@@ -43,19 +43,28 @@ body {
   animation: init 0.03s ease-in 0.5s 1 forwards;
 }
 
-body > #app > *:not(footer) > * > * + * {
+body > div {
+  display: grid;
+  grid-template-columns: 1fr max-content;
+  grid-template-rows: auto 1fr auto;
+  grid-gap: 0 calc(var(--margin) * 2.8);
+  min-height: 100%;
+}
+
+
+body > div > *:not(footer) > * > * + * {
   margin-top: calc(var(--margin) * 2);
 }
 
-body > #app > main > :first-of-type {
+body > div > main > :first-of-type {
   margin-top: calc(var(--margin) * 0.6);
 }
 
-body > #app > main > :first-of-type#definition {
+body > div > main > :first-of-type#definition {
   margin-top: calc(var(--margin) * 1.6);
 }
 
-body > #app > main > section + section {
+body > div > main > section + section {
   margin-top: calc(var(--margin) * 4);
 }
 
@@ -229,7 +238,6 @@ section ul li + li {
 }
 */
 
-/*
 form + *,
 form > * + * {
   margin-top: calc(var(--margin) * 2);
@@ -240,11 +248,15 @@ form ::placeholder {
   opacity: unset;
 }
 
-form button {
+form button,
+form input[type="submit"] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
   background-color: var(--color-fg);
   border-color: var(--color-fg);
-  border-style: solid;
   border-radius: unset;
+  border-style: solid;
   border-width: calc(var(--margin) * 0.2);
   color: var(--color-bg);
   cursor: pointer;
@@ -257,18 +269,94 @@ form button[disabled] {
   opacity: 0.3;
 }
 
-form input {
+form input[type="color"],
+form input[type="date"],
+form input[type="email"],
+form input[type="number"],
+form input[type="search"],
+form input[type="tel"],
+form input[type="text"],
+form input[type="time"],
+form input[type="password"],
+form input[type="url"] {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
   border: unset;
+  border-color: var(--color-fg);
   border-radius: unset;
-  border-bottom-color: var(--color-fg);
-  border-bottom-style: solid;
-  border-bottom-width: calc(var(--margin) * 0.2);
+  border-style: solid;
+  border-width: calc(var(--margin) * 0.2);
   box-shadow: none;
+  height: calc(var(--margin) * 2);
   outline: none;
   padding: calc(var(--margin) * 0.2);
+  width: 100%;
+}
+
+/*
+form input[type="file"] {
+  align-self: center;
+  color: transparent;
+}
+*/
+
+form input[type="radio"],
+form input[type="checkbox"] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border: unset;
+  border-color: var(--color-fg);
+  border-style: solid;
+  border-width: calc(var(--margin) * 0.2);
+  box-shadow: none;
+  outline: none;
+  height: calc(var(--margin) * 2);
+  width: calc(var(--margin) * 2);
+}
+
+form input[type="checkbox"] {
+  border-radius: unset;
+}
+
+form input[type="radio"] {
+  border-radius: 50%;
+}
+
+form input[type="radio"]:checked,
+form input[type="checkbox"]:checked {
+  background-color: var(--color-fg);
+  color: var(--color-bg);
+  font-size: calc(var(--margin) * 1.4);
+  text-align: center;
+}
+
+form input[type="checkbox"]:checked::after {
+  content: '\2713';
+}
+
+/*
+form input[type="radio"]:checked::after {
+  content: '\00b7';
+}
+*/
+
+form input[type="file"]::file-selector-button {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-color: var(--color-fg);
+  border: unset;
+  border-color: var(--color-fg);
+  border-radius: unset;
+  border-style: solid;
+  border-width: calc(var(--margin) * 0.2);
+  box-shadow: none;
+  color: var(--color-bg);
+  cursor: pointer;
+  padding: calc(var(--margin) * 0.2);
+  width: 100%;
 }
 
 form select {
@@ -281,9 +369,9 @@ form select {
   background-size: var(--margin);
   border: unset;
   border-radius: unset;
-  border-bottom-color: var(--color-fg);
-  border-bottom-style: solid;
-  border-bottom-width: calc(var(--margin) * 0.2);
+  border-color: var(--color-fg);
+  border-style: solid;
+  border-width: calc(var(--margin) * 0.2);
   box-shadow: none;
   outline: none;
   padding: calc(var(--margin) * 0.2);
@@ -313,15 +401,6 @@ form textarea {
   padding: calc(var(--margin) * 0.4);
   resize: vertical;
   width: 100%;
-}
-*/
-
-#app {
-  display: grid;
-  grid-template-columns: 1fr max-content;
-  grid-template-rows: auto 1fr auto;
-  grid-gap: 0 calc(var(--margin) * 2.8);
-  min-height: 100%;
 }
 
 /*
@@ -695,7 +774,10 @@ form textarea {
     display: grid;
     align-items: center;
     grid-gap: var(--margin);
-    grid-template-columns: auto 1fr;
+    grid-template-columns: minmax(10ch, auto) 1fr;
+  }
+  form div.grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
   }
   /*
   form input {

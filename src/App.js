@@ -25,52 +25,111 @@ function App() {
       <main>
         <form>
           <div>
-            <label htmlfor="subject">Studiengang</label>
-            <select id="subject" value={subject} onChange={(e) => setSubject(e.target.value)} >
+            <label htmlFor="subject">Studiengang</label>
+            <select id="subject" name="subject" value={subject} onChange={(e) => setSubject(e.target.value)}>
               <option value="vk">VK</option>
               <option value="act">Schauspiel</option>
               <option value="clown">Clown</option>
-              <option value="Kunst">Kunst</option>
+              <option value="kunst">Kunst</option>
             </select>
             {
             // sollte es hier die möglichkeit geben mehrere auszuwählen? also studiengang übergreifende projekte
             }
           </div>
           <div>
-            <label htmlfor="klasse">Fachklasse</label>
-            <select id="klasse" value={klasse} onChange={(e) => setKlasse(e.target.value)} >
-              <option value="NewMedia">New Media</option>
-              </select>
+            <label htmlFor="klasse">Fachklasse</label>
+            <select id="klasse" name="klasse" value={klasse} onChange={(e) => setKlasse(e.target.value)}>
+              <option value="newmedia">New Media</option>
+            </select>
           </div>
           <div>
-            <label htmlfor="title">Title of your Project</label>
-            <input type="text" id="title" value={title} onChange={(e) => setTitle(e.target.value)} />
+            <label htmlFor="title">Project Title</label>
+            <input id="title" name="title" type="text" value={title} onChange={(e) => setTitle(e.target.value)} />
           </div>
+          {/*
           <div>
             <p id="student">matrixClient.getUserName()</p>
-            <label htmlfor="collabbro">Collaborators</label>
-            <input type="text" id="collabbro" value={colab} onChange={(e) => setColab(e.target.value)} />
+            <label htmlFor="collab">Collaborators</label>
+            <input id="collab" name="collab" type="text" value={colab} onChange={(e) => setColab(e.target.value)} />
           </div>
+          */}
           {
           // vermutlich sollten auch hier mehrere studierende hinzugefügt werden können, evtl dann direkt matrix users durchsuchen fürs richtige zuordnen
           }
-          <div>
-            <button>Add Textarea</button>
+          <div className="grid">
+            <button>Add Text</button>
+            <button>Add Image</button>
+            <button>Add Video</button>
+            <button>Add Audio</button>
+            {/*
+            // fetch("https://stream.udk-berlin.de/api/userId/myVideos")
+            */}
           </div>
           <div>
-            <h2 id="peertube">Add Videos</h2>
-            <p>fetch(https://stream.udk-berlin.de/api/userId/myVideos)</p>
-            <button>redirect to upload on peertube</button>
+            <label htmlFor="checkbox">Check Box</label>
+            <input id="checkbox" name="checkbox" type="checkbox" />
           </div>
           <div>
-            <h2 id="files">Add Files</h2>
-            <label htmlfor="title">Upload</label>
-            <input type="file" id="myFile" name="filename" />
+            <label htmlFor="color">Add Color</label>
+            <input id="color" name="color" type="color" />
+          </div>
+          <div>
+            <label htmlFor="date">Date</label>
+            <input id="date" name="date" type="date" />
+          </div>
+          <div>
+            <label htmlFor="email">Email</label>
+            <input id="email" name="email" type="email" />
+          </div>
+          <div>
+            <label htmlFor="file">Files</label>
+            <input id="file" name="file" type="file" />
+          </div>
+          <div>
+            <label htmlFor="number">Number</label>
+            <input id="number" name="number" type="number" />
+          </div>
+          <div>
+            <label htmlFor="password">Password</label>
+            <input id="password" name="password" type="password" />
+          </div>
+          <div>
+            <label htmlFor="radio01">Radio #01</label>
+            <input id="radio01" name="radio" type="radio" />
+            <label htmlFor="radio02">Radio #02</label>
+            <input id="radio02" name="radio" type="radio" />
+            <label htmlFor="radio03">Radio #03</label>
+            <input id="radio03" name="radio" type="radio" />
+          </div>
+          <div>
+            <label htmlFor="range">Range</label>
+            <input id="range" name="range" type="range" />
+          </div>
+          <div>
+            <label htmlFor="search">Search</label>
+            <input id="search" name="search" type="search" />
+          </div>
+          <div>
+            <label htmlFor="submit">Submit</label>
+            <input id="submit" name="submit" type="submit" value="SUBMIT" />
+          </div>
+          <div>
+            <label htmlFor="tel">Tel</label>
+            <input id="tel" name="tel" type="tel" />
+          </div>
+          <div>
+            <label htmlFor="text">Text</label>
+            <input id="text" name="text" type="text" />
+          </div>
+          <div>
+            <label htmlFor="time">Time</label>
+            <input id="time" name="time" type="time" />
+          </div>
+          <div>
+            <label htmlFor="url">URL</label>
+            <input id="url" name="url" type="url" />
           </div>
         </form>
-        <div>
-      <h2>Preview(?) maybe on right side or not w/e</h2><img alt='whatever' src='http://s2.quickmeme.com/img/bb/bbf7ffa28426dea19b24872b13130fa3ad9bfb7f5acd6abb0dff47b0bebb0a3f.jpg' />
-      </div>
       </main>
       <nav>
         <div>
