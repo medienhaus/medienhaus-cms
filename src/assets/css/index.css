@@ -170,7 +170,6 @@ nav > div {
   top: calc(var(--margin) * 1.4);
 }
 
-/*
 nav + section {
   display: grid;
   grid-template-columns: repeat(2, min-content);
@@ -206,7 +205,6 @@ nav a {
   display: block;
   font-weight: bold;
 }
-*/
 
 /*
 section a:link {
@@ -647,7 +645,6 @@ form textarea {
     display: none;
   }
   /* TODO */
-  /*
   nav + section {
     background-color: var(--color-bg);
     grid-row: 1;
@@ -657,7 +654,6 @@ form textarea {
     top: 0;
     z-index: 1;
   }
-  */
   footer {
     grid-column: 1 / 3;
   }
