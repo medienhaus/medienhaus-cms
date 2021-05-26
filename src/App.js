@@ -18,7 +18,9 @@ function App() {
           <h1>medienhaus/</h1>
         </Link>
         */}
-        <h1>medienhaus/cms</h1>
+        <a href='/'>
+          <h1>medienhaus/cms</h1>
+        </a>
       </header>
       <main>
         <form>
