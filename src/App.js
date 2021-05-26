@@ -30,7 +30,8 @@ function App() {
               <option value="clown">Clown</option>
               <option value="Kunst">Kunst</option>
             </select>
-            {// sollte es hier die möglichkeit geben mehrere auszuwählen? also studiengang übergreifende projekte
+            {
+            // sollte es hier die möglichkeit geben mehrere auszuwählen? also studiengang übergreifende projekte
             }
           </div>
           <div>
@@ -72,12 +73,20 @@ function App() {
       </main>
       <nav>
         <div>
-          <div>hello</div>
-          <div>world</div>
-          <div>foo</div>
-          <div>bar</div>
+          <div>
+            <a href='/'>/hello</a>
+          </div>
+          <div>
+            <a href='/'>/world</a>
+            <a href='/'>/sidebar</a>
+            <a href='/'>/links</a>
+          </div>
         </div>
       </nav>
+      <section>
+        <button>EN</button>
+        <button>DE</button>
+      </section>
       <footer>
         <p className="copyleft">&#x1f12f; 2021 <a href="mailto:info@medienhaus.udk-berlin.de?subject=medienhaus/cms" rel="nofollow noopener noreferrer"><strong>medienhaus/</strong></a></p>
       </footer>
