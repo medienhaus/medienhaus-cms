@@ -7,8 +7,14 @@ function App() {
   return (
     <div className="App">
       <form>
-        <label htmlfor="title">Title of your Project</label>
-        <input type="text" id="title" value={title} onChange={(e) => setTitle(e.target.value)} />
+        <div>
+          <label htmlfor="title">Studiengang</label>
+          <input type="text" id="title" value={title} onChange={(e) => setTitle(e.target.value)} />
+        </div>
+        <div>
+          <label htmlfor="title">Title of your Project</label>
+          <input type="text" id="title" value={title} onChange={(e) => setTitle(e.target.value)} />
+        </div>
         </form>
     </div>
   );
