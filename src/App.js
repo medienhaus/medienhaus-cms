@@ -66,8 +66,9 @@ function App() {
             <input type="file" id="myFile" name="filename" />
           </div>
         </form>
+        <div>
       <h2>Preview(?) maybe on right side or not w/e</h2><img alt='whatever' src='http://s2.quickmeme.com/img/bb/bbf7ffa28426dea19b24872b13130fa3ad9bfb7f5acd6abb0dff47b0bebb0a3f.jpg' />
-
+      </div>
       </main>
       <nav>
         <div>
