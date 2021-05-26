@@ -55,8 +55,7 @@ function App() {
           // vermutlich sollten auch hier mehrere studierende hinzugefügt werden können, evtl dann direkt matrix users durchsuchen fürs richtige zuordnen
           }
           <div>
-            <label htmlfor="description">Description</label>
-            <textarea type="text" id="description" value={description} onChange={(e) => setDescription(e.target.value)} />
+            <button>Add Textarea</button>
           </div>
           <div>
             <h2 id="peertube">Add Videos</h2>
