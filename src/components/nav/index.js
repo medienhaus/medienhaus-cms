@@ -1,27 +1,63 @@
 import React from 'react'
+import i18n from 'i18next'
+import { NavLink } from 'react-router-dom'
+import { useAuth } from '../../Auth'
+
 
 const Nav = () => {
- 
-  return (
-    <>
-      <nav>
+  const auth = useAuth()
+
+  const changeLanguage = code => {
+    localStorage.setItem('cr_lang', code)
+    i18n.changeLanguage(code)
+  }
+  
+  if (auth.user === null) {
+    return null
+  }
+  
+     
+return (
+  <>
+    <nav>
+      <div>
         <div>
-          <div>
-            <a href='/'>/hello</a>
-          </div>
-          <div>
-            <a href='/'>/world</a>
-            <a href='/'>/sidebar</a>
-            <a href='/'>/links</a>
-          </div>
+          {auth.user
+            ? (
+            <a href={process.env.REACT_APP_MATRIX_BASE_URL + '/classroom'} rel="nofollow noopener noreferrer" target="_self">/classroom&nbsp;-&gt;</a>
+              )
+            : (
+            <NavLink activeclassname="active" to="/login">/login</NavLink>
+              )}
         </div>
-      </nav>
-      <section>
-        <button>EN</button>
-        <button>DE</button>
-      </section>
-    </>
-  )
+        {auth.user && (
+          <>
+            <div>
+              <NavLink activeclassname="active" to="/profile">/profile</NavLink>
+              <NavLink activeclassname="active" to="/submit">/submit</NavLink>
+                  <NavLink activeclassname="active" to="/tools">/tools</NavLink> {//only for dev
+                  }
+              {
+                // <NavLink activeclassname="active" to="/admin">/admin</NavLink>}
+                // matrixClient.isSynapseAdministrator() ?? console.log('with great power comes great responsibility')
+              }
+            </div>
+            <div>
+              <a href="https://meetings.udk-berlin.de" rel="external nofollow noopener noreferrer" target="_blank">/meet</a>
+              <a href="https://write.medienhaus.udk-berlin.de" rel="external nofollow noopener noreferrer" target="_blank">/write</a>
+              <a href="https://stream.medienhaus.udk-berlin.de" rel="external nofollow noopener noreferrer" target="_blank">/stream</a>
+            </div>
+          </>
+        )}
+      </div>
+    </nav>
+    <section>
+      <button onClick={() => changeLanguage('en')}>EN</button>
+      <button onClick={() => changeLanguage('de')}>DE</button>
+    </section>
+  </>
+)
+
 }
 
 export default Nav
