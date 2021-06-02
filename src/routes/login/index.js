@@ -7,7 +7,14 @@ import { useAuth } from '../../Auth'
 import { Loading } from '../../components/loading'
 
 const Login = () => {
-  const { register, handleSubmit, errors } = useForm()
+  const {
+    register,
+    handleSubmit,
+
+    formState: {
+      errors,
+    },
+  } = useForm()
   const [name, setName] = useState('')
   const [password, setPassword] = useState('')
   const [isLoading, setLoading] = useState(false)
