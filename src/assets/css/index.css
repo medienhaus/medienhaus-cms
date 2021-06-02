@@ -294,15 +294,15 @@ form input[type="url"] {
   width: 100%;
 }
 
-/*
-form input[type="file"] {
-  align-self: center;
-  color: transparent;
+input::-webkit-input-placeholder,
+input::-moz-placeholder
+form input :placeholder-shown {
+  padding-left: calc(var(--margin) * 1);
+  margin-left: calc(var(--margin) * 1);
 }
-*/
 
-form input[type="radio"],
-form input[type="checkbox"] {
+form input[type="checkbox"],
+form input[type="radio"] {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
@@ -311,6 +311,7 @@ form input[type="checkbox"] {
   border-style: solid;
   border-width: calc(var(--margin) * 0.2);
   box-shadow: none;
+  cursor: pointer;
   outline: none;
   height: calc(var(--margin) * 2);
   width: calc(var(--margin) * 2);
@@ -324,8 +325,8 @@ form input[type="radio"] {
   border-radius: 50%;
 }
 
-form input[type="radio"]:checked,
-form input[type="checkbox"]:checked {
+form input[type="checkbox"]:checked,
+form input[type="radio"]:checked {
   background-color: var(--color-fg);
   color: var(--color-bg);
   font-size: calc(var(--margin) * 1.4);
@@ -336,9 +337,24 @@ form input[type="checkbox"]:checked::after {
   content: '\2713';
 }
 
+form input[type="color"] {
+  cursor: pointer;
+}
+
+form input[type="color"]::-webkit-color-swatch,
+form input[type="color"]::-moz-color-swatch {
+  border: none;
+}
+
+form input[type="date"],
+form input[type="time"] {
+  cursor: text;
+}
+
 /*
-form input[type="radio"]:checked::after {
-  content: '\00b7';
+form input[type="file"] {
+  align-self: center;
+  color: transparent;
 }
 */
 
@@ -359,6 +375,83 @@ form input[type="file"]::file-selector-button {
   width: 100%;
 }
 
+/*
+form input[type="radio"]:checked::after {
+  content: '\00b7';
+}
+*/
+
+form input[type="range"] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-color: var(--color-fg);
+  border: unset;
+  box-shadow: none;
+  cursor: pointer;
+  height: calc(var(--margin) * 0.3);
+  outline: none;
+}
+
+/* TODO
+form input[type="range"]::-moz-focus-outer {
+  border: unset;
+}
+
+form input[type="range"]:hover {
+  outline:none;
+}
+*/
+
+/* TODO */
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-color: var(--color-fg);
+  border: unset;
+  border-radius: unset;
+  box-shadow: none;
+  outline: none;
+  /*
+  height: 9px;
+  width: 9px;
+  */
+}
+
+form input[type="range"]::-moz-range-thumb {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-color: var(--color-fg);
+  border: unset;
+  border-radius: unset;
+  box-shadow: none;
+  outline: none;
+}
+
+form input[type="range"]::-moz-range-progress {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-color: var(--color-fg);
+  border: unset;
+  box-shadow: none;
+  height: calc(var(--margin) * 0.3);
+  outline: none;
+}
+
+form input[type="range"]::-moz-range-track {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-color: var(--color-lo);
+  border: unset;
+  box-shadow: none;
+  height: calc(var(--margin) * 0.3);
+  outline: none;
+}
+
 form select {
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -373,6 +466,7 @@ form select {
   border-style: solid;
   border-width: calc(var(--margin) * 0.2);
   box-shadow: none;
+  cursor: pointer;
   outline: none;
   padding: calc(var(--margin) * 0.2);
   text-overflow: ellipsis;
