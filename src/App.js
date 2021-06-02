@@ -7,8 +7,8 @@ function App() {
   const [title, setTitle] = useState('');
   const [subject, setSubject] = useState('');
   const [klasse, setKlasse] = useState('');
-  const [colab, setColab] = useState('');
-  const [description, setDescription] = useState('');
+  //const [colab, setColab] = useState('');
+  //const [description, setDescription] = useState('');
 
   return (
     <>
@@ -44,7 +44,7 @@ function App() {
           </div>
           <div>
             <label htmlFor="title">Project Title</label>
-            <input id="title" name="title" type="text" value={title} onChange={(e) => setTitle(e.target.value)} />
+            <input id="title" name="title" placeholder="project title" type="text" value={title} onChange={(e) => setTitle(e.target.value)} />
           </div>
           {/*
           <div>
@@ -79,7 +79,7 @@ function App() {
           </div>
           <div>
             <label htmlFor="email">Email</label>
-            <input id="email" name="email" type="email" />
+            <input id="email" name="email" placeholder="u.name@udk-berlin.de" type="email" />
           </div>
           <div>
             <label htmlFor="file">Files</label>
@@ -87,11 +87,11 @@ function App() {
           </div>
           <div>
             <label htmlFor="number">Number</label>
-            <input id="number" name="number" type="number" />
+            <input id="number" name="number" placeholder="0" type="number" />
           </div>
           <div>
             <label htmlFor="password">Password</label>
-            <input id="password" name="password" type="password" />
+            <input id="password" name="password" placeholder="••••••••••••••••••••••••" type="password" />
           </div>
           <div>
             <label htmlFor="radio01">Radio #01</label>
@@ -107,7 +107,7 @@ function App() {
           </div>
           <div>
             <label htmlFor="search">Search</label>
-            <input id="search" name="search" type="search" />
+            <input id="search" name="search" placeholder="search …" type="search" />
           </div>
           <div>
             <label htmlFor="submit">Submit</label>
@@ -115,11 +115,11 @@ function App() {
           </div>
           <div>
             <label htmlFor="tel">Tel</label>
-            <input id="tel" name="tel" type="tel" />
+            <input id="tel" name="tel" placeholder="+49 30 3185 0" type="tel" />
           </div>
           <div>
             <label htmlFor="text">Text</label>
-            <input id="text" name="text" type="text" />
+            <input id="text" name="text" placeholder="some text" type="text" />
           </div>
           <div>
             <label htmlFor="time">Time</label>
@@ -127,7 +127,7 @@ function App() {
           </div>
           <div>
             <label htmlFor="url">URL</label>
-            <input id="url" name="url" type="url" />
+            <input id="url" name="url" placeholder="https://udk-berlin.de/example/" type="url" />
           </div>
         </form>
       </main>
