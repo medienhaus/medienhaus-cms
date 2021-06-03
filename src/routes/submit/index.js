@@ -83,7 +83,7 @@ const Submit = () => {
     try {
       //needs to be changed, sending access token in URL because for some reason its not working in header. 
       await matrixClient.createRoom(opts)
-      .then((res) => fetch(`https://dev.medienhaus.udk-berlin.de/_matrix/client/r0/rooms/${encodeURIComponent(projectSpace)}/state/m.space.child/${encodeURIComponent(res.room_id)}?access_token=${localStorage.getItem('medienhaus_access_token')}`, req2))
+      .then((res) => fetch(process.env.REACT_APP_MATRIX_BASE_URL + `/_matrix/client/r0/rooms/${encodeURIComponent(projectSpace)}/state/m.space.child/${encodeURIComponent(res.room_id)}?access_token=${localStorage.getItem('medienhaus_access_token')}`, req2))
       .then(async response => {
         const data = await response.json();
         if (!response.ok) {
