@@ -91,6 +91,8 @@ const Submit = () => {
             return Promise.reject(error);
         }
         console.log(data);
+
+        console.log(await matrixClient.getSpaceSummary(projectSpace))
     })
     .catch(error => {
         console.error('There was an error!', error);
