@@ -52,13 +52,16 @@ const Login = () => {
       <form onSubmit={handleSubmit(onSubmit)}>
         <div>
           <label htmlFor="username">{t('username')}:</label>
-          <input name="username" type="text" placeholder={t('u.name')} value={name} onChange={changeName} {...register('username', { required: true })} />
+          <input name="username" type="text" placeholder={t('u.name')} value={name} onChange={changeName} /> {//{...register('username', { required: true })} />  
+            //new version of react hook form kills typing if required, need to check whats going on 
+          }
 
         </div>
         {errors.username && t('Username can\'t be empty.')}
         <div>
           <label htmlFor="password">{t('password')}:</label>
-          <input name="password" type="password" placeholder="" value={password} onChange={changePassword} {...register('password',{ required: true })} />
+          <input name="password" type="password" placeholder="" value={password} onChange={changePassword} /> {// {...register('password',{ required: true })} />
+          }
         </div>
         {errors.password && t('Password can\'t be empty.')}
         {errormsg ?? errormsg}
