@@ -55,7 +55,7 @@ const Submit = () => {
     
     const req2 = {
       method: 'PUT',
-      // header: {'Authorization': "Bearer " + localStorage.getItem('medienhaus_access_token') },
+      header: {'Authorization': "Bearer " + localStorage.getItem('medienhaus_access_token') },
       body: JSON.stringify({
         "via": [localStorage.getItem('mx_home_server')],
         "suggested": false,
@@ -81,7 +81,6 @@ const Submit = () => {
         }]
     }
     try {
-      //needs to be changed, sending access token in URL because for some reason its not working in header. 
       await matrixClient.createRoom(opts)
       .then((res) => fetch(process.env.REACT_APP_MATRIX_BASE_URL + `/_matrix/client/r0/rooms/${encodeURIComponent(projectSpace)}/state/m.space.child/${encodeURIComponent(res.room_id)}?access_token=${localStorage.getItem('medienhaus_access_token')}`, req2))
       .then(async response => {
