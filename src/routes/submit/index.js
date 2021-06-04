@@ -1,5 +1,6 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Matrix from '../../Matrix'
+import showdown from "showdown"
 import { Loading } from "../../components/loading";
 
 const Submit = () => {
@@ -9,7 +10,9 @@ const Submit = () => {
   const [loading, setLoading] = useState(false);
   const [projectSpace, setProjectSpace] = useState('');
   const [counter, setCounter] = useState(0);
+  const [blocks, setBlocks] = useState([]);
 
+  const converter = new showdown.Converter()
   const matrixClient = Matrix.getMatrixClient()
 
   const createProject = async () => {
@@ -49,19 +52,7 @@ const Submit = () => {
   }
 
   const createBlock = async (content, e) => {
-    e.preventDefault()
-    setCounter(counter + 1)
-    console.log(counter)
-    
-    const req2 = {
-      method: 'PUT',
-      header: {'Authorization': "Bearer " + localStorage.getItem('medienhaus_access_token') },
-      body: JSON.stringify({
-        "via": [localStorage.getItem('mx_home_server')],
-        "suggested": false,
-        "auto_join": false
-      })
-    }
+    e.preventDefault()    
     const opts = {
       name: counter + '_' + content,
       visibility: "public",
@@ -80,9 +71,20 @@ const Submit = () => {
         content: { history_visibility: "world_readable" }
         }]
     }
+
+    const req2 = {
+      method: 'PUT',
+      headers: {'Authorization': "Bearer " + localStorage.getItem('medienhaus_access_token') },
+      body: JSON.stringify({
+        "via": [localStorage.getItem('mx_home_server')],
+        "suggested": false,
+        "auto_join": false
+      })
+    }
+
     try {
-      await matrixClient.createRoom(opts)
-      .then((res) => fetch(process.env.REACT_APP_MATRIX_BASE_URL + `/_matrix/client/r0/rooms/${encodeURIComponent(projectSpace)}/state/m.space.child/${encodeURIComponent(res.room_id)}?access_token=${localStorage.getItem('medienhaus_access_token')}`, req2))
+      await matrixClient.createRoom(opts) 
+        .then((res) => fetch(process.env.REACT_APP_MATRIX_BASE_URL + `/_matrix/client/r0/rooms/${projectSpace}/state/m.space.child/${res.room_id}`, req2))
       .then(async response => {
         const data = await response.json();
         if (!response.ok) {
@@ -90,7 +92,10 @@ const Submit = () => {
             return Promise.reject(error);
         }
         console.log(data);
-        console.log(await matrixClient.getSpaceSummary(projectSpace))
+        const spaces = await matrixClient.getSpaceSummary(projectSpace)
+        console.log(spaces.rooms)
+        setCounter(counter + 1)
+        console.log(counter)
     })
     .catch(error => {
         console.error('There was an error!', error);
@@ -101,6 +106,49 @@ const Submit = () => {
     } finally {
       setLoading(false)
     }
+  }
+
+  useEffect(() => {
+    const fetchSpace = async () => {
+      const space = await matrixClient.getSpaceSummary(projectSpace)
+      setBlocks(space.rooms)
+    }
+    console.log(blocks)
+    projectSpace && fetchSpace()
+  }, [counter, projectSpace]);
+  
+  const AddContent =  () => {
+  return(
+    blocks.map((block, index) => {
+      if(index > 0){
+     return ( <div>
+        <label htmlFor={block.name} key={index} >{block.topic}</label>
+       <textarea id="text" key={block.room_id} name={block.name} placeholder="some text" type="text" onChange={(e) => 
+                localStorage.setItem(block.room_id, e.target.value)
+              } />
+     </div>
+     )}
+    })
+    )
+  }
+
+  const onSave = (e) => {
+    e.preventDefault()
+    blocks.map(async (block, index) => {
+      try {
+        await matrixClient.sendMessage(block.room_id, {
+          "body": `= yaml =\norder: ${index}\n= yaml =\n${localStorage.getItem(block.room_id)}`,
+          "format": "org.matrix.custom.html",
+          "msgtype": "m.text",
+          "formatted_body": `= yaml =\norder: ${index}\n= yaml =\n${converter.makeHtml(localStorage.getItem(block.room_id))}`
+        })
+        //await matrixClient.redactEvent(roomId.room_id, entry.event, null, { 'reason': 'I have my reasons!' })
+
+        //onSave()
+      } catch (e) {
+        console.log("error while trying to edit: ")
+      }
+      })
   }
 
   return (
@@ -136,6 +184,7 @@ const Submit = () => {
         </div>
         <div>
           <h3>Content</h3>
+          {projectSpace && <AddContent />}
           <div className="grid">
             <input type="submit" id="" name="" value="Add Text" onClick={(e)=>createBlock('text', e)}/>
             <input type="submit" id="" name="" value="Add Image" onClick={(e)=>createBlock('img', e)}/>
@@ -154,7 +203,7 @@ const Submit = () => {
             </select>
         </div>
         <div>
-            {loading ? <Loading /> : <input id="submit" name="submit" type="submit" value="SUBMIT" />}
+            {loading ? <Loading /> : <input id="submit" name="submit" type="submit" value="SUBMIT" onClick={(e) => onSave(e)} />}
           </div>
         </form>
     </div>

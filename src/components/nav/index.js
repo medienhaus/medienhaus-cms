@@ -2,8 +2,7 @@ import React from 'react'
 import i18n from 'i18next'
 import { NavLink } from 'react-router-dom'
 import { useAuth } from '../../Auth'
-
-
+  
 const Nav = () => {
   const auth = useAuth()
 
