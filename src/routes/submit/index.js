@@ -12,7 +12,7 @@ const Submit = () => {
   const [projectSpace, setProjectSpace] = useState('');
   const [counter, setCounter] = useState(0);
   const [blocks, setBlocks] = useState([]);
-  const joinedSpaces = useJoinedSpaces()
+  const joinedSpaces= useJoinedSpaces()
 
   const converter = new showdown.Converter()
   const matrixClient = Matrix.getMatrixClient()
@@ -29,7 +29,7 @@ const Submit = () => {
       },
       {
         type: "m.room.topic",
-        content: { topic: JSON.stringify({ "Rundgang": 21, "type": "Studentproject" }) }
+        content: { topic: JSON.stringify({ "rundgang": 21, "type": "studentproject" }) }
       },
       {
         type: "m.room.guest_access",
@@ -39,7 +39,6 @@ const Submit = () => {
       power_level_content_override: { events_default: 100 },
       visibility: "private"
     }
-        
     try {
       await matrixClient.createRoom(opts)
         .then((response) => {
@@ -117,18 +116,40 @@ const Submit = () => {
     }
     setCounter(blocks.length)
     projectSpace && fetchSpace()
+    //grabContent(blocks[1].room_id)
     // eslint-disable-next-line
   }, [counter, projectSpace]);
+
+  const grabContent = async (room) => {
+    const req = {
+      method: 'GET',
+      headers: { 'Authorization': "Bearer " + localStorage.getItem('medienhaus_access_token') },
+    }
+    const allContent = process.env.REACT_APP_MATRIX_BASE_URL + `/_matrix/client/r0/rooms/${room}/messages?limit=99999&dir=b`
+    const result = await fetch(allContent, req)
+    const data = await result.json();
+    const htmlString = data.chunk.map(type => {
+      if (type.type === "m.room.message") {
+        return type.content.body
+      } else {
+        return false
+      }
+    }).filter(Boolean)
+    const str = htmlString[0]
+    return str
+  }
   
   const AddContent = () => {
+    console.log(blocks)
     return (
       // eslint-disable-next-line
-      blocks.map((block, index) => {
+      blocks.map( (block, index) => {
         if (index > 0) {
+          grabContent(block.room_id)
           const json = JSON.parse(block.topic)
           return (
             <div>
-              <textarea id="text" key={block.room_id} name={block.name} placeholder={`Add ${json.type}`} type="text" onChange={(e) =>
+              <textarea id="text" key={block.room_id} name={block.name} placeholder={`Add ${json.type}`} type="text"  onChange={(e) =>
                 localStorage.setItem(block.room_id, e.target.value)
               } />
             </div>
@@ -157,16 +178,24 @@ const Submit = () => {
     })
   }
 
-  return (
-    <div>
+  const Drafts = () => {
+    return (
+      <>
       <h2>Drafts:</h2>
       <ul>
-      {joinedSpaces.map((space, index) => {
+      {joinedSpaces && joinedSpaces.map((space, index) => {
         console.log(space)
-        return <li key={index} ><button onClick={() => {setProjectSpace(space.room_id); setTitle(space.name) }}>{space.name}</button></li>
+        return <li key={index} ><button onClick={() => { setProjectSpace(space.room_id); setTitle(space.name) }}>{space.name}</button></li>
       })
         }
-        </ul>
+      </ul>
+      </>
+    )
+  }
+
+  return (
+    <div>
+     {joinedSpaces && <Drafts />}
       <h2>New Project</h2>
       <form>
         <div>
@@ -189,7 +218,7 @@ const Submit = () => {
             <input id="title" name="title" placeholder="project title" type="text" value={title} onChange={(e) => setTitle(e.target.value)} />
         </div>
         <div>
-            {loading ? <Loading /> : <input id="submit" name="submit" type="submit" value="Save Title" onClick={() => createProject()} />}
+          {loading ? <Loading /> : <input id="submit" name="submit" type="submit" value="Save Title" disabled={!title} onClick={() => createProject()} />}
         </div>
         {projectSpace && (
             <>

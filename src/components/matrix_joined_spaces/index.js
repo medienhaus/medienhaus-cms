@@ -1,10 +1,8 @@
 import { useEffect, useState } from 'react'
-import { useHistory } from 'react-router-dom'
 import Matrix from '../../Matrix'
 
 const useJoinedSpaces = () => {
-  const [answer, setAnswer] = useState([])
-  const history = useHistory()
+  const [answer, setAnswer] = useState(false)
   const matrixClient = Matrix.getMatrixClient()
 
   const isJson = (str) => {
@@ -39,18 +37,16 @@ const useJoinedSpaces = () => {
         )
         setAnswer(getNames.filter(Boolean))
       } else {
-        setAnswer(['You are currently not part of any rooms'])
+        setAnswer(false)
       }
     } catch (e) {
       console.log(e)
-    }
+    } 
   }
-
   useEffect(() => {
     getAnswer()
     // eslint-disable-next-line
   }, []);
-
   return answer
 }
 
