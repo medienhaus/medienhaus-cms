@@ -1,7 +1,6 @@
 import React from 'react'
 
 const Landing = () => {
-
   return (
     <div>
       We've landed

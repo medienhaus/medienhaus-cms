@@ -1,7 +1,6 @@
 import React from 'react'
 
 const Header = () => {
-  
   return (
     <header>
         {/*
@@ -9,7 +8,7 @@ const Header = () => {
           <h1>medienhaus/</h1>
         </Link>
         */}
-        <a href='/'>
+        <a href="/">
           <h1>medienhaus/cms</h1>
         </a>
       </header>
