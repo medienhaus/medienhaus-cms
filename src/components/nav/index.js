@@ -2,7 +2,7 @@ import React from 'react'
 import i18n from 'i18next'
 import { NavLink } from 'react-router-dom'
 import { useAuth } from '../../Auth'
-  
+
 const Nav = () => {
   const auth = useAuth()
 
@@ -10,13 +10,12 @@ const Nav = () => {
     localStorage.setItem('cr_lang', code)
     i18n.changeLanguage(code)
   }
-  
+
   if (auth.user === null) {
     return null
   }
-  
-     
-return (
+
+  return (
   <>
     <nav>
       <div>
@@ -34,7 +33,7 @@ return (
             <div>
               <NavLink activeclassname="active" to="/profile">/profile</NavLink>
               <NavLink activeclassname="active" to="/submit">/submit</NavLink>
-                  <NavLink activeclassname="active" to="/tools">/tools</NavLink> {//only for dev
+                  <NavLink activeclassname="active" to="/tools">/tools</NavLink> {// only for dev
                   }
               {
                 // <NavLink activeclassname="active" to="/admin">/admin</NavLink>}
@@ -55,8 +54,7 @@ return (
       <button onClick={() => changeLanguage('de')}>DE</button>
     </section>
   </>
-)
-
+  )
 }
 
 export default Nav

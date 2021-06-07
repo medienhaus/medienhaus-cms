@@ -1,16 +1,20 @@
 import React, { useEffect, useState } from 'react'
 import Matrix from '../../Matrix'
-import showdown from "showdown"
-import { Loading } from "../../components/loading";
+import useJoinedSpaces from '../../components/matrix_joined_spaces'
+import FetchCms from '../../components/matrix_fetch_cms'
+import showdown from 'showdown'
+import { Loading } from '../../components/loading'
 
 const Submit = () => {
-  const [subject, setSubject] = useState('');
-  const [title, setTitle] = useState('');
-  const [visibility, setVisibility] = useState('draft');
-  const [loading, setLoading] = useState(false);
-  const [projectSpace, setProjectSpace] = useState('');
-  const [counter, setCounter] = useState(0);
-  const [blocks, setBlocks] = useState([]);
+  const [subject, setSubject] = useState('')
+  const [title, setTitle] = useState('')
+  const [visibility, setVisibility] = useState('draft')
+  const [loading, setLoading] = useState(false)
+  const [projectSpace, setProjectSpace] = useState('')
+  const [counter, setCounter] = useState(0)
+  const [blocks, setBlocks] = useState([])
+  const joinedSpaces = useJoinedSpaces()
+  const [blockContent, setBlockContent] = useState([])
 
   const converter = new showdown.Converter()
   const matrixClient = Matrix.getMatrixClient()
@@ -18,26 +22,25 @@ const Submit = () => {
   const createProject = async () => {
     setLoading(true)
     const opts = {
-      preset: visibility === "published" ? "public_chat": "private_chat",
+      preset: visibility === 'published' ? 'public_chat' : 'private_chat',
       name: title,
-      creation_content: { type: "m.space" },
+      creation_content: { type: 'm.space' },
       initial_state: [{
-        type: "m.room.history_visibility",
-        content: { history_visibility: visibility === "published" ? "world_readable" : "invited"  }
+        type: 'm.room.history_visibility',
+        content: { history_visibility: visibility === 'published' ? 'world_readable' : 'invited' }
       },
-        {
-          type: "m.room.topic",
-          content: { topic: "project data and stuff" }
-        },
-        {
-          type: "m.room.guest_access",
-          state_key: "",
-          content: { guest_access: "can_join" }
-        }],
+      {
+        type: 'm.room.topic',
+        content: { topic: JSON.stringify({ rundgang: 21, type: 'studentproject' }) }
+      },
+      {
+        type: 'm.room.guest_access',
+        state_key: '',
+        content: { guest_access: 'can_join' }
+      }],
       power_level_content_override: { events_default: 100 },
-      visibility: "private"
+      visibility: 'private'
     }
-        
     try {
       await matrixClient.createRoom(opts)
         .then((response) => {
@@ -52,56 +55,55 @@ const Submit = () => {
   }
 
   const createBlock = async (content, e) => {
-    e.preventDefault()    
+    e.preventDefault()
     const opts = {
       name: counter + '_' + content,
-      visibility: "public",
-      preset: "public_chat",
-      topic: content,
-      creation_content: { "m.federate": false },
+      visibility: 'public',
+      preset: 'public_chat',
+      topic: JSON.stringify({ type: content }),
+      creation_content: { 'm.federate': false },
       initial_state: [{
-        type: "m.space.parent",
+        type: 'm.space.parent',
         content: {
-          via: [localStorage.getItem("mx_home_server")],
+          via: [localStorage.getItem('mx_home_server')],
           canonical: true
-        }, 
+        },
         state_key: projectSpace
       }, {
-        type: "m.room.history_visibility",
-        content: { history_visibility: "world_readable" }
-        }]
+        type: 'm.room.history_visibility',
+        content: { history_visibility: 'world_readable' }
+      }]
     }
 
-    const req2 = {
+    const req = {
       method: 'PUT',
-      headers: {'Authorization': "Bearer " + localStorage.getItem('medienhaus_access_token') },
+      headers: { Authorization: 'Bearer ' + localStorage.getItem('medienhaus_access_token') },
       body: JSON.stringify({
-        "via": [localStorage.getItem('mx_home_server')],
-        "suggested": false,
-        "auto_join": false
+        via: [localStorage.getItem('mx_home_server')],
+        suggested: false,
+        auto_join: false
       })
     }
 
     try {
-      await matrixClient.createRoom(opts) 
-        .then((res) => fetch(process.env.REACT_APP_MATRIX_BASE_URL + `/_matrix/client/r0/rooms/${projectSpace}/state/m.space.child/${res.room_id}`, req2))
-      .then(async response => {
-        const data = await response.json();
-        if (!response.ok) {
-            const error = (data && data.message) || response.status;
-            return Promise.reject(error);
-        }
-        console.log(data);
-        const spaces = await matrixClient.getSpaceSummary(projectSpace)
-        console.log(spaces.rooms)
-        setCounter(counter + 1)
-        console.log(counter)
-    })
-    .catch(error => {
-        console.error('There was an error!', error);
-    });
-    }
-     catch (e) {
+      await matrixClient.createRoom(opts)
+        .then((res) => fetch(process.env.REACT_APP_MATRIX_BASE_URL + `/_matrix/client/r0/rooms/${projectSpace}/state/m.space.child/${res.room_id}`, req))
+        .then(async response => {
+          const data = await response.json()
+          if (!response.ok) {
+            const error = (data && data.message) || response.status
+            return Promise.reject(error)
+          }
+          console.log(data)
+          const spaces = await matrixClient.getSpaceSummary(projectSpace)
+          console.log(spaces)
+          setCounter(counter + 1)
+          console.log(counter)
+        })
+        .catch(error => {
+          console.error('There was an error!', error)
+        })
+    } catch (e) {
       console.log(e)
     } finally {
       setLoading(false)
@@ -113,22 +115,35 @@ const Submit = () => {
       const space = await matrixClient.getSpaceSummary(projectSpace)
       setBlocks(space.rooms)
     }
-    console.log(blocks)
+    setCounter(blocks.length)
     projectSpace && fetchSpace()
+    // eslint-disable-next-line
   }, [counter, projectSpace]);
-  
-  const AddContent =  () => {
-  return(
-    blocks.map((block, index) => {
-      if(index > 0){
-     return ( <div>
-        <label htmlFor={block.name} key={index} >{block.topic}</label>
-       <textarea id="text" key={block.room_id} name={block.name} placeholder="some text" type="text" onChange={(e) => 
+
+  const AddContent = () => {
+    console.log(blockContent)
+    return (
+      // eslint-disable-next-line
+      blocks.filter(x => x.room_type !== "m.space").map((block, index) => {
+        const { cms, error, fetching } = FetchCms(block.room_id)
+        const key = block.room_id
+        // cms && setBlockContent(blockContent => [...blockContent, { [key] : cms.body } ])
+        console.log(cms)
+        const json = JSON.parse(block.topic)
+        return (
+          fetching
+            ? 'Loading'
+            : error
+              ? console.error(error)
+              : (
+            <div>
+              <textarea id="text" key={block.room_id} name={block.name} placeholder={`Add ${json.type}`} type="text" value={cms.body} onChange={(e) =>
                 localStorage.setItem(block.room_id, e.target.value)
               } />
-     </div>
-     )}
-    })
+            </div>
+                )
+        )
+      })
     )
   }
 
@@ -137,22 +152,38 @@ const Submit = () => {
     blocks.map(async (block, index) => {
       try {
         await matrixClient.sendMessage(block.room_id, {
-          "body": `= yaml =\norder: ${index}\n= yaml =\n${localStorage.getItem(block.room_id)}`,
-          "format": "org.matrix.custom.html",
-          "msgtype": "m.text",
-          "formatted_body": `= yaml =\norder: ${index}\n= yaml =\n${converter.makeHtml(localStorage.getItem(block.room_id))}`
+          body: localStorage.getItem(block.room_id),
+          format: 'org.matrix.custom.html',
+          msgtype: 'm.text',
+          formatted_body: converter.makeHtml(localStorage.getItem(block.room_id))
         })
-        //await matrixClient.redactEvent(roomId.room_id, entry.event, null, { 'reason': 'I have my reasons!' })
+        // await matrixClient.redactEvent(roomId.room_id, entry.event, null, { 'reason': 'I have my reasons!' })
 
-        //onSave()
+        // onSave()
       } catch (e) {
-        console.log("error while trying to edit: ")
+        console.log('error while trying to edit: ')
       }
+    })
+  }
+
+  const Drafts = () => {
+    return (
+      <>
+      <h2>Drafts:</h2>
+      <ul>
+      {joinedSpaces && joinedSpaces.map((space, index) => {
+        console.log(space)
+        return <li key={index} ><button onClick={() => { setProjectSpace(space.room_id); setTitle(space.name) }}>{space.name}</button></li>
       })
+        }
+      </ul>
+      </>
+    )
   }
 
   return (
     <div>
+     {joinedSpaces && <Drafts />}
       <h2>New Project</h2>
       <form>
         <div>
@@ -168,43 +199,48 @@ const Submit = () => {
             // sollte es hier die möglichkeit geben mehrere auszuwählen? also studiengang übergreifende projekte
             }
         </div>
-        
+
         <div>
         <h3>Project Title / Collaborators / Credits</h3>
             <label htmlFor="title">Project Title</label>
             <input id="title" name="title" placeholder="project title" type="text" value={title} onChange={(e) => setTitle(e.target.value)} />
         </div>
         <div>
-            {loading ? <Loading /> : <input id="submit" name="submit" type="submit" value="Save Title" onClick={() => createProject()} />}
-          </div>
+          {loading ? <Loading /> : <input id="submit" name="submit" type="submit" value="Save Title" disabled={!title} onClick={() => createProject()} />}
+        </div>
+        {projectSpace && (
+            <>
         <div>
-          <h3>Collaborators / Credits</h3> 
+          <h3>Collaborators / Credits</h3>
           <button>ADD Collaborators +</button>
           <button>ADD Credits +</button>
         </div>
-        <div>
-          <h3>Content</h3>
-          {projectSpace && <AddContent />}
-          <div className="grid">
-            <input type="submit" id="" name="" value="Add Text" onClick={(e)=>createBlock('text', e)}/>
-            <input type="submit" id="" name="" value="Add Image" onClick={(e)=>createBlock('img', e)}/>
-            <input type="submit" id="" name="" value="Add Video" onClick={(e)=>createBlock('video', e)}/> 
-            <input type="submit" id="" name="" value="Add Audio" onClick={(e)=>createBlock('audio', e)}/>
-            {/*
+            <div>
+              <h3>Content</h3>
+              <AddContent />
+              <div className="grid">
+                <button type="submit" id="" name="" value="Add Text" onClick={(e) => createBlock('text', e)} >Add Text</button>
+                <button type="submit" id="" name="" value="Add Image" onClick={(e) => createBlock('img', e)}>Add Image</button>
+                <button type="submit" id="" name="" value="Add Video" onClick={(e) => createBlock('video', e)}>Add Video</button>
+                <button type="submit" id="" name="" value="Add Audio" onClick={(e) => createBlock('audio', e)}>Add Audio</button>
+                {/*
             // fetch("https://stream.udk-berlin.de/api/userId/myVideos")
             */}
-          </div>
-        </div>
-        <div>
-          <h3>Visibility (Draft/Published)</h3>
-            <select id="visibility" name="visibility" value={visibility} onChange={(e) => setVisibility(e.target.value)}>
-              <option value="draft">Draft</option>
-              <option value="published">Published</option>
-            </select>
-        </div>
-        <div>
-            {loading ? <Loading /> : <input id="submit" name="submit" type="submit" value="SUBMIT" onClick={(e) => onSave(e)} />}
-          </div>
+              </div>
+            </div>
+            <div>
+              <h3>Visibility (Draft/Published)</h3>
+              <select id="visibility" name="visibility" value={visibility} onChange={(e) => setVisibility(e.target.value)}>
+                <option value="draft">Draft</option>
+                <option value="published">Published</option>
+              </select>
+            </div>
+            <div>
+              {loading ? <Loading /> : <input id="submit" name="submit" type="submit" value="SUBMIT" onClick={(e) => onSave(e)} />}
+            </div>
+          </>
+        )
+        }
         </form>
     </div>
   )

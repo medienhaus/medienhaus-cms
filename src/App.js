@@ -1,8 +1,8 @@
-import React from 'react';
+import React from 'react'
 import { BrowserRouter as Router, Route, Switch, Redirect, useLocation } from 'react-router-dom'
-//import { Link } from 'react-router-dom'
-//import './App.css';
-import './assets/css/index.css';
+// import { Link } from 'react-router-dom'
+// import './App.css';
+import './assets/css/index.css'
 import Header from './components/header'
 import Footer from './components/footer'
 import Nav from './components/nav'
@@ -46,8 +46,7 @@ PrivateRoute.propTypes = {
   children: PropTypes.element
 }
 
-function App() {
- 
+function App () {
   return (
     <>
        <AuthProvider>
@@ -67,7 +66,7 @@ function App() {
       </Router>
       </AuthProvider>
     </>
-  );
+  )
 }
 
-export default App;
+export default App

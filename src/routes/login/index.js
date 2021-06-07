@@ -12,8 +12,8 @@ const Login = () => {
     handleSubmit,
 
     formState: {
-      errors,
-    },
+      errors
+    }
   } = useForm()
   const [name, setName] = useState('')
   const [password, setPassword] = useState('')
@@ -52,8 +52,8 @@ const Login = () => {
       <form onSubmit={handleSubmit(onSubmit)}>
         <div>
           <label htmlFor="username">{t('username')}:</label>
-          <input name="username" type="text" placeholder={t('u.name')} value={name} onChange={changeName} /> {//{...register('username', { required: true })} />  
-            //new version of react hook form kills typing if required, need to check whats going on 
+          <input name="username" type="text" placeholder={t('u.name')} value={name} onChange={changeName} /> {// {...register('username', { required: true })} />
+            // new version of react hook form kills typing if required, need to check whats going on
           }
 
         </div>
