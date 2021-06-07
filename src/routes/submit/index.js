@@ -21,6 +21,7 @@ const Submit = () => {
   const [fetchingUsers, setFetchingUsers] = useState(false);
   const [userSearch, setUserSearch] = useState([]);
   const [contentSelect, setContentSelect] = useState('');
+  const [collab, setCollab] = useState('');
 
   const converter = new showdown.Converter()
   const matrixClient = Matrix.getMatrixClient()
@@ -160,8 +161,16 @@ const Submit = () => {
     )
   }
 
-  const invite = () => {
-   // matrixClient.invite(roomId, userId)
+  const invite = async (e) => {
+    e.preventDefault()
+    const id = collab.split(' ')
+    console.log(id)
+    try {
+      const invitation = await matrixClient.invite(projectSpace, id[1]).
+        then((response) => console.log(response))
+      } catch (err) {
+    console.error(err);
+    }
   }
 
   const fetchUsers = async (e, search) => {
@@ -176,7 +185,6 @@ const Submit = () => {
       console.error('Error whhile trying to fetch users: ' + err);
     } finally {
       setFetchingUsers(false)
-      console.log(search)
     }
   }
 
@@ -244,7 +252,10 @@ const Submit = () => {
             <h3>Collaborators / Credits</h3>
               <div>
               <label htmlFor="user-datalist">Add Collaborator</label>
-                <input list="userSearch" id="user-datalist" name="user-datalist" onChange={debounce((e) => {fetchUsers(e, e.target.value)}, 200)} />
+              <input list="userSearch" id="user-datalist" name="user-datalist" onChange={debounce((e) => {
+                fetchUsers(e, e.target.value)
+                setCollab(e.target.value)
+              }, 200)} />
                 <datalist id="userSearch">
                 {userSearch.map((users, i) => {
                     return <option key={i} value={users.display_name + ' ' + users.user_id} />
