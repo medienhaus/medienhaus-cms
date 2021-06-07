@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Matrix from '../../Matrix'
 import useJoinedSpaces from '../../components/matrix_joined_spaces'
+import FetchCms from '../../components/matrix_fetch_cms'
 import showdown from "showdown"
 import { Loading } from "../../components/loading";
 
@@ -12,7 +13,8 @@ const Submit = () => {
   const [projectSpace, setProjectSpace] = useState('');
   const [counter, setCounter] = useState(0);
   const [blocks, setBlocks] = useState([]);
-  const joinedSpaces= useJoinedSpaces()
+  const joinedSpaces = useJoinedSpaces()
+  const [blockContent, setBlockContent] = useState([]);
 
   const converter = new showdown.Converter()
   const matrixClient = Matrix.getMatrixClient()
@@ -119,42 +121,27 @@ const Submit = () => {
     //grabContent(blocks[1].room_id)
     // eslint-disable-next-line
   }, [counter, projectSpace]);
-
-  const grabContent = async (room) => {
-    const req = {
-      method: 'GET',
-      headers: { 'Authorization': "Bearer " + localStorage.getItem('medienhaus_access_token') },
-    }
-    const allContent = process.env.REACT_APP_MATRIX_BASE_URL + `/_matrix/client/r0/rooms/${room}/messages?limit=99999&dir=b`
-    const result = await fetch(allContent, req)
-    const data = await result.json();
-    const htmlString = data.chunk.map(type => {
-      if (type.type === "m.room.message") {
-        return type.content.body
-      } else {
-        return false
-      }
-    }).filter(Boolean)
-    const str = htmlString[0]
-    return str
-  }
   
   const AddContent = () => {
-    console.log(blocks)
+    console.log(blockContent)
     return (
       // eslint-disable-next-line
-      blocks.map( (block, index) => {
-        if (index > 0) {
-          grabContent(block.room_id)
+      blocks.filter(x => x.room_type !== "m.space").map((block, index) => {
+        const { cms, error, fetching } = FetchCms(block.room_id)
+        const key = block.room_id
+        //setBlockContent(blockContent => [...blockContent, { [key] : cms.body } ])
+        console.log(cms)
           const json = JSON.parse(block.topic)
-          return (
+        return (
+            fetching ? "Loading" : error ? console.error(error) : (
             <div>
-              <textarea id="text" key={block.room_id} name={block.name} placeholder={`Add ${json.type}`} type="text"  onChange={(e) =>
+              <textarea id="text" key={block.room_id} name={block.name} placeholder={`Add ${json.type}`} type="text"  value={cms.body} onChange={(e) =>
                 localStorage.setItem(block.room_id, e.target.value)
               } />
             </div>
           )
-        }
+          )
+        
       })
     )
   }
