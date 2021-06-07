@@ -16,7 +16,7 @@ const Submit = () => {
   const [projectSpace, setProjectSpace] = useState('')
   const [counter, setCounter] = useState(0)
   const [blocks, setBlocks] = useState([])
-  const joinedSpaces = useJoinedSpaces()
+  const {joinedSpaces, spacesErr, fetchSpaces} = useJoinedSpaces()
   const [blockContent, setBlockContent] = useState([])
   const [fetchingUsers, setFetchingUsers] = useState(false);
   const [userSearch, setUserSearch] = useState([]);
@@ -125,6 +125,7 @@ const Submit = () => {
     setCounter(blocks.length)
     projectSpace && fetchSpace()
     // eslint-disable-next-line
+
   }, [counter, projectSpace]);
 
   const AddContent = () => {
@@ -147,7 +148,8 @@ const Submit = () => {
                 localStorage.setItem(block.room_id, e.target.value)
               } />
                  */}
-               <Editor
+                  <Editor
+                    dark={window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches}
               defaultValue={cms && cms.body}
               onChange={debounce((value) => {
                 const text = value();
@@ -212,9 +214,9 @@ const Submit = () => {
       <>
       <h2>Drafts:</h2>
       <ul>
-      {joinedSpaces && joinedSpaces.map((space, index) => {
+      { spacesErr ? console.error(spacesErr) :joinedSpaces ? joinedSpaces.map((space, index) => {
         return <li key={index} ><button onClick={() => { setProjectSpace(space.room_id); setTitle(space.name) }}>{space.name}</button></li>
-      })
+      }) : null 
         }
       </ul>
       </>
@@ -223,7 +225,7 @@ const Submit = () => {
 
   return (
     <div>
-     {joinedSpaces && <Drafts />}
+     {fetchSpaces ? "Loading Drafts. This could take a few seconds..." : <Drafts />}
       <h2>New Project</h2>
       <form>
       <h3>Category / Context / Course</h3>
