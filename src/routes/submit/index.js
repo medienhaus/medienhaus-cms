@@ -210,6 +210,7 @@ const Submit = () => {
   }
 
   const Drafts = () => {
+    console.log(joinedSpaces);
     return (
       <>
       <h2>Drafts:</h2>
@@ -263,7 +264,15 @@ const Submit = () => {
                     return <option key={i} value={users.display_name + ' ' + users.user_id} />
                   })}
                 </datalist>
-        </div>
+            </div>
+            <div>
+              <ul>
+              {joinedSpaces.map((space) => space.collab.filter(x => x !== false).map((collabs, index) => {
+                return <li key={index} >{collabs.joined}</li>
+              }))
+                }
+                </ul>
+            </div>
         <div>
           <button onClick={(e) => invite(e)}>ADD Collaborators +</button>
           <button>ADD Credits +</button>
