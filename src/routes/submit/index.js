@@ -3,7 +3,10 @@ import Matrix from '../../Matrix'
 import useJoinedSpaces from '../../components/matrix_joined_spaces'
 import FetchCms from '../../components/matrix_fetch_cms'
 import showdown from 'showdown'
+import Editor from "rich-markdown-editor";
+import debounce from "lodash/debounce";
 import { Loading } from '../../components/loading'
+import { User } from 'matrix-js-sdk'
 
 const Submit = () => {
   const [subject, setSubject] = useState('')
@@ -15,6 +18,8 @@ const Submit = () => {
   const [blocks, setBlocks] = useState([])
   const joinedSpaces = useJoinedSpaces()
   const [blockContent, setBlockContent] = useState([])
+  const [fetchingUsers, setFetchingUsers] = useState(false);
+  const [userSearch, setUserSearch] = useState([]);
 
   const converter = new showdown.Converter()
   const matrixClient = Matrix.getMatrixClient()
@@ -100,8 +105,8 @@ const Submit = () => {
           setCounter(counter + 1)
           console.log(counter)
         })
-        .catch(error => {
-          console.error('There was an error!', error)
+        .catch(err => {
+          console.error('There was an error!', err)
         })
     } catch (e) {
       console.log(e)
@@ -121,14 +126,12 @@ const Submit = () => {
   }, [counter, projectSpace]);
 
   const AddContent = () => {
-    console.log(blockContent)
     return (
       // eslint-disable-next-line
-      blocks.filter(x => x.room_type !== "m.space").map((block, index) => {
+      blocks.filter(x => x.room_type !== "m.space").map((block) => {
         const { cms, error, fetching } = FetchCms(block.room_id)
         const key = block.room_id
         // cms && setBlockContent(blockContent => [...blockContent, { [key] : cms.body } ])
-        console.log(cms)
         const json = JSON.parse(block.topic)
         return (
           fetching
@@ -136,16 +139,51 @@ const Submit = () => {
             : error
               ? console.error(error)
               : (
-            <div>
-              <textarea id="text" key={block.room_id} name={block.name} placeholder={`Add ${json.type}`} type="text" value={cms.body} onChange={(e) =>
+                <div>                  
+              <textarea id="text" key={block.room_id} name={block.name} placeholder={`Add ${json.type}`} type="text" value={cms !== undefined && cms.body} onChange={(e) =>
                 localStorage.setItem(block.room_id, e.target.value)
               } />
+              
+              { /*
+               <Editor
+              defaultValue={cms && cms.body}
+              onChange={debounce((value) => {
+                const text = value();
+                localStorage.setItem(block.room_id, text);
+              }, 250)}
+              key={index} />
+              */}
             </div>
                 )
         )
       })
     )
   }
+
+  const invite = () => {
+   // matrixClient.invite(roomId, userId)
+  }
+
+  const fetchUsers = async (e, search) => {
+    e.preventDefault()
+    setFetchingUsers(true)
+    try{
+      const users = await matrixClient.searchUserDirectory({"term": search})
+      setUserSearch(users.results)
+      console.log(userSearch)
+    }
+    catch (err) {
+      console.error('Error whhile trying to fetch users: ' + err);
+    } finally {
+      setFetchingUsers(false)
+    }
+  }
+
+  useEffect(() => {
+    
+  
+   
+  }, [userSearch]);
 
   const onSave = (e) => {
     e.preventDefault()
@@ -172,7 +210,6 @@ const Submit = () => {
       <h2>Drafts:</h2>
       <ul>
       {joinedSpaces && joinedSpaces.map((space, index) => {
-        console.log(space)
         return <li key={index} ><button onClick={() => { setProjectSpace(space.room_id); setTitle(space.name) }}>{space.name}</button></li>
       })
         }
@@ -186,10 +223,10 @@ const Submit = () => {
      {joinedSpaces && <Drafts />}
       <h2>New Project</h2>
       <form>
+      <h3>Category / Context / Course</h3>
         <div>
-        <h3>Category / Context / Course</h3>
             <label htmlFor="subject">Studiengang</label>
-            <select id="subject" name="subject" value={subject} onChange={(e) => setSubject(e.target.value)}>
+             <select id="subject" name="subject" value={subject} onChange={(e) => setSubject(e.target.value)}>
               <option value="vk">VK</option>
               <option value="act">Schauspiel</option>
               <option value="clown">Clown</option>
@@ -199,9 +236,8 @@ const Submit = () => {
             // sollte es hier die möglichkeit geben mehrere auszuwählen? also studiengang übergreifende projekte
             }
         </div>
-
-        <div>
         <h3>Project Title / Collaborators / Credits</h3>
+        <div>
             <label htmlFor="title">Project Title</label>
             <input id="title" name="title" placeholder="project title" type="text" value={title} onChange={(e) => setTitle(e.target.value)} />
         </div>
@@ -209,27 +245,42 @@ const Submit = () => {
           {loading ? <Loading /> : <input id="submit" name="submit" type="submit" value="Save Title" disabled={!title} onClick={() => createProject()} />}
         </div>
         {projectSpace && (
-            <>
+          <>
+            <h3>Collaborators / Credits</h3>
+              <div>
+              <label for="user-datalist">Add Collaborator</label>
+                <input list="userSearch" id="user-datalist" name="user-datalist" onChange={debounce((e) => {fetchUsers(e, e.target.value)}, 200)} />
+                <datalist id="userSearch">
+                  {userSearch.map((users, i) => {
+                    {console.log(users.display_name)}
+                    <option key={i} value={users.display_name} />
+                  })}
+                  <option value="Test is working" />
+                </datalist>
+        </div>
         <div>
-          <h3>Collaborators / Credits</h3>
-          <button>ADD Collaborators +</button>
+          <button onClick={(e) => invite(e)}>ADD Collaborators +</button>
           <button>ADD Credits +</button>
         </div>
-            <div>
-              <h3>Content</h3>
+        <h3>Content</h3>
               <AddContent />
-              <div className="grid">
-                <button type="submit" id="" name="" value="Add Text" onClick={(e) => createBlock('text', e)} >Add Text</button>
-                <button type="submit" id="" name="" value="Add Image" onClick={(e) => createBlock('img', e)}>Add Image</button>
-                <button type="submit" id="" name="" value="Add Video" onClick={(e) => createBlock('video', e)}>Add Video</button>
-                <button type="submit" id="" name="" value="Add Audio" onClick={(e) => createBlock('audio', e)}>Add Audio</button>
+              <div>
+              <select name="content-select" id="content-select">
+                  <option value="" disabled={true} >--Text------------</option>
+                  <option value="heading">Heading</option>
+                  <option value="text">Text</option>
+                  <option value="" disabled={true} >--Media------------</option>
+                  <option value="image">Image</option>
+                <option value="audio">Audio</option>
+                </select>
+                <button type="submit" id="" name="" value="Add Audio" onClick={(e) => createBlock('audio', e)}>Add Content</button>
                 {/*
             // fetch("https://stream.udk-berlin.de/api/userId/myVideos")
             */}
-              </div>
+          
             </div>
+            <h3>Visibility (Draft/Published)</h3>
             <div>
-              <h3>Visibility (Draft/Published)</h3>
               <select id="visibility" name="visibility" value={visibility} onChange={(e) => setVisibility(e.target.value)}>
                 <option value="draft">Draft</option>
                 <option value="published">Published</option>
