@@ -20,6 +20,7 @@ const Submit = () => {
   const [blockContent, setBlockContent] = useState([])
   const [fetchingUsers, setFetchingUsers] = useState(false);
   const [userSearch, setUserSearch] = useState([]);
+  const [contentSelect, setContentSelect] = useState('');
 
   const converter = new showdown.Converter()
   const matrixClient = Matrix.getMatrixClient()
@@ -128,7 +129,7 @@ const Submit = () => {
   const AddContent = () => {
     return (
       // eslint-disable-next-line
-      blocks.filter(x => x.room_type !== "m.space").map((block) => {
+      blocks.filter(x => x.room_type !== "m.space").map((block, index) => {
         const { cms, error, fetching } = FetchCms(block.room_id)
         const key = block.room_id
         // cms && setBlockContent(blockContent => [...blockContent, { [key] : cms.body } ])
@@ -139,12 +140,12 @@ const Submit = () => {
             : error
               ? console.error(error)
               : (
-                <div>                  
+                <div>
+                   { /*
               <textarea id="text" key={block.room_id} name={block.name} placeholder={`Add ${json.type}`} type="text" value={cms !== undefined && cms.body} onChange={(e) =>
                 localStorage.setItem(block.room_id, e.target.value)
               } />
-              
-              { /*
+                 */}
                <Editor
               defaultValue={cms && cms.body}
               onChange={debounce((value) => {
@@ -152,7 +153,6 @@ const Submit = () => {
                 localStorage.setItem(block.room_id, text);
               }, 250)}
               key={index} />
-              */}
             </div>
                 )
         )
@@ -176,14 +176,9 @@ const Submit = () => {
       console.error('Error whhile trying to fetch users: ' + err);
     } finally {
       setFetchingUsers(false)
+      console.log(search)
     }
   }
-
-  useEffect(() => {
-    
-  
-   
-  }, [userSearch]);
 
   const onSave = (e) => {
     e.preventDefault()
@@ -248,14 +243,12 @@ const Submit = () => {
           <>
             <h3>Collaborators / Credits</h3>
               <div>
-              <label for="user-datalist">Add Collaborator</label>
+              <label htmlFor="user-datalist">Add Collaborator</label>
                 <input list="userSearch" id="user-datalist" name="user-datalist" onChange={debounce((e) => {fetchUsers(e, e.target.value)}, 200)} />
                 <datalist id="userSearch">
-                  {userSearch.map((users, i) => {
-                    {console.log(users.display_name)}
-                    <option key={i} value={users.display_name} />
+                {userSearch.map((users, i) => {
+                    return <option key={i} value={users.display_name + ' ' + users.user_id} />
                   })}
-                  <option value="Test is working" />
                 </datalist>
         </div>
         <div>
@@ -265,7 +258,7 @@ const Submit = () => {
         <h3>Content</h3>
               <AddContent />
               <div>
-              <select name="content-select" id="content-select">
+              <select name="content-select" id="content-select" onChange={(e) => setContentSelect(e.target.value)}>
                   <option value="" disabled={true} >--Text------------</option>
                   <option value="heading">Heading</option>
                   <option value="text">Text</option>
@@ -273,7 +266,7 @@ const Submit = () => {
                   <option value="image">Image</option>
                 <option value="audio">Audio</option>
                 </select>
-                <button type="submit" id="" name="" value="Add Audio" onClick={(e) => createBlock('audio', e)}>Add Content</button>
+                <button type="submit" id="" name="" value="Add Audio" onClick={(e) => createBlock(contentSelect, e)}>Add Content</button>
                 {/*
             // fetch("https://stream.udk-berlin.de/api/userId/myVideos")
             */}
