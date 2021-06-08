@@ -17,7 +17,6 @@ const Submit = () => {
   const [counter, setCounter] = useState(0)
   const [blocks, setBlocks] = useState([])
   const {joinedSpaces, spacesErr, fetchSpaces} = useJoinedSpaces()
-  const [blockContent, setBlockContent] = useState([])
   const [fetchingUsers, setFetchingUsers] = useState(false);
   const [userSearch, setUserSearch] = useState([]);
   const [contentSelect, setContentSelect] = useState('');
@@ -201,10 +200,9 @@ const Submit = () => {
           formatted_body: converter.makeHtml(localStorage.getItem(block.room_id))
         })
         // await matrixClient.redactEvent(roomId.room_id, entry.event, null, { 'reason': 'I have my reasons!' })
-
         // onSave()
       } catch (e) {
-        console.log('error while trying to edit: ')
+        console.error('error while trying to save: ' + e)
       }
     })
   }
@@ -221,6 +219,24 @@ const Submit = () => {
         }
       </ul>
       </>
+    )
+  }
+
+  const Collaborators = () => {
+    
+    return (
+      <div>
+        <ul>{
+          joinedSpaces.map((space, i) => {
+            if (space.name === title) {
+              return Object.values(space.collab).map(name => {
+                return <li>{name.display_name}</li>
+              })
+            }
+          })
+        }
+          </ul>
+      </div>
     )
   }
 
@@ -253,6 +269,7 @@ const Submit = () => {
         {projectSpace && (
           <>
             <h3>Collaborators / Credits</h3>
+            <Collaborators />
               <div>
               <label htmlFor="user-datalist">Add Collaborator</label>
               <input list="userSearch" id="user-datalist" name="user-datalist" onChange={debounce((e) => {
@@ -264,14 +281,6 @@ const Submit = () => {
                     return <option key={i} value={users.display_name + ' ' + users.user_id} />
                   })}
                 </datalist>
-            </div>
-            <div>
-              <ul>
-              {joinedSpaces.map((space) => space.collab.filter(x => x !== false).map((collabs, index) => {
-                return <li key={index} >{collabs.joined}</li>
-              }))
-                }
-                </ul>
             </div>
         <div>
           <button onClick={(e) => invite(e)}>ADD Collaborators +</button>

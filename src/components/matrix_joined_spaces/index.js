@@ -25,7 +25,7 @@ const getAnswer = async () => {
           // console.log(room.rooms[0].room_type
           if (room.rooms[0].room_type === 'm.space' && isJson(room.rooms[0].topic)) {
             const collab = room.rooms[0].num_joined_members > 1 ? await matrixClient.getJoinedRoomMembers(room.rooms[0].room_id) : false
-            return { name: room.rooms[0].name, room_id: room.rooms[0].room_id, topic: JSON.parse(room.rooms[0].topic), collab: collab  }
+            return { name: room.rooms[0].name, room_id: room.rooms[0].room_id, topic: JSON.parse(room.rooms[0].topic), collab: collab && collab.joined  }
           } else {
             return false
           }
