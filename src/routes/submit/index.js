@@ -6,7 +6,8 @@ import showdown from 'showdown'
 import Editor from "rich-markdown-editor";
 import debounce from "lodash/debounce";
 import { Loading } from '../../components/loading'
-import { User } from 'matrix-js-sdk'
+import { useAuth } from '../../Auth'
+
 
 const Submit = () => {
   const [subject, setSubject] = useState('')
@@ -16,12 +17,13 @@ const Submit = () => {
   const [projectSpace, setProjectSpace] = useState('')
   const [counter, setCounter] = useState(0)
   const [blocks, setBlocks] = useState([])
-  const joinedSpaces = useJoinedSpaces()
-  const [blockContent, setBlockContent] = useState([])
+  const {joinedSpaces, spacesErr, fetchSpaces} = useJoinedSpaces()
   const [fetchingUsers, setFetchingUsers] = useState(false);
   const [userSearch, setUserSearch] = useState([]);
   const [contentSelect, setContentSelect] = useState('');
   const [collab, setCollab] = useState('');
+  const auth = useAuth()
+  const profile = auth.user
 
   const converter = new showdown.Converter()
   const matrixClient = Matrix.getMatrixClient()
@@ -88,7 +90,7 @@ const Submit = () => {
       body: JSON.stringify({
         via: [localStorage.getItem('mx_home_server')],
         suggested: false,
-        auto_join: false
+        auto_join: true
       })
     }
 
@@ -125,41 +127,8 @@ const Submit = () => {
     setCounter(blocks.length)
     projectSpace && fetchSpace()
     // eslint-disable-next-line
-  }, [counter, projectSpace]);
 
-  const AddContent = () => {
-    return (
-      // eslint-disable-next-line
-      blocks.filter(x => x.room_type !== "m.space").map((block, index) => {
-        const { cms, error, fetching } = FetchCms(block.room_id)
-        const key = block.room_id
-        // cms && setBlockContent(blockContent => [...blockContent, { [key] : cms.body } ])
-        const json = JSON.parse(block.topic)
-        return (
-          fetching
-            ? 'Loading'
-            : error
-              ? console.error(error)
-              : (
-                <div>
-                   { /*
-              <textarea id="text" key={block.room_id} name={block.name} placeholder={`Add ${json.type}`} type="text" value={cms !== undefined && cms.body} onChange={(e) =>
-                localStorage.setItem(block.room_id, e.target.value)
-              } />
-                 */}
-               <Editor
-              defaultValue={cms && cms.body}
-              onChange={debounce((value) => {
-                const text = value();
-                localStorage.setItem(block.room_id, text);
-              }, 250)}
-              key={index} />
-            </div>
-                )
-        )
-      })
-    )
-  }
+  }, [counter, projectSpace]);
 
   const invite = async (e) => {
     e.preventDefault()
@@ -167,7 +136,7 @@ const Submit = () => {
     console.log(id)
     try {
       const invitation = await matrixClient.invite(projectSpace, id[1]).
-        then((response) => console.log(response))
+        then(() => console.log("invited " + id[1]))
       } catch (err) {
     console.error(err);
     }
@@ -188,9 +157,33 @@ const Submit = () => {
     }
   }
 
+  const changeOrder = (e, pos, direction) => {
+    e.prevetnDefaut()
+    blocks.splice(pos + direction, 0, blocks.splice(pos, 1).pop())
+  }
+
+  const onDelete = async (e, roomId) => {
+    e.preventDefault()
+    try {
+      const count = await matrixClient.getJoinedRoomMembers(roomId)
+      //console.log(Object.keys(count.joined))
+      Object.keys(count.joined).length > 1 && Object.keys(count.joined).map(name => {
+        localStorage.getItem('medienhaus_user_id') !== name && matrixClient.kick(roomId, name)
+      })
+      matrixClient.leave(roomId)
+    } catch (err) {
+      console.error(err)
+    }
+    //matrixClient.kick(roomId, userId)
+    //matrixClient.leave(roomId)
+  }
+
   const onSave = (e) => {
     e.preventDefault()
     blocks.map(async (block, index) => {
+      const json = JSON.parse(block.topic)
+      const order = parseInt(block.name.split('_'))
+      order !== index && index > 0 && matrixClient.setRoomName(block.room_id, index + '_' + json.tgype)
       try {
         await matrixClient.sendMessage(block.room_id, {
           body: localStorage.getItem(block.room_id),
@@ -199,31 +192,87 @@ const Submit = () => {
           formatted_body: converter.makeHtml(localStorage.getItem(block.room_id))
         })
         // await matrixClient.redactEvent(roomId.room_id, entry.event, null, { 'reason': 'I have my reasons!' })
-
         // onSave()
       } catch (e) {
-        console.log('error while trying to edit: ')
+        console.error('error while trying to save: ' + e)
       }
     })
   }
 
+  const AddContent = () => {
+    return (
+      // eslint-disable-next-line
+      blocks.filter(x => x.room_type !== "m.space").map((block, index) => {
+        const { cms, error, fetching } = FetchCms(block.room_id)
+        const json = JSON.parse(block.topic)
+        return (
+          fetching
+            ? 'Loading'
+            : error
+              ? console.error(error)
+              : (
+                <div>
+                   { /*
+              <textarea id="text" key={block.room_id} name={block.name} placeholder={`Add ${json.type}`} type="text" value={cms !== undefined && cms.body} onChange={(e) =>
+                localStorage.setItem(block.room_id, e.target.value)
+              } />
+                 */}
+                  <Editor
+                    dark={window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches}
+              defaultValue={cms && cms.body}
+              onChange={debounce((value) => {
+                const text = value();
+                localStorage.setItem(block.room_id, text);
+              }, 250)}
+                    key={index} />
+                  {//index !== 0 && <button key={'up' + index} onClick={(e) => changeOrder(e, index, -1)}>UP</button>
+                  }
+                  {//index < blocks.length - 1 && <button key={'down' + index} onClick={(e) => changeOrder(e, index, 1)}>DOWN</button>
+                  }
+                  {<button key={'delete' + index} onClick={(e) => onDelete(e, block.room_id)} >DELETE</button>}
+            </div>
+                )
+        )
+      })
+    )
+  }
+
   const Drafts = () => {
+    console.log(joinedSpaces);
     return (
       <>
       <h2>Drafts:</h2>
       <ul>
-      {joinedSpaces && joinedSpaces.map((space, index) => {
+      { spacesErr ? console.error(spacesErr) :joinedSpaces ? joinedSpaces.map((space, index) => {
         return <li key={index} ><button onClick={() => { setProjectSpace(space.room_id); setTitle(space.name) }}>{space.name}</button></li>
-      })
+      }) : null 
         }
       </ul>
       </>
     )
   }
 
+  const Collaborators = () => {
+    
+    return (
+      <div>
+        <ul>{
+          joinedSpaces.map((space, i) => {
+            if (space.name === title) {
+              return Object.values(space.collab).map(name => {
+                return <li>{name.display_name}</li>
+              })
+            }
+          })
+        }
+          </ul>
+      </div>
+    )
+  }
+
   return (
     <div>
-     {joinedSpaces && <Drafts />}
+     {fetchSpaces ? "Loading Drafts. This could take a few seconds..." : <Drafts />}
       <h2>New Project</h2>
       <form>
       <h3>Category / Context / Course</h3>
@@ -250,6 +299,7 @@ const Submit = () => {
         {projectSpace && (
           <>
             <h3>Collaborators / Credits</h3>
+            <Collaborators />
               <div>
               <label htmlFor="user-datalist">Add Collaborator</label>
               <input list="userSearch" id="user-datalist" name="user-datalist" onChange={debounce((e) => {
@@ -261,7 +311,7 @@ const Submit = () => {
                     return <option key={i} value={users.display_name + ' ' + users.user_id} />
                   })}
                 </datalist>
-        </div>
+            </div>
         <div>
           <button onClick={(e) => invite(e)}>ADD Collaborators +</button>
           <button>ADD Credits +</button>
