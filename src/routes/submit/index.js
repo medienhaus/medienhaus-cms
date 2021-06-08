@@ -6,7 +6,8 @@ import showdown from 'showdown'
 import Editor from "rich-markdown-editor";
 import debounce from "lodash/debounce";
 import { Loading } from '../../components/loading'
-import { User } from 'matrix-js-sdk'
+import { useAuth } from '../../Auth'
+
 
 const Submit = () => {
   const [subject, setSubject] = useState('')
@@ -21,6 +22,8 @@ const Submit = () => {
   const [userSearch, setUserSearch] = useState([]);
   const [contentSelect, setContentSelect] = useState('');
   const [collab, setCollab] = useState('');
+  const auth = useAuth()
+  const profile = auth.user
 
   const converter = new showdown.Converter()
   const matrixClient = Matrix.getMatrixClient()
@@ -87,7 +90,7 @@ const Submit = () => {
       body: JSON.stringify({
         via: [localStorage.getItem('mx_home_server')],
         suggested: false,
-        auto_join: false
+        auto_join: true
       })
     }
 
@@ -127,15 +130,13 @@ const Submit = () => {
 
   }, [counter, projectSpace]);
 
-  
-
   const invite = async (e) => {
     e.preventDefault()
     const id = collab.split(' ')
     console.log(id)
     try {
       const invitation = await matrixClient.invite(projectSpace, id[1]).
-        then((response) => console.log(response))
+        then(() => console.log("invited " + id[1]))
       } catch (err) {
     console.error(err);
     }
@@ -156,9 +157,33 @@ const Submit = () => {
     }
   }
 
+  const changeOrder = (e, pos, direction) => {
+    e.prevetnDefaut()
+    blocks.splice(pos + direction, 0, blocks.splice(pos, 1).pop())
+  }
+
+  const onDelete = async (e, roomId) => {
+    e.preventDefault()
+    try {
+      const count = await matrixClient.getJoinedRoomMembers(roomId)
+      //console.log(Object.keys(count.joined))
+      Object.keys(count.joined).length > 1 && Object.keys(count.joined).map(name => {
+        localStorage.getItem('medienhaus_user_id') !== name && matrixClient.kick(roomId, name)
+      })
+      matrixClient.leave(roomId)
+    } catch (err) {
+      console.error(err)
+    }
+    //matrixClient.kick(roomId, userId)
+    //matrixClient.leave(roomId)
+  }
+
   const onSave = (e) => {
     e.preventDefault()
     blocks.map(async (block, index) => {
+      const json = JSON.parse(block.topic)
+      const order = parseInt(block.name.split('_'))
+      order !== index && index > 0 && matrixClient.setRoomName(block.room_id, index + '_' + json.tgype)
       try {
         await matrixClient.sendMessage(block.room_id, {
           body: localStorage.getItem(block.room_id),
@@ -199,7 +224,10 @@ const Submit = () => {
                 const text = value();
                 localStorage.setItem(block.room_id, text);
               }, 250)}
-              key={index} />
+                    key={index} />
+                  {index !== 0 && <button key={'up' + index} onClick={(e) => changeOrder(e, index, -1)}>UP</button>}
+                  {index < blocks.length - 1 && <button key={'down' + index} onClick={(e) => changeOrder(e, index, 1)}>DOWN</button>}
+                  {<button key={'delete' + index} onClick={(e) => onDelete(e, block.room_id)} >DELETE</button>}
             </div>
                 )
         )
