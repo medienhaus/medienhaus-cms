@@ -6,8 +6,6 @@ import showdown from 'showdown'
 import Editor from "rich-markdown-editor";
 import debounce from "lodash/debounce";
 import { Loading } from '../../components/loading'
-import { useAuth } from '../../Auth'
-
 
 const Submit = () => {
   const [subject, setSubject] = useState('')
@@ -22,8 +20,6 @@ const Submit = () => {
   const [userSearch, setUserSearch] = useState([]);
   const [contentSelect, setContentSelect] = useState('');
   const [collab, setCollab] = useState('');
-  const auth = useAuth()
-  const profile = auth.user
 
   const converter = new showdown.Converter()
   const matrixClient = Matrix.getMatrixClient()
@@ -127,7 +123,6 @@ const Submit = () => {
     setCounter(blocks.length)
     projectSpace && fetchSpace()
     // eslint-disable-next-line
-
   }, [counter, projectSpace]);
 
   const invite = async (e) => {
@@ -135,8 +130,7 @@ const Submit = () => {
     const id = collab.split(' ')
     console.log(id)
     try {
-      const invitation = await matrixClient.invite(projectSpace, id[1]).
-        then(() => console.log("invited " + id[1]))
+       await matrixClient.invite(projectSpace, id[1]).then(() => console.log("invited " + id[1]))
       } catch (err) {
     console.error(err);
     }
@@ -158,16 +152,16 @@ const Submit = () => {
   }
 
   const changeOrder = (e, pos, direction) => {
-    e.prevetnDefaut()
-    blocks.splice(pos + direction, 0, blocks.splice(pos, 1).pop())
+    e.preventDefault()
+    blocks.splice((pos) + direction, 0, blocks.splice(pos, 1).pop())
+    console.log(blocks);
   }
 
   const onDelete = async (e, roomId) => {
     e.preventDefault()
     try {
       const count = await matrixClient.getJoinedRoomMembers(roomId)
-      //console.log(Object.keys(count.joined))
-      Object.keys(count.joined).length > 1 && Object.keys(count.joined).map(name => {
+      Object.keys(count.joined).length > 1 && Object.keys(count.joined).forEach(name => {
         localStorage.getItem('medienhaus_user_id') !== name && matrixClient.kick(roomId, name)
       })
       matrixClient.leave(roomId)
@@ -183,7 +177,8 @@ const Submit = () => {
     blocks.map(async (block, index) => {
       const json = JSON.parse(block.topic)
       const order = parseInt(block.name.split('_'))
-      order !== index && index > 0 && matrixClient.setRoomName(block.room_id, index + '_' + json.tgype)
+      console.log(json.type)
+      order !== index && index > 0 && matrixClient.setRoomName(block.room_id, index + '_' + json.type)
       try {
         await matrixClient.sendMessage(block.room_id, {
           body: localStorage.getItem(block.room_id),
@@ -191,8 +186,10 @@ const Submit = () => {
           msgtype: 'm.text',
           formatted_body: converter.makeHtml(localStorage.getItem(block.room_id))
         })
+
         // await matrixClient.redactEvent(roomId.room_id, entry.event, null, { 'reason': 'I have my reasons!' })
         // onSave()
+
       } catch (e) {
         console.error('error while trying to save: ' + e)
       }
@@ -212,7 +209,7 @@ const Submit = () => {
               ? console.error(error)
               : (
                 <div>
-                   { /*
+                   {console.log(blocks)  /*
               <textarea id="text" key={block.room_id} name={block.name} placeholder={`Add ${json.type}`} type="text" value={cms !== undefined && cms.body} onChange={(e) =>
                 localStorage.setItem(block.room_id, e.target.value)
               } />
@@ -225,9 +222,9 @@ const Submit = () => {
                 localStorage.setItem(block.room_id, text);
               }, 250)}
                     key={index} />
-                  {//index !== 0 && <button key={'up' + index} onClick={(e) => changeOrder(e, index, -1)}>UP</button>
+                  {index !== 0 && <button key={'up' + index} onClick={(e) => changeOrder(e, index + 1, -1)}>UP</button>
                   }
-                  {//index < blocks.length - 1 && <button key={'down' + index} onClick={(e) => changeOrder(e, index, 1)}>DOWN</button>
+                  {index < blocks.length - 2 && <button key={'down' + index} onClick={(e) => changeOrder(e, index + 1, 1)}>DOWN</button>
                   }
                   {<button key={'delete' + index} onClick={(e) => onDelete(e, block.room_id)} >DELETE</button>}
             </div>
@@ -253,7 +250,6 @@ const Submit = () => {
   }
 
   const Collaborators = () => {
-    
     return (
       <div>
         <ul>{
