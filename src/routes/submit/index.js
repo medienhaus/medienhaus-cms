@@ -172,8 +172,8 @@ const Submit = () => {
     //matrixClient.leave(roomId)
   }
 
-  const onSave = (e) => {
-    e.preventDefault()
+  const onSave = () => {
+  
     blocks.map(async (block, index) => {
       const json = JSON.parse(block.topic)
       const order = parseInt(block.name.split('_'))
@@ -196,24 +196,41 @@ const Submit = () => {
     })
   }
 
+  const string2hash = (string) => {
+    var hash = 0;
+                  
+                if (string.length == 0) return hash;
+                  
+                for (let i = 0; i < string.length; i++) {
+                    const char = string.charCodeAt(i);
+                    hash = ((hash << 5) - hash) + char;
+                    hash = hash & hash;
+                }
+                  
+                return hash;
+            }
+  
+  
   const AddContent = () => {
     return (
       // eslint-disable-next-line
       blocks.filter(x => x.room_type !== "m.space").map((block, index) => {
         const { cms, error, fetching } = FetchCms(block.room_id)
         const json = JSON.parse(block.topic)
+
         return (
           fetching
             ? 'Loading'
             : error
               ? console.error(error)
               : (
-                <>
-                   {console.log(blocks)  /*
+                <>                   
+                  { /*
               <textarea id="text" key={block.room_id} name={block.name} placeholder={`Add ${json.type}`} type="text" value={cms !== undefined && cms.body} onChange={(e) =>
                 localStorage.setItem(block.room_id, e.target.value)
               } />
                  */}
+                  
                   <Editor
                     dark={window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches}
               defaultValue={cms && cms.body}
@@ -221,7 +238,12 @@ const Submit = () => {
                 const text = value();
                 localStorage.setItem(block.room_id, text);
               }, 250)}
+                    handleDOMEvents={{
+                      focus: () => console.log("FOCUS"),
+                      blur: (e) => string2hash(cms.body) !== string2hash(localStorage.getItem(block.room_id)) && onSave(e),
+              }}
                     key={index} />
+                  
                   <div className="grid">
                   {index !== 0 && <button key={'up' + index} onClick={(e) => changeOrder(e, index + 1, -1)}>UP</button>
                   }
