@@ -127,40 +127,7 @@ const Submit = () => {
 
   }, [counter, projectSpace]);
 
-  const AddContent = () => {
-    return (
-      // eslint-disable-next-line
-      blocks.filter(x => x.room_type !== "m.space").map((block, index) => {
-        const { cms, error, fetching } = FetchCms(block.room_id)
-        const key = block.room_id
-        // cms && setBlockContent(blockContent => [...blockContent, { [key] : cms.body } ])
-        const json = JSON.parse(block.topic)
-        return (
-          fetching
-            ? 'Loading'
-            : error
-              ? console.error(error)
-              : (
-                <div>
-                   { /*
-              <textarea id="text" key={block.room_id} name={block.name} placeholder={`Add ${json.type}`} type="text" value={cms !== undefined && cms.body} onChange={(e) =>
-                localStorage.setItem(block.room_id, e.target.value)
-              } />
-                 */}
-                  <Editor
-                    dark={window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches}
-              defaultValue={cms && cms.body}
-              onChange={debounce((value) => {
-                const text = value();
-                localStorage.setItem(block.room_id, text);
-              }, 250)}
-              key={index} />
-            </div>
-                )
-        )
-      })
-    )
-  }
+  
 
   const invite = async (e) => {
     e.preventDefault()
@@ -205,6 +172,39 @@ const Submit = () => {
         console.error('error while trying to save: ' + e)
       }
     })
+  }
+
+  const AddContent = () => {
+    return (
+      // eslint-disable-next-line
+      blocks.filter(x => x.room_type !== "m.space").map((block, index) => {
+        const { cms, error, fetching } = FetchCms(block.room_id)
+        const json = JSON.parse(block.topic)
+        return (
+          fetching
+            ? 'Loading'
+            : error
+              ? console.error(error)
+              : (
+                <div>
+                   { /*
+              <textarea id="text" key={block.room_id} name={block.name} placeholder={`Add ${json.type}`} type="text" value={cms !== undefined && cms.body} onChange={(e) =>
+                localStorage.setItem(block.room_id, e.target.value)
+              } />
+                 */}
+                  <Editor
+                    dark={window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches}
+              defaultValue={cms && cms.body}
+              onChange={debounce((value) => {
+                const text = value();
+                localStorage.setItem(block.room_id, text);
+              }, 250)}
+              key={index} />
+            </div>
+                )
+        )
+      })
+    )
   }
 
   const Drafts = () => {
