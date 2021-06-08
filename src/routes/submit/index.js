@@ -208,7 +208,7 @@ const Submit = () => {
             : error
               ? console.error(error)
               : (
-                <div>
+                <>
                    {console.log(blocks)  /*
               <textarea id="text" key={block.room_id} name={block.name} placeholder={`Add ${json.type}`} type="text" value={cms !== undefined && cms.body} onChange={(e) =>
                 localStorage.setItem(block.room_id, e.target.value)
@@ -227,7 +227,7 @@ const Submit = () => {
                   {index < blocks.length - 2 && <button key={'down' + index} onClick={(e) => changeOrder(e, index + 1, 1)}>DOWN</button>
                   }
                   {<button key={'delete' + index} onClick={(e) => onDelete(e, block.room_id)} >DELETE</button>}
-            </div>
+            </>
                 )
         )
       })

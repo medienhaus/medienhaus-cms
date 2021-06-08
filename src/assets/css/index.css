@@ -43,7 +43,7 @@ body {
   animation: init 0.03s ease-in 0.5s 1 forwards;
 }
 
-body > div {
+body > div:first-of-type {
   display: grid;
   grid-template-columns: 1fr max-content;
   grid-template-rows: auto 1fr auto;
@@ -52,19 +52,19 @@ body > div {
 }
 
 
-body > div > *:not(footer) > * > * + * {
+body > div:first-of-type > *:not(footer) > * > * + * {
   margin-top: calc(var(--margin) * 2);
 }
 
-body > div > main > :first-of-type {
+body > div:first-of-type > main > :first-of-type {
   margin-top: calc(var(--margin) * 0.6);
 }
 
-body > div > main > :first-of-type#definition {
+body > div:first-of-type > main > :first-of-type#definition {
   margin-top: calc(var(--margin) * 1.6);
 }
 
-body > div > main > section + section {
+body > div:first-of-type > main > section + section {
   margin-top: calc(var(--margin) * 4);
 }
 
@@ -101,6 +101,7 @@ h1, h2, h3, h4, h5, h6 {
   margin: unset;
 }
 
+/* TODO */
 h3 {
   text-decoration: underline;
 }
@@ -273,6 +274,7 @@ form button[disabled] {
   opacity: 0.3;
 }
 
+form input[id*="datalist"],
 form input[type="color"],
 form input[type="date"],
 form input[type="email"],
