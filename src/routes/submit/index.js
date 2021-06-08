@@ -225,8 +225,10 @@ const Submit = () => {
                 localStorage.setItem(block.room_id, text);
               }, 250)}
                     key={index} />
-                  {index !== 0 && <button key={'up' + index} onClick={(e) => changeOrder(e, index, -1)}>UP</button>}
-                  {index < blocks.length - 1 && <button key={'down' + index} onClick={(e) => changeOrder(e, index, 1)}>DOWN</button>}
+                  {//index !== 0 && <button key={'up' + index} onClick={(e) => changeOrder(e, index, -1)}>UP</button>
+                  }
+                  {//index < blocks.length - 1 && <button key={'down' + index} onClick={(e) => changeOrder(e, index, 1)}>DOWN</button>
+                  }
                   {<button key={'delete' + index} onClick={(e) => onDelete(e, block.room_id)} >DELETE</button>}
             </div>
                 )
