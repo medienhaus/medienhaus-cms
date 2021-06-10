@@ -159,6 +159,7 @@ const Submit = () => {
   const changeOrder = (e, pos, direction) => {
     e.preventDefault()
     blocks.splice((pos) + direction, 0, blocks.splice(pos, 1).pop())
+    setCounter(0)
     console.log(blocks);
   }
   const deleteProject = (e) => {
@@ -242,7 +243,7 @@ const Submit = () => {
     const json = JSON.parse(block.topic)
         return (
           fetching
-            ? <div>Loading</div>
+            ? <div style={{ height: "90px"}}>Loading</div>
             : error
               ? console.error(error)
               : (
@@ -355,10 +356,10 @@ const Submit = () => {
            { fetchingUsers ? "Looking for collaborators..." : <Collaborators />}
               <div>
               <label htmlFor="user-datalist">Add Collaborator</label>
-              <input list="userSearch" id="user-datalist" name="user-datalist" onChange={debounce((e) => {
+              <input list="userSearch" id="user-datalist" name="user-datalist" onChange={(e) => {
                 fetchUsers(e, e.target.value)
                 setCollab(e.target.value)
-              }, 200)} />
+              }} />
                 <datalist id="userSearch">
                 {userSearch.map((users, i) => {
                     return <option key={i} value={users.display_name + ' ' + users.user_id} />
