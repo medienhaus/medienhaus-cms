@@ -10,7 +10,7 @@ import { Loading } from '../../components/loading'
 const Submit = () => {
   const [subject, setSubject] = useState('')
   const [title, setTitle] = useState('')
-  const [visibility, setVisibility] = useState('draft')
+  const [visibility, setVisibility] = useState("draft")
   const [loading, setLoading] = useState(false)
   const [projectSpace, setProjectSpace] = useState('')
   const [counter, setCounter] = useState(0)
@@ -27,12 +27,12 @@ const Submit = () => {
   const createProject = async () => {
     setLoading(true)
     const opts = {
-      preset: visibility === 'published' ? 'public_chat' : 'private_chat',
+      preset: visibility === 'public' ? 'public_chat' : 'private_chat',
       name: title,
       creation_content: { type: 'm.space' },
       initial_state: [{
         type: 'm.room.history_visibility',
-        content: { history_visibility: visibility === 'published' ? 'world_readable' : 'invited' }
+        content: { history_visibility: visibility === 'public' ? 'world_readable' : 'invited' }
       },
       {
         type: 'm.room.topic',
@@ -119,21 +119,26 @@ const Submit = () => {
     const fetchSpace = async () => {
       const space = await matrixClient.getSpaceSummary(projectSpace)
       setBlocks(space.rooms)
+      console.log(blocks);
     }
     setCounter(blocks.length)
     projectSpace && fetchSpace()
     // eslint-disable-next-line
   }, [counter, projectSpace]);
 
-  const invite = async (e) => {
+  const invite =  (e) => {
     e.preventDefault()
     const id = collab.split(' ')
-    console.log(id)
-    try {
-       await matrixClient.invite(projectSpace, id[1]).then(() => console.log("invited " + id[1]))
+    blocks.forEach(async (room, index) => {
+      try {
+        await matrixClient.invite(room.room_id, id[1]).then(() => console.log("invited " + id[1] + " to " + room.name))
+        console.log(index);
       } catch (err) {
-    console.error(err);
-    }
+        console.error(err);
+          }
+        } 
+    )
+    
   }
 
   const fetchUsers = async (e, search) => {
@@ -156,6 +161,10 @@ const Submit = () => {
     blocks.splice((pos) + direction, 0, blocks.splice(pos, 1).pop())
     console.log(blocks);
   }
+  const deleteProject = (e) => {
+    e.preventDefault()
+    console.log('nööööööööö');
+  }
 
   const onDelete = async (e, roomId) => {
     e.preventDefault()
@@ -165,6 +174,7 @@ const Submit = () => {
         localStorage.getItem('medienhaus_user_id') !== name && matrixClient.kick(roomId, name)
       })
       matrixClient.leave(roomId)
+      setCounter(0)
     } catch (err) {
       console.error(err)
     }
@@ -172,8 +182,8 @@ const Submit = () => {
     //matrixClient.leave(roomId)
   }
 
-  const onSave = (e) => {
-    e.preventDefault()
+  const onSave = () => {
+  
     blocks.map(async (block, index) => {
       const json = JSON.parse(block.topic)
       const order = parseInt(block.name.split('_'))
@@ -195,43 +205,88 @@ const Submit = () => {
       }
     })
   }
+  const onPublish = async (e) => {
+    e.preventDefault()
+    const req = {
+      method: 'PUT',
+      headers: { Authorization: 'Bearer ' + localStorage.getItem('medienhaus_access_token') },
+      body: JSON.stringify({"join_rule": visibility === "public" ? 'public' : 'invite'})
+    }
+    try {
+      //matrixClient.sendEvent(projectSpace, "m.room.join_rules", {"join_rule": visibility === "public" ? 'public' : 'invite'} ).then((res) => console.log(res))
+    fetch(process.env.REACT_APP_MATRIX_BASE_URL + `/_matrix/client/r0/rooms/${projectSpace}/state/m.room.join_rules/`, req)
+     .then(response => { console.log(response); console.log(projectSpace);})
+      
+    } catch (err){
+      console.error(err);
+    }
+  }
 
-  const AddContent = () => {
-    return (
-      // eslint-disable-next-line
-      blocks.filter(x => x.room_type !== "m.space").map((block, index) => {
-        const { cms, error, fetching } = FetchCms(block.room_id)
-        const json = JSON.parse(block.topic)
+  const string2hash = (string) => {
+    var hash = 0;
+                if (string.length === 0) return hash;
+                for (let i = 0; i < string.length; i++) {
+                    const char = string.charCodeAt(i);
+                    hash = ((hash << 5) - hash) + char;
+                    hash = hash & hash;
+                }
+                return hash;
+            }
+  
+  //======= COMPONENTS ======================================================================
+  
+  const AddContent = ({block, index}) => {
+    const [clicked, setClicked] = useState(false);
+    const { cms, error, fetching } = FetchCms(block.room_id)
+    console.log("block");
+    const json = JSON.parse(block.topic)
         return (
           fetching
-            ? 'Loading'
+            ? <div>Loading</div>
             : error
               ? console.error(error)
               : (
-                <>
-                   {console.log(blocks)  /*
+                <>                   
+                  { /*
               <textarea id="text" key={block.room_id} name={block.name} placeholder={`Add ${json.type}`} type="text" value={cms !== undefined && cms.body} onChange={(e) =>
                 localStorage.setItem(block.room_id, e.target.value)
               } />
                  */}
+                  
                   <Editor
                     dark={window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches}
-              defaultValue={cms && cms.body}
-              onChange={debounce((value) => {
-                const text = value();
-                localStorage.setItem(block.room_id, text);
-              }, 250)}
+                    defaultValue={cms && cms.body}
+                    
+                    onChange={debounce((value) => {
+                      const text = value();
+                      localStorage.setItem(block.room_id, text);
+                     }, 250)}
+                    handleDOMEvents={{
+                      focus: () => console.log("FOCUS on " + block.room_id),
+                      blur: (e) => cms !== undefined ? string2hash(cms.body) !== string2hash(localStorage.getItem(block.room_id)) && onSave(e) : onSave(e),
+              }}
                     key={index} />
+                  
+                  <div className="grid">
                   {index !== 0 && <button key={'up' + index} onClick={(e) => changeOrder(e, index + 1, -1)}>UP</button>
                   }
                   {index < blocks.length - 2 && <button key={'down' + index} onClick={(e) => changeOrder(e, index + 1, 1)}>DOWN</button>
                   }
-                  {<button key={'delete' + index} onClick={(e) => onDelete(e, block.room_id)} >DELETE</button>}
+                    {<button key={'delete' + index} onClick={(e) => {
+                      if (clicked) {
+                        onDelete(e, block.room_id)
+                        setClicked(false)
+                      } else {
+                        e.preventDefault()
+                        setClicked(true)
+                      }                      
+                    }} >{clicked ? 'SURE?' : 'DELETE'}</button>}
+                    </div>
             </>
                 )
         )
-      })
-    )
+      
+    
   }
 
   const Drafts = () => {
@@ -240,8 +295,9 @@ const Submit = () => {
       <>
       <h2>Drafts:</h2>
       <ul>
-      { spacesErr ? console.error(spacesErr) :joinedSpaces ? joinedSpaces.map((space, index) => {
-        return <li key={index} ><button onClick={() => { setProjectSpace(space.room_id); setTitle(space.name) }}>{space.name}</button></li>
+          {spacesErr ? console.error(spacesErr) : joinedSpaces ? joinedSpaces.map((space, index) => {
+            console.log(space);
+            return <li key={index} ><button onClick={() => { setProjectSpace(space.room_id); setTitle(space.name); setVisibility(space.published) }}>{space.name}</button></li>
       }) : null 
         }
       </ul>
@@ -287,15 +343,16 @@ const Submit = () => {
         <h3>Project Title / Collaborators / Credits</h3>
         <div>
             <label htmlFor="title">Project Title</label>
-            <input id="title" name="title" placeholder="project title" type="text" value={title} onChange={(e) => setTitle(e.target.value)} />
+          <input id="title" name="title" placeholder="project title" type="text" value={title} onChange={(e) => setTitle(e.target.value)} />
         </div>
         <div>
           {loading ? <Loading /> : <input id="submit" name="submit" type="submit" value="Save Title" disabled={!title} onClick={() => createProject()} />}
+          {loading ? <Loading /> : title ? <input style={{ backgroundColor: "red" }} id="delete" name="delete" type="submit" value={"Delete project " + title} disabled={!title} onClick={(e) => deleteProject(e)} /> :  null}
         </div>
         {projectSpace && (
           <>
             <h3>Collaborators / Credits</h3>
-            <Collaborators />
+           { fetchingUsers ? "Looking for collaborators..." : <Collaborators />}
               <div>
               <label htmlFor="user-datalist">Add Collaborator</label>
               <input list="userSearch" id="user-datalist" name="user-datalist" onChange={debounce((e) => {
@@ -312,18 +369,21 @@ const Submit = () => {
           <button onClick={(e) => invite(e)}>ADD Collaborators +</button>
           <button>ADD Credits +</button>
         </div>
-        <h3>Content</h3>
-              <AddContent />
+            <h3>Content</h3>
+            {blocks.filter(x => x.room_type !== "m.space").map((content, i) => 
+              <AddContent block={ content } index={ i }/>
+            )}
               <div>
-              <select name="content-select" id="content-select" onChange={(e) => setContentSelect(e.target.value)}>
-                  <option value="" disabled={true} >--Text------------</option>
+              <select name="content-select"  defaultValue={''} id="content-select" onChange={(e) => setContentSelect(e.target.value)}>
+              <option value='' disabled={true} >Select Content</option>
+                  <option value="none" disabled={true} >--Text------------</option>
                   <option value="heading">Heading</option>
                   <option value="text">Text</option>
                   <option value="" disabled={true} >--Media------------</option>
                   <option value="image">Image</option>
                 <option value="audio">Audio</option>
                 </select>
-                <button type="submit" id="" name="" value="Add Audio" onClick={(e) => createBlock(contentSelect, e)}>Add Content</button>
+              <button type="submit" id="" name="" disabled={contentSelect === "" || false } value="Add Audio" onClick={(e) => createBlock(contentSelect, e)}>Add Content</button>
                 {/*
             // fetch("https://stream.udk-berlin.de/api/userId/myVideos")
             */}
@@ -332,12 +392,12 @@ const Submit = () => {
             <h3>Visibility (Draft/Published)</h3>
             <div>
               <select id="visibility" name="visibility" value={visibility} onChange={(e) => setVisibility(e.target.value)}>
-                <option value="draft">Draft</option>
-                <option value="published">Published</option>
+                <option value="invite">Draft</option>
+                <option value="public">Published</option>
               </select>
             </div>
             <div>
-              {loading ? <Loading /> : <input id="submit" name="submit" type="submit" value="SUBMIT" onClick={(e) => onSave(e)} />}
+              {loading ? <Loading /> : <input id="submit" name="submit" type="submit" value="SUBMIT" onChange={console.log(visibility)} onClick={(e) => onPublish(e)} />}
             </div>
           </>
         )
