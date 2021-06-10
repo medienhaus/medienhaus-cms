@@ -6,12 +6,11 @@ import showdown from 'showdown'
 import Editor from "rich-markdown-editor";
 import debounce from "lodash/debounce";
 import { Loading } from '../../components/loading'
-import renderToHtml from 'rich-markdown-editor/dist/lib/renderToHtml'
 
 const Submit = () => {
   const [subject, setSubject] = useState('')
   const [title, setTitle] = useState('')
-  const [visibility, setVisibility] = useState('draft')
+  const [visibility, setVisibility] = useState("draft")
   const [loading, setLoading] = useState(false)
   const [projectSpace, setProjectSpace] = useState('')
   const [counter, setCounter] = useState(0)
@@ -207,10 +206,26 @@ const Submit = () => {
       }
     })
   }
+  const onPublish = async (e) => {
+    e.preventDefault()
+    
+    const req = {
+      method: 'PUT',
+      headers: { Authorization: 'Bearer ' + localStorage.getItem('medienhaus_access_token') },
+      body: JSON.stringify({"join_rule": visibility === "published" ? 'public' : 'invite'})
+    }
+    try {
+      matrixClient.sendEvent(projectSpace, "m.room.join_rules", {"join_rule": visibility === "published" ? 'public' : 'invite'} ).then((res) => console.log(res))
+   /* fetch(process.env.REACT_APP_MATRIX_BASE_URL + `/_matrix/client/r0/rooms/${projectSpace}/state/m.room.join_rules/`, req)
+      .then(response => console.log(response))
+      */
+    } catch (err){
+      console.error(err);
+    }
+  }
 
   const string2hash = (string) => {
     var hash = 0;
-                  
                 if (string.length === 0) return hash;
                   
                 for (let i = 0; i < string.length; i++) {
@@ -218,10 +233,10 @@ const Submit = () => {
                     hash = ((hash << 5) - hash) + char;
                     hash = hash & hash;
                 }
-                  
                 return hash;
             }
   
+  //======= COMPONENTS ======================================================================
   
   const AddContent = ({block, index}) => {
     const [clicked, setClicked] = useState(false);
@@ -282,8 +297,9 @@ const Submit = () => {
       <>
       <h2>Drafts:</h2>
       <ul>
-      { spacesErr ? console.error(spacesErr) :joinedSpaces ? joinedSpaces.map((space, index) => {
-        return <li key={index} ><button onClick={() => { setProjectSpace(space.room_id); setTitle(space.name) }}>{space.name}</button></li>
+          {spacesErr ? console.error(spacesErr) : joinedSpaces ? joinedSpaces.map((space, index) => {
+            console.log(space);
+            return <li key={index} ><button onClick={() => { setProjectSpace(space.room_id); setTitle(space.name); setVisibility(space.published) }}>{space.name}</button></li>
       }) : null 
         }
       </ul>
@@ -383,7 +399,7 @@ const Submit = () => {
               </select>
             </div>
             <div>
-              {loading ? <Loading /> : <input id="submit" name="submit" type="submit" value="SUBMIT" onClick={(e) => onSave(e)} />}
+              {loading ? <Loading /> : <input id="submit" name="submit" type="submit" value="SUBMIT" onChange={console.log(visibility)} onClick={(e) => onPublish(e)} />}
             </div>
           </>
         )
