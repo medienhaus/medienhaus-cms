@@ -129,7 +129,6 @@ const Submit = () => {
   const invite =  (e) => {
     e.preventDefault()
     const id = collab.split(' ')
-
     blocks.forEach(async (room, index) => {
       try {
         await matrixClient.invite(room.room_id, id[1]).then(() => console.log("invited " + id[1] + " to " + room.name))
@@ -168,7 +167,6 @@ const Submit = () => {
   }
 
   const onDelete = async (e, roomId) => {
-   
     e.preventDefault()
     try {
       const count = await matrixClient.getJoinedRoomMembers(roomId)
@@ -176,6 +174,7 @@ const Submit = () => {
         localStorage.getItem('medienhaus_user_id') !== name && matrixClient.kick(roomId, name)
       })
       matrixClient.leave(roomId)
+      setCounter(0)
     } catch (err) {
       console.error(err)
     }
