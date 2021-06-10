@@ -27,12 +27,12 @@ const Submit = () => {
   const createProject = async () => {
     setLoading(true)
     const opts = {
-      preset: visibility === 'published' ? 'public_chat' : 'private_chat',
+      preset: visibility === 'public' ? 'public_chat' : 'private_chat',
       name: title,
       creation_content: { type: 'm.space' },
       initial_state: [{
         type: 'm.room.history_visibility',
-        content: { history_visibility: visibility === 'published' ? 'world_readable' : 'invited' }
+        content: { history_visibility: visibility === 'public' ? 'world_readable' : 'invited' }
       },
       {
         type: 'm.room.topic',
@@ -212,13 +212,14 @@ const Submit = () => {
     const req = {
       method: 'PUT',
       headers: { Authorization: 'Bearer ' + localStorage.getItem('medienhaus_access_token') },
-      body: JSON.stringify({"join_rule": visibility === "published" ? 'public' : 'invite'})
+      body: JSON.stringify({"join_rule": visibility === "public" ? 'public' : 'invite'})
     }
     try {
-      matrixClient.sendEvent(projectSpace, "m.room.join_rules", {"join_rule": visibility === "published" ? 'public' : 'invite'} ).then((res) => console.log(res))
-   /* fetch(process.env.REACT_APP_MATRIX_BASE_URL + `/_matrix/client/r0/rooms/${projectSpace}/state/m.room.join_rules/`, req)
-      .then(response => console.log(response))
-      */
+
+      //matrixClient.sendEvent(projectSpace, "m.room.join_rules", {"join_rule": visibility === "public" ? 'public' : 'invite'} ).then((res) => console.log(res))
+   fetch(process.env.REACT_APP_MATRIX_BASE_URL + `/_matrix/client/r0/rooms/${projectSpace}/state/m.room.join_rules/`, req)
+     .then(response => { console.log(response); console.log(projectSpace);})
+      
     } catch (err){
       console.error(err);
     }
@@ -394,8 +395,8 @@ const Submit = () => {
             <h3>Visibility (Draft/Published)</h3>
             <div>
               <select id="visibility" name="visibility" value={visibility} onChange={(e) => setVisibility(e.target.value)}>
-                <option value="draft">Draft</option>
-                <option value="published">Published</option>
+                <option value="invite">Draft</option>
+                <option value="public">Published</option>
               </select>
             </div>
             <div>
