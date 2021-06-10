@@ -6,6 +6,7 @@ import showdown from 'showdown'
 import Editor from "rich-markdown-editor";
 import debounce from "lodash/debounce";
 import { Loading } from '../../components/loading'
+import renderToHtml from 'rich-markdown-editor/dist/lib/renderToHtml'
 
 const Submit = () => {
   const [subject, setSubject] = useState('')
@@ -162,8 +163,13 @@ const Submit = () => {
     blocks.splice((pos) + direction, 0, blocks.splice(pos, 1).pop())
     console.log(blocks);
   }
+  const deleteProject = (e) => {
+    e.preventDefault()
+    console.log('nööööööööö');
+  }
 
   const onDelete = async (e, roomId) => {
+   
     e.preventDefault()
     try {
       const count = await matrixClient.getJoinedRoomMembers(roomId)
@@ -217,13 +223,11 @@ const Submit = () => {
             }
   
   
-  const AddContent = () => {
-    return (
-      // eslint-disable-next-line
-      blocks.filter(x => x.room_type !== "m.space").map((block, index) => {
-        const { cms, error, fetching } = FetchCms(block.room_id)
-        const json = JSON.parse(block.topic)
-
+  const AddContent = ({block, index}) => {
+    const [clicked, setClicked] = useState(false);
+    const { cms, error, fetching } = FetchCms(block.room_id)
+    console.log("block");
+    const json = JSON.parse(block.topic)
         return (
           fetching
             ? <div>Loading</div>
@@ -255,13 +259,21 @@ const Submit = () => {
                   }
                   {index < blocks.length - 2 && <button key={'down' + index} onClick={(e) => changeOrder(e, index + 1, 1)}>DOWN</button>
                   }
-                    {<button key={'delete' + index} onClick={(e) => onDelete(e, block.room_id)} >DELETE</button>}
+                    {<button key={'delete' + index} onClick={(e) => {
+                      if (clicked) {
+                        onDelete(e, block.room_id)
+                        setClicked(false)
+                      } else {
+                        e.preventDefault()
+                        setClicked(true)
+                      }                      
+                    }} >{clicked ? 'SURE?' : 'DELETE'}</button>}
                     </div>
             </>
                 )
         )
-      })
-    )
+      
+    
   }
 
   const Drafts = () => {
@@ -321,6 +333,7 @@ const Submit = () => {
         </div>
         <div>
           {loading ? <Loading /> : <input id="submit" name="submit" type="submit" value="Save Title" disabled={!title} onClick={() => createProject()} />}
+          {loading ? <Loading /> : title ? <input style={{ backgroundColor: "red" }} id="delete" name="delete" type="submit" value={"Delete project " + title} disabled={!title} onClick={(e) => deleteProject(e)} /> :  null}
         </div>
         {projectSpace && (
           <>
@@ -342,8 +355,10 @@ const Submit = () => {
           <button onClick={(e) => invite(e)}>ADD Collaborators +</button>
           <button>ADD Credits +</button>
         </div>
-        <h3>Content</h3>
-              <AddContent />
+            <h3>Content</h3>
+            {blocks.filter(x => x.room_type !== "m.space").map((content, i) => 
+              <AddContent block={ content } index={ i }/>
+            )}
               <div>
               <select name="content-select"  defaultValue={''} id="content-select" onChange={(e) => setContentSelect(e.target.value)}>
               <option value='' disabled={true} >Select Content</option>
