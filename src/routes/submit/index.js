@@ -208,16 +208,14 @@ const Submit = () => {
   }
   const onPublish = async (e) => {
     e.preventDefault()
-    
     const req = {
       method: 'PUT',
       headers: { Authorization: 'Bearer ' + localStorage.getItem('medienhaus_access_token') },
       body: JSON.stringify({"join_rule": visibility === "public" ? 'public' : 'invite'})
     }
     try {
-
       //matrixClient.sendEvent(projectSpace, "m.room.join_rules", {"join_rule": visibility === "public" ? 'public' : 'invite'} ).then((res) => console.log(res))
-   fetch(process.env.REACT_APP_MATRIX_BASE_URL + `/_matrix/client/r0/rooms/${projectSpace}/state/m.room.join_rules/`, req)
+    fetch(process.env.REACT_APP_MATRIX_BASE_URL + `/_matrix/client/r0/rooms/${projectSpace}/state/m.room.join_rules/`, req)
      .then(response => { console.log(response); console.log(projectSpace);})
       
     } catch (err){
@@ -228,7 +226,6 @@ const Submit = () => {
   const string2hash = (string) => {
     var hash = 0;
                 if (string.length === 0) return hash;
-                  
                 for (let i = 0; i < string.length; i++) {
                     const char = string.charCodeAt(i);
                     hash = ((hash << 5) - hash) + char;
@@ -260,6 +257,7 @@ const Submit = () => {
                   <Editor
                     dark={window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches}
                     defaultValue={cms && cms.body}
+                    
                     onChange={debounce((value) => {
                       const text = value();
                       localStorage.setItem(block.room_id, text);
@@ -386,7 +384,7 @@ const Submit = () => {
                   <option value="image">Image</option>
                 <option value="audio">Audio</option>
                 </select>
-                <button type="submit" id="" name="" value="Add Audio" onClick={(e) => createBlock(contentSelect, e)}>Add Content</button>
+              <button type="submit" id="" name="" disabled={contentSelect === "" || false } value="Add Audio" onClick={(e) => createBlock(contentSelect, e)}>Add Content</button>
                 {/*
             // fetch("https://stream.udk-berlin.de/api/userId/myVideos")
             */}
