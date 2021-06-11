@@ -198,8 +198,8 @@ const Submit = () => {
     //matrixClient.leave(roomId)
   }
   
-
   const string2hash = (string) => {
+    console.log(typeof string);
     var hash = 0;
                 if (string.length === 0) return hash;
                 for (let i = 0; i < string.length; i++) {
@@ -258,15 +258,21 @@ const Submit = () => {
                       localStorage.setItem(block.room_id, text);
                      }, 250)}
                     handleDOMEvents={{
-                      focus: (e) => console.log("FOCUS on " + block.room_id),
+                      focus: () => console.log("FOCUS on " + block.room_id),
                       blur: (e) => {
-                        if (cms !== undefined && localStorage.getItem(block.room_id) !== null) {
-                          string2hash(cms.body) !== string2hash(localStorage.getItem(block.room_id)) && onSave(block.room_id)
+                        if (localStorage.getItem(block.room_id) !== null && cms !== undefined && string2hash(cms.body) !== string2hash(localStorage.getItem(block.room_id))) {
+                          onSave(block.room_id)
+                          localStorage.removeItem(block.room_id)
+                          //localStorage.getItem(block.room_id) !== null && cms ? string2hash(cms.body) !== string2hash(localStorage.getItem(block.room_id) ? onSave(block.room_id) : null : 
+                          //string2hash(cms ? cms.body : "") !== string2hash(localStorage.getItem(block.room_id) !== null ? localStorage.getItem(block.room_id) : "") && onSave(block.room_id)
+                        } else if(localStorage.getItem(block.room_id) !== null && cms === undefined){
+                          onSave(block.room_id)
+                          localStorage.removeItem(block.room_id)
                         }
                       }
-              }}
+                    }
+                    }
                     key={index} />
-                  
                   <div className="grid">
                   {index !== 0 && <button key={'up' + index} onClick={(e) => changeOrder(e, index + 1, -1)}>UP</button>
                   }
