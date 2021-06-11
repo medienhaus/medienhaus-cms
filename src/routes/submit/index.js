@@ -154,43 +154,6 @@ const Submit = () => {
       setFetchingUsers(false)
     }
   }
-
-  const changeOrder = (e, pos, direction) => {
-    e.preventDefault()
-    blocks.splice((pos) + direction, 0, blocks.splice(pos, 1).pop())
-    console.log(blocks);
-    blocks.map(async (block, index) => {
-      const json = JSON.parse(block.topic)
-      const order = parseInt(block.name.split('_'))
-      console.log(json.type)
-      order !== index && index > 0 && matrixClient.setRoomName(block.room_id, index + '_' + json.type)
-
-      try {
-        await matrixClient.sendMessage(block.room_id, {
-          body: localStorage.getItem(block.room_id),
-          format: 'org.matrix.custom.html',
-          msgtype: 'm.text',
-          formatted_body: converter.makeHtml(localStorage.getItem(block.room_id))
-        })
-        // await matrixClient.redactEvent(roomId.room_id, entry.event, null, { 'reason': 'I have my reasons!' })
-        // onSave()
-      } catch (e) {
-        console.error('error while trying to save: ' + e)
-      }
-    })
-  }
-  
-  const string2hash = (string) => {
-    console.log(typeof string);
-    var hash = 0;
-                if (string.length === 0) return hash;
-                for (let i = 0; i < string.length; i++) {
-                    const char = string.charCodeAt(i);
-                    hash = ((hash << 5) - hash) + char;
-                    hash = hash & hash;
-                }
-                return hash;
-            }
   
   //======= COMPONENTS ======================================================================
   
@@ -201,7 +164,6 @@ const Submit = () => {
     const [deleting, setDeleting] = useState(false);
     const { cms, error, fetching } = FetchCms(block.room_id)
 
-    console.log("block");
     const json = JSON.parse(block.topic)
 
     const onSave = async (roomId) => {
@@ -255,6 +217,43 @@ const Submit = () => {
       //matrixClient.kick(roomId, userId)
       //matrixClient.leave(roomId)
     }
+
+    const changeOrder = (e, pos, direction) => {
+      e.preventDefault()
+      blocks.splice((pos) + direction, 0, blocks.splice(pos, 1).pop())
+      console.log(blocks);
+      blocks.map(async (block, index) => {
+        const json = JSON.parse(block.topic)
+        const order = parseInt(block.name.split('_'))
+        console.log(json.type)
+        order !== index && index > 0 && matrixClient.setRoomName(block.room_id, index + '_' + json.type)
+  
+        try {
+          await matrixClient.sendMessage(block.room_id, {
+            body: localStorage.getItem(block.room_id),
+            format: 'org.matrix.custom.html',
+            msgtype: 'm.text',
+            formatted_body: converter.makeHtml(localStorage.getItem(block.room_id))
+          })
+          // await matrixClient.redactEvent(roomId.room_id, entry.event, null, { 'reason': 'I have my reasons!' })
+          // onSave()
+        } catch (e) {
+          console.error('error while trying to save: ' + e)
+        }
+      })
+    }
+      
+  const string2hash = (string) => {
+    console.log(typeof string);
+    var hash = 0;
+                if (string.length === 0) return hash;
+                for (let i = 0; i < string.length; i++) {
+                    const char = string.charCodeAt(i);
+                    hash = ((hash << 5) - hash) + char;
+                    hash = hash & hash;
+                }
+                return hash;
+            }
 
         return (
           fetching
@@ -393,6 +392,8 @@ const Submit = () => {
   }
 
   const DeleteProjectButton = () => {
+    //dom not redrawing drafts after deletion is complete, needs to be fixed
+    
     const [warning, setWarning] = useState(false);
 
     const deleteProject = (e) => {
@@ -418,7 +419,6 @@ const Submit = () => {
           setCounter(0)
         }
       })
-    
     }
   
     return (
