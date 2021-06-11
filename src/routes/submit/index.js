@@ -172,30 +172,12 @@ const Submit = () => {
           msgtype: 'm.text',
           formatted_body: converter.makeHtml(localStorage.getItem(block.room_id))
         })
-
         // await matrixClient.redactEvent(roomId.room_id, entry.event, null, { 'reason': 'I have my reasons!' })
         // onSave()
-
       } catch (e) {
         console.error('error while trying to save: ' + e)
       }
     })
-  }
-
-  const onDelete = async (e, roomId) => {
-    e.preventDefault()
-    try {
-      const count = await matrixClient.getJoinedRoomMembers(roomId)
-      Object.keys(count.joined).length > 1 && Object.keys(count.joined).forEach(name => {
-        localStorage.getItem('medienhaus_user_id') !== name && matrixClient.kick(roomId, name)
-      })
-      matrixClient.leave(roomId)
-      setCounter(0)
-    } catch (err) {
-      console.error(err)
-    }
-    //matrixClient.kick(roomId, userId)
-    //matrixClient.leave(roomId)
   }
   
   const string2hash = (string) => {
@@ -216,6 +198,7 @@ const Submit = () => {
     const [clicked, setClicked] = useState(false);
     const [readOnly, setReadOnly] = useState(false);
     const [saved, setSaved] = useState(false);
+    const [deleting, setDeleting] = useState(false);
     const { cms, error, fetching } = FetchCms(block.room_id)
 
     console.log("block");
@@ -238,7 +221,6 @@ const Submit = () => {
         }
         // await matrixClient.redactEvent(roomId.room_id, entry.event, null, { 'reason': 'I have my reasons!' })
         // onSave()
-  
       } catch (e) {
         console.error('error while trying to save: ' + e)
         setSaved("Couldn't save!")
@@ -248,7 +230,30 @@ const Submit = () => {
       } finally {
         setReadOnly(false)
       }
-  
+    }
+
+    const onDelete = async (e, roomId) => {
+      e.preventDefault()
+      setDeleting(true)
+      try {
+        const count = await matrixClient.getJoinedRoomMembers(roomId)
+        Object.keys(count.joined).length > 1 && Object.keys(count.joined).forEach(name => {
+          localStorage.getItem('medienhaus_user_id') !== name && matrixClient.kick(roomId, name)
+        })
+        matrixClient.leave(roomId)
+        setCounter(0)
+      } catch (err) {
+        console.error(err)
+        setDeleting(`couldn't delete ${json.type}, please try again or try reloading the page`)
+        setTimeout(() => {
+          setDeleting()
+        },2000)
+      }
+      finally {
+        setDeleting()
+      }
+      //matrixClient.kick(roomId, userId)
+      //matrixClient.leave(roomId)
     }
 
         return (
@@ -263,6 +268,10 @@ const Submit = () => {
                     defaultValue={cms && cms.body}
                     placeholder={json.type}
                     readOnly={readOnly}
+                    uploadImage={ async file => {
+                      const result = console.log("jo");;
+                      return result.url;
+                    }}
                     onChange={debounce((value) => {
                       const text = value();
                       localStorage.setItem(block.room_id, text);
@@ -284,6 +293,7 @@ const Submit = () => {
                   <p style ={{fontSize: "calc(var(--margin) * 0.7"}}>{saved}</p>
                   {//@Andi maybe a check mark or something next to the editor/content block? some visual feedback for users to show their edit has been saved
                   }
+                   <p>{deleting}</p>
                   <div className="grid">
                   {index !== 0 && <button key={'up' + index} onClick={(e) => changeOrder(e, index + 1, -1)}>UP</button>
                   }
@@ -387,8 +397,28 @@ const Submit = () => {
 
     const deleteProject = (e) => {
       e.preventDefault()
-      console.log('nööööööööö');
-      setTitle("")
+      blocks.map(async (block, index) => {
+        try {
+          const count = await matrixClient.getJoinedRoomMembers(block.room_id)
+          Object.keys(count.joined).length > 1 && Object.keys(count.joined).forEach(name => {
+            localStorage.getItem('medienhaus_user_id') !== name && matrixClient.kick(block.room_id, name)
+          })
+          try {
+            const leave = await matrixClient.leave(block.room_id)
+            console.log(leave);
+            setTitle("")
+            setProjectSpace('')
+          } catch (err) {
+            console.error(err);
+          }
+   
+        } catch (err) {
+          console.error(err);
+        } finally {
+          setCounter(0)
+        }
+      })
+    
     }
   
     return (
