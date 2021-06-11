@@ -159,6 +159,27 @@ const Submit = () => {
     e.preventDefault()
     blocks.splice((pos) + direction, 0, blocks.splice(pos, 1).pop())
     console.log(blocks);
+    blocks.map(async (block, index) => {
+      const json = JSON.parse(block.topic)
+      const order = parseInt(block.name.split('_'))
+      console.log(json.type)
+      order !== index && index > 0 && matrixClient.setRoomName(block.room_id, index + '_' + json.type)
+
+      try {
+        await matrixClient.sendMessage(block.room_id, {
+          body: localStorage.getItem(block.room_id),
+          format: 'org.matrix.custom.html',
+          msgtype: 'm.text',
+          formatted_body: converter.makeHtml(localStorage.getItem(block.room_id))
+        })
+
+        // await matrixClient.redactEvent(roomId.room_id, entry.event, null, { 'reason': 'I have my reasons!' })
+        // onSave()
+
+      } catch (e) {
+        console.error('error while trying to save: ' + e)
+      }
+    })
   }
 
   const onDelete = async (e, roomId) => {
@@ -175,30 +196,6 @@ const Submit = () => {
     }
     //matrixClient.kick(roomId, userId)
     //matrixClient.leave(roomId)
-  }
-
-  const onSave = () => {
-  
-    blocks.map(async (block, index) => {
-      const json = JSON.parse(block.topic)
-      const order = parseInt(block.name.split('_'))
-      console.log(json.type)
-      order !== index && index > 0 && matrixClient.setRoomName(block.room_id, index + '_' + json.type)
-      try {
-        await matrixClient.sendMessage(block.room_id, {
-          body: localStorage.getItem(block.room_id),
-          format: 'org.matrix.custom.html',
-          msgtype: 'm.text',
-          formatted_body: converter.makeHtml(localStorage.getItem(block.room_id))
-        })
-
-        // await matrixClient.redactEvent(roomId.room_id, entry.event, null, { 'reason': 'I have my reasons!' })
-        // onSave()
-
-      } catch (e) {
-        console.error('error while trying to save: ' + e)
-      }
-    })
   }
   
 
@@ -217,33 +214,56 @@ const Submit = () => {
   
   const AddContent = ({block, index}) => {
     const [clicked, setClicked] = useState(false);
+    const [readOnly, setReadOnly] = useState(false);
     const { cms, error, fetching } = FetchCms(block.room_id)
+
     console.log("block");
     const json = JSON.parse(block.topic)
+
+    const onSave = async (roomId) => {
+      setReadOnly(true);
+      try {
+        await matrixClient.sendMessage(roomId, {
+          body: localStorage.getItem(roomId),
+          format: 'org.matrix.custom.html',
+          msgtype: 'm.text',
+          formatted_body: converter.makeHtml(localStorage.getItem(roomId))
+        })
+  
+        // await matrixClient.redactEvent(roomId.room_id, entry.event, null, { 'reason': 'I have my reasons!' })
+        // onSave()
+  
+      } catch (e) {
+        console.error('error while trying to save: ' + e)
+      } finally {
+        setReadOnly(false)
+      }
+  
+    }
+
         return (
           fetching
-            ? <div>Loading</div>
+            ? <div style={{ height: "90px"}}>Loading</div> // @Andi sort of. hack to keep interface from violently redrawing. We need to see how we deal with this. Too many waterfalls, let's stick to the rivers and the lakes that we're used to.
             : error
               ? console.error(error)
               : (
-                <>                   
-                  { /*
-              <textarea id="text" key={block.room_id} name={block.name} placeholder={`Add ${json.type}`} type="text" value={cms !== undefined && cms.body} onChange={(e) =>
-                localStorage.setItem(block.room_id, e.target.value)
-              } />
-                 */}
-                  
+                <>                                     
                   <Editor
                     dark={window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches}
                     defaultValue={cms && cms.body}
                     placeholder={json.type}
+                    readOnly={readOnly}
                     onChange={debounce((value) => {
                       const text = value();
                       localStorage.setItem(block.room_id, text);
                      }, 250)}
                     handleDOMEvents={{
-                      focus: (e) => console.log(e),
-                      blur: (e) => cms !== undefined ? string2hash(cms.body) !== string2hash(localStorage.getItem(block.room_id)) && onSave(e) : onSave(e),
+                      focus: (e) => console.log("FOCUS on " + block.room_id),
+                      blur: (e) => {
+                        if (cms !== undefined && localStorage.getItem(block.room_id) !== null) {
+                          string2hash(cms.body) !== string2hash(localStorage.getItem(block.room_id)) && onSave(block.room_id)
+                        }
+                      }
               }}
                     key={index} />
                   
@@ -372,6 +392,13 @@ const Submit = () => {
               }
               }
             } />
+         {warning &&  <input
+          id="delete"
+          name="delete"
+          type="submit"
+          value={'CANCEL'}
+          onClick={() => {setWarning(false) }}
+         />}
             </>
             )
   }
@@ -400,7 +427,8 @@ const Submit = () => {
           <input id="title" name="title" placeholder="project title" type="text" value={title} onChange={(e) => setTitle(e.target.value)} />
         </div>
         <div>
-          {loading ? <Loading /> : <input id="submit" name="submit" type="submit" value="Save Title" disabled={!title} onClick={() => createProject()} />}
+          {loading ? <Loading /> : <input id="submit" name="submit" type="submit" value="Save Title" disabled={!title} onClick={() => createProject()} /> //@Andi disabled seems to not change styling here for some reason 🤔
+          }
           {loading ? <Loading /> : title && <DeleteProjectButton /> }
         </div>
         {projectSpace && (
