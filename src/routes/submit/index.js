@@ -20,6 +20,9 @@ const Submit = () => {
   const [userSearch, setUserSearch] = useState([]);
   const [contentSelect, setContentSelect] = useState('');
   const [collab, setCollab] = useState('');
+  const [lastRoom, setLastRoom] = useState('');
+  
+  
 
   const converter = new showdown.Converter()
   const matrixClient = Matrix.getMatrixClient()
@@ -92,8 +95,11 @@ const Submit = () => {
 
     try {
       await matrixClient.createRoom(opts)
-        .then((res) => fetch(process.env.REACT_APP_MATRIX_BASE_URL + `/_matrix/client/r0/rooms/${projectSpace}/state/m.space.child/${res.room_id}`, req))
-        .then(async response => {
+        .then((res) => {
+          setLastRoom(res.room_id)
+          fetch(process.env.REACT_APP_MATRIX_BASE_URL + `/_matrix/client/r0/rooms/${projectSpace}/state/m.space.child/${res.room_id}`, req)
+        })
+        .then(async (response) => {
           const data = await response.json()
           if (!response.ok) {
             const error = (data && data.message) || response.status
@@ -154,8 +160,67 @@ const Submit = () => {
       setFetchingUsers(false)
     }
   }
+
+
+
   
   //======= COMPONENTS ======================================================================
+
+  const AddImage = () => {
+    const [selectedFile, setSelectedFile] = useState();
+    const [fileName, setFileName] = useState('');
+
+    const changeHandler = (event) => {
+      setSelectedFile(event.target.files[0])
+      console.log(selectedFile)
+      setFileName(event.target.files[0].name)
+      // setIsFilePicked(true);
+    }
+
+    const handleSubmission = async (e) => {
+   
+      try {
+        await createBlock("image", e).then(async () => {
+          await matrixClient.uploadContent(selectedFile, { name: fileName })
+          .then((response) => matrixClient.mxcUrlToHttp(response))
+          .then((url) => matrixClient.sendMessage(lastRoom, {
+            body: `![${fileName}](${url})`,
+            format: 'org.matrix.custom.html',
+            msgtype: 'm.text',
+            formatted_body: `![${fileName}](${url})`,
+          }))
+          .then((res) => console.log(res))
+        setFileName()
+        setSelectedFile('')
+         })
+       
+      } catch (e) {
+        console.log('error while trying to save image: ' + e)
+      }
+      
+  
+    }
+
+    selectedFile && console.log(selectedFile);
+    return (
+      <>
+        <input type="file" name="filename" onChange={changeHandler} disabled={contentSelect === "" || false} />
+        {selectedFile
+          && (
+            <div>
+            <p>Filename: <input type="text" value={fileName} onChange={e => {
+              e.preventDefault()
+              setFileName(e.target.value)
+            }} />
+            </p>
+              {selectedFile.type.includes("image") || <div>Please select an image file.</div>}
+            <p>Size in bytes: {selectedFile.size}</p>
+            <button onClick={(e) => handleSubmission(e)} disabled={!selectedFile.type.includes("image")}>Upload</button>
+            </div>
+        )
+         }
+      </>)
+  }
   
   const AddContent = ({block, index}) => {
     const [clicked, setClicked] = useState(false);
@@ -349,7 +414,7 @@ const Submit = () => {
     )
   }
 
-  const SubmitButton = ({ }) => {
+  const SubmitButton = () => {
     const [response, setResponse] = useState();
 
     const onPublish = async (e) => {
@@ -512,8 +577,10 @@ const Submit = () => {
                   <option value="" disabled={true} >--Media------------</option>
                   <option value="image">Image</option>
                 <option value="audio">Audio</option>
-                </select>
-              <button type="submit" id="" name="" disabled={contentSelect === "" || false } value="Add Audio" onClick={(e) => createBlock(contentSelect, e)}>Add Content</button>
+              </select>
+              {contentSelect === "image" ?
+             <AddImage /> :
+              <button type="submit" id="" name="" disabled={contentSelect === "" || false } value="Add Audio" onClick={(e) => createBlock(contentSelect, e)}>Add Content</button>}
                 {/*
             // fetch("https://stream.udk-berlin.de/api/userId/myVideos")
             */}
