@@ -137,9 +137,8 @@ const Submit = () => {
         console.error(err);
           }
         } 
-    )
-    
-  }
+      )
+   }
 
   const fetchUsers = async (e, search) => {
     e.preventDefault()
@@ -160,10 +159,6 @@ const Submit = () => {
     e.preventDefault()
     blocks.splice((pos) + direction, 0, blocks.splice(pos, 1).pop())
     console.log(blocks);
-  }
-  const deleteProject = (e) => {
-    e.preventDefault()
-    console.log('nööööööööö');
   }
 
   const onDelete = async (e, roomId) => {
@@ -205,22 +200,7 @@ const Submit = () => {
       }
     })
   }
-  const onPublish = async (e) => {
-    e.preventDefault()
-    const req = {
-      method: 'PUT',
-      headers: { Authorization: 'Bearer ' + localStorage.getItem('medienhaus_access_token') },
-      body: JSON.stringify({"join_rule": visibility === "public" ? 'public' : 'invite'})
-    }
-    try {
-      //matrixClient.sendEvent(projectSpace, "m.room.join_rules", {"join_rule": visibility === "public" ? 'public' : 'invite'} ).then((res) => console.log(res))
-    fetch(process.env.REACT_APP_MATRIX_BASE_URL + `/_matrix/client/r0/rooms/${projectSpace}/state/m.room.join_rules/`, req)
-     .then(response => { console.log(response); console.log(projectSpace);})
-      
-    } catch (err){
-      console.error(err);
-    }
-  }
+  
 
   const string2hash = (string) => {
     var hash = 0;
@@ -256,13 +236,13 @@ const Submit = () => {
                   <Editor
                     dark={window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches}
                     defaultValue={cms && cms.body}
-                    
+                    placeholder={json.type}
                     onChange={debounce((value) => {
                       const text = value();
                       localStorage.setItem(block.room_id, text);
                      }, 250)}
                     handleDOMEvents={{
-                      focus: () => console.log("FOCUS on " + block.room_id),
+                      focus: (e) => console.log(e),
                       blur: (e) => cms !== undefined ? string2hash(cms.body) !== string2hash(localStorage.getItem(block.room_id)) && onSave(e) : onSave(e),
               }}
                     key={index} />
@@ -322,6 +302,80 @@ const Submit = () => {
     )
   }
 
+  const SubmitButton = ({ }) => {
+    const [response, setResponse] = useState();
+
+    const onPublish = async (e) => {
+      e.preventDefault()
+      const req = {
+        method: 'PUT',
+        headers: { Authorization: 'Bearer ' + localStorage.getItem('medienhaus_access_token') },
+        body: JSON.stringify({"join_rule": visibility === "public" ? 'public' : 'invite'})
+      }
+      try {
+        //matrixClient.sendEvent(projectSpace, "m.room.join_rules", {"join_rule": visibility === "public" ? 'public' : 'invite'} ).then((res) => console.log(res))
+      fetch(process.env.REACT_APP_MATRIX_BASE_URL + `/_matrix/client/r0/rooms/${projectSpace}/state/m.room.join_rules/`, req)
+          .then (response => {
+            console.log(response);
+            if (response.ok) {
+              setResponse("Changed successfully!")
+              setTimeout(() => {
+                setResponse()
+              }, 3000);
+            } else {
+              setResponse("Oh no, something went wrong.")
+              setTimeout(() => {
+                setResponse()
+              }, 3000);
+            }
+      })
+        
+      } catch (err){
+        console.error(err);
+       
+      }
+    }
+  
+    return (
+      <div>
+        <input id="submit" name="submit" type="submit" value="SUBMIT" onClick={(e) => onPublish(e)} />
+        {response && <p>{response}</p>}
+      </div>
+    )
+  }
+
+  const DeleteProjectButton = () => {
+    const [warning, setWarning] = useState(false);
+
+    const deleteProject = (e) => {
+      e.preventDefault()
+      console.log('nööööööööö');
+      setTitle("")
+    }
+  
+    return (
+        <>
+        {warning && <p>Are you sure you want to delete the project <strong>{title}</strong>? This cannot be undone and will delete the project for you and any collaborator that might be part of it.</p>}
+          <input style={{ backgroundColor: "red" }} //@Andi please add to css
+            id="delete"
+            name="delete"
+            type="submit"
+            value={warning ? "Yes, delete project" : "Delete project"}
+            disabled={!title}
+            onClick={(e) => {
+              if (warning) {
+                deleteProject(e)
+                setWarning(false)
+              } else {
+                e.preventDefault()
+                setWarning(true)
+              }
+              }
+            } />
+            </>
+            )
+  }
+
   return (
     <div>
      {fetchSpaces ? "Loading Drafts. This could take a few seconds..." : <Drafts />}
@@ -347,7 +401,7 @@ const Submit = () => {
         </div>
         <div>
           {loading ? <Loading /> : <input id="submit" name="submit" type="submit" value="Save Title" disabled={!title} onClick={() => createProject()} />}
-          {loading ? <Loading /> : title ? <input style={{ backgroundColor: "red" }} id="delete" name="delete" type="submit" value={"Delete project " + title} disabled={!title} onClick={(e) => deleteProject(e)} /> :  null}
+          {loading ? <Loading /> : title && <DeleteProjectButton /> }
         </div>
         {projectSpace && (
           <>
@@ -397,7 +451,7 @@ const Submit = () => {
               </select>
             </div>
             <div>
-              {loading ? <Loading /> : <input id="submit" name="submit" type="submit" value="SUBMIT" onChange={console.log(visibility)} onClick={(e) => onPublish(e)} />}
+              {loading ? <Loading /> : <SubmitButton />}
             </div>
           </>
         )
