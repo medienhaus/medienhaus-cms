@@ -215,6 +215,7 @@ const Submit = () => {
   const AddContent = ({block, index}) => {
     const [clicked, setClicked] = useState(false);
     const [readOnly, setReadOnly] = useState(false);
+    const [saved, setSaved] = useState(false);
     const { cms, error, fetching } = FetchCms(block.room_id)
 
     console.log("block");
@@ -223,18 +224,27 @@ const Submit = () => {
     const onSave = async (roomId) => {
       setReadOnly(true);
       try {
-        await matrixClient.sendMessage(roomId, {
+       const save =  await matrixClient.sendMessage(roomId, {
           body: localStorage.getItem(roomId),
           format: 'org.matrix.custom.html',
           msgtype: 'm.text',
           formatted_body: converter.makeHtml(localStorage.getItem(roomId))
         })
-  
+        if ("event_id" in save) {
+          setSaved("Saved!")
+          setTimeout(() => {
+            setSaved()
+          },1000)
+        }
         // await matrixClient.redactEvent(roomId.room_id, entry.event, null, { 'reason': 'I have my reasons!' })
         // onSave()
   
       } catch (e) {
         console.error('error while trying to save: ' + e)
+        setSaved("Couldn't save!")
+          setTimeout(() => {
+            setSaved()
+          },1000)
       } finally {
         setReadOnly(false)
       }
@@ -243,7 +253,7 @@ const Submit = () => {
 
         return (
           fetching
-            ? <div style={{ height: "90px"}}>Loading</div> // @Andi sort of. hack to keep interface from violently redrawing. We need to see how we deal with this. Too many waterfalls, let's stick to the rivers and the lakes that we're used to.
+            ? <div style={{ height: "90px"}}>Loading</div> // @Andi sort of... hack to keep interface from violently redrawing. We need to see how we deal with this. Too many waterfalls, let's stick to the rivers and the lakes that we're used to.
             : error
               ? console.error(error)
               : (
@@ -263,8 +273,6 @@ const Submit = () => {
                         if (localStorage.getItem(block.room_id) !== null && cms !== undefined && string2hash(cms.body) !== string2hash(localStorage.getItem(block.room_id))) {
                           onSave(block.room_id)
                           localStorage.removeItem(block.room_id)
-                          //localStorage.getItem(block.room_id) !== null && cms ? string2hash(cms.body) !== string2hash(localStorage.getItem(block.room_id) ? onSave(block.room_id) : null : 
-                          //string2hash(cms ? cms.body : "") !== string2hash(localStorage.getItem(block.room_id) !== null ? localStorage.getItem(block.room_id) : "") && onSave(block.room_id)
                         } else if(localStorage.getItem(block.room_id) !== null && cms === undefined){
                           onSave(block.room_id)
                           localStorage.removeItem(block.room_id)
@@ -273,6 +281,9 @@ const Submit = () => {
                     }
                     }
                     key={index} />
+                  <p style ={{fontSize: "calc(var(--margin) * 0.7"}}>{saved}</p>
+                  {//@Andi maybe a check mark or something next to the editor/content block? some visual feedback for users to show their edit has been saved
+                  }
                   <div className="grid">
                   {index !== 0 && <button key={'up' + index} onClick={(e) => changeOrder(e, index + 1, -1)}>UP</button>
                   }
@@ -287,7 +298,8 @@ const Submit = () => {
                         setClicked(true)
                       }                      
                     }} >{clicked ? 'SURE?' : 'DELETE'}</button>}
-                    </div>
+                  </div>
+                 
             </>
                 )
         )
@@ -433,7 +445,7 @@ const Submit = () => {
           <input id="title" name="title" placeholder="project title" type="text" value={title} onChange={(e) => setTitle(e.target.value)} />
         </div>
         <div>
-          {loading ? <Loading /> : <input id="submit" name="submit" type="submit" value="Save Title" disabled={!title} onClick={() => createProject()} /> //@Andi disabled seems to not change styling here for some reason 🤔
+          {loading ? <Loading /> : <input id="submit" name="submit" type="submit" value="Save Title" disabled={!title} onClick={() => createProject()} /> //@Andi disabled="true" seems to not change styling here for some reason 🤔
           }
           {loading ? <Loading /> : title && <DeleteProjectButton /> }
         </div>
