@@ -20,9 +20,6 @@ const Submit = () => {
   const [userSearch, setUserSearch] = useState([]);
   const [contentSelect, setContentSelect] = useState('');
   const [collab, setCollab] = useState('');
-  const [lastRoom, setLastRoom] = useState('');
-  
-  
 
   const converter = new showdown.Converter()
   const matrixClient = Matrix.getMatrixClient()
@@ -65,7 +62,7 @@ const Submit = () => {
   const createBlock = async (content, e) => {
     e.preventDefault()
     const opts = {
-      name: counter + '_' + content,
+      name: (counter - 1) + '_' + content,
       visibility: 'public',
       preset: 'public_chat',
       topic: JSON.stringify({ type: content }),
@@ -94,26 +91,21 @@ const Submit = () => {
     }
 
     try {
-      await matrixClient.createRoom(opts)
-        .then((res) => {
-          setLastRoom(res.room_id)
-          fetch(process.env.REACT_APP_MATRIX_BASE_URL + `/_matrix/client/r0/rooms/${projectSpace}/state/m.space.child/${res.room_id}`, req)
+      const room = await matrixClient.createRoom(opts)
+        .then(async (res) => {
+          const room_id = res.room_id
+          const response = await fetch(process.env.REACT_APP_MATRIX_BASE_URL + `/_matrix/client/r0/rooms/${projectSpace}/state/m.space.child/${room_id}`, req)
+          return [room_id, response]
         })
-        .then(async (response) => {
-          const data = await response.json()
-          if (!response.ok) {
-            const error = (data && data.message) || response.status
+        .then(async (res) => {
+          const data =  await res[1].json()
+          if (!res[1].ok) {
+            const error = (data && data.message) || res[1].status
             return Promise.reject(error)
           }
-          console.log(data)
-          const spaces = await matrixClient.getSpaceSummary(projectSpace)
-          console.log(spaces)
-          setCounter(counter + 1)
-          console.log(counter)
+          return res[0]
         })
-        .catch(err => {
-          console.error('There was an error!', err)
-        })
+      return room 
     } catch (e) {
       console.log(e)
     } finally {
@@ -124,10 +116,12 @@ const Submit = () => {
   useEffect(() => {
     const fetchSpace = async () => {
       const space = await matrixClient.getSpaceSummary(projectSpace)
+      console.log("spaces length = " + space.rooms.length)
       setBlocks(space.rooms)
-      console.log(blocks);
+      setCounter(space.rooms.length) // blocks[0] is the space itself
+
     }
-    setCounter(blocks.length)
+    console.log("counter = " + counter)
     projectSpace && fetchSpace()
     // eslint-disable-next-line
   }, [counter, projectSpace]);
@@ -161,9 +155,6 @@ const Submit = () => {
     }
   }
 
-
-
-  
   //======= COMPONENTS ======================================================================
 
   const AddImage = () => {
@@ -180,25 +171,22 @@ const Submit = () => {
     const handleSubmission = async (e) => {
    
       try {
-        await createBlock("image", e).then(async () => {
+        await createBlock("image", e).then(async (res) => {
+          console.log(res)
           await matrixClient.uploadContent(selectedFile, { name: fileName })
-          .then((response) => matrixClient.mxcUrlToHttp(response))
-          .then((url) => matrixClient.sendMessage(lastRoom, {
-            body: `![${fileName}](${url})`,
-            format: 'org.matrix.custom.html',
-            msgtype: 'm.text',
-            formatted_body: `![${fileName}](${url})`,
+            .then((url) => matrixClient.sendImageMessage(res, url, {
+              mimetype: selectedFile.type,
+              size: selectedFile.size
           }))
           .then((res) => console.log(res))
-        setFileName()
-        setSelectedFile('')
+          setFileName()
+          setSelectedFile('')
+          setCounter(0)
          })
        
       } catch (e) {
         console.log('error while trying to save image: ' + e)
       }
-      
-  
     }
 
     selectedFile && console.log(selectedFile);
@@ -214,8 +202,8 @@ const Submit = () => {
             }} />
             </p>
               {selectedFile.type.includes("image") || <div>Please select an image file.</div>}
-            <p>Size in bytes: {selectedFile.size}</p>
-            <button onClick={(e) => handleSubmission(e)} disabled={!selectedFile.type.includes("image")}>Upload</button>
+              {selectedFile.size > 5000000 && <p style={{color: "red"}}> File size needs to be less than 5MB</p>}
+            <button onClick={(e) => handleSubmission(e)} disabled={!selectedFile.type.includes("image") || selectedFile.size > 25000000}>Upload</button>
             </div>
         )
          }
@@ -228,9 +216,8 @@ const Submit = () => {
     const [saved, setSaved] = useState(false);
     const [deleting, setDeleting] = useState(false);
     const { cms, error, fetching } = FetchCms(block.room_id)
-
     const json = JSON.parse(block.topic)
-
+    
     const onSave = async (roomId) => {
       setReadOnly(true);
       try {
@@ -322,20 +309,26 @@ const Submit = () => {
 
         return (
           fetching
-            ? <div style={{ height: "90px"}}>Loading</div> // @Andi sort of... hack to keep interface from violently redrawing. We need to see how we deal with this. Too many waterfalls, let's stick to the rivers and the lakes that we're used to.
+            ? <div style={{ height: "120px"}}>Loading</div> // @Andi sort of... hack to keep interface from violently redrawing. We need to see how we deal with this. Too many waterfalls, let's stick to the rivers and the lakes that we're used to.
             : error
               ? console.error(error)
               : (
-                <>                                     
+                <>
+                  {cms !== undefined && cms.msgtype === 'm.image' ?
+                    //@Andi <image /> not being displayed, so made this workaround with an editor in readonly mode. Althogh this offers a few advantages (same design as other content blocks and ability to directly download image for contributors)
+                     <Editor
+                     dark={window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches}
+                     defaultValue={cms && `![we probably should parse alt text in room topic](${matrixClient.mxcUrlToHttp(cms.url)})`}
+                      readOnly={true}
+                      key={index}
+                    />
+                 :
+                    <>
                   <Editor
                     dark={window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches}
                     defaultValue={cms && cms.body}
                     placeholder={json.type}
                     readOnly={readOnly}
-                    uploadImage={ async file => {
-                      const result = console.log("jo");;
-                      return result.url;
-                    }}
                     onChange={debounce((value) => {
                       const text = value();
                       localStorage.setItem(block.room_id, text);
@@ -354,7 +347,9 @@ const Submit = () => {
                     }
                     }
                     key={index} />
-                  <p style ={{fontSize: "calc(var(--margin) * 0.7"}}>{saved}</p>
+                    <p style={{ fontSize: "calc(var(--margin) * 0.7" }}>{saved}</p>
+                  </>
+                  }
                   {//@Andi maybe a check mark or something next to the editor/content block? some visual feedback for users to show their edit has been saved
                   }
                    <p>{deleting}</p>
@@ -382,13 +377,11 @@ const Submit = () => {
   }
 
   const Drafts = () => {
-    console.log(joinedSpaces);
     return (
       <>
       <h2>Drafts:</h2>
       <ul>
           {spacesErr ? console.error(spacesErr) : joinedSpaces ? joinedSpaces.map((space, index) => {
-            console.log(space);
             return <li key={index} ><button onClick={() => { setProjectSpace(space.room_id); setTitle(space.name); setVisibility(space.published) }}>{space.name}</button></li>
       }) : null 
         }
@@ -580,7 +573,9 @@ const Submit = () => {
               </select>
               {contentSelect === "image" ?
              <AddImage /> :
-              <button type="submit" id="" name="" disabled={contentSelect === "" || false } value="Add Audio" onClick={(e) => createBlock(contentSelect, e)}>Add Content</button>}
+                <button type="submit" id="" name="" disabled={contentSelect === "" || false} value="Add Audio" onClick={async (e) => await createBlock(contentSelect, e).then(() => {
+                  setCounter(0)
+                })}>Add Content</button>}
                 {/*
             // fetch("https://stream.udk-berlin.de/api/userId/myVideos")
             */}
