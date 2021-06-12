@@ -255,15 +255,27 @@ const Submit = () => {
       }
     }
 
-    const onDelete = async (e, roomId) => {
+    const onDelete = async (e, roomId, index) => {
       e.preventDefault()
       setDeleting(true)
+      setReadOnly(true)
+
+      const reorder = (name, room_id) => {
+            const title = name.split('_')
+            const num = parseInt(title[0]) - 1
+            matrixClient.setRoomName(room_id, num  + '_' + title[1] )
+          }
       try {
         const count = await matrixClient.getJoinedRoomMembers(roomId)
         Object.keys(count.joined).length > 1 && Object.keys(count.joined).forEach(name => {
           localStorage.getItem('medienhaus_user_id') !== name && matrixClient.kick(roomId, name)
         })
         matrixClient.leave(roomId)
+        blocks.forEach((block, i) => {
+          if (i > index) {
+            reorder(block.name, block.room_id)
+          }
+        })
         setCounter(0)
       } catch (err) {
         console.error(err)
@@ -275,6 +287,8 @@ const Submit = () => {
       finally {
         setDeleting()
       }
+
+      
       //matrixClient.kick(roomId, userId)
       //matrixClient.leave(roomId)
     }
@@ -286,13 +300,8 @@ const Submit = () => {
       const active = name.split('_')
       const order = parseInt(active[0])
       const newOrder = order + direction
-      console.log(newOrder)
       const passive = blocks[newOrder].name.split('_')
-      console.log(passive);
       const passiveRoom = blocks[newOrder].room_id
-      console.log("passiveRoom = " + order + '_' + passive[1])
-      console.log("activeRoom = " + newOrder + '_' + active[1])
-      
       try {
         await matrixClient.setRoomName(roomId, newOrder + '_' + active[1]).then(
           await matrixClient.setRoomName(passiveRoom, order + '_' + passive[1])
@@ -318,7 +327,7 @@ const Submit = () => {
 
         return (
           fetching
-            ? <div style={{ height: "120px"}}>Loading</div> // @Andi sort of... hack to keep interface from violently redrawing. We need to see how we deal with this. Too many waterfalls, let's stick to the rivers and the lakes that we're used to.
+            ? <div style={{ height: "120px"}}><Loading /></div> // @Andi sort of... hack to keep interface from violently redrawing. We need to see how we deal with this. Too many waterfalls, let's stick to the rivers and the lakes that we're used to.
             : error
               ? console.error(error)
               : (
@@ -369,13 +378,13 @@ const Submit = () => {
                   }
                     {<button key={'delete' + index} onClick={(e) => {
                       if (clicked) {
-                        onDelete(e, block.room_id)
+                        onDelete(e, block.room_id, index)
                         setClicked(false)
                       } else {
                         e.preventDefault()
                         setClicked(true)
                       }                      
-                    }} >{clicked ? 'SURE?' : 'DELETE'}</button>}
+                    }} >{clicked ? 'SURE?' : deleting ? <Loading /> : 'DELETE'}</button>}
                   </div>
                  
             </>
