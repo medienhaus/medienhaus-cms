@@ -62,8 +62,7 @@ const Submit = () => {
   const createBlock = async (content, e) => {
     e.preventDefault()
     const opts = {
-      name: (counter - 1) + '_' + content,
-      visibility: 'public',
+      name: (counter - 1) + '_' + content, // blocks[0] is the project space itself, therefore -1
       preset: 'public_chat',
       topic: JSON.stringify({ type: content }),
       creation_content: { 'm.federate': false },
@@ -116,12 +115,19 @@ const Submit = () => {
   useEffect(() => {
     const fetchSpace = async () => {
       const space = await matrixClient.getSpaceSummary(projectSpace)
-      console.log("spaces length = " + space.rooms.length)
-      setBlocks(space.rooms)
-      setCounter(space.rooms.length) // blocks[0] is the space itself
-
+      const spaceRooms = space.rooms.map(room => {
+        if (!('room_type' in room)) {
+          return room
+        }
+      })
+      setBlocks(spaceRooms.filter(x => x !== undefined).sort((a, b) => {
+        if (a.name < b.name) return -1
+        if (a.name > b.name) return 1
+        return 0
+      }))
+      setCounter(space.rooms.length) 
     }
-    console.log("counter = " + counter)
+    console.log(blocks);
     projectSpace && fetchSpace()
     // eslint-disable-next-line
   }, [counter, projectSpace]);
@@ -160,6 +166,7 @@ const Submit = () => {
   const AddImage = () => {
     const [selectedFile, setSelectedFile] = useState();
     const [fileName, setFileName] = useState('');
+    const [loading, setLoading] = useState(false);
 
     const changeHandler = (event) => {
       setSelectedFile(event.target.files[0])
@@ -169,7 +176,7 @@ const Submit = () => {
     }
 
     const handleSubmission = async (e) => {
-   
+      setLoading(true)
       try {
         await createBlock("image", e).then(async (res) => {
           console.log(res)
@@ -186,6 +193,8 @@ const Submit = () => {
        
       } catch (e) {
         console.log('error while trying to save image: ' + e)
+      } finally {
+        setLoading(false)
       }
     }
 
@@ -202,8 +211,9 @@ const Submit = () => {
             }} />
             </p>
               {selectedFile.type.includes("image") || <div>Please select an image file.</div>}
-              {selectedFile.size > 5000000 && <p style={{color: "red"}}> File size needs to be less than 5MB</p>}
-            <button onClick={(e) => handleSubmission(e)} disabled={!selectedFile.type.includes("image") || selectedFile.size > 25000000}>Upload</button>
+            {selectedFile.size > 5000000 && <p style={{ color: "red" }}> File size needs to be less than 5MB</p> //@Andi pls add to css
+            }
+            <button onClick={(e) => handleSubmission(e)} disabled={!selectedFile.type.includes("image") || selectedFile.size > 5000000 || loading}>{loading ? <Loading /> : "Upload"}</button>
             </div>
         )
          }
@@ -234,7 +244,6 @@ const Submit = () => {
           },1000)
         }
         // await matrixClient.redactEvent(roomId.room_id, entry.event, null, { 'reason': 'I have my reasons!' })
-        // onSave()
       } catch (e) {
         console.error('error while trying to save: ' + e)
         setSaved("Couldn't save!")
@@ -270,29 +279,29 @@ const Submit = () => {
       //matrixClient.leave(roomId)
     }
 
-    const changeOrder = (e, pos, direction) => {
+    const changeOrder = async (e,roomId, name, direction) => {
       e.preventDefault()
-      blocks.splice((pos) + direction, 0, blocks.splice(pos, 1).pop())
-      console.log(blocks);
-      blocks.map(async (block, index) => {
-        const json = JSON.parse(block.topic)
-        const order = parseInt(block.name.split('_'))
-        console.log(json.type)
-        order !== index && index > 0 && matrixClient.setRoomName(block.room_id, index + '_' + json.type)
-  
-        try {
-          await matrixClient.sendMessage(block.room_id, {
-            body: localStorage.getItem(block.room_id),
-            format: 'org.matrix.custom.html',
-            msgtype: 'm.text',
-            formatted_body: converter.makeHtml(localStorage.getItem(block.room_id))
-          })
-          // await matrixClient.redactEvent(roomId.room_id, entry.event, null, { 'reason': 'I have my reasons!' })
-          // onSave()
-        } catch (e) {
-          console.error('error while trying to save: ' + e)
-        }
-      })
+      setReadOnly(true)
+      //blocks.splice((pos) + direction, 0, blocks.splice(pos, 1).pop())
+      const active = name.split('_')
+      const order = parseInt(active[0])
+      const newOrder = order + direction
+      console.log(newOrder)
+      const passive = blocks[newOrder].name.split('_')
+      console.log(passive);
+      const passiveRoom = blocks[newOrder+direction].room_id
+      console.log("passiveRoom = " + order + '_' + passive[1])
+      console.log("activeRoom = " + newOrder + '_' + active[1])
+      debugger
+      try {
+        await matrixClient.setRoomName(roomId, newOrder + '_' + active[1]).then(
+          await matrixClient.setRoomName(passiveRoom, order + '_' + passive[1])
+        ).then(setCounter(0))
+      } catch (err) {
+        console.error(err);
+      } finally {
+        setReadOnly(false)
+      }
     }
       
   const string2hash = (string) => {
@@ -305,7 +314,7 @@ const Submit = () => {
                     hash = hash & hash;
                 }
                 return hash;
-            }
+  }
 
         return (
           fetching
@@ -346,17 +355,17 @@ const Submit = () => {
                       }
                     }
                     }
-                    key={index} />
-                    <p style={{ fontSize: "calc(var(--margin) * 0.7" }}>{saved}</p>
+                    key={block.room_id} />
+                      <p key={block.room_id + "_p" }style={{ fontSize: "calc(var(--margin) * 0.7" }}>{saved}</p>
                   </>
                   }
                   {//@Andi maybe a check mark or something next to the editor/content block? some visual feedback for users to show their edit has been saved
                   }
                    <p>{deleting}</p>
                   <div className="grid">
-                  {index !== 0 && <button key={'up' + index} onClick={(e) => changeOrder(e, index + 1, -1)}>UP</button>
+                  {index !== 0 && <button key={'up_' + block.room_id} onClick={(e) => changeOrder(e, block.room_id,  block.name, -1)}>UP</button>
                   }
-                  {index < blocks.length - 2 && <button key={'down' + index} onClick={(e) => changeOrder(e, index + 1, 1)}>DOWN</button>
+                  {index < blocks.length - 2 && <button key={'down_' + block.room_id} onClick={(e) => changeOrder(e,block.room_id, block.name, 1)}>DOWN</button>
                   }
                     {<button key={'delete' + index} onClick={(e) => {
                       if (clicked) {
@@ -509,6 +518,22 @@ const Submit = () => {
             )
   }
 
+  const AddBlock = () => {
+    const [loading, setLoading] = useState(false);
+
+    return (
+      <button type="submit" id="" name="" disabled={contentSelect === "" || false} value="Add Audio" onClick={async (e) =>
+      {
+        setLoading(true)
+        await createBlock(contentSelect, e).then(() => {
+          setCounter(0)
+          setLoading(false)
+        })
+      }
+      }>{loading ? <Loading /> : "Add Content"}</button>
+    )
+  }
+
   return (
     <div>
      {fetchSpaces ? "Loading Drafts. This could take a few seconds..." : <Drafts />}
@@ -558,7 +583,7 @@ const Submit = () => {
           <button>ADD Credits +</button>
         </div>
             <h3>Content</h3>
-            {blocks.filter(x => x.room_type !== "m.space").map((content, i) => 
+            { blocks.map((content, i) => 
               <AddContent block={ content } index={ i }/>
             )}
               <div>
@@ -572,10 +597,7 @@ const Submit = () => {
                 <option value="audio">Audio</option>
               </select>
               {contentSelect === "image" ?
-             <AddImage /> :
-                <button type="submit" id="" name="" disabled={contentSelect === "" || false} value="Add Audio" onClick={async (e) => await createBlock(contentSelect, e).then(() => {
-                  setCounter(0)
-                })}>Add Content</button>}
+             <AddImage /> : <AddBlock />}
                 {/*
             // fetch("https://stream.udk-berlin.de/api/userId/myVideos")
             */}
