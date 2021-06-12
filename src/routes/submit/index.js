@@ -21,9 +21,6 @@ const Submit = () => {
   const converter = new showdown.Converter()
   const matrixClient = Matrix.getMatrixClient()
 
-
-  
-
   const createBlock = async (content, e) => {
     e.preventDefault()
     const opts = {
@@ -613,7 +610,7 @@ const Submit = () => {
               setEdit(true)
             }
           }} />}
-          {edit && <input id="submit" name="submit" type="submit" value="Cancel" onClick={(e) => { e.preventDefault(); setEdit(false)}} />git }
+          {edit && <input id="submit" name="submit" type="submit" value="Cancel" onClick={(e) => { e.preventDefault(); setEdit(false)}} /> }
         </div>
         </>
     )
