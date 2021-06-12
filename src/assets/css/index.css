@@ -503,7 +503,6 @@ form textarea {
   width: 100%;
 }
 
-/*
 #loading {
   border-color: var(--color-fg) transparent var(--color-fg) transparent;
   border-radius: 50%;
@@ -513,7 +512,6 @@ form textarea {
   width: 2rem;
   animation: loading 2.4s linear infinite;
 }
-*/
 
 /*
 .account > div {
