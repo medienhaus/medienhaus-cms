@@ -289,10 +289,10 @@ const Submit = () => {
       console.log(newOrder)
       const passive = blocks[newOrder].name.split('_')
       console.log(passive);
-      const passiveRoom = blocks[newOrder+direction].room_id
+      const passiveRoom = blocks[newOrder].room_id
       console.log("passiveRoom = " + order + '_' + passive[1])
       console.log("activeRoom = " + newOrder + '_' + active[1])
-      debugger
+      
       try {
         await matrixClient.setRoomName(roomId, newOrder + '_' + active[1]).then(
           await matrixClient.setRoomName(passiveRoom, order + '_' + passive[1])
@@ -365,7 +365,7 @@ const Submit = () => {
                   <div className="grid">
                   {index !== 0 && <button key={'up_' + block.room_id} onClick={(e) => changeOrder(e, block.room_id,  block.name, -1)}>UP</button>
                   }
-                  {index < blocks.length - 2 && <button key={'down_' + block.room_id} onClick={(e) => changeOrder(e,block.room_id, block.name, 1)}>DOWN</button>
+                  {index < blocks.length - 1 && <button key={'down_' + block.room_id} onClick={(e) => changeOrder(e,block.room_id, block.name, 1)}>DOWN</button>
                   }
                     {<button key={'delete' + index} onClick={(e) => {
                       if (clicked) {
