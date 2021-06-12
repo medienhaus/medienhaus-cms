@@ -21,40 +21,8 @@ const Submit = () => {
   const converter = new showdown.Converter()
   const matrixClient = Matrix.getMatrixClient()
 
-  const createProject = async () => {
-    setLoading(true)
-    const opts = {
-      preset: visibility === 'public' ? 'public_chat' : 'private_chat',
-      name: title,
-      creation_content: { type: 'm.space' },
-      initial_state: [{
-        type: 'm.room.history_visibility',
-        content: { history_visibility: visibility === 'public' ? 'world_readable' : 'invited' }
-      },
-      {
-        type: 'm.room.topic',
-        content: { topic: JSON.stringify({ rundgang: 21, type: 'studentproject' }) }
-      },
-      {
-        type: 'm.room.guest_access',
-        state_key: '',
-        content: { guest_access: 'can_join' }
-      }],
-      power_level_content_override: { events_default: 100 },
-      visibility: 'private'
-    }
-    try {
-      await matrixClient.createRoom(opts)
-        .then((response) => {
-          console.log(response)
-          setProjectSpace(response.room_id)
-        })
-    } catch (e) {
-      console.log(e)
-    } finally {
-      setLoading(false)
-    }
-  }
+
+  
 
   const createBlock = async (content, e) => {
     e.preventDefault()
@@ -126,9 +94,11 @@ const Submit = () => {
     }
     console.log(blocks);
     projectSpace && fetchSpace()
+
     // eslint-disable-next-line
   }, [counter, projectSpace]);
 
+  
 
   //======= COMPONENTS ======================================================================
 
@@ -386,19 +356,26 @@ const Submit = () => {
     const invite = async (e) => {
     setInviting(true)
     e.preventDefault()
-    const id = collab.split(' ')
-    await matrixClient.invite(projectSpace, id[1])
-    blocks.forEach(async (room, index) => {
+      const id = collab.split(' ')
       try {
-        await matrixClient.invite(room.room_id, id[1]).then(() => console.log("invited " + id[1] + " to " + room.name))
-        console.log(index);
+        await matrixClient.invite(projectSpace, id[1])
+        blocks.forEach(async (room, index) => {
+          try {
+            await matrixClient.invite(room.room_id, id[1]).then(() => console.log("invited " + id[1] + " to " + room.name))
+            console.log(blocks.length);
+            console.log(index);
+
+          } catch (err) {
+            console.error(err);
+          } 
+        }
+        )
+        console.log("done");
       } catch (err) {
         console.error(err);
-      } finally {
+      }finally {
         setInviting(false)
-          }
-        } 
-      )
+      }
    }
 
   const fetchUsers = async (e, search) => {
@@ -415,6 +392,7 @@ const Submit = () => {
       setFetchingUsers(false)
     }
   }
+    
     return (
       <>
         {fetchSpaces ? <Loading /> :
@@ -431,11 +409,14 @@ const Submit = () => {
             </ul>
           </div>}
        <div>
-       <label htmlFor="user-datalist">Add Collaborator</label>
-       <input list="userSearch" id="user-datalist" name="user-datalist" onChange={debounce((e) => {
-         fetchUsers(e, e.target.value)
-         setCollab(e.target.value)
-       }, 200)} />
+       <div>
+         <label htmlFor="user-datalist">Add Collaborator</label>
+         <input list="userSearch" id="user-datalist" name="user-datalist" onChange={debounce((e) => {
+           fetchUsers(e, e.target.value)
+           setCollab(e.target.value)
+         }, 200)} />
+       </div>
+          {fetchingUsers ? <Loading /> : inviting ?? null }
          <datalist id="userSearch">
          {userSearch.map((users, i) => {
              return <option key={i} value={users.display_name + ' ' + users.user_id} />
@@ -554,16 +535,85 @@ const Submit = () => {
   }
 
   const ProjectTitle = () => {
+
+    const [projectTitle, setProjectTitle] = useState('');
+    const [edit, setEdit] = useState(false);
+    const [changing, setChanging] = useState(false);
+
+    useEffect(() => {
+      setProjectTitle(title)
+      // eslint-disable-next-line
+    }, [title]);
+
+    const createProject = async (title) => {
+      setLoading(true)
+      const opts = {
+        preset: visibility === 'public' ? 'public_chat' : 'private_chat',
+        name: title,
+        creation_content: { type: 'm.space' },
+        initial_state: [{
+          type: 'm.room.history_visibility',
+          content: { history_visibility: visibility === 'public' ? 'world_readable' : 'invited' }
+        },
+        {
+          type: 'm.room.topic',
+          content: { topic: JSON.stringify({ rundgang: 21, type: 'studentproject' }) }
+        },
+        {
+          type: 'm.room.guest_access',
+          state_key: '',
+          content: { guest_access: 'can_join' }
+        }],
+        power_level_content_override: { events_default: 100 },
+        visibility: 'private'
+      }
+      try {
+        await matrixClient.createRoom(opts)
+          .then((response) => {
+            console.log(response)
+            setProjectSpace(response.room_id)
+            setTitle(projectTitle)
+          })
+      } catch (e) {
+        console.log(e)
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    const doublicate = joinedSpaces && joinedSpaces.filter(({ name }) => projectTitle.includes(name))
+
+
     return (
       <>
       <div>
             <label htmlFor="title">Project Title</label>
-          <input id="title" name="title" placeholder="project title" type="text" value={title} onChange={(e) => setTitle(e.target.value)} />
+          <input id="title" name="title" placeholder="project title" type="text" value={projectTitle} disabled={title && !edit} onChange={(e) => setProjectTitle(e.target.value)} />
         </div>
         <div>
-          {loading ? <Loading /> : <input id="submit" name="submit" type="submit" value="Save Title" disabled={!title} onClick={() => createProject()} /> //@Andi disabled="true" seems to not change styling here for some reason 🤔
+          {loading ? <Loading /> : <input id="submit" name="submit" type="submit" value="New Project" disabled={!projectTitle || doublicate.length > 0} onClick={() => {
+            
+            createProject(projectTitle)
+          }} /> //@Andi disabled="true" seems to not change styling here for some reason 🤔
           }
-          {loading ? <Loading /> : title && <DeleteProjectButton /> }
+          {loading ? <Loading /> : title && <DeleteProjectButton />}
+          {title && <input id="submit" name="submit" type="submit" value={edit ? "Save" : changing ? <Loading /> : "Edit Title"} onClick={async (e) => {
+            e.preventDefault();
+            if (edit) {
+              setChanging(true)
+              try {
+                await matrixClient.setRoomName(projectSpace, projectTitle).then(() => setTitle(projectTitle))
+              } catch (err) {
+                console.error(err);
+              } finally {
+                setChanging(false)
+              }
+              setEdit(false)
+            } else {
+              setEdit(true)
+            }
+          }} />}
+          {edit && <input id="submit" name="submit" type="submit" value="Cancel" onClick={(e) => { e.preventDefault(); setEdit(false)}} /> }
         </div>
         </>
     )
@@ -587,7 +637,7 @@ const Submit = () => {
 
   return (
     <div>
-     {fetchSpaces ? "Loading Drafts. This could take a few seconds..." : <Drafts />}
+     {fetchSpaces ? <Loading /> : <Drafts />}
       <h2>New Project</h2>
       <form>
       <h3>Category / Context / Course</h3>
