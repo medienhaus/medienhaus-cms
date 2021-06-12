@@ -16,10 +16,7 @@ const Submit = () => {
   const [counter, setCounter] = useState(0)
   const [blocks, setBlocks] = useState([])
   const {joinedSpaces, spacesErr, fetchSpaces} = useJoinedSpaces()
-  const [fetchingUsers, setFetchingUsers] = useState(false);
-  const [userSearch, setUserSearch] = useState([]);
   const [contentSelect, setContentSelect] = useState('');
-  const [collab, setCollab] = useState('');
 
   const converter = new showdown.Converter()
   const matrixClient = Matrix.getMatrixClient()
@@ -132,34 +129,6 @@ const Submit = () => {
     // eslint-disable-next-line
   }, [counter, projectSpace]);
 
-  const invite =  (e) => {
-    e.preventDefault()
-    const id = collab.split(' ')
-    blocks.forEach(async (room, index) => {
-      try {
-        await matrixClient.invite(room.room_id, id[1]).then(() => console.log("invited " + id[1] + " to " + room.name))
-        console.log(index);
-      } catch (err) {
-        console.error(err);
-          }
-        } 
-      )
-   }
-
-  const fetchUsers = async (e, search) => {
-    e.preventDefault()
-    setFetchingUsers(true)
-    try{
-      const users = await matrixClient.searchUserDirectory({"term": search})
-      setUserSearch(users.results)
-      console.log(userSearch)
-    }
-    catch (err) {
-      console.error('Error whhile trying to fetch users: ' + err);
-    } finally {
-      setFetchingUsers(false)
-    }
-  }
 
   //======= COMPONENTS ======================================================================
 
@@ -409,19 +378,75 @@ const Submit = () => {
   }
 
   const Collaborators = () => {
+  const [fetchingUsers, setFetchingUsers] = useState(false);
+  const [userSearch, setUserSearch] = useState([]);
+    const [collab, setCollab] = useState('');
+    const [inviting, setInviting] = useState(false);
+
+    const invite = async (e) => {
+    setInviting(true)
+    e.preventDefault()
+    const id = collab.split(' ')
+    await matrixClient.invite(projectSpace, id[1])
+    blocks.forEach(async (room, index) => {
+      try {
+        await matrixClient.invite(room.room_id, id[1]).then(() => console.log("invited " + id[1] + " to " + room.name))
+        console.log(index);
+      } catch (err) {
+        console.error(err);
+      } finally {
+        setInviting(false)
+          }
+        } 
+      )
+   }
+
+  const fetchUsers = async (e, search) => {
+    e.preventDefault()
+    setFetchingUsers(true)
+    try{
+      const users = await matrixClient.searchUserDirectory({"term": search})
+      setUserSearch(users.results)
+      console.log(userSearch)
+    }
+    catch (err) {
+      console.error('Error whhile trying to fetch users: ' + err);
+    } finally {
+      setFetchingUsers(false)
+    }
+  }
     return (
-      <div>
-        <ul>{
-          joinedSpaces.map((space, i) => {
-            if (space.name === title) {
-              return Object.values(space.collab).map(name => {
-                return <li>{name.display_name}</li>
+      <>
+        {fetchSpaces ? <Loading /> :
+          <div>
+            <ul>{
+              joinedSpaces.map((space, i) => {
+                if (space.name === title) {
+                  return Object.values(space.collab).map(name => {
+                    return <li>{name.display_name}</li>
+                  })
+                }
               })
             }
-          })
-        }
-          </ul>
-      </div>
+            </ul>
+          </div>}
+       <div>
+       <label htmlFor="user-datalist">Add Collaborator</label>
+       <input list="userSearch" id="user-datalist" name="user-datalist" onChange={debounce((e) => {
+         fetchUsers(e, e.target.value)
+         setCollab(e.target.value)
+       }, 200)} />
+         <datalist id="userSearch">
+         {userSearch.map((users, i) => {
+             return <option key={i} value={users.display_name + ' ' + users.user_id} />
+           })}
+         </datalist>
+     </div>
+ <div>
+   <button onClick={(e) => invite(e)}>{inviting ? <Loading /> : "ADD Collaborators +"}</button>
+   <button>ADD Credits +</button>
+        </div>
+        </>
     )
   }
 
@@ -464,6 +489,7 @@ const Submit = () => {
         <input id="submit" name="submit" type="submit" value="SUBMIT" onClick={(e) => onPublish(e)} />
         {response && <p>{response}</p>}
       </div>
+      
     )
   }
 
@@ -527,6 +553,22 @@ const Submit = () => {
             )
   }
 
+  const ProjectTitle = () => {
+    return (
+      <>
+      <div>
+            <label htmlFor="title">Project Title</label>
+          <input id="title" name="title" placeholder="project title" type="text" value={title} onChange={(e) => setTitle(e.target.value)} />
+        </div>
+        <div>
+          {loading ? <Loading /> : <input id="submit" name="submit" type="submit" value="Save Title" disabled={!title} onClick={() => createProject()} /> //@Andi disabled="true" seems to not change styling here for some reason 🤔
+          }
+          {loading ? <Loading /> : title && <DeleteProjectButton /> }
+        </div>
+        </>
+    )
+  }
+
   const AddBlock = () => {
     const [loading, setLoading] = useState(false);
 
@@ -562,35 +604,12 @@ const Submit = () => {
             }
         </div>
         <h3>Project Title / Collaborators / Credits</h3>
-        <div>
-            <label htmlFor="title">Project Title</label>
-          <input id="title" name="title" placeholder="project title" type="text" value={title} onChange={(e) => setTitle(e.target.value)} />
-        </div>
-        <div>
-          {loading ? <Loading /> : <input id="submit" name="submit" type="submit" value="Save Title" disabled={!title} onClick={() => createProject()} /> //@Andi disabled="true" seems to not change styling here for some reason 🤔
-          }
-          {loading ? <Loading /> : title && <DeleteProjectButton /> }
-        </div>
+        <ProjectTitle />
         {projectSpace && (
           <>
             <h3>Collaborators / Credits</h3>
-           { fetchingUsers ? "Looking for collaborators..." : <Collaborators />}
-              <div>
-              <label htmlFor="user-datalist">Add Collaborator</label>
-              <input list="userSearch" id="user-datalist" name="user-datalist" onChange={debounce((e) => {
-                fetchUsers(e, e.target.value)
-                setCollab(e.target.value)
-              }, 200)} />
-                <datalist id="userSearch">
-                {userSearch.map((users, i) => {
-                    return <option key={i} value={users.display_name + ' ' + users.user_id} />
-                  })}
-                </datalist>
-            </div>
-        <div>
-          <button onClick={(e) => invite(e)}>ADD Collaborators +</button>
-          <button>ADD Credits +</button>
-        </div>
+            <Collaborators />
+             
             <h3>Content</h3>
             { blocks.map((content, i) => 
               <AddContent block={ content } index={ i }/>

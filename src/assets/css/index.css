@@ -513,6 +513,16 @@ form textarea {
   animation: loading 2.4s linear infinite;
 }
 
+button > #loading {
+  border-color: var(--color-bg) transparent var(--color-bg) transparent;
+  max-height: calc(var(--margin) * 1.15);
+  max-width: calc(var(--margin) * 1.15);
+  margin:0 auto;
+} 
+/*
+@Andi added loading spinner for buttons. 
+*/
+
 /*
 .account > div {
   display: grid;
