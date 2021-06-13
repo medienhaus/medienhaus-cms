@@ -269,8 +269,8 @@ form input[type="submit"] {
   width: 100%;
 }
 
-form button[disabled]
- {
+form button[disabled],
+form input[type="submit"][disabled] /* @Andi added form input */ {
   cursor: not-allowed;
   opacity: 0.3;
 }
