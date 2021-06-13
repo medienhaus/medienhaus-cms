@@ -16,54 +16,15 @@ const Submit = () => {
   const [counter, setCounter] = useState(0)
   const [blocks, setBlocks] = useState([])
   const {joinedSpaces, spacesErr, fetchSpaces} = useJoinedSpaces()
-  const [fetchingUsers, setFetchingUsers] = useState(false);
-  const [userSearch, setUserSearch] = useState([]);
   const [contentSelect, setContentSelect] = useState('');
-  const [collab, setCollab] = useState('');
 
   const converter = new showdown.Converter()
   const matrixClient = Matrix.getMatrixClient()
 
-  const createProject = async () => {
-    setLoading(true)
-    const opts = {
-      preset: visibility === 'public' ? 'public_chat' : 'private_chat',
-      name: title,
-      creation_content: { type: 'm.space' },
-      initial_state: [{
-        type: 'm.room.history_visibility',
-        content: { history_visibility: visibility === 'public' ? 'world_readable' : 'invited' }
-      },
-      {
-        type: 'm.room.topic',
-        content: { topic: JSON.stringify({ rundgang: 21, type: 'studentproject' }) }
-      },
-      {
-        type: 'm.room.guest_access',
-        state_key: '',
-        content: { guest_access: 'can_join' }
-      }],
-      power_level_content_override: { events_default: 100 },
-      visibility: 'private'
-    }
-    try {
-      await matrixClient.createRoom(opts)
-        .then((response) => {
-          console.log(response)
-          setProjectSpace(response.room_id)
-        })
-    } catch (e) {
-      console.log(e)
-    } finally {
-      setLoading(false)
-    }
-  }
-
   const createBlock = async (content, e) => {
     e.preventDefault()
     const opts = {
-      name: counter + '_' + content,
-      visibility: 'public',
+      name: (counter - 1) + '_' + content, // blocks[0] is the project space itself, therefore -1
       preset: 'public_chat',
       topic: JSON.stringify({ type: content }),
       creation_content: { 'm.federate': false },
@@ -91,23 +52,21 @@ const Submit = () => {
     }
 
     try {
-      await matrixClient.createRoom(opts)
-        .then((res) => fetch(process.env.REACT_APP_MATRIX_BASE_URL + `/_matrix/client/r0/rooms/${projectSpace}/state/m.space.child/${res.room_id}`, req))
-        .then(async response => {
-          const data = await response.json()
-          if (!response.ok) {
-            const error = (data && data.message) || response.status
+      const room = await matrixClient.createRoom(opts)
+        .then(async (res) => {
+          const room_id = res.room_id
+          const response = await fetch(process.env.REACT_APP_MATRIX_BASE_URL + `/_matrix/client/r0/rooms/${projectSpace}/state/m.space.child/${room_id}`, req)
+          return [room_id, response]
+        })
+        .then(async (res) => {
+          const data =  await res[1].json()
+          if (!res[1].ok) {
+            const error = (data?.message) || res[1].status
             return Promise.reject(error)
           }
-          console.log(data)
-          const spaces = await matrixClient.getSpaceSummary(projectSpace)
-          console.log(spaces)
-          setCounter(counter + 1)
-          console.log(counter)
+          return res[0]
         })
-        .catch(err => {
-          console.error('There was an error!', err)
-        })
+      return room 
     } catch (e) {
       console.log(e)
     } finally {
@@ -118,28 +77,308 @@ const Submit = () => {
   useEffect(() => {
     const fetchSpace = async () => {
       const space = await matrixClient.getSpaceSummary(projectSpace)
-      setBlocks(space.rooms)
-      console.log(blocks);
+      const spaceRooms = space.rooms.map(room => {
+        if (!('room_type' in room)) {
+          return room
+        }
+      })
+      setBlocks(spaceRooms.filter(x => x !== undefined).sort((a, b) => {
+        if (a.name < b.name) return -1
+        if (a.name > b.name) return 1
+        return 0
+      }))
+      setCounter(space.rooms.length) 
     }
-    setCounter(blocks.length)
+    console.log(blocks);
     projectSpace && fetchSpace()
+
     // eslint-disable-next-line
   }, [counter, projectSpace]);
 
-  const invite =  (e) => {
-    e.preventDefault()
-    const id = collab.split(' ')
-    blocks.forEach(async (room, index) => {
+  
+
+  //======= COMPONENTS ======================================================================
+
+  const AddImage = () => {
+    const [selectedFile, setSelectedFile] = useState();
+    const [fileName, setFileName] = useState('');
+    const [loading, setLoading] = useState(false);
+
+    const changeHandler = (event) => {
+      setSelectedFile(event.target.files[0])
+      console.log(selectedFile)
+      setFileName(event.target.files[0].name)
+      // setIsFilePicked(true);
+    }
+
+    const handleSubmission = async (e) => {
+      setLoading(true)
       try {
-        await matrixClient.invite(room.room_id, id[1]).then(() => console.log("invited " + id[1] + " to " + room.name))
-        console.log(index);
+        await createBlock("image", e).then(async (res) => {
+          console.log(res)
+          await matrixClient.uploadContent(selectedFile, { name: fileName })
+            .then((url) => matrixClient.sendImageMessage(res, url, {
+              mimetype: selectedFile.type,
+              size: selectedFile.size
+          }))
+          .then((res) => console.log(res))
+          setFileName()
+          setSelectedFile('')
+          setCounter(0)
+         })
+       
+      } catch (e) {
+        console.log('error while trying to save image: ' + e)
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    selectedFile && console.log(selectedFile);
+    return (
+      <>
+        <input type="file" name="filename" onChange={changeHandler} disabled={contentSelect === "" || false} />
+        {selectedFile
+          && (
+            <div>
+            <p>Filename: <input type="text" value={fileName} onChange={e => {
+              e.preventDefault()
+              setFileName(e.target.value)
+            }} />
+            </p>
+              {selectedFile.type.includes("image") || <div>Please select an image file.</div>}
+            {selectedFile.size > 5000000 && <p style={{ color: "red" }}> File size needs to be less than 5MB</p> //@Andi pls add to css
+            }
+            <button onClick={(e) => handleSubmission(e)} disabled={!selectedFile.type.includes("image") || selectedFile.size > 5000000 || loading}>{loading ? <Loading /> : "Upload"}</button>
+            </div>
+        )
+         }
+      </>)
+  }
+  
+  const AddContent = ({block, index}) => {
+    const [clicked, setClicked] = useState(false);
+    const [readOnly, setReadOnly] = useState(false);
+    const [saved, setSaved] = useState(false);
+    const [deleting, setDeleting] = useState(false);
+    const { cms, error, fetching } = FetchCms(block.room_id)
+    const json = JSON.parse(block.topic)
+    
+    const onSave = async (roomId) => {
+      setReadOnly(true);
+      try {
+       const save =  await matrixClient.sendMessage(roomId, {
+          body: localStorage.getItem(roomId),
+          format: 'org.matrix.custom.html',
+          msgtype: 'm.text',
+          formatted_body: converter.makeHtml(localStorage.getItem(roomId))
+        })
+        if ("event_id" in save) {
+          setSaved("Saved!")
+          setTimeout(() => {
+            setSaved()
+          },1000)
+        }
+        // await matrixClient.redactEvent(roomId.room_id, entry.event, null, { 'reason': 'I have my reasons!' })
+      } catch (e) {
+        console.error('error while trying to save: ' + e)
+        setSaved("Couldn't save!")
+          setTimeout(() => {
+            setSaved()
+          },1000)
+      } finally {
+        setReadOnly(false)
+      }
+    }
+
+    const onDelete = async (e, roomId, index) => {
+      e.preventDefault()
+      setDeleting(true)
+      setReadOnly(true)
+
+      const reorder = (name, room_id) => {
+            const title = name.split('_')
+            const num = parseInt(title[0]) - 1
+            matrixClient.setRoomName(room_id, num  + '_' + title[1] )
+          }
+      try {
+        const count = await matrixClient.getJoinedRoomMembers(roomId)
+        Object.keys(count.joined).length > 1 && Object.keys(count.joined).forEach(name => {
+          localStorage.getItem('medienhaus_user_id') !== name && matrixClient.kick(roomId, name)
+        })
+        matrixClient.leave(roomId)
+        blocks.forEach((block, i) => {
+          if (i > index) {
+            reorder(block.name, block.room_id)
+          }
+        })
+        setCounter(0)
+      } catch (err) {
+        console.error(err)
+        setDeleting(`couldn't delete ${json.type}, please try again or try reloading the page`)
+        setTimeout(() => {
+          setDeleting()
+        },2000)
+      }
+      finally {
+        setDeleting()
+      }
+      //matrixClient.kick(roomId, userId)
+      //matrixClient.leave(roomId)
+    }
+
+    const changeOrder = async (e,roomId, name, direction) => {
+      e.preventDefault()
+      setReadOnly(true)
+      //blocks.splice((pos) + direction, 0, blocks.splice(pos, 1).pop())
+      const active = name.split('_')
+      const order = parseInt(active[0])
+      const newOrder = order + direction
+      const passive = blocks[newOrder].name.split('_')
+      const passiveRoom = blocks[newOrder].room_id
+      try {
+        await matrixClient.setRoomName(roomId, newOrder + '_' + active[1]).then(
+          await matrixClient.setRoomName(passiveRoom, order + '_' + passive[1])
+        ).then(setCounter(0))
       } catch (err) {
         console.error(err);
-          }
-        } 
-    )
+      } finally {
+        setReadOnly(false)
+      }
+    }
+      
+  const string2hash = (string) => {
+    console.log(typeof string);
+    var hash = 0;
+                if (string.length === 0) return hash;
+                for (let i = 0; i < string.length; i++) {
+                    const char = string.charCodeAt(i);
+                    hash = ((hash << 5) - hash) + char;
+                    hash = hash & hash;
+                }
+                return hash;
+  }
+
+        return (
+          fetching
+            ? <div style={{ height: "120px"}}><Loading /></div> // @Andi sort of... hack to keep interface from violently redrawing. We need to see how we deal with this. Too many waterfalls, let's stick to the rivers and the lakes that we're used to.
+            : error
+              ? console.error(error)
+              : (
+                <>
+                  {cms?.msgtype === 'm.image' ?
+                    //@Andi <image /> not being displayed, so made this workaround with an editor in readonly mode. Althogh this offers a few advantages (same design as other content blocks and ability to directly download image for contributors)
+                     <Editor
+                     dark={window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches}
+                     defaultValue={cms && `![we probably should parse alt text in room topic](${matrixClient.mxcUrlToHttp(cms.url)})`}
+                      readOnly={true}
+                      key={index}
+                    />
+                 :
+                    <>
+                  <Editor
+                    dark={window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches}
+                    defaultValue={cms?.body}
+                    placeholder={json.type}
+                        readOnly={readOnly}
+                        onSave={({ done }) => { if (localStorage.getItem(block.room_id) !== null && cms !== undefined && string2hash(cms.body) !== string2hash(localStorage.getItem(block.room_id))) {
+                          onSave(block.room_id)
+                          localStorage.removeItem(block.room_id)
+                        } else if(localStorage.getItem(block.room_id) !== null && cms === undefined){
+                          onSave(block.room_id)
+                          localStorage.removeItem(block.room_id)
+                        } }}
+                    onChange={debounce((value) => {
+                      const text = value();
+                      localStorage.setItem(block.room_id, text);
+                     }, 250)}
+                    handleDOMEvents={{
+                      focus: () => console.log("FOCUS on " + block.room_id),
+                      blur: (e) => {
+                        if (localStorage.getItem(block.room_id) !== null && cms !== undefined && string2hash(cms.body) !== string2hash(localStorage.getItem(block.room_id))) {
+                          onSave(block.room_id)
+                          localStorage.removeItem(block.room_id)
+                        } else if(localStorage.getItem(block.room_id) !== null && cms === undefined){
+                          onSave(block.room_id)
+                          localStorage.removeItem(block.room_id)
+                        }
+                      }
+                    }
+                    }
+                    key={block.room_id} />
+                      <p key={block.room_id + "_p" }style={{ fontSize: "calc(var(--margin) * 0.7" }}>{saved}</p>
+                  </>
+                  }
+                  {//@Andi maybe a check mark or something next to the editor/content block? some visual feedback for users to show their edit has been saved
+                  }
+                   <p>{deleting}</p>
+                  <div className="grid">
+                  {index !== 0 && <button key={'up_' + block.room_id} onClick={(e) => changeOrder(e, block.room_id,  block.name, -1)}>UP</button>
+                  }
+                  {index < blocks.length - 1 && <button key={'down_' + block.room_id} onClick={(e) => changeOrder(e,block.room_id, block.name, 1)}>DOWN</button>
+                  }
+                    {<button key={'delete' + index} onClick={(e) => {
+                      if (clicked) {
+                        onDelete(e, block.room_id, index)
+                        setClicked(false)
+                      } else {
+                        e.preventDefault()
+                        setClicked(true)
+                      }                      
+                    }} >{clicked ? 'SURE?' : deleting ? <Loading /> : 'DELETE'}</button>}
+                  </div>
+                 
+            </>
+                )
+        )
+      
     
   }
+
+  const Drafts = () => {
+    return (
+      <>
+      <h2>Drafts:</h2>
+      <ul>
+          {spacesErr ? console.error(spacesErr) : joinedSpaces ? joinedSpaces.map((space, index) => {
+            return <li key={index} ><button onClick={() => { setProjectSpace(space.room_id); setTitle(space.name); setVisibility(space.published) }}>{space.name}</button></li>
+      }) : null 
+        }
+      </ul>
+      </>
+    )
+  }
+
+  const Collaborators = () => {
+  const [fetchingUsers, setFetchingUsers] = useState(false);
+  const [userSearch, setUserSearch] = useState([]);
+    const [collab, setCollab] = useState('');
+    const [inviting, setInviting] = useState(false);
+
+    const invite = async (e) => {
+    setInviting(true)
+    e.preventDefault()
+      const id = collab.split(' ')
+      try {
+        await matrixClient.invite(projectSpace, id[1])
+        blocks.forEach(async (room, index) => {
+          try {
+            await matrixClient.invite(room.room_id, id[1]).then(() => console.log("invited " + id[1] + " to " + room.name))
+            console.log(blocks.length);
+            console.log(index);
+
+          } catch (err) {
+            console.error(err);
+          } 
+        }
+        )
+        console.log("done");
+      } catch (err) {
+        console.error(err);
+      }finally {
+        setInviting(false)
+      }
+   }
 
   const fetchUsers = async (e, search) => {
     e.preventDefault()
@@ -155,177 +394,276 @@ const Submit = () => {
       setFetchingUsers(false)
     }
   }
-
-  const changeOrder = (e, pos, direction) => {
-    e.preventDefault()
-    blocks.splice((pos) + direction, 0, blocks.splice(pos, 1).pop())
-    console.log(blocks);
-  }
-  const deleteProject = (e) => {
-    e.preventDefault()
-    console.log('nööööööööö');
-  }
-
-  const onDelete = async (e, roomId) => {
-    e.preventDefault()
-    try {
-      const count = await matrixClient.getJoinedRoomMembers(roomId)
-      Object.keys(count.joined).length > 1 && Object.keys(count.joined).forEach(name => {
-        localStorage.getItem('medienhaus_user_id') !== name && matrixClient.kick(roomId, name)
-      })
-      matrixClient.leave(roomId)
-      setCounter(0)
-    } catch (err) {
-      console.error(err)
-    }
-    //matrixClient.kick(roomId, userId)
-    //matrixClient.leave(roomId)
-  }
-
-  const onSave = () => {
-  
-    blocks.map(async (block, index) => {
-      const json = JSON.parse(block.topic)
-      const order = parseInt(block.name.split('_'))
-      console.log(json.type)
-      order !== index && index > 0 && matrixClient.setRoomName(block.room_id, index + '_' + json.type)
-      try {
-        await matrixClient.sendMessage(block.room_id, {
-          body: localStorage.getItem(block.room_id),
-          format: 'org.matrix.custom.html',
-          msgtype: 'm.text',
-          formatted_body: converter.makeHtml(localStorage.getItem(block.room_id))
-        })
-
-        // await matrixClient.redactEvent(roomId.room_id, entry.event, null, { 'reason': 'I have my reasons!' })
-        // onSave()
-
-      } catch (e) {
-        console.error('error while trying to save: ' + e)
-      }
-    })
-  }
-  const onPublish = async (e) => {
-    e.preventDefault()
-    const req = {
-      method: 'PUT',
-      headers: { Authorization: 'Bearer ' + localStorage.getItem('medienhaus_access_token') },
-      body: JSON.stringify({"join_rule": visibility === "public" ? 'public' : 'invite'})
-    }
-    try {
-      //matrixClient.sendEvent(projectSpace, "m.room.join_rules", {"join_rule": visibility === "public" ? 'public' : 'invite'} ).then((res) => console.log(res))
-    fetch(process.env.REACT_APP_MATRIX_BASE_URL + `/_matrix/client/r0/rooms/${projectSpace}/state/m.room.join_rules/`, req)
-     .then(response => { console.log(response); console.log(projectSpace);})
-      
-    } catch (err){
-      console.error(err);
-    }
-  }
-
-  const string2hash = (string) => {
-    var hash = 0;
-                if (string.length === 0) return hash;
-                for (let i = 0; i < string.length; i++) {
-                    const char = string.charCodeAt(i);
-                    hash = ((hash << 5) - hash) + char;
-                    hash = hash & hash;
-                }
-                return hash;
-            }
-  
-  //======= COMPONENTS ======================================================================
-  
-  const AddContent = ({block, index}) => {
-    const [clicked, setClicked] = useState(false);
-    const { cms, error, fetching } = FetchCms(block.room_id)
-    console.log("block");
-    const json = JSON.parse(block.topic)
-        return (
-          fetching
-            ? <div>Loading</div>
-            : error
-              ? console.error(error)
-              : (
-                <>                   
-                  { /*
-              <textarea id="text" key={block.room_id} name={block.name} placeholder={`Add ${json.type}`} type="text" value={cms !== undefined && cms.body} onChange={(e) =>
-                localStorage.setItem(block.room_id, e.target.value)
-              } />
-                 */}
-                  
-                  <Editor
-                    dark={window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches}
-                    defaultValue={cms && cms.body}
-                    
-                    onChange={debounce((value) => {
-                      const text = value();
-                      localStorage.setItem(block.room_id, text);
-                     }, 250)}
-                    handleDOMEvents={{
-                      focus: () => console.log("FOCUS on " + block.room_id),
-                      blur: (e) => cms !== undefined ? string2hash(cms.body) !== string2hash(localStorage.getItem(block.room_id)) && onSave(e) : onSave(e),
-              }}
-                    key={index} />
-                  
-                  <div className="grid">
-                  {index !== 0 && <button key={'up' + index} onClick={(e) => changeOrder(e, index + 1, -1)}>UP</button>
-                  }
-                  {index < blocks.length - 2 && <button key={'down' + index} onClick={(e) => changeOrder(e, index + 1, 1)}>DOWN</button>
-                  }
-                    {<button key={'delete' + index} onClick={(e) => {
-                      if (clicked) {
-                        onDelete(e, block.room_id)
-                        setClicked(false)
-                      } else {
-                        e.preventDefault()
-                        setClicked(true)
-                      }                      
-                    }} >{clicked ? 'SURE?' : 'DELETE'}</button>}
-                    </div>
-            </>
-                )
-        )
-      
     
-  }
-
-  const Drafts = () => {
-    console.log(joinedSpaces);
     return (
       <>
-      <h2>Drafts:</h2>
-      <ul>
-          {spacesErr ? console.error(spacesErr) : joinedSpaces ? joinedSpaces.map((space, index) => {
-            console.log(space);
-            return <li key={index} ><button onClick={() => { setProjectSpace(space.room_id); setTitle(space.name); setVisibility(space.published) }}>{space.name}</button></li>
-      }) : null 
-        }
-      </ul>
-      </>
+        {fetchSpaces ? <Loading /> :
+          <section>
+            <ul>{
+              joinedSpaces.map((space, i) => {
+                if (space.name === title) {
+                  return Object.values(space.collab).map(name => {
+                    return <li>{name.display_name}</li>
+                  })
+                }
+              })
+            }
+            </ul>
+          </section>}
+       <div>
+       <div>
+         <label htmlFor="user-datalist">Add Collaborator</label>
+         <input list="userSearch" id="user-datalist" name="user-datalist" onChange={debounce((e) => {
+           fetchUsers(e, e.target.value)
+           setCollab(e.target.value)
+         }, 200)} />
+       </div>
+          {fetchingUsers ? <Loading /> : inviting ?? null }
+         <datalist id="userSearch">
+         {userSearch.map((users, i) => {
+             return <option key={i} value={users.display_name + ' ' + users.user_id} />
+           })}
+         </datalist>
+     </div>
+ <div>
+   <button onClick={(e) => invite(e)}>{inviting ? <Loading /> : "ADD Collaborators +"}</button>
+          <button disabled={ true }>ADD Credits +</button>
+        </div>
+        </>
     )
   }
 
-  const Collaborators = () => {
+  const SubmitButton = () => {
+    const [response, setResponse] = useState();
+
+    const onPublish = async (e) => {
+      e.preventDefault()
+      const req = {
+        method: 'PUT',
+        headers: { Authorization: 'Bearer ' + localStorage.getItem('medienhaus_access_token') },
+        body: JSON.stringify({"join_rule": visibility === "public" ? 'public' : 'invite'})
+      }
+      try {
+        //matrixClient.sendEvent(projectSpace, "m.room.join_rules", {"join_rule": visibility === "public" ? 'public' : 'invite'} ).then((res) => console.log(res))
+      fetch(process.env.REACT_APP_MATRIX_BASE_URL + `/_matrix/client/r0/rooms/${projectSpace}/state/m.room.join_rules/`, req)
+          .then (response => {
+            console.log(response);
+            if (response.ok) {
+              setResponse("Changed successfully!")
+              setTimeout(() => {
+                setResponse()
+              }, 3000);
+            } else {
+              setResponse("Oh no, something went wrong.")
+              setTimeout(() => {
+                setResponse()
+              }, 3000);
+            }
+      })
+        
+      } catch (err){
+        console.error(err);
+       
+      }
+    }
+  
     return (
       <div>
-        <ul>{
-          joinedSpaces.map((space, i) => {
-            if (space.name === title) {
-              return Object.values(space.collab).map(name => {
-                return <li>{name.display_name}</li>
-              })
-            }
-          })
-        }
-          </ul>
+        <input id="submit" name="submit" type="submit" value="SUBMIT" onClick={(e) => onPublish(e)} />
+        {response && <p>{response}</p>}
       </div>
+      
+    )
+  }
+
+ 
+
+  const ProjectTitle = () => {
+
+    const [projectTitle, setProjectTitle] = useState('');
+    const [edit, setEdit] = useState(false);
+    const [changing, setChanging] = useState(false);
+    const [newProject, setNewProject] = useState(false);
+    const [warning, setWarning] = useState(false);
+    const [leaving, setLeaving] = useState(false);
+    const doublicate = joinedSpaces?.filter(({ name }) => projectTitle === name).length > 0
+
+     
+    useEffect(() => {
+      setProjectTitle(title)
+      title === '' && setNewProject(true)
+      // eslint-disable-next-line
+    }, [title]);
+
+    const deleteProject = async (e, callback) => {
+      e.preventDefault()
+      const space = await matrixClient.getSpaceSummary(projectSpace)
+      console.log(space);
+      space.rooms.reverse().map(async (space, index) => {
+        //we reverse here to leave the actual project space last in case something goes wrong in the process.
+        setLeaving(true)
+        console.log("Leaving " + space.name);
+        try {
+          const count = await matrixClient.getJoinedRoomMembers(space.room_id)
+          Object.keys(count.joined).length > 1 && Object.keys(count.joined).forEach(name => {
+            localStorage.getItem('medienhaus_user_id') !== name && matrixClient.kick(space.room_id, name)
+          })
+          try {
+            const leave = await matrixClient.leave(space.room_id)
+            console.log(leave);
+            setTitle("")
+            setProjectSpace('')
+          } catch (err) {
+            console.error(err);
+          }
+   
+        } catch (err) {
+          console.error(err);
+        } finally {
+          setCounter(0)
+          setLeaving(false)
+        }
+        
+      })
+    }
+
+    const createProject = async (e, title) => {
+      e.preventDefault()
+      setLoading(true)
+      const opts = {
+        preset: visibility === 'public' ? 'public_chat' : 'private_chat',
+        name: title,
+        creation_content: { type: 'm.space' },
+        initial_state: [{
+          type: 'm.room.history_visibility',
+          content: { history_visibility: visibility === 'public' ? 'world_readable' : 'invited' }
+        },
+        {
+          type: 'm.room.topic',
+          content: { topic: JSON.stringify({ rundgang: 21, type: 'studentproject' }) }
+        },
+        {
+          type: 'm.room.guest_access',
+          state_key: '',
+          content: { guest_access: 'can_join' }
+        }],
+        power_level_content_override: { events_default: 100 },
+        visibility: 'private'
+      }
+      try {
+        await matrixClient.createRoom(opts)
+          .then((response) => {
+            console.log(response)
+            setProjectSpace(response.room_id)
+            setTitle(projectTitle)
+          })
+      } catch (e) {
+        console.log(e)
+      } finally {
+        setLoading(false)
+      }
+    }
+
+  
+    const DeleteProjectButton = () => {
+      //dom not redrawing drafts after deletion is complete, needs to be fixed
+    
+      return (
+          <>
+          {warning && <p>Are you sure you want to delete the project <strong>{title}</strong>? This cannot be undone and will delete the project for you and any collaborator that might be part of it.</p>}
+            <input style={{ backgroundColor: "red" }} //@Andi please add to css
+              id="delete"
+              name="delete"
+              type="submit"
+              value={warning ? "Yes, delete project" : "Delete project"}
+              disabled={!title || leaving}
+              onClick={(e) => {
+                if (warning) {
+                  deleteProject(e)
+                  setWarning(false)
+                } else {
+                  e.preventDefault()
+                  setWarning(true)
+                }
+                }
+              } />
+          {leaving && <Loading />}
+         
+           {warning &&  <input
+            id="delete"
+            name="delete"
+            type="submit"
+            value={'CANCEL'}
+            onClick={() => {setWarning(false) }}
+           />}
+              </>
+              )
+    }
+    
+    return (
+      <>
+      <div>
+            <label htmlFor="title">Project Title</label>
+          <input id="title" name="title" placeholder="project title" type="text" value={projectTitle} disabled={title && !edit} onChange={(e) => setProjectTitle(e.target.value)} />
+        </div>
+        <div>
+          
+          {loading ? <Loading /> : title && !edit && <DeleteProjectButton />}
+          {title && !warning && <input id="submit" name="submit" type="submit" value={edit ? "Save" : changing ? <Loading /> : "Edit Title"} onClick={async (e) => {
+            e.preventDefault();
+            if (edit) {
+              setChanging(true)
+              try {
+                await matrixClient.setRoomName(projectSpace, projectTitle).then(() => setTitle(projectTitle))
+              } catch (err) {
+                console.error(err);
+              } finally {
+                setChanging(false)
+              }
+              setEdit(false)
+            } else {
+              setEdit(true)
+            }
+          }} />}
+          {edit && <input id="submit" name="submit" type="submit" value="Cancel" onClick={(e) => { e.preventDefault(); setEdit(false) }} />}
+          {loading ? <Loading /> : !warning && !edit && <input id="submit" name="submit" type="submit" value={newProject ? "Create Project": "New Project"} disabled={(newProject && doublicate ) || !projectTitle } onClick={(e) => {
+            console.log(newProject);
+            if(newProject){
+              createProject(e, projectTitle)
+              setNewProject(false)
+            } else {
+              e.preventDefault()
+              setNewProject(true)
+              setTitle('')
+              setProjectSpace('')
+            }
+          }} /> 
+          }
+        </div>
+        </>
+    )
+  }
+
+  const AddBlock = () => {
+    const [loading, setLoading] = useState(false);
+
+    return (
+      <button type="submit" id="" name="" disabled={contentSelect === "" || false} value="Add Audio" onClick={async (e) =>
+      {
+        setLoading(true)
+        await createBlock(contentSelect, e).then(() => {
+          setCounter(0)
+          setLoading(false)
+        })
+      }
+      }>{loading ? <Loading /> : "Add Content"}</button>
     )
   }
 
   return (
     <div>
-     {fetchSpaces ? "Loading Drafts. This could take a few seconds..." : <Drafts />}
-      <h2>New Project</h2>
+     {fetchSpaces ? <Loading /> : <Drafts />}
+      
       <form>
       <h3>Category / Context / Course</h3>
         <div>
@@ -341,36 +679,14 @@ const Submit = () => {
             }
         </div>
         <h3>Project Title / Collaborators / Credits</h3>
-        <div>
-            <label htmlFor="title">Project Title</label>
-          <input id="title" name="title" placeholder="project title" type="text" value={title} onChange={(e) => setTitle(e.target.value)} />
-        </div>
-        <div>
-          {loading ? <Loading /> : <input id="submit" name="submit" type="submit" value="Save Title" disabled={!title} onClick={() => createProject()} />}
-          {loading ? <Loading /> : title ? <input style={{ backgroundColor: "red" }} id="delete" name="delete" type="submit" value={"Delete project " + title} disabled={!title} onClick={(e) => deleteProject(e)} /> :  null}
-        </div>
+        <ProjectTitle />
         {projectSpace && (
           <>
             <h3>Collaborators / Credits</h3>
-           { fetchingUsers ? "Looking for collaborators..." : <Collaborators />}
-              <div>
-              <label htmlFor="user-datalist">Add Collaborator</label>
-              <input list="userSearch" id="user-datalist" name="user-datalist" onChange={debounce((e) => {
-                fetchUsers(e, e.target.value)
-                setCollab(e.target.value)
-              }, 200)} />
-                <datalist id="userSearch">
-                {userSearch.map((users, i) => {
-                    return <option key={i} value={users.display_name + ' ' + users.user_id} />
-                  })}
-                </datalist>
-            </div>
-        <div>
-          <button onClick={(e) => invite(e)}>ADD Collaborators +</button>
-          <button>ADD Credits +</button>
-        </div>
+            <Collaborators />
+             
             <h3>Content</h3>
-            {blocks.filter(x => x.room_type !== "m.space").map((content, i) => 
+            { blocks.map((content, i) => 
               <AddContent block={ content } index={ i }/>
             )}
               <div>
@@ -382,8 +698,9 @@ const Submit = () => {
                   <option value="" disabled={true} >--Media------------</option>
                   <option value="image">Image</option>
                 <option value="audio">Audio</option>
-                </select>
-              <button type="submit" id="" name="" disabled={contentSelect === "" || false } value="Add Audio" onClick={(e) => createBlock(contentSelect, e)}>Add Content</button>
+              </select>
+              {contentSelect === "image" ?
+             <AddImage /> : <AddBlock />}
                 {/*
             // fetch("https://stream.udk-berlin.de/api/userId/myVideos")
             */}
@@ -397,7 +714,7 @@ const Submit = () => {
               </select>
             </div>
             <div>
-              {loading ? <Loading /> : <input id="submit" name="submit" type="submit" value="SUBMIT" onChange={console.log(visibility)} onClick={(e) => onPublish(e)} />}
+              {loading ? <Loading /> : <SubmitButton />}
             </div>
           </>
         )
