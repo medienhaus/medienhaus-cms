@@ -313,9 +313,9 @@ const Submit = () => {
                   }
                    <p>{deleting}</p>
                   <div className="grid">
-                  {index !== 0 && <button key={'up_' + block.room_id} onClick={(e) => changeOrder(e, block.room_id,  block.name, -1)}>UP</button>
+                  {index !== 0 && <button key={'up_' + block.room_id} onClick={(e) => changeOrder(e, block.room_id,  block.name, -1)}>↑</button>
                   }
-                  {index < blocks.length - 1 && <button key={'down_' + block.room_id} onClick={(e) => changeOrder(e,block.room_id, block.name, 1)}>DOWN</button>
+                  {index < blocks.length - 1 && <button key={'down_' + block.room_id} onClick={(e) => changeOrder(e,block.room_id, block.name, 1)}>↓</button>
                   }
                     {<button key={'delete' + index} onClick={(e) => {
                       if (clicked) {
@@ -325,7 +325,7 @@ const Submit = () => {
                         e.preventDefault()
                         setClicked(true)
                       }                      
-                    }} >{clicked ? 'SURE?' : deleting ? <Loading /> : 'DELETE'}</button>}
+                    }} >{clicked ? 'SURE?' : deleting ? <Loading /> : 'x'}</button>}
                   </div>
                  
             </>
