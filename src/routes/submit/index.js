@@ -61,7 +61,7 @@ const Submit = () => {
         .then(async (res) => {
           const data =  await res[1].json()
           if (!res[1].ok) {
-            const error = (data && data.message) || res[1].status
+            const error = (data?.message) || res[1].status
             return Promise.reject(error)
           }
           return res[0]
@@ -223,8 +223,6 @@ const Submit = () => {
       finally {
         setDeleting()
       }
-
-      
       //matrixClient.kick(roomId, userId)
       //matrixClient.leave(roomId)
     }
@@ -471,12 +469,24 @@ const Submit = () => {
     )
   }
 
-  const DeleteProjectButton = () => {
-    //dom not redrawing drafts after deletion is complete, needs to be fixed
-    
+ 
+
+  const ProjectTitle = () => {
+
+    const [projectTitle, setProjectTitle] = useState('');
+    const [edit, setEdit] = useState(false);
+    const [changing, setChanging] = useState(false);
+    const [newProject, setNewProject] = useState(false);
     const [warning, setWarning] = useState(false);
     const [leaving, setLeaving] = useState(false);
-   
+    const doublicate = joinedSpaces?.filter(({ name }) => projectTitle === name).length > 0
+
+     
+    useEffect(() => {
+      setProjectTitle(title)
+      title === '' && setNewProject(true)
+      // eslint-disable-next-line
+    }, [title]);
 
     const deleteProject = async (e, callback) => {
       e.preventDefault()
@@ -509,52 +519,9 @@ const Submit = () => {
         
       })
     }
-  
-    return (
-        <>
-        {warning && <p>Are you sure you want to delete the project <strong>{title}</strong>? This cannot be undone and will delete the project for you and any collaborator that might be part of it.</p>}
-          <input style={{ backgroundColor: "red" }} //@Andi please add to css
-            id="delete"
-            name="delete"
-            type="submit"
-            value={warning ? "Yes, delete project" : "Delete project"}
-            disabled={!title || leaving}
-            onClick={(e) => {
-              if (warning) {
-                deleteProject(e)
-                setWarning(false)
-              } else {
-                e.preventDefault()
-                setWarning(true)
-              }
-              }
-            } />
-        {leaving && <Loading />}
-       
-         {warning &&  <input
-          id="delete"
-          name="delete"
-          type="submit"
-          value={'CANCEL'}
-          onClick={() => {setWarning(false) }}
-         />}
-            </>
-            )
-  }
 
-  const ProjectTitle = () => {
-
-    const [projectTitle, setProjectTitle] = useState('');
-    const [edit, setEdit] = useState(false);
-    const [changing, setChanging] = useState(false);
-    const [newProject, setNewProject] = useState(false);
-
-    useEffect(() => {
-      setProjectTitle(title)
-      // eslint-disable-next-line
-    }, [title]);
-
-    const createProject = async (title) => {
+    const createProject = async (e, title) => {
+      e.preventDefault()
       setLoading(true)
       const opts = {
         preset: visibility === 'public' ? 'public_chat' : 'private_chat',
@@ -590,8 +557,42 @@ const Submit = () => {
       }
     }
 
-    const doublicate = joinedSpaces && joinedSpaces.filter(({ name }) => projectTitle.includes(name))
-
+  
+    const DeleteProjectButton = () => {
+      //dom not redrawing drafts after deletion is complete, needs to be fixed
+    
+      return (
+          <>
+          {warning && <p>Are you sure you want to delete the project <strong>{title}</strong>? This cannot be undone and will delete the project for you and any collaborator that might be part of it.</p>}
+            <input style={{ backgroundColor: "red" }} //@Andi please add to css
+              id="delete"
+              name="delete"
+              type="submit"
+              value={warning ? "Yes, delete project" : "Delete project"}
+              disabled={!title || leaving}
+              onClick={(e) => {
+                if (warning) {
+                  deleteProject(e)
+                  setWarning(false)
+                } else {
+                  e.preventDefault()
+                  setWarning(true)
+                }
+                }
+              } />
+          {leaving && <Loading />}
+         
+           {warning &&  <input
+            id="delete"
+            name="delete"
+            type="submit"
+            value={'CANCEL'}
+            onClick={() => {setWarning(false) }}
+           />}
+              </>
+              )
+    }
+    
     return (
       <>
       <div>
@@ -601,7 +602,7 @@ const Submit = () => {
         <div>
           
           {loading ? <Loading /> : title && <DeleteProjectButton />}
-          {title && <input id="submit" name="submit" type="submit" value={edit ? "Save" : changing ? <Loading /> : "Edit Title"} onClick={async (e) => {
+          {title && !warning && <input id="submit" name="submit" type="submit" value={edit ? "Save" : changing ? <Loading /> : "Edit Title"} onClick={async (e) => {
             e.preventDefault();
             if (edit) {
               setChanging(true)
@@ -618,16 +619,17 @@ const Submit = () => {
             }
           }} />}
           {edit && <input id="submit" name="submit" type="submit" value="Cancel" onClick={(e) => { e.preventDefault(); setEdit(false) }} />}
-          {loading ? <Loading /> : <input id="submit" name="submit" type="submit" value="New Project" disabled={!projectTitle || (doublicate.length > 0 )} onClick={() => {
+          {loading ? <Loading /> : !warning && <input id="submit" name="submit" type="submit" value={newProject ? "Create Project": "New Project"} disabled={(newProject && doublicate ) || !projectTitle } onClick={(e) => {
             console.log(newProject);
             if(newProject){
-              createProject(projectTitle)
+              createProject(e, projectTitle)
               setNewProject(false)
             } else {
+              e.preventDefault()
               setNewProject(true)
               setTitle('')
             }
-          }} /> //@Andi disabled="true" seems to not change styling here for some reason 🤔
+          }} /> 
           }
         </div>
         </>
