@@ -475,17 +475,24 @@ const Submit = () => {
     //dom not redrawing drafts after deletion is complete, needs to be fixed
     
     const [warning, setWarning] = useState(false);
+    const [leaving, setLeaving] = useState(false);
+   
 
-    const deleteProject = (e) => {
+    const deleteProject = async (e, callback) => {
       e.preventDefault()
-      blocks.map(async (block, index) => {
+      const space = await matrixClient.getSpaceSummary(projectSpace)
+      console.log(space);
+      space.rooms.reverse().map(async (space, index) => {
+        //we reverse here to leave the actual project space last in case something goes wrong in the process.
+        setLeaving(true)
+        console.log("Leaving " + space.name);
         try {
-          const count = await matrixClient.getJoinedRoomMembers(block.room_id)
+          const count = await matrixClient.getJoinedRoomMembers(space.room_id)
           Object.keys(count.joined).length > 1 && Object.keys(count.joined).forEach(name => {
-            localStorage.getItem('medienhaus_user_id') !== name && matrixClient.kick(block.room_id, name)
+            localStorage.getItem('medienhaus_user_id') !== name && matrixClient.kick(space.room_id, name)
           })
           try {
-            const leave = await matrixClient.leave(block.room_id)
+            const leave = await matrixClient.leave(space.room_id)
             console.log(leave);
             setTitle("")
             setProjectSpace('')
@@ -497,7 +504,9 @@ const Submit = () => {
           console.error(err);
         } finally {
           setCounter(0)
+          setLeaving(false)
         }
+        
       })
     }
   
@@ -509,7 +518,7 @@ const Submit = () => {
             name="delete"
             type="submit"
             value={warning ? "Yes, delete project" : "Delete project"}
-            disabled={!title}
+            disabled={!title || leaving}
             onClick={(e) => {
               if (warning) {
                 deleteProject(e)
@@ -520,6 +529,8 @@ const Submit = () => {
               }
               }
             } />
+        {leaving && <Loading />}
+       
          {warning &&  <input
           id="delete"
           name="delete"
@@ -536,6 +547,7 @@ const Submit = () => {
     const [projectTitle, setProjectTitle] = useState('');
     const [edit, setEdit] = useState(false);
     const [changing, setChanging] = useState(false);
+    const [newProject, setNewProject] = useState(false);
 
     useEffect(() => {
       setProjectTitle(title)
@@ -588,11 +600,7 @@ const Submit = () => {
           <input id="title" name="title" placeholder="project title" type="text" value={projectTitle} disabled={title && !edit} onChange={(e) => setProjectTitle(e.target.value)} />
         </div>
         <div>
-          {loading ? <Loading /> : <input id="submit" name="submit" type="submit" value="New Project" disabled={!projectTitle || doublicate.length > 0} onClick={() => {
-            
-            createProject(projectTitle)
-          }} /> //@Andi disabled="true" seems to not change styling here for some reason 🤔
-          }
+          
           {loading ? <Loading /> : title && <DeleteProjectButton />}
           {title && <input id="submit" name="submit" type="submit" value={edit ? "Save" : changing ? <Loading /> : "Edit Title"} onClick={async (e) => {
             e.preventDefault();
@@ -610,7 +618,18 @@ const Submit = () => {
               setEdit(true)
             }
           }} />}
-          {edit && <input id="submit" name="submit" type="submit" value="Cancel" onClick={(e) => { e.preventDefault(); setEdit(false)}} /> }
+          {edit && <input id="submit" name="submit" type="submit" value="Cancel" onClick={(e) => { e.preventDefault(); setEdit(false) }} />}
+          {loading ? <Loading /> : <input id="submit" name="submit" type="submit" value="New Project" disabled={!projectTitle || (doublicate.length > 0 && newProject)} onClick={() => {
+            console.log(newProject);
+            if(newProject){
+              createProject(projectTitle)
+              setNewProject(false)
+            } else {
+              setNewProject(true)
+              setTitle('')
+            }
+          }} /> //@Andi disabled="true" seems to not change styling here for some reason 🤔
+          }
         </div>
         </>
     )
@@ -635,7 +654,7 @@ const Submit = () => {
   return (
     <div>
      {fetchSpaces ? <Loading /> : <Drafts />}
-      <h2>New Project</h2>
+      
       <form>
       <h3>Category / Context / Course</h3>
         <div>
