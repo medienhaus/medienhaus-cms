@@ -268,7 +268,7 @@ const Submit = () => {
               ? console.error(error)
               : (
                 <>
-                  {cms !== undefined && cms.msgtype === 'm.image' ?
+                  {cms?.msgtype === 'm.image' ?
                     //@Andi <image /> not being displayed, so made this workaround with an editor in readonly mode. Althogh this offers a few advantages (same design as other content blocks and ability to directly download image for contributors)
                      <Editor
                      dark={window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches}
@@ -280,7 +280,7 @@ const Submit = () => {
                     <>
                   <Editor
                     dark={window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches}
-                    defaultValue={cms && cms.body}
+                    defaultValue={cms?.body}
                     placeholder={json.type}
                     readOnly={readOnly}
                     onChange={debounce((value) => {
@@ -592,7 +592,6 @@ const Submit = () => {
 
     const doublicate = joinedSpaces && joinedSpaces.filter(({ name }) => projectTitle.includes(name))
 
-
     return (
       <>
       <div>
@@ -619,7 +618,7 @@ const Submit = () => {
             }
           }} />}
           {edit && <input id="submit" name="submit" type="submit" value="Cancel" onClick={(e) => { e.preventDefault(); setEdit(false) }} />}
-          {loading ? <Loading /> : <input id="submit" name="submit" type="submit" value="New Project" disabled={!projectTitle || (doublicate.length > 0 && newProject)} onClick={() => {
+          {loading ? <Loading /> : <input id="submit" name="submit" type="submit" value="New Project" disabled={!projectTitle || (doublicate.length > 0 )} onClick={() => {
             console.log(newProject);
             if(newProject){
               createProject(projectTitle)
