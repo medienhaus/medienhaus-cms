@@ -391,7 +391,7 @@ const Submit = () => {
     return (
       <>
         {fetchSpaces ? <Loading /> :
-          <div>
+          <section>
             <ul>{
               joinedSpaces.map((space, i) => {
                 if (space.name === title) {
@@ -402,7 +402,7 @@ const Submit = () => {
               })
             }
             </ul>
-          </div>}
+          </section>}
        <div>
        <div>
          <label htmlFor="user-datalist">Add Collaborator</label>
