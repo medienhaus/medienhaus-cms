@@ -280,7 +280,14 @@ const Submit = () => {
                     dark={window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches}
                     defaultValue={cms?.body}
                     placeholder={json.type}
-                    readOnly={readOnly}
+                        readOnly={readOnly}
+                        onSave={({ done }) => { if (localStorage.getItem(block.room_id) !== null && cms !== undefined && string2hash(cms.body) !== string2hash(localStorage.getItem(block.room_id))) {
+                          onSave(block.room_id)
+                          localStorage.removeItem(block.room_id)
+                        } else if(localStorage.getItem(block.room_id) !== null && cms === undefined){
+                          onSave(block.room_id)
+                          localStorage.removeItem(block.room_id)
+                        } }}
                     onChange={debounce((value) => {
                       const text = value();
                       localStorage.setItem(block.room_id, text);
@@ -601,7 +608,7 @@ const Submit = () => {
         </div>
         <div>
           
-          {loading ? <Loading /> : title && <DeleteProjectButton />}
+          {loading ? <Loading /> : title && !edit && <DeleteProjectButton />}
           {title && !warning && <input id="submit" name="submit" type="submit" value={edit ? "Save" : changing ? <Loading /> : "Edit Title"} onClick={async (e) => {
             e.preventDefault();
             if (edit) {
@@ -619,7 +626,7 @@ const Submit = () => {
             }
           }} />}
           {edit && <input id="submit" name="submit" type="submit" value="Cancel" onClick={(e) => { e.preventDefault(); setEdit(false) }} />}
-          {loading ? <Loading /> : !warning && <input id="submit" name="submit" type="submit" value={newProject ? "Create Project": "New Project"} disabled={(newProject && doublicate ) || !projectTitle } onClick={(e) => {
+          {loading ? <Loading /> : !warning && !edit && <input id="submit" name="submit" type="submit" value={newProject ? "Create Project": "New Project"} disabled={(newProject && doublicate ) || !projectTitle } onClick={(e) => {
             console.log(newProject);
             if(newProject){
               createProject(e, projectTitle)
@@ -628,6 +635,7 @@ const Submit = () => {
               e.preventDefault()
               setNewProject(true)
               setTitle('')
+              setProjectSpace('')
             }
           }} /> 
           }
