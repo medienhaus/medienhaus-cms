@@ -427,7 +427,7 @@ const Submit = () => {
      </div>
  <div>
    <button onClick={(e) => invite(e)}>{inviting ? <Loading /> : "ADD Collaborators +"}</button>
-   <button>ADD Credits +</button>
+          <button disabled={ true }>ADD Credits +</button>
         </div>
         </>
     )
