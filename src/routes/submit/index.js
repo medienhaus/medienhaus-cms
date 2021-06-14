@@ -3,10 +3,12 @@ import Matrix from '../../Matrix'
 import useJoinedSpaces from '../../components/matrix_joined_spaces'
 import FetchCms from '../../components/matrix_fetch_cms'
 import Collaborators from '../../components/Collaborators'
+import FileUpload from '../../components/FileUpload'
 import showdown from 'showdown'
 import Editor from "rich-markdown-editor";
 import debounce from "lodash/debounce";
 import { Loading } from '../../components/loading'
+import createBlock from '../../components/matrix_create_room'
 
 const Submit = () => {
   const [subject, setSubject] = useState('')
@@ -22,59 +24,7 @@ const Submit = () => {
 
   const converter = new showdown.Converter()
   const matrixClient = Matrix.getMatrixClient()
-
-  const createBlock = async (content, e) => {
-    e.preventDefault()
-    const opts = {
-      name: (blocks.length) + '_' + content, // blocks[0] is the project space itself, therefore -1
-      preset: 'public_chat',
-      topic: JSON.stringify({ type: content }),
-      creation_content: { 'm.federate': false },
-      initial_state: [{
-        type: 'm.space.parent',
-        content: {
-          via: [localStorage.getItem('mx_home_server')],
-          canonical: true
-        },
-        state_key: projectSpace
-      }, {
-        type: 'm.room.history_visibility',
-        content: { history_visibility: 'world_readable' }
-      }]
-    }
-
-    const req = {
-      method: 'PUT',
-      headers: { Authorization: 'Bearer ' + localStorage.getItem('medienhaus_access_token') },
-      body: JSON.stringify({
-        via: [localStorage.getItem('mx_home_server')],
-        suggested: false,
-        auto_join: true
-      })
-    }
-
-    try {
-      const room = await matrixClient.createRoom(opts)
-        .then(async (res) => {
-          const room_id = res.room_id
-          const response = await fetch(process.env.REACT_APP_MATRIX_BASE_URL + `/_matrix/client/r0/rooms/${projectSpace}/state/m.space.child/${room_id}`, req)
-          return [room_id, response]
-        })
-        .then(async (res) => {
-          const data =  await res[1].json()
-          if (!res[1].ok) {
-            const error = (data?.message) || res[1].status
-            return Promise.reject(error)
-          }
-          return res[0]
-        })
-      return room 
-    } catch (e) {
-      console.log(e)
-    } finally {
-      setLoading(false)
-    }
-  }
+ 
 
   const getSync = async () => {
     try {
@@ -82,19 +32,34 @@ const Submit = () => {
     } catch (e) {
       console.log(e)
     }
-
-    matrixClient.on("RoomState.events", function (event, state, prevEvent) {
+    listen();
+    
+    /*matrixClient.on("RoomState.events", function (event, state, prevEvent) {
       if (event.event.type === "m.space.parent" && event.event.state_key === projectSpace) {
         setUpdate(true)
         setUpdate(false)
-        console.log(event);
-      } else if (event.event.type === "m.room.member" && blocks?.filter(({ room_id }) => event.sender.roomId.includes(room_id)))
+        //console.log(event);
+      } else if (event.event.type === "m.room.member" && blocks?.filter(({ room_id }) => event.sender.roomId.includes(room_id))){
       setUpdate(true)
       setUpdate(false)
-      console.log(event);
+     // console.log(event);
       //console.log(event);
       //console.log(state);
     });
+    */
+  }
+
+  const listen = () => {
+    matrixClient.addListener("RoomState.events", function (event) {
+      if (event.event.type === "m.room.member" && blocks?.filter(({ room_id }) => event.sender.roomId.includes(room_id))) {
+        setUpdate(true)
+        //console.log(event);
+      } else if (event.event.state_key === projectSpace) {
+        setUpdate(true)
+        console.log(event);
+      }
+    })
+
   }
 
   useEffect(() => {
@@ -116,83 +81,14 @@ const Submit = () => {
       }))
       setCounter(space.rooms.length)
       console.log(blocks);
+      setUpdate(false)
+
     }
     projectSpace && fetchSpace()
     // eslint-disable-next-line
   }, [update, projectSpace]);
 
   //======= COMPONENTS ======================================================================
-
-  const AddFiles = (props) => {
-    const [selectedFile, setSelectedFile] = useState();
-    const [fileName, setFileName] = useState('');
-    const [loading, setLoading] = useState(false);
-    const size = props.fileType === 'image' ? 5000000 : 25000000
-    const changeHandler = (event) => {
-      setSelectedFile(event.target.files[0])
-      console.log(selectedFile)
-      setFileName(event.target.files[0].name)
-      // setIsFilePicked(true);
-    }
-
-    const handleSubmission = async (e) => {
-      e.preventDefault()
-      setLoading(true)
-      try {
-        //await createBlock(props.fileType, e).then(async (res) => {
-          
-        await matrixClient.uploadContent(selectedFile, { name: fileName })
-          .then(async(url) => {
-            const room = await createBlock(props.fileType, e)
-            return [url, room]
-            }).then((res) =>
-            props.fileType === "image" ?
-              matrixClient.sendImageMessage(res[1], res[0], {
-              mimetype: selectedFile.type,
-              size: selectedFile.size
-              }) : matrixClient.sendMessage(res[1], {
-                "body": selectedFile.name,
-                "info": {
-                  "size": selectedFile.size,
-                  "mimetype": selectedFile.type
-                }, "msgtype": "m.audio",
-                "url": res[0]
-              })
-              )
-              .then(console.log) 
-          setFileName()
-          setSelectedFile('')
-          //setCounter(0)
-         //})
-       
-      } catch (e) {
-        console.log('error while trying to save image: ' + e)
-      } finally {
-        setLoading(false)
-      }
-    }
-
-    selectedFile && console.log(selectedFile);
-    return (
-      <>
-        <input type="file" name="filename" onChange={changeHandler} disabled={contentSelect === "" || false} />
-        {selectedFile
-          && (
-            <div>
-            <p>Filename: <input type="text" value={fileName} onChange={e => {
-              e.preventDefault()
-              setFileName(e.target.value)
-            }} />
-            </p>
-            <button onClick={(e) => handleSubmission(e)} disabled={!selectedFile.type.includes(props.fileType) || selectedFile.size > size || loading}>{loading ? <Loading /> : "Upload"}</button>
-            {selectedFile.type.includes(props.fileType) || <section>Please select an {props.fileType} file.</section>}
-            {selectedFile.size > size && <section style={{ color: "red" }}> File size needs to be less than {size / 1000000}MB</section> //@Andi pls add to css
-            }
-            </div>
-        )
-         }
-      </>)
-  }
   
   const AddContent = ({block, index}) => {
     const [clicked, setClicked] = useState(false);
@@ -609,7 +505,7 @@ const Submit = () => {
       <button type="submit" id="" name="" disabled={contentSelect === "" || false} value="Add Audio" onClick={async (e) =>
       {
         setLoading(true)
-        await createBlock(contentSelect, e).then(() => {
+        await createBlock( e, contentSelect, blocks.length , projectSpace).then(() => {
           //setCounter(0)
           setLoading(false)
         })
@@ -645,7 +541,7 @@ const Submit = () => {
              
             <h3>Content</h3>
             { blocks.map((content, i) => 
-              <AddContent block={ content } index={ i }/>
+              <AddContent block={content} index={i} number={blocks.length} space={projectSpace}/>
             )}
               <div>
               <select name="content-select"  defaultValue={''} id="content-select" onChange={(e) => setContentSelect(e.target.value)}>
@@ -658,7 +554,7 @@ const Submit = () => {
                 <option value="audio">Audio</option>
               </select>
               {contentSelect === "image" || contentSelect === "audio"  ?
-             <AddFiles fileType = {contentSelect} /> : <AddBlock />}
+             <FileUpload fileType = {contentSelect} number={ blocks.length} space = {projectSpace} /> : <AddBlock />}
                 {/*
             // fetch("https://stream.udk-berlin.de/api/userId/myVideos")
             */}
