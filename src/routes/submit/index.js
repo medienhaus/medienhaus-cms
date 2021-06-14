@@ -25,18 +25,26 @@ const Submit = () => {
     } catch (e) {
       console.log(e)
     }
-    matrixClient.addListener("RoomState.events", function (event) {
-      if (event.event.type === "m.room.member" && blocks?.filter(({ room_id }) => event.sender.roomId.includes(room_id))) {
-        setUpdate(true)
-        //console.log(event);
-      } else if (event.event.type === "m.room.name" && blocks?.filter(({ room_id }) => event.sender.roomId.includes(room_id))) {
-        setUpdate(true)
-      } else if (event.event.state_key === projectSpace) {
-        setUpdate(true)
-       // console.log(event);
-      }
-    })
   }
+
+  useEffect(() => {
+    const listening = async () => {
+      await matrixClient.removeAllListeners()
+      matrixClient.addListener("RoomState.events", function (event) {
+        if (event.event.type === "m.room.member" && blocks?.filter(({ room_id }) => event.sender.roomId.includes(room_id))) {
+          setUpdate(true)
+          //console.log(event);
+        } else if (event.event.type === "m.room.name" && blocks?.filter(({ room_id }) => event.sender.roomId.includes(room_id))) {
+          setUpdate(true)
+        } else if (event.event.state_key === projectSpace) {
+          setUpdate(true)
+          // console.log(event);
+        }
+      })
+    }
+  
+    projectSpace && listening()
+  }, [projectSpace]);
 
   useEffect(() => {
     getSync()
@@ -151,7 +159,7 @@ const Submit = () => {
       // eslint-disable-next-line
     }, [title]);
 
-    const deleteProject = async (e, callback) => {
+    const deleteProject = async (e) => {
       e.preventDefault()
       const space = await matrixClient.getSpaceSummary(projectSpace)
       console.log(space);
