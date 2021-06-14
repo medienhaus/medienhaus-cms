@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
 import Matrix from '../../Matrix'
 import FetchCms from '../../components/matrix_fetch_cms'
-import Editor from "rich-markdown-editor";
+import Editor, {renderToHtml} from "rich-markdown-editor";
 import debounce from "lodash/debounce";
 import { Loading } from '../../components/loading'
-import showdown from 'showdown'
+
 
   const AddContent = ({block, index, blocks}) => {
     const [clicked, setClicked] = useState(false);
@@ -13,7 +13,6 @@ import showdown from 'showdown'
     const [deleting, setDeleting] = useState(false);
     const { cms, error, fetching } = FetchCms(block.room_id)
     const json = JSON.parse(block.topic)
-    const converter = new showdown.Converter()
     const matrixClient = Matrix.getMatrixClient()
     
     const onSave = async (roomId) => {
@@ -23,7 +22,7 @@ import showdown from 'showdown'
           body: localStorage.getItem(roomId),
           format: 'org.matrix.custom.html',
           msgtype: 'm.text',
-          formatted_body: converter.makeHtml(localStorage.getItem(roomId))
+          formatted_body: renderToHtml(localStorage.getItem(roomId))
         })
         if ("event_id" in save) {
           setSaved("Saved!")
