@@ -338,7 +338,7 @@ const Submit = () => {
         <ProjectTitle />
         {projectSpace && (
           <>
-            <h3>Collaborators / Credits</h3>
+           
             <Collaborators projectSpace = {projectSpace} blocks = { blocks} title = {title} />
              
             <h3>Content</h3>

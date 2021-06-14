@@ -17,13 +17,19 @@ const Collaborators = ({ projectSpace, blocks, title }) => {
       e.preventDefault()
         const id = collab.split(' ')
         try {
-          await matrixClient.invite(projectSpace, id[1])
+          await matrixClient.invite(projectSpace, id[1]).then(() => {
+            const room = matrixClient.getRoom(projectSpace);
+            matrixClient.setPowerLevel(projectSpace, id[1], 100, room.currentState.getStateEvents("m.room.power_levels", ""))
+          })
           blocks.forEach(async (room, index) => {
             try {
-              await matrixClient.invite(room.room_id, id[1]).then(() => console.log("invited " + id[1] + " to " + room.name))
-              console.log(blocks.length);
-              console.log(index);
-  
+              await matrixClient.invite(room.room_id, id[1]).then(async () => {
+                const stateEvent = matrixClient.getRoom(projectSpace);
+
+                await matrixClient.setPowerLevel(room.room_id, id[1], 100, stateEvent.currentState.getStateEvents("m.room.power_levels", ""))
+              })
+            
+                .then((console.log("ey whatz")))//.then(() => console.log("invited " + id[1] + " to " + room.name))
             } catch (err) {
               console.error(err);
             } 
@@ -54,7 +60,8 @@ const Collaborators = ({ projectSpace, blocks, title }) => {
       
       return (
         <>
-          {
+           <h3>Collaborators / Credits</h3> 
+          {// @Andi would probably be nice to have the loading spinner next to the h3 whil its looking for collabrators 
            fetchSpaces ? <Loading /> : spacesErr ? "An error occured while trying to load collaborators." : 
             < section >
               <ul>{

@@ -134,38 +134,40 @@ import showdown from 'showdown'
                     </audio>
                     <section id="audio-title">{cms.body}</section>
                     </>  :
-                    <>
-                  <Editor
-                    dark={window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches}
-                    defaultValue={cms?.body}
-                    placeholder={json.type}
-                        readOnly={readOnly}
-                        onSave={({ done }) => { if (localStorage.getItem(block.room_id) !== null && cms !== undefined && string2hash(cms.body) !== string2hash(localStorage.getItem(block.room_id))) {
-                          onSave(block.room_id)
-                          localStorage.removeItem(block.room_id)
-                        } else if(localStorage.getItem(block.room_id) !== null && cms === undefined){
-                          onSave(block.room_id)
-                          localStorage.removeItem(block.room_id)
-                        } }}
-                    onChange={debounce((value) => {
-                      const text = value();
-                      localStorage.setItem(block.room_id, text);
-                     }, 250)}
-                    handleDOMEvents={{
-                      focus: () => console.log("FOCUS on " + block.room_id),
-                      blur: (e) => {
-                        if (localStorage.getItem(block.room_id) !== null && cms !== undefined && string2hash(cms.body) !== string2hash(localStorage.getItem(block.room_id))) {
-                          onSave(block.room_id)
-                          localStorage.removeItem(block.room_id)
-                        } else if(localStorage.getItem(block.room_id) !== null && cms === undefined){
-                          onSave(block.room_id)
-                          localStorage.removeItem(block.room_id)
+                    <><div>
+                      
+                                        <Editor
+                      dark={window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches}
+                      defaultValue={cms?.body}
+                      placeholder={json.type}
+                          readOnly={readOnly}
+                          onSave={({ done }) => { if (localStorage.getItem(block.room_id) !== null && cms !== undefined && string2hash(cms.body) !== string2hash(localStorage.getItem(block.room_id))) {
+                            onSave(block.room_id)
+                            localStorage.removeItem(block.room_id)
+                          } else if(localStorage.getItem(block.room_id) !== null && cms === undefined){
+                            onSave(block.room_id)
+                            localStorage.removeItem(block.room_id)
+                          } }}
+                      onChange={debounce((value) => {
+                        const text = value();
+                        localStorage.setItem(block.room_id, text);
+                       }, 250)}
+                      handleDOMEvents={{
+                        focus: () => console.log("FOCUS on " + block.room_id),
+                        blur: (e) => {
+                          if (localStorage.getItem(block.room_id) !== null && cms !== undefined && string2hash(cms.body) !== string2hash(localStorage.getItem(block.room_id))) {
+                            onSave(block.room_id)
+                            localStorage.removeItem(block.room_id)
+                          } else if(localStorage.getItem(block.room_id) !== null && cms === undefined){
+                            onSave(block.room_id)
+                            localStorage.removeItem(block.room_id)
+                          }
                         }
                       }
-                    }
-                    }
-                    key={block.room_id} />
+                      }
+                      key={block.room_id} />
                       <p key={block.room_id + "_p" }style={{ fontSize: "calc(var(--margin) * 0.7" }}>{saved}</p>
+                    </div>
                   </>
                   }
                   {//@Andi maybe a check mark or something next to the editor/content block? some visual feedback for users to show their edit has been saved
