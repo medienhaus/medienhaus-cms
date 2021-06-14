@@ -26,7 +26,7 @@ const Submit = () => {
   const createBlock = async (content, e) => {
     e.preventDefault()
     const opts = {
-      name: (counter - 1) + '_' + content, // blocks[0] is the project space itself, therefore -1
+      name: (blocks.length) + '_' + content, // blocks[0] is the project space itself, therefore -1
       preset: 'public_chat',
       topic: JSON.stringify({ type: content }),
       creation_content: { 'm.federate': false },
@@ -84,10 +84,14 @@ const Submit = () => {
     }
 
     matrixClient.on("RoomState.events", function (event, state, prevEvent) {
-      if ( blocks?.filter(({ room_id }) => event.sender.roomId.includes(room_id))|| event.event.type === "m.space.child") {
+      if (event.event.type === "m.space.parent" && event.event.state_key === projectSpace) {
         setUpdate(true)
         setUpdate(false)
-    }
+        console.log(event);
+      } else if (event.event.type === "m.room.member" && blocks?.filter(({ room_id }) => event.sender.roomId.includes(room_id)))
+      setUpdate(true)
+      setUpdate(false)
+      console.log(event);
       //console.log(event);
       //console.log(state);
     });
@@ -111,12 +115,11 @@ const Submit = () => {
         return 0
       }))
       setCounter(space.rooms.length)
-    
+      console.log(blocks);
     }
-    console.log(blocks);
     projectSpace && fetchSpace()
     // eslint-disable-next-line
-  }, [update, projectSpace, counter]);
+  }, [update, projectSpace]);
 
   //======= COMPONENTS ======================================================================
 
@@ -131,34 +134,36 @@ const Submit = () => {
       setFileName(event.target.files[0].name)
       // setIsFilePicked(true);
     }
-    console.log(props.fileType);
 
     const handleSubmission = async (e) => {
+      e.preventDefault()
       setLoading(true)
       try {
-        await createBlock(props.fileType, e).then(async (res) => {
+        //await createBlock(props.fileType, e).then(async (res) => {
           
-          await matrixClient.uploadContent(selectedFile, { name: fileName })
-            .then((url) =>
+        await matrixClient.uploadContent(selectedFile, { name: fileName })
+          .then(async(url) => {
+            const room = await createBlock(props.fileType, e)
+            return [url, room]
+            }).then((res) =>
             props.fileType === "image" ?
-              matrixClient.sendImageMessage(res, url, {
+              matrixClient.sendImageMessage(res[1], res[0], {
               mimetype: selectedFile.type,
               size: selectedFile.size
-              }) : matrixClient.sendMessage(res, {
+              }) : matrixClient.sendMessage(res[1], {
                 "body": selectedFile.name,
                 "info": {
                   "size": selectedFile.size,
                   "mimetype": selectedFile.type
                 }, "msgtype": "m.audio",
-                "url": url
+                "url": res[0]
               })
               )
-              .then((res) => console.log(res)) 
-           
+              .then(console.log) 
           setFileName()
           setSelectedFile('')
           //setCounter(0)
-         })
+         //})
        
       } catch (e) {
         console.log('error while trying to save image: ' + e)
