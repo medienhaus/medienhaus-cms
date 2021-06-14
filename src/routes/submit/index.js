@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import Matrix from '../../Matrix'
 import useJoinedSpaces from '../../components/matrix_joined_spaces'
 import FetchCms from '../../components/matrix_fetch_cms'
+import Collaborators from '../../components/Collaborators'
 import showdown from 'showdown'
 import Editor from "rich-markdown-editor";
 import debounce from "lodash/debounce";
@@ -95,33 +96,43 @@ const Submit = () => {
     // eslint-disable-next-line
   }, [counter, projectSpace]);
 
-  
-
   //======= COMPONENTS ======================================================================
 
-  const AddImage = () => {
+  const AddFiles = (props) => {
     const [selectedFile, setSelectedFile] = useState();
     const [fileName, setFileName] = useState('');
     const [loading, setLoading] = useState(false);
-
+    const size = props.fileType === 'image' ? 5000000 : 25000000
     const changeHandler = (event) => {
       setSelectedFile(event.target.files[0])
       console.log(selectedFile)
       setFileName(event.target.files[0].name)
       // setIsFilePicked(true);
     }
+    console.log(props.fileType);
 
     const handleSubmission = async (e) => {
       setLoading(true)
       try {
-        await createBlock("image", e).then(async (res) => {
-          console.log(res)
+        await createBlock(props.fileType, e).then(async (res) => {
+          
           await matrixClient.uploadContent(selectedFile, { name: fileName })
-            .then((url) => matrixClient.sendImageMessage(res, url, {
+            .then((url) =>
+            props.fileType === "image" ?
+              matrixClient.sendImageMessage(res, url, {
               mimetype: selectedFile.type,
               size: selectedFile.size
-          }))
-          .then((res) => console.log(res))
+              }) : matrixClient.sendMessage(res, {
+                "body": selectedFile.name,
+                "info": {
+                  "size": selectedFile.size,
+                  "mimetype": selectedFile.type
+                }, "msgtype": "m.audio",
+                "url": url
+              })
+              )
+              .then((res) => console.log(res)) 
+           
           setFileName()
           setSelectedFile('')
           setCounter(0)
@@ -146,10 +157,10 @@ const Submit = () => {
               setFileName(e.target.value)
             }} />
             </p>
-              {selectedFile.type.includes("image") || <div>Please select an image file.</div>}
-            {selectedFile.size > 5000000 && <p style={{ color: "red" }}> File size needs to be less than 5MB</p> //@Andi pls add to css
+            <button onClick={(e) => handleSubmission(e)} disabled={!selectedFile.type.includes(props.fileType) || selectedFile.size > size || loading}>{loading ? <Loading /> : "Upload"}</button>
+            {selectedFile.type.includes(props.fileType) || <section>Please select an {props.fileType} file.</section>}
+            {selectedFile.size > size && <section style={{ color: "red" }}> File size needs to be less than {size / 1000000}MB</section> //@Andi pls add to css
             }
-            <button onClick={(e) => handleSubmission(e)} disabled={!selectedFile.type.includes("image") || selectedFile.size > 5000000 || loading}>{loading ? <Loading /> : "Upload"}</button>
             </div>
         )
          }
@@ -274,7 +285,13 @@ const Submit = () => {
                       readOnly={true}
                       key={index}
                     />
-                 :
+                    : cms?.msgtype === 'm.audio' ?
+                      <>
+                    <audio controls>
+                    <source src={matrixClient.mxcUrlToHttp(cms.url)} />
+                        </audio>
+                        <section>{cms.body}</section>
+                    </>  :
                     <>
                   <Editor
                     dark={window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches}
@@ -349,90 +366,6 @@ const Submit = () => {
     )
   }
 
-  const Collaborators = () => {
-  const [fetchingUsers, setFetchingUsers] = useState(false);
-  const [userSearch, setUserSearch] = useState([]);
-    const [collab, setCollab] = useState('');
-    const [inviting, setInviting] = useState(false);
-
-    const invite = async (e) => {
-    setInviting(true)
-    e.preventDefault()
-      const id = collab.split(' ')
-      try {
-        await matrixClient.invite(projectSpace, id[1])
-        blocks.forEach(async (room, index) => {
-          try {
-            await matrixClient.invite(room.room_id, id[1]).then(() => console.log("invited " + id[1] + " to " + room.name))
-            console.log(blocks.length);
-            console.log(index);
-
-          } catch (err) {
-            console.error(err);
-          } 
-        }
-        )
-        console.log("done");
-      } catch (err) {
-        console.error(err);
-      }finally {
-        setInviting(false)
-      }
-   }
-
-  const fetchUsers = async (e, search) => {
-    e.preventDefault()
-    setFetchingUsers(true)
-    try{
-      const users = await matrixClient.searchUserDirectory({"term": search})
-      setUserSearch(users.results)
-      console.log(userSearch)
-    }
-    catch (err) {
-      console.error('Error whhile trying to fetch users: ' + err);
-    } finally {
-      setFetchingUsers(false)
-    }
-  }
-    
-    return (
-      <>
-        {fetchSpaces ? <Loading /> :
-          <section>
-            <ul>{
-              joinedSpaces.map((space, i) => {
-                if (space.name === title) {
-                  return Object.values(space.collab).map(name => {
-                    return <li>{name.display_name}</li>
-                  })
-                }
-              })
-            }
-            </ul>
-          </section>}
-       <div>
-       <div>
-         <label htmlFor="user-datalist">Add Collaborator</label>
-         <input list="userSearch" id="user-datalist" name="user-datalist" onChange={debounce((e) => {
-           fetchUsers(e, e.target.value)
-           setCollab(e.target.value)
-         }, 200)} />
-       </div>
-          {fetchingUsers ? <Loading /> : inviting ?? null }
-         <datalist id="userSearch">
-         {userSearch.map((users, i) => {
-             return <option key={i} value={users.display_name + ' ' + users.user_id} />
-           })}
-         </datalist>
-     </div>
- <div>
-   <button onClick={(e) => invite(e)}>{inviting ? <Loading /> : "ADD Collaborators +"}</button>
-          <button disabled={ true }>ADD Credits +</button>
-        </div>
-        </>
-    )
-  }
-
   const SubmitButton = () => {
     const [response, setResponse] = useState();
 
@@ -475,8 +408,6 @@ const Submit = () => {
       
     )
   }
-
- 
 
   const ProjectTitle = () => {
 
@@ -683,7 +614,7 @@ const Submit = () => {
         {projectSpace && (
           <>
             <h3>Collaborators / Credits</h3>
-            <Collaborators />
+            <Collaborators projectSpace = {projectSpace} blocks = { blocks} title = {title} />
              
             <h3>Content</h3>
             { blocks.map((content, i) => 
@@ -699,8 +630,8 @@ const Submit = () => {
                   <option value="image">Image</option>
                 <option value="audio">Audio</option>
               </select>
-              {contentSelect === "image" ?
-             <AddImage /> : <AddBlock />}
+              {contentSelect === "image" || contentSelect === "audio"  ?
+             <AddFiles fileType = {contentSelect} /> : <AddBlock />}
                 {/*
             // fetch("https://stream.udk-berlin.de/api/userId/myVideos")
             */}
