@@ -269,7 +269,8 @@ form input[type="submit"] {
   width: 100%;
 }
 
-form button[disabled] {
+form button[disabled],
+form input[type="submit"][disabled] /* @Andi added form input */ {
   cursor: not-allowed;
   opacity: 0.3;
 }
@@ -503,7 +504,6 @@ form textarea {
   width: 100%;
 }
 
-/*
 #loading {
   border-color: var(--color-fg) transparent var(--color-fg) transparent;
   border-radius: 50%;
@@ -513,6 +513,15 @@ form textarea {
   width: 2rem;
   animation: loading 2.4s linear infinite;
 }
+
+button > #loading {
+  border-color: var(--color-bg) transparent var(--color-bg) transparent;
+  max-height: calc(var(--margin) * 1.15);
+  max-width: calc(var(--margin) * 1.15);
+  margin:0 auto;
+} 
+/*
+@Andi added loading spinner for buttons. 
 */
 
 /*
