@@ -16,7 +16,6 @@ const Submit = () => {
   const [visibility, setVisibility] = useState("draft")
   const [loading, setLoading] = useState(false)
   const [projectSpace, setProjectSpace] = useState('')
-  const [counter, setCounter] = useState(0)
   const [blocks, setBlocks] = useState([])
   const {joinedSpaces, spacesErr, fetchSpaces} = useJoinedSpaces()
   const [contentSelect, setContentSelect] = useState('');
@@ -24,7 +23,6 @@ const Submit = () => {
 
   const converter = new showdown.Converter()
   const matrixClient = Matrix.getMatrixClient()
- 
 
   const getSync = async () => {
     try {
@@ -32,35 +30,19 @@ const Submit = () => {
     } catch (e) {
       console.log(e)
     }
-    listen();
-    
-    /*matrixClient.on("RoomState.events", function (event, state, prevEvent) {
-      if (event.event.type === "m.space.parent" && event.event.state_key === projectSpace) {
-        setUpdate(true)
-        setUpdate(false)
-        //console.log(event);
-      } else if (event.event.type === "m.room.member" && blocks?.filter(({ room_id }) => event.sender.roomId.includes(room_id))){
-      setUpdate(true)
-      setUpdate(false)
-     // console.log(event);
-      //console.log(event);
-      //console.log(state);
-    });
-    */
-  }
-
-  const listen = () => {
     matrixClient.addListener("RoomState.events", function (event) {
       if (event.event.type === "m.room.member" && blocks?.filter(({ room_id }) => event.sender.roomId.includes(room_id))) {
         setUpdate(true)
         //console.log(event);
+      } else if (event.event.type === "m.room.name" && blocks?.filter(({ room_id }) => event.sender.roomId.includes(room_id))) {
+        setUpdate(true)
       } else if (event.event.state_key === projectSpace) {
         setUpdate(true)
-        console.log(event);
+       // console.log(event);
       }
     })
-
   }
+
 
   useEffect(() => {
     getSync()
@@ -79,7 +61,6 @@ const Submit = () => {
         if (a.name > b.name) return 1
         return 0
       }))
-      setCounter(space.rooms.length)
       console.log(blocks);
       setUpdate(false)
 
@@ -291,9 +272,11 @@ const Submit = () => {
 
   const SubmitButton = () => {
     const [response, setResponse] = useState();
+    const [saving, setSaving] = useState(false);
 
     const onPublish = async (e) => {
       e.preventDefault()
+      setSaving(true)
       const req = {
         method: 'PUT',
         headers: { Authorization: 'Bearer ' + localStorage.getItem('medienhaus_access_token') },
@@ -320,13 +303,23 @@ const Submit = () => {
       } catch (err){
         console.error(err);
        
+      } finally {
+        setSaving(false)
       }
     }
-  
+
     return (
       <div>
-        <input id="submit" name="submit" type="submit" value="SUBMIT" onClick={(e) => onPublish(e)} />
-        {response && <p>{response}</p>}
+        <div>
+          <select id="visibility" name="visibility" value={visibility} onChange={(e) => { setVisibility(e.target.value)}}>
+                  <option value="invite">Draft</option>
+                  <option value="public">Published</option>
+                </select>
+              </div>
+        <div>
+          <input id="submit" name="submit" type="submit" value="SAVE" disabled={ saving }onClick={(e) => onPublish(e)} />
+          {response && <p>{response}</p>}
+        </div>
       </div>
       
     )
@@ -561,15 +554,7 @@ const Submit = () => {
           
             </div>
             <h3>Visibility (Draft/Published)</h3>
-            <div>
-              <select id="visibility" name="visibility" value={visibility} onChange={(e) => setVisibility(e.target.value)}>
-                <option value="invite">Draft</option>
-                <option value="public">Published</option>
-              </select>
-            </div>
-            <div>
               {loading ? <Loading /> : <SubmitButton />}
-            </div>
           </>
         )
         }
