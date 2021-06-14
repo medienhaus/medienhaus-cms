@@ -123,6 +123,7 @@ import { Loading } from '../../components/loading'
                      <Editor
                      dark={window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches}
                      defaultValue={cms && `![${cms.info.name}](${matrixClient.mxcUrlToHttp(cms.url)})`}
+                     disableExtensions={['blockmenu', /*'image',*/ 'embed', 'table', 'tr', 'th', 'td', 'bullet_list', 'ordered_list', 'checkbox_item', 'checkbox_list', 'container_notice', 'blockquote', 'heading', 'hr', 'highlight']}
                       readOnly={true}
                       key={index}
                     />
@@ -138,6 +139,7 @@ import { Loading } from '../../components/loading'
                                         <Editor
                       dark={window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches}
                       defaultValue={cms?.body}
+                      disableExtensions={['blockmenu', 'image', 'embed', 'table', 'tr', 'th', 'td', 'bullet_list', 'ordered_list', 'checkbox_item', 'checkbox_list', 'container_notice', 'blockquote', 'heading', 'hr', 'highlight']}
                       placeholder={json.type}
                           readOnly={readOnly}
                           onSave={({ done }) => { if (localStorage.getItem(block.room_id) !== null && cms !== undefined && string2hash(cms.body) !== string2hash(localStorage.getItem(block.room_id))) {
