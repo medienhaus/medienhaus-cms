@@ -109,8 +109,8 @@ import showdown from 'showdown'
                     hash = hash & hash;
                 }
                 return hash;
-  }
-
+    }
+    console.log(cms);
         return (
           fetching
             ? <div style={{ height: "120px"}}><Loading /></div> // @Andi sort of... hack to keep interface from violently redrawing. We need to see how we deal with this. Too many waterfalls, let's stick to the rivers and the lakes that we're used to.
@@ -119,10 +119,11 @@ import showdown from 'showdown'
               : (
                 <>
                   {cms?.msgtype === 'm.image' ?
+                    
                     //@Andi <image /> not being displayed, so made this workaround with an editor in readonly mode. Althogh this offers a few advantages (same design as other content blocks and ability to directly download image for contributors)
                      <Editor
                      dark={window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches}
-                     defaultValue={cms && `![we probably should parse alt text in room topic](${matrixClient.mxcUrlToHttp(cms.url)})`}
+                     defaultValue={cms && `![${cms.info.name}](${matrixClient.mxcUrlToHttp(cms.url)})`}
                       readOnly={true}
                       key={index}
                     />

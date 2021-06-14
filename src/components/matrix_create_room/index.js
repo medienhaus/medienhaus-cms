@@ -7,7 +7,9 @@ const createBlock = async (e, content, number, space) => {
     const opts = {
       name: (number) + '_' + content, // blocks[0] is the project space itself, therefore -1
       preset: 'public_chat',
-      topic: JSON.stringify({ type: content }),
+      topic: JSON.stringify({
+        type: content,
+      }),
       creation_content: { 'm.federate': false },
       initial_state: [{
         type: 'm.space.parent',

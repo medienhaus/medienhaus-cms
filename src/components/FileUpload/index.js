@@ -30,7 +30,8 @@ const FileUpload = (props) => {
             props.fileType === "image" ?
               matrixClient.sendImageMessage(res[1], res[0], {
               mimetype: selectedFile.type,
-              size: selectedFile.size
+                size: selectedFile.size,
+              name: selectedFile.name
               }) : matrixClient.sendMessage(res[1], {
                 "body": selectedFile.name,
                 "info": {
