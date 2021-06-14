@@ -18,6 +18,7 @@ const Submit = () => {
   const [blocks, setBlocks] = useState([])
   const {joinedSpaces, spacesErr, fetchSpaces} = useJoinedSpaces()
   const [contentSelect, setContentSelect] = useState('');
+  const [update, setUpdate] = useState(false);
 
   const converter = new showdown.Converter()
   const matrixClient = Matrix.getMatrixClient()
@@ -75,6 +76,27 @@ const Submit = () => {
     }
   }
 
+  const getSync = async () => {
+    try {
+      await matrixClient.startClient()
+    } catch (e) {
+      console.log(e)
+    }
+
+    matrixClient.on("RoomState.events", function (event, state, prevEvent) {
+      if ( blocks?.filter(({ room_id }) => event.sender.roomId.includes(room_id))|| event.event.type === "m.space.child") {
+        setUpdate(true)
+        setUpdate(false)
+    }
+      //console.log(event);
+      //console.log(state);
+    });
+  }
+
+  useEffect(() => {
+    getSync()
+  }, []);
+
   useEffect(() => {
     const fetchSpace = async () => {
       const space = await matrixClient.getSpaceSummary(projectSpace)
@@ -88,13 +110,13 @@ const Submit = () => {
         if (a.name > b.name) return 1
         return 0
       }))
-      setCounter(space.rooms.length) 
+      setCounter(space.rooms.length)
+    
     }
     console.log(blocks);
     projectSpace && fetchSpace()
-
     // eslint-disable-next-line
-  }, [counter, projectSpace]);
+  }, [update, projectSpace, counter]);
 
   //======= COMPONENTS ======================================================================
 
@@ -135,7 +157,7 @@ const Submit = () => {
            
           setFileName()
           setSelectedFile('')
-          setCounter(0)
+          //setCounter(0)
          })
        
       } catch (e) {
@@ -223,7 +245,7 @@ const Submit = () => {
             reorder(block.name, block.room_id)
           }
         })
-        setCounter(0)
+        //setCounter(0)
       } catch (err) {
         console.error(err)
         setDeleting(`couldn't delete ${json.type}, please try again or try reloading the page`)
@@ -250,7 +272,7 @@ const Submit = () => {
       try {
         await matrixClient.setRoomName(roomId, newOrder + '_' + active[1]).then(
           await matrixClient.setRoomName(passiveRoom, order + '_' + passive[1])
-        ).then(setCounter(0))
+        )//.then(setCounter(0))
       } catch (err) {
         console.error(err);
       } finally {
@@ -289,8 +311,8 @@ const Submit = () => {
                       <>
                     <audio controls>
                     <source src={matrixClient.mxcUrlToHttp(cms.url)} />
-                        </audio>
-                        <section>{cms.body}</section>
+                    </audio>
+                    <section id="audio-title">{cms.body}</section>
                     </>  :
                     <>
                   <Editor
@@ -451,7 +473,7 @@ const Submit = () => {
         } catch (err) {
           console.error(err);
         } finally {
-          setCounter(0)
+          //setCounter(0)
           setLeaving(false)
         }
         
@@ -583,7 +605,7 @@ const Submit = () => {
       {
         setLoading(true)
         await createBlock(contentSelect, e).then(() => {
-          setCounter(0)
+          //setCounter(0)
           setLoading(false)
         })
       }
