@@ -218,6 +218,11 @@ nav a {
   font-weight: bold;
 }
 
+/* @andi addd this */
+.button-group {
+  display: flex;
+  flex-direction: column;
+}
 /*
 section a:link {
   text-decoration: underline;

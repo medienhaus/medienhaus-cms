@@ -8,7 +8,7 @@ import { Loading } from '../../components/loading'
 import textIcon from '../../assets/icons/remix/text.svg'
 import headingIcon from '../../assets/icons/remix/h-1.svg'
 import audioIcon from '../../assets/icons/remix/volume-up-line.svg'
-import videoIcon from '../../assets/icons/remix/vidicon-line.svg'
+import imageIcon from '../../assets/icons/remix/image-line.svg'
 
   const AddContent = ({block, index, blocks}) => {
     const [clicked, setClicked] = useState(false);
@@ -113,7 +113,7 @@ import videoIcon from '../../assets/icons/remix/vidicon-line.svg'
                 }
                 return hash;
     }
-    console.log(cms);
+      
         return (
           fetching
             ? <div style={{ height: "120px"}}><Loading /></div> // @Andi sort of... hack to keep interface from violently redrawing. We need to see how we deal with this. Too many waterfalls, let's stick to the rivers and the lakes that we're used to.
@@ -123,6 +123,7 @@ import videoIcon from '../../assets/icons/remix/vidicon-line.svg'
                 /*
                 @Andi 
                 This needs a lot of css work...
+                I added some flexbox stuff wuickly to get the basic idea done. 
                 Basic structure for each element should now be:
                 <div>
                   <div class="button-group">
@@ -134,15 +135,16 @@ import videoIcon from '../../assets/icons/remix/vidicon-line.svg'
                   <button>delete</button>
                 </div>
                 */
-                <div>
+                <div class="editor-group" style={{display: "flex"}}>
                   <div class="button-group">
-                    {index !== 0 && <button key={'up_' + block.room_id} onClick={(e) => changeOrder(e, block.room_id,  block.name, -1)}>↑</button>}
-                    <section id="icon-bg" style={{ background: "white" }}><img src={json.type === 'heading' ? headingIcon : json.type === 'audio' ? audioIcon : textIcon} alt="svg icon text" /></section>
-                    {index < blocks.length - 1 && <button key={'down_' + block.room_id} onClick={(e) => changeOrder(e,block.room_id, block.name, 1)}>↓</button>}
+                
+                    {index !== 0 && <button style={{ padding: "calc(var(--margin) * 0.01)" }} key={'up_' + block.room_id} onClick={(e) => changeOrder(e, block.room_id,  block.name, -1)}>↑</button>}
+                    <section id="icon-bg" style={{ background: "white" }}><img src={json.type === 'heading' ? headingIcon : json.type === 'audio' ? audioIcon : json.type === 'image' ? imageIcon : textIcon} alt="svg icon text" /></section>
+                    {index < blocks.length - 1 && <button style={{padding: "calc(var(--margin) * 0.01)"}} key={'down_' + block.room_id} onClick={(e) => changeOrder(e,block.room_id, block.name, 1)}>↓</button>}
                   </div>
                   {cms?.msgtype === 'm.image' ?
                     //@Andi please fix widht in css 
-                      <img src={matrixClient.mxcUrlToHttp(cms.url)} alt={cms.info.name} key={block.room_id} width="800px"/>
+                      <img src={matrixClient.mxcUrlToHttp(cms.url)} alt={cms.info.name} key={block.room_id} width="100%"/>
                     : cms?.msgtype === 'm.audio' ?
                       <>
                     <audio controls>
@@ -150,8 +152,8 @@ import videoIcon from '../../assets/icons/remix/vidicon-line.svg'
                     </audio>
                     <section id="audio-title">{cms.body}</section>
                     </>  :
-                    <div>
-                      <Editor
+                    <div  style={{width:"100%"}}>
+                        <Editor
                       dark={window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches}
                       defaultValue={cms?.body}
                       disableExtensions={['blockmenu', 'image', 'embed', 'table', 'tr', 'th', 'td', 'bullet_list', 'ordered_list', 'checkbox_item', 'checkbox_list', 'container_notice', 'blockquote', 'heading', 'hr', 'highlight']}
@@ -187,7 +189,7 @@ import videoIcon from '../../assets/icons/remix/vidicon-line.svg'
                     </div>
                 
                   }
-                    {<button key={'delete' + index} onClick={(e) => {
+                  {<button style={{ padding: "calc(var(--margin) * 0.01)", width: "5%" }} key={'delete' + index} onClick={(e) => {
                       if (clicked) {
                         onDelete(e, block.room_id, index)
                         setClicked(false)
