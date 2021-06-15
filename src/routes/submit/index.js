@@ -30,8 +30,11 @@ const Submit = () => {
   useEffect(() => {
     const listening = async () => {
       await matrixClient.removeAllListeners()
+      const myRooms = await matrixClient.getSpaceSummary(projectSpace)
+      console.log(myRooms);
+
       matrixClient.addListener("RoomState.events", function (event) {
-        if (event.event.type === "m.room.member" && blocks?.filter(({ room_id }) => event.sender.roomId.includes(room_id))) {
+        if (event.event.type === "m.room.member" && myRooms.rooms?.filter(({ room_id }) => event.sender.roomId.includes(room_id))) {
           setUpdate(true)
           //console.log(event);
         } else if (event.event.type === "m.room.name" && blocks?.filter(({ room_id }) => event.sender.roomId.includes(room_id))) {
@@ -41,6 +44,13 @@ const Submit = () => {
           // console.log(event);
         }
       })
+      matrixClient.on("Room.timeline", function(event, room, toStartOfTimeline) {
+        if (event.getType() !== "m.room.message"  && blocks?.filter(({ room_id }) => event.event.room_id.includes(room_id))) {
+          return; // only use messages
+        }
+        console.log(event.event);
+        setUpdate(true)
+      });
     }
   
     projectSpace && listening()

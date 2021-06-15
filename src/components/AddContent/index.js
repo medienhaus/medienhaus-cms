@@ -5,6 +5,10 @@ import Editor, {renderToHtml} from "rich-markdown-editor";
 import debounce from "lodash/debounce";
 import { Loading } from '../../components/loading'
 
+import textIcon from '../../assets/icons/remix/text.svg'
+import headingIcon from '../../assets/icons/remix/h-1.svg'
+import audioIcon from '../../assets/icons/remix/volume-up-line.svg'
+import videoIcon from '../../assets/icons/remix/vidicon-line.svg'
 
   const AddContent = ({block, index, blocks}) => {
     const [clicked, setClicked] = useState(false);
@@ -116,17 +120,29 @@ import { Loading } from '../../components/loading'
             : error
               ? console.error(error)
               : (
-                <>
+                /*
+                @Andi 
+                This needs a lot of css work...
+                Basic structure for each element should now be:
+                <div>
+                  <div class="button-group">
+                  <button>up</button>
+                  <section><img icon /></section>
+                  <button>down</button>
+                  </div>
+                  <Editor /> or <image /> <audio /> etc...
+                  <button>delete</button>
+                </div>
+                */
+                <div>
+                  <div class="button-group">
+                    {index !== 0 && <button key={'up_' + block.room_id} onClick={(e) => changeOrder(e, block.room_id,  block.name, -1)}>↑</button>}
+                    <section id="icon-bg" style={{ background: "white" }}><img src={json.type === 'heading' ? headingIcon : json.type === 'audio' ? audioIcon : textIcon} alt="svg icon text" /></section>
+                    {index < blocks.length - 1 && <button key={'down_' + block.room_id} onClick={(e) => changeOrder(e,block.room_id, block.name, 1)}>↓</button>}
+                  </div>
                   {cms?.msgtype === 'm.image' ?
-                    
-                    //@Andi <image /> not being displayed, so made this workaround with an editor in readonly mode. Althogh this offers a few advantages (same design as other content blocks and ability to directly download image for contributors)
-                     <Editor
-                     dark={window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches}
-                     defaultValue={cms && `![${cms.info.name}](${matrixClient.mxcUrlToHttp(cms.url)})`}
-                     disableExtensions={['blockmenu', /*'image',*/ 'embed', 'table', 'tr', 'th', 'td', 'bullet_list', 'ordered_list', 'checkbox_item', 'checkbox_list', 'container_notice', 'blockquote', 'heading', 'hr', 'highlight']}
-                      readOnly={true}
-                      key={index}
-                    />
+                    //@Andi please fix widht in css 
+                      <img src={matrixClient.mxcUrlToHttp(cms.url)} alt={cms.info.name} key={block.room_id} width="800px"/>
                     : cms?.msgtype === 'm.audio' ?
                       <>
                     <audio controls>
@@ -134,9 +150,8 @@ import { Loading } from '../../components/loading'
                     </audio>
                     <section id="audio-title">{cms.body}</section>
                     </>  :
-                    <><div>
-                      
-                                        <Editor
+                    <div>
+                      <Editor
                       dark={window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches}
                       defaultValue={cms?.body}
                       disableExtensions={['blockmenu', 'image', 'embed', 'table', 'tr', 'th', 'td', 'bullet_list', 'ordered_list', 'checkbox_item', 'checkbox_list', 'container_notice', 'blockquote', 'heading', 'hr', 'highlight']}
@@ -167,17 +182,10 @@ import { Loading } from '../../components/loading'
                       }
                       }
                       key={block.room_id} />
-                      <p key={block.room_id + "_p" }style={{ fontSize: "calc(var(--margin) * 0.7" }}>{saved}</p>
+                        <p key={block.room_id + "_p"} style={{ fontSize: "calc(var(--margin) * 0.7" }}>{saved}</p> {//feedback that saving was succesfull or has failed
+                        }
                     </div>
-                  </>
-                  }
-                  {//@Andi maybe a check mark or something next to the editor/content block? some visual feedback for users to show their edit has been saved
-                  }
-                   <p>{deleting}</p>
-                  <div className="grid">
-                  {index !== 0 && <button key={'up_' + block.room_id} onClick={(e) => changeOrder(e, block.room_id,  block.name, -1)}>↑</button>
-                  }
-                  {index < blocks.length - 1 && <button key={'down_' + block.room_id} onClick={(e) => changeOrder(e,block.room_id, block.name, 1)}>↓</button>
+                
                   }
                     {<button key={'delete' + index} onClick={(e) => {
                       if (clicked) {
@@ -186,11 +194,10 @@ import { Loading } from '../../components/loading'
                       } else {
                         e.preventDefault()
                         setClicked(true)
-                      }                      
+                      }
+                      <p>{deleting}</p> //feedback that saving was succesfull or has failed
                     }} >{clicked ? 'SURE?' : deleting ? <Loading /> : 'x'}</button>}
-                  </div>
-                 
-            </>
+            </div>
                 )
         )
   }
