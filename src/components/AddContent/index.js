@@ -127,7 +127,7 @@ import videoIcon from '../../assets/icons/remix/vidicon-line.svg'
                 <div>
                   <div class="button-group">
                   <button>up</button>
-                  <section><img icon /></section>
+                  <section><img icon /></section> section hack to have a white background quickly
                   <button>down</button>
                   </div>
                   <Editor /> or <image /> <audio /> etc...
