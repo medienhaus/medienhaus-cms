@@ -123,7 +123,7 @@ import imageIcon from '../../assets/icons/remix/image-line.svg'
                 /*
                 @Andi 
                 This needs a lot of css work...
-                I added some flexbox stuff wuickly to get the basic idea done. 
+                I added some flexbox stuff quickly inline as well as in index.css to get the basic idea done. 
                 Basic structure for each element should now be:
                 <div>
                   <div class="button-group">
