@@ -138,9 +138,9 @@ import imageIcon from '../../assets/icons/remix/image-line.svg'
                 <div class="editor-group" style={{display: "flex"}}>
                   <div class="button-group">
                 
-                    {index !== 0 && <button style={{ padding: "calc(var(--margin) * 0.01)" }} key={'up_' + block.room_id} onClick={(e) => changeOrder(e, block.room_id,  block.name, -1)}>↑</button>}
+                    <button style={{ padding: "calc(var(--margin) * 0.01)" }} key={'up_' + block.room_id} disabled={ index === 0 } onClick={(e) => changeOrder(e, block.room_id,  block.name, -1)}>↑</button>
                     <section id="icon-bg" style={{ background: "white" }}><img src={json.type === 'heading' ? headingIcon : json.type === 'audio' ? audioIcon : json.type === 'image' ? imageIcon : textIcon} alt="svg icon text" /></section>
-                    {index < blocks.length - 1 && <button style={{padding: "calc(var(--margin) * 0.01)"}} key={'down_' + block.room_id} onClick={(e) => changeOrder(e,block.room_id, block.name, 1)}>↓</button>}
+                    <button style={{ padding: "calc(var(--margin) * 0.01)" }} key={'down_' + block.room_id} disabled={ index === blocks.length -1 } onClick={(e) => changeOrder(e,block.room_id, block.name, 1)}>↓</button>
                   </div>
                   {cms?.msgtype === 'm.image' ?
                     //@Andi please fix widht in css 
