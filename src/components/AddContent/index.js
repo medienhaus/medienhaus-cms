@@ -18,7 +18,7 @@ import imageIcon from '../../assets/icons/remix/image-line.svg'
     const { cms, error, fetching } = FetchCms(block.room_id)
     const json = JSON.parse(block.topic)
     const matrixClient = Matrix.getMatrixClient()
-    
+
     const onSave = async (roomId) => {
       setReadOnly(true);
       try {
@@ -101,7 +101,7 @@ import imageIcon from '../../assets/icons/remix/image-line.svg'
         setReadOnly(false)
       }
     }
-      
+
   const string2hash = (string) => {
     console.log(typeof string);
     var hash = 0;
@@ -113,7 +113,7 @@ import imageIcon from '../../assets/icons/remix/image-line.svg'
                 }
                 return hash;
     }
-      
+
         return (
           fetching
             ? <div style={{ height: "120px"}}><Loading /></div> // @Andi sort of... hack to keep interface from violently redrawing. We need to see how we deal with this. Too many waterfalls, let's stick to the rivers and the lakes that we're used to.
@@ -121,9 +121,9 @@ import imageIcon from '../../assets/icons/remix/image-line.svg'
               ? console.error(error)
               : (
                 /*
-                @Andi 
+                @Andi
                 This needs a lot of css work...
-                I added some flexbox stuff quickly inline as well as in index.css to get the basic idea done. 
+                I added some flexbox stuff quickly inline as well as in index.css to get the basic idea done.
                 Basic structure for each element should now be:
                 <div>
                   <div class="button-group">
@@ -135,61 +135,63 @@ import imageIcon from '../../assets/icons/remix/image-line.svg'
                   <button>delete</button>
                 </div>
                 */
-                <div class="editor-group" style={{display: "flex"}}>
-                  <div class="button-group">
-                
-                    <button style={{ padding: "calc(var(--margin) * 0.01)" }} key={'up_' + block.room_id} disabled={ index === 0 } onClick={(e) => changeOrder(e, block.room_id,  block.name, -1)}>↑</button>
-                    <section id="icon-bg" style={{ background: "white" }}><img src={json.type === 'heading' ? headingIcon : json.type === 'audio' ? audioIcon : json.type === 'image' ? imageIcon : textIcon} alt="svg icon text" /></section>
-                    <button style={{ padding: "calc(var(--margin) * 0.01)" }} key={'down_' + block.room_id} disabled={ index === blocks.length -1 } onClick={(e) => changeOrder(e,block.room_id, block.name, 1)}>↓</button>
+                <div className="editor">
+                  <div className="left">
+
+                    <button key={'up_' + block.room_id} disabled={ index === 0 } onClick={(e) => changeOrder(e, block.room_id,  block.name, -1)}>↑</button>
+                    <figure className="icon-bg"><img src={json.type === 'heading' ? headingIcon : json.type === 'audio' ? audioIcon : json.type === 'image' ? imageIcon : textIcon} alt="svg icon text" /></figure>
+                    <button key={'down_' + block.room_id} disabled={ index === blocks.length -1 } onClick={(e) => changeOrder(e,block.room_id, block.name, 1)}>↓</button>
                   </div>
                   {cms?.msgtype === 'm.image' ?
-                    //@Andi please fix widht in css 
-                      <img src={matrixClient.mxcUrlToHttp(cms.url)} alt={cms.info.name} key={block.room_id} width="100%"/>
-                    : cms?.msgtype === 'm.audio' ?
-                      <>
+                  <img src={matrixClient.mxcUrlToHttp(cms.url)} alt={cms.info.name} key={block.room_id} />
+                  : cms?.msgtype === 'm.audio' ?
+                  <>
                     <audio controls>
-                    <source src={matrixClient.mxcUrlToHttp(cms.url)} />
+                      <source src={matrixClient.mxcUrlToHttp(cms.url)} />
                     </audio>
+                    /* TODO */
                     <section id="audio-title">{cms.body}</section>
-                    </>  :
-                    <div  style={{width:"100%"}}>
-                        <Editor
-                      dark={window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches}
-                      defaultValue={cms?.body}
-                      disableExtensions={['blockmenu', 'image', 'embed', 'table', 'tr', 'th', 'td', 'bullet_list', 'ordered_list', 'checkbox_item', 'checkbox_list', 'container_notice', 'blockquote', 'heading', 'hr', 'highlight']}
-                      placeholder={json.type}
-                          readOnly={readOnly}
-                          onSave={({ done }) => { if (localStorage.getItem(block.room_id) !== null && cms !== undefined && string2hash(cms.body) !== string2hash(localStorage.getItem(block.room_id))) {
-                            onSave(block.room_id)
-                            localStorage.removeItem(block.room_id)
-                          } else if(localStorage.getItem(block.room_id) !== null && cms === undefined){
-                            onSave(block.room_id)
-                            localStorage.removeItem(block.room_id)
-                          } }}
-                      onChange={debounce((value) => {
-                        const text = value();
-                        localStorage.setItem(block.room_id, text);
-                       }, 250)}
-                      handleDOMEvents={{
-                        focus: () => console.log("FOCUS on " + block.room_id),
-                        blur: (e) => {
-                          if (localStorage.getItem(block.room_id) !== null && cms !== undefined && string2hash(cms.body) !== string2hash(localStorage.getItem(block.room_id))) {
-                            onSave(block.room_id)
-                            localStorage.removeItem(block.room_id)
-                          } else if(localStorage.getItem(block.room_id) !== null && cms === undefined){
-                            onSave(block.room_id)
-                            localStorage.removeItem(block.room_id)
-                          }
+                  </>  :
+                  <div className="center">
+                    <Editor
+                    dark={window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches}
+                    defaultValue={cms?.body}
+                    disableExtensions={['blockmenu', 'image', 'embed', 'table', 'tr', 'th', 'td', 'bullet_list', 'ordered_list', 'checkbox_item', 'checkbox_list', 'container_notice', 'blockquote', 'heading', 'hr', 'highlight']}
+                    placeholder={json.type}
+                    readOnly={readOnly}
+                    onSave={({ done }) => {
+                      if (localStorage.getItem(block.room_id) !== null && cms !== undefined && string2hash(cms.body) !== string2hash(localStorage.getItem(block.room_id))) {
+                        onSave(block.room_id)
+                        localStorage.removeItem(block.room_id)
+                      } else if(localStorage.getItem(block.room_id) !== null && cms === undefined) {
+                        onSave(block.room_id)
+                        localStorage.removeItem(block.room_id)
+                      }
+                    }}
+                    onChange={debounce((value) => {
+                      const text = value();
+                      localStorage.setItem(block.room_id, text);
+                     }, 250)}
+                    handleDOMEvents={{
+                      focus: () => console.log("FOCUS on " + block.room_id),
+                      blur: (e) => {
+                        if (localStorage.getItem(block.room_id) !== null && cms !== undefined && string2hash(cms.body) !== string2hash(localStorage.getItem(block.room_id))) {
+                          onSave(block.room_id)
+                          localStorage.removeItem(block.room_id)
+                        } else if(localStorage.getItem(block.room_id) !== null && cms === undefined){
+                          onSave(block.room_id)
+                          localStorage.removeItem(block.room_id)
                         }
                       }
-                      }
-                      key={block.room_id} />
-                        <p key={block.room_id + "_p"} style={{ fontSize: "calc(var(--margin) * 0.7" }}>{saved}</p> {//feedback that saving was succesfull or has failed
-                        }
-                    </div>
-                
+                    }}
+                    key={block.room_id} />
+                    <p key={block.room_id + "_p"}>{saved}</p> {//feedback that saving was succesfull or has failed
+                    }
+                  </div>
                   }
-                  {<button style={{ padding: "calc(var(--margin) * 0.01)", width: "5%" }} key={'delete' + index} onClick={(e) => {
+                  {
+                  <div className="right">
+                    <button key={'delete' + index} onClick={(e) => {
                       if (clicked) {
                         onDelete(e, block.room_id, index)
                         setClicked(false)
@@ -198,8 +200,12 @@ import imageIcon from '../../assets/icons/remix/image-line.svg'
                         setClicked(true)
                       }
                       <p>{deleting}</p> //feedback that saving was succesfull or has failed
-                    }} >{clicked ? 'SURE?' : deleting ? <Loading /> : 'x'}</button>}
-            </div>
+                    }}>
+                      {clicked ? 'SURE?' : deleting ? <Loading /> : '×'}
+                    </button>
+                  </div>
+                  }
+                </div>
                 )
         )
   }

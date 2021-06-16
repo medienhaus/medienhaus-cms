@@ -338,7 +338,6 @@ const Submit = () => {
     <div>
      {fetchSpaces ? <Loading /> : <Drafts />}
       
-      <form>
       <h3>Category / Context / Course</h3>
         <div>
             <label htmlFor="subject">Studiengang</label>
@@ -385,7 +384,6 @@ const Submit = () => {
           </>
         )
         }
-        </form>
     </div>
   )
 }

@@ -51,7 +51,6 @@ body > div:first-of-type {
   min-height: 100%;
 }
 
-
 body > div:first-of-type > *:not(footer) > * > * + * {
   margin-top: calc(var(--margin) * 2);
 }
@@ -171,6 +170,12 @@ main {
   max-width: 55ch;
 }
 
+/* TODO */
+form + *,
+form > * + * {
+  margin-top: calc(var(--margin) * 2);
+}
+
 nav {
   grid-row: 1 / 3;
   grid-column: 2;
@@ -219,10 +224,13 @@ nav a {
 }
 
 /* @andi addd this */
+/*
 .button-group {
   display: flex;
   flex-direction: column;
 }
+*/
+
 /*
 section a:link {
   text-decoration: underline;
@@ -248,18 +256,13 @@ section ul li + li {
 }
 */
 
-form + *,
-form > * + * {
-  margin-top: calc(var(--margin) * 2);
-}
-
-form ::placeholder {
+::placeholder {
   color: var(--color-ft);
   opacity: unset;
 }
 
-form button,
-form input[type="submit"] {
+button,
+input[type="submit"] {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
@@ -274,23 +277,23 @@ form input[type="submit"] {
   width: 100%;
 }
 
-form button[disabled],
-form input[type="submit"][disabled] /* @Andi added form input */ {
+button[disabled],
+input[type="submit"][disabled] {
   cursor: not-allowed;
   opacity: 0.3;
 }
 
-form input[id*="datalist"],
-form input[type="color"],
-form input[type="date"],
-form input[type="email"],
-form input[type="number"],
-form input[type="search"],
-form input[type="tel"],
-form input[type="text"],
-form input[type="time"],
-form input[type="password"],
-form input[type="url"] {
+input[id*="datalist"],
+input[type="color"],
+input[type="date"],
+input[type="email"],
+input[type="number"],
+input[type="search"],
+input[type="tel"],
+input[type="text"],
+input[type="time"],
+input[type="password"],
+input[type="url"] {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
@@ -306,15 +309,16 @@ form input[type="url"] {
   width: 100%;
 }
 
+/* TODO, maybe? third selector looks weird */
 input::-webkit-input-placeholder,
 input::-moz-placeholder
-form input :placeholder-shown {
+input :placeholder-shown {
   padding-left: calc(var(--margin) * 1);
   margin-left: calc(var(--margin) * 1);
 }
 
-form input[type="checkbox"],
-form input[type="radio"] {
+input[type="checkbox"],
+input[type="radio"] {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
@@ -329,48 +333,48 @@ form input[type="radio"] {
   width: calc(var(--margin) * 2);
 }
 
-form input[type="checkbox"] {
+input[type="checkbox"] {
   border-radius: unset;
 }
 
-form input[type="radio"] {
+input[type="radio"] {
   border-radius: 50%;
 }
 
-form input[type="checkbox"]:checked,
-form input[type="radio"]:checked {
+input[type="checkbox"]:checked,
+input[type="radio"]:checked {
   background-color: var(--color-fg);
   color: var(--color-bg);
   font-size: calc(var(--margin) * 1.4);
   text-align: center;
 }
 
-form input[type="checkbox"]:checked::after {
+input[type="checkbox"]:checked::after {
   content: '\2713';
 }
 
-form input[type="color"] {
+input[type="color"] {
   cursor: pointer;
 }
 
-form input[type="color"]::-webkit-color-swatch,
-form input[type="color"]::-moz-color-swatch {
+input[type="color"]::-webkit-color-swatch,
+input[type="color"]::-moz-color-swatch {
   border: none;
 }
 
-form input[type="date"],
-form input[type="time"] {
+input[type="date"],
+input[type="time"] {
   cursor: text;
 }
 
 /*
-form input[type="file"] {
+input[type="file"] {
   align-self: center;
   color: transparent;
 }
 */
 
-form input[type="file"]::file-selector-button {
+input[type="file"]::file-selector-button {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
@@ -388,12 +392,12 @@ form input[type="file"]::file-selector-button {
 }
 
 /*
-form input[type="radio"]:checked::after {
+input[type="radio"]:checked::after {
   content: '\00b7';
 }
 */
 
-form input[type="range"] {
+input[type="range"] {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
@@ -406,11 +410,11 @@ form input[type="range"] {
 }
 
 /* TODO
-form input[type="range"]::-moz-focus-outer {
+input[type="range"]::-moz-focus-outer {
   border: unset;
 }
 
-form input[type="range"]:hover {
+input[type="range"]:hover {
   outline:none;
 }
 */
@@ -431,7 +435,7 @@ input[type="range"]::-webkit-slider-thumb {
   */
 }
 
-form input[type="range"]::-moz-range-thumb {
+input[type="range"]::-moz-range-thumb {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
@@ -442,7 +446,7 @@ form input[type="range"]::-moz-range-thumb {
   outline: none;
 }
 
-form input[type="range"]::-moz-range-progress {
+input[type="range"]::-moz-range-progress {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
@@ -453,7 +457,7 @@ form input[type="range"]::-moz-range-progress {
   outline: none;
 }
 
-form input[type="range"]::-moz-range-track {
+input[type="range"]::-moz-range-track {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
@@ -464,7 +468,7 @@ form input[type="range"]::-moz-range-track {
   outline: none;
 }
 
-form select {
+select {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
@@ -484,17 +488,17 @@ form select {
   text-overflow: ellipsis;
 }
 
-form select:-moz-focusring {
+select:-moz-focusring {
   color: transparent;
   text-shadow: 0 0 0 var(--color-fg);
 }
 
-form select:-moz-focusring * {
+select:-moz-focusring * {
   color: var(--color-fg);
   text-shadow: none;
 }
 
-form textarea {
+textarea {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
@@ -519,15 +523,73 @@ form textarea {
   animation: loading 2.4s linear infinite;
 }
 
+/* TODO */
 button > #loading {
   border-color: var(--color-bg) transparent var(--color-bg) transparent;
+  margin: 0 auto;
   max-height: calc(var(--margin) * 1.15);
   max-width: calc(var(--margin) * 1.15);
-  margin:0 auto;
-} 
-/*
-@Andi added loading spinner for buttons. 
-*/
+}
+
+/* TODO editor */
+.editor {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  grid-gap: var(--margin);
+}
+
+.editor .left,
+.editor .right {
+  display: grid;
+  grid-template-rows: repeat(3, auto);
+  grid-gap: var(--margin);
+}
+
+.editor .left > :nth-child(1) {
+  grid-row: 1;
+  align-self: start;
+}
+
+.editor .left > :nth-child(2) {
+  border-color: var(--color-fg);
+  border-style: solid;
+  border-radius: unset;
+  border-width: calc(var(--margin) * 0.2);
+  display: grid;
+  grid-row: 2;
+  align-self: center;
+}
+
+.editor .left > :nth-child(2) > * {
+  max-width: 60%;
+  place-self: center;
+}
+
+.editor .left > :nth-child(3) {
+  grid-row: 3;
+  align-self: end;
+}
+
+.editor .center {
+  border-color: var(--color-fg);
+  border-style: solid;
+  border-radius: unset;
+  border-width: calc(var(--margin) * 0.2);
+  padding: 0 calc(var(--margin) * 0.4);
+}
+
+.editor .right > :only-child {
+  grid-row: 2;
+  align-self: center;
+}
+
+.editor .left,
+.editor .left > *,
+.editor .right,
+.editor .right > * {
+  min-height: 2rem;
+  width: 2rem;
+}
 
 /*
 .account > div {
