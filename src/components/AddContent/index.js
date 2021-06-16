@@ -5,10 +5,11 @@ import Editor, {renderToHtml} from "rich-markdown-editor";
 import debounce from "lodash/debounce";
 import { Loading } from '../../components/loading'
 
-import textIcon from '../../assets/icons/remix/text.svg'
-import headingIcon from '../../assets/icons/remix/h-1.svg'
-import audioIcon from '../../assets/icons/remix/volume-up-line.svg'
-import imageIcon from '../../assets/icons/remix/image-line.svg'
+//import textIcon from '../../assets/icons/remix/text.svg'
+import { ReactComponent as HeadingIcon } from '../../assets/icons/remix/h-1.svg'
+import { ReactComponent as AudioIcon } from '../../assets/icons/remix/volume-up-line.svg'
+import { ReactComponent as ImageIcon } from '../../assets/icons/remix/image-line.svg'
+import { ReactComponent as TextIcon } from '../../assets/icons/remix/text.svg';
 
   const AddContent = ({block, index, blocks}) => {
     const [clicked, setClicked] = useState(false);
@@ -112,7 +113,7 @@ import imageIcon from '../../assets/icons/remix/image-line.svg'
                     hash = hash & hash;
                 }
                 return hash;
-    }
+  }
 
         return (
           fetching
@@ -139,7 +140,9 @@ import imageIcon from '../../assets/icons/remix/image-line.svg'
                   <div className="left">
 
                     <button key={'up_' + block.room_id} disabled={ index === 0 } onClick={(e) => changeOrder(e, block.room_id,  block.name, -1)}>↑</button>
-                    <figure className="icon-bg"><img src={json.type === 'heading' ? headingIcon : json.type === 'audio' ? audioIcon : json.type === 'image' ? imageIcon : textIcon} alt="svg icon text" /></figure>
+                    <figure className="icon-bg">
+                   { json.type === 'heading' ? <HeadingIcon fill='var(--color-fg)' /> : json.type === 'audio' ? <AudioIcon fill='var(--color-fg)' />  : json.type === 'image' ? <ImageIcon fill='var(--color-fg)' />  : <TextIcon fill='var(--color-fg)' /> }
+                   </figure>
                     <button key={'down_' + block.room_id} disabled={ index === blocks.length -1 } onClick={(e) => changeOrder(e,block.room_id, block.name, 1)}>↓</button>
                   </div>
                   {cms?.msgtype === 'm.image' ?
@@ -149,7 +152,7 @@ import imageIcon from '../../assets/icons/remix/image-line.svg'
                     <audio controls>
                       <source src={matrixClient.mxcUrlToHttp(cms.url)} />
                     </audio>
-                    /* TODO */
+                   { /* TODO */}
                     <section id="audio-title">{cms.body}</section>
                   </>  :
                   <div className="center">
