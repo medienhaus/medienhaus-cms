@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
-import Matrix from '../../Matrix'
-import createBlock from '../../components/matrix_create_room'
-import { Loading } from '../../components/loading'
+import Matrix from '../../../Matrix'
+import createBlock from '../matrix_create_room'
+import { Loading } from '../../../components/loading'
  
 const FileUpload = (props) => {
     const [selectedFile, setSelectedFile] = useState();

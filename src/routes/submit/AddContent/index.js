@@ -1,15 +1,15 @@
 import React, { useState } from 'react'
-import Matrix from '../../Matrix'
-import FetchCms from '../../components/matrix_fetch_cms'
+import Matrix from '../../../Matrix'
+import FetchCms from '../../../components/matrix_fetch_cms'
 import Editor, {renderToHtml} from "rich-markdown-editor";
 import debounce from "lodash/debounce";
-import { Loading } from '../../components/loading'
+import { Loading } from '../../../components/loading'
 
 //import textIcon from '../../assets/icons/remix/text.svg'
-import { ReactComponent as HeadingIcon } from '../../assets/icons/remix/h-1.svg'
-import { ReactComponent as AudioIcon } from '../../assets/icons/remix/volume-up-line.svg'
-import { ReactComponent as ImageIcon } from '../../assets/icons/remix/image-line.svg'
-import { ReactComponent as TextIcon } from '../../assets/icons/remix/text.svg';
+import { ReactComponent as HeadingIcon } from '../../../assets/icons/remix/h-1.svg'
+import { ReactComponent as AudioIcon } from '../../../assets/icons/remix/volume-up-line.svg'
+import { ReactComponent as ImageIcon } from '../../../assets/icons/remix/image-line.svg'
+import { ReactComponent as TextIcon } from '../../../assets/icons/remix/text.svg';
 
   const AddContent = ({block, index, blocks}) => {
     const [clicked, setClicked] = useState(false);

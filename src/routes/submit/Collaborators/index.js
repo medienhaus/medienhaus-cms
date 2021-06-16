@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
-import Matrix from '../../Matrix'
-import { Loading } from '../../components/loading'
-import useJoinedSpaces from '../../components/matrix_joined_spaces'
+import Matrix from '../../../Matrix'
+import { Loading } from '../../../components/loading'
+import useJoinedSpaces from '../../../components/matrix_joined_spaces'
 import debounce from "lodash/debounce";
 
 const Collaborators = ({ projectSpace, blocks, title }) => {

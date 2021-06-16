@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import Matrix from '../../Matrix'
 import useJoinedSpaces from '../../components/matrix_joined_spaces'
-import Collaborators from '../../components/Collaborators'
-import FileUpload from '../../components/FileUpload'
-import AddContent from '../../components/AddContent'
+import Collaborators from './Collaborators'
+import FileUpload from './FileUpload'
+import AddContent from './AddContent'
 import { Loading } from '../../components/loading'
-import createBlock from '../../components/matrix_create_room'
+import createBlock from './matrix_create_room'
 
 const Submit = () => {
   const [subject, setSubject] = useState('')
