@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import {useHistory, useParams} from "react-router-dom";
 import Matrix from '../../Matrix'
 import useJoinedSpaces from '../../components/matrix_joined_spaces'
 import Collaborators from './Collaborators'
@@ -12,12 +13,15 @@ const Submit = () => {
   const [title, setTitle] = useState('')
   const [visibility, setVisibility] = useState("draft")
   const [loading, setLoading] = useState(false)
-  const [projectSpace, setProjectSpace] = useState('')
   const [blocks, setBlocks] = useState([])
   const {joinedSpaces, spacesErr, fetchSpaces} = useJoinedSpaces()
   const [contentSelect, setContentSelect] = useState('');
   const [update, setUpdate] = useState(false);
   const matrixClient = Matrix.getMatrixClient()
+  const params = useParams();
+  const history = useHistory();
+
+  const projectSpace = params.spaceId;
 
   const getSync = async () => {
     try {
@@ -89,7 +93,11 @@ const Submit = () => {
       <h2>Drafts:</h2>
       <ul>
           {spacesErr ? console.error(spacesErr) : joinedSpaces ? joinedSpaces.map((space, index) => {
-            return <li key={index} ><button onClick={() => { setProjectSpace(space.room_id); setTitle(space.name); setVisibility(space.published) }}>{space.name}</button></li>
+            return <li key={index} ><button onClick={() => {
+              history.push(`/submit/${space.room_id}`);
+              setTitle(space.name);
+              setVisibility(space.published);
+            }}>{space.name}</button></li>
       }) : null 
         }
       </ul>
@@ -184,9 +192,7 @@ const Submit = () => {
           })
           try {
             const leave = await matrixClient.leave(space.room_id)
-            console.log(leave);
-            setTitle("")
-            setProjectSpace('')
+            history.push('/submit');
           } catch (err) {
             console.error(err);
           }
@@ -227,9 +233,7 @@ const Submit = () => {
       try {
         await matrixClient.createRoom(opts)
           .then((response) => {
-            console.log(response)
-            setProjectSpace(response.room_id)
-            setTitle(projectTitle)
+            history.push(`/submit/${response.room_id}`)
           })
       } catch (e) {
         console.log(e)
@@ -309,7 +313,6 @@ const Submit = () => {
               e.preventDefault()
               setNewProject(true)
               setTitle('')
-              setProjectSpace('')
             }
           }} /> 
           }
