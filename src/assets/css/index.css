@@ -554,41 +554,48 @@ button > #loading {
   background-position: center center;
   background-repeat: no-repeat;
   background-size: calc(var(--margin) * 0.1) 100%;
-  /*
-  border-color: var(--color-fg) transparent var(--color-fg) transparent;
-  border-style: solid;
-  border-radius: unset;
-  border-width: calc(var(--margin) * 0.1);
-  */
   display: grid;
   grid-template-rows: repeat(3, auto);
   grid-gap: var(--margin);
 }
 
+.editor .left > *,
+.editor .right > * {
+  border-color: var(--color-bg);
+  border-style: solid;
+  border-radius: unset;
+  border-width: calc(var(--margin) * 0.2);
+  box-sizing: margin-box;
+}
+
 .editor .left > :nth-child(1) {
   grid-row: 1;
   align-self: start;
+  margin-top: calc(var(--margin) * -0.2);
 }
 
 .editor .left > :nth-child(2) {
   background-color: var(--color-bg);
+  /*
   border-color: var(--color-fg);
   border-style: solid;
   border-radius: unset;
   border-width: calc(var(--margin) * 0.2);
+  */
   display: grid;
   grid-row: 2;
   align-self: center;
 }
 
 .editor .left > :nth-child(2) > * {
-  max-width: 60%;
+  max-width: 80%;
   place-self: center;
 }
 
 .editor .left > :nth-child(3) {
   grid-row: 3;
   align-self: end;
+  margin-bottom: calc(var(--margin) * -0.2);
 }
 
 .editor .center {
