@@ -14,13 +14,14 @@ const Profile = () => {
 
     return (
       <>
-      <h2>Drafts:</h2>
+      
       <ul>
           {spacesErr ? console.error(spacesErr) : joinedSpaces ? <p>You have <strong>{joinedSpaces.length}</strong> projects.</p>
             /*  <li key={index} ><button onClick={() => { setProjectSpace(space.room_id); setTitle(space.name); setVisibility(space.published) }}>{space.name}</button></li>)*/
  : null 
         }
-      </ul>
+        </ul>
+        <h2>Drafts:</h2>
       </>
     )
   }
