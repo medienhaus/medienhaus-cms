@@ -1,32 +1,54 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useAuth } from '../../Auth'
 import useJoinedSpaces from '../../components/matrix_joined_spaces'
+import Matrix from '../../Matrix'
 import { Loading } from '../../components/loading'
 
 const Profile = () => {
   const auth = useAuth()
   const profile = auth.user
   const {joinedSpaces, spacesErr, fetchSpaces} = useJoinedSpaces()
+  const matrixClient = Matrix.getMatrixClient()
+  const [invites, setInvites] = useState([]);
 
+  useEffect(() => {
+   
+    const getSync = async () => {
+      try {
+        await matrixClient.startClient().then(() => {
+          matrixClient.on("Room", async function (room) {
+            setTimeout(async () => {
+              room._selfMembership === 'invite' && console.log(room);
+              room._selfMembership === 'invite' && setInvites(invites => invites.concat({ "name": room.name, "id": room.roomId, "membership": room._selfMembership }))
+            }, 0)
+          }
+          )
+        })
+      } catch (e) {
+        console.log(e)
+      }
+    }
+  
+    getSync();
+  }, []);
 
   const Projects = () => {
-    var draftCounter = 0;
+
+    const drafts = joinedSpaces?.filter(x => x.published === "invite")
+    const publish = joinedSpaces?.filter(x => x.published === "public")
     return (
       <>
-        {joinedSpaces && <p>You have <strong>{joinedSpaces.filter(x => x.published === "invite").length}</strong> drafts, which are not publicly visible.</p>}
-        
+        {drafts && <p>You have <strong>{drafts.length}</strong> drafts, which are not publicly visible.</p>}
       <ul>
-          {spacesErr ? console.error(spacesErr) : joinedSpaces?.filter(x => x.published === "invite").map((space, index) => {
-              return <li>{space.name}</li>
+          {spacesErr ? console.error(spacesErr) : drafts.map((space, index) => {
+              return <li><a href="#">{space.name}</a></li>
       }) 
         }
         </ul>
-        
-        {joinedSpaces && <p>You have <strong>{joinedSpaces.filter(x => x.published === "public").length}</strong> published projects, which are publicly visible.</p>}
-        
+        {publish && <p>You have <strong>{publish.length}</strong> published projects, which are publicly visible.</p>}
         <ul>
-            {spacesErr ? console.error(spacesErr) : joinedSpaces?.filter(x => x.published === "public").map((space, index) => {
-                return <li>{space.name}</li>
+            {spacesErr ? console.error(spacesErr) : publish.map((space, index) => {
+                return <li><a href="#">{space.name}</a></li>
         }) 
           }
         </ul>
@@ -34,17 +56,37 @@ const Profile = () => {
     )
   }
 
+  const Invites = () => {
+
+    console.log(invites);
+
+    const join = async (e, room) => {
+      e.preventDefault()
+      matrixClient.joinRoom(room).then(console.log).catch(console.log)
+    }
+    return invites.length > 0 && (
+      <>
+        <p>You have been invited to join the following project{invites.length > 1 && 's'}:</p>
+      <ul>
+          {invites.map((room) => {
+            return (
+              <div>
+              <li>{room.name}</li>
+                <button onClick={(e) => join(e, room.id)}>ACCEPT</button>
+                </div>)
+          })}
+        </ul>
+        </>
+    ) 
+  }
 
 
   return (
     <div>
       <p>Hello <strong>{profile.displayname}</strong></p>
       <p>welcome to your profile for the Rundgang 2021.</p>
-
-      {fetchSpaces ? <Loading /> : (
-        <Projects />
-      
-      )}
+      <Invites />
+      {fetchSpaces ? <Loading /> : <Projects />}
     </div>
   )
 }

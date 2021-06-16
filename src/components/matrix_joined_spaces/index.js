@@ -17,14 +17,12 @@ const getAnswer = async () => {
 
   try {
     const answer = await matrixClient.getJoinedRooms()
-    
     if (answer.joined_rooms.length > 0) {
       const getNames = await Promise.all(answer.joined_rooms.map(async (roomId) => {
         try {
           const room = await matrixClient.getSpaceSummary(roomId)
           // console.log(room.rooms[0].room_type
           if (room.rooms[0].room_type === 'm.space' && isJson(room.rooms[0].topic)) {
-            console.log(room);
             const collab = room.rooms[0].num_joined_members > 1 ? await matrixClient.getJoinedRoomMembers(room.rooms[0].room_id) : false
             const join_rule = await fetch(process.env.REACT_APP_MATRIX_BASE_URL + `/_matrix/client/r0/rooms/${room.rooms[0].room_id}/state/m.room.join_rules/`, {
               method: 'GET',
