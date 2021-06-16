@@ -7,8 +7,8 @@
   --color-fg: rgb(0,0,0);
   --color-bg: rgb(255,255,255);
   --color-hi: rgb(228,9,59);
+  --color-me: rgb(128,128,128);
   --color-lo: rgb(240,240,240);
-  --color-ft: rgb(0,0,0,0.3);
   --margin: 1rem;
 }
 
@@ -257,7 +257,7 @@ section ul li + li {
 */
 
 ::placeholder {
-  color: var(--color-ft);
+  color: var(--color-me);
   opacity: unset;
 }
 
@@ -297,12 +297,14 @@ input[type="url"] {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
+  background-color: var(--color-bg);
   border: unset;
   border-color: var(--color-fg);
   border-radius: unset;
   border-style: solid;
   border-width: calc(var(--margin) * 0.2);
   box-shadow: none;
+  color: var(--color-fg);
   height: calc(var(--margin) * 2);
   outline: none;
   padding: calc(var(--margin) * 0.2);
@@ -472,7 +474,8 @@ select {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
-  background-image: url(data:image/svg+xml;base64,PHN2ZyBoZWlnaHQ9JzMwMHB4JyB3aWR0aD0nMzAwcHgnIGZpbGw9IiMwMDAwMDAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgdmlld0JveD0iMCAwIDEwMCAxMDAiIHg9IjBweCIgeT0iMHB4Ij4gIDxwb2x5Z29uIHBvaW50cz0iNTAgNTcuMTMgMjMuMTkgMzAuNDYgMTYuMTMgMzcuNTUgNTAgNzEuMjMgODMuODYgMzcuNTUgNzYuODEgMzAuNDYgNTAgNTcuMTMiPjwvcG9seWdvbj48L3N2Zz4=);
+  background-color: var(--color-bg);
+  background-image: url(data:image/svg+xml;base64,PHN2ZyBoZWlnaHQ9IjMwMHB4IiB3aWR0aD0iMzAwcHgiIGZpbGw9InJnYigxMjgsMTI4LDEyOCkiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgdmlld0JveD0iMCAwIDEwMCAxMDAiIHg9IjBweCIgeT0iMHB4Ij48cG9seWdvbiBwb2ludHM9IjUwIDU3LjEzIDIzLjE5IDMwLjQ2IDE2LjEzIDM3LjU1IDUwIDcxLjIzIDgzLjg2IDM3LjU1IDc2LjgxIDMwLjQ2IDUwIDU3LjEzIj48L3BvbHlnb24+PC9zdmc+);
   background-position: calc(100% - calc(var(--margin) * 0.2)) 55%;
   background-repeat: no-repeat;
   background-size: var(--margin);
@@ -482,6 +485,7 @@ select {
   border-style: solid;
   border-width: calc(var(--margin) * 0.2);
   box-shadow: none;
+  color: var(--color-fg);
   cursor: pointer;
   outline: none;
   padding: calc(var(--margin) * 0.2);
@@ -502,11 +506,13 @@ textarea {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
+  background-color: var(--color-bg);
   border-color: var(--color-fg);
   border-radius: unset;
   border-style: solid;
   border-width: calc(var(--margin) * 0.2);
   box-shadow: none;
+  color: var(--color-fg);
   outline: none;
   padding: calc(var(--margin) * 0.4);
   resize: vertical;
@@ -882,6 +888,7 @@ button > #loading {
     --color-fg: rgb(255,255,255);
     --color-bg: rgb(20,20,20);
     --color-hi: rgb(228,9,59);
+    --color-me: rgb(128,128,128);
     --color-lo: rgb(40,40,40);
   }
 }
