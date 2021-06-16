@@ -117,25 +117,14 @@ import { ReactComponent as TextIcon } from '../../assets/icons/remix/text.svg';
 
         return (
           fetching
-            ? <div style={{ height: "120px"}}><Loading /></div> // @Andi sort of... hack to keep interface from violently redrawing. We need to see how we deal with this. Too many waterfalls, let's stick to the rivers and the lakes that we're used to.
+          /*
+           * @Andi sort of... hack to keep interface from violently redrawing. We need to see how we deal with this.
+           * Too many waterfalls, let's stick to the rivers and the lakes that we're used to.
+          */
+            ? <div style={{ height: "120px"}}><Loading /></div>
             : error
               ? console.error(error)
               : (
-                /*
-                @Andi
-                This needs a lot of css work...
-                I added some flexbox stuff quickly inline as well as in index.css to get the basic idea done.
-                Basic structure for each element should now be:
-                <div>
-                  <div class="button-group">
-                  <button>up</button>
-                  <section><img icon /></section> section hack to have a white background quickly
-                  <button>down</button>
-                  </div>
-                  <Editor /> or <image /> <audio /> etc...
-                  <button>delete</button>
-                </div>
-                */
                 <div className="editor">
                   <div className="left">
 
@@ -152,7 +141,7 @@ import { ReactComponent as TextIcon } from '../../assets/icons/remix/text.svg';
                     <audio controls>
                       <source src={matrixClient.mxcUrlToHttp(cms.url)} />
                     </audio>
-                   { /* TODO */}
+                   { /* TODO why section? */}
                     <section id="audio-title">{cms.body}</section>
                   </>  :
                   <div className="center">
