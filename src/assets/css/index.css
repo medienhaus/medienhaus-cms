@@ -888,7 +888,9 @@ button > #loading {
     --color-fg: rgb(255,255,255);
     --color-bg: rgb(20,20,20);
     --color-hi: rgb(228,9,59);
+    /*
     --color-me: rgb(128,128,128);
+    */
     --color-lo: rgb(40,40,40);
   }
 }
