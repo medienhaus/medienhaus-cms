@@ -135,6 +135,10 @@ a[rel~="external"]::after {
 img[alt=""], img:not([alt]) {
   border: 3px dashed rgb(255,0,0);
 }
+/*@Andi: added width to img for editors */
+img {
+  width: 100%
+}
 
 footer {
   display: grid;

@@ -32,6 +32,7 @@ const Submit = () => {
   }
 
   useEffect(() => {
+
     const listening = async () => {
       await matrixClient.removeAllListeners()
       const myRooms = await matrixClient.getSpaceSummary(projectSpace)
@@ -86,24 +87,6 @@ const Submit = () => {
   }, [update, projectSpace]);
 
   //======= COMPONENTS ======================================================================
-
-  const Drafts = () => {
-    return (
-      <>
-      <h2>Drafts:</h2>
-      <ul>
-          {spacesErr ? console.error(spacesErr) : joinedSpaces ? joinedSpaces.map((space, index) => {
-            return <li key={index} ><button onClick={() => {
-              history.push(`/submit/${space.room_id}`);
-              setTitle(space.name);
-              setVisibility(space.published);
-            }}>{space.name}</button></li>
-      }) : null 
-        }
-      </ul>
-      </>
-    )
-  }
 
   const SubmitButton = () => {
     const [response, setResponse] = useState();
@@ -166,8 +149,6 @@ const Submit = () => {
     const [edit, setEdit] = useState(false);
     const [changing, setChanging] = useState(false);
     const [newProject, setNewProject] = useState(false);
-    const [warning, setWarning] = useState(false);
-    const [leaving, setLeaving] = useState(false);
     const doublicate = joinedSpaces?.filter(({ name }) => projectTitle === name).length > 0
 
      
@@ -176,36 +157,6 @@ const Submit = () => {
       title === '' && setNewProject(true)
       // eslint-disable-next-line
     }, [title]);
-
-    const deleteProject = async (e) => {
-      e.preventDefault()
-      const space = await matrixClient.getSpaceSummary(projectSpace)
-      console.log(space);
-      space.rooms.reverse().map(async (space, index) => {
-        //we reverse here to leave the actual project space last in case something goes wrong in the process.
-        setLeaving(true)
-        console.log("Leaving " + space.name);
-        try {
-          const count = await matrixClient.getJoinedRoomMembers(space.room_id)
-          Object.keys(count.joined).length > 1 && Object.keys(count.joined).forEach(name => {
-            localStorage.getItem('medienhaus_user_id') !== name && matrixClient.kick(space.room_id, name)
-          })
-          try {
-            const leave = await matrixClient.leave(space.room_id)
-            history.push('/submit');
-          } catch (err) {
-            console.error(err);
-          }
-   
-        } catch (err) {
-          console.error(err);
-        } finally {
-          //setCounter(0)
-          setLeaving(false)
-        }
-        
-      })
-    }
 
     const createProject = async (e, title) => {
       e.preventDefault()
@@ -241,42 +192,6 @@ const Submit = () => {
         setLoading(false)
       }
     }
-
-  
-    const DeleteProjectButton = () => {
-      //dom not redrawing drafts after deletion is complete, needs to be fixed
-    
-      return (
-          <>
-          {warning && <p>Are you sure you want to delete the project <strong>{title}</strong>? This cannot be undone and will delete the project for you and any collaborator that might be part of it.</p>}
-            <input style={{ backgroundColor: "red" }} //@Andi please add to css
-              id="delete"
-              name="delete"
-              type="submit"
-              value={warning ? "Yes, delete project" : "Delete project"}
-              disabled={!title || leaving}
-              onClick={(e) => {
-                if (warning) {
-                  deleteProject(e)
-                  setWarning(false)
-                } else {
-                  e.preventDefault()
-                  setWarning(true)
-                }
-                }
-              } />
-          {leaving && <Loading />}
-         
-           {warning &&  <input
-            id="delete"
-            name="delete"
-            type="submit"
-            value={'CANCEL'}
-            onClick={() => {setWarning(false) }}
-           />}
-              </>
-              )
-    }
     
     return (
       <>
@@ -286,8 +201,7 @@ const Submit = () => {
         </div>
         <div>
           
-          {loading ? <Loading /> : title && !edit && <DeleteProjectButton />}
-          {title && !warning && <input id="submit" name="submit" type="submit" value={edit ? "Save" : changing ? <Loading /> : "Edit Title"} onClick={async (e) => {
+          {title && <input id="submit" name="submit" type="submit" value={edit ? "Save" : changing ? <Loading /> : "Edit Title"} onClick={async (e) => {
             e.preventDefault();
             if (edit) {
               setChanging(true)
@@ -304,7 +218,7 @@ const Submit = () => {
             }
           }} />}
           {edit && <input id="submit" name="submit" type="submit" value="Cancel" onClick={(e) => { e.preventDefault(); setEdit(false) }} />}
-          {loading ? <Loading /> : !warning && !edit && <input id="submit" name="submit" type="submit" value={newProject ? "Create Project": "New Project"} disabled={(newProject && doublicate ) || !projectTitle } onClick={(e) => {
+          {loading ? <Loading /> : !edit && <input id="submit" name="submit" type="submit" value={newProject ? "Create Project": "New Project"} disabled={(newProject && doublicate ) || !projectTitle } onClick={(e) => {
             console.log(newProject);
             if(newProject){
               createProject(e, projectTitle)
@@ -339,7 +253,6 @@ const Submit = () => {
 
   return (
     <div>
-     {fetchSpaces ? <Loading /> : <Drafts />}
       
       <h3>Category / Context / Course</h3>
         <div>

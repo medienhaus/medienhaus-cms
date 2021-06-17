@@ -15,7 +15,8 @@ const Collaborators = ({ projectSpace, blocks, title }) => {
     const invite = async (e) => {
       setInviting(true)
       e.preventDefault()
-        const id = collab.split(' ')
+      const id = collab.split(' ')
+
         try {
           await matrixClient.invite(projectSpace, id[1]).then(() => {
             const room = matrixClient.getRoom(projectSpace);
