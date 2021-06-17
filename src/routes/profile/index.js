@@ -9,18 +9,18 @@ import { Loading } from '../../components/loading'
 const Profile = () => {
   const auth = useAuth()
   const profile = auth.user
-  const { joinedSpaces, spacesErr, fetchSpaces } = useJoinedSpaces()
+  const { joinedSpaces, spacesErr, fetchSpaces, reload } = useJoinedSpaces((forceReload) => console.log(fetchSpaces || spacesErr))
   const matrixClient = Matrix.getMatrixClient()
   const drafts = joinedSpaces?.filter(x => x.published === "invite")
   const publish = joinedSpaces?.filter(x => x.published === "public")
   const [invites, setInvites] = useState([]);
 
-
   useEffect(() => {
+
     const getSync = async () => {
       try {
         await matrixClient.startClient().then(() => {
-          matrixClient.on("Room", async function (room) {
+          matrixClient.on("Room", (room) => {
             setTimeout(async () => {
               room._selfMembership === 'invite' && console.log(room);
               room._selfMembership === 'invite' && setInvites(invites => invites.concat({ "name": room.name, "id": room.roomId, "membership": room._selfMembership }))
@@ -39,6 +39,7 @@ const Profile = () => {
     <div>
       <p>Hello <strong>{profile.displayname}</strong>,</p>
       <p>welcome to your profile for the Rundgang 2021.</p>
+      <button onClick={() => reload()}>reload</button>
       {invites.length > 0 && (
       <>
         <p>You have been invited to join the following project{invites.length > 1 && 's'}:</p>

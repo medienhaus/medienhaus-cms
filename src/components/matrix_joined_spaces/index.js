@@ -48,12 +48,14 @@ const getAnswer = async () => {
   }
 }
 
-const useJoinedSpaces = () => {
+const useJoinedSpaces = ({num}) => {
   const [joinedSpaces, setJoinedSpaces] = useState()
   const [fetchSpaces, setFetchSpaces] = useState(true)
   const [spacesErr, setSpacesErr] = useState(false)
+  const [load, setLoad] = useState(false);
 
   useEffect(() => {
+    console.log(load);
     let canceled
     setFetchSpaces(true);
     (async () => {
@@ -69,11 +71,16 @@ const useJoinedSpaces = () => {
     return () => { canceled = true }
     
     // eslint-disable-next-line
-  }, []);
+  }, [load]);
   return {
     joinedSpaces,
     spacesErr,
-    fetchSpaces
+    fetchSpaces,
+    reload: () => {
+      setLoad({...load,
+        [num]: num}
+    )
+    }
   }
 }
 
