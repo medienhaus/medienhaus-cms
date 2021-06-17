@@ -17,7 +17,6 @@ const Profile = () => {
 
 
   useEffect(() => {
-   
     const getSync = async () => {
       try {
         await matrixClient.startClient().then(() => {
@@ -53,12 +52,12 @@ const Profile = () => {
          <>
          {drafts && <p>You have <strong>{drafts.length}</strong> drafts, which are not publicly visible.</p>}
        <ul>
-           {spacesErr ? console.error(spacesErr) : drafts.map((space, index) =>  <Projects space = { space } />) 
+           {spacesErr ? console.error(spacesErr) : drafts.map((space, index) =>  <Projects space = { space } visibility={ space.visibility }/>) 
           }
           </ul>
           {publish && <p>You have <strong>{publish.length}</strong> published projects, which are publicly visible.</p>}
           <ul>
-            {spacesErr ? console.error(spacesErr) : publish.map((space, index) => <Projects space = { space } />) 
+            {spacesErr ? console.error(spacesErr) : publish.map((space, index) => <Projects space = { space } visibility={ space.published } />) 
               }
             </ul>
           </>

@@ -3,7 +3,7 @@ import {useHistory} from "react-router-dom";
 import Matrix from '../../../Matrix'
 import { Loading } from '../../../components/loading'
 
-  const Projects = ({space}) => {
+  const Projects = ({space, visibility}) => {
     const [deleted, setDeleted] = useState(false);
     const history = useHistory();
     const matrixClient = Matrix.getMatrixClient()
@@ -76,7 +76,18 @@ import { Loading } from '../../../components/loading'
   }
     
     return (
-             <li><button disabled={ deleted } onClick={() => history.push(`/submit/${space.room_id}`)}>{space.name}</button> {deleted || <DeleteProjectButton roomId={space.room_id} name={ space.name }/>}</li>
+      <div>
+        <ul>
+          <li>{space.name}</li>
+          <li>placeholder</li>
+          <li>placeholder</li>
+          <li>placeholder</li>
+          <li>placeholder</li>
+        </ul>
+        <button disabled={deleted} onClick={() => history.push(`/submit/${space.room_id}`)}>EDIT</button>
+        <button disabled={deleted}>{visibility === 'public' ? "Redact" : "Publish"} </button>
+        {deleted || <DeleteProjectButton roomId={space.room_id} name={space.name} />}
+      </div>
     )
   }
 export default Projects
