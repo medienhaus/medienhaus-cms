@@ -1,204 +1,135 @@
-import React, { useState } from 'react'
+import React, {useState} from 'react'
 import Matrix from '../../../Matrix'
-import FetchCms from '../../../components/matrix_fetch_cms'
-import Editor, {renderToHtml} from "rich-markdown-editor";
-import debounce from "lodash/debounce";
+import createBlock from '../matrix_create_room'
+import reorder from '../DisplayContent/matrix_reorder_rooms'
 import { Loading } from '../../../components/loading'
 
-//import textIcon from '../../assets/icons/remix/text.svg'
-import { ReactComponent as HeadingIcon } from '../../../assets/icons/remix/h-1.svg'
-import { ReactComponent as AudioIcon } from '../../../assets/icons/remix/volume-up-line.svg'
-import { ReactComponent as ImageIcon } from '../../../assets/icons/remix/image-line.svg'
-import { ReactComponent as TextIcon } from '../../../assets/icons/remix/text.svg';
 
-  const AddContent = ({block, index, blocks}) => {
-    const [clicked, setClicked] = useState(false);
-    const [readOnly, setReadOnly] = useState(false);
-    const [saved, setSaved] = useState(false);
-    const [deleting, setDeleting] = useState(false);
-    const { cms, error, fetching } = FetchCms(block.room_id)
-    const json = JSON.parse(block.topic)
-    const matrixClient = Matrix.getMatrixClient()
+const AddContent = ({number, projectSpace, blocks}) => {
+    const [contentSelect, setContentSelect] = useState('');
+    const [addcontent, setAddcontent] = useState(false);
 
-    const onSave = async (roomId) => {
-      setReadOnly(true);
-      try {
-       const save =  await matrixClient.sendMessage(roomId, {
-          body: localStorage.getItem(roomId),
-          format: 'org.matrix.custom.html',
-          msgtype: 'm.text',
-          formatted_body: renderToHtml(localStorage.getItem(roomId))
-        })
-        if ("event_id" in save) {
-          setSaved("Saved!")
-          setTimeout(() => {
-            setSaved()
-          },1000)
-        }
-        // await matrixClient.redactEvent(roomId.room_id, entry.event, null, { 'reason': 'I have my reasons!' })
-      } catch (e) {
-        console.error('error while trying to save: ' + e)
-        setSaved("Couldn't save!")
-          setTimeout(() => {
-            setSaved()
-          },1000)
-      } finally {
-        setReadOnly(false)
-      }
-    }
-
-    const onDelete = async (e, roomId, index) => {
-      e.preventDefault()
-      setDeleting(true)
-      setReadOnly(true)
-
-      const reorder = (name, room_id) => {
-            const title = name.split('_')
-            const num = parseInt(title[0]) - 1
-            matrixClient.setRoomName(room_id, num  + '_' + title[1] )
-          }
-      try {
-        const count = await matrixClient.getJoinedRoomMembers(roomId)
-        Object.keys(count.joined).length > 1 && Object.keys(count.joined).forEach(name => {
-          localStorage.getItem('medienhaus_user_id') !== name && matrixClient.kick(roomId, name)
-        })
-        matrixClient.leave(roomId)
-        blocks.forEach((block, i) => {
-          if (i > index) {
-            reorder(block.name, block.room_id)
-          }
-        })
-        //setCounter(0)
-      } catch (err) {
-        console.error(err)
-        setDeleting(`couldn't delete ${json.type}, please try again or try reloading the page`)
-        setTimeout(() => {
-          setDeleting()
-        },2000)
-      }
-      finally {
-        setDeleting()
-      }
-      //matrixClient.kick(roomId, userId)
-      //matrixClient.leave(roomId)
-    }
-
-    const changeOrder = async (e,roomId, name, direction) => {
-      e.preventDefault()
-      setReadOnly(true)
-      //blocks.splice((pos) + direction, 0, blocks.splice(pos, 1).pop())
-      const active = name.split('_')
-      const order = parseInt(active[0])
-      const newOrder = order + direction
-      const passive = blocks[newOrder].name.split('_')
-      const passiveRoom = blocks[newOrder].room_id
-      try {
-        await matrixClient.setRoomName(roomId, newOrder + '_' + active[1]).then(
-          await matrixClient.setRoomName(passiveRoom, order + '_' + passive[1])
-        )//.then(setCounter(0))
-      } catch (err) {
-        console.error(err);
-      } finally {
-        setReadOnly(false)
-      }
-    }
-
-  const string2hash = (string) => {
-    console.log(typeof string);
-    var hash = 0;
-                if (string.length === 0) return hash;
-                for (let i = 0; i < string.length; i++) {
-                    const char = string.charCodeAt(i);
-                    hash = ((hash << 5) - hash) + char;
-                    hash = hash & hash;
+const AddBlock = ({contentSelect, number, projectSpace, blocks}) => {
+    const [loading, setLoading] = useState(false);
+    return (
+      <button type="submit" id="" name="" disabled={contentSelect === "" || false} value="Add Audio" onClick={async (e) =>
+      {
+            setLoading(true)
+            blocks.forEach((block, i) => {
+                if (i >= number) {
+                console.log(block.name);
+                reorder(block.name, block.room_id, false)
                 }
-                return hash;
-  }
+            })
+        
+            await createBlock(e, contentSelect, number, projectSpace).then(() => {
+                setLoading(false)
+                setAddcontent(false)
+        })
+      }
+      }>{loading ? <Loading /> : "Add Content"}</button>
+    )
+}
+     
+const FileUpload = (props) => {
+    const [selectedFile, setSelectedFile] = useState();
+    const [fileName, setFileName] = useState('');
+    const [loading, setLoading] = useState(false);
+    const matrixClient = Matrix.getMatrixClient()
+    const size = props.fileType === 'image' ? 5000000 : 25000000
 
-        return (
-          fetching
-          /*
-           * @Andi sort of... hack to keep interface from violently redrawing. We need to see how we deal with this.
-           * Too many waterfalls, let's stick to the rivers and the lakes that we're used to.
-          */
-            ? <div style={{ height: "120px"}}><Loading /></div>
-            : error
-              ? console.error(error)
-              : (
-                <div className="editor">
-                  <div className="left">
+    const changeHandler = (event) => {
+      setSelectedFile(event.target.files[0])
+      console.log(selectedFile)
+      setFileName(event.target.files[0].name)
+      // setIsFilePicked(true);
+    }
+    console.log(props);
+    const handleSubmission = async (e) => {
+      e.preventDefault()
+      setLoading(true)
+      try {
+        await matrixClient.uploadContent(selectedFile, { name: fileName })
+          .then(async (url) => {
+            props.blocks.forEach((block, i) => {
+              if (i >= props.number) {
+              console.log(block.name);
+              reorder(block.name, block.room_id, false)
+              }
+          })
+              const room = await createBlock(e, props.fileType, props.number, props.space)
+              console.log("room = " + room);
+            return [url, room]
+            }).then((res) =>
+            props.fileType === "image" ?
+              matrixClient.sendImageMessage(res[1], res[0], {
+              mimetype: selectedFile.type,
+                size: selectedFile.size,
+              name: selectedFile.name
+              }) : matrixClient.sendMessage(res[1], {
+                "body": selectedFile.name,
+                "info": {
+                  "size": selectedFile.size,
+                  "mimetype": selectedFile.type
+                }, "msgtype": "m.audio",
+                "url": res[0]
+              })
+              )
+              .then(console.log) 
+          setFileName()
+          setSelectedFile('')
+          setAddcontent(false)
 
-                    <button key={'up_' + block.room_id} disabled={ index === 0 } onClick={(e) => changeOrder(e, block.room_id,  block.name, -1)}>↑</button>
-                    <figure className="icon-bg">
-                   { json.type === 'heading' ? <HeadingIcon fill='var(--color-fg)' /> : json.type === 'audio' ? <AudioIcon fill='var(--color-fg)' />  : json.type === 'image' ? <ImageIcon fill='var(--color-fg)' />  : <TextIcon fill='var(--color-fg)' /> }
-                   </figure>
-                    <button key={'down_' + block.room_id} disabled={ index === blocks.length -1 } onClick={(e) => changeOrder(e,block.room_id, block.name, 1)}>↓</button>
-                  </div>
-                  {cms?.msgtype === 'm.image' ?
-                  <img src={matrixClient.mxcUrlToHttp(cms.url)} alt={cms.info.name} key={block.room_id} />
-                  : cms?.msgtype === 'm.audio' ?
-                  <>
-                    <audio controls>
-                      <source src={matrixClient.mxcUrlToHttp(cms.url)} />
-                    </audio>
-                   { /* TODO why section? */}
-                    <section id="audio-title">{cms.body}</section>
-                  </>  :
-                  <div className="center">
-                    <Editor
-                    dark={window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches}
-                    defaultValue={cms?.body}
-                    disableExtensions={['blockmenu', 'image', 'embed', 'table', 'tr', 'th', 'td', 'bullet_list', 'ordered_list', 'checkbox_item', 'checkbox_list', 'container_notice', 'blockquote', 'heading', 'hr', 'highlight']}
-                    placeholder={json.type}
-                    readOnly={readOnly}
-                    onSave={({ done }) => {
-                      if (localStorage.getItem(block.room_id) !== null && cms !== undefined && string2hash(cms.body) !== string2hash(localStorage.getItem(block.room_id))) {
-                        onSave(block.room_id)
-                        localStorage.removeItem(block.room_id)
-                      } else if(localStorage.getItem(block.room_id) !== null && cms === undefined) {
-                        onSave(block.room_id)
-                        localStorage.removeItem(block.room_id)
-                      }
-                    }}
-                    onChange={debounce((value) => {
-                      const text = value();
-                      localStorage.setItem(block.room_id, text);
-                     }, 250)}
-                    handleDOMEvents={{
-                      focus: () => console.log("FOCUS on " + block.room_id),
-                      blur: (e) => {
-                        if (localStorage.getItem(block.room_id) !== null && cms !== undefined && string2hash(cms.body) !== string2hash(localStorage.getItem(block.room_id))) {
-                          onSave(block.room_id)
-                          localStorage.removeItem(block.room_id)
-                        } else if(localStorage.getItem(block.room_id) !== null && cms === undefined){
-                          onSave(block.room_id)
-                          localStorage.removeItem(block.room_id)
-                        }
-                      }
-                    }}
-                    key={block.room_id} />
-                    <p key={block.room_id + "_p"}>{saved}</p> {//feedback that saving was succesfull or has failed
-                    }
-                  </div>
-                  }
-                  {
-                  <div className="right">
-                    <button key={'delete' + index} onClick={(e) => {
-                      if (clicked) {
-                        onDelete(e, block.room_id, index)
-                        setClicked(false)
-                      } else {
-                        e.preventDefault()
-                        setClicked(true)
-                      }
-                      <p>{deleting}</p> //feedback that saving was succesfull or has failed
-                    }}>
-                      {clicked ? 'SURE?' : deleting ? <Loading /> : '×'}
-                    </button>
-                  </div>
-                  }
-                </div>
-                )
+          //setCounter(0)
+         //})
+       
+      } catch (e) {
+        console.log('error while trying to save image: ' + e)
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    selectedFile && console.log(selectedFile);
+    return (
+      <>
+        <input type="file" name="filename" onChange={changeHandler} disabled={props.fileType === "" || false} />
+        {selectedFile
+          && (
+            <div>
+            <p>Filename: <input type="text" value={fileName} onChange={e => {
+              e.preventDefault()
+              setFileName(e.target.value)
+            }} />
+            </p>
+            <button onClick={(e) => handleSubmission(e)} disabled={!selectedFile.type.includes(props.fileType) || selectedFile.size > size || loading}>{loading ? <Loading /> : "Upload"}</button>
+            {selectedFile.type.includes(props.fileType) || <section>Please select an {props.fileType} file.</section>}
+            {selectedFile.size > size && <section style={{ color: "red" }}> File size needs to be less than {size / 1000000}MB</section> //@Andi pls add to css
+            }
+            </div>
         )
+         }
+      </>)
   }
-  export default AddContent
+    return (
+        !addcontent ? <button key={'add' + number} onClick={(e) => { e.preventDefault(); setAddcontent(true) }} >+</button> : (
+        <div>
+              <select name="content-select"  defaultValue={''} id="content-select" onChange={(e) => setContentSelect(e.target.value)}>
+              <option value='' disabled={true} >Select Content</option>
+                  <option value="none" disabled={true} >--Text------------</option>
+                  <option value="heading">Heading</option>
+                  <option value="text">Text</option>
+                  <option value="" disabled={true} >--Media------------</option>
+                  <option value="image">Image</option>
+                <option value="audio">Audio</option>
+              </select>
+              {contentSelect === "image" || contentSelect === "audio"  ?
+                <FileUpload fileType={contentSelect} number={number} space={projectSpace} blocks={blocks} /> : <AddBlock contentSelect={contentSelect } number ={number} projectSpace={projectSpace} blocks={blocks}/>}
+                {/*
+            // fetch("https://stream.udk-berlin.de/api/userId/myVideos")
+            */}
+          
+            </div>)
+    )
+}
+export default AddContent

@@ -23,11 +23,6 @@ const Profile = () => {
         await matrixClient.startClient().then(() => {
           matrixClient.on("Room", async function (room) {
             setTimeout(async () => {
-              const req = await fetch(process.env.REACT_APP_MATRIX_BASE_URL + `/_matrix/client/r0/rooms/${room.roomId}/joined_members`, {
-                method: 'GET',
-                headers: { Authorization: 'Bearer ' + localStorage.getItem('medienhaus_access_token') },
-              })
-              const members = await req.json()
               room._selfMembership === 'invite' && console.log(room);
               room._selfMembership === 'invite' && setInvites(invites => invites.concat({ "name": room.name, "id": room.roomId, "membership": room._selfMembership }))
             }, 0)
@@ -38,7 +33,6 @@ const Profile = () => {
         console.log(e)
       }
     }
-  
     getSync();
   }, []);
 
@@ -46,7 +40,6 @@ const Profile = () => {
     <div>
       <p>Hello <strong>{profile.displayname}</strong></p>
       <p>welcome to your profile for the Rundgang 2021.</p>
-
       {invites.length > 0 && (
       <>
         <p>You have been invited to join the following project{invites.length > 1 && 's'}:</p>

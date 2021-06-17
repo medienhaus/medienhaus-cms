@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
-import Matrix from '../../../Matrix'
-import createBlock from '../matrix_create_room'
-import { Loading } from '../../../components/loading'
+import Matrix from '../../../../Matrix'
+import createBlock from '../../matrix_create_room'
+import { Loading } from '../../../../components/loading'
+import reorder from '../../DisplayContent/matrix_reorder_rooms'
  
 const FileUpload = (props) => {
     const [selectedFile, setSelectedFile] = useState();
@@ -22,7 +23,13 @@ const FileUpload = (props) => {
       setLoading(true)
       try {
         await matrixClient.uploadContent(selectedFile, { name: fileName })
-          .then(async(url) => {
+          .then(async (url) => {
+            props.blocks.forEach((block, i) => {
+              if (i >= props.number) {
+              console.log(block.name);
+              reorder(block.name, block.room_id, false)
+              }
+          })
               const room = await createBlock(e, props.fileType, props.number, props.space)
               console.log("room = " + room);
             return [url, room]

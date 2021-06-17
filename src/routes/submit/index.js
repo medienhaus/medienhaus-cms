@@ -3,10 +3,8 @@ import {useHistory, useParams} from "react-router-dom";
 import Matrix from '../../Matrix'
 import useJoinedSpaces from '../../components/matrix_joined_spaces'
 import Collaborators from './Collaborators'
-import FileUpload from './FileUpload'
-import AddContent from './AddContent'
+import DisplayContent from './DisplayContent'
 import { Loading } from '../../components/loading'
-import createBlock from './matrix_create_room'
 
 const Submit = () => {
   const [subject, setSubject] = useState('')
@@ -15,7 +13,6 @@ const Submit = () => {
   const [loading, setLoading] = useState(false)
   const [blocks, setBlocks] = useState([])
   const {joinedSpaces, spacesErr, fetchSpaces} = useJoinedSpaces()
-  const [contentSelect, setContentSelect] = useState('');
   const [update, setUpdate] = useState(false);
   const matrixClient = Matrix.getMatrixClient()
   const params = useParams();
@@ -32,10 +29,11 @@ const Submit = () => {
   }
 
   useEffect(() => {
-
+    
     const listening = async () => {
       await matrixClient.removeAllListeners()
       const myRooms = await matrixClient.getSpaceSummary(projectSpace)
+      setTitle(myRooms?.rooms[0].name)
       console.log(myRooms);
 
       matrixClient.addListener("RoomState.events", function (event) {
@@ -149,6 +147,7 @@ const Submit = () => {
     const [edit, setEdit] = useState(false);
     const [changing, setChanging] = useState(false);
     const [newProject, setNewProject] = useState(false);
+    const [oldTitle, setOldTitle] = useState('');
     const doublicate = joinedSpaces?.filter(({ name }) => projectTitle === name).length > 0
 
      
@@ -215,10 +214,11 @@ const Submit = () => {
               setEdit(false)
             } else {
               setEdit(true)
+              setOldTitle(title)
             }
           }} />}
-          {edit && <input id="submit" name="submit" type="submit" value="Cancel" onClick={(e) => { e.preventDefault(); setEdit(false) }} />}
-          {loading ? <Loading /> : !edit && <input id="submit" name="submit" type="submit" value={newProject ? "Create Project": "New Project"} disabled={(newProject && doublicate ) || !projectTitle } onClick={(e) => {
+          {edit && <input id="submit" name="submit" type="submit" value="Cancel" onClick={(e) => { e.preventDefault(); setEdit(false); setProjectTitle(oldTitle) }} />}
+          {loading ? <Loading /> : !title && <input id="submit" name="submit" type="submit" value={newProject ? "Create Project": "New Project"} disabled={(newProject && doublicate ) || !projectTitle } onClick={(e) => {
             console.log(newProject);
             if(newProject){
               createProject(e, projectTitle)
@@ -235,21 +235,6 @@ const Submit = () => {
     )
   }
 
-  const AddBlock = () => {
-    const [loading, setLoading] = useState(false);
-
-    return (
-      <button type="submit" id="" name="" disabled={contentSelect === "" || false} value="Add Audio" onClick={async (e) =>
-      {
-        setLoading(true)
-        await createBlock( e, contentSelect, blocks.length , projectSpace).then(() => {
-          //setCounter(0)
-          setLoading(false)
-        })
-      }
-      }>{loading ? <Loading /> : "Add Content"}</button>
-    )
-  }
 
   return (
     <div>
@@ -275,26 +260,11 @@ const Submit = () => {
             <Collaborators projectSpace = {projectSpace} blocks = { blocks} title = {title} />
              
             <h3>Content</h3>
-            { blocks.map((content, i) => 
-              <AddContent block={content} index={i} blocks={blocks}/>
+          {blocks.map((content, i) =>
+              <>
+              <DisplayContent block={content} index={i} blocks={blocks} projectSpace={projectSpace} />
+              </>
             )}
-              <div>
-              <select name="content-select"  defaultValue={''} id="content-select" onChange={(e) => setContentSelect(e.target.value)}>
-              <option value='' disabled={true} >Select Content</option>
-                  <option value="none" disabled={true} >--Text------------</option>
-                  <option value="heading">Heading</option>
-                  <option value="text">Text</option>
-                  <option value="" disabled={true} >--Media------------</option>
-                  <option value="image">Image</option>
-                <option value="audio">Audio</option>
-              </select>
-              {contentSelect === "image" || contentSelect === "audio"  ?
-             <FileUpload fileType = {contentSelect} number={ blocks.length} space = {projectSpace} /> : <AddBlock />}
-                {/*
-            // fetch("https://stream.udk-berlin.de/api/userId/myVideos")
-            */}
-          
-            </div>
             <h3>Visibility (Draft/Published)</h3>
               {loading ? <Loading /> : <SubmitButton />}
           </>
