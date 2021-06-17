@@ -37,7 +37,7 @@ const Profile = () => {
 
   return (
     <div>
-      <p>Hello <strong>{profile.displayname}</strong></p>
+      <p>Hello <strong>{profile.displayname}</strong>,</p>
       <p>welcome to your profile for the Rundgang 2021.</p>
       {invites.length > 0 && (
       <>
@@ -50,12 +50,12 @@ const Profile = () => {
             }
       {fetchSpaces ? <Loading /> : (
          <>
-         {drafts && <p>You have <strong>{drafts.length}</strong> drafts, which are not publicly visible.</p>}
+          {drafts && <p>You have <strong>{drafts.length} draft{drafts.length > 1 && 's' }</strong>, which {drafts.length > 1 ? 'are' : 'is'  } not publicly visible.</p>}
        <ul>
            {spacesErr ? console.error(spacesErr) : drafts.map((space, index) =>  <><Projects space = { space } visibility={ space.visibility }/><hr /></>) 
           }
           </ul>
-          {publish && <p>You have <strong>{publish.length}</strong> published projects, which are publicly visible.</p>}
+          {publish && <p>You have <strong>{publish.length} published</strong> project{publish.length > 1 && 's'}, which {publish.length > 1 ? 'are' : 'is'  } publicly visible.</p>}
           <ul>
             {spacesErr ? console.error(spacesErr) : publish.map((space, index) => <><Projects space = { space } visibility={ space.published } /><hr /> </>) 
               }
