@@ -57,7 +57,7 @@ const Profile = () => {
           </ul>
           {publish && <p>You have <strong>{publish.length}</strong> published projects, which are publicly visible.</p>}
           <ul>
-            {spacesErr ? console.error(spacesErr) : publish.map((space, index) => {<><Projects space = { space } visibility={ space.published } /><hr /> </>}) 
+            {spacesErr ? console.error(spacesErr) : publish.map((space, index) => <><Projects space = { space } visibility={ space.published } /><hr /> </>) 
               }
             </ul>
           </>
