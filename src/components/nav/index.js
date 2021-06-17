@@ -22,7 +22,7 @@ const Nav = () => {
         <div>
           {auth.user
             ? (
-              <NavLink activeclassname="active" to="/submit">/submit</NavLink>
+              <NavLink activeclassname="active" to="/submit">create new</NavLink>
               //<a href={process.env.REACT_APP_MATRIX_BASE_URL + '/classroom'} rel="nofollow noopener noreferrer" target="_self">/classroom&nbsp;-&gt;</a>
               )
             : (
@@ -33,7 +33,6 @@ const Nav = () => {
           <>
             <div>
               <NavLink activeclassname="active" to="/profile">/profile</NavLink>
-             
                   <NavLink activeclassname="active" to="/tools">/tools</NavLink> {// only for dev
                   }
               {
