@@ -77,8 +77,8 @@ const useJoinedSpaces = ({num}) => {
     spacesErr,
     fetchSpaces,
     reload: () => {
-      setLoad({...load,
-        [num]: num}
+      setLoad({...load
+       }
     )
     }
   }

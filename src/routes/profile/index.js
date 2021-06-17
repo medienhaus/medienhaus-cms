@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { useAuth } from '../../Auth'
 import useJoinedSpaces from '../../components/matrix_joined_spaces'
 import Projects from './Projects'
@@ -9,7 +9,7 @@ import { Loading } from '../../components/loading'
 const Profile = () => {
   const auth = useAuth()
   const profile = auth.user
-  const { joinedSpaces, spacesErr, fetchSpaces, reload } = useJoinedSpaces((forceReload) => console.log(fetchSpaces || spacesErr))
+  const { joinedSpaces, spacesErr, fetchSpaces, reload } = useJoinedSpaces(() => console.log(fetchSpaces || spacesErr))
   const matrixClient = Matrix.getMatrixClient()
   const drafts = joinedSpaces?.filter(x => x.published === "invite")
   const publish = joinedSpaces?.filter(x => x.published === "public")
@@ -35,6 +35,8 @@ const Profile = () => {
     getSync();
   }, []);
 
+    
+  
   return (
     <div>
       <p>Hello <strong>{profile.displayname}</strong>,</p>
