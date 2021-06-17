@@ -23,12 +23,14 @@ const Invites = ({room}) => {
             setJoining(false)
         }
     }
-     return (
-              <div>
-              <li>{room.name}</li>
-             <button disabled={joining || joined} onClick={(e) => join(e, room.id)}>ACCEPT</button>
-             {error}
-                </div>
+    return (
+         <>
+            <div style={{display: 'flex'}}>
+                <li style={{width:'100%'}}>{room.name}</li>
+                <button disabled={joining || joined} onClick={(e) => join(e, room.id)}>ACCEPT</button>
+            </div>
+            {error}
+            </>
             )
          
   }

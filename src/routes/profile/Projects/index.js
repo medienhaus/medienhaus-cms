@@ -74,19 +74,22 @@ import { Loading } from '../../../components/loading'
             </>
             )
   }
-    
+    console.log(space);
     return (
-      <div>
-        <ul>
-          <li>{space.name}</li>
-          <li>placeholder</li>
-          <li>placeholder</li>
-          <li>placeholder</li>
-          <li>placeholder</li>
+      <div style={{display: "flex"}}>
+        <ul style={{width:'100%'}}>
+          <li><strong>{space.name}</strong></li>
+          <li>Department: Gestaltung</li>
+          <li>Program: Visuelle Kommunikation</li>
+          <li>Division: New Media</li>
+          <li>Supervisor: Prof. Jussi Ängeslevä</li>
+          <li>Semester: Summer 2021</li>
         </ul>
-        <button disabled={deleted} onClick={() => history.push(`/submit/${space.room_id}`)}>EDIT</button>
-        <button disabled={deleted}>{visibility === 'public' ? "Redact" : "Publish"} </button>
-        {deleted || <DeleteProjectButton roomId={space.room_id} name={space.name} />}
+        <div style={{flexDirection: "row",  alignContent: 'space-around', padding: '30px'}}>
+          <button disabled={deleted} onClick={() => history.push(`/submit/${space.room_id}`)}>EDIT</button>
+          <button disabled={deleted}>{visibility === 'public' ? "Redact" : "Publish"} </button>
+          {deleted || <DeleteProjectButton roomId={space.room_id} name={space.name} />}
+        </div>
       </div>
     )
   }
