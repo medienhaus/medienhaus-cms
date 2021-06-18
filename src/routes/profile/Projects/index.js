@@ -4,7 +4,6 @@ import Matrix from '../../../Matrix'
 import { Loading } from '../../../components/loading'
 
   const Projects = ({space, visibility, reloadProjects}) => {
-    const [deleted, setDeleted] = useState(false);
     const history = useHistory();
     const matrixClient = Matrix.getMatrixClient()
 
@@ -86,9 +85,9 @@ import { Loading } from '../../../components/loading'
           <li>Semester: Summer 2021</li>
         </ul>
         <div style={{flexDirection: "row",  alignContent: 'space-around', padding: '30px'}}>
-          <button disabled={deleted} onClick={() => history.push(`/submit/${space.room_id}`)}>EDIT</button>
-          <button disabled={deleted}>{visibility === 'public' ? "Redact" : "Publish"} </button>
-          {deleted || <DeleteProjectButton roomId={space.room_id} name={space.name} />}
+          <button  onClick={() => history.push(`/submit/${space.room_id}`)}>EDIT</button>
+          <button >{visibility === 'public' ? "Redact" : "Publish"} </button>
+          <DeleteProjectButton roomId={space.room_id} name={space.name} />
         </div>
       </div>
     )

@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useAuth } from '../../Auth'
 import useJoinedSpaces from '../../components/matrix_joined_spaces'
 import Projects from './Projects'
@@ -54,12 +54,12 @@ const Profile = () => {
             }
       {fetchSpaces ? <Loading /> : (
          <>
-          {drafts > 0 && <p>You have <strong>{drafts.length} draft{drafts.length > 1 && 's' }</strong>, which {drafts.length > 1 ? 'are' : 'is'  } not publicly visible.</p>}
+          {drafts?.length > 0 && <p>You have <strong>{drafts.length} draft{drafts.length > 1 && 's' }</strong>, which {drafts.length > 1 ? 'are' : 'is'  } not publicly visible.</p>}
        <ul>
            {spacesErr ? console.error(spacesErr) : drafts.map((space, index) =>  <><Projects space = { space } visibility={ space.visibility } reloadProjects={reloadProjects} /><hr /></>) 
           }
           </ul>
-          {publish > 0 && <p>You have <strong>{publish.length} published</strong> project{publish.length > 1 && 's'}, which {publish.length > 1 ? 'are' : 'is'  } publicly visible.</p>}
+          {publish?.length > 0 && <p>You have <strong>{publish.length} published</strong> project{publish.length > 1 && 's'}, which {publish.length > 1 ? 'are' : 'is'  } publicly visible.</p>}
           <ul>
             {spacesErr ? console.error(spacesErr) : publish.map((space, index) => <><Projects space = { space } visibility={ space.published } reloadProjects={reloadProjects} /><hr /> </>) 
               }

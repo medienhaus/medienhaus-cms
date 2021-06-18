@@ -8,19 +8,19 @@ import AddContent from './AddContent';
 import { Loading } from '../../components/loading'
 
 const Submit = () => {
+  const { joinedSpaces, spacesErr, fetchSpaces, reload } = useJoinedSpaces(() => console.log(fetchSpaces || spacesErr))
   const [subject, setSubject] = useState('')
   const [title, setTitle] = useState('')
   const [visibility, setVisibility] = useState("draft")
   const [loading, setLoading] = useState(false)
   const [blocks, setBlocks] = useState([])
-  const {joinedSpaces, spacesErr, fetchSpaces, reload} = useJoinedSpaces(() => console.log(fetchSpaces || spacesErr))
   const [update, setUpdate] = useState(false);
   const matrixClient = Matrix.getMatrixClient()
   const params = useParams();
   const history = useHistory();
 
   const projectSpace = params.spaceId;
-
+/*
   const getSync = async () => {
     try {
       await matrixClient.startClient()
@@ -63,7 +63,13 @@ const Submit = () => {
   useEffect(() => {
     getSync()
   }, []);
-
+*/
+    const reloadProjects = (msg) => {
+    reload()
+    console.log(msg);
+};
+  
+  
   useEffect(() => {
     const fetchSpace = async () => {
       const space = await matrixClient.getSpaceSummary(projectSpace)
@@ -236,7 +242,6 @@ const Submit = () => {
     )
   }
 
-
   return (
     <div>
       
@@ -258,10 +263,11 @@ const Submit = () => {
         {projectSpace && (
           <>
             <Collaborators projectSpace = {projectSpace} blocks = { blocks} title = {title} joinedSpaces= { joinedSpaces }  />
-             
-            <h3>Content</h3>
+          <h3>Content</h3>
+  <button onClick={()=>reload('reloaded')} >RELOAD</button>
+          
           { blocks.length === 0 ? <AddContent number={0} projectSpace={projectSpace} blocks={blocks}/> : blocks.map((content, i) =>
-              <DisplayContent block={content} index={i} blocks={blocks} projectSpace={projectSpace} /> 
+              <DisplayContent block={content} index={i} blocks={blocks} projectSpace={projectSpace} reloadProjects={reloadProjects}  /> 
             )}
             <h3>Visibility (Draft/Published)</h3>
               {loading ? <Loading /> : <SubmitButton />}
