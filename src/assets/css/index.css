@@ -132,12 +132,13 @@ a[rel~="external"]::after {
   vertical-align: super;
 }
 
-img[alt=""], img:not([alt]) {
-  border: 3px dashed rgb(255,0,0);
-}
-/*@Andi: added width to img for editors */
+/* TODO */
 img {
   width: 100%
+}
+
+img[alt=""], img:not([alt]) {
+  border: 3px dashed rgb(255,0,0);
 }
 
 footer {
@@ -562,7 +563,7 @@ button > #loading {
 
 .editor .left > *,
 .editor .right > *,
-.editor .add > * {
+.editor + .add > * {
   border-color: var(--color-bg);
   border-style: solid;
   border-radius: unset;
@@ -614,23 +615,21 @@ button > #loading {
   width: 2rem;
 }
 
-.editor .add {
+.editor + .add {
   /*
   background-image: linear-gradient(var(--color-me), var(--color-me));
   background-position: center center;
   background-repeat: no-repeat;
   background-size: calc(var(--margin) * 0.1) 100%;
   */
-  grid-column: 3 / 3;
-  align-items: end;
+  display: grid;
+  grid-template-columns: auto 2rem;
+  grid-gap: var(--margin);
 }
 
-/*
-.editor .add > * {
-  grid-row: 3;
-  align-self: end;
+.editor + .add > button {
+  grid-column: 2;
 }
-*/
 
 /*
 .account > div {
