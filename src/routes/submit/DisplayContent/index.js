@@ -136,13 +136,13 @@ import { ReactComponent as TextIcon } from '../../../assets/icons/remix/text.svg
                   {cms?.msgtype === 'm.image' ?
                   <img src={matrixClient.mxcUrlToHttp(cms.url)} alt={cms.info.name} key={block.room_id} />
                   : cms?.msgtype === 'm.audio' ?
-                  <>
+                  <div className="center">
                     <audio controls>
                       <source src={matrixClient.mxcUrlToHttp(cms.url)} />
                     </audio>
                    { /* TODO why section? */}
                     <section id="audio-title">{cms.body}</section>
-                  </>  :
+                    </div> :
                   <div className="center">
                     <Editor
                     dark={window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches}
