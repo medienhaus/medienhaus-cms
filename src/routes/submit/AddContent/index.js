@@ -13,7 +13,8 @@ const AddContent = ({number, projectSpace, blocks, reloadProjects}) => {
   return (
     <div className="add">
       {isPlusButton ?
-        <button key={'add' + number} onClick={(e) => { e.preventDefault(); setIsPlusButton(false) }} >+</button>
+        <button key={'add' + number} onBlur={() => setIsPlusButton(true)} onClick={(e) => { e.preventDefault(); setIsPlusButton(false) }} >+</button>
+        //onBlur not workin here, no idea why.
       : (
         <>
           <select name="content-select" defaultValue={''} id="content-select" onChange={(e) => setContentSelect(e.target.value)}>
