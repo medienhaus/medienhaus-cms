@@ -3,7 +3,7 @@ import Matrix from '../../../Matrix'
 import { Loading } from '../../../components/loading'
 import debounce from "lodash/debounce";
 
-const Collaborators = ({ projectSpace, blocks, title, joinedSpaces }) => {
+const Collaborators = ({ projectSpace, blocks, title, joinedSpaces, startListeningToCollab }) => {
     const [fetchingUsers, setFetchingUsers] = useState(false);
     const [userSearch, setUserSearch] = useState([]);
     const [collab, setCollab] = useState('');
@@ -26,9 +26,7 @@ const Collaborators = ({ projectSpace, blocks, title, joinedSpaces }) => {
                 const stateEvent = matrixClient.getRoom(projectSpace);
 
                 await matrixClient.setPowerLevel(room.room_id, id[1], 100, stateEvent.currentState.getStateEvents("m.room.power_levels", ""))
-              })
-            
-                .then((console.log("ey whatz")))//.then(() => console.log("invited " + id[1] + " to " + room.name))
+              }).then(() => console.log("invited " + id[1] + " to " + room.name))
             } catch (err) {
               console.error(err);
             } 
@@ -63,13 +61,11 @@ const Collaborators = ({ projectSpace, blocks, title, joinedSpaces }) => {
           {// @Andi would probably be nice to have the loading spinner next to the h3 whil its looking for collabrators 
             < section >
               <ul>{
-                joinedSpaces?.map((space, i) => {
-                  if (space.name === title) {
-                    return Object.values(space.collab).map(name => {
+                joinedSpaces?.map((space, i) => space.name === title && Object.values(space.collab).map(name => {
+                  startListeningToCollab()
                       return <li>{name.display_name}</li>
                     })
-                  }
-                })
+                )
               }
               </ul>
             </section>}

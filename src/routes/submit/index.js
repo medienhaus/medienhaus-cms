@@ -20,7 +20,7 @@ const Submit = () => {
   const history = useHistory();
 
   const projectSpace = params.spaceId;
-/*
+
   const getSync = async () => {
     try {
       await matrixClient.startClient()
@@ -30,40 +30,9 @@ const Submit = () => {
   }
 
   useEffect(() => {
-    
-    const listening = async () => {
-      await matrixClient.removeAllListeners()
-      const myRooms = await matrixClient.getSpaceSummary(projectSpace)
-      setTitle(myRooms?.rooms[0].name)
-      console.log(myRooms);
-
-      matrixClient.addListener("RoomState.events", function (event) {
-        if (event.event.type === "m.room.member" && myRooms.rooms?.filter(({ room_id }) => event.sender.roomId.includes(room_id))) {
-          setUpdate(true)
-          //console.log(event);
-        } else if (event.event.type === "m.room.name" && blocks?.filter(({ room_id }) => event.sender.roomId.includes(room_id))) {
-          setUpdate(true)
-        } else if (event.event.state_key === projectSpace) {
-          setUpdate(true)
-          // console.log(event);
-        }
-      })
-      matrixClient.on("Room.timeline", function(event, room, toStartOfTimeline) {
-        if (event.getType() !== "m.room.message"  && blocks?.filter(({ room_id }) => event.event.room_id.includes(room_id))) {
-          return; // only use messages
-        }
-        console.log(event.event);
-        setUpdate(true)
-      });
-    }
-  
-    projectSpace && listening()
-  }, [projectSpace]);
-
-  useEffect(() => {
     getSync()
   }, []);
-*/
+
   
   const reloadProjects = (msg) => {
     reload()
@@ -74,6 +43,7 @@ const Submit = () => {
   useEffect(() => {
     const fetchSpace = async () => {
       const space = await matrixClient.getSpaceSummary(projectSpace)
+      setTitle(space.rooms[0].name)
       const spaceRooms = space.rooms.map(room => {
         if (!('room_type' in room)) {
           return room
@@ -84,13 +54,38 @@ const Submit = () => {
         if (a.name > b.name) return 1
         return 0
       }))
-      console.log(blocks);
       setUpdate(false)
-
     }
     projectSpace && fetchSpace()
     // eslint-disable-next-line
-  }, [update, projectSpace, fetchSpaces, joinedSpaces]);
+  }, [update, projectSpace]);
+
+  const listeningToCollaborators = async () => {
+    console.log("Started spying on collaborators");
+    await matrixClient.removeAllListeners()
+    const myRooms = await matrixClient.getSpaceSummary(projectSpace)
+    setTitle(myRooms?.rooms[0].name)
+    console.log(myRooms);
+
+    matrixClient.addListener("RoomState.events", function (event) {
+      if (event.event.type === "m.room.member" && myRooms.rooms?.filter(({ room_id }) => event.sender.roomId.includes(room_id)) && event.event.sender !== localStorage.getItem('mx_user_id')) {
+        setUpdate(true) 
+
+      } else if (event.event.type === "m.room.name" && blocks?.filter(({ room_id }) => event.sender.roomId.includes(room_id)) && event.event.sender !== localStorage.getItem('mx_user_id')) {
+        setUpdate(true) 
+
+      } else if (event.event.state_key === projectSpace) {
+        setUpdate(true) 
+      }
+    })
+    matrixClient.on("Room.timeline", function(event, room, toStartOfTimeline) {
+      if (event.event.type === "m.room.message"  && blocks?.filter(({ room_id }) => event.event.room_id.includes(room_id)) && event.event.sender !== localStorage.getItem('mx_user_id')) {
+        setUpdate(true) 
+      }
+     
+     
+    });
+  }
 
   //======= COMPONENTS ======================================================================
 
@@ -243,6 +238,10 @@ const Submit = () => {
     )
   }
 
+  const startListeningToCollab = () => {
+    listeningToCollaborators()
+  }
+
   return (
     <div>
       
@@ -263,7 +262,7 @@ const Submit = () => {
         <ProjectTitle />
         {projectSpace && (
           <>
-            <Collaborators projectSpace = {projectSpace} blocks = { blocks} title = {title} joinedSpaces= { joinedSpaces }  />
+            <Collaborators projectSpace = {projectSpace} blocks = { blocks} title = {title} joinedSpaces= { joinedSpaces } startListeningToCollab={startListeningToCollab} />
           <h3>Content</h3>          
           { blocks.length === 0 ? <AddContent number={0} projectSpace={projectSpace} blocks={blocks} reloadProjects={reloadProjects}/> : blocks.map((content, i) =>
               <DisplayContent block={content} index={i} blocks={blocks} projectSpace={projectSpace} reloadProjects={reloadProjects}  /> 
