@@ -13,7 +13,7 @@ import { ReactComponent as AudioIcon } from '../../../assets/icons/remix/volume-
 import { ReactComponent as ImageIcon } from '../../../assets/icons/remix/image-line.svg'
 import { ReactComponent as TextIcon } from '../../../assets/icons/remix/text.svg';
 
-  const DisplayContent = ({block, index, blocks, projectSpace}) => {
+  const DisplayContent = ({block, index, blocks, projectSpace, reloadProjects}) => {
     const [clicked, setClicked] = useState(false);
     const [readOnly, setReadOnly] = useState(false);
     const [saved, setSaved] = useState(false);
@@ -92,7 +92,9 @@ import { ReactComponent as TextIcon } from '../../../assets/icons/remix/text.svg
       const passiveRoom = blocks[newOrder].room_id
       try {
         await matrixClient.setRoomName(roomId, newOrder + '_' + active[1]).then(
-          await matrixClient.setRoomName(passiveRoom, order + '_' + passive[1])
+          await matrixClient.setRoomName(passiveRoom, order + '_' + passive[1]).then(
+            reloadProjects('reload from DisplayContent changeOrder')
+          )
         )//.then(setCounter(0))
       } catch (err) {
         console.error(err);
@@ -193,8 +195,7 @@ import { ReactComponent as TextIcon } from '../../../assets/icons/remix/text.svg
                       {clicked ? 'SURE?' : deleting ? <Loading /> : '×'}
                       </button>
                   </div>
-                  <AddContent number={index +1} projectSpace={projectSpace} blocks={blocks}/>
-                  
+                  <AddContent number={index + 1} projectSpace={projectSpace} blocks={blocks} reloadProjects={reloadProjects} />
                 </div>
                 )
         )

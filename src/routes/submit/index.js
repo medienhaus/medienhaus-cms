@@ -64,11 +64,12 @@ const Submit = () => {
     getSync()
   }, []);
 */
-    const reloadProjects = (msg) => {
+  
+  const reloadProjects = (msg) => {
     reload()
+    setUpdate(true)
     console.log(msg);
 };
-  
   
   useEffect(() => {
     const fetchSpace = async () => {
@@ -89,7 +90,7 @@ const Submit = () => {
     }
     projectSpace && fetchSpace()
     // eslint-disable-next-line
-  }, [update, projectSpace]);
+  }, [update, projectSpace, fetchSpaces, joinedSpaces]);
 
   //======= COMPONENTS ======================================================================
 
@@ -263,10 +264,8 @@ const Submit = () => {
         {projectSpace && (
           <>
             <Collaborators projectSpace = {projectSpace} blocks = { blocks} title = {title} joinedSpaces= { joinedSpaces }  />
-          <h3>Content</h3>
-  <button onClick={()=>reload('reloaded')} >RELOAD</button>
-          
-          { blocks.length === 0 ? <AddContent number={0} projectSpace={projectSpace} blocks={blocks}/> : blocks.map((content, i) =>
+          <h3>Content</h3>          
+          { blocks.length === 0 ? <AddContent number={0} projectSpace={projectSpace} blocks={blocks} reloadProjects={reloadProjects}/> : blocks.map((content, i) =>
               <DisplayContent block={content} index={i} blocks={blocks} projectSpace={projectSpace} reloadProjects={reloadProjects}  /> 
             )}
             <h3>Visibility (Draft/Published)</h3>

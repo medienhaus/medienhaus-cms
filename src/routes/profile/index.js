@@ -16,7 +16,6 @@ const Profile = () => {
   const [invites, setInvites] = useState([]);
 
   useEffect(() => {
-
     const getSync = async () => {
       try {
         await matrixClient.startClient().then(() => {
