@@ -10,11 +10,12 @@ const AddContent = ({number, projectSpace, blocks, reloadProjects}) => {
     setIsPlusButton(button)
   }
 
-  return ( <div className="add">
-    {isPlusButton ?
-      <button key={'add' + number} onClick={(e) => { e.preventDefault(); setIsPlusButton(false) }} >+</button>
+  return (
+    <div className="add">
+      {isPlusButton ?
+        <button key={'add' + number} onClick={(e) => { e.preventDefault(); setIsPlusButton(false) }} >+</button>
       : (
-       <>
+        <>
           <select name="content-select" defaultValue={''} id="content-select" onChange={(e) => setContentSelect(e.target.value)}>
             <option value='' disabled={true} >Select Content</option>
             <option value="none" disabled={true} >--Text------------</option>
@@ -25,14 +26,15 @@ const AddContent = ({number, projectSpace, blocks, reloadProjects}) => {
             <option value="audio">Audio</option>
           </select>
           {contentSelect === "image" || contentSelect === "audio" ?
-            <FileUpload fileType={contentSelect} number={number} space={projectSpace} blocks={blocks} reloadProjects={reloadProjects} displayPlusButton={displayPlusButton} /> :
+            <FileUpload fileType={contentSelect} number={number} space={projectSpace} blocks={blocks} reloadProjects={reloadProjects} displayPlusButton={displayPlusButton} />
+          :
             <AddBlock contentSelect={contentSelect} number={number} projectSpace={projectSpace} blocks={blocks} reloadProjects={reloadProjects} displayPlusButton={displayPlusButton} />
           }
           <button onClick={(e) => { e.preventDefault(); setIsPlusButton(true) }} >CANCEL</button>
-          </>
+        </>
       )
     }
-     </div>
+    </div>
   )
 }
 export default AddContent

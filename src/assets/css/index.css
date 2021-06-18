@@ -623,12 +623,12 @@ button > #loading {
   background-size: calc(var(--margin) * 0.1) 100%;
   */
   display: grid;
-  grid-template-columns: auto 2rem;
+  grid-template-columns: 1fr auto 2rem;
   grid-gap: var(--margin);
 }
 
-.editor + .add > button {
-  grid-column: 2;
+.editor + .add > button:last-of-type {
+  grid-column: 3;
 }
 
 /*
