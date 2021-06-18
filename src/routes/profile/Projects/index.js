@@ -3,7 +3,7 @@ import {useHistory} from "react-router-dom";
 import Matrix from '../../../Matrix'
 import { Loading } from '../../../components/loading'
 
-  const Projects = ({space, visibility}) => {
+  const Projects = ({space, visibility, onDelete}) => {
     const [deleted, setDeleted] = useState(false);
     const history = useHistory();
     const matrixClient = Matrix.getMatrixClient()
@@ -54,7 +54,7 @@ import { Loading } from '../../../components/loading'
             onClick={async (e) => {
               if (warning) {
                 setLeaving(true)
-                await deleteProject(e, roomId).catch(err => console.error(err)).then(setDeleted(true)).then(() => setLeaving(false))
+                await deleteProject(e, roomId).catch(err => console.error(err)).then(onDelete).then(() => setLeaving(false))
                 setWarning(false)
               } else {
                 e.preventDefault()

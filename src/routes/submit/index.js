@@ -12,7 +12,7 @@ const Submit = () => {
   const [visibility, setVisibility] = useState("draft")
   const [loading, setLoading] = useState(false)
   const [blocks, setBlocks] = useState([])
-  const {joinedSpaces, spacesErr, fetchSpaces} = useJoinedSpaces()
+  const {joinedSpaces, spacesErr, fetchSpaces, reload} = useJoinedSpaces(() => console.log(fetchSpaces || spacesErr))
   const [update, setUpdate] = useState(false);
   const matrixClient = Matrix.getMatrixClient()
   const params = useParams();
@@ -257,7 +257,7 @@ const Submit = () => {
         {projectSpace && (
           <>
            
-            <Collaborators projectSpace = {projectSpace} blocks = { blocks} title = {title} />
+            <Collaborators projectSpace = {projectSpace} blocks = { blocks} title = {title} joinedSpaces= { joinedSpaces }  />
              
             <h3>Content</h3>
           {blocks.map((content, i) =>

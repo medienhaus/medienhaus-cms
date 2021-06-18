@@ -60,7 +60,7 @@ const Profile = () => {
           </ul>
           {publish && <p>You have <strong>{publish.length} published</strong> project{publish.length > 1 && 's'}, which {publish.length > 1 ? 'are' : 'is'  } publicly visible.</p>}
           <ul>
-            {spacesErr ? console.error(spacesErr) : publish.map((space, index) => <><Projects space = { space } visibility={ space.published } /><hr /> </>) 
+            {spacesErr ? console.error(spacesErr) : publish.map((space, index) => <><Projects space = { space } visibility={ space.published } onDelete={() => reload()} /><hr /> </>) 
               }
             </ul>
           </>

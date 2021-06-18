@@ -1,15 +1,13 @@
 import React, { useState } from 'react'
 import Matrix from '../../../Matrix'
 import { Loading } from '../../../components/loading'
-import useJoinedSpaces from '../../../components/matrix_joined_spaces'
 import debounce from "lodash/debounce";
 
-const Collaborators = ({ projectSpace, blocks, title }) => {
+const Collaborators = ({ projectSpace, blocks, title, joinedSpaces }) => {
     const [fetchingUsers, setFetchingUsers] = useState(false);
     const [userSearch, setUserSearch] = useState([]);
     const [collab, setCollab] = useState('');
     const [inviting, setInviting] = useState(false);
-    const {joinedSpaces, spacesErr, fetchSpaces} = useJoinedSpaces()
     const matrixClient = Matrix.getMatrixClient()
 
     const invite = async (e) => {
@@ -63,10 +61,9 @@ const Collaborators = ({ projectSpace, blocks, title }) => {
         <>
            <h3>Collaborators / Credits</h3> 
           {// @Andi would probably be nice to have the loading spinner next to the h3 whil its looking for collabrators 
-           fetchSpaces ? <Loading /> : spacesErr ? "An error occured while trying to load collaborators." : 
             < section >
               <ul>{
-                joinedSpaces.map((space, i) => {
+                joinedSpaces?.map((space, i) => {
                   if (space.name === title) {
                     return Object.values(space.collab).map(name => {
                       return <li>{name.display_name}</li>
