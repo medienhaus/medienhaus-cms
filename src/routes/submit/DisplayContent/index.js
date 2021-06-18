@@ -134,7 +134,7 @@ import { ReactComponent as TextIcon } from '../../../assets/icons/remix/text.svg
                     <button key={'down_' + block.room_id} disabled={ index === blocks.length -1 } onClick={(e) => changeOrder(e,block.room_id, block.name, 1)}>↓</button>
                   </div>
                   {cms?.msgtype === 'm.image' ?
-                  <img src={matrixClient.mxcUrlToHttp(cms.url)} alt={cms.info.name} key={block.room_id} />
+                  <div className="center"><img src={matrixClient.mxcUrlToHttp(cms.url)} alt={cms.info.name} key={block.room_id} /></div>
                   : cms?.msgtype === 'm.audio' ?
                   <div className="center">
                     <audio controls>
