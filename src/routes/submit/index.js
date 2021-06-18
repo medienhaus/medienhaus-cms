@@ -4,6 +4,7 @@ import Matrix from '../../Matrix'
 import useJoinedSpaces from '../../components/matrix_joined_spaces'
 import Collaborators from './Collaborators'
 import DisplayContent from './DisplayContent'
+import AddContent from './AddContent';
 import { Loading } from '../../components/loading'
 
 const Submit = () => {
@@ -256,14 +257,11 @@ const Submit = () => {
         <ProjectTitle />
         {projectSpace && (
           <>
-           
             <Collaborators projectSpace = {projectSpace} blocks = { blocks} title = {title} joinedSpaces= { joinedSpaces }  />
              
             <h3>Content</h3>
-          {blocks.map((content, i) =>
-              <>
-              <DisplayContent block={content} index={i} blocks={blocks} projectSpace={projectSpace} />
-              </>
+          { blocks.length === 0 ? <AddContent number={0} projectSpace={projectSpace} blocks={blocks}/> : blocks.map((content, i) =>
+              <DisplayContent block={content} index={i} blocks={blocks} projectSpace={projectSpace} /> 
             )}
             <h3>Visibility (Draft/Published)</h3>
               {loading ? <Loading /> : <SubmitButton />}
