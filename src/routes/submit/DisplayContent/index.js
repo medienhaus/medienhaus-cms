@@ -49,12 +49,11 @@ import { ReactComponent as TextIcon } from '../../../assets/icons/remix/text.svg
       }
     }
 
-
     const onDelete = async (e, roomId, index) => {
       e.preventDefault()
       setDeleting(true)
       setReadOnly(true)
-      
+
       try {
         const count = await matrixClient.getJoinedRoomMembers(roomId)
         Object.keys(count.joined).length > 1 && Object.keys(count.joined).forEach(name => {
@@ -125,6 +124,7 @@ import { ReactComponent as TextIcon } from '../../../assets/icons/remix/text.svg
             : error
               ? console.error(error)
               : (
+              <>
                 <div className="editor">
                   <div className="left">
                     <button key={'up_' + block.room_id} disabled={ index === 0 } onClick={(e) => changeOrder(e, block.room_id,  block.name, -1)}>↑</button>
@@ -180,7 +180,7 @@ import { ReactComponent as TextIcon } from '../../../assets/icons/remix/text.svg
                     }
                   </div>
                   }
-                  
+
                   <div className="right">
                     <button key={'delete' + index} onClick={(e) => {
                       if (clicked) {
@@ -196,9 +196,10 @@ import { ReactComponent as TextIcon } from '../../../assets/icons/remix/text.svg
                       {clicked ? 'SURE?' : deleting ? <Loading /> : '×'}
                       </button>
                   </div>
-                  <AddContent number={index + 1} projectSpace={projectSpace} blocks={blocks} reloadProjects={reloadProjects} />
                 </div>
-                )
+                <AddContent number={index + 1} projectSpace={projectSpace} blocks={blocks} reloadProjects={reloadProjects} />
+              </>
+              )
         )
   }
   export default DisplayContent

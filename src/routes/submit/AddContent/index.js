@@ -16,7 +16,7 @@ const AddContent = ({number, projectSpace, blocks, reloadProjects}) => {
         <button key={'add' + number} onClick={(e) => { e.preventDefault(); setIsPlusButton(false) }} >+</button>
       </div>
     : (
-      <div>
+      <div className="add">
         <select name="content-select"  defaultValue={''} id="content-select" onChange={(e) => setContentSelect(e.target.value)}>
         <option value='' disabled={true} >Select Content</option>
             <option value="none" disabled={true} >--Text------------</option>
