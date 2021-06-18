@@ -13,7 +13,7 @@ const AddContent = ({number, projectSpace, blocks, reloadProjects}) => {
   return (
     <div className="add">
       {isPlusButton ?
-        <button key={'add' + number} onBlur={() => setIsPlusButton(true)} onClick={(e) => { e.preventDefault(); setIsPlusButton(false) }} >+</button>
+        <button className="add-button" key={'add' + number} onBlur={() => setIsPlusButton(true)} onClick={(e) => { e.preventDefault(); setIsPlusButton(false) }} >+</button>
         //onBlur not workin here, no idea why.
       : (
         <>
@@ -26,12 +26,12 @@ const AddContent = ({number, projectSpace, blocks, reloadProjects}) => {
             <option value="image">Image</option>
             <option value="audio">Audio</option>
           </select>
+          <button className="cancel" onClick={(e) => { e.preventDefault(); setIsPlusButton(true) }} >×</button>
           {contentSelect === "image" || contentSelect === "audio" ?
             <FileUpload fileType={contentSelect} number={number} space={projectSpace} blocks={blocks} reloadProjects={reloadProjects} displayPlusButton={displayPlusButton} />
           :
             <AddBlock contentSelect={contentSelect} number={number} projectSpace={projectSpace} blocks={blocks} reloadProjects={reloadProjects} displayPlusButton={displayPlusButton} />
           }
-          <button onClick={(e) => { e.preventDefault(); setIsPlusButton(true) }} >CANCEL</button>
         </>
       )
     }

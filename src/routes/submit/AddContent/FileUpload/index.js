@@ -49,7 +49,7 @@ const FileUpload = (props) => {
                 "url": res[0]
               })
               )
-              .then(console.log) 
+              .then(console.log)
           setFileName()
           setSelectedFile('')
           props.displayPlusButton(true)
@@ -57,7 +57,7 @@ const FileUpload = (props) => {
 
           //setCounter(0)
          //})
-       
+
       } catch (e) {
         console.log('error while trying to save image: ' + e)
       } finally {
@@ -68,24 +68,24 @@ const FileUpload = (props) => {
     selectedFile && console.log(selectedFile);
     return (
       <>
-        <input type="file" name="filename" onChange={changeHandler} disabled={props.fileType === "" || false} />
-        {selectedFile
-          && (
-            <div>
-            <p>Filename: <input type="text" value={fileName} onChange={e => {
+        {selectedFile && (
+          <>
+          <div className="filename">
+            <label htmlFor="filename">Filename:</label>
+            <input id="filename" type="text" value={fileName} onChange={e => {
               e.preventDefault()
               setFileName(e.target.value)
             }} />
-            </p>
-            <button onClick={(e) => handleSubmission(e)} disabled={!selectedFile.type.includes(props.fileType) || selectedFile.size > size || loading}>{loading ? <Loading /> : "Upload"}</button>
-            {selectedFile.type.includes(props.fileType) || <section>Please select an {props.fileType} file.</section>}
-            {selectedFile.size > size && <section style={{ color: "red" }}> File size needs to be less than {size / 1000000}MB</section> //@Andi pls add to css
-            }
-            </div>
+          </div>
+          <button className="upload" onClick={(e) => handleSubmission(e)} disabled={!selectedFile.type.includes(props.fileType) || selectedFile.size > size || loading}>{loading ? <Loading /> : "Upload"}</button>
+          {selectedFile.type.includes(props.fileType) || <section>Please select an {props.fileType} file.</section>}
+          {selectedFile.size > size && <section style={{ color: "red" }}> File size needs to be less than {size / 1000000}MB</section> //@Andi pls add to css
+        }
+        </>
         )
          }
+        <input className="browse" type="file" name="browse" onChange={changeHandler} disabled={props.fileType === "" || false} />
       </>)
 }
 
 export default FileUpload
-  
