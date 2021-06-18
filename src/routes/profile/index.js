@@ -35,13 +35,14 @@ const Profile = () => {
     getSync();
   }, []);
 
-    
+  const reloadProjects = () => {
+    reload()
+};
   
   return (
     <div>
       <p>Hello <strong>{profile.displayname}</strong>,</p>
       <p>welcome to your profile for the Rundgang 2021.</p>
-      <button onClick={() => reload()}>reload</button>
       {invites.length > 0 && (
       <>
         <p>You have been invited to join the following project{invites.length > 1 && 's'}:</p>
@@ -53,14 +54,14 @@ const Profile = () => {
             }
       {fetchSpaces ? <Loading /> : (
          <>
-          {drafts && <p>You have <strong>{drafts.length} draft{drafts.length > 1 && 's' }</strong>, which {drafts.length > 1 ? 'are' : 'is'  } not publicly visible.</p>}
+          {drafts > 0 && <p>You have <strong>{drafts.length} draft{drafts.length > 1 && 's' }</strong>, which {drafts.length > 1 ? 'are' : 'is'  } not publicly visible.</p>}
        <ul>
-           {spacesErr ? console.error(spacesErr) : drafts.map((space, index) =>  <><Projects space = { space } visibility={ space.visibility }/><hr /></>) 
+           {spacesErr ? console.error(spacesErr) : drafts.map((space, index) =>  <><Projects space = { space } visibility={ space.visibility } reloadProjects={reloadProjects} /><hr /></>) 
           }
           </ul>
-          {publish && <p>You have <strong>{publish.length} published</strong> project{publish.length > 1 && 's'}, which {publish.length > 1 ? 'are' : 'is'  } publicly visible.</p>}
+          {publish > 0 && <p>You have <strong>{publish.length} published</strong> project{publish.length > 1 && 's'}, which {publish.length > 1 ? 'are' : 'is'  } publicly visible.</p>}
           <ul>
-            {spacesErr ? console.error(spacesErr) : publish.map((space, index) => <><Projects space = { space } visibility={ space.published } onDelete={() => reload()} /><hr /> </>) 
+            {spacesErr ? console.error(spacesErr) : publish.map((space, index) => <><Projects space = { space } visibility={ space.published } reloadProjects={reloadProjects} /><hr /> </>) 
               }
             </ul>
           </>
