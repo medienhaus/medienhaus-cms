@@ -551,9 +551,6 @@ button > #loading {
 
 .editor .left,
 .editor .right {
-  /*
-  background: repeating-linear-gradient(var(--color-fg) 0, var(--color-fg) calc(var(--margin) * 0.2), var(--color-bg) calc(var(--margin) * 0.2), var(--color-bg) calc(var(--margin) * 0.4));
-  */
   background-image: linear-gradient(var(--color-me), var(--color-me));
   background-position: center center;
   background-repeat: no-repeat;
@@ -564,12 +561,12 @@ button > #loading {
 }
 
 .editor .left > *,
-.editor .right > * {
+.editor .right > *,
+.editor .add > * {
   border-color: var(--color-bg);
   border-style: solid;
   border-radius: unset;
   border-width: calc(var(--margin) * 0.2);
-  box-sizing: margin-box;
 }
 
 .editor .left > :nth-child(1) {
@@ -580,12 +577,6 @@ button > #loading {
 
 .editor .left > :nth-child(2) {
   background-color: var(--color-bg);
-  /*
-  border-color: var(--color-fg);
-  border-style: solid;
-  border-radius: unset;
-  border-width: calc(var(--margin) * 0.2);
-  */
   display: grid;
   grid-row: 2;
   align-self: center;
@@ -622,6 +613,24 @@ button > #loading {
   min-height: 2rem;
   width: 2rem;
 }
+
+.editor .add {
+  /*
+  background-image: linear-gradient(var(--color-me), var(--color-me));
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: calc(var(--margin) * 0.1) 100%;
+  */
+  grid-column: 3 / 3;
+  align-items: end;
+}
+
+/*
+.editor .add > * {
+  grid-row: 3;
+  align-self: end;
+}
+*/
 
 /*
 .account > div {

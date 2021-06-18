@@ -10,13 +10,13 @@ import { Loading } from '../../../components/loading'
 
     const deleteProject = async (e, project) => {
       e.preventDefault()
-      var space 
+      var space
       return new Promise(async (resolve, reject) => {
         try {
           space = await matrixClient.getSpaceSummary(project)
         } catch (err) {
           reject(new Error(err))
-        }      
+        }
         space.rooms.reverse().map(async (space, index) => {
           //we reverse here to leave the actual project space last in case something goes wrong in the process.
           console.log("Leaving " + space.name);
@@ -26,7 +26,7 @@ import { Loading } from '../../../components/loading'
               localStorage.getItem('medienhaus_user_id') !== name && matrixClient.kick(space.room_id, name)
             })
             await matrixClient.leave(space.room_id)
-           
+
           } catch (err) {
             console.error(err);
             reject(new Error(err))
@@ -35,7 +35,7 @@ import { Loading } from '../../../components/loading'
         resolve('successfully deleted ' + project)
       })
     }
-    
+
   const DeleteProjectButton = ({roomId, name}) => {
     //dom not redrawing drafts after deletion is complete, needs to be fixed
     const [warning, setWarning] = useState(false);
@@ -62,7 +62,7 @@ import { Loading } from '../../../components/loading'
               }
             } />
         {leaving && <Loading />}
-       
+
          {warning &&  <input
           id="delete"
           name="delete"
