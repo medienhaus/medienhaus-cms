@@ -3,13 +3,13 @@ import {useHistory, useParams} from "react-router-dom";
 import Matrix from '../../Matrix'
 import useJoinedSpaces from '../../components/matrix_joined_spaces'
 import Collaborators from './Collaborators'
+import Category from './Category';
 import DisplayContent from './DisplayContent'
 import AddContent from './AddContent';
 import { Loading } from '../../components/loading'
 
 const Submit = () => {
   const { joinedSpaces, spacesErr, fetchSpaces, reload } = useJoinedSpaces(() => console.log(fetchSpaces || spacesErr))
-  const [subject, setSubject] = useState('')
   const [title, setTitle] = useState('')
   const [visibility, setVisibility] = useState("draft")
   const [loading, setLoading] = useState(false)
@@ -152,7 +152,6 @@ const Submit = () => {
     const [oldTitle, setOldTitle] = useState('');
     const doublicate = joinedSpaces?.filter(({ name }) => projectTitle === name).length > 0
 
-     
     useEffect(() => {
       setProjectTitle(title)
       title === '' && setNewProject(true)
@@ -245,18 +244,7 @@ const Submit = () => {
     <div>
       
       <h3>Category / Context / Course</h3>
-        <div>
-            <label htmlFor="subject">Studiengang</label>
-             <select id="subject" name="subject" value={subject} onChange={(e) => setSubject(e.target.value)}>
-              <option value="vk">VK</option>
-              <option value="act">Schauspiel</option>
-              <option value="clown">Clown</option>
-              <option value="kunst">Kunst</option>
-            </select>
-            {
-            // sollte es hier die möglichkeit geben mehrere auszuwählen? also studiengang übergreifende projekte
-            }
-        </div>
+        <Category />
         <h3>Project Title / Collaborators / Credits</h3>
         <ProjectTitle />
         {projectSpace && (
