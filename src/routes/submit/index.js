@@ -44,6 +44,7 @@ const Submit = () => {
     const fetchSpace = async () => {
       const space = await matrixClient.getSpaceSummary(projectSpace)
       setTitle(space.rooms[0].name)
+      console.log(space.rooms);
       const spaceRooms = space.rooms.map(room => {
         if (!('room_type' in room)) {
           return room
@@ -82,8 +83,6 @@ const Submit = () => {
       if (event.event.type === "m.room.message"  && blocks?.filter(({ room_id }) => event.event.room_id.includes(room_id)) && event.event.sender !== localStorage.getItem('mx_user_id')) {
         setUpdate(true) 
       }
-     
-     
     });
   }
 
