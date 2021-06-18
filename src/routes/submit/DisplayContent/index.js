@@ -186,6 +186,7 @@ import { ReactComponent as TextIcon } from '../../../assets/icons/remix/text.svg
                       if (clicked) {
                         onDelete(e, block.room_id, index)
                         setClicked(false)
+                        reloadProjects('callback from delete button in DisplayContent')
                       } else {
                         e.preventDefault()
                         setClicked(true)
