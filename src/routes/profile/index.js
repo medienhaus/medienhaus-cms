@@ -18,7 +18,8 @@ const Profile = () => {
   useEffect(() => {
     const getSync = async () => {
       try {
-        await matrixClient.startClient().then(() => {
+        await matrixClient.startClient().then(async() => {
+          console.log(await matrixClient.publicRooms());
           matrixClient.on("Room", (room) => {
             setTimeout(async () => {
               room._selfMembership === 'invite' && console.log(room);
