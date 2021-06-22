@@ -58,6 +58,7 @@ function App () {
             <Route path="/login" component={Login} />
             <PrivateRoute path="/tools" component={Tools} />
             <PrivateRoute path="/profile" component={Profile} />
+            <PrivateRoute path="/submit/:spaceId" component={Submit} />
             <PrivateRoute path="/submit" component={Submit} />
           </Switch>
         </main>

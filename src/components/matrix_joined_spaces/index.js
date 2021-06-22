@@ -17,21 +17,19 @@ const getAnswer = async () => {
 
   try {
     const answer = await matrixClient.getJoinedRooms()
-    
     if (answer.joined_rooms.length > 0) {
       const getNames = await Promise.all(answer.joined_rooms.map(async (roomId) => {
         try {
           const room = await matrixClient.getSpaceSummary(roomId)
           // console.log(room.rooms[0].room_type
           if (room.rooms[0].room_type === 'm.space' && isJson(room.rooms[0].topic)) {
-            console.log(room);
             const collab = room.rooms[0].num_joined_members > 1 ? await matrixClient.getJoinedRoomMembers(room.rooms[0].room_id) : false
             const join_rule = await fetch(process.env.REACT_APP_MATRIX_BASE_URL + `/_matrix/client/r0/rooms/${room.rooms[0].room_id}/state/m.room.join_rules/`, {
               method: 'GET',
               headers: { Authorization: 'Bearer ' + localStorage.getItem('medienhaus_access_token') },
             })
             const published =  await join_rule.json()
-            return { name: room.rooms[0].name, room_id: room.rooms[0].room_id, topic: JSON.parse(room.rooms[0].topic), published: published.join_rule, collab: collab && collab.joined  }
+            return { name: room.rooms[0].name, room_id: room.rooms[0].room_id, topic: JSON.parse(room.rooms[0].topic), published: published.join_rule, collab: collab && collab.joined , avatar_url: room.rooms[0].avatar_url !== undefined && room.rooms[0].avatar_url }
           } else {
             return false
           }
@@ -50,12 +48,14 @@ const getAnswer = async () => {
   }
 }
 
-const useJoinedSpaces = () => {
+const useJoinedSpaces = ({num}) => {
   const [joinedSpaces, setJoinedSpaces] = useState()
   const [fetchSpaces, setFetchSpaces] = useState(true)
   const [spacesErr, setSpacesErr] = useState(false)
+  const [load, setLoad] = useState(false);
 
   useEffect(() => {
+    console.log(load);
     let canceled
     setFetchSpaces(true);
     (async () => {
@@ -71,11 +71,16 @@ const useJoinedSpaces = () => {
     return () => { canceled = true }
     
     // eslint-disable-next-line
-  }, []);
+  }, [load]);
   return {
     joinedSpaces,
     spacesErr,
-    fetchSpaces
+    fetchSpaces,
+    reload: () => {
+      setLoad({...load
+       }
+    )
+    }
   }
 }
 
