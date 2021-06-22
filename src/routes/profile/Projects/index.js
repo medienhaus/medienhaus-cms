@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import {useHistory} from "react-router-dom";
 import Matrix from '../../../Matrix'
+import ProjectImage from '../../submit/ProjectImage';
 import { Loading } from '../../../components/loading'
 
   const Projects = ({space, visibility, reloadProjects}) => {
@@ -75,7 +76,8 @@ import { Loading } from '../../../components/loading'
   }
     console.log(space);
     return (
-      <div style={{display: "flex"}}>
+      <div style={{ display: "flex" }}>
+        {space.avatar_url &&  <img src={matrixClient.mxcUrlToHttp(space.avatar_url)} alt="Project image" />}
         <ul style={{width:'100%'}}>
           <li><strong>{space.name}</strong></li>
           <li>Department: Gestaltung</li>
