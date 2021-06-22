@@ -12,6 +12,7 @@ import { Loading } from '../../components/loading'
 const Submit = () => {
   const { joinedSpaces, spacesErr, fetchSpaces, reload } = useJoinedSpaces(() => console.log(fetchSpaces || spacesErr))
   const [title, setTitle] = useState('')
+  const [projectImage, setProjectImage] = useState(false);
   const [visibility, setVisibility] = useState("draft")
   const [loading, setLoading] = useState(false)
   const [blocks, setBlocks] = useState([])
@@ -45,6 +46,7 @@ const Submit = () => {
     const fetchSpace = async () => {
       const space = await matrixClient.getSpaceSummary(projectSpace)
       setTitle(space.rooms[0].name)
+      space.rooms[0].avatar_url !== undefined && setProjectImage(space.rooms[0].avatar_url)
       console.log(space.rooms);
       const spaceRooms = space.rooms.map(room => {
         if (!('room_type' in room)) {
@@ -85,6 +87,10 @@ const Submit = () => {
         setUpdate(true) 
       }
     });
+  }
+
+  const changeProjectImage = (url) => {
+    setProjectImage(url)
   }
 
   //======= COMPONENTS ======================================================================
@@ -250,9 +256,10 @@ const Submit = () => {
         <ProjectTitle />
         {projectSpace && (
           <>
-            <Collaborators projectSpace = {projectSpace} blocks = { blocks} title = {title} joinedSpaces= { joinedSpaces } startListeningToCollab={startListeningToCollab} />
+          <Collaborators projectSpace={projectSpace} blocks={blocks} title={title} joinedSpaces={joinedSpaces} startListeningToCollab={startListeningToCollab} />
+          <h3>Project Image</h3>
+          <ProjectImage projectSpace={projectSpace} projectImage={projectImage} changeProjectImage={changeProjectImage}/>
           <h3>Content</h3>
-          <ProjectImage projectSpace={projectSpace}/>
           { blocks.length === 0 ? <AddContent number={0} projectSpace={projectSpace} blocks={blocks} reloadProjects={reloadProjects}/> : blocks.map((content, i) =>
               <DisplayContent block={content} index={i} blocks={blocks} projectSpace={projectSpace} reloadProjects={reloadProjects}  /> 
             )}
