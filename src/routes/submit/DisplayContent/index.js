@@ -118,7 +118,7 @@ import { ReactComponent as TextIcon } from '../../../assets/icons/remix/text.svg
   }
 
         return (
-          fetching || loading 
+          fetching || loading || deleting
           /*
            * @Andi sort of... hack to keep interface from violently redrawing. We need to see how we deal with this.
            * Too many waterfalls, let's stick to the rivers and the lakes that we're used to.
