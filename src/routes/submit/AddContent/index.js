@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import FileUpload from './FileUpload';
+import MediaUpload from './MediaUpload';
 import AddBlock from './AddBlock';
 
 const AddContent = ({number, projectSpace, blocks, reloadProjects}) => {
@@ -28,7 +28,7 @@ const AddContent = ({number, projectSpace, blocks, reloadProjects}) => {
           </select>
           <button className="cancel" onClick={(e) => { e.preventDefault(); setIsPlusButton(true) }} >×</button>
           {contentSelect === "image" || contentSelect === "audio" ?
-            <FileUpload fileType={contentSelect} number={number} space={projectSpace} blocks={blocks} reloadProjects={reloadProjects} displayPlusButton={displayPlusButton} />
+            <MediaUpload fileType={contentSelect} number={number} space={projectSpace} blocks={blocks} reloadProjects={reloadProjects} displayPlusButton={displayPlusButton} />
           :
             <AddBlock contentSelect={contentSelect} number={number} projectSpace={projectSpace} blocks={blocks} reloadProjects={reloadProjects} displayPlusButton={displayPlusButton} />
           }

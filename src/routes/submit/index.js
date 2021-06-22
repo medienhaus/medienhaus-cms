@@ -6,6 +6,7 @@ import Collaborators from './Collaborators'
 import Category from './Category';
 import DisplayContent from './DisplayContent'
 import AddContent from './AddContent';
+import ProjectImage from './ProjectImage';
 import { Loading } from '../../components/loading'
 
 const Submit = () => {
@@ -250,7 +251,8 @@ const Submit = () => {
         {projectSpace && (
           <>
             <Collaborators projectSpace = {projectSpace} blocks = { blocks} title = {title} joinedSpaces= { joinedSpaces } startListeningToCollab={startListeningToCollab} />
-          <h3>Content</h3>          
+          <h3>Content</h3>
+          <ProjectImage projectSpace={projectSpace}/>
           { blocks.length === 0 ? <AddContent number={0} projectSpace={projectSpace} blocks={blocks} reloadProjects={reloadProjects}/> : blocks.map((content, i) =>
               <DisplayContent block={content} index={i} blocks={blocks} projectSpace={projectSpace} reloadProjects={reloadProjects}  /> 
             )}
