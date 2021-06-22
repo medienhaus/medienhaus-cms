@@ -18,11 +18,15 @@ const Profile = () => {
   useEffect(() => {
     const getSync = async () => {
       try {
-        await matrixClient.startClient().then(() => {
+        await matrixClient.startClient().then(async() => {
+          //console.log(await matrixClient.publicRooms());
           matrixClient.on("Room", (room) => {
             setTimeout(async () => {
-              room._selfMembership === 'invite' && console.log(room);
-              room._selfMembership === 'invite' && setInvites(invites => invites.concat({ "name": room.name, "id": room.roomId, "membership": room._selfMembership }))
+              if (room.getMyMembership() === 'invite') {
+                console.log(room.name + ' = ' + room.getType());
+                const isRoomEmpty = await room._loadMembersFromServer()
+                isRoomEmpty.length > 1 && room.getType() === 'm.space' && setInvites(invites => invites.concat({ "name": room.name, "id": room.roomId, "membership": room._selfMembership }))
+              }
             }, 0)
           }
           )
