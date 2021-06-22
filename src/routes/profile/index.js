@@ -19,11 +19,14 @@ const Profile = () => {
     const getSync = async () => {
       try {
         await matrixClient.startClient().then(async() => {
-          console.log(await matrixClient.publicRooms());
+          //console.log(await matrixClient.publicRooms());
           matrixClient.on("Room", (room) => {
             setTimeout(async () => {
-              room._selfMembership === 'invite' && console.log(room);
-              room._selfMembership === 'invite' && setInvites(invites => invites.concat({ "name": room.name, "id": room.roomId, "membership": room._selfMembership }))
+              if (room.getMyMembership() === 'invite') {
+                console.log(room);
+                const isRoomEmpty = await room._loadMembersFromServer()
+                isRoomEmpty.length > 1 && setInvites(invites => invites.concat({ "name": room.name, "id": room.roomId, "membership": room._selfMembership }))
+              }
             }, 0)
           }
           )
