@@ -1,10 +1,10 @@
-import React, {useState} from 'react'
-import MediaUpload from './MediaUpload';
-import AddBlock from './AddBlock';
+import React, { useState } from 'react'
+import MediaUpload from './MediaUpload'
+import AddBlock from './AddBlock'
 
-const AddContent = ({number, projectSpace, blocks, reloadProjects}) => {
-  const [contentSelect, setContentSelect] = useState('');
-  const [isPlusButton, setIsPlusButton] = useState(true);
+const AddContent = ({ number, projectSpace, blocks, reloadProjects }) => {
+  const [contentSelect, setContentSelect] = useState('')
+  const [isPlusButton, setIsPlusButton] = useState(true)
 
   const displayPlusButton = (button) => {
     setIsPlusButton(button)
@@ -12,13 +12,13 @@ const AddContent = ({number, projectSpace, blocks, reloadProjects}) => {
 
   return (
     <div className="add">
-      {isPlusButton ?
-        <button className="add-button" key={'add' + number} onBlur={() => setIsPlusButton(true)} onClick={(e) => { e.preventDefault(); setIsPlusButton(false) }} >+</button>
-        //onBlur not workin here, no idea why.
-      : (
+      {isPlusButton
+        ? <button className="add-button" key={'add' + number} onBlur={() => setIsPlusButton(true)} onClick={(e) => { e.preventDefault(); setIsPlusButton(false) }} >+</button>
+        // onBlur not workin here, no idea why.
+        : (
         <>
           <select name="content-select" defaultValue={''} id="content-select" onChange={(e) => setContentSelect(e.target.value)}>
-            <option value='' disabled={true} >Select Content</option>
+            <option value="" disabled={true} >Select Content</option>
             <option value="none" disabled={true} >--Text------------</option>
             <option value="heading">Heading</option>
             <option value="text">Text</option>
@@ -27,13 +27,12 @@ const AddContent = ({number, projectSpace, blocks, reloadProjects}) => {
             <option value="audio">Audio</option>
           </select>
           <button className="cancel" onClick={(e) => { e.preventDefault(); setIsPlusButton(true) }} >×</button>
-          {contentSelect === "image" || contentSelect === "audio" ?
-            <MediaUpload fileType={contentSelect} number={number} space={projectSpace} blocks={blocks} reloadProjects={reloadProjects} displayPlusButton={displayPlusButton} />
-          :
-            <AddBlock contentSelect={contentSelect} number={number} projectSpace={projectSpace} blocks={blocks} reloadProjects={reloadProjects} displayPlusButton={displayPlusButton} />
+          {contentSelect === 'image' || contentSelect === 'audio'
+            ? <MediaUpload fileType={contentSelect} number={number} space={projectSpace} blocks={blocks} reloadProjects={reloadProjects} displayPlusButton={displayPlusButton} />
+            : <AddBlock contentSelect={contentSelect} number={number} projectSpace={projectSpace} blocks={blocks} reloadProjects={reloadProjects} displayPlusButton={displayPlusButton} />
           }
         </>
-      )
+          )
     }
     </div>
   )

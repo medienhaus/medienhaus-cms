@@ -11,21 +11,21 @@ const Profile = () => {
   const profile = auth.user
   const { joinedSpaces, spacesErr, fetchSpaces, reload } = useJoinedSpaces(() => console.log(fetchSpaces || spacesErr))
   const matrixClient = Matrix.getMatrixClient()
-  const drafts = joinedSpaces?.filter(x => x.published === "invite")
-  const publish = joinedSpaces?.filter(x => x.published === "public")
-  const [invites, setInvites] = useState([]);
+  const drafts = joinedSpaces?.filter(x => x.published === 'invite')
+  const publish = joinedSpaces?.filter(x => x.published === 'public')
+  const [invites, setInvites] = useState([])
 
   useEffect(() => {
     const getSync = async () => {
       try {
-        await matrixClient.startClient().then(async() => {
-          //console.log(await matrixClient.publicRooms());
-          matrixClient.on("Room", (room) => {
+        await matrixClient.startClient().then(async () => {
+          // console.log(await matrixClient.publicRooms());
+          matrixClient.on('Room', (room) => {
             setTimeout(async () => {
               if (room.getMyMembership() === 'invite') {
-                console.log(room.name + ' = ' + room.getType());
+                console.log(room.name + ' = ' + room.getType())
                 const isRoomEmpty = await room._loadMembersFromServer()
-                isRoomEmpty.length > 1 && room.getType() === 'm.space' && setInvites(invites => invites.concat({ "name": room.name, "id": room.roomId, "membership": room._selfMembership }))
+                isRoomEmpty.length > 1 && room.getType() === 'm.space' && setInvites(invites => invites.concat({ name: room.name, id: room.roomId, membership: room._selfMembership }))
               }
             }, 0)
           }
@@ -35,13 +35,14 @@ const Profile = () => {
         console.log(e)
       }
     }
-    getSync();
-  }, []);
+    getSync()
+    // eslint-disable-next-line 
+  }, [])
 
   const reloadProjects = () => {
     reload()
-};
-  
+  }
+
   return (
     <div>
       <p>Hello <strong>{profile.displayname}</strong>,</p>
@@ -53,22 +54,24 @@ const Profile = () => {
             {invites.map((room) => <Invites room={room}/>)}
             </ul>
             </>
-        ) 
+      )
             }
-      {fetchSpaces ? <Loading /> : (
+      {fetchSpaces
+        ? <Loading />
+        : (
          <>
-          {drafts?.length > 0 && <p>You have <strong>{drafts.length} draft{drafts.length > 1 && 's' }</strong>, which {drafts.length > 1 ? 'are' : 'is'  } not publicly visible.</p>}
+          {drafts?.length > 0 && <p>You have <strong>{drafts.length} draft{drafts.length > 1 && 's' }</strong>, which {drafts.length > 1 ? 'are' : 'is' } not publicly visible.</p>}
        <ul>
-           {spacesErr ? console.error(spacesErr) : drafts.map((space, index) =>  <><Projects space = { space } visibility={ space.visibility } reloadProjects={reloadProjects} /><hr /></>) 
+           {spacesErr ? console.error(spacesErr) : drafts.map((space, index) => <><Projects space = { space } visibility={ space.visibility } reloadProjects={reloadProjects} /><hr /></>)
           }
           </ul>
-          {publish?.length > 0 && <p>You have <strong>{publish.length} published</strong> project{publish.length > 1 && 's'}, which {publish.length > 1 ? 'are' : 'is'  } publicly visible.</p>}
+          {publish?.length > 0 && <p>You have <strong>{publish.length} published</strong> project{publish.length > 1 && 's'}, which {publish.length > 1 ? 'are' : 'is' } publicly visible.</p>}
           <ul>
-            {spacesErr ? console.error(spacesErr) : publish.map((space, index) => <><Projects space = { space } visibility={ space.published } reloadProjects={reloadProjects} /><hr /> </>) 
+            {spacesErr ? console.error(spacesErr) : publish.map((space, index) => <><Projects space = { space } visibility={ space.published } reloadProjects={reloadProjects} /><hr /> </>)
               }
             </ul>
           </>
-      )}
+          )}
     </div>
   )
 }
