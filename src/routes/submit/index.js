@@ -90,7 +90,9 @@ const Submit = () => {
   }
 
   const changeProjectImage = (url) => {
+    setLoading(true)
     setProjectImage(url)
+    setLoading(false)
   }
 
   //======= COMPONENTS ======================================================================
@@ -258,7 +260,7 @@ const Submit = () => {
           <>
           <Collaborators projectSpace={projectSpace} blocks={blocks} title={title} joinedSpaces={joinedSpaces} startListeningToCollab={startListeningToCollab} />
           <h3>Project Image</h3>
-          <ProjectImage projectSpace={projectSpace} projectImage={projectImage} changeProjectImage={changeProjectImage}/>
+          {loading ? <Loading /> : <ProjectImage projectSpace={projectSpace} projectImage={projectImage} changeProjectImage={changeProjectImage}/>}
           <h3>Content</h3>
           { blocks.length === 0 ? <AddContent number={0} projectSpace={projectSpace} blocks={blocks} reloadProjects={reloadProjects}/> : blocks.map((content, i) =>
               <DisplayContent block={content} index={i} blocks={blocks} projectSpace={projectSpace} reloadProjects={reloadProjects}  /> 

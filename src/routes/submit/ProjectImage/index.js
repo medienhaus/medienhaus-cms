@@ -10,9 +10,8 @@ const ProjectImage = ({projectSpace, projectImage, changeProjectImage}) => {
     const handleSubmission = async (e, selectedFile, fileName) => {
         e.preventDefault()
         setLoading(true)
-        
         try {
-          await matrixClient.uploadContent(selectedFile, { name: fileName })
+          await matrixClient.uploadContent(selectedFile, { name: fileName})
               .then((url) => {
                 changeProjectImage(url)
                 const req = {
@@ -22,11 +21,12 @@ const ProjectImage = ({projectSpace, projectImage, changeProjectImage}) => {
                   }
                 fetch(process.env.REACT_APP_MATRIX_BASE_URL + `/_matrix/client/r0/rooms/${projectSpace}/state/m.room.avatar/`, req )
               }).then(console.log)
-             setLoading(false)
+          return "success"
         } catch (e) {
           console.log('error while trying to save image: ' + e)
         } finally {
           setLoading(false)
+          setEdit(false)
         }
       }
     

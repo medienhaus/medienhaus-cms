@@ -24,7 +24,7 @@ const FileUpload = (props) => {
               setFileName(e.target.value)
             }} />
           </div>
-          <button className="upload" onClick={(e) => props.handleSubmission(e, selectedFile, fileName)} disabled={!selectedFile.type.includes(props.fileType) || selectedFile.size > size || props.loading}>{props.loading ? <Loading /> : "Upload"}</button>
+            <button className="upload" onClick={(e) =>  props.handleSubmission(e, selectedFile, fileName)} disabled={!selectedFile.type.includes(props.fileType) || selectedFile.size > size || props.loading}>{props.loading ? <Loading /> : "Upload"}</button>
           {selectedFile.type.includes(props.fileType) || <section>Please select an {props.fileType} file.</section>}
           {selectedFile.size > size && <section style={{ color: "red" }}> File size needs to be less than {size / 1000000}MB</section> //@Andi pls add to css
         }
