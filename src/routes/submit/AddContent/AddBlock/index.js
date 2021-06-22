@@ -6,7 +6,7 @@ import { Loading } from '../../../../components/loading'
 const AddBlock = ({ contentSelect, number, projectSpace, blocks, reloadProjects, displayPlusButton }) => {
   const [loading, setLoading] = useState(false)
   return (
-      <button className="add-content" type="submit" disabled={contentSelect === '' || false} value="Add Audio" onClick={async (e) => {
+      <button className="add-content" type="submit" disabled={contentSelect === '' || false} value={`add ${contentSelect}`} onClick={async (e) => {
         setLoading(true)
         blocks.forEach((block, i) => {
           if (i >= number) {

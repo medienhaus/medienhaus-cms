@@ -22,6 +22,10 @@ const AddContent = ({ number, projectSpace, blocks, reloadProjects }) => {
             <option value="none" disabled={true} >--Text------------</option>
             <option value="heading">Heading</option>
             <option value="text">Text</option>
+            <option value="ul">List (unordered)</option>
+            <option value="ol">List (ordered)</option>
+            <option value="quote">Quote</option>
+            <option value="code">Code Block</option>
             <option value="" disabled={true} >--Media------------</option>
             <option value="image">Image</option>
             <option value="audio">Audio</option>

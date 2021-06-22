@@ -5,6 +5,7 @@ import Editor, { renderToHtml } from 'rich-markdown-editor'
 import debounce from 'lodash/debounce'
 import { Loading } from '../../../components/loading'
 import AddContent from '../AddContent'
+import UnorderedList from './UnorderedList'
 import reorder from './matrix_reorder_rooms'
 
 import { ReactComponent as HeadingIcon } from '../../../assets/icons/remix/h-1.svg'
@@ -137,7 +138,11 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadProjects }) 
                   {cms?.msgtype === 'm.image'
                     ? <div className="center"><img src={matrixClient.mxcUrlToHttp(cms.url)} alt={cms.info.name} key={block.room_id} /></div>
                     : cms?.msgtype === 'm.audio'
-                      ? <div className="center">
+                  ? json?.type === 'ul' ? 
+                  <UnorderedList />
+                  :
+                    
+                    <div className="center">
                     <audio controls>
                       <source src={matrixClient.mxcUrlToHttp(cms.url)} />
                     </audio>
