@@ -23,9 +23,9 @@ const Profile = () => {
           matrixClient.on("Room", (room) => {
             setTimeout(async () => {
               if (room.getMyMembership() === 'invite') {
-                console.log(room);
+                console.log(room.name + ' = ' + room.getType());
                 const isRoomEmpty = await room._loadMembersFromServer()
-                isRoomEmpty.length > 1 && setInvites(invites => invites.concat({ "name": room.name, "id": room.roomId, "membership": room._selfMembership }))
+                isRoomEmpty.length > 1 && room.getType() === 'm.space' && setInvites(invites => invites.concat({ "name": room.name, "id": room.roomId, "membership": room._selfMembership }))
               }
             }, 0)
           }
