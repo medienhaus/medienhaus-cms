@@ -16,6 +16,7 @@ import { ReactComponent as TextIcon } from '../../../assets/icons/remix/text.svg
   const DisplayContent = ({block, index, blocks, projectSpace, reloadProjects}) => {
     const [clicked, setClicked] = useState(false);
     const [readOnly, setReadOnly] = useState(false);
+    const [loading, setLoading] = useState(false);
     const [saved, setSaved] = useState(false);
     const [deleting, setDeleting] = useState(false);
     const { cms, error, fetching } = FetchCms(block.room_id)
@@ -82,6 +83,7 @@ import { ReactComponent as TextIcon } from '../../../assets/icons/remix/text.svg
 
     const changeOrder = async (e,roomId, name, direction) => {
       e.preventDefault()
+      setLoading(true)
       setReadOnly(true)
       //blocks.splice((pos) + direction, 0, blocks.splice(pos, 1).pop())
       const active = name.split('_')
@@ -99,6 +101,7 @@ import { ReactComponent as TextIcon } from '../../../assets/icons/remix/text.svg
         console.error(err);
       } finally {
         setReadOnly(false)
+        setLoading(false)
       }
     }
 
@@ -115,7 +118,7 @@ import { ReactComponent as TextIcon } from '../../../assets/icons/remix/text.svg
   }
 
         return (
-          fetching
+          fetching || loading 
           /*
            * @Andi sort of... hack to keep interface from violently redrawing. We need to see how we deal with this.
            * Too many waterfalls, let's stick to the rivers and the lakes that we're used to.
