@@ -16,28 +16,28 @@ const AddContent = ({ number, projectSpace, blocks, reloadProjects }) => {
         ? <button className="add-button" key={'add' + number} onBlur={() => setIsPlusButton(true)} onClick={(e) => { e.preventDefault(); setIsPlusButton(false) }} >+</button>
         // onBlur not workin here, no idea why.
         : (
-        <>
-          <select name="content-select" defaultValue={''} id="content-select" onChange={(e) => setContentSelect(e.target.value)}>
-            <option value="" disabled={true} >Select Content</option>
-            <option value="none" disabled={true} >--Text------------</option>
-            <option value="heading">Heading</option>
-            <option value="text">Text</option>
-            <option value="ul">List (unordered)</option>
-            <option value="ol">List (ordered)</option>
-            <option value="quote">Quote</option>
-            <option value="code">Code Block</option>
-            <option value="" disabled={true} >--Media------------</option>
-            <option value="image">Image</option>
-            <option value="audio">Audio</option>
-          </select>
-          <button className="cancel" onClick={(e) => { e.preventDefault(); setIsPlusButton(true) }} >×</button>
-          {contentSelect === 'image' || contentSelect === 'audio'
-            ? <MediaUpload fileType={contentSelect} number={number} space={projectSpace} blocks={blocks} reloadProjects={reloadProjects} displayPlusButton={displayPlusButton} />
-            : <AddBlock contentSelect={contentSelect} number={number} projectSpace={projectSpace} blocks={blocks} reloadProjects={reloadProjects} displayPlusButton={displayPlusButton} />
-          }
-        </>
-          )
-    }
+          <>
+            <select name="content-select" defaultValue={''} id="content-select" onChange={(e) => setContentSelect(e.target.value)}>
+              <option value="" disabled={true} >Select Content</option>
+              <option value="none" disabled={true} >--Text------------</option>
+              <option value="heading">Heading</option>
+              <option value="text">Text</option>
+              <option value="ul">List (unordered)</option>
+              <option value="ol">List (ordered)</option>
+              <option value="quote">Quote</option>
+              <option value="code">Code Block</option>
+              <option value="" disabled={true} >--Media------------</option>
+              <option value="image">Image</option>
+              <option value="audio">Audio</option>
+            </select>
+            <button className="cancel" onClick={(e) => { e.preventDefault(); setIsPlusButton(true) }} >×</button>
+            {contentSelect === 'image' || contentSelect === 'audio'
+              ? <MediaUpload fileType={contentSelect} number={number} space={projectSpace} blocks={blocks} reloadProjects={reloadProjects} displayPlusButton={displayPlusButton} />
+              : <AddBlock contentSelect={contentSelect} number={number} projectSpace={projectSpace} blocks={blocks} reloadProjects={reloadProjects} displayPlusButton={displayPlusButton} />
+            }
+          </>
+        )
+      }
     </div>
   )
 }
