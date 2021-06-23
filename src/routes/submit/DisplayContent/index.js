@@ -13,6 +13,8 @@ import { ReactComponent as AudioIcon } from '../../../assets/icons/remix/volume-
 import { ReactComponent as ImageIcon } from '../../../assets/icons/remix/image-line.svg'
 import { ReactComponent as TextIcon } from '../../../assets/icons/remix/text.svg'
 import { ReactComponent as UlIcon } from '../../../assets/icons/remix/list-unordered.svg'
+import { ReactComponent as OlIcon } from '../../../assets/icons/remix/list-ordered.svg'
+
 
 const DisplayContent = ({ block, index, blocks, projectSpace, reloadProjects }) => {
   const [clicked, setClicked] = useState(false)
@@ -26,7 +28,26 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadProjects }) 
 
   const onSave = async (roomId) => {
     setReadOnly(true)
+    
     try {
+      if (json.type === 'ul' || json.type === 'ol') {
+        const list = JSON.parse(localStorage.getItem(roomId)).map(li => li.text).join('\n')
+        console.log(list);
+        const save = await matrixClient.sendMessage(roomId, {
+        body: list,
+        format: 'org.matrix.custom.html',
+        msgtype: 'm.text',
+        formatted_body: renderToHtml(list)
+      })
+      if ('event_id' in save) {
+        setSaved('Saved!')
+        setTimeout(() => {
+          setSaved()
+        }, 1000)
+      }
+      
+      }
+      else { 
       const save = await matrixClient.sendMessage(roomId, {
         body: localStorage.getItem(roomId),
         format: 'org.matrix.custom.html',
@@ -38,6 +59,7 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadProjects }) 
         setTimeout(() => {
           setSaved()
         }, 1000)
+      }
       }
       // await matrixClient.redactEvent(roomId.room_id, entry.event, null, { 'reason': 'I have my reasons!' })
     } catch (e) {
@@ -137,6 +159,7 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadProjects }) 
                     json.type === 'audio' ? <AudioIcon fill="var(--color-fg)" /> :
                       json.type === 'image' ? <ImageIcon fill="var(--color-fg)" /> :
                         json.type === 'ul' ? <UlIcon fill="var(--color-fg)" /> :
+                        json.type === 'ol' ? <OlIcon fill="var(--color-fg)" /> :
                           <TextIcon fill="var(--color-fg)" />}
                    </figure>
                     <button key={'down_' + block.room_id} disabled={ index === blocks.length - 1 } onClick={(e) => changeOrder(e, block.room_id, block.name, 1)}>↓</button>
@@ -151,8 +174,10 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadProjects }) 
                    { /* TODO why section? */}
                     <section id="audio-title">{cms.body}</section>
                   </div> :
-                  json.type === 'ul' ? 
-                  <UnorderedList  />
+                  json.type === 'ul' ?
+                    <UnorderedList onSave={() => onSave(block.room_id)} storage={(list) => localStorage.setItem(block.room_id, list)} populated={ cms?.body} /> :
+                    json.type === 'ol' ?
+                    "ol"
                       : <div className="center">
                     <Editor
                     dark={window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches}
