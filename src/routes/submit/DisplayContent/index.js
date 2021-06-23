@@ -14,6 +14,8 @@ import { ReactComponent as ImageIcon } from '../../../assets/icons/remix/image-l
 import { ReactComponent as TextIcon } from '../../../assets/icons/remix/text.svg'
 import { ReactComponent as UlIcon } from '../../../assets/icons/remix/list-unordered.svg'
 import { ReactComponent as OlIcon } from '../../../assets/icons/remix/list-ordered.svg'
+import { ReactComponent as QuoteIcon } from '../../../assets/icons/remix/quote.svg'
+import { ReactComponent as CodeIcon } from '../../../assets/icons/remix/code.svg'
 
 
 const DisplayContent = ({ block, index, blocks, projectSpace, reloadProjects }) => {
@@ -159,7 +161,9 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadProjects }) 
                     json.type === 'audio' ? <AudioIcon fill="var(--color-fg)" /> :
                       json.type === 'image' ? <ImageIcon fill="var(--color-fg)" /> :
                         json.type === 'ul' ? <UlIcon fill="var(--color-fg)" /> :
-                        json.type === 'ol' ? <OlIcon fill="var(--color-fg)" /> :
+                          json.type === 'ol' ? <OlIcon fill="var(--color-fg)" /> :
+                            json.type === 'quote' ? <QuoteIcon fill="var(--color-fg)" /> :
+                            json.type === 'code' ? <CodeIcon fill="var(--color-fg)" /> :
                           <TextIcon fill="var(--color-fg)" />}
                    </figure>
                     <button key={'down_' + block.room_id} disabled={ index === blocks.length - 1 } onClick={(e) => changeOrder(e, block.room_id, block.name, 1)}>↓</button>

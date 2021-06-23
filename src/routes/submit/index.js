@@ -49,7 +49,6 @@ const Submit = () => {
       space.rooms[0].avatar_url !== undefined && setProjectImage(space.rooms[0].avatar_url)
       console.log(space.rooms)
       const spaceRooms = space.rooms.filter(x => !('room_type' in x)) 
-      
       setBlocks(spaceRooms.filter(x => x !== undefined).sort((a, b) => {
         if (a.name < b.name) return -1
         if (a.name > b.name) return 1
