@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
+import hljs from 'highlight.js'
+import 'highlight.js/styles/vs2015.css';
 
 const Code = ({ onSave, storage, saved, content }) => {
   const [value, setValue] = useState(content);
-  //content && setValue(content)
 
   return (
     <pre>
@@ -15,6 +16,7 @@ const Code = ({ onSave, storage, saved, content }) => {
         />
       </code>
       <p>{saved}</p>
+      {<div dangerouslySetInnerHTML={{ __html: hljs.highlightAuto(value).value }}></div>}
     </pre>
   )
 }
