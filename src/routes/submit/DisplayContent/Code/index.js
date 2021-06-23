@@ -4,7 +4,6 @@ const Code = ({ onSave, storage, saved, content }) => {
   const [value, setValue] = useState(content)
 
   return (
-
     <div>
       <textarea
         style={{ height: '100%', width: '100%' }}
