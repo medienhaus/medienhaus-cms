@@ -1,13 +1,10 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import hljs from 'highlight.js'
 import 'highlight.js/styles/github.css'
+hljs.initHighlightingOnLoad()
 
 const Code = ({ onSave, storage, saved, content }) => {
   const [value, setValue] = useState(content)
-  useEffect(() => {
-    const blocks = document.querySelectorAll('pre code')
-    blocks.forEach(hljs.highlightBlock)
-  }, [value])
 
   return (
 
@@ -19,9 +16,7 @@ const Code = ({ onSave, storage, saved, content }) => {
         value={value}
       />
       <p>{saved}</p>
-      <pre style={{ width: '100%' }}>
-        <code style={{ width: '100%' }}>{value}</code>
-      </pre>
+              <div style={{ width: '100%' }} dangerouslySetInnerHTML={{ __html: hljs.highlightAuto(value).value }} ></div>
 
     </div>
 
