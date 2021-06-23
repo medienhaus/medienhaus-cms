@@ -17,7 +17,6 @@ const Code = ({ onSave, storage, saved, content }) => {
       />
       <p>{saved}</p>
               <div style={{ width: '100%' }} dangerouslySetInnerHTML={{ __html: hljs.highlightAuto(value).value }} ></div>
-
     </div>
 
   )
