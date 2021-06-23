@@ -23,17 +23,19 @@ function PrivateRoute ({ children, ...rest }) {
 
   // Still loading...
   if (auth.user === null) {
-    return <Loading/>
+    return <Loading />
   }
 
   // Not logged in
   if (auth.user === false) {
-    return <Redirect
-      to={{
-        pathname: '/login',
-        state: { from: location }
-      }}
-    />
+    return (
+      <Redirect
+        to={{
+          pathname: '/login',
+          state: { from: location }
+        }}
+      />
+    )
   }
 
   // Logged in - render our actual route components
@@ -49,22 +51,22 @@ PrivateRoute.propTypes = {
 function App () {
   return (
     <>
-       <AuthProvider>
-       <Router>
-        <Header />
-        <main>
-          <Switch>
-            <Route path="/" exact component={Landing} />
-            <Route path="/login" component={Login} />
-            <PrivateRoute path="/tools" component={Tools} />
-            <PrivateRoute path="/profile" component={Profile} />
-            <PrivateRoute path="/submit/:spaceId" component={Submit} />
-            <PrivateRoute path="/submit" component={Submit} />
-          </Switch>
-        </main>
-        <Nav />
-        <Footer />
-      </Router>
+      <AuthProvider>
+        <Router>
+          <Header />
+          <main>
+            <Switch>
+              <Route path="/" exact component={Landing} />
+              <Route path="/login" component={Login} />
+              <PrivateRoute path="/tools" component={Tools} />
+              <PrivateRoute path="/profile" component={Profile} />
+              <PrivateRoute path="/submit/:spaceId" component={Submit} />
+              <PrivateRoute path="/submit" component={Submit} />
+            </Switch>
+          </main>
+          <Nav />
+          <Footer />
+        </Router>
       </AuthProvider>
     </>
   )

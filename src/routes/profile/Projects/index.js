@@ -10,7 +10,7 @@ const Projects = ({ space, visibility, reloadProjects }) => {
   const deleteProject = (e, project) => {
     e.preventDefault()
     let space
-    return new Promise(async (resolve, reject) => {
+    return Promise(async (resolve, reject) => {
       try {
         space = await matrixClient.getSpaceSummary(project)
       } catch (err) {
@@ -40,55 +40,56 @@ const Projects = ({ space, visibility, reloadProjects }) => {
     const [leaving, setLeaving] = useState(false)
 
     return (
-        <>
+      <>
         {warning && <p>Are you sure you want to delete the project <strong>{name}</strong>? This cannot be undone and will delete the project for you and any collaborator(s) that might be part of it.</p>}
-          <input style={{ backgroundColor: 'red' }} // @Andi please add to css
-            id="delete"
-            name="delete"
-            type="submit"
-            value={warning ? 'Yes, delete project' : 'Delete project'}
-            disabled={leaving}
-            onClick={async (e) => {
-              if (warning) {
-                setLeaving(true)
-                await deleteProject(e, roomId).catch(err => console.error(err)).then(() => reloadProjects()).then(() => setLeaving(false))
-                setWarning(false)
-              } else {
-                e.preventDefault()
-                setWarning(true)
-              }
-            }
-            } />
-        {leaving && <Loading />}
-
-         {warning && <input
+        <input
+          style={{ backgroundColor: 'red' }} // @Andi please add to css
           id="delete"
           name="delete"
           type="submit"
-          value={'CANCEL'}
+          value={warning ? 'Yes, delete project' : 'Delete project'}
+          disabled={leaving}
+          onClick={async (e) => {
+            if (warning) {
+              setLeaving(true)
+              await deleteProject(e, roomId).catch(err => console.error(err)).then(() => reloadProjects()).then(() => setLeaving(false))
+              setWarning(false)
+            } else {
+              e.preventDefault()
+              setWarning(true)
+            }
+          }}
+        />
+        {leaving && <Loading />}
+
+        {warning && <input
+          id="delete"
+          name="delete"
+          type="submit"
+          value="CANCEL"
           onClick={() => { setWarning(false) }}
-         />}
-            </>
+                    />}
+      </>
     )
   }
   console.log(space)
   return (
-      <div style={{ display: 'flex' }}>
-        {space.avatar_url && <img style={{ marginRight: '30px' }}src={matrixClient.mxcUrlToHttp(space.avatar_url)} alt="project-visual-key" />}
-        <ul style={{ width: '100%' }}>
-          <li><strong>{space.name}</strong></li>
-          <li>Department: Gestaltung</li>
-          <li>Program: Visuelle Kommunikation</li>
-          <li>Division: New Media</li>
-          <li>Supervisor: Prof. Jussi Ängeslevä</li>
-          <li>Semester: Summer 2021</li>
-        </ul>
-        <div style={{ flexDirection: 'row', alignContent: 'space-around', padding: '30px' }}>
-          <button onClick={() => history.push(`/submit/${space.room_id}`)}>EDIT</button>
-          <button >{visibility === 'public' ? 'Redact' : 'Publish'} </button>
-          <DeleteProjectButton roomId={space.room_id} name={space.name} />
-        </div>
+    <div style={{ display: 'flex' }}>
+      {space.avatar_url && <img style={{ marginRight: '30px' }} src={matrixClient.mxcUrlToHttp(space.avatar_url)} alt="project-visual-key" />}
+      <ul style={{ width: '100%' }}>
+        <li><strong>{space.name}</strong></li>
+        <li>Department: Gestaltung</li>
+        <li>Program: Visuelle Kommunikation</li>
+        <li>Division: New Media</li>
+        <li>Supervisor: Prof. Jussi Ängeslevä</li>
+        <li>Semester: Summer 2021</li>
+      </ul>
+      <div style={{ flexDirection: 'row', alignContent: 'space-around', padding: '30px' }}>
+        <button onClick={() => history.push(`/submit/${space.room_id}`)}>EDIT</button>
+        <button>{visibility === 'public' ? 'Redact' : 'Publish'} </button>
+        <DeleteProjectButton roomId={space.room_id} name={space.name} />
       </div>
+    </div>
   )
 }
 export default Projects

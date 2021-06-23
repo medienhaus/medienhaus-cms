@@ -8,7 +8,7 @@ import { Loading } from '../../components/loading'
 
 const Login = () => {
   const {
-    register,
+    // register,
     handleSubmit,
 
     formState: {
@@ -44,7 +44,7 @@ const Login = () => {
   const changePassword = e => { setPassword(e.target.value); setErrormsg() }
 
   if (auth.user) {
-    return <Redirect to={'/dashboard'} />
+    return <Redirect to="/dashboard" />
   }
 
   return (
@@ -67,10 +67,10 @@ const Login = () => {
         {errormsg ?? errormsg}
         {isLoading
           ? (
-          <Loading />
+            <Loading />
             )
           : (
-          <button name="submit" type="submit">LOGIN</button>
+            <button name="submit" type="submit">LOGIN</button>
             )}
       </form>
       <ul>

@@ -48,7 +48,7 @@ const Submit = () => {
       setTitle(space.rooms[0].name)
       space.rooms[0].avatar_url !== undefined && setProjectImage(space.rooms[0].avatar_url)
       console.log(space.rooms)
-      const spaceRooms = space.rooms.filter(x => !('room_type' in x)) 
+      const spaceRooms = space.rooms.filter(x => !('room_type' in x))
       setBlocks(spaceRooms.filter(x => x !== undefined).sort((a, b) => {
         if (a.name < b.name) return -1
         if (a.name > b.name) return 1
@@ -68,16 +68,16 @@ const Submit = () => {
     console.log(myRooms)
 
     matrixClient.addListener('RoomState.events', function (event) {
-      if (event.event.type === 'm.room.member' && myRooms.rooms?.filter(({ room_id }) => event.sender.roomId.includes(room_id)) && event.event.sender !== localStorage.getItem('mx_user_id')) {
+      if (event.event.type === 'm.room.member' && myRooms.rooms?.filter(({ roomId }) => event.sender.roomId.includes(roomId)) && event.event.sender !== localStorage.getItem('mx_user_id')) {
         setUpdate(true)
-      } else if (event.event.type === 'm.room.name' && blocks?.filter(({ room_id }) => event.sender.roomId.includes(room_id)) && event.event.sender !== localStorage.getItem('mx_user_id')) {
+      } else if (event.event.type === 'm.room.name' && blocks?.filter(({ roomId }) => event.sender.roomId.includes(roomId)) && event.event.sender !== localStorage.getItem('mx_user_id')) {
         setUpdate(true)
       } else if (event.event.state_key === projectSpace) {
         setUpdate(true)
       }
     })
     matrixClient.on('Room.timeline', function (event, room, toStartOfTimeline) {
-      if (event.event.type === 'm.room.message' && blocks?.filter(({ room_id }) => event.event.room_id.includes(room_id)) && event.event.sender !== localStorage.getItem('mx_user_id')) {
+      if (event.event.type === 'm.room.message' && blocks?.filter(({ roomId }) => event.event.room_id.includes(roomId)) && event.event.sender !== localStorage.getItem('mx_user_id')) {
         setUpdate(true)
       }
     })
@@ -130,13 +130,13 @@ const Submit = () => {
     return (
       <div>
         <div>
-          <select id="visibility" name="visibility" value={visibility} onChange={(e) => { setVisibility(e.target.value) }}>
-                  <option value="invite">Draft</option>
-                  <option value="public">Published</option>
-                </select>
-              </div>
+          <select id="visibility" name="visibility" value={visibility} onBlur={(e) => { setVisibility(e.target.value) }}>
+            <option value="invite">Draft</option>
+            <option value="public">Published</option>
+          </select>
+        </div>
         <div>
-          <input id="submit" name="submit" type="submit" value="SAVE" disabled={ saving }onClick={(e) => onPublish(e)} />
+          <input id="submit" name="submit" type="submit" value="SAVE" disabled={saving} onClick={(e) => onPublish(e)} />
           {response && <p>{response}</p>}
         </div>
       </div>
@@ -195,46 +195,49 @@ const Submit = () => {
 
     return (
       <>
-      <div>
-            <label htmlFor="title">Project Title</label>
+        <div>
+          <label htmlFor="title">Project Title</label>
           <input id="title" name="title" placeholder="project title" type="text" value={projectTitle} disabled={title && !edit} onChange={(e) => setProjectTitle(e.target.value)} />
         </div>
         <div>
 
-          {title && <input id="submit" name="submit" type="submit" value={edit ? 'Save' : changing ? <Loading /> : 'Edit Title'} onClick={async (e) => {
-            e.preventDefault()
-            if (edit) {
-              setChanging(true)
-              try {
-                await matrixClient.setRoomName(projectSpace, projectTitle).then(() => setTitle(projectTitle))
-              } catch (err) {
-                console.error(err)
-              } finally {
-                setChanging(false)
+          {title && <input
+            id="submit" name="submit" type="submit" value={edit ? 'Save' : changing ? <Loading /> : 'Edit Title'} onClick={async (e) => {
+              e.preventDefault()
+              if (edit) {
+                setChanging(true)
+                try {
+                  await matrixClient.setRoomName(projectSpace, projectTitle).then(() => setTitle(projectTitle))
+                } catch (err) {
+                  console.error(err)
+                } finally {
+                  setChanging(false)
+                }
+                setEdit(false)
+              } else {
+                setEdit(true)
+                setOldTitle(title)
               }
-              setEdit(false)
-            } else {
-              setEdit(true)
-              setOldTitle(title)
-            }
-          }} />}
+            }}
+          />}
           {edit && <input id="submit" name="submit" type="submit" value="Cancel" onClick={(e) => { e.preventDefault(); setEdit(false); setProjectTitle(oldTitle) }} />}
           {loading
             ? <Loading />
-            : !title && <input id="submit" name="submit" type="submit" value={newProject ? 'Create Project' : 'New Project'} disabled={(newProject && doublicate) || !projectTitle } onClick={(e) => {
-              console.log(newProject)
-              if (newProject) {
-                createProject(e, projectTitle)
-                setNewProject(false)
-              } else {
-                e.preventDefault()
-                setNewProject(true)
-                setTitle('')
-              }
-            }} />
-          }
+            : !title && <input
+              id="submit" name="submit" type="submit" value={newProject ? 'Create Project' : 'New Project'} disabled={(newProject && doublicate) || !projectTitle} onClick={(e) => {
+                console.log(newProject)
+                if (newProject) {
+                  createProject(e, projectTitle)
+                  setNewProject(false)
+                } else {
+                  e.preventDefault()
+                  setNewProject(true)
+                  setTitle('')
+                }
+              }}
+            />}
         </div>
-        </>
+      </>
     )
   }
 
@@ -246,25 +249,24 @@ const Submit = () => {
     <div>
 
       <h3>Category / Context / Course</h3>
-        <Category />
-        <h3>Project Title / Collaborators / Credits</h3>
-        <ProjectTitle />
-        {projectSpace && (
-          <>
+      <Category />
+      <h3>Project Title / Collaborators / Credits</h3>
+      <ProjectTitle />
+      {projectSpace && (
+        <>
           <Collaborators projectSpace={projectSpace} blocks={blocks} title={title} joinedSpaces={joinedSpaces} startListeningToCollab={startListeningToCollab} />
           <h3>Project Image</h3>
-          {loading ? <Loading /> : <ProjectImage projectSpace={projectSpace} projectImage={projectImage} changeProjectImage={changeProjectImage}/>}
+          {loading ? <Loading /> : <ProjectImage projectSpace={projectSpace} projectImage={projectImage} changeProjectImage={changeProjectImage} />}
           <h3>Content</h3>
-          { blocks.length === 0
-            ? <AddContent number={0} projectSpace={projectSpace} blocks={blocks} reloadProjects={reloadProjects}/>
+          {blocks.length === 0
+            ? <AddContent number={0} projectSpace={projectSpace} blocks={blocks} reloadProjects={reloadProjects} />
             : blocks.map((content, i) =>
-              <DisplayContent block={content} index={i} blocks={blocks} projectSpace={projectSpace} reloadProjects={reloadProjects} />
+              <DisplayContent block={content} index={i} blocks={blocks} projectSpace={projectSpace} reloadProjects={reloadProjects} key={content + i} />
             )}
-            <h3>Visibility (Draft/Published)</h3>
-              {loading ? <Loading /> : <SubmitButton />}
-          </>
-        )
-        }
+          <h3>Visibility (Draft/Published)</h3>
+          {loading ? <Loading /> : <SubmitButton />}
+        </>
+      )}
     </div>
   )
 }

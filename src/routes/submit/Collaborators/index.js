@@ -55,39 +55,40 @@ const Collaborators = ({ projectSpace, blocks, title, joinedSpaces, startListeni
   }
 
   return (
-        <>
-           <h3>Collaborators / Credits</h3>
-          {// @Andi would probably be nice to have the loading spinner next to the h3 whil its looking for collabrators
-            < section >
-              <ul>{
-                joinedSpaces?.map((space, i) => space.name === title && Object.values(space.collab).map(name => {
-                  startListeningToCollab()
-                  return <li>{name.display_name}</li>
-                })
-                )
-              }
-              </ul>
-            </section>}
-         <div>
-         <div>
-           <label htmlFor="user-datalist">Add Collaborator</label>
-           <input list="userSearch" id="user-datalist" name="user-datalist" onChange={debounce((e) => {
-             fetchUsers(e, e.target.value)
-             setCollab(e.target.value)
-           }, 200)} />
-         </div>
-            {fetchingUsers ? <Loading /> : inviting ?? null }
-           <datalist id="userSearch">
-           {userSearch.map((users, i) => {
-             return <option key={i} value={users.display_name + ' ' + users.user_id} />
-           })}
-           </datalist>
-       </div>
-   <div>
-     <button onClick={(e) => invite(e)}>{inviting ? <Loading /> : 'ADD Collaborators +'}</button>
-            <button disabled={ true }>ADD Credits +</button>
-          </div>
-          </>
+    <>
+      <h3>Collaborators / Credits</h3>
+      <section>
+        <ul>{
+          joinedSpaces?.map((space, i) => space.name === title && Object.values(space.collab).map(name => {
+            startListeningToCollab()
+            return <li key={name.display_name}>{name.display_name}</li>
+          })
+          )
+        }
+        </ul>
+      </section>
+      <div>
+        <div>
+          <label htmlFor="user-datalist">Add Collaborator</label>
+          <input
+            list="userSearch" id="user-datalist" name="user-datalist" onChange={debounce((e) => {
+              fetchUsers(e, e.target.value)
+              setCollab(e.target.value)
+            }, 200)}
+          />
+        </div>
+        {fetchingUsers ? <Loading /> : inviting ?? null}
+        <datalist id="userSearch">
+          {userSearch.map((users, i) => {
+            return <option key={i} value={users.display_name + ' ' + users.user_id} />
+          })}
+        </datalist>
+      </div>
+      <div>
+        <button onClick={(e) => invite(e)}>{inviting ? <Loading /> : 'ADD Collaborators +'}</button>
+        <button disabled>ADD Credits +</button>
+      </div>
+    </>
   )
 }
 export default Collaborators

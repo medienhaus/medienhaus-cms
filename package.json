@@ -6,6 +6,7 @@
     "@testing-library/jest-dom": "^5.12.0",
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
+    "highlight.js": "^11.0.1",
     "matrix-js-sdk": "^12.0.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
@@ -17,17 +18,30 @@
     "showdown": "^1.9.1",
     "web-vitals": "^1.1.2"
   },
+  "devDependencies": {
+    "eslint-config-standard": "^16.0.2"
+  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "fix-style": "eslint --fix ./src/**/*.js"
   },
   "eslintConfig": {
     "extends": [
       "react-app",
-      "react-app/jest"
-    ]
+      "plugin:react/recommended",
+      "plugin:jsx-a11y/recommended",
+      "standard"
+    ],
+    "rules": {
+      "react/prop-types": "off",
+      "jsx-quotes": [
+        "error",
+        "prefer-double"
+      ]
+    }
   },
   "browserslist": {
     "production": [

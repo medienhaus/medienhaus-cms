@@ -24,11 +24,11 @@ const getAnswer = async () => {
           // console.log(room.rooms[0].room_type
           if (room.rooms[0].room_type === 'm.space' && isJson(room.rooms[0].topic)) {
             const collab = room.rooms[0].num_joined_members > 1 ? await matrixClient.getJoinedRoomMembers(room.rooms[0].room_id) : false
-            const join_rule = await fetch(process.env.REACT_APP_MATRIX_BASE_URL + `/_matrix/client/r0/rooms/${room.rooms[0].room_id}/state/m.room.join_rules/`, {
+            const joinRule = await fetch(process.env.REACT_APP_MATRIX_BASE_URL + `/_matrix/client/r0/rooms/${room.rooms[0].room_id}/state/m.room.join_rules/`, {
               method: 'GET',
               headers: { Authorization: 'Bearer ' + localStorage.getItem('medienhaus_access_token') }
             })
-            const published = await join_rule.json()
+            const published = await joinRule.json()
             return { name: room.rooms[0].name, room_id: room.rooms[0].room_id, topic: JSON.parse(room.rooms[0].topic), published: published.join_rule, collab: collab && collab.joined, avatar_url: room.rooms[0].avatar_url !== undefined && room.rooms[0].avatar_url }
           } else {
             return false

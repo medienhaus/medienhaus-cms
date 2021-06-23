@@ -24,13 +24,13 @@ const Invites = ({ room }) => {
     }
   }
   return (
-         <>
-            <div style={{ display: 'flex' }}>
-                <li style={{ width: '100%' }}>{room.name}</li>
-                <button disabled={joining || joined} onClick={(e) => join(e, room.id)}>ACCEPT</button>
-            </div>
-            {error}
-            </>
+    <>
+      <div style={{ display: 'flex' }}>
+        <li style={{ width: '100%' }}>{room.name}</li>
+        <button disabled={joining || joined} onClick={(e) => join(e, room.id)}>ACCEPT</button>
+      </div>
+      {error}
+    </>
   )
 }
 export default Invites

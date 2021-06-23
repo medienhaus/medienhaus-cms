@@ -31,19 +31,19 @@ const ProjectImage = ({ projectSpace, projectImage, changeProjectImage }) => {
   }
 
   return (
-        <div>
-            {projectImage
-              ? <>
-                <img src={matrixClient.mxcUrlToHttp(projectImage)} alt="Project-key-visual" />
-                <button onClick={e => { e.preventDefault(); setEdit(edit => !edit) }}>CHANGE</button>
-                        {edit && <FileUpload fileType={'image'} handleSubmission={handleSubmission} loading={loading} />}
-                    </>
-              : (
-                <>
-                    Add a project image <FileUpload fileType={'image'} handleSubmission={handleSubmission} loading={loading} />
-                </>
-                )}
-        </div>
+    <div>
+      {projectImage
+        ? <>
+          <img src={matrixClient.mxcUrlToHttp(projectImage)} alt="Project-key-visual" />
+          <button onClick={e => { e.preventDefault(); setEdit(edit => !edit) }}>CHANGE</button>
+          {edit && <FileUpload fileType="image" handleSubmission={handleSubmission} loading={loading} />}
+          </>
+        : (
+          <>
+            Add a project image <FileUpload fileType="image" handleSubmission={handleSubmission} loading={loading} />
+          </>
+          )}
+    </div>
   )
 }
 export default ProjectImage
