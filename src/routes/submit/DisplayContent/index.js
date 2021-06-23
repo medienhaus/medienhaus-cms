@@ -5,7 +5,7 @@ import Editor, { renderToHtml } from 'rich-markdown-editor'
 import debounce from 'lodash/debounce'
 import { Loading } from '../../../components/loading'
 import AddContent from '../AddContent'
-import UnorderedList from './UnorderedList'
+import List from './List'
 import reorder from './matrix_reorder_rooms'
 
 import { ReactComponent as HeadingIcon } from '../../../assets/icons/remix/h-1.svg'
@@ -175,9 +175,9 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadProjects }) 
                     <section id="audio-title">{cms.body}</section>
                   </div> :
                   json.type === 'ul' ?
-                    <UnorderedList onSave={() => onSave(block.room_id)} storage={(list) => localStorage.setItem(block.room_id, list)} populated={ cms?.body} /> :
+                    <List onSave={() => onSave(block.room_id)} storage={(list) => localStorage.setItem(block.room_id, list)} populated={ cms?.body} type="ul"/> :
                     json.type === 'ol' ?
-                    "ol"
+                    <List onSave={() => onSave(block.room_id)} storage={(list) => localStorage.setItem(block.room_id, list)} populated={ cms?.body} type="ol"/>
                       : <div className="center">
                     <Editor
                     dark={window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches}
