@@ -132,24 +132,27 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadProjects }) 
                   <div className="left">
                     <button key={'up_' + block.room_id} disabled={ index === 0 } onClick={(e) => changeOrder(e, block.room_id, block.name, -1)}>↑</button>
                     <figure className="icon-bg">
-                   { json.type === 'heading' ? <HeadingIcon fill="var(--color-fg)" /> : json.type === 'audio' ? <AudioIcon fill="var(--color-fg)" /> : json.type === 'image' ? <ImageIcon fill="var(--color-fg)" /> :json.type === 'ul' ? <UlIcon fill="var(--color-fg)" /> : <TextIcon fill="var(--color-fg)" /> }
+                  {json.type === 'heading' ?
+                    <HeadingIcon fill="var(--color-fg)" /> :
+                    json.type === 'audio' ? <AudioIcon fill="var(--color-fg)" /> :
+                      json.type === 'image' ? <ImageIcon fill="var(--color-fg)" /> :
+                        json.type === 'ul' ? <UlIcon fill="var(--color-fg)" /> :
+                          <TextIcon fill="var(--color-fg)" />}
                    </figure>
                     <button key={'down_' + block.room_id} disabled={ index === blocks.length - 1 } onClick={(e) => changeOrder(e, block.room_id, block.name, 1)}>↓</button>
                   </div>
                   {cms?.msgtype === 'm.image'
                     ? <div className="center"><img src={matrixClient.mxcUrlToHttp(cms.url)} alt={cms.info.name} key={block.room_id} /></div>
                     : cms?.msgtype === 'm.audio'
-                  ? json?.type === 'ul' ? 
-                  <UnorderedList />
-                  :
-                    
-                    <div className="center">
+                  ? <div className="center">
                     <audio controls>
                       <source src={matrixClient.mxcUrlToHttp(cms.url)} />
                     </audio>
                    { /* TODO why section? */}
                     <section id="audio-title">{cms.body}</section>
-                    </div>
+                  </div> :
+                  json.type === 'ul' ? 
+                  <UnorderedList  />
                       : <div className="center">
                     <Editor
                     dark={window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches}
