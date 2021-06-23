@@ -12,6 +12,7 @@ import { ReactComponent as HeadingIcon } from '../../../assets/icons/remix/h-1.s
 import { ReactComponent as AudioIcon } from '../../../assets/icons/remix/volume-up-line.svg'
 import { ReactComponent as ImageIcon } from '../../../assets/icons/remix/image-line.svg'
 import { ReactComponent as TextIcon } from '../../../assets/icons/remix/text.svg'
+import { ReactComponent as UlIcon } from '../../../assets/icons/remix/list-unordered.svg'
 
 const DisplayContent = ({ block, index, blocks, projectSpace, reloadProjects }) => {
   const [clicked, setClicked] = useState(false)
@@ -131,7 +132,7 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadProjects }) 
                   <div className="left">
                     <button key={'up_' + block.room_id} disabled={ index === 0 } onClick={(e) => changeOrder(e, block.room_id, block.name, -1)}>↑</button>
                     <figure className="icon-bg">
-                   { json.type === 'heading' ? <HeadingIcon fill="var(--color-fg)" /> : json.type === 'audio' ? <AudioIcon fill="var(--color-fg)" /> : json.type === 'image' ? <ImageIcon fill="var(--color-fg)" /> : <TextIcon fill="var(--color-fg)" /> }
+                   { json.type === 'heading' ? <HeadingIcon fill="var(--color-fg)" /> : json.type === 'audio' ? <AudioIcon fill="var(--color-fg)" /> : json.type === 'image' ? <ImageIcon fill="var(--color-fg)" /> :json.type === 'ul' ? <UlIcon fill="var(--color-fg)" /> : <TextIcon fill="var(--color-fg)" /> }
                    </figure>
                     <button key={'down_' + block.room_id} disabled={ index === blocks.length - 1 } onClick={(e) => changeOrder(e, block.room_id, block.name, 1)}>↓</button>
                   </div>
