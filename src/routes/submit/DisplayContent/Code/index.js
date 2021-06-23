@@ -1,22 +1,23 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import hljs from 'highlight.js'
 import 'highlight.js/styles/github.css'
-hljs.initHighlightingOnLoad()
 
 const Code = ({ onSave, storage, saved, content }) => {
   const [value, setValue] = useState(content)
-
+  useEffect(() => {
+    hljs.highlightAll()
+  }, [value])
   return (
 
-    <div>
+        <div style={{ height: '100%', width: '100%' }}>
       <textarea
         style={{ height: '100%', width: '100%' }}
-        onChange={e => e.target.value && setValue(e.target.value)}
+        onChange={e => setValue(e.target.value)}
         onBlur={(e) => { storage(value); onSave(e) }}
         value={value}
       />
-      <p>{saved}</p>
-              <div style={{ width: '100%' }} dangerouslySetInnerHTML={{ __html: hljs.highlightAuto(value).value }} ></div>
+          <p>{saved}</p>
+          <pre><code>{content}</code></pre>
     </div>
 
   )
