@@ -6,6 +6,7 @@ import debounce from 'lodash/debounce'
 import { Loading } from '../../../components/loading'
 import AddContent from '../AddContent'
 import List from './List'
+import Code from './Code'
 import reorder from './matrix_reorder_rooms'
 
 import { ReactComponent as HeadingIcon } from '../../../assets/icons/remix/h-1.svg'
@@ -17,7 +18,6 @@ import { ReactComponent as OlIcon } from '../../../assets/icons/remix/list-order
 import { ReactComponent as QuoteIcon } from '../../../assets/icons/remix/quote.svg'
 import { ReactComponent as CodeIcon } from '../../../assets/icons/remix/code.svg'
 
-
 const DisplayContent = ({ block, index, blocks, projectSpace, reloadProjects }) => {
   const [clicked, setClicked] = useState(false)
   const [readOnly, setReadOnly] = useState(false)
@@ -27,7 +27,7 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadProjects }) 
   const { cms, error, fetching } = FetchCms(block.room_id)
   const json = JSON.parse(block.topic)
   const matrixClient = Matrix.getMatrixClient()
-
+  
   const onSave = async (roomId) => {
     setReadOnly(true)
     
@@ -40,6 +40,20 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadProjects }) 
         format: 'org.matrix.custom.html',
         msgtype: 'm.text',
         formatted_body: renderToHtml(list)
+      })
+      if ('event_id' in save) {
+        setSaved('Saved!')
+        setTimeout(() => {
+          setSaved()
+        }, 1000)
+      }
+      
+      }else  if (json.type === 'code') {
+        const save = await matrixClient.sendMessage(roomId, {
+        body: localStorage.getItem(roomId),
+        format: 'org.matrix.custom.html',
+        msgtype: 'm.text',
+        formatted_body: '<pre><code>' + localStorage.getItem(roomId) + '</code></pre>'
       })
       if ('event_id' in save) {
         setSaved('Saved!')
@@ -182,7 +196,9 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadProjects }) 
                     <List onSave={() => onSave(block.room_id)} storage={(list) => localStorage.setItem(block.room_id, list)} populated={ cms?.body} type="ul"/> :
                     json.type === 'ol' ?
                     <List onSave={() => onSave(block.room_id)} storage={(list) => localStorage.setItem(block.room_id, list)} populated={ cms?.body} type="ol"/>
-                      : <div className="center">
+                      : json.type === 'code' ?
+                        <Code onSave={() => onSave(block.room_id)} storage={(code) => localStorage.setItem(block.room_id, code)} saved={saved} content={cms?.body} /> :
+                        <div className="center">
                     <Editor
                     dark={window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches}
                     defaultValue={cms?.body}
