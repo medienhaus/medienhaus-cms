@@ -3,7 +3,7 @@ import Matrix from '../../../Matrix'
 import Knock from './Knock'
 import { Loading } from '../../../components/loading'
 
-const Category = () => {
+const Category = ({ title, projectSpace }) => {
   const [subject, setSubject] = useState('')
   const [loading, setLoading] = useState(false)
   const [member, setMember] = useState(false);
@@ -19,6 +19,9 @@ const Category = () => {
     console.log(member);
     setLoading(false)
   }
+  const callback = (requested) => {
+    setSubject('')
+  }
 
 
   return (
@@ -28,11 +31,9 @@ const Category = () => {
         <option value="" disabled={true} >Select Content</option>
         <option value="!JaLRUAZnONCuUHMPvy:">New Media</option>
         <option value="!rorMnDkmfIThdFzwPD:">Digitale Klasse</option>
-        <option value="clown">Clown</option>
-        <option value="kunst">Kunst</option>
       </select>
       {loading && <Loading />}
-      {!member && subject && <Knock roomId={subject} />}
+      {!member && subject && <Knock roomId={subject} projectSpace={projectSpace} title={title} callback={callback} />}
       {
         // sollte es hier die möglichkeit geben mehrere auszuwählen? also studiengang übergreifende projekte
       }
