@@ -9,7 +9,7 @@ const Code = ({ onSave, storage, saved, content }) => {
     <pre style={{ width: '100%' }}>
       <code className="json">
         <textarea
-          style={{ height: '500px', width: '100%' }}
+          style={{ width: '100%' }}
           onChange={e => setValue(e.target.value)}
           onBlur={(e) => { storage(value); onSave(e) }}
           value={value}

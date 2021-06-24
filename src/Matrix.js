@@ -1,7 +1,7 @@
 import matrixcs, { MemoryStore } from 'matrix-js-sdk'
 
 class Matrix {
-  constructor () {
+  constructor() {
     const myAccessToken = localStorage.getItem('medienhaus_access_token')
     const myUserId = localStorage.getItem('medienhaus_user_id')
 
@@ -18,11 +18,11 @@ class Matrix {
   }
 
   // @TODO Replace all calls of this with custom Matrix.function() wrapper functions for all calls that we make use of
-  getMatrixClient () {
+  getMatrixClient() {
     return this.matrixClient
   }
 
-  login (user, password) {
+  login(user, password) {
     return this.matrixClient.login('m.login.password', {
       type: 'm.login.password',
       user: user,
@@ -38,6 +38,7 @@ class Matrix {
       localStorage.setItem('mx_hs_url', response.well_known['m.homeserver'].base_url)
       localStorage.setItem('mx_user_id', response.user_id)
       localStorage.setItem('mx_device_id', response.device_id)
+      localStorage.setItem('mx_labs_feature_feature_spaces', true)
     }).catch((error) => {
       throw error
     })
