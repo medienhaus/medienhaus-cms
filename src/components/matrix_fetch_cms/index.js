@@ -13,6 +13,7 @@ const fetchMatrix = async (room) => {
     const htmlString = data.chunk.map(type => {
       if (type.type === 'm.room.message' && type.content['m.new_content'] === undefined) {
         const content = type.content
+        console.log(content);
         // const bar = { ...content, ...{ eventId: type.event_id } } // ......sorry
         return content
       } else { return null }
@@ -36,7 +37,7 @@ const FetchCms = (path) => {
       try {
         const res = await fetchMatrix(path)
         const text = res.filter(x => x !== null)
-        canceled || setCms(text[0])
+        canceled || setCms(text)
       } catch (e) {
         canceled || setError(e)
       } finally {

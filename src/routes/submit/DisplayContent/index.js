@@ -182,34 +182,34 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadProjects }) 
                 </figure>
                 <button key={'down_' + block.room_id} disabled={index === blocks.length - 1} onClick={(e) => changeOrder(e, block.room_id, block.name, 1)}>↓</button>
               </div>
-              {cms?.msgtype === 'm.image'
-                ? <div className="center"><img src={matrixClient.mxcUrlToHttp(cms.url)} alt={cms.info.name} key={block.room_id} /></div>
-                : cms?.msgtype === 'm.audio'
+              {cms[0]?.msgtype === 'm.image'
+                ? <div className="center"><img src={matrixClient.mxcUrlToHttp(cms[0].url)} alt={cms[0].info.name} key={block.room_id} /></div>
+                : cms[0]?.msgtype === 'm.audio'
                   ? <div className="center">
                     <audio controls>
-                      <source src={matrixClient.mxcUrlToHttp(cms.url)} />
+                      <source src={matrixClient.mxcUrlToHttp(cms[0].url)} />
                     </audio>
                     { /* TODO why section? */}
-                    <section id="audio-title">{cms.body}</section>
+                    <section id="audio-title">{cms[0].body}</section>
                   </div> :
                   json.type === 'ul' ?
-                    <List onSave={() => onSave(block.room_id)} storage={(list) => localStorage.setItem(block.room_id, list)} populated={cms?.body} type="ul" /> :
+                    <List onSave={() => onSave(block.room_id)} storage={(list) => localStorage.setItem(block.room_id, list)} populated={cms[0]?.body} type="ul" /> :
                     json.type === 'ol' ?
-                      <List onSave={() => onSave(block.room_id)} storage={(list) => localStorage.setItem(block.room_id, list)} populated={cms?.body} type="ol" />
+                      <List onSave={() => onSave(block.room_id)} storage={(list) => localStorage.setItem(block.room_id, list)} populated={cms[0]?.body} type="ol" />
                       : json.type === 'code' ?
-                        <Code onSave={() => onSave(block.room_id)} storage={(code) => localStorage.setItem(block.room_id, code)} saved={saved} content={cms?.body} /> :
+                        <Code onSave={() => onSave(block.room_id)} storage={(code) => localStorage.setItem(block.room_id, code)} saved={saved} content={cms[0]?.body} /> :
                         <div className="center">
                           <Editor
                             dark={window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches}
-                            defaultValue={cms?.body}
+                            defaultValue={cms[0]?.body}
                             disableExtensions={['blockmenu', 'image', 'embed', 'table', 'tr', 'th', 'td', 'bullet_list', 'ordered_list', 'checkbox_item', 'checkbox_list', 'container_notice', 'blockquote', 'heading', 'hr', 'highlight']}
                             placeholder={json.type}
                             readOnly={readOnly}
                             onSave={({ done }) => {
-                              if (localStorage.getItem(block.room_id) !== null && cms !== undefined && string2hash(cms.body) !== string2hash(localStorage.getItem(block.room_id))) {
+                              if (localStorage.getItem(block.room_id) !== null && cms[0] !== undefined && string2hash(cms[0].body) !== string2hash(localStorage.getItem(block.room_id))) {
                                 onSave(block.room_id)
                                 localStorage.removeItem(block.room_id)
-                              } else if (localStorage.getItem(block.room_id) !== null && cms === undefined) {
+                              } else if (localStorage.getItem(block.room_id) !== null && cms[0] === undefined) {
                                 onSave(block.room_id)
                                 localStorage.removeItem(block.room_id)
                               }
@@ -221,10 +221,10 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadProjects }) 
                             handleDOMEvents={{
                               focus: () => console.log('FOCUS on ' + block.room_id), // this could set MatrixClient"User.presence" to 'online', "User.currentlyActive" or 'typing. depending on which works best.
                               blur: (e) => {
-                                if (localStorage.getItem(block.room_id) !== null && cms !== undefined && string2hash(cms.body) !== string2hash(localStorage.getItem(block.room_id))) {
+                                if (localStorage.getItem(block.room_id) !== null && cms[0] !== undefined && string2hash(cms[0].body) !== string2hash(localStorage.getItem(block.room_id))) {
                                   onSave(block.room_id)
                                   localStorage.removeItem(block.room_id)
-                                } else if (localStorage.getItem(block.room_id) !== null && cms === undefined) {
+                                } else if (localStorage.getItem(block.room_id) !== null && cms[0] === undefined) {
                                   onSave(block.room_id)
                                   localStorage.removeItem(block.room_id)
                                 }
