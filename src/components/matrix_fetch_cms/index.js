@@ -13,9 +13,8 @@ const fetchMatrix = async (room) => {
     const htmlString = data.chunk.map(type => {
       if (type.type === 'm.room.message' && type.content['m.new_content'] === undefined) {
         const content = type.content
-        console.log(content);
-        // const bar = { ...content, ...{ eventId: type.event_id } } // ......sorry
-        return content
+        const bar = { ...content, ...{ eventId: type.event_id } }
+        return bar
       } else { return null }
     }
     )
