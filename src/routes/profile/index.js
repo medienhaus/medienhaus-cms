@@ -48,30 +48,30 @@ const Profile = () => {
       <p>Hello <strong>{profile.displayname}</strong>,</p>
       <p>welcome to your profile for the Rundgang 2021.</p>
       {invites.length > 0 && (
-      <>
-        <p>You have been invited to join the following project{invites.length > 1 && 's'}:</p>
-      <ul>
-            {invites.map((room) => <Invites room={room}/>)}
-            </ul>
-            </>
+        <>
+          <p>You have been invited to join the following project{invites.length > 1 && 's'}:</p>
+          <ul>
+            {invites.map((room) => <Invites room={room} />)}
+          </ul>
+        </>
       )
-            }
+      }
       {fetchSpaces
         ? <Loading />
         : (
-         <>
-          {drafts?.length > 0 && <p>You have <strong>{drafts.length} draft{drafts.length > 1 && 's' }</strong>, which {drafts.length > 1 ? 'are' : 'is' } not publicly visible.</p>}
-       <ul>
-           {spacesErr ? console.error(spacesErr) : drafts.map((space, index) => <><Projects space = { space } visibility={ space.visibility } reloadProjects={reloadProjects} /><hr /></>)
-          }
-          </ul>
-          {publish?.length > 0 && <p>You have <strong>{publish.length} published</strong> project{publish.length > 1 && 's'}, which {publish.length > 1 ? 'are' : 'is' } publicly visible.</p>}
-          <ul>
-            {spacesErr ? console.error(spacesErr) : publish.map((space, index) => <><Projects space = { space } visibility={ space.published } reloadProjects={reloadProjects} /><hr /> </>)
+          <>
+            {drafts?.length > 0 && <p>You have <strong>{drafts.length} draft{drafts.length > 1 && 's'}</strong>, which {drafts.length > 1 ? 'are' : 'is'} not publicly visible.</p>}
+            <ul>
+              {spacesErr ? console.error(spacesErr) : drafts.map((space, index) => <><Projects space={space} visibility={space.visibility} reloadProjects={reloadProjects} /><hr /></>)
+              }
+            </ul>
+            {publish?.length > 0 && <p>You have <strong>{publish.length} published</strong> project{publish.length > 1 && 's'}, which {publish.length > 1 ? 'are' : 'is'} publicly visible.</p>}
+            <ul>
+              {spacesErr ? console.error(spacesErr) : publish.map((space, index) => <><Projects space={space} visibility={space.published} reloadProjects={reloadProjects} /><hr /> </>)
               }
             </ul>
           </>
-          )}
+        )}
     </div>
   )
 }

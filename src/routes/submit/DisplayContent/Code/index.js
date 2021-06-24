@@ -6,17 +6,17 @@ const Code = ({ onSave, storage, saved, content }) => {
   const [value, setValue] = useState(content);
 
   return (
-    <pre>
+    <pre style={{ width: '100%' }}>
       <code className="json">
         <textarea
-          style={{ height: '100%' }}
+          style={{ height: '500px', width: '100%' }}
           onChange={e => setValue(e.target.value)}
           onBlur={(e) => { storage(value); onSave(e) }}
           value={value}
         />
       </code>
       <p>{saved}</p>
-      {<div dangerouslySetInnerHTML={{ __html: hljs.highlightAuto(value).value }}></div>}
+      {value && <div dangerouslySetInnerHTML={{ __html: hljs.highlightAuto(value).value }}></div>}
     </pre>
 
     /* Trying to overlay the two divy 

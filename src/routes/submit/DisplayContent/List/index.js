@@ -1,3 +1,5 @@
+// Can't copy/paste full lists into the UI. Only one element at a time. 
+
 import React, { useState } from 'react';
 
 const Item = ({ list, index, removeItem }) => {

@@ -17,13 +17,13 @@ import Submit from './routes/submit'
 import { AuthProvider, useAuth } from './Auth'
 import PropTypes from 'prop-types'
 
-function PrivateRoute ({ children, ...rest }) {
+function PrivateRoute({ children, ...rest }) {
   const auth = useAuth()
   const location = useLocation()
 
   // Still loading...
   if (auth.user === null) {
-    return <Loading/>
+    return <Loading />
   }
 
   // Not logged in
@@ -46,25 +46,25 @@ PrivateRoute.propTypes = {
   children: PropTypes.element
 }
 
-function App () {
+function App() {
   return (
     <>
-       <AuthProvider>
-       <Router>
-        <Header />
-        <main>
-          <Switch>
-            <Route path="/" exact component={Landing} />
-            <Route path="/login" component={Login} />
-            <PrivateRoute path="/tools" component={Tools} />
-            <PrivateRoute path="/profile" component={Profile} />
-            <PrivateRoute path="/submit/:spaceId" component={Submit} />
-            <PrivateRoute path="/submit" component={Submit} />
-          </Switch>
-        </main>
-        <Nav />
-        <Footer />
-      </Router>
+      <AuthProvider>
+        <Router>
+          <Header />
+          <main>
+            <Switch>
+              <Route path="/" exact component={Landing} />
+              <Route path="/login" component={Login} />
+              <PrivateRoute path="/tools" component={Tools} />
+              <PrivateRoute path="/profile" component={Profile} />
+              <PrivateRoute path="/submit/:spaceId" component={Submit} />
+              <PrivateRoute path="/submit" component={Submit} />
+            </Switch>
+          </main>
+          <Nav />
+          <Footer />
+        </Router>
       </AuthProvider>
     </>
   )
