@@ -26,10 +26,10 @@ const getAnswer = async () => {
             const collab = room.rooms[0].num_joined_members > 1 ? await matrixClient.getJoinedRoomMembers(room.rooms[0].room_id) : false
             const join_rule = await fetch(process.env.REACT_APP_MATRIX_BASE_URL + `/_matrix/client/r0/rooms/${room.rooms[0].room_id}/state/m.room.join_rules/`, {
               method: 'GET',
-              headers: { Authorization: 'Bearer ' + localStorage.getItem('medienhaus_access_token') },
+              headers: { Authorization: 'Bearer ' + localStorage.getItem('medienhaus_access_token') }
             })
-            const published =  await join_rule.json()
-            return { name: room.rooms[0].name, room_id: room.rooms[0].room_id, topic: JSON.parse(room.rooms[0].topic), published: published.join_rule, collab: collab && collab.joined , avatar_url: room.rooms[0].avatar_url !== undefined && room.rooms[0].avatar_url }
+            const published = await join_rule.json()
+            return { name: room.rooms[0].name, room_id: room.rooms[0].room_id, topic: JSON.parse(room.rooms[0].topic), published: published.join_rule, collab: collab && collab.joined, avatar_url: room.rooms[0].avatar_url !== undefined && room.rooms[0].avatar_url }
           } else {
             return false
           }
@@ -41,21 +41,21 @@ const getAnswer = async () => {
       )
       return getNames.filter(Boolean)
     } else {
-     return false
+      return false
     }
   } catch (e) {
     console.log(e)
   }
 }
 
-const useJoinedSpaces = ({num}) => {
+const useJoinedSpaces = ({ num }) => {
   const [joinedSpaces, setJoinedSpaces] = useState()
   const [fetchSpaces, setFetchSpaces] = useState(true)
   const [spacesErr, setSpacesErr] = useState(false)
-  const [load, setLoad] = useState(false);
+  const [load, setLoad] = useState(false)
 
   useEffect(() => {
-    console.log(load);
+    console.log(load)
     let canceled
     setFetchSpaces(true);
     (async () => {
@@ -69,7 +69,7 @@ const useJoinedSpaces = ({num}) => {
       }
     })()
     return () => { canceled = true }
-    
+
     // eslint-disable-next-line
   }, [load]);
   return {
@@ -77,9 +77,8 @@ const useJoinedSpaces = ({num}) => {
     spacesErr,
     fetchSpaces,
     reload: () => {
-      setLoad({...load
-       }
-    )
+      setLoad({ ...load }
+      )
     }
   }
 }

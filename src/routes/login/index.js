@@ -8,7 +8,7 @@ import { Loading } from '../../components/loading'
 
 const Login = () => {
   const {
-    register,
+    // register,
     handleSubmit,
 
     formState: {
@@ -67,11 +67,11 @@ const Login = () => {
         {errormsg ?? errormsg}
         {isLoading
           ? (
-          <Loading />
-            )
+            <Loading />
+          )
           : (
-          <button name="submit" type="submit">LOGIN</button>
-            )}
+            <button name="submit" type="submit">LOGIN</button>
+          )}
       </form>
       <ul>
         <li>
