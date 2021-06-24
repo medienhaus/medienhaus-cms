@@ -14,7 +14,7 @@
     "react-i18next": "^11.10.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
-    "rich-markdown-editor": "github:outline/rich-markdown-editor#pull/438/head",
+    "rich-markdown-editor": "^11.13.0",
     "showdown": "^1.9.1",
     "web-vitals": "^1.1.2"
   },
