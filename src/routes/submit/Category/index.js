@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import Matrix from '../../../Matrix'
-import Request from './Request'
+import Knock from './Knock'
 import { Loading } from '../../../components/loading'
 
 const Category = () => {
@@ -26,13 +26,13 @@ const Category = () => {
       <label htmlFor="subject">Studiengang</label>
       <select id="subject" name="subject" defaultValue={''} value={subject} onChange={(e) => isMember(e)}>
         <option value="" disabled={true} >Select Content</option>
-        <option value="!KIIwpwkcYdtsTgSGhw:">New Media</option>
-        <option value="!qKuBiJVgPrRowlcwTG:">Digitale Klasse</option>
+        <option value="!JaLRUAZnONCuUHMPvy:">New Media</option>
+        <option value="!rorMnDkmfIThdFzwPD:">Digitale Klasse</option>
         <option value="clown">Clown</option>
         <option value="kunst">Kunst</option>
       </select>
       {loading && <Loading />}
-      {!member && subject && <Request roomId={subject} />}
+      {!member && subject && <Knock roomId={subject} />}
       {
         // sollte es hier die möglichkeit geben mehrere auszuwählen? also studiengang übergreifende projekte
       }
