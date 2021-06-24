@@ -155,106 +155,105 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadProjects }) 
     return hash
   }
 
-  return (
-    fetching || loading
-      /*
-             * @Andi sort of... hack to keep interface from violently redrawing. We need to see how we deal with this.
-             * Too many waterfalls, let's stick to the rivers and the lakes that we're used to.
-            */
-      ? <div style={{ height: '120px' }}><Loading /></div>
-      : error
-        ? console.error(error)
-        : (
-          <>
-            <div className="editor">
-              <div className="left">
-                <button key={'up_' + block.room_id} disabled={index === 0} onClick={(e) => changeOrder(e, block.room_id, block.name, -1)}>↑</button>
-                <figure className="icon-bg">
-                  {json.type === 'heading' ?
-                    <HeadingIcon fill="var(--color-fg)" /> :
-                    json.type === 'audio' ? <AudioIcon fill="var(--color-fg)" /> :
-                      json.type === 'image' ? <ImageIcon fill="var(--color-fg)" /> :
-                        json.type === 'ul' ? <UlIcon fill="var(--color-fg)" /> :
-                          json.type === 'ol' ? <OlIcon fill="var(--color-fg)" /> :
-                            json.type === 'quote' ? <QuoteIcon fill="var(--color-fg)" /> :
-                              json.type === 'code' ? <CodeIcon fill="var(--color-fg)" /> :
-                                <TextIcon fill="var(--color-fg)" />}
-                </figure>
-                <button key={'down_' + block.room_id} disabled={index === blocks.length - 1} onClick={(e) => changeOrder(e, block.room_id, block.name, 1)}>↓</button>
-              </div>
-              {cms?.msgtype === 'm.image'
-                ? <div className="center"><img src={matrixClient.mxcUrlToHttp(cms.url)} alt={cms.info.name} key={block.room_id} /></div>
-                : cms?.msgtype === 'm.audio'
-                  ? <div className="center">
-                    <audio controls>
-                      <source src={matrixClient.mxcUrlToHttp(cms.url)} />
-                    </audio>
-                    { /* TODO why section? */}
-                    <section id="audio-title">{cms.body}</section>
-                  </div> :
-                  json.type === 'ul' ?
-                    <List onSave={() => onSave(block.room_id)} storage={(list) => localStorage.setItem(block.room_id, list)} populated={cms?.body} type="ul" /> :
-                    json.type === 'ol' ?
-                      <List onSave={() => onSave(block.room_id)} storage={(list) => localStorage.setItem(block.room_id, list)} populated={cms?.body} type="ol" />
-                      : json.type === 'code' ?
-                        <Code onSave={() => onSave(block.room_id)} storage={(code) => localStorage.setItem(block.room_id, code)} saved={saved} content={cms?.body} /> :
-                        <div className="center">
-                          <Editor
-                            dark={window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches}
-                            defaultValue={cms?.body}
-                            disableExtensions={['blockmenu', 'image', 'embed', 'table', 'tr', 'th', 'td', 'bullet_list', 'ordered_list', 'checkbox_item', 'checkbox_list', 'container_notice', 'blockquote', 'heading', 'hr', 'highlight']}
-                            placeholder={json.type}
-                            readOnly={readOnly}
-                            onSave={({ done }) => {
-                              if (localStorage.getItem(block.room_id) !== null && cms !== undefined && string2hash(cms.body) !== string2hash(localStorage.getItem(block.room_id))) {
-                                onSave(block.room_id)
-                                localStorage.removeItem(block.room_id)
-                              } else if (localStorage.getItem(block.room_id) !== null && cms === undefined) {
-                                onSave(block.room_id)
-                                localStorage.removeItem(block.room_id)
-                              }
-                            }}
-                            onChange={debounce((value) => {
-                              const text = value()
-                              localStorage.setItem(block.room_id, text)
-                            }, 250)}
-                            handleDOMEvents={{
-                              focus: () => console.log('FOCUS on ' + block.room_id), // this could set MatrixClient"User.presence" to 'online', "User.currentlyActive" or 'typing. depending on which works best.
-                              blur: (e) => {
-                                if (localStorage.getItem(block.room_id) !== null && cms !== undefined && string2hash(cms.body) !== string2hash(localStorage.getItem(block.room_id))) {
-                                  onSave(block.room_id)
-                                  localStorage.removeItem(block.room_id)
-                                } else if (localStorage.getItem(block.room_id) !== null && cms === undefined) {
-                                  onSave(block.room_id)
-                                  localStorage.removeItem(block.room_id)
-                                }
-                              }
-                            }}
-                            key={block.room_id} />
-                          <p key={block.room_id + '_p'}>{saved}</p> {// feedback that saving was succesfull or has failed
-                          }
-                        </div>
-              }
+  if (fetching || loading) {
+    return <div style={{ height: '120px' }}><Loading /></div>;
+  }
 
-              <div className="right">
-                <button key={'delete' + index} onClick={(e) => {
-                  if (clicked) {
-                    onDelete(e, block.room_id, index)
-                    setClicked(false)
-                    reloadProjects('callback from delete button in DisplayContent')
-                  } else {
-                    e.preventDefault()
-                    setClicked(true)
-                  }
-                  <p>{deleting}</p> // feedback that deleting was succesfull or has failed
-                }}>
-                  {clicked ? 'SURE?' : deleting ? <Loading /> : '×'}
-                </button>
-              </div>
-            </div>
-            <AddContent number={index + 1} projectSpace={projectSpace} blocks={blocks} reloadProjects={reloadProjects} />
-          </>
-        )
+  if (error) {
+    console.error(error);
+    return;
+  }
+
+  return (
+    <>
+      <div className="editor">
+        <div className="left">
+          <button key={'up_' + block.room_id} disabled={index === 0} onClick={(e) => changeOrder(e, block.room_id, block.name, -1)}>↑</button>
+          <figure className="icon-bg">
+            {json.type === 'heading' ?
+              <HeadingIcon fill="var(--color-fg)" /> :
+              json.type === 'audio' ? <AudioIcon fill="var(--color-fg)" /> :
+                json.type === 'image' ? <ImageIcon fill="var(--color-fg)" /> :
+                  json.type === 'ul' ? <UlIcon fill="var(--color-fg)" /> :
+                    json.type === 'ol' ? <OlIcon fill="var(--color-fg)" /> :
+                      json.type === 'quote' ? <QuoteIcon fill="var(--color-fg)" /> :
+                        json.type === 'code' ? <CodeIcon fill="var(--color-fg)" /> :
+                          <TextIcon fill="var(--color-fg)" />}
+          </figure>
+          <button key={'down_' + block.room_id} disabled={index === blocks.length - 1} onClick={(e) => changeOrder(e, block.room_id, block.name, 1)}>↓</button>
+        </div>
+        {cms?.msgtype === 'm.image'
+          ? <div className="center"><img src={matrixClient.mxcUrlToHttp(cms.url)} alt={cms.info.name} key={block.room_id} /></div>
+          : cms?.msgtype === 'm.audio'
+            ? <div className="center">
+              <audio controls>
+                <source src={matrixClient.mxcUrlToHttp(cms.url)} />
+              </audio>
+              { /* TODO why section? */}
+              <section id="audio-title">{cms.body}</section>
+            </div> :
+            json.type === 'ul' ?
+              <List onSave={() => onSave(block.room_id)} storage={(list) => localStorage.setItem(block.room_id, list)} populated={cms?.body} type="ul" /> :
+              json.type === 'ol' ?
+                <List onSave={() => onSave(block.room_id)} storage={(list) => localStorage.setItem(block.room_id, list)} populated={cms?.body} type="ol" />
+                : json.type === 'code' ?
+                  <Code onSave={() => onSave(block.room_id)} storage={(code) => localStorage.setItem(block.room_id, code)} saved={saved} content={cms?.body} /> :
+                  <div className="center">
+                    <Editor
+                      dark={window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches}
+                      defaultValue={cms?.body}
+                      disableExtensions={['blockmenu', 'image', 'embed', 'table', 'tr', 'th', 'td', 'bullet_list', 'ordered_list', 'checkbox_item', 'checkbox_list', 'container_notice', 'blockquote', 'heading', 'hr', 'highlight']}
+                      placeholder={json.type}
+                      readOnly={readOnly}
+                      onSave={({ done }) => {
+                        if (localStorage.getItem(block.room_id) !== null && cms !== undefined && string2hash(cms.body) !== string2hash(localStorage.getItem(block.room_id))) {
+                          onSave(block.room_id)
+                          localStorage.removeItem(block.room_id)
+                        } else if (localStorage.getItem(block.room_id) !== null && cms === undefined) {
+                          onSave(block.room_id)
+                          localStorage.removeItem(block.room_id)
+                        }
+                      }}
+                      onChange={debounce((value) => {
+                        const text = value()
+                        localStorage.setItem(block.room_id, text)
+                      }, 250)}
+                      handleDOMEvents={{
+                        focus: () => console.log('FOCUS on ' + block.room_id), // this could set MatrixClient"User.presence" to 'online', "User.currentlyActive" or 'typing. depending on which works best.
+                        blur: (e) => {
+                          if (localStorage.getItem(block.room_id) !== null && cms !== undefined && string2hash(cms.body) !== string2hash(localStorage.getItem(block.room_id))) {
+                            onSave(block.room_id)
+                            localStorage.removeItem(block.room_id)
+                          } else if (localStorage.getItem(block.room_id) !== null && cms === undefined) {
+                            onSave(block.room_id)
+                            localStorage.removeItem(block.room_id)
+                          }
+                        }
+                      }}
+                      key={block.room_id} />
+                    <p key={block.room_id + '_p'}>{saved}</p> {// feedback that saving was succesfull or has failed
+                    }
+                  </div>
+        }
+
+        <div className="right">
+          <button key={'delete' + index} onClick={(e) => {
+            if (clicked) {
+              onDelete(e, block.room_id, index)
+              setClicked(false)
+              reloadProjects('callback from delete button in DisplayContent')
+            } else {
+              e.preventDefault()
+              setClicked(true)
+            }
+            <p>{deleting}</p> // feedback that deleting was succesfull or has failed
+          }}>
+            {clicked ? 'SURE?' : deleting ? <Loading /> : '×'}
+          </button>
+        </div>
+      </div>
+      <AddContent number={index + 1} projectSpace={projectSpace} blocks={blocks} reloadProjects={reloadProjects} />
+    </>
   )
 }
 export default DisplayContent
