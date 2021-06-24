@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import MediaUpload from './MediaUpload'
 import AddBlock from './AddBlock'
+import PeertubeEmbed from "./peertubeEmbed";
 
 const AddContent = ({ number, projectSpace, blocks, reloadProjects }) => {
   const [contentSelect, setContentSelect] = useState('')
@@ -29,11 +30,17 @@ const AddContent = ({ number, projectSpace, blocks, reloadProjects }) => {
               <option value="" disabled={true} >--Media------------</option>
               <option value="image">Image</option>
               <option value="audio">Audio</option>
+              <option value="video">Video</option>
+              <option value="livestream">Livestream</option>
+              <option value="playlist">Playlist</option>
             </select>
             <button className="cancel" onClick={(e) => { e.preventDefault(); setIsPlusButton(true) }} >×</button>
-            {contentSelect === 'image' || contentSelect === 'audio'
-              ? <MediaUpload fileType={contentSelect} number={number} space={projectSpace} blocks={blocks} reloadProjects={reloadProjects} displayPlusButton={displayPlusButton} />
-              : <AddBlock contentSelect={contentSelect} number={number} projectSpace={projectSpace} blocks={blocks} reloadProjects={reloadProjects} displayPlusButton={displayPlusButton} />
+            {
+              contentSelect === 'image' || contentSelect === 'audio'
+                ? <MediaUpload fileType={contentSelect} number={number} space={projectSpace} blocks={blocks} reloadProjects={reloadProjects} displayPlusButton={displayPlusButton} />
+              : contentSelect === 'video' || contentSelect === 'livestream' || contentSelect === 'playlist'
+                ? <PeertubeEmbed type={contentSelect} />
+                : <AddBlock contentSelect={contentSelect} number={number} projectSpace={projectSpace} blocks={blocks} reloadProjects={reloadProjects} displayPlusButton={displayPlusButton} />
             }
           </>
         )
