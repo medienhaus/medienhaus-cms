@@ -170,15 +170,16 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadProjects }) 
         <div className="left">
           <button key={'up_' + block.room_id} disabled={index === 0} onClick={(e) => changeOrder(e, block.room_id, block.name, -1)}>↑</button>
           <figure className="icon-bg">
-            {json.type === 'heading' ?
-              <HeadingIcon fill="var(--color-fg)" /> :
+            {
+              json.type === 'heading' ? <HeadingIcon fill="var(--color-fg)" /> :
               json.type === 'audio' ? <AudioIcon fill="var(--color-fg)" /> :
-                json.type === 'image' ? <ImageIcon fill="var(--color-fg)" /> :
-                  json.type === 'ul' ? <UlIcon fill="var(--color-fg)" /> :
-                    json.type === 'ol' ? <OlIcon fill="var(--color-fg)" /> :
-                      json.type === 'quote' ? <QuoteIcon fill="var(--color-fg)" /> :
-                        json.type === 'code' ? <CodeIcon fill="var(--color-fg)" /> :
-                          <TextIcon fill="var(--color-fg)" />}
+              json.type === 'image' ? <ImageIcon fill="var(--color-fg)" /> :
+              json.type === 'ul' ? <UlIcon fill="var(--color-fg)" /> :
+              json.type === 'ol' ? <OlIcon fill="var(--color-fg)" /> :
+              json.type === 'quote' ? <QuoteIcon fill="var(--color-fg)" /> :
+              json.type === 'code' ? <CodeIcon fill="var(--color-fg)" /> :
+              <TextIcon fill="var(--color-fg)" />
+            }
           </figure>
           <button key={'down_' + block.room_id} disabled={index === blocks.length - 1} onClick={(e) => changeOrder(e, block.room_id, block.name, 1)}>↓</button>
         </div>
