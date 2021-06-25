@@ -8,11 +8,11 @@ import reorder from "../DisplayContent/matrix_reorder_rooms";
 
 const AddContent = ({ number, projectSpace, blocks, reloadProjects }) => {
   const [selectedBlockType, setSelectedBlockType] = useState('')
-  const [isPlusButton, setIsPlusButton] = useState(true)
+  const [showBlockTypeSelector, setShowBlockTypeSelector] = useState(false)
   const matrixClient = Matrix.getMatrixClient()
 
   const displayPlusButton = (button) => {
-    setIsPlusButton(button)
+    setShowBlockTypeSelector(!button)
   }
 
   async function onCreateBlockRoom() {
@@ -28,43 +28,45 @@ const AddContent = ({ number, projectSpace, blocks, reloadProjects }) => {
   }
 
   function onBlockWasAddedSuccessfully() {
-    setIsPlusButton(true)
+    setShowBlockTypeSelector(true)
     reloadProjects()
   }
 
+  // "Collapsed mode": Only show a small '+' button
+  if (!showBlockTypeSelector) {
+    return (
+      <div className="add">
+        <button className="add-button" key={'add' + number} onClick={(e) => { e.preventDefault(); setShowBlockTypeSelector(true) }} >+</button>
+      </div>
+    )
+  }
+
+  // "Expanded mode": Show our selector to let the user select which type of content they want to add here
   return (
     <div className="add">
-      {isPlusButton
-        ? <button className="add-button" key={'add' + number} onBlur={() => setIsPlusButton(true)} onClick={(e) => { e.preventDefault(); setIsPlusButton(false) }} >+</button>
-        // onBlur not workin here, no idea why.
-        : (
-          <>
-            <select name="content-select" defaultValue={''} id="content-select" onChange={(e) => setSelectedBlockType(e.target.value)}>
-              <option value="" disabled={true} >Select Content</option>
-              <option value="none" disabled={true} >--Text------------</option>
-              <option value="heading">Heading</option>
-              <option value="text">Text</option>
-              <option value="ul">List (unordered)</option>
-              <option value="ol">List (ordered)</option>
-              <option value="quote">Quote</option>
-              <option value="code">Code Block</option>
-              <option value="" disabled={true} >--Media------------</option>
-              <option value="image">Image</option>
-              <option value="audio">Audio</option>
-              <option value="video">Video</option>
-              <option value="livestream">Livestream</option>
-              <option value="playlist">Playlist</option>
-            </select>
-            <button className="cancel" onClick={(e) => { e.preventDefault(); setIsPlusButton(true) }} >×</button>
-            {
-              selectedBlockType === 'image' || selectedBlockType === 'audio'
-                ? <MediaUpload fileType={selectedBlockType} number={number} space={projectSpace} blocks={blocks} reloadProjects={reloadProjects} displayPlusButton={displayPlusButton} />
-              : selectedBlockType === 'video' || selectedBlockType === 'livestream' || selectedBlockType === 'playlist'
-                ? <PeertubeEmbed type={selectedBlockType} onCreateRoomForBlock={onCreateBlockRoom} onBlockWasAddedSuccessfully={onBlockWasAddedSuccessfully} />
-                : <AddBlock contentSelect={selectedBlockType} number={number} projectSpace={projectSpace} blocks={blocks} reloadProjects={reloadProjects} displayPlusButton={displayPlusButton} />
-            }
-          </>
-        )
+      <select name="content-select" value={selectedBlockType} id="content-select" onChange={(e) => setSelectedBlockType(e.target.value)}>
+        <option value="" disabled={true} >Select Content</option>
+        <option value="none" disabled={true} >--Text------------</option>
+        <option value="heading">Heading</option>
+        <option value="text">Text</option>
+        <option value="ul">List (unordered)</option>
+        <option value="ol">List (ordered)</option>
+        <option value="quote">Quote</option>
+        <option value="code">Code Block</option>
+        <option value="" disabled={true} >--Media------------</option>
+        <option value="image">Image</option>
+        <option value="audio">Audio</option>
+        <option value="video">Video</option>
+        <option value="livestream">Livestream</option>
+        <option value="playlist">Playlist</option>
+      </select>
+      <button className="cancel" onClick={(e) => { e.preventDefault(); setShowBlockTypeSelector(false); setSelectedBlockType('') }} >×</button>
+      {
+        selectedBlockType === 'image' || selectedBlockType === 'audio'
+          ? <MediaUpload fileType={selectedBlockType} number={number} space={projectSpace} blocks={blocks} reloadProjects={reloadProjects} displayPlusButton={displayPlusButton} />
+        : selectedBlockType === 'video' || selectedBlockType === 'livestream' || selectedBlockType === 'playlist'
+          ? <PeertubeEmbed type={selectedBlockType} onCreateRoomForBlock={onCreateBlockRoom} onBlockWasAddedSuccessfully={onBlockWasAddedSuccessfully} />
+          : <AddBlock contentSelect={selectedBlockType} number={number} projectSpace={projectSpace} blocks={blocks} reloadProjects={reloadProjects} displayPlusButton={displayPlusButton} />
       }
     </div>
   )
