@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react'
 import Matrix from '../../../Matrix'
 import createBlock from '../matrix_create_room'
 
-const PeertubeEmbed = ({type}) => {
+const PeertubeEmbed = ({type, onCreateRoomForBlock, onBlockWasAddedSuccessfully}) => {
   const [loading, setLoading] = useState(false)
   const [entries, setEntries] = useState({});
   const [selectedEntry, setSelectedEntry] = useState('');
@@ -27,25 +27,13 @@ const PeertubeEmbed = ({type}) => {
     fetchEntries()
   }, [type])
 
-  // const handleSubmission = async (e, selectedFile, fileName) => {
-  //   e.preventDefault()
-  //   setLoading(true)
-  //   try {
-  //     props.displayPlusButton(true)
-  //     props.reloadProjects('callback from FileUpload component')
-  //     setLoading(false)
-  //
-  //     // setCounter(0)
-  //     // })
-  //   } catch (e) {
-  //     console.log('error while trying to save image: ' + e)
-  //   } finally {
-  //     setLoading(false)
-  //   }
-  // }
-
-  function handleSubmit() {
-
+  async function handleSubmit() {
+    const blockRoomId = await onCreateRoomForBlock()
+    const sendMessageResult = await matrixClient.sendMessage(blockRoomId, {
+      body: selectedEntry,
+      msgtype: 'm.text'
+    })
+    onBlockWasAddedSuccessfully()
   }
 
   function selectEntry(e) {
@@ -53,20 +41,22 @@ const PeertubeEmbed = ({type}) => {
   }
 
   return (
-    <div>
-      <select disabled={(Object.keys(entries).length === 0)} onChange={selectEntry} value={selectedEntry}>
-        <option value="" disabled={true}>
-          {(
-            Object.keys(entries).length === 0
-              ? 'no entries'
-              : '--- please select ---'
-          )}
-        </option>
-        {Object.values(entries).map(entry => (
-          <option value={entry.id} key={entry.id}>{entry.name}</option>
-        ))}
-      </select>
-      <button disabled={!selectedEntry} onClick={handleSubmit}>Go</button>
+    <div style={{gridColumn: '1 / 3', marginTop: 'var(--margin)'}}>
+      <div style={{display: 'flex'}}>
+        <select disabled={(Object.keys(entries).length === 0)} onChange={selectEntry} value={selectedEntry} style={{flexGrow: 1, marginRight: 'var(--margin)'}}>
+          <option value="" disabled={true}>
+            {(
+              Object.keys(entries).length === 0
+                ? 'no entries'
+                : '--- Please Select ---'
+            )}
+          </option>
+          {Object.values(entries).map(entry => (
+            <option value={entry.uuid} key={entry.uuid}>{entry.name}</option>
+          ))}
+        </select>
+        <button disabled={!selectedEntry} onClick={handleSubmit} style={{flexBasis: '200px'}}>Add Content</button>
+      </div>
     </div>
   )
 }

@@ -2,13 +2,34 @@ import React, { useState } from 'react'
 import MediaUpload from './MediaUpload'
 import AddBlock from './AddBlock'
 import PeertubeEmbed from "./peertubeEmbed";
+import createBlock from "../matrix_create_room";
+import Matrix from "../../../Matrix";
+import reorder from "../DisplayContent/matrix_reorder_rooms";
 
 const AddContent = ({ number, projectSpace, blocks, reloadProjects }) => {
-  const [contentSelect, setContentSelect] = useState('')
+  const [selectedBlockType, setSelectedBlockType] = useState('')
   const [isPlusButton, setIsPlusButton] = useState(true)
+  const matrixClient = Matrix.getMatrixClient()
 
   const displayPlusButton = (button) => {
     setIsPlusButton(button)
+  }
+
+  async function onCreateBlockRoom() {
+    // Make some room in our room list by pushing rooms below this room down by 1 index
+    blocks.forEach((block, i) => {
+      if (i >= number) {
+        console.log(block.name)
+        reorder(block.name, block.room_id, false)
+      }
+    })
+    // Actually create a Matrix room for the new block
+    return await createBlock(undefined, selectedBlockType, number, projectSpace)
+  }
+
+  function onBlockWasAddedSuccessfully() {
+    setIsPlusButton(true)
+    reloadProjects()
   }
 
   return (
@@ -18,7 +39,7 @@ const AddContent = ({ number, projectSpace, blocks, reloadProjects }) => {
         // onBlur not workin here, no idea why.
         : (
           <>
-            <select name="content-select" defaultValue={''} id="content-select" onChange={(e) => setContentSelect(e.target.value)}>
+            <select name="content-select" defaultValue={''} id="content-select" onChange={(e) => setSelectedBlockType(e.target.value)}>
               <option value="" disabled={true} >Select Content</option>
               <option value="none" disabled={true} >--Text------------</option>
               <option value="heading">Heading</option>
@@ -36,11 +57,11 @@ const AddContent = ({ number, projectSpace, blocks, reloadProjects }) => {
             </select>
             <button className="cancel" onClick={(e) => { e.preventDefault(); setIsPlusButton(true) }} >×</button>
             {
-              contentSelect === 'image' || contentSelect === 'audio'
-                ? <MediaUpload fileType={contentSelect} number={number} space={projectSpace} blocks={blocks} reloadProjects={reloadProjects} displayPlusButton={displayPlusButton} />
-              : contentSelect === 'video' || contentSelect === 'livestream' || contentSelect === 'playlist'
-                ? <PeertubeEmbed type={contentSelect} />
-                : <AddBlock contentSelect={contentSelect} number={number} projectSpace={projectSpace} blocks={blocks} reloadProjects={reloadProjects} displayPlusButton={displayPlusButton} />
+              selectedBlockType === 'image' || selectedBlockType === 'audio'
+                ? <MediaUpload fileType={selectedBlockType} number={number} space={projectSpace} blocks={blocks} reloadProjects={reloadProjects} displayPlusButton={displayPlusButton} />
+              : selectedBlockType === 'video' || selectedBlockType === 'livestream' || selectedBlockType === 'playlist'
+                ? <PeertubeEmbed type={selectedBlockType} onCreateRoomForBlock={onCreateBlockRoom} onBlockWasAddedSuccessfully={onBlockWasAddedSuccessfully} />
+                : <AddBlock contentSelect={selectedBlockType} number={number} projectSpace={projectSpace} blocks={blocks} reloadProjects={reloadProjects} displayPlusButton={displayPlusButton} />
             }
           </>
         )
