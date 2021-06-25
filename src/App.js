@@ -1,7 +1,5 @@
 import React from 'react'
 import { BrowserRouter as Router, Route, Switch, Redirect, useLocation } from 'react-router-dom'
-// import { Link } from 'react-router-dom'
-// import './App.css';
 import './assets/css/index.css'
 import Header from './components/header'
 import Footer from './components/footer'
@@ -17,7 +15,7 @@ import Submit from './routes/submit'
 import { AuthProvider, useAuth } from './Auth'
 import PropTypes from 'prop-types'
 
-function PrivateRoute({ children, ...rest }) {
+function PrivateRoute ({ children, ...rest }) {
   const auth = useAuth()
   const location = useLocation()
 
@@ -46,7 +44,7 @@ PrivateRoute.propTypes = {
   children: PropTypes.element
 }
 
-function App() {
+function App () {
   return (
     <>
       <AuthProvider>

@@ -37,9 +37,9 @@ const createBlock = async (e, content, number, space) => {
   try {
     const room = await matrixClient.createRoom(opts)
       .then(async (res) => {
-        const room_id = res.room_id
-        const response = await fetch(process.env.REACT_APP_MATRIX_BASE_URL + `/_matrix/client/r0/rooms/${space}/state/m.space.child/${room_id}`, req)
-        return [room_id, response]
+        const roomId = res.room_id
+        const response = await fetch(process.env.REACT_APP_MATRIX_BASE_URL + `/_matrix/client/r0/rooms/${space}/state/m.space.child/${roomId}`, req)
+        return [roomId, response]
       })
       .then(async (res) => {
         const data = await res[1].json()

@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { Redirect, useHistory, useLocation } from 'react-router-dom'
@@ -66,12 +65,9 @@ const Login = () => {
         {errors.password && t('Password can\'t be empty.')}
         {errormsg ?? errormsg}
         {isLoading
-          ? (
-            <Loading />
-          )
-          : (
-            <button name="submit" type="submit">LOGIN</button>
-          )}
+          ? <Loading />
+          : <button name="submit" type="submit">LOGIN</button>
+        }
       </form>
       <ul>
         <li>

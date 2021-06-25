@@ -36,7 +36,7 @@ const Profile = () => {
       }
     }
     getSync()
-    // eslint-disable-next-line 
+    // eslint-disable-next-line
   }, [])
 
   const reloadProjects = () => {
@@ -71,7 +71,7 @@ const Profile = () => {
               }
             </ul>
           </>
-        )}
+          )}
     </div>
   )
 }

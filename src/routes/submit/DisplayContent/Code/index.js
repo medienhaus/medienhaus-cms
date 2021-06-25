@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
 import hljs from 'highlight.js'
-import 'highlight.js/styles/vs2015.css';
+import 'highlight.js/styles/vs2015.css'
 
 const Code = ({ onSave, storage, saved, content }) => {
-  const [value, setValue] = useState(content);
+  const [value, setValue] = useState(content)
 
   return (
     <pre style={{ width: '100%' }}>
@@ -19,7 +19,7 @@ const Code = ({ onSave, storage, saved, content }) => {
       {value && <div dangerouslySetInnerHTML={{ __html: hljs.highlightAuto(value).value }}></div>}
     </pre>
 
-    /* Trying to overlay the two divy 
+  /* Trying to overlay the two divy
 <div style={{
   position: "relative",
 }}>

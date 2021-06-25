@@ -15,8 +15,7 @@ const AddContent = ({ number, projectSpace, blocks, reloadProjects }) => {
       {isPlusButton
         ? <button className="add-button" key={'add' + number} onBlur={() => setIsPlusButton(true)} onClick={(e) => { e.preventDefault(); setIsPlusButton(false) }} >+</button>
         // onBlur not workin here, no idea why.
-        : (
-          <>
+        : <>
             <select name="content-select" defaultValue={''} id="content-select" onChange={(e) => setContentSelect(e.target.value)}>
               <option value="" disabled={true} >Select Content</option>
               <option value="none" disabled={true} >--Text------------</option>
@@ -36,9 +35,9 @@ const AddContent = ({ number, projectSpace, blocks, reloadProjects }) => {
               : <AddBlock contentSelect={contentSelect} number={number} projectSpace={projectSpace} blocks={blocks} reloadProjects={reloadProjects} displayPlusButton={displayPlusButton} />
             }
           </>
-        )
       }
     </div>
   )
 }
+
 export default AddContent

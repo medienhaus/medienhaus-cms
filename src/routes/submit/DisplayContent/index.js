@@ -34,7 +34,7 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadProjects }) 
     try {
       if (json.type === 'ul' || json.type === 'ol') {
         const list = JSON.parse(localStorage.getItem(roomId)).map(li => li.text).join('\n')
-        console.log(list);
+        console.log(list)
         const save = await matrixClient.sendMessage(roomId, {
           body: list,
           format: 'org.matrix.custom.html',
@@ -47,7 +47,6 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadProjects }) 
             setSaved()
           }, 1000)
         }
-
       } else if (json.type === 'code') {
         const save = await matrixClient.sendMessage(roomId, {
           body: localStorage.getItem(roomId),
@@ -61,9 +60,7 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadProjects }) 
             setSaved()
           }, 1000)
         }
-
-      }
-      else {
+      } else {
         const save = await matrixClient.sendMessage(roomId, {
           body: localStorage.getItem(roomId),
           format: 'org.matrix.custom.html',
@@ -156,12 +153,12 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadProjects }) 
   }
 
   if (fetching || loading) {
-    return <div style={{ height: '120px' }}><Loading /></div>;
+    return <div style={{ height: '120px' }}><Loading /></div>
   }
 
   if (error) {
-    console.error(error);
-    return;
+    console.error(error)
+    return
   }
 
   return (
@@ -171,14 +168,21 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadProjects }) 
           <button key={'up_' + block.room_id} disabled={index === 0} onClick={(e) => changeOrder(e, block.room_id, block.name, -1)}>↑</button>
           <figure className="icon-bg">
             {
-              json.type === 'heading' ? <HeadingIcon fill="var(--color-fg)" /> :
-              json.type === 'audio' ? <AudioIcon fill="var(--color-fg)" /> :
-              json.type === 'image' ? <ImageIcon fill="var(--color-fg)" /> :
-              json.type === 'ul' ? <UlIcon fill="var(--color-fg)" /> :
-              json.type === 'ol' ? <OlIcon fill="var(--color-fg)" /> :
-              json.type === 'quote' ? <QuoteIcon fill="var(--color-fg)" /> :
-              json.type === 'code' ? <CodeIcon fill="var(--color-fg)" /> :
-              <TextIcon fill="var(--color-fg)" />
+              json.type === 'heading'
+                ? <HeadingIcon fill="var(--color-fg)" />
+                : json.type === 'audio'
+                  ? <AudioIcon fill="var(--color-fg)" />
+                  : json.type === 'image'
+                    ? <ImageIcon fill="var(--color-fg)" />
+                    : json.type === 'ul'
+                      ? <UlIcon fill="var(--color-fg)" />
+                      : json.type === 'ol'
+                        ? <OlIcon fill="var(--color-fg)" />
+                        : json.type === 'quote'
+                          ? <QuoteIcon fill="var(--color-fg)" />
+                          : json.type === 'code'
+                            ? <CodeIcon fill="var(--color-fg)" />
+                            : <TextIcon fill="var(--color-fg)" />
             }
           </figure>
           <button key={'down_' + block.room_id} disabled={index === blocks.length - 1} onClick={(e) => changeOrder(e, block.room_id, block.name, 1)}>↓</button>
@@ -192,14 +196,14 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadProjects }) 
               </audio>
               { /* TODO why section? */}
               <section id="audio-title">{cms.body}</section>
-            </div> :
-            json.type === 'ul' ?
-              <List onSave={() => onSave(block.room_id)} storage={(list) => localStorage.setItem(block.room_id, list)} populated={cms?.body} type="ul" /> :
-              json.type === 'ol' ?
-                <List onSave={() => onSave(block.room_id)} storage={(list) => localStorage.setItem(block.room_id, list)} populated={cms?.body} type="ol" />
-                : json.type === 'code' ?
-                  <Code onSave={() => onSave(block.room_id)} storage={(code) => localStorage.setItem(block.room_id, code)} saved={saved} content={cms?.body} /> :
-                  <div className="center">
+            </div>
+            : json.type === 'ul'
+              ? <List onSave={() => onSave(block.room_id)} storage={(list) => localStorage.setItem(block.room_id, list)} populated={cms?.body} type="ul" />
+              : json.type === 'ol'
+                ? <List onSave={() => onSave(block.room_id)} storage={(list) => localStorage.setItem(block.room_id, list)} populated={cms?.body} type="ol" />
+                : json.type === 'code'
+                  ? <Code onSave={() => onSave(block.room_id)} storage={(code) => localStorage.setItem(block.room_id, code)} saved={saved} content={cms?.body} />
+                  : <div className="center">
                     <Editor
                       dark={window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches}
                       defaultValue={cms?.body}

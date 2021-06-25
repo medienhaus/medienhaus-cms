@@ -7,30 +7,17 @@ const Projects = ({ space, visibility, reloadProjects }) => {
   const history = useHistory()
   const matrixClient = Matrix.getMatrixClient()
 
-  const deleteProject = (e, project) => {
+  const deleteProject = async (e, project) => {
     e.preventDefault()
-    let space
-    return new Promise(async (resolve, reject) => {
-      try {
-        space = await matrixClient.getSpaceSummary(project)
-      } catch (err) {
-        reject(new Error(err))
-      }
-      space.rooms.reverse().map(async (space, index) => {
-        // we reverse here to leave the actual project space last in case something goes wrong in the process.
-        console.log('Leaving ' + space.name)
-        try {
-          const count = await matrixClient.getJoinedRoomMembers(space.room_id)
-          Object.keys(count.joined).length > 1 && Object.keys(count.joined).forEach(name => {
-            localStorage.getItem('medienhaus_user_id') !== name && matrixClient.kick(space.room_id, name)
-          })
-          await matrixClient.leave(space.room_id)
-        } catch (err) {
-          console.error(err)
-          reject(new Error(err))
-        }
+    const space = await matrixClient.getSpaceSummary(project)
+    space.rooms.reverse().map(async (space, index) => {
+      // we reverse here to leave the actual project space last in case something goes wrong in the process.
+      console.log('Leaving ' + space.name)
+      const count = await matrixClient.getJoinedRoomMembers(space.room_id)
+      Object.keys(count.joined).length > 1 && Object.keys(count.joined).forEach(name => {
+        localStorage.getItem('medienhaus_user_id') !== name && matrixClient.kick(space.room_id, name)
       })
-      resolve('successfully deleted ' + project)
+      await matrixClient.leave(space.room_id)
     })
   }
 
