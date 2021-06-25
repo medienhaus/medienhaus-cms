@@ -3,13 +3,13 @@ import MediaUpload from './MediaUpload'
 import AddBlock from './AddBlock'
 import PeertubeEmbed from "./peertubeEmbed";
 import createBlock from "../matrix_create_room";
-import Matrix from "../../../Matrix";
+//import Matrix from "../../../Matrix";
 import reorder from "../DisplayContent/matrix_reorder_rooms";
 
 const AddContent = ({ number, projectSpace, blocks, reloadProjects }) => {
   const [selectedBlockType, setSelectedBlockType] = useState('')
   const [showBlockTypeSelector, setShowBlockTypeSelector] = useState(false)
-  const matrixClient = Matrix.getMatrixClient()
+  //const matrixClient = Matrix.getMatrixClient()
 
   const displayPlusButton = (button) => {
     setShowBlockTypeSelector(!button)
@@ -61,9 +61,9 @@ const AddContent = ({ number, projectSpace, blocks, reloadProjects }) => {
       {
         selectedBlockType === 'image' || selectedBlockType === 'audio'
           ? <MediaUpload fileType={selectedBlockType} number={number} space={projectSpace} blocks={blocks} reloadProjects={reloadProjects} displayPlusButton={displayPlusButton} />
-        : selectedBlockType === 'video' || selectedBlockType === 'livestream' || selectedBlockType === 'playlist'
-          ? <PeertubeEmbed type={selectedBlockType} onCreateRoomForBlock={onCreateBlockRoom} onBlockWasAddedSuccessfully={onBlockWasAddedSuccessfully} />
-          : <AddBlock contentSelect={selectedBlockType} number={number} projectSpace={projectSpace} blocks={blocks} reloadProjects={reloadProjects} displayPlusButton={displayPlusButton} />
+          : selectedBlockType === 'video' || selectedBlockType === 'livestream' || selectedBlockType === 'playlist'
+            ? <PeertubeEmbed type={selectedBlockType} onCreateRoomForBlock={onCreateBlockRoom} onBlockWasAddedSuccessfully={onBlockWasAddedSuccessfully} />
+            : <AddBlock contentSelect={selectedBlockType} number={number} projectSpace={projectSpace} blocks={blocks} reloadProjects={reloadProjects} displayPlusButton={displayPlusButton} />
       }
     </div>
   )
