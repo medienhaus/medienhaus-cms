@@ -248,12 +248,12 @@ const Submit = () => {
   return (
     <div>
 
-      <h3>Category / Context / Course</h3>
-      <Category />
       <h3>Project Title / Collaborators / Credits</h3>
       <ProjectTitle />
       {projectSpace && (
         <>
+          <h3>Category / Context / Course</h3>
+          <Category title={title} projectSpace={projectSpace} />
           <Collaborators projectSpace={projectSpace} blocks={blocks} title={title} joinedSpaces={joinedSpaces} startListeningToCollab={startListeningToCollab} />
           <h3>Project Image</h3>
           {loading ? <Loading /> : <ProjectImage projectSpace={projectSpace} projectImage={projectImage} changeProjectImage={changeProjectImage} />}

@@ -11,10 +11,10 @@ const fetchMatrix = async (room) => {
     const result = await fetch(allMessages, req)
     const data = await result.json()
     const htmlString = data.chunk.map(type => {
-      if (type.type === 'm.room.message' && type.content['m.new_content'] === undefined) {
+      if (type.type === 'm.room.message' && type.content['m.new_content'] === undefined && type.redacted_because === undefined) {
         const content = type.content
-        // const bar = { ...content, ...{ eventId: type.event_id } } // ......sorry
-        return content
+        const bar = { ...content, ...{ eventId: type.event_id } }
+        return bar
       } else { return null }
     }
     )
@@ -27,7 +27,7 @@ const fetchMatrix = async (room) => {
 const FetchCms = (path) => {
   const [fetching, setFetching] = useState(true)
   const [error, setError] = useState(false)
-  const [cms, setCms] = useState()
+  const [cms, setCms] = useState([])
 
   useEffect(() => {
     let canceled
@@ -36,7 +36,7 @@ const FetchCms = (path) => {
       try {
         const res = await fetchMatrix(path)
         const text = res.filter(x => x !== null)
-        canceled || setCms(text[0])
+        canceled || setCms(text)
       } catch (e) {
         canceled || setError(e)
       } finally {

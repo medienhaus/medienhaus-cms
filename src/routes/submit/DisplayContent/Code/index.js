@@ -6,10 +6,11 @@ const Code = ({ onSave, storage, saved, content }) => {
   const [value, setValue] = useState(content);
 
   return (
+    /*
     <pre style={{ width: '100%' }}>
       <code className="json">
         <textarea
-          style={{ height: '500px', width: '100%' }}
+          style={{ width: '100%' }}
           onChange={e => setValue(e.target.value)}
           onBlur={(e) => { storage(value); onSave(e) }}
           value={value}
@@ -19,7 +20,8 @@ const Code = ({ onSave, storage, saved, content }) => {
       {value && <div dangerouslySetInnerHTML={{ __html: hljs.highlightAuto(value).value }}></div>}
     </pre>
 
-    /* Trying to overlay the two divy 
+    Trying to overlay the two divy 
+    */
 <div style={{
   position: "relative",
 }}>
@@ -45,7 +47,7 @@ const Code = ({ onSave, storage, saved, content }) => {
   </pre>
   <p>{saved}</p>
 </div>
-*/
+
   )
 }
 export default Code
