@@ -28,7 +28,7 @@ const fetchMatrix = async (room) => {
 const FetchCms = (path) => {
   const [fetching, setFetching] = useState(true)
   const [error, setError] = useState(false)
-  const [cms, setCms] = useState()
+  const [cms, setCms] = useState([])
 
   useEffect(() => {
     let canceled

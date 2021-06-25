@@ -24,7 +24,8 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadProjects }) 
   const [loading, setLoading] = useState(false)
   const [saved, setSaved] = useState(false)
   const [deleting, setDeleting] = useState(false)
-  const { cms, error, fetching } = FetchCms(block.room_id)
+  let { cms, error, fetching } = FetchCms(block.room_id)
+  cms = cms[0];
   const json = JSON.parse(block.topic)
   const matrixClient = Matrix.getMatrixClient()
 
@@ -222,6 +223,7 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadProjects }) 
                       handleDOMEvents={{
                         focus: () => console.log('FOCUS on ' + block.room_id), // this could set MatrixClient"User.presence" to 'online', "User.currentlyActive" or 'typing. depending on which works best.
                         blur: (e) => {
+                          debugger
                           if (localStorage.getItem(block.room_id) !== null && cms !== undefined && string2hash(cms.body) !== string2hash(localStorage.getItem(block.room_id))) {
                             onSave(block.room_id)
                             localStorage.removeItem(block.room_id)
