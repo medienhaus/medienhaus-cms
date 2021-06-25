@@ -4,7 +4,7 @@ import createBlock from '../matrix_create_room'
 
 const PeertubeEmbed = ({type, onCreateRoomForBlock, onBlockWasAddedSuccessfully}) => {
   const [loading, setLoading] = useState(false)
-  const [entries, setEntries] = useState({});
+  const [entries, setEntries] = useState([]);
   const [selectedEntry, setSelectedEntry] = useState('');
   const matrixClient = Matrix.getMatrixClient()
 
@@ -12,16 +12,29 @@ const PeertubeEmbed = ({type, onCreateRoomForBlock, onBlockWasAddedSuccessfully}
     async function fetchEntries() {
       setLoading(true);
       const resourceType = (type === 'playlist' ? 'video-playlists' : 'videos')
-      // TODO:
-      // const request = await fetch(`https://stream.udk-berlin.de/api/v1/accounts/${matrixClient.getUserIdLocalpart()}/${resourceType}`)
-
-      // TODO:
-      // if type === live then modify to only show live stream videos, not all videos
+      const request = await fetch(`https://stream.udk-berlin.de/api/v1/accounts/d.erdmann/${resourceType}?count=100`)
       // TODO:
       // pagination
-      const request = await fetch(`https://stream.udk-berlin.de/api/v1/accounts/e.dietrich/${resourceType}`)
-      const entries = await request.json()
-      setEntries(entries.data)
+      let entries = await request.json()
+
+      if (!(entries && entries.data && entries.data.length > 0)) {
+        setEntries([]);
+        setLoading(false);
+        return;
+      }
+
+      entries = entries.data
+
+      if (entries?.length > 0) {
+        // Only show live videos for type = "livestream", and non-live videos for type = "video"
+        if (type === 'livestream') {
+          entries = entries.filter(video => video.isLive);
+        } else if (type === 'video') {
+          entries = entries.filter(video => !video.isLive);
+        }
+      }
+
+      setEntries(entries)
       setLoading(false);
     }
     fetchEntries()
@@ -43,7 +56,7 @@ const PeertubeEmbed = ({type, onCreateRoomForBlock, onBlockWasAddedSuccessfully}
   return (
     <div style={{gridColumn: '1 / 3', marginTop: 'var(--margin)'}}>
       <div style={{display: 'flex'}}>
-        <select disabled={(Object.keys(entries).length === 0)} onChange={selectEntry} value={selectedEntry} style={{flexGrow: 1, marginRight: 'var(--margin)'}}>
+        <select disabled={entries.length === 0} onChange={selectEntry} value={selectedEntry} style={{flexGrow: 1, marginRight: 'var(--margin)'}}>
           <option value="" disabled={true}>
             {(
               Object.keys(entries).length === 0
@@ -51,7 +64,7 @@ const PeertubeEmbed = ({type, onCreateRoomForBlock, onBlockWasAddedSuccessfully}
                 : '--- Please Select ---'
             )}
           </option>
-          {Object.values(entries).map(entry => (
+          {entries.map(entry => (
             <option value={entry.uuid} key={entry.uuid}>{entry.name}</option>
           ))}
         </select>
