@@ -2,12 +2,16 @@ import React, { useState } from 'react'
 import Matrix from '../../Matrix'
 import Requests from './Requests'
 import { Loading } from '../../components/loading'
+import joinedRooms from '../../components/matrix_joined_rooms'
 
 const Moderation = () => {
     const matrixClient = Matrix.getMatrixClient()
     const [loading, setLoading] = useState(false);
     const [space, setSpace] = useState('');
     const [member, setMember] = useState(false);
+    const moderationRooms = joinedRooms().filter(x => x.includes("Door"))
+    
+    console.log(moderationRooms);
 
     const isMember = async (e) => {
         e.preventDefault()
@@ -24,9 +28,6 @@ const Moderation = () => {
         }
         setLoading(false)
     }
-    const callback = (requested) => {
-
-    }
 
     return (
         <div>
@@ -37,7 +38,7 @@ const Moderation = () => {
                 <option value="!rorMnDkmfIThdFzwPD:" >Digitale Klasse</option>
             </select>
             {loading && <Loading />}
-            {member && space && <Requests roomId={space + localStorage.getItem('mx_home_server')} />}
+            {member ? <Requests roomId={space + localStorage.getItem('mx_home_server')} /> : space === ''? null : '  nö'}
         </div>
     )
 }

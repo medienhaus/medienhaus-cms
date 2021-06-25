@@ -23,6 +23,7 @@ const Knock = ({ roomId, projectSpace, title, callback }) => {
                 format: 'org.matrix.custom.html',
                 msgtype: 'm.text'
             })
+            
             if ('event_id' in save) {
                 setRequested('✓')
                 setTimeout(() => {

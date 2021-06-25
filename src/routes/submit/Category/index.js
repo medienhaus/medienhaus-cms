@@ -10,6 +10,7 @@ const Category = ({ title, projectSpace }) => {
   const [member, setMember] = useState(false);
   const matrixClient = Matrix.getMatrixClient()
 
+
   const isMember = async (e) => {
     e.preventDefault()
     setLoading(true)
@@ -42,7 +43,7 @@ const Category = ({ title, projectSpace }) => {
         <option value={JSON.stringify({ knock: "!rorMnDkmfIThdFzwPD:", space: "!qKuBiJVgPrRowlcwTG:" })}>Digitale Klasse</option>
       </select>
       {loading && <Loading />}
-      {!member && subject && <Knock roomId={knock} projectSpace={projectSpace} title={title} callback={callback} />}
+      {!member && subject !== '' && <Knock roomId={knock} projectSpace={projectSpace} title={title} callback={callback} />}
       {
         // sollte es hier die möglichkeit geben mehrere auszuwählen? also studiengang übergreifende projekte
       }

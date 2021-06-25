@@ -1,10 +1,29 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import matrixcs from "matrix-js-sdk";
 import useFetchCms from '../../../components/matrix_fetch_cms'
-import RejectButton from './RejectButton';
+import LoadingSpinnerButton from './LoadingSpinnerButton';
 import { Loading } from '../../../components/loading';
 
+const knockClient = matrixcs.createClient({
+    baseUrl: process.env.REACT_APP_MATRIX_BASE_URL,
+    accessToken: process.env.REACT_APP_KNOCK_BOT_TOKEN,
+    userId: process.env.REACT_APP_KNOCK_BOT_ACCOUNT,
+    useAuthorizationHeader: true
+})
+
 const Requests = ({ roomId }) => {
-    const { cms, error, fetching } = useFetchCms(roomId);
+    let { cms, error, fetching } = useFetchCms(roomId);
+    const [deleteIndex, setDeleteIndex] = useState();
+    const [allButtonsDisabled, setAllButtonsDisabled] = useState(false);
+
+
+    useEffect(() => {
+    cms = cms.splice(deleteIndex, 1)
+    }, [deleteIndex]);
+
+    const handleButtons = (index) => {
+        setDeleteIndex(index)
+    }
 
     const AcceptButton = () => {
         const [inviting, setInviting] = useState(false);
@@ -38,15 +57,29 @@ const Requests = ({ roomId }) => {
 
     }
 
+    const redact = async (eventId) => {
+        setAllButtonsDisabled(true)
+        try {
+           await knockClient.redactEvent(roomId, eventId).then(console.log)
+        } catch (err) {
+            console.error(err)
+            setAllButtonsDisabled(false)
+        } finally {
+
+        }
+    }
+
     return (
         <div>
-            {fetching ? <Loading /> : cms?.map(request => {
+            {fetching ? <Loading /> : cms?.map((request, index) => {
                 return (
                     <div>
                         <p>{request.body}</p>
-                        <AcceptButton />
-                        <RejectButton eventId={request.eventId} roomId={roomId} />
-                        <ReportButton />
+                        <LoadingSpinnerButton disabled={allButtonsDisabled} onClick={() => redact(request.eventId)} >ACCEPT</LoadingSpinnerButton>
+                        <LoadingSpinnerButton disabled={allButtonsDisabled} onClick={() => redact(request.eventId)} >REJECT</LoadingSpinnerButton>
+                        <LoadingSpinnerButton disabled={allButtonsDisabled} onClick={() => redact(request.eventId)} >REPORT</LoadingSpinnerButton>
+                        
+
                     </div>)
             })}
         </div>
