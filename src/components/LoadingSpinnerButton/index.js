@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Loading } from "../../../../components/loading";
+import { Loading } from "../loading";
 
 
 const LoadingSpinnerButton = ({disabled, onClick: callback, children }) => {

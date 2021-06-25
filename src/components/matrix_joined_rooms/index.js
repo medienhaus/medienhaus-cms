@@ -13,9 +13,10 @@ const useJoinedRooms = () => {
       if (answer.joined_rooms.length > 0) {
         const getNames = await Promise.all(answer.joined_rooms.map(async (roomId) => {
           try {
-            const room = await matrixClient.getStateEvent(roomId, 'm.room.name')
-            if (room.name !== '') {
-              return [room.name, roomId]
+            const room = await matrixClient.getStateEvent(roomId, 'm.room.topic')
+            if (room.topic) {
+            const name = await matrixClient.getStateEvent(roomId, 'm.room.name')
+              return {name: name.name, topic: room.topic, room_id: roomId}
             } else {
               return ''
             }

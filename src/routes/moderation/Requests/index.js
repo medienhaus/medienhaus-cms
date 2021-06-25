@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import matrixcs from "matrix-js-sdk";
-import useFetchCms from '../../../components/matrix_fetch_cms'
-import LoadingSpinnerButton from './LoadingSpinnerButton';
-import { Loading } from '../../../components/loading';
+import LoadingSpinnerButton from '../../../components/LoadingSpinnerButton';
 
 const knockClient = matrixcs.createClient({
     baseUrl: process.env.REACT_APP_MATRIX_BASE_URL,
@@ -11,52 +9,10 @@ const knockClient = matrixcs.createClient({
     useAuthorizationHeader: true
 })
 
-const Requests = ({ roomId }) => {
-    let { cms, error, fetching } = useFetchCms(roomId);
+const Requests = ({ roomId, body, eventId}) => {
     const [deleteIndex, setDeleteIndex] = useState();
     const [allButtonsDisabled, setAllButtonsDisabled] = useState(false);
-
-
-    useEffect(() => {
-    cms = cms.splice(deleteIndex, 1)
-    }, [deleteIndex]);
-
-    const handleButtons = (index) => {
-        setDeleteIndex(index)
-    }
-
-    const AcceptButton = () => {
-        const [inviting, setInviting] = useState(false);
-        const [accepted, setAccepted] = useState(false);
-
-        const invite = async (e) => {
-            /*
-                        setInviting(true)
-                        e.preventDefault()
-            
-                        try {
-                            await knockClient.invite(projectSpace, user).then(() => {
-                                //const room = matrixClient.getRoom(projectSpace)
-                                //matrixClient.setPowerLevel(projectSpace, id[1], 100, room.currentState.getStateEvents('m.room.power_levels', ''))
-                            })
-                            setAccepted(true)
-                            console.log('done')
-                        } catch (err) {
-                            console.error(err)
-                        } finally {
-                            setInviting(false)
-                        }
-            */
-        }
-        return <button onClick={e => invite(e)} >ACCEPT</button>
-    }
-
-
-    const ReportButton = () => {
-        return <button>REPORT</button>
-
-    }
-
+    
     const redact = async (eventId) => {
         setAllButtonsDisabled(true)
         try {
@@ -65,23 +21,18 @@ const Requests = ({ roomId }) => {
             console.error(err)
             setAllButtonsDisabled(false)
         } finally {
-
         }
     }
 
     return (
         <div>
-            {fetching ? <Loading /> : cms?.map((request, index) => {
                 return (
                     <div>
-                        <p>{request.body}</p>
-                        <LoadingSpinnerButton disabled={allButtonsDisabled} onClick={() => redact(request.eventId)} >ACCEPT</LoadingSpinnerButton>
-                        <LoadingSpinnerButton disabled={allButtonsDisabled} onClick={() => redact(request.eventId)} >REJECT</LoadingSpinnerButton>
-                        <LoadingSpinnerButton disabled={allButtonsDisabled} onClick={() => redact(request.eventId)} >REPORT</LoadingSpinnerButton>
-                        
-
-                    </div>)
-            })}
+                        <p>{body}</p>
+                        <LoadingSpinnerButton disabled={allButtonsDisabled} onClick={() => redact(eventId)} >ACCEPT</LoadingSpinnerButton>
+                        <LoadingSpinnerButton disabled={allButtonsDisabled} onClick={() => redact(eventId)} >REJECT</LoadingSpinnerButton>
+                        <LoadingSpinnerButton disabled={allButtonsDisabled} onClick={() => redact(eventId)} >REPORT</LoadingSpinnerButton>
+                    </div>  
         </div>
     )
 }
