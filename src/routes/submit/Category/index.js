@@ -39,7 +39,7 @@ const Category = ({ title, projectSpace }) => {
       <select id="subject" name="subject" defaultValue={''} value={subject} onChange={(e) => isMember(e)}>
         <option value="" disabled={true} >Select Context</option>
         <option value={JSON.stringify({ knock: "!JaLRUAZnONCuUHMPvy:", space: "!KIIwpwkcYdtsTgSGhw:" })}>New Media</option>
-        <option value={JSON.stringify({ knock: "!rorMnDkmfIThdFzwPD:", space: "qKuBiJVgPrRowlcwTG" })}>Digitale Klasse</option>
+        <option value={JSON.stringify({ knock: "!rorMnDkmfIThdFzwPD:", space: "!qKuBiJVgPrRowlcwTG:" })}>Digitale Klasse</option>
       </select>
       {loading && <Loading />}
       {!member && subject && <Knock roomId={knock} projectSpace={projectSpace} title={title} callback={callback} />}
