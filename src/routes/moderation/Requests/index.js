@@ -11,7 +11,14 @@ const knockClient = matrixcs.createClient({
 
 const Requests = ({ roomId, body, eventId }) => {
     const [allButtonsDisabled, setAllButtonsDisabled] = useState(false);
-
+    const space = body.substring(
+        body.lastIndexOf("(") + 1,
+        body.lastIndexOf(")")
+    )
+    const user = body.substring(
+        body.indexOf("(") + 1,
+        body.indexOf(")")
+    )
     const redact = async (eventId) => {
         setAllButtonsDisabled(true)
         try {
@@ -24,17 +31,9 @@ const Requests = ({ roomId, body, eventId }) => {
 
     const invite = async () => {
         setAllButtonsDisabled(true)
-        const project = body.substring(
-            body.lastIndexOf("(") + 1,
-            body.lastIndexOf(")")
-        );
-        const user = body.substring(
-            body.indexOf("(") + 1,
-            body.indexOf(")")
-        );
 
         try {
-            await knockClient.invite(project, user).then((res) => {
+            await knockClient.invite(space, user).then((res) => {
                 console.log(res)
                 // in case we need to change power level for users
                 // knockClient.getRoom(projectSpace)
@@ -43,18 +42,20 @@ const Requests = ({ roomId, body, eventId }) => {
         } catch (err) {
             console.error(err)
             setAllButtonsDisabled(false)
-
         }
-
     }
 
+    const report = () => {
+        setAllButtonsDisabled(true)
+        console.log("Reported " + user + " for spamming in " + space);
+    }
     return (
         <div>
             <div>
                 <p>{body}</p>
                 <LoadingSpinnerButton disabled={allButtonsDisabled} onClick={invite} >ACCEPT</LoadingSpinnerButton>
                 <LoadingSpinnerButton disabled={allButtonsDisabled} onClick={() => redact(eventId)} >REJECT</LoadingSpinnerButton>
-                <LoadingSpinnerButton disabled={allButtonsDisabled} onClick={() => redact(eventId)} >REPORT</LoadingSpinnerButton>
+                <LoadingSpinnerButton disabled={allButtonsDisabled} onClick={report} >REPORT</LoadingSpinnerButton>
             </div>
         </div>
     )
