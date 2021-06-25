@@ -10,38 +10,29 @@ const Moderation = () => {
     const [loading, setLoading] = useState(false);
     const [space, setSpace] = useState('');
     const [member, setMember] = useState(false);
-    const moderationRooms = joinedRooms().filter(obj => 
+    const moderationRooms = joinedRooms().filter(obj =>
         Object.keys(obj)
-          .some(key => obj[key].includes('door')))
-    //let { cms, error, fetching } = useFetchCms();
-    console.log(moderationRooms);
+            .some(key => obj[key].includes('door')))
 
-    const isMember = async (e) => {
-        e.preventDefault()
-        setLoading(true)
-        setSpace(e.target.value)
-        try {
-            await matrixClient.members(space + localStorage.getItem('mx_home_server')).catch(err => console.error(err)).then(res => {
-                setMember(res.chunk.map(a => a.sender).includes(localStorage.getItem('mx_user_id')))
-            })
-            console.log(member);
-        } catch (err) {
-            console.error(err)
-            setMember(false)
+    const GetRequestPerRoom = ({ roomId }) => {
+        let { cms, error, fetching } = useFetchCms(roomId);
+
+        if (fetching) {
+            return <Loading />
         }
-        setLoading(false)
+        if (error) {
+            console.error(error);
+            return;
+        }
+
+        return cms.map(knock => {
+            return <Requests roomId={roomId} body={knock.body} eventId={knock.event_id} />
+        })
     }
 
     return (
         <div>
-            <label htmlFor="subject">Please select a space to moderate</label>
-            <select id="subject" name="subject" defaultValue={''} value={space} onChange={(e) => isMember(e)}>
-                <option value="" disabled={true} >Select Context</option>
-                <option value="!JaLRUAZnONCuUHMPvy:" >New Media</option>
-                <option value="!rorMnDkmfIThdFzwPD:" >Digitale Klasse</option>
-            </select>
-            {loading && <Loading />}
-            {member ? <Requests roomId={space + localStorage.getItem('mx_home_server')} body={null} eventId={null} /> : space === ''? null : '  nö'}
+            {moderationRooms.length > 0 && moderationRooms.map(requests => <GetRequestPerRoom roomId={requests.room_id} />)}
         </div>
     )
 }
