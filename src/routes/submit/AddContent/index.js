@@ -18,10 +18,7 @@ const AddContent = ({ number, projectSpace, blocks, reloadProjects }) => {
   async function onCreateBlockRoom() {
     // Make some room in our room list by pushing rooms below this room down by 1 index
     blocks.forEach((block, i) => {
-      if (i >= number) {
-        console.log(block.name)
-        reorder(block.name, block.room_id, false)
-      }
+      if (i >= number) { reorder(block.name, block.room_id, false) }
     })
     // Actually create a Matrix room for the new block
     return await createBlock(undefined, selectedBlockType, number, projectSpace)
