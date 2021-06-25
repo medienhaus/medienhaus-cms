@@ -47,8 +47,8 @@ const PeertubeEmbed = ({ type, onCreateRoomForBlock, onBlockWasAddedSuccessfully
       body: selectedEntry,
       msgtype: 'm.text'
     })
-    setLoading(false)
     onBlockWasAddedSuccessfully()
+    setLoading(false)
   }
 
   function selectEntry(e) {

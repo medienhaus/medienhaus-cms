@@ -25,7 +25,7 @@ const AddContent = ({ number, projectSpace, blocks, reloadProjects }) => {
   }
 
   function onBlockWasAddedSuccessfully() {
-    setShowBlockTypeSelector(true)
+    setShowBlockTypeSelector(false)
     reloadProjects()
   }
 
