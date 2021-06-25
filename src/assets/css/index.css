@@ -502,6 +502,12 @@ select:-moz-focusring * {
   text-shadow: none;
 }
 
+select[disabled] {
+  border-color: var(--color-me);
+  color: var(--color-me);
+  cursor: not-allowed;
+}
+
 textarea {
   -webkit-appearance: none;
   -moz-appearance: none;

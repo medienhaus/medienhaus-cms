@@ -25,7 +25,8 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadProjects }) 
   const [loading, setLoading] = useState(false)
   const [saved, setSaved] = useState(false)
   const [deleting, setDeleting] = useState(false)
-  const { cms, error, fetching } = FetchCms(block.room_id)
+  let { cms, error, fetching } = FetchCms(block.room_id)
+  cms = cms[0];
   const json = JSON.parse(block.topic)
   const matrixClient = Matrix.getMatrixClient()
 
@@ -173,14 +174,14 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadProjects }) 
           <figure className="icon-bg">
             {
               json.type === 'heading' ? <HeadingIcon fill="var(--color-fg)" /> :
-              json.type === 'audio' ? <AudioIcon fill="var(--color-fg)" /> :
-              json.type === 'image' ? <ImageIcon fill="var(--color-fg)" /> :
-              json.type === 'ul' ? <UlIcon fill="var(--color-fg)" /> :
-              json.type === 'ol' ? <OlIcon fill="var(--color-fg)" /> :
-              json.type === 'quote' ? <QuoteIcon fill="var(--color-fg)" /> :
-              json.type === 'code' ? <CodeIcon fill="var(--color-fg)" /> :
-              json.type === 'video' ? <VideoIcon fill="var(--color-fg)" /> :
-              <TextIcon fill="var(--color-fg)" />
+                json.type === 'audio' ? <AudioIcon fill="var(--color-fg)" /> :
+                  json.type === 'image' ? <ImageIcon fill="var(--color-fg)" /> :
+                    json.type === 'ul' ? <UlIcon fill="var(--color-fg)" /> :
+                      json.type === 'ol' ? <OlIcon fill="var(--color-fg)" /> :
+                        json.type === 'quote' ? <QuoteIcon fill="var(--color-fg)" /> :
+                          json.type === 'code' ? <CodeIcon fill="var(--color-fg)" /> :
+                            json.type === 'video' ? <VideoIcon fill="var(--color-fg)" /> :
+                              <TextIcon fill="var(--color-fg)" />
             }
           </figure>
           <button key={'down_' + block.room_id} disabled={index === blocks.length - 1} onClick={(e) => changeOrder(e, block.room_id, block.name, 1)}>↓</button>
