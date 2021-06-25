@@ -1,8 +1,7 @@
 import { useState } from "react";
 import { Loading } from "../loading";
 
-
-const LoadingSpinnerButton = ({disabled, onClick: callback, children }) => {
+const LoadingSpinnerButton = ({disabled, onClick: callback, style, children}) => {
     const [loading, setLoading] = useState(false);
 
     const onClick = async (e) => {
@@ -12,9 +11,7 @@ const LoadingSpinnerButton = ({disabled, onClick: callback, children }) => {
         setLoading(false)
     }
 
-
-    return <button disabled={disabled} onClick={onClick}>{loading ? <Loading /> : children}</button>
-
+    return <button disabled={loading || disabled} onClick={onClick} style={style}>{loading ? <Loading /> : children}</button>
 }
 
 export default LoadingSpinnerButton

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Matrix from '../../../Matrix'
 import { Loading } from '../../../components/loading'
+import LoadingSpinnerButton from "../../../components/LoadingSpinnerButton";
 //import createBlock from '../matrix_create_room'
 
 const PeertubeEmbed = ({ type, onCreateRoomForBlock, onBlockWasAddedSuccessfully }) => {
@@ -18,8 +19,9 @@ const PeertubeEmbed = ({ type, onCreateRoomForBlock, onBlockWasAddedSuccessfully
       let entries = await request.json()
 
       if (!(entries && entries.data && entries.data.length > 0)) {
-        setEntries([]);
-        setLoading(false);
+        setEntries([])
+        setSelectedEntry('')
+        setLoading(false)
         return;
       }
 
@@ -35,33 +37,36 @@ const PeertubeEmbed = ({ type, onCreateRoomForBlock, onBlockWasAddedSuccessfully
       }
 
       setEntries(entries)
-      setLoading(false);
+      setSelectedEntry('')
+      setLoading(false)
     }
     fetchEntries()
   }, [type])
 
   async function handleSubmit() {
-    setLoading(true)
     const blockRoomId = await onCreateRoomForBlock()
     const sendMessageResult = await matrixClient.sendMessage(blockRoomId, {
       body: selectedEntry,
       msgtype: 'm.text'
     })
     onBlockWasAddedSuccessfully()
-    setLoading(false)
   }
 
   function selectEntry(e) {
     setSelectedEntry(e.target.value);
   }
 
+  if (loading) {
+    return <Loading/>
+  }
+
   return (
     <div style={{ gridColumn: '1 / 3', marginTop: 'var(--margin)' }}>
       <div style={{ display: 'flex' }}>
-        <select disabled={entries.length === 0} onChange={selectEntry} value={selectedEntry} style={{ flexGrow: 1, marginRight: 'var(--margin)' }}>
+        <select disabled={entries.length === 0} onChange={selectEntry} value={selectedEntry} style={{ flex: '1 0', marginRight: 'var(--margin)' }}>
           <option value="" disabled={true}>
             {(
-              Object.keys(entries).length === 0
+              entries.length === 0
                 ? 'no entries'
                 : '--- Please Select ---'
             )}
@@ -70,7 +75,7 @@ const PeertubeEmbed = ({ type, onCreateRoomForBlock, onBlockWasAddedSuccessfully
             <option value={entry.uuid} key={entry.uuid}>{(type === 'playlist' ? entry.displayName : entry.name)}</option>
           ))}
         </select>
-        <button disabled={!selectedEntry || loading} onClick={handleSubmit} style={{ flexBasis: '200px' }}>{loading ? <Loading /> : "Add Content"}</button>
+        <LoadingSpinnerButton onClick={handleSubmit} disabled={entries.length < 1 || !selectedEntry} style={{ flex: '0 1 200px' }}>Add Content</LoadingSpinnerButton>
       </div>
     </div>
   )
