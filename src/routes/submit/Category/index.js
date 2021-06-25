@@ -41,7 +41,7 @@ const Category = ({ title, projectSpace }) => {
         <option value="" disabled={true} >Select Context</option>
         <option value={JSON.stringify({ knock: "!MNbLTPjDmMMggNiAqF:", space: "!jlCZIPgvqyfpnbXbKo:" })}>Designtechniken Modedesign: Schnittkonstruktion</option>
         <option value={JSON.stringify({ knock: "!CHZoKrkkFkrkXwRxCd:", space: "!qWnQdvExJViExqebYz:" })}>Basisprojekt Modedesign: HOODIE GUT, ALLES GUT</option>
-        <option value={JSON.stringify({ knock: "!dDHUptRvvBuyxNAjBq:", space: "!KKkTWxprXLKkdZypBe:" })}>Basisprojekt Produktdesign: fixperts in quarantine</option>
+        <option value={JSON.stringify({ knock: "!dDHUptRvvBuyxNAjBq:", space: "!KKkTWxprXLKkdZypBe:" })}>Basisprojekt Produktdesign: fixperts in quarantineg</option>
       </select>
       {loading && <Loading />}
       {!member && subject !== '' && <Knock roomId={knock} projectSpace={projectSpace} title={title} callback={callback} />}
