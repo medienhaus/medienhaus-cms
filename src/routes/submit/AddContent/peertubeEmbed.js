@@ -12,9 +12,8 @@ const PeertubeEmbed = ({type, onCreateRoomForBlock, onBlockWasAddedSuccessfully}
     async function fetchEntries() {
       setLoading(true);
       const resourceType = (type === 'playlist' ? 'video-playlists' : 'videos')
-      const request = await fetch(`https://stream.udk-berlin.de/api/v1/accounts/d.erdmann/${resourceType}?count=100`)
-      // TODO:
-      // pagination
+      const request = await fetch(`https://stream.udk-berlin.de/api/v1/accounts/${(type === 'playlist' ? 'newmediaclass' : 'd.erdmann')}/${resourceType}?count=100`)
+      // TODO: pagination for more than 100 entries
       let entries = await request.json()
 
       if (!(entries && entries.data && entries.data.length > 0)) {
@@ -65,7 +64,7 @@ const PeertubeEmbed = ({type, onCreateRoomForBlock, onBlockWasAddedSuccessfully}
             )}
           </option>
           {entries.map(entry => (
-            <option value={entry.uuid} key={entry.uuid}>{entry.name}</option>
+            <option value={entry.uuid} key={entry.uuid}>{(type === 'playlist' ? entry.displayName : entry.name)}</option>
           ))}
         </select>
         <button disabled={!selectedEntry} onClick={handleSubmit} style={{flexBasis: '200px'}}>Add Content</button>
