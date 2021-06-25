@@ -18,6 +18,9 @@
     "showdown": "^1.9.1",
     "web-vitals": "^1.1.2"
   },
+  "devDependencies": {
+    "eslint-config-standard": "^16.0.2"
+  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
@@ -27,8 +30,14 @@
   "eslintConfig": {
     "extends": [
       "react-app",
-      "react-app/jest"
-    ]
+      "standard"
+    ],
+    "rules": {
+      "jsx-quotes": [
+        "error",
+        "prefer-double"
+      ]
+    }
   },
   "browserslist": {
     "production": [
