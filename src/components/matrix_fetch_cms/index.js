@@ -12,7 +12,6 @@ const fetchMatrix = async (room) => {
     const data = await result.json()
     const htmlString = data.chunk.map(type => {
       if (type.type === 'm.room.message' && type.content['m.new_content'] === undefined && type.redacted_because === undefined) {
-        console.log(type);
         const content = type.content
         const bar = { ...content, ...{ eventId: type.event_id } }
         return bar
