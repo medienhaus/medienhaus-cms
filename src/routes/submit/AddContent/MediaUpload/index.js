@@ -57,8 +57,8 @@ const MediaUpload = (props) => {
   }
 
   return (
-
-    <FileUpload fileType={props.fileType} handleSubmission={handleSubmission} loading={loading} />)
+    <FileUpload fileType={props.fileType} handleSubmission={handleSubmission} loading={loading} />
+  )
 }
 
 export default MediaUpload

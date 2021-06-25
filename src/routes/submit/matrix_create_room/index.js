@@ -2,7 +2,9 @@ import Matrix from '../../../Matrix'
 
 const createBlock = async (e, content, number, space) => {
   const matrixClient = Matrix.getMatrixClient()
-  e.preventDefault()
+  if (e) {
+    e.preventDefault()
+  }
 
   const opts = {
     name: (number) + '_' + content, // blocks[0] is the project space itself, therefore -1

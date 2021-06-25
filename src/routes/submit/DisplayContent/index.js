@@ -17,6 +17,7 @@ import { ReactComponent as UlIcon } from '../../../assets/icons/remix/list-unord
 import { ReactComponent as OlIcon } from '../../../assets/icons/remix/list-ordered.svg'
 import { ReactComponent as QuoteIcon } from '../../../assets/icons/remix/quote.svg'
 import { ReactComponent as CodeIcon } from '../../../assets/icons/remix/code.svg'
+import { ReactComponent as VideoIcon } from '../../../assets/icons/remix/vidicon-line.svg'
 
 const DisplayContent = ({ block, index, blocks, projectSpace, reloadProjects }) => {
   const [clicked, setClicked] = useState(false)
@@ -179,7 +180,8 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadProjects }) 
                       json.type === 'ol' ? <OlIcon fill="var(--color-fg)" /> :
                         json.type === 'quote' ? <QuoteIcon fill="var(--color-fg)" /> :
                           json.type === 'code' ? <CodeIcon fill="var(--color-fg)" /> :
-                            <TextIcon fill="var(--color-fg)" />
+                            json.type === 'video' ? <VideoIcon fill="var(--color-fg)" /> :
+                              <TextIcon fill="var(--color-fg)" />
             }
           </figure>
           <button key={'down_' + block.room_id} disabled={index === blocks.length - 1} onClick={(e) => changeOrder(e, block.room_id, block.name, 1)}>↓</button>
@@ -199,31 +201,23 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadProjects }) 
               json.type === 'ol' ?
                 <List onSave={() => onSave(block.room_id)} storage={(list) => localStorage.setItem(block.room_id, list)} populated={cms?.body} type="ol" />
                 : json.type === 'code' ?
-                  <Code onSave={() => onSave(block.room_id)} storage={(code) => localStorage.setItem(block.room_id, code)} saved={saved} content={cms?.body} /> :
-                  <div className="center">
-                    <Editor
-                      dark={window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches}
-                      defaultValue={cms?.body}
-                      disableExtensions={['blockmenu', 'image', 'embed', 'table', 'tr', 'th', 'td', 'bullet_list', 'ordered_list', 'checkbox_item', 'checkbox_list', 'container_notice', 'blockquote', 'heading', 'hr', 'highlight']}
-                      placeholder={json.type}
-                      readOnly={readOnly}
-                      onSave={({ done }) => {
-                        if (localStorage.getItem(block.room_id) !== null && cms !== undefined && string2hash(cms.body) !== string2hash(localStorage.getItem(block.room_id))) {
-                          onSave(block.room_id)
-                          localStorage.removeItem(block.room_id)
-                        } else if (localStorage.getItem(block.room_id) !== null && cms === undefined) {
-                          onSave(block.room_id)
-                          localStorage.removeItem(block.room_id)
-                        }
-                      }}
-                      onChange={debounce((value) => {
-                        const text = value()
-                        localStorage.setItem(block.room_id, text)
-                      }, 250)}
-                      handleDOMEvents={{
-                        focus: () => console.log('FOCUS on ' + block.room_id), // this could set MatrixClient"User.presence" to 'online', "User.currentlyActive" or 'typing. depending on which works best.
-                        blur: (e) => {
-                          debugger
+                  <Code onSave={() => onSave(block.room_id)} storage={(code) => localStorage.setItem(block.room_id, code)} saved={saved} content={cms?.body} />
+                  : (json.type === 'video' || json.type === 'livestream' || json.type === 'playlist') ? (
+                    <iframe src={`https://stream.udk-berlin.de/${(json.type === 'playlist' ? 'video-playlists' : 'videos')}/embed/${cms?.body}`}
+                            frameBorder="0"
+                            sandbox="allow-same-origin allow-scripts"
+                            allowFullScreen="allowfullscreen"
+                            style={{width: '100%', aspectRatio: '16 / 9', border: `calc(var(--margin) * 0.2) solid var(--color-fg)`}}
+                    />
+                  ) :
+                    <div className="center">
+                      <Editor
+                        dark={window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches}
+                        defaultValue={cms?.body}
+                        disableExtensions={['blockmenu', 'image', 'embed', 'table', 'tr', 'th', 'td', 'bullet_list', 'ordered_list', 'checkbox_item', 'checkbox_list', 'container_notice', 'blockquote', 'heading', 'hr', 'highlight']}
+                        placeholder={json.type}
+                        readOnly={readOnly}
+                        onSave={({ done }) => {
                           if (localStorage.getItem(block.room_id) !== null && cms !== undefined && string2hash(cms.body) !== string2hash(localStorage.getItem(block.room_id))) {
                             onSave(block.room_id)
                             localStorage.removeItem(block.room_id)
@@ -231,12 +225,27 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadProjects }) 
                             onSave(block.room_id)
                             localStorage.removeItem(block.room_id)
                           }
-                        }
-                      }}
-                      key={block.room_id} />
-                    <p key={block.room_id + '_p'}>{saved}</p> {// feedback that saving was succesfull or has failed
-                    }
-                  </div>
+                        }}
+                        onChange={debounce((value) => {
+                          const text = value()
+                          localStorage.setItem(block.room_id, text)
+                        }, 250)}
+                        handleDOMEvents={{
+                          focus: () => console.log('FOCUS on ' + block.room_id), // this could set MatrixClient"User.presence" to 'online', "User.currentlyActive" or 'typing. depending on which works best.
+                          blur: (e) => {
+                            if (localStorage.getItem(block.room_id) !== null && cms !== undefined && string2hash(cms.body) !== string2hash(localStorage.getItem(block.room_id))) {
+                              onSave(block.room_id)
+                              localStorage.removeItem(block.room_id)
+                            } else if (localStorage.getItem(block.room_id) !== null && cms === undefined) {
+                              onSave(block.room_id)
+                              localStorage.removeItem(block.room_id)
+                            }
+                          }
+                        }}
+                        key={block.room_id} />
+                      <p key={block.room_id + '_p'}>{saved}</p> {// feedback that saving was succesfull or has failed
+                      }
+                    </div>
         }
 
         <div className="right">
