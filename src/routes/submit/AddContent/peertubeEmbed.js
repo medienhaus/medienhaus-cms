@@ -45,7 +45,7 @@ const PeertubeEmbed = ({ type, onCreateRoomForBlock, onBlockWasAddedSuccessfully
 
   async function handleSubmit() {
     const blockRoomId = await onCreateRoomForBlock()
-    const sendMessageResult = await matrixClient.sendMessage(blockRoomId, {
+    await matrixClient.sendMessage(blockRoomId, {
       body: selectedEntry,
       msgtype: 'm.text'
     })
@@ -57,7 +57,7 @@ const PeertubeEmbed = ({ type, onCreateRoomForBlock, onBlockWasAddedSuccessfully
   }
 
   if (loading) {
-    return <Loading/>
+    return <Loading />
   }
 
   return (
