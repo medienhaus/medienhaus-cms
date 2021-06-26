@@ -12,12 +12,15 @@ const Invites = ({ room }) => {
   const join = async (room) => {
     setJoining(true)
     try {
-      //first we join the project space in order to be able to call getSpaceSummary()
+      //first we join the project space in order to be able to call getSpaceSummary() nad check if the invite is for a module or a student project
       await matrixClient.joinRoom(room)
-      //then we map through each room in the projectspace and join it
-      await matrixClient.getSpaceSummary(room).then(res => {
-        res.rooms.map(async contentRooms => contentRooms.room_id !== room && await matrixClient.joinRoom(contentRooms.room_id))
-      })
+      const studentProject = await matrixClient.getStateEvent(room, 'm.room.topic')
+      if (studentProject.topic?.includes("studentproject")) {
+        //if the project is a student project we map through each room in the projectspace and join it
+        await matrixClient.getSpaceSummary(room).then(res => {
+          res.rooms.map(async contentRooms => contentRooms.room_id !== room && await matrixClient.joinRoom(contentRooms.room_id))
+        })
+      }
     } catch (err) {
       setJoined(false)
       setError(err.errcode === 'M_UNKNOWN' ? 'Looks like this room does not exist anymore.' : 'Something went wrong.')
