@@ -12,7 +12,9 @@ const Invites = ({ room }) => {
   const join = async (room) => {
     setJoining(true)
     try {
+      //first we join the project space in order to be able to call getSpaceSummary()
       await matrixClient.joinRoom(room)
+      //then we map through each room in the projectspace and join it
       await matrixClient.getSpaceSummary(room).then(res => {
         res.rooms.map(async contentRooms => contentRooms.room_id !== room && await matrixClient.joinRoom(contentRooms.room_id))
       })

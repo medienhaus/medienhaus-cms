@@ -62,22 +62,37 @@ const Submit = () => {
 
   const listeningToCollaborators = async () => {
     console.log('Started spying on collaborators')
+    try {
+      //joining contentRooms which might have been created since we last opened the project
+      await matrixClient.getSpaceSummary(projectSpace).then(res => {
+        res.rooms.map(async contentRooms => contentRooms.room_id !== projectSpace && await matrixClient.joinRoom(contentRooms.room_id))
+      })
+    } catch (err) {
+      console.error(err);
+    }
+
     await matrixClient.removeAllListeners()
     const myRooms = await matrixClient.getSpaceSummary(projectSpace)
     setTitle(myRooms?.rooms[0].name)
     console.log(myRooms)
 
     matrixClient.addListener('RoomState.events', function (event) {
+
       if (event.event.type === 'm.room.member' && myRooms.rooms?.filter(({ roomId }) => event.sender.roomId.includes(roomId)) && event.event.sender !== localStorage.getItem('mx_user_id')) {
         setUpdate(true)
       } else if (event.event.type === 'm.room.name' && blocks?.filter(({ roomId }) => event.sender.roomId.includes(roomId)) && event.event.sender !== localStorage.getItem('mx_user_id')) {
         setUpdate(true)
+      } else if (event.event.type === 'm.space.child' && event.event.room_id === projectSpace && event.event.sender !== localStorage.getItem('mx_user_id')) {
+        console.log(event.event);
+        setUpdate(true)
+        matrixClient.joinRoom(event.event.state_key)
       } else if (event.event.state_key === projectSpace) {
         setUpdate(true)
       }
     })
     matrixClient.on('Room.timeline', function (event, room, toStartOfTimeline) {
       if (event.event.type === 'm.room.message' && blocks?.filter(({ roomId }) => event.event.room_id.includes(roomId)) && event.event.sender !== localStorage.getItem('mx_user_id')) {
+        console.log(event);
         setUpdate(true)
       }
     })
