@@ -135,7 +135,7 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadProjects }) 
     try {
       await matrixClient.setRoomName(roomId, newOrder + '_' + active[1]).then(
         await matrixClient.setRoomName(passiveRoom, order + '_' + passive[1]).then(
-          reloadProjects('reload from DisplayContent changeOrder')
+          reloadProjects()
         )
       )// .then(setCounter(0))
     } catch (err) {
@@ -256,7 +256,7 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadProjects }) 
             if (clicked) {
               onDelete(e, block.room_id, index)
               setClicked(false)
-              reloadProjects('callback from delete button in DisplayContent')
+              reloadProjects()
             } else {
               e.preventDefault()
               setClicked(true)

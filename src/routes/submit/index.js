@@ -17,6 +17,7 @@ const Submit = () => {
   const [loading, setLoading] = useState(false)
   const [blocks, setBlocks] = useState([])
   const [update, setUpdate] = useState(false)
+  const [isCollab, setIsCollab] = useState(false);
   const matrixClient = Matrix.getMatrixClient()
   const params = useParams()
   const history = useHistory()
@@ -36,10 +37,25 @@ const Submit = () => {
     // eslint-disable-next-line
   }, [])
 
-  const reloadProjects = (msg) => {
+  const reloadProjects = (roomId) => {
     reload()
+    console.log("roomId = " + roomId);
+    isCollab && roomId && inviteCollaborators(roomId)
     setUpdate(true)
-    console.log(msg)
+  }
+
+  const inviteCollaborators = (roomId) => {
+    //function to invite collaborators to newly created content rooms
+    const setPower = async (userId) => {
+      const stateEvent = matrixClient.getRoom(roomId)
+      console.log(stateEvent);
+      await matrixClient.setPowerLevel(roomId, userId, 100, stateEvent.currentState.getStateEvents('m.room.power_levels', ''))
+    }
+    //this monstrosity goes through our joined spaces -> then through our projectspace and gets all members in the space. Then we invite all members that are != to the users own userId 😰
+    joinedSpaces?.map((space, i) =>
+      space.name === title && Object.keys(space.collab).filter(x =>
+        x !== localStorage.getItem('mx_user_id')).map(userId =>
+          matrixClient.invite(roomId, userId, () => setPower(userId))))
   }
 
   useEffect(() => {
@@ -47,7 +63,6 @@ const Submit = () => {
       const space = await matrixClient.getSpaceSummary(projectSpace)
       setTitle(space.rooms[0].name)
       space.rooms[0].avatar_url !== undefined && setProjectImage(space.rooms[0].avatar_url)
-      console.log(space.rooms)
       const spaceRooms = space.rooms.filter(x => !('room_type' in x))
       setBlocks(spaceRooms.filter(x => x !== undefined).sort((a, b) => {
         if (a.name < b.name) return -1
@@ -62,6 +77,7 @@ const Submit = () => {
 
   const listeningToCollaborators = async () => {
     console.log('Started spying on collaborators')
+    setIsCollab(true)
     try {
       //joining contentRooms which might have been created since we last opened the project
       await matrixClient.getSpaceSummary(projectSpace).then(res => {
@@ -74,8 +90,6 @@ const Submit = () => {
     await matrixClient.removeAllListeners()
     const myRooms = await matrixClient.getSpaceSummary(projectSpace)
     setTitle(myRooms?.rooms[0].name)
-    console.log(myRooms)
-
     matrixClient.addListener('RoomState.events', function (event) {
 
       if (event.event.type === 'm.room.member' && myRooms.rooms?.filter(({ roomId }) => event.sender.roomId.includes(roomId)) && event.event.sender !== localStorage.getItem('mx_user_id')) {
