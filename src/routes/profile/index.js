@@ -11,13 +11,13 @@ const Profile = () => {
   const profile = auth.user
   const { joinedSpaces, spacesErr, fetchSpaces, reload } = useJoinedSpaces(() => console.log(fetchSpaces || spacesErr))
   const matrixClient = Matrix.getMatrixClient()
-  const drafts = joinedSpaces?.filter(x => x.published === 'invite')
-  const publish = joinedSpaces?.filter(x => x.published === 'public')
+  const [drafts, setDrafts] = useState([]);
+  const [publish, setPublish] = useState([]);
   const [invites, setInvites] = useState([])
 
   useEffect(() => {
+
     const getSync = async () => {
-      console.log("invites = " + invites);
       try {
         await matrixClient.startClient().then(async () => {
           // console.log(await matrixClient.publicRooms());
@@ -41,12 +41,28 @@ const Profile = () => {
     // eslint-disable-next-line 
   }, [])
 
-  const reloadProjects = () => {
-    reload()
-  }
+  useEffect(() => {
+    setDrafts(joinedSpaces?.filter(x => x.published === 'invite'))
+    setPublish(joinedSpaces?.filter(x => x.published === 'public'))
+  }, [joinedSpaces]);
+
 
   const reloadInvites = (index) => {
     setInvites(invites => invites.filter((invite, i) => i !== index))
+  }
+
+  const onRedact = (index, space) => {
+    setPublish(publish => publish.filter((draft, i) => i !== index))
+    setDrafts(drafts => [...drafts, space])
+    console.log(publish);
+    console.log(drafts);
+  }
+
+  const onPublish = (index, space) => {
+    setDrafts(drafts => drafts.filter((draft, i) => i !== index))
+    setPublish(publish => [...publish, space])
+    console.log(publish);
+    console.log(drafts);
   }
 
   return (
@@ -68,12 +84,12 @@ const Profile = () => {
           <>
             {drafts?.length > 0 && <p>You have <strong>{drafts.length} draft{drafts.length > 1 && 's'}</strong>, which {drafts.length > 1 ? 'are' : 'is'} not publicly visible.</p>}
             <ul>
-              {spacesErr ? console.error(spacesErr) : drafts.map((space, index) => <><Projects space={space} visibility={space.visibility} reloadProjects={reloadProjects} /><hr /></>)
+              {spacesErr ? console.error(spacesErr) : drafts.map((space, index) => <><Projects space={space} visibility={space.visibility} index={index} reloadProjects={onPublish} /><hr /></>)
               }
             </ul>
             {publish?.length > 0 && <p>You have <strong>{publish.length} published</strong> project{publish.length > 1 && 's'}, which {publish.length > 1 ? 'are' : 'is'} publicly visible.</p>}
             <ul>
-              {spacesErr ? console.error(spacesErr) : publish.map((space, index) => <><Projects space={space} visibility={space.published} reloadProjects={reloadProjects} /><hr /> </>)
+              {spacesErr ? console.error(spacesErr) : publish.map((space, index) => <><Projects space={space} visibility={space.published} index={index} reloadProjects={onRedact} /><hr /> </>)
               }
             </ul>
           </>
