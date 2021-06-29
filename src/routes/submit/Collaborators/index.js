@@ -18,13 +18,13 @@ const Collaborators = ({ projectSpace, blocks, title, joinedSpaces, startListeni
     try {
       await matrixClient.invite(projectSpace, id[1]).then(() => {
         const room = matrixClient.getRoom(projectSpace)
-        matrixClient.setPowerLevel(projectSpace, id[1], 100, room.currentState.getStateEvents('m.room.power_levels', ''))
+        matrixClient.setPowerLevel(projectSpace, id[1], 50, room.currentState.getStateEvents('m.room.power_levels', ''))
       })
       blocks.forEach(async (room, index) => {
         try {
           await matrixClient.invite(room.room_id, id[1]).then(async () => {
             const stateEvent = matrixClient.getRoom(projectSpace)
-            await matrixClient.setPowerLevel(room.room_id, id[1], 100, stateEvent.currentState.getStateEvents('m.room.power_levels', ''))
+            await matrixClient.setPowerLevel(room.room_id, id[1], 50, stateEvent.currentState.getStateEvents('m.room.power_levels', ''))
           }).then(() => console.log('invited ' + id[1] + ' to ' + room.name))
         } catch (err) {
           console.error(err)

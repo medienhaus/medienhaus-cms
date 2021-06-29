@@ -51,7 +51,7 @@ const Submit = () => {
     const setPower = async (userId) => {
       const stateEvent = matrixClient.getRoom(roomId)
       console.log(stateEvent);
-      await matrixClient.setPowerLevel(roomId, userId, 100, stateEvent.currentState.getStateEvents('m.room.power_levels', ''))
+      await matrixClient.setPowerLevel(roomId, userId, 50, stateEvent.currentState.getStateEvents('m.room.power_levels', ''))
     }
     //this monstrosity goes through our joined spaces -> then through our projectspace and gets all members in the space. Then we invite all members that are != to the users own userId 😰
     joinedSpaces?.map((space, i) =>
