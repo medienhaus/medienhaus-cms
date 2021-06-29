@@ -23,7 +23,7 @@ const Profile = () => {
           matrixClient.on('Room', (room) => {
             setTimeout(async () => {
               if (room.getMyMembership() === 'invite') {
-                console.log(room.name + ' = ' + room.getType())
+                console.log(room)
                 const isRoomEmpty = await room._loadMembersFromServer()
                 isRoomEmpty.length > 1 && room.getType() === 'm.space' && setInvites(invites => invites.concat({ name: room.name, id: room.roomId, membership: room._selfMembership }))
               }
@@ -43,6 +43,10 @@ const Profile = () => {
     reload()
   }
 
+  const reloadInvites = (index) => {
+    setInvites(invites => invites.filter((invite, i) => i !== index))
+  }
+
   return (
     <div>
       <p>Hello <strong>{profile.displayname}</strong>,</p>
@@ -51,7 +55,7 @@ const Profile = () => {
         <>
           <p>You have been invited to join the following project{invites.length > 1 && 's'}:</p>
           <ul>
-            {invites.map((room) => <Invites room={room} />)}
+            {invites.map((room, index) => <Invites room={room} index={index} callback={reloadInvites} />)}
           </ul>
         </>
       )
