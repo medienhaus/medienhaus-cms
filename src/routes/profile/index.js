@@ -13,7 +13,7 @@ const Profile = () => {
   const matrixClient = Matrix.getMatrixClient()
   const drafts = joinedSpaces?.filter(x => x.published === 'invite')
   const publish = joinedSpaces?.filter(x => x.published === 'public')
-  const [invites, setInvites] = useState()
+  const [invites, setInvites] = useState([])
 
   useEffect(() => {
     const getSync = async () => {
@@ -23,7 +23,6 @@ const Profile = () => {
           // console.log(await matrixClient.publicRooms());
           matrixClient.on('Room', (room) => {
             setTimeout(async () => {
-              setInvites([])
               if (room.getMyMembership() === 'invite') {
                 console.log(room)
                 const isRoomEmpty = await room._loadMembersFromServer()
