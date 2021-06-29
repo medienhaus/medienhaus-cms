@@ -41,6 +41,7 @@ const Submit = () => {
     // roomId is needed in order to invite collaborators to newly created rooms.
     reload()
     console.log("roomId = " + roomId);
+    // checking to see if the project is a collaboration, if so invite all collaborators and make them admin
     isCollab && roomId && inviteCollaborators(roomId)
     setUpdate(true)
   }
