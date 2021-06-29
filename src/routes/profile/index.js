@@ -13,20 +13,23 @@ const Profile = () => {
   const matrixClient = Matrix.getMatrixClient()
   const drafts = joinedSpaces?.filter(x => x.published === 'invite')
   const publish = joinedSpaces?.filter(x => x.published === 'public')
-  const [invites, setInvites] = useState([])
+  const [invites, setInvites] = useState()
 
   useEffect(() => {
     const getSync = async () => {
+      console.log("invites = " + invites);
       try {
         await matrixClient.startClient().then(async () => {
           // console.log(await matrixClient.publicRooms());
           matrixClient.on('Room', (room) => {
             setTimeout(async () => {
+              setInvites([])
               if (room.getMyMembership() === 'invite') {
                 console.log(room)
                 const isRoomEmpty = await room._loadMembersFromServer()
                 isRoomEmpty.length > 1 && room.getType() === 'm.space' && setInvites(invites => invites.concat({ name: room.name, id: room.roomId, membership: room._selfMembership }))
               }
+
             }, 0)
           }
           )
@@ -51,7 +54,7 @@ const Profile = () => {
     <div>
       <p>Hello <strong>{profile.displayname}</strong>,</p>
       <p>welcome to your profile for the Rundgang 2021.</p>
-      {invites.length > 0 && (
+      {!invites ? <Loading /> : invites.length > 0 && (
         <>
           <p>You have been invited to join the following project{invites.length > 1 && 's'}:</p>
           <ul>
