@@ -6,6 +6,7 @@ import LoadingSpinnerButton from '../../../components/LoadingSpinnerButton'
 
 const Projects = ({ space, visibility, index, reloadProjects }) => {
   const [responseFromPublish, setResponseFromPublish] = useState();
+  const [loading, setLoading] = useState(false);
   const history = useHistory()
   const matrixClient = Matrix.getMatrixClient()
 
@@ -75,6 +76,7 @@ const Projects = ({ space, visibility, index, reloadProjects }) => {
   }
 
   const onChangeVisibility = async () => {
+    setLoading(true)
     const req = {
       method: 'PUT',
       headers: { Authorization: 'Bearer ' + localStorage.getItem('medienhaus_access_token') },
@@ -86,6 +88,7 @@ const Projects = ({ space, visibility, index, reloadProjects }) => {
           console.log(response)
           if (response.ok) {
             reloadProjects(index, space)
+            setLoading(false)
           } else {
             setResponseFromPublish('Oh no, something went wrong.')
             setTimeout(() => {
@@ -112,7 +115,7 @@ const Projects = ({ space, visibility, index, reloadProjects }) => {
       </ul>
       <div style={{ flexDirection: 'row', alignContent: 'space-around', padding: '30px' }}>
         <button onClick={() => history.push(`/submit/${space.room_id}`)}>EDIT</button>
-        <LoadingSpinnerButton onClick={onChangeVisibility}>{responseFromPublish || visibility === 'public' ? 'Redact' : 'Publish'}</LoadingSpinnerButton>
+        <LoadingSpinnerButton disabled={loading} onClick={onChangeVisibility}>{loading ? <Loading /> : visibility === 'public' ? 'Redact' : 'Publish'}</LoadingSpinnerButton>
         <DeleteProjectButton roomId={space.room_id} name={space.name} />
       </div>
     </div>
