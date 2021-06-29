@@ -38,6 +38,7 @@ const Submit = () => {
   }, [])
 
   const reloadProjects = (roomId) => {
+    // roomId is needed in order to invite collaborators to newly created rooms.
     reload()
     console.log("roomId = " + roomId);
     isCollab && roomId && inviteCollaborators(roomId)
