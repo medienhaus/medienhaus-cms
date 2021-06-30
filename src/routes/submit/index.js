@@ -44,7 +44,8 @@ const Submit = () => {
   }
 
   useEffect(() => {
-    joinedSpaces && setVisibility(joinedSpaces.filter(x => x.room_id === projectSpace)[0].published)
+    setVisibility(joinedSpaces?.filter(x => x.room_id === projectSpace)[0]?.published)
+    console.log(visibility);
     // eslint-disable-next-line
   }, [joinedSpaces]);
 
