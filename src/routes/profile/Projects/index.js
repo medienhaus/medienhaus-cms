@@ -116,6 +116,7 @@ const Projects = ({ space, visibility, index, reloadProjects }) => {
       <div style={{ flexDirection: 'row', alignContent: 'space-around', padding: '30px' }}>
         <button onClick={() => history.push(`/submit/${space.room_id}`)}>EDIT</button>
         <LoadingSpinnerButton disabled={loading} onClick={onChangeVisibility}>{loading ? <Loading /> : visibility === 'public' ? 'Redact' : 'Publish'}</LoadingSpinnerButton>
+        {responseFromPublish}
         <DeleteProjectButton roomId={space.room_id} name={space.name} />
       </div>
     </div>
