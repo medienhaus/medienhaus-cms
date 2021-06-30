@@ -13,7 +13,7 @@ import { Loading } from '../../components/loading'
 import { MatrixEvent } from 'matrix-js-sdk'
 
 const Submit = () => {
-  const { joinedSpaces, spacesErr, fetchSpaces, reload } = useJoinedSpaces(() => console.log(fetchSpaces || spacesErr))
+  const { joinedSpaces, spacesErr, fetchSpaces } = useJoinedSpaces(() => console.log(fetchSpaces || spacesErr))
   const [title, setTitle] = useState('')
   const [projectImage, setProjectImage] = useState(false)
   const [visibility, setVisibility] = useState('draft')
@@ -41,21 +41,18 @@ const Submit = () => {
 
   const reloadProjects = (roomId) => {
     // roomId is needed in order to invite collaborators to newly created rooms.
-    reload()
     console.log("roomId = " + roomId);
     // checking to see if the project is a collaboration, if so invite all collaborators and make them admin
     isCollab && roomId && inviteCollaborators(roomId)
     setUpdate(true)
   }
 
-  const inviteCollaborators = (roomId) => {
-    const allCollaborators = joinedSpaces?.map((space, i) => space.name === title && Object.keys(space.collab).filter(x => x !== localStorage.getItem('mx_user_id'))).filter(space => space !== false)[0]
+  const inviteCollaborators = async (roomId) => {
+    const allCollaborators = joinedSpaces?.map((space, i) => space.name === title && Object.keys(space.collab).filter(userId => userId !== localStorage.getItem('mx_user_id') && userId !== process.env.REACT_APP_PROJECT_BOT_ACCOUNT)).filter(space => space !== false)[0]
     // I would be surprised if there isn't an easier way to get joined members...
-    console.log(allCollaborators);
-    //function to invite collaborators to newly created content rooms
     const setPower = async (userId) => {
+      console.log("changing power level for " + userId);
       matrixClient.getStateEvent(roomId, "m.room.power_levels", "").then(async (res) => {
-        // after inviting the user, we promote them to moderator
         const powerEvent = new MatrixEvent({
           type: "m.room.power_levels",
           content: res,
@@ -68,14 +65,18 @@ const Submit = () => {
         }
       })
     }
-
-    allCollaborators.map(userId => matrixClient.invite(roomId, userId, () => console.log("invited " + userId)))
-    allCollaborators.map(async userId => userId !== process.env.REACT_APP_PROJECT_BOT_ACCOUNT && await setPower(userId))
+    // invite users to newly created content room
+    const invites = allCollaborators.map(userId => matrixClient.invite(roomId, userId, () => console.log("invited " + userId)).catch(err => console.log(err)))
+    await Promise.all(invites)
+    console.log("inviting done, now changing power");
+    // then promote them to moderator
+    const power = allCollaborators.map(userId => setPower(userId))
+    await Promise.all(power)
+    console.log("all done")
   }
 
   useEffect(() => {
     setVisibility(joinedSpaces?.filter(x => x.room_id === projectSpace)[0]?.published)
-    console.log(visibility);
     // eslint-disable-next-line
   }, [joinedSpaces]);
 
