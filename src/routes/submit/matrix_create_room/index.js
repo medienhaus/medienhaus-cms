@@ -1,3 +1,4 @@
+import powerMove from '../../../components/matrix_power_move'
 import Matrix from '../../../Matrix'
 
 const createBlock = async (e, content, number, space) => {
@@ -50,6 +51,8 @@ const createBlock = async (e, content, number, space) => {
           return Promise.reject(error)
         }
         return res[0]
+      }).then(async (roomId) => {
+        return await powerMove(roomId)
       })
     return room
   } catch (e) {

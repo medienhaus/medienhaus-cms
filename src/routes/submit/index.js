@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useHistory, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import Matrix from '../../Matrix'
 import useJoinedSpaces from '../../components/matrix_joined_spaces'
 import Collaborators from './Collaborators'
@@ -7,6 +7,8 @@ import Category from './Category'
 import DisplayContent from './DisplayContent'
 import AddContent from './AddContent'
 import ProjectImage from './ProjectImage'
+import ProjectTitle from './ProjectTitle'
+import PublishProject from './ProjectTitle/PublishProject'
 import { Loading } from '../../components/loading'
 import { MatrixEvent } from 'matrix-js-sdk'
 
@@ -21,7 +23,6 @@ const Submit = () => {
   const [isCollab, setIsCollab] = useState(false);
   const matrixClient = Matrix.getMatrixClient()
   const params = useParams()
-  const history = useHistory()
 
   const projectSpace = params.spaceId
 
@@ -71,6 +72,13 @@ const Submit = () => {
   }
 
   useEffect(() => {
+    setVisibility(joinedSpaces?.filter(x => x.room_id === projectSpace)[0]?.published)
+    console.log(visibility);
+    // eslint-disable-next-line
+  }, [joinedSpaces]);
+
+  useEffect(() => {
+    projectSpace || setTitle('') // shoukd fix the error when already editing a project and wanting to create a new one
     const fetchSpace = async () => {
       const space = await matrixClient.getSpaceSummary(projectSpace)
       setTitle(space.rooms[0].name)
@@ -130,167 +138,19 @@ const Submit = () => {
     setLoading(false)
   }
 
-  //= ====== COMPONENTS ======================================================================
-
-  const SubmitButton = () => {
-    const [response, setResponse] = useState()
-    const [saving, setSaving] = useState(false)
-
-    const onPublish = async (e) => {
-      e.preventDefault()
-      setSaving(true)
-      const req = {
-        method: 'PUT',
-        headers: { Authorization: 'Bearer ' + localStorage.getItem('medienhaus_access_token') },
-        body: JSON.stringify({ join_rule: visibility === 'public' ? 'public' : 'invite' })
-      }
-      try {
-        // matrixClient.sendEvent(projectSpace, "m.room.join_rules", {"join_rule": visibility === "public" ? 'public' : 'invite'} ).then((res) => console.log(res))
-        fetch(process.env.REACT_APP_MATRIX_BASE_URL + `/_matrix/client/r0/rooms/${projectSpace}/state/m.room.join_rules/`, req)
-          .then(response => {
-            console.log(response)
-            if (response.ok) {
-              setResponse('Changed successfully!')
-              setTimeout(() => {
-                setResponse()
-              }, 3000)
-            } else {
-              setResponse('Oh no, something went wrong.')
-              setTimeout(() => {
-                setResponse()
-              }, 3000)
-            }
-          })
-      } catch (err) {
-        console.error(err)
-      } finally {
-        setSaving(false)
-      }
-    }
-
-    return (
-      <div>
-        <div>
-          <select id="visibility" name="visibility" value={visibility} onChange={(e) => { setVisibility(e.target.value) }} onBlur={(e) => { setVisibility(e.target.value) }}>
-            <option value="invite">Draft</option>
-            <option value="public">Published</option>
-          </select>
-        </div>
-        <div>
-          <input id="submit" name="submit" type="submit" value="SAVE" disabled={saving} onClick={(e) => onPublish(e)} />
-          {response && <p>{response}</p>}
-        </div>
-      </div>
-
-    )
-  }
-
-  const ProjectTitle = () => {
-    const [projectTitle, setProjectTitle] = useState('')
-    const [edit, setEdit] = useState(false)
-    const [changing, setChanging] = useState(false)
-    const [newProject, setNewProject] = useState(false)
-    const [oldTitle, setOldTitle] = useState('')
-    const doublicate = joinedSpaces?.filter(({ name }) => projectTitle === name).length > 0
-
-    useEffect(() => {
-      setProjectTitle(title)
-      title === '' && setNewProject(true)
-      // eslint-disable-next-line
-    }, [title]);
-
-    const createProject = async (e, title) => {
-      e.preventDefault()
-      setLoading(true)
-      const opts = {
-        preset: visibility === 'public' ? 'public_chat' : 'private_chat',
-        name: title,
-        creation_content: { type: 'm.space' },
-        initial_state: [{
-          type: 'm.room.history_visibility',
-          content: { history_visibility: visibility === 'public' ? 'world_readable' : 'invited' }
-        },
-        {
-          type: 'm.room.topic',
-          content: { topic: JSON.stringify({ rundgang: 21, type: 'studentproject' }) }
-        },
-        {
-          type: 'm.room.guest_access',
-          state_key: '',
-          content: { guest_access: 'can_join' }
-        }],
-        power_level_content_override: { events_default: 100 },
-        visibility: 'private'
-      }
-      try {
-        await matrixClient.createRoom(opts)
-          .then((response) => {
-            history.push(`/submit/${response.room_id}`)
-          })
-      } catch (e) {
-        console.log(e)
-      } finally {
-        setLoading(false)
-      }
-    }
-
-    return (
-      <>
-        <div>
-          <label htmlFor="title">Project Title</label>
-          <input id="title" name="title" placeholder="project title" type="text" value={projectTitle} disabled={title && !edit} onChange={(e) => setProjectTitle(e.target.value)} />
-        </div>
-        <div>
-
-          {title && <input
-            id="submit" name="submit" type="submit" value={edit ? 'Save' : changing ? <Loading /> : 'Edit Title'} onClick={async (e) => {
-              e.preventDefault()
-              if (edit) {
-                setChanging(true)
-                try {
-                  await matrixClient.setRoomName(projectSpace, projectTitle).then(() => setTitle(projectTitle))
-                } catch (err) {
-                  console.error(err)
-                } finally {
-                  setChanging(false)
-                }
-                setEdit(false)
-              } else {
-                setEdit(true)
-                setOldTitle(title)
-              }
-            }}
-          />}
-          {edit && <input id="submit" name="submit" type="submit" value="Cancel" onClick={(e) => { e.preventDefault(); setEdit(false); setProjectTitle(oldTitle) }} />}
-          {loading
-            ? <Loading />
-            : !title && <input
-              id="submit" name="submit" type="submit" value={newProject ? 'Create Project' : 'New Project'} disabled={(newProject && doublicate) || !projectTitle} onClick={(e) => {
-                console.log(newProject)
-                if (newProject) {
-                  createProject(e, projectTitle)
-                  setNewProject(false)
-                } else {
-                  e.preventDefault()
-                  setNewProject(true)
-                  setTitle('')
-                }
-              }}
-            />}
-        </div>
-      </>
-    )
-  }
-
   const startListeningToCollab = () => {
     listeningToCollaborators()
+  }
+
+  const changeTitle = (newTitle) => {
+    setTitle(newTitle)
   }
 
   return (
     <div>
 
       <h3>Project Title / Collaborators / Credits</h3>
-      <ProjectTitle />
+      <ProjectTitle joinedSpaces={joinedSpaces} title={title} projectSpace={projectSpace} callback={changeTitle} />
       {projectSpace && (
         <>
           <h3>Category / Context / Course</h3>
@@ -305,7 +165,7 @@ const Submit = () => {
               <DisplayContent block={content} index={i} blocks={blocks} projectSpace={projectSpace} reloadProjects={reloadProjects} key={content + i} />
             )}
           <h3>Visibility (Draft/Published)</h3>
-          {loading ? <Loading /> : <SubmitButton />}
+          <PublishProject projectSpace={projectSpace} published={visibility} />
         </>
       )}
     </div>

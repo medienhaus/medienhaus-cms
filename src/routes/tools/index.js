@@ -107,6 +107,10 @@ const Tools = () => {
             <input id="text" name="text" placeholder="some text" type="text" />
           </div>
           <div>
+            <label htmlFor="textarea">Textarea</label>
+            <textarea id="textarea" name="textarea" placeholder="some text" type="textarea" />
+          </div>
+          <div>
             <label htmlFor="time">Time</label>
             <input id="time" name="time" type="time" />
           </div>
