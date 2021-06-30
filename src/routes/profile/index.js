@@ -51,18 +51,23 @@ const Profile = () => {
     setInvites(invites => invites.filter((invite, i) => i !== index))
   }
 
-  const onRedact = (index, space) => {
-    space.published = 'invite'
+  const onRedact = (index, space, redact) => {
+    if (!redact) {
+      // if the callback is not from deleting a project we add the object to the drafts array
+      space.published = 'invite'
+      setDrafts(drafts => [...drafts, space])
+    }
     setPublish(publish => publish.filter((draft, i) => i !== index))
-    setDrafts(drafts => [...drafts, space])
     console.log(publish);
     console.log(drafts);
   }
 
-  const onPublish = (index, space) => {
-    space.published = 'public'
+  const onPublish = (index, space, redact) => {
+    if (!redact) {
+      space.published = 'public'
+      setPublish(publish => [...publish, space])
+    }
     setDrafts(drafts => drafts.filter((draft, i) => i !== index))
-    setPublish(publish => [...publish, space])
     console.log(publish);
     console.log(drafts);
   }

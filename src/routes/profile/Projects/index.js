@@ -54,7 +54,7 @@ const Projects = ({ space, visibility, index, reloadProjects }) => {
           onClick={async (e) => {
             if (warning) {
               setLeaving(true)
-              await deleteProject(e, roomId).catch(err => console.error(err)).then(() => reloadProjects(index, space)).then(() => setLeaving(false))
+              await deleteProject(e, roomId).catch(err => console.error(err)).then(() => reloadProjects(index, space, true)).then(() => setLeaving(false))
               setWarning(false)
             } else {
               e.preventDefault()
@@ -87,7 +87,7 @@ const Projects = ({ space, visibility, index, reloadProjects }) => {
         .then(response => {
           console.log(response)
           if (response.ok) {
-            reloadProjects(index, space)
+            reloadProjects(index, space, false)
             setLoading(false)
           } else {
             setResponseFromPublish('Oh no, something went wrong.')
