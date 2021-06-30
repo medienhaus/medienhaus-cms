@@ -49,10 +49,10 @@ const Nav = () => {
           )}
         </div>
       </nav>
-      <section>
-        <button onClick={() => changeLanguage('en')}>EN</button>
-        <button onClick={() => changeLanguage('de')}>DE</button>
-      </section>
+      <select>
+        <option onClick={() => changeLanguage('en')}>EN</option>
+        <option onClick={() => changeLanguage('de')}>DE</option>
+      </select>
     </>
   )
 }

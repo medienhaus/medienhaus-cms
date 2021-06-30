@@ -173,7 +173,7 @@ main {
   max-width: 55ch;
 }
 
-main a {
+main a:link {
   text-decoration: underline;
 }
 
@@ -199,6 +199,7 @@ nav > div {
   top: calc(var(--margin) * 1.4);
 }
 
+/*
 nav + section {
   display: grid;
   grid-template-columns: repeat(2, min-content);
@@ -224,6 +225,17 @@ nav + section > button {
 
 nav + section > button:hover {
   text-decoration: underline;
+}
+*/
+
+nav + select {
+  grid-row: 3;
+  grid-column: 2;
+  align-self: end;
+  justify-self: end;
+  position: sticky;
+  bottom: var(--margin);
+  width: 6ch;
 }
 
 nav > * > * > a + a {
@@ -1015,6 +1027,7 @@ button > #loading {
     display: none;
   }
   /* TODO */
+  /*
   nav + section {
     background-color: var(--color-bg);
     grid-row: 1;
@@ -1024,6 +1037,7 @@ button > #loading {
     top: 0;
     z-index: 1;
   }
+  */
   footer {
     grid-column: 1 / 3;
   }
