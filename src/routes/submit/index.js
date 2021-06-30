@@ -47,7 +47,9 @@ const Submit = () => {
   }
 
   const inviteCollaborators = (roomId) => {
-    const allCollaborators = joinedSpaces?.map((space, i) => space.name === title && Object.keys(space.collab).filter(x => x !== localStorage.getItem('mx_user_id')))
+    const allCollaborators = joinedSpaces?.map((space, i) => space.name === title && Object.keys(space.collab).filter(x => x !== localStorage.getItem('mx_user_id'))).filter(space => space !== false)[0]
+    // I would be surprised if there isn't an easier way to get joined members...
+    console.log(allCollaborators);
     //function to invite collaborators to newly created content rooms
     const setPower = async (userId) => {
       matrixClient.getStateEvent(roomId, "m.room.power_levels", "").then(async (res) => {
@@ -64,9 +66,9 @@ const Submit = () => {
         }
       })
     }
-    //this monstrosity goes through our joined spaces -> then through our projectspace and gets all members in the space. Then we invite all members that are != to the users own userId 😰
+
     allCollaborators.map(userId => matrixClient.invite(roomId, userId, () => console.log("invited " + userId)))
-    allCollaborators.map(async userId => await setPower(userId))
+    allCollaborators.map(async userId => userId !== process.env.REACT_APP_PROJECT_BOT_ACCOUNT && await setPower(userId))
   }
 
   useEffect(() => {
