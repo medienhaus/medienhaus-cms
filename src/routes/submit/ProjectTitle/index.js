@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import Matrix from '../../../Matrix'
 import { Loading } from '../../../components/loading'
+import { MatrixEvent } from 'matrix-js-sdk'
 
 
 const ProjectTitle = ({ joinedSpaces, title, projectSpace, callback }) => {
@@ -53,13 +54,22 @@ const ProjectTitle = ({ joinedSpaces, title, projectSpace, callback }) => {
         try {
             await matrixClient.createRoom(opts)
                 .then(async (response) => {
-                    inviteBot(response.room_id)
+                    await inviteBot(response.room_id)
                     return response.room_id
                 }).then(async (res) => {
+                    const stateEvent = await matrixClient.getStateEvent(res, "m.room.power_levels", "")
+                    console.log(stateEvent);
                     // after inviting and promoting our bot, the user demotes themself to moderator
-                    const stateEvent = matrixClient.getRoom(res)
-                    await matrixClient.setPowerLevel(res, localStorage.getItem('mx_user_id'), 50, stateEvent.currentState.getStateEvents('m.room.power_levels', ''))
-                    return res
+                    return [res, stateEvent]
+                }).then(async (res) => {
+                    const powerEvent = new MatrixEvent(
+                        {
+                            type: "m.room.power_levels",
+                            content: res[1],
+                        },
+                    );
+                    await matrixClient.setPowerLevel(res[0], localStorage.getItem('mx_user_id'), 50, powerEvent)
+                    return res[0]
                 }).then((res) => history.push(`/submit/${res}`))
         } catch (e) {
             console.log(e)
