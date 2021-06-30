@@ -22,7 +22,7 @@ const Nav = () => {
           <div>
             {auth.user
               ? (
-                <NavLink activeclassname="active" to="/submit">/create new -&gt;</NavLink>
+                <NavLink activeclassname="active" to="/submit/">/create new -&gt;</NavLink>
                 // <a href={process.env.REACT_APP_MATRIX_BASE_URL + '/classroom'} rel="nofollow noopener noreferrer" target="_self">/classroom&nbsp;-&gt;</a>
               )
               : (
@@ -49,10 +49,10 @@ const Nav = () => {
           )}
         </div>
       </nav>
-      <section>
-        <button onClick={() => changeLanguage('en')}>EN</button>
-        <button onClick={() => changeLanguage('de')}>DE</button>
-      </section>
+      <select>
+        <option onClick={() => changeLanguage('en')}>EN</option>
+        <option onClick={() => changeLanguage('de')}>DE</option>
+      </select>
     </>
   )
 }

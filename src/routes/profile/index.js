@@ -9,13 +9,14 @@ import { Loading } from '../../components/loading'
 const Profile = () => {
   const auth = useAuth()
   const profile = auth.user
-  const { joinedSpaces, spacesErr, fetchSpaces, reload } = useJoinedSpaces(() => console.log(fetchSpaces || spacesErr))
+  const { joinedSpaces, spacesErr, fetchSpaces } = useJoinedSpaces(() => console.log(fetchSpaces || spacesErr))
   const matrixClient = Matrix.getMatrixClient()
-  const drafts = joinedSpaces?.filter(x => x.published === 'invite')
-  const publish = joinedSpaces?.filter(x => x.published === 'public')
+  const [drafts, setDrafts] = useState([]);
+  const [publications, setPublications] = useState([]);
   const [invites, setInvites] = useState([])
 
   useEffect(() => {
+
     const getSync = async () => {
       try {
         await matrixClient.startClient().then(async () => {
@@ -23,10 +24,11 @@ const Profile = () => {
           matrixClient.on('Room', (room) => {
             setTimeout(async () => {
               if (room.getMyMembership() === 'invite') {
-                console.log(room.name + ' = ' + room.getType())
+                console.log(room)
                 const isRoomEmpty = await room._loadMembersFromServer()
                 isRoomEmpty.length > 1 && room.getType() === 'm.space' && setInvites(invites => invites.concat({ name: room.name, id: room.roomId, membership: room._selfMembership }))
               }
+
             }, 0)
           }
           )
@@ -39,19 +41,42 @@ const Profile = () => {
     // eslint-disable-next-line 
   }, [])
 
-  const reloadProjects = () => {
-    reload()
+  useEffect(() => {
+    setDrafts(joinedSpaces?.filter(projectSpace => projectSpace.published === 'invite'))
+    setPublications(joinedSpaces?.filter(projectSpace => projectSpace.published === 'public'))
+  }, [joinedSpaces]);
+
+
+  const removeInviteByIndex = (index) => {
+    setInvites(invites => invites.filter((invite, i) => i !== index))
+  }
+
+  const changePublicationToDraft = (index, space, redact) => {
+    if (!redact) {
+      // if the callback is not from deleting a project we add the object to the drafts array
+      space.published = 'invite'
+      setDrafts(drafts => [...drafts, space])
+    }
+    setPublications(publications => publications.filter((draft, i) => i !== index))
+  }
+
+  const changeDraftToPublication = (index, space, redact) => {
+    if (!redact) {
+      space.published = 'public'
+      setPublications(publications => [...publications, space])
+    }
+    setDrafts(drafts => drafts.filter((draft, i) => i !== index))
   }
 
   return (
     <div>
       <p>Hello <strong>{profile.displayname}</strong>,</p>
       <p>welcome to your profile for the Rundgang 2021.</p>
-      {invites.length > 0 && (
+      {!invites ? <Loading /> : invites.length > 0 && (
         <>
           <p>You have been invited to join the following project{invites.length > 1 && 's'}:</p>
           <ul>
-            {invites.map((room) => <Invites room={room} />)}
+            {invites.map((room, index) => <Invites room={room} index={index} callback={removeInviteByIndex} />)}
           </ul>
         </>
       )
@@ -62,12 +87,12 @@ const Profile = () => {
           <>
             {drafts?.length > 0 && <p>You have <strong>{drafts.length} draft{drafts.length > 1 && 's'}</strong>, which {drafts.length > 1 ? 'are' : 'is'} not publicly visible.</p>}
             <ul>
-              {spacesErr ? console.error(spacesErr) : drafts.map((space, index) => <><Projects space={space} visibility={space.visibility} reloadProjects={reloadProjects} /><hr /></>)
+              {spacesErr ? console.error(spacesErr) : drafts.map((space, index) => <><Projects space={space} visibility={space.visibility} index={index} reloadProjects={changeDraftToPublication} /><hr /></>)
               }
             </ul>
-            {publish?.length > 0 && <p>You have <strong>{publish.length} published</strong> project{publish.length > 1 && 's'}, which {publish.length > 1 ? 'are' : 'is'} publicly visible.</p>}
+            {publications?.length > 0 && <p>You have <strong>{publications.length} published</strong> project{publications.length > 1 && 's'}, which {publications.length > 1 ? 'are' : 'is'} publicly visible.</p>}
             <ul>
-              {spacesErr ? console.error(spacesErr) : publish.map((space, index) => <><Projects space={space} visibility={space.published} reloadProjects={reloadProjects} /><hr /> </>)
+              {spacesErr ? console.error(spacesErr) : publications.map((space, index) => <><Projects space={space} visibility={space.published} index={index} reloadProjects={changePublicationToDraft} /><hr /> </>)
               }
             </ul>
           </>

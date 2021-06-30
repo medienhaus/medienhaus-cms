@@ -1,20 +1,18 @@
 
 import React, { useState } from 'react'
 import Matrix from '../../../Matrix'
+import LoadingSpinnerButton from '../../../components/LoadingSpinnerButton'
 
-const Invites = ({ room }) => {
+const Invites = ({ room, index, callback }) => {
   const [joining, setJoining] = useState(false)
-  const [joined, setJoined] = useState(false)
   const [error, setError] = useState('')
   const matrixClient = Matrix.getMatrixClient()
 
-  const join = async (e, room) => {
-    e.preventDefault()
+  const join = async (room) => {
     setJoining(true)
     try {
-      await matrixClient.joinRoom(room).then(console.log).then(setJoined(true))
+      await matrixClient.joinRoom(room).then(console.log).then(callback(index))
     } catch (err) {
-      setJoined(false)
       setError(err.errcode === 'M_UNKNOWN' ? 'Looks like this room does not exist anymore.' : 'Something went wrong.')
       setTimeout(() => {
         setError('')
@@ -24,13 +22,14 @@ const Invites = ({ room }) => {
     }
   }
   return (
-         <>
-            <div style={{ display: 'flex' }}>
-                <li style={{ width: '100%' }}>{room.name}</li>
-                <button disabled={joining || joined} onClick={(e) => join(e, room.id)}>ACCEPT</button>
-            </div>
-            {error}
-            </>
+    <>
+      <div style={{ display: 'flex' }}>
+        <li style={{ width: '100%' }}>{room.name}</li>
+        <LoadingSpinnerButton disabled={joining} onClick={() => join(room.id)}>ACCEPT</LoadingSpinnerButton>
+        {error}
+      </div>
+      {error}
+    </>
   )
 }
 export default Invites
