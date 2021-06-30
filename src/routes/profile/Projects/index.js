@@ -80,7 +80,7 @@ const Projects = ({ space, visibility, index, reloadProjects }) => {
     const req = {
       method: 'PUT',
       headers: { Authorization: 'Bearer ' + localStorage.getItem('medienhaus_access_token') },
-      body: JSON.stringify({ join_rule: visibility === 'public' ? 'invite' : 'public' })
+      body: JSON.stringify({ join_rule: visibility === 'public' ? 'invite' : 'world_readable' })
     }
     try {
       fetch(process.env.REACT_APP_MATRIX_BASE_URL + `/_matrix/client/r0/rooms/${space.room_id}/state/m.room.join_rules/`, req)
