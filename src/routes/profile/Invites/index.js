@@ -26,6 +26,7 @@ const Invites = ({ room, index, callback }) => {
       <div style={{ display: 'flex' }}>
         <li style={{ width: '100%' }}>{room.name}</li>
         <LoadingSpinnerButton disabled={joining} onClick={() => join(room.id)}>ACCEPT</LoadingSpinnerButton>
+        {error}
       </div>
       {error}
     </>
