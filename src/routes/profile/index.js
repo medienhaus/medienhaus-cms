@@ -9,7 +9,7 @@ import { Loading } from '../../components/loading'
 const Profile = () => {
   const auth = useAuth()
   const profile = auth.user
-  const { joinedSpaces, spacesErr, fetchSpaces, reload } = useJoinedSpaces(() => console.log(fetchSpaces || spacesErr))
+  const { joinedSpaces, spacesErr, fetchSpaces } = useJoinedSpaces(() => console.log(fetchSpaces || spacesErr))
   const matrixClient = Matrix.getMatrixClient()
   const [drafts, setDrafts] = useState([]);
   const [publish, setPublish] = useState([]);
