@@ -52,6 +52,7 @@ const Profile = () => {
   }
 
   const onRedact = (index, space) => {
+    space.published = 'invite'
     setPublish(publish => publish.filter((draft, i) => i !== index))
     setDrafts(drafts => [...drafts, space])
     console.log(publish);
@@ -59,6 +60,7 @@ const Profile = () => {
   }
 
   const onPublish = (index, space) => {
+    space.published = 'public'
     setDrafts(drafts => drafts.filter((draft, i) => i !== index))
     setPublish(publish => [...publish, space])
     console.log(publish);
