@@ -47,15 +47,15 @@ const Submit = () => {
   }
 
   const inviteCollaborators = (roomId) => {
+    const allCollaborators = joinedSpaces?.map((space, i) => space.name === title && Object.keys(space.collab).filter(x => x !== localStorage.getItem('mx_user_id')))
     //function to invite collaborators to newly created content rooms
     const setPower = async (userId) => {
       matrixClient.getStateEvent(roomId, "m.room.power_levels", "").then(async (res) => {
         // after inviting the user, we promote them to moderator
-        const powerEvent = new MatrixEvent(
-          {
-            type: "m.room.power_levels",
-            content: res,
-          },
+        const powerEvent = new MatrixEvent({
+          type: "m.room.power_levels",
+          content: res,
+        },
         );
         try {
           await matrixClient.setPowerLevel(roomId, userId, 50, powerEvent)
@@ -65,10 +65,8 @@ const Submit = () => {
       })
     }
     //this monstrosity goes through our joined spaces -> then through our projectspace and gets all members in the space. Then we invite all members that are != to the users own userId 😰
-    joinedSpaces?.map((space, i) =>
-      space.name === title && Object.keys(space.collab).filter(x =>
-        x !== localStorage.getItem('mx_user_id')).map(userId =>
-          matrixClient.invite(roomId, userId, () => setPower(userId))))
+    allCollaborators.map(userId => matrixClient.invite(roomId, userId, () => console.log("invited " + userId)))
+    allCollaborators.map(async userId => await setPower(userId))
   }
 
   useEffect(() => {
