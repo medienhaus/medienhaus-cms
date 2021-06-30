@@ -42,34 +42,30 @@ const Profile = () => {
   }, [])
 
   useEffect(() => {
-    setDrafts(joinedSpaces?.filter(x => x.published === 'invite'))
-    setPublish(joinedSpaces?.filter(x => x.published === 'public'))
+    setDrafts(joinedSpaces?.filter(projectSpace => projectSpace.published === 'invite'))
+    setPublish(joinedSpaces?.filter(projectSpace => projectSpace.published === 'public'))
   }, [joinedSpaces]);
 
 
-  const reloadInvites = (index) => {
+  const removeInviteByIndex = (index) => {
     setInvites(invites => invites.filter((invite, i) => i !== index))
   }
 
-  const onRedact = (index, space, redact) => {
+  const changePublicationToDraft = (index, space, redact) => {
     if (!redact) {
       // if the callback is not from deleting a project we add the object to the drafts array
       space.published = 'invite'
       setDrafts(drafts => [...drafts, space])
     }
     setPublish(publish => publish.filter((draft, i) => i !== index))
-    console.log(publish);
-    console.log(drafts);
   }
 
-  const onPublish = (index, space, redact) => {
+  const changeDraftToPublication = (index, space, redact) => {
     if (!redact) {
       space.published = 'public'
       setPublish(publish => [...publish, space])
     }
     setDrafts(drafts => drafts.filter((draft, i) => i !== index))
-    console.log(publish);
-    console.log(drafts);
   }
 
   return (
@@ -80,7 +76,7 @@ const Profile = () => {
         <>
           <p>You have been invited to join the following project{invites.length > 1 && 's'}:</p>
           <ul>
-            {invites.map((room, index) => <Invites room={room} index={index} callback={reloadInvites} />)}
+            {invites.map((room, index) => <Invites room={room} index={index} callback={removeInviteByIndex} />)}
           </ul>
         </>
       )
@@ -91,12 +87,12 @@ const Profile = () => {
           <>
             {drafts?.length > 0 && <p>You have <strong>{drafts.length} draft{drafts.length > 1 && 's'}</strong>, which {drafts.length > 1 ? 'are' : 'is'} not publicly visible.</p>}
             <ul>
-              {spacesErr ? console.error(spacesErr) : drafts.map((space, index) => <><Projects space={space} visibility={space.visibility} index={index} reloadProjects={onPublish} /><hr /></>)
+              {spacesErr ? console.error(spacesErr) : drafts.map((space, index) => <><Projects space={space} visibility={space.visibility} index={index} reloadProjects={changeDraftToPublication} /><hr /></>)
               }
             </ul>
             {publish?.length > 0 && <p>You have <strong>{publish.length} published</strong> project{publish.length > 1 && 's'}, which {publish.length > 1 ? 'are' : 'is'} publicly visible.</p>}
             <ul>
-              {spacesErr ? console.error(spacesErr) : publish.map((space, index) => <><Projects space={space} visibility={space.published} index={index} reloadProjects={onRedact} /><hr /> </>)
+              {spacesErr ? console.error(spacesErr) : publish.map((space, index) => <><Projects space={space} visibility={space.published} index={index} reloadProjects={changePublicationToDraft} /><hr /> </>)
               }
             </ul>
           </>
