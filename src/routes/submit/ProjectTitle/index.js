@@ -47,9 +47,10 @@ const ProjectTitle = ({ joinedSpaces, title, projectSpace, callback }) => {
         }
         try {
             await matrixClient.createRoom(opts)
-                .then((response) => {
-                    history.push(`/submit/${response.room_id}`)
-                })
+                .then(async (response) => {
+                    await matrixClient.invite(response.room_id, process.env.REACT_APP_PROJECT_BOT_ACCOUNT)
+                    return response.room_id
+                }).then((res) => history.push(`/submit/${res}`))
         } catch (e) {
             console.log(e)
         } finally {

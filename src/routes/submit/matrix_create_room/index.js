@@ -6,6 +6,10 @@ const createBlock = async (e, content, number, space) => {
     e.preventDefault()
   }
 
+  const inviteBot = (roomId) => {
+    matrixClient.invite(roomId, process.env.REACT_APP_PROJECT_BOT_ACCOUNT)
+  }
+
   const opts = {
     name: (number) + '_' + content, // blocks[0] is the project space itself, therefore -1
     preset: 'public_chat',
@@ -49,6 +53,7 @@ const createBlock = async (e, content, number, space) => {
           const error = (data?.message) || res[1].status
           return Promise.reject(error)
         }
+        inviteBot(res[0])
         return res[0]
       })
     return room
