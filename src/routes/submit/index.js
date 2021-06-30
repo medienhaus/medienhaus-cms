@@ -40,8 +40,10 @@ const Submit = () => {
   }, [])
 
   const reloadProjects = (roomId) => {
+    // roomId is needed in order to invite collaborators to newly created rooms.
     reload()
     console.log("roomId = " + roomId);
+    // checking to see if the project is a collaboration, if so invite all collaborators and make them admin
     isCollab && roomId && inviteCollaborators(roomId)
     setUpdate(true)
   }
@@ -52,6 +54,7 @@ const Submit = () => {
     console.log(allCollaborators);
     //function to invite collaborators to newly created content rooms
     const setPower = async (userId) => {
+<<<<<<< HEAD
       matrixClient.getStateEvent(roomId, "m.room.power_levels", "").then(async (res) => {
         // after inviting the user, we promote them to moderator
         const powerEvent = new MatrixEvent({
@@ -65,6 +68,11 @@ const Submit = () => {
           console.error(err);
         }
       })
+=======
+      const stateEvent = matrixClient.getRoom(roomId)
+      console.log(stateEvent);
+      await matrixClient.setPowerLevel(roomId, userId, 50, stateEvent.currentState.getStateEvents('m.room.power_levels', ''))
+>>>>>>> 1ff9823daf1c5958e1b6ff6676d2a61340c6a259
     }
 
     allCollaborators.map(userId => matrixClient.invite(roomId, userId, () => console.log("invited " + userId)))
