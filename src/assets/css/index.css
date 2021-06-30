@@ -89,6 +89,11 @@ a:active {
   color: var(--color-fg);
 }
 
+code {
+  background-color: var(--color-lo);
+  padding: 0 calc(var(--margin) * 0.2);
+}
+
 em, i {
   font-style: italic;
 }
@@ -166,6 +171,15 @@ main {
   grid-row: 2;
   grid-column: 1;
   max-width: 55ch;
+}
+
+main a {
+  text-decoration: underline;
+}
+
+main ul {
+  list-style-type: "\2013\0020";
+  list-style-position: inside;
 }
 
 /* TODO */
@@ -541,6 +555,17 @@ button > #loading {
   margin: 0 auto;
   max-height: calc(var(--margin) * 1.15);
   max-width: calc(var(--margin) * 1.15);
+}
+
+#login form div:nth-of-type(1) div {
+  display: grid;
+  grid-gap: var(--margin);
+  grid-auto-flow: row;
+}
+
+#login label + *,
+#login ul > li + li {
+  margin-top: calc(var(--margin) * 0.5);
 }
 
 /* TODO editor */
@@ -1038,13 +1063,17 @@ button > #loading {
 
 /* 480px */
 @media (min-width: 30em) {
-  form div {
+  #login form div:nth-of-type(1) div {
+    grid-template-columns: auto 20ch;
+  }
+  /* TODO tools */
+  #tools div {
     display: grid;
     align-items: center;
     grid-gap: var(--margin);
     grid-template-columns: minmax(10ch, auto) 1fr;
   }
-  form div.grid {
+  #tools div.grid {
     grid-template-columns: repeat(4, minmax(0, 1fr));
   }
   /*
@@ -1056,7 +1085,7 @@ button > #loading {
 
 /* fallback for list-style-type: "<string>"; */
 @supports not (list-style-type: "\2013\0020") {
-  section ul li::before {
+  main ul li::before {
     content: "\2013\0020";
   }
 }

@@ -51,15 +51,19 @@ const Login = () => {
     <section id="login">
       <form onSubmit={handleSubmit(onSubmit)}>
         <div>
-          <label htmlFor="username">{t('username')}:</label>
-          <input name="username" type="text" placeholder={t('u.name')} value={name} onChange={changeName} /> {// {...register('username', { required: true })} />
-            // new version of react hook form kills typing if required, need to check whats going on
+          <label htmlFor="username">{t('username')}</label>
+          <div>
+            <input name="username" type="text" placeholder={t('u.name')} value={name} onChange={changeName} /> {// {...register('username', { required: true })} />
+            <select>
+              <option value="udk" select>@udk-berlin.de</option>
+              <option value="intra">@intra.udk-berlin.de</option>
+            </select>
           }
-
+          </div>
         </div>
         {errors.username && t('Username can\'t be empty.')}
         <div>
-          <label htmlFor="password">{t('password')}:</label>
+          <label htmlFor="password">{t('password')}</label>
           <input name="password" type="password" placeholder="" value={password} onChange={changePassword} /> {// {...register('password',{ required: true })} />
           }
         </div>
@@ -73,6 +77,7 @@ const Login = () => {
             <button name="submit" type="submit">LOGIN</button>
           )}
       </form>
+      <p>❗️ Your login <code>username</code> and <code>password</code> are the same as for your <code>@udk-berlin.de</code> or <code>@intra.udk-berlin.de</code> mail account. If you forgot your password or want to change it, please check the links below.</p>
       <ul>
         <li>
           <a href={process.env.REACT_APP_MEDIENHAUS_FRONTEND_LOGIN_FORGOT_PASSWORD} rel="external noopener noreferrer">
