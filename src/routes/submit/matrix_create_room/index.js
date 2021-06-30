@@ -6,8 +6,10 @@ const createBlock = async (e, content, number, space) => {
     e.preventDefault()
   }
 
-  const inviteBot = (roomId) => {
-    matrixClient.invite(roomId, process.env.REACT_APP_PROJECT_BOT_ACCOUNT)
+  const inviteBot = async (roomId) => {
+    await matrixClient.invite(roomId, process.env.REACT_APP_PROJECT_BOT_ACCOUNT)
+    const stateEvent = matrixClient.getRoom(roomId)
+    await matrixClient.setPowerLevel(roomId, process.env.REACT_APP_PROJECT_BOT_ACCOUNT, 100, stateEvent.currentState.getStateEvents('m.room.power_levels', ''))
   }
 
   const opts = {
@@ -54,6 +56,9 @@ const createBlock = async (e, content, number, space) => {
           return Promise.reject(error)
         }
         inviteBot(res[0])
+        // after inviting and promoting our bot, the user demotes themself to moderator
+        const stateEvent = matrixClient.getRoom(res[0])
+        await matrixClient.setPowerLevel(res[0], localStorage.getItem('mx_user_id'), 50, stateEvent.currentState.getStateEvents('m.room.power_levels', ''))
         return res[0]
       })
     return room

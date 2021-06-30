@@ -25,6 +25,11 @@ const ProjectTitle = ({ joinedSpaces, title, projectSpace, callback }) => {
     const createProject = async (e, title) => {
         e.preventDefault()
         setLoading(true)
+        const inviteBot = async (roomId) => {
+            await matrixClient.invite(roomId, process.env.REACT_APP_PROJECT_BOT_ACCOUNT)
+            const stateEvent = matrixClient.getRoom(roomId)
+            await matrixClient.setPowerLevel(roomId, process.env.REACT_APP_PROJECT_BOT_ACCOUNT, 100, stateEvent.currentState.getStateEvents('m.room.power_levels', ''))
+        }
         const opts = {
             preset: 'private_chat',
             name: title,
@@ -48,8 +53,13 @@ const ProjectTitle = ({ joinedSpaces, title, projectSpace, callback }) => {
         try {
             await matrixClient.createRoom(opts)
                 .then(async (response) => {
-                    await matrixClient.invite(response.room_id, process.env.REACT_APP_PROJECT_BOT_ACCOUNT)
+                    inviteBot(response.room_id)
                     return response.room_id
+                }).then(async (res) => {
+                    // after inviting and promoting our bot, the user demotes themself to moderator
+                    const stateEvent = matrixClient.getRoom(res)
+                    await matrixClient.setPowerLevel(res, localStorage.getItem('mx_user_id'), 50, stateEvent.currentState.getStateEvents('m.room.power_levels', ''))
+                    return res
                 }).then((res) => history.push(`/submit/${res}`))
         } catch (e) {
             console.log(e)
