@@ -12,7 +12,7 @@ const Profile = () => {
   const { joinedSpaces, spacesErr, fetchSpaces } = useJoinedSpaces(() => console.log(fetchSpaces || spacesErr))
   const matrixClient = Matrix.getMatrixClient()
   const [drafts, setDrafts] = useState([]);
-  const [publish, setPublish] = useState([]);
+  const [publications, setPublications] = useState([]);
   const [invites, setInvites] = useState([])
 
   useEffect(() => {
@@ -43,7 +43,7 @@ const Profile = () => {
 
   useEffect(() => {
     setDrafts(joinedSpaces?.filter(projectSpace => projectSpace.published === 'invite'))
-    setPublish(joinedSpaces?.filter(projectSpace => projectSpace.published === 'public'))
+    setPublications(joinedSpaces?.filter(projectSpace => projectSpace.published === 'public'))
   }, [joinedSpaces]);
 
 
@@ -57,13 +57,13 @@ const Profile = () => {
       space.published = 'invite'
       setDrafts(drafts => [...drafts, space])
     }
-    setPublish(publish => publish.filter((draft, i) => i !== index))
+    setPublications(publications => publications.filter((draft, i) => i !== index))
   }
 
   const changeDraftToPublication = (index, space, redact) => {
     if (!redact) {
       space.published = 'public'
-      setPublish(publish => [...publish, space])
+      setPublications(publications => [...publications, space])
     }
     setDrafts(drafts => drafts.filter((draft, i) => i !== index))
   }
@@ -90,9 +90,9 @@ const Profile = () => {
               {spacesErr ? console.error(spacesErr) : drafts.map((space, index) => <><Projects space={space} visibility={space.visibility} index={index} reloadProjects={changeDraftToPublication} /><hr /></>)
               }
             </ul>
-            {publish?.length > 0 && <p>You have <strong>{publish.length} published</strong> project{publish.length > 1 && 's'}, which {publish.length > 1 ? 'are' : 'is'} publicly visible.</p>}
+            {publications?.length > 0 && <p>You have <strong>{publications.length} published</strong> project{publications.length > 1 && 's'}, which {publications.length > 1 ? 'are' : 'is'} publicly visible.</p>}
             <ul>
-              {spacesErr ? console.error(spacesErr) : publish.map((space, index) => <><Projects space={space} visibility={space.published} index={index} reloadProjects={changePublicationToDraft} /><hr /> </>)
+              {spacesErr ? console.error(spacesErr) : publications.map((space, index) => <><Projects space={space} visibility={space.published} index={index} reloadProjects={changePublicationToDraft} /><hr /> </>)
               }
             </ul>
           </>
