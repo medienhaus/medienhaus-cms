@@ -180,6 +180,7 @@ const Submit = () => {
               <DisplayContent block={content} index={i} blocks={blocks} projectSpace={projectSpace} reloadProjects={reloadProjects} key={content + i} />
             )}
           <h3>Visibility (Draft/Published)</h3>
+          <p>Select if you want to save the information provided by you as a draft or if you are happy with it select to publish the project. You can change this at any time.</p>
           <PublishProject projectSpace={projectSpace} published={visibility} />
         </>
       )}

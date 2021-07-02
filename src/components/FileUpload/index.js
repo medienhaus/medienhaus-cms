@@ -30,7 +30,7 @@ const FileUpload = (props) => {
           <select id="license" name="license" defaultValue={''} value={license} onChange={(e) => setLicense(e.target.value)}>
             <option value="" disabled={true}>-- SELECT LICENSE --</option>
           </select>
-          <textarea type="text" placeholder="please describe the image with some words to enable visually impaired website visitors to comprehend what’s being shown here" />
+          <textarea placeholder="please describe the image with some words to enable visually impaired website visitors to comprehend what’s being shown here" />
 
 
           <button className="upload" onClick={(e) => props.handleSubmission(e, selectedFile, fileName)} disabled={!selectedFile.type.includes(props.fileType) || selectedFile.size > size || props.loading}>{props.loading ? <Loading /> : 'Upload'}</button>

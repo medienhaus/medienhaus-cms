@@ -2,13 +2,9 @@ import React, { useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import Matrix from '../../../Matrix'
 import { Loading } from '../../../components/loading'
-import LoadingSpinnerButton from '../../../components/LoadingSpinnerButton'
+import PublishProject from '../../submit/ProjectTitle/PublishProject'
 
 const Projects = ({ space, visibility, index, reloadProjects }) => {
-  const [responseFromPublish, setResponseFromPublish] = useState();
-  const [loading, setLoading] = useState(false);
-  const [visibilityFromDropdown, setVisibilityFromDropdown] = useState(visibility);
-  const [consent, setConsent] = useState(false);
   const history = useHistory()
   const matrixClient = Matrix.getMatrixClient()
 
@@ -79,32 +75,6 @@ const Projects = ({ space, visibility, index, reloadProjects }) => {
     )
   }
 
-  const onChangeVisibility = async () => {
-    setLoading(true)
-    const req = {
-      method: 'PUT',
-      headers: { Authorization: 'Bearer ' + localStorage.getItem('medienhaus_access_token') },
-      body: JSON.stringify({ join_rule: visibilityFromDropdown })
-    }
-    try {
-      fetch(process.env.REACT_APP_MATRIX_BASE_URL + `/_matrix/client/r0/rooms/${space.room_id}/state/m.room.join_rules/`, req)
-        .then(response => {
-          console.log(response)
-          if (response.ok) {
-            reloadProjects(index, space, false)
-            setLoading(false)
-          } else {
-            setResponseFromPublish('Oh no, something went wrong.')
-            setTimeout(() => {
-              setResponseFromPublish()
-            }, 3000)
-          }
-        })
-    } catch (err) {
-      console.error(err)
-    }
-  }
-
   console.log(space)
   return (
     <>
@@ -123,18 +93,10 @@ const Projects = ({ space, visibility, index, reloadProjects }) => {
 
           <button onClick={() => history.push(`/submit/${space.room_id}`)}>EDIT</button>
           <DeleteProjectButton roomId={space.room_id} name={space.name} />
-          <select name="visibility" id="visibility" value={visibilityFromDropdown} onChange={(e) => setVisibilityFromDropdown(e.target.value)}>
-            <option value="public">Public</option>
-            <option value="invite">Draft</option>
-          </select>
-          <LoadingSpinnerButton disabled={loading || !consent} onClick={onChangeVisibility}>SAVE</LoadingSpinnerButton>
-          {responseFromPublish}
+
         </div>
       </div>
-      <div>
-        <label htmlFor="checkbox">I hereby consent</label>
-        <input id="checkbox" name="checkbox" type="checkbox" value={consent} onChange={() => setConsent(consent => !consent)} />
-      </div>
+      <PublishProject projectSpace={space.room_id} published={visibility} />
     </>
   )
 }
