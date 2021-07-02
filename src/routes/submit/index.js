@@ -59,6 +59,7 @@ const Submit = () => {
         },
         );
         try {
+          // something here is going wrong
           await matrixClient.setPowerLevel(roomId, userId, 50, powerEvent)
         } catch (err) {
           console.error(err);

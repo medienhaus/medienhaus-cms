@@ -7,8 +7,11 @@ import LoadingSpinnerButton from '../../../components/LoadingSpinnerButton'
 const Projects = ({ space, visibility, index, reloadProjects }) => {
   const [responseFromPublish, setResponseFromPublish] = useState();
   const [loading, setLoading] = useState(false);
+  const [visibilityFromDropdown, setVisibilityFromDropdown] = useState(visibility);
   const history = useHistory()
   const matrixClient = Matrix.getMatrixClient()
+
+  console.log(visibility);
 
   const deleteProject = (e, project) => {
     e.preventDefault()
@@ -80,7 +83,7 @@ const Projects = ({ space, visibility, index, reloadProjects }) => {
     const req = {
       method: 'PUT',
       headers: { Authorization: 'Bearer ' + localStorage.getItem('medienhaus_access_token') },
-      body: JSON.stringify({ join_rule: visibility === 'public' ? 'invite' : 'world_readable' })
+      body: JSON.stringify({ join_rule: visibilityFromDropdown })
     }
     try {
       fetch(process.env.REACT_APP_MATRIX_BASE_URL + `/_matrix/client/r0/rooms/${space.room_id}/state/m.room.join_rules/`, req)
@@ -115,9 +118,13 @@ const Projects = ({ space, visibility, index, reloadProjects }) => {
       </ul>
       <div style={{ flexDirection: 'row', alignContent: 'space-around', padding: '30px' }}>
         <button onClick={() => history.push(`/submit/${space.room_id}`)}>EDIT</button>
-        <LoadingSpinnerButton disabled={loading} onClick={onChangeVisibility}>{loading ? <Loading /> : visibility === 'public' ? 'Redact' : 'Publish'}</LoadingSpinnerButton>
-        {responseFromPublish}
         <DeleteProjectButton roomId={space.room_id} name={space.name} />
+        <select name="visibility" id="visibility" value={visibilityFromDropdown} onChange={(e) => setVisibilityFromDropdown(e.target.value)}>
+          <option value="public">Public</option>
+          <option value="invite">Draft</option>
+        </select>
+        <LoadingSpinnerButton disabled={loading} onClick={onChangeVisibility}>SAVE</LoadingSpinnerButton>
+        {responseFromPublish}
       </div>
     </div>
   )
