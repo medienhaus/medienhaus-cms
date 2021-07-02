@@ -8,6 +8,7 @@ const Projects = ({ space, visibility, index, reloadProjects }) => {
   const [responseFromPublish, setResponseFromPublish] = useState();
   const [loading, setLoading] = useState(false);
   const [visibilityFromDropdown, setVisibilityFromDropdown] = useState(visibility);
+  const [consent, setConsent] = useState(false);
   const history = useHistory()
   const matrixClient = Matrix.getMatrixClient()
 
@@ -106,27 +107,35 @@ const Projects = ({ space, visibility, index, reloadProjects }) => {
 
   console.log(space)
   return (
-    <div style={{ display: 'flex' }}>
-      {space.avatar_url && <img style={{ marginRight: '30px' }} src={matrixClient.mxcUrlToHttp(space.avatar_url)} alt="project-visual-key" />}
-      <ul style={{ width: '100%' }}>
-        <li><strong>{space.name}</strong></li>
-        <li>Department: Gestaltung</li>
-        <li>Program: Visuelle Kommunikation</li>
-        <li>Division: New Media</li>
-        <li>Supervisor: Prof. Jussi Ängeslevä</li>
-        <li>Semester: Summer 2021</li>
-      </ul>
-      <div style={{ flexDirection: 'row', alignContent: 'space-around', padding: '30px' }}>
-        <button onClick={() => history.push(`/submit/${space.room_id}`)}>EDIT</button>
-        <DeleteProjectButton roomId={space.room_id} name={space.name} />
-        <select name="visibility" id="visibility" value={visibilityFromDropdown} onChange={(e) => setVisibilityFromDropdown(e.target.value)}>
-          <option value="public">Public</option>
-          <option value="invite">Draft</option>
-        </select>
-        <LoadingSpinnerButton disabled={loading} onClick={onChangeVisibility}>SAVE</LoadingSpinnerButton>
-        {responseFromPublish}
+    <>
+      <div style={{ display: 'flex' }}>
+        {space.avatar_url && <img style={{ marginRight: '30px' }} src={matrixClient.mxcUrlToHttp(space.avatar_url)} alt="project-visual-key" />}
+        <ul style={{ width: '100%' }}>
+          <li><strong>{space.name}</strong></li>
+          <li>Department: Gestaltung</li>
+          <li>Program: Visuelle Kommunikation</li>
+          <li>Division: New Media</li>
+          <li>Supervisor: Prof. Jussi Ängeslevä</li>
+          <li>Semester: Summer 2021</li>
+        </ul>
+
+        <div style={{ flexDirection: 'row', alignContent: 'space-around', padding: '30px' }}>
+
+          <button onClick={() => history.push(`/submit/${space.room_id}`)}>EDIT</button>
+          <DeleteProjectButton roomId={space.room_id} name={space.name} />
+          <select name="visibility" id="visibility" value={visibilityFromDropdown} onChange={(e) => setVisibilityFromDropdown(e.target.value)}>
+            <option value="public">Public</option>
+            <option value="invite">Draft</option>
+          </select>
+          <LoadingSpinnerButton disabled={loading || !consent} onClick={onChangeVisibility}>SAVE</LoadingSpinnerButton>
+          {responseFromPublish}
+        </div>
       </div>
-    </div>
+      <div>
+        <label htmlFor="checkbox">I hereby consent</label>
+        <input id="checkbox" name="checkbox" type="checkbox" value={consent} onChange={() => setConsent(state => !state)} />
+      </div>
+    </>
   )
 }
 export default Projects
