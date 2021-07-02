@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import Matrix from '../../../Matrix'
 import { Loading } from '../../../components/loading'
-import PublishProject from '../../submit/ProjectTitle/PublishProject'
+import PublishProject from '../../../components/PublishProject'
 
 const Projects = ({ space, visibility, index, reloadProjects }) => {
   const history = useHistory()

@@ -8,7 +8,7 @@ import DisplayContent from './DisplayContent'
 import AddContent from './AddContent'
 import ProjectImage from './ProjectImage'
 import ProjectTitle from './ProjectTitle'
-import PublishProject from './ProjectTitle/PublishProject'
+import PublishProject from '../../components/PublishProject'
 import { Loading } from '../../components/loading'
 import { MatrixEvent } from 'matrix-js-sdk'
 
