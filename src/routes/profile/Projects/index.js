@@ -133,7 +133,7 @@ const Projects = ({ space, visibility, index, reloadProjects }) => {
       </div>
       <div>
         <label htmlFor="checkbox">I hereby consent</label>
-        <input id="checkbox" name="checkbox" type="checkbox" value={consent} onChange={() => setConsent(state => !state)} />
+        <input id="checkbox" name="checkbox" type="checkbox" value={consent} onChange={() => setConsent(consent => !consent)} />
       </div>
     </>
   )

@@ -78,6 +78,7 @@ const ProjectTitle = ({ joinedSpaces, title, projectSpace, callback }) => {
     return (
         <>
             <div>
+                <p>Please provide just the project title without any year or artist name.</p>
                 <label htmlFor="title">Project Title</label>
                 <input id="title" name="title" placeholder="project title" type="text" value={projectTitle} disabled={title && !edit} onChange={(e) => setProjectTitle(e.target.value)} />
             </div>

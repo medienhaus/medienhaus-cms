@@ -21,6 +21,7 @@ const Submit = () => {
   const [blocks, setBlocks] = useState([])
   const [update, setUpdate] = useState(false)
   const [isCollab, setIsCollab] = useState(false);
+  const [contentLang, setContentLang] = useState('en');
   const matrixClient = Matrix.getMatrixClient()
   const params = useParams()
 
@@ -152,7 +153,8 @@ const Submit = () => {
 
   return (
     <div>
-
+      <p><strong>Welcome to your project!</strong></p>
+      <p>This is the project page. Please add in which context the project happend, projectname and descriptive text and images. If you want to continue at a later point in time, you can save the project as a draft and find it in your collection under “drafts”.</p>
       <h3>Project Title / Collaborators / Credits</h3>
       <ProjectTitle joinedSpaces={joinedSpaces} title={title} projectSpace={projectSpace} callback={changeTitle} />
       {projectSpace && (
@@ -163,6 +165,15 @@ const Submit = () => {
           <h3>Project Image</h3>
           {loading ? <Loading /> : <ProjectImage projectSpace={projectSpace} projectImage={projectImage} changeProjectImage={changeProjectImage} />}
           <h3>Content</h3>
+          <p>You can add elements like text, video and pictures to the main body of your project by using the “+” on the right side.
+            One block of text is mandatory to describe your project.
+            When using the text block you can format text by highlighting it.
+            You can use the arrows on the left to rearrange exsisting blocks.
+            You can provide information in multiple languages by choosing in the dropdown below.</p>
+          <select id="subject" name="subject" defaultValue={''} value={contentLang} onChange={(e) => setContentLang(e.target.value)}>
+            <option value="de">DE - German</option>
+            <option value="en" >EN -English</option>
+          </select>
           {blocks.length === 0
             ? <AddContent number={0} projectSpace={projectSpace} blocks={blocks} reloadProjects={reloadProjects} />
             : blocks.map((content, i) =>
