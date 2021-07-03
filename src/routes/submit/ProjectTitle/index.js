@@ -21,7 +21,8 @@ const ProjectTitle = ({ joinedSpaces, title, projectSpace, callback }) => {
     title === '' && setNewProject(true)
     // eslint-disable-next-line
     }, [title]);
-
+  console.log('title = ' + title)
+  console.log('oldTitle = ' + oldTitle)
   const createProject = async (e, title) => {
     e.preventDefault()
     setLoading(true)
@@ -84,7 +85,7 @@ const ProjectTitle = ({ joinedSpaces, title, projectSpace, callback }) => {
                 <span>{projectTitle.length + '/100'}</span>
             </div>
             <div>
-                {title && edit && <LoadingSpinnerButton disabled={projectTitle.length > 100} onClick={async () => {
+                {title && edit && (projectTitle !== oldTitle) && <LoadingSpinnerButton disabled={projectTitle.length > 100} onClick={async () => {
                   if (projectTitle.length < 101) {
                     try {
                       await matrixClient.setRoomName(projectSpace, projectTitle).then(() => callback(projectTitle))
@@ -98,7 +99,7 @@ const ProjectTitle = ({ joinedSpaces, title, projectSpace, callback }) => {
                   }
                 }}>Save</LoadingSpinnerButton>}
 
-                {edit && <input id="submit" name="submit" type="submit" value="Cancel" onClick={(e) => { e.preventDefault(); setEdit(false); setProjectTitle(oldTitle) }} />}
+                {edit && (projectTitle !== oldTitle) && <input id="submit" name="submit" type="submit" value="Cancel" onClick={(e) => { e.preventDefault(); setEdit(false); setProjectTitle(oldTitle) }} />}
                 {loading
                   ? <Loading />
                   : !title && <input
