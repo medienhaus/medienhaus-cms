@@ -116,7 +116,6 @@ const Submit = () => {
     })
     matrixClient.on('Room.timeline', function (event, room, toStartOfTimeline) {
       if (event.event.type === 'm.room.message' && blocks?.filter(({ roomId }) => event.event.room_id.includes(roomId)) && event.event.sender !== localStorage.getItem('mx_user_id')) {
-        debugger
         console.log(event);
         setUpdate(true)
       }
