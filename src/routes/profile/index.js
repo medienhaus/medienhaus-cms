@@ -11,15 +11,15 @@ const Profile = () => {
   const profile = auth.user
   const { joinedSpaces, spacesErr, fetchSpaces } = useJoinedSpaces(() => console.log(fetchSpaces || spacesErr))
   const matrixClient = Matrix.getMatrixClient()
-  const [drafts, setDrafts] = useState([]);
-  const [publications, setPublications] = useState([]);
+  const [drafts, setDrafts] = useState([])
+  const [publications, setPublications] = useState([])
   const [invites, setInvites] = useState({})
 
   // @TODO: Check for existing invites on page load
 
   // Listen for room events to populate our "pending invites" state
   useEffect(() => {
-    async function handleRoomEvent(room) {
+    async function handleRoomEvent (room) {
       // Ignore event if this is not about a space
       if (room.getType() !== 'm.space') return
 
@@ -50,8 +50,7 @@ const Profile = () => {
   useEffect(() => {
     setDrafts(joinedSpaces?.filter(projectSpace => projectSpace.published === 'invite'))
     setPublications(joinedSpaces?.filter(projectSpace => projectSpace.published === 'public'))
-  }, [joinedSpaces]);
-
+  }, [joinedSpaces])
 
   const removeInviteByIndex = (index) => {
     // @TODO: This function is currently not being used. But needs to be refactored to take the room ID as index.
@@ -79,7 +78,9 @@ const Profile = () => {
     <div>
       <p>Hello <strong>{profile.displayname}</strong>,</p>
       <p>welcome to your profile for the Rundgang 2021.</p>
-      {!invites ? <Loading /> : Object.keys(invites).length > 0 && (
+      {!invites
+        ? <Loading />
+        : Object.keys(invites).length > 0 && (
         <>
           <p>You have been invited to join the following project{invites.length > 1 && 's'}:</p>
           <ul>
@@ -90,7 +91,7 @@ const Profile = () => {
             ))}
           </ul>
         </>
-      )
+        )
       }
       {fetchSpaces
         ? <Loading />
@@ -107,9 +108,9 @@ const Profile = () => {
               }
             </ul>
           </>
-        )}
+          )}
     </div>
   )
-} 
+}
 
 export default Profile

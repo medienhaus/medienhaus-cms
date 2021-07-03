@@ -39,8 +39,6 @@ const Collaborators = ({ projectSpace, blocks, title, joinedSpaces, startListeni
     }
   }
 
-
-
   const fetchUsers = async (e, search) => {
     e.preventDefault()
     setFetchingUsers(true)

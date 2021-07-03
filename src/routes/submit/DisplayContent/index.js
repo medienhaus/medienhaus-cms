@@ -28,7 +28,7 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadProjects }) 
   const [saved, setSaved] = useState(false)
   const [deleting, setDeleting] = useState(false)
   let { cms, error, fetching } = FetchCms(block.room_id)
-  cms = cms[0];
+  cms = cms[0]
   const json = JSON.parse(block.topic)
   const matrixClient = Matrix.getMatrixClient()
 
@@ -38,7 +38,7 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadProjects }) 
     try {
       if (json.type === 'ul' || json.type === 'ol') {
         const list = JSON.parse(localStorage.getItem(roomId)).map(li => li.text).join('\n')
-        console.log(list);
+        console.log(list)
         const save = await matrixClient.sendMessage(roomId, {
           body: list,
           format: 'org.matrix.custom.html',
@@ -51,7 +51,6 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadProjects }) 
             setSaved()
           }, 1000)
         }
-
       } else if (json.type === 'code') {
         const save = await matrixClient.sendMessage(roomId, {
           body: localStorage.getItem(roomId),
@@ -65,9 +64,7 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadProjects }) 
             setSaved()
           }, 1000)
         }
-
-      }
-      else {
+      } else {
         const save = await matrixClient.sendMessage(roomId, {
           body: localStorage.getItem(roomId),
           format: 'org.matrix.custom.html',
@@ -159,12 +156,12 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadProjects }) 
   }
 
   if (fetching || loading) {
-    return <div style={{ height: '120px' }}><Loading /></div>;
+    return <div style={{ height: '120px' }}><Loading /></div>
   }
 
   if (error) {
-    console.error(error);
-    return;
+    console.error(error)
+    return
   }
 
   return (
@@ -174,16 +171,25 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadProjects }) 
           <LoadingSpinnerButton key={'up_' + block.room_id} disabled={index < 2} onClick={() => changeOrder(block.room_id, block.name, -1)}>↑</LoadingSpinnerButton>
           <figure className="icon-bg">
             {
-              json.type === 'heading' ? <HeadingIcon fill="var(--color-fg)" /> :
-                json.type === 'audio' ? <AudioIcon fill="var(--color-fg)" /> :
-                  json.type === 'image' ? <ImageIcon fill="var(--color-fg)" /> :
-                    json.type === 'ul' ? <UlIcon fill="var(--color-fg)" /> :
-                      json.type === 'ol' ? <OlIcon fill="var(--color-fg)" /> :
-                        json.type === 'quote' ? <QuoteIcon fill="var(--color-fg)" /> :
-                          json.type === 'code' ? <CodeIcon fill="var(--color-fg)" /> :
-                            json.type === 'video' ? <VideoIcon fill="var(--color-fg)" /> :
-                              json.type === 'playlist' ? <PlaylistIcon fill="var(--color-fg)" /> :
-                                <TextIcon fill="var(--color-fg)" />
+              json.type === 'heading'
+                ? <HeadingIcon fill="var(--color-fg)" />
+                : json.type === 'audio'
+                  ? <AudioIcon fill="var(--color-fg)" />
+                  : json.type === 'image'
+                    ? <ImageIcon fill="var(--color-fg)" />
+                    : json.type === 'ul'
+                      ? <UlIcon fill="var(--color-fg)" />
+                      : json.type === 'ol'
+                        ? <OlIcon fill="var(--color-fg)" />
+                        : json.type === 'quote'
+                          ? <QuoteIcon fill="var(--color-fg)" />
+                          : json.type === 'code'
+                            ? <CodeIcon fill="var(--color-fg)" />
+                            : json.type === 'video'
+                              ? <VideoIcon fill="var(--color-fg)" />
+                              : json.type === 'playlist'
+                                ? <PlaylistIcon fill="var(--color-fg)" />
+                                : <TextIcon fill="var(--color-fg)" />
             }
           </figure>
           <LoadingSpinnerButton key={'down_' + block.room_id} disabled={index === blocks.length - 1 || index === 0} onClick={() => changeOrder(block.room_id, block.name, 1)}>↓</LoadingSpinnerButton>
@@ -197,23 +203,24 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadProjects }) 
               </audio>
               { /* TODO why section? */}
               <section id="audio-title">{cms.body}</section>
-            </div> :
-            json.type === 'ul' ?
-              <List onSave={() => onSave(block.room_id)} storage={(list) => localStorage.setItem(block.room_id, list)} populated={cms?.body} type="ul" /> :
-              json.type === 'ol' ?
-                <List onSave={() => onSave(block.room_id)} storage={(list) => localStorage.setItem(block.room_id, list)} populated={cms?.body} type="ol" />
-                : json.type === 'code' ?
-                  <Code onSave={() => onSave(block.room_id)} storage={(code) => localStorage.setItem(block.room_id, code)} saved={saved} content={cms?.body} />
-                  : (json.type === 'video' || json.type === 'livestream' || json.type === 'playlist') ? (
+            </div>
+            : json.type === 'ul'
+              ? <List onSave={() => onSave(block.room_id)} storage={(list) => localStorage.setItem(block.room_id, list)} populated={cms?.body} type="ul" />
+              : json.type === 'ol'
+                ? <List onSave={() => onSave(block.room_id)} storage={(list) => localStorage.setItem(block.room_id, list)} populated={cms?.body} type="ol" />
+                : json.type === 'code'
+                  ? <Code onSave={() => onSave(block.room_id)} storage={(code) => localStorage.setItem(block.room_id, code)} saved={saved} content={cms?.body} />
+                  : (json.type === 'video' || json.type === 'livestream' || json.type === 'playlist')
+                      ? (
                     <iframe src={`https://stream.udk-berlin.de/${(json.type === 'playlist' ? 'video-playlists' : 'videos')}/embed/${cms?.body}`}
                       frameBorder="0"
                       title={cms?.body}
                       sandbox="allow-same-origin allow-scripts"
                       allowFullScreen="allowfullscreen"
-                      style={{ width: '100%', aspectRatio: '16 / 9', border: `calc(var(--margin) * 0.2) solid var(--color-fg)` }}
+                      style={{ width: '100%', aspectRatio: '16 / 9', border: 'calc(var(--margin) * 0.2) solid var(--color-fg)' }}
                     />
-                  ) :
-                    <div className="center">
+                        )
+                      : <div className="center">
                       <Editor
                         dark={window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches}
                         defaultValue={cms?.body}

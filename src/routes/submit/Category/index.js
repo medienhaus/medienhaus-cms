@@ -5,11 +5,10 @@ import { Loading } from '../../../components/loading'
 
 const Category = ({ title, projectSpace }) => {
   const [subject, setSubject] = useState('')
-  const [room, setRoom] = useState('');
+  const [room, setRoom] = useState('')
   const [loading, setLoading] = useState(false)
-  const [member, setMember] = useState(false);
+  const [member, setMember] = useState(false)
   const matrixClient = Matrix.getMatrixClient()
-
 
   const isMember = async (e) => {
     e.preventDefault()
@@ -21,7 +20,7 @@ const Category = ({ title, projectSpace }) => {
       await matrixClient.members(room.space + localStorage.getItem('mx_home_server')).catch(err => console.error(err)).then(res => {
         setMember(res.chunk.map(a => a.sender).includes(localStorage.getItem('mx_user_id')))
       })
-      console.log(member);
+      console.log(member)
     } catch (err) {
       console.error(err)
       setMember(false)
@@ -33,7 +32,6 @@ const Category = ({ title, projectSpace }) => {
     setSubject('')
   }
 
-
   return (
     <div>
       <p>In which main context do you want to publish your project? This information is necessary for showing your project in the right place on the udk rundgang website.</p>
@@ -41,9 +39,9 @@ const Category = ({ title, projectSpace }) => {
       <label htmlFor="subject">Studiengang</label>
       <select id="subject" name="subject" defaultValue={''} value={subject} onChange={(e) => isMember(e)}>
         <option value="" disabled={true} >Select Context</option>
-        <option value={JSON.stringify({ knock: "!MNbLTPjDmMMggNiAqF:", space: "!jlCZIPgvqyfpnbXbKo:", name: "Designtechniken Modedesign: Schnittkonstruktion" })}>Designtechniken Modedesign: Schnittkonstruktion</option>
-        <option value={JSON.stringify({ knock: "!CHZoKrkkFkrkXwRxCd:", space: "!qWnQdvExJViExqebYz:", name: "Basisprojekt Modedesign: HOODIE GUT, ALLES GUT" })}>Basisprojekt Modedesign: HOODIE GUT, ALLES GUT</option>
-        <option value={JSON.stringify({ knock: "!dDHUptRvvBuyxNAjBq:", space: "!KKkTWxprXLKkdZypBe:", name: "Basisprojekt Produktdesign: fixperts in quarantineg" })}>Basisprojekt Produktdesign: fixperts in quarantine</option>
+        <option value={JSON.stringify({ knock: '!MNbLTPjDmMMggNiAqF:', space: '!jlCZIPgvqyfpnbXbKo:', name: 'Designtechniken Modedesign: Schnittkonstruktion' })}>Designtechniken Modedesign: Schnittkonstruktion</option>
+        <option value={JSON.stringify({ knock: '!CHZoKrkkFkrkXwRxCd:', space: '!qWnQdvExJViExqebYz:', name: 'Basisprojekt Modedesign: HOODIE GUT, ALLES GUT' })}>Basisprojekt Modedesign: HOODIE GUT, ALLES GUT</option>
+        <option value={JSON.stringify({ knock: '!dDHUptRvvBuyxNAjBq:', space: '!KKkTWxprXLKkdZypBe:', name: 'Basisprojekt Produktdesign: fixperts in quarantineg' })}>Basisprojekt Produktdesign: fixperts in quarantine</option>
       </select>
       {loading && <Loading />}
       {subject !== '' && !member && <Knock room={room} callback={callback} />}

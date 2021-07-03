@@ -4,7 +4,7 @@ import { Loading } from '../../components/loading'
 const FileUpload = (props) => {
   const [selectedFile, setSelectedFile] = useState()
   const [fileName, setFileName] = useState('')
-  const [license, setLicense] = useState('');
+  const [license, setLicense] = useState('')
 
   const size = props.fileType === 'image' ? 5000000 : 25000000
 
@@ -31,7 +31,6 @@ const FileUpload = (props) => {
             <option value="" disabled={true}>-- SELECT LICENSE --</option>
           </select>
           <textarea placeholder="please describe the image with some words to enable visually impaired website visitors to comprehend what’s being shown here" />
-
 
           <button className="upload" onClick={(e) => props.handleSubmission(e, selectedFile, fileName)} disabled={!selectedFile.type.includes(props.fileType) || selectedFile.size > size || props.loading}>{props.loading ? <Loading /> : 'Upload'}</button>
           {selectedFile.type.includes(props.fileType) || <section>Please select an {props.fileType} file.</section>}

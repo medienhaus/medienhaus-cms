@@ -42,7 +42,7 @@ const ProjectImage = ({ projectSpace, projectImage, changeProjectImage }) => {
           <>
             Add a project image <FileUpload fileType={'image'} handleSubmission={handleSubmission} loading={loading} />
           </>
-        )}
+          )}
     </div>
   )
 }

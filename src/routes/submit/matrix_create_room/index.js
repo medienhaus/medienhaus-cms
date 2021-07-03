@@ -24,20 +24,20 @@ const createBlock = async (e, content, number, space) => {
       content: { history_visibility: 'world_readable' }
     }],
     power_level_content_override: {
-      "ban": 50,
-      "events": {
-        "m.room.name": 50,
-        "m.room.power_levels": 50
+      ban: 50,
+      events: {
+        'm.room.name': 50,
+        'm.room.power_levels': 50
       },
-      "events_default": 0,
-      "invite": 50,
-      "kick": 50,
-      "notifications": {
-        "room": 20
+      events_default: 0,
+      invite: 50,
+      kick: 50,
+      notifications: {
+        room: 20
       },
-      "redact": 50,
-      "state_default": 50,
-      "users_default": 0
+      redact: 50,
+      state_default: 50,
+      users_default: 0
 
     }
   }
@@ -55,9 +55,9 @@ const createBlock = async (e, content, number, space) => {
   try {
     const room = await matrixClient.createRoom(opts)
       .then(async (res) => {
-        const room_id = res.room_id
-        const response = await fetch(process.env.REACT_APP_MATRIX_BASE_URL + `/_matrix/client/r0/rooms/${space}/state/m.space.child/${room_id}`, req)
-        return [room_id, response]
+        const roomId = res.room_id
+        const response = await fetch(process.env.REACT_APP_MATRIX_BASE_URL + `/_matrix/client/r0/rooms/${space}/state/m.space.child/${roomId}`, req)
+        return [roomId, response]
       })
       .then(async (res) => {
         const data = await res[1].json()
