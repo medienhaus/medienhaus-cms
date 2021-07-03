@@ -774,11 +774,13 @@ button > #loading {
   text-overflow: ellipsis;
 }
 
+/*
 .project .right {
   display: grid;
   grid-gap: var(--margin);
   grid-template-rows: repeat(3, 2rem);
 }
+*/
 
 .project :nth-child(3) {
   grid-column: 3;
