@@ -635,7 +635,14 @@ button > #loading {
   border-style: solid;
   border-radius: unset;
   border-width: calc(var(--margin) * 0.2);
+}
+
+.editor .center > div {
   padding: 0 calc(var(--margin) * 0.4);
+}
+
+.editor .center div {
+  height: 100%;
 }
 
 .editor .right > :only-child {
