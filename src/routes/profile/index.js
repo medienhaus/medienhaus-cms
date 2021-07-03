@@ -13,19 +13,31 @@ const Profile = () => {
   const matrixClient = Matrix.getMatrixClient()
   const [drafts, setDrafts] = useState([]);
   const [publications, setPublications] = useState([]);
-  const [invites, setInvites] = useState([])
+  const [invites, setInvites] = useState({})
 
-  // Listen to room events to populate our "pending invites" state
+  // @TODO: Check for existing invites on page load
+
+  // Listen for room events to populate our "pending invites" state
   useEffect(() => {
     async function handleRoomEvent(room) {
-      if (room.getMyMembership() === 'invite') {
-        const isRoomEmpty = await room._loadMembersFromServer()
-        isRoomEmpty.length > 1 && room.getType() === 'm.space' && setInvites(invites => invites.concat({
-          name: room.name,
-          id: room.roomId,
-          membership: room._selfMembership
-        }))
+      if (room.getMyMembership() !== 'invite' || room.getType() !== 'm.space') {
+        // Ignore event if this is not about an invite for a space
+        return
       }
+      const roomMembers = await room._loadMembersFromServer()
+      if (roomMembers.length < 1) {
+        // Ignore this event if it's for an empty room
+        return
+      }
+
+      setInvites(invites => invites.assign({
+        [room.roomId]:
+          {
+            name: room.name,
+            id: room.roomId,
+            membership: room._selfMembership
+          }
+      }))
     }
     matrixClient.on('Room', handleRoomEvent)
 
@@ -42,7 +54,8 @@ const Profile = () => {
 
 
   const removeInviteByIndex = (index) => {
-    setInvites(invites => invites.filter((invite, i) => i !== index))
+    // @TODO: This function is currently not being used. But needs to be refactored to take the room ID as index.
+    // setInvites(invites => invites.filter((invite, i) => i !== index))
   }
 
   const changePublicationToDraft = (index, space, redact) => {
