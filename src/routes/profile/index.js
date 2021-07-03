@@ -15,16 +15,23 @@ const Profile = () => {
   const [publications, setPublications] = useState([]);
   const [invites, setInvites] = useState([])
 
-  // Problematic: This event listener needs to be unset when navigating away from the profile page
-  matrixClient.on('Room', async (room) => {
-    if (room.getMyMembership() === 'invite') {
-      console.log(room)
-      const isRoomEmpty = await room._loadMembersFromServer()
-      isRoomEmpty.length > 1 && room.getType() === 'm.space' && setInvites(invites => invites.concat({
-        name: room.name,
-        id: room.roomId,
-        membership: room._selfMembership
-      }))
+  // Listen to room events to populate our "pending invites" state
+  useEffect(() => {
+    async function handleRoomEvent(room) {
+      if (room.getMyMembership() === 'invite') {
+        const isRoomEmpty = await room._loadMembersFromServer()
+        isRoomEmpty.length > 1 && room.getType() === 'm.space' && setInvites(invites => invites.concat({
+          name: room.name,
+          id: room.roomId,
+          membership: room._selfMembership
+        }))
+      }
+    }
+    matrixClient.on('Room', handleRoomEvent)
+
+    // When navigating away from /profile we want to stop listening for those room events again
+    return () => {
+      matrixClient.removeListener('Room', handleRoomEvent)
     }
   })
 
