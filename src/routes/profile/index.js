@@ -77,7 +77,7 @@ const Profile = () => {
   return (
     <div>
       <p>Hello <strong>{profile.displayname}</strong>,</p>
-      <p>welcome to your profile for the Rundgang 2021.</p>
+      <p>welcome to the content management system for Rundgang 2021.</p>
       {!invites
         ? <Loading />
         : Object.keys(invites).length > 0 && (
@@ -98,15 +98,15 @@ const Profile = () => {
         : (
           <>
             {drafts?.length > 0 && <p>You have <strong>{drafts.length} draft{drafts.length > 1 && 's'}</strong>, which {drafts.length > 1 ? 'are' : 'is'} not publicly visible.</p>}
-            <ul>
+            <section className="draft">
               {spacesErr ? console.error(spacesErr) : drafts.map((space, index) => <><Projects space={space} visibility={space.published} index={index} reloadProjects={changeDraftToPublication} /><hr /></>)
               }
-            </ul>
+            </section>
             {publications?.length > 0 && <p>You have <strong>{publications.length} published</strong> project{publications.length > 1 && 's'}, which {publications.length > 1 ? 'are' : 'is'} publicly visible.</p>}
-            <ul>
+            <section className="public">
               {spacesErr ? console.error(spacesErr) : publications.map((space, index) => <><Projects space={space} visibility={space.published} index={index} reloadProjects={changePublicationToDraft} /><hr /> </>)
               }
-            </ul>
+            </section>
           </>
           )}
     </div>

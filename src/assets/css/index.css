@@ -110,6 +110,14 @@ h3 {
   text-decoration: underline;
 }
 
+hr {
+  border-color: var(--color-fg);
+  border-radius: unset;
+  border-style: solid;
+  border-width: calc(var(--margin) * 0.05);
+  margin: var(--margin) 0;
+}
+
 strong, b {
   font-weight: bold;
 }
@@ -132,6 +140,7 @@ a[rel~="external"]::after {
 
 /* TODO */
 img {
+  object-fit: cover;
   width: 100%
 }
 
@@ -516,6 +525,7 @@ select {
   outline: none;
   padding: calc(var(--margin) * 0.2);
   text-overflow: ellipsis;
+  width: 100%;
 }
 
 select:-moz-focusring {
@@ -641,6 +651,10 @@ button > #loading {
   padding: 0 calc(var(--margin) * 0.4);
 }
 
+.editor figure.center {
+  font-size: 0;
+}
+
 .editor .center div {
   height: 100%;
 }
@@ -722,6 +736,64 @@ button > #loading {
   grid-column: 1 / -1;
   grid-row: 3;
   margin-top: var(--margin);
+}
+
+.project {
+  display: grid;
+  grid-template-columns: calc(var(--margin) * 8) auto 8ch;
+  grid-gap: var(--margin);
+}
+
+.project figure.left  {
+  font-size: 0;
+}
+
+.project .left img,
+.project .center {
+  border-color: var(--color-fg);
+  border-style: solid;
+  border-radius: unset;
+  border-width: calc(var(--margin) * 0.2);
+  height: calc(var(--margin) * 8);
+}
+
+/*
+.project .center {
+  height: calc(var(--margin) * 6);
+}
+*/
+
+.project .center p {
+  overflow: hidden;
+  padding: calc(var(--margin) * 0.2) calc(var(--margin) * 0.4);
+  text-overflow: ellipsis;
+}
+
+.project .right {
+  display: grid;
+  grid-template-rows: repeat(3, 2rem);
+  grid-gap: var(--margin);
+}
+
+.project .below {
+  display: grid;
+  grid-column: 1 / -1;
+  grid-auto-flow: row;
+  grid-gap: var(--margin);
+}
+
+.project .below div {
+  display: grid;
+  grid-template-columns: 2rem auto;
+  grid-gap: var(--margin);
+}
+
+.project .below div > :nth-child(1) {
+  grid-column: 1;
+}
+
+.project .below div > :nth-child(2) {
+  grid-column: 2;
 }
 
 /*

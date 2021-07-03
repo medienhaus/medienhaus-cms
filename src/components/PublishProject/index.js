@@ -49,30 +49,27 @@ const PublishProject = ({ space, published, index, callback }) => {
   }
 
   return (
-        <div>
-            <div>
-              <select id="visibility" name="visibility" value={visibility} onChange={(e) => {
-                setVisibility(e.target.value)
-                e.target.value === 'public'
-                  ? setShowConsentBox(true)
-                  : setShowConsentBox(false)
-                setShowSaveButton(true)
-                setConsent(false)
-              }} onBlur={(e) => { setVisibility(e.target.value) }}>
-                    <option value="invite">Draft</option>
-                    <option value="public">Public</option>
-                </select>
-            </div>
-            <div>
-                {showSaveButton && <LoadingSpinnerButton disabled={(!consent && visibility === 'public')} onClick={onChangeVisibility}>SAVE</LoadingSpinnerButton>}
-                {userFeedback && <p>{userFeedback}</p>}
-                {showConsentBox && <div >
-                    <label htmlFor="checkbox">I hereby consent</label>
-                    <input id="checkbox" name="checkbox" type="checkbox" value={consent} onChange={() => setConsent(consent => !consent)} />
-                </div>}
-            </div>
-        </div>
-
+    <>
+      <select id="visibility" name="visibility" value={visibility} onChange={(e) => {
+        setVisibility(e.target.value)
+        e.target.value === 'public'
+          ? setShowConsentBox(true)
+          : setShowConsentBox(false)
+        setShowSaveButton(true)
+        setConsent(false)
+      }} onBlur={(e) => { setVisibility(e.target.value) }}>
+            <option value="invite">Draft</option>
+            <option value="public">Public</option>
+      </select>
+      <div>
+        {userFeedback && <p>{userFeedback}</p>}
+        {showConsentBox && <div>
+          <input id="checkbox" name="checkbox" type="checkbox" value={consent} onChange={() => setConsent(consent => !consent)} />
+          <label htmlFor="checkbox">I hereby consent that I own the rights to the uploaded content and am aware of the content violation policy.</label>
+        </div>}
+        {showSaveButton && <LoadingSpinnerButton disabled={(!consent && visibility === 'public')} onClick={onChangeVisibility}>SAVE</LoadingSpinnerButton>}
+      </div>
+    </>
   )
 }
 
