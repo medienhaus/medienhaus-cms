@@ -35,7 +35,7 @@ const ProjectImage = ({ projectSpace, projectImage, changeProjectImage }) => {
       {projectImage
         ? <>
           <img src={matrixClient.mxcUrlToHttp(projectImage)} alt="Project-key-visual" />
-          <button onClick={e => { e.preventDefault(); setEdit(edit => !edit) }}>CHANGE</button>
+          <button onClick={e => { e.preventDefault(); setEdit(edit => !edit) }}>{edit ? 'CANCEL' : 'CHANGE'}</button>
           {edit && <FileUpload fileType={'image'} handleSubmission={handleSubmission} loading={loading} />}
         </>
         : (

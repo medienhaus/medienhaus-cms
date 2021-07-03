@@ -7,7 +7,7 @@ const PublishProject = ({ space, published, index, callback }) => {
   const [showConsentBox, setShowConsentBox] = useState(false)
   const [showSaveButton, setShowSaveButton] = useState(false)
   const [consent, setConsent] = useState(false)
-  console.log(space)
+
   useEffect(() => {
     setVisibility(published)
   }, [published])
