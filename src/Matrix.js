@@ -43,6 +43,10 @@ class Matrix {
       throw error
     })
   }
+
+  startSync() {
+    this.matrixClient.startClient()
+  }
 }
 
 export default new Matrix()

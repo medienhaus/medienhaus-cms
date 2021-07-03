@@ -3,7 +3,7 @@ import LoadingSpinnerButton from "../LoadingSpinnerButton"
 
 
 const PublishProject = ({ projectSpace, published }) => {
-    const [response, setResponse] = useState()
+    const [userFeedback, setUserFeedback] = useState()
     const [visibility, setVisibility] = useState(published);
     const [consent, setConsent] = useState(false);
 
@@ -19,19 +19,18 @@ const PublishProject = ({ projectSpace, published }) => {
             body: JSON.stringify({ join_rule: visibility === 'public' ? 'public' : 'invite' })
         }
         try {
-            // matrixClient.sendEvent(projectSpace, "m.room.join_rules", {"join_rule": visibility === "public" ? 'public' : 'invite'} ).then((res) => console.log(res))
-            fetch(process.env.REACT_APP_MATRIX_BASE_URL + `/_matrix/client/r0/rooms/${projectSpace}/state/m.room.join_rules/`, req)
+            await fetch(process.env.REACT_APP_MATRIX_BASE_URL + `/_matrix/client/r0/rooms/${projectSpace}/state/m.room.join_rules/`, req)
                 .then(response => {
                     console.log(response)
                     if (response.ok) {
-                        setResponse('Changed successfully!')
+                        setUserFeedback('Changed successfully!')
                         setTimeout(() => {
-                            setResponse()
+                            setUserFeedback()
                         }, 3000)
                     } else {
-                        setResponse('Oh no, something went wrong.')
+                        setUserFeedback('Oh no, something went wrong.')
                         setTimeout(() => {
-                            setResponse()
+                            setUserFeedback()
                         }, 3000)
                     }
                 })
@@ -43,14 +42,14 @@ const PublishProject = ({ projectSpace, published }) => {
     return (
         <div>
             <div>
-                <select name="visibility" id="visibility" value={visibility} onChange={(e) => setVisibility(e.target.value)}>
-                    <option value="public">Public</option>
+                <select id="visibility" name="visibility" value={visibility} onChange={(e) => { setVisibility(e.target.value) }} onBlur={(e) => { setVisibility(e.target.value) }}>
                     <option value="invite">Draft</option>
+                    <option value="public">Public</option>
                 </select>
             </div>
             <div>
                 <LoadingSpinnerButton disabled={!consent} onClick={onChangeVisibility}>SAVE</LoadingSpinnerButton>
-                {response && <p>{response}</p>}
+                {userFeedback && <p>{userFeedback}</p>}
                 <div>
                     <label htmlFor="checkbox">I hereby consent</label>
                     <input id="checkbox" name="checkbox" type="checkbox" value={consent} onChange={() => setConsent(consent => !consent)} />
