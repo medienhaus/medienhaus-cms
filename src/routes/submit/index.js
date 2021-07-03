@@ -22,6 +22,7 @@ const Submit = () => {
   const [update, setUpdate] = useState(false)
   const [isCollab, setIsCollab] = useState(false)
   const [contentLang, setContentLang] = useState('en')
+  const [spaceObject, setSpaceObject] = useState()
   const matrixClient = Matrix.getMatrixClient()
   const params = useParams()
 
@@ -74,6 +75,8 @@ const Submit = () => {
     const fetchSpace = async () => {
       const space = await matrixClient.getSpaceSummary(projectSpace)
       setTitle(space.rooms[0].name)
+      setSpaceObject(space.rooms[0])
+      console.log(spaceObject)
       space.rooms[0].avatar_url !== undefined && setProjectImage(space.rooms[0].avatar_url)
       const spaceRooms = space.rooms.filter(x => !('room_type' in x))
       setBlocks(spaceRooms.filter(x => x !== undefined).sort((a, b) => {
@@ -165,7 +168,7 @@ const Submit = () => {
             )}
           <h3>Visibility (Draft/Published)</h3>
           <p>Select if you want to save the information provided by you as a draft or if you are happy with it select to publish the project. You can change this at any time.</p>
-          <PublishProject projectSpace={projectSpace} published={visibility} />
+          <PublishProject space={spaceObject} published={visibility} />
         </>
       )}
     </div>

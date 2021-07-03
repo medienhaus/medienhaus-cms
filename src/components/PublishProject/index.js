@@ -7,7 +7,7 @@ const PublishProject = ({ space, published, index, callback }) => {
   const [showConsentBox, setShowConsentBox] = useState(false)
   const [showSaveButton, setShowSaveButton] = useState(false)
   const [consent, setConsent] = useState(false)
-
+  console.log(space)
   useEffect(() => {
     setVisibility(published)
   }, [published])
@@ -34,7 +34,7 @@ const PublishProject = ({ space, published, index, callback }) => {
               setShowSaveButton(false)
               setShowConsentBox(false)
               setConsent(false)
-              callback(index, space, false)
+              callback && callback(index, space, false)
             }, 3000)
           } else {
             setUserFeedback('Oh no, something went wrong.')
