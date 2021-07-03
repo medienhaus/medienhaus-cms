@@ -21,8 +21,7 @@ const ProjectTitle = ({ joinedSpaces, title, projectSpace, callback }) => {
     title === '' ? setNewProject(true) : setNewProject(false)
     // eslint-disable-next-line
     }, [title]);
-  console.log('title = ' + newProject)
-  console.log('oldTitle = ' + oldTitle)
+
   const createProject = async (e, title) => {
     e.preventDefault()
     setLoading(true)
