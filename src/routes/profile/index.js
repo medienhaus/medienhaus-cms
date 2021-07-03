@@ -15,31 +15,18 @@ const Profile = () => {
   const [publications, setPublications] = useState([]);
   const [invites, setInvites] = useState([])
 
-  useEffect(() => {
-
-    const getSync = async () => {
-      try {
-        await matrixClient.startClient().then(async () => {
-          // console.log(await matrixClient.publicRooms());
-          matrixClient.on('Room', (room) => {
-            setTimeout(async () => {
-              if (room.getMyMembership() === 'invite') {
-                console.log(room)
-                const isRoomEmpty = await room._loadMembersFromServer()
-                isRoomEmpty.length > 1 && room.getType() === 'm.space' && setInvites(invites => invites.concat({ name: room.name, id: room.roomId, membership: room._selfMembership }))
-              }
-
-            }, 0)
-          }
-          )
-        })
-      } catch (e) {
-        console.log(e)
-      }
+  // Problematic: This event listener needs to be unset when navigating away from the profile page
+  matrixClient.on('Room', async (room) => {
+    if (room.getMyMembership() === 'invite') {
+      console.log(room)
+      const isRoomEmpty = await room._loadMembersFromServer()
+      isRoomEmpty.length > 1 && room.getType() === 'm.space' && setInvites(invites => invites.concat({
+        name: room.name,
+        id: room.roomId,
+        membership: room._selfMembership
+      }))
     }
-    getSync()
-    // eslint-disable-next-line 
-  }, [])
+  })
 
   useEffect(() => {
     setDrafts(joinedSpaces?.filter(projectSpace => projectSpace.published === 'invite'))

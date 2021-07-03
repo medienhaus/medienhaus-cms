@@ -61,6 +61,12 @@ function useAuthProvider () {
     }
   }, [])
 
+  useEffect(() => {
+    if (user) {
+      Matrix.startSync()
+    }
+  }, [user])
+
   return {
     user,
     signin,
