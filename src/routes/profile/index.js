@@ -20,17 +20,17 @@ const Profile = () => {
   // Listen for room events to populate our "pending invites" state
   useEffect(() => {
     async function handleRoomEvent(room) {
-      if (room.getMyMembership() !== 'invite' || room.getType() !== 'm.space') {
-        // Ignore event if this is not about an invite for a space
-        return
-      }
-      const roomMembers = await room._loadMembersFromServer()
-      if (roomMembers.length < 1) {
-        // Ignore this event if it's for an empty room
+      // Ignore event if this is not about a space
+      if (room.getType() !== 'm.space') return
+
+      const roomMembers = await room._loadMembersFromServer().catch(console.error)
+      // room.getMyMembership() is only available after the current call stack has cleared (_.defer),
+      // so we put it behind the "await"
+      if (room.getMyMembership() !== 'invite' || roomMembers.length < 1) {
         return
       }
 
-      setInvites(invites => invites.assign({
+      setInvites(invites => Object.assign({}, invites, {
         [room.roomId]:
           {
             name: room.name,
@@ -79,11 +79,15 @@ const Profile = () => {
     <div>
       <p>Hello <strong>{profile.displayname}</strong>,</p>
       <p>welcome to your profile for the Rundgang 2021.</p>
-      {!invites ? <Loading /> : invites.length > 0 && (
+      {!invites ? <Loading /> : Object.keys(invites).length > 0 && (
         <>
           <p>You have been invited to join the following project{invites.length > 1 && 's'}:</p>
           <ul>
-            {invites.map((room, index) => <Invites room={room} index={index} callback={removeInviteByIndex} />)}
+            {Object.values(invites).map((room, index) => (
+              <li key={index}>
+                <Invites room={room} callback={() => { removeInviteByIndex(room) }} />
+              </li>
+            ))}
           </ul>
         </>
       )

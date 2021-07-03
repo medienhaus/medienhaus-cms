@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import Matrix from '../../../Matrix'
 import LoadingSpinnerButton from '../../../components/LoadingSpinnerButton'
 
-const Invites = ({ room, index, callback }) => {
+const Invites = ({ room, callback }) => {
   const [joining, setJoining] = useState(false)
   const [error, setError] = useState('')
   const matrixClient = Matrix.getMatrixClient()
@@ -32,7 +32,7 @@ const Invites = ({ room, index, callback }) => {
   return (
     <>
       <div style={{ display: 'flex' }}>
-        <li style={{ width: '100%' }}>{room.name}</li>
+        <span style={{ width: '100%' }}>{room.name}</span>
         <LoadingSpinnerButton disabled={joining} onClick={() => join(room.id)}>ACCEPT</LoadingSpinnerButton>
         {error}
       </div>
