@@ -26,19 +26,6 @@ const Submit = () => {
 
   const projectSpace = params.spaceId
 
-  const getSync = async () => {
-    try {
-      await matrixClient.startClient()
-    } catch (e) {
-      console.log(e)
-    }
-  }
-
-  useEffect(() => {
-    getSync()
-    // eslint-disable-next-line
-  }, [])
-
   const reloadProjects = (roomId) => {
     // roomId is needed in order to invite collaborators to newly created rooms.
     console.log("roomId = " + roomId);
@@ -110,14 +97,14 @@ const Submit = () => {
       console.error(err);
     }
 
-    await matrixClient.removeAllListeners()
+    await matrixClient.removeAllListeners().setMaxListeners(999)
     const myRooms = await matrixClient.getSpaceSummary(projectSpace)
     setTitle(myRooms?.rooms[0].name)
     matrixClient.addListener('RoomState.events', function (event) {
 
       if (event.event.type === 'm.room.member' && myRooms.rooms?.filter(({ roomId }) => event.sender.roomId.includes(roomId)) && event.event.sender !== localStorage.getItem('mx_user_id')) {
         setUpdate(true)
-      } else if (event.event.type === 'm.room.name' && blocks?.filter(({ roomId }) => event.sender.roomId.includes(roomId)) && event.event.sender !== localStorage.getItem('mx_user_id')) {
+      } else if (event.event.type === 'm.room.name' && blocks?.filter(({ roomId }) => event.sender.roomId.includes(roomId))) {
         setUpdate(true)
       } else if (event.event.type === 'm.space.child' && event.event.room_id === projectSpace && event.event.sender !== localStorage.getItem('mx_user_id')) {
         console.log(event.event);

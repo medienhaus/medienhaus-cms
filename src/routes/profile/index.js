@@ -13,33 +13,39 @@ const Profile = () => {
   const matrixClient = Matrix.getMatrixClient()
   const [drafts, setDrafts] = useState([]);
   const [publications, setPublications] = useState([]);
-  const [invites, setInvites] = useState([])
+  const [invites, setInvites] = useState({})
 
+  // @TODO: Check for existing invites on page load
+
+  // Listen for room events to populate our "pending invites" state
   useEffect(() => {
+    async function handleRoomEvent(room) {
+      // Ignore event if this is not about a space
+      if (room.getType() !== 'm.space') return
 
-    const getSync = async () => {
-      try {
-        await matrixClient.startClient().then(async () => {
-          // console.log(await matrixClient.publicRooms());
-          matrixClient.on('Room', (room) => {
-            setTimeout(async () => {
-              if (room.getMyMembership() === 'invite') {
-                console.log(room)
-                const isRoomEmpty = await room._loadMembersFromServer()
-                isRoomEmpty.length > 1 && room.getType() === 'm.space' && setInvites(invites => invites.concat({ name: room.name, id: room.roomId, membership: room._selfMembership }))
-              }
-
-            }, 0)
-          }
-          )
-        })
-      } catch (e) {
-        console.log(e)
+      const roomMembers = await room._loadMembersFromServer().catch(console.error)
+      // room.getMyMembership() is only available after the current call stack has cleared (_.defer),
+      // so we put it behind the "await"
+      if (room.getMyMembership() !== 'invite' || roomMembers.length < 1) {
+        return
       }
+
+      setInvites(invites => Object.assign({}, invites, {
+        [room.roomId]:
+          {
+            name: room.name,
+            id: room.roomId,
+            membership: room._selfMembership
+          }
+      }))
     }
-    getSync()
-    // eslint-disable-next-line 
-  }, [])
+    matrixClient.on('Room', handleRoomEvent)
+
+    // When navigating away from /profile we want to stop listening for those room events again
+    return () => {
+      matrixClient.removeListener('Room', handleRoomEvent)
+    }
+  })
 
   useEffect(() => {
     setDrafts(joinedSpaces?.filter(projectSpace => projectSpace.published === 'invite'))
@@ -48,7 +54,8 @@ const Profile = () => {
 
 
   const removeInviteByIndex = (index) => {
-    setInvites(invites => invites.filter((invite, i) => i !== index))
+    // @TODO: This function is currently not being used. But needs to be refactored to take the room ID as index.
+    // setInvites(invites => invites.filter((invite, i) => i !== index))
   }
 
   const changePublicationToDraft = (index, space, redact) => {
@@ -72,11 +79,15 @@ const Profile = () => {
     <div>
       <p>Hello <strong>{profile.displayname}</strong>,</p>
       <p>welcome to your profile for the Rundgang 2021.</p>
-      {!invites ? <Loading /> : invites.length > 0 && (
+      {!invites ? <Loading /> : Object.keys(invites).length > 0 && (
         <>
           <p>You have been invited to join the following project{invites.length > 1 && 's'}:</p>
           <ul>
-            {invites.map((room, index) => <Invites room={room} index={index} callback={removeInviteByIndex} />)}
+            {Object.values(invites).map((room, index) => (
+              <li key={index}>
+                <Invites room={room} callback={() => { removeInviteByIndex(room) }} />
+              </li>
+            ))}
           </ul>
         </>
       )
