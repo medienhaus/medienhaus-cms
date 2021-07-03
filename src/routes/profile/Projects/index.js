@@ -5,8 +5,8 @@ import { Loading } from '../../../components/loading'
 import LoadingSpinnerButton from '../../../components/LoadingSpinnerButton'
 
 const Projects = ({ space, visibility, index, reloadProjects }) => {
-  const [responseFromPublish, setResponseFromPublish] = useState();
-  const [loading, setLoading] = useState(false);
+  const [responseFromPublish, setResponseFromPublish] = useState()
+  const [loading, setLoading] = useState(false)
   const history = useHistory()
   const matrixClient = Matrix.getMatrixClient()
 

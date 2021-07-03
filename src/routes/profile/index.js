@@ -11,12 +11,11 @@ const Profile = () => {
   const profile = auth.user
   const { joinedSpaces, spacesErr, fetchSpaces } = useJoinedSpaces(() => console.log(fetchSpaces || spacesErr))
   const matrixClient = Matrix.getMatrixClient()
-  const [drafts, setDrafts] = useState([]);
-  const [publications, setPublications] = useState([]);
+  const [drafts, setDrafts] = useState([])
+  const [publications, setPublications] = useState([])
   const [invites, setInvites] = useState([])
 
   useEffect(() => {
-
     const getSync = async () => {
       try {
         await matrixClient.startClient().then(async () => {
@@ -28,7 +27,6 @@ const Profile = () => {
                 const isRoomEmpty = await room._loadMembersFromServer()
                 isRoomEmpty.length > 1 && room.getType() === 'm.space' && setInvites(invites => invites.concat({ name: room.name, id: room.roomId, membership: room._selfMembership }))
               }
-
             }, 0)
           }
           )
@@ -44,8 +42,7 @@ const Profile = () => {
   useEffect(() => {
     setDrafts(joinedSpaces?.filter(projectSpace => projectSpace.published === 'invite'))
     setPublications(joinedSpaces?.filter(projectSpace => projectSpace.published === 'public'))
-  }, [joinedSpaces]);
-
+  }, [joinedSpaces])
 
   const removeInviteByIndex = (index) => {
     setInvites(invites => invites.filter((invite, i) => i !== index))
@@ -72,14 +69,16 @@ const Profile = () => {
     <div>
       <p>Hello <strong>{profile.displayname}</strong>,</p>
       <p>welcome to your profile for the Rundgang 2021.</p>
-      {!invites ? <Loading /> : invites.length > 0 && (
+      {!invites
+        ? <Loading />
+        : invites.length > 0 && (
         <>
           <p>You have been invited to join the following project{invites.length > 1 && 's'}:</p>
           <ul>
             {invites.map((room, index) => <Invites room={room} index={index} callback={removeInviteByIndex} />)}
           </ul>
         </>
-      )
+        )
       }
       {fetchSpaces
         ? <Loading />

@@ -26,20 +26,20 @@ const createBlock = async (e, content, number, space) => {
       content: { history_visibility: 'world_readable' }
     }],
     power_level_content_override: {
-      "ban": 50,
-      "events": {
-        "m.room.name": 50,
-        "m.room.power_levels": 50
+      ban: 50,
+      events: {
+        'm.room.name': 50,
+        'm.room.power_levels': 50
       },
-      "events_default": 0,
-      "invite": 50,
-      "kick": 50,
-      "notifications": {
-        "room": 20
+      events_default: 0,
+      invite: 50,
+      kick: 50,
+      notifications: {
+        room: 20
       },
-      "redact": 50,
-      "state_default": 50,
-      "users_default": 0
+      redact: 50,
+      state_default: 50,
+      users_default: 0
 
     }
   }

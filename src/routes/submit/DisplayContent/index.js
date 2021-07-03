@@ -210,15 +210,16 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadProjects }) 
                 ? <List onSave={() => onSave(block.room_id)} storage={(list) => localStorage.setItem(block.room_id, list)} populated={cms?.body} type="ol" />
                 : json.type === 'code'
                   ? <Code onSave={() => onSave(block.room_id)} storage={(code) => localStorage.setItem(block.room_id, code)} saved={saved} content={cms?.body} />
-                  : (json.type === 'video' || json.type === 'livestream' || json.type === 'playlist') ? (
-                    <iframe src={`https://stream.udk-berlin.de/${(json.type === 'playlist' ? 'video-playlists' : 'videos')}/embed/${cms?.body}`}
-                      frameBorder="0"
-                      title={cms?.body}
-                      sandbox="allow-same-origin allow-scripts"
-                      allowFullScreen="allowfullscreen"
-                      style={{ width: '100%', aspectRatio: '16 / 9', border: 'calc(var(--margin) * 0.2) solid var(--color-fg)' }}
-                    />
-                    )
+                  : (json.type === 'video' || json.type === 'livestream' || json.type === 'playlist')
+                      ? (
+                          <iframe src={`https://stream.udk-berlin.de/${(json.type === 'playlist' ? 'video-playlists' : 'videos')}/embed/${cms?.body}`}
+                            frameBorder="0"
+                            title={cms?.body}
+                            sandbox="allow-same-origin allow-scripts"
+                            allowFullScreen="allowfullscreen"
+                            style={{ width: '100%', aspectRatio: '16 / 9', border: 'calc(var(--margin) * 0.2) solid var(--color-fg)' }}
+                          />
+                        )
                       : <div className="center">
                       <Editor
                         dark={window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches}
