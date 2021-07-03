@@ -8,7 +8,7 @@ const Tools = () => {
   // const [description, setDescription] = useState('');
 
   return (
-     <form>
+     <form id="tools">
           <div>
             <label htmlFor="subject">Studiengang</label>
             <select id="subject" name="subject" value={subject} onChange={(e) => setSubject(e.target.value)}>
@@ -105,6 +105,10 @@ const Tools = () => {
           <div>
             <label htmlFor="text">Text</label>
             <input id="text" name="text" placeholder="some text" type="text" />
+          </div>
+          <div>
+            <label htmlFor="textarea">Textarea</label>
+            <textarea id="textarea" name="textarea" placeholder="some text" type="textarea" />
           </div>
           <div>
             <label htmlFor="time">Time</label>

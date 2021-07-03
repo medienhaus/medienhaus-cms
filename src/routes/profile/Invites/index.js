@@ -1,20 +1,26 @@
 
 import React, { useState } from 'react'
 import Matrix from '../../../Matrix'
+import LoadingSpinnerButton from '../../../components/LoadingSpinnerButton'
 
-const Invites = ({ room }) => {
+const Invites = ({ room, index, callback }) => {
   const [joining, setJoining] = useState(false)
-  const [joined, setJoined] = useState(false)
   const [error, setError] = useState('')
   const matrixClient = Matrix.getMatrixClient()
 
-  const join = async (e, room) => {
-    e.preventDefault()
+  const join = async (room) => {
     setJoining(true)
     try {
-      await matrixClient.joinRoom(room).then(console.log).then(setJoined(true))
+      //first we join the project space in order to be able to call getSpaceSummary() nad check if the invite is for a module or a student project
+      await matrixClient.joinRoom(room)
+      const studentProject = await matrixClient.getStateEvent(room, 'm.room.topic')
+      if (studentProject.topic?.includes("studentproject")) {
+        //if the project is a student project we map through each room in the projectspace and join it
+        await matrixClient.getSpaceSummary(room).then(res => {
+          res.rooms.map(async contentRooms => contentRooms.room_id !== room && await matrixClient.joinRoom(contentRooms.room_id))
+        })
+      }
     } catch (err) {
-      setJoined(false)
       setError(err.errcode === 'M_UNKNOWN' ? 'Looks like this room does not exist anymore.' : 'Something went wrong.')
       setTimeout(() => {
         setError('')
@@ -24,13 +30,14 @@ const Invites = ({ room }) => {
     }
   }
   return (
-         <>
-            <div style={{ display: 'flex' }}>
-                <li style={{ width: '100%' }}>{room.name}</li>
-                <button disabled={joining || joined} onClick={(e) => join(e, room.id)}>ACCEPT</button>
-            </div>
-            {error}
-            </>
+    <>
+      <div style={{ display: 'flex' }}>
+        <li style={{ width: '100%' }}>{room.name}</li>
+        <LoadingSpinnerButton disabled={joining} onClick={() => join(room.id)}>ACCEPT</LoadingSpinnerButton>
+        {error}
+      </div>
+      {error}
+    </>
   )
 }
 export default Invites

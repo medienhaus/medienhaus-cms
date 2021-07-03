@@ -16,44 +16,44 @@ const Nav = () => {
   }
 
   return (
-  <>
-    <nav>
-      <div>
+    <>
+      <nav>
         <div>
-          {auth.user
-            ? (
-              <NavLink activeclassname="active" to="/submit">/create new -&gt;</NavLink>
-              // <a href={process.env.REACT_APP_MATRIX_BASE_URL + '/classroom'} rel="nofollow noopener noreferrer" target="_self">/classroom&nbsp;-&gt;</a>
+          <div>
+            {auth.user
+              ? (
+                <NavLink activeclassname="active" to="/submit/">/create new -&gt;</NavLink>
+                // <a href={process.env.REACT_APP_MATRIX_BASE_URL + '/classroom'} rel="nofollow noopener noreferrer" target="_self">/classroom&nbsp;-&gt;</a>
               )
-            : (
-            <NavLink activeclassname="active" to="/login">/login</NavLink>
+              : (
+                <NavLink activeclassname="active" to="/login">/login</NavLink>
               )}
+          </div>
+          {auth.user && (
+            <>
+              <div>
+                <NavLink activeclassname="active" to="/profile">/profile</NavLink>
+                <NavLink activeclassname="active" to="/tools">/tools</NavLink> {/* only for dev */}
+                <NavLink activeclassname="active" to="/moderation">/moderation</NavLink>
+                {
+                  // <NavLink activeclassname="active" to="/admin">/admin</NavLink>}
+                  // matrixClient.isSynapseAdministrator() ?? console.log('with great power comes great responsibility')
+                }
+              </div>
+              <div>
+                <a href="https://meetings.udk-berlin.de" rel="external nofollow noopener noreferrer" target="_blank">/meet</a>
+                <a href="https://write.medienhaus.udk-berlin.de" rel="external nofollow noopener noreferrer" target="_blank">/write</a>
+                <a href="https://stream.medienhaus.udk-berlin.de" rel="external nofollow noopener noreferrer" target="_blank">/stream</a>
+              </div>
+            </>
+          )}
         </div>
-        {auth.user && (
-          <>
-            <div>
-              <NavLink activeclassname="active" to="/profile">/profile</NavLink>
-                  <NavLink activeclassname="active" to="/tools">/tools</NavLink> {// only for dev
-                  }
-              {
-                // <NavLink activeclassname="active" to="/admin">/admin</NavLink>}
-                // matrixClient.isSynapseAdministrator() ?? console.log('with great power comes great responsibility')
-              }
-            </div>
-            <div>
-              <a href="https://meetings.udk-berlin.de" rel="external nofollow noopener noreferrer" target="_blank">/meet</a>
-              <a href="https://write.medienhaus.udk-berlin.de" rel="external nofollow noopener noreferrer" target="_blank">/write</a>
-              <a href="https://stream.medienhaus.udk-berlin.de" rel="external nofollow noopener noreferrer" target="_blank">/stream</a>
-            </div>
-          </>
-        )}
-      </div>
-    </nav>
-    <section>
-      <button onClick={() => changeLanguage('en')}>EN</button>
-      <button onClick={() => changeLanguage('de')}>DE</button>
-    </section>
-  </>
+      </nav>
+      <select>
+        <option onClick={() => changeLanguage('en')}>EN</option>
+        <option onClick={() => changeLanguage('de')}>DE</option>
+      </select>
+    </>
   )
 }
 

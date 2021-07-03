@@ -1,11 +1,14 @@
+import powerMove from '../../../components/matrix_power_move'
 import Matrix from '../../../Matrix'
 
 const createBlock = async (e, content, number, space) => {
   const matrixClient = Matrix.getMatrixClient()
-  e.preventDefault()
+  if (e) {
+    e.preventDefault()
+  }
 
   const opts = {
-    name: (number) + '_' + content, // blocks[0] is the project space itself, therefore -1
+    name: (number) + '_' + content,
     preset: 'public_chat',
     topic: JSON.stringify({
       type: content
@@ -21,7 +24,24 @@ const createBlock = async (e, content, number, space) => {
     }, {
       type: 'm.room.history_visibility',
       content: { history_visibility: 'world_readable' }
-    }]
+    }],
+    power_level_content_override: {
+      "ban": 50,
+      "events": {
+        "m.room.name": 50,
+        "m.room.power_levels": 50
+      },
+      "events_default": 0,
+      "invite": 50,
+      "kick": 50,
+      "notifications": {
+        "room": 20
+      },
+      "redact": 50,
+      "state_default": 50,
+      "users_default": 0
+
+    }
   }
 
   const req = {
@@ -48,6 +68,8 @@ const createBlock = async (e, content, number, space) => {
           return Promise.reject(error)
         }
         return res[0]
+      }).then(async (roomId) => {
+        return await powerMove(roomId)
       })
     return room
   } catch (e) {
