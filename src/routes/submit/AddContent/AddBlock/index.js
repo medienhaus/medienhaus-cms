@@ -15,10 +15,10 @@ const AddBlock = ({ contentSelect, number, projectSpace, blocks, reloadProjects,
         }
       })
 
-      await createBlock(e, contentSelect, number, projectSpace).then(() => {
+      await createBlock(e, contentSelect, number, projectSpace).then((res) => {
         setLoading(false)
         displayPlusButton(true)
-        reloadProjects('callback from AddBlock component')
+        reloadProjects(res)
       })
     }
     }>{loading ? <Loading /> : 'Add Content'}</button>

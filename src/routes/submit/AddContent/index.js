@@ -3,13 +3,11 @@ import MediaUpload from './MediaUpload'
 import AddBlock from './AddBlock'
 import PeertubeEmbed from "./peertubeEmbed";
 import createBlock from "../matrix_create_room";
-//import Matrix from "../../../Matrix";
 import reorder from "../DisplayContent/matrix_reorder_rooms";
 
 const AddContent = ({ number, projectSpace, blocks, reloadProjects }) => {
   const [selectedBlockType, setSelectedBlockType] = useState('')
   const [showBlockTypeSelector, setShowBlockTypeSelector] = useState(false)
-  //const matrixClient = Matrix.getMatrixClient()
 
   const displayPlusButton = (button) => {
     setShowBlockTypeSelector(!button)

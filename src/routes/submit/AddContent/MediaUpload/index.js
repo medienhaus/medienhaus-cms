@@ -13,6 +13,7 @@ const MediaUpload = (props) => {
   const handleSubmission = async (e, selectedFile, fileName) => {
     e.preventDefault()
     setLoading(true)
+    let room
     try {
       await matrixClient.uploadContent(selectedFile, { name: fileName })
         .then(async (url) => {
@@ -25,7 +26,7 @@ const MediaUpload = (props) => {
           const room = await createBlock(e, props.fileType, props.number, props.space)
           console.log('room = ' + room)
           return [url, room]
-        }).then((res) =>
+        }).then((res) => {
           props.fileType === 'image'
             ? matrixClient.sendImageMessage(res[1], res[0], {
               mimetype: selectedFile.type,
@@ -41,10 +42,11 @@ const MediaUpload = (props) => {
               msgtype: 'm.audio',
               url: res[0]
             })
+          room = res[1]
+        }
         )
-        .then(console.log)
       props.displayPlusButton(true)
-      props.reloadProjects('callback from FileUpload component')
+      props.reloadProjects(room)
       setLoading(false)
 
       // setCounter(0)

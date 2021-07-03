@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import Matrix from '../../../Matrix'
 import { Loading } from '../../../components/loading'
+import powerMove from '../../../components/matrix_power_move'
 
 
 const ProjectTitle = ({ joinedSpaces, title, projectSpace, callback }) => {
@@ -25,6 +26,7 @@ const ProjectTitle = ({ joinedSpaces, title, projectSpace, callback }) => {
     const createProject = async (e, title) => {
         e.preventDefault()
         setLoading(true)
+
         const opts = {
             preset: 'private_chat',
             name: title,
@@ -42,14 +44,30 @@ const ProjectTitle = ({ joinedSpaces, title, projectSpace, callback }) => {
                 state_key: '',
                 content: { guest_access: 'can_join' }
             }],
-            power_level_content_override: { events_default: 100 },
+            power_level_content_override: {
+                "ban": 50,
+                "events": {
+                    "m.room.name": 50,
+                    "m.room.power_levels": 50
+                },
+                "events_default": 0,
+                "invite": 50,
+                "kick": 50,
+                "notifications": {
+                    "room": 20
+                },
+                "redact": 50,
+                "state_default": 50,
+                "users_default": 0
+
+            },
             visibility: 'private'
         }
         try {
             await matrixClient.createRoom(opts)
-                .then((response) => {
-                    history.push(`/submit/${response.room_id}`)
-                })
+                .then(async (response) => {
+                    return await powerMove(response.room_id)
+                }).then((res) => history.push(`/submit/${res}`))
         } catch (e) {
             console.log(e)
         } finally {
