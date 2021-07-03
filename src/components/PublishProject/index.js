@@ -4,6 +4,7 @@ import LoadingSpinnerButton from '../LoadingSpinnerButton'
 const PublishProject = ({ projectSpace, published }) => {
   const [userFeedback, setUserFeedback] = useState()
   const [visibility, setVisibility] = useState(published)
+  const [showConsentBox, setShowConsentBox] = useState(false)
   const [consent, setConsent] = useState(false)
 
   useEffect(() => {
@@ -40,18 +41,18 @@ const PublishProject = ({ projectSpace, published }) => {
   return (
         <div>
             <div>
-                <select id="visibility" name="visibility" value={visibility} onChange={(e) => { setVisibility(e.target.value) }} onBlur={(e) => { setVisibility(e.target.value) }}>
+              <select id="visibility" name="visibility" value={visibility} onChange={(e) => { setVisibility(e.target.value); e.target.value === 'public' ? setShowConsentBox(true) : setShowConsentBox(false) }} onBlur={(e) => { setVisibility(e.target.value) }}>
                     <option value="invite">Draft</option>
                     <option value="public">Public</option>
                 </select>
             </div>
             <div>
-                <LoadingSpinnerButton disabled={!consent} onClick={onChangeVisibility}>SAVE</LoadingSpinnerButton>
+                <LoadingSpinnerButton disabled={(!consent && visibility === 'public')} onClick={onChangeVisibility}>SAVE</LoadingSpinnerButton>
                 {userFeedback && <p>{userFeedback}</p>}
-                <div>
+                {showConsentBox && <div >
                     <label htmlFor="checkbox">I hereby consent</label>
                     <input id="checkbox" name="checkbox" type="checkbox" value={consent} onChange={() => setConsent(consent => !consent)} />
-                </div>
+                </div>}
             </div>
         </div>
 
