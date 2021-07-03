@@ -18,14 +18,6 @@ const FileUpload = (props) => {
     <>
       {selectedFile && (
         <>
-          <div className="filename">
-            <label htmlFor="filename">Filename:</label>
-            <input id="filename" type="text" value={fileName} onChange={e => {
-              e.preventDefault()
-              setFileName(e.target.value)
-            }} />
-
-          </div>
           <input type="text" placeholder="Author" />
           <select id="license" name="license" defaultValue={''} value={license} onChange={(e) => setLicense(e.target.value)}>
             <option value="" disabled={true}>-- SELECT LICENSE --</option>
