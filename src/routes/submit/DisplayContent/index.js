@@ -168,7 +168,7 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadProjects }) 
     <>
       <div className="editor">
         <div className="left">
-          <LoadingSpinnerButton key={'up_' + block.room_id} disabled={index < 2} onClick={() => changeOrder(block.room_id, block.name, -1)}>↑</LoadingSpinnerButton>
+          {index > 0 && <LoadingSpinnerButton key={'up_' + block.room_id} disabled={index < 2} onClick={() => changeOrder(block.room_id, block.name, -1)}>↑</LoadingSpinnerButton>}
           <figure className="icon-bg">
             {
               json.type === 'heading'
@@ -192,7 +192,7 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadProjects }) 
                                 : <TextIcon fill="var(--color-fg)" />
             }
           </figure>
-          <LoadingSpinnerButton key={'down_' + block.room_id} disabled={index === blocks.length - 1 || index === 0} onClick={() => changeOrder(block.room_id, block.name, 1)}>↓</LoadingSpinnerButton>
+         {index > 0 && <LoadingSpinnerButton key={'down_' + block.room_id} disabled={index === blocks.length - 1} onClick={() => changeOrder(block.room_id, block.name, 1)}>↓</LoadingSpinnerButton>}
         </div>
         {cms?.msgtype === 'm.image'
           ? <div className="center"><img src={matrixClient.mxcUrlToHttp(cms.url)} alt={cms.info.name} key={block.room_id} /></div>
@@ -259,7 +259,7 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadProjects }) 
         }
 
         <div className="right">
-          <button key={'delete' + index} disabled={index === 0 || deleting} onClick={(e) => {
+          {index > 0 && <button key={'delete' + index} disabled={index === 0 || deleting} onClick={(e) => {
             if (clickedDelete) {
               onDelete(e, block.room_id, index)
               setClickedDelete(false)
@@ -271,7 +271,7 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadProjects }) 
             <p>{deleting}</p> // feedback that deleting was succesfull or has failed
           }}>
             {clickedDelete ? 'SURE?' : deleting ? <Loading /> : '×'}
-          </button>
+          </button>}
         </div>
       </div>
       <AddContent number={index + 1} projectSpace={projectSpace} blocks={blocks} reloadProjects={reloadProjects} />
