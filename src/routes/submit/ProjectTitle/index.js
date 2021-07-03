@@ -101,7 +101,8 @@ const ProjectTitle = ({ joinedSpaces, title, projectSpace, callback }) => {
                 {!newProject && edit && (projectTitle !== oldTitle) && <input id="submit" name="submit" type="submit" value="Cancel" onClick={(e) => { e.preventDefault(); setEdit(false); setProjectTitle(oldTitle) }} />}
                 {loading
                   ? <Loading />
-                  : !title && <input
+                  : !title && newProject &&
+                    <input
                         id="submit" name="submit" type="submit" value={newProject && 'Create Project'} disabled={(newProject && doublicate) || !projectTitle || projectTitle.length > 100} onClick={(e) => {
                           console.log(newProject)
                           if (newProject && projectTitle.length < 101) {
