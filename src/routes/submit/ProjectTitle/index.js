@@ -106,6 +106,7 @@ const ProjectTitle = ({ joinedSpaces, title, projectSpace, callback }) => {
                           console.log(newProject)
                           if (newProject && projectTitle.length < 101) {
                             createProject(e, projectTitle)
+                            setOldTitle(projectTitle)
                             setNewProject(false)
                           } else {
                             e.preventDefault()
