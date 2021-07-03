@@ -3,8 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import Matrix from '../../../Matrix'
 import { Loading } from '../../../components/loading'
-import powerMove from '../../../components/matrix_power_move'
-
+import createBlock from '../matrix_create_room'
 
 const ProjectTitle = ({ joinedSpaces, title, projectSpace, callback }) => {
     const [projectTitle, setProjectTitle] = useState('')
@@ -66,7 +65,8 @@ const ProjectTitle = ({ joinedSpaces, title, projectSpace, callback }) => {
         try {
             await matrixClient.createRoom(opts)
                 .then(async (response) => {
-                    return await powerMove(response.room_id)
+                    await createBlock(undefined, 'introduction', 0, response.room_id)
+                    return response.room_id
                 }).then((res) => history.push(`/submit/${res}`))
         } catch (e) {
             console.log(e)

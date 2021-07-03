@@ -3,9 +3,7 @@ import Matrix from '../../../Matrix'
 
 const createBlock = async (e, content, number, space) => {
   const matrixClient = Matrix.getMatrixClient()
-  if (e) {
-    e.preventDefault()
-  }
+  if (e) e.preventDefault()
 
   const opts = {
     name: (number) + '_' + content,

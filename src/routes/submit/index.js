@@ -16,7 +16,7 @@ const Submit = () => {
   const { joinedSpaces, spacesErr, fetchSpaces } = useJoinedSpaces(() => console.log(fetchSpaces || spacesErr))
   const [title, setTitle] = useState('')
   const [projectImage, setProjectImage] = useState(false)
-  const [visibility, setVisibility] = useState('draft')
+  const [visibility, setVisibility] = useState('invite')
   const [loading, setLoading] = useState(false)
   const [blocks, setBlocks] = useState([])
   const [update, setUpdate] = useState(false)
@@ -90,9 +90,9 @@ const Submit = () => {
       space.rooms[0].avatar_url !== undefined && setProjectImage(space.rooms[0].avatar_url)
       const spaceRooms = space.rooms.filter(x => !('room_type' in x))
       setBlocks(spaceRooms.filter(x => x !== undefined).sort((a, b) => {
-        if (a.name < b.name) return -1
-        if (a.name > b.name) return 1
-        return 0
+        return a.name - b.name;
+
+
       }))
       setUpdate(false)
     }
