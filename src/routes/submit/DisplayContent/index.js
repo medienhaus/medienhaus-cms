@@ -171,7 +171,7 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadProjects }) 
     <>
       <div className="editor">
         <div className="left">
-          <button key={'up_' + block.room_id} disabled={index === 0} onClick={(e) => changeOrder(e, block.room_id, block.name, -1)}>↑</button>
+          <button key={'up_' + block.room_id} disabled={index < 2} onClick={(e) => changeOrder(e, block.room_id, block.name, -1)}>↑</button>
           <figure className="icon-bg">
             {
               json.type === 'heading' ? <HeadingIcon fill="var(--color-fg)" /> :
@@ -186,7 +186,7 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadProjects }) 
                                 <TextIcon fill="var(--color-fg)" />
             }
           </figure>
-          <button key={'down_' + block.room_id} disabled={index === blocks.length - 1} onClick={(e) => changeOrder(e, block.room_id, block.name, 1)}>↓</button>
+          <button key={'down_' + block.room_id} disabled={index === blocks.length - 1 || index === 0} onClick={(e) => changeOrder(e, block.room_id, block.name, 1)}>↓</button>
         </div>
         {cms?.msgtype === 'm.image'
           ? <div className="center"><img src={matrixClient.mxcUrlToHttp(cms.url)} alt={cms.info.name} key={block.room_id} /></div>
