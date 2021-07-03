@@ -76,7 +76,6 @@ const Submit = () => {
       const space = await matrixClient.getSpaceSummary(projectSpace)
       setTitle(space.rooms[0].name)
       setSpaceObject(space.rooms[0])
-      console.log(spaceObject)
       space.rooms[0].avatar_url !== undefined && setProjectImage(space.rooms[0].avatar_url)
       const spaceRooms = space.rooms.filter(x => !('room_type' in x))
       setBlocks(spaceRooms.filter(x => x !== undefined).sort((a, b) => {
