@@ -29,7 +29,7 @@ const getAnswer = async () => {
               headers: { Authorization: 'Bearer ' + localStorage.getItem('medienhaus_access_token') }
             })
             const published = await joinRule.json()
-            return { name: room.rooms[0].name, room_id: room.rooms[0].room_id, topic: JSON.parse(room.rooms[0].topic), published: published.joinRule, collab: collab && collab.joined, avatar_url: room.rooms[0].avatar_url !== undefined && room.rooms[0].avatar_url }
+            return { name: room.rooms[0].name, room_id: room.rooms[0].room_id, topic: JSON.parse(room.rooms[0].topic), published: published.join_rule, collab: collab && collab.joined, avatar_url: room.rooms[0].avatar_url !== undefined && room.rooms[0].avatar_url }
           } else {
             return false
           }
