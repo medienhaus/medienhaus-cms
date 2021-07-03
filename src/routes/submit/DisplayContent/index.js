@@ -22,7 +22,7 @@ import { ReactComponent as VideoIcon } from '../../../assets/icons/remix/vidicon
 import { ReactComponent as PlaylistIcon } from '../../../assets/icons/remix/playlist.svg'
 
 const DisplayContent = ({ block, index, blocks, projectSpace, reloadProjects }) => {
-  const [clicked, setClicked] = useState(false)
+  const [clickedDelete, setClickedDelete] = useState(false)
   const [readOnly, setReadOnly] = useState(false)
   const [loading, setLoading] = useState(false)
   const [saved, setSaved] = useState(false)
@@ -260,17 +260,17 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadProjects }) 
 
         <div className="right">
           <button key={'delete' + index} disabled={index === 0 || deleting} onClick={(e) => {
-            if (clicked) {
+            if (clickedDelete) {
               onDelete(e, block.room_id, index)
-              setClicked(false)
+              setClickedDelete(false)
               reloadProjects()
             } else {
               e.preventDefault()
-              setClicked(true)
+              setClickedDelete(true)
             }
             <p>{deleting}</p> // feedback that deleting was succesfull or has failed
           }}>
-            {clicked ? 'SURE?' : deleting ? <Loading /> : '×'}
+            {clickedDelete ? 'SURE?' : deleting ? <Loading /> : '×'}
           </button>
         </div>
       </div>
