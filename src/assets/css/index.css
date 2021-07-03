@@ -740,12 +740,18 @@ button > #loading {
 
 .project {
   display: grid;
-  grid-template-columns: calc(var(--margin) * 8) auto 8ch;
+  grid-template-columns: calc(var(--margin) * 7.2) auto 8ch;
+  grid-template-rows: repeat(3, auto);
   grid-gap: var(--margin);
 }
 
 .project figure.left  {
   font-size: 0;
+}
+
+.project .left,
+.project .center {
+  grid-row: 1 / -1;
 }
 
 .project .left img,
@@ -754,25 +760,39 @@ button > #loading {
   border-style: solid;
   border-radius: unset;
   border-width: calc(var(--margin) * 0.2);
-  height: calc(var(--margin) * 8);
+  height: calc(var(--margin) * 7.8);
 }
 
-/*
 .project .center {
-  height: calc(var(--margin) * 6);
+  display: grid;
+  place-items: center;
 }
-*/
 
 .project .center p {
   overflow: hidden;
-  padding: calc(var(--margin) * 0.2) calc(var(--margin) * 0.4);
+  padding: 0 calc(var(--margin) * 0.4);
   text-overflow: ellipsis;
 }
 
 .project .right {
   display: grid;
-  grid-template-rows: repeat(3, 2rem);
   grid-gap: var(--margin);
+  grid-template-rows: repeat(3, 2rem);
+}
+
+.project :nth-child(3) {
+  grid-column: 3;
+  grid-row: 1;
+}
+
+.project :nth-child(4) {
+  grid-column: 3;
+  grid-row: 2;
+}
+
+.project :nth-child(5) {
+  grid-column: 3;
+  grid-row: 3;
 }
 
 .project .below {

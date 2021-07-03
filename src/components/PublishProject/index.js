@@ -61,7 +61,7 @@ const PublishProject = ({ space, published, index, callback }) => {
             <option value="invite">Draft</option>
             <option value="public">Public</option>
       </select>
-      <div>
+      <div className="below">
         {userFeedback && <p>{userFeedback}</p>}
         {showConsentBox && <div>
           <input id="checkbox" name="checkbox" type="checkbox" value={consent} onChange={() => setConsent(consent => !consent)} />

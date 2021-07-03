@@ -80,11 +80,15 @@ const Projects = ({ space, visibility, index, reloadProjects }) => {
         <div className="center">
           <p>Lorem ipsum dolor something something required project description introduction abstract and so on, I guess by now you know what I mean, mh?</p>
         </div>
+        {/*
         <div className="right">
+        */}
           <button onClick={() => history.push(`/submit/${space.room_id}`)}>EDIT</button>
           <DeleteProjectButton roomId={space.room_id} name={space.name} />
           <PublishProject space={space} published={visibility} index={index} callback={reloadProjects}/>
+        {/*
         </div>
+        */}
       </div>
     </>
   )
