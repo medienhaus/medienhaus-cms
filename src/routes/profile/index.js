@@ -28,7 +28,6 @@ const Profile = () => {
                 const isRoomEmpty = await room._loadMembersFromServer()
                 isRoomEmpty.length > 1 && room.getType() === 'm.space' && setInvites(invites => invites.concat({ name: room.name, id: room.roomId, membership: room._selfMembership }))
               }
-
             }, 0)
           }
           )
