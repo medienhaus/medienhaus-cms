@@ -4,11 +4,11 @@ import { useHistory } from 'react-router-dom'
 import Matrix from '../../../Matrix'
 import { Loading } from '../../../components/loading'
 import createBlock from '../matrix_create_room'
+import LoadingSpinnerButton from '../../../components/LoadingSpinnerButton'
 
 const ProjectTitle = ({ joinedSpaces, title, projectSpace, callback }) => {
     const [projectTitle, setProjectTitle] = useState('')
     const [edit, setEdit] = useState(false)
-    const [changing, setChanging] = useState(false)
     const [newProject, setNewProject] = useState(false)
     const [oldTitle, setOldTitle] = useState('')
     const [loading, setLoading] = useState(false)
@@ -80,36 +80,31 @@ const ProjectTitle = ({ joinedSpaces, title, projectSpace, callback }) => {
             <div>
                 <p>Please provide just the project title without any year or artist name.</p>
                 <label htmlFor="title">Project Title</label>
-                <input id="title" name="title" placeholder="project title" type="text" value={projectTitle} disabled={title && !edit} onChange={(e) => setProjectTitle(e.target.value)} />
+                <input id="title" name="title" placeholder="project title" type="text" value={projectTitle} onClick={() => { setEdit(true); setOldTitle(title) }} onChange={(e) => setProjectTitle(e.target.value)} />
+                <span>{projectTitle.length + '/100'}</span>
             </div>
             <div>
-
-                {title && <input
-                    id="submit" name="submit" type="submit" value={edit ? 'Save' : changing ? <Loading /> : 'Edit Title'} onClick={async (e) => {
-                        e.preventDefault()
-                        if (edit) {
-                            setChanging(true)
-                            try {
-                                await matrixClient.setRoomName(projectSpace, projectTitle).then(() => callback(projectTitle))
-                            } catch (err) {
-                                console.error(err)
-                            } finally {
-                                setChanging(false)
-                            }
-                            setEdit(false)
-                        } else {
-                            setEdit(true)
-                            setOldTitle(title)
+                {title && edit && <LoadingSpinnerButton disabled={projectTitle.length > 100} onClick={async () => {
+                    if (projectTitle.length < 101) {
+                        try {
+                            await matrixClient.setRoomName(projectSpace, projectTitle).then(() => callback(projectTitle))
+                        } catch (err) {
+                            console.error(err)
                         }
-                    }}
-                />}
+                        setEdit(false)
+                    } else {
+                        setEdit(true)
+                        setOldTitle(title)
+                    }
+                }}>Save</LoadingSpinnerButton>}
+
                 {edit && <input id="submit" name="submit" type="submit" value="Cancel" onClick={(e) => { e.preventDefault(); setEdit(false); setProjectTitle(oldTitle) }} />}
                 {loading
                     ? <Loading />
                     : !title && <input
-                        id="submit" name="submit" type="submit" value={newProject ? 'Create Project' : 'New Project'} disabled={(newProject && doublicate) || !projectTitle} onClick={(e) => {
+                        id="submit" name="submit" type="submit" value={newProject ? 'Create Project' : 'New Project'} disabled={(newProject && doublicate) || !projectTitle || projectTitle.length > 100} onClick={(e) => {
                             console.log(newProject)
-                            if (newProject) {
+                            if (newProject && projectTitle.length < 101) {
                                 createProject(e, projectTitle)
                                 setNewProject(false)
                             } else {

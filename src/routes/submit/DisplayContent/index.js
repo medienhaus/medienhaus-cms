@@ -8,6 +8,7 @@ import AddContent from '../AddContent'
 import List from './List'
 import Code from './Code'
 import reorder from './matrix_reorder_rooms'
+import LoadingSpinnerButton from '../../../components/LoadingSpinnerButton'
 
 import { ReactComponent as HeadingIcon } from '../../../assets/icons/remix/h-1.svg'
 import { ReactComponent as AudioIcon } from '../../../assets/icons/remix/volume-up-line.svg'
@@ -122,8 +123,7 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadProjects }) 
     // matrixClient.leave(roomId)
   }
 
-  const changeOrder = async (e, roomId, name, direction) => {
-    e.preventDefault()
+  const changeOrder = async (roomId, name, direction) => {
     setLoading(true)
     setReadOnly(true)
     // blocks.splice((pos) + direction, 0, blocks.splice(pos, 1).pop())
@@ -171,7 +171,7 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadProjects }) 
     <>
       <div className="editor">
         <div className="left">
-          <button key={'up_' + block.room_id} disabled={index < 2} onClick={(e) => changeOrder(e, block.room_id, block.name, -1)}>↑</button>
+          <LoadingSpinnerButton key={'up_' + block.room_id} disabled={index < 2} onClick={() => changeOrder(block.room_id, block.name, -1)}>↑</LoadingSpinnerButton>
           <figure className="icon-bg">
             {
               json.type === 'heading' ? <HeadingIcon fill="var(--color-fg)" /> :
@@ -186,7 +186,7 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadProjects }) 
                                 <TextIcon fill="var(--color-fg)" />
             }
           </figure>
-          <button key={'down_' + block.room_id} disabled={index === blocks.length - 1 || index === 0} onClick={(e) => changeOrder(e, block.room_id, block.name, 1)}>↓</button>
+          <LoadingSpinnerButton key={'down_' + block.room_id} disabled={index === blocks.length - 1 || index === 0} onClick={() => changeOrder(block.room_id, block.name, 1)}>↓</LoadingSpinnerButton>
         </div>
         {cms?.msgtype === 'm.image'
           ? <div className="center"><img src={matrixClient.mxcUrlToHttp(cms.url)} alt={cms.info.name} key={block.room_id} /></div>
@@ -252,7 +252,7 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadProjects }) 
         }
 
         <div className="right">
-          <button key={'delete' + index} onClick={(e) => {
+          <button key={'delete' + index} disabled={index === 0 || deleting} onClick={(e) => {
             if (clicked) {
               onDelete(e, block.room_id, index)
               setClicked(false)
