@@ -18,10 +18,10 @@ const ProjectTitle = ({ joinedSpaces, title, projectSpace, callback }) => {
 
   useEffect(() => {
     setProjectTitle(title)
-    title === '' && setNewProject(true)
+    title === '' ? setNewProject(true) : setNewProject(false)
     // eslint-disable-next-line
     }, [title]);
-  console.log('title = ' + title)
+  console.log('title = ' + newProject)
   console.log('oldTitle = ' + oldTitle)
   const createProject = async (e, title) => {
     e.preventDefault()
@@ -99,7 +99,7 @@ const ProjectTitle = ({ joinedSpaces, title, projectSpace, callback }) => {
                   }
                 }}>Save</LoadingSpinnerButton>}
 
-                {edit && (projectTitle !== oldTitle) && <input id="submit" name="submit" type="submit" value="Cancel" onClick={(e) => { e.preventDefault(); setEdit(false); setProjectTitle(oldTitle) }} />}
+                {!newProject && edit && (projectTitle !== oldTitle) && <input id="submit" name="submit" type="submit" value="Cancel" onClick={(e) => { e.preventDefault(); setEdit(false); setProjectTitle(oldTitle) }} />}
                 {loading
                   ? <Loading />
                   : !title && <input
