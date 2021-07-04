@@ -55,7 +55,7 @@ const Collaborators = ({ projectSpace, blocks, title, joinedSpaces, startListeni
 
   return (
     <>
-      <h3>Collaborators / Credits</h3>
+      <h3>Contributors</h3>
       <p>Did you work with other people on this project? Here you can share access to edit this project.
         The mentioned person needs an account at medienhaus/.
         You can also mention a person without an account but you will not be able to share the project to edit by the person.</p>

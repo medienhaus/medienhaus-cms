@@ -138,18 +138,29 @@ const Submit = () => {
   }
 
   return (
-    <div>
-      <p><strong>Welcome to your project!</strong></p>
-      <p>This is the project page. Please add in which context the project happend, projectname and descriptive text and images. If you want to continue at a later point in time, you can save the project as a draft and find it in your collection under “drafts”.</p>
-      <h3>Project Title / Collaborators / Credits</h3>
-      <ProjectTitle joinedSpaces={joinedSpaces} title={title} projectSpace={projectSpace} callback={changeTitle} />
+    <>
+      <section className="welcome">
+        <p><strong>Welcome to your project!</strong></p>
+        <p>This is the project page. Please add in which context the project happend, projectname and descriptive text and images. If you want to continue at a later point in time, you can save the project as a draft and find it in your collection under “drafts”.</p>
+      </section>
+      <section className="project-title">
+        <h3>Project Title</h3>
+        <ProjectTitle joinedSpaces={joinedSpaces} title={title} projectSpace={projectSpace} callback={changeTitle} />
+      </section>
       {projectSpace && (
-        <>
-          <h3>Category / Context / Course</h3>
+      <>
+        <section className="context">
+          <h3>Context</h3>
           <Category title={title} projectSpace={projectSpace} />
+        </section>
+        <section className="contributors">
           <Collaborators projectSpace={projectSpace} blocks={blocks} title={title} joinedSpaces={joinedSpaces} startListeningToCollab={startListeningToCollab} />
+        </section>
+        <section className="project-image">
           <h3>Project Image</h3>
           {loading ? <Loading /> : <ProjectImage projectSpace={projectSpace} projectImage={projectImage} changeProjectImage={changeProjectImage} />}
+        </section>
+        <section className="content">
           <h3>Content</h3>
           <p>You can add elements like text, video and pictures to the main body of your project by using the “+” on the right side.
             One block of text is mandatory to describe your project.
@@ -165,12 +176,15 @@ const Submit = () => {
             : blocks.map((content, i) =>
               <DisplayContent block={content} index={i} blocks={blocks} projectSpace={projectSpace} reloadProjects={reloadProjects} key={content + i} />
             )}
-          <h3>Visibility (Draft/Published)</h3>
-          <p>Select if you want to save the information provided by you as a draft or if you are happy with it select to publish the project. You can change this at any time.</p>
-          <PublishProject space={spaceObject} published={visibility} />
+          </section>
+          <section className="visibility">
+            <h3>Visibility (Draft/Published)</h3>
+            <p>Select if you want to save the information provided by you as a draft or if you are happy with it select to publish the project. You can change this at any time.</p>
+            <PublishProject space={spaceObject} published={visibility} />
+          </section>
         </>
       )}
-    </div>
+    </>
   )
 }
 

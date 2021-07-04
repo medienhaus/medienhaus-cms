@@ -61,14 +61,14 @@ const PublishProject = ({ space, published, index, callback }) => {
             <option value="invite">Draft</option>
             <option value="public">Public</option>
       </select>
-      <div className="below">
+      {showConsentBox && <div className="below">
         {userFeedback && <p>{userFeedback}</p>}
-        {showConsentBox && <div>
+        <div>
           <input id="checkbox" name="checkbox" type="checkbox" value={consent} onChange={() => setConsent(consent => !consent)} />
           <label htmlFor="checkbox">I hereby consent that I own the rights to the uploaded content and am aware of the content violation policy.</label>
-        </div>}
+        </div>
         {showSaveButton && <LoadingSpinnerButton disabled={(!consent && visibility === 'public')} onClick={onChangeVisibility}>SAVE</LoadingSpinnerButton>}
-      </div>
+      </div>}
     </>
   )
 }

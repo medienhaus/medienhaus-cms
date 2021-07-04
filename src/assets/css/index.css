@@ -64,7 +64,7 @@ body > div:first-of-type > main > :first-of-type#definition {
 }
 
 body > div:first-of-type > main > section + section {
-  margin-top: calc(var(--margin) * 4);
+  margin-top: calc(var(--margin) * 2);
 }
 
 a:link {
@@ -105,9 +105,8 @@ h1, h2, h3, h4, h5, h6 {
   margin: unset;
 }
 
-/* TODO */
 h3 {
-  text-decoration: underline;
+  font-weight: bold;
 }
 
 hr {
@@ -184,6 +183,13 @@ main {
 
 main a:link {
   text-decoration: underline;
+}
+
+/*
+main section + section,
+*/
+main section > * + * {
+  margin-top: var(--margin);
 }
 
 main ul {
@@ -738,6 +744,24 @@ button > #loading {
   margin-top: var(--margin);
 }
 
+.maxlength {
+  display: grid;
+}
+
+.maxlength > span {
+  background-color: var(--color-bg);
+  justify-self: end;
+  margin-right: calc(var(--margin) * 0.5);
+  margin-top: calc(var(--margin) * -1);
+  padding: calc(var(--margin) * 0.2) calc(var(--margin) * 0.4);
+}
+
+.savecancel {
+  display: grid;
+  grid-auto-flow: column;
+  grid-gap: var(--margin);
+}
+
 .project {
   display: grid;
   grid-template-columns: calc(var(--margin) * 7.2) auto 8ch;
@@ -797,24 +821,28 @@ button > #loading {
   grid-row: 3;
 }
 
-.project .below {
+.project .below,
+.visibility .below {
   display: grid;
   grid-column: 1 / -1;
   grid-auto-flow: row;
   grid-gap: var(--margin);
 }
 
-.project .below div {
+.project .below div,
+.visibility .below div {
   display: grid;
   grid-template-columns: 2rem auto;
   grid-gap: var(--margin);
 }
 
-.project .below div > :nth-child(1) {
+.project .below div > :nth-child(1),
+.visibility .below div > :nth-child(1) {
   grid-column: 1;
 }
 
-.project .below div > :nth-child(2) {
+.project .below div > :nth-child(2),
+.visibility .below div > :nth-child(2) {
   grid-column: 2;
 }
 
