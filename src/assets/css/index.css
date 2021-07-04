@@ -248,8 +248,7 @@ nav + select {
   grid-column: 2;
   align-self: end;
   justify-self: end;
-  position: sticky;
-  bottom: var(--margin);
+  margin-bottom: calc(var(--margin) * 0.65);
   width: 6ch;
 }
 
@@ -764,15 +763,15 @@ button > #loading {
 
 .project {
   display: grid;
-  grid-template-columns: calc(var(--margin) * 7.8) auto 8ch;
-  grid-template-rows: repeat(4, auto);
   grid-gap: var(--margin);
 }
 
+/*
 .project .above  {
   grid-column: 1 / -1;
   grid-row: 1;
 }
+*/
 
 .project .left {
   background-color: var(--color-fg);
@@ -789,7 +788,9 @@ button > #loading {
 
 .project .left,
 .project .center {
+  /*
   grid-row: 2 / -1;
+  */
   height: calc(var(--margin) * 7.8);
 }
 
@@ -813,6 +814,7 @@ button > #loading {
 }
 */
 
+/*
 .project :nth-child(4) {
   grid-column: 3;
   grid-row: 2;
@@ -827,11 +829,14 @@ button > #loading {
   grid-column: 3;
   grid-row: 4;
 }
+*/
 
 .project .below,
 .visibility .below {
   display: grid;
+  /*
   grid-column: 1 / -1;
+  */
   grid-auto-flow: row;
   grid-gap: var(--margin);
 }
@@ -1229,6 +1234,66 @@ button > #loading {
   /*
   form input {
     min-width: 10ch;
+  }
+  */
+}
+
+/* 640px */
+@media (min-width: 40em) {
+  nav + select {
+    position: sticky;
+    bottom: var(--margin);
+  }
+  .project {
+    grid-template-columns: calc(var(--margin) * 7.8) auto 8ch;
+    grid-template-rows: repeat(4, auto);
+  }
+  .project .above  {
+    grid-column: 1 / -1;
+    grid-row: 1;
+  }
+  .project .left,
+  .project .center {
+    grid-row: 2 / -1;
+    height: calc(var(--margin) * 7.8);
+  }
+  .project :nth-child(4) {
+    grid-column: 3;
+    grid-row: 2;
+  }
+  .project :nth-child(5) {
+    grid-column: 3;
+    grid-row: 3;
+  }
+  .project :nth-child(6) {
+    grid-column: 3;
+    grid-row: 4;
+  }
+  .project .below,
+  .visibility .below {
+    /*
+    display: grid;
+    */
+    grid-column: 1 / -1;
+    /*
+    grid-auto-flow: row;
+    grid-gap: var(--margin);
+    */
+  }
+  /*
+  .project .below div,
+  .visibility .below div {
+    display: grid;
+    grid-template-columns: 2rem auto;
+    grid-gap: var(--margin);
+  }
+  .project .below div > :nth-child(1),
+  .visibility .below div > :nth-child(1) {
+    grid-column: 1;
+  }
+  .project .below div > :nth-child(2),
+  .visibility .below div > :nth-child(2) {
+    grid-column: 2;
   }
   */
 }
