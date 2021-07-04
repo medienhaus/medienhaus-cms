@@ -30,7 +30,7 @@ html {
   font-style: normal;
   font-weight: 500;
   height: 100%;
-  line-height: 1.4;
+  line-height: 1.3;
   scroll-behavior: smooth;
 }
 
@@ -765,37 +765,43 @@ button > #loading {
 .project {
   display: grid;
   grid-template-columns: calc(var(--margin) * 7.8) auto 8ch;
-  grid-template-rows: repeat(3, auto);
+  grid-template-rows: repeat(4, auto);
   grid-gap: var(--margin);
 }
 
-.project figure.left  {
+.project .above  {
+  grid-column: 1 / -1;
+  grid-row: 1;
+}
+
+.project .left {
   background-color: var(--color-fg);
   font-size: 0;
-}
-
-.project .left,
-.project .center {
-  grid-row: 1 / -1;
-}
-
-.project .left img,
-.project .center {
   border-color: var(--color-fg);
   border-style: solid;
   border-radius: unset;
   border-width: calc(var(--margin) * 0.2);
+}
+
+.project .left img {
+  height: 100%;
+}
+
+.project .left,
+.project .center {
+  grid-row: 2 / -1;
   height: calc(var(--margin) * 7.8);
 }
 
 .project .center {
-  display: grid;
-  place-items: center;
+  overflow-y: hidden;
 }
 
 .project .center p {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 6;
   overflow: hidden;
-  padding: 0 calc(var(--margin) * 0.4);
   text-overflow: ellipsis;
 }
 
@@ -807,11 +813,6 @@ button > #loading {
 }
 */
 
-.project :nth-child(3) {
-  grid-column: 3;
-  grid-row: 1;
-}
-
 .project :nth-child(4) {
   grid-column: 3;
   grid-row: 2;
@@ -820,6 +821,11 @@ button > #loading {
 .project :nth-child(5) {
   grid-column: 3;
   grid-row: 3;
+}
+
+.project :nth-child(6) {
+  grid-column: 3;
+  grid-row: 4;
 }
 
 .project .below,
