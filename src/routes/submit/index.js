@@ -27,12 +27,12 @@ const Submit = () => {
 
   const projectSpace = params.spaceId
 
-  const reloadSpace = (roomId) => {
+  const reloadSpace = async (roomId) => {
     // roomId is needed in order to invite collaborators to newly created rooms.
     console.log('roomId = ' + roomId)
     // checking to see if the project is a collaboration, if so invite all collaborators and make them admin
     isCollab && roomId && inviteCollaborators(roomId)
-    fetchSpace()
+    await fetchSpace()
   }
 
   const inviteCollaborators = async (roomId) => {
@@ -71,8 +71,9 @@ const Submit = () => {
     space.rooms[0].avatar_url !== undefined && setProjectImage(space.rooms[0].avatar_url)
     const spaceRooms = space.rooms.filter(x => !('room_type' in x))
     setBlocks(spaceRooms.filter(x => x !== undefined).sort((a, b) => {
-      return a.name.substring(0, a.name.indexOf('_')) - b.name.substring(0, b.name.indexOf('_'))
+      return a.name.charAt(0) - b.name.charAt(0)
     }))
+    console.log(blocks)
   }
 
   useEffect(() => {
