@@ -92,13 +92,12 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace }) => 
     e.preventDefault()
     setDeleting(true)
     setReadOnly(true)
-
     try {
       const count = await matrixClient.getJoinedRoomMembers(roomId)
       Object.keys(count.joined).length > 1 && Object.keys(count.joined).forEach(name => {
         localStorage.getItem('medienhaus_user_id') !== name && matrixClient.kick(roomId, name)
       })
-      matrixClient.leave(roomId)
+      await matrixClient.leave(roomId)
       blocks.forEach((block, i) => {
         if (i > index) {
           reorder(block.name, block.room_id, true)
@@ -114,8 +113,6 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace }) => 
     } finally {
       setDeleting()
     }
-    // matrixClient.kick(roomId, userId)
-    // matrixClient.leave(roomId)
   }
 
   const changeOrder = async (roomId, name, direction) => {
