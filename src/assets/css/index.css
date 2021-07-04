@@ -764,12 +764,13 @@ button > #loading {
 
 .project {
   display: grid;
-  grid-template-columns: calc(var(--margin) * 7.2) auto 8ch;
+  grid-template-columns: calc(var(--margin) * 7.8) auto 8ch;
   grid-template-rows: repeat(3, auto);
   grid-gap: var(--margin);
 }
 
 .project figure.left  {
+  background-color: var(--color-fg);
   font-size: 0;
 }
 

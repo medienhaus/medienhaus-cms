@@ -76,7 +76,9 @@ const Projects = ({ space, visibility, index, reloadProjects }) => {
   return (
     <>
       <div className="project">
-        {space.avatar_url && <figure className="left"><img src={matrixClient.mxcUrlToHttp(space.avatar_url)} alt="project-visual-key" /></figure>}
+        <figure className="left">
+          {space.avatar_url && <img src={matrixClient.mxcUrlToHttp(space.avatar_url)} alt="project-visual-key" />}
+        </figure>
         <div className="center">
           <p>Lorem ipsum dolor something something required project description introduction abstract and so on, I guess by now you know what I mean, mh?</p>
         </div>
