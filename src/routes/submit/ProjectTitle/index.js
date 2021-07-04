@@ -75,49 +75,50 @@ const ProjectTitle = ({ joinedSpaces, title, projectSpace, callback }) => {
   }
 
   return (
-    <>
-      <div className="maxlength">
-        <input id="title" maxlength="100" name="title" placeholder="project title" type="text" value={projectTitle} onClick={() => { setEdit(true); setOldTitle(title) }} onChange={(e) => setProjectTitle(e.target.value)} />
-        <span>{projectTitle.length + '/100'}</span>
-      </div>
-      {/*
+        <>
+            <div className="maxlength">
+                <input id="title" maxlength="100" name="title" placeholder="project title" type="text" value={projectTitle} onClick={() => { setEdit(true); setOldTitle(title) }} onChange={(e) => setProjectTitle(e.target.value)} />
+                <span>{projectTitle.length + '/100'}</span>
+            </div>
+            {/*
       <p>❗️ Please provide just the project title without any year or artist name.</p>
-      */}
-      <div className="savecancel">
-        {!newProject && edit && (projectTitle !== oldTitle) && <input id="submit" name="submit" type="submit" value="❌ CANCEL" onClick={(e) => { e.preventDefault(); setEdit(false); setProjectTitle(oldTitle) }} />}
-        {loading
-          ? <Loading />
-          : !title && newProject &&
-            <input
-              id="submit" name="submit" type="submit" value={newProject && 'Create Project'} disabled={(newProject && doublicate) || !projectTitle || projectTitle.length > 100} onClick={(e) => {
-                console.log(newProject)
-                if (newProject && projectTitle.length < 101) {
-                  createProject(e, projectTitle)
-                  setOldTitle(projectTitle)
-                  setNewProject(false)
-                } else {
-                  e.preventDefault()
-                  setNewProject(true)
-                }
-              }}
-          />
-        }
+      */}{!newProject && edit && (projectTitle !== oldTitle) &&
+              <div className="savecancel">
+                  <input id="submit" name="submit" type="submit" value="❌ CANCEL" onClick={(e) => { e.preventDefault(); setEdit(false); setProjectTitle(oldTitle) }} />
+                  {loading
+                    ? <Loading />
+                    : !title && newProject &&
+                      <input
+                          id="submit" name="submit" type="submit" value={newProject && 'Create Project'} disabled={(newProject && doublicate) || !projectTitle || projectTitle.length > 100} onClick={(e) => {
+                            console.log(newProject)
+                            if (newProject && projectTitle.length < 101) {
+                              createProject(e, projectTitle)
+                              setOldTitle(projectTitle)
+                              setNewProject(false)
+                            } else {
+                              e.preventDefault()
+                              setNewProject(true)
+                            }
+                          }}
+                      />
+                  }
 
-        {title && edit && (projectTitle !== oldTitle) && <LoadingSpinnerButton disabled={projectTitle.length > 100} onClick={async () => {
-          if (projectTitle.length < 101) {
-            try {
-              await matrixClient.setRoomName(projectSpace, projectTitle).then(() => callback(projectTitle))
-            } catch (err) {
-              console.error(err)
-            }
-            setEdit(false)
-          } else {
-            setEdit(true)
-            setOldTitle(title)
+                  {title && edit && (projectTitle !== oldTitle) && <LoadingSpinnerButton disabled={projectTitle.length > 100} onClick={async () => {
+                    if (projectTitle.length < 101) {
+                      try {
+                        await matrixClient.setRoomName(projectSpace, projectTitle).then(() => callback(projectTitle))
+                      } catch (err) {
+                        console.error(err)
+                      }
+                      setEdit(false)
+                    } else {
+                      setEdit(true)
+                      setOldTitle(title)
+                    }
+                  }}>✅ SAVE</LoadingSpinnerButton>}
+              </div>
           }
-        }}>✅ SAVE</LoadingSpinnerButton>}
-      </div>
-    </>
+        </>
   )
 }
 export default ProjectTitle
