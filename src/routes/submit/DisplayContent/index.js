@@ -127,11 +127,9 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace }) => 
     const passive = blocks[newOrder].name.split('_')
     const passiveRoom = blocks[newOrder].room_id
     try {
-      await matrixClient.setRoomName(roomId, newOrder + '_' + active[1]).then(
-        await matrixClient.setRoomName(passiveRoom, order + '_' + passive[1]).then(
-          reloadSpace()
-        )
-      )
+      await matrixClient.setRoomName(roomId, newOrder + '_' + active[1])
+        .then(await matrixClient.setRoomName(passiveRoom, order + '_' + passive[1]))
+        .then(reloadSpace())
     } catch (err) {
       console.error(err)
     } finally {
