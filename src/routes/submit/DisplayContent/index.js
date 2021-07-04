@@ -88,11 +88,13 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace }) => 
     }
   }
 
-  const onDelete = async (e, roomId, index) => {
+  const onDelete = async (e, roomId, name, index) => {
     e.preventDefault()
     setDeleting(true)
     setReadOnly(true)
     try {
+      const roomType = name.split('_')
+      await matrixClient.setRoomName(roomId, 'x_' + roomType[1])
       const count = await matrixClient.getJoinedRoomMembers(roomId)
       Object.keys(count.joined).length > 1 && Object.keys(count.joined).forEach(name => {
         localStorage.getItem('medienhaus_user_id') !== name && matrixClient.kick(roomId, name)
@@ -253,7 +255,7 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace }) => 
         <div className="right">
           <button key={'delete' + index} disabled={index === 0 || deleting} onClick={(e) => {
             if (clickedDelete) {
-              onDelete(e, block.room_id, index)
+              onDelete(e, block.room_id, block.name, index)
               setClickedDelete(false)
               reloadSpace()
             } else {

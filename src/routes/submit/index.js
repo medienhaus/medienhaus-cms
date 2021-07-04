@@ -55,7 +55,7 @@ const Submit = () => {
       })
     }
     // invite users to newly created content room
-    const invites = allCollaborators.map(userId => matrixClient.invite(roomId, userId, () => console.log('invited ' + userId)).catch(err => console.log(err)))
+    const invites = allCollaborators?.map(userId => matrixClient.invite(roomId, userId, () => console.log('invited ' + userId)).catch(err => console.log(err)))
     await Promise.all(invites)
     console.log('inviting done, now changing power')
     // then promote them to moderator
@@ -70,8 +70,8 @@ const Submit = () => {
     setSpaceObject(space.rooms[0])
     space.rooms[0].avatar_url !== undefined && setProjectImage(space.rooms[0].avatar_url)
     const spaceRooms = space.rooms.filter(x => !('room_type' in x))
-    setBlocks(spaceRooms.filter(x => x !== undefined).sort((a, b) => {
-      return a.name.charAt(0) - b.name.charAt(0)
+    setBlocks(spaceRooms.filter(x => x !== undefined).filter(room => room.name.charAt(0) !== 'x').sort((a, b) => {
+      return a.name.substring(a.name.indexOf('_')) - b.name.substring(a.name.indexOf('_'))
     }))
     console.log(blocks)
   }
@@ -88,8 +88,6 @@ const Submit = () => {
   }, [projectSpace])
 
   const listeningToCollaborators = async () => {
-    console.log('Started spying on collaborators')
-    setIsCollab(true)
     try {
       // joining contentRooms which might have been created since we last opened the project
       await matrixClient.getSpaceSummary(projectSpace).then(res => {
@@ -130,12 +128,13 @@ const Submit = () => {
   }
 
   const startListeningToCollab = () => {
+    setIsCollab(true)
+    console.log('Started spying on collaborators')
     listeningToCollaborators()
   }
 
   const changeTitle = (newTitle) => {
     setTitle(newTitle)
-    setVisibility('invite')
   }
 
   return (
@@ -155,7 +154,7 @@ const Submit = () => {
           <Category title={title} projectSpace={projectSpace} />
         </section>
         <section className="contributors">
-          <Collaborators projectSpace={projectSpace} blocks={blocks} title={title} joinedSpaces={joinedSpaces} startListeningToCollab={startListeningToCollab} />
+          <Collaborators projectSpace={projectSpace} blocks={blocks} title={title} joinedSpaces={joinedSpaces} startListeningToCollab={() => startListeningToCollab()} />
         </section>
         <section className="project-image">
           <h3>Project Image</h3>
