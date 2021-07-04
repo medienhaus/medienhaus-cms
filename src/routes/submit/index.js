@@ -135,6 +135,7 @@ const Submit = () => {
 
   const changeTitle = (newTitle) => {
     setTitle(newTitle)
+    setVisibility('invite')
   }
 
   return (

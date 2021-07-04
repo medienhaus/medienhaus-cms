@@ -6,6 +6,7 @@ const LoadingSpinnerButton = ({ disabled, onClick: callback, style, children }) 
   const isMounted = useRef(true)
 
   useEffect(() => {
+    // needed to add this cleanup useEffect to prevent memory leaks
     isMounted.current = true
     return () => {
       isMounted.current = false
