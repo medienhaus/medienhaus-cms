@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
 import MediaUpload from './MediaUpload'
 import AddBlock from './AddBlock'
-import PeertubeEmbed from "./peertubeEmbed";
-import createBlock from "../matrix_create_room";
-import reorder from "../DisplayContent/matrix_reorder_rooms";
+import PeertubeEmbed from './peertubeEmbed'
+import createBlock from '../matrix_create_room'
+import reorder from '../DisplayContent/matrix_reorder_rooms'
 
 const AddContent = ({ number, projectSpace, blocks, reloadProjects }) => {
   const [selectedBlockType, setSelectedBlockType] = useState('')
@@ -13,7 +13,7 @@ const AddContent = ({ number, projectSpace, blocks, reloadProjects }) => {
     setShowBlockTypeSelector(!button)
   }
 
-  async function onCreateBlockRoom() {
+  async function onCreateBlockRoom () {
     // Make some room in our room list by pushing rooms below this room down by 1 index
     blocks.forEach((block, i) => {
       if (i >= number) { reorder(block.name, block.room_id, false) }
@@ -22,7 +22,7 @@ const AddContent = ({ number, projectSpace, blocks, reloadProjects }) => {
     return await createBlock(undefined, selectedBlockType, number, projectSpace)
   }
 
-  function onBlockWasAddedSuccessfully() {
+  function onBlockWasAddedSuccessfully () {
     setShowBlockTypeSelector(false)
     reloadProjects()
   }

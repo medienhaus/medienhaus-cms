@@ -1,18 +1,18 @@
 import React, { useEffect, useState } from 'react'
 import Matrix from '../../../Matrix'
 import { Loading } from '../../../components/loading'
-import LoadingSpinnerButton from "../../../components/LoadingSpinnerButton";
-//import createBlock from '../matrix_create_room'
+import LoadingSpinnerButton from '../../../components/LoadingSpinnerButton'
+// import createBlock from '../matrix_create_room'
 
 const PeertubeEmbed = ({ type, onCreateRoomForBlock, onBlockWasAddedSuccessfully }) => {
   const [loading, setLoading] = useState(false)
-  const [entries, setEntries] = useState([]);
-  const [selectedEntry, setSelectedEntry] = useState('');
+  const [entries, setEntries] = useState([])
+  const [selectedEntry, setSelectedEntry] = useState('')
   const matrixClient = Matrix.getMatrixClient()
 
   useEffect(() => {
-    async function fetchEntries() {
-      setLoading(true);
+    async function fetchEntries () {
+      setLoading(true)
       const resourceType = (type === 'playlist' ? 'video-playlists' : 'videos')
       const request = await fetch(`https://stream.udk-berlin.de/api/v1/accounts/${(type === 'playlist' ? 'newmediaclass' : 'd.erdmann')}/${resourceType}?count=100`)
       // TODO: pagination for more than 100 entries
@@ -22,7 +22,7 @@ const PeertubeEmbed = ({ type, onCreateRoomForBlock, onBlockWasAddedSuccessfully
         setEntries([])
         setSelectedEntry('')
         setLoading(false)
-        return;
+        return
       }
 
       entries = entries.data
@@ -30,9 +30,9 @@ const PeertubeEmbed = ({ type, onCreateRoomForBlock, onBlockWasAddedSuccessfully
       if (entries?.length > 0) {
         // Only show live videos for type = "livestream", and non-live videos for type = "video"
         if (type === 'livestream') {
-          entries = entries.filter(video => video.isLive);
+          entries = entries.filter(video => video.isLive)
         } else if (type === 'video') {
-          entries = entries.filter(video => !video.isLive);
+          entries = entries.filter(video => !video.isLive)
         }
       }
 
@@ -43,7 +43,7 @@ const PeertubeEmbed = ({ type, onCreateRoomForBlock, onBlockWasAddedSuccessfully
     fetchEntries()
   }, [type])
 
-  async function handleSubmit() {
+  async function handleSubmit () {
     const blockRoomId = await onCreateRoomForBlock()
     await matrixClient.sendMessage(blockRoomId, {
       body: selectedEntry,
@@ -52,8 +52,8 @@ const PeertubeEmbed = ({ type, onCreateRoomForBlock, onBlockWasAddedSuccessfully
     onBlockWasAddedSuccessfully()
   }
 
-  function selectEntry(e) {
-    setSelectedEntry(e.target.value);
+  function selectEntry (e) {
+    setSelectedEntry(e.target.value)
   }
 
   if (loading) {

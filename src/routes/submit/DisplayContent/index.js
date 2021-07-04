@@ -8,6 +8,7 @@ import AddContent from '../AddContent'
 import List from './List'
 import Code from './Code'
 import reorder from './matrix_reorder_rooms'
+import LoadingSpinnerButton from '../../../components/LoadingSpinnerButton'
 
 import { ReactComponent as HeadingIcon } from '../../../assets/icons/remix/h-1.svg'
 import { ReactComponent as AudioIcon } from '../../../assets/icons/remix/volume-up-line.svg'
@@ -21,13 +22,13 @@ import { ReactComponent as VideoIcon } from '../../../assets/icons/remix/vidicon
 import { ReactComponent as PlaylistIcon } from '../../../assets/icons/remix/playlist.svg'
 
 const DisplayContent = ({ block, index, blocks, projectSpace, reloadProjects }) => {
-  const [clicked, setClicked] = useState(false)
+  const [clickedDelete, setClickedDelete] = useState(false)
   const [readOnly, setReadOnly] = useState(false)
   const [loading, setLoading] = useState(false)
   const [saved, setSaved] = useState(false)
   const [deleting, setDeleting] = useState(false)
   let { cms, error, fetching } = FetchCms(block.room_id)
-  cms = cms[0];
+  cms = cms[0]
   const json = JSON.parse(block.topic)
   const matrixClient = Matrix.getMatrixClient()
 
@@ -37,7 +38,7 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadProjects }) 
     try {
       if (json.type === 'ul' || json.type === 'ol') {
         const list = JSON.parse(localStorage.getItem(roomId)).map(li => li.text).join('\n')
-        console.log(list);
+        console.log(list)
         const save = await matrixClient.sendMessage(roomId, {
           body: list,
           format: 'org.matrix.custom.html',
@@ -50,7 +51,6 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadProjects }) 
             setSaved()
           }, 1000)
         }
-
       } else if (json.type === 'code') {
         const save = await matrixClient.sendMessage(roomId, {
           body: localStorage.getItem(roomId),
@@ -64,9 +64,7 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadProjects }) 
             setSaved()
           }, 1000)
         }
-
-      }
-      else {
+      } else {
         const save = await matrixClient.sendMessage(roomId, {
           body: localStorage.getItem(roomId),
           format: 'org.matrix.custom.html',
@@ -122,8 +120,7 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadProjects }) 
     // matrixClient.leave(roomId)
   }
 
-  const changeOrder = async (e, roomId, name, direction) => {
-    e.preventDefault()
+  const changeOrder = async (roomId, name, direction) => {
     setLoading(true)
     setReadOnly(true)
     // blocks.splice((pos) + direction, 0, blocks.splice(pos, 1).pop())
@@ -159,37 +156,46 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadProjects }) 
   }
 
   if (fetching || loading) {
-    return <div style={{ height: '120px' }}><Loading /></div>;
+    return <div style={{ height: '120px' }}><Loading /></div>
   }
 
   if (error) {
-    console.error(error);
-    return;
+    console.error(error)
+    return
   }
 
   return (
     <>
       <div className="editor">
         <div className="left">
-          <button key={'up_' + block.room_id} disabled={index === 0} onClick={(e) => changeOrder(e, block.room_id, block.name, -1)}>↑</button>
+          <LoadingSpinnerButton key={'up_' + block.room_id} disabled={index < 2} onClick={() => changeOrder(block.room_id, block.name, -1)}>↑</LoadingSpinnerButton>
           <figure className="icon-bg">
             {
-              json.type === 'heading' ? <HeadingIcon fill="var(--color-fg)" /> :
-                json.type === 'audio' ? <AudioIcon fill="var(--color-fg)" /> :
-                  json.type === 'image' ? <ImageIcon fill="var(--color-fg)" /> :
-                    json.type === 'ul' ? <UlIcon fill="var(--color-fg)" /> :
-                      json.type === 'ol' ? <OlIcon fill="var(--color-fg)" /> :
-                        json.type === 'quote' ? <QuoteIcon fill="var(--color-fg)" /> :
-                          json.type === 'code' ? <CodeIcon fill="var(--color-fg)" /> :
-                            json.type === 'video' ? <VideoIcon fill="var(--color-fg)" /> :
-                              json.type === 'playlist' ? <PlaylistIcon fill="var(--color-fg)" /> :
-                                <TextIcon fill="var(--color-fg)" />
+              json.type === 'heading'
+                ? <HeadingIcon fill="var(--color-fg)" />
+                : json.type === 'audio'
+                  ? <AudioIcon fill="var(--color-fg)" />
+                  : json.type === 'image'
+                    ? <ImageIcon fill="var(--color-fg)" />
+                    : json.type === 'ul'
+                      ? <UlIcon fill="var(--color-fg)" />
+                      : json.type === 'ol'
+                        ? <OlIcon fill="var(--color-fg)" />
+                        : json.type === 'quote'
+                          ? <QuoteIcon fill="var(--color-fg)" />
+                          : json.type === 'code'
+                            ? <CodeIcon fill="var(--color-fg)" />
+                            : json.type === 'video'
+                              ? <VideoIcon fill="var(--color-fg)" />
+                              : json.type === 'playlist'
+                                ? <PlaylistIcon fill="var(--color-fg)" />
+                                : <TextIcon fill="var(--color-fg)" />
             }
           </figure>
-          <button key={'down_' + block.room_id} disabled={index === blocks.length - 1} onClick={(e) => changeOrder(e, block.room_id, block.name, 1)}>↓</button>
+          <LoadingSpinnerButton key={'down_' + block.room_id} disabled={index === blocks.length - 1 || index === 0} onClick={() => changeOrder(block.room_id, block.name, 1)}>↓</LoadingSpinnerButton>
         </div>
         {cms?.msgtype === 'm.image'
-          ? <div className="center"><img src={matrixClient.mxcUrlToHttp(cms.url)} alt={cms.info.name} key={block.room_id} /></div>
+          ? <figure className="center"><img src={matrixClient.mxcUrlToHttp(cms.url)} alt={cms.info.name} key={block.room_id} /></figure>
           : cms?.msgtype === 'm.audio'
             ? <div className="center">
               <audio controls>
@@ -197,23 +203,24 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadProjects }) 
               </audio>
               { /* TODO why section? */}
               <section id="audio-title">{cms.body}</section>
-            </div> :
-            json.type === 'ul' ?
-              <List onSave={() => onSave(block.room_id)} storage={(list) => localStorage.setItem(block.room_id, list)} populated={cms?.body} type="ul" /> :
-              json.type === 'ol' ?
-                <List onSave={() => onSave(block.room_id)} storage={(list) => localStorage.setItem(block.room_id, list)} populated={cms?.body} type="ol" />
-                : json.type === 'code' ?
-                  <Code onSave={() => onSave(block.room_id)} storage={(code) => localStorage.setItem(block.room_id, code)} saved={saved} content={cms?.body} />
-                  : (json.type === 'video' || json.type === 'livestream' || json.type === 'playlist') ? (
+            </div>
+            : json.type === 'ul'
+              ? <List onSave={() => onSave(block.room_id)} storage={(list) => localStorage.setItem(block.room_id, list)} populated={cms?.body} type="ul" />
+              : json.type === 'ol'
+                ? <List onSave={() => onSave(block.room_id)} storage={(list) => localStorage.setItem(block.room_id, list)} populated={cms?.body} type="ol" />
+                : json.type === 'code'
+                  ? <Code onSave={() => onSave(block.room_id)} storage={(code) => localStorage.setItem(block.room_id, code)} saved={saved} content={cms?.body} />
+                  : (json.type === 'video' || json.type === 'livestream' || json.type === 'playlist')
+                      ? (
                     <iframe src={`https://stream.udk-berlin.de/${(json.type === 'playlist' ? 'video-playlists' : 'videos')}/embed/${cms?.body}`}
                       frameBorder="0"
                       title={cms?.body}
                       sandbox="allow-same-origin allow-scripts"
                       allowFullScreen="allowfullscreen"
-                      style={{ width: '100%', aspectRatio: '16 / 9', border: `calc(var(--margin) * 0.2) solid var(--color-fg)` }}
+                      style={{ width: '100%', aspectRatio: '16 / 9', border: 'calc(var(--margin) * 0.2) solid var(--color-fg)' }}
                     />
-                  ) :
-                    <div className="center">
+                        )
+                      : <div className="center">
                       <Editor
                         dark={window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches}
                         defaultValue={cms?.body}
@@ -252,18 +259,18 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadProjects }) 
         }
 
         <div className="right">
-          <button key={'delete' + index} onClick={(e) => {
-            if (clicked) {
+          <button key={'delete' + index} disabled={index === 0 || deleting} onClick={(e) => {
+            if (clickedDelete) {
               onDelete(e, block.room_id, index)
-              setClicked(false)
+              setClickedDelete(false)
               reloadProjects()
             } else {
               e.preventDefault()
-              setClicked(true)
+              setClickedDelete(true)
             }
             <p>{deleting}</p> // feedback that deleting was succesfull or has failed
           }}>
-            {clicked ? 'SURE?' : deleting ? <Loading /> : '×'}
+            {clickedDelete ? 'SURE?' : deleting ? <Loading /> : '×'}
           </button>
         </div>
       </div>

@@ -11,15 +11,15 @@ const Profile = () => {
   const profile = auth.user
   const { joinedSpaces, spacesErr, fetchSpaces } = useJoinedSpaces(() => console.log(fetchSpaces || spacesErr))
   const matrixClient = Matrix.getMatrixClient()
-  const [drafts, setDrafts] = useState([]);
-  const [publications, setPublications] = useState([]);
+  const [drafts, setDrafts] = useState([])
+  const [publications, setPublications] = useState([])
   const [invites, setInvites] = useState({})
 
   // @TODO: Check for existing invites on page load
 
   // Listen for room events to populate our "pending invites" state
   useEffect(() => {
-    async function handleRoomEvent(room) {
+    async function handleRoomEvent (room) {
       // Ignore event if this is not about a space
       if (room.getType() !== 'm.space') return
 
@@ -50,8 +50,7 @@ const Profile = () => {
   useEffect(() => {
     setDrafts(joinedSpaces?.filter(projectSpace => projectSpace.published === 'invite'))
     setPublications(joinedSpaces?.filter(projectSpace => projectSpace.published === 'public'))
-  }, [joinedSpaces]);
-
+  }, [joinedSpaces])
 
   const removeInviteByIndex = (index) => {
     // @TODO: This function is currently not being used. But needs to be refactored to take the room ID as index.
@@ -78,36 +77,38 @@ const Profile = () => {
   return (
     <div>
       <p>Hello <strong>{profile.displayname}</strong>,</p>
-      <p>welcome to your profile for the Rundgang 2021.</p>
-      {!invites ? <Loading /> : Object.keys(invites).length > 0 && (
+      <p>welcome to the content management system for Rundgang 2021.</p>
+      {!invites
+        ? <Loading />
+        : Object.keys(invites).length > 0 && (
         <>
           <p>You have been invited to join the following project{invites.length > 1 && 's'}:</p>
           <ul>
             {Object.values(invites).map((room, index) => (
-              <li key={index}>
+              <li key={index} style={{ 'list-style-type': 'none' }}>
                 <Invites room={room} callback={() => { removeInviteByIndex(room) }} />
               </li>
             ))}
           </ul>
         </>
-      )
+        )
       }
       {fetchSpaces
         ? <Loading />
         : (
           <>
             {drafts?.length > 0 && <p>You have <strong>{drafts.length} draft{drafts.length > 1 && 's'}</strong>, which {drafts.length > 1 ? 'are' : 'is'} not publicly visible.</p>}
-            <ul>
-              {spacesErr ? console.error(spacesErr) : drafts.map((space, index) => <><Projects space={space} visibility={space.visibility} index={index} reloadProjects={changeDraftToPublication} /><hr /></>)
+            <section className="draft">
+              {spacesErr ? console.error(spacesErr) : drafts.map((space, index) => <><Projects space={space} visibility={space.published} index={index} reloadProjects={changeDraftToPublication} /><hr /></>)
               }
-            </ul>
+            </section>
             {publications?.length > 0 && <p>You have <strong>{publications.length} published</strong> project{publications.length > 1 && 's'}, which {publications.length > 1 ? 'are' : 'is'} publicly visible.</p>}
-            <ul>
+            <section className="public">
               {spacesErr ? console.error(spacesErr) : publications.map((space, index) => <><Projects space={space} visibility={space.published} index={index} reloadProjects={changePublicationToDraft} /><hr /> </>)
               }
-            </ul>
+            </section>
           </>
-        )}
+          )}
     </div>
   )
 }

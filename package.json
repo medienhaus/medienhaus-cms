@@ -18,6 +18,11 @@
     "showdown": "^1.9.1",
     "web-vitals": "^1.1.2"
   },
+  "devDependencies": {
+    "eslint": "^7.30.0",
+    "eslint-config-standard": "^16.0.2",
+    "eslint-plugin-react-hooks": "^4.2.0"
+  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
@@ -27,8 +32,15 @@
   "eslintConfig": {
     "extends": [
       "react-app",
-      "react-app/jest"
-    ]
+      "standard",
+      "plugin:react-hooks/recommended"
+    ],
+    "rules": {
+      "jsx-quotes": [
+        "error",
+        "prefer-double"
+      ]
+    }
   },
   "browserslist": {
     "production": [

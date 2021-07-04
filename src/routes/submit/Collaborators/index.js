@@ -39,8 +39,6 @@ const Collaborators = ({ projectSpace, blocks, title, joinedSpaces, startListeni
     }
   }
 
-
-
   const fetchUsers = async (e, search) => {
     e.preventDefault()
     setFetchingUsers(true)
@@ -57,8 +55,11 @@ const Collaborators = ({ projectSpace, blocks, title, joinedSpaces, startListeni
 
   return (
     <>
-      <h3>Collaborators / Credits</h3>
-      {// @Andi would probably be nice to have the loading spinner next to the h3 whil its looking for collabrators
+      <h3>Contributors</h3>
+      <p>Did you work with other people on this project? Here you can share access to edit this project.
+        The mentioned person needs an account at medienhaus/.
+        You can also mention a person without an account but you will not be able to share the project to edit by the person.</p>
+      {
         < section >
           <ul>{
             joinedSpaces?.map((space, i) => space.name === title && Object.values(space.collab).map(name => {

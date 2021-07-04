@@ -15,8 +15,8 @@ const useJoinedRooms = () => {
           try {
             const room = await matrixClient.getStateEvent(roomId, 'm.room.topic')
             if (room.topic) {
-            const name = await matrixClient.getStateEvent(roomId, 'm.room.name')
-              return {name: name.name, topic: room.topic, room_id: roomId}
+              const name = await matrixClient.getStateEvent(roomId, 'm.room.name')
+              return { name: name.name, topic: room.topic, room_id: roomId }
             } else {
               return ''
             }
