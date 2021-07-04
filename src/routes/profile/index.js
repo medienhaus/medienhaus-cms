@@ -53,7 +53,6 @@ const Profile = () => {
   }, [joinedSpaces])
 
   const removeInviteByIndex = (room) => {
-    // @TODO: This function is currently not being used. But needs to be refactored to take the room ID as index.
     // setInvites(invites => invites.filter((invite, i) => i !== index))
     setInvites(Object.fromEntries(
       Object.entries(invites).filter(([key]) => key !== room)))
