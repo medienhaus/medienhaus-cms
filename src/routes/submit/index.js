@@ -19,7 +19,6 @@ const Submit = () => {
   const [visibility, setVisibility] = useState('')
   const [loading, setLoading] = useState(false)
   const [blocks, setBlocks] = useState([])
-  const [update, setUpdate] = useState(false)
   const [isCollab, setIsCollab] = useState(false)
   const [contentLang, setContentLang] = useState('en')
   const [spaceObject, setSpaceObject] = useState()
@@ -28,12 +27,12 @@ const Submit = () => {
 
   const projectSpace = params.spaceId
 
-  const reloadProjects = (roomId) => {
+  const reloadSpace = (roomId) => {
     // roomId is needed in order to invite collaborators to newly created rooms.
     console.log('roomId = ' + roomId)
     // checking to see if the project is a collaboration, if so invite all collaborators and make them admin
     isCollab && roomId && inviteCollaborators(roomId)
-    setUpdate(true)
+    fetchSpace()
   }
 
   const inviteCollaborators = async (roomId) => {
@@ -65,6 +64,17 @@ const Submit = () => {
     console.log('all done')
   }
 
+  const fetchSpace = async () => {
+    const space = await matrixClient.getSpaceSummary(projectSpace)
+    setTitle(space.rooms[0].name)
+    setSpaceObject(space.rooms[0])
+    space.rooms[0].avatar_url !== undefined && setProjectImage(space.rooms[0].avatar_url)
+    const spaceRooms = space.rooms.filter(x => !('room_type' in x))
+    setBlocks(spaceRooms.filter(x => x !== undefined).sort((a, b) => {
+      return a.name - b.name
+    }))
+  }
+
   useEffect(() => {
     setVisibility(joinedSpaces?.filter(x => x.room_id === projectSpace)[0]?.published)
     // eslint-disable-next-line
@@ -72,20 +82,9 @@ const Submit = () => {
 
   useEffect(() => {
     projectSpace || setTitle('') // shoukd fix the error when already editing a project and wanting to create a new one
-    const fetchSpace = async () => {
-      const space = await matrixClient.getSpaceSummary(projectSpace)
-      setTitle(space.rooms[0].name)
-      setSpaceObject(space.rooms[0])
-      space.rooms[0].avatar_url !== undefined && setProjectImage(space.rooms[0].avatar_url)
-      const spaceRooms = space.rooms.filter(x => !('room_type' in x))
-      setBlocks(spaceRooms.filter(x => x !== undefined).sort((a, b) => {
-        return a.name - b.name
-      }))
-      setUpdate(false)
-    }
     projectSpace && fetchSpace()
     // eslint-disable-next-line
-  }, [update, projectSpace]);
+  }, [projectSpace])
 
   const listeningToCollaborators = async () => {
     console.log('Started spying on collaborators')
@@ -104,21 +103,21 @@ const Submit = () => {
     setTitle(myRooms?.rooms[0].name)
     matrixClient.addListener('RoomState.events', function (event) {
       if (event.event.type === 'm.room.member' && myRooms.rooms?.filter(({ roomId }) => event.sender.roomId.includes(roomId)) && event.event.sender !== localStorage.getItem('mx_user_id')) {
-        setUpdate(true)
+        fetchSpace()
       } else if (event.event.type === 'm.room.name' && blocks?.filter(({ roomId }) => event.sender.roomId.includes(roomId))) {
-        setUpdate(true)
+        fetchSpace()
       } else if (event.event.type === 'm.space.child' && event.event.room_id === projectSpace && event.event.sender !== localStorage.getItem('mx_user_id')) {
         console.log(event.event)
-        setUpdate(true)
+        fetchSpace()
         matrixClient.joinRoom(event.event.state_key)
       } else if (event.event.state_key === projectSpace) {
-        setUpdate(true)
+        fetchSpace()
       }
     })
     matrixClient.on('Room.timeline', function (event, room, toStartOfTimeline) {
       if (event.event.type === 'm.room.message' && blocks?.filter(({ roomId }) => event.event.room_id.includes(roomId)) && event.event.sender !== localStorage.getItem('mx_user_id')) {
         console.log(event)
-        setUpdate(true)
+        fetchSpace()
       }
     })
   }
@@ -172,9 +171,9 @@ const Submit = () => {
             <option value="en" >EN -English</option>
           </select>
           {blocks.length === 0
-            ? <AddContent number={0} projectSpace={projectSpace} blocks={blocks} reloadProjects={reloadProjects} />
+            ? <AddContent number={0} projectSpace={projectSpace} blocks={blocks} reloadSpace={reloadSpace} />
             : blocks.map((content, i) =>
-              <DisplayContent block={content} index={i} blocks={blocks} projectSpace={projectSpace} reloadProjects={reloadProjects} key={content + i} />
+              <DisplayContent block={content} index={i} blocks={blocks} projectSpace={projectSpace} reloadSpace={reloadSpace} key={content + i} />
             )}
           </section>
           <section className="visibility">

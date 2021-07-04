@@ -5,7 +5,7 @@ import PeertubeEmbed from './peertubeEmbed'
 import createBlock from '../matrix_create_room'
 import reorder from '../DisplayContent/matrix_reorder_rooms'
 
-const AddContent = ({ number, projectSpace, blocks, reloadProjects }) => {
+const AddContent = ({ number, projectSpace, blocks, reloadSpace }) => {
   const [selectedBlockType, setSelectedBlockType] = useState('')
   const [showBlockTypeSelector, setShowBlockTypeSelector] = useState(false)
 
@@ -24,7 +24,7 @@ const AddContent = ({ number, projectSpace, blocks, reloadProjects }) => {
 
   function onBlockWasAddedSuccessfully () {
     setShowBlockTypeSelector(false)
-    reloadProjects()
+    reloadSpace()
   }
 
   // "Collapsed mode": Only show a small '+' button
@@ -58,10 +58,10 @@ const AddContent = ({ number, projectSpace, blocks, reloadProjects }) => {
       <button className="cancel" onClick={(e) => { e.preventDefault(); setShowBlockTypeSelector(false); setSelectedBlockType('') }} >×</button>
       {
         selectedBlockType === 'image' || selectedBlockType === 'audio'
-          ? <MediaUpload fileType={selectedBlockType} number={number} space={projectSpace} blocks={blocks} reloadProjects={reloadProjects} displayPlusButton={displayPlusButton} />
+          ? <MediaUpload fileType={selectedBlockType} number={number} space={projectSpace} blocks={blocks} reloadSpace={reloadSpace} displayPlusButton={displayPlusButton} />
           : selectedBlockType === 'video' || selectedBlockType === 'livestream' || selectedBlockType === 'playlist'
             ? <PeertubeEmbed type={selectedBlockType} onCreateRoomForBlock={onCreateBlockRoom} onBlockWasAddedSuccessfully={onBlockWasAddedSuccessfully} />
-            : <AddBlock contentSelect={selectedBlockType} number={number} projectSpace={projectSpace} blocks={blocks} reloadProjects={reloadProjects} displayPlusButton={displayPlusButton} />
+            : <AddBlock contentSelect={selectedBlockType} number={number} projectSpace={projectSpace} blocks={blocks} reloadSpace={reloadSpace} displayPlusButton={displayPlusButton} />
       }
     </div>
   )

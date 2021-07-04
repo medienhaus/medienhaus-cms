@@ -21,7 +21,7 @@ import { ReactComponent as CodeIcon } from '../../../assets/icons/remix/code.svg
 import { ReactComponent as VideoIcon } from '../../../assets/icons/remix/vidicon-line.svg'
 import { ReactComponent as PlaylistIcon } from '../../../assets/icons/remix/playlist.svg'
 
-const DisplayContent = ({ block, index, blocks, projectSpace, reloadProjects }) => {
+const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace }) => {
   const [clickedDelete, setClickedDelete] = useState(false)
   const [readOnly, setReadOnly] = useState(false)
   const [loading, setLoading] = useState(false)
@@ -34,7 +34,6 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadProjects }) 
 
   const onSave = async (roomId) => {
     setReadOnly(true)
-
     try {
       if (json.type === 'ul' || json.type === 'ol') {
         const list = JSON.parse(localStorage.getItem(roomId)).map(li => li.text).join('\n')
@@ -78,7 +77,6 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadProjects }) 
           }, 1000)
         }
       }
-      // await matrixClient.redactEvent(roomId.room_id, entry.event, null, { 'reason': 'I have my reasons!' })
     } catch (e) {
       console.error('error while trying to save: ' + e)
       setSaved("Couldn't save!")
@@ -106,7 +104,7 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadProjects }) 
           reorder(block.name, block.room_id, true)
         }
       })
-      // setCounter(0)
+      reloadSpace()
     } catch (err) {
       console.error(err)
       setDeleting(`couldn't delete ${json.type}, please try again or try reloading the page`)
@@ -123,7 +121,6 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadProjects }) 
   const changeOrder = async (roomId, name, direction) => {
     setLoading(true)
     setReadOnly(true)
-    // blocks.splice((pos) + direction, 0, blocks.splice(pos, 1).pop())
     const active = name.split('_')
     const order = parseInt(active[0])
     const newOrder = order + direction
@@ -132,7 +129,7 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadProjects }) 
     try {
       await matrixClient.setRoomName(roomId, newOrder + '_' + active[1]).then(
         await matrixClient.setRoomName(passiveRoom, order + '_' + passive[1]).then(
-          reloadProjects()
+          reloadSpace()
         )
       )// .then(setCounter(0))
     } catch (err) {
@@ -263,7 +260,7 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadProjects }) 
             if (clickedDelete) {
               onDelete(e, block.room_id, index)
               setClickedDelete(false)
-              reloadProjects()
+              reloadSpace()
             } else {
               e.preventDefault()
               setClickedDelete(true)
@@ -274,7 +271,7 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadProjects }) 
           </button>
         </div>
       </div>
-      <AddContent number={index + 1} projectSpace={projectSpace} blocks={blocks} reloadProjects={reloadProjects} />
+      <AddContent number={index + 1} projectSpace={projectSpace} blocks={blocks} reloadSpace={reloadSpace} />
     </>
   )
 }

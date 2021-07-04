@@ -3,7 +3,7 @@ import createBlock from '../../matrix_create_room'
 import reorder from '../../DisplayContent/matrix_reorder_rooms'
 import { Loading } from '../../../../components/loading'
 
-const AddBlock = ({ contentSelect, number, projectSpace, blocks, reloadProjects, displayPlusButton }) => {
+const AddBlock = ({ contentSelect, number, projectSpace, blocks, reloadSpace, displayPlusButton }) => {
   const [loading, setLoading] = useState(false)
   return (
     <button className="add-content" type="submit" disabled={contentSelect === '' || false} value={`add ${contentSelect}`} onClick={async (e) => {
@@ -18,7 +18,7 @@ const AddBlock = ({ contentSelect, number, projectSpace, blocks, reloadProjects,
       await createBlock(e, contentSelect, number, projectSpace).then((res) => {
         setLoading(false)
         displayPlusButton(true)
-        reloadProjects(res)
+        reloadSpace(res)
       })
     }
     }>{loading ? <Loading /> : 'Add Content'}</button>
