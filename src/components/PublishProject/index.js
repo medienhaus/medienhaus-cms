@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import LoadingSpinnerButton from '../LoadingSpinnerButton'
+import { Loading } from '../loading'
 
 const PublishProject = ({ space, published, index, callback }) => {
   const [userFeedback, setUserFeedback] = useState()
@@ -49,7 +50,8 @@ const PublishProject = ({ space, published, index, callback }) => {
   }
 
   return (
-    <>
+    visibility
+      ? <>
       <select id="visibility" name="visibility" value={visibility} onChange={(e) => {
         setVisibility(e.target.value)
         e.target.value === 'public'
@@ -69,7 +71,8 @@ const PublishProject = ({ space, published, index, callback }) => {
         </div>
         {showSaveButton && <LoadingSpinnerButton disabled={(!consent && visibility === 'public')} onClick={onChangeVisibility}>SAVE</LoadingSpinnerButton>}
       </div>}
-    </>
+      </>
+      : <Loading />
   )
 }
 
