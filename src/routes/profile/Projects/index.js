@@ -8,8 +8,6 @@ const Projects = ({ space, visibility, index, reloadProjects }) => {
   const history = useHistory()
   const matrixClient = Matrix.getMatrixClient()
 
-  console.log(visibility)
-
   const deleteProject = async (e, project) => {
     e.preventDefault()
     let space
@@ -76,12 +74,12 @@ const Projects = ({ space, visibility, index, reloadProjects }) => {
   return (
     <>
       <div className="project">
-        <h3 className="above">Lirum Larum Lorem Ipsum (2014–2021)</h3>
+        <h3 className="above">{space.name}</h3>
         <figure className="left">
           {space.avatar_url && <img src={matrixClient.mxcUrlToHttp(space.avatar_url)} alt="project-visual-key" />}
         </figure>
         <div className="center">
-          <p>Lorem ipsum dolor something something required project description introduction abstract and so on, I guess by now you know what I mean, mh?</p>
+          <p>{space.description || 'Please add a short description to your project.'}</p>
         </div>
         {/*
         <div className="right">

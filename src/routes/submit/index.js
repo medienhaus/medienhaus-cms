@@ -16,7 +16,7 @@ const Submit = () => {
   const { joinedSpaces, spacesErr, fetchSpaces } = useJoinedSpaces(() => console.log(fetchSpaces || spacesErr))
   const [title, setTitle] = useState('')
   const [projectImage, setProjectImage] = useState(false)
-  const [visibility, setVisibility] = useState('invite')
+  const [visibility, setVisibility] = useState('')
   const [loading, setLoading] = useState(false)
   const [blocks, setBlocks] = useState([])
   const [update, setUpdate] = useState(false)

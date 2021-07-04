@@ -77,17 +77,17 @@ const ProjectTitle = ({ joinedSpaces, title, projectSpace, callback }) => {
   return (
         <>
             <div className="maxlength">
-                <input id="title" maxlength="100" name="title" placeholder="project title" type="text" value={projectTitle} onClick={() => { setEdit(true); setOldTitle(title) }} onChange={(e) => setProjectTitle(e.target.value)} />
+                <input id="title" maxLength="100" name="title" placeholder="project title" type="text" value={projectTitle} onClick={() => { setEdit(true); setOldTitle(title) }} onChange={(e) => setProjectTitle(e.target.value)} />
                 <span>{projectTitle.length + '/100'}</span>
             </div>
             {/*
       <p>❗️ Please provide just the project title without any year or artist name.</p>
-      */}{!newProject && edit && (projectTitle !== oldTitle) &&
+      */}{loading
+      ? <Loading />
+      : edit && (projectTitle !== oldTitle) &&
               <div className="savecancel">
-                  <input id="submit" name="submit" type="submit" value="❌ CANCEL" onClick={(e) => { e.preventDefault(); setEdit(false); setProjectTitle(oldTitle) }} />
-                  {loading
-                    ? <Loading />
-                    : !title && newProject &&
+                {!newProject && <input id="submit" name="submit" type="submit" value="❌ CANCEL" onClick={(e) => { e.preventDefault(); setEdit(false); setProjectTitle(oldTitle) }} />}
+                  {!title && newProject &&
                       <input
                           id="submit" name="submit" type="submit" value={newProject && 'Create Project'} disabled={(newProject && doublicate) || !projectTitle || projectTitle.length > 100} onClick={(e) => {
                             console.log(newProject)
