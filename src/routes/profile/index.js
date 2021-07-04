@@ -85,7 +85,7 @@ const Profile = () => {
           <p>You have been invited to join the following project{invites.length > 1 && 's'}:</p>
           <ul>
             {Object.values(invites).map((room, index) => (
-              <li key={index}>
+              <li key={index} style={{ 'list-style-type': 'none' }}>
                 <Invites room={room} callback={() => { removeInviteByIndex(room) }} />
               </li>
             ))}
