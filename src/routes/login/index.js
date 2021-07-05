@@ -19,6 +19,7 @@ const Login = () => {
   const [password, setPassword] = useState('')
   const [isLoading, setLoading] = useState(false)
   const [errormsg, setErrormsg] = useState()
+  const [consent, setConsent] = useState(false)
   const history = useHistory()
   const location = useLocation()
   const { t } = useTranslation('login')
@@ -53,7 +54,7 @@ const Login = () => {
         <div>
           <label htmlFor="username">{t('username')}</label>
           <div>
-            <input name="username" type="text" placeholder={t('u.name')} value={name} onChange={changeName} /> {// {...register('username', { required: true })} />
+            <input name="username" type="text" placeholder={t('u.name')} value={name} onChange={changeName} /> {// @TODO {...register('username', { required: true })} />
             <select>
               <option value="udk" select>@udk-berlin.de</option>
               <option value="intra">@intra.udk-berlin.de</option>
@@ -64,7 +65,7 @@ const Login = () => {
         {errors.username && t('Username can\'t be empty.')}
         <div>
           <label htmlFor="password">{t('password')}</label>
-          <input name="password" type="password" placeholder="••••••••••••••••••••••••" value={password} onChange={changePassword} /> {// {...register('password',{ required: true })} />
+          <input name="password" type="password" placeholder="••••••••••••••••••••••••" value={password} onChange={changePassword} /> {// @TODO {...register('password',{ required: true })} />
           }
         </div>
         {errors.password && t('Password can\'t be empty.')}
@@ -74,7 +75,11 @@ const Login = () => {
             <Loading />
             )
           : (
-            <button name="submit" type="submit">LOGIN</button>
+            <div>
+            <input id="checkbox" name="checkbox" type="checkbox" value={consent} onChange={() => setConsent(consent => !consent)} />
+            <label htmlFor="checkbox">I hereby consent that I own the rights to the uploaded content and am aware of the content violation policy.</label>
+            <button name="submit" type="submit" disabled={!consent}>LOGIN</button>
+            </div>
             )}
       </form>
       <p>Your login <code>username</code> and <code>password</code> are the same as for your <code>@udk-berlin.de</code> or <code>@intra.udk-berlin.de</code> mail account. If you forgot your password or want to change it, please check the links below.</p>
