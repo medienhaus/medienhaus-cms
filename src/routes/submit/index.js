@@ -205,7 +205,7 @@ const Submit = () => {
           <section className="visibility">
             <h3>Visibility (Draft/Published)</h3>
             <p>Select if you want to save the information provided by you as a draft or if you are happy with it select to publish the project. You can change this at any time.</p>
-            <PublishProject space={spaceObject?.rooms[0]} published={visibility} />
+            <PublishProject space={joinedSpaces?.filter(x => x.room_id === projectSpace)[0]?.description} published={visibility} />
           </section>
         </>
       )}
