@@ -64,6 +64,20 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace }) => 
           }, 1000)
         }
       } else {
+        if (json.type === 'introduction') {
+          console.log('introooooo')
+          localStorage.getItem(block.room_id).length > 20
+            ? matrixClient.setRoomTopic(projectSpace, JSON.stringify({
+              rundgang: 21,
+              type: 'studentproject',
+              complete: true
+            }))
+            : matrixClient.setRoomTopic(projectSpace, JSON.stringify({
+              rundgang: 21,
+              type: 'studentproject',
+              complete: false
+            }))
+        }
         const save = await matrixClient.sendMessage(roomId, {
           body: localStorage.getItem(roomId),
           format: 'org.matrix.custom.html',

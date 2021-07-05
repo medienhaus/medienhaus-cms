@@ -47,7 +47,7 @@ const Submit = () => {
         }
         )
         try {
-          // something here is going wrong
+          // something here is going wrong for collab > 2
           await matrixClient.setPowerLevel(roomId, userId, 100, powerEvent)
         } catch (err) {
           console.error(err)
@@ -58,7 +58,7 @@ const Submit = () => {
     const invites = allCollaborators?.map(userId => matrixClient.invite(roomId, userId, () => console.log('invited ' + userId)).catch(err => console.log(err)))
     await Promise.all(invites)
     console.log('inviting done, now changing power')
-    // then promote them to moderator
+    // then promote them to admin
     const power = allCollaborators.map(userId => setPower(userId))
     await Promise.all(power)
     console.log('all done')
@@ -71,7 +71,6 @@ const Submit = () => {
     space.rooms[0].avatar_url !== undefined && setProjectImage(space.rooms[0].avatar_url)
     const spaceRooms = space.rooms.filter(x => !('room_type' in x))
     setBlocks(spaceRooms.filter(x => x !== undefined).filter(room => room.name.charAt(0) !== 'x').sort((a, b) => {
-      console.log(a.name.substring(0, a.name.indexOf('_')))
       return a.name.substring(0, a.name.indexOf('_')) - b.name.substring(0, b.name.indexOf('_'))
     }))
   }, [projectSpace, matrixClient])
@@ -94,6 +93,11 @@ const Submit = () => {
     } catch (err) {
       console.error(err)
     }
+    /*
+    Disabled for now, serious performance issues here...
+    I suspect we're not removing listeners fast enough while adding them 🤷‍♂️
+    Maybe a useEffect subscribe unsibscribe would fix it but pushing this as collaborative editing is not essential for launch.
+    Displyaing warning message for the time being.
 
     await matrixClient.removeAllListeners().setMaxListeners(999)
     const myRooms = await matrixClient.getSpaceSummary(projectSpace)
@@ -117,6 +121,7 @@ const Submit = () => {
         fetchSpace()
       }
     })
+    */
   }
 
   const changeProjectImage = (url) => {
@@ -139,7 +144,8 @@ const Submit = () => {
     <>
       <section className="welcome">
         <p><strong>Welcome to your project!</strong></p>
-        <p>This is the project page. Please add in which context the project happend, projectname and descriptive text and images. If you want to continue at a later point in time, you can save the project as a draft and find it in your collection under “drafts”.</p>
+        <p>This is the project page. Please add in which context the project happend, projectname and descriptive text and images.
+          If you want to continue at a later point in time, you can save the project as a draft and find it in your collection under “drafts”.</p>
       </section>
       <section className="project-title">
         <h3>Project Title</h3>
@@ -168,7 +174,7 @@ const Submit = () => {
           <select id="subject" name="subject" defaultValue={''} value={contentLang} onChange={(e) => setContentLang(e.target.value)}>
             <option value="de">DE - German</option>
             <option value="en" >EN -English</option>
-          </select>
+            </select>
           {blocks.length === 0
             ? <AddContent number={0} projectSpace={projectSpace} blocks={blocks} reloadSpace={reloadSpace} />
             : blocks.map((content, i) =>

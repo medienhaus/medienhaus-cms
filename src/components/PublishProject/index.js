@@ -8,7 +8,7 @@ const PublishProject = ({ space, published, index, callback }) => {
   const [showConsentBox, setShowConsentBox] = useState(false)
   const [showSaveButton, setShowSaveButton] = useState(false)
   const [consent, setConsent] = useState(false)
-
+  console.log(space)
   useEffect(() => {
     setVisibility(published)
   }, [published])
@@ -65,11 +65,14 @@ const PublishProject = ({ space, published, index, callback }) => {
       </select>
       {showSaveButton && <div className="below">
         {userFeedback && <p>{userFeedback}</p>}
-        {showConsentBox && <div>
+        {showConsentBox && (visibility === 'public' && !space.topic.complete)
+          ? <p>Please add a short description to your project</p>
+          : <div>
           <input id="checkbox" name="checkbox" type="checkbox" value={consent} onChange={() => setConsent(consent => !consent)} />
           <label htmlFor="checkbox">I hereby consent that I own the rights to the uploaded content and am aware of the content violation policy.</label>
         </div>}
-        <LoadingSpinnerButton disabled={(!consent && visibility === 'public')} onClick={onChangeVisibility}>SAVE</LoadingSpinnerButton>
+          <LoadingSpinnerButton disabled={(!consent && visibility === 'public') || (visibility === 'public' && !space.topic.complete)} onClick={onChangeVisibility}>SAVE</LoadingSpinnerButton>
+
       </div>}
       </>
       : <Loading />
