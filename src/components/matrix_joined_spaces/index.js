@@ -44,7 +44,7 @@ const getAnswer = async () => {
             published: published.join_rule,
             collab: collab && collab.joined,
             avatar_url: room.rooms[0].avatar_url !== undefined && room.rooms[0].avatar_url,
-            introduction: room.rooms[1].topic,
+            description: room.rooms[1].topic,
             meta: meta
           }
         } catch (error) {}
