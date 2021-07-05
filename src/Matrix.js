@@ -46,6 +46,7 @@ class Matrix {
 
   startSync () {
     this.matrixClient.startClient()
+    this.matrixClient.setMaxListeners(500)
   }
 }
 

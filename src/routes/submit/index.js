@@ -75,7 +75,7 @@ const Submit = () => {
     const fetchSpace = async () => {
       const space = await matrixClient.getSpaceSummary(projectSpace)
       setTitle(space.rooms[0].name)
-      setSpaceObject(space.rooms[0])
+      setSpaceObject(space)
       space.rooms[0].avatar_url !== undefined && setProjectImage(space.rooms[0].avatar_url)
       const spaceRooms = space.rooms.filter(x => !('room_type' in x))
       setBlocks(spaceRooms.filter(x => x !== undefined).sort((a, b) => {
@@ -87,25 +87,34 @@ const Submit = () => {
     // eslint-disable-next-line
   }, [update, projectSpace]);
 
-  const listeningToCollaborators = async () => {
-    console.log('Started spying on collaborators')
-    setIsCollab(true)
-    try {
-      // joining contentRooms which might have been created since we last opened the project
-      await matrixClient.getSpaceSummary(projectSpace).then(res => {
-        res.rooms.map(async contentRooms => contentRooms.room_id !== projectSpace && await matrixClient.joinRoom(contentRooms.room_id))
-      })
-    } catch (err) {
-      console.error(err)
+  useEffect(() => {
+    if (!projectSpace || !spaceObject) {
+      // We do not listen for any room-specific events if we are not currently editing a project
+      return
     }
 
-    await matrixClient.removeAllListeners().setMaxListeners(999)
-    const myRooms = await matrixClient.getSpaceSummary(projectSpace)
-    setTitle(myRooms?.rooms[0].name)
-    matrixClient.addListener('RoomState.events', function (event) {
-      if (event.event.type === 'm.room.member' && myRooms.rooms?.filter(({ roomId }) => event.sender.roomId.includes(roomId)) && event.event.sender !== localStorage.getItem('mx_user_id')) {
+    async function handleRoomTimelineEvent (event) {
+      if (event.event.type === 'm.room.message' && blocks?.filter(({ roomId }) => event.event.room_id.includes(roomId)) && event.event.sender !== localStorage.getItem('mx_user_id')) {
+        // If a given content block room received a new message, we set the "lastUpdate" property of the appropriate
+        // block in "blocks" which will force the given content block to re-render.
+        setBlocks((blocks) => {
+          const newBlocks = [...blocks]
+
+          return newBlocks.map((block) => {
+            if (block.room_id === event.event.room_id) {
+              block.lastUpdate = event.event.origin_server_ts
+            }
+
+            return block
+          })
+        })
+      }
+    }
+
+    async function handleRoomStateEvent (event) {
+      if (event.event.type === 'm.room.member' && spaceObject.rooms?.filter(({ roomId }) => event.sender?.roomId.includes(roomId)) && event.event.sender !== localStorage.getItem('mx_user_id')) {
         setUpdate(true)
-      } else if (event.event.type === 'm.room.name' && blocks?.filter(({ roomId }) => event.sender.roomId.includes(roomId))) {
+      } else if (event.event.type === 'm.room.name' && blocks?.filter(({ roomId }) => event.sender?.roomId.includes(roomId))) {
         setUpdate(true)
       } else if (event.event.type === 'm.space.child' && event.event.room_id === projectSpace && event.event.sender !== localStorage.getItem('mx_user_id')) {
         console.log(event.event)
@@ -114,13 +123,21 @@ const Submit = () => {
       } else if (event.event.state_key === projectSpace) {
         setUpdate(true)
       }
-    })
-    matrixClient.on('Room.timeline', function (event, room, toStartOfTimeline) {
-      if (event.event.type === 'm.room.message' && blocks?.filter(({ roomId }) => event.event.room_id.includes(roomId)) && event.event.sender !== localStorage.getItem('mx_user_id')) {
-        console.log(event)
-        setUpdate(true)
-      }
-    })
+    }
+
+    console.log('subscribe to all room events')
+    matrixClient.addListener('Room.timeline', handleRoomTimelineEvent)
+    matrixClient.addListener('RoomState.events', handleRoomStateEvent)
+
+    return () => {
+      console.log('unsubscribed from all room events')
+      matrixClient.removeListener('Room.timeline', handleRoomTimelineEvent)
+      matrixClient.removeListener('RoomState.events', handleRoomStateEvent)
+    }
+  }, [projectSpace, spaceObject])
+
+  const listeningToCollaborators = async () => {
+    setIsCollab(true)
   }
 
   const changeProjectImage = (url) => {
@@ -174,13 +191,13 @@ const Submit = () => {
           {blocks.length === 0
             ? <AddContent number={0} projectSpace={projectSpace} blocks={blocks} reloadProjects={reloadProjects} />
             : blocks.map((content, i) =>
-              <DisplayContent block={content} index={i} blocks={blocks} projectSpace={projectSpace} reloadProjects={reloadProjects} key={content + i} />
+              <DisplayContent block={content} index={i} blocks={blocks} projectSpace={projectSpace} reloadProjects={reloadProjects} key={content + i + content?.lastUpdate} />
             )}
           </section>
           <section className="visibility">
             <h3>Visibility (Draft/Published)</h3>
             <p>Select if you want to save the information provided by you as a draft or if you are happy with it select to publish the project. You can change this at any time.</p>
-            <PublishProject space={spaceObject} published={visibility} />
+            <PublishProject space={spaceObject?.rooms[0]} published={visibility} />
           </section>
         </>
       )}
