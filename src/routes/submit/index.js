@@ -71,18 +71,14 @@ const Submit = () => {
     space.rooms[0].avatar_url !== undefined && setProjectImage(space.rooms[0].avatar_url)
     const spaceRooms = space.rooms.filter(x => !('room_type' in x))
     setBlocks(spaceRooms.filter(x => x !== undefined).filter(room => room.name.charAt(0) !== 'x').sort((a, b) => {
-      return a.name.substring(0, a.name.indexOf('_')) - b.name.substring(0, a.name.indexOf('_'))
+      console.log(a.name.substring(0, a.name.indexOf('_')))
+      return a.name.substring(0, a.name.indexOf('_')) - b.name.substring(0, b.name.indexOf('_'))
     }))
   }, [projectSpace, matrixClient])
 
   useEffect(() => {
     setVisibility(joinedSpaces?.filter(x => x.room_id === projectSpace)[0]?.published)
-    // eslint-disable-next-line
-  }, [joinedSpaces]);
-
-  useEffect(() => {
-    console.log(blocks)
-  }, [blocks])
+  }, [joinedSpaces, projectSpace])
 
   useEffect(() => {
     projectSpace || setTitle('')
