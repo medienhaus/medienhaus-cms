@@ -235,7 +235,7 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace }) => 
                       : <div className="center">
                       <Editor
                         dark={window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches}
-                        defaultValue={cms?.body}
+                        defaultValue={json.type === 'introduction' ? block.topic : cms?.body}
                         disableExtensions={['blockmenu', 'image', 'embed', 'table', 'tr', 'th', 'td', 'bullet_list', 'ordered_list', 'checkbox_item', 'checkbox_list', 'container_notice', 'blockquote', 'heading', 'hr', 'highlight']}
                         placeholder={json.type}
                         readOnly={readOnly}
