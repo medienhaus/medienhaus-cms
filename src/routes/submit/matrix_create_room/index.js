@@ -64,6 +64,10 @@ const createBlock = async (e, content, number, space) => {
           const error = (data?.message) || res[1].status
           return Promise.reject(error)
         }
+        await matrixClient.sendStateEvent(res[0], 'meta', {
+          type: content,
+          version: 1
+        })
         return res[0]
       })
     return room
