@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import Matrix from '../../../Matrix'
 import { Loading } from '../../../components/loading'
@@ -33,9 +33,17 @@ const Projects = ({ space, visibility, index, reloadProjects }) => {
   }
 
   const DeleteProjectButton = ({ roomId, name }) => {
-    // dom not redrawing drafts after deletion is complete, needs to be fixed
     const [warning, setWarning] = useState(false)
     const [leaving, setLeaving] = useState(false)
+    const isMounted = useRef(true)
+
+    useEffect(() => {
+      // needed to add this cleanup useEffect to prevent memory leaks
+      isMounted.current = true
+      return () => {
+        isMounted.current = false
+      }
+    }, [])
 
     return (
       <>
@@ -49,7 +57,14 @@ const Projects = ({ space, visibility, index, reloadProjects }) => {
           onClick={async (e) => {
             if (warning) {
               setLeaving(true)
-              await deleteProject(e, roomId).catch(err => console.error(err)).then(() => reloadProjects(index, space, true)).then(() => setLeaving(false))
+              await deleteProject(e, roomId)
+                .then(() => reloadProjects(index, space, true))
+                .catch(err => console.log(err))
+                .finally(() => {
+                  if (isMounted.current) {
+                    setLeaving(false)
+                  }
+                })
               setWarning(false)
             } else {
               e.preventDefault()

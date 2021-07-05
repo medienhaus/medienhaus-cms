@@ -20,6 +20,7 @@ const Invites = ({ room, callback }) => {
           res.rooms.map(async contentRooms => contentRooms.room_id !== room && await matrixClient.joinRoom(contentRooms.room_id))
         })
       }
+      callback(room)
     } catch (err) {
       setError(err.errcode === 'M_UNKNOWN' ? 'Looks like this room does not exist anymore.' : 'Something went wrong.')
       setTimeout(() => {

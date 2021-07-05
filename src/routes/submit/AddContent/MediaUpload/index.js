@@ -46,7 +46,7 @@ const MediaUpload = (props) => {
         }
         )
       props.displayPlusButton(true)
-      props.reloadProjects(room)
+      props.reloadSpace(room)
       setLoading(false)
 
       // setCounter(0)

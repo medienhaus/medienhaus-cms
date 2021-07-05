@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import Matrix from '../../Matrix'
 import useJoinedSpaces from '../../components/matrix_joined_spaces'
@@ -19,7 +19,6 @@ const Submit = () => {
   const [visibility, setVisibility] = useState('')
   const [loading, setLoading] = useState(false)
   const [blocks, setBlocks] = useState([])
-  const [update, setUpdate] = useState(false)
   const [isCollab, setIsCollab] = useState(false)
   const [contentLang, setContentLang] = useState('en')
   const [spaceObject, setSpaceObject] = useState()
@@ -28,12 +27,12 @@ const Submit = () => {
 
   const projectSpace = params.spaceId
 
-  const reloadProjects = (roomId) => {
+  const reloadSpace = async (roomId) => {
     // roomId is needed in order to invite collaborators to newly created rooms.
     console.log('roomId = ' + roomId)
     // checking to see if the project is a collaboration, if so invite all collaborators and make them admin
     isCollab && roomId && inviteCollaborators(roomId)
-    setUpdate(true)
+    await fetchSpace()
   }
 
   const inviteCollaborators = async (roomId) => {
@@ -48,7 +47,7 @@ const Submit = () => {
         }
         )
         try {
-          // something here is going wrong
+          // something here is going wrong for collab > 2
           await matrixClient.setPowerLevel(roomId, userId, 100, powerEvent)
         } catch (err) {
           console.error(err)
@@ -56,36 +55,34 @@ const Submit = () => {
       })
     }
     // invite users to newly created content room
-    const invites = allCollaborators.map(userId => matrixClient.invite(roomId, userId, () => console.log('invited ' + userId)).catch(err => console.log(err)))
+    const invites = allCollaborators?.map(userId => matrixClient.invite(roomId, userId, () => console.log('invited ' + userId)).catch(err => console.log(err)))
     await Promise.all(invites)
     console.log('inviting done, now changing power')
-    // then promote them to moderator
+    // then promote them to admin
     const power = allCollaborators.map(userId => setPower(userId))
     await Promise.all(power)
     console.log('all done')
   }
 
-  useEffect(() => {
-    setVisibility(joinedSpaces?.filter(x => x.room_id === projectSpace)[0]?.published)
-    // eslint-disable-next-line
-  }, [joinedSpaces]);
+  const fetchSpace = useCallback(async () => {
+    const space = await matrixClient.getSpaceSummary(projectSpace)
+    setTitle(space.rooms[0].name)
+    setSpaceObject(space)
+    space.rooms[0].avatar_url !== undefined && setProjectImage(space.rooms[0].avatar_url)
+    const spaceRooms = space.rooms.filter(x => !('room_type' in x))
+    setBlocks(spaceRooms.filter(x => x !== undefined).filter(room => room.name.charAt(0) !== 'x').sort((a, b) => {
+      return a.name.substring(0, a.name.indexOf('_')) - b.name.substring(0, b.name.indexOf('_'))
+    }))
+  }, [projectSpace, matrixClient])
 
   useEffect(() => {
-    projectSpace || setTitle('') // shoukd fix the error when already editing a project and wanting to create a new one
-    const fetchSpace = async () => {
-      const space = await matrixClient.getSpaceSummary(projectSpace)
-      setTitle(space.rooms[0].name)
-      setSpaceObject(space)
-      space.rooms[0].avatar_url !== undefined && setProjectImage(space.rooms[0].avatar_url)
-      const spaceRooms = space.rooms.filter(x => !('room_type' in x))
-      setBlocks(spaceRooms.filter(x => x !== undefined).sort((a, b) => {
-        return a.name - b.name
-      }))
-      setUpdate(false)
-    }
+    setVisibility(joinedSpaces?.filter(x => x.room_id === projectSpace)[0]?.published)
+  }, [joinedSpaces, projectSpace])
+
+  useEffect(() => {
+    projectSpace || setTitle('')
     projectSpace && fetchSpace()
-    // eslint-disable-next-line
-  }, [update, projectSpace]);
+  }, [projectSpace, fetchSpace])
 
   useEffect(() => {
     if (!projectSpace || !spaceObject) {
@@ -113,15 +110,15 @@ const Submit = () => {
 
     async function handleRoomStateEvent (event) {
       if (event.event.type === 'm.room.member' && spaceObject.rooms?.filter(({ roomId }) => event.sender?.roomId.includes(roomId)) && event.event.sender !== localStorage.getItem('mx_user_id')) {
-        setUpdate(true)
+        fetchSpace()
       } else if (event.event.type === 'm.room.name' && blocks?.filter(({ roomId }) => event.sender?.roomId.includes(roomId))) {
-        setUpdate(true)
+        fetchSpace()
       } else if (event.event.type === 'm.space.child' && event.event.room_id === projectSpace && event.event.sender !== localStorage.getItem('mx_user_id')) {
         console.log(event.event)
-        setUpdate(true)
+        fetchSpace()
         matrixClient.joinRoom(event.event.state_key)
       } else if (event.event.state_key === projectSpace) {
-        setUpdate(true)
+        fetchSpace()
       }
     }
 
@@ -134,10 +131,18 @@ const Submit = () => {
       matrixClient.removeListener('Room.timeline', handleRoomTimelineEvent)
       matrixClient.removeListener('RoomState.events', handleRoomStateEvent)
     }
-  }, [projectSpace, spaceObject])
+  }, [projectSpace, spaceObject, blocks, fetchSpace, matrixClient])
 
   const listeningToCollaborators = async () => {
     setIsCollab(true)
+    try {
+      // joining contentRooms which might have been created since we last opened the project
+      await matrixClient.getSpaceSummary(projectSpace).then(res => {
+        res.rooms.map(async contentRooms => contentRooms.room_id !== projectSpace && await matrixClient.joinRoom(contentRooms.room_id))
+      })
+    } catch (err) {
+      console.error(err)
+    }
   }
 
   const changeProjectImage = (url) => {
@@ -147,6 +152,8 @@ const Submit = () => {
   }
 
   const startListeningToCollab = () => {
+    setIsCollab(true)
+    console.log('Started spying on collaborators')
     listeningToCollaborators()
   }
 
@@ -158,7 +165,8 @@ const Submit = () => {
     <>
       <section className="welcome">
         <p><strong>Welcome to your project!</strong></p>
-        <p>This is the project page. Please add in which context the project happend, projectname and descriptive text and images. If you want to continue at a later point in time, you can save the project as a draft and find it in your collection under “drafts”.</p>
+        <p>This is the project page. Please add in which context the project happend, projectname and descriptive text and images.
+          If you want to continue at a later point in time, you can save the project as a draft and find it in your collection under “drafts”.</p>
       </section>
       <section className="project-title">
         <h3>Project Title</h3>
@@ -171,7 +179,7 @@ const Submit = () => {
           <Category title={title} projectSpace={projectSpace} />
         </section>
         <section className="contributors">
-          <Collaborators projectSpace={projectSpace} blocks={blocks} title={title} joinedSpaces={joinedSpaces} startListeningToCollab={startListeningToCollab} />
+          <Collaborators projectSpace={projectSpace} blocks={blocks} title={title} joinedSpaces={joinedSpaces} startListeningToCollab={() => startListeningToCollab()} />
         </section>
         <section className="project-image">
           <h3>Project Image</h3>
@@ -187,11 +195,11 @@ const Submit = () => {
           <select id="subject" name="subject" defaultValue={''} value={contentLang} onChange={(e) => setContentLang(e.target.value)}>
             <option value="de">DE - German</option>
             <option value="en" >EN -English</option>
-          </select>
+            </select>
           {blocks.length === 0
-            ? <AddContent number={0} projectSpace={projectSpace} blocks={blocks} reloadProjects={reloadProjects} />
+            ? <AddContent number={0} projectSpace={projectSpace} blocks={blocks} reloadSpace={reloadSpace} />
             : blocks.map((content, i) =>
-              <DisplayContent block={content} index={i} blocks={blocks} projectSpace={projectSpace} reloadProjects={reloadProjects} key={content + i + content?.lastUpdate} />
+              <DisplayContent block={content} index={i} blocks={blocks} projectSpace={projectSpace} reloadSpace={reloadSpace} key={content + i + content?.lastUpdate} />
             )}
           </section>
           <section className="visibility">

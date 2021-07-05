@@ -52,9 +52,10 @@ const Profile = () => {
     setPublications(joinedSpaces?.filter(projectSpace => projectSpace.published === 'public'))
   }, [joinedSpaces])
 
-  const removeInviteByIndex = (index) => {
-    // @TODO: This function is currently not being used. But needs to be refactored to take the room ID as index.
+  const removeInviteByIndex = (room) => {
     // setInvites(invites => invites.filter((invite, i) => i !== index))
+    setInvites(Object.fromEntries(
+      Object.entries(invites).filter(([key]) => key !== room)))
   }
 
   const changePublicationToDraft = (index, space, redact) => {
@@ -86,7 +87,7 @@ const Profile = () => {
           <ul>
             {Object.values(invites).map((room, index) => (
               <li key={index} style={{ 'list-style-type': 'none' }}>
-                <Invites room={room} callback={() => { removeInviteByIndex(room) }} />
+                <Invites room={room} callback={removeInviteByIndex} />
               </li>
             ))}
           </ul>

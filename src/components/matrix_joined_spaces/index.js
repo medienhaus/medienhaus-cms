@@ -32,7 +32,7 @@ const getAnswer = async () => {
           const room = await matrixClient.getSpaceSummary(roomId)
           // console.log(room.rooms[0].room_type
           if (room.rooms[0].room_type === 'm.space' && isJson(room.rooms[0].topic)) {
-            const collab = room.rooms[0].num_joined_members > 2 ? await matrixClient.getJoinedRoomMembers(room.rooms[0].room_id) : false
+            const collab = room.rooms[0].num_joined_members > 1 ? await matrixClient.getJoinedRoomMembers(room.rooms[0].room_id) : false
             const joinRule = await fetch(process.env.REACT_APP_MATRIX_BASE_URL + `/_matrix/client/r0/rooms/${room.rooms[0].room_id}/state/m.room.join_rules/`, {
               method: 'GET',
               headers: { Authorization: 'Bearer ' + localStorage.getItem('medienhaus_access_token') }

@@ -21,7 +21,7 @@ import { ReactComponent as CodeIcon } from '../../../assets/icons/remix/code.svg
 import { ReactComponent as VideoIcon } from '../../../assets/icons/remix/vidicon-line.svg'
 import { ReactComponent as PlaylistIcon } from '../../../assets/icons/remix/playlist.svg'
 
-const DisplayContent = ({ block, index, blocks, projectSpace, reloadProjects }) => {
+const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace }) => {
   const [clickedDelete, setClickedDelete] = useState(false)
   const [readOnly, setReadOnly] = useState(false)
   const [loading, setLoading] = useState(false)
@@ -34,7 +34,6 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadProjects }) 
 
   const onSave = async (roomId) => {
     setReadOnly(true)
-
     try {
       if (json.type === 'ul' || json.type === 'ol') {
         const list = JSON.parse(localStorage.getItem(roomId)).map(li => li.text).join('\n')
@@ -65,6 +64,20 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadProjects }) 
           }, 1000)
         }
       } else {
+        if (json.type === 'introduction') {
+          console.log('introooooo')
+          localStorage.getItem(block.room_id).length > 20
+            ? matrixClient.setRoomTopic(projectSpace, JSON.stringify({
+              rundgang: 21,
+              type: 'studentproject',
+              complete: true
+            }))
+            : matrixClient.setRoomTopic(projectSpace, JSON.stringify({
+              rundgang: 21,
+              type: 'studentproject',
+              complete: false
+            }))
+        }
         const save = await matrixClient.sendMessage(roomId, {
           body: localStorage.getItem(roomId),
           format: 'org.matrix.custom.html',
@@ -78,7 +91,6 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadProjects }) 
           }, 1000)
         }
       }
-      // await matrixClient.redactEvent(roomId.room_id, entry.event, null, { 'reason': 'I have my reasons!' })
     } catch (e) {
       console.error('error while trying to save: ' + e)
       setSaved("Couldn't save!")
@@ -90,23 +102,24 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadProjects }) 
     }
   }
 
-  const onDelete = async (e, roomId, index) => {
+  const onDelete = async (e, roomId, name, index) => {
     e.preventDefault()
     setDeleting(true)
     setReadOnly(true)
-
     try {
+      const roomType = name.split('_')
+      await matrixClient.setRoomName(roomId, 'x_' + roomType[1])
       const count = await matrixClient.getJoinedRoomMembers(roomId)
       Object.keys(count.joined).length > 1 && Object.keys(count.joined).forEach(name => {
         localStorage.getItem('medienhaus_user_id') !== name && matrixClient.kick(roomId, name)
       })
-      matrixClient.leave(roomId)
+      await matrixClient.leave(roomId)
       blocks.forEach((block, i) => {
         if (i > index) {
           reorder(block.name, block.room_id, true)
         }
       })
-      // setCounter(0)
+      reloadSpace()
     } catch (err) {
       console.error(err)
       setDeleting(`couldn't delete ${json.type}, please try again or try reloading the page`)
@@ -116,25 +129,20 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadProjects }) 
     } finally {
       setDeleting()
     }
-    // matrixClient.kick(roomId, userId)
-    // matrixClient.leave(roomId)
   }
 
   const changeOrder = async (roomId, name, direction) => {
     setLoading(true)
     setReadOnly(true)
-    // blocks.splice((pos) + direction, 0, blocks.splice(pos, 1).pop())
     const active = name.split('_')
     const order = parseInt(active[0])
     const newOrder = order + direction
     const passive = blocks[newOrder].name.split('_')
     const passiveRoom = blocks[newOrder].room_id
     try {
-      await matrixClient.setRoomName(roomId, newOrder + '_' + active[1]).then(
-        await matrixClient.setRoomName(passiveRoom, order + '_' + passive[1]).then(
-          reloadProjects()
-        )
-      )// .then(setCounter(0))
+      await matrixClient.setRoomName(roomId, newOrder + '_' + active[1])
+        .then(await matrixClient.setRoomName(passiveRoom, order + '_' + passive[1]))
+      reloadSpace()
     } catch (err) {
       console.error(err)
     } finally {
@@ -261,9 +269,9 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadProjects }) 
         <div className="right">
           <button key={'delete' + index} disabled={index === 0 || deleting} onClick={(e) => {
             if (clickedDelete) {
-              onDelete(e, block.room_id, index)
+              onDelete(e, block.room_id, block.name, index)
               setClickedDelete(false)
-              reloadProjects()
+              reloadSpace()
             } else {
               e.preventDefault()
               setClickedDelete(true)
@@ -274,7 +282,7 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadProjects }) 
           </button>
         </div>
       </div>
-      <AddContent number={index + 1} projectSpace={projectSpace} blocks={blocks} reloadProjects={reloadProjects} />
+      <AddContent number={index + 1} projectSpace={projectSpace} blocks={blocks} reloadSpace={reloadSpace} />
     </>
   )
 }
