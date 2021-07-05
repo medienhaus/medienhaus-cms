@@ -345,7 +345,9 @@ input[type="url"] {
   box-shadow: none;
   color: var(--color-fg);
   height: calc(var(--margin) * 2);
+  /*
   outline: none;
+  */
   padding: calc(var(--margin) * 0.2);
   width: 100%;
 }
@@ -369,7 +371,9 @@ input[type="radio"] {
   border-width: calc(var(--margin) * 0.2);
   box-shadow: none;
   cursor: pointer;
+  /*
   outline: none;
+  */
   height: calc(var(--margin) * 2);
   width: calc(var(--margin) * 2);
 }
@@ -448,7 +452,9 @@ input[type="range"] {
   box-shadow: none;
   cursor: pointer;
   height: calc(var(--margin) * 0.3);
+  /*
   outline: none;
+  */
 }
 
 /* TODO
@@ -470,7 +476,9 @@ input[type="range"]::-webkit-slider-thumb {
   border: unset;
   border-radius: unset;
   box-shadow: none;
+  /*
   outline: none;
+  */
   /*
   height: 9px;
   width: 9px;
@@ -485,7 +493,9 @@ input[type="range"]::-moz-range-thumb {
   border: unset;
   border-radius: unset;
   box-shadow: none;
+  /*
   outline: none;
+  */
 }
 
 input[type="range"]::-moz-range-progress {
@@ -496,7 +506,9 @@ input[type="range"]::-moz-range-progress {
   border: unset;
   box-shadow: none;
   height: calc(var(--margin) * 0.3);
+  /*
   outline: none;
+  */
 }
 
 input[type="range"]::-moz-range-track {
@@ -507,7 +519,9 @@ input[type="range"]::-moz-range-track {
   border: unset;
   box-shadow: none;
   height: calc(var(--margin) * 0.3);
+  /*
   outline: none;
+  */
 }
 
 select {
@@ -527,7 +541,9 @@ select {
   box-shadow: none;
   color: var(--color-fg);
   cursor: pointer;
+  /*
   outline: none;
+  */
   padding: calc(var(--margin) * 0.2);
   text-overflow: ellipsis;
   width: 100%;
@@ -560,7 +576,9 @@ textarea {
   border-width: calc(var(--margin) * 0.2);
   box-shadow: none;
   color: var(--color-fg);
+  /*
   outline: none;
+  */
   padding: calc(var(--margin) * 0.4);
   resize: vertical;
   width: 100%;
