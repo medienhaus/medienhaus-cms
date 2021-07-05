@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import Matrix from '../../../Matrix'
 import FetchCms from '../../../components/matrix_fetch_cms'
 import Editor, { renderToHtml } from 'rich-markdown-editor'
@@ -27,11 +27,20 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace }) => 
   const [loading, setLoading] = useState(false)
   const [saved, setSaved] = useState(false)
   const [deleting, setDeleting] = useState(false)
+  const [json, setJson] = useState({})
   let { cms, error, fetching } = FetchCms(block.room_id)
   cms = cms[0]
   const matrixClient = Matrix.getMatrixClient()
-  // eslint-disable-next-line no-unused-vars
-  const [json, setJson] = useState(async () => await matrixClient.getStateEvent(block.room_id, 'm.room.meta'))
+  const isMounted = useRef(true)
+
+  useEffect(() => {
+    const fetchJson = async () => setJson(await matrixClient.getStateEvent(block.room_id, 'm.room.meta'))
+    fetchJson()
+    isMounted.current = true
+    return () => {
+      isMounted.current = false
+    }
+  }, [block.room_id, matrixClient])
 
   const onSave = async (roomId) => {
     setReadOnly(true)
@@ -64,21 +73,15 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace }) => 
             setSaved()
           }, 1000)
         }
-      } else {
-        if (json.type === 'introduction') {
-          console.log('introooooo')
-          localStorage.getItem(block.room_id).length > 20
-            ? matrixClient.setRoomTopic(projectSpace, JSON.stringify({
-              rundgang: 21,
-              type: 'studentproject',
-              complete: true
-            }))
-            : matrixClient.setRoomTopic(projectSpace, JSON.stringify({
-              rundgang: 21,
-              type: 'studentproject',
-              complete: false
-            }))
+      } else if (json.type === 'introduction') {
+        const save = await matrixClient.setRoomTopic(roomId, localStorage.getItem(roomId))
+        if ('event_id' in save) {
+          setSaved('Saved!')
+          setTimeout(() => {
+            setSaved()
+          }, 1000)
         }
+      } else {
         const save = await matrixClient.sendMessage(roomId, {
           body: localStorage.getItem(roomId),
           format: 'org.matrix.custom.html',
