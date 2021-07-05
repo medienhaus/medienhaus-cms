@@ -29,8 +29,9 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace }) => 
   const [deleting, setDeleting] = useState(false)
   let { cms, error, fetching } = FetchCms(block.room_id)
   cms = cms[0]
-  const json = JSON.parse(block.topic)
   const matrixClient = Matrix.getMatrixClient()
+  // eslint-disable-next-line no-unused-vars
+  const [json, setJson] = useState(async () => await matrixClient.getStateEvent(block.room_id, 'm.room.meta'))
 
   const onSave = async (roomId) => {
     setReadOnly(true)
