@@ -128,7 +128,7 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace }) => 
     try {
       await matrixClient.setRoomName(roomId, newOrder + '_' + active[1])
         .then(await matrixClient.setRoomName(passiveRoom, order + '_' + passive[1]))
-        .then(reloadSpace())
+      reloadSpace()
     } catch (err) {
       console.error(err)
     } finally {

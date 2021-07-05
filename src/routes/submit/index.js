@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import Matrix from '../../Matrix'
 import useJoinedSpaces from '../../components/matrix_joined_spaces'
@@ -64,17 +64,16 @@ const Submit = () => {
     console.log('all done')
   }
 
-  const fetchSpace = async () => {
+  const fetchSpace = useCallback(async () => {
     const space = await matrixClient.getSpaceSummary(projectSpace)
     setTitle(space.rooms[0].name)
     setSpaceObject(space.rooms[0])
     space.rooms[0].avatar_url !== undefined && setProjectImage(space.rooms[0].avatar_url)
     const spaceRooms = space.rooms.filter(x => !('room_type' in x))
     setBlocks(spaceRooms.filter(x => x !== undefined).filter(room => room.name.charAt(0) !== 'x').sort((a, b) => {
-      return a.name.substring(a.name.indexOf('_')) - b.name.substring(a.name.indexOf('_'))
+      return a.name.substring(0, a.name.indexOf('_')) - b.name.substring(0, a.name.indexOf('_'))
     }))
-    console.log(blocks)
-  }
+  }, [projectSpace, matrixClient])
 
   useEffect(() => {
     setVisibility(joinedSpaces?.filter(x => x.room_id === projectSpace)[0]?.published)
@@ -82,10 +81,13 @@ const Submit = () => {
   }, [joinedSpaces]);
 
   useEffect(() => {
-    projectSpace || setTitle('') // shoukd fix the error when already editing a project and wanting to create a new one
+    console.log(blocks)
+  }, [blocks])
+
+  useEffect(() => {
+    projectSpace || setTitle('')
     projectSpace && fetchSpace()
-    // eslint-disable-next-line
-  }, [projectSpace])
+  }, [projectSpace, fetchSpace])
 
   const listeningToCollaborators = async () => {
     try {
