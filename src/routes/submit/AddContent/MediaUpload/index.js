@@ -10,7 +10,7 @@ const MediaUpload = (props) => {
 
   console.log(props)
 
-  const handleSubmission = async (e, selectedFile, fileName) => {
+  const handleSubmission = async (e, selectedFile, fileName, author, license, alttext) => {
     e.preventDefault()
     setLoading(true)
     let room
@@ -31,7 +31,10 @@ const MediaUpload = (props) => {
             ? matrixClient.sendImageMessage(res[1], res[0], {
               mimetype: selectedFile.type,
               size: selectedFile.size,
-              name: selectedFile.name
+              name: selectedFile.name,
+              author: author,
+              license: license,
+              alt: alttext
             })
             : matrixClient.sendMessage(res[1], {
               body: selectedFile.name,
