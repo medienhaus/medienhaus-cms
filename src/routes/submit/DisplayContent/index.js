@@ -176,6 +176,7 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace }) => 
 
   return (
     <>
+      <AddContent number={index} projectSpace={projectSpace} blocks={blocks} reloadSpace={reloadSpace} />
       <div className="editor">
         <div className="left">
           <LoadingSpinnerButton key={'up_' + block.room_id} disabled={index < 1} onClick={() => changeOrder(block.room_id, block.name, -1)}>↑</LoadingSpinnerButton>
@@ -211,7 +212,7 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace }) => 
           <LoadingSpinnerButton key={'down_' + block.room_id} disabled={index === blocks.length - 1} onClick={() => changeOrder(block.room_id, block.name, 1)}>↓</LoadingSpinnerButton>
         </div>
         {cms?.msgtype === 'm.image'
-          ? <> {console.log(cms.info)}
+          ? <>
           <figure className="center"><img src={matrixClient.mxcUrlToHttp(cms.url)} alt={cms?.info?.alt} key={block.room_id} /></figure>
           <div>Author: {cms.info.author}</div>
           <div>Alt-text: {cms.info.alt}</div>
@@ -321,7 +322,6 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace }) => 
           </button>
         </div>
       </div>
-      <AddContent number={index + 1} projectSpace={projectSpace} blocks={blocks} reloadSpace={reloadSpace} />
     </>
   )
 }
