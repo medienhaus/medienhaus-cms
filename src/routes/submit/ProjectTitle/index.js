@@ -75,7 +75,7 @@ const ProjectTitle = ({ title, projectSpace, callback }) => {
                 {!newProject && <input id="submit" name="submit" type="submit" value="❌ CANCEL" onClick={(e) => { e.preventDefault(); setEdit(false); setProjectTitle(oldTitle) }} />}
                   {!title && newProject &&
                       <input
-                          id="submit" name="submit" type="submit" value={newProject && 'Create Project'} disabled={newProject || !projectTitle || projectTitle.length > 100} onClick={(e) => {
+                          id="submit" name="submit" type="submit" value={newProject && 'Create Project'} disabled={ !projectTitle || projectTitle.length > 100} onClick={(e) => {
                             console.log(newProject)
                             if (newProject && projectTitle.length < 101) {
                               createProject(e, projectTitle)

@@ -198,7 +198,7 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace }) => 
                               ? <VideoIcon fill="var(--color-fg)" />
                               : json.type === 'playlist'
                                 ? <PlaylistIcon fill="var(--color-fg)" />
-                                : json.type === 'date'
+                                : json.type === 'location'
                                   ? <LocationIcon fill="var(--color-fg)" />
                                   : json.type === 'bbb'
                                     ? <PictureInPictureIcon fill="var(--color-fg)" />
