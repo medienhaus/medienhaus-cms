@@ -176,7 +176,7 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace }) => 
 
   return (
     <>
-      <AddContent number={index} projectSpace={projectSpace} blocks={blocks} reloadSpace={reloadSpace} />
+      {index === 0 && <AddContent number={index} projectSpace={projectSpace} blocks={blocks} reloadSpace={reloadSpace} />}
       <div className="editor">
         <div className="left">
           <LoadingSpinnerButton key={'up_' + block.room_id} disabled={index < 1} onClick={() => changeOrder(block.room_id, block.name, -1)}>↑</LoadingSpinnerButton>
@@ -322,6 +322,7 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace }) => 
           </button>
         </div>
       </div>
+      {index > 0 && <AddContent number={index + 1} projectSpace={projectSpace} blocks={blocks} reloadSpace={reloadSpace} />}
     </>
   )
 }
