@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { ReactComponent as TextIcon } from '../../../assets/icons/remix/text.svg'
 import Matrix from '../../../Matrix'
-// import Editor from 'rich-markdown-editor'
 
 const ProjectDescription = ({ space, callback }) => {
   const [saved, setSaved] = useState(false)
@@ -12,9 +11,9 @@ const ProjectDescription = ({ space, callback }) => {
     const save = await matrixClient.setRoomTopic(space.room_id, description)
     if ('event_id' in save) {
       setSaved('Saved!')
+      callback()
       setTimeout(() => {
         setSaved()
-        callback()
       }, 1000)
     }
   }

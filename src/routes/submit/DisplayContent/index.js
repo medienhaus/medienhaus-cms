@@ -9,6 +9,7 @@ import List from './List'
 import Code from './Code'
 import reorder from './matrix_reorder_rooms'
 import LoadingSpinnerButton from '../../../components/LoadingSpinnerButton'
+import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
 
 import { ReactComponent as HeadingIcon } from '../../../assets/icons/remix/h-1.svg'
 import { ReactComponent as AudioIcon } from '../../../assets/icons/remix/volume-up-line.svg'
@@ -20,6 +21,7 @@ import { ReactComponent as QuoteIcon } from '../../../assets/icons/remix/quote.s
 import { ReactComponent as CodeIcon } from '../../../assets/icons/remix/code.svg'
 import { ReactComponent as VideoIcon } from '../../../assets/icons/remix/vidicon-line.svg'
 import { ReactComponent as PlaylistIcon } from '../../../assets/icons/remix/playlist.svg'
+import { ReactComponent as DateIcon } from '../../../assets/icons/remix/date.svg'
 
 const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace }) => {
   const [clickedDelete, setClickedDelete] = useState(false)
@@ -193,7 +195,9 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace }) => 
                               ? <VideoIcon fill="var(--color-fg)" />
                               : json.type === 'playlist'
                                 ? <PlaylistIcon fill="var(--color-fg)" />
-                                : <TextIcon fill="var(--color-fg)" />
+                                : json.type === 'date'
+                                  ? <DateIcon fill="var(--color-fg)" />
+                                  : <TextIcon fill="var(--color-fg)" />
             }
           </figure>
           <LoadingSpinnerButton key={'down_' + block.room_id} disabled={index === blocks.length - 1} onClick={() => changeOrder(block.room_id, block.name, 1)}>↓</LoadingSpinnerButton>
@@ -224,29 +228,24 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace }) => 
                         style={{ width: '100%', aspectRatio: '16 / 9', border: 'calc(var(--margin) * 0.2) solid var(--color-fg)' }}
                       />
                         )
-                      : <div className="center">
-                      <Editor
-                        dark={window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches}
-                        defaultValue={cms?.body}
-                        disableExtensions={['blockmenu', 'image', 'embed', 'table', 'tr', 'th', 'td', 'bullet_list', 'ordered_list', 'checkbox_item', 'checkbox_list', 'container_notice', 'blockquote', 'heading', 'hr', 'highlight']}
-                        placeholder={json.type}
-                        readOnly={readOnly}
-                        onSave={({ done }) => {
-                          if (localStorage.getItem(block.room_id) !== null && cms !== undefined && string2hash(cms.body) !== string2hash(localStorage.getItem(block.room_id))) {
-                            onSave(block.room_id)
-                            localStorage.removeItem(block.room_id)
-                          } else if (localStorage.getItem(block.room_id) !== null && cms === undefined) {
-                            onSave(block.room_id)
-                            localStorage.removeItem(block.room_id)
-                          }
-                        }}
-                        onChange={debounce((value) => {
-                          const text = value()
-                          localStorage.setItem(block.room_id, text)
-                        }, 250)}
-                        handleDOMEvents={{
-                          focus: () => console.log('FOCUS on ' + block.room_id), // this could set MatrixClient"User.presence" to 'online', "User.currentlyActive" or 'typing. depending on which works best.
-                          blur: (e) => {
+                      : json.type === 'date'
+                        ? <MapContainer center={cms.body} zoom={13} scrollWheelZoom={false}><TileLayer
+                        attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+                        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                      />
+                        <Marker position={cms.body}>
+                          <Popup>
+                            A pretty CSS3 popup. <br /> Easily customizable.
+                          </Popup>
+                        </Marker></MapContainer>
+                        : <div className="center">
+                        <Editor
+                          dark={window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches}
+                          defaultValue={cms?.body}
+                          disableExtensions={['blockmenu', 'image', 'embed', 'table', 'tr', 'th', 'td', 'bullet_list', 'ordered_list', 'checkbox_item', 'checkbox_list', 'container_notice', 'blockquote', 'heading', 'hr', 'highlight']}
+                          placeholder={json.type}
+                          readOnly={readOnly}
+                          onSave={({ done }) => {
                             if (localStorage.getItem(block.room_id) !== null && cms !== undefined && string2hash(cms.body) !== string2hash(localStorage.getItem(block.room_id))) {
                               onSave(block.room_id)
                               localStorage.removeItem(block.room_id)
@@ -254,12 +253,27 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace }) => 
                               onSave(block.room_id)
                               localStorage.removeItem(block.room_id)
                             }
-                          }
-                        }}
-                        key={block.room_id} />
-                      <p key={block.room_id + '_p'}>{saved}</p> {// feedback that saving was succesfull or has failed
-                      }
-                    </div>
+                          }}
+                          onChange={debounce((value) => {
+                            const text = value()
+                            localStorage.setItem(block.room_id, text)
+                          }, 250)}
+                          handleDOMEvents={{
+                            focus: () => console.log('FOCUS on ' + block.room_id), // this could set MatrixClient"User.presence" to 'online', "User.currentlyActive" or 'typing. depending on which works best.
+                            blur: (e) => {
+                              if (localStorage.getItem(block.room_id) !== null && cms !== undefined && string2hash(cms.body) !== string2hash(localStorage.getItem(block.room_id))) {
+                                onSave(block.room_id)
+                                localStorage.removeItem(block.room_id)
+                              } else if (localStorage.getItem(block.room_id) !== null && cms === undefined) {
+                                onSave(block.room_id)
+                                localStorage.removeItem(block.room_id)
+                              }
+                            }
+                          }}
+                          key={block.room_id} />
+                        <p key={block.room_id + '_p'}>{saved}</p> {// feedback that saving was succesfull or has failed
+                        }
+                      </div>
         }
 
         <div className="right">
