@@ -37,8 +37,11 @@ const ProjectDescription = ({ space }) => {
                     <p>{saved}</p>
                 </div>
                 <div className="right">
-                    <button disabled={true}>×</button>
+                    <button disabled={true} >x</button>
                 </div>
+            </div>
+            <div className="add">
+                <button className="add-button" disabled={true} >+</button>
             </div>
         </>
   )

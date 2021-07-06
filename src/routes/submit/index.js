@@ -68,7 +68,7 @@ const Submit = () => {
   }
 
   const fetchSpace = useCallback(async () => {
-    // here we collect all necessary information about the project space
+    // here we collect all necessary information about the project
     const space = await matrixClient.getSpaceSummary(projectSpace)
     setTitle(space.rooms[0].name)
     setSpaceObject(space)
