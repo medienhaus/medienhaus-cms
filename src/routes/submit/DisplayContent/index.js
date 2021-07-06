@@ -73,14 +73,6 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace }) => 
             setSaved()
           }, 1000)
         }
-      } else if (json.type === 'introduction') {
-        const save = await matrixClient.setRoomTopic(roomId, localStorage.getItem(roomId))
-        if ('event_id' in save) {
-          setSaved('Saved!')
-          setTimeout(() => {
-            setSaved()
-          }, 1000)
-        }
       } else {
         const save = await matrixClient.sendMessage(roomId, {
           body: localStorage.getItem(roomId),
@@ -224,18 +216,18 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace }) => 
                   ? <Code onSave={() => onSave(block.room_id)} storage={(code) => localStorage.setItem(block.room_id, code)} saved={saved} content={cms?.body} />
                   : (json.type === 'video' || json.type === 'livestream' || json.type === 'playlist')
                       ? (
-                    <iframe src={`https://stream.udk-berlin.de/${(json.type === 'playlist' ? 'video-playlists' : 'videos')}/embed/${cms?.body}`}
-                      frameBorder="0"
-                      title={cms?.body}
-                      sandbox="allow-same-origin allow-scripts"
-                      allowFullScreen="allowfullscreen"
-                      style={{ width: '100%', aspectRatio: '16 / 9', border: 'calc(var(--margin) * 0.2) solid var(--color-fg)' }}
-                    />
+                      <iframe src={`https://stream.udk-berlin.de/${(json.type === 'playlist' ? 'video-playlists' : 'videos')}/embed/${cms?.body}`}
+                        frameBorder="0"
+                        title={cms?.body}
+                        sandbox="allow-same-origin allow-scripts"
+                        allowFullScreen="allowfullscreen"
+                        style={{ width: '100%', aspectRatio: '16 / 9', border: 'calc(var(--margin) * 0.2) solid var(--color-fg)' }}
+                      />
                         )
                       : <div className="center">
                       <Editor
                         dark={window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches}
-                        defaultValue={json.type === 'introduction' ? block.topic : cms?.body}
+                        defaultValue={cms?.body}
                         disableExtensions={['blockmenu', 'image', 'embed', 'table', 'tr', 'th', 'td', 'bullet_list', 'ordered_list', 'checkbox_item', 'checkbox_list', 'container_notice', 'blockquote', 'heading', 'hr', 'highlight']}
                         placeholder={json.type}
                         readOnly={readOnly}

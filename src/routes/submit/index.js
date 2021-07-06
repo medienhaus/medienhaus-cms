@@ -9,6 +9,7 @@ import AddContent from './AddContent'
 import ProjectImage from './ProjectImage'
 import ProjectTitle from './ProjectTitle'
 import PublishProject from '../../components/PublishProject'
+import ProjectDescription from './ProjectDescription'
 import { Loading } from '../../components/loading'
 import { MatrixEvent } from 'matrix-js-sdk'
 
@@ -68,6 +69,7 @@ const Submit = () => {
     const space = await matrixClient.getSpaceSummary(projectSpace)
     setTitle(space.rooms[0].name)
     setSpaceObject(space)
+    console.log(space)
     space.rooms[0].avatar_url !== undefined && setProjectImage(space.rooms[0].avatar_url)
     const spaceRooms = space.rooms.filter(x => !('room_type' in x))
     setBlocks(spaceRooms.filter(x => x !== undefined).filter(room => room.name.charAt(0) !== 'x').sort((a, b) => {
@@ -173,39 +175,40 @@ const Submit = () => {
         <ProjectTitle joinedSpaces={joinedSpaces} title={title} projectSpace={projectSpace} callback={changeTitle} />
       </section>
       {projectSpace && (
-      <>
-        <section className="context">
-          <h3>Context</h3>
-          <Category title={title} projectSpace={projectSpace} />
-        </section>
-        <section className="contributors">
-          <Collaborators projectSpace={projectSpace} blocks={blocks} title={title} joinedSpaces={joinedSpaces} startListeningToCollab={() => startListeningToCollab()} />
-        </section>
-        <section className="project-image">
-          <h3>Project Image</h3>
-          {loading ? <Loading /> : <ProjectImage projectSpace={projectSpace} projectImage={projectImage} changeProjectImage={changeProjectImage} />}
-        </section>
-        <section className="content">
-          <h3>Content</h3>
-          <p>You can add elements like text, video and pictures to the main body of your project by using the “+” on the right side.
-            One block of text is mandatory to describe your project.
-            When using the text block you can format text by highlighting it.
-            You can use the arrows on the left to rearrange exsisting blocks.
-            You can provide information in multiple languages by choosing in the dropdown below.</p>
-          <select id="subject" name="subject" defaultValue={''} value={contentLang} onChange={(e) => setContentLang(e.target.value)}>
-            <option value="de">DE - German</option>
-            <option value="en" >EN -English</option>
+        <>
+          <section className="context">
+            <h3>Context</h3>
+            <Category title={title} projectSpace={projectSpace} />
+          </section>
+          <section className="contributors">
+            <Collaborators projectSpace={projectSpace} blocks={blocks} title={title} joinedSpaces={joinedSpaces} startListeningToCollab={() => startListeningToCollab()} />
+          </section>
+          <section className="project-image">
+            <h3>Project Image</h3>
+            {loading ? <Loading /> : <ProjectImage projectSpace={projectSpace} projectImage={projectImage} changeProjectImage={changeProjectImage} />}
+          </section>
+          <section className="content">
+            <h3>Content</h3>
+            <p>You can add elements like text, video and pictures to the main body of your project by using the “+” on the right side.
+              One block of text is mandatory to describe your project.
+              When using the text block you can format text by highlighting it.
+              You can use the arrows on the left to rearrange exsisting blocks.
+              You can provide information in multiple languages by choosing in the dropdown below.</p>
+            <select id="subject" name="subject" defaultValue={''} value={contentLang} onChange={(e) => setContentLang(e.target.value)}>
+              <option value="de">DE - German</option>
+              <option value="en" >EN -English</option>
             </select>
-          {blocks.length === 0
-            ? <AddContent number={0} projectSpace={projectSpace} blocks={blocks} reloadSpace={reloadSpace} />
-            : blocks.map((content, i) =>
-              <DisplayContent block={content} index={i} blocks={blocks} projectSpace={projectSpace} reloadSpace={reloadSpace} key={content + i + content?.lastUpdate} />
-            )}
+            <ProjectDescription space={spaceObject?.rooms[0]} />
+            {blocks.length === 0
+              ? <AddContent number={0} projectSpace={projectSpace} blocks={blocks} reloadSpace={reloadSpace} />
+              : blocks.map((content, i) =>
+                <DisplayContent block={content} index={i} blocks={blocks} projectSpace={projectSpace} reloadSpace={reloadSpace} key={content + i + content?.lastUpdate} />
+              )}
           </section>
           <section className="visibility">
             <h3>Visibility (Draft/Published)</h3>
             <p>Select if you want to save the information provided by you as a draft or if you are happy with it select to publish the project. You can change this at any time.</p>
-            <PublishProject space={joinedSpaces?.filter(x => x.room_id === projectSpace)[0]?.description} published={visibility} />
+            <PublishProject space={joinedSpaces?.filter(x => x.room_id === projectSpace)[0]} published={visibility} />
           </section>
         </>
       )}
