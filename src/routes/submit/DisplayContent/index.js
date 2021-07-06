@@ -211,7 +211,12 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace }) => 
           <LoadingSpinnerButton key={'down_' + block.room_id} disabled={index === blocks.length - 1} onClick={() => changeOrder(block.room_id, block.name, 1)}>↓</LoadingSpinnerButton>
         </div>
         {cms?.msgtype === 'm.image'
-          ? <figure className="center"><img src={matrixClient.mxcUrlToHttp(cms.url)} alt={cms.info.name} key={block.room_id} /></figure>
+          ? <> {console.log(cms.info)}
+          <figure className="center"><img src={matrixClient.mxcUrlToHttp(cms.url)} alt={cms?.info?.alt} key={block.room_id} /></figure>
+          <div>Author: {cms.info.author}</div>
+          <div>Alt-text: {cms.info.alt}</div>
+          <div>License: {cms.info.license}</div>
+            </>
           : cms?.msgtype === 'm.audio'
             ? <div className="center">
               <audio controls>

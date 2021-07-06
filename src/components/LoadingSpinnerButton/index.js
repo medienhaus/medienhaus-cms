@@ -16,7 +16,7 @@ const LoadingSpinnerButton = ({ disabled, onClick: callback, style, children }) 
   const onClick = async (e) => {
     e.preventDefault()
     setLoading(true)
-    await callback().then(setLoading(false)).catch(err => console.log(err))
+    await callback().catch(err => console.log(err))
       .finally(() => {
         if (isMounted.current) {
           setLoading(false)
