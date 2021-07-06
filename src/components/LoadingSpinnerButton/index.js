@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { Loading } from '../loading'
 
-const LoadingSpinnerButton = ({ disabled, onClick: callback, style, children }) => {
+const LoadingSpinnerButton = ({ disabled, onClick: callback, style, children, stopPropagationOnClick }) => {
   const [loading, setLoading] = useState(false)
   const isMounted = useRef(true)
 
@@ -14,6 +14,7 @@ const LoadingSpinnerButton = ({ disabled, onClick: callback, style, children }) 
   }, [])
 
   const onClick = async (e) => {
+    if (stopPropagationOnClick) e.stopPropagation()
     e.preventDefault()
     setLoading(true)
     await callback().catch(err => console.log(err))

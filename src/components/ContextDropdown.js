@@ -4,6 +4,7 @@ import { get, remove, uniqBy } from 'lodash'
 import mapDeep from 'deepdash/es/mapDeep'
 import struktur from '../struktur'
 import { findValueDeep } from 'deepdash/es/standalone'
+import LoadingSpinnerButton from './LoadingSpinnerButton'
 
 const items = uniqBy(mapDeep(struktur, (value, key, parent, context) => {
   // Add "path" parameter to create breadcrumbs from first hierarchy element up to "myself"
@@ -23,9 +24,9 @@ const items = uniqBy(mapDeep(struktur, (value, key, parent, context) => {
 function ContextDropdown () {
   const [inputItems, setInputItems] = useState(items)
 
-  function requestAccessToSpace (e) {
-    e.preventDefault()
-    e.stopPropagation()
+  async function requestAccessToSpace () {
+    // eslint-disable-next-line promise/param-names
+    await new Promise(r => setTimeout(r, 1500))
   }
 
   const {
@@ -66,6 +67,8 @@ function ContextDropdown () {
             position: 'absolute',
             width: '50px',
             right: '0',
+            bottom: '0',
+            top: '0',
             background: 'none',
             border: 'none',
             color: 'transparent'
@@ -105,7 +108,13 @@ function ContextDropdown () {
                 ))}
               </small>
             </div>
-            <button style={{ width: '140px', alignSelf: 'start', flex: '0 0' }} onClick={requestAccessToSpace}>REQUEST</button>
+            <LoadingSpinnerButton
+              onClick={requestAccessToSpace}
+              stopPropagationOnClick={true}
+              style={{ width: '140px', alignSelf: 'start', flex: '0 0' }}
+            >
+              REQUEST
+            </LoadingSpinnerButton>
           </li>
         ))}
       </ul>
