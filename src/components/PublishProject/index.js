@@ -6,7 +6,7 @@ const PublishProject = ({ space, published, index, callback }) => {
   const [userFeedback, setUserFeedback] = useState()
   const [visibility, setVisibility] = useState(published)
   const [showSaveButton, setShowSaveButton] = useState(false)
-  console.log(space)
+
   useEffect(() => {
     setVisibility(published)
   }, [published])

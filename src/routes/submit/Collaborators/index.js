@@ -72,24 +72,23 @@ const Collaborators = ({ projectSpace, blocks, title, members, startListeningToC
         </section>}
       <div>
         <div>
-          <label htmlFor="user-datalist">Add Collaborator</label>
-          <input list="userSearch" id="user-datalist" name="user-datalist" onChange={debounce((e) => {
+          <input list="userSearch" id="user-datalist" name="user-datalist" placeholder="contributor name" onChange={debounce((e) => {
             fetchUsers(e, e.target.value)
             setCollab(e.target.value)
           }, 200)} />
         </div>
-        {fetchingUsers ? <Loading /> : inviting ?? null}
         <datalist id="userSearch">
           {userSearch.map((users, i) => {
             return <option key={i} value={users.display_name + ' ' + users.user_id} />
           })}
         </datalist>
       </div>
+      {fetchingUsers ? <Loading /> : inviting ?? null}
       <div>
-        <button onClick={(e) => invite(e)}>{inviting ? <Loading /> : 'ADD Collaborators +'}</button>
-        <button disabled={true}>ADD Credits +</button>
+        <button onClick={(e) => invite(e)}>{inviting ? <Loading /> : 'ADD'}</button>
       </div>
     </>
   )
 }
+
 export default Collaborators

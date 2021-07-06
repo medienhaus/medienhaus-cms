@@ -39,9 +39,7 @@ const ProjectImage = ({ projectSpace, projectImage, changeProjectImage }) => {
           {edit && <FileUpload fileType={'image'} handleSubmission={handleSubmission} loading={loading} />}
         </>
         : (
-          <>
-            Add a project image <FileUpload fileType={'image'} handleSubmission={handleSubmission} loading={loading} />
-          </>
+          <FileUpload fileType={'image'} handleSubmission={handleSubmission} loading={loading} />
           )}
     </div>
   )

@@ -21,19 +21,21 @@ const AddDate = ({ onCreateRoomForBlock, onBlockWasAddedSuccessfully }) => {
   }
 
   return (
-        <>
-            <form>
-                <label htmlFor="party">Choose a date:
-                    <input type="date" name="party" value={date} onChange={(e) => setDate(e.target.value)} />
-                </label>
-                <label htmlFor="appt">Choose a time:</label>
-              <input type="time" value={time} onChange={(e) => {
-                console.log(e)
-                setTime(e.target.value)
-              }} id="appt" name="appt" />
-            </form>
-            <LoadingSpinnerButton loading={loading} onClick={handleSubmit}>SAVE</LoadingSpinnerButton>
-        </>
+    <>
+      <div>
+        <label htmlFor="party">Choose a date:</label>
+        <input id="party" name="party" type="date" value={date} onChange={(e) => setDate(e.target.value)} />
+      </div>
+      <div>
+        <label htmlFor="appt">Choose a time:</label>
+        <input id="appt" name="appt" type="time" value={time} onChange={(e) => {
+          console.log(e)
+          setTime(e.target.value)
+        }} />
+      </div>
+      <LoadingSpinnerButton loading={loading} onClick={handleSubmit}>SAVE</LoadingSpinnerButton>
+    </>
   )
 }
+
 export default AddDate

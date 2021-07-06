@@ -17,6 +17,7 @@ const FileUpload = (props) => {
 
   return (
     <>
+      <input className="browse" type="file" name="browse" onChange={changeHandler} disabled={props.fileType === '' || false} />
       {selectedFile && (
         <>
         <input type="text" placeholder="Author" onChange={(e) => setAuthor(e.target.value)} />
@@ -38,7 +39,6 @@ const FileUpload = (props) => {
           {selectedFile.type.includes(props.fileType) || <section>Please select an {props.fileType} file.</section>}
           {selectedFile.size > size && <section style={{ color: 'red' }}> File size needs to be less than {size / 1000000}MB</section>
           }
-
         </>
       )
       }

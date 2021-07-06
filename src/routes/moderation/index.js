@@ -23,23 +23,28 @@ const Moderation = () => {
   }
 
   return (
-        <div>
-            {joinedRooms().length === 0
-              ? (
-                <div>
-                    Checking to see if you are moderating any spaces. {<Loading />}
-                </div>
-                )
-              : moderationRooms.length > 0
-                ? moderationRooms.map(requests => {
-                  return <GetRequestPerRoom roomId={requests.room_id} />
-                })
-                : (
-                <div>
-                    Looks like you are not moderating any spaces.
-                </div>
-                  )}
-        </div>
+    <div>
+      {joinedRooms().length === 0
+        ? (
+          <>
+            <div>
+              Checking to see if you are moderating any spaces.
+            </div>
+            {<Loading />}
+          </>
+          )
+        : moderationRooms.length > 0
+          ? moderationRooms.map(requests => {
+            return <GetRequestPerRoom roomId={requests.room_id} />
+          })
+          : (
+            <div>
+              Looks like you are not moderating any spaces.
+            </div>
+            )
+      }
+    </div>
   )
 }
+
 export default Moderation
