@@ -23,6 +23,8 @@ import { ReactComponent as VideoIcon } from '../../../assets/icons/remix/vidicon
 import { ReactComponent as PlaylistIcon } from '../../../assets/icons/remix/playlist.svg'
 import { ReactComponent as DateIcon } from '../../../assets/icons/remix/date.svg'
 
+import locations from '../../../assets/locations.json'
+
 const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace }) => {
   const [clickedDelete, setClickedDelete] = useState(false)
   const [readOnly, setReadOnly] = useState(false)
@@ -229,15 +231,18 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace }) => 
                       />
                         )
                       : json.type === 'date'
-                        ? <MapContainer center={cms.body} zoom={13} scrollWheelZoom={false}><TileLayer
-                        attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-                        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                      />
-                        <Marker position={cms.body}>
+                        ? <MapContainer center={cms.body.split(',')} zoom={17} scrollWheelZoom={false} placeholder>
+                        <TileLayer
+                          attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+                          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                        />
+                        <Marker position={cms.body.split(',')}>
                           <Popup>
-                            A pretty CSS3 popup. <br /> Easily customizable.
+                            {locations.find(coord => coord.coordinates === cms.body).name}
                           </Popup>
-                        </Marker></MapContainer>
+                        </Marker>
+                      </MapContainer>
+
                         : <div className="center">
                         <Editor
                           dark={window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches}
