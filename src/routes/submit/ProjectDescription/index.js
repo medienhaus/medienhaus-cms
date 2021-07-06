@@ -1,14 +1,12 @@
 import React, { useState } from 'react'
 import { ReactComponent as TextIcon } from '../../../assets/icons/remix/text.svg'
-import Matrix from '../../../Matrix'
 
-const ProjectDescription = ({ space }) => {
+const ProjectDescription = ({ description: intro, callback }) => {
   const [saved, setSaved] = useState(false)
-  const [description, setDescription] = useState(space?.topic)
-  const matrixClient = Matrix.getMatrixClient()
+  const [description, setDescription] = useState(intro)
 
   const onSave = async () => {
-    const save = await matrixClient.setRoomTopic(space.room_id, description)
+    const save = await callback(description)
     if ('event_id' in save) {
       setSaved('Saved!')
       setTimeout(() => {
@@ -33,7 +31,7 @@ const ProjectDescription = ({ space }) => {
                         setDescription(e.target.value)
                       }}
                       placeholder="Please add a short description of your project. This field is required before publishing."
-                        onBlur={() => onSave(space.room_id)} />
+                        onBlur={() => onSave()} />
                     <p>{saved}</p>
                 </div>
                 <div className="right">

@@ -100,7 +100,7 @@ const Projects = ({ space, visibility, index, reloadProjects }) => {
         */}
           <button onClick={() => history.push(`/submit/${space.room_id}`)}>EDIT</button>
           <DeleteProjectButton roomId={space.room_id} name={space.name} />
-          <PublishProject space={space} published={visibility} index={index} callback={reloadProjects} />
+          <PublishProject space={space} published={visibility} index={index} description={space.description} callback={reloadProjects} />
         {/*
         </div>
         */}

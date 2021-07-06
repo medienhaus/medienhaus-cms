@@ -175,6 +175,13 @@ const Submit = () => {
     setTitle(newTitle)
   }
 
+  const onChangeDescription = async (description) => {
+    const changeTopic = await matrixClient.setRoomTopic(spaceObject.rooms[0].room_id, description)
+    fetchSpace()
+    // @TODO setSpaceObject(spaceObject => ({...spaceObject, rooms: [...spaceObject.rooms, ]}))
+    return changeTopic
+  }
+
   return (
     <>
       <section className="welcome">
@@ -210,7 +217,7 @@ const Submit = () => {
               <option value="de">DE - German</option>
               <option value="en" >EN -English</option>
             </select>
-            {spaceObject ? <ProjectDescription space={spaceObject?.rooms[0]} /> : <Loading />}
+            {spaceObject ? <ProjectDescription description={spaceObject?.rooms[0].topic} callback={onChangeDescription} /> : <Loading />}
             {blocks.length === 0
               ? <AddContent number={0} projectSpace={projectSpace} blocks={blocks} reloadSpace={reloadSpace} />
               : blocks.map((content, i) =>
@@ -220,7 +227,7 @@ const Submit = () => {
           <section className="visibility">
             <h3>Visibility (Draft/Published)</h3>
             <p>Select if you want to save the information provided by you as a draft or if you are happy with it select to publish the project. You can change this at any time.</p>
-            {spaceObject ? <PublishProject space={spaceObject.rooms[0]} published={visibility} /> : <Loading /> }
+            {spaceObject ? <PublishProject description={spaceObject.rooms[0].topic} published={visibility} /> : <Loading /> }
           </section>
         </>
       )}

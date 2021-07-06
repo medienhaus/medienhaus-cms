@@ -2,11 +2,10 @@ import React, { useEffect, useState } from 'react'
 import LoadingSpinnerButton from '../LoadingSpinnerButton'
 import { Loading } from '../loading'
 
-const PublishProject = ({ space, published, index, callback }) => {
+const PublishProject = ({ space, published, index, description, callback }) => {
   const [userFeedback, setUserFeedback] = useState()
   const [visibility, setVisibility] = useState(published)
   const [showSaveButton, setShowSaveButton] = useState(false)
-  const description = space?.description || space?.topic
 
   useEffect(() => {
     setVisibility(published)
