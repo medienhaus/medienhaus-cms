@@ -32,9 +32,9 @@ const Nav = () => {
           {auth.user && (
             <>
               <div>
-                <NavLink activeclassname="active" to="/profile">/profile</NavLink>
+                <NavLink activeclassname="active" to="/overview">/overview</NavLink>
                 <NavLink activeclassname="active" to="/support">/support</NavLink>
-                <NavLink activeclassname="active" to="/tools">/tools</NavLink> {/* only for dev */}
+                {/* <NavLink activeclassname="active" to="/tools">/tools</NavLink>  only for dev */}
                 <NavLink activeclassname="active" to="/moderation">/moderation</NavLink>
                 {
                   // <NavLink activeclassname="active" to="/admin">/admin</NavLink>}

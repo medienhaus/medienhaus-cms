@@ -22,7 +22,7 @@ import { ReactComponent as CodeIcon } from '../../../assets/icons/remix/code.svg
 import { ReactComponent as VideoIcon } from '../../../assets/icons/remix/vidicon-line.svg'
 import { ReactComponent as PlaylistIcon } from '../../../assets/icons/remix/playlist.svg'
 import { ReactComponent as PictureInPictureIcon } from '../../../assets/icons/remix/picture-in-picture-line.svg'
-import { ReactComponent as DateIcon } from '../../../assets/icons/remix/date.svg'
+import { ReactComponent as LocationIcon } from '../../../assets/icons/remix/location.svg'
 
 import locations from '../../../assets/data/locations.json'
 
@@ -199,7 +199,7 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace }) => 
                               : json.type === 'playlist'
                                 ? <PlaylistIcon fill="var(--color-fg)" />
                                 : json.type === 'date'
-                                  ? <DateIcon fill="var(--color-fg)" />
+                                  ? <LocationIcon fill="var(--color-fg)" />
                                   : json.type === 'bbb'
                                     ? <PictureInPictureIcon fill="var(--color-fg)" />
                                     : <TextIcon fill="var(--color-fg)" />
@@ -233,7 +233,7 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace }) => 
                         style={{ width: '100%', aspectRatio: '16 / 9', border: 'calc(var(--margin) * 0.2) solid var(--color-fg)' }}
                       />
                         )
-                      : json.type === 'date'
+                      : json.type === 'location'
                         ? <MapContainer center={cms.body.split(',')} zoom={17} scrollWheelZoom={false} placeholder>
                         <TileLayer
                           attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'

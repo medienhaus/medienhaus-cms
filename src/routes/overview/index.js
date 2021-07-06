@@ -6,7 +6,7 @@ import Invites from './Invites'
 import Matrix from '../../Matrix'
 import { Loading } from '../../components/loading'
 
-const Profile = () => {
+const Overview = () => {
   const auth = useAuth()
   const profile = auth.user
   const { joinedSpaces, spacesErr, fetchSpaces } = useJoinedSpaces(() => console.log(fetchSpaces || spacesErr))
@@ -114,4 +114,4 @@ const Profile = () => {
   )
 }
 
-export default Profile
+export default Overview
