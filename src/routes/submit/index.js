@@ -112,17 +112,23 @@ const Submit = () => {
     }
 
     async function handleRoomStateEvent (event) {
+      /*
+      Not sure if still needed, might only update collaborator list and causes trouble
       if (event.event.type === 'm.room.member' && spaceObject.rooms?.filter(({ roomId }) => event.sender?.roomId.includes(roomId)) && event.event.sender !== localStorage.getItem('mx_user_id')) {
         fetchSpace()
-      } else if (event.event.type === 'm.room.name' && blocks?.filter(({ roomId }) => event.sender?.roomId.includes(roomId))) {
+      } else
+      */
+      if (event.event.type === 'm.room.name' && blocks?.filter(({ roomId }) => event.sender?.roomId.includes(roomId))) {
+        // listen to room order changes or deletions (room names being changed)
         fetchSpace()
       } else if (event.event.type === 'm.space.child' && event.event.room_id === projectSpace && event.event.sender !== localStorage.getItem('mx_user_id')) {
-        console.log(event.event)
+        // new content room being added
         fetchSpace()
         matrixClient.joinRoom(event.event.state_key)
-      } else if (event.event.state_key === projectSpace) {
+      }/* else if (event.event.state_key === projectSpace) {
         fetchSpace()
       }
+      */
     }
 
     console.log('subscribe to all room events')

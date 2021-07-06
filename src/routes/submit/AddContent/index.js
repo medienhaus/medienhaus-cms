@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import MediaUpload from './MediaUpload'
 import AddBlock from './AddBlock'
 import PeertubeEmbed from './peertubeEmbed'
-import AddDate from './AddDate'
+import AddLocation from './AddDate'
 import createBlock from '../matrix_create_room'
 import reorder from '../DisplayContent/matrix_reorder_rooms'
 import BigBlueButtonEmbed from './bigBlueButtonEmbed'
@@ -66,7 +66,7 @@ const AddContent = ({ number, projectSpace, blocks, reloadSpace }) => {
           : selectedBlockType === 'video' || selectedBlockType === 'livestream' || selectedBlockType === 'playlist'
             ? <PeertubeEmbed type={selectedBlockType} onCreateRoomForBlock={onCreateBlockRoom} onBlockWasAddedSuccessfully={onBlockWasAddedSuccessfully} />
             : selectedBlockType === 'date'
-              ? <AddDate onCreateRoomForBlock={onCreateBlockRoom} onBlockWasAddedSuccessfully={onBlockWasAddedSuccessfully}/>
+              ? <AddLocation onCreateRoomForBlock={onCreateBlockRoom} onBlockWasAddedSuccessfully={onBlockWasAddedSuccessfully}/>
               : selectedBlockType === 'bbb'
                 ? <BigBlueButtonEmbed onCreateRoomForBlock={onCreateBlockRoom} onBlockWasAddedSuccessfully={onBlockWasAddedSuccessfully} />
                 : <AddBlock contentSelect={selectedBlockType} number={number} projectSpace={projectSpace} blocks={blocks} reloadSpace={reloadSpace} displayPlusButton={displayPlusButton} />
