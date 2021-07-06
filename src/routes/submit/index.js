@@ -4,7 +4,7 @@ import Matrix from '../../Matrix'
 import useJoinedSpaces from '../../components/matrix_joined_spaces'
 import { MatrixEvent } from 'matrix-js-sdk'
 
-// Components
+// components
 import Collaborators from './Collaborators'
 import Category from './Category'
 import DisplayContent from './DisplayContent'
@@ -71,7 +71,6 @@ const Submit = () => {
     const space = await matrixClient.getSpaceSummary(projectSpace)
     setTitle(space.rooms[0].name)
     setSpaceObject(space)
-    console.log(space)
     space.rooms[0].avatar_url !== undefined && setProjectImage(space.rooms[0].avatar_url)
     const spaceRooms = space.rooms.filter(x => !('room_type' in x))
     setBlocks(spaceRooms.filter(x => x !== undefined).filter(room => room.name.charAt(0) !== 'x').sort((a, b) => {

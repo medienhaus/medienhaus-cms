@@ -5,10 +5,13 @@ import PeertubeEmbed from './peertubeEmbed'
 import createBlock from '../matrix_create_room'
 import reorder from '../DisplayContent/matrix_reorder_rooms'
 
+// assets
+import locations from '../../../assets/locations.json'
+
 const AddContent = ({ number, projectSpace, blocks, reloadSpace }) => {
   const [selectedBlockType, setSelectedBlockType] = useState('')
   const [showBlockTypeSelector, setShowBlockTypeSelector] = useState(false)
-
+  const [selectedLocation, setSelectedLocation] = useState('')
   const displayPlusButton = (button) => {
     setShowBlockTypeSelector(!button)
   }
@@ -54,6 +57,8 @@ const AddContent = ({ number, projectSpace, blocks, reloadSpace }) => {
         <option value="video">Video</option>
         <option value="livestream">Livestream</option>
         <option value="playlist">Playlist</option>
+        <option value="" disabled={true} >--Date and Venue ------------</option>
+        <option value="date">Date</option>
       </select>
       <button className="cancel" onClick={(e) => { e.preventDefault(); setShowBlockTypeSelector(false); setSelectedBlockType('') }} >×</button>
       {
@@ -61,7 +66,11 @@ const AddContent = ({ number, projectSpace, blocks, reloadSpace }) => {
           ? <MediaUpload fileType={selectedBlockType} number={number} space={projectSpace} blocks={blocks} reloadSpace={reloadSpace} displayPlusButton={displayPlusButton} />
           : selectedBlockType === 'video' || selectedBlockType === 'livestream' || selectedBlockType === 'playlist'
             ? <PeertubeEmbed type={selectedBlockType} onCreateRoomForBlock={onCreateBlockRoom} onBlockWasAddedSuccessfully={onBlockWasAddedSuccessfully} />
-            : <AddBlock contentSelect={selectedBlockType} number={number} projectSpace={projectSpace} blocks={blocks} reloadSpace={reloadSpace} displayPlusButton={displayPlusButton} />
+            : selectedBlockType === 'date'
+              ? <select name="location-select" value={selectedLocation} id="location-select" onChange={(e) => setSelectedLocation(e.target.value)}>
+                {locations.map(location => <option value={location.coordinates}>{location.location}</option>)}
+                  </select>
+              : <AddBlock contentSelect={selectedBlockType} number={number} projectSpace={projectSpace} blocks={blocks} reloadSpace={reloadSpace} displayPlusButton={displayPlusButton} />
       }
     </div>
   )

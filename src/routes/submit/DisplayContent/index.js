@@ -34,7 +34,7 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace }) => 
   const isMounted = useRef(true)
 
   useEffect(() => {
-    const fetchJson = async () => setJson(await matrixClient.getStateEvent(block.room_id, 'm.room.meta'))
+    const fetchJson = async () => setJson(await matrixClient.getStateEvent(block.room_id, 'm.medienhaus.meta'))
     fetchJson()
     isMounted.current = true
     return () => {
