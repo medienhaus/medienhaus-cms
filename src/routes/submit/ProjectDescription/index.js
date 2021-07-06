@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { ReactComponent as TextIcon } from '../../../assets/icons/remix/text.svg'
 import Matrix from '../../../Matrix'
 
-const ProjectDescription = ({ space, callback }) => {
+const ProjectDescription = ({ space }) => {
   const [saved, setSaved] = useState(false)
   const [description, setDescription] = useState(space?.topic)
   const matrixClient = Matrix.getMatrixClient()
@@ -11,7 +11,6 @@ const ProjectDescription = ({ space, callback }) => {
     const save = await matrixClient.setRoomTopic(space.room_id, description)
     if ('event_id' in save) {
       setSaved('Saved!')
-      callback()
       setTimeout(() => {
         setSaved()
       }, 1000)

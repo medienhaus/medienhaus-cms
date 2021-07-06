@@ -1,7 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import Matrix from '../../Matrix'
-import useJoinedSpaces from '../../components/matrix_joined_spaces'
 import { MatrixEvent } from 'matrix-js-sdk'
 
 // components
@@ -16,7 +15,6 @@ import ProjectDescription from './ProjectDescription'
 import { Loading } from '../../components/loading'
 
 const Submit = () => {
-  const { joinedSpaces, spacesErr, fetchSpaces, reload } = useJoinedSpaces(false)
   const [title, setTitle] = useState('')
   const [projectImage, setProjectImage] = useState(false)
   const [visibility, setVisibility] = useState('')
@@ -25,6 +23,7 @@ const Submit = () => {
   const [isCollab, setIsCollab] = useState(false)
   const [contentLang, setContentLang] = useState('en')
   const [spaceObject, setSpaceObject] = useState()
+  const [roomMembers, setRoomMembers] = useState()
   const matrixClient = Matrix.getMatrixClient()
   const params = useParams()
 
@@ -39,9 +38,7 @@ const Submit = () => {
   }
 
   const inviteCollaborators = async (roomId) => {
-    const getRoomMembers = await matrixClient.getJoinedRoomMembers(spaceObject?.rooms[0].room_id)
-    const allCollaborators = getRoomMembers.filter(userId => userId !== localStorage.getItem('mx_user_id'))[0]
-    console.log(allCollaborators)
+    const allCollaborators = Object.keys(roomMembers.joined).filter(userId => userId !== localStorage.getItem('mx_user_id'))
     // const allCollaborators = joinedSpaces?.map((space, i) => space.name === title && Object.keys(space.collab).filter(userId => userId !== localStorage.getItem('mx_user_id') && userId !== process.env.REACT_APP_PROJECT_BOT_ACCOUNT)).filter(space => space !== false)[0]
     // I would be surprised if there isn't an easier way to get joined members...
     const setPower = async (userId) => {
@@ -75,10 +72,9 @@ const Submit = () => {
     setTitle(space.rooms[0].name)
     setSpaceObject(space)
     const getRoomMembers = await matrixClient.getJoinedRoomMembers(space?.rooms[0].room_id)
-    console.log(getRoomMembers)
-
-    const allCollaborators = getRoomMembers.joined
-    console.log(allCollaborators)
+    setRoomMembers(getRoomMembers.joined)
+    const allCollaborators = Object.keys(getRoomMembers.joined)
+    console.log(allCollaborators.filter(userId => userId !== localStorage.getItem('mx_user_id')))
 
     space.rooms[0].avatar_url !== undefined && setProjectImage(space.rooms[0].avatar_url)
     const joinRule = await fetch(process.env.REACT_APP_MATRIX_BASE_URL + `/_matrix/client/r0/rooms/${space.rooms[0].room_id}/state/m.room.join_rules/`, {
@@ -190,12 +186,8 @@ const Submit = () => {
       </section>
       <section className="project-title">
         <h3>Project Title</h3>
-        <ProjectTitle joinedSpaces={joinedSpaces} title={title} projectSpace={projectSpace} callback={changeTitle} />
+        <ProjectTitle title={title} projectSpace={projectSpace} callback={changeTitle} />
       </section>
-      { // If we have problems fetching the users spaces we display an error message
-        spacesErr && <p>⚠️Looks like there was an error while trying to load your project.
-        Please make sure you are connected to the internet. If the error persist, you can get in touch with us via the Support form.</p>
-      }
       {projectSpace && (
         <>
           <section className="context">
@@ -203,7 +195,7 @@ const Submit = () => {
             <Category title={title} projectSpace={projectSpace} />
           </section>
           <section className="contributors">
-            <Collaborators projectSpace={projectSpace} blocks={blocks} title={title} joinedSpaces={joinedSpaces} startListeningToCollab={() => startListeningToCollab()} />
+            <Collaborators projectSpace={projectSpace} blocks={blocks} title={title} members={roomMembers} startListeningToCollab={() => startListeningToCollab()} />
           </section>
           <section className="project-image">
             <h3>Project Image</h3>
@@ -220,7 +212,7 @@ const Submit = () => {
               <option value="de">DE - German</option>
               <option value="en" >EN -English</option>
             </select>
-            {spaceObject ? <ProjectDescription space={spaceObject?.rooms[0]} callback={reload} /> : <Loading />}
+            {spaceObject ? <ProjectDescription space={spaceObject?.rooms[0]} /> : <Loading />}
             {blocks.length === 0
               ? <AddContent number={0} projectSpace={projectSpace} blocks={blocks} reloadSpace={reloadSpace} />
               : blocks.map((content, i) =>
@@ -230,7 +222,7 @@ const Submit = () => {
           <section className="visibility">
             <h3>Visibility (Draft/Published)</h3>
             <p>Select if you want to save the information provided by you as a draft or if you are happy with it select to publish the project. You can change this at any time.</p>
-            {fetchSpaces ? <Loading /> : <PublishProject space={spaceObject.rooms[0]} published={visibility} />}
+            {spaceObject ? <PublishProject space={spaceObject.rooms[0]} published={visibility} /> : <Loading /> }
           </section>
         </>
       )}

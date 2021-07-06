@@ -3,7 +3,7 @@ import Matrix from '../../../Matrix'
 import { Loading } from '../../../components/loading'
 import debounce from 'lodash/debounce'
 
-const Collaborators = ({ projectSpace, blocks, title, joinedSpaces, startListeningToCollab }) => {
+const Collaborators = ({ projectSpace, blocks, title, members, startListeningToCollab }) => {
   const [fetchingUsers, setFetchingUsers] = useState(false)
   const [userSearch, setUserSearch] = useState([])
   const [collab, setCollab] = useState('')
@@ -62,11 +62,11 @@ const Collaborators = ({ projectSpace, blocks, title, joinedSpaces, startListeni
       {
         < section >
           <ul>{
-            joinedSpaces?.map((space, i) => space.name === title && Object.values(space.collab).map(name => {
-              startListeningToCollab()
-              return <li>{name.display_name}</li>
-            })
-            )
+           members?.length > 1 && Object.values(members).map(name => {
+             startListeningToCollab()
+             return <li>{name.display_name}</li>
+           })
+
           }
           </ul>
         </section>}

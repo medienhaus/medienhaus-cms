@@ -5,14 +5,13 @@ import { Loading } from '../../../components/loading'
 import createBlock from '../matrix_create_room'
 import LoadingSpinnerButton from '../../../components/LoadingSpinnerButton'
 
-const ProjectTitle = ({ joinedSpaces, title, projectSpace, callback }) => {
+const ProjectTitle = ({ title, projectSpace, callback }) => {
   const [projectTitle, setProjectTitle] = useState('')
   const [edit, setEdit] = useState(false)
   const [newProject, setNewProject] = useState(false)
   const [oldTitle, setOldTitle] = useState('')
   const [loading, setLoading] = useState(false)
   const matrixClient = Matrix.getMatrixClient()
-  const doublicate = joinedSpaces?.filter(({ name }) => projectTitle === name).length > 0
   const history = useHistory()
 
   useEffect(() => {
@@ -76,7 +75,7 @@ const ProjectTitle = ({ joinedSpaces, title, projectSpace, callback }) => {
                 {!newProject && <input id="submit" name="submit" type="submit" value="❌ CANCEL" onClick={(e) => { e.preventDefault(); setEdit(false); setProjectTitle(oldTitle) }} />}
                   {!title && newProject &&
                       <input
-                          id="submit" name="submit" type="submit" value={newProject && 'Create Project'} disabled={(newProject && doublicate) || !projectTitle || projectTitle.length > 100} onClick={(e) => {
+                          id="submit" name="submit" type="submit" value={newProject && 'Create Project'} disabled={newProject || !projectTitle || projectTitle.length > 100} onClick={(e) => {
                             console.log(newProject)
                             if (newProject && projectTitle.length < 101) {
                               createProject(e, projectTitle)
