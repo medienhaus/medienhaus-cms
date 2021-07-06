@@ -9,7 +9,6 @@ const DisplayImage = ({ roomId, url, alt }) => {
   const [loading, setLoading] = useState(false)
   const [feedback, setFeedback] = useState('')
   const matrixClient = Matrix.getMatrixClient()
-  console.log(alt)
 
   const onSave = async () => {
     setLoading(true)
@@ -46,7 +45,7 @@ const DisplayImage = ({ roomId, url, alt }) => {
         <a href="https://chooser-beta.creativecommons.org/">https://chooser-beta.creativecommons.org/</a>
         <textarea placeholder="please describe the image with a few words to enable visually impaired website visitors to comprehend what’s being shown here"
             onChange={(e) => setAlttext(e.target.value)} />
-        <LoadingSpinnerButton loading={loading || alttext.length < 0 || license.length < 0 || author.length < 0 } onClick={onSave} >{feedback || 'SAVE'}</LoadingSpinnerButton>
+        <LoadingSpinnerButton disabled={loading || alttext.length < 0 || license.length < 0 || author.length < 0 } onClick={onSave} >{feedback || 'SAVE'}</LoadingSpinnerButton>
     </>
   )
 }

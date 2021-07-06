@@ -8,6 +8,7 @@ const AddLocation = ({ onCreateRoomForBlock, onBlockWasAddedSuccessfully }) => {
   const [selectedLocation, setSelectedLocation] = useState('')
   const [loading, setLoading] = useState(false)
   const matrixClient = Matrix.getMatrixClient()
+  console.log(selectedLocation)
 
   const handleSubmit = async () => {
     setLoading(true)
@@ -22,10 +23,11 @@ const AddLocation = ({ onCreateRoomForBlock, onBlockWasAddedSuccessfully }) => {
 
   return (
         <>
-            <select name="location-select" value={selectedLocation} id="location-select" onChange={(e) => setSelectedLocation(e.target.value)}>
+      <select name="location-select" value={selectedLocation} id="location-select" onChange={(e) => setSelectedLocation(e.target.value)}>
+        <option value="" disabled={true} >------ SELECT LOCATION ------</option>
                 {locations.map(location => <option value={location.coordinates} key={location.coordinates}>{location.name}</option>)}
             </select>
-            <LoadingSpinnerButton loading={ loading} onClick={handleSubmit}>SAVE</LoadingSpinnerButton>
+            <LoadingSpinnerButton disabled={ loading || !selectedLocation} onClick={handleSubmit}>SAVE</LoadingSpinnerButton>
         </>
   )
 }

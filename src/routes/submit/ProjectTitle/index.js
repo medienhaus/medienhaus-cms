@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import Matrix from '../../../Matrix'
 import { Loading } from '../../../components/loading'
-import createBlock from '../matrix_create_room'
 import LoadingSpinnerButton from '../../../components/LoadingSpinnerButton'
 
 const ProjectTitle = ({ title, projectSpace, callback }) => {
@@ -49,10 +48,7 @@ const ProjectTitle = ({ title, projectSpace, callback }) => {
     }
     try {
       await matrixClient.createRoom(opts)
-        .then(async (response) => {
-          await createBlock(undefined, 'introduction', 0, response.room_id)
-          return response.room_id
-        }).then((res) => history.push(`/submit/${res}`))
+        .then((res) => history.push(`/submit/${res.room_id}`))
     } catch (e) {
       console.log(e)
     } finally {

@@ -6,7 +6,7 @@ const ProjectImage = ({ projectSpace, projectImage, changeProjectImage }) => {
   const [edit, setEdit] = useState(false)
   const [loading, setLoading] = useState(false)
   const matrixClient = Matrix.getMatrixClient()
-  console.log(projectImage)
+
   const handleSubmission = async (e, selectedFile, fileName) => {
     e.preventDefault()
     setLoading(true)
