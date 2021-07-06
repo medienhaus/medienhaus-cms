@@ -52,11 +52,9 @@ body > div:first-of-type {
   min-height: 100%;
 }
 
-/*
-body > div:first-of-type > *:not(footer) > * > * + * {
+body > div:first-of-type > *:not(footer) > *:not(section) > * + * {
   margin-top: calc(var(--margin) * 2);
 }
-*/
 
 body > div:first-of-type > main > :first-of-type {
   margin-top: calc(var(--margin) * 0.6);
