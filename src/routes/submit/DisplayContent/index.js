@@ -172,7 +172,7 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace }) => 
     <>
       <div className="editor">
         <div className="left">
-          <LoadingSpinnerButton key={'up_' + block.room_id} disabled={index < 2} onClick={() => changeOrder(block.room_id, block.name, -1)}>↑</LoadingSpinnerButton>
+          <LoadingSpinnerButton key={'up_' + block.room_id} disabled={index < 1} onClick={() => changeOrder(block.room_id, block.name, -1)}>↑</LoadingSpinnerButton>
           <figure className="icon-bg">
             {
               json.type === 'heading'
@@ -196,7 +196,7 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace }) => 
                                 : <TextIcon fill="var(--color-fg)" />
             }
           </figure>
-          <LoadingSpinnerButton key={'down_' + block.room_id} disabled={index === blocks.length - 1 || index === 0} onClick={() => changeOrder(block.room_id, block.name, 1)}>↓</LoadingSpinnerButton>
+          <LoadingSpinnerButton key={'down_' + block.room_id} disabled={index === blocks.length - 1} onClick={() => changeOrder(block.room_id, block.name, 1)}>↓</LoadingSpinnerButton>
         </div>
         {cms?.msgtype === 'm.image'
           ? <figure className="center"><img src={matrixClient.mxcUrlToHttp(cms.url)} alt={cms.info.name} key={block.room_id} /></figure>
@@ -263,7 +263,7 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace }) => 
         }
 
         <div className="right">
-          <button key={'delete' + index} disabled={index === 0 || deleting} onClick={(e) => {
+          <button key={'delete' + index} disabled={deleting} onClick={(e) => {
             if (clickedDelete) {
               onDelete(e, block.room_id, block.name, index)
               setClickedDelete(false)

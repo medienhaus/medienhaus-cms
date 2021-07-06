@@ -14,7 +14,7 @@ import { Loading } from '../../components/loading'
 import { MatrixEvent } from 'matrix-js-sdk'
 
 const Submit = () => {
-  const { joinedSpaces, spacesErr, fetchSpaces } = useJoinedSpaces(() => console.log(fetchSpaces || spacesErr))
+  const { joinedSpaces, spacesErr, fetchSpaces, reload } = useJoinedSpaces(false)
   const [title, setTitle] = useState('')
   const [projectImage, setProjectImage] = useState(false)
   const [visibility, setVisibility] = useState('')
@@ -174,6 +174,10 @@ const Submit = () => {
         <h3>Project Title</h3>
         <ProjectTitle joinedSpaces={joinedSpaces} title={title} projectSpace={projectSpace} callback={changeTitle} />
       </section>
+      { // If we have problems fetching the users spaces we display an error message
+        spacesErr && <p>⚠️Looks like there was an error while trying to load your project.
+        Please make sure you are connected to the internet. If the error persist, you can get in touch with us via the Support form.</p>
+      }
       {projectSpace && (
         <>
           <section className="context">
@@ -198,7 +202,7 @@ const Submit = () => {
               <option value="de">DE - German</option>
               <option value="en" >EN -English</option>
             </select>
-            <ProjectDescription space={spaceObject?.rooms[0]} />
+            {spaceObject ? <ProjectDescription space={spaceObject?.rooms[0]} callback={reload} /> : <Loading />}
             {blocks.length === 0
               ? <AddContent number={0} projectSpace={projectSpace} blocks={blocks} reloadSpace={reloadSpace} />
               : blocks.map((content, i) =>
@@ -208,7 +212,7 @@ const Submit = () => {
           <section className="visibility">
             <h3>Visibility (Draft/Published)</h3>
             <p>Select if you want to save the information provided by you as a draft or if you are happy with it select to publish the project. You can change this at any time.</p>
-            <PublishProject space={joinedSpaces?.filter(x => x.room_id === projectSpace)[0]} published={visibility} />
+            {fetchSpaces ? <Loading /> : <PublishProject space={joinedSpaces?.filter(x => x.room_id === projectSpace)[0]} published={visibility} />}
           </section>
         </>
       )}

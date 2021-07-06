@@ -60,11 +60,11 @@ const getAnswer = async () => {
   }
 }
 
-const useJoinedSpaces = ({ num }) => {
+const useJoinedSpaces = ({ reload }) => {
   const [joinedSpaces, setJoinedSpaces] = useState()
   const [fetchSpaces, setFetchSpaces] = useState(true)
   const [spacesErr, setSpacesErr] = useState(false)
-  const [load, setLoad] = useState(false)
+  const [load, setLoad] = useState(reload)
 
   useEffect(() => {
     let canceled
