@@ -312,7 +312,7 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace }) => 
             }
             <p>{deleting}</p> // feedback that deleting was succesfull or has failed
           }}>
-            {clickedDelete ? 'SURE?' : deleting ? <Loading /> : '×'}
+            {clickedDelete ? '❓' : deleting ? <Loading /> : '×'}
           </button>
         </div>
       </div>
