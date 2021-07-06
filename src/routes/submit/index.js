@@ -2,6 +2,9 @@ import React, { useCallback, useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import Matrix from '../../Matrix'
 import useJoinedSpaces from '../../components/matrix_joined_spaces'
+import { MatrixEvent } from 'matrix-js-sdk'
+
+// Components
 import Collaborators from './Collaborators'
 import Category from './Category'
 import DisplayContent from './DisplayContent'
@@ -11,7 +14,6 @@ import ProjectTitle from './ProjectTitle'
 import PublishProject from '../../components/PublishProject'
 import ProjectDescription from './ProjectDescription'
 import { Loading } from '../../components/loading'
-import { MatrixEvent } from 'matrix-js-sdk'
 
 const Submit = () => {
   const { joinedSpaces, spacesErr, fetchSpaces, reload } = useJoinedSpaces(false)

@@ -34,11 +34,11 @@ const ProjectTitle = ({ joinedSpaces, title, projectSpace, callback }) => {
         content: { history_visibility: 'world_readable' }
       },
       {
-        type: 'm.room.meta',
+        type: 'm.medienhaus.meta',
         content: {
           rundgang: 21,
           type: 'studentproject',
-          version: 1
+          version: '0.1'
         }
       },
       {
