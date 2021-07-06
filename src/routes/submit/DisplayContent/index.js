@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import Matrix from '../../../Matrix'
 import FetchCms from '../../../components/matrix_fetch_cms'
 import Editor, { renderToHtml } from 'rich-markdown-editor'
@@ -9,6 +9,7 @@ import List from './List'
 import Code from './Code'
 import reorder from './matrix_reorder_rooms'
 import LoadingSpinnerButton from '../../../components/LoadingSpinnerButton'
+import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
 
 import { ReactComponent as HeadingIcon } from '../../../assets/icons/remix/h-1.svg'
 import { ReactComponent as AudioIcon } from '../../../assets/icons/remix/volume-up-line.svg'
@@ -21,6 +22,9 @@ import { ReactComponent as CodeIcon } from '../../../assets/icons/remix/code.svg
 import { ReactComponent as VideoIcon } from '../../../assets/icons/remix/vidicon-line.svg'
 import { ReactComponent as PlaylistIcon } from '../../../assets/icons/remix/playlist.svg'
 import { ReactComponent as PictureInPictureIcon } from '../../../assets/icons/remix/picture-in-picture-line.svg'
+import { ReactComponent as DateIcon } from '../../../assets/icons/remix/date.svg'
+
+import locations from '../../../assets/locations.json'
 
 const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace }) => {
   const [clickedDelete, setClickedDelete] = useState(false)
@@ -28,10 +32,20 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace }) => 
   const [loading, setLoading] = useState(false)
   const [saved, setSaved] = useState(false)
   const [deleting, setDeleting] = useState(false)
+  const [json, setJson] = useState({})
   let { cms, error, fetching } = FetchCms(block.room_id)
   cms = cms[0]
-  const json = JSON.parse(block.topic)
   const matrixClient = Matrix.getMatrixClient()
+  const isMounted = useRef(true)
+
+  useEffect(() => {
+    const fetchJson = async () => setJson(await matrixClient.getStateEvent(block.room_id, 'm.medienhaus.meta'))
+    fetchJson()
+    isMounted.current = true
+    return () => {
+      isMounted.current = false
+    }
+  }, [block.room_id, matrixClient])
 
   const onSave = async (roomId) => {
     setReadOnly(true)
@@ -65,20 +79,6 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace }) => 
           }, 1000)
         }
       } else {
-        if (json.type === 'introduction') {
-          console.log('introooooo')
-          localStorage.getItem(block.room_id).length > 20
-            ? matrixClient.setRoomTopic(projectSpace, JSON.stringify({
-              rundgang: 21,
-              type: 'studentproject',
-              complete: true
-            }))
-            : matrixClient.setRoomTopic(projectSpace, JSON.stringify({
-              rundgang: 21,
-              type: 'studentproject',
-              complete: false
-            }))
-        }
         const save = await matrixClient.sendMessage(roomId, {
           body: localStorage.getItem(roomId),
           format: 'org.matrix.custom.html',
@@ -177,7 +177,7 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace }) => 
     <>
       <div className="editor">
         <div className="left">
-          <LoadingSpinnerButton key={'up_' + block.room_id} disabled={index < 2} onClick={() => changeOrder(block.room_id, block.name, -1)}>↑</LoadingSpinnerButton>
+          <LoadingSpinnerButton key={'up_' + block.room_id} disabled={index < 1} onClick={() => changeOrder(block.room_id, block.name, -1)}>↑</LoadingSpinnerButton>
           <figure className="icon-bg">
             {
               json.type === 'heading'
@@ -198,12 +198,14 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace }) => 
                               ? <VideoIcon fill="var(--color-fg)" />
                               : json.type === 'playlist'
                                 ? <PlaylistIcon fill="var(--color-fg)" />
-                                : json.type === 'bbb'
-                                  ? <PictureInPictureIcon fill="var(--color-fg)" />
-                                  : <TextIcon fill="var(--color-fg)" />
+                                : json.type === 'date'
+                                  ? <DateIcon fill="var(--color-fg)" />
+                                  : json.type === 'bbb'
+                                    ? <PictureInPictureIcon fill="var(--color-fg)" />
+                                    : <TextIcon fill="var(--color-fg)" />
             }
           </figure>
-          <LoadingSpinnerButton key={'down_' + block.room_id} disabled={index === blocks.length - 1 || index === 0} onClick={() => changeOrder(block.room_id, block.name, 1)}>↓</LoadingSpinnerButton>
+          <LoadingSpinnerButton key={'down_' + block.room_id} disabled={index === blocks.length - 1} onClick={() => changeOrder(block.room_id, block.name, 1)}>↓</LoadingSpinnerButton>
         </div>
         {cms?.msgtype === 'm.image'
           ? <figure className="center"><img src={matrixClient.mxcUrlToHttp(cms.url)} alt={cms.info.name} key={block.room_id} /></figure>
@@ -221,10 +223,33 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace }) => 
                 ? <List onSave={() => onSave(block.room_id)} storage={(list) => localStorage.setItem(block.room_id, list)} populated={cms?.body} type="ol" />
                 : json.type === 'code'
                   ? <Code onSave={() => onSave(block.room_id)} storage={(code) => localStorage.setItem(block.room_id, code)} saved={saved} content={cms?.body} />
-                  : json.type === 'bbb'
-                    ? <div>BigBlueButton-Session<br /><a href={cms?.body} target="_blank" rel="external nofollow noopener noreferrer">{cms?.body}</a></div>
-                    : (json.type === 'video' || json.type === 'livestream' || json.type === 'playlist')
-                        ? (
+                  : (json.type === 'video' || json.type === 'livestream' || json.type === 'playlist')
+                      ? (
+                      <iframe src={`https://stream.udk-berlin.de/${(json.type === 'playlist' ? 'video-playlists' : 'videos')}/embed/${cms?.body}`}
+                        frameBorder="0"
+                        title={cms?.body}
+                        sandbox="allow-same-origin allow-scripts"
+                        allowFullScreen="allowfullscreen"
+                        style={{ width: '100%', aspectRatio: '16 / 9', border: 'calc(var(--margin) * 0.2) solid var(--color-fg)' }}
+                      />
+                        )
+                      : json.type === 'date'
+                        ? <MapContainer center={cms.body.split(',')} zoom={17} scrollWheelZoom={false} placeholder>
+                        <TileLayer
+                          attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+                          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                        />
+                        <Marker position={cms.body.split(',')}>
+                          <Popup>
+                            {locations.find(coord => coord.coordinates === cms.body).name}
+                          </Popup>
+                        </Marker>
+                      </MapContainer>
+
+                        : json.type === 'bbb'
+                          ? <div>BigBlueButton-Session<br /><a href={cms?.body} target="_blank" rel="external nofollow noopener noreferrer">{cms?.body}</a></div>
+                          : (json.type === 'video' || json.type === 'livestream' || json.type === 'playlist')
+                              ? (
                           <iframe src={`https://stream.udk-berlin.de/${(json.type === 'playlist' ? 'video-playlists' : 'videos')}/embed/${cms?.body}`}
                             frameBorder="0"
                             title={cms?.body}
@@ -232,8 +257,8 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace }) => 
                             allowFullScreen="allowfullscreen"
                             style={{ width: '100%', aspectRatio: '16 / 9', border: 'calc(var(--margin) * 0.2) solid var(--color-fg)' }}
                           />
-                          )
-                        : <div className="center">
+                                )
+                              : <div className="center">
                         <Editor
                           dark={window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches}
                           defaultValue={cms?.body}
@@ -272,7 +297,7 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace }) => 
         }
 
         <div className="right">
-          <button key={'delete' + index} disabled={index === 0 || deleting} onClick={(e) => {
+          <button key={'delete' + index} disabled={deleting} onClick={(e) => {
             if (clickedDelete) {
               onDelete(e, block.room_id, block.name, index)
               setClickedDelete(false)

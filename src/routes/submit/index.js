@@ -2,6 +2,9 @@ import React, { useCallback, useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import Matrix from '../../Matrix'
 import useJoinedSpaces from '../../components/matrix_joined_spaces'
+import { MatrixEvent } from 'matrix-js-sdk'
+
+// components
 import Collaborators from './Collaborators'
 import Category from './Category'
 import DisplayContent from './DisplayContent'
@@ -9,11 +12,11 @@ import AddContent from './AddContent'
 import ProjectImage from './ProjectImage'
 import ProjectTitle from './ProjectTitle'
 import PublishProject from '../../components/PublishProject'
+import ProjectDescription from './ProjectDescription'
 import { Loading } from '../../components/loading'
-import { MatrixEvent } from 'matrix-js-sdk'
 
 const Submit = () => {
-  const { joinedSpaces, spacesErr, fetchSpaces } = useJoinedSpaces(() => console.log(fetchSpaces || spacesErr))
+  const { joinedSpaces, spacesErr, fetchSpaces, reload } = useJoinedSpaces(false)
   const [title, setTitle] = useState('')
   const [projectImage, setProjectImage] = useState(false)
   const [visibility, setVisibility] = useState('')
@@ -172,40 +175,45 @@ const Submit = () => {
         <h3>Project Title</h3>
         <ProjectTitle joinedSpaces={joinedSpaces} title={title} projectSpace={projectSpace} callback={changeTitle} />
       </section>
+      { // If we have problems fetching the users spaces we display an error message
+        spacesErr && <p>⚠️Looks like there was an error while trying to load your project.
+        Please make sure you are connected to the internet. If the error persist, you can get in touch with us via the Support form.</p>
+      }
       {projectSpace && (
-      <>
-        <section className="context">
-          <h3>Context</h3>
-          <Category title={title} projectSpace={projectSpace} />
-        </section>
-        <section className="contributors">
-          <Collaborators projectSpace={projectSpace} blocks={blocks} title={title} joinedSpaces={joinedSpaces} startListeningToCollab={() => startListeningToCollab()} />
-        </section>
-        <section className="project-image">
-          <h3>Project Image</h3>
-          {loading ? <Loading /> : <ProjectImage projectSpace={projectSpace} projectImage={projectImage} changeProjectImage={changeProjectImage} />}
-        </section>
-        <section className="content">
-          <h3>Content</h3>
-          <p>You can add elements like text, video and pictures to the main body of your project by using the “+” on the right side.
-            One block of text is mandatory to describe your project.
-            When using the text block you can format text by highlighting it.
-            You can use the arrows on the left to rearrange exsisting blocks.
-            You can provide information in multiple languages by choosing in the dropdown below.</p>
-          <select id="subject" name="subject" defaultValue={''} value={contentLang} onChange={(e) => setContentLang(e.target.value)}>
-            <option value="de">DE - German</option>
-            <option value="en" >EN -English</option>
+        <>
+          <section className="context">
+            <h3>Context</h3>
+            <Category title={title} projectSpace={projectSpace} />
+          </section>
+          <section className="contributors">
+            <Collaborators projectSpace={projectSpace} blocks={blocks} title={title} joinedSpaces={joinedSpaces} startListeningToCollab={() => startListeningToCollab()} />
+          </section>
+          <section className="project-image">
+            <h3>Project Image</h3>
+            {loading ? <Loading /> : <ProjectImage projectSpace={projectSpace} projectImage={projectImage} changeProjectImage={changeProjectImage} />}
+          </section>
+          <section className="content">
+            <h3>Content</h3>
+            <p>You can add elements like text, video and pictures to the main body of your project by using the “+” on the right side.
+              One block of text is mandatory to describe your project.
+              When using the text block you can format text by highlighting it.
+              You can use the arrows on the left to rearrange exsisting blocks.
+              You can provide information in multiple languages by choosing in the dropdown below.</p>
+            <select id="subject" name="subject" defaultValue={''} value={contentLang} onChange={(e) => setContentLang(e.target.value)}>
+              <option value="de">DE - German</option>
+              <option value="en" >EN -English</option>
             </select>
-          {blocks.length === 0
-            ? <AddContent number={0} projectSpace={projectSpace} blocks={blocks} reloadSpace={reloadSpace} />
-            : blocks.map((content, i) =>
-              <DisplayContent block={content} index={i} blocks={blocks} projectSpace={projectSpace} reloadSpace={reloadSpace} key={content + i + content?.lastUpdate} />
-            )}
+            {spaceObject ? <ProjectDescription space={spaceObject?.rooms[0]} callback={reload} /> : <Loading />}
+            {blocks.length === 0
+              ? <AddContent number={0} projectSpace={projectSpace} blocks={blocks} reloadSpace={reloadSpace} />
+              : blocks.map((content, i) =>
+                <DisplayContent block={content} index={i} blocks={blocks} projectSpace={projectSpace} reloadSpace={reloadSpace} key={content + i + content?.lastUpdate} />
+              )}
           </section>
           <section className="visibility">
             <h3>Visibility (Draft/Published)</h3>
             <p>Select if you want to save the information provided by you as a draft or if you are happy with it select to publish the project. You can change this at any time.</p>
-            <PublishProject space={spaceObject?.rooms[0]} published={visibility} />
+            {fetchSpaces ? <Loading /> : <PublishProject space={joinedSpaces?.filter(x => x.room_id === projectSpace)[0]} published={visibility} />}
           </section>
         </>
       )}

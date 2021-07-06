@@ -5,17 +5,14 @@ import { Loading } from '../loading'
 const PublishProject = ({ space, published, index, callback }) => {
   const [userFeedback, setUserFeedback] = useState()
   const [visibility, setVisibility] = useState(published)
-  const [showConsentBox, setShowConsentBox] = useState(false)
   const [showSaveButton, setShowSaveButton] = useState(false)
-  const [consent, setConsent] = useState(false)
-  console.log(space)
+
   useEffect(() => {
     setVisibility(published)
   }, [published])
 
   useEffect(() => {
     published === visibility && setShowSaveButton(false)
-    published === 'public' && setShowConsentBox(false)
   }, [visibility, published])
 
   const onChangeVisibility = async () => {
@@ -33,8 +30,6 @@ const PublishProject = ({ space, published, index, callback }) => {
             setTimeout(() => {
               setUserFeedback()
               setShowSaveButton(false)
-              setShowConsentBox(false)
-              setConsent(false)
               callback && callback(index, space, false)
             }, 3000)
           } else {
@@ -54,25 +49,17 @@ const PublishProject = ({ space, published, index, callback }) => {
       ? <>
       <select id="visibility" name="visibility" value={visibility} onChange={(e) => {
         setVisibility(e.target.value)
-        e.target.value === 'public'
-          ? setShowConsentBox(true)
-          : setShowConsentBox(false)
         setShowSaveButton(true)
-        setConsent(false)
       }} onBlur={(e) => { setVisibility(e.target.value) }}>
             <option value="invite">Draft</option>
             <option value="public">Public</option>
       </select>
       {showSaveButton && <div className="below">
         {userFeedback && <p>{userFeedback}</p>}
-        {showConsentBox && (visibility === 'public' && !space.topic.complete)
-          ? <p>Please add a short description to your project</p>
-          : <div>
-          <input id="checkbox" name="checkbox" type="checkbox" value={consent} onChange={() => setConsent(consent => !consent)} />
-          <label htmlFor="checkbox">I hereby consent that I own the rights to the uploaded content and am aware of the content violation policy.</label>
-        </div>}
-          <LoadingSpinnerButton disabled={(!consent && visibility === 'public') || (visibility === 'public' && !space.topic.complete)} onClick={onChangeVisibility}>SAVE</LoadingSpinnerButton>
-
+          {(visibility === 'public' && !space.description)
+            ? <p>Please add a short description to your project</p>
+            : <LoadingSpinnerButton disabled={(visibility === 'public' && !space.description)} onClick={onChangeVisibility}>SAVE</LoadingSpinnerButton>
+    }
       </div>}
       </>
       : <Loading />

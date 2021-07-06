@@ -7,9 +7,7 @@ const createBlock = async (e, content, number, space) => {
   const opts = {
     name: (number) + '_' + content,
     preset: 'public_chat',
-    topic: JSON.stringify({
-      type: content
-    }),
+    topic: '',
     creation_content: { 'm.federate': false },
     initial_state: [{
       type: 'm.space.parent',
@@ -64,6 +62,10 @@ const createBlock = async (e, content, number, space) => {
           const error = (data?.message) || res[1].status
           return Promise.reject(error)
         }
+        await matrixClient.sendStateEvent(res[0], 'm.medienhaus.meta', {
+          type: content,
+          version: '0.1'
+        })
         return res[0]
       })
     return room

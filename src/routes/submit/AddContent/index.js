@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import MediaUpload from './MediaUpload'
 import AddBlock from './AddBlock'
 import PeertubeEmbed from './peertubeEmbed'
+import AddDate from './AddDate'
 import createBlock from '../matrix_create_room'
 import reorder from '../DisplayContent/matrix_reorder_rooms'
 import BigBlueButtonEmbed from './bigBlueButtonEmbed'
@@ -9,7 +10,6 @@ import BigBlueButtonEmbed from './bigBlueButtonEmbed'
 const AddContent = ({ number, projectSpace, blocks, reloadSpace }) => {
   const [selectedBlockType, setSelectedBlockType] = useState('')
   const [showBlockTypeSelector, setShowBlockTypeSelector] = useState(false)
-
   const displayPlusButton = (button) => {
     setShowBlockTypeSelector(!button)
   }
@@ -56,6 +56,8 @@ const AddContent = ({ number, projectSpace, blocks, reloadSpace }) => {
         <option value="livestream">Livestream</option>
         <option value="playlist">Playlist</option>
         <option value="bbb">BigBlueButton-Session</option>
+        <option value="" disabled={true} >--Date and Venue ------------</option>
+        <option value="date">Date</option>
       </select>
       <button className="cancel" onClick={(e) => { e.preventDefault(); setShowBlockTypeSelector(false); setSelectedBlockType('') }} >×</button>
       {
@@ -63,9 +65,11 @@ const AddContent = ({ number, projectSpace, blocks, reloadSpace }) => {
           ? <MediaUpload fileType={selectedBlockType} number={number} space={projectSpace} blocks={blocks} reloadSpace={reloadSpace} displayPlusButton={displayPlusButton} />
           : selectedBlockType === 'video' || selectedBlockType === 'livestream' || selectedBlockType === 'playlist'
             ? <PeertubeEmbed type={selectedBlockType} onCreateRoomForBlock={onCreateBlockRoom} onBlockWasAddedSuccessfully={onBlockWasAddedSuccessfully} />
-            : selectedBlockType === 'bbb'
-              ? <BigBlueButtonEmbed onCreateRoomForBlock={onCreateBlockRoom} onBlockWasAddedSuccessfully={onBlockWasAddedSuccessfully} />
-              : <AddBlock contentSelect={selectedBlockType} number={number} projectSpace={projectSpace} blocks={blocks} reloadSpace={reloadSpace} displayPlusButton={displayPlusButton} />
+            : selectedBlockType === 'date'
+              ? <AddDate onCreateRoomForBlock={onCreateBlockRoom} onBlockWasAddedSuccessfully={onBlockWasAddedSuccessfully}/>
+              : selectedBlockType === 'bbb'
+                ? <BigBlueButtonEmbed onCreateRoomForBlock={onCreateBlockRoom} onBlockWasAddedSuccessfully={onBlockWasAddedSuccessfully} />
+                : <AddBlock contentSelect={selectedBlockType} number={number} projectSpace={projectSpace} blocks={blocks} reloadSpace={reloadSpace} displayPlusButton={displayPlusButton} />
       }
     </div>
   )

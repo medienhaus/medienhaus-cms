@@ -34,31 +34,18 @@ const ProjectTitle = ({ joinedSpaces, title, projectSpace, callback }) => {
         content: { history_visibility: 'world_readable' }
       },
       {
-        type: 'm.room.topic',
-        content: { topic: JSON.stringify({ rundgang: 21, type: 'studentproject' }) }
+        type: 'm.medienhaus.meta',
+        content: {
+          rundgang: 21,
+          type: 'studentproject',
+          version: '0.1'
+        }
       },
       {
         type: 'm.room.guest_access',
         state_key: '',
         content: { guest_access: 'can_join' }
       }],
-      power_level_content_override: {
-        ban: 50,
-        events: {
-          'm.room.name': 50,
-          'm.room.power_levels': 50
-        },
-        events_default: 0,
-        invite: 50,
-        kick: 50,
-        notifications: {
-          room: 20
-        },
-        redact: 50,
-        state_default: 50,
-        users_default: 0
-
-      },
       visibility: 'private'
     }
     try {

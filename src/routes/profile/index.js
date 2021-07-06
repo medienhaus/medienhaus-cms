@@ -14,7 +14,7 @@ const Profile = () => {
   const [drafts, setDrafts] = useState([])
   const [publications, setPublications] = useState([])
   const [invites, setInvites] = useState({})
-
+  console.log(joinedSpaces)
   // @TODO: Check for existing invites on page load
 
   // Listen for room events to populate our "pending invites" state
