@@ -33,6 +33,7 @@ const Nav = () => {
             <>
               <div>
                 <NavLink activeclassname="active" to="/profile">/profile</NavLink>
+                <NavLink activeclassname="active" to="/support">/support</NavLink>
                 <NavLink activeclassname="active" to="/tools">/tools</NavLink> {/* only for dev */}
                 <NavLink activeclassname="active" to="/moderation">/moderation</NavLink>
                 {

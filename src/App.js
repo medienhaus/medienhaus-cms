@@ -14,6 +14,7 @@ import Tools from './routes/tools'
 import Profile from './routes/profile'
 import Submit from './routes/submit'
 import Moderation from './routes/moderation'
+import Support from './routes/support'
 
 import { AuthProvider, useAuth } from './Auth'
 import PropTypes from 'prop-types'
@@ -62,6 +63,7 @@ function App () {
               <PrivateRoute path="/submit/:spaceId" component={Submit} />
               <PrivateRoute path="/submit" component={Submit} />
               <PrivateRoute path="/moderation" component={Moderation} />
+              <PrivateRoute path="/support" component={Support} />
             </Switch>
           </main>
           <Nav />

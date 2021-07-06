@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import LoadingSpinnerButton from '../../../../components/LoadingSpinnerButton'
 import Matrix from '../../../../Matrix'
 // assets
-import locations from '../../../../assets/locations.json'
+import locations from '../../../../assets/data/locations.json'
 
 const AddLocation = ({ onCreateRoomForBlock, onBlockWasAddedSuccessfully }) => {
   const [selectedLocation, setSelectedLocation] = useState('')

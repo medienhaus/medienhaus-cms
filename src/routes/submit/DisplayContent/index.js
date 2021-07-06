@@ -24,7 +24,7 @@ import { ReactComponent as PlaylistIcon } from '../../../assets/icons/remix/play
 import { ReactComponent as PictureInPictureIcon } from '../../../assets/icons/remix/picture-in-picture-line.svg'
 import { ReactComponent as DateIcon } from '../../../assets/icons/remix/date.svg'
 
-import locations from '../../../assets/locations.json'
+import locations from '../../../assets/data/locations.json'
 
 const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace }) => {
   const [clickedDelete, setClickedDelete] = useState(false)
