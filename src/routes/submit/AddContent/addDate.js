@@ -23,12 +23,12 @@ const AddDate = ({ onCreateRoomForBlock, onBlockWasAddedSuccessfully }) => {
   return (
     <>
       <div>
-        <label htmlFor="party">Choose a date:</label>
-        <input id="party" name="party" type="date" value={date} onChange={(e) => setDate(e.target.value)} />
+        <label htmlFor="date">Choose a date:</label>
+        <input id="date" name="date" type="date" value={date} onChange={(e) => setDate(e.target.value)} />
       </div>
       <div>
-        <label htmlFor="appt">Choose a time:</label>
-        <input id="appt" name="appt" type="time" value={time} onChange={(e) => {
+        <label htmlFor="time">Choose a time:</label>
+        <input id="time" name="time" type="time" value={time} onChange={(e) => {
           console.log(e)
           setTime(e.target.value)
         }} />
