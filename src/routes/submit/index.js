@@ -39,7 +39,10 @@ const Submit = () => {
   }
 
   const inviteCollaborators = async (roomId) => {
-    const allCollaborators = joinedSpaces?.map((space, i) => space.name === title && Object.keys(space.collab).filter(userId => userId !== localStorage.getItem('mx_user_id') && userId !== process.env.REACT_APP_PROJECT_BOT_ACCOUNT)).filter(space => space !== false)[0]
+    const getRoomMembers = await matrixClient.getJoinedRoomMembers(spaceObject?.rooms[0].room_id)
+    const allCollaborators = getRoomMembers.filter(userId => userId !== localStorage.getItem('mx_user_id'))[0]
+    console.log(allCollaborators)
+    // const allCollaborators = joinedSpaces?.map((space, i) => space.name === title && Object.keys(space.collab).filter(userId => userId !== localStorage.getItem('mx_user_id') && userId !== process.env.REACT_APP_PROJECT_BOT_ACCOUNT)).filter(space => space !== false)[0]
     // I would be surprised if there isn't an easier way to get joined members...
     const setPower = async (userId) => {
       console.log('changing power level for ' + userId)
@@ -71,16 +74,24 @@ const Submit = () => {
     const space = await matrixClient.getSpaceSummary(projectSpace)
     setTitle(space.rooms[0].name)
     setSpaceObject(space)
+    const getRoomMembers = await matrixClient.getJoinedRoomMembers(space?.rooms[0].room_id)
+    console.log(getRoomMembers)
+
+    const allCollaborators = getRoomMembers.joined
+    console.log(allCollaborators)
+
     space.rooms[0].avatar_url !== undefined && setProjectImage(space.rooms[0].avatar_url)
+    const joinRule = await fetch(process.env.REACT_APP_MATRIX_BASE_URL + `/_matrix/client/r0/rooms/${space.rooms[0].room_id}/state/m.room.join_rules/`, {
+      method: 'GET',
+      headers: { Authorization: 'Bearer ' + localStorage.getItem('medienhaus_access_token') }
+    })
+    const published = await joinRule.json()
+    setVisibility(published.join_rule)
     const spaceRooms = space.rooms.filter(x => !('room_type' in x))
     setBlocks(spaceRooms.filter(x => x !== undefined).filter(room => room.name.charAt(0) !== 'x').sort((a, b) => {
       return a.name.substring(0, a.name.indexOf('_')) - b.name.substring(0, b.name.indexOf('_'))
     }))
   }, [projectSpace, matrixClient])
-
-  useEffect(() => {
-    setVisibility(joinedSpaces?.filter(x => x.room_id === projectSpace)[0]?.published)
-  }, [joinedSpaces, projectSpace])
 
   useEffect(() => {
     projectSpace || setTitle('')
@@ -219,7 +230,7 @@ const Submit = () => {
           <section className="visibility">
             <h3>Visibility (Draft/Published)</h3>
             <p>Select if you want to save the information provided by you as a draft or if you are happy with it select to publish the project. You can change this at any time.</p>
-            {fetchSpaces ? <Loading /> : <PublishProject space={joinedSpaces?.filter(x => x.room_id === projectSpace)[0]} published={visibility} />}
+            {fetchSpaces ? <Loading /> : <PublishProject space={spaceObject.rooms[0]} published={visibility} />}
           </section>
         </>
       )}
