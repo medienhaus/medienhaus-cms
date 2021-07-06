@@ -4,7 +4,6 @@ import { useForm } from 'react-hook-form'
 import { Redirect, useHistory, useLocation } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { useAuth } from '../../Auth'
-import { Loading } from '../../components/loading'
 
 const Login = () => {
   const {
@@ -19,7 +18,6 @@ const Login = () => {
   const [password, setPassword] = useState('')
   const [isLoading, setLoading] = useState(false)
   const [errormsg, setErrormsg] = useState()
-  const [consent, setConsent] = useState(false)
   const history = useHistory()
   const location = useLocation()
   const { t } = useTranslation('login')
@@ -68,19 +66,8 @@ const Login = () => {
           <input name="password" type="password" placeholder="••••••••••••••••••••••••" value={password} onChange={changePassword} /> {// @TODO {...register('password',{ required: true })} />
           }
         </div>
-        {errors.password && t('Password can\'t be empty.')}
+        {errors?.password && t('Password can\'t be empty.')}
         {errormsg ?? errormsg}
-        {isLoading
-          ? (
-            <Loading />
-            )
-          : (
-            <div>
-            <input id="checkbox" name="checkbox" type="checkbox" value={consent} onChange={() => setConsent(consent => !consent)} />
-            <label htmlFor="checkbox">I hereby consent that I own the rights to the uploaded content and am aware of the content violation policy.</label>
-            <button name="submit" type="submit" disabled={!consent}>LOGIN</button>
-            </div>
-            )}
       </form>
       <p>Your login <code>username</code> and <code>password</code> are the same as for your <code>@udk-berlin.de</code> or <code>@intra.udk-berlin.de</code> mail account. If you forgot your password or want to change it, please check the links below.</p>
       <ul>

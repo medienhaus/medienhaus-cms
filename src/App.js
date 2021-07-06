@@ -15,6 +15,7 @@ import Overview from './routes/overview'
 import Submit from './routes/submit'
 import Moderation from './routes/moderation'
 import Support from './routes/support'
+import Terms from './routes/terms'
 
 import { AuthProvider, useAuth } from './Auth'
 import PropTypes from 'prop-types'
@@ -37,6 +38,16 @@ function PrivateRoute ({ children, ...rest }) {
       }}
     />
   }
+  // Consent not given to terms
+
+  if (!localStorage.getItem('terms-consent')) {
+    return <Redirect
+      to={{
+        pathname: '/terms',
+        state: { from: location }
+      }}
+      />
+  }
 
   // Logged in - render our actual route components
   return (
@@ -58,6 +69,7 @@ function App () {
             <Switch>
               <Route path="/" exact component={Landing} />
               <Route path="/login" component={Login} />
+              <Route path="/terms" component={Terms} />
               <PrivateRoute path="/tools" component={Tools} />
               <PrivateRoute path="/overview" component={Overview} />
               <PrivateRoute path="/submit/:spaceId" component={Submit} />

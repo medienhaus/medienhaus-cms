@@ -1,5 +1,5 @@
 import React from 'react'
-import i18n from 'i18next'
+// import i18n from 'i18next'
 import { NavLink } from 'react-router-dom'
 import { useAuth } from '../../Auth'
 
@@ -8,7 +8,7 @@ const Nav = () => {
 
   const changeLanguage = code => {
     localStorage.setItem('cr_lang', code)
-    i18n.changeLanguage(code)
+    // i18n.changeLanguage(code)
   }
 
   if (auth.user === null) {
