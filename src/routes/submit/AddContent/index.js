@@ -57,7 +57,7 @@ const AddContent = ({ number, projectSpace, blocks, reloadSpace }) => {
         <option value="playlist">Playlist</option>
         <option value="bbb">BigBlueButton-Session</option>
         <option value="" disabled={true} >--Date and Venue ------------</option>
-        <option value="date">Date</option>
+        <option value="location">Location</option>
       </select>
       <button className="cancel" onClick={(e) => { e.preventDefault(); setShowBlockTypeSelector(false); setSelectedBlockType('') }} >×</button>
       {
