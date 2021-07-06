@@ -42,7 +42,7 @@ const FileUpload = (props) => {
         </>
       )
       }
-      <input className="browse" type="file" name="browse" onChange={changeHandler} disabled={props.fileType === '' || false } />
+
     </>
   )
 }
