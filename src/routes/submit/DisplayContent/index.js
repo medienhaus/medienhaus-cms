@@ -23,6 +23,7 @@ import { ReactComponent as VideoIcon } from '../../../assets/icons/remix/vidicon
 import { ReactComponent as PlaylistIcon } from '../../../assets/icons/remix/playlist.svg'
 import { ReactComponent as PictureInPictureIcon } from '../../../assets/icons/remix/picture-in-picture-line.svg'
 import { ReactComponent as LocationIcon } from '../../../assets/icons/remix/location.svg'
+import { ReactComponent as DateIcon } from '../../../assets/icons/remix/date.svg'
 
 import locations from '../../../assets/data/locations.json'
 
@@ -200,9 +201,11 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace }) => 
                                 ? <PlaylistIcon fill="var(--color-fg)" />
                                 : json.type === 'location'
                                   ? <LocationIcon fill="var(--color-fg)" />
-                                  : json.type === 'bbb'
-                                    ? <PictureInPictureIcon fill="var(--color-fg)" />
-                                    : <TextIcon fill="var(--color-fg)" />
+                                  : json.type === 'date'
+                                    ? <DateIcon fill="var(--color-fg)" />
+                                    : json.type === 'bbb'
+                                      ? <PictureInPictureIcon fill="var(--color-fg)" />
+                                      : <TextIcon fill="var(--color-fg)" />
             }
           </figure>
           <LoadingSpinnerButton key={'down_' + block.room_id} disabled={index === blocks.length - 1} onClick={() => changeOrder(block.room_id, block.name, 1)}>↓</LoadingSpinnerButton>
@@ -245,11 +248,12 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace }) => 
                           </Popup>
                         </Marker>
                       </MapContainer>
-
-                        : json.type === 'bbb'
-                          ? <div>BigBlueButton-Session<br /><a href={cms?.body} target="_blank" rel="external nofollow noopener noreferrer">{cms?.body}</a></div>
-                          : (json.type === 'video' || json.type === 'livestream' || json.type === 'playlist')
-                              ? (
+                        : json.type === 'date'
+                          ? <input type="date" />
+                          : json.type === 'bbb'
+                            ? <div>BigBlueButton-Session<br /><a href={cms?.body} target="_blank" rel="external nofollow noopener noreferrer">{cms?.body}</a></div>
+                            : (json.type === 'video' || json.type === 'livestream' || json.type === 'playlist')
+                                ? (
                           <iframe src={`https://stream.udk-berlin.de/${(json.type === 'playlist' ? 'video-playlists' : 'videos')}/embed/${cms?.body}`}
                             frameBorder="0"
                             title={cms?.body}
@@ -257,8 +261,8 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace }) => 
                             allowFullScreen="allowfullscreen"
                             style={{ width: '100%', aspectRatio: '16 / 9', border: 'calc(var(--margin) * 0.2) solid var(--color-fg)' }}
                           />
-                                )
-                              : <div className="center">
+                                  )
+                                : <div className="center">
                         <Editor
                           dark={window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches}
                           defaultValue={cms?.body}
