@@ -4,7 +4,7 @@ import Matrix from '../../../Matrix'
 
 const AddDate = ({ onCreateRoomForBlock, onBlockWasAddedSuccessfully }) => {
   const [date, setDate] = useState('')
-  const [time, setTime] = useState('18:00')
+  const [time, setTime] = useState('')
   const [loading, setLoading] = useState(false)
   const matrixClient = Matrix.getMatrixClient()
 
@@ -21,19 +21,21 @@ const AddDate = ({ onCreateRoomForBlock, onBlockWasAddedSuccessfully }) => {
   }
 
   return (
-        <>
-            <form>
-                <label htmlFor="party">Choose a date:
-                    <input type="date" name="party" value={date} onChange={(e) => setDate(e.target.value)} />
-                </label>
-                <label htmlFor="appt">Choose a time:</label>
-              <input type="time" value={time} onChange={(e) => {
-                console.log(e)
-                setTime(e.target.value)
-              }} id="appt" name="appt" />
-            </form>
-            <LoadingSpinnerButton loading={loading} onClick={handleSubmit}>SAVE</LoadingSpinnerButton>
-        </>
+    <>
+      <div>
+        <label htmlFor="date">Choose a date:</label>
+        <input id="date" name="date" type="date" value={date} onChange={(e) => setDate(e.target.value)} />
+      </div>
+      <div>
+        <label htmlFor="time">Choose a time:</label>
+        <input id="time" name="time" type="time" value={time} onChange={(e) => {
+          console.log(e)
+          setTime(e.target.value)
+        }} />
+      </div>
+      <LoadingSpinnerButton loading={loading} onClick={handleSubmit}>SAVE</LoadingSpinnerButton>
+    </>
   )
 }
+
 export default AddDate

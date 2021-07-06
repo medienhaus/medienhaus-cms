@@ -52,7 +52,7 @@ body > div:first-of-type {
   min-height: 100%;
 }
 
-body > div:first-of-type > *:not(footer) > * > * + * {
+body > div:first-of-type > *:not(footer) > *:not(section) > * + * {
   margin-top: calc(var(--margin) * 2);
 }
 
@@ -90,8 +90,10 @@ a:active {
   color: var(--color-fg);
 }
 
+/* TODO */
 code {
   background-color: var(--color-lo);
+  font-family: monospace, monospace;
   padding: 0 calc(var(--margin) * 0.2);
 }
 
@@ -300,6 +302,10 @@ section ul li + li {
   opacity: unset;
 }
 
+button {
+  text-transform: uppercase;
+}
+
 button,
 input[type="submit"] {
   -webkit-appearance: none;
@@ -413,12 +419,13 @@ input[type="time"] {
   cursor: text;
 }
 
-/*
 input[type="file"] {
+  /*
   align-self: center;
   color: transparent;
+  */
+  width: 100%;
 }
-*/
 
 input[type="file"]::file-selector-button {
   -webkit-appearance: none;
@@ -433,9 +440,15 @@ input[type="file"]::file-selector-button {
   box-shadow: none;
   color: var(--color-bg);
   cursor: pointer;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
   line-height: inherit;
-  padding: calc(var(--margin) * 0.2);
+  padding: calc(var(--margin) * 0.2) calc(var(--margin) * 0.4);
+  text-transform: uppercase;
+  /*
   width: 100%;
+  */
 }
 
 /*
@@ -762,6 +775,12 @@ button > #loading {
   margin-top: var(--margin);
 }
 
+.editor + .add + div {
+  display: grid;
+  grid-auto-flow: row;
+  grid-gap: var(--margin);
+}
+
 .maxlength {
   display: grid;
 }
@@ -877,6 +896,17 @@ button > #loading {
   grid-column: 2;
 }
 
+.terms > div {
+  display: grid;
+  grid-template-columns: 2rem auto;
+  grid-gap: var(--margin);
+}
+
+.terms > div > label {
+  font-family: "Times New Roman", serif;
+  font-size: 0.7rem;
+}
+
 /*
 .account > div {
   display: grid;
@@ -971,12 +1001,21 @@ button > #loading {
 .explore form#advanced div {
   grid-template-columns: 5ch 1fr;
 }
+*/
 
 .faq code {
   background-color: var(--color-lo);
   padding: 0 calc(var(--margin) * 0.2);
 }
 
+.support h3 + * {
+  /*
+  margin-top: calc(var(--margin) * 0.5);
+  */
+  margin-top: var(--margin);
+}
+
+/*
 .request #formchooser {
   display: grid;
   grid-template-columns: 1fr 1fr;

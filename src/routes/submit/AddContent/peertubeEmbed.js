@@ -61,22 +61,20 @@ const PeertubeEmbed = ({ type, onCreateRoomForBlock, onBlockWasAddedSuccessfully
   }
 
   return (
-    <div style={{ gridColumn: '1 / 3', marginTop: 'var(--margin)' }}>
-      <div style={{ display: 'flex' }}>
-        <select disabled={entries.length === 0} onChange={selectEntry} value={selectedEntry} style={{ flex: '1 0', marginRight: 'var(--margin)' }}>
-          <option value="" disabled={true}>
-            {(
-              entries.length === 0
-                ? 'no entries'
-                : '--- Please Select ---'
-            )}
-          </option>
-          {entries.map(entry => (
-            <option value={entry.uuid} key={entry.uuid}>{(type === 'playlist' ? entry.displayName : entry.name)}</option>
-          ))}
-        </select>
-        <LoadingSpinnerButton onClick={handleSubmit} disabled={entries.length < 1 || !selectedEntry} style={{ flex: '0 1 200px' }}>Add Content</LoadingSpinnerButton>
-      </div>
+    <div>
+      <select disabled={entries.length === 0} onChange={selectEntry} value={selectedEntry}>
+        <option value="" disabled={true}>
+          {(
+            entries.length === 0
+              ? 'no entries'
+              : '--- Please Select ---'
+          )}
+        </option>
+        {entries.map(entry => (
+          <option value={entry.uuid} key={entry.uuid}>{(type === 'playlist' ? entry.displayName : entry.name)}</option>
+        ))}
+      </select>
+      <LoadingSpinnerButton onClick={handleSubmit} disabled={entries.length < 1 || !selectedEntry}>Add Content</LoadingSpinnerButton>
     </div>
   )
 }

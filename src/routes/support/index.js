@@ -71,12 +71,13 @@ const Support = () => {
     <>
       <section className="faq">
         <ReactMarkdown source={markdown} />
+        <p><em>Hier könnte Ihre F.A.Q. stehen …</em></p>
       </section>
       <section className="support">
         <h2>{t('In case you didn\'t find an answer to your question here, please provide us some details and tell us about the problem you encounter via the support form below.')}</h2>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div>
-            <label htmlFor="Operating System">{t('operating system')}</label>
+            <h3>{t('Operating System')}</h3>
             <select name="Operating System" defaultValue={''} onBlur={changeSystem} // ref={register({ required: true })}
               >
               <option value="" disabled hidden>-- select operating system --</option>
@@ -90,7 +91,7 @@ const Support = () => {
           </div>
           {errors?.browser && 'Please select an operating system.'}
           <div>
-            <label htmlFor="Web Browser">{t('web browser')}</label>
+            <h3>{t('Web Browser')}</h3>
             <select name="browser" defaultValue={''} onBlur={changeBrowser} // ref={register({ required: true })}
             >
               <option value="" disabled hidden >-- select web browser --</option>
@@ -105,14 +106,17 @@ const Support = () => {
           </div>
           {errors?.browser && 'Please select a web browser.'}
           <div>
-            <label htmlFor="Mail Address">{t('email address')}</label>
+            <h3>{t('Mail Address')}</h3>
             {/* eslint-disable-next-line no-useless-escape */}
             <input type="email" placeholder="u.name@udk-berlin.de" name="email" value={mail} onChange={changeMail} // ref={register({ required: true, pattern: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/ })}
             />
           </div>
           {errors?.email && 'Please enter a valid email address.'}
-          <textarea name="messageInput" placeholder={t('Please describe the problem you encounter …')} rows="7" spellCheck="true" value={msg} onChange={changeMsg} // ref={register({ required: true })}
-          />
+          <div>
+            <h3>{t('Your Message')}</h3>
+            <textarea name="messageInput" placeholder={t('Please describe the problem you encounter …')} rows="7" spellCheck="true" value={msg} onChange={changeMsg} // ref={register({ required: true })}
+            />
+          </div>
           {errors?.messageInput && 'This field can’t be empty.'}
           <button type="submit" disabled={sending}>{t('SUBMIT')}</button>
           {feedback}

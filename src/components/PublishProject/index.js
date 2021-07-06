@@ -6,8 +6,7 @@ const PublishProject = ({ space, published, index, callback }) => {
   const [userFeedback, setUserFeedback] = useState()
   const [visibility, setVisibility] = useState(published)
   const [showSaveButton, setShowSaveButton] = useState(false)
-
-  console.log(space)
+  const description = space?.description || space?.topic
 
   useEffect(() => {
     setVisibility(published)
@@ -58,9 +57,9 @@ const PublishProject = ({ space, published, index, callback }) => {
       </select>
       {showSaveButton && <div className="below">
         {userFeedback && <p>{userFeedback}</p>}
-          {(visibility === 'public' && !space.topic)
-            ? <p>Please add a short description to your project</p>
-            : <LoadingSpinnerButton disabled={(visibility === 'public' && !space.topic)} onClick={onChangeVisibility}>SAVE</LoadingSpinnerButton>
+          {(visibility === 'public' && !description)
+            ? <p>❗️Please add a short description to your project</p>
+            : <LoadingSpinnerButton disabled={(visibility === 'public' && !description)} onClick={onChangeVisibility}>SAVE</LoadingSpinnerButton>
     }
       </div>}
       </>

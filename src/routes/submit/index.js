@@ -68,14 +68,12 @@ const Submit = () => {
   }
 
   const fetchSpace = useCallback(async () => {
+    // here we collect all necessary information about the project
     const space = await matrixClient.getSpaceSummary(projectSpace)
     setTitle(space.rooms[0].name)
     setSpaceObject(space)
     const getRoomMembers = await matrixClient.getJoinedRoomMembers(space?.rooms[0].room_id)
     setRoomMembers(getRoomMembers.joined)
-    const allCollaborators = Object.keys(getRoomMembers.joined)
-    console.log(allCollaborators.filter(userId => userId !== localStorage.getItem('mx_user_id')))
-
     space.rooms[0].avatar_url !== undefined && setProjectImage(space.rooms[0].avatar_url)
     const joinRule = await fetch(process.env.REACT_APP_MATRIX_BASE_URL + `/_matrix/client/r0/rooms/${space.rooms[0].room_id}/state/m.room.join_rules/`, {
       method: 'GET',
