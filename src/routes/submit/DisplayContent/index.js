@@ -249,55 +249,55 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace }) => 
                         </Marker>
                       </MapContainer>
                         : json.type === 'date'
-                          ? <input type="date" />
+                          ? <div>{cms.body.split(' ')[0]} {cms.body.split(' ')[1] || null}</div>
                           : json.type === 'bbb'
                             ? <div>BigBlueButton-Session<br /><a href={cms?.body} target="_blank" rel="external nofollow noopener noreferrer">{cms?.body}</a></div>
                             : (json.type === 'video' || json.type === 'livestream' || json.type === 'playlist')
                                 ? (
-                          <iframe src={`https://stream.udk-berlin.de/${(json.type === 'playlist' ? 'video-playlists' : 'videos')}/embed/${cms?.body}`}
-                            frameBorder="0"
-                            title={cms?.body}
-                            sandbox="allow-same-origin allow-scripts"
-                            allowFullScreen="allowfullscreen"
-                            style={{ width: '100%', aspectRatio: '16 / 9', border: 'calc(var(--margin) * 0.2) solid var(--color-fg)' }}
-                          />
+                              <iframe src={`https://stream.udk-berlin.de/${(json.type === 'playlist' ? 'video-playlists' : 'videos')}/embed/${cms?.body}`}
+                                frameBorder="0"
+                                title={cms?.body}
+                                sandbox="allow-same-origin allow-scripts"
+                                allowFullScreen="allowfullscreen"
+                                style={{ width: '100%', aspectRatio: '16 / 9', border: 'calc(var(--margin) * 0.2) solid var(--color-fg)' }}
+                              />
                                   )
                                 : <div className="center">
-                        <Editor
-                          dark={window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches}
-                          defaultValue={cms?.body}
-                          disableExtensions={['blockmenu', 'image', 'embed', 'table', 'tr', 'th', 'td', 'bullet_list', 'ordered_list', 'checkbox_item', 'checkbox_list', 'container_notice', 'blockquote', 'heading', 'hr', 'highlight']}
-                          placeholder={json.type}
-                          readOnly={readOnly}
-                          onSave={({ done }) => {
-                            if (localStorage.getItem(block.room_id) !== null && cms !== undefined && string2hash(cms.body) !== string2hash(localStorage.getItem(block.room_id))) {
-                              onSave(block.room_id)
-                              localStorage.removeItem(block.room_id)
-                            } else if (localStorage.getItem(block.room_id) !== null && cms === undefined) {
-                              onSave(block.room_id)
-                              localStorage.removeItem(block.room_id)
-                            }
-                          }}
-                          onChange={debounce((value) => {
-                            const text = value()
-                            localStorage.setItem(block.room_id, text)
-                          }, 250)}
-                          handleDOMEvents={{
-                            focus: () => console.log('FOCUS on ' + block.room_id), // this could set MatrixClient"User.presence" to 'online', "User.currentlyActive" or 'typing. depending on which works best.
-                            blur: (e) => {
-                              if (localStorage.getItem(block.room_id) !== null && cms !== undefined && string2hash(cms.body) !== string2hash(localStorage.getItem(block.room_id))) {
-                                onSave(block.room_id)
-                                localStorage.removeItem(block.room_id)
-                              } else if (localStorage.getItem(block.room_id) !== null && cms === undefined) {
-                                onSave(block.room_id)
-                                localStorage.removeItem(block.room_id)
+                              <Editor
+                                dark={window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches}
+                                defaultValue={cms?.body}
+                                disableExtensions={['blockmenu', 'image', 'embed', 'table', 'tr', 'th', 'td', 'bullet_list', 'ordered_list', 'checkbox_item', 'checkbox_list', 'container_notice', 'blockquote', 'heading', 'hr', 'highlight']}
+                                placeholder={json.type}
+                                readOnly={readOnly}
+                                onSave={({ done }) => {
+                                  if (localStorage.getItem(block.room_id) !== null && cms !== undefined && string2hash(cms.body) !== string2hash(localStorage.getItem(block.room_id))) {
+                                    onSave(block.room_id)
+                                    localStorage.removeItem(block.room_id)
+                                  } else if (localStorage.getItem(block.room_id) !== null && cms === undefined) {
+                                    onSave(block.room_id)
+                                    localStorage.removeItem(block.room_id)
+                                  }
+                                }}
+                                onChange={debounce((value) => {
+                                  const text = value()
+                                  localStorage.setItem(block.room_id, text)
+                                }, 250)}
+                                handleDOMEvents={{
+                                  focus: () => console.log('FOCUS on ' + block.room_id), // this could set MatrixClient"User.presence" to 'online', "User.currentlyActive" or 'typing. depending on which works best.
+                                  blur: (e) => {
+                                    if (localStorage.getItem(block.room_id) !== null && cms !== undefined && string2hash(cms.body) !== string2hash(localStorage.getItem(block.room_id))) {
+                                      onSave(block.room_id)
+                                      localStorage.removeItem(block.room_id)
+                                    } else if (localStorage.getItem(block.room_id) !== null && cms === undefined) {
+                                      onSave(block.room_id)
+                                      localStorage.removeItem(block.room_id)
+                                    }
+                                  }
+                                }}
+                                key={block.room_id} />
+                              <p key={block.room_id + '_p'}>{saved}</p> {// feedback that saving was succesfull or has failed
                               }
-                            }
-                          }}
-                          key={block.room_id} />
-                        <p key={block.room_id + '_p'}>{saved}</p> {// feedback that saving was succesfull or has failed
-                        }
-                      </div>
+                            </div>
         }
 
         <div className="right">

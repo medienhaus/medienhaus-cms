@@ -4,7 +4,7 @@ import Matrix from '../../../Matrix'
 
 const AddDate = ({ onCreateRoomForBlock, onBlockWasAddedSuccessfully }) => {
   const [date, setDate] = useState('')
-  const [time, setTime] = useState('18:00')
+  const [time, setTime] = useState('')
   const [loading, setLoading] = useState(false)
   const matrixClient = Matrix.getMatrixClient()
 
