@@ -68,7 +68,7 @@ const AddContent = ({ number, projectSpace, blocks, reloadSpace }) => {
             ? <PeertubeEmbed type={selectedBlockType} onCreateRoomForBlock={onCreateBlockRoom} onBlockWasAddedSuccessfully={onBlockWasAddedSuccessfully} />
             : selectedBlockType === 'date'
               ? <select name="location-select" value={selectedLocation} id="location-select" onChange={(e) => setSelectedLocation(e.target.value)}>
-                {locations.map(location => <option value={location.coordinates}>{location.location}</option>)}
+                {locations.map(location => <option value={location.coordinates}>{location.name}</option>)}
                   </select>
               : <AddBlock contentSelect={selectedBlockType} number={number} projectSpace={projectSpace} blocks={blocks} reloadSpace={reloadSpace} displayPlusButton={displayPlusButton} />
       }

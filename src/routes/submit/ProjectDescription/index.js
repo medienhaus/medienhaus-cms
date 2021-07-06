@@ -7,7 +7,6 @@ const ProjectDescription = ({ space, callback }) => {
   const [saved, setSaved] = useState(false)
   const [description, setDescription] = useState(space?.topic)
   const matrixClient = Matrix.getMatrixClient()
-  console.log(space)
 
   const onSave = async () => {
     const save = await matrixClient.setRoomTopic(space.room_id, description)
