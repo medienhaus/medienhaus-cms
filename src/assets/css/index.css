@@ -416,7 +416,7 @@ input[type="color"]::-moz-color-swatch {
 
 input[type="date"],
 input[type="time"] {
-  cursor: text;
+  cursor: auto;
 }
 
 input[type="file"] {
