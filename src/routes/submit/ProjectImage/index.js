@@ -31,7 +31,7 @@ const ProjectImage = ({ projectSpace, projectImage, changeProjectImage }) => {
   }
 
   return (
-    <div>
+    <>
       {projectImage
         ? <>
           <img src={matrixClient.mxcUrlToHttp(projectImage)} alt="Project-key-visual" />
@@ -41,7 +41,7 @@ const ProjectImage = ({ projectSpace, projectImage, changeProjectImage }) => {
         : (
           <FileUpload fileType={'image'} handleSubmission={handleSubmission} loading={loading} />
           )}
-    </div>
+    </>
   )
 }
 export default ProjectImage
