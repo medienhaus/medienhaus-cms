@@ -214,8 +214,8 @@ const Submit = () => {
               You can use the arrows on the left to rearrange exsisting blocks.
               You can provide information in multiple languages by choosing in the dropdown below.</p>
             <select id="subject" name="subject" defaultValue={''} value={contentLang} onChange={(e) => setContentLang(e.target.value)}>
-              <option value="de">DE - German</option>
-              <option value="en" >EN -English</option>
+              <option value="de">DE — German</option>
+              <option value="en" >EN — English</option>
             </select>
             {spaceObject ? <ProjectDescription description={spaceObject?.rooms[0].topic} callback={onChangeDescription} /> : <Loading />}
             {blocks.length === 0
