@@ -11,7 +11,7 @@ import { Loading } from './components/loading'
 import Landing from './routes/landing'
 import Login from './routes/login'
 import Tools from './routes/tools'
-import Overview from './routes/overview'
+import Projects from './routes/projects'
 import Submit from './routes/submit'
 import Moderation from './routes/moderation'
 import Support from './routes/support'
@@ -71,7 +71,7 @@ function App () {
               <Route path="/login" component={Login} />
               <Route path="/terms" component={Terms} />
               <PrivateRoute path="/tools" component={Tools} />
-              <PrivateRoute path="/overview" component={Overview} />
+              <PrivateRoute path="/projects" component={Projects} />
               <PrivateRoute path="/submit/:spaceId" component={Submit} />
               <PrivateRoute path="/submit" component={Submit} />
               <PrivateRoute path="/moderation" component={Moderation} />

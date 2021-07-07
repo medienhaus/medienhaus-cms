@@ -36,7 +36,7 @@ const Terms = () => {
       </div>
       <button name="submit" type="submit" disabled={!consent0 || !consent1 || !consent2 || !consent3 || !consent4} onClick={() => {
         localStorage.setItem('terms-consent', true)
-        history.push('/overview')
+        history.push('/projects')
       }}>ACCEPT & SAVE</button>
     </section>
   )

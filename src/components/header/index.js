@@ -6,7 +6,7 @@ const Header = () => {
   const auth = useAuth()
   return (
     <header>
-      <Link to={auth.user ? '/overview' : '/login'}>
+      <Link to={auth.user ? '/projects' : '/login'}>
         <h1>udk/rundgang</h1>
       </Link>
     </header>
