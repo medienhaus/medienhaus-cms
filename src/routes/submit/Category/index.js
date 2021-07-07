@@ -35,9 +35,10 @@ const Category = ({ title, projectSpace }) => {
 
   return (
     <>
-      <p>In which main context do you want to publish your project? This information is necessary for showing your project in the right place on the udk rundgang website.</p>
-      <p>The context could be for example a class, a course, a seminar, or also a free project without any specific context. If you are unsure ask the organiser of the context. Below the choosen event you will find additional information to confirm your choice.</p>
-      <label htmlFor="subject">Studiengang</label>
+      <p>In which main context do you want to publish your project?</p>
+      <p>This information is necessary for showing your project in the right place on the udk rundgang website, and therefore required when setting the project visibility to public.</p>
+      <p>The context could be for example a class, a course, a seminar, or also a free project without any specific context. If you are unsure ask the organiser of the context.</p>
+      <p>You can scroll through the list, or filter/search the list by typing one or more keywords. Below the all contexts you can find additional information to confirm your choice.</p>
       <div style={{ position: 'relative' }}>
         <ContextDropdown callback={isMember} />
       </div>

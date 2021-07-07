@@ -56,9 +56,9 @@ const Collaborators = ({ projectSpace, blocks, title, members, startListeningToC
   return (
     <>
       <h3>Contributors</h3>
-      <p>Did you work with other people on this project? Here you can share access to edit this project.
-        The mentioned person needs an account at medienhaus/.
-        You can also mention a person without an account but you will not be able to share the project to edit by the person.</p>
+      <p>Did you work with other people on this project?</p>
+      <p>You can share access (for editing) to this project. The contributing editor needs an <a href="https://spaces.udk-berlin.de" rel="external nofollow noopener noreferrer" target="_blank"><strong>udk/spaces</strong></a> account to edit the project.</p>
+      <p>You can also give credits to a contributor without an <strong>udk/spaces</strong> account, but they won’t be able to get access for editing.</p>
       {
         < section >
           <ul>{

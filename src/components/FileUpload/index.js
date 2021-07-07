@@ -88,11 +88,14 @@ const FileUpload = (props) => {
               <li>ND: No derivatives or adaptations of the work are permitted</li>
             </ul>
           </div>}
+          {license === 'rs-inc' && <div id="rs-inc" className="license-info">
+            <p>This Item is protected by copyright and/or related rights. You are free to use this Item in any way that is permitted by the copyright and related rights legislation that applies to your use. For other uses you need to obtain permission from the rights-holder(s).</p>
+          </div>}
           <p>Further information:</p>
           <ul>
-            <li><a href="https://creativecommons.org/about/cclicenses/" rel="nofollow noreferrer external" target="_blank">About CC Licenses</a></li>
-            <li><a href="https://chooser-beta.creativecommons.org/" rel="nofollow noreferrer external" target="_blank">CC License Chooser (beta)</a></li>
-            <li><a href="https://rightsstatements.org/page/1.0/" rel="nofollow noreferrer external" target="_blank">Rights Statements</a></li>
+            <li><a href="https://creativecommons.org/about/cclicenses/" rel="external nofollow noopener noreferrer" target="_blank">About CC Licenses</a></li>
+            <li><a href="https://chooser-beta.creativecommons.org/" rel="external nofollow noopener noreferrer" target="_blank">CC License Chooser (beta)</a></li>
+            <li><a href="https://rightsstatements.org/page/1.0/" rel="external nofollow noopener noreferrer" target="_blank">Rights Statements</a></li>
           </ul>
           <textarea rows="3" placeholder="please describe the image with a few words to enable visually impaired website visitors to comprehend what’s being shown here"
             onChange={(e) => setAlttext(e.target.value)} />
@@ -103,8 +106,8 @@ const FileUpload = (props) => {
         </>
       )
       }
-
     </>
   )
 }
+
 export default FileUpload

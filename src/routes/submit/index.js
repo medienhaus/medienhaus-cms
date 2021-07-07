@@ -185,9 +185,9 @@ const Submit = () => {
   return (
     <>
       <section className="welcome">
-        <p><strong>Welcome to your project!</strong></p>
-        <p>This is the project page. Please add in which context the project happend, projectname and descriptive text and images.
-          If you want to continue at a later point in time, you can save the project as a draft and find it in your collection under “drafts”.</p>
+        <p><strong>Create and upload new project</strong></p>
+        <p>This is the project creation page. Please add in which context the project happend, projectname and descriptive text and images.</p>
+        <p>If you want to continue at a later point in time, you can save the project as a draft and find it in your collection under “drafts”.</p>
       </section>
       <section className="project-title">
         <h3>Project Title</h3>
@@ -208,11 +208,11 @@ const Submit = () => {
           </section>
           <section className="content">
             <h3>Content</h3>
-            <p>You can add elements like text, video and pictures to the main body of your project by using the “+” on the right side.
-              One block of text is mandatory to describe your project.
-              When using the text block you can format text by highlighting it.
-              You can use the arrows on the left to rearrange exsisting blocks.
-              You can provide information in multiple languages by choosing in the dropdown below.</p>
+            <p>You can add elements like text, images, audio, video, and some more by clicking the <code>+</code> button near the content block below.</p>
+            <p>The first content block&thinsp;&mdash;&thinsp;which is the abstract, description, or introduction for your project&thinsp;&mdash;&thinsp;is required and therefore mandatory.</p>
+            <p>In all other <code>text</code> content blocks, you can format your input text by highlighting the to be formatted text with your cursor.</p>
+            <p>You can use the <code>↑</code> and <code>↓</code> arrows to rearrange existing blocks.</p>
+            <p>And you can provide content and information in multiple languages by setting the desired language in the dropdown list below.</p>
             <select id="subject" name="subject" defaultValue={''} value={contentLang} onChange={(e) => setContentLang(e.target.value)}>
               <option value="de">DE — German</option>
               <option value="en" >EN — English</option>
@@ -226,7 +226,8 @@ const Submit = () => {
           </section>
           <section className="visibility">
             <h3>Visibility (Draft/Published)</h3>
-            <p>Select if you want to save the information provided by you as a draft or if you are happy with it select to publish the project. You can change this at any time.</p>
+            <p>Do you want to save your project as a draft, visible only in the <strong>udk/rundgang</strong> content management system, or do you want to publish the project to the <a href="https://rundgang.udk-berlin.de" rel="external nofollow noopener noreferrer" target="_blank">rundgang.udk-berlin.de</a> website?</p>
+            <p>You can change this at any time.</p>
             {spaceObject ? <PublishProject description={spaceObject.rooms[0].topic} published={visibility} /> : <Loading /> }
           </section>
         </>

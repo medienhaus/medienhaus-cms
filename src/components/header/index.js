@@ -7,7 +7,7 @@ const Header = () => {
   return (
     <header>
       <Link to={auth.user ? '/overview' : '/login'}>
-        <h1>medienhaus/cms</h1>
+        <h1>udk/rundgang</h1>
       </Link>
     </header>
   )

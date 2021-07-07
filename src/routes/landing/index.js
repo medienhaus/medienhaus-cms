@@ -3,7 +3,7 @@ import React from 'react'
 const Landing = () => {
   return (
     <div>
-      We've landed
+      Welcome to the Rundgang 2021 content management system.
     </div>
   )
 }
