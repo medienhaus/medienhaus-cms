@@ -555,6 +555,7 @@ select {
   box-shadow: none;
   color: var(--color-fg);
   cursor: pointer;
+  height: calc(var(--margin) * 2);
   /*
   outline: none;
   */
