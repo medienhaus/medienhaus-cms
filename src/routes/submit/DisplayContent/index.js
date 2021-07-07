@@ -213,10 +213,14 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace }) => 
         </div>
         {cms?.msgtype === 'm.image'
           ? <>
-          <figure className="center"><img src={matrixClient.mxcUrlToHttp(cms.url)} alt={cms?.info?.alt} key={block.room_id} /></figure>
-          <div>Author: {cms.info.author}</div>
-          <div>Alt-text: {cms.info.alt}</div>
-          <div>License: {cms.info.license}</div>
+            <figure className="center"><img src={matrixClient.mxcUrlToHttp(cms.url)} alt={cms?.info?.alt} key={block.room_id} /></figure>
+            {/*
+            <input type="text" placeholder="author, credits, et cetera" value={cms.info.author} disabled={true}/>
+            <select id="license" name="license" value={cms.info.license}>
+              <option value={cms.info.license} disabled={true}>{cms.info.license}</option>
+            </select>
+            <textarea rows="3" value={cms.info.alt} disabled={true} />
+            */}
             </>
           : cms?.msgtype === 'm.audio'
             ? <div className="center">
