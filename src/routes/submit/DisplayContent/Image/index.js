@@ -30,7 +30,7 @@ const DisplayImage = ({ roomId, url, alt }) => {
   }
   return (<>
         <figure className="center"><img src={url} alt={alt} /></figure>
-        <input type="text" placeholder="Author" onChange={(e) => setAuthor(e.target.value)} />
+        <input type="text" placeholder="author, credits, et cetera" onChange={(e) => setAuthor(e.target.value)} />
         <select id="license" name="license" defaultValue={''} value={license} onChange={(e) => setLicense(e.target.value)}>
             <option value="" disabled={true}>-- SELECT LICENSE --</option>
             <option value="CC0 1.0">– CC0 1.0 (public domain)</option>
