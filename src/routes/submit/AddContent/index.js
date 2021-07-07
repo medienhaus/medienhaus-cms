@@ -43,24 +43,27 @@ const AddContent = ({ number, projectSpace, blocks, reloadSpace }) => {
     <>
       <div className="add">
         <select name="content-select" value={selectedBlockType} id="content-select" onChange={(e) => setSelectedBlockType(e.target.value)}>
-          <option value="" disabled={true} >Select Content</option>
-          <option value="none" disabled={true} >--Text------------</option>
-          <option value="heading">Heading</option>
-          <option value="text">Text</option>
-          <option value="ul">List (unordered)</option>
-          <option value="ol">List (ordered)</option>
-          <option value="quote">Quote</option>
-          <option value="code">Code Block</option>
-          <option value="" disabled={true} >--Media------------</option>
-          <option value="image">Image</option>
-          <option value="audio">Audio</option>
-          <option value="video">Video</option>
-          <option value="livestream">Livestream</option>
-          <option value="playlist">Playlist</option>
-          <option value="bbb">BigBlueButton-Session</option>
-          <option value="" disabled={true} >--Date and Venue ------------</option>
-          <option value="date">Date & Time</option>
-          <option value="location">Location</option>
+          <option value="" disabled={true} >-- select content --</option>
+          <optgroup label="Text">
+            <option value="heading">Heading</option>
+            <option value="text">Text</option>
+            <option value="ul">List (unordered)</option>
+            <option value="ol">List (ordered)</option>
+            <option value="quote">Quote</option>
+            <option value="code">Code Block</option>
+          </optgroup>
+          <optgroup label="Media">
+            <option value="image">Image</option>
+            <option value="audio">Audio</option>
+            <option value="video">Video</option>
+            <option value="livestream">Livestream</option>
+            <option value="playlist">Playlist</option>
+            <option value="bbb">BigBlueButton-Session</option>
+          </optgroup>
+          <optgroup label="Date, Time, and Venue">
+            <option value="date">Date & Time</option>
+            <option value="location">Location</option>
+          </optgroup>
         </select>
         <button className="cancel" onClick={(e) => { e.preventDefault(); setShowBlockTypeSelector(false); setSelectedBlockType('') }} >×</button>
       </div>
