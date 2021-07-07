@@ -78,7 +78,7 @@ const Overview = () => {
   return (
     <div>
       <p>Hello <strong>{profile.displayname}</strong>.</p>
-      {drafts.length === 0 && publications.length === 0 && <p>Welcome to the content management system for Rundgang 2021. Looks like you don’t have uploaded any projects, yet.</p>}
+      {drafts?.length === 0 && publications?.length === 0 && <p>Welcome to the content management system for Rundgang 2021. Looks like you don’t have uploaded any projects, yet.</p>}
       {!invites
         ? <Loading />
         : Object.keys(invites).length > 0 && (
