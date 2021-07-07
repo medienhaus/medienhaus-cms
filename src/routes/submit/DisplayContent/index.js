@@ -153,18 +153,6 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace }) => 
     }
   }
 
-  const string2hash = (string) => {
-    console.log(typeof string)
-    let hash = 0
-    if (string.length === 0) return hash
-    for (let i = 0; i < string.length; i++) {
-      const char = string.charCodeAt(i)
-      hash = ((hash << 5) - hash) + char
-      hash = hash & hash
-    }
-    return hash
-  }
-
   if (fetching || loading) {
     return <div style={{ height: '120px' }}><Loading /></div>
   }
@@ -280,7 +268,7 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace }) => 
                                 placeholder={json.type}
                                 readOnly={readOnly}
                                 onSave={({ done }) => {
-                                  if (localStorage.getItem(block.room_id) !== null && cms !== undefined && string2hash(cms.body) !== string2hash(localStorage.getItem(block.room_id))) {
+                                  if (localStorage.getItem(block.room_id) !== null && cms !== undefined && cms.body !== localStorage.getItem(block.room_id)) {
                                     onSave(block.room_id)
                                     localStorage.removeItem(block.room_id)
                                   } else if (localStorage.getItem(block.room_id) !== null && cms === undefined) {
@@ -295,7 +283,7 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace }) => 
                                 handleDOMEvents={{
                                   focus: () => console.log('FOCUS on ' + block.room_id), // this could set MatrixClient"User.presence" to 'online', "User.currentlyActive" or 'typing. depending on which works best.
                                   blur: (e) => {
-                                    if (localStorage.getItem(block.room_id) !== null && cms !== undefined && string2hash(cms.body) !== string2hash(localStorage.getItem(block.room_id))) {
+                                    if (localStorage.getItem(block.room_id) !== null && cms !== undefined && cms.body !== localStorage.getItem(block.room_id)) {
                                       onSave(block.room_id)
                                       localStorage.removeItem(block.room_id)
                                     } else if (localStorage.getItem(block.room_id) !== null && cms === undefined) {
