@@ -783,6 +783,10 @@ button > #loading {
   grid-gap: var(--margin);
 }
 
+.license-info > * + * {
+  margin-top: var(--margin);
+}
+
 .maxlength {
   display: grid;
 }
