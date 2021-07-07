@@ -77,8 +77,8 @@ const Overview = () => {
 
   return (
     <div>
-      <p>Hello <strong>{profile.displayname}</strong>,</p>
-      <p>welcome to the content management system for Rundgang 2021.</p>
+      <p>Hello <strong>{profile.displayname}</strong>.</p>
+      <p>Welcome to the content management system for Rundgang 2021. Looks like you don’t have uploaded any projects, yet.</p>
       {!invites
         ? <Loading />
         : Object.keys(invites).length > 0 && (
@@ -105,11 +105,11 @@ const Overview = () => {
             </section>
             {publications?.length > 0 && <p>You have <strong>{publications.length} published</strong> project{publications.length > 1 && 's'}, which {publications.length > 1 ? 'are' : 'is'} publicly visible.</p>}
             <section className="public">
-              {spacesErr ? console.error(spacesErr) : publications.map((space, index) => <><Projects space={space} visibility={space.published} index={index} reloadProjects={changePublicationToDraft} /><hr /> </>)
-              }
+              {spacesErr ? console.error(spacesErr) : publications.map((space, index) => <><Projects space={space} visibility={space.published} index={index} reloadProjects={changePublicationToDraft} /><hr /> </>)}
             </section>
           </>
-          )}
+          )
+      }
     </div>
   )
 }
