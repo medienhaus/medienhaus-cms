@@ -97,6 +97,12 @@ code {
   padding: 0 calc(var(--margin) * 0.2);
 }
 
+code, pre, kbd, samp,
+code a, pre a, kbd a, samp a {
+  font-family: "Roboto Mono", monospace;
+  font-weight: normal;
+}
+
 em, i {
   font-style: italic;
 }
