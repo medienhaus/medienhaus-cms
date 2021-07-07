@@ -38,7 +38,6 @@ const FileUpload = (props) => {
           </select>
           {license === 'cc0' && <div id="cc0" className="license-info">
             <p>CC0 (aka CC Zero) is a public dedication tool, which allows creators to give up their copyright and put their works into the worldwide public domain. CC0 allows reusers to distribute, remix, adapt, and build upon the material in any medium or format, with no conditions.</p>
-            <p>CC BY includes the following elements:</p>
           </div>}
           {license === 'cc-by' && <div id="cc-by" className="license-info">
             <p>This license allows reusers to distribute, remix, adapt, and build upon the material in any medium or format, so long as attribution is given to the creator. The license allows for commercial use.</p>
