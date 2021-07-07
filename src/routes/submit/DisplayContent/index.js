@@ -322,7 +322,7 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace }) => 
           </button>
         </div>
       </div>
-      {index > 0 && <AddContent number={index + 1} projectSpace={projectSpace} blocks={blocks} reloadSpace={reloadSpace} />}
+      <AddContent number={index + 1} projectSpace={projectSpace} blocks={blocks} reloadSpace={reloadSpace} />
     </>
   )
 }
