@@ -722,6 +722,7 @@ button > #loading {
   column-gap: var(--margin);
 }
 
+/*
 .editor + .add > .add-button,
 .editor + .add > .cancel {
   border-color: var(--color-bg);
@@ -729,6 +730,7 @@ button > #loading {
   border-radius: unset;
   border-width: calc(var(--margin) * 0.2);
 }
+*/
 
 .editor + .add > .add-button {
   grid-column: 3;
