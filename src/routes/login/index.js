@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { Redirect, useHistory, useLocation } from 'react-router-dom'
@@ -53,8 +52,8 @@ const Login = () => {
           <label htmlFor="username">{t('username')}</label>
           <div>
             <input name="username" type="text" placeholder={t('u.name')} value={name} onChange={changeName} /> {// @TODO {...register('username', { required: true })} />
-            <select>
-              <option value="udk" select>@udk-berlin.de</option>
+            <select defaultValue="udk">
+              <option value="udk">@udk-berlin.de</option>
               <option value="intra">@intra.udk-berlin.de</option>
             </select>
           }
