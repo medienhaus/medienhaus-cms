@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { Redirect, useHistory, useLocation } from 'react-router-dom'
-import { useTranslation } from 'react-i18next'
+import { Trans, useTranslation } from 'react-i18next'
 import { useAuth } from '../../Auth'
 
 const Login = () => {
@@ -69,7 +69,11 @@ const Login = () => {
         {errormsg ?? errormsg}
             <button name="submit" type="submit" >LOGIN</button>
       </form>
-      <p>Your login <code>username</code> and <code>password</code> are the same as for your <code>@udk-berlin.de</code> or <code>@intra.udk-berlin.de</code> mail account. If you forgot your password or want to change it, please check the links below.</p>
+      <p>
+        <Trans t={t} i18nKey="usernameSameAsEmail">
+          Your login <code>username</code> and <code>password</code> are the same as for your <code>@udk-berlin.de</code> or <code>@intra.udk-berlin.de</code> mail account. If you forgot your password or want to change it, please check the links below.
+        </Trans>
+      </p>
       <ul>
         <li>
           <a href={process.env.REACT_APP_MEDIENHAUS_FRONTEND_LOGIN_FORGOT_PASSWORD} rel="external nofollow noopener noreferrer">
