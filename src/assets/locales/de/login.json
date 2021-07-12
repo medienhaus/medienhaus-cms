@@ -1,0 +1,11 @@
+{
+  "username": "benutzername",
+  "u.name": "i.name",
+  "Username can't be empty.": "Bitte geben Sie einen Benutzernamen ein.",
+  "password": "passwort",
+  "Password can't be empty.": "Bitte geben Sie ein Passwort ein.",
+  "usernameSameAsEmail": "@TODO",
+  "Forgot your password?": "Passwort vergessen?",
+  "Register new account?": "Account registrieren?",
+  "Need support?": "Support gewünscht?"
+}

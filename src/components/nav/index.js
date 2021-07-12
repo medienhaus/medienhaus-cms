@@ -1,14 +1,15 @@
 import React from 'react'
-// import i18n from 'i18next'
+import i18n from 'i18next'
 import { NavLink } from 'react-router-dom'
 import { useAuth } from '../../Auth'
 
 const Nav = () => {
   const auth = useAuth()
 
-  const changeLanguage = code => {
-    localStorage.setItem('cr_lang', code)
-    // i18n.changeLanguage(code)
+  const changeLanguage = event => {
+    const languageCode = event.target.value
+    localStorage.setItem('cr_lang', languageCode)
+    i18n.changeLanguage(languageCode)
   }
 
   if (auth.user === null) {
@@ -50,9 +51,9 @@ const Nav = () => {
           )}
         </div>
       </nav>
-      <select>
-        <option onClick={() => changeLanguage('en')}>EN</option>
-        <option onClick={() => changeLanguage('de')}>DE</option>
+      <select defaultValue={i18n.language} onChange={changeLanguage}>
+        <option value="en">EN</option>
+        <option value="de">DE</option>
       </select>
     </>
   )
