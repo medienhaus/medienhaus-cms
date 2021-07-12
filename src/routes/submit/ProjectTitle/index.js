@@ -23,32 +23,63 @@ const ProjectTitle = ({ title, projectSpace, callback }) => {
     e.preventDefault()
     setLoading(true)
 
-    const opts = {
-      preset: 'private_chat',
-      name: title,
-      creation_content: { type: 'm.space' },
-      initial_state: [{
-        type: 'm.room.history_visibility',
-        content: { history_visibility: 'world_readable' }
-      },
-      {
-        type: 'm.medienhaus.meta',
-        content: {
-          rundgang: 21,
-          type: 'studentproject',
-          version: '0.1'
-        }
-      },
-      {
-        type: 'm.room.guest_access',
-        state_key: '',
-        content: { guest_access: 'can_join' }
-      }],
-      visibility: 'private'
+    const opts = (type, name) => {
+      return {
+        preset: 'private_chat',
+        name: name,
+        creation_content: { type: 'm.space' },
+        initial_state: [{
+          type: 'm.room.history_visibility',
+          content: { history_visibility: 'world_readable' }
+        },
+        {
+          type: 'm.medienhaus.meta',
+          content: {
+            rundgang: 21,
+            type: type,
+            version: '0.1'
+          }
+        },
+        {
+          type: 'm.room.guest_access',
+          state_key: '',
+          content: { guest_access: 'can_join' }
+        }],
+        visibility: 'private'
+      }
     }
     try {
-      await matrixClient.createRoom(opts)
-        .then((res) => history.push(`/submit/${res.room_id}`))
+      await matrixClient.createRoom(opts('studentproject', title))
+        .then(async (space) => {
+          const en = await matrixClient.createRoom(opts('lang', 'en'))
+          const de = await matrixClient.createRoom(opts('lang', 'de'))
+          return [space.room_id, en.room_id, de.room_id]
+        })
+        .then(async (res) => {
+          await fetch(process.env.REACT_APP_MATRIX_BASE_URL + `/_matrix/client/r0/rooms/${res[0]}/state/m.space.child/${res[1]}`, {
+            method: 'PUT',
+            headers: { Authorization: 'Bearer ' + localStorage.getItem('medienhaus_access_token') },
+            body: JSON.stringify({
+              via:
+                [process.env.REACT_APP_MATRIX_BASE_URL],
+              suggested: false,
+              auto_join: true
+            })
+          })
+          await fetch(process.env.REACT_APP_MATRIX_BASE_URL + `/_matrix/client/r0/rooms/${res[0]}/state/m.space.child/${res[2]}`, {
+            method: 'PUT',
+            headers: { Authorization: 'Bearer ' + localStorage.getItem('medienhaus_access_token') },
+            body: JSON.stringify({
+              via:
+                [process.env.REACT_APP_MATRIX_BASE_URL],
+              suggested: false,
+              auto_join: true
+            })
+          })
+
+          return res[0]
+        })
+        .then((res) => history.push(`/submit/${res}`))
     } catch (e) {
       console.log(e)
     } finally {
