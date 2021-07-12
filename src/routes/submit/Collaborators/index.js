@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import Matrix from '../../../Matrix'
 import { Loading } from '../../../components/loading'
-import debounce from 'lodash/debounce'
 
 const Collaborators = ({ projectSpace, blocks, title, members, startListeningToCollab }) => {
   const [fetchingUsers, setFetchingUsers] = useState(false)
@@ -72,10 +71,10 @@ const Collaborators = ({ projectSpace, blocks, title, members, startListeningToC
         </section>}
       <div>
         <div>
-          <input list="userSearch" id="user-datalist" name="user-datalist" placeholder="contributor name" onChange={debounce((e) => {
+          <input list="userSearch" id="user-datalist" name="user-datalist" placeholder="contributor name" onChange={(e) => {
             fetchUsers(e, e.target.value)
             setCollab(e.target.value)
-          }, 200)} />
+          }} />
         </div>
         <datalist id="userSearch">
           {userSearch.map((users, i) => {
