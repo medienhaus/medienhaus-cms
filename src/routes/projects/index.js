@@ -94,7 +94,9 @@ const Overview = () => {
         </>
         )
       }
-      <Link activeclassname="active" to="/submit/">/create new -&gt;</Link>
+      <div>
+        <Link activeclassname="active" to="/submit/">/create new -&gt;</Link>
+      </div>
       {fetchSpaces
         ? <Loading />
         : (
