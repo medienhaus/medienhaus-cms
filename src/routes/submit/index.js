@@ -81,11 +81,13 @@ const Submit = () => {
     })
     const published = await joinRule.json()
     setVisibility(published.join_rule)
-    const spaceRooms = space.rooms.filter(x => !('room_type' in x))
-    setBlocks(spaceRooms.filter(x => x !== undefined).filter(room => room.name.charAt(0) !== 'x').sort((a, b) => {
+    // we fetch the selected language content
+    const spaceRooms = space.rooms.filter(room => room.name === contentLang)
+    const getContent = await matrixClient.getSpaceSummary(spaceRooms[0].room_id)
+    setBlocks(getContent.rooms.filter(room => room.name !== contentLang).filter(room => room.name.charAt(0) !== 'x').sort((a, b) => {
       return a.name.substring(0, a.name.indexOf('_')) - b.name.substring(0, b.name.indexOf('_'))
     }))
-  }, [projectSpace, matrixClient])
+  }, [projectSpace, matrixClient, contentLang])
 
   useEffect(() => {
     projectSpace || setTitle('')
@@ -219,9 +221,9 @@ const Submit = () => {
             </select>
             {spaceObject ? <ProjectDescription description={spaceObject?.rooms[0].topic} callback={onChangeDescription} /> : <Loading />}
             {blocks.length === 0
-              ? <AddContent number={0} projectSpace={projectSpace} blocks={blocks} reloadSpace={reloadSpace} />
+              ? <AddContent number={0} projectSpace={spaceObject?.rooms.filter(room => room.name === contentLang)[0].room_id} blocks={blocks} reloadSpace={reloadSpace} />
               : blocks.map((content, i) =>
-                <DisplayContent block={content} index={i} blocks={blocks} projectSpace={projectSpace} reloadSpace={reloadSpace} key={content + i + content?.lastUpdate} />
+                <DisplayContent block={content} index={i} blocks={blocks} projectSpace={spaceObject?.rooms.filter(room => room.name === contentLang)[0].room_id} reloadSpace={reloadSpace} key={content + i + content?.lastUpdate} />
               )}
           </section>
           <section className="visibility">

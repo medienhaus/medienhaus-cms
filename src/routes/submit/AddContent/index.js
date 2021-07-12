@@ -62,7 +62,7 @@ const AddContent = ({ number, projectSpace, blocks, reloadSpace }) => {
           </optgroup>
           <optgroup label="Date, Time, and Venue">
             <option value="date">Date & Time</option>
-            <option value="location">Location</option>
+            <option value="location">Venue</option>
           </optgroup>
         </select>
         <button className="cancel" onClick={(e) => { e.preventDefault(); setShowBlockTypeSelector(false); setSelectedBlockType('') }} >×</button>
