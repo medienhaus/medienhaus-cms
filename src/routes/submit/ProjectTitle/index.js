@@ -49,13 +49,16 @@ const ProjectTitle = ({ title, projectSpace, callback }) => {
       }
     }
     try {
+      // create the project space for the student project
       await matrixClient.createRoom(opts('studentproject', title))
         .then(async (space) => {
+          // by default we create two subpsaces for localisation
           const en = await matrixClient.createRoom(opts('lang', 'en'))
           const de = await matrixClient.createRoom(opts('lang', 'de'))
           return [space.room_id, en.room_id, de.room_id]
         })
         .then(async (res) => {
+          // and add those subspaces as children to the project space
           await fetch(process.env.REACT_APP_MATRIX_BASE_URL + `/_matrix/client/r0/rooms/${res[0]}/state/m.space.child/${res[1]}`, {
             method: 'PUT',
             headers: { Authorization: 'Bearer ' + localStorage.getItem('medienhaus_access_token') },
