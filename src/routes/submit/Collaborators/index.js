@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useState } from 'react'
 import Matrix from '../../../Matrix'
 import { Loading } from '../../../components/loading'
 import { useTranslation } from 'react-i18next'
+import { useAuth } from '../../../Auth'
 
 const Collaborators = ({ projectSpace, blocks, title, members, startListeningToCollab }) => {
   const [fetchingUsers, setFetchingUsers] = useState(false)
@@ -11,6 +12,8 @@ const Collaborators = ({ projectSpace, blocks, title, members, startListeningToC
   const [inviting, setInviting] = useState(false)
   const [giveWritePermission, setGiveWritePermission] = useState(false)
   const [addContributionFeedback, setAddContributionFeedback] = useState('')
+  const auth = useAuth()
+  const profile = auth.user
 
   const matrixClient = Matrix.getMatrixClient()
   const { t } = useTranslation()
@@ -28,18 +31,26 @@ const Collaborators = ({ projectSpace, blocks, title, members, startListeningToC
     setInviting(true)
     e?.preventDefault()
     const id = collab.substring(collab.lastIndexOf(' ') + 1)
+    const name = collab.substring(0, collab.lastIndexOf(' '))
 
     try {
-      await matrixClient.invite(projectSpace, id[1]).then(() => {
+      await matrixClient.invite(projectSpace, id).then(() => {
         const room = matrixClient.getRoom(projectSpace)
         matrixClient.setPowerLevel(projectSpace, id, 100, room.currentState.getStateEvents('m.room.power_levels', ''))
       })
       blocks.forEach(async (room, index) => {
         try {
-          await matrixClient.invite(room.room_id, id).then(async () => {
-            const stateEvent = matrixClient.getRoom(projectSpace)
-            await matrixClient.setPowerLevel(room.room_id, id, 100, stateEvent.currentState.getStateEvents('m.room.power_levels', ''))
-          }).then(() => console.log('invited ' + id + ' to ' + room.name))
+          await matrixClient.invite(room.room_id, id)
+            .then(() => {
+              setAddContributionFeedback('✓ ' + name + ' was invited and needs to accept your invitation')
+              setTimeout(() => {
+                setAddContributionFeedback('')
+              }, 3000)
+            })
+            .then(async () => {
+              const stateEvent = matrixClient.getRoom(projectSpace)
+              await matrixClient.setPowerLevel(room.room_id, id, 100, stateEvent.currentState.getStateEvents('m.room.power_levels', ''))
+            }).then(() => console.log('invited ' + id + ' to ' + room.name))
         } catch (err) {
           console.error(err)
         }
@@ -117,10 +128,13 @@ const Collaborators = ({ projectSpace, blocks, title, members, startListeningToC
       <p>You can also give credits to a contributor without an <strong>udk/spaces</strong> account, but they won’t be able to get access for editing.</p>
         < section >
           <ul>{
-           members?.length > 1 && Object.values(members).map(name => {
-             startListeningToCollab()
-             return <li>🖋 {name.display_name}</li>
-           })
+          Object.keys(members)?.length > 1 && Object.values(members).map((name, i) => {
+            startListeningToCollab()
+            return name.display_name !== profile.displayname &&
+              (<div style={{ display: 'flex' }}>
+                  <li style={{ width: '100%' }}>🖋 {name.display_name}</li><button disabled={true}>x</button>
+              </div>)
+          })
         }
           {credits && credits.map((name, index) => {
             return <Credits name={name} index={index} />
