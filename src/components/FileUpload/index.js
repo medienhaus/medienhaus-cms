@@ -8,7 +8,6 @@ const FileUpload = (props) => {
   const [license, setLicense] = useState('')
   const [alttext, setAlttext] = useState('')
   const size = props.fileType === 'image' ? 5000000 : 25000000
-  console.log(props.fileType)
   const impairment = props.fileType === 'audio' ? 'hearing' : 'visually'
 
   const changeHandler = (event) => {
