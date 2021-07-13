@@ -218,7 +218,7 @@ const Submit = () => {
             </select>
           </section>
           <section className="contributors">
-            <Collaborators projectSpace={spaceObject.rooms} members={roomMembers} time={getCurrentTime} startListeningToCollab={() => startListeningToCollab()} />
+            <Collaborators projectSpace={spaceObject?.rooms} members={roomMembers} time={getCurrentTime} startListeningToCollab={() => startListeningToCollab()} />
           </section>
           <section className="project-image">
             <h3>Project Image</h3>

@@ -20,7 +20,7 @@ const Collaborators = ({ projectSpace, members, time, startListeningToCollab }) 
   const { t } = useTranslation()
 
   const checkForCredits = useCallback(async () => {
-    const event = await matrixClient.getStateEvent(projectSpace[0].room_id, 'm.medienhaus.meta')
+    const event = projectSpace && await matrixClient.getStateEvent(projectSpace[0].room_id, 'm.medienhaus.meta')
     setCredits(event?.credit)
   }, [matrixClient, projectSpace])
 
