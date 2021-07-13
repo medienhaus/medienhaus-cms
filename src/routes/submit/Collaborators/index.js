@@ -5,7 +5,7 @@ import { Loading } from '../../../components/loading'
 import { useTranslation } from 'react-i18next'
 import { useAuth } from '../../../Auth'
 
-const Collaborators = ({ projectSpace, blocks, title, members, startListeningToCollab }) => {
+const Collaborators = ({ projectSpace, blocks, title, members, time, startListeningToCollab }) => {
   const [fetchingUsers, setFetchingUsers] = useState(false)
   const [userSearch, setUserSearch] = useState([])
   const [collab, setCollab] = useState('')
@@ -44,6 +44,7 @@ const Collaborators = ({ projectSpace, blocks, title, members, startListeningToC
           await matrixClient.invite(room.room_id, id)
             .then(() => {
               setAddContributionFeedback('✓ ' + name + ' was invited and needs to accept your invitation')
+              time()
               setTimeout(() => {
                 setAddContributionFeedback('')
                 setCollab('')
@@ -75,6 +76,7 @@ const Collaborators = ({ projectSpace, blocks, title, members, startListeningToC
     const sendCredit = await matrixClient.sendStateEvent(projectSpace, 'm.medienhaus.meta', content)
     setAddContributionFeedback('event_id' in sendCredit ? '✓' : 'Something went wrong')
     checkForCredits()
+    time()
     setTimeout(() => {
       setAddContributionFeedback('')
       setCollab('')
