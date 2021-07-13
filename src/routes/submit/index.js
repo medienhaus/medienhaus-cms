@@ -33,7 +33,8 @@ const Submit = () => {
 
   const getCurrentTime = useCallback(() => {
     const today = new Date()
-    setSaveTimestamp(today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds())
+    const time = today.getHours() + ':' + today.getMinutes().toString().padStart(2, '0') + ':' + today.getSeconds().toString().padStart(2, '0')
+    setSaveTimestamp(time)
   }, [])
 
   const reloadSpace = async (roomId) => {
