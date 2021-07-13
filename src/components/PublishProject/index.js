@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import LoadingSpinnerButton from '../LoadingSpinnerButton'
 import { Loading } from '../loading'
+import { useTranslation } from 'react-i18next'
 
 const PublishProject = ({ space, published, index, description, time, callback }) => {
+  const { t } = useTranslation('projects')
   const [userFeedback, setUserFeedback] = useState()
   const [visibility, setVisibility] = useState(published)
   const [showSaveButton, setShowSaveButton] = useState(false)
@@ -52,14 +54,14 @@ const PublishProject = ({ space, published, index, description, time, callback }
         setVisibility(e.target.value)
         setShowSaveButton(true)
       }} onBlur={(e) => { setVisibility(e.target.value) }}>
-            <option value="invite">Draft</option>
-            <option value="public">Public</option>
+            <option value="invite">{t('Draft')}</option>
+            <option value="public">{t('Public')}</option>
       </select>
       {showSaveButton && <div className="below">
         {userFeedback && <p>{userFeedback}</p>}
           {(visibility === 'public' && !description)
-            ? <p>❗️Please add a short description to your project</p>
-            : <LoadingSpinnerButton disabled={(visibility === 'public' && !description)} onClick={onChangeVisibility}>SAVE</LoadingSpinnerButton>
+            ? <p>❗{t('️Please add a short description to your project.')}</p>
+            : <LoadingSpinnerButton disabled={(visibility === 'public' && !description)} onClick={onChangeVisibility}>{t('SAVE')}</LoadingSpinnerButton>
     }
       </div>}
       </>

@@ -7,6 +7,7 @@ import Invites from './Invites'
 import Matrix from '../../Matrix'
 import { Loading } from '../../components/loading'
 import { Trans, useTranslation } from 'react-i18next'
+import { sortBy } from 'lodash'
 
 const Overview = () => {
   const auth = useAuth()
@@ -14,8 +15,7 @@ const Overview = () => {
   const profile = auth.user
   const { joinedSpaces, spacesErr, fetchSpaces } = useJoinedSpaces(() => console.log(fetchSpaces || spacesErr))
   const matrixClient = Matrix.getMatrixClient()
-  const [drafts, setDrafts] = useState([])
-  const [publications, setPublications] = useState([])
+  const [projects, setProjects] = useState([])
   const [invites, setInvites] = useState({})
   // @TODO: Check for existing invites on page load
 
@@ -50,8 +50,7 @@ const Overview = () => {
   })
 
   useEffect(() => {
-    setDrafts(joinedSpaces?.filter(projectSpace => projectSpace.published === 'invite'))
-    setPublications(joinedSpaces?.filter(projectSpace => projectSpace.published === 'public'))
+    setProjects(sortBy(joinedSpaces, 'name'))
   }, [joinedSpaces])
 
   const removeInviteByIndex = (room) => {
@@ -60,27 +59,10 @@ const Overview = () => {
       Object.entries(invites).filter(([key]) => key !== room)))
   }
 
-  const changePublicationToDraft = (index, space, redact) => {
-    if (!redact) {
-      // if the callback is not from deleting a project we add the object to the drafts array
-      space.published = 'invite'
-      setDrafts(drafts => [...drafts, space])
-    }
-    setPublications(publications => publications.filter((draft, i) => i !== index))
-  }
-
-  const changeDraftToPublication = (index, space, redact) => {
-    if (!redact) {
-      space.published = 'public'
-      setPublications(publications => [...publications, space])
-    }
-    setDrafts(drafts => drafts.filter((draft, i) => i !== index))
-  }
-
   return (
     <div>
       <p>{t('Hello')} <strong>{profile.displayname}</strong>.</p>
-      {drafts?.length === 0 && publications?.length === 0 && (
+      {projects?.length === 0 && (
         <p>{t('Welcome to the content management system for Rundgang 2021. Looks like you haven\'t uploaded any projects, yet.')}</p>
       )}
       {!invites
@@ -103,22 +85,21 @@ const Overview = () => {
         )
       }
       <div>
-        <Link activeclassname="active" to="/submit/">/create new -&gt;</Link>
+        <Link activeclassname="active" to="/submit/">{t('create new project')} -&gt;</Link>
       </div>
       {fetchSpaces
         ? <Loading />
         : (
-          <>
-            {drafts?.length > 0 && <p>You have <strong>{drafts.length} draft{drafts.length > 1 && 's'}</strong>, which {drafts.length > 1 ? 'are' : 'is'} not publicly visible.</p>}
-            <section className="draft">
-              {spacesErr ? console.error(spacesErr) : drafts.map((space, index) => <><Projects space={space} visibility={space.published} index={index} reloadProjects={changeDraftToPublication} /><hr /></>)
-              }
-            </section>
-            {publications?.length > 0 && <p>You have <strong>{publications.length} published</strong> project{publications.length > 1 && 's'}, which {publications.length > 1 ? 'are' : 'is'} publicly visible.</p>}
-            <section className="public">
-              {spacesErr ? console.error(spacesErr) : publications.map((space, index) => <><Projects space={space} visibility={space.published} index={index} reloadProjects={changePublicationToDraft} /><hr /> </>)}
-            </section>
-          </>
+          <section>
+            {spacesErr
+              ? console.error(spacesErr)
+              : projects.map((space, index) => (
+              <React.Fragment key={index}>
+                <Projects space={space} visibility={space.published} index={index} />
+                <hr />
+              </React.Fragment>
+              ))}
+          </section>
           )
       }
     </div>

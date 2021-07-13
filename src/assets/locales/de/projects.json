@@ -1,12 +1,16 @@
 {
   "Hello": "Hallo",
-  "_Welcome to the content management system for Rundgang 2021. Looks like you haven't uploaded any projects, yet.": "",
+  "Welcome to the content management system for Rundgang 2021. Looks like you haven't uploaded any projects, yet.": "Willkommen im Content Management System der Rundgang-Plattform 2021! Es sieht so aus als hätten Sie noch keine Projekte angelegt.",
+  "create new project": "neues projekt anlegen",
   "pendingInvites": "Du wurdest zu folgendem Projekt eingeladen:",
   "pendingInvites_plural": "Du wurdest zu den folgenden Projekten eingeladen:",
   "EDIT": "BEARBEITEN",
   "DELETE": "LÖSCHEN",
   "CANCEL": "ABBRECHEN",
+  "SAVE": "SPEICHERN",
   "Yes, delete project": "Ja, Projekt löschen",
-  "Please add a short description to your project.": "",
-  "deleteConfirmation": "Möchten Sie das Projekt <1>{{name}}</1> wirklich löschen? This cannot be undone and will delete the project for you and any collaborator(s) that might be part of it."
+  "Please add a short description to your project.": "Bitte fügen Sie eine kurze Beschreibung hinzu",
+  "deleteConfirmation": "Möchten Sie das Projekt <1>{{name}}</1> wirklich löschen? This cannot be undone and will delete the project for you and any collaborator(s) that might be part of it.",
+  "Draft": "Vorlage",
+  "Public": "Öffentlich"
 }
