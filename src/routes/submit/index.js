@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react'
-import { useParams, useHistory } from 'react-router-dom'
+import { useParams, useHistory, NavLink } from 'react-router-dom'
 import Matrix from '../../Matrix'
 import { MatrixEvent } from 'matrix-js-sdk'
 
@@ -200,7 +200,7 @@ const Submit = () => {
       <section className="welcome">
         <p><strong>{projectSpace ? 'Edit' : 'Create and upload new'} project</strong></p>
         <p>This is the project {projectSpace ? 'edit' : 'creation'} page. Please add in which context the project happened, project name and descriptive text and images.</p>
-        <p>If you want to continue at a later point in time, the project is automatically saved as a draft and you can find it in /projects.</p>
+        <p>If you want to continue at a later point in time, the project is automatically saved as a draft and you can find it in <NavLink activeclassname="active" to="/projects">/projects</NavLink>.</p>
       </section>
       <section className="project-title">
         <h3>Project Title</h3>
