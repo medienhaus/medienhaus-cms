@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams, useHistory } from 'react-router-dom'
 import Matrix from '../../Matrix'
 import { MatrixEvent } from 'matrix-js-sdk'
 
@@ -24,10 +24,17 @@ const Submit = () => {
   const [contentLang, setContentLang] = useState('en')
   const [spaceObject, setSpaceObject] = useState()
   const [roomMembers, setRoomMembers] = useState()
+  const [saveTimestamp, setSaveTimestamp] = useState('')
+  const history = useHistory()
   const matrixClient = Matrix.getMatrixClient()
   const params = useParams()
 
   const projectSpace = params.spaceId
+
+  const getCurrentTime = useCallback(() => {
+    const today = new Date()
+    setSaveTimestamp(today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds())
+  }, [])
 
   const reloadSpace = async (roomId) => {
     // roomId is needed in order to invite collaborators to newly created rooms.
@@ -38,7 +45,8 @@ const Submit = () => {
   }
 
   const inviteCollaborators = async (roomId) => {
-    const allCollaborators = Object.keys(roomMembers.joined).filter(userId => userId !== localStorage.getItem('mx_user_id'))
+    console.log(roomMembers)
+    const allCollaborators = Object.keys(roomMembers).filter(userId => userId !== localStorage.getItem('mx_user_id'))
     // const allCollaborators = joinedSpaces?.map((space, i) => space.name === title && Object.keys(space.collab).filter(userId => userId !== localStorage.getItem('mx_user_id') && userId !== process.env.REACT_APP_PROJECT_BOT_ACCOUNT)).filter(space => space !== false)[0]
     // I would be surprised if there isn't an easier way to get joined members...
     const setPower = async (userId) => {
@@ -87,7 +95,8 @@ const Submit = () => {
     setBlocks(getContent.rooms.filter(room => room.name !== contentLang).filter(room => room.name.charAt(0) !== 'x').sort((a, b) => {
       return a.name.substring(0, a.name.indexOf('_')) - b.name.substring(0, b.name.indexOf('_'))
     }))
-  }, [projectSpace, matrixClient, contentLang])
+    getCurrentTime()
+  }, [matrixClient, projectSpace, getCurrentTime, contentLang])
 
   useEffect(() => {
     projectSpace || setTitle('')
@@ -223,7 +232,7 @@ const Submit = () => {
             {blocks.length === 0
               ? <AddContent number={0} projectSpace={spaceObject?.rooms.filter(room => room.name === contentLang)[0].room_id} blocks={blocks} reloadSpace={reloadSpace} />
               : blocks.map((content, i) =>
-                <DisplayContent block={content} index={i} blocks={blocks} projectSpace={spaceObject?.rooms.filter(room => room.name === contentLang)[0].room_id} reloadSpace={reloadSpace} key={content + i + content?.lastUpdate} />
+                <DisplayContent block={content} index={i} blocks={blocks} projectSpace={spaceObject?.rooms.filter(room => room.name === contentLang)[0].room_id} reloadSpace={reloadSpace} time={getCurrentTime} key={content + i + content?.lastUpdate} />
               )}
           </section>
           <section className="visibility">
@@ -232,6 +241,8 @@ const Submit = () => {
             <p>You can change this at any time.</p>
             {spaceObject ? <PublishProject space={spaceObject.rooms[0] } description={spaceObject.rooms[0].topic} published={visibility} /> : <Loading /> }
           </section>
+          {saveTimestamp && <div>Project last saved at {saveTimestamp}</div>}
+          <button onClick={() => history.push('/projects')}>back to overview</button>
         </>
       )}
     </>
