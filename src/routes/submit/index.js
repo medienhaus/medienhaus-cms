@@ -198,8 +198,8 @@ const Submit = () => {
   return (
     <>
       <section className="welcome">
-        <p><strong>Create and upload new project</strong></p>
-        <p>This is the project creation page. Please add in which context the project happend, projectname and descriptive text and images.</p>
+        <p><strong>{projectSpace ? 'Edit' : 'Create and upload new'} project</strong></p>
+        <p>This is the project {projectSpace ? 'edit' : 'creation'} page. Please add in which context the project happend, project name and descriptive text and images.</p>
         <p>If you want to continue at a later point in time, you can save the project as a draft and find it in your collection under “drafts”.</p>
       </section>
       <section className="project-title">
