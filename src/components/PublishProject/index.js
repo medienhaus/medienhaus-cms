@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import LoadingSpinnerButton from '../LoadingSpinnerButton'
 import { Loading } from '../loading'
 
-const PublishProject = ({ space, published, index, description, callback }) => {
+const PublishProject = ({ space, published, index, description, time, callback }) => {
   const [userFeedback, setUserFeedback] = useState()
   const [visibility, setVisibility] = useState(published)
   const [showSaveButton, setShowSaveButton] = useState(false)
@@ -27,6 +27,7 @@ const PublishProject = ({ space, published, index, description, callback }) => {
           console.log(response)
           if (response.ok) {
             setUserFeedback('Changed successfully!')
+            time()
             setTimeout(() => {
               setUserFeedback()
               setShowSaveButton(false)

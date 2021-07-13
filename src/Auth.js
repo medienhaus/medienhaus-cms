@@ -33,10 +33,11 @@ function useAuthProvider () {
 
   const signout = cb => {
     // @TODO Implement
-    // return fakeAuth.signout(() => {
-    //   setUser(null);
-    //   cb();
-    // });
+    return Matrix.getMatrixClient().logout(() => {
+      localStorage.clear()
+      setUser(false)
+      cb()
+    })
   }
 
   const fetchAndSetUserData = (callback) => {

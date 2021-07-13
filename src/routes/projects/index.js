@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useAuth } from '../../Auth'
+import { Link } from 'react-router-dom'
 import useJoinedSpaces from '../../components/matrix_joined_spaces'
 import Projects from './Projects'
 import Invites from './Invites'
@@ -16,7 +17,6 @@ const Overview = () => {
   const [drafts, setDrafts] = useState([])
   const [publications, setPublications] = useState([])
   const [invites, setInvites] = useState({})
-  console.log(joinedSpaces)
   // @TODO: Check for existing invites on page load
 
   // Listen for room events to populate our "pending invites" state
@@ -102,6 +102,9 @@ const Overview = () => {
         </>
         )
       }
+      <div>
+        <Link activeclassname="active" to="/submit/">/create new -&gt;</Link>
+      </div>
       {fetchSpaces
         ? <Loading />
         : (

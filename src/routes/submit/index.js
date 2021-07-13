@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams, useHistory } from 'react-router-dom'
 import Matrix from '../../Matrix'
 import { MatrixEvent } from 'matrix-js-sdk'
 
@@ -24,10 +24,18 @@ const Submit = () => {
   const [contentLang, setContentLang] = useState('en')
   const [spaceObject, setSpaceObject] = useState()
   const [roomMembers, setRoomMembers] = useState()
+  const [saveTimestamp, setSaveTimestamp] = useState('')
+  const history = useHistory()
   const matrixClient = Matrix.getMatrixClient()
   const params = useParams()
 
   const projectSpace = params.spaceId
+
+  const getCurrentTime = useCallback(() => {
+    const today = new Date()
+    const time = today.getHours() + ':' + today.getMinutes().toString().padStart(2, '0') + ':' + today.getSeconds().toString().padStart(2, '0')
+    setSaveTimestamp(time)
+  }, [])
 
   const reloadSpace = async (roomId) => {
     // roomId is needed in order to invite collaborators to newly created rooms.
@@ -38,7 +46,8 @@ const Submit = () => {
   }
 
   const inviteCollaborators = async (roomId) => {
-    const allCollaborators = Object.keys(roomMembers.joined).filter(userId => userId !== localStorage.getItem('mx_user_id'))
+    console.log(roomMembers)
+    const allCollaborators = Object.keys(roomMembers).filter(userId => userId !== localStorage.getItem('mx_user_id'))
     // const allCollaborators = joinedSpaces?.map((space, i) => space.name === title && Object.keys(space.collab).filter(userId => userId !== localStorage.getItem('mx_user_id') && userId !== process.env.REACT_APP_PROJECT_BOT_ACCOUNT)).filter(space => space !== false)[0]
     // I would be surprised if there isn't an easier way to get joined members...
     const setPower = async (userId) => {
@@ -81,11 +90,14 @@ const Submit = () => {
     })
     const published = await joinRule.json()
     setVisibility(published.join_rule)
-    const spaceRooms = space.rooms.filter(x => !('room_type' in x))
-    setBlocks(spaceRooms.filter(x => x !== undefined).filter(room => room.name.charAt(0) !== 'x').sort((a, b) => {
+    // we fetch the selected language content
+    const spaceRooms = space.rooms.filter(room => room.name === contentLang)
+    const getContent = await matrixClient.getSpaceSummary(spaceRooms[0].room_id)
+    setBlocks(getContent.rooms.filter(room => room.name !== contentLang).filter(room => room.name.charAt(0) !== 'x').sort((a, b) => {
       return a.name.substring(0, a.name.indexOf('_')) - b.name.substring(0, b.name.indexOf('_'))
     }))
-  }, [projectSpace, matrixClient])
+    getCurrentTime()
+  }, [matrixClient, projectSpace, getCurrentTime, contentLang])
 
   useEffect(() => {
     projectSpace || setTitle('')
@@ -162,6 +174,7 @@ const Submit = () => {
   const changeProjectImage = (url) => {
     setLoading(true)
     setProjectImage(url)
+    getCurrentTime()
     setLoading(false)
   }
 
@@ -200,7 +213,7 @@ const Submit = () => {
             <Category title={title} projectSpace={projectSpace} />
           </section>
           <section className="contributors">
-            <Collaborators projectSpace={projectSpace} blocks={blocks} title={title} members={roomMembers} startListeningToCollab={() => startListeningToCollab()} />
+            <Collaborators projectSpace={projectSpace} blocks={blocks} title={title} members={roomMembers} time={getCurrentTime} startListeningToCollab={() => startListeningToCollab()} />
           </section>
           <section className="project-image">
             <h3>Project Image</h3>
@@ -219,17 +232,19 @@ const Submit = () => {
             </select>
             {spaceObject ? <ProjectDescription description={spaceObject?.rooms[0].topic} callback={onChangeDescription} /> : <Loading />}
             {blocks.length === 0
-              ? <AddContent number={0} projectSpace={projectSpace} blocks={blocks} reloadSpace={reloadSpace} />
+              ? <AddContent number={0} projectSpace={spaceObject?.rooms.filter(room => room.name === contentLang)[0].room_id} blocks={blocks} reloadSpace={reloadSpace} />
               : blocks.map((content, i) =>
-                <DisplayContent block={content} index={i} blocks={blocks} projectSpace={projectSpace} reloadSpace={reloadSpace} key={content + i + content?.lastUpdate} />
+                <DisplayContent block={content} index={i} blocks={blocks} projectSpace={spaceObject?.rooms.filter(room => room.name === contentLang)[0].room_id} reloadSpace={reloadSpace} time={getCurrentTime} key={content + i + content?.lastUpdate} />
               )}
           </section>
           <section className="visibility">
             <h3>Visibility (Draft/Published)</h3>
             <p>Do you want to save your project as a draft, visible only in the <strong>udk/rundgang</strong> content management system, or do you want to publish the project to the <a href="https://rundgang.udk-berlin.de" rel="external nofollow noopener noreferrer" target="_blank">rundgang.udk-berlin.de</a> website?</p>
             <p>You can change this at any time.</p>
-            {spaceObject ? <PublishProject description={spaceObject.rooms[0].topic} published={visibility} /> : <Loading /> }
+            {spaceObject ? <PublishProject space={spaceObject.rooms[0] } description={spaceObject.rooms[0].topic} published={visibility} time={getCurrentTime}/> : <Loading /> }
           </section>
+          {saveTimestamp && <div>Project last saved at {saveTimestamp}</div>}
+          <button onClick={() => history.push('/projects')}>back to overview</button>
         </>
       )}
     </>

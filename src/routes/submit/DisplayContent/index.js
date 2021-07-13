@@ -27,7 +27,7 @@ import { ReactComponent as DateIcon } from '../../../assets/icons/remix/date.svg
 
 import locations from '../../../assets/data/locations.json'
 
-const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace }) => {
+const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace, time }) => {
   const [clickedDelete, setClickedDelete] = useState(false)
   const [readOnly, setReadOnly] = useState(false)
   const [loading, setLoading] = useState(false)
@@ -93,6 +93,7 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace }) => 
           }, 1000)
         }
       }
+      time()
     } catch (e) {
       console.error('error while trying to save: ' + e)
       setSaved("Couldn't save!")
@@ -281,7 +282,8 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace }) => 
                                   localStorage.setItem(block.room_id, text)
                                 }, 250)}
                                 handleDOMEvents={{
-                                  focus: () => console.log('FOCUS on ' + block.room_id), // this could set MatrixClient"User.presence" to 'online', "User.currentlyActive" or 'typing. depending on which works best.
+                                  focus: () => {
+                                  }, // this could set MatrixClient"User.presence" to 'online', "User.currentlyActive" or 'typing. depending on which works best.
                                   blur: (e) => {
                                     if (localStorage.getItem(block.room_id) !== null && cms !== undefined && cms.body !== localStorage.getItem(block.room_id)) {
                                       onSave(block.room_id)

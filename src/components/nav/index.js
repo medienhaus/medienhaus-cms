@@ -1,11 +1,11 @@
 import React from 'react'
 import i18n from 'i18next'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useHistory } from 'react-router-dom'
 import { useAuth } from '../../Auth'
 
 const Nav = () => {
   const auth = useAuth()
-
+  const history = useHistory()
   const changeLanguage = event => {
     const languageCode = event.target.value
     localStorage.setItem('cr_lang', languageCode)
@@ -23,7 +23,7 @@ const Nav = () => {
           <div>
             {auth.user
               ? (
-                <NavLink activeclassname="active" to="/submit/">/create new -&gt;</NavLink>
+                <button onClick={() => auth.signout(() => history.push('/'))}>logout</button>
                 // <a href={process.env.REACT_APP_MATRIX_BASE_URL + '/classroom'} rel="nofollow noopener noreferrer" target="_self">/classroom&nbsp;-&gt;</a>
                 )
               : (
