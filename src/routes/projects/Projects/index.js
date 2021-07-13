@@ -60,7 +60,7 @@ const Projects = ({ space, visibility, index, reloadProjects }) => {
             if (warning) {
               setLeaving(true)
               await deleteProject(e, roomId)
-                .then(() => reloadProjects(index, space, true))
+                .then(() => reloadProjects(index))
                 .catch(err => console.log(err))
                 .finally(() => {
                   if (isMounted.current) {
