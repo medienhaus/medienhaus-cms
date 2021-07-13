@@ -164,7 +164,7 @@ const Submit = () => {
     try {
       // joining contentRooms which might have been created since we last opened the project
       await matrixClient.getSpaceSummary(projectSpace).then(res => {
-        res.rooms.map(async contentRooms => contentRooms.room_id !== projectSpace && await matrixClient.joinRoom(contentRooms.room_id))
+        res.rooms.map(async contentRooms => contentRooms.room_id !== projectSpace && await matrixClient.joinRoom(contentRooms.room_id).catch(err => console.log(err)))
       })
     } catch (err) {
       console.error(err)
@@ -213,7 +213,7 @@ const Submit = () => {
             <Category title={title} projectSpace={projectSpace} />
           </section>
           <section className="contributors">
-            <Collaborators projectSpace={projectSpace} blocks={blocks} title={title} members={roomMembers} time={getCurrentTime} startListeningToCollab={() => startListeningToCollab()} />
+            <Collaborators projectSpace={spaceObject.rooms} members={roomMembers} time={getCurrentTime} startListeningToCollab={() => startListeningToCollab()} />
           </section>
           <section className="project-image">
             <h3>Project Image</h3>
