@@ -125,13 +125,14 @@ const Collaborators = ({ projectSpace, blocks, title, members, startListeningToC
       <h3>Contributors</h3>
       <p>Did you work with other people on this project?</p>
       <p>You can share access (for editing) to this project. The contributing editor needs an <a href="https://spaces.udk-berlin.de" rel="external nofollow noopener noreferrer" target="_blank"><strong>udk/spaces</strong></a> account to edit the project.</p>
-      <p>You can also give credits to a contributor without an <strong>udk/spaces</strong> account, but they won’t be able to get access for editing.</p>
+      <p>You can also give credits to a contributor without an <strong>udk/spaces</strong> account, but they won’t be able to get access for editing. Just type in their name and click 'ADD'.</p>
         < section >
           <ul>{
-          Object.keys(members)?.length > 1 && Object.values(members).map((name, i) => {
+          members && Object.keys(members).length > 1 && Object.values(members).map((name, i) => {
             startListeningToCollab()
             return name.display_name !== profile.displayname &&
               (<div style={{ display: 'flex' }}>
+              {/* @TODO kicking user function */}
                   <li style={{ width: '100%' }}>🖋 {name.display_name}</li><button disabled={true}>x</button>
               </div>)
           })
@@ -156,18 +157,19 @@ const Collaborators = ({ projectSpace, blocks, title, members, startListeningToC
           })}
         </datalist>
       </div>
-      <div>
-        <select value={giveWritePermission} onChange={(e) => setGiveWritePermission(e.target.value)}>
-          <option value={false} >🔒 {collab.substring(collab.lastIndexOf(' ') + 1) || 'user'} {t('CANNOT edit the project')}</option>
-          <option value={true} disabled={!userSearch.some(user => user.user_id === collab.substring(collab.lastIndexOf(' ') + 1))}>🖋 {collab.substring(0, collab.lastIndexOf(' ') + 1) || 'user'} {t('CAN edit the project')}</option>
+      {collab &&
+        <div>
+          <select value={giveWritePermission} onChange={(e) => setGiveWritePermission(e.target.value)}>
+            <option value={false} >🔒 {collab.substring(collab.lastIndexOf(' ') + 1) || 'user'} {t('CANNOT edit the project')}</option>
+            <option value={true} disabled={!userSearch.some(user => user.user_id === collab.substring(collab.lastIndexOf(' ') + 1))}>🖋 {collab.substring(0, collab.lastIndexOf(' ') + 1) || 'user'} {t('CAN edit the project')}</option>
           </select>
-          {<button disabled={ !collab || inviting || fetchingUsers } onClick={(e) => {
+          <button disabled={!collab || inviting || fetchingUsers} onClick={(e) => {
             giveWritePermission
               ? invite(e)
               : addCredit(e)
-          }}>{inviting || fetchingUsers ? <Loading /> : addContributionFeedback || (giveWritePermission ? 'ADD 🖋 ' : 'ADD 🔒')}</button>}
-      </div>
-      {!userSearch.some(user => user.user_id === collab.substring(collab.lastIndexOf(' ') + 1)) && <p>❗️ {t("If you're looking to give a user write permissions but can't, please make sure they have already logged in to spaces.udk-berlin.de at least once.")}</p>}
+          }}>{inviting || fetchingUsers ? <Loading /> : addContributionFeedback || (giveWritePermission ? 'ADD 🖋 ' : 'ADD 🔒')}</button>
+        </div>}
+      {collab && !userSearch.some(user => user.user_id === collab.substring(collab.lastIndexOf(' ') + 1)) && <p>❗️ {t("If you're looking to give a user write permissions but can't, please make sure they have already logged in to spaces.udk-berlin.de at least once.")}</p>}
     </>
   )
 }
