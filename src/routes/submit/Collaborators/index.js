@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import Matrix from '../../../Matrix'
+import Credits from './Credits'
 import { Loading } from '../../../components/loading'
 import { useTranslation } from 'react-i18next'
 import { useAuth } from '../../../Auth'
@@ -80,32 +81,6 @@ const Collaborators = ({ projectSpace, blocks, title, members, startListeningToC
     console.log(sendCredit)
   }
 
-  const Credits = ({ name, index }) => {
-    const [deleteCreditFeedback, setdeleteCreditFeedback] = useState('')
-    const [loading, setLoading] = useState(false)
-
-    const deleteCredit = async (e) => {
-      e.preventDefault()
-      setLoading(true)
-      const content = await matrixClient.getStateEvent(projectSpace, 'm.medienhaus.meta')
-      content.credit.splice(index, 1)
-      console.log(content)
-      const sendCredit = await matrixClient.sendStateEvent(projectSpace, 'm.medienhaus.meta', content)
-      setLoading(false)
-      setdeleteCreditFeedback('event_id' in sendCredit ? '✓' : 'Something went wrong')
-      setTimeout(() => {
-        checkForCredits()
-        setdeleteCreditFeedback('')
-      }, 2000)
-    }
-    return (
-      <div style={{ display: 'flex' }}>
-        <li style={{ width: '100%' }}>🔒 {name}</li>
-        <button onClick={(e) => deleteCredit(e, index)}>{loading ? <Loading /> : deleteCreditFeedback || 'x'}</button>
-      </div>
-    )
-  }
-
   const fetchUsers = async (e, search) => {
     e.preventDefault()
     setFetchingUsers(true)
@@ -138,7 +113,7 @@ const Collaborators = ({ projectSpace, blocks, title, members, startListeningToC
           })
         }
           {credits && credits.map((name, index) => {
-            return <Credits name={name} index={index} />
+            return <Credits name={name} index={index} projectSpace={projectSpace} callback={checkForCredits} />
           })}
           </ul>
 
