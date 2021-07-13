@@ -211,6 +211,11 @@ const Submit = () => {
           <section className="context">
             <h3>Context</h3>
             <Category title={title} projectSpace={projectSpace} />
+             <select>
+              <option>Analog</option>
+              <option>Digital</option>
+              <option>Hybrid</option>
+            </select>
           </section>
           <section className="contributors">
             <Collaborators projectSpace={spaceObject.rooms} members={roomMembers} time={getCurrentTime} startListeningToCollab={() => startListeningToCollab()} />
