@@ -17,7 +17,6 @@ const Category = ({ title, projectSpace }) => {
     const getPresentType = async () => {
       setChangingPresentType(true)
       const meta = await matrixClient.getStateEvent(projectSpace, 'm.medienhaus.meta')
-      console.log(meta)
       setPresentType(meta?.present)
       setChangingPresentType(false)
     }
@@ -50,10 +49,8 @@ const Category = ({ title, projectSpace }) => {
     setChangingPresentType(true)
     e.preventDefault()
     setPresentType(e.target.value)
-    console.log(e.target.value)
     const content = await matrixClient.getStateEvent(projectSpace, 'm.medienhaus.meta')
     content.present = e.target.value
-    console.log(content)
     await matrixClient.sendStateEvent(projectSpace, 'm.medienhaus.meta', content)
     setChangingPresentType(false)
   }
