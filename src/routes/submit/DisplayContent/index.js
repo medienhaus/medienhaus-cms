@@ -281,7 +281,8 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace }) => 
                                   localStorage.setItem(block.room_id, text)
                                 }, 250)}
                                 handleDOMEvents={{
-                                  focus: () => console.log('FOCUS on ' + block.room_id), // this could set MatrixClient"User.presence" to 'online', "User.currentlyActive" or 'typing. depending on which works best.
+                                  focus: () => {
+                                  }, // this could set MatrixClient"User.presence" to 'online', "User.currentlyActive" or 'typing. depending on which works best.
                                   blur: (e) => {
                                     if (localStorage.getItem(block.room_id) !== null && cms !== undefined && cms.body !== localStorage.getItem(block.room_id)) {
                                       onSave(block.room_id)

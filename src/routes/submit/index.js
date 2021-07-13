@@ -230,7 +230,7 @@ const Submit = () => {
             <h3>Visibility (Draft/Published)</h3>
             <p>Do you want to save your project as a draft, visible only in the <strong>udk/rundgang</strong> content management system, or do you want to publish the project to the <a href="https://rundgang.udk-berlin.de" rel="external nofollow noopener noreferrer" target="_blank">rundgang.udk-berlin.de</a> website?</p>
             <p>You can change this at any time.</p>
-            {spaceObject ? <PublishProject description={spaceObject.rooms[0].topic} published={visibility} /> : <Loading /> }
+            {spaceObject ? <PublishProject space={spaceObject.rooms[0] } description={spaceObject.rooms[0].topic} published={visibility} /> : <Loading /> }
           </section>
         </>
       )}
