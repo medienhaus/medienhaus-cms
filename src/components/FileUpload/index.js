@@ -8,6 +8,8 @@ const FileUpload = (props) => {
   const [license, setLicense] = useState('')
   const [alttext, setAlttext] = useState('')
   const size = props.fileType === 'image' ? 5000000 : 25000000
+  console.log(props.fileType)
+  const impairment = props.fileType === 'audio' ? 'hearing' : 'visually'
 
   const changeHandler = (event) => {
     setSelectedFile(event.target.files[0])
@@ -97,7 +99,7 @@ const FileUpload = (props) => {
             <li><a href="https://chooser-beta.creativecommons.org/" rel="external nofollow noopener noreferrer" target="_blank">CC License Chooser (beta)</a></li>
             <li><a href="https://rightsstatements.org/page/1.0/" rel="external nofollow noopener noreferrer" target="_blank">Rights Statements</a></li>
           </ul>
-          <textarea rows="3" placeholder="please describe the image with a few words to enable visually impaired website visitors to comprehend what’s being shown here"
+          <textarea rows="3" placeholder={'please describe the image with a few words to enable ' + impairment + ' impaired website visitors to comprehend what’s being shown here'}
             onChange={(e) => setAlttext(e.target.value)} />
           <button className="upload" onClick={(e) => props.handleSubmission(e, selectedFile, fileName, author, license, alttext)} disabled={!selectedFile.type.includes(props.fileType) || selectedFile.size > size || props.loading || alttext.length < 1 || license.length < 1 || author.length < 1}>{props.loading ? <Loading /> : 'Upload'}</button>
           {selectedFile.type.includes(props.fileType) || <section>Please select an {props.fileType} file.</section>}
