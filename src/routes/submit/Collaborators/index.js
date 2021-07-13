@@ -46,6 +46,7 @@ const Collaborators = ({ projectSpace, blocks, title, members, startListeningToC
               setAddContributionFeedback('✓ ' + name + ' was invited and needs to accept your invitation')
               setTimeout(() => {
                 setAddContributionFeedback('')
+                setCollab('')
               }, 3000)
             })
             .then(async () => {
@@ -76,6 +77,7 @@ const Collaborators = ({ projectSpace, blocks, title, members, startListeningToC
     checkForCredits()
     setTimeout(() => {
       setAddContributionFeedback('')
+      setCollab('')
     }, 2000)
     setInviting(false)
     console.log(sendCredit)
@@ -120,7 +122,7 @@ const Collaborators = ({ projectSpace, blocks, title, members, startListeningToC
         </section>
       <div>
         <div>
-          <input list="userSearch" id="user-datalist" name="user-datalist" placeholder="contributor name" onChange={(e) => {
+          <input list="userSearch" id="user-datalist" name="user-datalist" placeholder="contributor name" value={collab} onChange={(e) => {
             setGiveWritePermission(false)
             fetchUsers(e, e.target.value)
             setCollab(e.target.value)
