@@ -6,9 +6,11 @@ import Projects from './Projects'
 import Invites from './Invites'
 import Matrix from '../../Matrix'
 import { Loading } from '../../components/loading'
+import { Trans, useTranslation } from 'react-i18next'
 
 const Overview = () => {
   const auth = useAuth()
+  const { t } = useTranslation('projects')
   const profile = auth.user
   const { joinedSpaces, spacesErr, fetchSpaces } = useJoinedSpaces(() => console.log(fetchSpaces || spacesErr))
   const matrixClient = Matrix.getMatrixClient()
@@ -77,16 +79,22 @@ const Overview = () => {
 
   return (
     <div>
-      <p>Hello <strong>{profile.displayname}</strong>.</p>
-      {drafts?.length === 0 && publications?.length === 0 && <p>Welcome to the content management system for Rundgang 2021. Looks like you don’t have uploaded any projects, yet.</p>}
+      <p>{t('Hello')} <strong>{profile.displayname}</strong>.</p>
+      {drafts?.length === 0 && publications?.length === 0 && (
+        <p>{t('Welcome to the content management system for Rundgang 2021. Looks like you haven\'t uploaded any projects, yet.')}</p>
+      )}
       {!invites
         ? <Loading />
         : Object.keys(invites).length > 0 && (
         <>
-          <p>You have been invited to join the following project{invites.length > 1 && 's'}:</p>
+          <p>
+            <Trans t={t} i18nKey="pendingInvites" count={Object.keys(invites).length}>
+              You have been invited to join the following project{Object.keys(invites).length > 1 ? 's' : ''}:
+            </Trans>
+          </p>
           <ul>
             {Object.values(invites).map((room, index) => (
-              <li key={index} style={{ 'list-style-type': 'none' }}>
+              <li key={index} style={{ listStyleType: 'none' }}>
                 <Invites room={room} callback={removeInviteByIndex} />
               </li>
             ))}

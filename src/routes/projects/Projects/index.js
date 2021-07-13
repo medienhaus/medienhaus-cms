@@ -3,9 +3,11 @@ import { useHistory } from 'react-router-dom'
 import Matrix from '../../../Matrix'
 import { Loading } from '../../../components/loading'
 import PublishProject from '../../../components/PublishProject'
+import { Trans, useTranslation } from 'react-i18next'
 
 const Projects = ({ space, visibility, index, reloadProjects }) => {
   const history = useHistory()
+  const { t } = useTranslation('projects')
   const matrixClient = Matrix.getMatrixClient()
 
   const deleteProject = async (e, project) => {
@@ -47,12 +49,12 @@ const Projects = ({ space, visibility, index, reloadProjects }) => {
 
     return (
       <>
-        {warning && <p>Are you sure you want to delete the project <strong>{name}</strong>? This cannot be undone and will delete the project for you and any collaborator(s) that might be part of it.</p>}
+        {warning && <p><Trans t={t} i18nKey="deleteConfirmation">Are you sure you want to delete the project <strong>{{ name }}</strong>? This cannot be undone and will delete the project for you and any collaborator(s) that might be part of it.</Trans></p>}
         <input
           id="delete"
           name="delete"
           type="submit"
-          value={warning ? 'Yes, delete project' : 'DELETE'}
+          value={warning ? t('Yes, delete project') : t('DELETE')}
           disabled={leaving}
           onClick={async (e) => {
             if (warning) {
@@ -78,7 +80,7 @@ const Projects = ({ space, visibility, index, reloadProjects }) => {
           id="delete"
           name="delete"
           type="submit"
-          value={'CANCEL'}
+          value={t('CANCEL')}
           onClick={() => { setWarning(false) }}
         />}
       </>
@@ -93,12 +95,12 @@ const Projects = ({ space, visibility, index, reloadProjects }) => {
           {space.avatar_url && <img src={matrixClient.mxcUrlToHttp(space.avatar_url)} alt="project-visual-key" />}
         </figure>
         <div className="center">
-          <p>{space.description || 'Please add a short description to your project.'}</p>
+          <p>{space.description || t('Please add a short description to your project.')}</p>
         </div>
         {/*
         <div className="right">
         */}
-          <button onClick={() => history.push(`/submit/${space.room_id}`)}>EDIT</button>
+          <button onClick={() => history.push(`/submit/${space.room_id}`)}>{t('EDIT')}</button>
           <DeleteProjectButton roomId={space.room_id} name={space.name} />
           <PublishProject space={space} published={visibility} index={index} description={space.description} callback={reloadProjects} />
         {/*
