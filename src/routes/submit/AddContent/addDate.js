@@ -24,7 +24,14 @@ const AddDate = ({ onCreateRoomForBlock, onBlockWasAddedSuccessfully }) => {
     <>
       <div>
         <label htmlFor="date">Choose a date:</label>
-        <input id="date" name="date" type="date" value={date} onChange={(e) => setDate(e.target.value)} />
+        <input
+          id="date"
+          name="date"
+          type="date"
+          min="2021-10-29"
+          max="2021-10-31"
+          value={date}
+          onChange={(e) => setDate(e.target.value)} />
       </div>
       <div>
         <label htmlFor="time">Choose a time:</label>
