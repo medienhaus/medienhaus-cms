@@ -36,6 +36,7 @@ const Nav = () => {
             <>
               <div>
                 <NavLink activeclassname="active" to="/projects">/projects</NavLink>
+                <NavLink activeclassname="active" to="/feedback">/feedback</NavLink>
                 <NavLink activeclassname="active" to="/support">/support</NavLink>
                 {/* <NavLink activeclassname="active" to="/tools">/tools</NavLink>  only for dev */}
                 {/*
