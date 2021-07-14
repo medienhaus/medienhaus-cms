@@ -253,7 +253,7 @@ const Submit = () => {
             {spaceObject ? <PublishProject space={spaceObject.rooms[0]} description={spaceObject.rooms[0].topic} published={visibility} time={getCurrentTime} /> : <Loading />}
           </section>
           <section className="save">
-            <button onClick={() => history.push('/projects')}>← SAVE + BACK TO OVERVIEW</button>
+            <button onClick={() => history.push('/projects')}>← BACK TO OVERVIEW</button>
             {saveTimestamp && <p>Project last saved at {saveTimestamp}</p>}
           </section>
         </>
