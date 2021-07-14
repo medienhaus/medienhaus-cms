@@ -42,7 +42,7 @@ const Login = () => {
   const changePassword = e => { setPassword(e.target.value); setErrormsg() }
 
   if (auth.user) {
-    return <Redirect to={'/'} />
+    return <Redirect to="/" />
   }
 
   return (
@@ -51,12 +51,12 @@ const Login = () => {
         <div>
           <label htmlFor="username">{t('username')}</label>
           <div>
-            <input name="username" type="text" placeholder={t('u.name')} value={name} onChange={changeName} /> {// @TODO {...register('username', { required: true })} />
+            <input name="username" type="text" placeholder={t('u.name')} value={name} onChange={changeName} />
+            {/* @TODO {...register('username', { required: true })} */}
             <select defaultValue="udk">
               <option value="udk">@udk-berlin.de</option>
               <option value="intra">@intra.udk-berlin.de</option>
             </select>
-          }
           </div>
         </div>
         {errors.username && t('Username can\'t be empty.')}
@@ -67,7 +67,7 @@ const Login = () => {
         </div>
         {errors?.password && t('Password can\'t be empty.')}
         {errormsg ?? errormsg}
-            <button name="submit" type="submit" >LOGIN</button>
+        <button name="submit" type="submit">LOGIN</button>
       </form>
       <p>
         <Trans t={t} i18nKey="usernameSameAsEmail">
