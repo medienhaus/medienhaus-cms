@@ -104,7 +104,7 @@ const ProjectTitle = ({ title, projectSpace, callback }) => {
       ? <Loading />
       : edit && (projectTitle !== oldTitle) &&
               <div className="savecancel">
-                {!newProject && <input id="submit" name="submit" type="submit" value="❌ CANCEL" onClick={(e) => { e.preventDefault(); setEdit(false); setProjectTitle(oldTitle) }} />}
+                {!newProject && <input id="submit" className="cancel" name="submit" type="submit" value="CANCEL" onClick={(e) => { e.preventDefault(); setEdit(false); setProjectTitle(oldTitle) }} />}
                   {!title && newProject &&
                       <input
                           id="submit" name="submit" type="submit" value={newProject && t('Create Project')} disabled={ !projectTitle || projectTitle.length > 100} onClick={(e) => {
@@ -121,7 +121,7 @@ const ProjectTitle = ({ title, projectSpace, callback }) => {
                       />
                   }
 
-                  {title && edit && (projectTitle !== oldTitle) && <LoadingSpinnerButton disabled={projectTitle.length > 100} onClick={async () => {
+                  {title && edit && (projectTitle !== oldTitle) && <LoadingSpinnerButton className="confirm" disabled={projectTitle.length > 100} onClick={async () => {
                     if (projectTitle.length < 101) {
                       try {
                         await matrixClient.setRoomName(projectSpace, projectTitle).then(() => callback(projectTitle))
@@ -133,7 +133,7 @@ const ProjectTitle = ({ title, projectSpace, callback }) => {
                       setEdit(true)
                       setOldTitle(title)
                     }
-                  }}>✅ SAVE</LoadingSpinnerButton>}
+                  }}>SAVE</LoadingSpinnerButton>}
               </div>
           }
         </>
