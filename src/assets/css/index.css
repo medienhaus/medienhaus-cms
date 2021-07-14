@@ -1393,7 +1393,7 @@ button > #loading {
     bottom: var(--margin);
   }
   .project {
-    grid-template-columns: calc(var(--margin) * 7.8) auto 8ch;
+    grid-template-columns: calc(var(--margin) * 7.8) auto 12ch;
     grid-template-rows: repeat(4, auto);
   }
   .project .above  {
