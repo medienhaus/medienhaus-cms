@@ -309,8 +309,6 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace, time,
                                     }}
                                     key={block.room_id}
                                   />
-                                  <p key={block.room_id + '_p'}>{saved}</p> {// feedback that saving was succesfull or has failed
-                              }
                                 </div>}
 
         <div className="right">
