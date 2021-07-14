@@ -2,12 +2,11 @@ import React, { useEffect, useRef, useState } from 'react'
 import { Trans, useTranslation } from 'react-i18next'
 import { Loading } from '../../../../components/loading'
 import LoadingSpinnerButton from '../../../../components/LoadingSpinnerButton'
-import Matrix from '../../../../Matrix'
+import deleteProject from '../../deleteProject'
 
-const DeleteProjectButton = ({ roomId, name, index, toggleDeleteButton, reloadProjects }) => {
+const DeleteProjectButton = ({ roomId, name, index, toggleDeleteButton, removeProject }) => {
   const [leaving, setLeaving] = useState(false)
   const isMounted = useRef(true)
-  const matrixClient = Matrix.getMatrixClient()
 
   const { t } = useTranslation('projects')
 
@@ -18,39 +17,6 @@ const DeleteProjectButton = ({ roomId, name, index, toggleDeleteButton, reloadPr
       isMounted.current = false
     }
   }, [])
-
-  const deleteProject = async (e) => {
-    e.preventDefault()
-    let space
-    try {
-      space = await matrixClient.getSpaceSummary(roomId)
-    } catch (err) {
-      console.error(err)
-    }
-    space.rooms.reverse().map(async (space, index) => {
-      // we reverse here to leave the actual project space last in case something goes wrong in the process.
-      console.log('Leaving ' + space.name)
-      if (index < space.rooms.length) {
-        const subspaces = await matrixClient.getSpaceSummary(space.roomId)
-        subspaces.rooms.reverse().map(async (space) => {
-          const count = await matrixClient.getJoinedRoomMembers(space.room_id)
-          Object.keys(count.joined).length > 1 && Object.keys(count.joined).forEach(name => {
-            localStorage.getItem('medienhaus_user_id') !== name && matrixClient.kick(space.room_id, name)
-          })
-        })
-      }
-      try {
-        const count = await matrixClient.getJoinedRoomMembers(space.room_id)
-        Object.keys(count.joined).length > 1 && Object.keys(count.joined).forEach(name => {
-          localStorage.getItem('medienhaus_user_id') !== name && matrixClient.kick(space.room_id, name)
-        })
-        await matrixClient.leave(space.room_id)
-      } catch (err) {
-        console.error(err)
-      }
-    })
-    return 'successfully deleted ' + roomId
-  }
 
   return (
     <>
@@ -67,8 +33,9 @@ const DeleteProjectButton = ({ roomId, name, index, toggleDeleteButton, reloadPr
           disabled={leaving}
           onClick={async () => {
             setLeaving(true)
-            await deleteProject(null, roomId)
-              .then(() => reloadProjects(index))
+            await deleteProject(roomId)
+              .then(() => removeProject(index))
+              .then(() => toggleDeleteButton())
               .catch(err => console.log(err))
               .finally(() => {
                 if (isMounted.current) {

@@ -8,23 +8,25 @@ import Matrix from '../../Matrix'
 import { Loading } from '../../components/loading'
 import { Trans, useTranslation } from 'react-i18next'
 import { sortBy } from 'lodash'
+import deleteProject from './deleteProject'
 
 const Overview = () => {
   const auth = useAuth()
   const { t } = useTranslation('projects')
   const profile = auth.user
-  const { joinedSpaces, spacesErr, fetchSpaces } = useJoinedSpaces(() => console.log(fetchSpaces || spacesErr))
+  const { joinedSpaces, spacesErr, fetchSpaces, reload } = useJoinedSpaces(false)
   const matrixClient = Matrix.getMatrixClient()
   const [projects, setProjects] = useState([])
   const [invites, setInvites] = useState({})
   const history = useHistory()
+  console.log(joinedSpaces)
   // @TODO: Check for existing invites on page load
 
   // Listen for room events to populate our "pending invites" state
   useEffect(() => {
     async function handleRoomEvent (room) {
-      // Ignore event if this is not about a space
-      if (room.getType() !== 'm.space') return
+      // Ignore event if this is not about a space or if it is a language space
+      if (room.getType() !== 'm.space' || room.name === 'de' || room.name === 'en') return
 
       const roomMembers = await room._loadMembersFromServer().catch(console.error)
       // room.getMyMembership() is only available after the current call stack has cleared (_.defer),
@@ -55,21 +57,23 @@ const Overview = () => {
   }
 
   useEffect(() => {
-    setProjects(sortBy(joinedSpaces, 'name'))
+    // we check if a collaborator has deleted a project since we last logged in
+    joinedSpaces?.filter(space => space.meta.deleted).forEach(async space => await deleteProject(space.room_id))
+    const updatedSpaces = joinedSpaces?.filter(space => !space.meta.deleted)
+    setProjects(sortBy(updatedSpaces, 'name'))
   }, [joinedSpaces])
 
   const removeInviteByIndex = (room) => {
     // setInvites(invites => invites.filter((invite, i) => i !== index))
     setInvites(Object.fromEntries(
       Object.entries(invites).filter(([key]) => key !== room)))
+    reload(true)
   }
 
   return (
     <div>
       <p>{t('Hello')} <strong>{profile.displayname}</strong>.</p>
-      {projects?.length === 0 && (
-        <p>{t('Welcome to the content management system for Rundgang 2021. Looks like you haven\'t uploaded any projects, yet.')}</p>
-      )}
+
       {!invites
         ? <Loading />
         : Object.keys(invites).length > 0 && (
@@ -80,29 +84,34 @@ const Overview = () => {
               </Trans>
             </p>
             <ul>
-              {Object.values(invites).map((room, index) => (
+              {Object.values(invites).map((space, index) => (
                 <li key={index} style={{ listStyleType: 'none' }}>
-                  <Invites room={room} callback={removeInviteByIndex} />
+                  <Invites space={space} callback={removeInviteByIndex} />
                 </li>
               ))}
             </ul>
           </>
         )}
-      <div>
-        <button onClick={() => history.push('/submit')}>{t('create new project')} -&gt;</button>
-      </div>
+      {!fetchSpaces && !spacesErr &&
+        <div>
+          <button onClick={() => history.push('/submit')}>{t('create new project')} -&gt;</button>
+        </div>}
       {fetchSpaces
         ? <Loading />
         : (
           <section>
             {spacesErr
               ? console.error(spacesErr)
-              : projects.map((space, index) => (
-                <React.Fragment key={index}>
-                  <Projects space={space} visibility={space.published} index={index} reloadProjects={removeProject} />
-                  <hr />
-                </React.Fragment>
-              ))}
+              : projects?.length === 0
+                ? (
+                  <p>{t('Welcome to the content management system for Rundgang 2021. Looks like you haven\'t uploaded any projects, yet.')}</p>
+                  )
+                : projects.map((space, index) => (
+                  <React.Fragment key={index}>
+                    <Projects space={space} visibility={space.published} index={index} removeProject={removeProject} />
+                    <hr />
+                  </React.Fragment>
+                ))}
           </section>
           )}
     </div>

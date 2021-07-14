@@ -37,9 +37,10 @@ const ProjectTitle = ({ title, projectSpace, callback }) => {
         {
           type: 'm.medienhaus.meta',
           content: {
+            version: '0.1',
             rundgang: 21,
             type: type,
-            version: '0.1'
+            present: 'analog'
           }
         },
         {

@@ -6,11 +6,15 @@ const ProjectDescription = ({ description: intro, callback }) => {
   const { t } = useTranslation('projects')
   const [saved, setSaved] = useState(false)
   const [description, setDescription] = useState(intro)
+  const [backupDescription, setBackupDescription] = useState()
 
   const onSave = async () => {
-    const save = await callback(description)
-    if ('event_id' in save) {
-      setSaved('Saved!')
+    console.log(description)
+    if (description) {
+      await callback(description)
+    } else {
+      setDescription(backupDescription)
+      setSaved('Description can\'t be empty')
       setTimeout(() => {
         setSaved()
       }, 1000)
@@ -29,6 +33,7 @@ const ProjectDescription = ({ description: intro, callback }) => {
           <textarea
             style={{ height: '100%', border: 'none' }}
             value={description}
+            onClick={() => setBackupDescription(description)}
             onChange={(e) => {
               setDescription(e.target.value)
             }}

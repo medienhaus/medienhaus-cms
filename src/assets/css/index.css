@@ -7,7 +7,10 @@
 :root {
   --color-fg: rgb(0,0,0);
   --color-bg: rgb(255,255,255);
+  /*
   --color-hi: rgb(228,9,59);
+  */
+  --color-hi: rgb(255,255,153);
   --color-me: rgb(128,128,128);
   --color-lo: rgb(240,240,240);
   --margin: 1rem;
@@ -20,7 +23,7 @@
 }
 
 *::selection {
-  background-color: var(--color-lo);
+  background-color: var(--color-hi);
 }
 
 html {
@@ -624,6 +627,7 @@ textarea[disabled] {
   border-color: var(--color-me);
   color: var(--color-me);
   cursor: not-allowed;
+  resize: none;
 }
 
 #loading {
@@ -724,8 +728,14 @@ button > #loading {
   margin-top: var(--margin);
 }
 
+.editor audio.center ~ input {
+  text-overflow: ellipsis;
+}
+
+/*
 .editor .center div {
 }
+*/
 
 .editor figure.center {
   font-size: 0;
@@ -981,7 +991,7 @@ button > #loading {
 }
 
 .save {
-  margin-top: calc(var(--margin) * 4) !important;
+  margin-top: calc(var(--margin) * 3) !important;
 }
 
 /*
@@ -1283,7 +1293,10 @@ button > #loading {
   :root {
     --color-fg: rgb(255,255,255);
     --color-bg: rgb(20,20,20);
+    /*
     --color-hi: rgb(228,9,59);
+    */
+    --color-hi: rgb(255,255,153);
     /*
     --color-me: rgb(128,128,128);
     */

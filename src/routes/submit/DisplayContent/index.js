@@ -207,25 +207,38 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace, time,
               <figure className="center">
                 <img src={matrixClient.mxcUrlToHttp(cms.url)} alt={cms?.info?.alt} key={block.room_id} />
               </figure>
-
               <input type="text" placeholder="author, credits, et cetera" value={cms.info.author} disabled />
               <select id="license" name="license" value={cms.info.license} disabled>
-                <option value={cms.info.license} disabled>{cms.info.license}</option>
+                <option value="cc0">CC0 1.0</option>
+                <option value="cc-by">CC BY 4.0</option>
+                <option value="cc-by-sa">CC BY-SA 4.0</option>
+                <option value="cc-by-nc">CC BY-NC 4.0</option>
+                <option value="cc-by-nc-sa">CC BY-NC-SA 4.0</option>
+                <option value="cc-by-nd">CC BY-ND 4.0</option>
+                <option value="cc-by-nc-nd">CC BY-NC-ND 4.0</option>
               </select>
               <textarea rows="3" value={cms.info.alt} disabled />
             </div>
             )
           : cms?.msgtype === 'm.audio'
             ? <div>
+              {console.log(cms)}
+
               <audio className="center" controls>
                 <source src={matrixClient.mxcUrlToHttp(cms.url)} />
               </audio>
-              <p id="audio-title">{cms.body}</p>
-              <input type="text" placeholder="author, credits, et cetera" value={cms.info.author} disabled />
+              <input type="text" value={cms.info.name} disabled />
+              <input type="text" value={cms.info.author} disabled />
               <select id="license" name="license" value={cms.info.license} disabled>
-                <option value={cms.info.license} disabled>{cms.info.license}</option>
+                <option value="cc0">CC0 1.0</option>
+                <option value="cc-by">CC BY 4.0</option>
+                <option value="cc-by-sa">CC BY-SA 4.0</option>
+                <option value="cc-by-nc">CC BY-NC 4.0</option>
+                <option value="cc-by-nc-sa">CC BY-NC-SA 4.0</option>
+                <option value="cc-by-nd">CC BY-ND 4.0</option>
+                <option value="cc-by-nc-nd">CC BY-NC-ND 4.0</option>
               </select>
-              <textarea rows="3" value={cms.info.alt} disabled />
+              <textarea value={cms.info.alt} disabled />
             </div>
             : json.type === 'ul'
               ? <List onSave={() => onSave(block.room_id)} storage={(list) => localStorage.setItem(block.room_id, list)} populated={cms?.body} type="ul" />
@@ -257,7 +270,7 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace, time,
                               </Popup>
                             </Marker>
                           </MapContainer>
-                          <input disabled value={cms.body.substring(cms.body.lastIndexOf(' '))} />
+                          <input type="text" disabled value={cms.body.substring(cms.body.lastIndexOf(' '))} />
                         </div>
                         : json.type === 'date'
                           ? <div>{cms.body.split(' ')[0]} {cms.body.split(' ')[1] || null}</div>
@@ -309,8 +322,6 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace, time,
                                     }}
                                     key={block.room_id}
                                   />
-                                  <p key={block.room_id + '_p'}>{saved}</p> {// feedback that saving was succesfull or has failed
-                              }
                                 </div>}
 
         <div className="right">
