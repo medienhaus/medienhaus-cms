@@ -39,7 +39,7 @@ const ProjectImage = ({ projectSpace, projectImage, changeProjectImage, imgAutho
           <button onClick={e => { e.preventDefault(); setEdit(edit => !edit) }}>{edit ? 'CANCEL' : 'CHANGE'}</button>
           {imgAuthor && <input type="text" placeholder="author, credits, et cetera" value={imgAuthor} disabled />}
           {imgLicense && <>
-            <select id="license" name="license" value={imgLicense}>
+            <select id="license" name="license" value={imgLicense} disabled>
               <option value="cc0">CC0 1.0</option>
               <option value="cc-by">CC BY 4.0</option>
               <option value="cc-by-sa">CC BY-SA 4.0</option>
