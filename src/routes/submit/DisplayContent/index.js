@@ -210,7 +210,13 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace, time,
 
               <input type="text" placeholder="author, credits, et cetera" value={cms.info.author} disabled />
               <select id="license" name="license" value={cms.info.license} disabled>
-                <option value={cms.info.license} disabled>{cms.info.license}</option>
+                <option value="cc0">CC0 1.0</option>
+                <option value="cc-by">CC BY 4.0</option>
+                <option value="cc-by-sa">CC BY-SA 4.0</option>
+                <option value="cc-by-nc">CC BY-NC 4.0</option>
+                <option value="cc-by-nc-sa">CC BY-NC-SA 4.0</option>
+                <option value="cc-by-nd">CC BY-ND 4.0</option>
+                <option value="cc-by-nc-nd">CC BY-NC-ND 4.0</option>
               </select>
               <textarea rows="3" value={cms.info.alt} disabled />
             </div>
@@ -220,10 +226,16 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace, time,
               <audio className="center" controls>
                 <source src={matrixClient.mxcUrlToHttp(cms.url)} />
               </audio>
-              <p id="audio-title">{cms.body}</p>
-              <input type="text" placeholder="author, credits, et cetera" value={cms.info.author} disabled />
+              <input type="text" value={cms.body} disabled />
+              <input type="text" value={cms.info.author} disabled />
               <select id="license" name="license" value={cms.info.license} disabled>
-                <option value={cms.info.license} disabled>{cms.info.license}</option>
+                <option value="cc0">CC0 1.0</option>
+                <option value="cc-by">CC BY 4.0</option>
+                <option value="cc-by-sa">CC BY-SA 4.0</option>
+                <option value="cc-by-nc">CC BY-NC 4.0</option>
+                <option value="cc-by-nc-sa">CC BY-NC-SA 4.0</option>
+                <option value="cc-by-nd">CC BY-ND 4.0</option>
+                <option value="cc-by-nc-nd">CC BY-NC-ND 4.0</option>
               </select>
               <textarea rows="3" value={cms.info.alt} disabled />
             </div>
