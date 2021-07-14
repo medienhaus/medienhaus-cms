@@ -62,8 +62,9 @@ const DeleteProjectButton = ({ roomId, name, index, toggleDeleteButton, reloadPr
                 </Trans>
             </p>
             <div className="savecancel">
-              <button onClick={() => toggleDeleteButton()}>{t('CANCEL')}</button>
+              <button className="cancel" onClick={() => toggleDeleteButton()}>{t('CANCEL')}</button>
               <LoadingSpinnerButton
+                  className="confirm"
                   disabled={leaving}
                   onClick={async () => {
                     if (warning) {
