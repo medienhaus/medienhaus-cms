@@ -30,7 +30,7 @@ const Moderation = () => {
             <div>
               Checking to see if you are moderating any spaces.
             </div>
-            {<Loading />}
+            <Loading />
           </>
           )
         : moderationRooms.length > 0
@@ -41,8 +41,7 @@ const Moderation = () => {
             <div>
               Looks like you are not moderating any spaces.
             </div>
-            )
-      }
+            )}
     </div>
   )
 }

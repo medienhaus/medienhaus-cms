@@ -73,22 +73,21 @@ const Overview = () => {
       {!invites
         ? <Loading />
         : Object.keys(invites).length > 0 && (
-        <>
-          <p>
-            <Trans t={t} i18nKey="pendingInvites" count={Object.keys(invites).length}>
-              You have been invited to join the following project{Object.keys(invites).length > 1 ? 's' : ''}:
-            </Trans>
-          </p>
-          <ul>
-            {Object.values(invites).map((room, index) => (
-              <li key={index} style={{ listStyleType: 'none' }}>
-                <Invites room={room} callback={removeInviteByIndex} />
-              </li>
-            ))}
-          </ul>
-        </>
-        )
-      }
+          <>
+            <p>
+              <Trans t={t} i18nKey="pendingInvites" count={Object.keys(invites).length}>
+                You have been invited to join the following project{Object.keys(invites).length > 1 ? 's' : ''}:
+              </Trans>
+            </p>
+            <ul>
+              {Object.values(invites).map((room, index) => (
+                <li key={index} style={{ listStyleType: 'none' }}>
+                  <Invites room={room} callback={removeInviteByIndex} />
+                </li>
+              ))}
+            </ul>
+          </>
+        )}
       <div>
         <button onClick={() => history.push('/submit')}>{t('create new project')} -&gt;</button>
       </div>
@@ -99,14 +98,13 @@ const Overview = () => {
             {spacesErr
               ? console.error(spacesErr)
               : projects.map((space, index) => (
-              <React.Fragment key={index}>
-                <Projects space={space} visibility={space.published} index={index} reloadProjects={removeProject} />
-                <hr />
-              </React.Fragment>
+                <React.Fragment key={index}>
+                  <Projects space={space} visibility={space.published} index={index} reloadProjects={removeProject} />
+                  <hr />
+                </React.Fragment>
               ))}
           </section>
-          )
-      }
+          )}
     </div>
   )
 }

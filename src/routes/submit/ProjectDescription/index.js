@@ -18,29 +18,30 @@ const ProjectDescription = ({ description: intro, callback }) => {
   }
 
   return (
-        <>
-            <div className="editor">
-                <div className="left">
-                    <button disabled={true}>↑</button>
-                    <figure className="icon-bg"><TextIcon fill="var(--color-fg)" /></figure>
-                    <button disabled={true}>↓</button>
-                </div>
-                <div className="center">
-                  <textarea
-                      style={{ height: '100%', border: 'none' }}
-                      value = { description }
-                      onChange={(e) => {
-                        setDescription(e.target.value)
-                      }}
-                      placeholder={`${t('Please add a short description of your project.')} ${t('This field is required before publishing.')}`}
-                        onBlur={() => onSave()} />
-                    <p>{saved}</p>
-                </div>
-                <div className="right">
-                    <button disabled={true}>×</button>
-                </div>
-            </div>
-        </>
+    <>
+      <div className="editor">
+        <div className="left">
+          <button disabled>↑</button>
+          <figure className="icon-bg"><TextIcon fill="var(--color-fg)" /></figure>
+          <button disabled>↓</button>
+        </div>
+        <div className="center">
+          <textarea
+            style={{ height: '100%', border: 'none' }}
+            value={description}
+            onChange={(e) => {
+              setDescription(e.target.value)
+            }}
+            placeholder={`${t('Please add a short description of your project.')} ${t('This field is required before publishing.')}`}
+            onBlur={() => onSave()}
+          />
+          <p>{saved}</p>
+        </div>
+        <div className="right">
+          <button disabled>×</button>
+        </div>
+      </div>
+    </>
   )
 }
 export default ProjectDescription

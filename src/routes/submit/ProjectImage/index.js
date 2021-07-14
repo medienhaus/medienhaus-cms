@@ -37,10 +37,10 @@ const ProjectImage = ({ projectSpace, projectImage, changeProjectImage, imgAutho
         ? <>
           <img src={matrixClient.mxcUrlToHttp(projectImage)} alt="Project-key-visual" />
           <button onClick={e => { e.preventDefault(); setEdit(edit => !edit) }}>{edit ? 'CANCEL' : 'CHANGE'}</button>
-           {imgAuthor && <input type="text" placeholder="author, credits, et cetera" value={imgAuthor} disabled={true}/>}
+          {imgAuthor && <input type="text" placeholder="author, credits, et cetera" value={imgAuthor} disabled />}
           {imgLicense && <>
             <select id="license" name="license" value={imgLicense}>
-               <option value="cc0">CC0 1.0</option>
+              <option value="cc0">CC0 1.0</option>
               <option value="cc-by">CC BY 4.0</option>
               <option value="cc-by-sa">CC BY-SA 4.0</option>
               <option value="cc-by-nc">CC BY-NC 4.0</option>
@@ -49,11 +49,11 @@ const ProjectImage = ({ projectSpace, projectImage, changeProjectImage, imgAutho
               <option value="cc-by-nc-nd">CC BY-NC-ND 4.0</option>
             </select>
           </>}
-            {imgAlt && <textarea rows="3" value={imgAlt} disabled={true} />}
-          {edit && <FileUpload fileType={'image'} handleSubmission={handleSubmission} loading={loading} />}
+          {imgAlt && <textarea rows="3" value={imgAlt} disabled />}
+          {edit && <FileUpload fileType="image" handleSubmission={handleSubmission} loading={loading} />}
         </>
         : (
-          <FileUpload fileType={'image'} handleSubmission={handleSubmission} loading={loading} />
+          <FileUpload fileType="image" handleSubmission={handleSubmission} loading={loading} />
           )}
     </>
   )

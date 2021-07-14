@@ -24,16 +24,15 @@ const Projects = ({ space, visibility, index, reloadProjects }) => {
         {/*
         <div className="right">
         */}
-          <button disabled={showDeleteComponent} onClick={() => history.push(`/submit/${space.room_id}`)}>{t('EDIT')}</button>
-          <button disabled={showDeleteComponent} onClick={() => setShowDeleteComponent(true)}>DELETE</button>
-          <PublishProject disabled={showDeleteComponent} space={space} published={visibility} index={index} description={space.description} callback={reloadProjects} />
+        <button disabled={showDeleteComponent} onClick={() => history.push(`/submit/${space.room_id}`)}>{t('EDIT')}</button>
+        <button disabled={showDeleteComponent} onClick={() => setShowDeleteComponent(true)}>DELETE</button>
+        <PublishProject disabled={showDeleteComponent} space={space} published={visibility} index={index} description={space.description} callback={reloadProjects} />
         {/*
         </div>
         */}
       </div>
-    {showDeleteComponent &&
-        <DeleteProjectButton roomId={space.room_id} name={space.name} index={index} toggleDeleteButton={() => setShowDeleteComponent(false)} reloadProject={reloadProjects} />
-    }
+      {showDeleteComponent &&
+        <DeleteProjectButton roomId={space.room_id} name={space.name} index={index} toggleDeleteButton={() => setShowDeleteComponent(false)} reloadProject={reloadProjects} />}
     </>
   )
 }

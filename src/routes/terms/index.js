@@ -34,10 +34,13 @@ const Terms = () => {
         <input id="checkbox4" name="checkbox4" type="checkbox" value={consent4} onChange={() => setConsent4(consent4 => !consent4)} />
         <label htmlFor="checkbox4">{t('I (we) acknowledge and agree that in the event of an actual or potential breach of the principles set out in sections 1 and 2 above, the image, video and/or sound material may be removed from the platform, either in whole or in part.')}</label>
       </div>
-      <button name="submit" type="submit" disabled={!consent0 || !consent1 || !consent2 || !consent3 || !consent4} onClick={() => {
-        localStorage.setItem('terms-consent', true)
-        history.push('/')
-      }}>ACCEPT & SAVE</button>
+      <button
+        name="submit" type="submit" disabled={!consent0 || !consent1 || !consent2 || !consent3 || !consent4} onClick={() => {
+          localStorage.setItem('terms-consent', true)
+          history.push('/')
+        }}
+      >ACCEPT & SAVE
+      </button>
     </section>
   )
 }

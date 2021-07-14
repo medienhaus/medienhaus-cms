@@ -202,28 +202,30 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace, time,
           <LoadingSpinnerButton key={'down_' + block.room_id} disabled={index === blocks.length - 1} onClick={() => changeOrder(block.room_id, block.name, 1)}>↓</LoadingSpinnerButton>
         </div>
         {cms?.msgtype === 'm.image'
-          ? <div>
+          ? (
+            <div>
               <figure className="center">
                 <img src={matrixClient.mxcUrlToHttp(cms.url)} alt={cms?.info?.alt} key={block.room_id} />
               </figure>
 
-              <input type="text" placeholder="author, credits, et cetera" value={cms.info.author} disabled={true}/>
-              <select id="license" name="license" value={cms.info.license} disabled={true}>
-                <option value={cms.info.license} disabled={true}>{cms.info.license}</option>
+              <input type="text" placeholder="author, credits, et cetera" value={cms.info.author} disabled />
+              <select id="license" name="license" value={cms.info.license} disabled>
+                <option value={cms.info.license} disabled>{cms.info.license}</option>
               </select>
-              <textarea rows="3" value={cms.info.alt} disabled={true} />
+              <textarea rows="3" value={cms.info.alt} disabled />
             </div>
+            )
           : cms?.msgtype === 'm.audio'
             ? <div>
               <audio className="center" controls>
                 <source src={matrixClient.mxcUrlToHttp(cms.url)} />
               </audio>
               <p id="audio-title">{cms.body}</p>
-              <input type="text" placeholder="author, credits, et cetera" value={cms.info.author} disabled={true}/>
-              <select id="license" name="license" value={cms.info.license} disabled={true}>
-                <option value={cms.info.license} disabled={true}>{cms.info.license}</option>
+              <input type="text" placeholder="author, credits, et cetera" value={cms.info.author} disabled />
+              <select id="license" name="license" value={cms.info.license} disabled>
+                <option value={cms.info.license} disabled>{cms.info.license}</option>
               </select>
-              <textarea rows="3" value={cms.info.alt} disabled={true} />
+              <textarea rows="3" value={cms.info.alt} disabled />
             </div>
             : json.type === 'ul'
               ? <List onSave={() => onSave(block.room_id)} storage={(list) => localStorage.setItem(block.room_id, list)} populated={cms?.body} type="ul" />
@@ -233,28 +235,29 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace, time,
                   ? <Code onSave={() => onSave(block.room_id)} storage={(code) => localStorage.setItem(block.room_id, code)} saved={saved} content={cms?.body} />
                   : (json.type === 'video' || json.type === 'livestream' || json.type === 'playlist')
                       ? (
-                      <iframe src={`https://stream.udk-berlin.de/${(json.type === 'playlist' ? 'video-playlists' : 'videos')}/embed/${cms?.body}`}
-                        frameBorder="0"
-                        title={cms?.body}
-                        sandbox="allow-same-origin allow-scripts"
-                        allowFullScreen="allowfullscreen"
-                        style={{ width: '100%', aspectRatio: '16 / 9', border: 'calc(var(--margin) * 0.2) solid var(--color-fg)' }}
-                      />
+                        <iframe
+                          src={`https://stream.udk-berlin.de/${(json.type === 'playlist' ? 'video-playlists' : 'videos')}/embed/${cms?.body}`}
+                          frameBorder="0"
+                          title={cms?.body}
+                          sandbox="allow-same-origin allow-scripts"
+                          allowFullScreen="allowfullscreen"
+                          style={{ width: '100%', aspectRatio: '16 / 9', border: 'calc(var(--margin) * 0.2) solid var(--color-fg)' }}
+                        />
                         )
                       : json.type === 'location'
                         ? <div className="center">
-                        <MapContainer center={[cms.body.substring(0, cms.body.indexOf(',')), cms.body.substring(cms.body.indexOf(',') + 1, cms.body.lastIndexOf(' '))]} zoom={17} scrollWheelZoom={false} placeholder>
-                        <TileLayer
-                          attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-                          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                        />
-                        <Marker position={[cms.body.substring(0, cms.body.indexOf(',')), cms.body.substring(cms.body.indexOf(',') + 1, cms.body.lastIndexOf(' '))]}>
-                          <Popup>
-                            {locations.find(coord => coord.coordinates === cms.body.substring(0, cms.body.indexOf(',')) + ',' + cms.body.substring(cms.body.indexOf(',') + 1, cms.body.lastIndexOf(' '))).name}
-                          </Popup>
-                        </Marker>
-                      </MapContainer>
-                      <input disabled value={cms.body.substring(cms.body.lastIndexOf(' '))} />
+                          <MapContainer center={[cms.body.substring(0, cms.body.indexOf(',')), cms.body.substring(cms.body.indexOf(',') + 1, cms.body.lastIndexOf(' '))]} zoom={17} scrollWheelZoom={false} placeholder>
+                            <TileLayer
+                              attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+                              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                            />
+                            <Marker position={[cms.body.substring(0, cms.body.indexOf(',')), cms.body.substring(cms.body.indexOf(',') + 1, cms.body.lastIndexOf(' '))]}>
+                              <Popup>
+                                {locations.find(coord => coord.coordinates === cms.body.substring(0, cms.body.indexOf(',')) + ',' + cms.body.substring(cms.body.indexOf(',') + 1, cms.body.lastIndexOf(' '))).name}
+                              </Popup>
+                            </Marker>
+                          </MapContainer>
+                          <input disabled value={cms.body.substring(cms.body.lastIndexOf(' '))} />
                         </div>
                         : json.type === 'date'
                           ? <div>{cms.body.split(' ')[0]} {cms.body.split(' ')[1] || null}</div>
@@ -262,65 +265,68 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace, time,
                             ? <div>BigBlueButton-Session<br /><a href={cms?.body} target="_blank" rel="external nofollow noopener noreferrer">{cms?.body}</a></div>
                             : (json.type === 'video' || json.type === 'livestream' || json.type === 'playlist')
                                 ? (
-                              <iframe src={`https://stream.udk-berlin.de/${(json.type === 'playlist' ? 'video-playlists' : 'videos')}/embed/${cms?.body}`}
-                                frameBorder="0"
-                                title={cms?.body}
-                                sandbox="allow-same-origin allow-scripts"
-                                allowFullScreen="allowfullscreen"
-                                style={{ width: '100%', aspectRatio: '16 / 9', border: 'calc(var(--margin) * 0.2) solid var(--color-fg)' }}
-                              />
+                                  <iframe
+                                    src={`https://stream.udk-berlin.de/${(json.type === 'playlist' ? 'video-playlists' : 'videos')}/embed/${cms?.body}`}
+                                    frameBorder="0"
+                                    title={cms?.body}
+                                    sandbox="allow-same-origin allow-scripts"
+                                    allowFullScreen="allowfullscreen"
+                                    style={{ width: '100%', aspectRatio: '16 / 9', border: 'calc(var(--margin) * 0.2) solid var(--color-fg)' }}
+                                  />
                                   )
                                 : <div className="center">
-                              <Editor
-                                dark={window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches}
-                                defaultValue={cms?.body}
-                                disableExtensions={['blockmenu', 'image', 'embed', 'table', 'tr', 'th', 'td', 'bullet_list', 'ordered_list', 'checkbox_item', 'checkbox_list', 'container_notice', 'blockquote', 'heading', 'hr', 'highlight']}
-                                placeholder={json.type}
-                                readOnly={readOnly}
-                                onSave={({ done }) => {
-                                  if (localStorage.getItem(block.room_id) !== null && cms !== undefined && cms.body !== localStorage.getItem(block.room_id)) {
-                                    onSave(block.room_id)
-                                    localStorage.removeItem(block.room_id)
-                                  } else if (localStorage.getItem(block.room_id) !== null && cms === undefined) {
-                                    onSave(block.room_id)
-                                    localStorage.removeItem(block.room_id)
-                                  }
-                                }}
-                                onChange={debounce((value) => {
-                                  const text = value()
-                                  localStorage.setItem(block.room_id, text)
-                                }, 250)}
-                                handleDOMEvents={{
-                                  focus: () => {
-                                  }, // this could set MatrixClient"User.presence" to 'online', "User.currentlyActive" or 'typing. depending on which works best.
-                                  blur: (e) => {
-                                    if (localStorage.getItem(block.room_id) !== null && cms !== undefined && cms.body !== localStorage.getItem(block.room_id)) {
-                                      onSave(block.room_id)
-                                      localStorage.removeItem(block.room_id)
-                                    } else if (localStorage.getItem(block.room_id) !== null && cms === undefined) {
-                                      onSave(block.room_id)
-                                      localStorage.removeItem(block.room_id)
-                                    }
-                                  }
-                                }}
-                                key={block.room_id} />
-                              <p key={block.room_id + '_p'}>{saved}</p> {// feedback that saving was succesfull or has failed
+                                  <Editor
+                                    dark={window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches}
+                                    defaultValue={cms?.body}
+                                    disableExtensions={['blockmenu', 'image', 'embed', 'table', 'tr', 'th', 'td', 'bullet_list', 'ordered_list', 'checkbox_item', 'checkbox_list', 'container_notice', 'blockquote', 'heading', 'hr', 'highlight']}
+                                    placeholder={json.type}
+                                    readOnly={readOnly}
+                                    onSave={({ done }) => {
+                                      if (localStorage.getItem(block.room_id) !== null && cms !== undefined && cms.body !== localStorage.getItem(block.room_id)) {
+                                        onSave(block.room_id)
+                                        localStorage.removeItem(block.room_id)
+                                      } else if (localStorage.getItem(block.room_id) !== null && cms === undefined) {
+                                        onSave(block.room_id)
+                                        localStorage.removeItem(block.room_id)
+                                      }
+                                    }}
+                                    onChange={debounce((value) => {
+                                      const text = value()
+                                      localStorage.setItem(block.room_id, text)
+                                    }, 250)}
+                                    handleDOMEvents={{
+                                      focus: () => {
+                                      }, // this could set MatrixClient"User.presence" to 'online', "User.currentlyActive" or 'typing. depending on which works best.
+                                      blur: (e) => {
+                                        if (localStorage.getItem(block.room_id) !== null && cms !== undefined && cms.body !== localStorage.getItem(block.room_id)) {
+                                          onSave(block.room_id)
+                                          localStorage.removeItem(block.room_id)
+                                        } else if (localStorage.getItem(block.room_id) !== null && cms === undefined) {
+                                          onSave(block.room_id)
+                                          localStorage.removeItem(block.room_id)
+                                        }
+                                      }
+                                    }}
+                                    key={block.room_id}
+                                  />
+                                  <p key={block.room_id + '_p'}>{saved}</p> {// feedback that saving was succesfull or has failed
                               }
-                            </div>
-        }
+                                </div>}
 
         <div className="right">
-          <button key={'delete' + index} disabled={deleting} onClick={(e) => {
-            if (clickedDelete) {
-              onDelete(e, block.room_id, block.name, index)
-              setClickedDelete(false)
-              reloadSpace()
-            } else {
-              e.preventDefault()
-              setClickedDelete(true)
-            }
-            <p>{deleting}</p> // feedback that deleting was succesfull or has failed
-          }}>
+          <button
+            key={'delete' + index} disabled={deleting} onClick={(e) => {
+              if (clickedDelete) {
+                onDelete(e, block.room_id, block.name, index)
+                setClickedDelete(false)
+                reloadSpace()
+              } else {
+                e.preventDefault()
+                setClickedDelete(true)
+              }
+                <p>{deleting}</p> // feedback that deleting was succesfull or has failed
+            }}
+          >
             {clickedDelete ? '❓' : deleting ? <Loading /> : '×'}
           </button>
         </div>
