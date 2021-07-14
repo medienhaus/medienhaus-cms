@@ -8,13 +8,13 @@ import createBlock from '../matrix_create_room'
 import reorder from '../DisplayContent/matrix_reorder_rooms'
 import BigBlueButtonEmbed from './bigBlueButtonEmbed'
 
-const AddContent = ({ number, projectSpace, blocks, reloadSpace }) => {
+const AddContent = ({ number, projectSpace, blocks, reloadSpace, present }) => {
   const [selectedBlockType, setSelectedBlockType] = useState('')
   const [showBlockTypeSelector, setShowBlockTypeSelector] = useState(false)
   const displayPlusButton = (button) => {
     setShowBlockTypeSelector(!button)
   }
-
+  console.log(present)
   async function onCreateBlockRoom () {
     // Make some room in our room list by pushing rooms below this room down by 1 index
     blocks.forEach((block, i) => {
@@ -62,7 +62,7 @@ const AddContent = ({ number, projectSpace, blocks, reloadSpace }) => {
           </optgroup>
           <optgroup label="Date, Time, and Venue">
             <option value="date">Date & Time</option>
-            <option value="location">Venue</option>
+           {present !== 'digital' && <option value="location">Venue</option>}
           </optgroup>
         </select>
         <button className="cancel" onClick={(e) => { e.preventDefault(); setShowBlockTypeSelector(false); setSelectedBlockType('') }} >×</button>
