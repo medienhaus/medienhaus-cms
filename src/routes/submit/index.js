@@ -258,14 +258,19 @@ const Submit = () => {
               )}
           </section>
           <section className="visibility">
-            <h3>Visibility (Draft/Published)</h3>
-            <p>Do you want to save your project as a draft, visible only in the <strong>udk/rundgang</strong> content management system, or do you want to publish the project to the <a href="https://rundgang.udk-berlin.de" rel="external nofollow noopener noreferrer" target="_blank">rundgang.udk-berlin.de</a> website?</p>
-            <p>You can change this at any time.</p>
+            <h3>{t('Visibility (Draft / Published)')}</h3>
+            <p>
+              <Trans t={t} i18nKey="visibilityInstructions1">
+                Do you want to save your project as a draft, visible only in the <strong>udk/rundgang</strong> content management system, or do you want to publish the project to the <a href="https://rundgang.udk-berlin.de" rel="external nofollow noopener noreferrer" target="_blank">rundgang.udk-berlin.de</a> website?
+              </Trans>
+            </p>
+            <p>{t('You can change this at any time.')}</p>
+            <p><em>{t('Please note: The frontend, i.e. the website where all projects will be visible, is still under construction. Therefore, at the moment it is not yet possible to preview the created projects.')}</em></p>
             {spaceObject ? <PublishProject space={spaceObject.rooms[0]} description={spaceObject.rooms[0].topic} published={visibility} time={getCurrentTime} /> : <Loading />}
           </section>
           <section className="save">
-            <button onClick={() => history.push('/projects')}>← BACK TO OVERVIEW</button>
-            {saveTimestamp && <p>Project last saved at {saveTimestamp}</p>}
+            <button onClick={() => history.push('/projects')}>← {t('BACK TO OVERVIEW')}</button>
+            {saveTimestamp && <p>{t('Project last saved at')} {saveTimestamp}</p>}
           </section>
         </>
       )}

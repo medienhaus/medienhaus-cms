@@ -36,5 +36,11 @@
   "contentInstructions2": "Der erste Inhaltsblock - die Einleitung zu Ihrem Projekt - ist erforderlich und daher obligatorisch. Bitte geben Sie den Text sowohl auf Deutsch, als auch auf Englisch ein.",
   "contentInstructions3": "In allen anderen Textblöcken können Sie Ihren Eingabetext formatieren, indem Sie den zu formatierenden Text mit dem Cursor markieren.",
   "contentInstructions4": "Mit den Pfeilen <1>↑</1> und <1>↓</1> können Sie bestehende Blöcke neu anordnen.",
-  "contentInstructions5": "Sie können alle Inhalte in verschiedenen Sprachen angeben, indem Sie das untenstehende Dropdown verwenden."
+  "contentInstructions5": "Sie können alle Inhalte in verschiedenen Sprachen angeben, indem Sie das untenstehende Dropdown verwenden.",
+  "Visibility (Draft / Published)": "Sichtbarkeit (Entwurf/Freigabe zur Veröffentlichung)",
+  "visibilityInstructions1": "Möchten Sie Ihr Projekt zunächst als Entwurf speichern oder schon für die Veröffentlichung auf der Rundgang-Plattform freigeben? Die freigegebenen Projekte werden zum Rundgang am 29.10.2021 veröffentlicht.",
+  "You can change this at any time.": "Sollten Sie nach der Veröffentlichung Ihrer Beiträge noch Änderungen vornehmen wollen, können Sie das weiterhin machen.  Bitte beachten Sie aber, dass Inhalte zu analogen und hybriden Projekten am 08.10.2021 für das gedruckte Rundgang-Programm aus dem System gezogen werden. Projekte, die bis dahin nicht von Ihnen zur Veröffentlichung freigegeben worden sind, werden nicht im Programmheft aufgenommen.",
+  "Please note: The frontend, i.e. the website where all projects will be visible, is still under construction. Therefore, at the moment it is not yet possible to preview the created projects.": "Bitte beachten Sie: Die Arbeiten am Frontend, also an der öffentlichen Website, auf der alle Projekte zu sehen sein werden, sind noch im vollen Gange Daher ist derzeit noch keine Vorschau der angelegten Projekte möglich.",
+  "BACK TO OVERVIEW": "ZURÜCK ZUR ÜBERSICHT",
+  "Project last saved at": "Projekt zuletzt gespeichert:"
 }
