@@ -50,14 +50,14 @@ const Requests = ({ roomId, body, eventId }) => {
     console.log('Reported ' + user + ' for spamming in ' + space)
   }
   return (
-        <div>
-            <div>
-                <p>{body}</p>
-                <LoadingSpinnerButton disabled={allButtonsDisabled} onClick={invite} >ACCEPT</LoadingSpinnerButton>
-                <LoadingSpinnerButton disabled={allButtonsDisabled} onClick={() => redact(eventId)} >REJECT</LoadingSpinnerButton>
-                <LoadingSpinnerButton disabled={allButtonsDisabled} onClick={report} >REPORT</LoadingSpinnerButton>
-            </div>
-        </div>
+    <div>
+      <div>
+        <p>{body}</p>
+        <LoadingSpinnerButton disabled={allButtonsDisabled} onClick={invite}>ACCEPT</LoadingSpinnerButton>
+        <LoadingSpinnerButton disabled={allButtonsDisabled} onClick={() => redact(eventId)}>REJECT</LoadingSpinnerButton>
+        <LoadingSpinnerButton disabled={allButtonsDisabled} onClick={report}>REPORT</LoadingSpinnerButton>
+      </div>
+    </div>
   )
 }
 export default Requests

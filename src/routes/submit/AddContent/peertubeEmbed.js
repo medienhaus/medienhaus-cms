@@ -63,7 +63,7 @@ const PeertubeEmbed = ({ type, onCreateRoomForBlock, onBlockWasAddedSuccessfully
   return (
     <div>
       <select disabled={entries.length === 0} onChange={selectEntry} value={selectedEntry}>
-        <option value="" disabled={true}>
+        <option value="" disabled>
           {(
             entries.length === 0
               ? 'no entries'

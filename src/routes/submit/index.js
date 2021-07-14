@@ -240,15 +240,15 @@ const Submit = () => {
             <h3>{t('Project Context')}</h3>
             <Category title={title} projectSpace={projectSpace} />
           </section>
-                    <section className="present">
+          <section className="present">
             <h3>Type of Presentation</h3>
-            <PresentType presentValue={medienhausMeta?.present} projectSpace={projectSpace} callback={changePresentationType }/>
+            <PresentType presentValue={medienhausMeta?.present} projectSpace={projectSpace} callback={changePresentationType} />
           </section>
           <section className="contributors">
             <Collaborators projectSpace={spaceObject?.rooms} members={roomMembers} time={getCurrentTime} startListeningToCollab={() => startListeningToCollab()} />
           </section>
           <section className="project-image">
-             <h3>{t('Thumbnail')}</h3>
+            <h3>{t('Thumbnail')}</h3>
             {loading ? <Loading /> : <ProjectImage projectSpace={projectSpace} projectImage={projectImage} changeProjectImage={changeProjectImage} imgAuthor={imgAuthor} imgLicense={imgLicense} imgAlt={imgAlt} />}
           </section>
           <section className="content">
@@ -258,13 +258,13 @@ const Submit = () => {
             <p><Trans t={t} i18nKey="contentInstructions3">In all other text content blocks, you can format your input text by highlighting the to be formatted text with your cursor.</Trans></p>
             <p><Trans t={t} i18nKey="contentInstructions4">You can use the <code>↑</code> and <code>↓</code> arrows to rearrange existing blocks.</Trans></p>
             <p><Trans t={t} i18nKey="contentInstructions5">You can provide content and information in multiple languages by setting the desired language in the dropdown list below.</Trans></p>
-            <select id="subject" name="subject" defaultValue={''} value={contentLang} onChange={(e) => setContentLang(e.target.value)}>
+            <select id="subject" name="subject" defaultValue="" value={contentLang} onChange={(e) => setContentLang(e.target.value)}>
               <option value="de">DE — Deutsch</option>
-              <option value="en" >EN — English</option>
+              <option value="en">EN — English</option>
             </select>
             {spaceObject ? <ProjectDescription description={spaceObject?.rooms[0].topic} callback={onChangeDescription} /> : <Loading />}
             {blocks.length === 0
-              ? <AddContent number={0} projectSpace={spaceObject?.rooms.filter(room => room.name === contentLang)[0].room_id} blocks={blocks} reloadSpace={reloadSpace} present={medienhausMeta?.present}/>
+              ? <AddContent number={0} projectSpace={spaceObject?.rooms.filter(room => room.name === contentLang)[0].room_id} blocks={blocks} reloadSpace={reloadSpace} present={medienhausMeta?.present} />
               : blocks.map((content, i) =>
                 <DisplayContent block={content} index={i} blocks={blocks} projectSpace={spaceObject?.rooms.filter(room => room.name === contentLang)[0].room_id} reloadSpace={reloadSpace} time={getCurrentTime} present={medienhausMeta?.present} key={content + i + content?.lastUpdate} />
               )}

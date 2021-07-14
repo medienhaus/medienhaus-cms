@@ -31,14 +31,17 @@ const AddDate = ({ onCreateRoomForBlock, onBlockWasAddedSuccessfully }) => {
           min="2021-10-29"
           max="2021-10-31"
           value={date}
-          onChange={(e) => setDate(e.target.value)} />
+          onChange={(e) => setDate(e.target.value)}
+        />
       </div>
       <div>
         <label htmlFor="time">Choose a time:</label>
-        <input id="time" name="time" type="time" value={time} onChange={(e) => {
-          console.log(e)
-          setTime(e.target.value)
-        }} />
+        <input
+          id="time" name="time" type="time" value={time} onChange={(e) => {
+            console.log(e)
+            setTime(e.target.value)
+          }}
+        />
       </div>
       <LoadingSpinnerButton loading={loading} onClick={handleSubmit}>SAVE</LoadingSpinnerButton>
     </>

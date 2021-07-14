@@ -31,22 +31,26 @@ function PrivateRoute ({ children, ...rest }) {
 
   // Not logged in
   if (auth.user === false) {
-    return <Redirect
-      to={{
-        pathname: '/login',
-        state: { from: location }
-      }}
-    />
+    return (
+      <Redirect
+        to={{
+          pathname: '/login',
+          state: { from: location }
+        }}
+      />
+    )
   }
   // Consent not given to terms
 
   if (!localStorage.getItem('terms-consent')) {
-    return <Redirect
-      to={{
-        pathname: '/terms',
-        state: { from: location }
-      }}
+    return (
+      <Redirect
+        to={{
+          pathname: '/terms',
+          state: { from: location }
+        }}
       />
+    )
   }
 
   // Logged in - render our actual route components

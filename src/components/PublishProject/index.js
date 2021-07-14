@@ -50,20 +50,23 @@ const PublishProject = ({ disabled, space, published, index, description, time, 
   return (
     visibility
       ? <>
-      <select id="visibility" name="visibility" value={visibility} onChange={(e) => {
-        setVisibility(e.target.value)
-        setShowSaveButton(true)
-      }} onBlur={(e) => { setVisibility(e.target.value) }} disabled={disabled}>
-            <option value="invite">{t('Draft')}</option>
-            <option value="public">{t('Public')}</option>
-      </select>
-      {showSaveButton && <div className="below">
-        {userFeedback && <p>{userFeedback}</p>}
-          {(visibility === 'public' && !description)
-            ? <p>❗{t('️Please add a short description of your project.')}</p>
-            : <LoadingSpinnerButton disabled={(visibility === 'public' && !description)} onClick={onChangeVisibility}>{t('SAVE')}</LoadingSpinnerButton>
-    }
-      </div>}
+        <select
+          id="visibility" name="visibility" value={visibility} onChange={(e) => {
+            setVisibility(e.target.value)
+            setShowSaveButton(true)
+          }} onBlur={(e) => { setVisibility(e.target.value) }} disabled={disabled}
+        >
+          <option value="invite">{t('Draft')}</option>
+          <option value="public">{t('Public')}</option>
+        </select>
+        {showSaveButton && (
+          <div className="below">
+            {userFeedback && <p>{userFeedback}</p>}
+            {(visibility === 'public' && !description)
+              ? <p>❗{t('️Please add a short description of your project.')}</p>
+              : <LoadingSpinnerButton disabled={(visibility === 'public' && !description)} onClick={onChangeVisibility}>{t('SAVE')}</LoadingSpinnerButton>}
+          </div>
+        )}
       </>
       : <Loading />
   )

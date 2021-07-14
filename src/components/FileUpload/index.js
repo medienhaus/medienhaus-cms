@@ -22,8 +22,8 @@ const FileUpload = (props) => {
       {selectedFile && (
         <>
           <input type="text" placeholder="author, credits, et cetera" onChange={(e) => setAuthor(e.target.value)} />
-          <select id="license" name="license" defaultValue={''} value={license} onChange={(e) => setLicense(e.target.value)}>
-            <option value="" disabled={true}>-- select license or rights statement --</option>
+          <select id="license" name="license" defaultValue="" value={license} onChange={(e) => setLicense(e.target.value)}>
+            <option value="" disabled>-- select license or rights statement --</option>
             <optgroup label="Creative Commons Licenses">
               <option value="cc0">CC0 1.0</option>
               <option value="cc-by">CC BY 4.0</option>
@@ -98,15 +98,15 @@ const FileUpload = (props) => {
             <li><a href="https://chooser-beta.creativecommons.org/" rel="external nofollow noopener noreferrer" target="_blank">CC License Chooser (beta)</a></li>
             <li><a href="https://rightsstatements.org/page/1.0/" rel="external nofollow noopener noreferrer" target="_blank">Rights Statements</a></li>
           </ul>
-          <textarea rows="3" placeholder={'please describe the image with a few words to enable ' + impairment + ' impaired website visitors to comprehend what’s being shown here'}
-            onChange={(e) => setAlttext(e.target.value)} />
+          <textarea
+            rows="3" placeholder={'please describe the image with a few words to enable ' + impairment + ' impaired website visitors to comprehend what’s being shown here'}
+            onChange={(e) => setAlttext(e.target.value)}
+          />
           <button className="upload" onClick={(e) => props.handleSubmission(e, selectedFile, fileName, author, license, alttext)} disabled={!selectedFile.type.includes(props.fileType) || selectedFile.size > size || props.loading || alttext.length < 1 || license.length < 1 || author.length < 1}>{props.loading ? <Loading /> : 'Upload'}</button>
           {selectedFile.type.includes(props.fileType) || <section>Please select an {props.fileType} file.</section>}
-          {selectedFile.size > size && <section style={{ color: 'red' }}> File size needs to be less than {size / 1000000}MB</section>
-          }
+          {selectedFile.size > size && <section style={{ color: 'red' }}> File size needs to be less than {size / 1000000}MB</section>}
         </>
-      )
-      }
+      )}
     </>
   )
 }

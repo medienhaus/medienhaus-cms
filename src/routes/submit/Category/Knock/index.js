@@ -38,7 +38,7 @@ const Knock = ({ room, callback }) => {
   }
 
   return (
-        <button onClick={e => sendRequestMessage(e)} style={requested ? { backgroundColor: 'green' } : {}}>{requested || 'REQUEST'}</button>
+    <button onClick={e => sendRequestMessage(e)} style={requested ? { backgroundColor: 'green' } : {}}>{requested || 'REQUEST'}</button>
   )
 }
 export default Knock

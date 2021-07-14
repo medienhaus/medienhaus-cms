@@ -32,7 +32,7 @@ const AddContent = ({ number, projectSpace, blocks, reloadSpace, present }) => {
   if (!showBlockTypeSelector) {
     return (
       <div className="add">
-        <button className="add-button" key={'add' + number} onClick={(e) => { e.preventDefault(); setShowBlockTypeSelector(true) }} >+</button>
+        <button className="add-button" key={'add' + number} onClick={(e) => { e.preventDefault(); setShowBlockTypeSelector(true) }}>+</button>
       </div>
     )
   }
@@ -42,7 +42,7 @@ const AddContent = ({ number, projectSpace, blocks, reloadSpace, present }) => {
     <>
       <div className="add">
         <select name="content-select" value={selectedBlockType} id="content-select" onChange={(e) => setSelectedBlockType(e.target.value)}>
-          <option value="" disabled={true} >-- select content --</option>
+          <option value="" disabled>-- select content --</option>
           <optgroup label="Text">
             <option value="heading">Heading</option>
             <option value="text">Text</option>
@@ -61,10 +61,10 @@ const AddContent = ({ number, projectSpace, blocks, reloadSpace, present }) => {
           </optgroup>
           <optgroup label="Date, Time, and Venue">
             <option value="date">Date & Time</option>
-           {present !== 'digital' && <option value="location">Venue</option>}
+            {present !== 'digital' && <option value="location">Venue</option>}
           </optgroup>
         </select>
-        <button className="cancel" onClick={(e) => { e.preventDefault(); setShowBlockTypeSelector(false); setSelectedBlockType('') }} >×</button>
+        <button className="cancel" onClick={(e) => { e.preventDefault(); setShowBlockTypeSelector(false); setSelectedBlockType('') }}>×</button>
       </div>
       {
         selectedBlockType === 'image' || selectedBlockType === 'audio'
@@ -74,7 +74,7 @@ const AddContent = ({ number, projectSpace, blocks, reloadSpace, present }) => {
             : selectedBlockType === 'location'
               ? <AddLocation onCreateRoomForBlock={onCreateBlockRoom} onBlockWasAddedSuccessfully={onBlockWasAddedSuccessfully} />
               : selectedBlockType === 'date'
-                ? <AddDate onCreateRoomForBlock={onCreateBlockRoom} onBlockWasAddedSuccessfully={onBlockWasAddedSuccessfully}/>
+                ? <AddDate onCreateRoomForBlock={onCreateBlockRoom} onBlockWasAddedSuccessfully={onBlockWasAddedSuccessfully} />
                 : selectedBlockType === 'bbb'
                   ? <BigBlueButtonEmbed onCreateRoomForBlock={onCreateBlockRoom} onBlockWasAddedSuccessfully={onBlockWasAddedSuccessfully} />
                   : <AddBlock contentSelect={selectedBlockType} number={number} projectSpace={projectSpace} blocks={blocks} reloadSpace={reloadSpace} displayPlusButton={displayPlusButton} />

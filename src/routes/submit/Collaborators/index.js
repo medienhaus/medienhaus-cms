@@ -112,32 +112,34 @@ const Collaborators = ({ projectSpace, members, time, startListeningToCollab }) 
       <p>{t('Did you work with other people on this project?')}</p>
       <p><Trans t={t} i18nKey="contributorsInstructions2">You can share access (for editing) to this project. The contributing editor needs an <a href="https://spaces.udk-berlin.de" rel="external nofollow noopener noreferrer" target="_blank" style={{ fontWeight: 'bold' }}>udk/spaces</a> account to edit the project.</Trans></p>
       <p><Trans t={t} i18nKey="contributorsInstructions3">You can also give credits to a contributor without an <strong>udk/spaces</strong> account, but they won’t be able to get access for editing. Just type in their name and click the <code>ADD</code> button.</Trans></p>
-        < section >
-          <ul>{
+      <section>
+        <ul>{
           members && Object.keys(members).length > 1 && Object.values(members).map((name, i) => {
             startListeningToCollab()
             return name.display_name !== profile.displayname &&
               (<div style={{ display: 'flex' }}>
-              {/* @TODO kicking user function */}
-                  <li style={{ width: '100%' }}>🖋 {name.display_name}</li><button disabled={true}>x</button>
+                {/* @TODO kicking user function */}
+                <li style={{ width: '100%' }}>🖋 {name.display_name}</li><button disabled>x</button>
               </div>)
           })
         }
-          {credits && credits.map((name, index) => {
-            return <Credits name={name} index={index} projectSpace={projectSpace[0].room_id} callback={checkForCredits} />
-          })}
-          </ul>
+          {credits && credits.map((name, index) =>
+            <Credits name={name} index={index} projectSpace={projectSpace[0].room_id} callback={checkForCredits} key={index} />
+          )}
+        </ul>
 
-        </section>
+      </section>
       <div>
         <div>
-          <input list="userSearch" id="user-datalist" name="user-datalist" placeholder="contributor name" value={collab} onChange={(e) => {
-            setGiveWritePermission(false)
-            fetchUsers(e, e.target.value)
-            setCollab(e.target.value)
-          }}/>
+          <input
+            list="userSearch" id="user-datalist" name="user-datalist" placeholder="contributor name" value={collab} onChange={(e) => {
+              setGiveWritePermission(false)
+              fetchUsers(e, e.target.value)
+              setCollab(e.target.value)
+            }}
+          />
         </div>
-        <datalist id="userSearch" >
+        <datalist id="userSearch">
           {userSearch.map((users, i) => {
             return <option key={i} value={users.display_name + ' ' + users.user_id} />
           })}
@@ -146,14 +148,17 @@ const Collaborators = ({ projectSpace, members, time, startListeningToCollab }) 
       {collab &&
         <div>
           <select value={giveWritePermission} onChange={(e) => setGiveWritePermission(e.target.value)}>
-            <option value={false} >🔒 {collab.substring(collab.lastIndexOf(' ') + 1) || 'user'} {t('CANNOT edit the project')}</option>
-            <option value={true} disabled={!userSearch.some(user => user.user_id === collab.substring(collab.lastIndexOf(' ') + 1))}>🖋 {collab.substring(0, collab.lastIndexOf(' ') + 1) || 'user'} {t('CAN edit the project')}</option>
+            <option value={false}>🔒 {collab.substring(collab.lastIndexOf(' ') + 1) || 'user'} {t('CANNOT edit the project')}</option>
+            <option value disabled={!userSearch.some(user => user.user_id === collab.substring(collab.lastIndexOf(' ') + 1))}>🖋 {collab.substring(0, collab.lastIndexOf(' ') + 1) || 'user'} {t('CAN edit the project')}</option>
           </select>
-          <button disabled={!collab || inviting || fetchingUsers} onClick={(e) => {
-            giveWritePermission
-              ? invite(e)
-              : addCredit(e)
-          }}>{inviting || fetchingUsers ? <Loading /> : addContributionFeedback || (giveWritePermission ? 'ADD 🖋 ' : 'ADD 🔒')}</button>
+          <button
+            disabled={!collab || inviting || fetchingUsers} onClick={(e) => {
+              giveWritePermission
+                ? invite(e)
+                : addCredit(e)
+            }}
+          >{inviting || fetchingUsers ? <Loading /> : addContributionFeedback || (giveWritePermission ? 'ADD 🖋 ' : 'ADD 🔒')}
+          </button>
         </div>}
       {collab && !userSearch.some(user => user.user_id === collab.substring(collab.lastIndexOf(' ') + 1)) && <p>❗️ {t("If you're looking to give a user write permissions but can't, please make sure they have already logged in to spaces.udk-berlin.de at least once.")}</p>}
     </>

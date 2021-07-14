@@ -24,14 +24,14 @@ const PresentType = ({ presentValue, projectSpace, callback }) => {
   }
 
   return (
-        <>
-            <p>{t('Rent this text for bitcoins')}</p>
-            <select value={presentTypeValue} disabled={changingPresentType} onChange={(e) => changePresentType(e)}>
-                <option value="analog">Analog</option>
-                <option value="digital">Digital</option>
-                <option value="hybrid">Hybrid</option>
-            </select>
-        </>
+    <>
+      <p>{t('Rent this text for bitcoins')}</p>
+      <select value={presentTypeValue} disabled={changingPresentType} onChange={(e) => changePresentType(e)}>
+        <option value="analog">Analog</option>
+        <option value="digital">Digital</option>
+        <option value="hybrid">Hybrid</option>
+      </select>
+    </>
   )
 }
 export default PresentType
