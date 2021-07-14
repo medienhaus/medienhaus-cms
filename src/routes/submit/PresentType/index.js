@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Matrix from '../../../Matrix'
 import { useTranslation } from 'react-i18next'
 
@@ -7,6 +7,10 @@ const PresentType = ({ presentValue, projectSpace, callback }) => {
   const [changingPresentType, setChangingPresentType] = useState(false)
   const matrixClient = Matrix.getMatrixClient()
   const { t } = useTranslation()
+
+  useEffect(() => {
+    setPresentTypeValue(presentValue)
+  }, [presentValue])
 
   const changePresentType = async (e) => {
     setChangingPresentType(true)

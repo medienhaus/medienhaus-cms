@@ -14,7 +14,6 @@ const AddContent = ({ number, projectSpace, blocks, reloadSpace, present }) => {
   const displayPlusButton = (button) => {
     setShowBlockTypeSelector(!button)
   }
-  console.log(present)
   async function onCreateBlockRoom () {
     // Make some room in our room list by pushing rooms below this room down by 1 index
     blocks.forEach((block, i) => {
