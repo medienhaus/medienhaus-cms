@@ -242,17 +242,20 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace, time,
                       />
                         )
                       : json.type === 'location'
-                        ? <MapContainer center={cms.body.split(',')} zoom={17} scrollWheelZoom={false} placeholder>
+                        ? <>
+                        <MapContainer center={[cms.body.substring(0, cms.body.indexOf(',')), cms.body.substring(cms.body.indexOf(',') + 1, cms.body.lastIndexOf(' '))]} zoom={17} scrollWheelZoom={false} placeholder>
                         <TileLayer
                           attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                         />
-                        <Marker position={cms.body.split(',')}>
+                        <Marker position={[cms.body.substring(0, cms.body.indexOf(',')), cms.body.substring(cms.body.indexOf(',') + 1, cms.body.lastIndexOf(' '))]}>
                           <Popup>
-                            {locations.find(coord => coord.coordinates === cms.body).name}
+                            {locations.find(coord => coord.coordinates === cms.body.substring(0, cms.body.indexOf(',')) + ',' + cms.body.substring(cms.body.indexOf(',') + 1, cms.body.lastIndexOf(' '))).name}
                           </Popup>
                         </Marker>
                       </MapContainer>
+                      <input disabled value={cms.body.substring(cms.body.lastIndexOf(' '))} />
+                        </>
                         : json.type === 'date'
                           ? <div>{cms.body.split(' ')[0]} {cms.body.split(' ')[1] || null}</div>
                           : json.type === 'bbb'

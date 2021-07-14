@@ -6,6 +6,7 @@ import locations from '../../../../assets/data/locations.json'
 
 const AddLocation = ({ onCreateRoomForBlock, onBlockWasAddedSuccessfully }) => {
   const [selectedLocation, setSelectedLocation] = useState('')
+  const [room, setRoom] = useState('')
   const [loading, setLoading] = useState(false)
   const matrixClient = Matrix.getMatrixClient()
   console.log(selectedLocation)
@@ -15,7 +16,7 @@ const AddLocation = ({ onCreateRoomForBlock, onBlockWasAddedSuccessfully }) => {
     await onCreateRoomForBlock().then(async (res) =>
       await matrixClient.sendMessage(res, {
         msgtype: 'm.text',
-        body: selectedLocation
+        body: selectedLocation + ' ' + room
       })).catch(console.log)
     onBlockWasAddedSuccessfully()
     setLoading(false)
@@ -26,7 +27,8 @@ const AddLocation = ({ onCreateRoomForBlock, onBlockWasAddedSuccessfully }) => {
       <select name="location-select" value={selectedLocation} id="location-select" onChange={(e) => setSelectedLocation(e.target.value)}>
         <option value="" disabled={true} >------ SELECT LOCATION ------</option>
                 {locations.map(location => <option value={location.coordinates} key={location.coordinates}>{location.name}</option>)}
-            </select>
+      </select>
+       <input type="text" placeholder="room number or specific location" onChange={(e) => setRoom(e.target.value)} />
             <LoadingSpinnerButton disabled={ loading || !selectedLocation} onClick={handleSubmit}>SAVE</LoadingSpinnerButton>
         </>
   )
