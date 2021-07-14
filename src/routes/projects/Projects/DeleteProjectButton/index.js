@@ -61,27 +61,30 @@ const DeleteProjectButton = ({ roomId, name, index, toggleDeleteButton, reloadPr
                     This cannot be undone and will delete the project for you and any collaborator(s) that might be part of it.
                 </Trans>
             </p>
-            <button onClick={() => toggleDeleteButton()}>{t('CANCEL')}</button>
-            <LoadingSpinnerButton
-                disabled={leaving}
-                onClick={async () => {
-                  if (warning) {
-                    setLeaving(true)
-                    await deleteProject(null, roomId)
-                      .then(() => reloadProjects(index))
-                      .catch(err => console.log(err))
-                      .finally(() => {
-                        if (isMounted.current) {
-                          setLeaving(false)
-                        }
-                      })
-                    setWarning(false)
-                  } else {
-                    setWarning(true)
-                  }
-                }} >{warning ? t('Yes, delete project') : t('DELETE')}</LoadingSpinnerButton>
-
+            <div className="savecancel">
+              <button className="cancel" onClick={() => toggleDeleteButton()}>{t('CANCEL')}</button>
+              <LoadingSpinnerButton
+                  className="confirm"
+                  disabled={leaving}
+                  onClick={async () => {
+                    if (warning) {
+                      setLeaving(true)
+                      await deleteProject(null, roomId)
+                        .then(() => reloadProjects(index))
+                        .catch(err => console.log(err))
+                        .finally(() => {
+                          if (isMounted.current) {
+                            setLeaving(false)
+                          }
+                        })
+                      setWarning(false)
+                    } else {
+                      setWarning(true)
+                    }
+                  }} >{warning ? t('Yes, delete project') : t('DELETE')}</LoadingSpinnerButton>
+            </div>
         </>
   )
 }
+
 export default DeleteProjectButton
