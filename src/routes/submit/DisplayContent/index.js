@@ -214,12 +214,11 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace, time 
               <textarea rows="3" value={cms.info.alt} disabled={true} />
             </div>
           : cms?.msgtype === 'm.audio'
-            ? <div className="center">
-              <audio controls>
+            ? <div>
+              <audio className="center" controls>
                 <source src={matrixClient.mxcUrlToHttp(cms.url)} />
               </audio>
-              { /* TODO why section? */}
-              <section id="audio-title">{cms.body}</section>
+              <p id="audio-title">{cms.body}</p>
               <input type="text" placeholder="author, credits, et cetera" value={cms.info.author} disabled={true}/>
               <select id="license" name="license" value={cms.info.license} disabled={true}>
                 <option value={cms.info.license} disabled={true}>{cms.info.license}</option>

@@ -716,6 +716,17 @@ button > #loading {
   padding: 0 calc(var(--margin) * 0.4);
 }
 
+.editor audio.center {
+  width: 100%;
+}
+
+.editor audio.center ~ * {
+  margin-top: var(--margin);
+}
+
+.editor .center div {
+}
+
 .editor figure.center {
   font-size: 0;
 }
