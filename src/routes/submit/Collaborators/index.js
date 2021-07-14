@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState } from 'react'
 import Matrix from '../../../Matrix'
 import Credits from './Credits'
 import { Loading } from '../../../components/loading'
-import { useTranslation } from 'react-i18next'
+import { Trans, useTranslation } from 'react-i18next'
 import { useAuth } from '../../../Auth'
 
 const Collaborators = ({ projectSpace, members, time, startListeningToCollab }) => {
@@ -17,7 +17,7 @@ const Collaborators = ({ projectSpace, members, time, startListeningToCollab }) 
   const profile = auth.user
 
   const matrixClient = Matrix.getMatrixClient()
-  const { t } = useTranslation()
+  const { t } = useTranslation('projects')
 
   const checkForCredits = useCallback(async () => {
     const event = projectSpace && await matrixClient.getStateEvent(projectSpace[0].room_id, 'm.medienhaus.meta')
@@ -108,10 +108,10 @@ const Collaborators = ({ projectSpace, members, time, startListeningToCollab }) 
 
   return (
     <>
-      <h3>Contributors</h3>
-      <p>Did you work with other people on this project?</p>
-      <p>You can share access (for editing) to this project. The contributing editor needs an <a href="https://spaces.udk-berlin.de" rel="external nofollow noopener noreferrer" target="_blank"><strong>udk/spaces</strong></a> account to edit the project.</p>
-      <p>You can also give credits to a contributor without an <strong>udk/spaces</strong> account, but they won’t be able to get access for editing. Just type in their name and click 'ADD'.</p>
+      <h3>{t('Contributors')}</h3>
+      <p>{t('Did you work with other people on this project?')}</p>
+      <p><Trans t={t} i18nKey="contributorsInstructions2">You can share access (for editing) to this project. The contributing editor needs an <a href="https://spaces.udk-berlin.de" rel="external nofollow noopener noreferrer" target="_blank" style={{ fontWeight: 'bold' }}>udk/spaces</a> account to edit the project.</Trans></p>
+      <p><Trans t={t} i18nKey="contributorsInstructions3">You can also give credits to a contributor without an <strong>udk/spaces</strong> account, but they won’t be able to get access for editing. Just type in their name and click 'ADD'.</Trans></p>
         < section >
           <ul>{
           members && Object.keys(members).length > 1 && Object.values(members).map((name, i) => {

@@ -95,7 +95,7 @@ const Projects = ({ space, visibility, index, reloadProjects }) => {
           {space.avatar_url && <img src={matrixClient.mxcUrlToHttp(space.avatar_url)} alt="project-visual-key" />}
         </figure>
         <div className="center">
-          <p>{space.description || t('Please add a short description to your project.')}</p>
+          <p>{space.description || t('Please add a short description of your project.')}</p>
         </div>
         {/*
         <div className="right">

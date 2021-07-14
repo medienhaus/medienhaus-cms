@@ -3,8 +3,10 @@ import { useHistory } from 'react-router-dom'
 import Matrix from '../../../Matrix'
 import { Loading } from '../../../components/loading'
 import LoadingSpinnerButton from '../../../components/LoadingSpinnerButton'
+import { useTranslation } from 'react-i18next'
 
 const ProjectTitle = ({ title, projectSpace, callback }) => {
+  const { t } = useTranslation('projects')
   const [projectTitle, setProjectTitle] = useState('')
   const [edit, setEdit] = useState(false)
   const [newProject, setNewProject] = useState(false)
@@ -93,7 +95,7 @@ const ProjectTitle = ({ title, projectSpace, callback }) => {
   return (
         <>
             <div className="maxlength">
-                <input id="title" maxLength="100" name="title" placeholder="project title" type="text" value={projectTitle} onClick={() => { setEdit(true); setOldTitle(title) }} onChange={(e) => setProjectTitle(e.target.value)} />
+                <input id="title" maxLength="100" name="title" type="text" value={projectTitle} onClick={() => { setEdit(true); setOldTitle(title) }} onChange={(e) => setProjectTitle(e.target.value)} />
                 <span>{projectTitle.length + '/100'}</span>
             </div>
             {/*
@@ -105,7 +107,7 @@ const ProjectTitle = ({ title, projectSpace, callback }) => {
                 {!newProject && <input id="submit" name="submit" type="submit" value="❌ CANCEL" onClick={(e) => { e.preventDefault(); setEdit(false); setProjectTitle(oldTitle) }} />}
                   {!title && newProject &&
                       <input
-                          id="submit" name="submit" type="submit" value={newProject && 'Create Project'} disabled={ !projectTitle || projectTitle.length > 100} onClick={(e) => {
+                          id="submit" name="submit" type="submit" value={newProject && t('Create Project')} disabled={ !projectTitle || projectTitle.length > 100} onClick={(e) => {
                             console.log(newProject)
                             if (newProject && projectTitle.length < 101) {
                               createProject(e, projectTitle)
