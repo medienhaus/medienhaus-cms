@@ -975,8 +975,9 @@ button > #loading {
 }
 
 .terms > div > label {
-  font-family: "Times New Roman", serif;
-  font-size: 0.7rem;
+  font-family: "Courier New";
+  font-size: 0.75rem;
+  line-height: 1.1rem;
 }
 
 .save {

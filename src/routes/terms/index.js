@@ -13,7 +13,7 @@ const Terms = () => {
 
   return (
     <section className="terms">
-      <p>Before uploading any content, we kindly ask you to read through and accept the following terms & conditions and content violation policies.</p>
+      <p>{t('Before uploading any content, we kindly ask you to read through and accept the following terms & conditions and content violation policies.')}</p>
       <div>
         <input id="checkbox0" name="checkbox0" type="checkbox" value={consent0} onChange={() => setConsent0(consent0 => !consent0)} />
         <label htmlFor="checkbox0">{t('I (we) hereby confirm that the rights to the image, video and/or sound material uploaded here belong to me (us) and that I (we) have all the rights required to make the image, video and/or sound material publicly accessible, to reproduce, distribute and exhibit it as part of the tour of the Berlin University of the Arts. I (we) confirm that the use of the uploaded image, video and/or sound material for this purpose does not infringe any third-party rights, in particular copyright, ancillary copyright, trademark or patent rights, title protection rights, trade secrets, personal rights or other rights or property rights of third parties.')}</label>
