@@ -980,7 +980,7 @@ button > #loading {
 }
 
 .save {
-  margin-top: calc(var(--margin) * 4) !important;
+  margin-top: calc(var(--margin) * 3) !important;
 }
 
 /*
