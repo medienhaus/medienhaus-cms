@@ -19,7 +19,6 @@ import { Trans, useTranslation } from 'react-i18next'
 const Submit = () => {
   const { t } = useTranslation('projects')
   const [title, setTitle] = useState('')
-  const [projectImage, setProjectImage] = useState(false)
   const [visibility, setVisibility] = useState('')
   const [loading, setLoading] = useState(false)
   const [blocks, setBlocks] = useState([])
@@ -32,11 +31,6 @@ const Submit = () => {
   const history = useHistory()
   const matrixClient = Matrix.getMatrixClient()
   const params = useParams()
-
-  // for presentation
-  const [imgAuthor, setImgAuthor] = useState()
-  const [imgLicense, setImgLicense] = useState()
-  const [imgAlt, setImgAlt] = useState()
 
   const projectSpace = params.spaceId
 
@@ -95,8 +89,6 @@ const Submit = () => {
     // checking if the project is a collaboration
     const getRoomMembers = await matrixClient.getJoinedRoomMembers(space?.rooms[0].room_id)
     setRoomMembers(getRoomMembers.joined)
-    // set project image if available
-    space.rooms[0].avatar_url !== undefined && setProjectImage(space.rooms[0].avatar_url)
     // check if project is published or draft
     const joinRule = await fetch(process.env.REACT_APP_MATRIX_BASE_URL + `/_matrix/client/r0/rooms/${space.rooms[0].room_id}/state/m.room.join_rules/`, {
       method: 'GET',
@@ -188,12 +180,8 @@ const Submit = () => {
     }
   }
 
-  const changeProjectImage = (url, author, license, alt) => {
+  const changeProjectImage = (url) => {
     setLoading(true)
-    setProjectImage(url)
-    setImgAuthor(author)
-    setImgLicense(license)
-    setImgAlt(alt)
     getCurrentTime()
     setLoading(false)
   }
@@ -249,7 +237,7 @@ const Submit = () => {
           </section>
           <section className="project-image">
             <h3>{t('Thumbnail')}</h3>
-            {loading ? <Loading /> : <ProjectImage projectSpace={projectSpace} projectImage={projectImage} changeProjectImage={changeProjectImage} imgAuthor={imgAuthor} imgLicense={imgLicense} imgAlt={imgAlt} />}
+            {loading ? <Loading /> : <ProjectImage projectSpace={projectSpace} changeProjectImage={changeProjectImage} />}
           </section>
           <section className="content">
             <h3>{t('Content')}</h3>
