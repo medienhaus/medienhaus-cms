@@ -51,7 +51,8 @@
       "jsx-quotes": [
         "error",
         "prefer-double"
-      ]
+      ],
+      "react/prop-types": "off"
     }
   },
   "browserslist": [
