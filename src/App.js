@@ -1,7 +1,6 @@
 import React from 'react'
 import { BrowserRouter as Router, Route, Switch, Redirect, useLocation } from 'react-router-dom'
-// import { Link } from 'react-router-dom'
-// import './App.css';
+
 import './assets/css/index.css'
 import Header from './components/header'
 import Footer from './components/footer'
@@ -15,6 +14,7 @@ import Projects from './routes/projects'
 import Submit from './routes/submit'
 import Moderation from './routes/moderation'
 import Support from './routes/support'
+import Feedback from './routes/feedback'
 import Terms from './routes/terms'
 
 import { AuthProvider, useAuth } from './Auth'
@@ -80,6 +80,7 @@ function App () {
               <PrivateRoute path="/submit" component={Submit} />
               <PrivateRoute path="/moderation" component={Moderation} />
               <PrivateRoute path="/support" component={Support} />
+              <PrivateRoute path="/feedback" component={Feedback} />
             </Switch>
           </main>
           <Nav />
