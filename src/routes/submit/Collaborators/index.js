@@ -123,9 +123,9 @@ const Collaborators = ({ projectSpace, members, time, startListeningToCollab }) 
               </div>)
           })
         }
-          {credits && credits.map((name, index) => {
-            return <Credits name={name} index={index} projectSpace={projectSpace[0].room_id} callback={checkForCredits} />
-          })}
+          {credits && credits.map((name, index) =>
+            <Credits name={name} index={index} projectSpace={projectSpace[0].room_id} callback={checkForCredits} key={index} />
+          )}
         </ul>
 
       </section>

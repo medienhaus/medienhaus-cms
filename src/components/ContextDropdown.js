@@ -103,7 +103,7 @@ function ContextDropdown () {
               <br />
               <small style={{ color: 'gray' }}>
                 {item.path.map((breadcrumb, i) => (
-                  <span style={{ display: 'block', paddingLeft: `${i * 15}px` }}>
+                  <span style={{ display: 'block', paddingLeft: `${i * 15}px` }} key={i + breadcrumb}>
                     {i !== 0 && <>&raquo; </>}
                     {breadcrumb}
                   </span>

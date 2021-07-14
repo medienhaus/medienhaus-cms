@@ -17,8 +17,8 @@ const Moderation = () => {
       console.error(error)
       return
     }
-    return cms.map(knock => {
-      return <Requests roomId={roomId} body={knock.body} eventId={knock.eventId} />
+    return cms.map((knock, index) => {
+      return <Requests roomId={roomId} body={knock.body} eventId={knock.eventId} key={index} />
     })
   }
 
@@ -34,9 +34,7 @@ const Moderation = () => {
           </>
           )
         : moderationRooms.length > 0
-          ? moderationRooms.map(requests => {
-            return <GetRequestPerRoom roomId={requests.room_id} />
-          })
+          ? moderationRooms.map((requests, index) => <GetRequestPerRoom roomId={requests.room_id} key={index} />)
           : (
             <div>
               Looks like you are not moderating any spaces.
