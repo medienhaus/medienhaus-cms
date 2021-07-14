@@ -120,22 +120,23 @@ const ProjectTitle = ({ title, projectSpace, callback }) => {
               }}
             />}
 
-          {title && edit && (projectTitle !== oldTitle) && <LoadingSpinnerButton
-            className="confirm" disabled={projectTitle.length > 100} onClick={async () => {
-              if (projectTitle.length < 101) {
-                try {
-                  await matrixClient.setRoomName(projectSpace, projectTitle).then(() => callback(projectTitle))
-                } catch (err) {
-                  console.error(err)
+          {title && edit && (projectTitle !== oldTitle) &&
+            <LoadingSpinnerButton
+              className="confirm" disabled={projectTitle.length > 100} onClick={async () => {
+                if (projectTitle.length < 101) {
+                  try {
+                    await matrixClient.setRoomName(projectSpace, projectTitle).then(() => callback(projectTitle))
+                  } catch (err) {
+                    console.error(err)
+                  }
+                  setEdit(false)
+                } else {
+                  setEdit(true)
+                  setOldTitle(title)
                 }
-                setEdit(false)
-              } else {
-                setEdit(true)
-                setOldTitle(title)
-              }
-            }}
-                                                           >SAVE
-          </LoadingSpinnerButton>}
+              }}
+            >SAVE
+            </LoadingSpinnerButton>}
         </div>}
     </>
   )
