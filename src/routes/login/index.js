@@ -23,7 +23,7 @@ const Login = () => {
 
   const auth = useAuth()
 
-  const { from } = location.state || { from: { pathname: '/projects' } }
+  const { from } = location.state || { from: { pathname: '/' } }
 
   const onSubmit = () => {
     if (isLoading) { return }
@@ -42,7 +42,7 @@ const Login = () => {
   const changePassword = e => { setPassword(e.target.value); setErrormsg() }
 
   if (auth.user) {
-    return <Redirect to={'/projects'} />
+    return <Redirect to={'/'} />
   }
 
   return (
