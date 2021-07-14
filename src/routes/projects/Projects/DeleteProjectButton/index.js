@@ -5,7 +5,6 @@ import LoadingSpinnerButton from '../../../../components/LoadingSpinnerButton'
 import Matrix from '../../../../Matrix'
 
 const DeleteProjectButton = ({ roomId, name, index, toggleDeleteButton, reloadProjects }) => {
-  const [warning, setWarning] = useState(false)
   const [leaving, setLeaving] = useState(false)
   const isMounted = useRef(true)
   const matrixClient = Matrix.getMatrixClient()
@@ -67,21 +66,16 @@ const DeleteProjectButton = ({ roomId, name, index, toggleDeleteButton, reloadPr
                   className="confirm"
                   disabled={leaving}
                   onClick={async () => {
-                    if (warning) {
-                      setLeaving(true)
-                      await deleteProject(null, roomId)
-                        .then(() => reloadProjects(index))
-                        .catch(err => console.log(err))
-                        .finally(() => {
-                          if (isMounted.current) {
-                            setLeaving(false)
-                          }
-                        })
-                      setWarning(false)
-                    } else {
-                      setWarning(true)
-                    }
-                  }} >{warning ? t('Yes, delete project') : t('DELETE')}</LoadingSpinnerButton>
+                    setLeaving(true)
+                    await deleteProject(null, roomId)
+                      .then(() => reloadProjects(index))
+                      .catch(err => console.log(err))
+                      .finally(() => {
+                         if (isMounted.current) {
+                           setLeaving(false)
+                           }
+                          })
+                  }} >{t('DELETE')}</LoadingSpinnerButton>
             </div>
         </>
   )
