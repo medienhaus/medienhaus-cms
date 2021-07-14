@@ -23,8 +23,8 @@ const Overview = () => {
   // Listen for room events to populate our "pending invites" state
   useEffect(() => {
     async function handleRoomEvent (room) {
-      // Ignore event if this is not about a space
-      if (room.getType() !== 'm.space') return
+      // Ignore event if this is not about a space or if it is a language space
+      if (room.getType() !== 'm.space' || room.name === 'de' || room.name === 'en') return
 
       const roomMembers = await room._loadMembersFromServer().catch(console.error)
       // room.getMyMembership() is only available after the current call stack has cleared (_.defer),
@@ -80,9 +80,9 @@ const Overview = () => {
               </Trans>
             </p>
             <ul>
-              {Object.values(invites).map((room, index) => (
+              {Object.values(invites).map((space, index) => (
                 <li key={index} style={{ listStyleType: 'none' }}>
-                  <Invites room={room} callback={removeInviteByIndex} />
+                  <Invites space={space} callback={removeInviteByIndex} />
                 </li>
               ))}
             </ul>

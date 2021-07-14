@@ -28,7 +28,6 @@ const DeleteProjectButton = ({ roomId, name, index, toggleDeleteButton, removePr
         // we reverse here to leave the actual project space last in case something goes wrong in the process.
         console.log('Leaving ' + space.name)
         const subspaces = await matrixClient.getSpaceSummary(space.room_id).catch(console.log)
-        // eslint-disable-next-line no-debugger
         subspaces.rooms.reverse().forEach(async (space) => {
           const count = await matrixClient.getJoinedRoomMembers(space.room_id)
           Object.keys(count.joined).length > 1 && Object.keys(count.joined).forEach(name => {
