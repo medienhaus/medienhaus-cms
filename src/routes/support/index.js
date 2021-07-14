@@ -100,7 +100,7 @@ const Support = () => {
             <h3>{t('Web Browser')}</h3>
             <select name="browser" defaultValue={''} onBlur={changeBrowser} // ref={register({ required: true })}
             >
-              <option value="" disabled hidden >-- select web browser --</option>
+              <option value="" disabled hidden>-- select web browser --</option>
               <option value="Firefox">Firefox</option>
               <option value="Chrome">Chrome</option>
               <option value="Safari">Safari</option>
