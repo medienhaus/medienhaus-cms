@@ -238,7 +238,7 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace, time,
                 <option value="cc-by-nd">CC BY-ND 4.0</option>
                 <option value="cc-by-nc-nd">CC BY-NC-ND 4.0</option>
               </select>
-              <textarea rows="3" value={cms.info.alt} disabled />
+              <textarea value={cms.info.alt} disabled />
             </div>
             : json.type === 'ul'
               ? <List onSave={() => onSave(block.room_id)} storage={(list) => localStorage.setItem(block.room_id, list)} populated={cms?.body} type="ul" />
