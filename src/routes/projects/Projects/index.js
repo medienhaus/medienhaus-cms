@@ -1,9 +1,9 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React from 'react'
 import { useHistory } from 'react-router-dom'
 import Matrix from '../../../Matrix'
-import { Loading } from '../../../components/loading'
 import PublishProject from '../../../components/PublishProject'
-import { Trans, useTranslation } from 'react-i18next'
+import { useTranslation } from 'react-i18next'
+import DeleteProjectButton from './DeleteProjectButton'
 
 const Projects = ({ space, visibility, index, reloadProjects }) => {
   const history = useHistory()
@@ -34,59 +34,6 @@ const Projects = ({ space, visibility, index, reloadProjects }) => {
     return 'successfully deleted ' + project
   }
 
-  const DeleteProjectButton = ({ roomId, name }) => {
-    const [warning, setWarning] = useState(false)
-    const [leaving, setLeaving] = useState(false)
-    const isMounted = useRef(true)
-
-    useEffect(() => {
-      // needed to add this cleanup useEffect to prevent memory leaks
-      isMounted.current = true
-      return () => {
-        isMounted.current = false
-      }
-    }, [])
-
-    return (
-      <>
-        {warning && <p><Trans t={t} i18nKey="deleteConfirmation">Are you sure you want to delete the project <strong>{{ name }}</strong>? This cannot be undone and will delete the project for you and any collaborator(s) that might be part of it.</Trans></p>}
-        <input
-          id="delete"
-          name="delete"
-          type="submit"
-          value={warning ? t('Yes, delete project') : t('DELETE')}
-          disabled={leaving}
-          onClick={async (e) => {
-            if (warning) {
-              setLeaving(true)
-              await deleteProject(e, roomId)
-                .then(() => reloadProjects(index))
-                .catch(err => console.log(err))
-                .finally(() => {
-                  if (isMounted.current) {
-                    setLeaving(false)
-                  }
-                })
-              setWarning(false)
-            } else {
-              e.preventDefault()
-              setWarning(true)
-            }
-          }
-          } />
-        {leaving && <Loading />}
-
-        {warning && <input
-          id="delete"
-          name="delete"
-          type="submit"
-          value={t('CANCEL')}
-          onClick={() => { setWarning(false) }}
-        />}
-      </>
-    )
-  }
-
   return (
     <>
       <div className="project">
@@ -101,8 +48,9 @@ const Projects = ({ space, visibility, index, reloadProjects }) => {
         <div className="right">
         */}
           <button onClick={() => history.push(`/submit/${space.room_id}`)}>{t('EDIT')}</button>
-          <DeleteProjectButton roomId={space.room_id} name={space.name} />
           <PublishProject space={space} published={visibility} index={index} description={space.description} callback={reloadProjects} />
+          <DeleteProjectButton roomId={space.room_id} name={space.name} index={index} deleteProject={deleteProject} reloadProject={reloadProjects} />
+
         {/*
         </div>
         */}
