@@ -52,7 +52,7 @@
         "error",
         "prefer-double"
       ],
-      "react/prop-types": "disable",
+      "react/prop-types": "off",
       "react/jsx-closing-tag-location": "warn"
     }
   },

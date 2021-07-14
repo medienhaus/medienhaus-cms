@@ -4,7 +4,7 @@ import { Loading } from '../../../../components/loading'
 import LoadingSpinnerButton from '../../../../components/LoadingSpinnerButton'
 import Matrix from '../../../../Matrix'
 
-const DeleteProjectButton = ({ roomId, name, index, toggleDeleteButton, reloadProjects }) => {
+const DeleteProjectButton = ({ roomId, name, index, toggleDeleteButton, removeProject }) => {
   const [leaving, setLeaving] = useState(false)
   const isMounted = useRef(true)
   const matrixClient = Matrix.getMatrixClient()
@@ -19,37 +19,35 @@ const DeleteProjectButton = ({ roomId, name, index, toggleDeleteButton, reloadPr
     }
   }, [])
 
-  const deleteProject = async (e) => {
-    e.preventDefault()
-    let space
+  const deleteProject = async () => {
+    let log
     try {
-      space = await matrixClient.getSpaceSummary(roomId)
-    } catch (err) {
-      console.error(err)
-    }
-    space.rooms.reverse().map(async (space, index) => {
-      // we reverse here to leave the actual project space last in case something goes wrong in the process.
-      console.log('Leaving ' + space.name)
-      if (index < space.rooms.length) {
-        const subspaces = await matrixClient.getSpaceSummary(space.roomId)
-        subspaces.rooms.reverse().map(async (space) => {
+      const space = await matrixClient.getSpaceSummary(roomId).catch(console.log)
+      console.log(space.rooms)
+      space.rooms.filter(room => room.room_id !== roomId).forEach(async (space, index) => {
+        // we reverse here to leave the actual project space last in case something goes wrong in the process.
+        console.log('Leaving ' + space.name)
+        const subspaces = await matrixClient.getSpaceSummary(space.room_id).catch(console.log)
+        // eslint-disable-next-line no-debugger
+        subspaces.rooms.reverse().forEach(async (space) => {
           const count = await matrixClient.getJoinedRoomMembers(space.room_id)
           Object.keys(count.joined).length > 1 && Object.keys(count.joined).forEach(name => {
-            localStorage.getItem('medienhaus_user_id') !== name && matrixClient.kick(space.room_id, name)
+            localStorage.getItem('medienhaus_user_id') !== name && matrixClient.kick(space.room_id, name).catch(console.log)
           })
+          await matrixClient.leave(space.room_id).catch(console.log)
         })
-      }
-      try {
         const count = await matrixClient.getJoinedRoomMembers(space.room_id)
         Object.keys(count.joined).length > 1 && Object.keys(count.joined).forEach(name => {
-          localStorage.getItem('medienhaus_user_id') !== name && matrixClient.kick(space.room_id, name)
+          localStorage.getItem('medienhaus_user_id') !== name && matrixClient.kick(space.room_id, name).catch(console.log)
         })
-        await matrixClient.leave(space.room_id)
-      } catch (err) {
-        console.error(err)
-      }
-    })
-    return 'successfully deleted ' + roomId
+        await matrixClient.leave(space.room_id).catch(console.log)
+      })
+      await matrixClient.leave(roomId).catch(console.log)
+      log = 'successfully deleted ' + roomId
+    } catch (err) {
+      log = err
+    }
+    return log
   }
 
   return (
@@ -67,8 +65,9 @@ const DeleteProjectButton = ({ roomId, name, index, toggleDeleteButton, reloadPr
           disabled={leaving}
           onClick={async () => {
             setLeaving(true)
-            await deleteProject(null, roomId)
-              .then(() => reloadProjects(index))
+            await deleteProject(roomId)
+              .then(() => removeProject(index))
+              .then(() => toggleDeleteButton())
               .catch(err => console.log(err))
               .finally(() => {
                 if (isMounted.current) {

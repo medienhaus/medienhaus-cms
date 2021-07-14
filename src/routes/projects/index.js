@@ -99,7 +99,7 @@ const Overview = () => {
               ? console.error(spacesErr)
               : projects.map((space, index) => (
                 <React.Fragment key={index}>
-                  <Projects space={space} visibility={space.published} index={index} reloadProjects={removeProject} />
+                  <Projects space={space} visibility={space.published} index={index} removeProject={removeProject} />
                   <hr />
                 </React.Fragment>
               ))}

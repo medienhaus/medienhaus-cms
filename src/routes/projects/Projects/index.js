@@ -5,7 +5,7 @@ import PublishProject from '../../../components/PublishProject'
 import { useTranslation } from 'react-i18next'
 import DeleteProjectButton from './DeleteProjectButton'
 
-const Projects = ({ space, visibility, index, reloadProjects }) => {
+const Projects = ({ space, visibility, index, removeProject }) => {
   const history = useHistory()
   const { t } = useTranslation('projects')
   const matrixClient = Matrix.getMatrixClient()
@@ -26,13 +26,13 @@ const Projects = ({ space, visibility, index, reloadProjects }) => {
         */}
         <button disabled={showDeleteComponent} onClick={() => history.push(`/submit/${space.room_id}`)}>{t('EDIT')}</button>
         <button disabled={showDeleteComponent} onClick={() => setShowDeleteComponent(true)}>DELETE</button>
-        <PublishProject disabled={showDeleteComponent} space={space} published={visibility} index={index} description={space.description} callback={reloadProjects} />
+        <PublishProject disabled={showDeleteComponent} space={space} published={visibility} index={index} description={space.description} />
         {/*
         </div>
         */}
       </div>
       {showDeleteComponent &&
-        <DeleteProjectButton roomId={space.room_id} name={space.name} index={index} toggleDeleteButton={() => setShowDeleteComponent(false)} reloadProject={reloadProjects} />}
+        <DeleteProjectButton roomId={space.room_id} name={space.name} index={index} toggleDeleteButton={() => setShowDeleteComponent(false)} removeProject={removeProject} />}
     </>
   )
 }
