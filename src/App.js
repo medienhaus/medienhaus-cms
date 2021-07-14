@@ -67,7 +67,7 @@ function App () {
   return (
     <>
       <AuthProvider>
-        <Router>
+        <Router basename="/rundgang">
           <Header />
           <main>
             <Switch>
