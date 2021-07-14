@@ -60,7 +60,7 @@ const PublishProject = ({ space, published, index, description, time, callback }
       {showSaveButton && <div className="below">
         {userFeedback && <p>{userFeedback}</p>}
           {(visibility === 'public' && !description)
-            ? <p>❗{t('️Please add a short description to your project.')}</p>
+            ? <p>❗{t('️Please add a short description of your project.')}</p>
             : <LoadingSpinnerButton disabled={(visibility === 'public' && !description)} onClick={onChangeVisibility}>{t('SAVE')}</LoadingSpinnerButton>
     }
       </div>}

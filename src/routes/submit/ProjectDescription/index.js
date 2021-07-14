@@ -1,7 +1,9 @@
 import React, { useState } from 'react'
 import { ReactComponent as TextIcon } from '../../../assets/icons/remix/text.svg'
+import { useTranslation } from 'react-i18next'
 
 const ProjectDescription = ({ description: intro, callback }) => {
+  const { t } = useTranslation('projects')
   const [saved, setSaved] = useState(false)
   const [description, setDescription] = useState(intro)
 
@@ -30,7 +32,7 @@ const ProjectDescription = ({ description: intro, callback }) => {
                       onChange={(e) => {
                         setDescription(e.target.value)
                       }}
-                      placeholder="Please add a short description of your project. This field is required before publishing."
+                      placeholder={`${t('Please add a short description of your project.')} ${t('This field is required before publishing.')}`}
                         onBlur={() => onSave()} />
                     <p>{saved}</p>
                 </div>

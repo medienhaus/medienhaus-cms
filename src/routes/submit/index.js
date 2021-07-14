@@ -13,8 +13,10 @@ import ProjectTitle from './ProjectTitle'
 import PublishProject from '../../components/PublishProject'
 import ProjectDescription from './ProjectDescription'
 import { Loading } from '../../components/loading'
+import { Trans, useTranslation } from 'react-i18next'
 
 const Submit = () => {
+  const { t } = useTranslation('projects')
   const [title, setTitle] = useState('')
   const [projectImage, setProjectImage] = useState(false)
   const [visibility, setVisibility] = useState('')
@@ -198,36 +200,37 @@ const Submit = () => {
   return (
     <>
       <section className="welcome">
-        <p><strong>Create and upload new project</strong></p>
-        <p>This is the project creation page. Please add in which context the project happend, projectname and descriptive text and images.</p>
-        <p>If you want to continue at a later point in time, you can save the project as a draft and find it in your collection under “drafts”.</p>
+        <p><strong>{t('Create and upload new project')}</strong></p>
+        <p>{t('This is the project creation page. Please add the context in which the project was created, a project name, descriptive text and a thumbnail. You can also add more images, videos, livestreams and BigBlueButton sessions.')}</p>
+        <p>{t('If you want to continue at a later point in time, you can save the project as a draft and find it in your collection under /projects.')}</p>
+        <p>{t('The Rundgang platform will appear in German as well as in English. Therefore, remember to create your project name and introduction in both German and English. Other texts should also be entered in both languages, otherwise the text will appear in only one language on both pages.')}</p>
       </section>
       <section className="project-title">
-        <h3>Project Title</h3>
+        <h3>{t('Project Title')}</h3>
         <ProjectTitle title={title} projectSpace={projectSpace} callback={changeTitle} />
       </section>
       {projectSpace && (
         <>
           <section className="context">
-            <h3>Context</h3>
+            <h3>{t('Project Context')}</h3>
             <Category title={title} projectSpace={projectSpace} />
           </section>
           <section className="contributors">
             <Collaborators projectSpace={projectSpace} blocks={blocks} title={title} members={roomMembers} time={getCurrentTime} startListeningToCollab={() => startListeningToCollab()} />
           </section>
           <section className="project-image">
-            <h3>Project Image</h3>
+            <h3>{t('Thumbnail')}</h3>
             {loading ? <Loading /> : <ProjectImage projectSpace={projectSpace} projectImage={projectImage} changeProjectImage={changeProjectImage} />}
           </section>
           <section className="content">
-            <h3>Content</h3>
-            <p>You can add elements like text, images, audio, video, and some more by clicking the <code>+</code> button near the content block below.</p>
-            <p>The first content block&thinsp;&mdash;&thinsp;which is the abstract, description, or introduction for your project&thinsp;&mdash;&thinsp;is required and therefore mandatory.</p>
-            <p>In all other <code>text</code> content blocks, you can format your input text by highlighting the to be formatted text with your cursor.</p>
-            <p>You can use the <code>↑</code> and <code>↓</code> arrows to rearrange existing blocks.</p>
-            <p>And you can provide content and information in multiple languages by setting the desired language in the dropdown list below.</p>
+            <h3>{t('Content')}</h3>
+            <p><Trans t={t} i18nKey="contentInstructions1">You can add elements like texts, images, audio and video files, BigBlueButton sessions and livestreams by clicking the <code>+</code> button near the content block below.</Trans></p>
+            <p><Trans t={t} i18nKey="contentInstructions2">The first content block&thinsp;&mdash;&thinsp;which is the introduction to your project&thinsp;&mdash;&thinsp;is required and therefore mandatory. Please enter the text in German as well as in English.</Trans></p>
+            <p><Trans t={t} i18nKey="contentInstructions3">In all other text content blocks, you can format your input text by highlighting the to be formatted text with your cursor.</Trans></p>
+            <p><Trans t={t} i18nKey="contentInstructions4">You can use the <code>↑</code> and <code>↓</code> arrows to rearrange existing blocks.</Trans></p>
+            <p><Trans t={t} i18nKey="contentInstructions5">You can provide content and information in multiple languages by setting the desired language in the dropdown list below.</Trans></p>
             <select id="subject" name="subject" defaultValue={''} value={contentLang} onChange={(e) => setContentLang(e.target.value)}>
-              <option value="de">DE — German</option>
+              <option value="de">DE — Deutsch</option>
               <option value="en" >EN — English</option>
             </select>
             {spaceObject ? <ProjectDescription description={spaceObject?.rooms[0].topic} callback={onChangeDescription} /> : <Loading />}
