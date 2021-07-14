@@ -42,7 +42,7 @@ const Submit = () => {
 
   const getCurrentTime = useCallback(() => {
     const today = new Date()
-    const time = today.getHours() + ':' + today.getMinutes().toString().padStart(2, '0') + ':' + today.getSeconds().toString().padStart(2, '0')
+    const time = today.getHours().toString().padStart(2, '0') + ':' + today.getMinutes().toString().padStart(2, '0') + ':' + today.getSeconds().toString().padStart(2, '0')
     const date = today.getFullYear() + '-' + today.getMonth().toString().padStart(2, '0') + '-' + today.getDay().toString().padStart(2, '0')
     setSaveTimestamp(date + ', ' + time)
   }, [])
