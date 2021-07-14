@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import Matrix from '../../../Matrix'
 import Knock from './Knock'
 import { Loading } from '../../../components/loading'
@@ -11,19 +11,7 @@ const Category = ({ title, projectSpace }) => {
   const [room, setRoom] = useState('')
   const [loading, setLoading] = useState(false)
   const [member, setMember] = useState(false)
-  const [presentType, setPresentType] = useState('analog')
-  const [changingPresentType, setChangingPresentType] = useState(false)
   const matrixClient = Matrix.getMatrixClient()
-
-  useEffect(() => {
-    const getPresentType = async () => {
-      setChangingPresentType(true)
-      const meta = await matrixClient.getStateEvent(projectSpace, 'm.medienhaus.meta')
-      setPresentType(meta?.present)
-      setChangingPresentType(false)
-    }
-    getPresentType()
-  }, [matrixClient, projectSpace])
 
   const isMember = async (e) => {
     e.preventDefault()
@@ -47,16 +35,6 @@ const Category = ({ title, projectSpace }) => {
     setSubject('')
   }
 
-  const changePresentType = async (e) => {
-    setChangingPresentType(true)
-    e.preventDefault()
-    setPresentType(e.target.value)
-    const content = await matrixClient.getStateEvent(projectSpace, 'm.medienhaus.meta')
-    content.present = e.target.value
-    await matrixClient.sendStateEvent(projectSpace, 'm.medienhaus.meta', content)
-    setChangingPresentType(false)
-  }
-
   return (
     <>
       <p>{t('In which main context do you want to publish your project?')}</p>
@@ -68,11 +46,6 @@ const Category = ({ title, projectSpace }) => {
       </div>
       {loading && <Loading />}
       {subject !== '' && !member && <Knock room={room} callback={callback} />}
-      <select value={presentType} disabled={changingPresentType}onChange={(e) => changePresentType(e)}>
-        <option value="analog">Analog</option>
-        <option value="digital">Digital</option>
-        <option value="hybrid">Hybrid</option>
-      </select>
     </>
   )
 }

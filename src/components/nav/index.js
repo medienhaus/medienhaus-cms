@@ -1,7 +1,7 @@
 import React from 'react'
 import i18n from 'i18next'
 import { NavLink, useHistory } from 'react-router-dom'
-import LoadingSpinnerButton from '../LoadingSpinnerButton'
+// import LoadingSpinnerButton from '../LoadingSpinnerButton'
 import { useAuth } from '../../Auth'
 
 const Nav = () => {
@@ -24,8 +24,9 @@ const Nav = () => {
           <div>
             {auth.user
               ? (
-                <LoadingSpinnerButton onClick={() => auth.signout(() => history.push('/'))}>logout</LoadingSpinnerButton>
+                // <LoadingSpinnerButton onClick={() => auth.signout(() => history.push('/'))}>logout</LoadingSpinnerButton>
                 // <a href={process.env.REACT_APP_MATRIX_BASE_URL + '/classroom'} rel="nofollow noopener noreferrer" target="_self">/classroom&nbsp;-&gt;</a>
+                <NavLink activeclassname="active" to="/logout" onClick={() => auth.signout(() => history.push('/'))}>/logout</NavLink>
                 )
               : (
                 <NavLink activeclassname="active" to="/login">/login</NavLink>
@@ -37,16 +38,13 @@ const Nav = () => {
                 <NavLink activeclassname="active" to="/projects">/projects</NavLink>
                 <NavLink activeclassname="active" to="/support">/support</NavLink>
                 {/* <NavLink activeclassname="active" to="/tools">/tools</NavLink>  only for dev */}
+                {/*
                 <NavLink activeclassname="active" to="/moderation">/moderation</NavLink>
+                */}
                 {
                   // <NavLink activeclassname="active" to="/admin">/admin</NavLink>}
                   // matrixClient.isSynapseAdministrator() ?? console.log('with great power comes great responsibility')
                 }
-              </div>
-              <div>
-                <a href="https://meetings.udk-berlin.de" rel="external nofollow noopener noreferrer" target="_blank">/meet</a>
-                <a href="https://write.medienhaus.udk-berlin.de" rel="external nofollow noopener noreferrer" target="_blank">/write</a>
-                <a href="https://stream.medienhaus.udk-berlin.de" rel="external nofollow noopener noreferrer" target="_blank">/stream</a>
               </div>
             </>
           )}

@@ -27,7 +27,7 @@ import { ReactComponent as DateIcon } from '../../../assets/icons/remix/date.svg
 
 import locations from '../../../assets/data/locations.json'
 
-const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace, time }) => {
+const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace, time, present }) => {
   const [clickedDelete, setClickedDelete] = useState(false)
   const [readOnly, setReadOnly] = useState(false)
   const [loading, setLoading] = useState(false)
@@ -202,22 +202,28 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace, time 
           <LoadingSpinnerButton key={'down_' + block.room_id} disabled={index === blocks.length - 1} onClick={() => changeOrder(block.room_id, block.name, 1)}>↓</LoadingSpinnerButton>
         </div>
         {cms?.msgtype === 'm.image'
-          ? <>
-            <figure className="center"><img src={matrixClient.mxcUrlToHttp(cms.url)} alt={cms?.info?.alt} key={block.room_id} /></figure>
+          ? <div>
+              <figure className="center">
+                <img src={matrixClient.mxcUrlToHttp(cms.url)} alt={cms?.info?.alt} key={block.room_id} />
+              </figure>
 
-            <input type="text" placeholder="author, credits, et cetera" value={cms.info.author} disabled={true}/>
-            <select id="license" name="license" value={cms.info.license}>
-              <option value={cms.info.license} disabled={true}>{cms.info.license}</option>
-            </select>
-            <textarea rows="3" value={cms.info.alt} disabled={true} />
-            </>
+              <input type="text" placeholder="author, credits, et cetera" value={cms.info.author} disabled={true}/>
+              <select id="license" name="license" value={cms.info.license} disabled={true}>
+                <option value={cms.info.license} disabled={true}>{cms.info.license}</option>
+              </select>
+              <textarea rows="3" value={cms.info.alt} disabled={true} />
+            </div>
           : cms?.msgtype === 'm.audio'
-            ? <div className="center">
-              <audio controls>
+            ? <div>
+              <audio className="center" controls>
                 <source src={matrixClient.mxcUrlToHttp(cms.url)} />
               </audio>
-              { /* TODO why section? */}
-              <section id="audio-title">{cms.body}</section>
+              <p id="audio-title">{cms.body}</p>
+              <input type="text" placeholder="author, credits, et cetera" value={cms.info.author} disabled={true}/>
+              <select id="license" name="license" value={cms.info.license} disabled={true}>
+                <option value={cms.info.license} disabled={true}>{cms.info.license}</option>
+              </select>
+              <textarea rows="3" value={cms.info.alt} disabled={true} />
             </div>
             : json.type === 'ul'
               ? <List onSave={() => onSave(block.room_id)} storage={(list) => localStorage.setItem(block.room_id, list)} populated={cms?.body} type="ul" />
@@ -316,7 +322,7 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace, time 
           </button>
         </div>
       </div>
-      <AddContent number={index + 1} projectSpace={projectSpace} blocks={blocks} reloadSpace={reloadSpace} />
+      <AddContent number={index + 1} projectSpace={projectSpace} blocks={blocks} reloadSpace={reloadSpace} present={present} />
     </>
   )
 }

@@ -10,6 +10,7 @@ import DisplayContent from './DisplayContent'
 import AddContent from './AddContent'
 import ProjectImage from './ProjectImage'
 import ProjectTitle from './ProjectTitle'
+import PresentType from './PresentType'
 import PublishProject from '../../components/PublishProject'
 import ProjectDescription from './ProjectDescription'
 import { Loading } from '../../components/loading'
@@ -27,16 +28,23 @@ const Submit = () => {
   const [spaceObject, setSpaceObject] = useState()
   const [roomMembers, setRoomMembers] = useState()
   const [saveTimestamp, setSaveTimestamp] = useState('')
+  const [medienhausMeta, setMedienhausMeta] = useState([])
   const history = useHistory()
   const matrixClient = Matrix.getMatrixClient()
   const params = useParams()
+
+  // for presentation
+  const [imgAuthor, setImgAuthor] = useState()
+  const [imgLicense, setImgLicense] = useState()
+  const [imgAlt, setImgAlt] = useState()
 
   const projectSpace = params.spaceId
 
   const getCurrentTime = useCallback(() => {
     const today = new Date()
     const time = today.getHours() + ':' + today.getMinutes().toString().padStart(2, '0') + ':' + today.getSeconds().toString().padStart(2, '0')
-    setSaveTimestamp(time)
+    const date = today.getFullYear() + '-' + today.getMonth().toString().padStart(2, '0') + '-' + today.getDay().toString().padStart(2, '0')
+    setSaveTimestamp(date + ', ' + time)
   }, [])
 
   const reloadSpace = async (roomId) => {
@@ -81,17 +89,24 @@ const Submit = () => {
   const fetchSpace = useCallback(async () => {
     // here we collect all necessary information about the project
     const space = await matrixClient.getSpaceSummary(projectSpace)
+    // setting title to project space name
     setTitle(space.rooms[0].name)
     setSpaceObject(space)
+    // checking if the project is a collaboration
     const getRoomMembers = await matrixClient.getJoinedRoomMembers(space?.rooms[0].room_id)
     setRoomMembers(getRoomMembers.joined)
+    // set project image if available
     space.rooms[0].avatar_url !== undefined && setProjectImage(space.rooms[0].avatar_url)
+    // check if project is published or draft
     const joinRule = await fetch(process.env.REACT_APP_MATRIX_BASE_URL + `/_matrix/client/r0/rooms/${space.rooms[0].room_id}/state/m.room.join_rules/`, {
       method: 'GET',
       headers: { Authorization: 'Bearer ' + localStorage.getItem('medienhaus_access_token') }
     })
     const published = await joinRule.json()
     setVisibility(published.join_rule)
+    // fetch custom medienhaus event
+    const meta = await matrixClient.getStateEvent(projectSpace, 'm.medienhaus.meta')
+    setMedienhausMeta(meta)
     // we fetch the selected language content
     const spaceRooms = space.rooms.filter(room => room.name === contentLang)
     const getContent = await matrixClient.getSpaceSummary(spaceRooms[0].room_id)
@@ -173,9 +188,12 @@ const Submit = () => {
     }
   }
 
-  const changeProjectImage = (url) => {
+  const changeProjectImage = (url, author, license, alt) => {
     setLoading(true)
     setProjectImage(url)
+    setImgAuthor(author)
+    setImgLicense(license)
+    setImgAlt(alt)
     getCurrentTime()
     setLoading(false)
   }
@@ -196,7 +214,10 @@ const Submit = () => {
     // @TODO setSpaceObject(spaceObject => ({...spaceObject, rooms: [...spaceObject.rooms, ]}))
     return changeTopic
   }
-
+  const changePresentationType = (newMedienhausMeta) => {
+    console.log(newMedienhausMeta)
+    setMedienhausMeta(newMedienhausMeta)
+  }
   return (
     <>
       <section className="welcome">
@@ -219,12 +240,16 @@ const Submit = () => {
             <h3>{t('Project Context')}</h3>
             <Category title={title} projectSpace={projectSpace} />
           </section>
+                    <section className="present">
+            <h3>Type of Presentation</h3>
+            <PresentType presentValue={medienhausMeta?.present} projectSpace={projectSpace} callback={changePresentationType }/>
+          </section>
           <section className="contributors">
             <Collaborators projectSpace={spaceObject?.rooms} members={roomMembers} time={getCurrentTime} startListeningToCollab={() => startListeningToCollab()} />
           </section>
           <section className="project-image">
-            <h3>{t('Thumbnail')}</h3>
-            {loading ? <Loading /> : <ProjectImage projectSpace={projectSpace} projectImage={projectImage} changeProjectImage={changeProjectImage} />}
+             <h3>{t('Thumbnail')}</h3>
+            {loading ? <Loading /> : <ProjectImage projectSpace={projectSpace} projectImage={projectImage} changeProjectImage={changeProjectImage} imgAuthor={imgAuthor} imgLicense={imgLicense} imgAlt={imgAlt} />}
           </section>
           <section className="content">
             <h3>{t('Content')}</h3>
@@ -239,9 +264,9 @@ const Submit = () => {
             </select>
             {spaceObject ? <ProjectDescription description={spaceObject?.rooms[0].topic} callback={onChangeDescription} /> : <Loading />}
             {blocks.length === 0
-              ? <AddContent number={0} projectSpace={spaceObject?.rooms.filter(room => room.name === contentLang)[0].room_id} blocks={blocks} reloadSpace={reloadSpace} />
+              ? <AddContent number={0} projectSpace={spaceObject?.rooms.filter(room => room.name === contentLang)[0].room_id} blocks={blocks} reloadSpace={reloadSpace} present={medienhausMeta?.present}/>
               : blocks.map((content, i) =>
-                <DisplayContent block={content} index={i} blocks={blocks} projectSpace={spaceObject?.rooms.filter(room => room.name === contentLang)[0].room_id} reloadSpace={reloadSpace} time={getCurrentTime} key={content + i + content?.lastUpdate} />
+                <DisplayContent block={content} index={i} blocks={blocks} projectSpace={spaceObject?.rooms.filter(room => room.name === contentLang)[0].room_id} reloadSpace={reloadSpace} time={getCurrentTime} present={medienhausMeta?.present} key={content + i + content?.lastUpdate} />
               )}
           </section>
           <section className="visibility">
@@ -250,8 +275,10 @@ const Submit = () => {
             <p>You can change this at any time.</p>
             {spaceObject ? <PublishProject space={spaceObject.rooms[0]} description={spaceObject.rooms[0].topic} published={visibility} time={getCurrentTime} /> : <Loading />}
           </section>
-          {saveTimestamp && <div>Project last saved at {saveTimestamp}</div>}
-          <button onClick={() => history.push('/projects')}>back to overview</button>
+          <section className="save">
+            <button onClick={() => history.push('/projects')}>← BACK TO OVERVIEW</button>
+            {saveTimestamp && <p>Project last saved at {saveTimestamp}</p>}
+          </section>
         </>
       )}
     </>

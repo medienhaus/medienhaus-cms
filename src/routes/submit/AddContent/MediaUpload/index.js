@@ -8,8 +8,6 @@ const MediaUpload = (props) => {
   const [loading, setLoading] = useState(false)
   const matrixClient = Matrix.getMatrixClient()
 
-  console.log(props)
-
   const handleSubmission = async (e, selectedFile, fileName, author, license, alttext) => {
     e.preventDefault()
     setLoading(true)
@@ -40,7 +38,11 @@ const MediaUpload = (props) => {
               body: selectedFile.name,
               info: {
                 size: selectedFile.size,
-                mimetype: selectedFile.type
+                mimetype: selectedFile.type,
+                name: selectedFile.name,
+                author: author,
+                license: license,
+                alt: alttext
               },
               msgtype: 'm.audio',
               url: res[0]
