@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useAuth } from '../../Auth'
-import { Link } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 import useJoinedSpaces from '../../components/matrix_joined_spaces'
 import Projects from './Projects'
 import Invites from './Invites'
@@ -17,6 +17,7 @@ const Overview = () => {
   const matrixClient = Matrix.getMatrixClient()
   const [projects, setProjects] = useState([])
   const [invites, setInvites] = useState({})
+  const history = useHistory()
   // @TODO: Check for existing invites on page load
 
   // Listen for room events to populate our "pending invites" state
@@ -89,7 +90,7 @@ const Overview = () => {
         )
       }
       <div>
-        <Link activeclassname="active" to="/submit/">{t('create new project')} -&gt;</Link>
+        <button onClick={() => history.push('/submit')}>{t('create new project')} -&gt;</button>
       </div>
       {fetchSpaces
         ? <Loading />

@@ -34,7 +34,9 @@ const Submit = () => {
   const getCurrentTime = useCallback(() => {
     const today = new Date()
     const time = today.getHours() + ':' + today.getMinutes().toString().padStart(2, '0') + ':' + today.getSeconds().toString().padStart(2, '0')
-    setSaveTimestamp(time)
+    const date = today.getDay().toString().padStart(2, '0') + '.' + today.getMonth().toString().padStart(2, '0') + '.' + today.getFullYear()
+    console.log(date)
+    setSaveTimestamp(date + ', ' + time)
   }, [])
 
   const reloadSpace = async (roomId) => {
