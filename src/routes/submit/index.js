@@ -29,12 +29,18 @@ const Submit = () => {
   const matrixClient = Matrix.getMatrixClient()
   const params = useParams()
 
+  // for presentation
+  const [imgAuthor, setImgAuthor] = useState()
+  const [imgLicense, setImgLicense] = useState()
+  const [imgAlt, setImgAlt] = useState()
+
   const projectSpace = params.spaceId
 
   const getCurrentTime = useCallback(() => {
     const today = new Date()
     const time = today.getHours() + ':' + today.getMinutes().toString().padStart(2, '0') + ':' + today.getSeconds().toString().padStart(2, '0')
-    setSaveTimestamp(time)
+    const date = today.getDay().toString().padStart(2, '0') + '.' + today.getMonth().toString().padStart(2, '0') + '.' + today.getFullYear()
+    setSaveTimestamp(date + ', ' + time)
   }, [])
 
   const reloadSpace = async (roomId) => {
@@ -171,9 +177,12 @@ const Submit = () => {
     }
   }
 
-  const changeProjectImage = (url) => {
+  const changeProjectImage = (url, author, license, alt) => {
     setLoading(true)
     setProjectImage(url)
+    setImgAuthor(author)
+    setImgLicense(license)
+    setImgAlt(alt)
     getCurrentTime()
     setLoading(false)
   }
@@ -217,7 +226,7 @@ const Submit = () => {
           </section>
           <section className="project-image">
             <h3>Project Image</h3>
-            {loading ? <Loading /> : <ProjectImage projectSpace={projectSpace} projectImage={projectImage} changeProjectImage={changeProjectImage} />}
+            {loading ? <Loading /> : <ProjectImage projectSpace={projectSpace} projectImage={projectImage} changeProjectImage={changeProjectImage} imgAuthor={imgAuthor} imgLicense={imgLicense} imgAlt={imgAlt} />}
           </section>
           <section className="content">
             <h3>Content</h3>
