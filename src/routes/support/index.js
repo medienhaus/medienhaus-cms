@@ -1,11 +1,8 @@
-// import React, { useEffect, useState } from 'react'
 import React, { useState } from 'react'
-// import ReactMarkdown from 'react-markdown' // https://github.com/remarkjs/react-markdown
 import { useForm } from 'react-hook-form' // https://github.com/react-hook-form/react-hook-form
-// import { Loading } from '../../components/loading'
 import { useTranslation } from 'react-i18next'
 import { useAuth } from '../../Auth'
-// import { makeRequest } from '../../Backend'
+import { makeRequest } from '../../Backend'
 
 const Support = () => {
   const { handleSubmit, errors } = useForm()
@@ -13,10 +10,8 @@ const Support = () => {
   const [mail, setMail] = useState('')
   const [system, setSystem] = useState()
   const [browser, setBrowser] = useState()
-  // const [loading, setLoading] = useState(true)
   const [sending, setSending] = useState(false)
   const [feedback, setFeedback] = useState('')
-  // const { t, i18n } = useTranslation('support')
   const { t } = useTranslation('support')
 
   const auth = useAuth()
@@ -26,19 +21,6 @@ const Support = () => {
   const changeMail = e => setMail(e.target.value)
   const changeBrowser = e => setBrowser(e.target.value)
   const changeSystem = e => setSystem(e.target.value)
-  // const faqPath = i18n.language === 'en' ? require('../../assets/data/support/support_en.md').default : require('../../assets/data/support/support_de.md').default
-
-  // const [markdown, setMarkdown] = useState()
-
-  /*
-  useEffect(() => {
-    setLoading(true)
-    fetch(faqPath)
-      .then((response) => response.text())
-      .then((text) => setMarkdown(text))
-      .then(() => setLoading(false))
-  }, [faqPath, i18n.language])
-  */
 
   const onSubmit = async () => {
     setSending(true)
@@ -51,11 +33,10 @@ const Support = () => {
         msg: msg
       }
     try {
-      /* await makeRequest('messenger/support', support)
+      await makeRequest('messenger/support', support)
         .then(msg => {
           console.log(msg)
         })
-        */
       console.log(support)
       setFeedback('Your message has ben sent! We will get back to you asap …')
       setSending(false)
@@ -69,16 +50,8 @@ const Support = () => {
     }
   }
 
-  // if (loading) return <Loading />
-
   return (
     <>
-      {/*
-      <section className="faq">
-        <ReactMarkdown source={markdown} />
-        <p><em>Hier könnte Ihre F.A.Q. stehen …</em></p>
-      </section>
-      */}
       <section className="support">
         <h2>{t('In case you didn\'t find an answer to your question here, please provide us some details and tell us about the problem you encounter via the support form below.')}</h2>
         <form onSubmit={handleSubmit(onSubmit)}>
@@ -115,7 +88,6 @@ const Support = () => {
           {errors?.browser && 'Please select a web browser.'}
           <div>
             <h3>{t('Mail Address')}</h3>
-            {/* eslint-disable-next-line no-useless-escape */}
             <input
               type="email" placeholder="u.name@udk-berlin.de" name="email" value={mail} onChange={changeMail}
             />
