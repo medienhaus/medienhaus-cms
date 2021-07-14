@@ -67,7 +67,7 @@ const PeertubeEmbed = ({ type, onCreateRoomForBlock, onBlockWasAddedSuccessfully
           {(
             entries.length === 0
               ? 'no entries'
-              : '--- please select ' + type + '---'
+              : '-- please select ' + type + ' --'
           )}
         </option>
         {entries.map(entry => (
