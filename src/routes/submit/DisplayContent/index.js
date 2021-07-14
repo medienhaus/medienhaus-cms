@@ -207,7 +207,6 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace, time,
               <figure className="center">
                 <img src={matrixClient.mxcUrlToHttp(cms.url)} alt={cms?.info?.alt} key={block.room_id} />
               </figure>
-
               <input type="text" placeholder="author, credits, et cetera" value={cms.info.author} disabled />
               <select id="license" name="license" value={cms.info.license} disabled>
                 <option value="cc0">CC0 1.0</option>
@@ -223,10 +222,12 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace, time,
             )
           : cms?.msgtype === 'm.audio'
             ? <div>
+              {console.log(cms)}
+
               <audio className="center" controls>
                 <source src={matrixClient.mxcUrlToHttp(cms.url)} />
               </audio>
-              <input type="text" value={cms.body} disabled />
+              <input type="text" value={cms.info.name} disabled />
               <input type="text" value={cms.info.author} disabled />
               <select id="license" name="license" value={cms.info.license} disabled>
                 <option value="cc0">CC0 1.0</option>
@@ -269,7 +270,7 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace, time,
                               </Popup>
                             </Marker>
                           </MapContainer>
-                          <input disabled value={cms.body.substring(cms.body.lastIndexOf(' '))} />
+                          <input type="text" disabled value={cms.body.substring(cms.body.lastIndexOf(' '))} />
                         </div>
                         : json.type === 'date'
                           ? <div>{cms.body.split(' ')[0]} {cms.body.split(' ')[1] || null}</div>
