@@ -22,6 +22,8 @@ const DeleteProjectButton = ({ roomId, name, index, toggleDeleteButton, removePr
   const deleteProject = async () => {
     let log
     try {
+      // we change the meta json to reflect the deleted space
+      await matrixClient.sendStateEvent(roomId, 'm.medienhaus.meta', { deleted: true })
       const space = await matrixClient.getSpaceSummary(roomId).catch(console.log)
       console.log(space.rooms)
       space.rooms.filter(room => room.room_id !== roomId).forEach(async (space, index) => {
@@ -36,7 +38,7 @@ const DeleteProjectButton = ({ roomId, name, index, toggleDeleteButton, removePr
           await matrixClient.leave(space.room_id).catch(console.log)
         })
         const count = await matrixClient.getJoinedRoomMembers(space.room_id)
-        Object.keys(count.joined).length > 1 && Object.keys(count.joined).forEach(name => {
+        Object.keys(count.joined).length > 1 && Object.keys(count.joined).forEach(async name => {
           localStorage.getItem('medienhaus_user_id') !== name && matrixClient.kick(space.room_id, name).catch(console.log)
         })
         await matrixClient.leave(space.room_id).catch(console.log)
