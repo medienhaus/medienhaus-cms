@@ -14,7 +14,7 @@ const Overview = () => {
   const auth = useAuth()
   const { t } = useTranslation('projects')
   const profile = auth.user
-  const { joinedSpaces, spacesErr, fetchSpaces } = useJoinedSpaces(() => console.log(fetchSpaces || spacesErr))
+  const { joinedSpaces, spacesErr, fetchSpaces, reload } = useJoinedSpaces(false)
   const matrixClient = Matrix.getMatrixClient()
   const [projects, setProjects] = useState([])
   const [invites, setInvites] = useState({})
@@ -67,6 +67,7 @@ const Overview = () => {
     // setInvites(invites => invites.filter((invite, i) => i !== index))
     setInvites(Object.fromEntries(
       Object.entries(invites).filter(([key]) => key !== room)))
+    reload(true)
   }
 
   return (
