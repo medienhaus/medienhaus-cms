@@ -1,38 +1,15 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import Matrix from '../../../Matrix'
 import PublishProject from '../../../components/PublishProject'
 import { useTranslation } from 'react-i18next'
-// import DeleteProjectButton from './DeleteProjectButton'
+import DeleteProjectButton from './DeleteProjectButton'
 
 const Projects = ({ space, visibility, index, reloadProjects }) => {
   const history = useHistory()
   const { t } = useTranslation('projects')
   const matrixClient = Matrix.getMatrixClient()
-
-  const deleteProject = async (e, project) => {
-    e.preventDefault()
-    let space
-    try {
-      space = await matrixClient.getSpaceSummary(project)
-    } catch (err) {
-      console.error(err)
-    }
-    space.rooms.reverse().map(async (space, index) => {
-      // we reverse here to leave the actual project space last in case something goes wrong in the process.
-      console.log('Leaving ' + space.name)
-      try {
-        const count = await matrixClient.getJoinedRoomMembers(space.room_id)
-        Object.keys(count.joined).length > 1 && Object.keys(count.joined).forEach(name => {
-          localStorage.getItem('medienhaus_user_id') !== name && matrixClient.kick(space.room_id, name)
-        })
-        await matrixClient.leave(space.room_id)
-      } catch (err) {
-        console.error(err)
-      }
-    })
-    return 'successfully deleted ' + project
-  }
+  const [showDeleteComponent, setShowDeleteComponent] = useState(false)
 
   return (
     <>
@@ -48,15 +25,15 @@ const Projects = ({ space, visibility, index, reloadProjects }) => {
         <div className="right">
         */}
           <button onClick={() => history.push(`/submit/${space.room_id}`)}>{t('EDIT')}</button>
-          <button onClick={(e) => deleteProject(e)}>DELETE</button>
+          <button onClick={() => setShowDeleteComponent(true)}>DELETE</button>
           <PublishProject space={space} published={visibility} index={index} description={space.description} callback={reloadProjects} />
         {/*
         </div>
         */}
       </div>
-    {/*
-    <DeleteProjectButton roomId={space.room_id} name={space.name} index={index} deleteProject={deleteProject} reloadProject={reloadProjects} />
-    */}
+    {showDeleteComponent &&
+        <DeleteProjectButton roomId={space.room_id} name={space.name} index={index} toggleDeleteButton={() => setShowDeleteComponent(false)} reloadProject={reloadProjects} />
+    }
     </>
   )
 }
