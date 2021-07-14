@@ -148,8 +148,8 @@ const Collaborators = ({ projectSpace, members, time, startListeningToCollab }) 
       {collab &&
         <div>
           <select value={giveWritePermission} onChange={(e) => setGiveWritePermission(e.target.value)}>
-            <option value={false}>🔒 {collab.substring(collab.lastIndexOf(' ') + 1) || 'user'} {t('CANNOT edit the project')}</option>
-            <option value="" disabled={!userSearch.some(user => user.user_id === collab.substring(collab.lastIndexOf(' ') + 1))}>🖋 {collab.substring(0, collab.lastIndexOf(' ') + 1) || 'user'} {t('CAN edit the project')}</option>
+            <option value="">🔒 {collab.substring(collab.lastIndexOf(' ') + 1) || 'user'} {t('CANNOT edit the project')}</option>
+            <option value disabled={!userSearch.some(user => user.user_id === collab.substring(collab.lastIndexOf(' ') + 1))}>🖋 {collab.substring(0, collab.lastIndexOf(' ') + 1) || 'user'} {t('CAN edit the project')}</option>
           </select>
           <button
             disabled={!collab || inviting || fetchingUsers} onClick={(e) => {
