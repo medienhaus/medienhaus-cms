@@ -220,6 +220,12 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace, time 
               </audio>
               { /* TODO why section? */}
               <section id="audio-title">{cms.body}</section>
+            {console.log(cms)}
+              <input type="text" placeholder="author, credits, et cetera" value={cms.info.author} disabled={true}/>
+              <select id="license" name="license" value={cms.info.license} disabled={true}>
+                <option value={cms.info.license} disabled={true}>{cms.info.license}</option>
+              </select>
+              <textarea rows="3" value={cms.info.alt} disabled={true} />
             </div>
             : json.type === 'ul'
               ? <List onSave={() => onSave(block.room_id)} storage={(list) => localStorage.setItem(block.room_id, list)} populated={cms?.body} type="ul" />

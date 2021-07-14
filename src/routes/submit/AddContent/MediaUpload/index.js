@@ -40,7 +40,11 @@ const MediaUpload = (props) => {
               body: selectedFile.name,
               info: {
                 size: selectedFile.size,
-                mimetype: selectedFile.type
+                mimetype: selectedFile.type,
+                name: selectedFile.name,
+                author: author,
+                license: license,
+                alt: alttext
               },
               msgtype: 'm.audio',
               url: res[0]
