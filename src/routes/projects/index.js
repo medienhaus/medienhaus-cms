@@ -8,6 +8,7 @@ import Matrix from '../../Matrix'
 import { Loading } from '../../components/loading'
 import { Trans, useTranslation } from 'react-i18next'
 import { sortBy } from 'lodash'
+import deleteProject from './deleteProject'
 
 const Overview = () => {
   const auth = useAuth()
@@ -18,6 +19,7 @@ const Overview = () => {
   const [projects, setProjects] = useState([])
   const [invites, setInvites] = useState({})
   const history = useHistory()
+  console.log(joinedSpaces)
   // @TODO: Check for existing invites on page load
 
   // Listen for room events to populate our "pending invites" state
@@ -55,7 +57,10 @@ const Overview = () => {
   }
 
   useEffect(() => {
-    setProjects(sortBy(joinedSpaces, 'name'))
+    // we check if a collaborator has deleted a project since we last logged in
+    joinedSpaces?.filter(space => space.meta.deleted).forEach(async space => await deleteProject(space.room_id))
+    const updatedSpaces = joinedSpaces?.filter(space => !space.meta.deleted)
+    setProjects(sortBy(updatedSpaces, 'name'))
   }, [joinedSpaces])
 
   const removeInviteByIndex = (room) => {
