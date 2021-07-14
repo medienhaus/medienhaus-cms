@@ -220,7 +220,6 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace, time 
               </audio>
               { /* TODO why section? */}
               <section id="audio-title">{cms.body}</section>
-            {console.log(cms)}
               <input type="text" placeholder="author, credits, et cetera" value={cms.info.author} disabled={true}/>
               <select id="license" name="license" value={cms.info.license} disabled={true}>
                 <option value={cms.info.license} disabled={true}>{cms.info.license}</option>

@@ -8,8 +8,6 @@ const MediaUpload = (props) => {
   const [loading, setLoading] = useState(false)
   const matrixClient = Matrix.getMatrixClient()
 
-  console.log(props)
-
   const handleSubmission = async (e, selectedFile, fileName, author, license, alttext) => {
     e.preventDefault()
     setLoading(true)
