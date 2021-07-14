@@ -73,9 +73,7 @@ const Overview = () => {
   return (
     <div>
       <p>{t('Hello')} <strong>{profile.displayname}</strong>.</p>
-      {projects?.length === 0 && (
-        <p>{t('Welcome to the content management system for Rundgang 2021. Looks like you haven\'t uploaded any projects, yet.')}</p>
-      )}
+
       {!invites
         ? <Loading />
         : Object.keys(invites).length > 0 && (
@@ -94,21 +92,26 @@ const Overview = () => {
             </ul>
           </>
         )}
-      <div>
-        <button onClick={() => history.push('/submit')}>{t('create new project')} -&gt;</button>
-      </div>
+      {!fetchSpaces && !spacesErr &&
+        <div>
+          <button onClick={() => history.push('/submit')}>{t('create new project')} -&gt;</button>
+        </div>}
       {fetchSpaces
         ? <Loading />
         : (
           <section>
             {spacesErr
               ? console.error(spacesErr)
-              : projects.map((space, index) => (
-                <React.Fragment key={index}>
-                  <Projects space={space} visibility={space.published} index={index} removeProject={removeProject} />
-                  <hr />
-                </React.Fragment>
-              ))}
+              : projects?.length === 0
+                ? (
+                  <p>{t('Welcome to the content management system for Rundgang 2021. Looks like you haven\'t uploaded any projects, yet.')}</p>
+                  )
+                : projects.map((space, index) => (
+                  <React.Fragment key={index}>
+                    <Projects space={space} visibility={space.published} index={index} removeProject={removeProject} />
+                    <hr />
+                  </React.Fragment>
+                ))}
           </section>
           )}
     </div>
