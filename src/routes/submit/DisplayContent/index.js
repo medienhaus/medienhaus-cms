@@ -131,6 +131,7 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace, time 
       }, 2000)
     } finally {
       setDeleting()
+      setReadOnly(false)
     }
   }
 

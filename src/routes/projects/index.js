@@ -49,6 +49,10 @@ const Overview = () => {
     }
   })
 
+  const removeProject = (index) => {
+    setProjects(projects.filter((name, i) => i !== index))
+  }
+
   useEffect(() => {
     setProjects(sortBy(joinedSpaces, 'name'))
   }, [joinedSpaces])
@@ -95,7 +99,7 @@ const Overview = () => {
               ? console.error(spacesErr)
               : projects.map((space, index) => (
               <React.Fragment key={index}>
-                <Projects space={space} visibility={space.published} index={index} />
+                <Projects space={space} visibility={space.published} index={index} reloadProjects={removeProject} />
                 <hr />
               </React.Fragment>
               ))}

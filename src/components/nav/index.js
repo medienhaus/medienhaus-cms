@@ -1,6 +1,7 @@
 import React from 'react'
 import i18n from 'i18next'
 import { NavLink, useHistory } from 'react-router-dom'
+import LoadingSpinnerButton from '../LoadingSpinnerButton'
 import { useAuth } from '../../Auth'
 
 const Nav = () => {
@@ -23,7 +24,7 @@ const Nav = () => {
           <div>
             {auth.user
               ? (
-                <button onClick={() => auth.signout(() => history.push('/'))}>logout</button>
+                <LoadingSpinnerButton onClick={() => auth.signout(() => history.push('/'))}>logout</LoadingSpinnerButton>
                 // <a href={process.env.REACT_APP_MATRIX_BASE_URL + '/classroom'} rel="nofollow noopener noreferrer" target="_self">/classroom&nbsp;-&gt;</a>
                 )
               : (

@@ -5,7 +5,7 @@ import { Loading } from '../../../components/loading'
 import { Trans, useTranslation } from 'react-i18next'
 import { useAuth } from '../../../Auth'
 
-const Collaborators = ({ projectSpace, blocks, title, members, time, startListeningToCollab }) => {
+const Collaborators = ({ projectSpace, members, time, startListeningToCollab }) => {
   const [fetchingUsers, setFetchingUsers] = useState(false)
   const [userSearch, setUserSearch] = useState([])
   const [collab, setCollab] = useState('')
@@ -20,7 +20,7 @@ const Collaborators = ({ projectSpace, blocks, title, members, time, startListen
   const { t } = useTranslation('projects')
 
   const checkForCredits = useCallback(async () => {
-    const event = await matrixClient.getStateEvent(projectSpace, 'm.medienhaus.meta')
+    const event = projectSpace && await matrixClient.getStateEvent(projectSpace[0].room_id, 'm.medienhaus.meta')
     setCredits(event?.credit)
   }, [matrixClient, projectSpace])
 
@@ -35,30 +35,37 @@ const Collaborators = ({ projectSpace, blocks, title, members, time, startListen
     const name = collab.substring(0, collab.lastIndexOf(' '))
 
     try {
-      await matrixClient.invite(projectSpace, id).then(() => {
-        const room = matrixClient.getRoom(projectSpace)
-        matrixClient.setPowerLevel(projectSpace, id, 100, room.currentState.getStateEvents('m.room.power_levels', ''))
-      })
-      blocks.forEach(async (room, index) => {
-        try {
-          await matrixClient.invite(room.room_id, id)
-            .then(() => {
-              setAddContributionFeedback('✓ ' + name + ' was invited and needs to accept your invitation')
-              time()
-              setTimeout(() => {
-                setAddContributionFeedback('')
-                setCollab('')
-              }, 3000)
-            })
-            .then(async () => {
-              const stateEvent = matrixClient.getRoom(projectSpace)
-              await matrixClient.setPowerLevel(room.room_id, id, 100, stateEvent.currentState.getStateEvents('m.room.power_levels', ''))
-            }).then(() => console.log('invited ' + id + ' to ' + room.name))
-        } catch (err) {
-          console.error(err)
+      projectSpace.forEach(async (space, index) => {
+        await matrixClient.invite(space.room_id, id)
+          .then(() => {
+            const room = matrixClient.getRoom(space.room_id)
+            matrixClient.setPowerLevel(space.room_id, id, 100, room.currentState.getStateEvents('m.room.power_levels', ''))
+          }).catch(console.log)
+
+        if (index > 0) {
+          try {
+            await matrixClient.getSpaceSummary(space.room_id)
+              .then((res) => {
+                res.rooms.forEach(async (room, index) => {
+                  await matrixClient.invite(room.room_id, id).catch(console.log)
+                  const stateEvent = matrixClient.getRoom(projectSpace[0].room_id)
+                  await matrixClient.setPowerLevel(room.room_id, id, 100, stateEvent.currentState.getStateEvents('m.room.power_levels', ''))
+                    .catch(console.log)
+                    .then(() => console.log('invited ' + id + ' to ' + room.name))
+                }
+                )
+              })
+          } catch (err) {
+            console.log(err)
+          }
         }
-      }
-      )
+      })
+      setAddContributionFeedback('✓ ' + name + ' was invited and needs to accept your invitation')
+      time()
+      setTimeout(() => {
+        setAddContributionFeedback('')
+        setCollab('')
+      }, 3000)
       console.log('done')
     } catch (err) {
       console.error(err)
@@ -71,9 +78,9 @@ const Collaborators = ({ projectSpace, blocks, title, members, time, startListen
     // @TODO for now adding credits as json key, needs to be discuessed
     setInviting(true)
     e.preventDefault()
-    const content = await matrixClient.getStateEvent(projectSpace, 'm.medienhaus.meta')
+    const content = await matrixClient.getStateEvent(projectSpace[0].room_id, 'm.medienhaus.meta')
     content.credit ? content.credit = [...content.credit, collab] : content.credit = [collab]
-    const sendCredit = await matrixClient.sendStateEvent(projectSpace, 'm.medienhaus.meta', content)
+    const sendCredit = await matrixClient.sendStateEvent(projectSpace[0].room_id, 'm.medienhaus.meta', content)
     setAddContributionFeedback('event_id' in sendCredit ? '✓' : 'Something went wrong')
     checkForCredits()
     time()
@@ -117,7 +124,7 @@ const Collaborators = ({ projectSpace, blocks, title, members, time, startListen
           })
         }
           {credits && credits.map((name, index) => {
-            return <Credits name={name} index={index} projectSpace={projectSpace} callback={checkForCredits} />
+            return <Credits name={name} index={index} projectSpace={projectSpace[0].room_id} callback={checkForCredits} />
           })}
           </ul>
 

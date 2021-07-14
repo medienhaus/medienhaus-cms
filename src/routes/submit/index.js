@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react'
-import { useParams, useHistory } from 'react-router-dom'
+import { useParams, useHistory, NavLink } from 'react-router-dom'
 import Matrix from '../../Matrix'
 import { MatrixEvent } from 'matrix-js-sdk'
 
@@ -166,7 +166,7 @@ const Submit = () => {
     try {
       // joining contentRooms which might have been created since we last opened the project
       await matrixClient.getSpaceSummary(projectSpace).then(res => {
-        res.rooms.map(async contentRooms => contentRooms.room_id !== projectSpace && await matrixClient.joinRoom(contentRooms.room_id))
+        res.rooms.map(async contentRooms => contentRooms.room_id !== projectSpace && await matrixClient.joinRoom(contentRooms.room_id).catch(err => console.log(err)))
       })
     } catch (err) {
       console.error(err)
@@ -200,9 +200,13 @@ const Submit = () => {
   return (
     <>
       <section className="welcome">
-        <p><strong>{t('Create and upload new project')}</strong></p>
-        <p>{t('This is the project creation page. Please add the context in which the project was created, a project name, descriptive text and a thumbnail. You can also add more images, videos, livestreams and BigBlueButton sessions.')}</p>
-        <p>{t('If you want to continue at a later point in time, you can save the project as a draft and find it in your collection under /projects.')}</p>
+        <p>
+          {projectSpace
+            ? <strong>{t('Edit project')}</strong>
+            : <strong>{t('Create and upload new project')}</strong>}
+        </p>
+        <p>{t('This is the project page. Please add the context in which the project was created, a project name, descriptive text and a thumbnail. You can also add more images, videos, livestreams and BigBlueButton sessions.')}</p>
+        <p><Trans t={t} i18nKey="submitInstructions2">If you want to continue at a later point in time, you can save the project as a draft and find it in your collection under <NavLink activeclassname="active" to="/projects">/projects</NavLink>.</Trans></p>
         <p>{t('The Rundgang platform will appear in German as well as in English. Therefore, remember to create your project name and introduction in both German and English. Other texts should also be entered in both languages, otherwise the text will appear in only one language on both pages.')}</p>
       </section>
       <section className="project-title">
@@ -216,7 +220,7 @@ const Submit = () => {
             <Category title={title} projectSpace={projectSpace} />
           </section>
           <section className="contributors">
-            <Collaborators projectSpace={projectSpace} blocks={blocks} title={title} members={roomMembers} time={getCurrentTime} startListeningToCollab={() => startListeningToCollab()} />
+            <Collaborators projectSpace={spaceObject?.rooms} members={roomMembers} time={getCurrentTime} startListeningToCollab={() => startListeningToCollab()} />
           </section>
           <section className="project-image">
             <h3>{t('Thumbnail')}</h3>
@@ -244,7 +248,7 @@ const Submit = () => {
             <h3>Visibility (Draft/Published)</h3>
             <p>Do you want to save your project as a draft, visible only in the <strong>udk/rundgang</strong> content management system, or do you want to publish the project to the <a href="https://rundgang.udk-berlin.de" rel="external nofollow noopener noreferrer" target="_blank">rundgang.udk-berlin.de</a> website?</p>
             <p>You can change this at any time.</p>
-            {spaceObject ? <PublishProject space={spaceObject.rooms[0] } description={spaceObject.rooms[0].topic} published={visibility} time={getCurrentTime}/> : <Loading /> }
+            {spaceObject ? <PublishProject space={spaceObject.rooms[0]} description={spaceObject.rooms[0].topic} published={visibility} time={getCurrentTime} /> : <Loading />}
           </section>
           {saveTimestamp && <div>Project last saved at {saveTimestamp}</div>}
           <button onClick={() => history.push('/projects')}>back to overview</button>
