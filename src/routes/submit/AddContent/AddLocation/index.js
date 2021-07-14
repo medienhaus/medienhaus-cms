@@ -16,7 +16,7 @@ const AddLocation = ({ onCreateRoomForBlock, onBlockWasAddedSuccessfully }) => {
     await onCreateRoomForBlock().then(async (res) =>
       await matrixClient.sendMessage(res, {
         msgtype: 'm.text',
-        body: selectedLocation + ' ' + room
+        body: selectedLocation + '-' + room
       })).catch(console.log)
     onBlockWasAddedSuccessfully()
     setLoading(false)

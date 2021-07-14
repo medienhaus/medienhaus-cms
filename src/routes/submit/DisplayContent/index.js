@@ -259,18 +259,19 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace, time,
                         )
                       : json.type === 'location'
                         ? <div className="center">
-                          <MapContainer center={[cms.body.substring(0, cms.body.indexOf(',')), cms.body.substring(cms.body.indexOf(',') + 1, cms.body.lastIndexOf(' '))]} zoom={17} scrollWheelZoom={false} placeholder>
+                          <MapContainer center={[cms.body.substring(0, cms.body.indexOf(',')), cms.body.substring(cms.body.indexOf(',') + 1, cms.body.indexOf('-'))]} zoom={17} scrollWheelZoom={false} placeholder>
                             <TileLayer
                               attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                             />
-                            <Marker position={[cms.body.substring(0, cms.body.indexOf(',')), cms.body.substring(cms.body.indexOf(',') + 1, cms.body.lastIndexOf(' '))]}>
+                            {console.log(cms.body.indexOf(' '))}
+                            <Marker position={[cms.body.substring(0, cms.body.indexOf(',')), cms.body.substring(cms.body.indexOf(',') + 1, cms.body.indexOf('-'))]}>
                               <Popup>
-                                {locations.find(coord => coord.coordinates === cms.body.substring(0, cms.body.indexOf(',')) + ',' + cms.body.substring(cms.body.indexOf(',') + 1, cms.body.lastIndexOf(' '))).name}
+                                {locations.find(coord => coord.coordinates === cms.body.substring(0, cms.body.indexOf(',')) + ',' + cms.body.substring(cms.body.indexOf(',') + 1, cms.body.lastIndexOf('-'))).name}
                               </Popup>
                             </Marker>
                           </MapContainer>
-                          <input type="text" disabled value={cms.body.substring(cms.body.lastIndexOf(' '))} />
+                          <input type="text" disabled value={cms.body.substring(cms.body.lastIndexOf('-') + 1)} />
                         </div>
                         : json.type === 'date'
                           ? <div>{cms.body.split(' ')[0]} {cms.body.split(' ')[1] || null}</div>
