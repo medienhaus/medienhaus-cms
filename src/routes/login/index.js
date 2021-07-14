@@ -71,7 +71,7 @@ const Login = () => {
       </form>
       <p>
         <Trans t={t} i18nKey="usernameSameAsEmail">
-          Your login <code>username</code> and <code>password</code> are the same as for your <code>@udk-berlin.de</code> or <code>@intra.udk-berlin.de</code> mail account. If you forgot your password or want to change it, please check the links below.
+          Your login username and password are the same as for your <code>@udk-berlin.de</code> or <code>@intra.udk-berlin.de</code> mail account. If you forgot your password or want to change it, please check the links below.
         </Trans>
       </p>
       <ul>
