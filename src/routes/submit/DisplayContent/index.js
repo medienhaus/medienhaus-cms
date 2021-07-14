@@ -264,7 +264,6 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace, time,
                               attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                             />
-                            {console.log(cms.body.indexOf(' '))}
                             <Marker position={[cms.body.substring(0, cms.body.indexOf(',')), cms.body.substring(cms.body.indexOf(',') + 1, cms.body.indexOf('-'))]}>
                               <Popup>
                                 {locations.find(coord => coord.coordinates === cms.body.substring(0, cms.body.indexOf(',')) + ',' + cms.body.substring(cms.body.indexOf(',') + 1, cms.body.lastIndexOf('-'))).name}
