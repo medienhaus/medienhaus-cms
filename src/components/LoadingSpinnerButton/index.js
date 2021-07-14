@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { Loading } from '../loading'
 
-const LoadingSpinnerButton = ({ disabled, onClick: callback, style, children, stopPropagationOnClick }) => {
+const LoadingSpinnerButton = ({ className, disabled, onClick: callback, style, children, stopPropagationOnClick }) => {
   const [loading, setLoading] = useState(false)
   const isMounted = useRef(true)
 
@@ -25,7 +25,7 @@ const LoadingSpinnerButton = ({ disabled, onClick: callback, style, children, st
       })
   }
 
-  return <button disabled={loading || disabled} onClick={onClick} style={style}>{loading ? <Loading /> : children}</button>
+  return <button className={className} disabled={loading || disabled} onClick={onClick} style={style}>{loading ? <Loading /> : children}</button>
 }
 
 export default LoadingSpinnerButton

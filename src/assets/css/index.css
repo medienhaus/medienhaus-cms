@@ -850,7 +850,9 @@ button > #loading {
   justify-self: end;
   margin-right: calc(var(--margin) * 0.5);
   margin-top: calc(var(--margin) * -1);
+  min-width: 7ch;
   padding: calc(var(--margin) * 0.2) calc(var(--margin) * 0.4);
+  text-align: right;
 }
 
 .savecancel {
@@ -858,6 +860,16 @@ button > #loading {
   grid-auto-flow: column;
   grid-gap: var(--margin);
 }
+
+.savecancel .cancel {
+  background-color: var(--color-bg);
+  color: var(--color-fg);
+}
+
+/*
+.savecancel .confirm {
+}
+*/
 
 .project {
   display: grid;

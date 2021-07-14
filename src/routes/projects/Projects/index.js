@@ -26,7 +26,7 @@ const Projects = ({ space, visibility, index, reloadProjects }) => {
         */}
           <button disabled={showDeleteComponent} onClick={() => history.push(`/submit/${space.room_id}`)}>{t('EDIT')}</button>
           <button disabled={showDeleteComponent} onClick={() => setShowDeleteComponent(true)}>DELETE</button>
-          <PublishProject space={space} published={visibility} index={index} description={space.description} callback={reloadProjects} />
+          <PublishProject disabled={showDeleteComponent} space={space} published={visibility} index={index} description={space.description} callback={reloadProjects} />
         {/*
         </div>
         */}

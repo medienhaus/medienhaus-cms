@@ -3,7 +3,7 @@ import LoadingSpinnerButton from '../LoadingSpinnerButton'
 import { Loading } from '../loading'
 import { useTranslation } from 'react-i18next'
 
-const PublishProject = ({ space, published, index, description, time, callback }) => {
+const PublishProject = ({ disabled, space, published, index, description, time, callback }) => {
   const { t } = useTranslation('projects')
   const [userFeedback, setUserFeedback] = useState()
   const [visibility, setVisibility] = useState(published)
@@ -53,7 +53,7 @@ const PublishProject = ({ space, published, index, description, time, callback }
       <select id="visibility" name="visibility" value={visibility} onChange={(e) => {
         setVisibility(e.target.value)
         setShowSaveButton(true)
-      }} onBlur={(e) => { setVisibility(e.target.value) }}>
+      }} onBlur={(e) => { setVisibility(e.target.value) }} disabled={disabled}>
             <option value="invite">{t('Draft')}</option>
             <option value="public">{t('Public')}</option>
       </select>
