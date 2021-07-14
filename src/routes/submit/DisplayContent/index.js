@@ -202,15 +202,17 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace, time 
           <LoadingSpinnerButton key={'down_' + block.room_id} disabled={index === blocks.length - 1} onClick={() => changeOrder(block.room_id, block.name, 1)}>↓</LoadingSpinnerButton>
         </div>
         {cms?.msgtype === 'm.image'
-          ? <>
-            <figure className="center"><img src={matrixClient.mxcUrlToHttp(cms.url)} alt={cms?.info?.alt} key={block.room_id} /></figure>
+          ? <div>
+              <figure className="center">
+                <img src={matrixClient.mxcUrlToHttp(cms.url)} alt={cms?.info?.alt} key={block.room_id} />
+              </figure>
 
-            <input type="text" placeholder="author, credits, et cetera" value={cms.info.author} disabled={true}/>
-            <select id="license" name="license" value={cms.info.license}>
-              <option value={cms.info.license} disabled={true}>{cms.info.license}</option>
-            </select>
-            <textarea rows="3" value={cms.info.alt} disabled={true} />
-            </>
+              <input type="text" placeholder="author, credits, et cetera" value={cms.info.author} disabled={true}/>
+              <select id="license" name="license" value={cms.info.license} disabled={true}>
+                <option value={cms.info.license} disabled={true}>{cms.info.license}</option>
+              </select>
+              <textarea rows="3" value={cms.info.alt} disabled={true} />
+            </div>
           : cms?.msgtype === 'm.audio'
             ? <div className="center">
               <audio controls>

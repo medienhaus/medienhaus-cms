@@ -365,6 +365,21 @@ input[type="url"] {
   width: 100%;
 }
 
+input[id*="datalist"][disabled],
+input[type="color"][disabled],
+input[type="date"][disabled],
+input[type="email"][disabled],
+input[type="number"][disabled],
+input[type="search"][disabled],
+input[type="tel"][disabled],
+input[type="text"][disabled],
+input[type="time"][disabled],
+input[type="password"][disabled] {
+  border-color: var(--color-me);
+  color: var(--color-me);
+  cursor: not-allowed;
+}
+
 /* TODO, maybe? third selector looks weird */
 input::-webkit-input-placeholder,
 input::-moz-placeholder
@@ -605,6 +620,12 @@ textarea {
   width: 100%;
 }
 
+textarea[disabled] {
+  border-color: var(--color-me);
+  color: var(--color-me);
+  cursor: not-allowed;
+}
+
 #loading {
   border-color: var(--color-fg) transparent var(--color-fg) transparent;
   border-radius: 50%;
@@ -699,6 +720,10 @@ button > #loading {
   font-size: 0;
 }
 
+.editor figure.center ~ * {
+  margin-top: var(--margin);
+}
+
 .editor .center div {
   height: 100%;
 }
@@ -788,6 +813,17 @@ button > #loading {
   display: grid;
   grid-auto-flow: row;
   grid-gap: var(--margin);
+}
+
+.editor .list > div {
+  display: grid;
+  grid-template-columns: auto 2em;
+}
+
+.editor .list > div > button {
+  background-color: var(--color-bg);
+  border: unset;
+  color: var(--color-fg);
 }
 
 .license-info > * + * {

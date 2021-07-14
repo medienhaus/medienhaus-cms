@@ -4,9 +4,8 @@ import React, { useState } from 'react'
 
 const Item = ({ list, index, removeItem }) => {
   return (
-    <div className="li" style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>{list.text}<div><button onClick={() => removeItem(index)}>x</button>
-    </div>
-    </div>
+    <div>{list.text}<button onClick={() => removeItem(index)}>×</button></div>
+    // <li>{list.text}<button className="no-bg" onClick={() => removeItem(index)}>×</button></li>
   )
 }
 
@@ -60,7 +59,7 @@ const List = ({ onSave, storage, populated, type }) => {
   }
 
   return (
-    <div className="list" >
+    <div className="list">
       {list.map((item, index) => (
         <Item
           key={index}
