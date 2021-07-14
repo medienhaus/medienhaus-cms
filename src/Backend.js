@@ -8,7 +8,7 @@ function makeRequest (url, payload, method = 'POST', authenticate = true) {
   }
 
   if (authenticate) {
-    requestMetadata.headers['Medienhaus-Matrix-Server-Url'] = process.env.REACT_APP_MATRIX_BASE_URL
+    requestMetadata.headers['Medienhaus-Matrix-Server-Base-Url'] = process.env.REACT_APP_MATRIX_BASE_URL
     requestMetadata.headers['Medienhaus-Matrix-Access-Token'] = localStorage.getItem('medienhaus_access_token')
     requestMetadata.headers['Medienhaus-Matrix-User-Id'] = localStorage.getItem('medienhaus_user_id')
   }
