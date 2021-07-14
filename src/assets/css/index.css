@@ -920,6 +920,10 @@ button > #loading {
   font-size: 0.7rem;
 }
 
+.save {
+  margin-top: calc(var(--margin) * 4) !important;
+}
+
 /*
 .account > div {
   display: grid;
