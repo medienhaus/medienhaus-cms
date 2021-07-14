@@ -221,25 +221,25 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace, time,
             </div>
             )
           : cms?.msgtype === 'm.audio'
-            ? <div>
-              {console.log(cms)}
-
-              <audio className="center" controls>
-                <source src={matrixClient.mxcUrlToHttp(cms.url)} />
-              </audio>
-              <input type="text" value={cms.info.name} disabled />
-              <input type="text" value={cms.info.author} disabled />
-              <select id="license" name="license" value={cms.info.license} disabled>
-                <option value="cc0">CC0 1.0</option>
-                <option value="cc-by">CC BY 4.0</option>
-                <option value="cc-by-sa">CC BY-SA 4.0</option>
-                <option value="cc-by-nc">CC BY-NC 4.0</option>
-                <option value="cc-by-nc-sa">CC BY-NC-SA 4.0</option>
-                <option value="cc-by-nd">CC BY-ND 4.0</option>
-                <option value="cc-by-nc-nd">CC BY-NC-ND 4.0</option>
-              </select>
-              <textarea value={cms.info.alt} disabled />
-            </div>
+            ? (
+              <div>
+                <audio className="center" controls>
+                  <source src={matrixClient.mxcUrlToHttp(cms.url)} />
+                </audio>
+                <input type="text" value={cms.info.name} disabled />
+                <input type="text" value={cms.info.author} disabled />
+                <select id="license" name="license" value={cms.info.license} disabled>
+                  <option value="cc0">CC0 1.0</option>
+                  <option value="cc-by">CC BY 4.0</option>
+                  <option value="cc-by-sa">CC BY-SA 4.0</option>
+                  <option value="cc-by-nc">CC BY-NC 4.0</option>
+                  <option value="cc-by-nc-sa">CC BY-NC-SA 4.0</option>
+                  <option value="cc-by-nd">CC BY-ND 4.0</option>
+                  <option value="cc-by-nc-nd">CC BY-NC-ND 4.0</option>
+                </select>
+                <textarea value={cms.info.alt} disabled />
+              </div>
+              )
             : json.type === 'ul'
               ? <List onSave={() => onSave(block.room_id)} storage={(list) => localStorage.setItem(block.room_id, list)} populated={cms?.body} type="ul" />
               : json.type === 'ol'
@@ -258,20 +258,22 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace, time,
                         />
                         )
                       : json.type === 'location'
-                        ? <div className="center">
-                          <MapContainer center={[cms.body.substring(0, cms.body.indexOf(',')), cms.body.substring(cms.body.indexOf(',') + 1, cms.body.indexOf('-'))]} zoom={17} scrollWheelZoom={false} placeholder>
-                            <TileLayer
-                              attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-                              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                            />
-                            <Marker position={[cms.body.substring(0, cms.body.indexOf(',')), cms.body.substring(cms.body.indexOf(',') + 1, cms.body.indexOf('-'))]}>
-                              <Popup>
-                                {locations.find(coord => coord.coordinates === cms.body.substring(0, cms.body.indexOf(',')) + ',' + cms.body.substring(cms.body.indexOf(',') + 1, cms.body.lastIndexOf('-'))).name}
-                              </Popup>
-                            </Marker>
-                          </MapContainer>
-                          <input type="text" disabled value={cms.body.substring(cms.body.lastIndexOf('-') + 1)} />
-                        </div>
+                        ? (
+                          <div className="center">
+                            <MapContainer center={[cms.body.substring(0, cms.body.indexOf(',')), cms.body.substring(cms.body.indexOf(',') + 1, cms.body.indexOf('-'))]} zoom={17} scrollWheelZoom={false} placeholder>
+                              <TileLayer
+                                attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+                                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                              />
+                              <Marker position={[cms.body.substring(0, cms.body.indexOf(',')), cms.body.substring(cms.body.indexOf(',') + 1, cms.body.indexOf('-'))]}>
+                                <Popup>
+                                  {locations.find(coord => coord.coordinates === cms.body.substring(0, cms.body.indexOf(',')) + ',' + cms.body.substring(cms.body.indexOf(',') + 1, cms.body.lastIndexOf('-'))).name}
+                                </Popup>
+                              </Marker>
+                            </MapContainer>
+                            <input type="text" disabled value={cms.body.substring(cms.body.lastIndexOf('-') + 1)} />
+                          </div>
+                          )
                         : json.type === 'date'
                           ? <div>{cms.body.split(' ')[0]} {cms.body.split(' ')[1] || null}</div>
                           : json.type === 'bbb'
@@ -287,30 +289,15 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace, time,
                                     style={{ width: '100%', aspectRatio: '16 / 9', border: 'calc(var(--margin) * 0.2) solid var(--color-fg)' }}
                                   />
                                   )
-                                : <div className="center">
-                                  <Editor
-                                    dark={window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches}
-                                    defaultValue={cms?.body}
-                                    disableExtensions={['blockmenu', 'image', 'embed', 'table', 'tr', 'th', 'td', 'bullet_list', 'ordered_list', 'checkbox_item', 'checkbox_list', 'container_notice', 'blockquote', 'heading', 'hr', 'highlight']}
-                                    placeholder={json.type}
-                                    readOnly={readOnly}
-                                    onSave={({ done }) => {
-                                      if (localStorage.getItem(block.room_id) !== null && cms !== undefined && cms.body !== localStorage.getItem(block.room_id)) {
-                                        onSave(block.room_id)
-                                        localStorage.removeItem(block.room_id)
-                                      } else if (localStorage.getItem(block.room_id) !== null && cms === undefined) {
-                                        onSave(block.room_id)
-                                        localStorage.removeItem(block.room_id)
-                                      }
-                                    }}
-                                    onChange={debounce((value) => {
-                                      const text = value()
-                                      localStorage.setItem(block.room_id, text)
-                                    }, 250)}
-                                    handleDOMEvents={{
-                                      focus: () => {
-                                      }, // this could set MatrixClient"User.presence" to 'online', "User.currentlyActive" or 'typing. depending on which works best.
-                                      blur: (e) => {
+                                : (
+                                  <div className="center">
+                                    <Editor
+                                      dark={window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches}
+                                      defaultValue={cms?.body}
+                                      disableExtensions={['blockmenu', 'image', 'embed', 'table', 'tr', 'th', 'td', 'bullet_list', 'ordered_list', 'checkbox_item', 'checkbox_list', 'container_notice', 'blockquote', 'heading', 'hr', 'highlight']}
+                                      placeholder={json.type}
+                                      readOnly={readOnly}
+                                      onSave={({ done }) => {
                                         if (localStorage.getItem(block.room_id) !== null && cms !== undefined && cms.body !== localStorage.getItem(block.room_id)) {
                                           onSave(block.room_id)
                                           localStorage.removeItem(block.room_id)
@@ -318,11 +305,28 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace, time,
                                           onSave(block.room_id)
                                           localStorage.removeItem(block.room_id)
                                         }
-                                      }
-                                    }}
-                                    key={block.room_id}
-                                  />
-                                </div>}
+                                      }}
+                                      onChange={debounce((value) => {
+                                        const text = value()
+                                        localStorage.setItem(block.room_id, text)
+                                      }, 250)}
+                                      handleDOMEvents={{
+                                        focus: () => {
+                                        }, // this could set MatrixClient"User.presence" to 'online', "User.currentlyActive" or 'typing. depending on which works best.
+                                        blur: (e) => {
+                                          if (localStorage.getItem(block.room_id) !== null && cms !== undefined && cms.body !== localStorage.getItem(block.room_id)) {
+                                            onSave(block.room_id)
+                                            localStorage.removeItem(block.room_id)
+                                          } else if (localStorage.getItem(block.room_id) !== null && cms === undefined) {
+                                            onSave(block.room_id)
+                                            localStorage.removeItem(block.room_id)
+                                          }
+                                        }
+                                      }}
+                                      key={block.room_id}
+                                    />
+                                  </div>
+                                  )}
 
         <div className="right">
           <button

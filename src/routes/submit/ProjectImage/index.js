@@ -45,31 +45,33 @@ const ProjectImage = ({ projectSpace, changeProjectImage, imgAuthor, imgLicense,
     }
   }
 
+  const fileUpload = <FileUpload fileType="image" handleSubmission={handleSubmission} loading={loading} />
+
+  if (!projectImage) {
+    return fileUpload
+  }
+
   return (
     <>
-      {projectImage
-        ? <>
-          <img src={matrixClient.mxcUrlToHttp(projectImage.url)} alt="Project-key-visual" />
-          <button onClick={e => { e.preventDefault(); setEdit(edit => !edit) }}>{edit ? 'CANCEL' : 'CHANGE'}</button>
-          {!edit &&
-            <>
-              <input type="text" placeholder="author, credits, et cetera" value={projectImage.author} disabled />
-              <select id="license" name="license" value={projectImage.license} disabled>
-                <option value="cc0">CC0 1.0</option>
-                <option value="cc-by">CC BY 4.0</option>
-                <option value="cc-by-sa">CC BY-SA 4.0</option>
-                <option value="cc-by-nc">CC BY-NC 4.0</option>
-                <option value="cc-by-nc-sa">CC BY-NC-SA 4.0</option>
-                <option value="cc-by-nd">CC BY-ND 4.0</option>
-                <option value="cc-by-nc-nd">CC BY-NC-ND 4.0</option>
-              </select>
-              <textarea rows="3" value={projectImage.alt} disabled />
-            </>}
-          {edit && <FileUpload fileType="image" handleSubmission={handleSubmission} loading={loading} />}
-        </>
-        : (
-          <FileUpload fileType="image" handleSubmission={handleSubmission} loading={loading} />
-          )}
+      <>
+        <img src={matrixClient.mxcUrlToHttp(projectImage.url)} alt="Project-key-visual" />
+        <button onClick={e => { e.preventDefault(); setEdit(edit => !edit) }}>{edit ? 'CANCEL' : 'CHANGE'}</button>
+        {!edit &&
+          <>
+            <input type="text" placeholder="author, credits, et cetera" value={projectImage.author} disabled />
+            <select id="license" name="license" value={projectImage.license} disabled>
+              <option value="cc0">CC0 1.0</option>
+              <option value="cc-by">CC BY 4.0</option>
+              <option value="cc-by-sa">CC BY-SA 4.0</option>
+              <option value="cc-by-nc">CC BY-NC 4.0</option>
+              <option value="cc-by-nc-sa">CC BY-NC-SA 4.0</option>
+              <option value="cc-by-nd">CC BY-ND 4.0</option>
+              <option value="cc-by-nc-nd">CC BY-NC-ND 4.0</option>
+            </select>
+            <textarea rows="3" value={projectImage.alt} disabled />
+          </>}
+        {edit && fileUpload}
+      </>
     </>
   )
 }

@@ -117,10 +117,12 @@ const Collaborators = ({ projectSpace, members, time, startListeningToCollab }) 
           members && Object.keys(members).length > 1 && Object.values(members).map((name, i) => {
             startListeningToCollab()
             return name.display_name !== profile.displayname &&
-              (<div style={{ display: 'flex' }}>
-                {/* @TODO kicking user function */}
-                <li style={{ width: '100%' }}>🖋 {name.display_name}</li><button disabled>x</button>
-              </div>)
+              (
+                <div style={{ display: 'flex' }}>
+                  {/* @TODO kicking user function */}
+                  <li style={{ width: '100%' }}>🖋 {name.display_name}</li><button disabled>x</button>
+                </div>
+              )
           })
         }
           {credits && credits.map((name, index) =>
