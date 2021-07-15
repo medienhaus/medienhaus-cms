@@ -53,6 +53,7 @@ function ContextDropdown () {
     <>
       <div style={{ display: 'flex' }} {...getComboboxProps()}>
         <input
+          disabled
           type="text" placeholder="-- search or select context --" {...getInputProps()} style={{
             flex: '1 0',
             backgroundImage: 'url(data:image/svg+xml;base64,PHN2ZyBoZWlnaHQ9IjMwMHB4IiB3aWR0aD0iMzAwcHgiIGZpbGw9InJnYigxMjgsMTI4LDEyOCkiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgdmlld0JveD0iMCAwIDEwMCAxMDAiIHg9IjBweCIgeT0iMHB4Ij48cG9seWdvbiBwb2ludHM9IjUwIDU3LjEzIDIzLjE5IDMwLjQ2IDE2LjEzIDM3LjU1IDUwIDcxLjIzIDgzLjg2IDM3LjU1IDc2LjgxIDMwLjQ2IDUwIDU3LjEzIj48L3BvbHlnb24+PC9zdmc+)',
@@ -62,6 +63,7 @@ function ContextDropdown () {
           }}
         />
         <button
+          disabled
           type="button"
           {...getToggleButtonProps()}
           aria-label="toggle menu"
