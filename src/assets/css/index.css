@@ -863,6 +863,16 @@ button > #loading {
   color: var(--color-fg);
 }
 
+.invites > ul,
+.invites > ul > li {
+  display: grid;
+  grid-gap: var(--margin);
+}
+
+.invites > ul > li {
+  grid-template-columns: 1fr 12ch;
+}
+
 .license-info > * + * {
   margin-top: var(--margin);
 }

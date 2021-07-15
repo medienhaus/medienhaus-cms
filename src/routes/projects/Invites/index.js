@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react'
 import Matrix from '../../../Matrix'
 import LoadingSpinnerButton from '../../../components/LoadingSpinnerButton'
@@ -36,15 +35,15 @@ const Invites = ({ space, callback }) => {
       setJoining(false)
     }
   }
+
   return (
     <>
-      <div style={{ display: 'flex' }}>
-        <span style={{ width: '100%' }}>{space.name}</span>
-        <LoadingSpinnerButton disabled={joining} onClick={() => join(space.id)}>ACCEPT</LoadingSpinnerButton>
-        {error}
-      </div>
+      <span>{space.name}</span>
+      {/* TODO: needs i18n */}
+      <LoadingSpinnerButton disabled={joining} onClick={() => join(space.id)}>ACCEPT</LoadingSpinnerButton>
       {error}
     </>
   )
 }
+
 export default Invites

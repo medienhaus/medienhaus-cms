@@ -77,7 +77,9 @@ const Overview = () => {
       {!invites
         ? <Loading />
         : Object.keys(invites).length > 0 && (
-          <>
+          <section className="invites">
+            {/* TODO: needs i18n */}
+            <h3>Invites</h3>
             <p>
               <Trans t={t} i18nKey="pendingInvites" count={Object.keys(invites).length}>
                 You have been invited to join the following project{Object.keys(invites).length > 1 ? 's' : ''}:
@@ -85,12 +87,12 @@ const Overview = () => {
             </p>
             <ul>
               {Object.values(invites).map((space, index) => (
-                <li key={index} style={{ listStyleType: 'none' }}>
+                <li key={index}>
                   <Invites space={space} callback={removeInviteByIndex} />
                 </li>
               ))}
             </ul>
-          </>
+          </section>
         )}
       {!fetchSpaces && !spacesErr &&
         <div>
