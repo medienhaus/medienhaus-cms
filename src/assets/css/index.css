@@ -10,7 +10,7 @@
   /*
   --color-hi: rgb(228,9,59);
   */
-  --color-hi: rgb(255,255,153);
+  --color-hi: rgb(255,240,170);
   --color-me: rgb(128,128,128);
   --color-lo: rgb(240,240,240);
   --margin: 1rem;
@@ -41,8 +41,8 @@ html {
 body {
   font-size: 1rem;
   height: 100%;
-  padding-left: calc(var(--margin) * 2);
-  padding-right: calc(var(--margin) * 2);
+  padding-left: var(--margin);
+  padding-right: var(--margin);
   opacity: 0;
   animation: init 0.03s ease-in 0.5s 1 forwards;
 }
@@ -96,7 +96,8 @@ a:active {
 /* TODO */
 code {
   background-color: var(--color-lo);
-  font-family: monospace, monospace;
+  font-family: "Roboto Mono", monospace;
+  font-weight: normal;
   padding: 0 calc(var(--margin) * 0.2);
 }
 
@@ -256,8 +257,19 @@ nav + section > button:hover {
 */
 
 nav + select {
-  grid-row: 3;
+  /*
+  grid-row: 1;
   grid-column: 2;
+  align-self: start;
+  justify-self: end;
+  margin-top: var(--margin);
+  position: sticky;
+  top: var(--margin);
+  width: 6ch;
+  z-index: 1;
+  */
+  grid-column: 2;
+  grid-row: 3;
   align-self: end;
   justify-self: end;
   margin-bottom: calc(var(--margin) * 0.65);
@@ -421,7 +433,7 @@ input[type="checkbox"]:checked,
 input[type="radio"]:checked {
   background-color: var(--color-fg);
   color: var(--color-bg);
-  font-size: calc(var(--margin) * 1.4);
+  font-size: 1.4rem;
   text-align: center;
 }
 
@@ -856,14 +868,26 @@ button > #loading {
 }
 
 .maxlength > span {
+  /*
   background-color: var(--color-bg);
   justify-self: end;
   margin-right: calc(var(--margin) * 0.5);
   margin-top: calc(var(--margin) * -1);
+  */
+  font-size: 0.6rem;
+  justify-self: end;
   min-width: 7ch;
+  /*
   padding: calc(var(--margin) * 0.2) calc(var(--margin) * 0.4);
+  */
+  margin-top: calc(var(--margin) * 0.2);
   text-align: right;
 }
+
+/*
+.timestamp {
+}
+*/
 
 .savecancel {
   display: grid;
@@ -985,10 +1009,21 @@ button > #loading {
 }
 
 .terms > div > label {
-  font-family: "Courier New";
-  font-size: 0.75rem;
-  line-height: 1.1rem;
+  font-family: "Courier New", "Courier", monospace;
+  font-size: 0.7rem;
+  line-height: normal;
 }
+
+.terms > div > input[type="checkbox"] {
+  font-family: "Courier New", "Courier", monospace;
+}
+
+/*
+.terms > div > input[type="checkbox"]:checked {
+  background-color: var(--color-bg);
+  color: var(--color-fg);
+}
+*/
 
 .save {
   margin-top: calc(var(--margin) * 3) !important;
@@ -1296,7 +1331,7 @@ button > #loading {
     /*
     --color-hi: rgb(228,9,59);
     */
-    --color-hi: rgb(255,255,153);
+    --color-hi: rgb(255,240,170);
     /*
     --color-me: rgb(128,128,128);
     */
@@ -1388,7 +1423,18 @@ button > #loading {
 
 /* 640px */
 @media (min-width: 40em) {
+  body {
+    padding-left: calc(var(--margin) * 2);
+    padding-right: calc(var(--margin) * 2);
+  }
   nav + select {
+    /*
+    grid-column: 2;
+    grid-row: 3;
+    align-self: end;
+    justify-self: end;
+    margin-bottom: calc(var(--margin) * 0.65);
+    */
     position: sticky;
     bottom: var(--margin);
   }

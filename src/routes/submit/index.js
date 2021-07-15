@@ -270,7 +270,7 @@ const Submit = () => {
           </section>
           <section className="save">
             <button onClick={() => history.push('/projects')}>← {t('BACK TO OVERVIEW')}</button>
-            {saveTimestamp && <p>{t('Project last saved at')} {saveTimestamp}</p>}
+            {saveTimestamp && <p className="timestamp">↳ {t('Project last saved at')} {saveTimestamp}</p>}
           </section>
         </>
       )}
