@@ -1428,7 +1428,7 @@ button > #loading {
   }
   header > button.open {
     font-weight: bold;
-    letter-spacing: 0.1rem;
+    letter-spacing: 0.05rem;
     margin-top: -0.3rem;
     transform: rotate(90deg);
   }
