@@ -38,8 +38,12 @@ const ProjectDescription = ({ description: intro, callback }) => {
               setDescription(e.target.value)
             }}
             placeholder={`${t('Please add a short description of your project.')} ${t('This field is required before publishing.')}`}
-            onBlur={() => onSave()}
-          />
+            onBlur={() => onSave()
+            }
+            onKeyDown={(e) => {
+              e.target.style.height = 'inherit'
+              e.target.style.height = `${e.target.scrollHeight}px`
+            } }/>
           <p>{saved}</p>
         </div>
         <div className="right">
