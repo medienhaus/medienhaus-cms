@@ -13,13 +13,10 @@ const PublishProject = ({ disabled, space, published, description, time }) => {
   }, [published])
 
   const onChangeVisibility = async (e) => {
-    setVisibility(e.target.value)
-    console.log('visibility = ' + visibility)
-    console.log('target value = ' + e.target.value)
     const req = {
       method: 'PUT',
       headers: { Authorization: 'Bearer ' + localStorage.getItem('medienhaus_access_token') },
-      body: JSON.stringify({ join_rule: visibility })
+      body: JSON.stringify({ join_rule: e.target.value })
     }
     try {
       await fetch(process.env.REACT_APP_MATRIX_BASE_URL + `/_matrix/client/r0/rooms/${space.room_id}/state/m.room.join_rules/`, req)
@@ -27,6 +24,7 @@ const PublishProject = ({ disabled, space, published, description, time }) => {
           if (response.ok) {
             /* TODO: needs i18n */
             setUserFeedback('Changed successfully!')
+            setVisibility(e.target.value)
             time && time()
             setTimeout(() => {
               setUserFeedback()
