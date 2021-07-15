@@ -339,6 +339,7 @@ input[type="submit"] {
   border-width: calc(var(--margin) * 0.2);
   color: var(--color-bg);
   cursor: pointer;
+  height: calc(var(--margin) * 2);
   padding: calc(var(--margin) * 0.2);
   width: 100%;
 }
@@ -673,6 +674,17 @@ button > #loading {
 
 .contributors > .permissions > * + * {
   margin-top: var(--margin);
+}
+
+.credits > ul,
+.credits > ul > li {
+  display: grid;
+  align-items: center;
+  grid-gap: var(--margin);
+}
+
+.credits > ul > li {
+  grid-template-columns: 1fr 2rem;
 }
 
 /* TODO editor */
