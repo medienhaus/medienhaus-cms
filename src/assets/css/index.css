@@ -188,6 +188,10 @@ header > a > h1 {
   display: inline-block;
 }
 
+header > button {
+  display: none;
+}
+
 main {
   grid-row: 2;
   grid-column: 1;
@@ -264,24 +268,12 @@ nav + section > button:hover {
 }
 */
 
-nav + select {
-  /*
-  grid-row: 1;
-  grid-column: 2;
-  align-self: start;
-  justify-self: end;
-  margin-top: var(--margin);
-  position: sticky;
-  top: var(--margin);
+/* Language Selector */
+nav select {
   width: 6ch;
-  z-index: 1;
-  */
-  grid-column: 2;
-  grid-row: 3;
-  align-self: end;
-  justify-self: end;
-  margin-bottom: calc(var(--margin) * 0.65);
-  width: 6ch;
+  position: fixed;
+  bottom: var(--margin);
+  right: var(--margin);
 }
 
 nav > * > * > a + a {
@@ -1409,6 +1401,49 @@ button > #loading {
   nav {
     display: none;
   }
+  nav.active {
+    background-color: var(--color-bg);
+    display: block;
+    padding: calc(var(--margin) * 1.4) var(--margin);
+    position: fixed;
+    top: calc(var(--margin) * 3.8);
+    /*
+    left: 50%;
+    */
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
+  }
+  header {
+    display: grid;
+    grid-template-columns: 1fr 2rem;
+    grid-gap: var(--margin);
+  }
+  header > button {
+    background-color: var(--color-bg);
+    border: unset;
+    color: var(--color-fg);
+    display: initial;
+  }
+  header > button.open {
+    font-weight: bold;
+    letter-spacing: 0.05rem;
+    margin-top: -0.3rem;
+    transform: rotate(90deg);
+  }
+  header > button.close {
+    font-size: 1.5rem;
+    margin-top: -0.5rem;
+  }
+  /*
+  header button {
+    display: block;
+    float: right;
+    width: auto;
+    margin-top: calc(var(--margin) * -0.3);
+  }
+  */
   /* TODO */
   /*
   nav + section {
@@ -1486,16 +1521,10 @@ button > #loading {
     padding-left: calc(var(--margin) * 2);
     padding-right: calc(var(--margin) * 2);
   }
-  nav + select {
-    /*
-    grid-column: 2;
-    grid-row: 3;
-    align-self: end;
-    justify-self: end;
-    margin-bottom: calc(var(--margin) * 0.65);
-    */
-    position: sticky;
+  /* Language Selector */
+  nav select {
     bottom: var(--margin);
+    right: calc(var(--margin) * 2);
   }
   .project {
     grid-template-columns: calc(var(--margin) * 7.8) auto 12ch;
