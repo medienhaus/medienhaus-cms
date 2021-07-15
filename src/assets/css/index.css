@@ -1401,17 +1401,20 @@ nav button {
   }
   nav {
     display: none;
+  }
+  nav.active {
+    background-color: var(--color-bg);
+    display: block;
+    padding: calc(var(--margin) * 1.4) var(--margin);
     position: fixed;
-    top: 0;
+    top: calc(var(--margin) * 3.4);
+    /*
+    left: 50%;
+    */
     left: 0;
-    background: var(--color-bg);
     right: 0;
     bottom: 0;
     z-index: 1;
-    padding: calc(var(--margin) * 1.4) var(--margin);
-  }
-  nav.active {
-    display: block;
   }
   header button,
   nav button {
