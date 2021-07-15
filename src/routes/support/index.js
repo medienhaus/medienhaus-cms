@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useForm } from 'react-hook-form' // https://github.com/react-hook-form/react-hook-form
-import { Trans, useTranslation } from 'react-i18next'
+import { useTranslation } from 'react-i18next'
 import { useAuth } from '../../Auth'
 import { makeRequest } from '../../Backend'
 
@@ -10,7 +10,7 @@ const Support = () => {
   const [system, setSystem] = useState()
   const [browser, setBrowser] = useState()
   const [sending, setSending] = useState(false)
-  const [submitted, setSubmit] = useState(false)
+  const [submitted, setSubmitted] = useState(false)
   const { t } = useTranslation('support')
 
   const auth = useAuth()
