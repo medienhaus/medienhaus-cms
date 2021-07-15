@@ -14,6 +14,8 @@ const PublishProject = ({ disabled, space, published, description, time }) => {
 
   const onChangeVisibility = async (e) => {
     setVisibility(e.target.value)
+    console.log('visibility = ' + visibility)
+    console.log('target value = ' + e.target.value)
     const req = {
       method: 'PUT',
       headers: { Authorization: 'Bearer ' + localStorage.getItem('medienhaus_access_token') },
