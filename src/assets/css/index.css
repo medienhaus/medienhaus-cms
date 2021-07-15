@@ -1398,6 +1398,11 @@ button > #loading {
   }
 }
 
+header button,
+nav button {
+  display: none;
+}
+
 /* 479px */
 @media (max-width: 29.938em) {
   header {
@@ -1408,6 +1413,21 @@ button > #loading {
   }
   nav {
     display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: black;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
+    padding: calc(var(--margin) * 1.4) var(--margin);
+  }
+  nav.active {
+    display: block;
+  }
+  header button,
+  nav button {
+    display: block;
   }
   /* TODO */
   /*

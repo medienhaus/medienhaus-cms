@@ -2,7 +2,6 @@ import React from 'react'
 import { BrowserRouter as Router, Route, Switch, Redirect, useLocation } from 'react-router-dom'
 
 import './assets/css/index.css'
-import Header from './components/header'
 import Footer from './components/footer'
 import Nav from './components/nav'
 import { Loading } from './components/loading'
@@ -68,7 +67,7 @@ function App () {
     <>
       <AuthProvider>
         <Router basename="/rundgang">
-          <Header />
+          <Nav />
           <main>
             <Switch>
               <Route path="/" exact component={Landing} />
@@ -83,7 +82,6 @@ function App () {
               <PrivateRoute path="/feedback" component={Feedback} />
             </Switch>
           </main>
-          <Nav />
           <Footer />
         </Router>
       </AuthProvider>
