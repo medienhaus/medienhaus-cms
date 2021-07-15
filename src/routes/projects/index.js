@@ -75,8 +75,8 @@ const Overview = () => {
 
   useEffect(() => {
     // we check if a collaborator has deleted a project since we last logged in
-    joinedSpaces?.filter(space => space.meta?.deleted).forEach(async space => await deleteProject(space.room_id))
-    const updatedSpaces = joinedSpaces?.filter(space => !space.meta?.deleted)
+    joinedSpaces.length > 0 && joinedSpaces?.filter(space => space.meta?.deleted).forEach(async space => await deleteProject(space.room_id))
+    const updatedSpaces = joinedSpaces.length > 0 && joinedSpaces?.filter(space => !space.meta?.deleted)
     setProjects(sortBy(updatedSpaces, 'name'))
   }, [joinedSpaces])
 
