@@ -1406,7 +1406,7 @@ button > #loading {
     display: block;
     padding: calc(var(--margin) * 1.4) var(--margin);
     position: fixed;
-    top: calc(var(--margin) * 3.8);
+    top: calc(var(--margin) * 3.7);
     /*
     left: 50%;
     */
