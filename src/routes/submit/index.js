@@ -214,7 +214,7 @@ const Submit = () => {
             : <strong>{t('Create and upload new project')}</strong>}
         </p>
         <p>{t('This is the project page. Please add the context in which the project was created, a project name, descriptive text and a thumbnail. You can also add more images, videos, livestreams and BigBlueButton sessions.')}</p>
-        <p><Trans t={t} i18nKey="submitInstructions2">If you want to continue at a later point in time, you can save the project as a draft and find it in your collection under <NavLink activeclassname="active" to="/projects">/projects</NavLink>.</Trans></p>
+        <p><Trans t={t} i18nKey="submitInstructions2">If you want to continue at a later point in time, the project is automatically saved as a draft and you can find it in your collection under <NavLink activeclassname="active" to="/projects">/projects</NavLink>.</Trans></p>
         <p>{t('The Rundgang platform will appear in German as well as in English. Therefore, remember to create your project name and introduction in both German and English. Other texts should also be entered in both languages, otherwise the text will appear in only one language on both pages.')}</p>
       </section>
       <section className="project-title">
