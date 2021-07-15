@@ -25,10 +25,11 @@ const Overview = () => {
   useEffect(() => {
     // when navigating away from /projects we need the following code to retreive our pending invites for memoryStore
     const allRooms = matrixClient.getRooms()
-    allRooms.forEach(room => {
+    allRooms.forEach(async room => {
       // ignore rooms that aren't spaces (or are language spaces) and only return invites
       if (room.getType() !== 'm.space' || room.name === 'de' || room.name === 'en') return
-      if (room.getMyMembership() !== 'invite') return
+      const roomMembers = await room._loadMembersFromServer().catch(console.error)
+      if (room.getMyMembership() !== 'invite' || roomMembers < 1) return
       setInvites(invites => Object.assign({}, invites, {
         [room.roomId]:
           {
@@ -46,7 +47,7 @@ const Overview = () => {
       const roomMembers = await room._loadMembersFromServer().catch(console.error)
       // room.getMyMembership() is only available after the current call stack has cleared (_.defer),
       // so we put it behind the "await"
-      if (room.getMyMembership() === 'invite' || roomMembers.length < 1) {
+      if (room.getMyMembership() !== 'invite' || roomMembers.length < 1) {
         return
       }
       setInvites(invites => Object.assign({}, invites, {
