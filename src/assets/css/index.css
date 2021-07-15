@@ -1425,9 +1425,10 @@ button > #loading {
     border: unset;
     color: var(--color-fg);
     display: initial;
+    font-size: 1.4rem;
     justify-self: center;
     letter-spacing: 0.1rem;
-    margin-top: -0.4rem;
+    margin-top: -0.2rem;
     transform: rotate(90deg);
   }
   /*
