@@ -669,14 +669,14 @@ button > #loading {
   max-width: calc(var(--margin) * 1.15);
 }
 
-#login form div:nth-of-type(1) div {
+.login form div:nth-of-type(1) div {
   display: grid;
   grid-gap: var(--margin);
   grid-auto-flow: row;
 }
 
-#login label + *,
-#login ul > li + li {
+.login label + *,
+.login ul > li + li {
   margin-top: calc(var(--margin) * 0.5);
 }
 
@@ -1460,7 +1460,7 @@ button > #loading {
 
 /* 480px */
 @media (min-width: 30em) {
-  #login form div:nth-of-type(1) div {
+  .login form div:nth-of-type(1) div {
     grid-template-columns: auto 20ch;
   }
   /* TODO tools */

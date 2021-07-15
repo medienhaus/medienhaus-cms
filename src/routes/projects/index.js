@@ -101,7 +101,7 @@ const Overview = () => {
               <h3>Invites</h3>
               <p>
                 <Trans t={t} i18nKey="pendingInvites" count={Object.keys(invites).length}>
-                  You have been invited to join the following project{Object.keys(invites).length > 1 ? 's' : ''}:
+                  You have been invited to join the following project{Object.keys(invites).length > 1 ? 's' : ''}. When you accept an invitation, the project will be listed below with your others. You can edit collaborative projects, delete them, or change their visibility.
                 </Trans>
               </p>
               <ul>

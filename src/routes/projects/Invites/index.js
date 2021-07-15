@@ -38,7 +38,7 @@ const Invites = ({ space, callback }) => {
 
   return (
     <>
-      <span>{space.name}</span>
+      <strong>{space.name}</strong>
       {/* TODO: needs i18n */}
       <LoadingSpinnerButton disabled={joining} onClick={() => join(space.id)}>ACCEPT</LoadingSpinnerButton>
       {error}
