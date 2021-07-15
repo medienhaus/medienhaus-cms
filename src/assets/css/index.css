@@ -211,10 +211,18 @@ main ul {
 }
 
 /* TODO */
+/*
 form + *,
+*/
 form > * + * {
-  margin-top: calc(var(--margin) * 2);
+  margin-top: var(--margin);
 }
+
+/*
+form > div > * + * {
+  margin-top: calc(var(--margin) * 0.5);
+}
+*/
 
 nav {
   grid-row: 1 / 3;

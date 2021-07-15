@@ -42,7 +42,8 @@ const Feedback = () => {
   if (submitted) {
     return (
       <section>
-        <p><Trans t={t} i18nKey="submittedMessage">Thank you for your feedback! We are collecting your feedback and will evaluate it after the Rundgang 2021. If you need technical help with entering your contributions, please reach out via the <NavLink to="/support">/support</NavLink> form.</Trans></p>
+        <p>{t('Thank you for your feedback!')}</p>
+        <p><Trans t={t} i18nKey="submittedMessage">We are collecting your feedback and will evaluate it after the Rundgang 2021. If you need technical help with entering your contributions, please reach out via the <NavLink to="/support">/support</NavLink> form.</Trans></p>
       </section>
     )
   }
