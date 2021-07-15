@@ -742,6 +742,7 @@ button > #loading {
 
 .editor .center > textarea {
   height: 100%;
+  resize: none;
 }
 
 .editor audio.center {
