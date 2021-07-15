@@ -260,23 +260,21 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace, time,
                       : json.type === 'location'
                         ? (
                           <div>
-                            <div className="center">
-                              {// @TODO leaflet breaks css layout structure; no idea how to fix
-                              cms.body.substring(0, cms.body.indexOf(',')) + ',' + cms.body.substring(cms.body.indexOf(',') + 1, cms.body.indexOf('-')) !== '0.0, 0.0' &&
-                                <MapContainer center={[cms.body.substring(0, cms.body.indexOf(',')), cms.body.substring(cms.body.indexOf(',') + 1, cms.body.indexOf('-'))]} zoom={17} scrollWheelZoom={false} placeholder>
-                                  <TileLayer
-                                    attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-                                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                                  />
-                                  <Marker position={[cms.body.substring(0, cms.body.indexOf(',')), cms.body.substring(cms.body.indexOf(',') + 1, cms.body.indexOf('-'))]}>
-                                    <Popup>
-                                      {locations.find(coord => coord.coordinates === cms.body.substring(0, cms.body.indexOf(',')) + ',' + cms.body.substring(cms.body.indexOf(',') + 1, cms.body.lastIndexOf('-'))).name}
-                                    </Popup>
-                                  </Marker>
-                                </MapContainer>
-}
-                              {cms.body.substring(cms.body.lastIndexOf('-') + 1).length > 0 && <input type="text" disabled value={cms.body.substring(cms.body.lastIndexOf('-') + 1)} />}
-                            </div>
+                            {// @TODO leaflet breaks css layout structure; no idea how to fix
+                            cms.body.substring(0, cms.body.indexOf(',')) + ',' + cms.body.substring(cms.body.indexOf(',') + 1, cms.body.indexOf('-')) !== '0.0, 0.0' &&
+                              <MapContainer className="center" center={[cms.body.substring(0, cms.body.indexOf(',')), cms.body.substring(cms.body.indexOf(',') + 1, cms.body.indexOf('-'))]} zoom={17} scrollWheelZoom={false} placeholder>
+                                <TileLayer
+                                  attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+                                  url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                                />
+                                <Marker position={[cms.body.substring(0, cms.body.indexOf(',')), cms.body.substring(cms.body.indexOf(',') + 1, cms.body.indexOf('-'))]}>
+                                  <Popup>
+                                    {locations.find(coord => coord.coordinates === cms.body.substring(0, cms.body.indexOf(',')) + ',' + cms.body.substring(cms.body.indexOf(',') + 1, cms.body.lastIndexOf('-'))).name}
+                                  </Popup>
+                                </Marker>
+                              </MapContainer>
+                            }
+                            {cms.body.substring(cms.body.lastIndexOf('-') + 1).length > 0 && <input type="text" disabled value={cms.body.substring(cms.body.lastIndexOf('-') + 1)} />}
                           </div>
                           )
                         : json.type === 'date'

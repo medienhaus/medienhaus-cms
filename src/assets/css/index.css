@@ -687,6 +687,10 @@ button > #loading {
   grid-template-columns: 1fr 2rem;
 }
 
+.credits > ul > li > span {
+  word-break: break-all;
+}
+
 /* TODO editor */
 .editor {
   display: grid;
@@ -757,15 +761,13 @@ button > #loading {
   resize: none;
 }
 
-/*
 .editor .center.leaflet-container {
-  height: 100%;
+  height: calc(var(--margin) * 12);
 }
 
 .editor .center.leaflet-container + * {
   margin-top: var(--margin);
 }
-*/
 
 .editor audio.center {
   width: 100%;
@@ -779,11 +781,6 @@ button > #loading {
   text-overflow: ellipsis;
 }
 
-/*
-.editor .center div {
-}
-*/
-
 .editor figure.center {
   font-size: 0;
 }
@@ -792,9 +789,11 @@ button > #loading {
   margin-top: var(--margin);
 }
 
+/*
 .editor .center div {
   height: 100%;
 }
+*/
 
 .editor .right > :only-child {
   grid-row: 2;
