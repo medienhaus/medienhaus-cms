@@ -7,9 +7,9 @@ const ProjectDescription = ({ description: intro, callback }) => {
   const [saved, setSaved] = useState(false)
   const [description, setDescription] = useState(intro)
   const [backupDescription, setBackupDescription] = useState()
+  const [textRows, setTextRows] = useState()
 
   const onSave = async () => {
-    console.log(description)
     if (description) {
       await callback(description)
     } else {
@@ -32,18 +32,18 @@ const ProjectDescription = ({ description: intro, callback }) => {
         <div className="center">
           <textarea
             style={{ height: '100%', border: 'none' }}
+            rows={textRows}
             value={description}
             onClick={() => setBackupDescription(description)}
             onChange={(e) => {
               setDescription(e.target.value)
+              const text = e.target.value.split('\n').length
+              setTextRows(text)
             }}
             placeholder={`${t('Please add a short description of your project.')} ${t('This field is required before publishing.')}`}
-            onBlur={() => onSave()
-            }
-            onKeyDown={(e) => {
-              e.target.style.height = 'inherit'
-              e.target.style.height = `${e.target.scrollHeight}px`
-            } }/>
+            onBlur={() => onSave()}
+
+          />
           <p>{saved}</p>
         </div>
         <div className="right">
