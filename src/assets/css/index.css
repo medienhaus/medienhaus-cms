@@ -1427,13 +1427,14 @@ button > #loading {
     display: initial;
   }
   header > button.open {
+    font-weight: bold;
     letter-spacing: 0.1rem;
-    margin-top: -0.4rem;
+    margin-top: -0.3rem;
     transform: rotate(90deg);
   }
   header > button.close {
-    font-size: 1.4rem;
-    margin-top: -0.2rem;
+    font-size: 1.5rem;
+    margin-top: -0.5rem;
   }
   /*
   header button {
