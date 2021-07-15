@@ -260,7 +260,7 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace, time,
                       : json.type === 'location'
                         ? (
                           <div className="center">
-                            {// @TODO needs a better solution but due to time pressure this has to do for now
+                            {// @TODO leaflet breaks css layout structure; no idea how to fix
                             cms.body.substring(0, cms.body.indexOf(',')) + ',' + cms.body.substring(cms.body.indexOf(',') + 1, cms.body.indexOf('-')) !== '0.0, 0.0' &&
                               <MapContainer center={[cms.body.substring(0, cms.body.indexOf(',')), cms.body.substring(cms.body.indexOf(',') + 1, cms.body.indexOf('-'))]} zoom={17} scrollWheelZoom={false} placeholder>
                                 <TileLayer

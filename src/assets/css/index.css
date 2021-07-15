@@ -745,6 +745,7 @@ button > #loading {
   resize: none;
 }
 
+/*
 .editor .center.leaflet-container {
   height: 100%;
 }
@@ -752,6 +753,7 @@ button > #loading {
 .editor .center.leaflet-container + * {
   margin-top: var(--margin);
 }
+*/
 
 .editor audio.center {
   width: 100%;
