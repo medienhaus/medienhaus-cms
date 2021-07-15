@@ -10,7 +10,7 @@ const ProjectImage = ({ projectSpace, changeProjectImage, imgAuthor, imgLicense,
 
   useEffect(() => {
     const fetchProjectImage = async () => {
-      const avatar = await matrixClient.getStateEvent(projectSpace, 'm.room.avatar')
+      const avatar = await matrixClient.getStateEvent(projectSpace, 'm.room.avatar').catch(console.error)
       setProjectImage(avatar)
     }
     fetchProjectImage()
