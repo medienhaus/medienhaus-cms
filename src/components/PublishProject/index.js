@@ -13,6 +13,7 @@ const PublishProject = ({ disabled, space, published, description, time }) => {
   }, [published])
 
   const onChangeVisibility = async (e) => {
+    setVisibility(e.target.value)
     const req = {
       method: 'PUT',
       headers: { Authorization: 'Bearer ' + localStorage.getItem('medienhaus_access_token') },
@@ -24,7 +25,6 @@ const PublishProject = ({ disabled, space, published, description, time }) => {
           if (response.ok) {
             /* TODO: needs i18n */
             setUserFeedback('Changed successfully!')
-            setVisibility(e.target.value)
             time && time()
             setTimeout(() => {
               setUserFeedback()
