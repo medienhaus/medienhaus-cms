@@ -60,7 +60,7 @@ const Collaborators = ({ projectSpace, members, time, startListeningToCollab }) 
           }
         }
       })
-      setAddContributionFeedback('✓ ' + name + ' was invited and needs to accept your invitation')
+      setAddContributionFeedback('✓' + name + ' was invited and needs to accept your invitation')
       time()
       setTimeout(() => {
         setAddContributionFeedback('')
@@ -155,16 +155,17 @@ const Collaborators = ({ projectSpace, members, time, startListeningToCollab }) 
             <option value disabled={!userSearch.some(user => user.user_id === collab.substring(collab.lastIndexOf(' ') + 1))}>⚠️ {t('CAN edit the project')}</option>
           </select>
           <div className="savecancel">
-            <button className="cancel" disabled={!collab || inviting || fetchingUsers} onClick={() => setCollab('')}>CANCEL</button>
+            <button className="cancel" disabled={!collab || inviting || fetchingUsers || addContributionFeedback} onClick={() => setCollab('')}>CANCEL</button>
             <button
               disabled={!collab || inviting || fetchingUsers} onClick={(e) => {
                 giveWritePermission
                   ? invite(e)
                   : addCredit(e)
               }}
-            >{inviting || fetchingUsers ? <Loading /> : addContributionFeedback || 'SAVE'}
+            >{inviting || fetchingUsers ? <Loading /> || '✓ ' : 'SAVE'}
             </button>
           </div>
+          {addContributionFeedback}
           {/*
           >{inviting || fetchingUsers ? <Loading /> : addContributionFeedback || (giveWritePermission ? 'ADD 🖋 ' : 'ADD 🔒')}
           */}
