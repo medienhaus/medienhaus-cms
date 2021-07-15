@@ -61,7 +61,7 @@ const PublishProject = ({ disabled, space, published, description, time }) => {
               ❗️ <Trans t={t}>Please add your project to a context.﹡</Trans>
             </p>
             <p>
-              ﹡ <em><Trans t={t}>this is not yet possible; we will roll out an update soon; the context is required for publishing your project on the Rundgang 2021 website.</Trans></em>
+              ﹡ <em><Trans t={t}>This is not yet possible; we will roll out an update soon; the context is required for publishing your project on the Rundgang 2021 website.</Trans></em>
             </p>
           </>}
       </div>
