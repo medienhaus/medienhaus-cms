@@ -157,6 +157,7 @@ const Collaborators = ({ projectSpace, members, time, startListeningToCollab }) 
             <option value="">🚫 {t('CANNOT edit the project')}</option>
             <option value disabled={!userSearch.some(user => user.user_id === collab.substring(collab.lastIndexOf(' ') + 1))}>⚠️ {t('CAN edit the project')}</option>
           </select>
+          <button className="cancel" disabled={!collab || inviting || fetchingUsers} onClick={() => setCollab('')}>CANCEL</button>
           <button
             disabled={!collab || inviting || fetchingUsers} onClick={(e) => {
               giveWritePermission

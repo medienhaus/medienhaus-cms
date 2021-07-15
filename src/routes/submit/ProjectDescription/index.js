@@ -42,7 +42,6 @@ const ProjectDescription = ({ description: intro, callback }) => {
             }}
             placeholder={`${t('Please add a short description of your project.')} ${t('This field is required before publishing.')}`}
             onBlur={() => onSave()}
-
           />
           <p>{saved}</p>
         </div>
