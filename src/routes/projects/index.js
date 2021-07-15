@@ -112,8 +112,9 @@ const Overview = () => {
           </section>
         )}
       {!fetchSpaces && !spacesErr &&
+        <h3>Projects</h3>
         <div>
-          <button onClick={() => history.push('/submit')}>{t('create new project')} -&gt;</button>
+          <button onClick={() => history.push('/submit')}>{t('create new project')} →</button>
         </div>}
       {fetchSpaces
         ? <Loading />
