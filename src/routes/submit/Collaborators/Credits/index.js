@@ -22,6 +22,7 @@ const Credits = ({ name, index, projectSpace, callback }) => {
     }, 2000)
   }
   return (
+    // @TODO cant invite yourself!
     <div style={{ display: 'flex' }}>
       <li style={{ width: '100%' }}>🔒 {name}</li>
       <button onClick={(e) => deleteCredit(e, index)}>{loading ? <Loading /> : deleteCreditFeedback || 'x'}</button>
