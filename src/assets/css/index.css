@@ -895,7 +895,10 @@ button > #loading {
 
 .savecancel {
   display: grid;
+  /*
   grid-auto-flow: column;
+  */
+  grid-template-columns: repeat(2, 1fr);
   grid-gap: var(--margin);
 }
 
