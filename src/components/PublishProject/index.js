@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Loading } from '../loading'
-import { useTranslation } from 'react-i18next'
+import { Trans, useTranslation } from 'react-i18next'
 
 const PublishProject = ({ disabled, space, published, description, time }) => {
   const { t } = useTranslation('projects')
@@ -53,7 +53,10 @@ const PublishProject = ({ disabled, space, published, description, time }) => {
       <div className="below">
         {userFeedback && <p>{userFeedback}</p>}
         {!description && <p>❗{t('️Please add a short description of your project.')}</p>}
-        {!context && <p>❗{t('️Please add your project to a context. <em>This is not yet possible but will be shortly.</em>')}</p>}
+        {!context &&
+          <p>
+            <Trans t={t}>Please add your project to a context. <em>This is not yet possible but will be shortly.</em></Trans>
+          </p>}
       </div>
     </>
   )
