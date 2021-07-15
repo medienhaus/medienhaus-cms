@@ -113,15 +113,13 @@ const Collaborators = ({ projectSpace, members, time, startListeningToCollab }) 
       <p><Trans t={t} i18nKey="contributorsInstructions2">You can share access (for editing) to this project. The contributing editor needs an <a href="https://spaces.udk-berlin.de" rel="external nofollow noopener noreferrer" target="_blank" style={{ fontWeight: 'bold' }}>udk/spaces</a> account to edit the project.</Trans></p>
       <p><Trans t={t} i18nKey="contributorsInstructions3">You can also give credits to a contributor without an <strong>udk/spaces</strong> account, but they won’t be able to get access for editing. Just type in their name and click the <code>ADD</code> button.</Trans></p>
       <section>
-        <ul>{
+        {/* @TODO kicking user function */}
+        <ul className="invites">{
           members && Object.keys(members).length > 1 && Object.values(members).map((name, i) => {
             startListeningToCollab()
             return name.display_name !== profile.displayname &&
               (
-                <div style={{ display: 'flex' }}>
-                  {/* @TODO kicking user function */}
-                  <li style={{ width: '100%' }}>⚠️ {name.display_name}</li><button disabled>x</button>
-                </div>
+                <li><span>⚠️ {name.display_name}</span><button disabled>×</button></li>
               )
           })
         }
