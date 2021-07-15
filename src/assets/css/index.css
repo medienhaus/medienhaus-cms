@@ -447,7 +447,7 @@ input[type="color"] {
 
 input[type="color"]::-webkit-color-swatch,
 input[type="color"]::-moz-color-swatch {
-  border: none;
+  border: unset;
 }
 
 input[type="date"],
@@ -627,6 +627,7 @@ textarea {
   border-width: calc(var(--margin) * 0.2);
   box-shadow: none;
   color: var(--color-fg);
+  height: 100%;
   /*
   outline: none;
   */
@@ -730,6 +731,10 @@ button > #loading {
   border-style: solid;
   border-radius: unset;
   border-width: calc(var(--margin) * 0.2);
+}
+
+.editor .center > * {
+  border: unset;
 }
 
 .editor .center > div {
@@ -947,8 +952,11 @@ button > #loading {
   height: 100%;
 }
 
+/*
 .project .left,
 .project .center {
+*/
+.project .left {
   /*
   grid-row: 2 / -1;
   */
