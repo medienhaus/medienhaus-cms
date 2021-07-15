@@ -30,7 +30,7 @@ const AddLocation = ({ onCreateRoomForBlock, onBlockWasAddedSuccessfully }) => {
         {locations.map(location => <option value={location.coordinates} key={location.coordinates}>{location.name}</option>)}
       </select>
       <input type="text" placeholder="room number or specific location" onChange={(e) => setRoom(e.target.value)} />
-      <LoadingSpinnerButton disabled={loading || !selectedLocation} onClick={handleSubmit}>SAVE</LoadingSpinnerButton>
+      <LoadingSpinnerButton disabled={loading || !selectedLocation || (selectedLocation === '0.0, 0.0' && !room)} onClick={handleSubmit}>SAVE</LoadingSpinnerButton>
     </>
   )
 }
