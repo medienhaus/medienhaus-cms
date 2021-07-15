@@ -46,7 +46,7 @@ const Login = () => {
   }
 
   return (
-    <section id="login">
+    <section className="login">
       <form onSubmit={handleSubmit(onSubmit)}>
         <div>
           <label htmlFor="username">{t('username')}</label>

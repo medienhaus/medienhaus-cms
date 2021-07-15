@@ -58,9 +58,8 @@ const Support = () => {
         <p>{t('In case you didn’t find an answer to your question here, please provide us some details and tell us about the problem you encounter via the support form below.')}</p>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div>
-            <label htmlFor="operatingSystem">{t('operating system')}</label>
             <select {...register('operatingSystem', { required: true })} name="operatingSystem" id="operatingSystem" defaultValue="" onBlur={changeSystem}>
-              <option value="" disabled hidden>-- select operating system --</option>
+              <option value="" disabled hidden>{t('-- select operating system --')}</option>
               <option value="Linux">Linux</option>
               <option value="macOS">macOS</option>
               <option value="Windows">Windows</option>
@@ -69,11 +68,10 @@ const Support = () => {
               <option value="Other">(Other)</option>
             </select>
           </div>
-          {errors?.operatingSystem && 'Please select an operating system.'}
+          {errors?.operatingSystem && t('Please select an operating system.')}
           <div>
-            <label htmlFor="browser">{t('web browser')}</label>
             <select {...register('browser', { required: true })} name="browser" id="browser" defaultValue="" onBlur={changeBrowser}>
-              <option value="" disabled hidden>-- select web browser --</option>
+              <option value="" disabled hidden>{t('-- select web browser --')}</option>
               <option value="Firefox">Firefox</option>
               <option value="Chrome">Chrome</option>
               <option value="Safari">Safari</option>
@@ -83,9 +81,9 @@ const Support = () => {
               <option value="Other">(Other)</option>
             </select>
           </div>
-          {errors?.browser && 'Please select a web browser.'}
+          {errors?.browser && t('Please select a web browser.')}
           <textarea {...register('messageInput', { required: true })} name="messageInput" placeholder={t('Please describe the problem you encounter …')} rows="7" spellCheck="true" value={msg} onChange={changeMsg} />
-          {errors?.messageInput && 'This field can’t be empty.'}
+          {errors?.messageInput && t('This field can’t be empty.')}
           <button type="submit" disabled={sending}>{t('SUBMIT')}</button>
         </form>
       </section>
