@@ -1,9 +1,9 @@
 {
   "username": "benutzername",
   "u.name": "i.name",
-  "Username can't be empty.": "Bitte geben Sie einen Benutzernamen ein.",
+  "Username can’t be empty.": "Bitte geben Sie einen Benutzernamen ein.",
   "password": "passwort",
-  "Password can't be empty.": "Bitte geben Sie ein Passwort ein.",
+  "Password can’t be empty.": "Bitte geben Sie ein Passwort ein.",
   "usernameSameAsEmail": "Sowohl Ihr Benutzername als auch Ihr Passwort sind die selben wie für Ihre <1>@udk-berlin.de</1> bzw. <1>@intra.udk-berlin.de</1> E-Mail-Adresse. Falls Sie ihr Passwort vergessen haben oder ändern möchten, benutzen Sie bitte einen der untenstehenden Links.",
   "Forgot your password?": "Passwort vergessen?",
   "Register new account?": "Account registrieren?",

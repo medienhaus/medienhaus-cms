@@ -96,7 +96,7 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace, time,
       time()
     } catch (e) {
       console.error('error while trying to save: ' + e)
-      setSaved("Couldn't save!")
+      setSaved("Couldn’t save!")
       setTimeout(() => {
         setSaved()
       }, 1000)
@@ -125,7 +125,7 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace, time,
       reloadSpace()
     } catch (err) {
       console.error(err)
-      setDeleting(`couldn't delete ${json.type}, please try again or try reloading the page`)
+      setDeleting(`couldn’t delete ${json.type}, please try again or try reloading the page`)
       setTimeout(() => {
         setDeleting()
       }, 2000)
