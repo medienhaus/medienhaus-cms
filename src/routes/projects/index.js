@@ -17,14 +17,30 @@ const Overview = () => {
   const { joinedSpaces, spacesErr, fetchSpaces, reload } = useJoinedSpaces(false)
   const matrixClient = Matrix.getMatrixClient()
   const [projects, setProjects] = useState([])
-  const [invites, setInvites] = useState({})
+  const [invites, setInvites] = useState()
   const history = useHistory()
-  console.log(joinedSpaces)
   // @TODO: Check for existing invites on page load
 
   // Listen for room events to populate our "pending invites" state
   useEffect(() => {
+    // when navigating away from /projects we need the following code to retreive our pending invites for memoryStore
+    const allRooms = matrixClient.getRooms()
+    allRooms.forEach(room => {
+      // ignore rooms that aren't spaces (or are language spaces) and only return invites
+      if (room.getType() !== 'm.space' || room.name === 'de' || room.name === 'en') return
+      if (room.getMyMembership() !== 'invite') return
+      setInvites(invites => Object.assign({}, invites, {
+        [room.roomId]:
+          {
+            name: room.name,
+            id: room.roomId,
+            membership: room._selfMembership
+          }
+      }))
+    })
+
     async function handleRoomEvent (room) {
+      console.log('in function handleevents')
       // Ignore event if this is not about a space or if it is a language space
       if (room.getType() !== 'm.space' || room.name === 'de' || room.name === 'en') return
 
@@ -49,8 +65,9 @@ const Overview = () => {
     // When navigating away from /profile we want to stop listening for those room events again
     return () => {
       matrixClient.removeListener('Room', handleRoomEvent)
+      console.log('stopped listening')
     }
-  })
+  }, [matrixClient])
 
   const removeProject = (index) => {
     setProjects(projects.filter((name, i) => i !== index))
