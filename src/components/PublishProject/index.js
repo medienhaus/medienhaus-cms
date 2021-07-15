@@ -53,7 +53,7 @@ const PublishProject = ({ disabled, space, published, description, time }) => {
       <div className="below">
         {userFeedback && <p>{userFeedback}</p>}
         {!description && <p>❗{t('️Please add a short description of your project.')}</p>}
-        {!context && <p>❗{t('️Please add your project to a context. (This is not yet possible but will be shortly.')}</p>}
+        {!context && <p>❗{t('️Please add your project to a context. <em>This is not yet possible but will be shortly.</em>')}</p>}
       </div>
     </>
   )
