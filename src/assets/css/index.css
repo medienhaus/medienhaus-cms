@@ -1369,8 +1369,9 @@ button > #loading {
     --color-bg: rgb(20,20,20);
     /*
     --color-hi: rgb(228,9,59);
-    */
     --color-hi: rgb(255,240,170);
+    */
+    --color-hi: rgb(228,9,59);
     /*
     --color-me: rgb(128,128,128);
     */
