@@ -26,7 +26,7 @@ const getAnswer = async () => {
           const room = await matrixClient.getSpaceSummary(roomId)
           if (room.rooms[0].room_type !== 'm.space') return
           // and which one of these spaces has our medienhaus state event
-          const meta = await matrixClient.getStateEvent(room.rooms[0].room_id, 'm.medienhaus.meta')
+          const meta = await matrixClient.getStateEvent(room.rooms[0].room_id, 'dev.medienhaus.meta')
           if (meta.type !== 'studentproject') return
           // then we check if the project is a collaboration
           const collab = room.rooms[0].num_joined_members > 1 ? await matrixClient.getJoinedRoomMembers(room.rooms[0].room_id) : false

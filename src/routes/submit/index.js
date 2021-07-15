@@ -97,7 +97,7 @@ const Submit = () => {
     const published = await joinRule.json()
     setVisibility(published.join_rule)
     // fetch custom medienhaus event
-    const meta = await matrixClient.getStateEvent(projectSpace, 'm.medienhaus.meta')
+    const meta = await matrixClient.getStateEvent(projectSpace, 'dev.medienhaus.meta')
     setMedienhausMeta(meta)
     // we fetch the selected language content
     const spaceRooms = space.rooms.filter(room => room.name === contentLang)

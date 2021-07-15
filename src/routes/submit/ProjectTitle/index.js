@@ -29,13 +29,14 @@ const ProjectTitle = ({ title, projectSpace, callback }) => {
       return {
         preset: 'private_chat',
         name: name,
+        room_version: '7',
         creation_content: { type: 'm.space' },
         initial_state: [{
           type: 'm.room.history_visibility',
           content: { history_visibility: 'world_readable' }
         },
         {
-          type: 'm.medienhaus.meta',
+          type: 'dev.medienhaus.meta',
           content: {
             version: '0.1',
             rundgang: 21,

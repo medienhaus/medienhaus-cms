@@ -16,9 +16,9 @@ const PresentType = ({ presentValue, projectSpace, callback }) => {
     setChangingPresentType(true)
     e.preventDefault()
     setPresentTypeValue(e.target.value)
-    const content = await matrixClient.getStateEvent(projectSpace, 'm.medienhaus.meta')
+    const content = await matrixClient.getStateEvent(projectSpace, 'dev.medienhaus.meta')
     content.present = e.target.value
-    await matrixClient.sendStateEvent(projectSpace, 'm.medienhaus.meta', content)
+    await matrixClient.sendStateEvent(projectSpace, 'dev.medienhaus.meta', content)
     callback(content)
     setChangingPresentType(false)
   }

@@ -20,7 +20,7 @@ const Collaborators = ({ projectSpace, members, time, startListeningToCollab }) 
   const { t } = useTranslation('projects')
 
   const checkForCredits = useCallback(async () => {
-    const event = projectSpace && await matrixClient.getStateEvent(projectSpace[0].room_id, 'm.medienhaus.meta')
+    const event = projectSpace && await matrixClient.getStateEvent(projectSpace[0].room_id, 'dev.medienhaus.meta')
     setCredits(event?.credit)
   }, [matrixClient, projectSpace])
 
@@ -78,9 +78,9 @@ const Collaborators = ({ projectSpace, members, time, startListeningToCollab }) 
     // @TODO for now adding credits as json key, needs to be discuessed
     setInviting(true)
     e.preventDefault()
-    const content = await matrixClient.getStateEvent(projectSpace[0].room_id, 'm.medienhaus.meta')
+    const content = await matrixClient.getStateEvent(projectSpace[0].room_id, 'dev.medienhaus.meta')
     content.credit ? content.credit = [...content.credit, collab] : content.credit = [collab]
-    const sendCredit = await matrixClient.sendStateEvent(projectSpace[0].room_id, 'm.medienhaus.meta', content)
+    const sendCredit = await matrixClient.sendStateEvent(projectSpace[0].room_id, 'dev.medienhaus.meta', content)
     setAddContributionFeedback('event_id' in sendCredit ? '✓' : 'Something went wrong')
     checkForCredits()
     time()
