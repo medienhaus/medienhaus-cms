@@ -217,7 +217,7 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace, time,
                 <option value="cc-by-nd">CC BY-ND 4.0</option>
                 <option value="cc-by-nc-nd">CC BY-NC-ND 4.0</option>
               </select>
-              <textarea rows="3" value={cms.info.alt} disabled />
+              <textarea rows={cms.info.alt.split('\n').length} value={cms.info.alt} disabled />
             </div>
             )
           : cms?.msgtype === 'm.audio'
@@ -237,7 +237,7 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace, time,
                   <option value="cc-by-nd">CC BY-ND 4.0</option>
                   <option value="cc-by-nc-nd">CC BY-NC-ND 4.0</option>
                 </select>
-                <textarea value={cms.info.alt} disabled />
+                <textarea rows={cms.info.alt.split('\n').length} value={cms.info.alt} disabled />
               </div>
               )
             : json.type === 'ul'
