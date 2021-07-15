@@ -12,7 +12,7 @@ const Invites = ({ space, callback }) => {
     try {
       // first we join the project space in order to be able to call getSpaceSummary() nad check if the invite is for a module or a student project
       await matrixClient.joinRoom(room)
-      const meta = await matrixClient.getStateEvent(room, 'm.medienhaus.meta')
+      const meta = await matrixClient.getStateEvent(room, 'dev.medienhaus.meta')
       if (meta?.type === 'studentproject') {
         // if the project is a student project we map through each room in the projectspace and join it
         const space = await matrixClient.getSpaceSummary(room)

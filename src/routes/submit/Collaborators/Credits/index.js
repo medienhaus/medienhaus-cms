@@ -14,10 +14,10 @@ const Credits = ({ name, index, projectSpace, callback }) => {
   const deleteCredit = async (e) => {
     e.preventDefault()
     setLoading(true)
-    const content = await matrixClient.getStateEvent(projectSpace, 'm.medienhaus.meta')
+    const content = await matrixClient.getStateEvent(projectSpace, 'dev.medienhaus.meta')
     content.credit.splice(index, 1)
     console.log(content)
-    const sendCredit = await matrixClient.sendStateEvent(projectSpace, 'm.medienhaus.meta', content)
+    const sendCredit = await matrixClient.sendStateEvent(projectSpace, 'dev.medienhaus.meta', content)
     setLoading(false)
     setdeleteCreditFeedback('event_id' in sendCredit ? '✓' : 'Something went wrong')
     setTimeout(() => {

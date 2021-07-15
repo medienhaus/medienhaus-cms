@@ -5,9 +5,9 @@ const deleteProject = async (roomId) => {
   let log
   try {
     // we change the meta json to reflect the deleted space
-    const meta = await matrixClient.getStateEvent(roomId, 'm.medienhaus.meta').catch(console.log)
+    const meta = await matrixClient.getStateEvent(roomId, 'dev.medienhaus.meta').catch(console.log)
     meta.deleted = true
-    await matrixClient.sendStateEvent(roomId, 'm.medienhaus.meta', meta)
+    await matrixClient.sendStateEvent(roomId, 'dev.medienhaus.meta', meta)
     const space = await matrixClient.getSpaceSummary(roomId).catch(console.log)
     console.log(space.rooms)
     space.rooms.filter(room => room.room_id !== roomId).forEach(async (space, index) => {

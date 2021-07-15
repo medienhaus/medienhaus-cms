@@ -12,7 +12,7 @@ const DisplayImage = ({ roomId, url, alt }) => {
 
   const onSave = async () => {
     setLoading(true)
-    await matrixClient.sendStateEvent(roomId, 'm.medienhaus.meta', {
+    await matrixClient.sendStateEvent(roomId, 'dev.medienhaus.meta', {
       rundgang: 21,
       type: 'image',
       imageMeta: {
