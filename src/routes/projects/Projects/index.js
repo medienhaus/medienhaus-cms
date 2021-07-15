@@ -19,6 +19,7 @@ const Projects = ({ space, visibility, index, removeProject }) => {
           {space.avatar_url && <img src={matrixClient.mxcUrlToHttp(space.avatar_url)} alt="project-visual-key" />}
         </figure>
         <div className="center">
+          {/* @TODO grab description based on selected cms language */}
           <p>{space.description || t('Please add a short description of your project.')}</p>
         </div>
         {/*

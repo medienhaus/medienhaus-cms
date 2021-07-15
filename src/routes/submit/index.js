@@ -28,6 +28,7 @@ const Submit = () => {
   const [roomMembers, setRoomMembers] = useState()
   const [saveTimestamp, setSaveTimestamp] = useState('')
   const [medienhausMeta, setMedienhausMeta] = useState([])
+  const [description, setDescription] = useState()
   const history = useHistory()
   const matrixClient = Matrix.getMatrixClient()
   const params = useParams()
@@ -100,6 +101,8 @@ const Submit = () => {
     setMedienhausMeta(meta)
     // we fetch the selected language content
     const spaceRooms = space.rooms.filter(room => room.name === contentLang)
+    // and set the topic depending on selected language
+    setDescription(spaceRooms[0].topic || '')
     const getContent = await matrixClient.getSpaceSummary(spaceRooms[0].room_id)
     setBlocks(getContent.rooms.filter(room => room.name !== contentLang).filter(room => room.name.charAt(0) !== 'x').sort((a, b) => {
       return a.name.substring(0, a.name.indexOf('_')) - b.name.substring(0, b.name.indexOf('_'))
@@ -196,7 +199,11 @@ const Submit = () => {
   }
 
   const onChangeDescription = async (description) => {
-    const changeTopic = await matrixClient.setRoomTopic(spaceObject.rooms[0].room_id, description)
+    // if the selected content language is english we save the description in the project space topic
+    contentLang === 'en' && await matrixClient.setRoomTopic(spaceObject.rooms[0].room_id, description).catch(console.log)
+    // here we set the description for the selected language space
+    const contentRoom = spaceObject.rooms.filter(room => room.name === contentLang)
+    const changeTopic = await matrixClient.setRoomTopic(contentRoom[0].room_id, description).catch(console.log)
     fetchSpace()
     // @TODO setSpaceObject(spaceObject => ({...spaceObject, rooms: [...spaceObject.rooms, ]}))
     return changeTopic
@@ -245,11 +252,16 @@ const Submit = () => {
             <p><Trans t={t} i18nKey="contentInstructions3">In all other text content blocks, you can format your input text by highlighting the to be formatted text with your cursor.</Trans></p>
             <p><Trans t={t} i18nKey="contentInstructions4">You can use the <code>↑</code> and <code>↓</code> arrows to rearrange existing blocks.</Trans></p>
             <p><Trans t={t} i18nKey="contentInstructions5">You can provide content and information in multiple languages by setting the desired language in the dropdown list below.</Trans></p>
-            <select id="subject" name="subject" defaultValue="" value={contentLang} onChange={(e) => setContentLang(e.target.value)}>
+            <select
+              id="subject" name="subject" defaultValue="" value={contentLang} onChange={(e) => {
+                setContentLang(e.target.value)
+                setDescription()
+              }}
+            >
               <option value="de">DE — Deutsch</option>
               <option value="en">EN — English</option>
             </select>
-            {spaceObject ? <ProjectDescription description={spaceObject?.rooms[0].topic} callback={onChangeDescription} /> : <Loading />}
+            {spaceObject && (description || description === '') ? <ProjectDescription description={description} callback={onChangeDescription} /> : <Loading />}
             {blocks.length === 0
               ? <AddContent number={0} projectSpace={spaceObject?.rooms.filter(room => room.name === contentLang)[0].room_id} blocks={blocks} reloadSpace={reloadSpace} present={medienhausMeta?.present} />
               : blocks.map((content, i) =>
