@@ -1431,6 +1431,9 @@ button > #loading {
     margin-top: -0.2rem;
     transform: rotate(90deg);
   }
+  header > button.open {
+    font-size: 1.8rem;
+  }
   /*
   header button {
     display: block;
