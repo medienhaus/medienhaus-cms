@@ -97,25 +97,27 @@ const Overview = () => {
         ? <Loading />
         : <>
           {Object.keys(invites).length > 0 && (
-            <section className="invites">
-              {/* TODO: needs i18n */}
-              <h3>Invites</h3>
-              <p>
-                <Trans t={t} i18nKey="pendingInvites" count={Object.keys(invites).length}>
-                  You have been invited to join the following project{Object.keys(invites).length > 1 ? 's' : ''}. When you accept an invitation, the project will be listed below with your others. You can edit collaborative projects, delete them, or change their visibility.
-                </Trans>
-              </p>
-              <ul>
-                {Object.values(invites).map((space, index) => (
-                  <li key={index}>
-                    <Invites space={space} callback={removeInviteByIndex} />
-                  </li>
-                ))}
-              </ul>
-            </section>
+            <>
+              <section className="invites">
+                {/* TODO: needs i18n */}
+                <h3>Invites</h3>
+                <p>
+                  <Trans t={t} i18nKey="pendingInvites" count={Object.keys(invites).length}>
+                    You have been invited to join the following project{Object.keys(invites).length > 1 ? 's' : ''}. When you accept an invitation, the project will be listed below with your others. You can edit collaborative projects, delete them, or change their visibility.
+                  </Trans>
+                </p>
+                <ul>
+                  {Object.values(invites).map((space, index) => (
+                    <li key={index}>
+                      <Invites space={space} callback={removeInviteByIndex} />
+                    </li>
+                  ))}
+                </ul>
+              </section>
+              <h3>Projects</h3>
+            </>
           )}
 
-          <h3>Projects</h3>
           <div>
             <button onClick={() => history.push('/submit')}>{t('create new project')} →</button>
           </div>
