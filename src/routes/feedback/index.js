@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form'
 import { Trans, useTranslation } from 'react-i18next'
 import { useAuth } from '../../Auth'
 import { makeRequest } from '../../Backend'
+import Matrix from '../../Matrix'
 
 const Feedback = () => {
   const { register, formState: { errors }, handleSubmit } = useForm()
@@ -11,6 +12,7 @@ const Feedback = () => {
   const [sending, setSending] = useState(false)
   const [submitted, setSubmitted] = useState(false)
   const { t } = useTranslation('feedback')
+  const matrixClient = Matrix.getMatrixClient()
 
   const auth = useAuth()
   const profile = auth.user
@@ -21,7 +23,7 @@ const Feedback = () => {
     setSending(true)
     const support =
       {
-        displayname: profile.displayname,
+        displayname: `${profile.displayname} (${matrixClient.getUserId()})`,
         msg: msg
       }
     try {
