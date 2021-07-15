@@ -30,7 +30,10 @@ const Nav = () => {
         <Link to="/">
           <h1>udk/rundgang</h1>
         </Link>
-        <button type="button" onClick={() => setIsNavigationOpen(!isNavigationOpen)}>{isNavigationOpen ? 'BACK' : 'MENU'}</button>
+        <button type="button" onClick={() => setIsNavigationOpen(!isNavigationOpen)}>{isNavigationOpen ? '×' : '|||'}</button>
+        {/*
+        <button type="button" onClick={() => setIsNavigationOpen(!isNavigationOpen)}>{isNavigationOpen ? 'back' : 'menu'}</button>
+        */}
       </header>
       <nav className={`${(isNavigationOpen && 'active')}`}>
         <div>

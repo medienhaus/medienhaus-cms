@@ -188,6 +188,10 @@ header > a > h1 {
   display: inline-block;
 }
 
+header > button {
+  display: none;
+}
+
 main {
   grid-row: 2;
   grid-column: 1;
@@ -1386,10 +1390,6 @@ button > #loading {
   }
 }
 
-header button {
-  display: none;
-}
-
 /* 479px */
 @media (max-width: 29.938em) {
   header {
@@ -1415,12 +1415,29 @@ header button {
     bottom: 0;
     z-index: 1;
   }
+  header {
+    display: grid;
+    grid-template-columns: 1fr 2rem;
+    grid-gap: var(--margin);
+  }
+  header > button {
+    background-color: var(--color-bg);
+    border: unset;
+    color: var(--color-fg);
+    display: initial;
+    justify-self: center;
+    letter-spacing: 0.1rem;
+    margin-top: -0.4rem;
+    transform: rotate(90deg);
+  }
+  /*
   header button {
     display: block;
     float: right;
     width: auto;
     margin-top: calc(var(--margin) * -0.3);
   }
+  */
   /* TODO */
   /*
   nav + section {
