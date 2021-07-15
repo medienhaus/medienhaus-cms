@@ -7,7 +7,6 @@ const ProjectDescription = ({ description: intro, callback }) => {
   const [description, setDescription] = useState(intro)
   const [backupDescription, setBackupDescription] = useState()
   const [textRows, setTextRows] = useState(description && description.split('\n').length)
-  console.log(description)
 
   const onSave = async () => {
     if (description) {
