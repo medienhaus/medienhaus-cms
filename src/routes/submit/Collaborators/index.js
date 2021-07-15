@@ -60,7 +60,7 @@ const Collaborators = ({ projectSpace, members, time, startListeningToCollab }) 
           }
         }
       })
-      setAddContributionFeedback('✓' + name + ' was invited and needs to accept your invitation')
+      setAddContributionFeedback('✓ ' + name + ' was invited and needs to accept your invitation')
       time()
       setTimeout(() => {
         setAddContributionFeedback('')
@@ -165,7 +165,8 @@ const Collaborators = ({ projectSpace, members, time, startListeningToCollab }) 
             >{inviting || fetchingUsers ? <Loading /> || '✓ ' : 'SAVE'}
             </button>
           </div>
-          {addContributionFeedback}
+          {addContributionFeedback &&
+            <p>{addContributionFeedback}</p>}
           {/*
           >{inviting || fetchingUsers ? <Loading /> : addContributionFeedback || (giveWritePermission ? 'ADD 🖋 ' : 'ADD 🔒')}
           */}
