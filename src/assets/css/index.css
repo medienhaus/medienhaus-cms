@@ -1416,7 +1416,7 @@ nav button {
     position: fixed;
     top: 0;
     left: 0;
-    background: black;
+    background: var(--color-bg);
     right: 0;
     bottom: 0;
     z-index: 1;
