@@ -17,7 +17,7 @@ const Overview = () => {
   const { joinedSpaces, spacesErr, fetchSpaces, reload } = useJoinedSpaces(false)
   const matrixClient = Matrix.getMatrixClient()
   const [projects, setProjects] = useState([])
-  const [invites, setInvites] = useState()
+  const [invites, setInvites] = useState({})
   const history = useHistory()
   // @TODO: Check for existing invites on page load
 
@@ -40,17 +40,15 @@ const Overview = () => {
     })
 
     async function handleRoomEvent (room) {
-      console.log('in function handleevents')
       // Ignore event if this is not about a space or if it is a language space
       if (room.getType() !== 'm.space' || room.name === 'de' || room.name === 'en') return
 
       const roomMembers = await room._loadMembersFromServer().catch(console.error)
       // room.getMyMembership() is only available after the current call stack has cleared (_.defer),
       // so we put it behind the "await"
-      if (room.getMyMembership() !== 'invite' || roomMembers.length < 1) {
+      if (room.getMyMembership() === 'invite' || roomMembers.length < 1) {
         return
       }
-
       setInvites(invites => Object.assign({}, invites, {
         [room.roomId]:
           {
@@ -75,9 +73,12 @@ const Overview = () => {
 
   useEffect(() => {
     // we check if a collaborator has deleted a project since we last logged in
-    joinedSpaces.length > 0 && joinedSpaces?.filter(space => space.meta?.deleted).forEach(async space => await deleteProject(space.room_id))
-    const updatedSpaces = joinedSpaces.length > 0 && joinedSpaces?.filter(space => !space.meta?.deleted)
-    setProjects(sortBy(updatedSpaces, 'name'))
+    if (joinedSpaces) {
+      joinedSpaces?.filter(space => space.meta?.deleted).forEach(async space => await deleteProject(space.room_id))
+      const updatedSpaces = joinedSpaces?.filter(space => !space.meta?.deleted)
+      setProjects(sortBy(updatedSpaces, 'name'))
+    }
+    console.log(joinedSpaces)
   }, [joinedSpaces])
 
   const removeInviteByIndex = (room) => {
