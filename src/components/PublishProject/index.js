@@ -54,11 +54,16 @@ const PublishProject = ({ disabled, space, published, description, time }) => {
       </select>
       <div className="below">
         {userFeedback && <p>{userFeedback}</p>}
-        {!description && <p>❗{t('️Please add a short description of your project.')}</p>}
+        {!description && <p>❗ {t('️Please add a short description of your project.')}</p>}
         {!context &&
-          <p>
-            <Trans t={t}>❗ Please add your project to a context. <em>This is not yet possible but will be shortly.</em></Trans>
-          </p>}
+          <>
+            <p>
+              ❗️ <Trans t={t}>Please add your project to a context.﹡</Trans>
+            </p>
+            <p>
+              ﹡ <em><Trans t={t}>this is not yet possible; we will roll out an update soon; the context is required for publishing your project on the Rundgang 2021 website.</Trans></em>
+            </p>
+          </>}
       </div>
     </>
   )
