@@ -3,7 +3,7 @@ import Matrix from '../../../Matrix'
 import Knock from './Knock'
 import { Loading } from '../../../components/loading'
 import ContextDropdown from '../../../components/ContextDropdown'
-import { useTranslation } from 'react-i18next'
+import { Trans, useTranslation } from 'react-i18next'
 
 const Category = ({ title, projectSpace }) => {
   const { t } = useTranslation('projects')
@@ -41,6 +41,8 @@ const Category = ({ title, projectSpace }) => {
       <p>{t('This information is necessary to show your project in the right place on the Rundgang platform, and must therefore be specified when you set the visibility of the project to public.')}</p>
       <p>{t('The context can be a class, a course, a seminar or a free project. If you are unsure, ask the professor of your class or the seminar leader.')}</p>
       <p>{t('You can scroll through the list, or filter/search the list by typing one or more keywords.')}</p>
+      <p>﹡ <em><Trans t={t}>This is not yet possible; we will roll out an update soon; the context is required for publishing your project on the Rundgang 2021 website.</Trans></em></p>
+
       <div style={{ position: 'relative' }}>
         <ContextDropdown callback={isMember} />
       </div>
