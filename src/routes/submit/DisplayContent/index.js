@@ -271,7 +271,7 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace, time,
                                 </Popup>
                               </Marker>
                             </MapContainer>
-                            <input type="text" disabled value={cms.body.substring(cms.body.lastIndexOf('-') + 1)} />
+                            {cms.body.substring(cms.body.lastIndexOf('-') + 1).length > 0 && <input type="text" disabled value={cms.body.substring(cms.body.lastIndexOf('-') + 1)} />}
                           </div>
                           )
                         : json.type === 'date'
