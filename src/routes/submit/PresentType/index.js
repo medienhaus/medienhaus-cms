@@ -25,7 +25,7 @@ const PresentType = ({ presentValue, projectSpace, callback }) => {
 
   return (
     <>
-      <p>{t('Rent this text for bitcoins')}</p>
+      <p>{t('Need some text for this; wording of section is also not final; how about something along "Format", "Verortung", …')}</p>
       <select value={presentTypeValue} disabled={changingPresentType} onChange={(e) => changePresentType(e)}>
         <option value="analog">Analog</option>
         <option value="digital">Digital</option>
