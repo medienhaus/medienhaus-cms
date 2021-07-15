@@ -120,7 +120,7 @@ const Collaborators = ({ projectSpace, members, time, startListeningToCollab }) 
               (
                 <div style={{ display: 'flex' }}>
                   {/* @TODO kicking user function */}
-                  <li style={{ width: '100%' }}>🖋 {name.display_name}</li><button disabled>x</button>
+                  <li style={{ width: '100%' }}>⚠️ {name.display_name}</li><button disabled>x</button>
                 </div>
               )
           })
@@ -148,10 +148,14 @@ const Collaborators = ({ projectSpace, members, time, startListeningToCollab }) 
         </datalist>
       </div>
       {collab &&
-        <div>
+        <div className="permissions">
           <select value={giveWritePermission} onChange={(e) => setGiveWritePermission(e.target.value)}>
-            <option value="">🔒 {collab.substring(collab.lastIndexOf(' ') + 1) || 'user'} {t('CANNOT edit the project')}</option>
-            <option value disabled={!userSearch.some(user => user.user_id === collab.substring(collab.lastIndexOf(' ') + 1))}>🖋 {collab.substring(0, collab.lastIndexOf(' ') + 1) || 'user'} {t('CAN edit the project')}</option>
+            {/*
+            <option value="">🚫 {collab.substring(collab.lastIndexOf(' ') + 1) || 'user'} {t('CANNOT edit the project')}</option>
+            <option value disabled={!userSearch.some(user => user.user_id === collab.substring(collab.lastIndexOf(' ') + 1))}>⚠️ {collab.substring(0, collab.lastIndexOf(' ') + 1) || 'user'} {t('CAN edit the project')}</option>
+            */}
+            <option value="">🚫 {t('CANNOT edit the project')}</option>
+            <option value disabled={!userSearch.some(user => user.user_id === collab.substring(collab.lastIndexOf(' ') + 1))}>⚠️ {t('CAN edit the project')}</option>
           </select>
           <button
             disabled={!collab || inviting || fetchingUsers} onClick={(e) => {
@@ -159,8 +163,11 @@ const Collaborators = ({ projectSpace, members, time, startListeningToCollab }) 
                 ? invite(e)
                 : addCredit(e)
             }}
-          >{inviting || fetchingUsers ? <Loading /> : addContributionFeedback || (giveWritePermission ? 'ADD 🖋 ' : 'ADD 🔒')}
+          >{inviting || fetchingUsers ? <Loading /> : addContributionFeedback || (giveWritePermission ? '⚠️ ADD EDITOR' : 'ADD CREDIT')}
           </button>
+          {/*
+          >{inviting || fetchingUsers ? <Loading /> : addContributionFeedback || (giveWritePermission ? 'ADD 🖋 ' : 'ADD 🔒')}
+          */}
         </div>}
       {collab && !userSearch.some(user => user.user_id === collab.substring(collab.lastIndexOf(' ') + 1)) && <p>❗️ {t("If you're looking to give a user write permissions but can't, please make sure they have already logged in to spaces.udk-berlin.de at least once.")}</p>}
     </>

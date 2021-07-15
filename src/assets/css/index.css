@@ -671,6 +671,10 @@ button > #loading {
   margin-top: calc(var(--margin) * 0.5);
 }
 
+.contributors > .permissions > * + * {
+  margin-top: var(--margin);
+}
+
 /* TODO editor */
 .editor {
   display: grid;
