@@ -7,8 +7,6 @@ import { Loading } from '../../components/loading'
 
 const Login = () => {
   const { register, formState: { errors }, handleSubmit } = useForm()
-  const [name, setName] = useState('')
-  const [password, setPassword] = useState('')
   const [isLoading, setLoading] = useState(false)
   const [serverResponseErrorMessage, setServerResponseErrorMessage] = useState('')
   const history = useHistory()
@@ -19,11 +17,11 @@ const Login = () => {
 
   const { from } = location.state || { from: { pathname: '/' } }
 
-  const onSubmit = () => {
+  const onSubmit = data => {
     if (isLoading) { return }
     setLoading(true)
     setServerResponseErrorMessage('')
-    auth.signin(name, password, () => {
+    auth.signin(data.username, data.password, () => {
       setLoading(false)
       history.replace(from)
     }).catch((error) => {
@@ -31,9 +29,6 @@ const Login = () => {
       setLoading(false)
     })
   }
-
-  const changeName = e => setName(e.target.value)
-  const changePassword = e => { setPassword(e.target.value); setServerResponseErrorMessage() }
 
   if (auth.user) {
     return <Redirect to="/" />
@@ -45,18 +40,17 @@ const Login = () => {
         <div>
           <label htmlFor="username">{t('username')}</label>
           <div>
-            <input {...register('username', { required: true })} name="username" type="text" placeholder={t('u.name')} value={name} onChange={changeName} />
+            <input {...register('username', { required: true })} name="username" type="text" placeholder={t('u.name')} />
             <select defaultValue="udk">
               <option value="udk">@udk-berlin.de</option>
               <option value="intra">@intra.udk-berlin.de</option>
             </select>
           </div>
         </div>
-        {errors.username && t('Username can\'t be empty.')}
+        {errors?.username && t('Username can\'t be empty.')}
         <div>
           <label htmlFor="password">{t('password')}</label>
-          <input {...register('password', { required: true })} name="password" type="password" placeholder="••••••••••••••••••••••••" value={password} onChange={changePassword} /> {// @TODO {...register('password',{ required: true })} />
-          }
+          <input {...register('password', { required: true })} name="password" type="password" placeholder="••••••••••••••••••••••••" />
         </div>
         {errors?.password && t('Password can\'t be empty.')}
         {serverResponseErrorMessage && <p>❗️ {serverResponseErrorMessage}</p>}
