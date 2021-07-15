@@ -33,7 +33,6 @@ const Submit = () => {
   const params = useParams()
 
   const projectSpace = params.spaceId
-
   const getCurrentTime = useCallback(() => {
     const today = new Date()
     const time = today.getHours().toString().padStart(2, '0') + ':' + today.getMinutes().toString().padStart(2, '0') + ':' + today.getSeconds().toString().padStart(2, '0')

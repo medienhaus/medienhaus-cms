@@ -6,6 +6,7 @@ const PublishProject = ({ disabled, space, published, description, time }) => {
   const { t } = useTranslation('projects')
   const [userFeedback, setUserFeedback] = useState()
   const [visibility, setVisibility] = useState(published)
+  const context = false
 
   useEffect(() => {
     setVisibility(published)
@@ -47,11 +48,12 @@ const PublishProject = ({ disabled, space, published, description, time }) => {
         id="visibility" name="visibility" value={visibility} onChange={(e) => onChangeVisibility(e)} disabled={disabled}
       >
         <option value="invite">{t('Draft')}</option>
-        <option value="public" disabled={!description}>{t('Public')}</option>
+        <option value="public" disabled={!description || !context}>{t('Public')}</option>
       </select>
       <div className="below">
         {userFeedback && <p>{userFeedback}</p>}
         {!description && <p>❗{t('️Please add a short description of your project.')}</p>}
+        {!context && <p>❗{t('️Please add your project to a context. (This is not yet possible but will be shortly.')}</p>}
       </div>
     </>
   )
