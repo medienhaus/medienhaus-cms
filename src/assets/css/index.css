@@ -1386,8 +1386,7 @@ button > #loading {
   }
 }
 
-header button,
-nav button {
+header button {
   display: none;
 }
 
@@ -1416,9 +1415,11 @@ nav button {
     bottom: 0;
     z-index: 1;
   }
-  header button,
-  nav button {
+  header button {
     display: block;
+    float: right;
+    width: auto;
+    margin-top: calc(var(--margin) * -0.3);
   }
   /* TODO */
   /*

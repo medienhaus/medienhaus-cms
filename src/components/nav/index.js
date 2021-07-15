@@ -30,10 +30,9 @@ const Nav = () => {
         <Link to="/">
           <h1>udk/rundgang</h1>
         </Link>
-        <button type="button" onClick={() => setIsNavigationOpen(true)} style={{ float: 'right', width: 'auto' }}>MENU</button>
+        <button type="button" onClick={() => setIsNavigationOpen(!isNavigationOpen)}>{isNavigationOpen ? 'BACK' : 'MENU'}</button>
       </header>
       <nav className={`${(isNavigationOpen && 'active')}`}>
-        <button type="button" onClick={() => setIsNavigationOpen(false)}>&times;</button>
         <div>
           <div>
             {auth.user
