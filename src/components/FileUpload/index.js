@@ -37,11 +37,13 @@ const FileUpload = (props) => {
               <option value="rs-inc">In Copyright</option>
             </optgroup>
           </select>
+          {/* TODO: needs i18n */}
           {license === 'cc0' && (
             <div id="cc0" className="license-info">
               <p>CC0 (aka CC Zero) is a public dedication tool, which allows creators to give up their copyright and put their works into the worldwide public domain. CC0 allows reusers to distribute, remix, adapt, and build upon the material in any medium or format, with no conditions.</p>
             </div>
           )}
+          {/* TODO: needs i18n */}
           {license === 'cc-by' && (
             <div id="cc-by" className="license-info">
               <p>This license allows reusers to distribute, remix, adapt, and build upon the material in any medium or format, so long as attribution is given to the creator. The license allows for commercial use.</p>
@@ -51,6 +53,7 @@ const FileUpload = (props) => {
               </ul>
             </div>
           )}
+          {/* TODO: needs i18n */}
           {license === 'cc-by-sa' && (
             <div id="cc-by-sa" className="license-info">
               <p>This license allows reusers to distribute, remix, adapt, and build upon the material in any medium or format, so long as attribution is given to the creator. The license allows for commercial use. If you remix, adapt, or build upon the material, you must license the modified material under identical terms.</p>
@@ -61,6 +64,7 @@ const FileUpload = (props) => {
               </ul>
             </div>
           )}
+          {/* TODO: needs i18n */}
           {license === 'cc-by-nc' && (
             <div id="cc-by-nc" className="license-info">
               <p>This license allows reusers to distribute, remix, adapt, and build upon the material in any medium or format for noncommercial purposes only, and only so long as attribution is given to the creator.</p>
@@ -71,6 +75,7 @@ const FileUpload = (props) => {
               </ul>
             </div>
           )}
+          {/* TODO: needs i18n */}
           {license === 'cc-by-nc-sa' && (
             <div id="cc-by-nc-sa" className="license-info">
               <p>This license allows reusers to distribute, remix, adapt, and build upon the material in any medium or format for noncommercial purposes only, and only so long as attribution is given to the creator. If you remix, adapt, or build upon the material, you must license the modified material under identical terms.</p>
@@ -82,6 +87,7 @@ const FileUpload = (props) => {
               </ul>
             </div>
           )}
+          {/* TODO: needs i18n */}
           {license === 'cc-by-nd' && (
             <div id="cc-by-nd" className="license-info">
               <p>This license allows reusers to copy and distribute the material in any medium or format in unadapted form only, and only so long as attribution is given to the creator. The license allows for commercial use.</p>
@@ -92,6 +98,7 @@ const FileUpload = (props) => {
               </ul>
             </div>
           )}
+          {/* TODO: needs i18n */}
           {license === 'cc-by-nc-nd' && (
             <div id="cc-by-nc-nd" className="license-info">
               <p>This license allows reusers to copy and distribute the material in any medium or format in unadapted form only, for noncommercial purposes only, and only so long as attribution is given to the creator.</p>
@@ -103,24 +110,30 @@ const FileUpload = (props) => {
               </ul>
             </div>
           )}
+          {/* TODO: needs i18n */}
           {license === 'rs-inc' && (
             <div id="rs-inc" className="license-info">
               <p>This Item is protected by copyright and/or related rights. You are free to use this Item in any way that is permitted by the copyright and related rights legislation that applies to your use. For other uses you need to obtain permission from the rights-holder(s).</p>
             </div>
           )}
+          {/* TODO: needs i18n */}
           <p>Further information:</p>
           <ul>
             <li><a href="https://creativecommons.org/about/cclicenses/" rel="external nofollow noopener noreferrer" target="_blank">About CC Licenses</a></li>
             <li><a href="https://chooser-beta.creativecommons.org/" rel="external nofollow noopener noreferrer" target="_blank">CC License Chooser (beta)</a></li>
             <li><a href="https://rightsstatements.org/page/1.0/" rel="external nofollow noopener noreferrer" target="_blank">Rights Statements</a></li>
           </ul>
+          {/* TODO: needs i18n */}
           <textarea
             rows="3" placeholder={'please describe the ' + impairment[0] + ' with a few words for ' + impairment[1] + ' impaired website visitors.'}
             onChange={(e) => setAlttext(e.target.value)}
           />
+          {/* TODO: needs i18n */}
           <button className="upload" onClick={(e) => props.handleSubmission(e, selectedFile, fileName, author, license, alttext)} disabled={!selectedFile.type.includes(props.fileType) || selectedFile.size > size || props.loading || alttext.length < 1 || license.length < 1 || author.length < 1}>{props.loading ? <Loading /> : 'Upload'}</button>
-          {selectedFile.type.includes(props.fileType) || <section>Please select an {props.fileType} file.</section>}
-          {selectedFile.size > size && <section style={{ color: 'red' }}> File size needs to be less than {size / 1000000}MB</section>}
+          {/* TODO: needs i18n */}
+          {selectedFile.type.includes(props.fileType) || <p>❗️ Please select an {props.fileType} file.</p>}
+          {/* TODO: needs i18n */}
+          {selectedFile.size > size && <p>❗️ File size needs to be less than {size / 1000000}MB</p>}
         </>
       )}
     </>

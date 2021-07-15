@@ -31,7 +31,6 @@ const ProjectDescription = ({ description: intro, callback }) => {
         </div>
         <div className="center">
           <textarea
-            style={{ height: '100%', border: 'none' }}
             rows={textRows}
             value={description}
             onClick={() => setBackupDescription(description)}
