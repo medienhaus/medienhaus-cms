@@ -7,6 +7,10 @@ const Credits = ({ name, index, projectSpace, callback }) => {
   const [loading, setLoading] = useState(false)
   const matrixClient = Matrix.getMatrixClient()
 
+  /* TODO: needs fix, better call this only once 🤣 */
+  const items = ['😀', '😃', '😄', '😁', '😆', '😅', '😂', '☺️', '😊', '😇', '🙂', '🙃', '😉', '😌', '😋', '🥳', '😶', '😷']
+  const item = items[Math.floor(Math.random() * items.length)]
+
   const deleteCredit = async (e) => {
     e.preventDefault()
     setLoading(true)
@@ -22,10 +26,7 @@ const Credits = ({ name, index, projectSpace, callback }) => {
     }, 2000)
   }
   return (
-    <div style={{ display: 'flex' }}>
-      <li style={{ width: '100%' }}>🔒 {name}</li>
-      <button onClick={(e) => deleteCredit(e, index)}>{loading ? <Loading /> : deleteCreditFeedback || 'x'}</button>
-    </div>
+    <li><span>{item} {name}</span><button onClick={(e) => deleteCredit(e, index)}>{loading ? <Loading /> : deleteCreditFeedback || '×'}</button></li>
   )
 }
 

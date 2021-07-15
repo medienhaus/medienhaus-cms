@@ -211,10 +211,18 @@ main ul {
 }
 
 /* TODO */
+/*
 form + *,
+*/
 form > * + * {
-  margin-top: calc(var(--margin) * 2);
+  margin-top: var(--margin);
 }
+
+/*
+form > div > * + * {
+  margin-top: calc(var(--margin) * 0.5);
+}
+*/
 
 nav {
   grid-row: 1 / 3;
@@ -661,14 +669,14 @@ button > #loading {
   max-width: calc(var(--margin) * 1.15);
 }
 
-#login form div:nth-of-type(1) div {
+.login form div:nth-of-type(1) div {
   display: grid;
   grid-gap: var(--margin);
   grid-auto-flow: row;
 }
 
-#login label + *,
-#login ul > li + li {
+.login label + *,
+.login ul > li + li {
   margin-top: calc(var(--margin) * 0.5);
 }
 
@@ -685,6 +693,10 @@ button > #loading {
 
 .credits > ul > li {
   grid-template-columns: 1fr 2rem;
+}
+
+.credits > ul > li > span {
+  word-break: break-all;
 }
 
 /* TODO editor */
@@ -757,15 +769,13 @@ button > #loading {
   resize: none;
 }
 
-/*
 .editor .center.leaflet-container {
-  height: 100%;
+  height: calc(var(--margin) * 12);
 }
 
 .editor .center.leaflet-container + * {
   margin-top: var(--margin);
 }
-*/
 
 .editor audio.center {
   width: 100%;
@@ -779,11 +789,6 @@ button > #loading {
   text-overflow: ellipsis;
 }
 
-/*
-.editor .center div {
-}
-*/
-
 .editor figure.center {
   font-size: 0;
 }
@@ -792,9 +797,11 @@ button > #loading {
   margin-top: var(--margin);
 }
 
+/*
 .editor .center div {
   height: 100%;
 }
+*/
 
 .editor .right > :only-child {
   grid-row: 2;
@@ -1453,7 +1460,7 @@ button > #loading {
 
 /* 480px */
 @media (min-width: 30em) {
-  #login form div:nth-of-type(1) div {
+  .login form div:nth-of-type(1) div {
     grid-template-columns: auto 20ch;
   }
   /* TODO tools */
