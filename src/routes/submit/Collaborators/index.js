@@ -89,7 +89,6 @@ const Collaborators = ({ projectSpace, members, time, startListeningToCollab }) 
       setCollab('')
     }, 2000)
     setInviting(false)
-    console.log(sendCredit)
   }
 
   const fetchUsers = async (e, search) => {
