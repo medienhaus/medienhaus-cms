@@ -51,7 +51,7 @@ const Support = () => {
   return (
     <>
       <section className="support">
-        <h2>{t('In case you didn\'t find an answer to your question here, please provide us some details and tell us about the problem you encounter via the support form below.')}</h2>
+        <h2>{t('In case you didn’t find an answer to your question here, please provide us some details and tell us about the problem you encounter via the support form below.')}</h2>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div>
             <label htmlFor="operatingSystem">{t('operating system')}</label>
