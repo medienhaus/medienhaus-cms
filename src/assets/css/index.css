@@ -627,7 +627,6 @@ textarea {
   border-width: calc(var(--margin) * 0.2);
   box-shadow: none;
   color: var(--color-fg);
-  height: 100%;
   /*
   outline: none;
   */
@@ -739,6 +738,10 @@ button > #loading {
 
 .editor .center > div {
   padding: 0 calc(var(--margin) * 0.4);
+}
+
+.editor .center > textarea {
+  height: 100%;
 }
 
 .editor audio.center {
