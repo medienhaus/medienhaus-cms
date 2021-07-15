@@ -96,7 +96,7 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace, time,
       time()
     } catch (e) {
       console.error('error while trying to save: ' + e)
-      setSaved("Couldn’t save!")
+      setSaved('Couldn’t save!')
       setTimeout(() => {
         setSaved()
       }, 1000)
