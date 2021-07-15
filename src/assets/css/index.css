@@ -264,24 +264,12 @@ nav + section > button:hover {
 }
 */
 
-nav + select {
-  /*
-  grid-row: 1;
-  grid-column: 2;
-  align-self: start;
-  justify-self: end;
-  margin-top: var(--margin);
-  position: sticky;
-  top: var(--margin);
+/* Language Selector */
+nav select {
   width: 6ch;
-  z-index: 1;
-  */
-  grid-column: 2;
-  grid-row: 3;
-  align-self: end;
-  justify-self: end;
-  margin-bottom: calc(var(--margin) * 0.65);
-  width: 6ch;
+  position: fixed;
+  bottom: var(--margin);
+  right: var(--margin);
 }
 
 nav > * > * > a + a {
@@ -1506,16 +1494,10 @@ nav button {
     padding-left: calc(var(--margin) * 2);
     padding-right: calc(var(--margin) * 2);
   }
-  nav + select {
-    /*
-    grid-column: 2;
-    grid-row: 3;
-    align-self: end;
-    justify-self: end;
-    margin-bottom: calc(var(--margin) * 0.65);
-    */
-    position: sticky;
+  /* Language Selector */
+  nav select {
     bottom: var(--margin);
+    right: calc(var(--margin) * 2);
   }
   .project {
     grid-template-columns: calc(var(--margin) * 7.8) auto 12ch;
