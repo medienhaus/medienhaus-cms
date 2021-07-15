@@ -129,7 +129,7 @@ const Overview = () => {
                 : projects.map((space, index) => (
                   <React.Fragment key={index}>
                     <Projects space={space} visibility={space.published} index={index} removeProject={removeProject} />
-                    <hr />
+                    {index < projects.length - 1 && <hr />}
                   </React.Fragment>
                 ))}
           </section>
