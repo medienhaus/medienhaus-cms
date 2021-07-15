@@ -59,7 +59,7 @@ const Support = () => {
         <form onSubmit={handleSubmit(onSubmit)}>
           <div>
             <select {...register('operatingSystem', { required: true })} name="operatingSystem" id="operatingSystem" defaultValue="" onBlur={changeSystem}>
-              <option value="" disabled hidden>{t('-- select operating system --')}</option>
+              <option value="" disabled>{t('-- select operating system --')}</option>
               <option value="Linux">Linux</option>
               <option value="macOS">macOS</option>
               <option value="Windows">Windows</option>
@@ -71,7 +71,7 @@ const Support = () => {
           {errors?.operatingSystem && t('Please select an operating system.')}
           <div>
             <select {...register('browser', { required: true })} name="browser" id="browser" defaultValue="" onBlur={changeBrowser}>
-              <option value="" disabled hidden>{t('-- select web browser --')}</option>
+              <option value="" disabled>{t('-- select web browser --')}</option>
               <option value="Firefox">Firefox</option>
               <option value="Chrome">Chrome</option>
               <option value="Safari">Safari</option>
