@@ -27,16 +27,16 @@ const Nav = () => {
   return (
     <>
       <header>
-        <Link to="/">
+        <NavLink to="/">
           <h1>udk/rundgang</h1>
-        </Link>
+        </NavLink>
         <button type="button" className={isNavigationOpen ? 'close' : 'open'} onClick={() => setIsNavigationOpen(!isNavigationOpen)}>{isNavigationOpen ? '×' : '|||'}</button>
       </header>
       <nav className={`${(isNavigationOpen && 'active')}`}>
         <div>
           <div>
             {auth.user
-              ? <Link to="/logout" onClick={() => auth.signout(() => history.push('/'))}>/logout</Link>
+              ? <Link to="/" onClick={() => auth.signout(() => history.push('/'))}>/logout</Link>
               : <NavLink to="/login">/login</NavLink>}
           </div>
           {auth.user && (
