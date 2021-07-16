@@ -126,7 +126,6 @@ const FileUpload = (props) => {
             <li><a href="https://chooser-beta.creativecommons.org/" rel="external nofollow noopener noreferrer" target="_blank">CC License Chooser (beta)</a></li>
             <li><a href="https://rightsstatements.org/page/1.0/" rel="external nofollow noopener noreferrer" target="_blank">Rights Statements</a></li>
           </ul>
-          {/* TODO: needs i18n */}
           <TextareaAutosize
             rows="3"
             placeholder={t('please describe the ') + impairment[0] + t(' with a few words for ') + impairment[1] + t(' impaired website visitors.')}
@@ -134,16 +133,13 @@ const FileUpload = (props) => {
               setAlttext(e.target.value)
             }}
           />
-          {/* TODO: needs i18n */}
           <button
             className="upload"
             onClick={(e) => props.handleSubmission(e, selectedFile, fileName, author, license, alttext)}
             disabled={!selectedFile.type.includes(props.fileType) || selectedFile.size > size || props.loading || alttext.length < 1 || license.length < 1 || author.length < 1}
           >{props.loading ? <Loading /> : 'Upload'}
           </button>
-          {/* TODO: needs i18n */}
-          {selectedFile.type.includes(props.fileType) || <p>❗️ <Trans t={t} i18nKey="selectFileType">Please select an {props.fileType} file.</Trans></p>}
-          {/* TODO: needs i18n */}
+          {selectedFile.type.includes(props.fileType) || <p>❗️ <Trans t={t} i18nKey="selectFileType">Please select an {impairment[0]} file.</Trans></p>}
           {selectedFile.size > size && <p>❗️ {t('File size needs to be less than')} {size / 1000000}MB</p>}
         </>
       )}
