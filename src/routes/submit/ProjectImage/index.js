@@ -62,11 +62,11 @@ const ProjectImage = ({ projectSpace, changeProjectImage }) => {
   return (
     <>
       <>
-        <img src={matrixClient.mxcUrlToHttp(projectImage.url)} alt="Project-key-visual" />
+        <img src={matrixClient.mxcUrlToHttp(projectImage.url)} alt={projectImage.alt} />
         <button onClick={e => { e.preventDefault(); setEdit(edit => !edit) }}>{edit ? t('CANCEL') : t('CHANGE')}</button>
         {!edit &&
           <>
-            <input type="text" placeholder="author, credits, et cetera" value={projectImage.author} disabled />
+            <input type="text" value={projectImage.author} disabled />
             <select id="license" name="license" value={projectImage.license} disabled>
               <option value="cc0">CC0 1.0</option>
               <option value="cc-by">CC BY 4.0</option>
