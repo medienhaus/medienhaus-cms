@@ -24,7 +24,7 @@ const FileUpload = (props) => {
       <input className="browse" type="file" name="browse" onChange={changeHandler} disabled={props.fileType === '' || false} />
       {selectedFile && (
         <>
-          <input type="text" placeholder="author, credits, et cetera" onChange={(e) => setAuthor(e.target.value)} />
+          <input type="text" placeholder={t('author, credits, et cetera')} onChange={(e) => setAuthor(e.target.value)} />
           <select id="license" name="license" defaultValue="" value={license} onChange={(e) => setLicense(e.target.value)}>
             <option value="" disabled>-- select license or rights statement --</option>
             <optgroup label="Creative Commons Licenses">

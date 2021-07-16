@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import Matrix from '../../../../Matrix'
 import LoadingSpinnerButton from '../../../../components/LoadingSpinnerButton'
+import { useTranslation } from 'react-i18next'
 
 const DisplayImage = ({ roomId, url, alt }) => {
   const [license, setLicense] = useState('')
@@ -9,6 +10,7 @@ const DisplayImage = ({ roomId, url, alt }) => {
   const [loading, setLoading] = useState(false)
   const [feedback, setFeedback] = useState('')
   const matrixClient = Matrix.getMatrixClient()
+  const { t } = useTranslation('fileupload')
 
   const onSave = async () => {
     setLoading(true)
@@ -48,7 +50,7 @@ const DisplayImage = ({ roomId, url, alt }) => {
         placeholder="please describe the image with a few words to enable visually impaired website visitors to comprehend what’s being shown here"
         onChange={(e) => setAlttext(e.target.value)}
       />
-      <LoadingSpinnerButton disabled={loading || alttext.length < 0 || license.length < 0 || author.length < 0} onClick={onSave}>{feedback || 'SAVE'}</LoadingSpinnerButton>
+      <LoadingSpinnerButton disabled={loading || alttext.length < 0 || license.length < 0 || author.length < 0} onClick={onSave}>{feedback || t('SAVE')}</LoadingSpinnerButton>
     </>
   )
 }
