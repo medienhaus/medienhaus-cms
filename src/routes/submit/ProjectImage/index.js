@@ -2,12 +2,14 @@ import React, { useCallback, useEffect, useState } from 'react'
 import Matrix from '../../../Matrix'
 import FileUpload from '../../../components/FileUpload'
 import TextareaAutosize from 'react-textarea-autosize'
+import { useTranslation } from 'react-i18next'
 
 const ProjectImage = ({ projectSpace, changeProjectImage }) => {
   const [edit, setEdit] = useState(false)
   const [loading, setLoading] = useState(false)
   const [projectImage, setProjectImage] = useState()
   const matrixClient = Matrix.getMatrixClient()
+  const { t } = useTranslation('projects')
 
   const fetchProjectImage = useCallback(async () => {
     const avatar = await matrixClient.getStateEvent(projectSpace, 'm.room.avatar')
@@ -61,7 +63,7 @@ const ProjectImage = ({ projectSpace, changeProjectImage }) => {
     <>
       <>
         <img src={matrixClient.mxcUrlToHttp(projectImage.url)} alt="Project-key-visual" />
-        <button onClick={e => { e.preventDefault(); setEdit(edit => !edit) }}>{edit ? 'CANCEL' : 'CHANGE'}</button>
+        <button onClick={e => { e.preventDefault(); setEdit(edit => !edit) }}>{edit ? t('CANCEL') : t('CHANGE')}</button>
         {!edit &&
           <>
             <input type="text" placeholder="author, credits, et cetera" value={projectImage.author} disabled />
