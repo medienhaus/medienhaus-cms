@@ -4,7 +4,7 @@
   "Username can’t be empty.": "Username muss angegeben werden.",
   "password": "passwort",
   "Password can’t be empty.": "Passwort muss angegeben werden.",
-  "usernameSameAsEmail": "Ihr Username und Ihr Passwort sind identisch mit den Login-Daten für Ihre <1>@udk-berlin.de</1> bzw. <1>@intra.udk-berlin.de</1> E-Mail-Adresse. Falls Sie ihr Passwort vergessen haben oder ändern möchten, benutzen Sie bitte einen der untenstehenden Links.",
+  "usernameSameAsEmail": "Ihr Username und Ihr Passwort sind identisch mit den Login-Daten für Ihre <1>@udk-berlin.de</1> bzw. <1>@intra.udk-berlin.de</1> E-Mail-Adresse. Falls Sie Ihr Passwort vergessen haben oder ändern möchten, benutzen Sie bitte einen der untenstehenden Links.",
   "Forgot your password?": "Passwort vergessen?",
   "Register new account?": "Account registrieren?",
   "Need support?": "Support gewünscht?",
