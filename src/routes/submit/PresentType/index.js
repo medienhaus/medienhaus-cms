@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import Matrix from '../../../Matrix'
-import { useTranslation } from 'react-i18next'
 
 const PresentType = ({ presentValue, projectSpace, callback }) => {
   const [presentTypeValue, setPresentTypeValue] = useState(presentValue)
   const [changingPresentType, setChangingPresentType] = useState(false)
   const matrixClient = Matrix.getMatrixClient()
-  const { t } = useTranslation()
 
   useEffect(() => {
     setPresentTypeValue(presentValue)
@@ -25,7 +23,6 @@ const PresentType = ({ presentValue, projectSpace, callback }) => {
 
   return (
     <>
-      <p>{t('Need some text for this; wording of section is also not final; how about something along "Format", "Verortung", …')}</p>
       <select value={presentTypeValue} disabled={changingPresentType} onChange={(e) => changePresentType(e)}>
         <option value="analog">Analog</option>
         <option value="digital">Digital</option>

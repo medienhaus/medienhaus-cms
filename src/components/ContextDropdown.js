@@ -5,6 +5,7 @@ import mapDeep from 'deepdash/es/mapDeep'
 import struktur from '../struktur'
 import { findValueDeep } from 'deepdash/es/standalone'
 import LoadingSpinnerButton from './LoadingSpinnerButton'
+import { useTranslation } from 'react-i18next'
 
 const items = uniqBy(mapDeep(struktur, (value, key, parent, context) => {
   // Add "path" parameter to create breadcrumbs from first hierarchy element up to "myself"
@@ -23,6 +24,7 @@ const items = uniqBy(mapDeep(struktur, (value, key, parent, context) => {
 
 function ContextDropdown () {
   const [inputItems, setInputItems] = useState(items)
+  const { t } = useTranslation('context')
 
   async function requestAccessToSpace () {
     // eslint-disable-next-line promise/param-names
@@ -54,7 +56,7 @@ function ContextDropdown () {
       <div style={{ display: 'flex' }} {...getComboboxProps()}>
         <input
           disabled
-          type="text" placeholder="-- search or select context --" {...getInputProps()} style={{
+          type="text" placeholder={t('-- search or select context --')} {...getInputProps()} style={{
             flex: '1 0',
             backgroundImage: 'url(data:image/svg+xml;base64,PHN2ZyBoZWlnaHQ9IjMwMHB4IiB3aWR0aD0iMzAwcHgiIGZpbGw9InJnYigxMjgsMTI4LDEyOCkiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgdmlld0JveD0iMCAwIDEwMCAxMDAiIHg9IjBweCIgeT0iMHB4Ij48cG9seWdvbiBwb2ludHM9IjUwIDU3LjEzIDIzLjE5IDMwLjQ2IDE2LjEzIDM3LjU1IDUwIDcxLjIzIDgzLjg2IDM3LjU1IDc2LjgxIDMwLjQ2IDUwIDU3LjEzIj48L3BvbHlnb24+PC9zdmc+)',
             backgroundPosition: 'calc(100% - calc(var(--margin) * 0.2)) 55%',

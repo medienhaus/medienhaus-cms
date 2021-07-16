@@ -109,7 +109,7 @@ const Collaborators = ({ projectSpace, members, time, startListeningToCollab }) 
     <>
       <h3>{t('Contributors')}</h3>
       <p>{t('Did you work with other people on this project?')}</p>
-      <p><Trans t={t} i18nKey="contributorsInstructions2">You can share access (for editing) to this project. The contributing editor needs an <a href="https://spaces.udk-berlin.de" rel="external nofollow noopener noreferrer" target="_blank" style={{ fontWeight: 'bold' }}>udk/spaces</a> account to edit the project.</Trans></p>
+      <p><Trans t={t} i18nKey="contributorsInstructions2">You can share access (for editing) to this project. The contributing editor needs an <a href="https://spaces.udk-berlin.de" rel="external nofollow noopener noreferrer" target="_blank">udk/spaces</a> account to edit the project.</Trans></p>
       <p><Trans t={t} i18nKey="contributorsInstructions3">You can also give credits to a contributor without an <strong>udk/spaces</strong> account, but they won’t be able to get access for editing. Just type in their name and click the <code>ADD</code> button.</Trans></p>
       <section className="credits">
         {/* @TODO kicking user function */}
@@ -131,7 +131,7 @@ const Collaborators = ({ projectSpace, members, time, startListeningToCollab }) 
       <div>
         <div>
           <input
-            list="userSearch" id="user-datalist" name="user-datalist" placeholder="contributor name" value={collab} onChange={(e) => {
+            list="userSearch" id="user-datalist" name="user-datalist" placeholder={t('contributor name')} value={collab} onChange={(e) => {
               setGiveWritePermission(false)
               fetchUsers(e, e.target.value)
               setCollab(e.target.value)

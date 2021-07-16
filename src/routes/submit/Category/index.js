@@ -3,7 +3,7 @@ import Matrix from '../../../Matrix'
 import Knock from './Knock'
 import { Loading } from '../../../components/loading'
 import ContextDropdown from '../../../components/ContextDropdown'
-import { Trans, useTranslation } from 'react-i18next'
+import { useTranslation } from 'react-i18next'
 
 const Category = ({ title, projectSpace }) => {
   const { t } = useTranslation('projects')
@@ -44,7 +44,7 @@ const Category = ({ title, projectSpace }) => {
       <div style={{ position: 'relative' }}>
         <ContextDropdown callback={isMember} />
       </div>
-      <p>﹡ <em><Trans t={t}>This is not yet possible; we will roll out an update soon; the context is required for publishing your project on the Rundgang 2021 website.</Trans></em></p>
+      <p>﹡ <em>{t('This is not yet possible; we will roll out an update soon; the context is required for publishing your project on the Rundgang 2021 website.')}</em></p>
       {loading && <Loading />}
       {subject !== '' && !member && <Knock room={room} callback={callback} />}
     </>
