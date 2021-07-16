@@ -29,9 +29,9 @@
   "devDependencies": {
     "eslint": "^7.30.0",
     "eslint-config-standard": "^16.0.2",
-    "eslint-plugin-react-hooks": "^4.2.0",
     "eslint-config-standard-jsx": "^10.0.0",
-    "eslint-config-standard-react": "^11.0.1"
+    "eslint-config-standard-react": "^11.0.1",
+    "eslint-plugin-react-hooks": "^4.2.0"
   },
   "scripts": {
     "start": "react-scripts start",

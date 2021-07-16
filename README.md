@@ -13,9 +13,9 @@ Berlin University of the Arts’ free and open-source environment for digital le
 
 ## Custom medienhaus stateEvent
 
-The cms uses a custom stateEvent `m.medienhaus.meta` to store information about the room.
+The cms uses a custom stateEvent `dev.medienhaus.meta` to store information about the room.
 
-You can fetch the event via the api or matrix sdk by calling `matrixClient.getStateEvent(roomId, 'm.medienhaus.meta'` which will return: 
+You can fetch the event via the api or matrix sdk by calling `matrixClient.getStateEvent(roomId, 'dev.medienhaus.meta'` which will return: 
 ```
 content: {
           rundgang: 21,
@@ -32,7 +32,7 @@ published: public,
 collab: false,
 avatar_url: mxc://image,
 description: room_topic,
-meta: m.medienhaus.meta
+meta: dev.medienhaus.meta
  ```
 
 ## Development
