@@ -10,8 +10,8 @@ const FileUpload = (props) => {
   const [license, setLicense] = useState('')
   const [alttext, setAlttext] = useState('')
   const size = props.fileType === 'image' ? 5000000 : 25000000
-  const impairment = props.fileType === 'audio' ? ['audio', 'hearing'] : ['image', 'visually']
   const { t } = useTranslation('fileupload')
+  const impairment = props.fileType === 'audio' ? ['audio', t('hearing')] : ['image', t('visually')]
 
   const changeHandler = (event) => {
     setSelectedFile(event.target.files[0])
@@ -129,7 +129,7 @@ const FileUpload = (props) => {
           {/* TODO: needs i18n */}
           <TextareaAutosize
             rows="3"
-            placeholder={t('please describe the ' + impairment[0] + ' with a few words for ' + impairment[1] + ' impaired website visitors.')}
+            placeholder={t('please describe the ') + impairment[0] + t(' with a few words for ') + impairment[1] + t(' impaired website visitors.')}
             onChange={(e) => {
               setAlttext(e.target.value)
             }}
