@@ -142,7 +142,7 @@ const FileUpload = (props) => {
           >{props.loading ? <Loading /> : 'Upload'}
           </button>
           {/* TODO: needs i18n */}
-          {selectedFile.type.includes(props.fileType) || <p>❗️ <Trans i18nKey="selectFileType">Please select an {props.fileType} file.</Trans></p>}
+          {selectedFile.type.includes(props.fileType) || <p>❗️ <Trans t={t} i18nKey="selectFileType">Please select an {props.fileType} file.</Trans></p>}
           {/* TODO: needs i18n */}
           {selectedFile.size > size && <p>❗️ {t('File size needs to be less than')} {size / 1000000}MB</p>}
         </>
