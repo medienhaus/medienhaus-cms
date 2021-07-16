@@ -29,7 +29,7 @@ const ProjectDescription = ({ description: intro, callback }) => {
         </div>
         <div className="center">
           <TextareaAutosize
-            rows={3}
+            minRows={6}
             value={description}
             onClick={() => setBackupDescription(description)}
             onChange={(e) => {
