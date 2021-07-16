@@ -43,7 +43,7 @@ const AddDate = ({ onCreateRoomForBlock, onBlockWasAddedSuccessfully }) => {
           }}
         />
       </div>
-      <LoadingSpinnerButton loading={loading} onClick={handleSubmit}>SAVE</LoadingSpinnerButton>
+      <LoadingSpinnerButton disabled={loading || (!date && !time)} loading={loading} onClick={handleSubmit}>SAVE</LoadingSpinnerButton>
     </>
   )
 }
