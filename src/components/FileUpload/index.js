@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Loading } from '../../components/loading'
 import TextareaAutosize from 'react-textarea-autosize'
+import { useTranslation } from 'react-i18next'
 
 const FileUpload = (props) => {
   const [selectedFile, setSelectedFile] = useState()
@@ -10,6 +11,7 @@ const FileUpload = (props) => {
   const [alttext, setAlttext] = useState('')
   const size = props.fileType === 'image' ? 5000000 : 25000000
   const impairment = props.fileType === 'audio' ? ['audio', 'hearing'] : ['image', 'visually']
+  const { t } = useTranslation('fileupload')
 
   const changeHandler = (event) => {
     setSelectedFile(event.target.files[0])
@@ -142,7 +144,7 @@ const FileUpload = (props) => {
           {/* TODO: needs i18n */}
           {selectedFile.type.includes(props.fileType) || <p>❗️ Please select an {props.fileType} file.</p>}
           {/* TODO: needs i18n */}
-          {selectedFile.size > size && <p>❗️ File size needs to be less than {size / 1000000}MB</p>}
+          {selectedFile.size > size && <p>❗️ {t('File size needs to be less than')} {size / 1000000}MB</p>}
         </>
       )}
     </>
