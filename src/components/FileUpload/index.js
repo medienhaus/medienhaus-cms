@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { Loading } from '../../components/loading'
+import TextareaAutosize from 'react-textarea-autosize'
 
 const FileUpload = (props) => {
   const [selectedFile, setSelectedFile] = useState()
@@ -124,7 +125,7 @@ const FileUpload = (props) => {
             <li><a href="https://rightsstatements.org/page/1.0/" rel="external nofollow noopener noreferrer" target="_blank">Rights Statements</a></li>
           </ul>
           {/* TODO: needs i18n */}
-          <textarea
+          <TextareaAutosize
             rows="3"
             placeholder={'please describe the ' + impairment[0] + ' with a few words for ' + impairment[1] + ' impaired website visitors.'}
             onChange={(e) => {
