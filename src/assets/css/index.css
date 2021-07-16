@@ -2,8 +2,6 @@
 
 @import url("./normalize.css");
 @import url("./fonts.css");
-@import url("https://unpkg.com/leaflet@1.7.1/dist/leaflet.css");
-
 :root {
   --color-fg: rgb(0,0,0);
   --color-bg: rgb(255,255,255);
@@ -63,9 +61,11 @@ body > div:first-of-type > main > :first-of-type {
   margin-top: calc(var(--margin) * 0.6);
 }
 
+/*
 body > div:first-of-type > main > :first-of-type#definition {
   margin-top: calc(var(--margin) * 1.6);
 }
+*/
 
 body > div:first-of-type > main > section + section {
   margin-top: calc(var(--margin) * 2);
@@ -156,9 +156,11 @@ img {
   width: 100%
 }
 
+/*
 img[alt=""], img:not([alt]) {
   border: 3px dashed rgb(255,0,0);
 }
+*/
 
 footer {
   display: grid;
@@ -643,7 +645,7 @@ textarea[disabled] {
   resize: none;
 }
 
-#loading {
+.loading {
   border-color: var(--color-fg) transparent var(--color-fg) transparent;
   border-radius: 50%;
   border-style: solid;
@@ -654,7 +656,7 @@ textarea[disabled] {
 }
 
 /* TODO */
-button > #loading {
+button > .loading {
   border-color: var(--color-bg) transparent var(--color-bg) transparent;
   margin: 0 auto;
   max-height: calc(var(--margin) * 1.15);
@@ -1146,7 +1148,7 @@ button > #loading {
   opacity: 0.3;
 }
 
-.explore button > #loading {
+.explore button > .loading {
   border-color: var(--color-bg) transparent var(--color-bg) transparent;
   max-height: calc(var(--margin) * 1.15);
   max-width: calc(var(--margin) * 1.15);
@@ -1499,13 +1501,13 @@ button > #loading {
     grid-template-columns: auto 20ch;
   }
   /* TODO tools */
-  #tools div {
+  .boilerplate div {
     display: grid;
     align-items: center;
     grid-gap: var(--margin);
     grid-template-columns: minmax(10ch, auto) 1fr;
   }
-  #tools div.grid {
+  .boilerplate div.grid {
     grid-template-columns: repeat(4, minmax(0, 1fr));
   }
   /*
@@ -1586,3 +1588,5 @@ button > #loading {
     content: "\2013\0020";
   }
 }
+
+@import url("https://unpkg.com/leaflet@1.7.1/dist/leaflet.css");

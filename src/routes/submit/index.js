@@ -222,7 +222,7 @@ const Submit = () => {
         </p>
         <p>{t('This is the project page. Please add the context in which the project was created, a project name, descriptive text and a thumbnail. You can also add more images, videos, livestreams and BigBlueButton sessions.')}</p>
         <p><Trans t={t} i18nKey="submitInstructions2">If you want to continue at a later point in time, the project is automatically saved as a draft and you can find it in your collection under <NavLink activeclassname="active" to="/projects">/projects</NavLink>.</Trans></p>
-        <p>{t('The Rundgang platform will appear in German as well as in English. Therefore, remember to create your project name and introduction in both German and English. Other texts should also be entered in both languages, otherwise the text will appear in only one language on both pages.')}</p>
+        <p>{t('The Rundgang website will be available in English and German. Therefore, remember to create your project description in both German and English. Other texts should also be entered in both languages, otherwise the text will appear in only one language on both pages.')}</p>
       </section>
       <section className="project-title">
         <h3>{t('Project Title')}</h3>
@@ -242,13 +242,13 @@ const Submit = () => {
             <Collaborators projectSpace={spaceObject?.rooms} members={roomMembers} time={getCurrentTime} startListeningToCollab={() => startListeningToCollab()} />
           </section>
           <section className="project-image">
-            <h3>{t('Thumbnail')}</h3>
+            <h3>{t('Project image')}</h3>
             {loading ? <Loading /> : <ProjectImage projectSpace={projectSpace} changeProjectImage={changeProjectImage} />}
           </section>
           <section className="content">
             <h3>{t('Content')}</h3>
             <p><Trans t={t} i18nKey="contentInstructions1">You can add elements like texts, images, audio and video files, BigBlueButton sessions and livestreams by clicking the <code>+</code> button near the content block below.</Trans></p>
-            <p><Trans t={t} i18nKey="contentInstructions2">The first content block&thinsp;&mdash;&thinsp;which is the introduction to your project&thinsp;&mdash;&thinsp;is required and therefore mandatory. Please enter the text in German as well as in English.</Trans></p>
+            <p><Trans t={t} i18nKey="contentInstructions2">The first content block&thinsp;&mdash;&thinsp;which is the introduction to your project&thinsp;&mdash;&thinsp;is required.</Trans></p>
             <p><Trans t={t} i18nKey="contentInstructions3">In all other text content blocks, you can format your input text by highlighting the to be formatted text with your cursor.</Trans></p>
             <p><Trans t={t} i18nKey="contentInstructions4">You can use the <code>↑</code> and <code>↓</code> arrows to rearrange existing blocks.</Trans></p>
             <p><Trans t={t} i18nKey="contentInstructions5">You can provide content and information in multiple languages by setting the desired language in the dropdown list below.</Trans></p>
@@ -269,10 +269,10 @@ const Submit = () => {
               )}
           </section>
           <section className="visibility">
-            <h3>{t('Visibility (Draft / Published)')}</h3>
+            <h3>{t('Visibility')}</h3>
             <p>
               <Trans t={t} i18nKey="visibilityInstructions1">
-                Do you want to save your project as a draft, visible only in the <strong>udk/rundgang</strong> content management system, or do you want to publish the project to the <a href="https://rundgang.udk-berlin.de" rel="external nofollow noopener noreferrer" target="_blank">rundgang.udk-berlin.de</a> website?
+                Do you want to save your project as a draft, visible only in the <strong>udk/rundgang</strong> content management system, or do you want to publish the project to the <a href="https://rundgang.udk-berlin.de" rel="external nofollow noopener noreferrer" target="_blank">Rundgang 2021 website</a>?
               </Trans>
             </p>
             <p>{t('You can change this at any time.')}</p>

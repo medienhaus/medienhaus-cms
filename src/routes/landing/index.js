@@ -20,7 +20,7 @@ const Landing = () => {
           </p>
           <p>
             <Trans t={t} i18nKey="feedback">
-              As the platform is a new tool that can continue to enrich the Rundgang – Open Days in the future, we would be happy if you send us your feedback on how to handle the system via the <NavLink to="/feedback">/feedback</NavLink> link in the menu.
+              As the platform is a new tool that can continue to enrich the Rundgang – Open Days in the future, we would be happy if you send us your feedback via the <NavLink to="/feedback">/feedback</NavLink> link in the menu.
             </Trans>
           </p>
           <p>

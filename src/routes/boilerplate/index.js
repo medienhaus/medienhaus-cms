@@ -1,13 +1,13 @@
 import React, { useState } from 'react'
 import ContextDropdown from '../../components/ContextDropdown'
 
-const Tools = () => {
+const Boilerplate = () => {
   const [title, setTitle] = useState('')
 
   const [klasse, setKlasse] = useState('')
 
   return (
-    <form id="tools">
+    <form className="boilerplate">
       <div>
         <label htmlFor="subject">Studiengang</label>
         <div style={{ display: 'block', position: 'relative' }}>
@@ -115,4 +115,4 @@ const Tools = () => {
   )
 }
 
-export default Tools
+export default Boilerplate
