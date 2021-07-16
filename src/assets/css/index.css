@@ -2,8 +2,6 @@
 
 @import url("./normalize.css");
 @import url("./fonts.css");
-@import url("https://unpkg.com/leaflet@1.7.1/dist/leaflet.css");
-
 :root {
   --color-fg: rgb(0,0,0);
   --color-bg: rgb(255,255,255);
@@ -1590,3 +1588,5 @@ button > .loading {
     content: "\2013\0020";
   }
 }
+
+@import url("https://unpkg.com/leaflet@1.7.1/dist/leaflet.css");
