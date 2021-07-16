@@ -235,7 +235,13 @@ const Submit = () => {
             <Category title={title} projectSpace={projectSpace} />
           </section>
           <section className="present">
-            <h3>Type of Presentation</h3>
+            <h3>{t('Format')}</h3>
+            <p>{t('In what form is your project presented?')}</p>
+            <ul>
+              <li>{t('Analog: in a physical location and without digital elements')}</li>
+              <li>{t('Digital: exclusively in digital space, at no physical location')}</li>
+              <li>{t('Hybrid: both at a physical location and digitally (e.g. by streaming a performance to which guests can also come, etc.)')}</li>
+            </ul>
             <PresentType presentValue={medienhausMeta?.present} projectSpace={projectSpace} callback={changePresentationType} />
           </section>
           <section className="contributors">
