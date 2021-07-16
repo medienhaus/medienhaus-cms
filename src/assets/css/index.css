@@ -1590,3 +1590,10 @@ button > .loading {
 }
 
 @import url("https://unpkg.com/leaflet@1.7.1/dist/leaflet.css");
+
+.leaflet-container,
+.leaflet-container a:link,
+.leaflet-container a:hover {
+  color: rgb(0,0,0);
+  text-decoration: none;
+}
