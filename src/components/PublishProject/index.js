@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { Loading } from '../loading'
-import { Trans, useTranslation } from 'react-i18next'
+import { useTranslation } from 'react-i18next'
 
 const PublishProject = ({ disabled, space, published, description, time }) => {
-  const { t } = useTranslation('projects')
+  const { t } = useTranslation('publish')
   const [userFeedback, setUserFeedback] = useState()
   const [visibility, setVisibility] = useState(published)
   const context = false
@@ -23,14 +23,18 @@ const PublishProject = ({ disabled, space, published, description, time }) => {
       await fetch(process.env.REACT_APP_MATRIX_BASE_URL + `/_matrix/client/r0/rooms/${space.room_id}/state/m.room.join_rules/`, req)
         .then(response => {
           if (response.ok) {
-            /* TODO: needs i18n */
+            /* TODO @marcel-klasse
+            setUserFeedback({t('Changed successfully!')})
+            */
             setUserFeedback('Changed successfully!')
             time && time()
             setTimeout(() => {
               setUserFeedback()
             }, 3000)
           } else {
-            /* TODO: needs i18n */
+            /* TODO @marcel-klasse
+            setUserFeedback({t('Oh no, something went wrong.')})
+            */
             setUserFeedback('Oh no, something went wrong.')
             setTimeout(() => {
               setUserFeedback()
@@ -58,10 +62,10 @@ const PublishProject = ({ disabled, space, published, description, time }) => {
         {!context &&
           <>
             <p>
-              ❗️ <Trans t={t}>Please add your project to a context.﹡</Trans>
+              ❗️ {t('Please add your project to a context.')}﹡
             </p>
             <p>
-              ﹡ <em><Trans t={t}>This is not yet possible; we will roll out an update soon; the context is required for publishing your project on the Rundgang 2021 website.</Trans></em>
+              ﹡ <em>{t('This is not yet possible; we will roll out an update soon; the context is required for publishing your project on the Rundgang 2021 website.')}</em>
             </p>
           </>}
       </div>

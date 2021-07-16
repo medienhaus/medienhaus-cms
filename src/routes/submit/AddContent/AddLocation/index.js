@@ -10,7 +10,7 @@ const AddLocation = ({ onCreateRoomForBlock, onBlockWasAddedSuccessfully }) => {
   const [room, setRoom] = useState('')
   const [loading, setLoading] = useState(false)
   const matrixClient = Matrix.getMatrixClient()
-  const { t } = useTranslation('landing')
+  const { t } = useTranslation('locations')
   console.log(selectedLocation)
 
   const handleSubmit = async () => {
@@ -27,11 +27,10 @@ const AddLocation = ({ onCreateRoomForBlock, onBlockWasAddedSuccessfully }) => {
   return (
     <>
       <select name="location-select" value={selectedLocation} id="location-select" onChange={(e) => setSelectedLocation(e.target.value)}>
-        <option value="" disabled>{t('-- select location --')}</option>
-        <option value="0.0, 0.0">{t('custom location, describe below')}</option>
+        <option value="" disabled>{t('-- select venue --')}</option>
+        <option value="0.0, 0.0">{t('other venue, please enter below')}</option>
         {locations.map(location => <option value={location.coordinates} key={location.coordinates}>{location.name}</option>)}
       </select>
-      {/* TODO: needs i18n */}
       <input type="text" placeholder="room number or specific location" onChange={(e) => setRoom(e.target.value)} />
       <LoadingSpinnerButton disabled={loading || !selectedLocation || (selectedLocation === '0.0, 0.0' && !room)} onClick={handleSubmit}>{t('SAVE')}</LoadingSpinnerButton>
     </>

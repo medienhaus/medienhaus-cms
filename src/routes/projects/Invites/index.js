@@ -1,11 +1,13 @@
 import React, { useState } from 'react'
 import Matrix from '../../../Matrix'
 import LoadingSpinnerButton from '../../../components/LoadingSpinnerButton'
+import { useTranslation } from 'react-i18next'
 
 const Invites = ({ space, callback }) => {
   const [joining, setJoining] = useState(false)
   const [error, setError] = useState('')
   const matrixClient = Matrix.getMatrixClient()
+  const { t } = useTranslation('invites')
 
   const join = async (room) => {
     setJoining(true)
@@ -39,8 +41,7 @@ const Invites = ({ space, callback }) => {
   return (
     <>
       <strong>{space.name}</strong>
-      {/* TODO: needs i18n */}
-      <LoadingSpinnerButton disabled={joining} onClick={() => join(space.id)}>ACCEPT</LoadingSpinnerButton>
+      <LoadingSpinnerButton disabled={joining} onClick={() => join(space.id)}>{t('ACCEPT')}</LoadingSpinnerButton>
       {error}
     </>
   )

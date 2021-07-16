@@ -1,5 +1,7 @@
 {
   "Hello": "Hallo",
+  "Invites": "Einladungen",
+  "Projects": "Projekte",
   "Welcome to the content management system for Rundgang 2021. Looks like you haven't uploaded any projects, yet.": "Willkommen im Content Management System für den Rundgang 2021! Es sieht so aus, als hätten Sie noch keine Projekte angelegt.",
   "create new project": "neues projekt anlegen",
   "pendingInvites": "Sie wurden zu folgendem Projekt eingeladen:",
