@@ -38,6 +38,8 @@
   "contributor name": "Name des/der Mitwirkenden",
   "contributorsInstructions2": "Sie können den Zugriff auf dieses Projekt zum Bearbeiten des Eintrags freigeben. Der/Die Mitwirkende benötigt einen <1>udk/spaces</1> Account, um das Projekt bearbeiten zu können.",
   "contributorsInstructions3": "Sie können auch Mitwirkende ohne <1>udk/spaces</1> Account nennen, diese können das Projekt dann jedoch nicht bearbeiten.",
+  "CANNOT edit the project": "kann das Projekt NICHT editieren",
+  "CAN edit and delete(!) the project": "DARF das Projekt editieren und löschen(!)",
   "Project image": "Titelbild",
   "Content":  "Inhalt",
   "contentInstructions1": "Sie können Elemente wie Texte, Bilder, Audio- und Videodateien, BigBlueButton-Sitzungen und Livestreams hinzufügen, indem Sie auf die Schaltfläche <1>+</1> neben dem Inhaltsblock unten klicken.",
