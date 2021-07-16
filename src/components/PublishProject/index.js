@@ -23,19 +23,13 @@ const PublishProject = ({ disabled, space, published, time }) => {
       await fetch(process.env.REACT_APP_MATRIX_BASE_URL + `/_matrix/client/r0/rooms/${space.room_id}/state/m.room.join_rules/`, req)
         .then(response => {
           if (response.ok) {
-            /* TODO @marcel-klasse
-            setUserFeedback({t('Changed successfully!')})
-            */
-            setUserFeedback('Changed successfully!')
+            setUserFeedback(t('Changed successfully!'))
             time && time()
             setTimeout(() => {
               setUserFeedback()
             }, 3000)
           } else {
-            /* TODO @marcel-klasse
-            setUserFeedback({t('Oh no, something went wrong.')})
-            */
-            setUserFeedback('Oh no, something went wrong.')
+            setUserFeedback(t('Oh no, something went wrong.'))
             setTimeout(() => {
               setUserFeedback()
             }, 3000)
