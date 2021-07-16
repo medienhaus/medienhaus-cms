@@ -60,6 +60,7 @@ const Collaborators = ({ projectSpace, members, time, startListeningToCollab }) 
           }
         }
       })
+      // TODO: needs i18n
       setAddContributionFeedback('✓ ' + name + ' was invited and needs to accept your invitation')
       time()
       setTimeout(() => {
@@ -81,6 +82,7 @@ const Collaborators = ({ projectSpace, members, time, startListeningToCollab }) 
     const content = await matrixClient.getStateEvent(projectSpace[0].room_id, 'dev.medienhaus.meta')
     content.credit ? content.credit = [...content.credit, collab] : content.credit = [collab]
     const sendCredit = await matrixClient.sendStateEvent(projectSpace[0].room_id, 'dev.medienhaus.meta', content)
+    // TODO: needs i18n
     setAddContributionFeedback('event_id' in sendCredit ? '✓' : 'Something went wrong')
     checkForCredits()
     time()
@@ -162,7 +164,7 @@ const Collaborators = ({ projectSpace, members, time, startListeningToCollab }) 
                   ? invite(e)
                   : addCredit(e)
               }}
-            >{inviting || fetchingUsers ? <Loading /> || '✓ ' : 'SAVE'}
+            >{inviting || fetchingUsers ? <Loading /> || '✓' : t('SAVE')}
             </button>
           </div>
           {addContributionFeedback &&
