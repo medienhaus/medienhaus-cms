@@ -37,8 +37,8 @@ const Category = ({ title, projectSpace }) => {
 
   return (
     <>
-      <p>{t('In which main context do you want to publish your project?')}</p>
-      <p>{t('This information is necessary to show your project in the right place on the Rundgang platform, and must therefore be specified when you set the visibility of the project to public.')}</p>
+      <p>{t('In which context do you want to publish your project?')}</p>
+      <p>{t('This information is necessary to show your project in the right place on the Rundgang 2021 website, and must therefore be specified when you change the visibility of the project to public.')}</p>
       <p>{t('The context can be a class, a course, a seminar or a free project. If you are unsure, ask the professor of your class or the seminar leader.')}</p>
       <p>{t('You can scroll through the list, or filter/search the list by typing one or more keywords.')}</p>
       <div style={{ position: 'relative' }}>
