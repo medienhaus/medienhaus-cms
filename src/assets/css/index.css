@@ -750,6 +750,10 @@ button > .loading {
   border-width: calc(var(--margin) * 0.2);
 }
 
+.editor .center {
+  border-color: var(--color-me);
+}
+
 .editor .center > * {
   border: unset;
 }
