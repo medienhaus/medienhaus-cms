@@ -125,11 +125,19 @@ const FileUpload = (props) => {
           </ul>
           {/* TODO: needs i18n */}
           <textarea
-            rows="3" placeholder={'please describe the ' + impairment[0] + ' with a few words for ' + impairment[1] + ' impaired website visitors.'}
-            onChange={(e) => setAlttext(e.target.value)}
+            rows="3"
+            placeholder={'please describe the ' + impairment[0] + ' with a few words for ' + impairment[1] + ' impaired website visitors.'}
+            onChange={(e) => {
+              setAlttext(e.target.value)
+            }}
           />
           {/* TODO: needs i18n */}
-          <button className="upload" onClick={(e) => props.handleSubmission(e, selectedFile, fileName, author, license, alttext)} disabled={!selectedFile.type.includes(props.fileType) || selectedFile.size > size || props.loading || alttext.length < 1 || license.length < 1 || author.length < 1}>{props.loading ? <Loading /> : 'Upload'}</button>
+          <button
+            lassName="upload"
+            onClick={(e) => props.handleSubmission(e, selectedFile, fileName, author, license, alttext)}
+            disabled={!selectedFile.type.includes(props.fileType) || selectedFile.size > size || props.loading || alttext.length < 1 || license.length < 1 || author.length < 1}
+          >{props.loading ? <Loading /> : 'Upload'}
+          </button>
           {/* TODO: needs i18n */}
           {selectedFile.type.includes(props.fileType) || <p>❗️ Please select an {props.fileType} file.</p>}
           {/* TODO: needs i18n */}
