@@ -261,7 +261,7 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace, time,
                       : json.type === 'location'
                         ? (
                           <div
-                            className={cms.body.substring(0, cms.body.indexOf(',')) + ',' + cms.body.substring(cms.body.indexOf(',') + 1, cms.body.indexOf('-')) === '0.0, 0.0' && 'center disabled'}
+                            className={cms.body.substring(0, cms.body.indexOf(',')) + ',' + cms.body.substring(cms.body.indexOf(',') + 1, cms.body.indexOf('-')) === '0.0, 0.0' && 'center'}
                           >
                             {
                             cms.body.substring(0, cms.body.indexOf(',')) + ',' + cms.body.substring(cms.body.indexOf(',') + 1, cms.body.indexOf('-')) !== '0.0, 0.0' &&
@@ -281,7 +281,7 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace, time,
                           </div>
                           )
                         : json.type === 'date'
-                          ? <div className="center disabled">
+                          ? <div className="center">
                             <input type="text" value={cms.body.split(' ')[0] + ' ' + cms.body.split(' ')[1] || null} disabled />
                             {/* eslint-disable-next-line react/jsx-indent */}
                             </div>
