@@ -158,10 +158,12 @@ const Submit = () => {
       }
       */
     }
-
-    console.log('subscribe to all room events')
-    matrixClient.addListener('Room.timeline', handleRoomTimelineEvent)
-    matrixClient.addListener('RoomState.events', handleRoomStateEvent)
+    // first we check if the initial sync is complete otherwise we create a loop
+    if (matrixClient.isInitialSyncComplete()) {
+      console.log('subscribe to all room events')
+      matrixClient.addListener('Room.timeline', handleRoomTimelineEvent)
+      matrixClient.addListener('RoomState.events', handleRoomStateEvent)
+    }
 
     return () => {
       console.log('unsubscribed from all room events')
