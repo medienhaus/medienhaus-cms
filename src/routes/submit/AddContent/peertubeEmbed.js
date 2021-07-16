@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import Matrix from '../../../Matrix'
 import { Loading } from '../../../components/loading'
 import LoadingSpinnerButton from '../../../components/LoadingSpinnerButton'
+import { Trans, useTranslation } from 'react-i18next'
 // import createBlock from '../matrix_create_room'
 
 const PeertubeEmbed = ({ type, onCreateRoomForBlock, onBlockWasAddedSuccessfully }) => {
@@ -10,6 +11,7 @@ const PeertubeEmbed = ({ type, onCreateRoomForBlock, onBlockWasAddedSuccessfully
   const [selectedEntry, setSelectedEntry] = useState('')
   const matrixClient = Matrix.getMatrixClient()
   const username = matrixClient.getUserIdLocalpart()
+  const { t } = useTranslation()
 
   useEffect(() => {
     async function fetchEntries () {
@@ -75,6 +77,7 @@ const PeertubeEmbed = ({ type, onCreateRoomForBlock, onBlockWasAddedSuccessfully
           <option value={entry.uuid} key={entry.uuid}>{(type === 'playlist' ? entry.displayName : entry.name)}</option>
         ))}
       </select>
+      {type === 'livestream' && <Trans t={t} i18nKey="linkToStream">You can start a livestream via <a href="https://stream.udk-berlin.de" rel="external nofollow noopener noreferrer" target="_blank">/stream</a></Trans>}
       <LoadingSpinnerButton onClick={handleSubmit} disabled={entries.length < 1 || !selectedEntry}>Add Content</LoadingSpinnerButton>
     </div>
   )
