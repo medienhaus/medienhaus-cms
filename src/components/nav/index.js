@@ -45,7 +45,6 @@ const Nav = () => {
                 <NavLink to="/projects">/projects</NavLink>
                 <NavLink to="/feedback">/feedback</NavLink>
                 <NavLink to="/support">/support</NavLink>
-                {/* <NavLink activeclassname="active" to="/tools">/tools</NavLink>  only for dev */}
                 {/*
                 <NavLink activeclassname="active" to="/moderation">/moderation</NavLink>
                 */}

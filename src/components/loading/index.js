@@ -1,3 +1,3 @@
 import React from 'react'
 
-export const Loading = () => <div id="loading" />
+export const Loading = () => <div className="loading" />
