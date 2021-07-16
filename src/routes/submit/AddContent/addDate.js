@@ -38,7 +38,6 @@ const AddDate = ({ onCreateRoomForBlock, onBlockWasAddedSuccessfully }) => {
         <label htmlFor="time">Choose a time:</label>
         <input
           id="time" name="time" type="time" value={time} onChange={(e) => {
-            console.log(e)
             setTime(e.target.value)
           }}
         />
