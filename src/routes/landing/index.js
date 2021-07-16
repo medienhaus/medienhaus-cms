@@ -1,11 +1,12 @@
 import React from 'react'
 import { Trans, useTranslation } from 'react-i18next'
 import { useAuth } from '../../Auth'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useHistory } from 'react-router-dom'
 
 const Landing = () => {
   const { t } = useTranslation('landing')
   const auth = useAuth()
+  const history = useHistory()
 
   return (
     <div>
@@ -28,6 +29,7 @@ const Landing = () => {
               If you need technical support for entering projects, please fill out the <NavLink to="/support">/support</NavLink> form.
             </Trans>
           </p>
+          <button onClick={() => history.push('/submit')}>{t('create new project')}</button>
         </>
       )}
       <p><em>{t('Please note: The public-facing Rundgang website on which all projects will be presented, is still under construction. Therefore, it is not yet possible to preview the projects that have been created.')}</em></p>
