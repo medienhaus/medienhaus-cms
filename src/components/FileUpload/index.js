@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Loading } from '../../components/loading'
 import TextareaAutosize from 'react-textarea-autosize'
-import { useTranslation } from 'react-i18next'
+import { Trans, useTranslation } from 'react-i18next'
 
 const FileUpload = (props) => {
   const [selectedFile, setSelectedFile] = useState()
@@ -142,7 +142,7 @@ const FileUpload = (props) => {
           >{props.loading ? <Loading /> : 'Upload'}
           </button>
           {/* TODO: needs i18n */}
-          {selectedFile.type.includes(props.fileType) || <p>❗️ Please select an {props.fileType} file.</p>}
+          {selectedFile.type.includes(props.fileType) || <p>❗️ <Trans i18nKey="selectFileType">Please select an {props.fileType} file.</Trans></p>}
           {/* TODO: needs i18n */}
           {selectedFile.size > size && <p>❗️ {t('File size needs to be less than')} {size / 1000000}MB</p>}
         </>
