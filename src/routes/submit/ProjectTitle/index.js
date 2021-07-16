@@ -137,7 +137,7 @@ const ProjectTitle = ({ title, projectSpace, callback }) => {
                   setOldTitle(title)
                 }
               }}
-            >SAVE
+            >{t('SAVE')}
             </LoadingSpinnerButton>}
         </div>}
     </>

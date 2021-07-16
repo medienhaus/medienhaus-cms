@@ -1,12 +1,14 @@
 import React, { useState } from 'react'
 import LoadingSpinnerButton from '../../../components/LoadingSpinnerButton'
 import Matrix from '../../../Matrix'
+import { useTranslation } from 'react-i18next'
 
 const AddDate = ({ onCreateRoomForBlock, onBlockWasAddedSuccessfully }) => {
   const [date, setDate] = useState('')
   const [time, setTime] = useState('')
   const [loading, setLoading] = useState(false)
   const matrixClient = Matrix.getMatrixClient()
+  const { t } = useTranslation('date')
 
   console.log(date, time)
   const handleSubmit = async () => {
@@ -42,7 +44,7 @@ const AddDate = ({ onCreateRoomForBlock, onBlockWasAddedSuccessfully }) => {
           }}
         />
       </div>
-      <LoadingSpinnerButton disabled={loading || (!date && !time)} loading={loading} onClick={handleSubmit}>SAVE</LoadingSpinnerButton>
+      <LoadingSpinnerButton disabled={loading || (!date && !time)} loading={loading} onClick={handleSubmit}>{t('SAVE')}</LoadingSpinnerButton>
     </>
   )
 }

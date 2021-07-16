@@ -235,7 +235,13 @@ const Submit = () => {
             <Category title={title} projectSpace={projectSpace} />
           </section>
           <section className="present">
-            <h3>Type of Presentation</h3>
+            <h3>{t('Format')}</h3>
+            <p>{t('In what form is your project presented?')}</p>
+            <ul>
+              <li>{t('Analog: in a physical location and without digital elements')}</li>
+              <li>{t('Digital: exclusively in digital space, at no physical location')}</li>
+              <li>{t('Hybrid: both at a physical location and digitally (e.g. by streaming a performance to which guests can also come, etc.)')}</li>
+            </ul>
             <PresentType presentValue={medienhausMeta?.present} projectSpace={projectSpace} callback={changePresentationType} />
           </section>
           <section className="contributors">
@@ -272,10 +278,10 @@ const Submit = () => {
             <h3>{t('Visibility')}</h3>
             <p>
               <Trans t={t} i18nKey="visibilityInstructions1">
-                Do you want to save your project as a draft, visible only in the <strong>udk/rundgang</strong> content management system, or do you want to publish the project to the <a href="https://rundgang.udk-berlin.de" rel="external nofollow noopener noreferrer" target="_blank">Rundgang 2021 website</a>?
+                Would you like to save your project as a draft or release it for publishing on the Rundgang platform? The released projects will be published for the Rundgang on October 29, 2021.
               </Trans>
             </p>
-            <p>{t('You can change this at any time.')}</p>
+            <p>{t('If you still want to make changes to your contributions after publishing, you can continue to do so. Please note, however, that content on analogue and hybrid projects will be pulled from the system on October 8, 2021 for the printed Rundgang programme. Projects that have not been approved by you for publishing by then will not be included in the programme booklet.')}</p>
             <p><em>{t('Please note: The frontend, i.e. the website where all projects will be visible, is still under construction. Therefore, at the moment it is not yet possible to preview the created projects.')}</em></p>
             {spaceObject ? <PublishProject space={spaceObject.rooms[0]} description={spaceObject.rooms[0].topic} published={visibility} time={getCurrentTime} /> : <Loading />}
           </section>

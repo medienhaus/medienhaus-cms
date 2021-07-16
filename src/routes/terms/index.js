@@ -39,7 +39,7 @@ const Terms = () => {
           localStorage.setItem('terms-consent', true)
           history.push('/')
         }}
-      >ACCEPT & SAVE
+      >{t('ACCEPT & SAVE')}
       </button>
     </section>
   )

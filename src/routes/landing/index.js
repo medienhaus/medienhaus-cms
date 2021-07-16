@@ -1,11 +1,12 @@
 import React from 'react'
 import { Trans, useTranslation } from 'react-i18next'
 import { useAuth } from '../../Auth'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useHistory } from 'react-router-dom'
 
 const Landing = () => {
   const { t } = useTranslation('landing')
   const auth = useAuth()
+  const history = useHistory()
 
   return (
     <div>
@@ -18,6 +19,7 @@ const Landing = () => {
               We also offer you the possibility to offer virtual meetings via the video conferencing tool BigBlueButton at <a href="https://meetings.udk-berlin.de" rel="external nofollow noopener noreferrer" target="_blank">udk/meet</a> and to integrate videos and live streams via <a href="https://stream.udk-berlin.de" rel="external nofollow noopener noreferrer" target="_blank">udk/stream</a> on your own project page.
             </Trans>
           </p>
+          <button onClick={() => history.push('/submit')}>{t('create new project')}</button>
           <p>
             <Trans t={t} i18nKey="feedback">
               As the platform is a new tool that can continue to enrich the Rundgang – Open Days in the future, we would be happy if you send us your feedback via the <NavLink to="/feedback">/feedback</NavLink> link in the menu.
