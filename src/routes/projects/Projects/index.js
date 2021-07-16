@@ -10,6 +10,7 @@ const Projects = ({ space, visibility, index, removeProject }) => {
   const { t } = useTranslation('projects')
   const matrixClient = Matrix.getMatrixClient()
   const [showDeleteComponent, setShowDeleteComponent] = useState(false)
+  const context = false
 
   return (
     <>
@@ -34,6 +35,16 @@ const Projects = ({ space, visibility, index, removeProject }) => {
       </div>
       {showDeleteComponent &&
         <DeleteProjectButton roomId={space.room_id} name={space.name} index={index} toggleDeleteButton={() => setShowDeleteComponent(false)} removeProject={removeProject} />}
+      {!space.description && <p>❗️ {t('Please add a short description of your project.')}</p>}
+      {!context &&
+        <>
+          <p>
+            ❗️ {t('Please add your project to a context.')}﹡
+          </p>
+          <p>
+            ﹡ <em>{t('This is not yet possible; we will roll out an update soon; the context is required for publishing your project on the Rundgang 2021 website.')}</em>
+          </p>
+        </>}
     </>
   )
 }
