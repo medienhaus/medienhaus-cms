@@ -1,5 +1,6 @@
 {
   "File size needs to be less than": "Datei darf nicht größer sein als",
   "author, credits, et cetera": "Autor*in, Credits, et cetera",
+  "textareaPlaceholder": "Bitte beschreiben Sie die hochgeladene Mediendatei mit ein paar Worten für hör- bzw. sehbeeinträchtigte Website-Besucher*innen.",
   "selectFileType": "Bitte wählen Sie eine <1>{props.fileType}</1>-Datei."
 }
