@@ -276,11 +276,13 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace, time,
                                 </Marker>
                               </MapContainer>
                             }
-                            {cms.body.substring(cms.body.lastIndexOf('-') + 1).length > 0 && <input type="text" disabled value={cms.body.substring(cms.body.lastIndexOf('-') + 1)} />}
+                            {cms.body.substring(cms.body.lastIndexOf('-') + 1).length > 0 && <input type="text" value={cms.body.substring(cms.body.lastIndexOf('-') + 1)} disabled />}
                           </div>
                           )
                         : json.type === 'date'
-                          ? <div>{cms.body.split(' ')[0]} {cms.body.split(' ')[1] || null}</div>
+                          ? <div className="center disabled">
+                            <input type="text" value={cms.body.split(' ')[0]} {cms.body.split(' ')[1] || null} disabled />
+                          </div>
                           : json.type === 'bbb'
                             ? <div>BigBlueButton-Session<br /><a href={cms?.body} target="_blank" rel="external nofollow noopener noreferrer">{cms?.body}</a></div>
                             : (json.type === 'video' || json.type === 'livestream' || json.type === 'playlist')

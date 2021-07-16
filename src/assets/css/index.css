@@ -750,10 +750,6 @@ button > .loading {
   border-width: calc(var(--margin) * 0.2);
 }
 
-.editor .center {
-  border-color: var(--color-me);
-}
-
 .editor .center > * {
   border: unset;
 }
@@ -773,6 +769,11 @@ button > .loading {
 
 .editor .center.leaflet-container + * {
   margin-top: var(--margin);
+}
+
+.editor .disabled {
+  border-color: var(--color-me);
+  color: var(--color-me);
 }
 
 .editor audio.center {
