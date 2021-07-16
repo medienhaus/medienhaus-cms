@@ -1,4 +1,5 @@
 {
   "File size needs to be less than": "Datei darf nicht größer sein als",
-  "author, credits, et cetera": "Autor*in, Credits, et cetera"
+  "author, credits, et cetera": "Autor*in, Credits, et cetera",
+  "selectFileType": "Bitte wählen Sie eine {props.fileType}-Datei."
 }
