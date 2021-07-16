@@ -134,7 +134,7 @@ const FileUpload = (props) => {
           />
           {/* TODO: needs i18n */}
           <button
-            lassName="upload"
+            className="upload"
             onClick={(e) => props.handleSubmission(e, selectedFile, fileName, author, license, alttext)}
             disabled={!selectedFile.type.includes(props.fileType) || selectedFile.size > size || props.loading || alttext.length < 1 || license.length < 1 || author.length < 1}
           >{props.loading ? <Loading /> : 'Upload'}

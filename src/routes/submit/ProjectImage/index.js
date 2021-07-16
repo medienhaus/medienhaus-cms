@@ -1,20 +1,26 @@
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import Matrix from '../../../Matrix'
 import FileUpload from '../../../components/FileUpload'
+import TextareaAutosize from 'react-textarea-autosize'
 
-const ProjectImage = ({ projectSpace, changeProjectImage, imgAuthor, imgLicense, imgAlt }) => {
+const ProjectImage = ({ projectSpace, changeProjectImage }) => {
   const [edit, setEdit] = useState(false)
   const [loading, setLoading] = useState(false)
   const [projectImage, setProjectImage] = useState()
   const matrixClient = Matrix.getMatrixClient()
 
-  useEffect(() => {
-    const fetchProjectImage = async () => {
-      const avatar = await matrixClient.getStateEvent(projectSpace, 'm.room.avatar').catch(console.error)
-      setProjectImage(avatar)
-    }
-    fetchProjectImage()
+  const fetchProjectImage = useCallback(async () => {
+    const avatar = await matrixClient.getStateEvent(projectSpace, 'm.room.avatar')
+      .catch(res => {
+        res.data.error === 'Event not found.' && console.log('No Avatar set, yet')
+      })
+    console.log(avatar)
+    avatar && setProjectImage(avatar)
   }, [matrixClient, projectSpace])
+
+  useEffect(() => {
+    fetchProjectImage()
+  }, [fetchProjectImage, projectSpace])
 
   const handleSubmission = async (e, selectedFile, fileName, author, license, alt) => {
     e.preventDefault()
@@ -35,7 +41,7 @@ const ProjectImage = ({ projectSpace, changeProjectImage, imgAuthor, imgLicense,
             })
           }
           fetch(process.env.REACT_APP_MATRIX_BASE_URL + `/_matrix/client/r0/rooms/${projectSpace}/state/m.room.avatar/`, req)
-        }).then(console.log)
+        }).then(fetchProjectImage)
       return 'success'
     } catch (e) {
       console.log('error while trying to save image: ' + e)
@@ -68,7 +74,7 @@ const ProjectImage = ({ projectSpace, changeProjectImage, imgAuthor, imgLicense,
               <option value="cc-by-nd">CC BY-ND 4.0</option>
               <option value="cc-by-nc-nd">CC BY-NC-ND 4.0</option>
             </select>
-            <textarea rows="3" value={projectImage.alt} disabled />
+            <TextareaAutosize rows="3" value={projectImage.alt} disabled />
           </>}
         {edit && fileUpload}
       </>

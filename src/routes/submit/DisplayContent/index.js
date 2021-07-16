@@ -9,6 +9,7 @@ import List from './List'
 import Code from './Code'
 import reorder from './matrix_reorder_rooms'
 import LoadingSpinnerButton from '../../../components/LoadingSpinnerButton'
+import TextareaAutosize from 'react-textarea-autosize'
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
 
 import { ReactComponent as HeadingIcon } from '../../../assets/icons/remix/h-1.svg'
@@ -217,7 +218,7 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace, time,
                 <option value="cc-by-nd">CC BY-ND 4.0</option>
                 <option value="cc-by-nc-nd">CC BY-NC-ND 4.0</option>
               </select>
-              <textarea rows={cms.info.alt.split('\n').length} value={cms.info.alt} disabled />
+              <TextareaAutosize rows={cms.info.alt.split('\n').length} value={cms.info.alt} disabled />
             </div>
             )
           : cms?.msgtype === 'm.audio'
@@ -237,7 +238,7 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace, time,
                   <option value="cc-by-nd">CC BY-ND 4.0</option>
                   <option value="cc-by-nc-nd">CC BY-NC-ND 4.0</option>
                 </select>
-                <textarea rows={cms.info.alt.split('\n').length} value={cms.info.alt} disabled />
+                <TextareaAutosize rows={cms.info.alt.split('\n').length} value={cms.info.alt} disabled />
               </div>
               )
             : json.type === 'ul'
