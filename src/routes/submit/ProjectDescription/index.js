@@ -1,12 +1,12 @@
 import React, { useState } from 'react'
 import { ReactComponent as TextIcon } from '../../../assets/icons/remix/text.svg'
 import { useTranslation } from 'react-i18next'
+import TextareaAutosize from 'react-textarea-autosize'
 
 const ProjectDescription = ({ description: intro, callback }) => {
   const { t } = useTranslation('projects')
   const [description, setDescription] = useState(intro)
   const [backupDescription, setBackupDescription] = useState()
-  const [textRows, setTextRows] = useState(description && description.split('\n').length)
 
   const onSave = async () => {
     if (description) {
@@ -28,14 +28,12 @@ const ProjectDescription = ({ description: intro, callback }) => {
           <button disabled>↓</button>
         </div>
         <div className="center">
-          <textarea
-            rows={textRows}
+          <TextareaAutosize
+            rows={3}
             value={description}
             onClick={() => setBackupDescription(description)}
             onChange={(e) => {
               setDescription(e.target.value)
-              const text = e.target.value.split('\n').length
-              setTextRows(text)
             }}
             placeholder={`${t('Please add a short description of your project.')} ${t('This field is required before publishing.')}`}
             onBlur={() => onSave()}

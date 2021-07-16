@@ -281,8 +281,9 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace, time,
                           )
                         : json.type === 'date'
                           ? <div className="center disabled">
-                            <input type="text" value={cms.body.split(' ')[0]} {cms.body.split(' ')[1] || null} disabled />
-                          </div>
+                            <input type="text" value={cms.body.split(' ')[0] + ' ' + cms.body.split(' ')[1] || null} disabled />
+                            {/* eslint-disable-next-line react/jsx-indent */}
+                            </div>
                           : json.type === 'bbb'
                             ? <div>BigBlueButton-Session<br /><a href={cms?.body} target="_blank" rel="external nofollow noopener noreferrer">{cms?.body}</a></div>
                             : (json.type === 'video' || json.type === 'livestream' || json.type === 'playlist')
