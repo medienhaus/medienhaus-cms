@@ -285,7 +285,22 @@ const Submit = () => {
             </p>
             <p>{t('If you still want to make changes to your contributions after publishing, you can continue to do so. Please note, however, that content on analogue and hybrid projects will be pulled from the system on October 8, 2021 for the printed Rundgang programme. Projects that have not been approved by you for publishing by then will not be included in the programme booklet.')}</p>
             <p><em>{t('Please note: The frontend, i.e. the website where all projects will be visible, is still under construction. Therefore, at the moment it is not yet possible to preview the created projects.')}</em></p>
-            {spaceObject ? <PublishProject space={spaceObject.rooms[0]} description={spaceObject.rooms[0].topic} published={visibility} time={getCurrentTime} /> : <Loading />}
+            {spaceObject
+              ? (<>
+                <PublishProject space={spaceObject.rooms[0]} description={spaceObject.rooms[0].topic} published={visibility} time={getCurrentTime} />
+                {!medienhausMeta.description && <p>❗️ {t('Please add a short description of your project.')}</p>}
+                {!medienhausMeta.context &&
+                  <>
+                    <p>
+                      ❗️ {t('Please add your project to a context.')}﹡
+                    </p>
+                    <p>
+                      ﹡ <em>{t('This is not yet possible; we will roll out an update soon; the context is required for publishing your project on the Rundgang 2021 website.')}</em>
+                    </p>
+                  </>}
+                {/* eslint-disable-next-line react/jsx-indent */}
+                 </>)
+              : <Loading />}
           </section>
           <section className="save">
             <button onClick={() => history.push('/projects')}>← {t('BACK TO OVERVIEW')}</button>
