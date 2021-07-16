@@ -158,9 +158,11 @@ img {
   width: 100%
 }
 
+/*
 img[alt=""], img:not([alt]) {
   border: 3px dashed rgb(255,0,0);
 }
+*/
 
 footer {
   display: grid;
