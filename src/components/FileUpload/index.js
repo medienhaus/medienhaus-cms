@@ -129,7 +129,7 @@ const FileUpload = (props) => {
           {/* TODO: needs i18n */}
           <TextareaAutosize
             rows="3"
-            placeholder={<Trans t={t} i18nKey="textareaPlaceholder">please describe the {impairment[0]}  with a few words for {impairment[1]} impaired website visitors.</Trans>}
+            placeholder={t('please describe the ' + impairment[0] + ' with a few words for ' + impairment[1] + ' impaired website visitors.')}
             onChange={(e) => {
               setAlttext(e.target.value)
             }}
