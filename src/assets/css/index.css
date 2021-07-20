@@ -168,7 +168,7 @@ footer {
   grid-row: 3;
   grid-column: 1 / 2;
   margin-top: calc(var(--margin) * 4);
-  margin-bottom: var(--margin);
+  margin-bottom: calc(var(--margin) * 1.4);
 }
 
 header {
@@ -1470,11 +1470,14 @@ button > .loading {
   */
   footer {
     grid-column: 1 / 3;
+    align-items: center;
   }
   footer .languageSelector {
     /*
     @TODO: Move the language selector to the very right on mobile viewports when signed out
      */
+    grid-column: 3;
+    justify-self: end;
   }
   /*
   form input {
@@ -1541,7 +1544,6 @@ button > .loading {
     padding-left: calc(var(--margin) * 2);
     padding-right: calc(var(--margin) * 2);
   }
-  /* Language Selector */
   nav .languageSelector {
     bottom: var(--margin);
     right: calc(var(--margin) * 2);
