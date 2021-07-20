@@ -22,8 +22,8 @@ const getAnswer = async () => {
         published: room.getJoinRule(),
         collab: collab,
         avatar_url: room.getMxcAvatarUrl(),
-        meta: event[0].event.content,
-        description: topic[0]?.event.content.topic
+        meta: event[event.length - 1].event.content,
+        description: topic[topic.length - 1]?.event.content.topic
       }
     })
   return filteredRooms
