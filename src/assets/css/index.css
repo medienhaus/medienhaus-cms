@@ -270,7 +270,6 @@ nav + section > button:hover {
 }
 */
 
-/* Language Selector */
 .languageSelector {
   width: 6ch;
 }
@@ -1473,9 +1472,6 @@ button > .loading {
     align-items: center;
   }
   footer .languageSelector {
-    /*
-    @TODO: Move the language selector to the very right on mobile viewports when signed out
-     */
     grid-column: 3;
     justify-self: end;
   }
