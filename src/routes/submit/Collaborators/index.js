@@ -120,7 +120,7 @@ const Collaborators = ({ projectSpace, members, time, startListeningToCollab }) 
             startListeningToCollab()
             return name.display_name !== profile.displayname &&
               (
-                <li><span>⚠️ {name.display_name}</span><button disabled>×</button></li>
+                <li key={name.display_name}><span>⚠️ {name.display_name}</span><button disabled>×</button></li>
               )
           })
         }

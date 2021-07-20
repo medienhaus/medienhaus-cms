@@ -13,15 +13,16 @@ const Overview = () => {
   const auth = useAuth()
   const { t } = useTranslation('projects')
   const profile = auth.user
-  const { joinedSpaces, spacesErr, fetchSpaces, reload } = useJoinedSpaces(false)
   const matrixClient = Matrix.getMatrixClient()
   const [projects, setProjects] = useState([])
   const [invites, setInvites] = useState({})
+  const { joinedSpaces, spacesErr, fetchSpaces, reload } = useJoinedSpaces(false)
+
   // @TODO: Check for existing invites on page load
 
   // Listen for room events to populate our "pending invites" state
   useEffect(() => {
-    // when navigating away from /projects we need the following code to retreive our pending invites for memoryStore
+    // when navigating away from /projects we need the following code to retreive our pending invites from memoryStore
     const allRooms = matrixClient.getRooms()
     allRooms.forEach(async room => {
       // ignore rooms that aren't spaces (or are language spaces) and only return invites

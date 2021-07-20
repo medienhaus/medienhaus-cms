@@ -16,7 +16,6 @@ const ProjectImage = ({ projectSpace, changeProjectImage }) => {
       .catch(res => {
         res.data.error === 'Event not found.' && console.log('No Avatar set, yet')
       })
-    console.log(avatar)
     avatar && setProjectImage(avatar)
   }, [matrixClient, projectSpace])
 
