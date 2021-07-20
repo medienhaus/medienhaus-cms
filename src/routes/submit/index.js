@@ -88,6 +88,8 @@ const Submit = () => {
       const spaceDetails = await matrixClient.getRoom(projectSpace)
       // setting title to project space name
       setTitle(space.rooms[0].name)
+      // set the topic depending on selected language
+      setDescription({ en: space.rooms.filter(room => room.name === 'en')[0].topic || '', de: space.rooms.filter(room => room.name === 'de')[0].topic || '' })
       // checking if the project is a collaboration
       setRoomMembers(spaceDetails.currentState.members)
       // check if project is published or draft
@@ -97,8 +99,6 @@ const Submit = () => {
       setMedienhausMeta(meta[meta.length - 1].event.content)
       // we fetch the selected language content
       const spaceRooms = space.rooms.filter(room => room.name === contentLang)
-      // and set the topic depending on selected language
-      setDescription(spaceRooms[0].topic || '')
       const getContent = await matrixClient.getSpaceSummary(spaceRooms[0].room_id)
       setBlocks(getContent.rooms.filter(room => room.name !== contentLang).filter(room => room.name.charAt(0) !== 'x').sort((a, b) => {
         return a.name.substring(0, a.name.indexOf('_')) - b.name.substring(0, b.name.indexOf('_'))
@@ -270,7 +270,7 @@ const Submit = () => {
                 <option value="de">DE — Deutsch</option>
                 <option value="en">EN — English</option>
               </select>
-              {spaceObject && (description || description === '') ? <ProjectDescription description={description} callback={onChangeDescription} /> : <Loading />}
+              {spaceObject && (description || description === '') ? <ProjectDescription description={description[contentLang]} callback={onChangeDescription} /> : <Loading />}
               {blocks.length === 0
                 ? <AddContent number={0} projectSpace={spaceObject?.rooms.filter(room => room.name === contentLang)[0].room_id} blocks={blocks} reloadSpace={reloadSpace} present={medienhausMeta?.present} />
                 : blocks.map((content, i) =>
@@ -288,8 +288,8 @@ const Submit = () => {
               <p><em>{t('Please note: The frontend, i.e. the website where all projects will be visible, is still under construction. Therefore, at the moment it is not yet possible to preview the created projects.')}</em></p>
               {spaceObject
                 ? (<>
-                  <PublishProject space={spaceObject.rooms[0]} description={spaceObject.rooms[0].topic} published={visibility} time={getCurrentTime} />
-                  {!medienhausMeta.description && <p>❗️ {t('Please add a short description of your project.')}</p>}
+                  <PublishProject space={spaceObject.rooms[0]} description={description?.en} published={visibility} time={getCurrentTime} />
+                  {!description?.en && <p>❗️ {t('Please add a short description of your project.')}</p>}
                   {!medienhausMeta.context &&
                     <>
                       <p>
@@ -312,7 +312,6 @@ const Submit = () => {
         {/* eslint-disable-next-line react/jsx-indent */}
         </>
       : <Loading />
-
   )
 }
 
