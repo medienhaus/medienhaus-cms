@@ -9,7 +9,7 @@ const LanguageSelector = () => {
   }
 
   return (
-    <select defaultValue={i18n.language} onChange={changeLanguage}>
+    <select className="languageSelector" defaultValue={i18n.language} onChange={changeLanguage}>
       <option value="en">EN</option>
       <option value="de">DE</option>
     </select>

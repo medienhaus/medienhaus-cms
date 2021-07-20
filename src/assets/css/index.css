@@ -271,8 +271,10 @@ nav + section > button:hover {
 */
 
 /* Language Selector */
-nav select {
+.languageSelector {
   width: 6ch;
+}
+nav .languageSelector {
   position: fixed;
   bottom: var(--margin);
   right: var(--margin);
@@ -1469,6 +1471,11 @@ button > .loading {
   footer {
     grid-column: 1 / 3;
   }
+  footer .languageSelector {
+    /*
+    @TODO: Move the language selector to the very right on mobile viewports when signed out
+     */
+  }
   /*
   form input {
     width: 100%;
@@ -1523,6 +1530,9 @@ button > .loading {
     min-width: 10ch;
   }
   */
+  footer .languageSelector {
+    display: none;
+  }
 }
 
 /* 640px */
@@ -1532,7 +1542,7 @@ button > .loading {
     padding-right: calc(var(--margin) * 2);
   }
   /* Language Selector */
-  nav select {
+  nav .languageSelector {
     bottom: var(--margin);
     right: calc(var(--margin) * 2);
   }
