@@ -1423,15 +1423,18 @@ button > .loading {
     z-index: 1;
   }
   header {
-    display: grid;
-    grid-template-columns: 1fr 2rem;
-    grid-gap: var(--margin);
+    /*display: grid;*/
+    /*grid-template-columns: 1fr 2rem;*/
+    /*grid-gap: var(--margin);*/
+    display: flex;
+    justify-content: space-between;
   }
   header > button {
     background-color: var(--color-bg);
     border: unset;
     color: var(--color-fg);
     display: initial;
+    flex: 0 1;
   }
   header > button.open {
     font-weight: bold;
