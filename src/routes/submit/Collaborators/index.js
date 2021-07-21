@@ -135,7 +135,7 @@ const Collaborators = ({ projectSpace, members, time, startListeningToCollab }) 
       <section className="credits">
         {/* @TODO kicking user function */}
         <ul>
-          <h4>{t('Can edit')}:</h4>
+          <h4>⚠️ {t('CAN edit and delete(!) the project')}:</h4>
           {
           members && Object.keys(members).length > 1 && Object.values(members).map((name, i) => {
             startListeningToCollab()
@@ -159,7 +159,7 @@ const Collaborators = ({ projectSpace, members, time, startListeningToCollab }) 
 
         {credits &&
           <ul>
-            <h4>{t('Cannot edit')}:</h4>
+            <h4>🚫 {t('CANNOT edit the project')}:</h4>
             {credits.map((name, index) =>
               <Credits name={name} index={index} projectSpace={projectSpace[0].room_id} callback={checkForCredits} key={index} />
 
