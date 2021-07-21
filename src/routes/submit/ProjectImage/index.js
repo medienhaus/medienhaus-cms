@@ -29,8 +29,7 @@ const ProjectImage = ({ projectSpace, changeProjectImage }) => {
 
     try {
       await matrixClient.uploadContent(selectedFile, { name: fileName })
-        .then((url) => {
-          changeProjectImage(url, author, license, alt)
+        .then(async (url) => {
           const req = {
             method: 'PUT',
             headers: { Authorization: 'Bearer ' + localStorage.getItem('medienhaus_access_token') },
@@ -41,9 +40,10 @@ const ProjectImage = ({ projectSpace, changeProjectImage }) => {
               alt: alt
             })
           }
-          fetch(process.env.REACT_APP_MATRIX_BASE_URL + `/_matrix/client/r0/rooms/${projectSpace}/state/m.room.avatar/`, req)
-        }).then((res) => {
-          fetchProjectImage()
+          await fetch(process.env.REACT_APP_MATRIX_BASE_URL + `/_matrix/client/r0/rooms/${projectSpace}/state/m.room.avatar/`, req)
+        }).then(async () => {
+          await fetchProjectImage()
+          changeProjectImage()
         })
       return 'success'
     } catch (e) {
