@@ -42,7 +42,9 @@ const ProjectImage = ({ projectSpace, changeProjectImage }) => {
             })
           }
           fetch(process.env.REACT_APP_MATRIX_BASE_URL + `/_matrix/client/r0/rooms/${projectSpace}/state/m.room.avatar/`, req)
-        }).then(fetchProjectImage)
+        }).then((res) => {
+          fetchProjectImage()
+        })
       return 'success'
     } catch (e) {
       console.log('error while trying to save image: ' + e)

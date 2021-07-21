@@ -78,7 +78,6 @@ const Overview = () => {
       const updatedSpaces = joinedSpaces?.filter(space => !space.meta?.deleted)
       setProjects(sortBy(updatedSpaces, 'name'))
     }
-    console.log(joinedSpaces)
   }, [joinedSpaces])
 
   const removeInviteByIndex = (room, roomWasDeleted) => {
@@ -86,7 +85,9 @@ const Overview = () => {
     setInvites(Object.fromEntries(
       Object.entries(invites).filter(([key]) => key !== room)))
     // if the room was already deleted we leave the room as well to change our membership status
-    roomWasDeleted && matrixClient.leave(room)
+    roomWasDeleted
+      ? matrixClient.leave(room)
+      : matrixClient.getRoom(room).updateMyMembership('join')
     reload(true)
   }
 
