@@ -137,7 +137,7 @@ const Collaborators = ({ projectSpace, members, time, startListeningToCollab }) 
         {
           members && Object.keys(members).length > 1 &&
             <ul>
-              <h4>⚠️ {t('CAN edit and delete(!) the project')}:</h4>
+              <h4><strong>{t('CAN edit and delete(!) the project')}</strong></h4>
               {Object.values(members).map((name, i) => {
                 startListeningToCollab()
                 return name.user.displayName !== profile.displayname &&
@@ -159,7 +159,7 @@ const Collaborators = ({ projectSpace, members, time, startListeningToCollab }) 
         }
         {credits?.length > 0 &&
           <ul>
-            <h4>🚫 {t('CANNOT edit the project')}:</h4>
+            <h4><strong>{t('CANNOT edit the project')}</strong></h4>
             {credits.map((name, index) =>
               <Credits name={name} index={index} projectSpace={projectSpace[0].room_id} callback={checkForCredits} key={index} />
             )}
