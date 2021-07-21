@@ -5,7 +5,7 @@ const matrixClient = Matrix.getMatrixClient()
 
 const getAnswer = async () => {
   const allRooms = matrixClient.getRooms()
-  console.log(allRooms)
+  console.log(allRooms.filter(room => room.name === 'power change maybe'))
   const filteredRooms = allRooms
   // we filter all joined rooms for spaces
     .filter(room => room.getType() === 'm.space' &&

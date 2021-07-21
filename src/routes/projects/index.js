@@ -22,31 +22,14 @@ const Overview = () => {
 
   // Listen for room events to populate our "pending invites" state
   useEffect(() => {
-    // when navigating away from /projects we need the following code to retreive our pending invites from memoryStore
-    const allRooms = matrixClient.getRooms()
-    allRooms.forEach(async room => {
-      // ignore rooms that aren't spaces (or are language spaces) and only return invites
-      if (room.getType() !== 'm.space' || room.name === 'de' || room.name === 'en') return
-      const roomMembers = await room._loadMembersFromServer().catch(console.error)
-      if (room.getMyMembership() !== 'invite' || roomMembers < 1) return
-      setInvites(invites => Object.assign({}, invites, {
-        [room.roomId]:
-          {
-            name: room.name,
-            id: room.roomId,
-            membership: room._selfMembership
-          }
-      }))
-    })
-
     async function handleRoomEvent (room) {
-      // Ignore event if this is not about a space or if it is a language space
-      if (room.getType() !== 'm.space' || room.name === 'de' || room.name === 'en') return
+      // Ignore event if this is not about an invite toa  space or if it is a language space
+      if (room.getMyMembership() !== 'invite' || room.getType() !== 'm.space' || room.name === 'de' || room.name === 'en') return
 
       const roomMembers = await room._loadMembersFromServer().catch(console.error)
       // room.getMyMembership() is only available after the current call stack has cleared (_.defer),
       // so we put it behind the "await"
-      if (room.getMyMembership() !== 'invite' || roomMembers.length < 1) {
+      if (roomMembers.length < 1) {
         return
       }
       setInvites(invites => Object.assign({}, invites, {
