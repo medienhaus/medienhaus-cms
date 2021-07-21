@@ -31,7 +31,7 @@ const getAnswer = async () => {
 }
 
 const useJoinedSpaces = ({ reload }) => {
-  const [joinedSpaces, setJoinedSpaces] = useState()
+  const [joinedSpaces, setJoinedSpaces] = useState(reload)
   const [fetchSpaces, setFetchSpaces] = useState(true)
   const [spacesErr, setSpacesErr] = useState(false)
   const [load, setLoad] = useState(reload)

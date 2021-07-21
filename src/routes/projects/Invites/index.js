@@ -33,7 +33,7 @@ const Invites = ({ space, callback }) => {
 
       setTimeout(() => {
         setError('')
-        err?.errcode === 'M_UNKNOWN' && callback(room, true)
+        err?.errcode === 'M_UNKNOWN' && leave(room) // if the room was deleted we leave the room to clear it from our invites
       }, 2000)
     } finally {
       setReactingToInvite(false)
