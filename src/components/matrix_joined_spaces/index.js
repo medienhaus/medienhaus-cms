@@ -10,7 +10,7 @@ const getAnswer = async () => {
     .filter(room => room.getType() === 'm.space' &&
       room.name !== 'de' && // and within those spaces we filter all language spaces.
       room.name !== 'en' &&
-      room.getMyMembership() !== 'leave' && // we only want spaces a user is part of
+      room.getMyMembership() === 'join' && // we only want spaces a user is part of
       room.currentState.events.has('dev.medienhaus.meta')) // Last step is to filter any spaces which were not created with  the cms, therefore will not have the medienhaus state event
     .map(room => {
       const collab = room.getJoinedMemberCount() > 1
@@ -24,8 +24,7 @@ const getAnswer = async () => {
         collab: collab,
         avatar_url: room.getMxcAvatarUrl(),
         meta: event,
-        description: topic,
-        membership: room.getMyMembership()
+        description: topic
       }
     })
   return filteredRooms

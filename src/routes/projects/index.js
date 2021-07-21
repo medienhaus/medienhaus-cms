@@ -20,7 +20,7 @@ const Overview = () => {
 
   // @TODO: Check for existing invites on page load
 
-  /* Listen for room events to populate our "pending invites" state
+  // Listen for room events to populate our "pending invites" state
   useEffect(() => {
     // when navigating away from /projects we need the following code to retreive our pending invites from memoryStore
     const allRooms = matrixClient.getRooms()
@@ -66,23 +66,18 @@ const Overview = () => {
       console.log('stopped listening')
     }
   }, [matrixClient])
-*/
+
   const removeProject = (index) => {
     setProjects(projects.filter((name, i) => i !== index))
   }
 
   useEffect(() => {
     if (joinedSpaces) {
-      console.log(joinedSpaces)
-      // we check if a collaborator has deleted a project since we last logged in
+    // we check if a collaborator has deleted a project since we last logged in
       joinedSpaces?.filter(space => space.meta?.deleted).forEach(async space => await deleteProject(space.room_id))
       // then we update our array to not display the just deleted projects and only display joined rooms
-      const updatedProjects = joinedSpaces?.filter(space => !space.meta?.deleted && space.membership === 'join')
+      const updatedProjects = joinedSpaces?.filter(space => !space.meta?.deleted)
       setProjects(sortBy(updatedProjects, 'name'))
-
-      const updateInvites = joinedSpaces?.filter(space => !space.meta?.deleted && space.membership === 'invite')
-      console.log(updateInvites)
-      setInvites(sortBy(updateInvites, 'name'))
     }
   }, [joinedSpaces])
 
