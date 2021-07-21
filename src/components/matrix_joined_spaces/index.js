@@ -4,10 +4,10 @@ const matrixClient = Matrix.getMatrixClient()
 // @TODO change hook to also return invites and knocks
 
 const getAnswer = async () => {
-  const allRooms = matrixClient.getRooms()
-  const filteredRooms = allRooms
+  const visibleRooms = matrixClient.getVisibleRooms()
+  const filteredRooms = visibleRooms
   // we filter all joined rooms for spaces
-    .filter(room => room.getType() === 'm.space' &&
+    .filter(room => room.isSpaceRoom() &&
       room.name !== 'de' && // and within those spaces we filter all language spaces.
       room.name !== 'en' &&
       room.getMyMembership() === 'join' && // we only want spaces a user is part of

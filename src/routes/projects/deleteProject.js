@@ -9,7 +9,6 @@ const deleteProject = async (roomId) => {
     meta.deleted = true
     await matrixClient.sendStateEvent(roomId, 'dev.medienhaus.meta', meta)
     const space = await matrixClient.getSpaceSummary(roomId).catch(console.log)
-    console.log(space.rooms)
     space.rooms.filter(room => room.room_id !== roomId).forEach(async (space, index) => {
       // we reverse here to leave the actual project space last in case something goes wrong in the process.
       console.log('Leaving ' + space.name)

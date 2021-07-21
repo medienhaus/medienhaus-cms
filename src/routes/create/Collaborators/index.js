@@ -145,6 +145,7 @@ const Collaborators = ({ projectSpace, members, time, startListeningToCollab }) 
                   <li key={name.user.displayName}>
                     <span title={name.userId}>⚠️ {name.user?.displayName}
                       {name.membership === 'invite' && <em> (invited)</em>}
+                      {name.membership === 'leave' && <em> (rejected)</em>}
                     </span>
                     <LoadingSpinnerButton
                       // revoking invitations / kicking a user is only possible if a users powerLevel is bigger than that of the user's in question
