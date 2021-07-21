@@ -96,6 +96,7 @@ const Submit = () => {
       setVisibility(spaceDetails.getJoinRule())
       // fetch custom medienhaus event
       const meta = spaceDetails.timeline.filter(event => event.event.type === 'dev.medienhaus.meta')
+      console.log(spaceDetails)
       setMedienhausMeta(meta[meta.length - 1].event.content)
       // we fetch the selected language content
       const spaceRooms = space.rooms.filter(room => room.name === contentLang)

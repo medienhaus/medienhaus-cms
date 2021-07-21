@@ -81,10 +81,12 @@ const Overview = () => {
     console.log(joinedSpaces)
   }, [joinedSpaces])
 
-  const removeInviteByIndex = (room) => {
+  const removeInviteByIndex = (room, roomWasDeleted) => {
     // setInvites(invites => invites.filter((invite, i) => i !== index))
     setInvites(Object.fromEntries(
       Object.entries(invites).filter(([key]) => key !== room)))
+    // if the room was already deleted we leave the room as well to change our membership status
+    roomWasDeleted && matrixClient.leave(room)
     reload(true)
   }
 

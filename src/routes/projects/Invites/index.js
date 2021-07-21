@@ -27,12 +27,14 @@ const Invites = ({ space, callback }) => {
           await matrixClient.joinRoom(space.room_id).catch(console.log)
         })
       }
-      callback(room)
+      callback(room, false)
     } catch (err) {
       setError(err.errcode === 'M_UNKNOWN' ? 'Looks like this room does not exist anymore.' : 'Something went wrong.')
+
       setTimeout(() => {
         setError('')
-      }, 3000)
+        err?.errcode === 'M_UNKNOWN' && callback(room, true)
+      }, 2000)
     } finally {
       setJoining(false)
     }

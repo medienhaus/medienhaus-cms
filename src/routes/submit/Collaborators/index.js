@@ -18,7 +18,6 @@ const Collaborators = ({ projectSpace, members, time, startListeningToCollab }) 
   const profile = auth.user
   const matrixClient = Matrix.getMatrixClient()
   const { t } = useTranslation('projects')
-  console.log(members)
 
   const checkForCredits = useCallback(async () => {
     const event = projectSpace && await matrixClient.getStateEvent(projectSpace[0].room_id, 'dev.medienhaus.meta')
@@ -140,8 +139,8 @@ const Collaborators = ({ projectSpace, members, time, startListeningToCollab }) 
             startListeningToCollab()
             return name.user.displayName !== profile.displayname &&
               (
-                <li style={{ display: 'flex' }} key={name.user.displayName}>
-                  <span>⚠️ {name.user.displayName}</span>
+                <li key={name.user.displayName}>
+                  <span>⚠️ {name.user?.displayName}</span>
                   {name.membership === 'invite' && <span>invited</span>}
                   <LoadingSpinnerButton
                   // revoking invitations / kicking a user is only possible if a users powerLevel is bigger than that of the user's in question
