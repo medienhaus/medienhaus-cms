@@ -134,30 +134,32 @@ const Collaborators = ({ projectSpace, members, time, startListeningToCollab }) 
       <p><Trans t={t} i18nKey="contributorsInstructions3">You can also give credits to a contributor without an <strong>udk/spaces</strong> account, but they won’t be able to get access for editing. Just type in their name and click the <code>ADD</code> button.</Trans></p>
       <section className="credits">
         {/* @TODO kicking user function */}
-        <ul>
-          <h4>⚠️ {t('CAN edit and delete(!) the project')}:</h4>
-          {
-          members && Object.keys(members).length > 1 && Object.values(members).map((name, i) => {
-            startListeningToCollab()
-            return name.user.displayName !== profile.displayname &&
-              (
-                <li key={name.user.displayName}>
-                  <span title={name.userId}>⚠️ {name.user?.displayName}
-                    {name.membership === 'invite' && <em> (invited)</em>}
-                  </span>
-                  <LoadingSpinnerButton
-                  // revoking invitations / kicking a user is only possible if a users powerLevel is bigger than that of the user's in question
-                    disabled={name.membership === 'join' || name.powerLevel >= members[localStorage.getItem('mx_user_id')].powerLevel}
-                    onClick={() => kickUser(name)}
-                  >×
-                  </LoadingSpinnerButton>
-                </li>
-              )
-          })
-        }
-        </ul>
 
-        {credits &&
+        {
+          members && Object.keys(members).length > 1 &&
+            <ul>
+              <h4>⚠️ {t('CAN edit and delete(!) the project')}:</h4>
+              {Object.values(members).map((name, i) => {
+                startListeningToCollab()
+                return name.user.displayName !== profile.displayname &&
+                (
+                  <li key={name.user.displayName}>
+                    <span title={name.userId}>⚠️ {name.user?.displayName}
+                      {name.membership === 'invite' && <em> (invited)</em>}
+                    </span>
+                    <LoadingSpinnerButton
+                      // revoking invitations / kicking a user is only possible if a users powerLevel is bigger than that of the user's in question
+                      disabled={name.membership === 'join' || name.powerLevel >= members[localStorage.getItem('mx_user_id')].powerLevel}
+                      onClick={() => kickUser(name)}
+                    >×
+                    </LoadingSpinnerButton>
+                  </li>
+                )
+              })}
+            </ul>
+}
+
+        {credits?.length > 0 &&
           <ul>
             <h4>🚫 {t('CANNOT edit the project')}:</h4>
             {credits.map((name, index) =>
