@@ -113,7 +113,7 @@ const Submit = () => {
   useEffect(() => {
     projectSpace || setTitle('')
     projectSpace && fetchSpace()
-  }, [projectSpace, fetchSpace])
+  }, [projectSpace, fetchSpace, title])
 
   useEffect(() => {
     if (!projectSpace || !spaceObject) {

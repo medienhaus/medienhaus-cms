@@ -18,6 +18,7 @@ const Collaborators = ({ projectSpace, members, time, startListeningToCollab }) 
   const profile = auth.user
   const matrixClient = Matrix.getMatrixClient()
   const { t } = useTranslation('projects')
+  console.log(members)
 
   const checkForCredits = useCallback(async () => {
     const event = projectSpace && await matrixClient.getStateEvent(projectSpace[0].room_id, 'dev.medienhaus.meta')
