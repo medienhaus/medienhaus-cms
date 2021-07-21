@@ -5,13 +5,12 @@ const matrixClient = Matrix.getMatrixClient()
 
 const getAnswer = async () => {
   const allRooms = matrixClient.getRooms()
-  console.log(allRooms.filter(room => room.name === 'power change maybe'))
   const filteredRooms = allRooms
   // we filter all joined rooms for spaces
     .filter(room => room.getType() === 'm.space' &&
       room.name !== 'de' && // and within those spaces we filter all language spaces.
       room.name !== 'en' &&
-      room.getMyMembership() === 'join' && // we only want spaces a user is part of
+      room.getMyMembership() !== 'leave' && // we only want spaces a user is part of
       room.currentState.events.has('dev.medienhaus.meta')) // Last step is to filter any spaces which were not created with  the cms, therefore will not have the medienhaus state event
     .map(room => {
       const collab = room.getJoinedMemberCount() > 1
@@ -25,7 +24,8 @@ const getAnswer = async () => {
         collab: collab,
         avatar_url: room.getMxcAvatarUrl(),
         meta: event,
-        description: topic
+        description: topic,
+        membership: room.getMyMembership()
       }
     })
   return filteredRooms

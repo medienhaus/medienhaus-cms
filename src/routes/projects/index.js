@@ -14,22 +14,39 @@ const Overview = () => {
   const { t } = useTranslation('projects')
   const profile = auth.user
   const matrixClient = Matrix.getMatrixClient()
-  const [projects, setProjects] = useState([])
+  const [projects, setProjects] = useState({})
   const [invites, setInvites] = useState({})
   const { joinedSpaces, spacesErr, fetchSpaces, reload } = useJoinedSpaces(false)
 
   // @TODO: Check for existing invites on page load
 
-  // Listen for room events to populate our "pending invites" state
+  /* Listen for room events to populate our "pending invites" state
   useEffect(() => {
-    async function handleRoomEvent (room) {
-      // Ignore event if this is not about an invite toa  space or if it is a language space
+    // when navigating away from /projects we need the following code to retreive our pending invites from memoryStore
+    const allRooms = matrixClient.getRooms()
+    allRooms.forEach(async room => {
+      // ignore rooms that aren't spaces (or are language spaces) and only return invites
       if (room.getMyMembership() !== 'invite' || room.getType() !== 'm.space' || room.name === 'de' || room.name === 'en') return
+      const roomMembers = await room._loadMembersFromServer().catch(console.error)
+      if (roomMembers < 1) return
+      setInvites(invites => Object.assign({}, invites, {
+        [room.roomId]:
+          {
+            name: room.name,
+            id: room.roomId,
+            membership: room._selfMembership
+          }
+      }))
+    })
+
+    async function handleRoomEvent (room) {
+      // Ignore event if this is not about a space or if it is a language space
+      if (room.getType() !== 'm.space' || room.name === 'de' || room.name === 'en') return
 
       const roomMembers = await room._loadMembersFromServer().catch(console.error)
       // room.getMyMembership() is only available after the current call stack has cleared (_.defer),
       // so we put it behind the "await"
-      if (roomMembers.length < 1) {
+      if (room.getMyMembership() !== 'invite' || roomMembers.length < 1) {
         return
       }
       setInvites(invites => Object.assign({}, invites, {
@@ -49,17 +66,23 @@ const Overview = () => {
       console.log('stopped listening')
     }
   }, [matrixClient])
-
+*/
   const removeProject = (index) => {
     setProjects(projects.filter((name, i) => i !== index))
   }
 
   useEffect(() => {
-    // we check if a collaborator has deleted a project since we last logged in
     if (joinedSpaces) {
+      console.log(joinedSpaces)
+      // we check if a collaborator has deleted a project since we last logged in
       joinedSpaces?.filter(space => space.meta?.deleted).forEach(async space => await deleteProject(space.room_id))
-      const updatedSpaces = joinedSpaces?.filter(space => !space.meta?.deleted)
-      setProjects(sortBy(updatedSpaces, 'name'))
+      // then we update our array to not display the just deleted projects and only display joined rooms
+      const updatedProjects = joinedSpaces?.filter(space => !space.meta?.deleted && space.membership === 'join')
+      setProjects(sortBy(updatedProjects, 'name'))
+
+      const updateInvites = joinedSpaces?.filter(space => !space.meta?.deleted && space.membership === 'invite')
+      console.log(updateInvites)
+      setInvites(sortBy(updateInvites, 'name'))
     }
   }, [joinedSpaces])
 
