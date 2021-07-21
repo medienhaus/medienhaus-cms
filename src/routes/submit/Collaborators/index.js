@@ -134,7 +134,6 @@ const Collaborators = ({ projectSpace, members, time, startListeningToCollab }) 
       <p><Trans t={t} i18nKey="contributorsInstructions3">You can also give credits to a contributor without an <strong>udk/spaces</strong> account, but they won’t be able to get access for editing. Just type in their name and click the <code>ADD</code> button.</Trans></p>
       <section className="credits">
         {/* @TODO kicking user function */}
-
         {
           members && Object.keys(members).length > 1 &&
             <ul>
@@ -157,18 +156,15 @@ const Collaborators = ({ projectSpace, members, time, startListeningToCollab }) 
                 )
               })}
             </ul>
-}
-
+        }
         {credits?.length > 0 &&
           <ul>
             <h4>🚫 {t('CANNOT edit the project')}:</h4>
             {credits.map((name, index) =>
               <Credits name={name} index={index} projectSpace={projectSpace[0].room_id} callback={checkForCredits} key={index} />
-
             )}
             {/* eslint-disable-next-line react/jsx-closing-tag-location */}
           </ul>}
-
       </section>
       <div>
         <div>
