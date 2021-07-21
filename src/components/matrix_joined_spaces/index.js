@@ -12,19 +12,20 @@ const getAnswer = async () => {
       room.name !== 'de' && // and within those spaces we filter all language spaces.
       room.name !== 'en' &&
       room.getMyMembership() === 'join' && // we only want spaces a user is part of
-      room.timeline.some(event => event.event.type === 'dev.medienhaus.meta')) // Last step is to filter any spaces which were not created with  the cms, therefore will not have the medienhaus state event
+      room.currentState.events.has('dev.medienhaus.meta')) // Last step is to filter any spaces which were not created with  the cms, therefore will not have the medienhaus state event
     .map(room => {
       const collab = room.getJoinedMemberCount() > 1
-      const event = room.timeline.filter(event => event.event.type === 'dev.medienhaus.meta')
-      const topic = room.timeline.filter(event => event.event.type === 'm.room.topic')
+      const event = room.currentState.events.get('dev.medienhaus.meta').values().next().value.event.content
+      const topic = room.currentState.events.has('m.room.topic') ? room.currentState.events.get('m.room.topic').values().next().value.event.content.topic : undefined
+      // have not found an easier way to grab the events from the room object
       return {
         name: room.name,
         room_id: room.roomId,
         published: room.getJoinRule(),
         collab: collab,
         avatar_url: room.getMxcAvatarUrl(),
-        meta: event[event.length - 1].event.content,
-        description: topic[topic.length - 1]?.event.content.topic
+        meta: event,
+        description: topic
       }
     })
   return filteredRooms

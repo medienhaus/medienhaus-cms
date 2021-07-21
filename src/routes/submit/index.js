@@ -95,9 +95,9 @@ const Submit = () => {
       // check if project is published or draft
       setVisibility(spaceDetails.getJoinRule())
       // fetch custom medienhaus event
-      const meta = spaceDetails.timeline.filter(event => event.event.type === 'dev.medienhaus.meta')
+      const meta = spaceDetails.currentState.events.get('dev.medienhaus.meta').values().next().value.event.content
       console.log(spaceDetails)
-      setMedienhausMeta(meta[meta.length - 1].event.content)
+      setMedienhausMeta(meta)
       // we fetch the selected language content
       const spaceRooms = space.rooms.filter(room => room.name === contentLang)
       const getContent = await matrixClient.getSpaceSummary(spaceRooms[0].room_id)
