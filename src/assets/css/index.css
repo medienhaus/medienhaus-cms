@@ -691,7 +691,12 @@ button > .loading {
 }
 
 .credits > ul > li > span {
+  /*
   word-break: break-all;
+  */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 /* TODO editor */
