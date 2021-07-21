@@ -86,7 +86,7 @@ const ProjectTitle = ({ title, projectSpace, callback }) => {
 
           return res[0]
         })
-        .then((res) => history.push(`/submit/${res}`))
+        .then((res) => history.push(`/create/${res}`))
     } catch (e) {
       console.log(e)
     } finally {
