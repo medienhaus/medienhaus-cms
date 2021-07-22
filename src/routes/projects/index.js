@@ -105,12 +105,17 @@ const Overview = () => {
                 </Trans>
               </p>
               <ul>
-                {Object.values(invites).map((space, index) => (
-                  <li key={index}>
-                    <Invites space={space} callback={removeInviteByIndex} />
-                  </li>
-                  {index < Object.values(invites).length - 1 && <hr />}
-                ))}
+                {Object.values(invites).map((space, index) => {
+                  return (
+                    <React.Fragment key={space.name + index}>
+                      <li key={index}>
+                        <Invites space={space} callback={removeInviteByIndex} />
+                      </li>
+                      {index < Object.values(invites).length - 1 && <hr />}
+                    </React.Fragment>
+                  )
+                })}
+
               </ul>
             </section>
             <h3>{t('Projects')}</h3>
