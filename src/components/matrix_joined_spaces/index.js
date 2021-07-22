@@ -1,88 +1,64 @@
 import { useEffect, useState } from 'react'
 import Matrix from '../../Matrix'
-
-/*
-Keeping this here as a safety for now
-const fetchIntroduction = async (room) => {
-  const introductionRoom = process.env.REACT_APP_MATRIX_BASE_URL + `/_matrix/client/r0/rooms/${room}/messages?limit=1&dir=b`
-  const introduction = await fetch(introductionRoom, {
-    method: 'GET',
-    headers: { Authorization: 'Bearer ' + localStorage.getItem('medienhaus_access_token') }
-  })
-  const introductionText = await introduction.json()
-  return introductionText.chunk[0].content.body
-}
-*/
+const matrixClient = Matrix.getMatrixClient()
+// @TODO change hook to also return invites and knocks
 
 const getAnswer = async () => {
-  const matrixClient = Matrix.getMatrixClient()
-  try {
-    // first we have to get all rooms a user has currently joined
-    const answer = await matrixClient.getJoinedRooms()
-    if (answer.joined_rooms.length > 0) {
-      const getNames = await Promise.all(answer.joined_rooms.map(async (roomId) => {
-        try {
-          // now we need to find out which of these rooms are spaces
-          const room = await matrixClient.getSpaceSummary(roomId)
-          if (room.rooms[0].room_type !== 'm.space') return
-          // and which one of these spaces has our medienhaus state event
-          const meta = await matrixClient.getStateEvent(room.rooms[0].room_id, 'dev.medienhaus.meta')
-          if (meta.type !== 'studentproject') return
-          // then we check if the project is a collaboration
-          const collab = room.rooms[0].num_joined_members > 1 ? await matrixClient.getJoinedRoomMembers(room.rooms[0].room_id) : false
-          // and if the project is published or still a draft
-          const joinRule = await fetch(process.env.REACT_APP_MATRIX_BASE_URL + `/_matrix/client/r0/rooms/${room.rooms[0].room_id}/state/m.room.join_rules/`, {
-            method: 'GET',
-            headers: { Authorization: 'Bearer ' + localStorage.getItem('medienhaus_access_token') }
-          })
-          const published = await joinRule.json()
-          // fetch introduction text
-          // const introduction = room.rooms[1] ? await fetchIntroduction(room.rooms[1].room_id) : false
-          return {
-            name: room.rooms[0].name,
-            room_id: room.rooms[0].room_id,
-            published: published.join_rule,
-            collab: collab && collab.joined,
-            avatar_url: room.rooms[0].avatar_url !== undefined && room.rooms[0].avatar_url,
-            description: room.rooms[0].topic,
-            meta: meta
-          }
-        } catch (error) {}
+  const visibleRooms = matrixClient.getVisibleRooms()
+  const filteredRooms = visibleRooms
+  // we filter all joined rooms for spaces
+    .filter(room => room.isSpaceRoom() &&
+      room.name !== 'de' && // and within those spaces we filter all language spaces.
+      room.name !== 'en' &&
+      room.getMyMembership() === 'join' && // we only want spaces a user is part of
+      room.currentState.events.has('dev.medienhaus.meta')) // Last step is to filter any spaces which were not created with  the cms, therefore will not have the medienhaus state event
+    .map(room => {
+      const collab = room.getJoinedMemberCount() > 1
+      const event = room.currentState.events.get('dev.medienhaus.meta').values().next().value.event.content
+      const topic = room.currentState.events.has('m.room.topic') ? room.currentState.events.get('m.room.topic').values().next().value.event.content.topic : undefined
+      // have not found an easier way to grab the events from the room object
+      return {
+        name: room.name,
+        room_id: room.roomId,
+        published: room.getJoinRule(),
+        collab: collab,
+        avatar_url: room.getMxcAvatarUrl(),
+        meta: event,
+        description: topic
       }
-      )
-      )
-      return getNames.filter(Boolean)
-    } else {
-      return false
-    }
-  } catch (e) {
-    console.log(e)
-  }
+    })
+  return filteredRooms
 }
 
 const useJoinedSpaces = ({ reload }) => {
-  const [joinedSpaces, setJoinedSpaces] = useState()
+  const [joinedSpaces, setJoinedSpaces] = useState(reload)
   const [fetchSpaces, setFetchSpaces] = useState(true)
   const [spacesErr, setSpacesErr] = useState(false)
   const [load, setLoad] = useState(reload)
 
   useEffect(() => {
     let canceled
-    setFetchSpaces(true);
-    (async () => {
-      try {
-        const res = await getAnswer()
-        canceled || setJoinedSpaces(res)
-      } catch (err) {
-        canceled || setSpacesErr(err)
-      } finally {
-        canceled || setFetchSpaces(false)
+    setFetchSpaces(true)
+    const fetchSpaces = async () => {
+      if (matrixClient.isInitialSyncComplete()) {
+        try {
+          const res = await getAnswer()
+          canceled || setJoinedSpaces(res)
+        } catch (err) {
+          canceled || setSpacesErr(err)
+        } finally {
+          canceled || setFetchSpaces(false)
+        }
+      } else {
+        setTimeout(() => {
+          fetchSpaces()
+        }, 200)
       }
-    })()
+    }
+    fetchSpaces()
     return () => { canceled = true }
+  }, [load])
 
-    // eslint-disable-next-line
-  }, [load]);
   return {
     joinedSpaces,
     spacesErr,

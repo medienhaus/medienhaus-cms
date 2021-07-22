@@ -10,7 +10,7 @@ import Landing from './routes/landing'
 import Login from './routes/login'
 import Boilerplate from './routes/boilerplate'
 import Projects from './routes/projects'
-import Submit from './routes/submit'
+import Create from './routes/create'
 import Moderation from './routes/moderation'
 import Support from './routes/support'
 import Feedback from './routes/feedback'
@@ -75,8 +75,8 @@ function App () {
               <Route path="/terms" component={Terms} />
               <PrivateRoute path="/boilerplate" component={Boilerplate} />
               <PrivateRoute path="/projects" component={Projects} />
-              <PrivateRoute path="/submit/:spaceId" component={Submit} />
-              <PrivateRoute path="/submit" component={Submit} />
+              <PrivateRoute path="/create/:spaceId" component={Create} />
+              <PrivateRoute path="/create" component={Create} />
               <PrivateRoute path="/moderation" component={Moderation} />
               <PrivateRoute path="/support" component={Support} />
               <PrivateRoute path="/feedback" component={Feedback} />

@@ -24,9 +24,9 @@
   "Project Title": "Projektname",
   "Create Project": "Projekt erstellen",
   "Project Context": "Projekt-Kontext",
-  "In which context do you want to publish your project?":  "In welchem Kontext möchten Sie Ihr Projekt veröffentlichen?",
+  "In which context do you want to publish your project?": "In welchem Kontext möchten Sie Ihr Projekt veröffentlichen?",
   "This information is necessary to show your project in the right place on the Rundgang 2021 website, and must therefore be specified when you change the visibility of the project to public.": "Diese Information ist notwendig, um Ihr Projekt an der richtigen Stelle auf der Rundgang-Plattform zu zeigen und muss daher angegeben werden, wenn Sie die Sichtbarkeit des Projekts auf „öffentlich“ setzen.",
-  "The context can be a class, a course, a seminar or a free project. If you are unsure, ask the professor of your class or the seminar leader.":  "Der Kontext kann z.B. eine Klasse, ein Kurs, ein Seminar oder auch ein freies Projekt sein. Wenn Sie unsicher sind, fragen Sie den*die Professor*in Ihrer Klasse oder den*die Seminarleiter*in.",
+  "The context can be a class, a course, a seminar or a free project. If you are unsure, ask the professor of your class or the seminar leader.": "Der Kontext kann z.B. eine Klasse, ein Kurs, ein Seminar oder auch ein freies Projekt sein. Wenn Sie unsicher sind, fragen Sie den*die Professor*in Ihrer Klasse oder den*die Seminarleiter*in.",
   "You can scroll through the list, or filter/search the list by typing one or more keywords.": "Sie können durch die Liste blättern oder die Liste filtern/durchsuchen, indem Sie ein oder mehrere Schlüsselwörter eingeben.",
   "This is not yet possible; we will roll out an update soon; the context is required for publishing your project on the Rundgang 2021 website.": "Dies ist noch nicht möglich; wir werden in Kürze ein Update durchführen; der Kontext wird für die Veröffentlichung Ihres Projekts auf der Rundgang 2021-Website benötigt.",
   "Format": "Format",
@@ -44,7 +44,7 @@
   "CANNOT edit the project": "kann das Projekt NICHT editieren",
   "CAN edit and delete(!) the project": "kann das Projekt EDITIEREN und LÖSCHEN(!)",
   "Project image": "Titelbild",
-  "Content":  "Inhalt",
+  "Content": "Inhalt",
   "contentInstructions1": "Sie können Elemente wie Texte, Bilder, Audio- und Videodateien, BigBlueButton-Sitzungen und Livestreams hinzufügen, indem Sie auf die Schaltfläche <1>+</1> neben dem Inhaltsblock unten klicken.",
   "contentInstructions2": "Der erste Inhaltsblock – die Einleitung zu Ihrem Projekt – ist zwingend erforderlich.",
   "contentInstructions3": "In allen anderen Textblöcken können Sie Ihren Eingabetext formatieren, indem Sie den zu formatierenden Text mit dem Cursor markieren.",
@@ -55,5 +55,6 @@
   "If you still want to make changes to your contributions after publishing, you can continue to do so. Please note, however, that content on analogue and hybrid projects will be pulled from the system on October 8, 2021 for the printed Rundgang programme. Projects that have not been approved by you for publishing by then will not be included in the programme booklet.": "Sollten Sie nach der Veröffentlichung Ihrer Beiträge noch Änderungen vornehmen wollen, können Sie das weiterhin machen.  Bitte beachten Sie aber, dass Inhalte zu analogen und hybriden Projekten am 08.10.2021 für das gedruckte Rundgang-Programm aus dem System gezogen werden. Projekte, die bis dahin nicht von Ihnen zur Veröffentlichung freigegeben worden sind, werden nicht im Programmheft aufgenommen.",
   "Please note: The frontend, i.e. the website where all projects will be visible, is still under construction. Therefore, at the moment it is not yet possible to preview the created projects.": "Bitte beachten Sie: Die Entwicklung der öffentlichen Website des Rundgang 2021, auf der alle Projekte zu sehen sein werden, ist noch in vollem Gange, daher ist derzeit noch keine Vorschau der angelegten Projekte möglich.",
   "BACK TO OVERVIEW": "ZURÜCK ZUR ÜBERSICHT",
-  "Project last saved at": "Projekt zuletzt gespeichert:"
+  "Project last saved at": "Projekt zuletzt gespeichert:",
+  "You are already part of this project 🥳": "Du bist  bereits Teil dieses Projektes 🥳"
 }

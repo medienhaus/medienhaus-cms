@@ -47,7 +47,7 @@ const Nav = () => {
           {auth.user && (
             <>
               <div>
-                <NavLink to="/submit">/create</NavLink>
+                <NavLink to="/create">/create</NavLink>
                 <NavLink to="/projects">/projects</NavLink>
                 <NavLink to="/feedback">/feedback</NavLink>
                 <NavLink to="/support">/support</NavLink>

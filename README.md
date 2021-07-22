@@ -10,7 +10,8 @@ Berlin University of the Arts’ free and open-source environment for digital le
 
 
 # medienhaus-cms
-
+The medienhaus-rundgang-cms is a fork of the medienhaus-cms, which will be released soon. 
+It was adapted to fit the needs of the 2021 Rundgang of Berlin University of the Arts. [link to rundgang](#)
 ## Custom medienhaus stateEvent
 
 The cms uses a custom stateEvent `dev.medienhaus.meta` to store information about the room.
@@ -26,13 +27,13 @@ content: {
 The custom fetchJoinedSpaces Hook also returns an object with our stateEvent in the key `meta`:
 
 ```
-name: room_name,
-room_id: room_id,
-published: public,
-collab: false,
 avatar_url: mxc://image,
+collab: false,
 description: room_topic,
-meta: dev.medienhaus.meta
+meta: dev.medienhaus.meta,
+name: room_name,
+published: public,
+room_id: room_id
  ```
 
 ## Development

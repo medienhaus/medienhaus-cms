@@ -26,7 +26,7 @@ const DeleteProjectButton = ({ roomId, name, index, toggleDeleteButton, removePr
           This cannot be undone and will delete the project for you and any collaborator(s) that might be part of it.
         </Trans>
       </p>
-      <div className="savecancel">
+      <div className="confirmation">
         <button className="cancel" onClick={() => toggleDeleteButton()}>{t('CANCEL')}</button>
         <LoadingSpinnerButton
           className="confirm"

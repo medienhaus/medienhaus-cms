@@ -4,6 +4,7 @@ import Credits from './Credits'
 import { Loading } from '../../../components/loading'
 import { Trans, useTranslation } from 'react-i18next'
 import { useAuth } from '../../../Auth'
+import LoadingSpinnerButton from '../../../components/LoadingSpinnerButton'
 
 const Collaborators = ({ projectSpace, members, time, startListeningToCollab }) => {
   const [fetchingUsers, setFetchingUsers] = useState(false)
@@ -15,7 +16,6 @@ const Collaborators = ({ projectSpace, members, time, startListeningToCollab }) 
   const [addContributionFeedback, setAddContributionFeedback] = useState('')
   const auth = useAuth()
   const profile = auth.user
-
   const matrixClient = Matrix.getMatrixClient()
   const { t } = useTranslation('projects')
 
@@ -33,45 +33,53 @@ const Collaborators = ({ projectSpace, members, time, startListeningToCollab }) 
     e?.preventDefault()
     const id = collab.substring(collab.lastIndexOf(' ') + 1)
     const name = collab.substring(0, collab.lastIndexOf(' '))
+    if (id !== localStorage.getItem('mx_user_id')) {
+      try {
+        projectSpace.forEach(async (space, index) => {
+          await matrixClient.invite(space.room_id, id)
+            .then(() => {
+              const room = matrixClient.getRoom(space.room_id)
+              matrixClient.setPowerLevel(space.room_id, id, 100, room.currentState.getStateEvents('m.room.power_levels', ''))
+            }).catch(console.log)
 
-    try {
-      projectSpace.forEach(async (space, index) => {
-        await matrixClient.invite(space.room_id, id)
-          .then(() => {
-            const room = matrixClient.getRoom(space.room_id)
-            matrixClient.setPowerLevel(space.room_id, id, 100, room.currentState.getStateEvents('m.room.power_levels', ''))
-          }).catch(console.log)
-
-        if (index > 0) {
-          try {
-            await matrixClient.getSpaceSummary(space.room_id)
-              .then((res) => {
-                res.rooms.forEach(async (room, index) => {
-                  await matrixClient.invite(room.room_id, id).catch(console.log)
-                  const stateEvent = matrixClient.getRoom(projectSpace[0].room_id)
-                  await matrixClient.setPowerLevel(room.room_id, id, 100, stateEvent.currentState.getStateEvents('m.room.power_levels', ''))
-                    .catch(console.log)
-                    .then(() => console.log('invited ' + id + ' to ' + room.name))
-                }
-                )
-              })
-          } catch (err) {
-            console.log(err)
+          if (index > 0) {
+            try {
+              await matrixClient.getSpaceSummary(space.room_id)
+                .then((res) => {
+                  res.rooms.forEach(async (room, index) => {
+                    await matrixClient.invite(room.room_id, id).catch(console.log)
+                    const stateEvent = matrixClient.getRoom(projectSpace[0].room_id)
+                    await matrixClient.setPowerLevel(room.room_id, id, 100, stateEvent.currentState.getStateEvents('m.room.power_levels', ''))
+                      .catch(console.log)
+                      .then(() => console.log('invited ' + id + ' to ' + room.name))
+                  }
+                  )
+                })
+            } catch (err) {
+              console.log(err)
+            }
           }
-        }
-      })
-      // TODO: needs i18n
-      setAddContributionFeedback('✓ ' + name + t(' was invited and needs to accept your invitation'))
-      time()
+        })
+        // TODO: needs i18n
+        setAddContributionFeedback('✓ ' + name + t(' was invited and needs to accept your invitation'))
+        time()
+        setTimeout(() => {
+          setAddContributionFeedback('')
+          setCollab('')
+        }, 3000)
+        console.log('done')
+      } catch (err) {
+        console.error(err)
+      } finally {
+        setInviting(false)
+      }
+    } else {
+      setAddContributionFeedback(t('You are already part of this project 🥳'))
       setTimeout(() => {
         setAddContributionFeedback('')
         setCollab('')
+        setInviting(false)
       }, 3000)
-      console.log('done')
-    } catch (err) {
-      console.error(err)
-    } finally {
-      setInviting(false)
     }
   }
 
@@ -107,6 +115,17 @@ const Collaborators = ({ projectSpace, members, time, startListeningToCollab }) 
     }
   }
 
+  const kickUser = async (name) => {
+    projectSpace.forEach(async (space, index) => {
+      console.log('revoking invitation from: ' + space.name)
+      const subspaces = await matrixClient.getSpaceSummary(space.room_id).catch(console.log)
+      subspaces.rooms.reverse().forEach(async (space) => {
+        matrixClient.kick(space.room_id, name.user.userId).catch(console.log)
+      })
+      matrixClient.kick(space.room_id, name.user.userId).catch(console.log)
+    })
+  }
+
   return (
     <>
       <h3>{t('Contributors')}</h3>
@@ -115,20 +134,38 @@ const Collaborators = ({ projectSpace, members, time, startListeningToCollab }) 
       <p><Trans t={t} i18nKey="contributorsInstructions3">You can also give credits to a contributor without an <strong>udk/spaces</strong> account, but they won’t be able to get access for editing. Just type in their name and click the <code>ADD</code> button.</Trans></p>
       <section className="credits">
         {/* @TODO kicking user function */}
-        <ul>{
-          members && Object.keys(members).length > 1 && Object.values(members).map((name, i) => {
-            startListeningToCollab()
-            return name.display_name !== profile.displayname &&
-              (
-                <li><span>⚠️ {name.display_name}</span><button disabled>×</button></li>
-              )
-          })
+        {
+          members && Object.keys(members).length > 1 &&
+            <ul>
+              <h4><strong>{t('CAN edit and delete(!) the project')}</strong></h4>
+              {Object.values(members).map((name, i) => {
+                startListeningToCollab()
+                return name.user.displayName !== profile.displayname &&
+                (
+                  <li key={name.user.displayName}>
+                    <span title={name.userId}>⚠️ {name.user?.displayName}
+                      {name.membership === 'invite' && <em> (invited)</em>}
+                      {name.membership === 'leave' && <em> (rejected)</em>}
+                    </span>
+                    <LoadingSpinnerButton
+                      // revoking invitations / kicking a user is only possible if a users powerLevel is bigger than that of the user's in question
+                      disabled={name.membership === 'join' || name.powerLevel >= members[localStorage.getItem('mx_user_id')].powerLevel}
+                      onClick={() => kickUser(name)}
+                    >×
+                    </LoadingSpinnerButton>
+                  </li>
+                )
+              })}
+            </ul>
         }
-          {credits && credits.map((name, index) =>
-            <Credits name={name} index={index} projectSpace={projectSpace[0].room_id} callback={checkForCredits} key={index} />
-          )}
-        </ul>
-
+        {credits?.length > 0 &&
+          <ul>
+            <h4><strong>{t('CANNOT edit the project')}</strong></h4>
+            {credits.map((name, index) =>
+              <Credits name={name} index={index} projectSpace={projectSpace[0].room_id} callback={checkForCredits} key={index} />
+            )}
+            {/* eslint-disable-next-line react/jsx-closing-tag-location */}
+          </ul>}
       </section>
       <div>
         <div>
@@ -156,7 +193,7 @@ const Collaborators = ({ projectSpace, members, time, startListeningToCollab }) 
             <option value="">🚫 {t('CANNOT edit the project')}</option>
             <option value disabled={!userSearch.some(user => user.user_id === collab.substring(collab.lastIndexOf(' ') + 1))}>⚠️ {t('CAN edit and delete(!) the project')}</option>
           </select>
-          <div className="savecancel">
+          <div className="confirmation">
             <button className="cancel" disabled={!collab || inviting || fetchingUsers || addContributionFeedback} onClick={() => setCollab('')}>{t('CANCEL')}</button>
             <button
               disabled={!collab || inviting || fetchingUsers} onClick={(e) => {

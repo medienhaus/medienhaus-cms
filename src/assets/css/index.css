@@ -692,7 +692,12 @@ button > .loading {
 }
 
 .credits > ul > li > span {
+  /*
   word-break: break-all;
+  */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 /* TODO editor */
@@ -905,11 +910,13 @@ button > .loading {
 .invites > ul,
 .invites > ul > li {
   display: grid;
-  grid-gap: var(--margin);
 }
 
 .invites > ul > li {
+  grid-gap: var(--margin);
+  /*
   grid-template-columns: 1fr 12ch;
+  */
 }
 
 .license-info > * + * {
@@ -942,7 +949,7 @@ button > .loading {
 }
 */
 
-.savecancel {
+.confirmation {
   display: grid;
   /*
   grid-auto-flow: column;
@@ -951,13 +958,13 @@ button > .loading {
   grid-gap: var(--margin);
 }
 
-.savecancel .cancel {
+.confirmation .cancel {
   background-color: var(--color-bg);
   color: var(--color-fg);
 }
 
 /*
-.savecancel .confirm {
+.confirmation .confirm {
 }
 */
 

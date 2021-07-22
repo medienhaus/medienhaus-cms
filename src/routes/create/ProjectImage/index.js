@@ -16,7 +16,6 @@ const ProjectImage = ({ projectSpace, changeProjectImage }) => {
       .catch(res => {
         res.data.error === 'Event not found.' && console.log('No Avatar set, yet')
       })
-    console.log(avatar)
     avatar && setProjectImage(avatar)
   }, [matrixClient, projectSpace])
 
@@ -30,8 +29,7 @@ const ProjectImage = ({ projectSpace, changeProjectImage }) => {
 
     try {
       await matrixClient.uploadContent(selectedFile, { name: fileName })
-        .then((url) => {
-          changeProjectImage(url, author, license, alt)
+        .then(async (url) => {
           const req = {
             method: 'PUT',
             headers: { Authorization: 'Bearer ' + localStorage.getItem('medienhaus_access_token') },
@@ -42,8 +40,11 @@ const ProjectImage = ({ projectSpace, changeProjectImage }) => {
               alt: alt
             })
           }
-          fetch(process.env.REACT_APP_MATRIX_BASE_URL + `/_matrix/client/r0/rooms/${projectSpace}/state/m.room.avatar/`, req)
-        }).then(fetchProjectImage)
+          await fetch(process.env.REACT_APP_MATRIX_BASE_URL + `/_matrix/client/r0/rooms/${projectSpace}/state/m.room.avatar/`, req)
+        }).then(async () => {
+          await fetchProjectImage()
+          changeProjectImage()
+        })
       return 'success'
     } catch (e) {
       console.log('error while trying to save image: ' + e)
