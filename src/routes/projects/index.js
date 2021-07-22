@@ -76,7 +76,7 @@ const Overview = () => {
     // we check if a collaborator has deleted a project since we last logged in
       joinedSpaces?.filter(space => space.meta?.deleted).forEach(async space => await deleteProject(space.room_id))
       // then we update our array to not display the just deleted projects and only display joined rooms
-      const updatedProjects = joinedSpaces?.filter(space => !space.meta?.deleted)
+      const updatedProjects = joinedSpaces?.filter(space => !space.meta?.deleted && space.meta.type === 'studentproject')
       setProjects(sortBy(updatedProjects, 'name'))
     }
   }, [joinedSpaces])

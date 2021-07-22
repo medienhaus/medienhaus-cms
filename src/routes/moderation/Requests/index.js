@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import matrixcs from 'matrix-js-sdk'
 import LoadingSpinnerButton from '../../../components/LoadingSpinnerButton'
+import { useTranslation } from 'react-i18next'
 
 const knockClient = matrixcs.createClient({
   baseUrl: process.env.REACT_APP_MATRIX_BASE_URL,
@@ -9,20 +10,14 @@ const knockClient = matrixcs.createClient({
   useAuthorizationHeader: true
 })
 
-const Requests = ({ roomId, body, eventId }) => {
+const Requests = ({ roomId, roomName, userName, userId, eventId }) => {
+  const { t } = useTranslation()
   const [allButtonsDisabled, setAllButtonsDisabled] = useState(false)
-  const space = body.substring(
-    body.lastIndexOf('(') + 1,
-    body.lastIndexOf(')')
-  )
-  const user = body.substring(
-    body.indexOf('(') + 1,
-    body.indexOf(')')
-  )
-  const redact = async (eventId) => {
+
+  const kick = async () => {
     setAllButtonsDisabled(true)
     try {
-      await knockClient.redactEvent(roomId, eventId).then(console.log)
+      await knockClient.kick(roomId, userId).then(console.log)
     } catch (err) {
       console.error(err)
       setAllButtonsDisabled(false)
@@ -33,7 +28,7 @@ const Requests = ({ roomId, body, eventId }) => {
     setAllButtonsDisabled(true)
 
     try {
-      await knockClient.invite(space, user).then((res) => {
+      await knockClient.invite(roomId, userId).then((res) => {
         console.log(res)
         // in case we need to change power level for users
         // knockClient.getRoom(projectSpace)
@@ -47,15 +42,16 @@ const Requests = ({ roomId, body, eventId }) => {
 
   const report = () => {
     setAllButtonsDisabled(true)
-    console.log('Reported ' + user + ' for spamming in ' + space)
+    console.log('Reported ' + userName + ' for spamming in ' + roomName)
+    // @TODO what happens when reporting?
   }
   return (
     <div>
       <div>
-        <p>{body}</p>
-        <LoadingSpinnerButton disabled={allButtonsDisabled} onClick={invite}>ACCEPT</LoadingSpinnerButton>
-        <LoadingSpinnerButton disabled={allButtonsDisabled} onClick={() => redact(eventId)}>REJECT</LoadingSpinnerButton>
-        <LoadingSpinnerButton disabled={allButtonsDisabled} onClick={report}>REPORT</LoadingSpinnerButton>
+        <p>{userName} ({userId}) {t(' wants to join ')} {roomName}</p>
+        <LoadingSpinnerButton disabled={allButtonsDisabled} onClick={invite}>{t('ACCEPT')}</LoadingSpinnerButton>
+        <LoadingSpinnerButton disabled={allButtonsDisabled} onClick={kick}>{t('REJECT')}</LoadingSpinnerButton>
+        <LoadingSpinnerButton disabled={allButtonsDisabled} onClick={report}>{t('REPORT')}</LoadingSpinnerButton>
       </div>
     </div>
   )

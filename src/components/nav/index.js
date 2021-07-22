@@ -1,13 +1,35 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link, useHistory } from 'react-router-dom'
 import { useAuth } from '../../Auth'
 import { isFunction } from 'lodash/lang'
 import LanguageSelector from '../LanguageSelector'
-
+import useJoinedSpaces from '../matrix_joined_spaces'
+import Matrix from '../../Matrix'
 const Nav = () => {
   const auth = useAuth()
   const history = useHistory()
   const [isNavigationOpen, setIsNavigationOpen] = useState(false)
+  const [knockAmount, setKnockAmount] = useState(0)
+  const { joinedSpaces, spacesErr, fetchSpaces } = useJoinedSpaces(false)
+  const matrixClient = Matrix.getMatrixClient()
+
+  useEffect(() => {
+    if (spacesErr) console.log(spacesErr)
+    if (joinedSpaces && auth.user) {
+      const filteredRooms = joinedSpaces.filter(space => space.meta.type === 'context').map(space => {
+        return matrixClient.getRoom(space.room_id)
+      })
+      if (filteredRooms.length > 0) {
+        const allKnocks = []
+        filteredRooms.forEach(room => {
+          Object.values(room.currentState.members)
+            .forEach(user => allKnocks.push(user))
+        })
+        // console.log(Object.values(room.currentState.members))
+        setKnockAmount(allKnocks.filter(user => user.membership === 'knock').length)
+      }
+    }
+  }, [joinedSpaces, auth.user, matrixClient, spacesErr])
 
   if (auth.user === null) {
     return null
@@ -51,9 +73,8 @@ const Nav = () => {
                 <NavLink to="/projects">/projects</NavLink>
                 <NavLink to="/feedback">/feedback</NavLink>
                 <NavLink to="/support">/support</NavLink>
-                {/*
-                <NavLink activeclassname="active" to="/moderation">/moderation</NavLink>
-                */}
+                {fetchSpaces ||
+                  <NavLink activeclassname="active" to="/moderation">/moderation {knockAmount > 0 && knockAmount}</NavLink>}
               </div>
             </>
           )}

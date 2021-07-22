@@ -1,45 +1,46 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Requests from './Requests'
 import { Loading } from '../../components/loading'
-import joinedRooms from '../../components/matrix_joined_rooms'
-import useFetchCms from '../../components/matrix_fetch_cms'
+import useJoinedSpaces from '../../components/matrix_joined_spaces'
+import Matrix from '../../Matrix'
+import { useTranslation } from 'react-i18next'
 
 const Moderation = () => {
-  const moderationRooms = joinedRooms().filter(obj =>
-    Object.keys(obj)
-      .some(key => obj[key].includes('door')))
+  const { joinedSpaces, spacesErr, fetchSpaces } = useJoinedSpaces(false)
+  const [moderationRooms, setModerationRooms] = useState()
+  const matrixClient = Matrix.getMatrixClient()
+  const { t } = useTranslation()
 
-  const GetRequestPerRoom = ({ roomId }) => {
-    const { cms, error, fetching } = useFetchCms(roomId)
-
-    if (fetching) return <Loading />
-    if (error) {
-      console.error(error)
-      return
+  useEffect(() => {
+    if (joinedSpaces) {
+      const filteredRooms = joinedSpaces.filter(space => space.meta.type === 'context')
+      setModerationRooms(filteredRooms)
     }
-    return cms.map((knock, index) => {
-      return <Requests roomId={roomId} body={knock.body} eventId={knock.eventId} key={index} />
+  }, [joinedSpaces])
+
+  const GetRequestPerRoom = ({ request }) => {
+    const room = matrixClient.getRoom(request.room_id)
+    // console.log(Object.values(room.currentState.members))
+    const knockingUsers = Object.values(room?.currentState.members).filter(user => user.membership === 'knock')
+
+    if (knockingUsers.length < 1) return <p>{t('No requests at the moment.')}</p>
+
+    return knockingUsers.map((user, index) => {
+      return <Requests roomId={request.room_id} roomName={request.name} userId={user.user.userId} userName={user.name} key={index} />
     })
   }
 
+  if (fetchSpaces || !matrixClient.isInitialSyncComplete()) return <Loading />
+  if (spacesErr) return <p>{spacesErr}</p>
   return (
     <div>
-      {joinedRooms().length === 0
-        ? (
-          <>
-            <div>
-              Checking to see if you are moderating any spaces.
-            </div>
-            <Loading />
-          </>
-          )
-        : moderationRooms.length > 0
-          ? moderationRooms.map((requests, index) => <GetRequestPerRoom roomId={requests.room_id} key={index} />)
-          : (
-            <div>
-              Looks like you are not moderating any spaces.
-            </div>
-            )}
+      {moderationRooms.length > 0
+        ? moderationRooms.map((request, index) => <GetRequestPerRoom request={request} key={index} />)
+        : (
+          <div>
+            {t('Looks like you are not moderating any spaces.')}
+          </div>
+          )}
     </div>
   )
 }
