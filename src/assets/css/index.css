@@ -912,9 +912,11 @@ button > .loading {
   grid-gap: var(--margin);
 }
 
+/*
 .invites > ul > li {
   grid-template-columns: 1fr 12ch;
 }
+*/
 
 .license-info > * + * {
   margin-top: var(--margin);
@@ -946,7 +948,7 @@ button > .loading {
 }
 */
 
-.savecancel {
+.confirmation {
   display: grid;
   /*
   grid-auto-flow: column;
@@ -955,13 +957,13 @@ button > .loading {
   grid-gap: var(--margin);
 }
 
-.savecancel .cancel {
+.confirmation .cancel {
   background-color: var(--color-bg);
   color: var(--color-fg);
 }
 
 /*
-.savecancel .confirm {
+.confirmation .confirm {
 }
 */
 

@@ -109,6 +109,7 @@ const Overview = () => {
                   <li key={index}>
                     <Invites space={space} callback={removeInviteByIndex} />
                   </li>
+                  {index < Object.values(invites).length - 1 && <hr />}
                 ))}
               </ul>
             </section>

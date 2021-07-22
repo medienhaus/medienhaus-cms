@@ -74,8 +74,10 @@ const Invites = ({ space, callback }) => {
   return (
     <>
       <strong>{space.name}</strong>
-      <LoadingSpinnerButton disabled={reactingToInvite} onClick={() => join(space.id)}>{t('ACCEPT')}</LoadingSpinnerButton>
-      <LoadingSpinnerButton disabled={reactingToInvite} onClick={() => leave(space.id)}>{t('REJECT')}</LoadingSpinnerButton>
+      <div className="confirmation">
+        <LoadingSpinnerButton className="cancel" disabled={reactingToInvite} onClick={() => leave(space.id)}>{t('REJECT')}</LoadingSpinnerButton>
+        <LoadingSpinnerButton className="confirm" disabled={reactingToInvite} onClick={() => join(space.id)}>{t('ACCEPT')}</LoadingSpinnerButton>
+      </div>
       {error}
     </>
   )
