@@ -282,7 +282,8 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace, time,
                           )
                         : json.type === 'date'
                           ? <div className="center">
-                            <input type="text" value={cms.body.split(' ')[0] + ' ' + cms.body.split(' ')[1] || null} disabled />
+                            <input type="date" value={cms.body.split(' ')[0]} disabled required />
+                            <input type="time" value={cms.body.split(' ')[1]} disabled required />
                             {/* eslint-disable-next-line react/jsx-indent */}
                             </div>
                           : json.type === 'bbb'

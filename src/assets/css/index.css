@@ -909,14 +909,14 @@ button > .loading {
 .invites > ul,
 .invites > ul > li {
   display: grid;
-  grid-gap: var(--margin);
 }
 
-/*
 .invites > ul > li {
+  grid-gap: var(--margin);
+  /*
   grid-template-columns: 1fr 12ch;
+  */
 }
-*/
 
 .license-info > * + * {
   margin-top: var(--margin);
