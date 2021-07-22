@@ -15,7 +15,7 @@ const Overview = () => {
   const profile = auth.user
   const matrixClient = Matrix.getMatrixClient()
   const [projects, setProjects] = useState({})
-  const [invites, setInvites] = useState({})
+  const [invites, setInvites] = useState()
   const { joinedSpaces, spacesErr, fetchSpaces, reload } = useJoinedSpaces(false)
 
   // @TODO: Check for existing invites on page load
