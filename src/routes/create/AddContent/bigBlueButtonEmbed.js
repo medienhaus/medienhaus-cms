@@ -25,7 +25,7 @@ const BigBlueButtonEmbed = ({ onCreateRoomForBlock, onBlockWasAddedSuccessfully 
 
   return (
     <div>
-      <input type="text" value={inputValue} onChange={onChangeInputValue} placeholder="https://meetings.udk-berlin.de/" />
+      <input type="text" value={inputValue} onChange={onChangeInputValue} placeholder="https://meetings.udk-berlin.de/b/bbb-foo-bar-baz" />
       <LoadingSpinnerButton onClick={handleSubmit} disabled={!inputValue || !validInputValue}>Add Content</LoadingSpinnerButton>
     </div>
   )

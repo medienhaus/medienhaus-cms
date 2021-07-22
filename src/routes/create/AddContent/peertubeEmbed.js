@@ -11,7 +11,7 @@ const PeertubeEmbed = ({ type, onCreateRoomForBlock, onBlockWasAddedSuccessfully
   const [selectedEntry, setSelectedEntry] = useState('')
   const matrixClient = Matrix.getMatrixClient()
   const username = matrixClient.getUserIdLocalpart()
-  const { t } = useTranslation()
+  const { t } = useTranslation('peertube')
 
   useEffect(() => {
     async function fetchEntries () {
@@ -69,15 +69,17 @@ const PeertubeEmbed = ({ type, onCreateRoomForBlock, onBlockWasAddedSuccessfully
         <option value="" disabled>
           {(
             entries.length === 0
-              ? 'no entries'
-              : '-- please select ' + type + ' --'
+              ? t('no entries')
+              : t('-- please select ') + type + ' --'
           )}
         </option>
         {entries.map(entry => (
           <option value={entry.uuid} key={entry.uuid}>{(type === 'playlist' ? entry.displayName : entry.name)}</option>
         ))}
       </select>
-      {type === 'livestream' && <Trans t={t} i18nKey="linkToStream">You can start a livestream via <a href="https://stream.udk-berlin.de" rel="external nofollow noopener noreferrer" target="_blank">/stream</a></Trans>}
+      {type === 'video' && <p>↳ <Trans t={t} i18nKey="linkToVideo">You can upload videos via <a href="https://stream.udk-berlin.de/videos/upload" rel="external nofollow noopener noreferrer" target="_blank">udk/stream</a></Trans></p>}
+      {type === 'livestream' && <p>↳ <Trans t={t} i18nKey="linkToStream">You can start a livestream via <a href="https://stream.udk-berlin.de/videos/upload" rel="external nofollow noopener noreferrer" target="_blank">udk/stream</a></Trans></p>}
+      {type === 'playlist' && <p>↳ <Trans t={t} i18nKey="linkToPlaylist">You can create playlists via <a href="https://stream.udk-berlin.de/videos/upload" rel="external nofollow noopener noreferrer" target="_blank">udk/stream</a></Trans></p>}
       <LoadingSpinnerButton onClick={handleSubmit} disabled={entries.length < 1 || !selectedEntry}>Add Content</LoadingSpinnerButton>
     </div>
   )

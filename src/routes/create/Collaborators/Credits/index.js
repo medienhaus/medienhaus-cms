@@ -6,10 +6,19 @@ const Credits = ({ name, index, projectSpace, callback }) => {
   const [deleteCreditFeedback, setdeleteCreditFeedback] = useState('')
   const [loading, setLoading] = useState(false)
   const matrixClient = Matrix.getMatrixClient()
+  const hashCode = (string) => {
+    let hash = 0; let i; let chr
+    if (string.length === 0) return hash
+    for (i = 0; i < string.length; i++) {
+      chr = string.charCodeAt(i)
+      hash = ((hash << 5) - hash) + chr
+      hash |= 0
+    }
+    return hash
+  }
 
-  /* TODO: needs fix, better call this only once 🤣 */
   const items = ['😀', '😃', '😄', '😁', '😆', '😅', '😂', '☺️', '😊', '😇', '🙂', '🙃', '😉', '😌', '😋', '🥳', '😶', '😷']
-  const item = items[Math.floor(Math.random() * items.length)]
+  const item = items[(hashCode(name) + index) % items.length]
 
   const deleteCredit = async (e) => {
     e.preventDefault()

@@ -169,7 +169,7 @@ footer {
   grid-row: 3;
   grid-column: 1 / 2;
   margin-top: calc(var(--margin) * 4);
-  margin-bottom: var(--margin);
+  margin-bottom: calc(var(--margin) * 1.4);
 }
 
 header {
@@ -271,9 +271,10 @@ nav + section > button:hover {
 }
 */
 
-/* Language Selector */
-nav select {
+.languageSelector {
   width: 6ch;
+}
+nav .languageSelector {
   position: fixed;
   bottom: var(--margin);
   right: var(--margin);
@@ -1431,15 +1432,18 @@ button > .loading {
     z-index: 1;
   }
   header {
-    display: grid;
-    grid-template-columns: 1fr 2rem;
-    grid-gap: var(--margin);
+    /*display: grid;*/
+    /*grid-template-columns: 1fr 2rem;*/
+    /*grid-gap: var(--margin);*/
+    display: flex;
+    justify-content: space-between;
   }
   header > button {
     background-color: var(--color-bg);
     border: unset;
     color: var(--color-fg);
     display: initial;
+    flex: 0 1;
   }
   header > button.open {
     font-weight: bold;
@@ -1473,6 +1477,11 @@ button > .loading {
   */
   footer {
     grid-column: 1 / 3;
+    align-items: center;
+  }
+  footer .languageSelector {
+    grid-column: 3;
+    justify-self: end;
   }
   /*
   form input {
@@ -1528,6 +1537,9 @@ button > .loading {
     min-width: 10ch;
   }
   */
+  footer .languageSelector {
+    display: none;
+  }
 }
 
 /* 640px */
@@ -1536,8 +1548,7 @@ button > .loading {
     padding-left: calc(var(--margin) * 2);
     padding-right: calc(var(--margin) * 2);
   }
-  /* Language Selector */
-  nav select {
+  nav .languageSelector {
     bottom: var(--margin);
     right: calc(var(--margin) * 2);
   }
@@ -1604,7 +1615,7 @@ button > .loading {
 
 @import url("https://unpkg.com/leaflet@1.7.1/dist/leaflet.css");
 /*
-@import url("./leaflet.css");
+@import url("./fonts.css");
 */
 
 .leaflet-container,

@@ -1,26 +1,29 @@
 import React, { useState } from 'react'
-import i18n from 'i18next'
 import { Link, useHistory } from 'react-router-dom'
 import { useAuth } from '../../Auth'
+import { isFunction } from 'lodash/lang'
+import LanguageSelector from '../LanguageSelector'
 
 const Nav = () => {
   const auth = useAuth()
   const history = useHistory()
   const [isNavigationOpen, setIsNavigationOpen] = useState(false)
 
-  const changeLanguage = event => {
-    const languageCode = event.target.value
-    localStorage.setItem('cr_lang', languageCode)
-    i18n.changeLanguage(languageCode)
-  }
-
   if (auth.user === null) {
     return null
   }
 
-  const NavLink = ({ to, children }) => {
+  const NavLink = ({ to, onClick, children }) => {
     return (
-      <Link to={to} onClick={() => setIsNavigationOpen(false)}>{children}</Link>
+      <Link
+        to={to}
+        onClick={() => {
+          setIsNavigationOpen(false)
+          if (onClick && isFunction(onClick)) onClick()
+        }}
+      >
+        {children}
+      </Link>
     )
   }
 
@@ -30,13 +33,15 @@ const Nav = () => {
         <NavLink to="/">
           <h1>udk/rundgang</h1>
         </NavLink>
-        <button type="button" className={isNavigationOpen ? 'close' : 'open'} onClick={() => setIsNavigationOpen(!isNavigationOpen)}>{isNavigationOpen ? '×' : '|||'}</button>
+        {auth.user
+          ? <button type="button" className={isNavigationOpen ? 'close' : 'open'} onClick={() => setIsNavigationOpen(!isNavigationOpen)}>{isNavigationOpen ? '×' : '|||'}</button>
+          : <NavLink to="/login">/login</NavLink>}
       </header>
       <nav className={`${(isNavigationOpen && 'active')}`}>
         <div>
           <div>
             {auth.user
-              ? <Link to="/" onClick={() => auth.signout(() => history.push('/'))}>/logout</Link>
+              ? <NavLink to="/" onClick={() => auth.signout(() => history.push('/'))}>/logout</NavLink>
               : <NavLink to="/login">/login</NavLink>}
           </div>
           {auth.user && (
@@ -53,10 +58,7 @@ const Nav = () => {
             </>
           )}
         </div>
-        <select defaultValue={i18n.language} onChange={changeLanguage}>
-          <option value="en">EN</option>
-          <option value="de">DE</option>
-        </select>
+        <LanguageSelector />
       </nav>
     </>
   )
