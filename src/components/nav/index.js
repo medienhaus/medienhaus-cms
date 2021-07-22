@@ -25,8 +25,8 @@ const Nav = () => {
           Object.values(room.currentState.members)
             .forEach(user => allKnocks.push(user))
         })
-        // console.log(Object.values(room.currentState.members))
-        setKnockAmount(allKnocks.filter(user => user.membership === 'knock').length)
+        // @TODO change back to knock when context is finished
+        setKnockAmount(allKnocks.filter(user => user.membership === 'invite').length)
       }
     }
   }, [joinedSpaces, auth.user, matrixClient, spacesErr])
@@ -73,8 +73,10 @@ const Nav = () => {
                 <NavLink to="/projects">/projects</NavLink>
                 <NavLink to="/feedback">/feedback</NavLink>
                 <NavLink to="/support">/support</NavLink>
-                {fetchSpaces ||
-                  <NavLink activeclassname="active" to="/moderation">/moderation {knockAmount > 0 && knockAmount}</NavLink>}
+                {fetchSpaces || <>
+                  <NavLink activeclassname="active" to="/moderation">/moderation </NavLink> {knockAmount > 0 && <sup>{knockAmount}</sup>}
+                  {/* @Andi please display inline */}
+                </>}
               </div>
             </>
           )}

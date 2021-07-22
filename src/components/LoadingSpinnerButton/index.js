@@ -17,12 +17,15 @@ const LoadingSpinnerButton = ({ className, disabled, onClick: callback, style, c
     if (stopPropagationOnClick) e.stopPropagation()
     e.preventDefault()
     setLoading(true)
-    await callback().catch(err => console.log(err))
-      .finally(() => {
-        if (isMounted.current) {
-          setLoading(false)
-        }
-      })
+    try {
+      await callback()
+    } catch (err) {
+      console.log(err)
+    } finally {
+      if (isMounted.current) {
+        setLoading(false)
+      }
+    }
   }
 
   return <button className={className} disabled={loading || disabled} onClick={onClick} style={style}>{loading ? <Loading /> : children}</button>

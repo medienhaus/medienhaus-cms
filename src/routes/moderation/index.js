@@ -9,6 +9,7 @@ import LoadingSpinnerButton from '../../components/LoadingSpinnerButton'
 const Moderation = () => {
   const { joinedSpaces, spacesErr, fetchSpaces } = useJoinedSpaces(false)
   const [moderationRooms, setModerationRooms] = useState()
+  const [selectedRoom, setSelectedRoom] = useState(false)
   const [userToInvite, setUserToInvite] = useState('')
   const [userSearch, setUserSearch] = useState([])
   const [fetching, setFetching] = useState(false)
@@ -53,16 +54,16 @@ const Moderation = () => {
     }
   }
 
-  const invite = () => {
+  const invite = async () => {
     const id = userToInvite.substring(userToInvite.lastIndexOf(' ') + 1)
     const name = userToInvite.substring(0, userToInvite.lastIndexOf(' '))
     if (id !== localStorage.getItem('mx_user_id')) {
-      matrixClient.invite(id, moderationRooms[0].room_id)
-      setInviteFeedback('invited' + { name } + ' successfully')
+      await matrixClient.invite(moderationRooms[0].room_id, id)
+      setInviteFeedback('invited' + name + ' successfully')
       setTimeout(() => {
         setInviteFeedback('')
         setUserToInvite('')
-      })
+      }, 2000)
     }
   }
 
@@ -73,6 +74,10 @@ const Moderation = () => {
       {moderationRooms.length > 0
         ? <>
           {moderationRooms.map((request, index) => <GetRequestPerRoom request={request} key={index} />)}
+          <select value={selectedRoom} onChange={(e) => setSelectedRoom(e.target.value)}>
+            <option value={false} disabled>--- {t('SELECT CONTEXT ROOM')} ---</option>
+            {moderationRooms.map((room, index) => <option key={index} value={room.room_id}>{room.name}</option>)}
+          </select>
           <div>
             <div>
               <input
@@ -83,7 +88,7 @@ const Moderation = () => {
                 onChange={(e) => {
                   fetchUsers(e, e.target.value)
                 }}
-                onClick={(e) => {
+                onBlur={(e) => {
                   setUserToInvite(e.target.value)
                 }}
               />
@@ -95,12 +100,11 @@ const Moderation = () => {
             </datalist>
           </div>
           <div className="confirmation">
-            <button className="cancel" disabled onClick={() => console.log('caneling')}>{t('CANCEL')}</button>
-            <LoadingSpinnerButton disabled={fetching} onClick={invite}>{t('INVITE')}
-            </LoadingSpinnerButton>
+            <LoadingSpinnerButton disabled={fetching || inviteFeedback} onClick={invite}>{t('INVITE')}</LoadingSpinnerButton>
           </div>
           {inviteFeedback &&
             <p>{inviteFeedback}</p>}
+          {/* eslint-disable-next-line react/jsx-closing-tag-location */}
         </>
         : (
           <div>
