@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import { useAuth } from '../../Auth'
 import useJoinedSpaces from '../../components/matrix_joined_spaces'
 import Projects from './Projects'
 import Invites from './Invites'
@@ -10,9 +9,7 @@ import { sortBy } from 'lodash'
 import deleteProject from './deleteProject'
 
 const Overview = () => {
-  const auth = useAuth()
   const { t } = useTranslation('projects')
-  const profile = auth.user
   const matrixClient = Matrix.getMatrixClient()
   const [projects, setProjects] = useState({})
   const [invites, setInvites] = useState()
@@ -76,7 +73,7 @@ const Overview = () => {
     // we check if a collaborator has deleted a project since we last logged in
       joinedSpaces?.filter(space => space.meta?.deleted).forEach(async space => await deleteProject(space.room_id))
       // then we update our array to not display the just deleted projects and only display joined rooms
-      const updatedProjects = joinedSpaces?.filter(space => !space.meta?.deleted)
+      const updatedProjects = joinedSpaces?.filter(space => !space.meta?.deleted && space.meta.type === 'studentproject')
       setProjects(sortBy(updatedProjects, 'name'))
     }
   }, [joinedSpaces])
@@ -92,51 +89,46 @@ const Overview = () => {
 
   return (
     <div>
-      <p>{t('Hello')} <strong>{profile.displayname}</strong>.</p>
-
-      <>
-        {Object.keys(invites).length > 0 && (
-          <>
-            <section className="invites">
-              <h3>{t('Invites')}</h3>
-              <p>
-                <Trans t={t} i18nKey="pendingInvites" count={Object.keys(invites).length}>
-                  You have been invited to join the following project{Object.keys(invites).length > 1 ? 's' : ''}. When you accept an invitation, the project will be listed below with your others. You can edit collaborative projects, delete them, or change their visibility.
-                </Trans>
-              </p>
-              <ul>
-                {Object.values(invites).map((space, index) => {
-                  return (
-                    <React.Fragment key={space.name + index}>
-                      <li key={index}>
-                        <Invites space={space} callback={removeInviteByIndex} />
-                      </li>
-                      {index < Object.values(invites).length - 1 && <hr />}
-                    </React.Fragment>
-                  )
-                })}
-
-              </ul>
-            </section>
-            <h3>{t('Projects')}</h3>
-          </>
-        )}
-        <section>
-          {spacesErr
-            ? console.error(spacesErr)
-            : projects?.length === 0
-              ? (
-                <p>{t('Welcome to the content management system for Rundgang 2021. Looks like you haven\'t uploaded any projects, yet.')}</p>
+      {Object.keys(invites).length > 0 && (
+        <>
+          <section className="invites">
+            <h3>{t('Invites')}</h3>
+            <p>
+              <Trans t={t} i18nKey="pendingInvites" count={Object.keys(invites).length}>
+                You have been invited to join the following project{Object.keys(invites).length > 1 ? 's' : ''}. When you accept an invitation, the project will be listed below with your others. You can edit collaborative projects, delete them, or change their visibility.
+              </Trans>
+            </p>
+            <ul>
+              {Object.values(invites).map((space, index) => {
+                return (
+                  <React.Fragment key={space.name + index}>
+                    <li key={index}>
+                      <Invites space={space} callback={removeInviteByIndex} />
+                    </li>
+                    {index < Object.values(invites).length - 1 && <hr />}
+                  </React.Fragment>
                 )
-              : projects.map((space, index) => (
-                <React.Fragment key={index}>
-                  <Projects space={space} visibility={space.published} index={index} removeProject={removeProject} />
-                  {index < projects.length - 1 && <hr />}
-                </React.Fragment>
-              ))}
-        </section>
-        {/* eslint-disable-next-line react/jsx-indent */}
-      </>
+              })}
+
+            </ul>
+          </section>
+          <h3>{t('Projects')}</h3>
+        </>
+      )}
+      <section>
+        {spacesErr
+          ? console.error(spacesErr)
+          : projects?.length === 0
+            ? (
+              <p>{t('Welcome to the content management system for Rundgang 2021. Looks like you haven\'t uploaded any projects, yet.')}</p>
+              )
+            : projects.map((space, index) => (
+              <React.Fragment key={index}>
+                <Projects space={space} visibility={space.published} index={index} removeProject={removeProject} />
+                {index < projects.length - 1 && <hr />}
+              </React.Fragment>
+            ))}
+      </section>
     </div>
   )
 }
