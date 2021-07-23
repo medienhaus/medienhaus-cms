@@ -228,13 +228,13 @@ const Create = () => {
           <p>{t('The Rundgang website will be available in English and German. The project name can only be entered in one language and will therefore be used for both pages. Other texts should ideally be entered in both languages, otherwise the text will appear on both pages in only one language.')}</p>
         </section>
         <section className="project-title">
-          <h3>{t('Project Title')}</h3>
+          <h3>{t('Project title')}</h3>
           <ProjectTitle title={title} projectSpace={projectSpace} callback={changeTitle} />
         </section>
         {projectSpace && (
           <>
             <section className="context">
-              <h3>{t('Project Context')}</h3>
+              <h3>{t('Project context')}</h3>
               <Category title={title} projectSpace={projectSpace} />
             </section>
             <section className="present">
