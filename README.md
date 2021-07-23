@@ -7,7 +7,6 @@ Berlin University of the Arts’ free and open-source environment for digital le
 [Concept Paper](https://medienhaus.dev/) | [Twitter](https://twitter.com/medienhaus_)
 
 <br>
-
 # medienhaus-cms
 
 medienhaus-cms is a federatable, room-based CMS using the [Matrix](https://matrix.org/) protocol.
