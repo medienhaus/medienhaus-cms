@@ -6,11 +6,11 @@ Berlin University of the Arts’ free and open-source environment for digital le
 
 [Concept Paper](https://medienhaus.dev/) | [Twitter](https://twitter.com/medienhaus_)
 
-## medienhaus/cms
+# medienhaus/cms
 
 `medienhaus-cms` is a federatable, room-based content management system (CMS) using the [Matrix](https://matrix.org/) protocol. At the moment the project is still adapted to fit the needs of the Berlin University of the Arts’ digitally enhanced [Rundgang 2021](https://www.udk-berlin.de/universitaet/marketing-zentrale-veranstaltungen/zentrale-veranstaltungen/rundgang-tage-der-offenen-tuer-der-udk-berlin/rundgang-plattform/). In the future, `medienhaus-cms` will feature customisation options to fit specific needs.
 
-### medienhaus/ stateEvent
+## Custom stateEvent
 
 The CMS uses a custom stateEvent `dev.medienhaus.meta` to store information about rooms.
 
@@ -54,16 +54,13 @@ In the project directory, you can run:
 
 #### `npm start`
 
-Runs the application in development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Runs the application in development mode. Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+The page will reload if you make edits. You will also see any lint errors in the console.
 
 #### `npm run build`
 
-Builds the application for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Builds the application for production to the `build` folder. It correctly bundles React in production mode and optimizes the build for the best performance.
 
 The build is minified and the filenames include the hashes.
 
@@ -71,4 +68,6 @@ See the section about [Create React App deployment](https://facebook.github.io/c
 
 ### Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started). To learn React, check out the [React documentation](https://reactjs.org/).
+You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+
+To learn React, check out the [React documentation](https://reactjs.org/).
