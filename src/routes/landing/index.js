@@ -6,10 +6,13 @@ import { NavLink, useHistory } from 'react-router-dom'
 const Landing = () => {
   const { t } = useTranslation('landing')
   const auth = useAuth()
+  const profile = auth.user
   const history = useHistory()
 
   return (
     <div>
+      <p>{t('Hello')} <strong>{profile.displayname}</strong>.</p>
+
       <strong>{t('Welcome to the Rundgang 2021 content management system!')}</strong>
       <p>{t('The Rundgang – Open Days of the Berlin University of the Arts will take place for the first time in both analogue and digital space from 29–31 October 2021. On this platform, you will have the opportunity to create your own projects and thus add information on analogue offers or present digitally created semester projects.')}</p>
       {auth.user && (

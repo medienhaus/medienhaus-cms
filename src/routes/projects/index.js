@@ -7,7 +7,6 @@ import { Loading } from '../../components/loading'
 import { Trans, useTranslation } from 'react-i18next'
 import { sortBy } from 'lodash'
 import deleteProject from './deleteProject'
-import Profile from './Profile/profile'
 
 const Overview = () => {
   const { t } = useTranslation('projects')
@@ -90,50 +89,46 @@ const Overview = () => {
 
   return (
     <div>
-      <Profile />
-      <>
-        {Object.keys(invites).length > 0 && (
-          <>
-            <section className="invites">
-              <h3>{t('Invites')}</h3>
-              <p>
-                <Trans t={t} i18nKey="pendingInvites" count={Object.keys(invites).length}>
-                  You have been invited to join the following project{Object.keys(invites).length > 1 ? 's' : ''}. When you accept an invitation, the project will be listed below with your others. You can edit collaborative projects, delete them, or change their visibility.
-                </Trans>
-              </p>
-              <ul>
-                {Object.values(invites).map((space, index) => {
-                  return (
-                    <React.Fragment key={space.name + index}>
-                      <li key={index}>
-                        <Invites space={space} callback={removeInviteByIndex} />
-                      </li>
-                      {index < Object.values(invites).length - 1 && <hr />}
-                    </React.Fragment>
-                  )
-                })}
-
-              </ul>
-            </section>
-            <h3>{t('Projects')}</h3>
-          </>
-        )}
-        <section>
-          {spacesErr
-            ? console.error(spacesErr)
-            : projects?.length === 0
-              ? (
-                <p>{t('Welcome to the content management system for Rundgang 2021. Looks like you haven\'t uploaded any projects, yet.')}</p>
+      {Object.keys(invites).length > 0 && (
+        <>
+          <section className="invites">
+            <h3>{t('Invites')}</h3>
+            <p>
+              <Trans t={t} i18nKey="pendingInvites" count={Object.keys(invites).length}>
+                You have been invited to join the following project{Object.keys(invites).length > 1 ? 's' : ''}. When you accept an invitation, the project will be listed below with your others. You can edit collaborative projects, delete them, or change their visibility.
+              </Trans>
+            </p>
+            <ul>
+              {Object.values(invites).map((space, index) => {
+                return (
+                  <React.Fragment key={space.name + index}>
+                    <li key={index}>
+                      <Invites space={space} callback={removeInviteByIndex} />
+                    </li>
+                    {index < Object.values(invites).length - 1 && <hr />}
+                  </React.Fragment>
                 )
-              : projects.map((space, index) => (
-                <React.Fragment key={index}>
-                  <Projects space={space} visibility={space.published} index={index} removeProject={removeProject} />
-                  {index < projects.length - 1 && <hr />}
-                </React.Fragment>
-              ))}
-        </section>
-        {/* eslint-disable-next-line react/jsx-indent */}
-      </>
+              })}
+
+            </ul>
+          </section>
+          <h3>{t('Projects')}</h3>
+        </>
+      )}
+      <section>
+        {spacesErr
+          ? console.error(spacesErr)
+          : projects?.length === 0
+            ? (
+              <p>{t('Welcome to the content management system for Rundgang 2021. Looks like you haven\'t uploaded any projects, yet.')}</p>
+              )
+            : projects.map((space, index) => (
+              <React.Fragment key={index}>
+                <Projects space={space} visibility={space.published} index={index} removeProject={removeProject} />
+                {index < projects.length - 1 && <hr />}
+              </React.Fragment>
+            ))}
+      </section>
     </div>
   )
 }
