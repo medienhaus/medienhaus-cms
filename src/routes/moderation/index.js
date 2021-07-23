@@ -76,7 +76,7 @@ const Moderation = () => {
           {moderationRooms.map((request, index) => <GetRequestPerRoom request={request} key={index} />)}
           <h3>{t('Invite students to context rooms')}</h3>
           <select value={selectedRoom} onChange={(e) => setSelectedRoom(e.target.value)}>
-            <option value={false} disabled>--- {t('SELECT CONTEXT ROOM')} ---</option>
+            <option value={false} disabled>-- {t('SELECT CONTEXT')} --</option>
             {moderationRooms.map((room, index) => <option key={index} value={room.room_id}>{room.name}</option>)}
           </select>
           <input
