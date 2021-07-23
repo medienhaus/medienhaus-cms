@@ -187,6 +187,7 @@ header > a > h1 {
   display: inline-block;
 }
 
+header > a[href="/rundgang/login"],
 header > button {
   display: none;
 }
@@ -1447,11 +1448,14 @@ button > .loading {
     display: flex;
     justify-content: space-between;
   }
+  header > a[href="/rundgang/login"],
+  header > button {
+    display: initial;
+  }
   header > button {
     background-color: var(--color-bg);
     border: unset;
     color: var(--color-fg);
-    display: initial;
     flex: 0 1;
   }
   header > button.open {
