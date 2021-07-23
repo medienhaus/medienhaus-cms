@@ -6,10 +6,8 @@
 :root {
   --color-fg: rgb(0,0,0);
   --color-bg: rgb(255,255,255);
-  /*
-  --color-hi: rgb(228,9,59);
-  */
   --color-hi: rgb(255,240,170);
+  --color-no: rgb(255,96,96);
   --color-me: rgb(128,128,128);
   --color-lo: rgb(240,240,240);
   --margin: 1rem;
@@ -94,7 +92,6 @@ a:active {
   color: var(--color-fg);
 }
 
-/* TODO */
 code {
   background-color: var(--color-lo);
   font-family: "Roboto Mono", monospace;
@@ -151,7 +148,6 @@ a[rel~="external"]::after {
   vertical-align: super;
 }
 
-/* TODO */
 img {
   object-fit: cover;
   width: 100%
@@ -217,10 +213,6 @@ main ul {
   list-style-position: inside;
 }
 
-/* TODO */
-/*
-form + *,
-*/
 form > * + * {
   margin-top: var(--margin);
 }
@@ -512,7 +504,8 @@ input[type="range"] {
   */
 }
 
-/* TODO
+/* TODO */
+/*
 input[type="range"]::-moz-focus-outer {
   border: unset;
 }
@@ -647,34 +640,24 @@ textarea[disabled] {
   resize: none;
 }
 
-.loading {
-  border-color: var(--color-fg) transparent var(--color-fg) transparent;
-  border-radius: 50%;
-  border-style: solid;
-  border-width: calc(var(--margin) * 0.2);
-  height: 2rem;
-  width: 2rem;
-  animation: loading 2.4s linear infinite;
-}
-
-/* TODO */
-button > .loading {
-  border-color: var(--color-bg) transparent var(--color-bg) transparent;
-  margin: 0 auto;
-  max-height: calc(var(--margin) * 1.15);
-  max-width: calc(var(--margin) * 1.15);
-}
-
-.login form div:nth-of-type(1) div {
+.confirmation {
   display: grid;
+  /*
+  grid-auto-flow: column;
+  */
+  grid-template-columns: repeat(2, 1fr);
   grid-gap: var(--margin);
-  grid-auto-flow: row;
 }
 
-.login label + *,
-.login ul > li + li {
-  margin-top: calc(var(--margin) * 0.5);
+.confirmation .cancel {
+  background-color: var(--color-bg);
+  color: var(--color-fg);
 }
+
+/*
+.confirmation .confirm {
+}
+*/
 
 .contributors > .permissions > * + * {
   margin-top: var(--margin);
@@ -923,6 +906,34 @@ button > .loading {
   margin-top: var(--margin);
 }
 
+.loading {
+  border-color: var(--color-fg) transparent var(--color-fg) transparent;
+  border-radius: 50%;
+  border-style: solid;
+  border-width: calc(var(--margin) * 0.2);
+  height: 2rem;
+  width: 2rem;
+  animation: loading 2.4s linear infinite;
+}
+
+button > .loading {
+  border-color: var(--color-bg) transparent var(--color-bg) transparent;
+  margin: 0 auto;
+  max-height: calc(var(--margin) * 1.15);
+  max-width: calc(var(--margin) * 1.15);
+}
+
+.login form div:nth-of-type(1) div {
+  display: grid;
+  grid-gap: var(--margin);
+  grid-auto-flow: row;
+}
+
+.login label + *,
+.login ul > li + li {
+  margin-top: calc(var(--margin) * 0.5);
+}
+
 .maxlength {
   display: grid;
 }
@@ -944,29 +955,13 @@ button > .loading {
   text-align: right;
 }
 
-/*
-.timestamp {
+.notification {
+  color: var(--color-no);
+  display: inline-block;
+  font-size: 0.6rem;
+  font-weight: 900;
+  vertical-align: super;
 }
-*/
-
-.confirmation {
-  display: grid;
-  /*
-  grid-auto-flow: column;
-  */
-  grid-template-columns: repeat(2, 1fr);
-  grid-gap: var(--margin);
-}
-
-.confirmation .cancel {
-  background-color: var(--color-bg);
-  color: var(--color-fg);
-}
-
-/*
-.confirmation .confirm {
-}
-*/
 
 .project {
   display: grid;
@@ -1068,6 +1063,24 @@ button > .loading {
   grid-column: 2;
 }
 
+.requests > div {
+  display: grid;
+  grid-gap: var(--margin);
+}
+
+.requests > div > p {
+  /*
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  */
+  word-break: break-word;
+}
+
+.save {
+  margin-top: calc(var(--margin) * 3) !important;
+}
+
 .terms > div {
   display: grid;
   grid-template-columns: 2rem auto;
@@ -1091,9 +1104,10 @@ button > .loading {
 }
 */
 
-.save {
-  margin-top: calc(var(--margin) * 3) !important;
+/*
+.timestamp {
 }
+*/
 
 /*
 .account > div {
@@ -1394,14 +1408,9 @@ button > .loading {
   :root {
     --color-fg: rgb(255,255,255);
     --color-bg: rgb(20,20,20);
-    /*
     --color-hi: rgb(228,9,59);
-    --color-hi: rgb(255,240,170);
-    */
-    --color-hi: rgb(228,9,59);
-    /*
+    --color-no: rgb(255,96,96);
     --color-me: rgb(128,128,128);
-    */
     --color-lo: rgb(40,40,40);
   }
 }

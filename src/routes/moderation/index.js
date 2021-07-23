@@ -70,7 +70,7 @@ const Moderation = () => {
   if (fetchSpaces || !matrixClient.isInitialSyncComplete()) return <Loading />
   if (spacesErr) return <p>{spacesErr}</p>
   return (
-    <div>
+    <section className="moderation">
       {moderationRooms.length > 0
         ? <>
           {moderationRooms.map((request, index) => <GetRequestPerRoom request={request} key={index} />)}
@@ -79,30 +79,24 @@ const Moderation = () => {
             <option value={false} disabled>--- {t('SELECT CONTEXT ROOM')} ---</option>
             {moderationRooms.map((room, index) => <option key={index} value={room.room_id}>{room.name}</option>)}
           </select>
-          <div>
-            <div>
-              <input
-                list="userSearch"
-                id="user-datalist"
-                name="user-datalist"
-                placeholder={t('name')}
-                onChange={(e) => {
-                  fetchUsers(e, e.target.value)
-                }}
-                onBlur={(e) => {
-                  setUserToInvite(e.target.value)
-                }}
-              />
-            </div>
-            <datalist id="userSearch">
-              {userSearch.map((users, i) => {
-                return <option key={i} value={users.display_name + ' ' + users.user_id} />
-              })}
-            </datalist>
-          </div>
-          <div className="confirmation">
-            <LoadingSpinnerButton disabled={fetching || inviteFeedback} onClick={invite}>{t('INVITE')}</LoadingSpinnerButton>
-          </div>
+          <input
+            list="userSearch"
+            id="user-datalist"
+            name="user-datalist"
+            placeholder={t('name')}
+            onChange={(e) => {
+              fetchUsers(e, e.target.value)
+            }}
+            onBlur={(e) => {
+              setUserToInvite(e.target.value)
+            }}
+          />
+          <datalist id="userSearch">
+            {userSearch.map((users, i) => {
+              return <option key={i} value={users.display_name + ' ' + users.user_id} />
+            })}
+          </datalist>
+          <LoadingSpinnerButton disabled={fetching || inviteFeedback} onClick={invite}>{t('INVITE')}</LoadingSpinnerButton>
           {inviteFeedback &&
             <p>{inviteFeedback}</p>}
           {/* eslint-disable-next-line react/jsx-closing-tag-location */}
@@ -112,7 +106,7 @@ const Moderation = () => {
             {t('Looks like you are not moderating any spaces.')}
           </div>
           )}
-    </div>
+    </section>
   )
 }
 

@@ -46,11 +46,13 @@ const Requests = ({ roomId, roomName, userName, userId, eventId }) => {
     // @TODO what happens when reporting?
   }
   return (
-    <div>
+    <div className="requests">
       <div>
         <p>{userName} ({userId}) {t(' wants to join ')} {roomName}</p>
-        <LoadingSpinnerButton disabled={allButtonsDisabled} onClick={invite}>{t('ACCEPT')}</LoadingSpinnerButton>
-        <LoadingSpinnerButton disabled={allButtonsDisabled} onClick={kick}>{t('REJECT')}</LoadingSpinnerButton>
+        <div className="confirmation">
+          <LoadingSpinnerButton className="cancel" disabled={allButtonsDisabled} onClick={kick}>{t('REJECT')}</LoadingSpinnerButton>
+          <LoadingSpinnerButton className="confirm" disabled={allButtonsDisabled} onClick={invite}>{t('ACCEPT')}</LoadingSpinnerButton>
+        </div>
         <LoadingSpinnerButton disabled={allButtonsDisabled} onClick={report}>{t('REPORT')}</LoadingSpinnerButton>
       </div>
     </div>
