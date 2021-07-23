@@ -103,8 +103,8 @@ const Moderation = () => {
             <LoadingSpinnerButton disabled={fetching || inviteFeedback} onClick={invite}>{t('INVITE')}</LoadingSpinnerButton>
             {inviteFeedback &&
               <p>{inviteFeedback}</p>}
-            {/* eslint-disable-next-line react/jsx-closing-tag-location */}
           </section>
+          {/* eslint-disable-next-line react/jsx-closing-tag-location */}
         </>
         : (
           <div>
