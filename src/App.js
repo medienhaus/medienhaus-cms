@@ -19,7 +19,6 @@ import Account from './routes/account'
 
 import { AuthProvider, useAuth } from './Auth'
 import PropTypes from 'prop-types'
-
 function PrivateRoute ({ children, ...rest }) {
   const auth = useAuth()
   const location = useLocation()
