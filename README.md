@@ -60,9 +60,7 @@ The page will reload if you make edits. You will also see any lint errors in the
 
 #### `npm run build`
 
-Builds the application for production to the `build` folder. It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.
+Builds the application for production to the `build` folder. It correctly bundles React in production mode and optimizes the build for the best performance. The build is minified and the filenames include the hashes.
 
 See the section about [Create React App deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
