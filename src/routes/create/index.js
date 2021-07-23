@@ -214,6 +214,9 @@ const Create = () => {
     console.log(newMedienhausMeta)
     setMedienhausMeta(newMedienhausMeta)
   }
+
+  if (!matrixClient.isInitialSyncComplete) return <Loading />
+
   return (
     matrixClient.isInitialSyncComplete()
       ? <>
