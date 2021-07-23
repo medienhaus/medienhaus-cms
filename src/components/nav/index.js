@@ -76,6 +76,8 @@ const Nav = () => {
                 {fetchSpaces || <>
                   <NavLink activeclassname="active" to="/moderation">/moderation </NavLink> {knockAmount > 0 && <sup>{knockAmount}</sup>}
                   {/* @Andi please display inline */}
+
+                  {/* eslint-disable-next-line react/jsx-closing-tag-location */}
                 </>}
               </div>
             </>

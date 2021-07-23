@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import { useAuth } from '../../Auth'
 import useJoinedSpaces from '../../components/matrix_joined_spaces'
 import Projects from './Projects'
 import Invites from './Invites'
@@ -8,11 +7,10 @@ import { Loading } from '../../components/loading'
 import { Trans, useTranslation } from 'react-i18next'
 import { sortBy } from 'lodash'
 import deleteProject from './deleteProject'
+import Profile from './Profile/profile'
 
 const Overview = () => {
-  const auth = useAuth()
   const { t } = useTranslation('projects')
-  const profile = auth.user
   const matrixClient = Matrix.getMatrixClient()
   const [projects, setProjects] = useState({})
   const [invites, setInvites] = useState()
@@ -92,8 +90,7 @@ const Overview = () => {
 
   return (
     <div>
-      <p>{t('Hello')} <strong>{profile.displayname}</strong>.</p>
-
+      <Profile />
       <>
         {Object.keys(invites).length > 0 && (
           <>
