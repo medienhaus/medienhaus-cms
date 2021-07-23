@@ -263,7 +263,7 @@ const Create = () => {
               <p><Trans t={t} i18nKey="contentInstructions2">The first content block&thinsp;&mdash;&thinsp;which is the introduction to your project&thinsp;&mdash;&thinsp;is required.</Trans></p>
               <p><Trans t={t} i18nKey="contentInstructions3">In all other text content blocks, you can format your input text by highlighting the to be formatted text with your cursor.</Trans></p>
               <p><Trans t={t} i18nKey="contentInstructions4">You can use the <code>↑</code> and <code>↓</code> arrows to rearrange existing blocks.</Trans></p>
-              <p><Trans t={t} i18nKey="contentInstructions5">You can provide content and information in multiple languages by setting the desired language in the dropdown list below.</Trans></p>
+              <p><Trans t={t} i18nKey="contentInstructions5">You can provide content and information in multiple languages. We would recommend to provide the content in both, English and German. If you provide contents for just one language that content will appear on both Rundgang website versions, the English and the German one.</Trans></p>
               <select
                 id="subject" name="subject" defaultValue="" value={contentLang} onChange={(e) => {
                   setContentLang(e.target.value)
