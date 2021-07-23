@@ -70,6 +70,7 @@ const Nav = () => {
             <>
               <div>
                 <NavLink to="/create">/create</NavLink>
+                <NavLink to="/account">/account</NavLink>
                 <NavLink to="/projects">/projects</NavLink>
                 {fetchSpaces || <>
                   <NavLink activeclassname="active" to="/moderation">/moderation </NavLink> {knockAmount > 0 && <sup>{knockAmount}</sup>}

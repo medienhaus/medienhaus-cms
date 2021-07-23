@@ -15,6 +15,7 @@ import Moderation from './routes/moderation'
 import Support from './routes/support'
 import Feedback from './routes/feedback'
 import Terms from './routes/terms'
+import Account from './routes/account'
 
 import { AuthProvider, useAuth } from './Auth'
 import PropTypes from 'prop-types'
@@ -73,6 +74,7 @@ function App () {
               <Route path="/" exact component={Landing} />
               <Route path="/login" component={Login} />
               <Route path="/terms" component={Terms} />
+              <PrivateRoute path="/account" component={Account} />
               <PrivateRoute path="/boilerplate" component={Boilerplate} />
               <PrivateRoute path="/projects" component={Projects} />
               <PrivateRoute path="/create/:spaceId" component={Create} />
