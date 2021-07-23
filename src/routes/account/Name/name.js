@@ -1,16 +1,13 @@
 
 import React, { useState } from 'react'
-import { useAuth } from '../../../Auth'
 import { useTranslation } from 'react-i18next'
 import Matrix from '../../../Matrix'
 import LoadingSpinnerButton from '../../../components/LoadingSpinnerButton'
 
-const Profile = () => {
+const Name = ({ name }) => {
   const { t } = useTranslation('projects')
-  const auth = useAuth()
-  const profile = auth.user
   const [editDisplayName, setEditDisplayName] = useState(false)
-  const [newDisplayName, setNewDisplayName] = useState(profile.displayname)
+  const [newDisplayName, setNewDisplayName] = useState(name)
   const matrixClient = Matrix.getMatrixClient()
 
   const changeDisplayName = async () => {
@@ -20,14 +17,13 @@ const Profile = () => {
 
   return (
     <div className="pofile">
-      {profile.avatar_url ? <img className="avatar" src={matrixClient.mxcUrlToHttp(profile.avatar_url, 100, 100, 'crop', true)} alt="avatar" /> : <canvas className="avatar" style={{ backgroundColor: 'black' }} />}
       <div>
         {editDisplayName
           ? <input value={newDisplayName} onChange={(e) => setNewDisplayName(e.target.value)} />
           : <p>{t('Hello')}  <strong>{newDisplayName}</strong></p>}
         {/* @Andi */}
         <button onClick={() => {
-          if (editDisplayName) setNewDisplayName(profile.displayname)
+          if (editDisplayName) setNewDisplayName(name)
           setEditDisplayName(editDisplayName => !editDisplayName)
         }}
         >{editDisplayName ? t('cancel') : t('edit name')}
@@ -37,4 +33,4 @@ const Profile = () => {
     </div>
   )
 }
-export default Profile
+export default Name
