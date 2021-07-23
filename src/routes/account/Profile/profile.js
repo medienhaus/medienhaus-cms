@@ -20,6 +20,7 @@ const Profile = () => {
 
   return (
     <div className="pofile">
+      {profile.avatar_url ? <img className="avatar" src={matrixClient.mxcUrlToHttp(profile.avatar_url, 100, 100, 'crop', true)} alt="avatar" /> : <canvas className="avatar" style={{ backgroundColor: 'black' }} />}
       <div>
         {editDisplayName
           ? <input value={newDisplayName} onChange={(e) => setNewDisplayName(e.target.value)} />
