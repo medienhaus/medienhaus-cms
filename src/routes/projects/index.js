@@ -62,6 +62,7 @@ const Overview = () => {
       matrixClient.removeListener('Room', handleRoomEvent)
       console.log('stopped listening')
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [matrixClient])
 
   const removeProject = (index) => {

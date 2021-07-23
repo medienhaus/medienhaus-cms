@@ -8,13 +8,14 @@ Berlin University of the Arts’ free and open-source environment for digital le
 
 <br>
 
-
 # medienhaus-cms
-The medienhaus-rundgang-cms is a fork of the medienhaus-cms, which will be released soon. 
-It was adapted to fit the needs of the 2021 Rundgang of Berlin University of the Arts. [link to rundgang](#)
+
+medienhaus-cms is a federatable, room-based CMS using the [Matrix](https://matrix.org/) protocol.
+At the moment the project is still adpated to fit the needs of the 2021 [Rundgang](#) of Berlin University of the Arts.
+In the future the project wil feature custimisation options to fit specific needs.
 ## Custom medienhaus stateEvent
 
-The cms uses a custom stateEvent `dev.medienhaus.meta` to store information about the room.
+The cms uses a custom stateEvent `dev.medienhaus.meta` to store information about rooms.
 
 You can fetch the event via the api or matrix sdk by calling `matrixClient.getStateEvent(roomId, 'dev.medienhaus.meta'` which will return: 
 ```
