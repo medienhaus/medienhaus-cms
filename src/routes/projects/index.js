@@ -56,7 +56,7 @@ const Overview = () => {
       }))
     }
     matrixClient.on('Room', handleRoomEvent)
-
+    if (!invites) setInvites({}) // if we dont have any pending invites we set invites to an empty array to stop displaying the loading spinner
     // When navigating away from /profile we want to stop listening for those room events again
     return () => {
       matrixClient.removeListener('Room', handleRoomEvent)
@@ -84,7 +84,7 @@ const Overview = () => {
       Object.entries(invites).filter(([key]) => key !== room)))
     reload(true)
   }
-
+  console.log(invites)
   if (!invites || fetchSpaces || !matrixClient.isInitialSyncComplete()) return <Loading />
 
   return (
