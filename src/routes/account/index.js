@@ -7,10 +7,10 @@ const Account = (params) => {
   const auth = useAuth()
   const profile = auth.user
   return (
-    <>
+    <section className="account">
       <Name name={profile.displayname} />
       <Avatar avatarUrl={profile.avatar_url} />
-    </>
+    </section>
   )
 }
 export default Account

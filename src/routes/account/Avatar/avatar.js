@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import LoadingSpinnerButton from '../../../components/LoadingSpinnerButton'
@@ -30,7 +29,7 @@ const Avatar = ({ avatarUrl }) => {
   }
 
   return (
-    <div>
+    <div className="avatar">
       {currentAvatar ? <img className="avatar" src={src} alt="avatar" /> : <canvas className="avatar" style={{ backgroundColor: 'black' }} />}
       <button onClick={() => {
         setChangeAvatar(changeAvatar => !changeAvatar)

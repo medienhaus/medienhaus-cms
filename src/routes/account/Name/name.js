@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import Matrix from '../../../Matrix'
@@ -16,11 +15,11 @@ const Name = ({ name }) => {
   }
 
   return (
-    <div className="pofile">
+    <div className="name">
       <div>
         {editDisplayName
           ? <input value={newDisplayName} onChange={(e) => setNewDisplayName(e.target.value)} />
-          : <p>{t('Hello')}  <strong>{newDisplayName}</strong></p>}
+          : <p>{t('Hello')} <strong>{newDisplayName}</strong></p>}
         {/* @Andi */}
         <button onClick={() => {
           if (editDisplayName) setNewDisplayName(name)

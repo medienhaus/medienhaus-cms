@@ -641,6 +641,9 @@ textarea[disabled] {
   resize: none;
 }
 
+.account {
+}
+
 .confirmation {
   display: grid;
   /*
