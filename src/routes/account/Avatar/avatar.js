@@ -12,7 +12,7 @@ const Avatar = ({ avatarUrl }) => {
   const { t } = useTranslation()
 
   useEffect(() => {
-    if (currentAvatar) setSrc(matrixClient.mxcUrlToHttp(currentAvatar, 100, 100, 'crop', true))
+    if (currentAvatar) setSrc(matrixClient.mxcUrlToHttp(currentAvatar, 1000, 1000, 'crop', true))
   }, [currentAvatar, matrixClient])
 
   const changeHandler = (event) => {
@@ -29,8 +29,10 @@ const Avatar = ({ avatarUrl }) => {
   }
 
   return (
-    <div className="avatar">
-      {currentAvatar ? <img className="avatar" src={src} alt="avatar" /> : <canvas className="avatar" style={{ backgroundColor: 'black' }} />}
+    <div className="profile-image">
+      <h3>Profile image</h3>
+      <p>Here you can change your profile image. The profile image will be shown on the public Rundgang website along with your project.</p>
+      {currentAvatar ? <img className="avatar" src={src} alt="profile image" /> : <canvas className="avatar" />}
       <button onClick={() => {
         setChangeAvatar(changeAvatar => !changeAvatar)
       }}
@@ -39,7 +41,16 @@ const Avatar = ({ avatarUrl }) => {
       {changeAvatar && (
         <>
           <input className="browse" type="file" name="browse" onChange={changeHandler} />
-          <LoadingSpinnerButton disabled={!selectedFile || !selectedFile.type.includes('image')} onClick={handleSubmission}>{t('UPLOAD')}</LoadingSpinnerButton>
+          <div className="confirmation">
+            <button
+              className="cancel"
+              onClick={() => {
+                setChangeAvatar(changeAvatar => !changeAvatar)
+              }}
+            >{changeAvatar ? t('CANCEL') : t('CHANGE')}
+            </button>
+            <LoadingSpinnerButton className="confirm" disabled={!selectedFile || !selectedFile.type.includes('image')} onClick={handleSubmission}>{t('UPLOAD')}</LoadingSpinnerButton>
+          </div>
           {selectedFile && !selectedFile.type.includes('image') && <p>❗️ {t('Please select an image file')}</p>}
         </>
       )}

@@ -641,8 +641,21 @@ textarea[disabled] {
   resize: none;
 }
 
-.account > .name > * + * {
+.account > div > * + * {
   margin-top: var(--margin);
+}
+
+/*
+.account > .profile-image > div {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+*/
+
+.account .avatar {
+  background-color: var(--color-fg);
+  height: calc(var(--margin) * 8);
+  width: calc(var(--margin) * 8);
 }
 
 .confirmation {
