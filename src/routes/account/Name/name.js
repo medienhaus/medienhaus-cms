@@ -17,17 +17,18 @@ const Name = ({ name }) => {
   return (
     <div className="name">
       <div>
-        {editDisplayName
-          ? <input value={newDisplayName} onChange={(e) => setNewDisplayName(e.target.value)} />
-          : <p>{t('Hello')} <strong>{newDisplayName}</strong></p>}
+        <input id="title" maxLength="100" name="title" type="text" value={newDisplayName} onClick={(e) => { setEditDisplayName(true) }} onChange={(e) => setNewDisplayName(e.target.value)} />
         {/* @Andi */}
-        <button onClick={() => {
-          if (editDisplayName) setNewDisplayName(name)
-          setEditDisplayName(editDisplayName => !editDisplayName)
-        }}
-        >{editDisplayName ? t('cancel') : t('edit name')}
-        </button>
-        {editDisplayName && <LoadingSpinnerButton onClick={changeDisplayName}>SAVE</LoadingSpinnerButton>}
+
+        {editDisplayName &&
+          <>
+            <button onClick={() => {
+              if (editDisplayName) setNewDisplayName(name)
+              setEditDisplayName(editDisplayName => !editDisplayName)
+            }}
+            >{editDisplayName ? t('cancel') : t('edit name')}
+            </button><LoadingSpinnerButton onClick={changeDisplayName}>SAVE</LoadingSpinnerButton>
+          </>}
       </div>
     </div>
   )
