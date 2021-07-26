@@ -6,6 +6,7 @@ import Avatar from './Avatar/avatar'
 const Account = (params) => {
   const auth = useAuth()
   const profile = auth.user
+
   return (
     <section className="account">
       <Name name={profile.displayname} />

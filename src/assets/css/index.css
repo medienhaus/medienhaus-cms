@@ -641,7 +641,8 @@ textarea[disabled] {
   resize: none;
 }
 
-.account {
+.account > .name > * + * {
+  margin-top: var(--margin);
 }
 
 .confirmation {

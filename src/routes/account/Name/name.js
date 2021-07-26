@@ -16,18 +16,19 @@ const Name = ({ name }) => {
 
   return (
     <div className="name">
-      <div>
-        <input id="title" maxLength="100" name="title" type="text" value={newDisplayName} onClick={(e) => { setEditDisplayName(true) }} onChange={(e) => setNewDisplayName(e.target.value)} />
-        {/* @Andi */}
-
+      <input id="title" maxLength="100" name="title" type="text" value={newDisplayName} onClick={(e) => { setEditDisplayName(true) }} onChange={(e) => setNewDisplayName(e.target.value)} />
+      <div className="confirmation">
         {editDisplayName &&
           <>
-            <button onClick={() => {
-              if (editDisplayName) setNewDisplayName(name)
-              setEditDisplayName(editDisplayName => !editDisplayName)
-            }}
+            <button
+              className="cancel"
+              onClick={() => {
+                if (editDisplayName) setNewDisplayName(name)
+                setEditDisplayName(editDisplayName => !editDisplayName)
+              }}
             >{editDisplayName ? t('cancel') : t('edit name')}
-            </button><LoadingSpinnerButton onClick={changeDisplayName}>SAVE</LoadingSpinnerButton>
+            </button>
+            <LoadingSpinnerButton className="confirm" onClick={changeDisplayName}>SAVE</LoadingSpinnerButton>
           </>}
       </div>
     </div>
