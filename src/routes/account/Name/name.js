@@ -16,7 +16,7 @@ const Name = ({ name }) => {
 
   return (
     <div className="name">
-      <input id="title" maxLength="100" name="title" type="text" value={newDisplayName} onClick={(e) => { setEditDisplayName(true) }} onChange={(e) => setNewDisplayName(e.target.value)} />
+      <input id="title" maxLength="100" name="title" type="text" value={newDisplayName} onChange={(e) => { setEditDisplayName(true); setNewDisplayName(e.target.value) }} />
       <div className="confirmation">
         {editDisplayName &&
           <>
