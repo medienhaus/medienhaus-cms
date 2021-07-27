@@ -133,16 +133,26 @@ const FileUpload = (props) => {
               setAlttext(e.target.value)
             }}
           />
-          <button
-            className="upload"
-            onClick={(e) => props.handleSubmission(e, selectedFile, fileName, author, license, alttext)}
-            disabled={!selectedFile.type.includes(props.fileType) || selectedFile.size > size || props.loading || alttext.length < 1 || license.length < 1 || author.length < 1}
-          >{props.loading ? <Loading /> : 'Upload'}
-          </button>
-          {selectedFile.type.includes(props.fileType) || <p>❗️ <Trans t={t} i18nKey="selectFileType">Please select an {impairment[0]} file.</Trans></p>}
-          {selectedFile.size > size && <p>❗️ {t('File size needs to be less than')} {size / 1000000}MB</p>}
+          <div className="confirmation">
+            <button
+              className="cancel"
+              onClick={() => {
+                props.callback()
+              }}
+            >{t('CANCEL')}
+            </button>
+            <button
+              className="upload"
+              onClick={(e) => props.handleSubmission(e, selectedFile, fileName, author, license, alttext)}
+              disabled={!selectedFile.type.includes(props.fileType) || selectedFile.size > size || props.loading || alttext.length < 1 || license.length < 1 || author.length < 1}
+            >{props.loading ? <Loading /> : 'Upload'}
+            </button>
+            {selectedFile.type.includes(props.fileType) || <p>❗️ <Trans t={t} i18nKey="selectFileType">Please select an {impairment[0]} file.</Trans></p>}
+            {selectedFile.size > size && <p>❗️ {t('File size needs to be less than')} {size / 1000000}MB</p>}
+          </div>
         </>
       )}
+      {!selectedFile && <div className="confirmation"><button className="cancel" onClick={() => { props.callback() }}>{t('CANCEL')}</button></div>}
     </>
   )
 }

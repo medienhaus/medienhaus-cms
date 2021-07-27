@@ -54,7 +54,7 @@ const ProjectImage = ({ projectSpace, changeProjectImage }) => {
     }
   }
 
-  const fileUpload = <FileUpload fileType="image" handleSubmission={handleSubmission} loading={loading} />
+  const fileUpload = <FileUpload fileType="image" handleSubmission={handleSubmission} loading={loading} callback={() => setEdit(edit => !edit)} />
 
   if (!projectImage) {
     return fileUpload
@@ -64,9 +64,10 @@ const ProjectImage = ({ projectSpace, changeProjectImage }) => {
     <>
       <>
         <img src={matrixClient.mxcUrlToHttp(projectImage.url)} alt={projectImage.alt} />
-        <button onClick={e => { e.preventDefault(); setEdit(edit => !edit) }}>{t('CHANGE')}</button>
         {!edit &&
           <>
+            <button onClick={e => { e.preventDefault(); setEdit(edit => !edit) }}>{t('CHANGE')}</button>
+
             <input type="text" value={projectImage.author} disabled />
             <select id="license" name="license" value={projectImage.license} disabled>
               <option value="cc0">CC0 1.0</option>
