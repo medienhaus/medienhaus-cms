@@ -64,7 +64,7 @@ const MediaUpload = (props) => {
   }
 
   return (
-    <FileUpload fileType={props.fileType} handleSubmission={handleSubmission} loading={loading} />
+    <FileUpload fileType={props.fileType} handleSubmission={handleSubmission} loading={loading} callback={() => props.displayPlusButton(true)} />
   )
 }
 
