@@ -139,11 +139,13 @@ const Collaborators = ({ projectSpace, members, time, startListeningToCollab }) 
             <ul>
               <h4><strong>{t('CAN edit and delete(!) the project')}</strong></h4>
               {Object.values(members).map((name, i) => {
+                console.log(name)
+
                 startListeningToCollab()
-                return name.user.displayName !== profile.displayname &&
+                return name.rawDisplayName !== profile.displayname &&
                 (
-                  <li key={name.user.displayName}>
-                    <span title={name.userId}>⚠️ {name.user?.displayName}
+                  <li key={name.user?.displayName || name.rawDisplayName}>
+                    <span title={name.userId}>⚠️ {name.user?.displayName || name.rawDisplayName}
                       {name.membership === 'invite' && <em> (invited)</em>}
                       {name.membership === 'leave' && <em> (rejected)</em>}
                     </span>
