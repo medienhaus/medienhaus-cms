@@ -21,8 +21,7 @@ const ProjectTitle = ({ title, projectSpace, callback }) => {
     // eslint-disable-next-line
     }, [title]);
 
-  const createProject = async (e, title) => {
-    e.preventDefault()
+  const createProject = async (title) => {
     setLoading(true)
 
     const opts = (type, name) => {
@@ -108,11 +107,11 @@ const ProjectTitle = ({ title, projectSpace, callback }) => {
         <div className="confirmation">
           {!newProject && <button className="cancel" onClick={(e) => { e.preventDefault(); setEdit(false); setProjectTitle(oldTitle) }}>CANCEL</button>}
           {!title && newProject &&
-            <input
-              id="submit" name="submit" type="submit" value={newProject && t('Create Project')} disabled={!projectTitle || projectTitle.length > 100} onClick={(e) => {
+            <LoadingSpinnerButton
+              disabled={!projectTitle || projectTitle.length > 100} onClick={(e) => {
                 console.log(newProject)
                 if (newProject && projectTitle.length < 101) {
-                  createProject(e, projectTitle)
+                  createProject(projectTitle)
                   setOldTitle(projectTitle)
                   setNewProject(false)
                 } else {
@@ -120,7 +119,8 @@ const ProjectTitle = ({ title, projectSpace, callback }) => {
                   setNewProject(true)
                 }
               }}
-            />}
+            >{newProject && t('Create Project')}/
+            </LoadingSpinnerButton>}
 
           {title && edit && (projectTitle !== oldTitle) &&
             <LoadingSpinnerButton
