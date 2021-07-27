@@ -64,7 +64,7 @@ const ProjectImage = ({ projectSpace, changeProjectImage }) => {
     <>
       <>
         <img src={matrixClient.mxcUrlToHttp(projectImage.url)} alt={projectImage.alt} />
-        <button onClick={e => { e.preventDefault(); setEdit(edit => !edit) }}>{edit ? t('CANCEL') : t('CHANGE')}</button>
+        <button onClick={e => { e.preventDefault(); setEdit(edit => !edit) }}>{t('CHANGE')}</button>
         {!edit &&
           <>
             <input type="text" value={projectImage.author} disabled />

@@ -48,7 +48,7 @@ const Avatar = ({ avatarUrl, name }) => {
               onClick={() => {
                 setChangeAvatar(changeAvatar => !changeAvatar)
               }}
-            >{changeAvatar ? t('CANCEL') : t('CHANGE')}
+            >{t('CANCEL')}
             </button>
             <LoadingSpinnerButton className="confirm" disabled={!selectedFile || !selectedFile.type.includes('image')} onClick={handleSubmission}>{t('UPLOAD')}</LoadingSpinnerButton>
           </div>
