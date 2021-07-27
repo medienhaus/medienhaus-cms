@@ -33,7 +33,7 @@ const Avatar = ({ avatarUrl, name }) => {
     <div className="profile-image">
       <h3>Profile image</h3>
       <p>Here you can change your profile image. The profile image will be shown on the public Rundgang website along with your project.</p>
-      {currentAvatar ? <img className="avatar" src={src} alt={'profile image of ' + { name }} /> : <canvas className="avatar" />}
+      {currentAvatar ? <img className="avatar" src={src} alt={'profile image of' + { name }} /> : <canvas className="avatar" />}
       {!changeAvatar &&
         <button onClick={() => {
           setChangeAvatar(changeAvatar => !changeAvatar)
@@ -47,7 +47,7 @@ const Avatar = ({ avatarUrl, name }) => {
             <button
               className="cancel"
               onClick={() => {
-                setChangeAvatar(changeAvatar => !changeAvatar)
+                setChangeAvatar(false)
               }}
             >{t('CANCEL')}
             </button>
