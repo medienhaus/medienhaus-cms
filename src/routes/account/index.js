@@ -1,16 +1,17 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Name from './Name/name'
 import { useAuth } from '../../Auth'
 import Avatar from './Avatar/avatar'
 
-const Account = (params) => {
+const Account = () => {
   const auth = useAuth()
   const profile = auth.user
+  const [displayName, setDisplayName] = useState('')
 
   return (
     <section className="account">
-      <Name name={profile.displayname} />
-      <Avatar avatarUrl={profile.avatar_url} />
+      <Name name={displayName || profile.displayname} callback={(name) => setDisplayName(name)} />
+      <Avatar avatarUrl={profile.avatar_url} name={displayName || profile.displayname} />
     </section>
   )
 }

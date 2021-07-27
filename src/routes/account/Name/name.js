@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next'
 import Matrix from '../../../Matrix'
 import LoadingSpinnerButton from '../../../components/LoadingSpinnerButton'
 
-const Name = ({ name }) => {
+const Name = ({ name, callback }) => {
   const { t } = useTranslation('projects')
   const [editDisplayName, setEditDisplayName] = useState(false)
   const [newDisplayName, setNewDisplayName] = useState(name)
@@ -11,6 +11,7 @@ const Name = ({ name }) => {
 
   const changeDisplayName = async () => {
     await matrixClient.setDisplayName(newDisplayName)
+    callback(newDisplayName)
     setEditDisplayName(false)
   }
 

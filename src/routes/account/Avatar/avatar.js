@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next'
 import LoadingSpinnerButton from '../../../components/LoadingSpinnerButton'
 import Matrix from '../../../Matrix'
 
-const Avatar = ({ avatarUrl }) => {
+const Avatar = ({ avatarUrl, name }) => {
   const [currentAvatar, setCurrentAvatar] = useState(avatarUrl)
   const [changeAvatar, setChangeAvatar] = useState(false)
   const [selectedFile, setSelectedFile] = useState()
@@ -32,7 +32,7 @@ const Avatar = ({ avatarUrl }) => {
     <div className="profile-image">
       <h3>Profile image</h3>
       <p>Here you can change your profile image. The profile image will be shown on the public Rundgang website along with your project.</p>
-      {currentAvatar ? <img className="avatar" src={src} alt="avatar" /> : <canvas className="avatar" />}
+      {currentAvatar ? <img className="avatar" src={src} alt={'profile image of' + { name }} /> : <canvas className="avatar" />}
       <button onClick={() => {
         setChangeAvatar(changeAvatar => !changeAvatar)
       }}
