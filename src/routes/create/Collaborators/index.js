@@ -139,8 +139,6 @@ const Collaborators = ({ projectSpace, members, time, startListeningToCollab }) 
             <ul>
               <h4><strong>{t('CAN edit and delete(!) the project')}</strong></h4>
               {Object.values(members).map((name, i) => {
-                console.log(name)
-
                 startListeningToCollab()
                 return name.rawDisplayName !== profile.displayname &&
                 (
