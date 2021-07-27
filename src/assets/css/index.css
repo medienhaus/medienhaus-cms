@@ -658,6 +658,18 @@ textarea[disabled] {
   width: calc(var(--margin) * 8);
 }
 
+.cancel {
+  background-color: var(--color-bg);
+  color: var(--color-fg);
+}
+
+/*
+.confirm {
+  background-color: var(--color-fg);
+  color: var(--color-bg);
+}
+*/
+
 .confirmation {
   display: grid;
   /*
@@ -666,16 +678,6 @@ textarea[disabled] {
   grid-template-columns: repeat(2, 1fr);
   grid-gap: var(--margin);
 }
-
-.confirmation .cancel {
-  background-color: var(--color-bg);
-  color: var(--color-fg);
-}
-
-/*
-.confirmation .confirm {
-}
-*/
 
 .contributors > .permissions > * + * {
   margin-top: var(--margin);
