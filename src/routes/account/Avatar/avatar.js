@@ -26,6 +26,7 @@ const Avatar = ({ avatarUrl, name }) => {
         return url
       })
       .then((url) => setCurrentAvatar(url))
+      .then(() => setChangeAvatar(false))
   }
 
   return (
