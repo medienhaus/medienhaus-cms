@@ -40,7 +40,7 @@ jobs:
       - uses: up9cloud/action-rsync@v1.1
         env:
           HOST: dev.medienhaus.udk-berlin.de
-          KEY: ${{secrets.DEPLOY_SSH_KEY}}
+          KEY: ${{secrets.SSH_DEV_MEDIENHAUS_UDK_BERLIN_DE}}
           TARGET: /var/www/html/rundgang/
           VERBOSE: true
           USER: root
