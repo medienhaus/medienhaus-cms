@@ -236,11 +236,11 @@ const Create = () => {
           <ProjectTitle title={title} projectSpace={projectSpace} callback={changeTitle} />
         </section>
         {projectSpace && (
-          <>
+          <>{medienhausMeta.type === 'studentproject' &&
             <section className="context">
               <h3>{t('Project context')}</h3>
               <Category title={title} projectSpace={projectSpace} />
-            </section>
+            </section>}
             <section className="present">
               <h3>{t('Format')}</h3>
               <p>{t('In what form is your project presented?')}</p>

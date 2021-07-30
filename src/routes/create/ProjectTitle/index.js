@@ -54,7 +54,7 @@ const ProjectTitle = ({ title, projectSpace, callback }) => {
     }
     try {
       // create the project space for the student project
-      await matrixClient.createRoom(opts('studentproject', title))
+      await matrixClient.createRoom(opts(type, title))
         .then(async (space) => {
           // by default we create two subpsaces for localisation
           const en = await matrixClient.createRoom(opts('lang', 'en'))
@@ -97,8 +97,8 @@ const ProjectTitle = ({ title, projectSpace, callback }) => {
   return (
     <>
       <select value={type} onChange={(e) => setType(e.target.value)}>
-        <option>{t('Content')}</option>
-        <option>{t('Page')}</option>
+        <option value="studenproject">{t('Content')}</option>
+        <option value="page">{t('Page')}</option>
       </select>
       <div className="maxlength">
         <input id="title" maxLength="100" name="title" type="text" value={projectTitle} onClick={() => { setEdit(true); setOldTitle(title) }} onChange={(e) => setProjectTitle(e.target.value)} />
