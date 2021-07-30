@@ -8,6 +8,9 @@
             "displayName": "EN - English"
         }
     ], 
-    "routeId": "!ZmOLGSLGeBBiYfPUcy:dev.medienhaus.udk-berlin.de"
-    
+    "routeId": "!ZmOLGSLGeBBiYfPUcy:dev.medienhaus.udk-berlin.de",
+    "contentId": "!jxBlZGAFgWILzMKOzO:dev.medienhaus.udk-berlin.de",
+    "contextId": "!QhZqSCgZPwRKUbjCAb:dev.medienhaus.udk-berlin.de",
+    "pagesId": "!RnCJAjSrXQfJBZLNEt:dev.medienhaus.udk-berlin.de"
+
  }

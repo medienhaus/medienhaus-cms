@@ -4,6 +4,7 @@ import Matrix from '../../../Matrix'
 import { Loading } from '../../../components/loading'
 import LoadingSpinnerButton from '../../../components/LoadingSpinnerButton'
 import { useTranslation } from 'react-i18next'
+import config from '../../../config.json'
 
 const ProjectTitle = ({ title, projectSpace, callback }) => {
   const { t } = useTranslation('projects')
@@ -11,7 +12,7 @@ const ProjectTitle = ({ title, projectSpace, callback }) => {
   const [edit, setEdit] = useState(false)
   const [newProject, setNewProject] = useState(false)
   const [oldTitle, setOldTitle] = useState('')
-  const [type, setType] = useState('content')
+  const [type, setType] = useState('studentproject')
   const [loading, setLoading] = useState(false)
   const matrixClient = Matrix.getMatrixClient()
   const history = useHistory()
@@ -55,6 +56,21 @@ const ProjectTitle = ({ title, projectSpace, callback }) => {
     try {
       // create the project space for the student project
       await matrixClient.createRoom(opts(type, title))
+        .then(async (res) => {
+          // and add those subspaces as children to the project space
+          const roomId = type === 'page' ? config.pagesId : config.contentId
+          await fetch(process.env.REACT_APP_MATRIX_BASE_URL + `/_matrix/client/r0/rooms/${roomId}/state/m.space.child/${res.room_id}`, {
+            method: 'PUT',
+            headers: { Authorization: 'Bearer ' + localStorage.getItem('medienhaus_access_token') },
+            body: JSON.stringify({
+              via:
+                [process.env.REACT_APP_MATRIX_BASE_URL],
+              suggested: false,
+              auto_join: true
+            })
+          })
+          return res
+        })
         .then(async (space) => {
           // by default we create two subpsaces for localisation
           const en = await matrixClient.createRoom(opts('lang', 'en'))
@@ -96,9 +112,10 @@ const ProjectTitle = ({ title, projectSpace, callback }) => {
 
   return (
     <>
+      {console.log('id = ' + type)}
       {!title &&
         <select value={type} onChange={(e) => setType(e.target.value)}>
-          <option value="studenproject">{t('Content')}</option>
+          <option value="studentproject">{t('Content')}</option>
           <option value="page">{t('Page')}</option>
         </select>}
       <div className="maxlength">
@@ -115,7 +132,6 @@ const ProjectTitle = ({ title, projectSpace, callback }) => {
           {!title && newProject &&
             <LoadingSpinnerButton
               disabled={!projectTitle || projectTitle.length > 100} onClick={(e) => {
-                console.log(newProject)
                 if (newProject && projectTitle.length < 101) {
                   createProject(projectTitle)
                   setOldTitle(projectTitle)
