@@ -1,0 +1,23 @@
+{
+    "localisation": [
+        "de",
+        "en"
+    ],
+    "routes": [
+        "account": [
+            "active": true
+        ],
+        "create": [
+            "active": true
+        ],
+        "moderation": [
+            "active": true
+        ],
+        "projects": [
+            "active": true
+        ],
+        "support": [
+            "active": true
+        ],
+    ]
+}
