@@ -9,13 +9,14 @@ import { Loading } from './components/loading'
 import Landing from './routes/landing'
 import Login from './routes/login'
 import Boilerplate from './routes/boilerplate'
-import Projects from './routes/projects'
+import Content from './routes/projects'
 import Create from './routes/create'
 import Moderation from './routes/moderation'
 import Support from './routes/support'
 import Feedback from './routes/feedback'
 import Terms from './routes/terms'
 import Account from './routes/account'
+import Pages from './routes/pages'
 
 import { AuthProvider, useAuth } from './Auth'
 import PropTypes from 'prop-types'
@@ -73,14 +74,16 @@ function App () {
               <Route path="/" exact component={Landing} />
               <Route path="/login" component={Login} />
               <Route path="/terms" component={Terms} />
-              <PrivateRoute path="/account" component={Account} />
-              <PrivateRoute path="/boilerplate" component={Boilerplate} />
-              <PrivateRoute path="/projects" component={Projects} />
               <PrivateRoute path="/create/:spaceId" component={Create} />
               <PrivateRoute path="/create" component={Create} />
+              <PrivateRoute path="/boilerplate" component={Boilerplate} />
               <PrivateRoute path="/moderation" component={Moderation} />
-              <PrivateRoute path="/support" component={Support} />
+              <PrivateRoute path="/content" component={Content} />
+              <PrivateRoute path="/pages" component={Pages} />
+
+              <PrivateRoute path="/account" component={Account} />
               <PrivateRoute path="/feedback" component={Feedback} />
+              <PrivateRoute path="/support" component={Support} />
             </Switch>
           </main>
           <Footer />

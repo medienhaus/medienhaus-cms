@@ -5,6 +5,7 @@ import { isFunction } from 'lodash/lang'
 import LanguageSelector from '../LanguageSelector'
 import useJoinedSpaces from '../matrix_joined_spaces'
 import Matrix from '../../Matrix'
+
 const Nav = () => {
   const auth = useAuth()
   const history = useHistory()
@@ -74,7 +75,8 @@ const Nav = () => {
                   <NavLink activeclassname="active" to="/moderation">/moderation{knockAmount > 0 && <sup className="notification">●</sup>}</NavLink>
                   {/* eslint-disable-next-line react/jsx-closing-tag-location */}
                 </>}
-                <NavLink to="/projects">/projects</NavLink>
+                <NavLink to="/content">/content</NavLink>
+                <NavLink to="/pages">/pages</NavLink>
               </div>
               <div>
                 <NavLink to="/account">/account</NavLink>
