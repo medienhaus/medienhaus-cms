@@ -13,7 +13,7 @@ const Overview = () => {
   const matrixClient = Matrix.getMatrixClient()
   const [projects, setProjects] = useState({})
   const [invites, setInvites] = useState()
-  const { joinedSpaces, spacesErr, fetchSpaces, reload } = useJoinedSpaces(false)
+  const { joinedSpaces, spacesErr, fetchSpaces, reload } = useJoinedSpaces(false, 'studentproject')
 
   // @TODO: Check for existing invites on page load
 
@@ -85,7 +85,6 @@ const Overview = () => {
       Object.entries(invites).filter(([key]) => key !== room)))
     reload(true)
   }
-  console.log(invites)
   if (!invites || fetchSpaces || !matrixClient.isInitialSyncComplete()) return <Loading />
 
   return (
@@ -125,7 +124,7 @@ const Overview = () => {
               )
             : projects.map((space, index) => (
               <React.Fragment key={index}>
-                <Projects space={space} visibility={space.published} index={index} removeProject={removeProject} />
+                <Projects space={space} visibility={space.published} index={index} removeProject={removeProject} required />
                 {index < projects.length - 1 && <hr />}
               </React.Fragment>
             ))}

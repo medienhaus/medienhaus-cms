@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Loading } from '../loading'
 import { useTranslation } from 'react-i18next'
 
-const PublishProject = ({ disabled, space, published, time }) => {
+const PublishProject = ({ disabled, space, published, time, required }) => {
   const { t } = useTranslation('publish')
   const [userFeedback, setUserFeedback] = useState()
   const [visibility, setVisibility] = useState(published)
@@ -48,7 +48,7 @@ const PublishProject = ({ disabled, space, published, time }) => {
         id="visibility" name="visibility" value={visibility} onChange={(e) => onChangeVisibility(e)} disabled={disabled}
       >
         <option value="invite">{t('Draft')}</option>
-        <option value="public" disabled={!space.description || !context}>{t('Public')}</option>
+        <option value="public" disabled={required && (!space.description || !context)}>{t('Public')}</option>
       </select>
       <div className="below">
         {userFeedback && <p>{userFeedback}</p>}

@@ -5,7 +5,7 @@ import PublishProject from '../../../components/PublishProject'
 import { useTranslation } from 'react-i18next'
 import DeleteProjectButton from './DeleteProjectButton'
 
-const Projects = ({ space, visibility, index, removeProject }) => {
+const Projects = ({ space, visibility, index, removeProject, required }) => {
   const history = useHistory()
   const { t } = useTranslation('projects')
   const matrixClient = Matrix.getMatrixClient()
@@ -28,15 +28,15 @@ const Projects = ({ space, visibility, index, removeProject }) => {
         */}
         <button disabled={showDeleteComponent} onClick={() => history.push(`/create/${space.room_id}`)}>{t('EDIT')}</button>
         <button disabled={showDeleteComponent} onClick={() => setShowDeleteComponent(true)}>{t('DELETE')}</button>
-        <PublishProject disabled={showDeleteComponent} space={space} published={visibility} index={index} description={space.description} />
+        <PublishProject disabled={showDeleteComponent} space={space} published={visibility} index={index} description={space.description} required={required} />
         {/*
         </div>
         */}
       </div>
       {showDeleteComponent &&
         <DeleteProjectButton roomId={space.room_id} name={space.name} index={index} toggleDeleteButton={() => setShowDeleteComponent(false)} removeProject={removeProject} />}
-      {!space.description && <p>❗️ {t('Please add a short description of your project.')}</p>}
-      {!context &&
+      {!space.description && required && <p>❗️ {t('Please add a short description of your project.')}</p>}
+      {!context && required &&
         <>
           <p>
             ❗️ {t('Please add your project to a context.')}﹡

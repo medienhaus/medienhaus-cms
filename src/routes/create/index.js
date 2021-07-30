@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useState } from 'react'
 import { useParams, useHistory, NavLink } from 'react-router-dom'
 import Matrix from '../../Matrix'
 import { MatrixEvent } from 'matrix-js-sdk'
+import config from '../../config.json'
 
 // components
 import Collaborators from './Collaborators'
@@ -231,7 +232,7 @@ const Create = () => {
           <p>{t('The Rundgang website will be available in English and German. The project name can only be entered in one language and will therefore be used for both pages. Other texts should ideally be entered in both languages, otherwise the text will appear on both pages in only one language.')}</p>
         </section>
         <section className="project-title">
-          <h3>{t('Project title')}</h3>
+          <h3>{t('Title')}</h3>
           <ProjectTitle title={title} projectSpace={projectSpace} callback={changeTitle} />
         </section>
         {projectSpace && (
@@ -270,9 +271,11 @@ const Create = () => {
                   setDescription()
                 }}
               >
-                <option value="de">DE — Deutsch</option>
-                <option value="en">EN — English</option>
+                {config.localisation.map(lang => {
+                  return <option key={lang.iso} value={lang.iso}>{lang.displayName}</option>
+                })}
               </select>
+
               {spaceObject && (description || description === '') ? <ProjectDescription description={description[contentLang]} callback={onChangeDescription} /> : <Loading />}
               {blocks.length === 0
                 ? <AddContent number={0} projectSpace={spaceObject?.rooms.filter(room => room.name === contentLang)[0].room_id} blocks={blocks} reloadSpace={reloadSpace} present={medienhausMeta?.present} />

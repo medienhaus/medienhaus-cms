@@ -1,30 +1,28 @@
 import React, { useEffect, useState } from 'react'
-import Matrix from '../../Matrix'
-import config from '../../config.json'
+import useJoinedSpaces from '../../components/matrix_joined_spaces'
 
 import Page from './Page'
+import { Loading } from '../../components/loading'
 
 const Pages = () => {
-  const matrixClient = Matrix.getMatrixClient()
   const [pages, setPages] = useState()
+  const { joinedSpaces, spacesErr, fetchSpaces } = useJoinedSpaces(false)
 
   useEffect(() => {
-    const getSummary = async () => {
-      const summary = await matrixClient.getSpaceSummary(config.routeId)
-        .then(async res => {
-          const roomId = res.rooms.filter(room => room.name === 'content')[0].room_id
-          const content = await matrixClient.getSpaceSummary(roomId)
-          return content.rooms.filter(room => room.room_id !== roomId)
-        }
-        )
-      setPages(summary)
+    const filterSpaces = () => {
+      setPages(joinedSpaces?.filter(space => !space.meta?.deleted && space.meta.type === 'page'))
     }
+    joinedSpaces && filterSpaces()
+  }, [joinedSpaces])
 
-    getSummary()
-  }, [matrixClient])
+  const removeProject = (index) => {
+    setPages(pages.filter((name, i) => i !== index))
+  }
 
+  if (fetchSpaces) return <Loading />
+  if (spacesErr) return <p>There was an error: {spacesErr}</p>
   return (
-    <Page pages={pages} />
+    <Page pages={pages} callback={removeProject} />
   )
 }
 export default Pages

@@ -1,7 +1,12 @@
 {
     "localisation":[
-       "de",
-       "en"
+       { 
+           "iso" : "de",
+        "displayName": "DE — Deutsch"},
+        {
+            "iso": "en",
+            "displayName": "EN - English"
+        }
     ], 
     "routeId": "!ZmOLGSLGeBBiYfPUcy:dev.medienhaus.udk-berlin.de"
     

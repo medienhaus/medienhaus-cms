@@ -11,6 +11,7 @@ const ProjectTitle = ({ title, projectSpace, callback }) => {
   const [edit, setEdit] = useState(false)
   const [newProject, setNewProject] = useState(false)
   const [oldTitle, setOldTitle] = useState('')
+  const [type, setType] = useState('content')
   const [loading, setLoading] = useState(false)
   const matrixClient = Matrix.getMatrixClient()
   const history = useHistory()
@@ -95,6 +96,10 @@ const ProjectTitle = ({ title, projectSpace, callback }) => {
 
   return (
     <>
+      <select value={type} onChange={(e) => setType(e.target.value)}>
+        <option>{t('Content')}</option>
+        <option>{t('Page')}</option>
+      </select>
       <div className="maxlength">
         <input id="title" maxLength="100" name="title" type="text" value={projectTitle} onClick={() => { setEdit(true); setOldTitle(title) }} onChange={(e) => setProjectTitle(e.target.value)} />
         <span>{projectTitle.length + '/100'}</span>
@@ -119,7 +124,7 @@ const ProjectTitle = ({ title, projectSpace, callback }) => {
                   setNewProject(true)
                 }
               }}
-            >{newProject && t('Create project')}
+            >{newProject && t('Create')}
             </LoadingSpinnerButton>}
 
           {title && edit && (projectTitle !== oldTitle) &&

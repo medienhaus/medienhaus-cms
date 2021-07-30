@@ -1,8 +1,19 @@
 import React from 'react'
-const Page = ({ pages }) => {
-  console.log(pages)
+import Projects from '../../projects/Projects'
+
+// import fetchCms from '../../../components/matrix_fetch_cms'
+
+const Page = ({ pages, callback }) => {
+  if (pages.length === 0) return <p>You don't have any pages.</p>
   return (
-    <p>this is a page</p>
+    pages.map((page, index) => {
+      return (
+        <section key={page.name}>
+          <Projects space={page} visibility={page.published} index={index} removeProject={callback} />
+        </section>
+      )
+    }
+    )
   )
 }
 export default Page
