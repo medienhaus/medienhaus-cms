@@ -74,6 +74,7 @@ function App () {
               <Route path="/" exact component={Landing} />
               <Route path="/login" component={Login} />
               <Route path="/terms" component={Terms} />
+
               <PrivateRoute path="/create/:spaceId" component={Create} />
               <PrivateRoute path="/create" component={Create} />
               <PrivateRoute path="/boilerplate" component={Boilerplate} />
