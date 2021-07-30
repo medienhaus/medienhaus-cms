@@ -96,10 +96,11 @@ const ProjectTitle = ({ title, projectSpace, callback }) => {
 
   return (
     <>
-      <select value={type} onChange={(e) => setType(e.target.value)}>
-        <option value="studenproject">{t('Content')}</option>
-        <option value="page">{t('Page')}</option>
-      </select>
+      {!title &&
+        <select value={type} onChange={(e) => setType(e.target.value)}>
+          <option value="studenproject">{t('Content')}</option>
+          <option value="page">{t('Page')}</option>
+        </select>}
       <div className="maxlength">
         <input id="title" maxLength="100" name="title" type="text" value={projectTitle} onClick={() => { setEdit(true); setOldTitle(title) }} onChange={(e) => setProjectTitle(e.target.value)} />
         <span>{projectTitle.length + '/100'}</span>
