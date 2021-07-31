@@ -24,6 +24,7 @@ const Overview = () => {
     allRooms.forEach(async room => {
       // ignore rooms that aren't spaces (or are language spaces) and only return invites
       if (room.getMyMembership() !== 'invite' || room.getType() !== 'm.space' || room.name === 'de' || room.name === 'en') return
+      console.log(room)
       const roomMembers = await room._loadMembersFromServer().catch(console.error)
       if (roomMembers < 1) return
       setInvites(invites => Object.assign({}, invites, {

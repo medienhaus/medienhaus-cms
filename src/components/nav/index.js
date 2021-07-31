@@ -77,7 +77,7 @@ const Nav = () => {
                   {/* eslint-disable-next-line react/jsx-closing-tag-location */}
                 </>}
                 {config.function.content && <NavLink to="/content">/content</NavLink>}
-                {matrixClient.isInitialSyncComplete() && config.function.pages && matrixClient.getRoom(config.pagesId).getMyMembership() === 'join' && <NavLink to="/pages">/pages</NavLink>}
+                {matrixClient.isInitialSyncComplete() && config.function.pages && matrixClient.getRoom(config.pagesId)?.getMyMembership() === 'join' && <NavLink to="/pages">/pages</NavLink>}
               </div>
               <div>
                 <NavLink to="/account">/account</NavLink>

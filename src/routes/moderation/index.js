@@ -72,7 +72,7 @@ const Moderation = () => {
     const id = userToInvite.substring(userToInvite.lastIndexOf(' ') + 1)
     const name = userToInvite.substring(0, userToInvite.lastIndexOf(' '))
     if (id !== localStorage.getItem('mx_user_id')) {
-      await matrixClient.invite(moderationRooms[0].room_id, id)
+      await matrixClient.invite(selectedRoom, id)
       setInviteFeedback('invited ' + name + ' successfully')
       selectedRoom === (config.rootId || config.peagesId) && promote(id, selectedRoom, 100)
       setTimeout(() => {
@@ -112,8 +112,10 @@ const Moderation = () => {
               id="user-datalist"
               name="user-datalist"
               placeholder={t('name')}
+              value={userToInvite}
               onChange={(e) => {
                 fetchUsers(e, e.target.value)
+                setUserToInvite(e.target.value)
               }}
               onBlur={(e) => {
                 setUserToInvite(e.target.value)
