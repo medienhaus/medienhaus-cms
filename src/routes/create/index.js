@@ -239,7 +239,7 @@ const Create = () => {
             <PresentType presentValue={medienhausMeta?.present} projectSpace={projectSpace} callback={changePresentationType} />
           </section>
 
-          {config.function.alias &&
+          {config.function.alternativeAuthors &&
             <section className="alternativeAuthors">
               <AlternativeAuthors projectSpace={projectSpace} defaultAuthors={medienhausMeta?.alternativeAuthors} />
             </section>}
