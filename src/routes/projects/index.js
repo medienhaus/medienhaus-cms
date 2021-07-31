@@ -13,7 +13,7 @@ const Overview = () => {
   const matrixClient = Matrix.getMatrixClient()
   const [projects, setProjects] = useState({})
   const [invites, setInvites] = useState()
-  const { joinedSpaces, spacesErr, fetchSpaces, reload } = useJoinedSpaces(false, 'studentproject')
+  const { joinedSpaces, spacesErr, fetchSpaces, reload } = useJoinedSpaces(false, 'content')
 
   // @TODO: Check for existing invites on page load
 
@@ -74,7 +74,7 @@ const Overview = () => {
     // we check if a collaborator has deleted a project since we last logged in
       joinedSpaces?.filter(space => space.meta?.deleted).forEach(async space => await deleteProject(space.room_id))
       // then we update our array to not display the just deleted projects and only display joined rooms
-      const updatedProjects = joinedSpaces?.filter(space => !space.meta?.deleted && space.meta.type === 'studentproject')
+      const updatedProjects = joinedSpaces?.filter(space => !space.meta?.deleted && space.meta.type === 'content')
       setProjects(sortBy(updatedProjects, 'name'))
     }
   }, [joinedSpaces])

@@ -16,6 +16,7 @@ import PublishProject from '../../components/PublishProject'
 import ProjectDescription from './ProjectDescription'
 import { Loading } from '../../components/loading'
 import { Trans, useTranslation } from 'react-i18next'
+import AlternativeAuthors from './AlternativeAuthors'
 
 const Create = () => {
   const { t } = useTranslation('projects')
@@ -68,6 +69,8 @@ const Create = () => {
 
   const fetchSpace = useCallback(async () => {
     if (matrixClient.isInitialSyncComplete()) {
+      // we make sure the old description gets deleted when creating a new project
+      setDescription()
       // here we collect all necessary information about the project
       const space = await matrixClient.getSpaceSummary(projectSpace)
       setSpaceObject(space)
@@ -201,108 +204,111 @@ const Create = () => {
     setMedienhausMeta(newMedienhausMeta)
   }
 
-  if (!matrixClient.isInitialSyncComplete()) return <Loading />
+  if (!matrixClient.isInitialSyncComplete()) return (<Loading />)
 
   return (
-    matrixClient.isInitialSyncComplete()
-      ? <>
-        <section className="welcome">
-          <p>
-            {projectSpace
-              ? <strong>{t('Edit project')}</strong>
-              : <strong>{t('Create and upload new project')}</strong>}
-          </p>
-          <p>{t('This is the project page. Please add the context in which the project was created, a project name, descriptive text and a thumbnail. You can also add more images, videos, livestreams and BigBlueButton sessions.')}</p>
-          <p><Trans t={t} i18nKey="submitInstructions2">If you want to continue at a later point in time, the project is automatically saved as a draft and you can find it in your collection under <NavLink activeclassname="active" to="/projects">/projects</NavLink>.</Trans></p>
-          <p>{t('The Rundgang website will be available in English and German. The project name can only be entered in one language and will therefore be used for both pages. Other texts should ideally be entered in both languages, otherwise the text will appear on both pages in only one language.')}</p>
-        </section>
-        <section className="project-title">
-          <h3>{t('Title')}</h3>
-          <ProjectTitle title={title} projectSpace={projectSpace} callback={changeTitle} />
-        </section>
-        {projectSpace && (
-          <>{medienhausMeta.type === 'content' &&
-            <section className="context">
-              <h3>{t('Project context')}</h3>
-              <Category title={title} projectSpace={projectSpace} />
-            </section>}
-            <section className="present">
-              <h3>{t('Format')}</h3>
-              <p>{t('In what form is your project presented?')}</p>
-              <ul>
-                <li>{t('Analog: in a physical location and without digital elements')}</li>
-                <li>{t('Digital: exclusively in digital space, at no physical location')}</li>
-                <li>{t('Hybrid: both at a physical location and digitally (e.g. by streaming a performance to which guests can also come, etc.)')}</li>
-              </ul>
-              <PresentType presentValue={medienhausMeta?.present} projectSpace={projectSpace} callback={changePresentationType} />
-            </section>
-            <section className="contributors">
-              <Collaborators projectSpace={spaceObject?.rooms} members={roomMembers} time={getCurrentTime} startListeningToCollab={() => startListeningToCollab()} />
-            </section>
-            <section className="project-image">
-              <h3>{t('Project image')}</h3>
-              {loading ? <Loading /> : <ProjectImage projectSpace={projectSpace} changeProjectImage={changeProjectImage} />}
-            </section>
-            <section className="content">
-              <h3>{t('Content')}</h3>
-              <p><Trans t={t} i18nKey="contentInstructions1">You can add elements like texts, images, audio and video files, BigBlueButton sessions and livestreams by clicking the <code>+</code> button near the content block below.</Trans></p>
-              <p><Trans t={t} i18nKey="contentInstructions2">The first content block&thinsp;&mdash;&thinsp;which is the introduction to your project&thinsp;&mdash;&thinsp;is required.</Trans></p>
-              <p><Trans t={t} i18nKey="contentInstructions3">In all other text content blocks, you can format your input text by highlighting the to be formatted text with your cursor.</Trans></p>
-              <p><Trans t={t} i18nKey="contentInstructions4">You can use the <code>↑</code> and <code>↓</code> arrows to rearrange existing blocks.</Trans></p>
-              <p><Trans t={t} i18nKey="contentInstructions5">You can provide content and information in multiple languages. We would recommend to provide the content in both, English and German. If you provide contents for just one language that content will appear on both Rundgang website versions, the English and the German one.</Trans></p>
-              <select
-                id="subject" name="subject" defaultValue="" value={contentLang} onChange={(e) => {
-                  setContentLang(e.target.value)
-                  setDescription()
-                }}
-              >
-                {config.localisation.map(lang => {
-                  return <option key={lang.iso} value={lang.iso}>{lang.displayName}</option>
-                })}
-              </select>
+    <>
+      <section className="welcome">
+        <p>
+          {projectSpace
+            ? <strong>{t('Edit project')}</strong>
+            : <strong>{t('Create and upload new project')}</strong>}
+        </p>
+        <p>{t('This is the project page. Please add the context in which the project was created, a project name, descriptive text and a thumbnail. You can also add more images, videos, livestreams and BigBlueButton sessions.')}</p>
+        <p><Trans t={t} i18nKey="submitInstructions2">If you want to continue at a later point in time, the project is automatically saved as a draft and you can find it in your collection under <NavLink activeclassname="active" to="/projects">/projects</NavLink>.</Trans></p>
+        <p>{t('The Rundgang website will be available in English and German. The project name can only be entered in one language and will therefore be used for both pages. Other texts should ideally be entered in both languages, otherwise the text will appear on both pages in only one language.')}</p>
+      </section>
+      <section className="project-title">
+        <h3>{t('Title')}</h3>
+        <ProjectTitle title={title} projectSpace={projectSpace} callback={changeTitle} />
+      </section>
+      {projectSpace && (
+        <>{config.function.context && medienhausMeta.type === 'content' &&
+          <section className="context">
+            <h3>{t('Project context')}</h3>
+            <Category title={title} projectSpace={projectSpace} />
+          </section>}
+          <section className="present">
+            <h3>{t('Format')}</h3>
+            <p>{t('In what form is your project presented?')}</p>
+            <ul>
+              <li>{t('Analog: in a physical location and without digital elements')}</li>
+              <li>{t('Digital: exclusively in digital space, at no physical location')}</li>
+              <li>{t('Hybrid: both at a physical location and digitally (e.g. by streaming a performance to which guests can also come, etc.)')}</li>
+            </ul>
+            <PresentType presentValue={medienhausMeta?.present} projectSpace={projectSpace} callback={changePresentationType} />
+          </section>
 
-              {spaceObject && (description || description === '') ? <ProjectDescription description={description[contentLang]} callback={onChangeDescription} /> : <Loading />}
-              {blocks.length === 0
-                ? <AddContent number={0} projectSpace={spaceObject?.rooms.filter(room => room.name === contentLang)[0].room_id} blocks={blocks} reloadSpace={reloadSpace} present={medienhausMeta?.present} />
-                : blocks.map((content, i) =>
-                  <DisplayContent block={content} index={i} blocks={blocks} projectSpace={spaceObject?.rooms.filter(room => room.name === contentLang)[0].room_id} reloadSpace={reloadSpace} time={getCurrentTime} present={medienhausMeta?.present} key={content + i + content?.lastUpdate} />
-                )}
-            </section>
-            <section className="visibility">
-              <h3>{t('Visibility')}</h3>
-              <p>
-                <Trans t={t} i18nKey="visibilityInstructions1">
-                  Would you like to save your project as a draft or release it for publishing on the Rundgang platform? The released projects will be published for the Rundgang on October 29, 2021.
-                </Trans>
-              </p>
-              <p>{t('If you still want to make changes to your contributions after publishing, you can continue to do so. Please note, however, that content on analogue and hybrid projects will be pulled from the system on October 8, 2021 for the printed Rundgang programme. Projects that have not been approved by you for publishing by then will not be included in the programme booklet.')}</p>
-              <p><em>{t('Please note: The frontend, i.e. the website where all projects will be visible, is still under construction. Therefore, at the moment it is not yet possible to preview the created projects.')}</em></p>
-              {spaceObject
-                ? (<>
-                  <PublishProject space={spaceObject.rooms[0]} description={description?.en} published={visibility} time={getCurrentTime} />
-                  {!description?.en && <p>❗️ {t('Please add a short description of your project.')}</p>}
-                  {!medienhausMeta.context &&
-                    <>
-                      <p>
-                        ❗️ {t('Please add your project to a context.')}﹡
-                      </p>
-                      <p>
-                        ﹡ <em>{t('This is not yet possible; we will roll out an update soon; the context is required for publishing your project on the Rundgang 2021 website.')}</em>
-                      </p>
-                    </>}
-                  {/* eslint-disable-next-line react/jsx-indent */}
-                   </>)
-                : <Loading />}
-            </section>
-            <section className="save">
-              <button onClick={() => history.push('/projects')}>← {t('BACK TO OVERVIEW')}</button>
-              {saveTimestamp && <p className="timestamp">↳ {t('Project last saved at')} {saveTimestamp}</p>}
-            </section>
-          </>
-        )}
-        {/* eslint-disable-next-line react/jsx-indent */}
+          {config.function.alias &&
+            <section className="alternativeAuthors">
+              <AlternativeAuthors projectSpace={projectSpace} defaultAuthors={medienhausMeta?.alternativeAuthors} />
+            </section>}
+          <section className="contributors">
+            <Collaborators projectSpace={spaceObject?.rooms} members={roomMembers} time={getCurrentTime} startListeningToCollab={() => startListeningToCollab()} />
+          </section>
+          <section className="project-image">
+            <h3>{t('Project image')}</h3>
+            {loading ? <Loading /> : <ProjectImage projectSpace={projectSpace} changeProjectImage={changeProjectImage} />}
+          </section>
+          <section className="content">
+            <h3>{t('Content')}</h3>
+            <p><Trans t={t} i18nKey="contentInstructions1">You can add elements like texts, images, audio and video files, BigBlueButton sessions and livestreams by clicking the <code>+</code> button near the content block below.</Trans></p>
+            <p><Trans t={t} i18nKey="contentInstructions2">The first content block&thinsp;&mdash;&thinsp;which is the introduction to your project&thinsp;&mdash;&thinsp;is required.</Trans></p>
+            <p><Trans t={t} i18nKey="contentInstructions3">In all other text content blocks, you can format your input text by highlighting the to be formatted text with your cursor.</Trans></p>
+            <p><Trans t={t} i18nKey="contentInstructions4">You can use the <code>↑</code> and <code>↓</code> arrows to rearrange existing blocks.</Trans></p>
+            <p><Trans t={t} i18nKey="contentInstructions5">You can provide content and information in multiple languages. We would recommend to provide the content in both, English and German. If you provide contents for just one language that content will appear on both Rundgang website versions, the English and the German one.</Trans></p>
+            <select
+              id="subject" name="subject" defaultValue="" value={contentLang} onChange={(e) => {
+                setContentLang(e.target.value)
+                setDescription()
+              }}
+            >
+              {config.localisation.map(lang => {
+                return <option key={lang.iso} value={lang.iso}>{lang.displayName}</option>
+              })}
+            </select>
+
+            {spaceObject && (description || description === '') ? <ProjectDescription description={description[contentLang]} callback={onChangeDescription} /> : <Loading />}
+            {blocks.length === 0
+              ? <AddContent number={0} projectSpace={spaceObject?.rooms.filter(room => room.name === contentLang)[0].room_id} blocks={blocks} reloadSpace={reloadSpace} present={medienhausMeta?.present} />
+              : blocks.map((content, i) =>
+                <DisplayContent block={content} index={i} blocks={blocks} projectSpace={spaceObject?.rooms.filter(room => room.name === contentLang)[0].room_id} reloadSpace={reloadSpace} time={getCurrentTime} present={medienhausMeta?.present} key={content + i + content?.lastUpdate} />
+              )}
+          </section>
+          <section className="visibility">
+            <h3>{t('Visibility')}</h3>
+            <p>
+              <Trans t={t} i18nKey="visibilityInstructions1">
+                Would you like to save your project as a draft or release it for publishing on the {config.platformName} platform? The released projects will be published for the Rundgang on October 29, 2021.
+              </Trans>
+            </p>
+            <p>{t('If you still want to make changes to your contributions after publishing, you can continue to do so. Please note, however, that content on analogue and hybrid projects will be pulled from the system on October 8, 2021 for the printed Rundgang programme. Projects that have not been approved by you for publishing by then will not be included in the programme booklet.')}</p>
+            <p><em>{t('Please note: The frontend, i.e. the website where all projects will be visible, is still under construction. Therefore, at the moment it is not yet possible to preview the created projects.')}</em></p>
+            {spaceObject
+              ? (<>
+                <PublishProject space={spaceObject.rooms[0]} description={description?.en} published={visibility} time={getCurrentTime} />
+                {!description?.en && <p>❗️ {t('Please add a short description of your project.')}</p>}
+                {config.function.context && !medienhausMeta.context &&
+                  <>
+                    <p>
+                      ❗️ {t('Please add your project to a context.')}﹡
+                    </p>
+                    <p>
+                      ﹡ <em>{t('This is not yet possible; we will roll out an update soon; the context is required for publishing your project on the Rundgang 2021 website.')}</em>
+                    </p>
+                  </>}
+                {/* eslint-disable-next-line react/jsx-indent */}
+                 </>)
+              : <Loading />}
+          </section>
+          <section className="save">
+            <button onClick={() => history.push(medienhausMeta.type === 'content' ? '/content' : '/pages')}>← {t('BACK TO OVERVIEW')}</button>
+            {saveTimestamp && <p className="timestamp">↳ {t('Project last saved at')} {saveTimestamp}</p>}
+          </section>
         </>
-      : <Loading />
+      )}
+      {/* eslint-disable-next-line react/jsx-indent */}
+    </>
   )
 }
 

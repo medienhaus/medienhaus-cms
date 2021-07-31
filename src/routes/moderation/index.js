@@ -73,7 +73,7 @@ const Moderation = () => {
     const name = userToInvite.substring(0, userToInvite.lastIndexOf(' '))
     if (id !== localStorage.getItem('mx_user_id')) {
       await matrixClient.invite(moderationRooms[0].room_id, id)
-      setInviteFeedback('invited' + name + ' successfully')
+      setInviteFeedback('invited ' + name + ' successfully')
       selectedRoom === (config.rootId || config.peagesId) && promote(id, selectedRoom, 100)
       setTimeout(() => {
         setInviteFeedback('')
@@ -100,7 +100,8 @@ const Moderation = () => {
                 <>
                   <option value={false} disabled>-- {t('Promote to admin')} --</option>
                   <option value={config.rootId}>medienhaus-cms (Admin)</option>
-                  <option value={config.pagesId}>pages (Admin)</option>
+                  <option value={config.pagesId}>pages</option>
+                  <option value={config.contextId}>context</option>
                 </>}
               <option value={false} disabled>-- {t('Context')} --</option>
               {moderationRooms.map((room, index) => <option key={index} value={room.room_id}>{room.name}</option>)}

@@ -5,6 +5,7 @@ import { isFunction } from 'lodash/lang'
 import LanguageSelector from '../LanguageSelector'
 import useJoinedSpaces from '../matrix_joined_spaces'
 import Matrix from '../../Matrix'
+import config from '../../config.json'
 
 const Nav = () => {
   const auth = useAuth()
@@ -75,8 +76,8 @@ const Nav = () => {
                   <NavLink activeclassname="active" to="/moderation">/moderation{knockAmount > 0 && <sup className="notification">●</sup>}</NavLink>
                   {/* eslint-disable-next-line react/jsx-closing-tag-location */}
                 </>}
-                <NavLink to="/content">/content</NavLink>
-                <NavLink to="/pages">/pages</NavLink>
+                {config.function.content && <NavLink to="/content">/content</NavLink>}
+                {matrixClient.isInitialSyncComplete() && config.function.pages && matrixClient.getRoom(config.pagesId).getMyMembership() === 'join' && <NavLink to="/pages">/pages</NavLink>}
               </div>
               <div>
                 <NavLink to="/account">/account</NavLink>

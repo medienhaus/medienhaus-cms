@@ -1,5 +1,6 @@
 import React from 'react'
 import { BrowserRouter as Router, Route, Switch, Redirect, useLocation } from 'react-router-dom'
+import config from './config.json'
 
 import './assets/css/index.css'
 import Footer from './components/footer'
@@ -54,6 +55,7 @@ function PrivateRoute ({ children, ...rest }) {
   }
 
   // Logged in - render our actual route components
+
   return (
     <Route {...rest}>{children}</Route>
   )
@@ -79,8 +81,8 @@ function App () {
               <PrivateRoute path="/create" component={Create} />
               <PrivateRoute path="/boilerplate" component={Boilerplate} />
               <PrivateRoute path="/moderation" component={Moderation} />
-              <PrivateRoute path="/content" component={Content} />
-              <PrivateRoute path="/pages" component={Pages} />
+              {config.function.content && <PrivateRoute path="/content" component={Content} />}
+              {config.function.pages && <PrivateRoute path="/pages" component={Pages} />}
 
               <PrivateRoute path="/account" component={Account} />
               <PrivateRoute path="/feedback" component={Feedback} />

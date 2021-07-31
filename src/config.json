@@ -1,4 +1,6 @@
 {
+    "platformName": "Rundgang 2021", 
+    
     "function": {
         "alias": true, 
         "content": true,

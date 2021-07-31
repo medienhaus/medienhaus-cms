@@ -12,7 +12,7 @@ const ProjectTitle = ({ title, projectSpace, callback }) => {
   const [edit, setEdit] = useState(false)
   const [newProject, setNewProject] = useState(false)
   const [oldTitle, setOldTitle] = useState('')
-  const [type, setType] = useState('studentproject')
+  const [type, setType] = useState('content')
   const [loading, setLoading] = useState(false)
   const matrixClient = Matrix.getMatrixClient()
   const history = useHistory()
@@ -115,7 +115,7 @@ const ProjectTitle = ({ title, projectSpace, callback }) => {
       {!title &&
         <select value={type} onChange={(e) => setType(e.target.value)}>
           {config.function.content && <option value="content">{t('Content')}</option>}
-          {config.function.pages && <option value="page">{t('Page')}</option>}
+          {config.function.pages && matrixClient.getRoom(config.pagesId).getMyMembership() === 'join' && <option value="page">{t('Page')}</option>}
         </select>}
       <div className="maxlength">
         <input id="title" maxLength="100" name="title" type="text" value={projectTitle} onClick={() => { setEdit(true); setOldTitle(title) }} onChange={(e) => setProjectTitle(e.target.value)} />
