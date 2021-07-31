@@ -19,7 +19,7 @@ You can fetch the event via API or `matrix-js-sdk` by calling `matrixClient.getS
 ```
 content: {
   rundgang: 21,
-  type: 'studentproject',
+  type: 'content',
   version: '0.1'
 }
 ```

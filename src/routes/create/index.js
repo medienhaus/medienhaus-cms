@@ -1,8 +1,8 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import { useParams, useHistory, NavLink } from 'react-router-dom'
 import Matrix from '../../Matrix'
-import { MatrixEvent } from 'matrix-js-sdk'
 import config from '../../config.json'
+import promote from '../../components/matrix_promote'
 
 // components
 import Collaborators from './Collaborators'
@@ -55,28 +55,13 @@ const Create = () => {
     const allCollaborators = Object.keys(roomMembers).filter(userId => userId !== localStorage.getItem('mx_user_id'))
     // const allCollaborators = joinedSpaces?.map((space, i) => space.name === title && Object.keys(space.collab).filter(userId => userId !== localStorage.getItem('mx_user_id') && userId !== process.env.REACT_APP_PROJECT_BOT_ACCOUNT)).filter(space => space !== false)[0]
     // I would be surprised if there isn't an easier way to get joined members...
-    const setPower = async (userId) => {
-      console.log('changing power level for ' + userId)
-      matrixClient.getStateEvent(roomId, 'm.room.power_levels', '').then(async (res) => {
-        const powerEvent = new MatrixEvent({
-          type: 'm.room.power_levels',
-          content: res
-        }
-        )
-        try {
-          // something here is going wrong for collab > 2
-          await matrixClient.setPowerLevel(roomId, userId, 100, powerEvent)
-        } catch (err) {
-          console.error(err)
-        }
-      })
-    }
+
     // invite users to newly created content room
     const invites = allCollaborators?.map(userId => matrixClient.invite(roomId, userId, () => console.log('invited ' + userId)).catch(err => console.log(err)))
     await Promise.all(invites)
     console.log('inviting done, now changing power')
     // then promote them to admin
-    const power = allCollaborators.map(userId => setPower(userId))
+    const power = allCollaborators.map(userId => promote(userId, roomId, 100))
     await Promise.all(power)
     console.log('all done')
   }
@@ -216,7 +201,7 @@ const Create = () => {
     setMedienhausMeta(newMedienhausMeta)
   }
 
-  if (!matrixClient.isInitialSyncComplete) return <Loading />
+  if (!matrixClient.isInitialSyncComplete()) return <Loading />
 
   return (
     matrixClient.isInitialSyncComplete()
@@ -236,7 +221,7 @@ const Create = () => {
           <ProjectTitle title={title} projectSpace={projectSpace} callback={changeTitle} />
         </section>
         {projectSpace && (
-          <>{medienhausMeta.type === 'studentproject' &&
+          <>{medienhausMeta.type === 'content' &&
             <section className="context">
               <h3>{t('Project context')}</h3>
               <Category title={title} projectSpace={projectSpace} />

@@ -5,10 +5,14 @@ import useJoinedSpaces from '../../components/matrix_joined_spaces'
 import Matrix from '../../Matrix'
 import { useTranslation } from 'react-i18next'
 import LoadingSpinnerButton from '../../components/LoadingSpinnerButton'
+import config from '../../config.json'
+import promote from '../../components/matrix_promote'
 
 const Moderation = () => {
   const { joinedSpaces, spacesErr, fetchSpaces } = useJoinedSpaces(false)
   const [moderationRooms, setModerationRooms] = useState()
+  const [admin, setAdmin] = useState(false)
+
   const [selectedRoom, setSelectedRoom] = useState(false)
   const [userToInvite, setUserToInvite] = useState('')
   const [userSearch, setUserSearch] = useState([])
@@ -21,11 +25,21 @@ const Moderation = () => {
     if (joinedSpaces) {
       const filteredRooms = joinedSpaces.filter(space => space.meta.type === 'context')
       setModerationRooms(filteredRooms)
+
+      // check admin priviliges
+      const powerLevel = async () => {
+        try {
+          const getPagesLevel = await matrixClient.getStateEvent(config.rootId, 'm.room.power_levels')
+          getPagesLevel.users[localStorage.getItem('mx_user_id')] === 100 && setAdmin(true)
+        } catch (err) {
+          console.error(err)
+        }
+      }
+      powerLevel()
     }
-  }, [joinedSpaces])
+  }, [joinedSpaces, matrixClient])
 
   useEffect(() => {
-    console.log(userToInvite)
   }, [userToInvite])
   const GetRequestPerRoom = ({ request }) => {
     const room = matrixClient.getRoom(request.room_id)
@@ -48,7 +62,7 @@ const Moderation = () => {
       // we only update the state if the returned array has entries, to be able to check if users a matrix users or not further down in the code (otherwise the array gets set to [] as soon as you selected an option from the datalist)
       users.results.length > 0 && setUserSearch(users.results)
     } catch (err) {
-      console.error('Error whhile trying to fetch users: ' + err)
+      console.error('Error while trying to fetch users: ' + err)
     } finally {
       setFetching(false)
     }
@@ -60,6 +74,7 @@ const Moderation = () => {
     if (id !== localStorage.getItem('mx_user_id')) {
       await matrixClient.invite(moderationRooms[0].room_id, id)
       setInviteFeedback('invited' + name + ' successfully')
+      selectedRoom === (config.rootId || config.peagesId) && promote(id, selectedRoom, 100)
       setTimeout(() => {
         setInviteFeedback('')
         setUserToInvite('')
@@ -78,10 +93,18 @@ const Moderation = () => {
             {moderationRooms.map((request, index) => <GetRequestPerRoom request={request} key={index} />)}
           </section>
           <section className="invite">
-            <h3>{t('Invite students')}</h3>
+            <h3>{t('Invite')}</h3>
             <select value={selectedRoom} onChange={(e) => setSelectedRoom(e.target.value)}>
-              <option value={false} disabled>-- {t('SELECT CONTEXT')} --</option>
+              <option value={false} disabled>-- {t('SELECT')} --</option>
+              {admin &&
+                <>
+                  <option value={false} disabled>-- {t('Promote to admin')} --</option>
+                  <option value={config.rootId}>medienhaus-cms (Admin)</option>
+                  <option value={config.pagesId}>pages (Admin)</option>
+                </>}
+              <option value={false} disabled>-- {t('Context')} --</option>
               {moderationRooms.map((room, index) => <option key={index} value={room.room_id}>{room.name}</option>)}
+
             </select>
             <input
               list="userSearch"
@@ -100,7 +123,7 @@ const Moderation = () => {
                 return <option key={i} value={users.display_name + ' ' + users.user_id} />
               })}
             </datalist>
-            <LoadingSpinnerButton disabled={fetching || inviteFeedback} onClick={invite}>{t('INVITE')}</LoadingSpinnerButton>
+            <LoadingSpinnerButton disabled={fetching || inviteFeedback || !selectedRoom} onClick={invite}>{t('INVITE')}</LoadingSpinnerButton>
             {inviteFeedback &&
               <p>{inviteFeedback}</p>}
           </section>

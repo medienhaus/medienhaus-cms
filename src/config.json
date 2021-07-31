@@ -1,4 +1,11 @@
 {
+    "function": {
+        "alias": true, 
+        "content": true,
+        "context": true,
+        "pages": true
+    },
+
     "localisation":[
        { 
            "iso" : "de",
@@ -8,7 +15,8 @@
             "displayName": "EN - English"
         }
     ], 
-    "routeId": "!ZmOLGSLGeBBiYfPUcy:dev.medienhaus.udk-berlin.de",
+
+    "rootId": "!ZmOLGSLGeBBiYfPUcy:dev.medienhaus.udk-berlin.de",
     "contentId": "!jxBlZGAFgWILzMKOzO:dev.medienhaus.udk-berlin.de",
     "contextId": "!QhZqSCgZPwRKUbjCAb:dev.medienhaus.udk-berlin.de",
     "pagesId": "!RnCJAjSrXQfJBZLNEt:dev.medienhaus.udk-berlin.de"

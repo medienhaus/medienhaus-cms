@@ -112,11 +112,10 @@ const ProjectTitle = ({ title, projectSpace, callback }) => {
 
   return (
     <>
-      {console.log('id = ' + type)}
       {!title &&
         <select value={type} onChange={(e) => setType(e.target.value)}>
-          <option value="studentproject">{t('Content')}</option>
-          <option value="page">{t('Page')}</option>
+          {config.function.content && <option value="content">{t('Content')}</option>}
+          {config.function.pages && <option value="page">{t('Page')}</option>}
         </select>}
       <div className="maxlength">
         <input id="title" maxLength="100" name="title" type="text" value={projectTitle} onClick={() => { setEdit(true); setOldTitle(title) }} onChange={(e) => setProjectTitle(e.target.value)} />
