@@ -8,7 +8,6 @@ const AlternativeAuthors = ({ projectSpace, defaultAuthors }) => {
 
   const matrixClient = Matrix.getMatrixClient()
   const { t } = useTranslation()
-  console.log(authors)
 
   useEffect(() => {
     defaultAuthors && setAuthors(defaultAuthors.toString())
@@ -20,8 +19,6 @@ const AlternativeAuthors = ({ projectSpace, defaultAuthors }) => {
       const content = await matrixClient.getStateEvent(projectSpace, 'dev.medienhaus.meta')
       if (authors.length > 0) content.alternativeAuthors = authors.split(',')
       else delete content.AlternativeAuthors
-
-      console.log(content)
       const sendCredit = await matrixClient.sendStateEvent(projectSpace, 'dev.medienhaus.meta', content)
       console.log(sendCredit)
     }
