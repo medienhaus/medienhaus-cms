@@ -1,26 +1,23 @@
 {
-    "platformName": "Rundgang 2021", 
-    
-    "function": {
-        "alternativeAuthors": true, 
-        "content": true,
-        "context": true,
-        "pages": true
+  "platformName": "Rundgang 2021",
+  "function": {
+    "alternativeAuthors": true,
+    "content": true,
+    "context": true,
+    "pages": true
+  },
+  "localisation":[
+    {
+      "iso" : "de",
+      "displayName": "DE — Deutsch"
     },
-
-    "localisation":[
-       { 
-           "iso" : "de",
-        "displayName": "DE — Deutsch"},
-        {
-            "iso": "en",
-            "displayName": "EN - English"
-        }
-    ], 
-
-    "rootId": "!ZmOLGSLGeBBiYfPUcy:dev.medienhaus.udk-berlin.de",
-    "contentId": "!jxBlZGAFgWILzMKOzO:dev.medienhaus.udk-berlin.de",
-    "contextId": "!QhZqSCgZPwRKUbjCAb:dev.medienhaus.udk-berlin.de",
-    "pagesId": "!RnCJAjSrXQfJBZLNEt:dev.medienhaus.udk-berlin.de"
-
+    {
+      "iso": "en",
+      "displayName": "EN - English"
+    }
+  ],
+  "rootId": "!ZmOLGSLGeBBiYfPUcy:dev.medienhaus.udk-berlin.de",
+  "contentId": "!jxBlZGAFgWILzMKOzO:dev.medienhaus.udk-berlin.de",
+  "contextId": "!QhZqSCgZPwRKUbjCAb:dev.medienhaus.udk-berlin.de",
+  "pagesId": "!RnCJAjSrXQfJBZLNEt:dev.medienhaus.udk-berlin.de"
  }
