@@ -27,19 +27,20 @@ const AlternativeAuthors = ({ projectSpace, defaultAuthors }) => {
 
   return (
     <>
-      <h3>{t('Alternative Authors')}</h3>
-      <p>{t('If filled in, this will overwrite all contributors in the "Contributor" field. Credits will still be displayed normally.')}</p>
+      <h3>{t('Alternative authors')}</h3>
+      <p>{t('If filled in, this will overwrite all contributors in the “Contributors” section. Credits will still be displayed normally.')}</p>
       <p>{t('Please seperate authors by commas.')}</p>
       <input
         defaultValue={authors}
-        type="text" onChange={
-                  debounce((e) => {
-                    setAuthors(e.target.value)
-                  }, 800)
-}
+        type="text"
+        onChange={
+          debounce((e) => {
+            setAuthors(e.target.value)
+          }, 800)
+        }
       />
     </>
-
   )
 }
+
 export default AlternativeAuthors
