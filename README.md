@@ -6,6 +6,8 @@ Berlin University of the Arts’ free and open-source environment for digital le
 
 [Concept Paper](https://medienhaus.dev/) | [Twitter](https://twitter.com/medienhaus_)
 
+<br>
+
 # medienhaus/cms
 
 `medienhaus-cms` is a federatable, room-based content management system (CMS) using the [Matrix](https://matrix.org/) protocol. At the moment the project is still adapted to fit the needs of the Berlin University of the Arts’ digitally enhanced [Rundgang 2021](https://www.udk-berlin.de/universitaet/marketing-zentrale-veranstaltungen/zentrale-veranstaltungen/rundgang-tage-der-offenen-tuer-der-udk-berlin/rundgang-plattform/). In the future, `medienhaus-cms` will feature customisation options to fit specific needs.
