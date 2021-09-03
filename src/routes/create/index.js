@@ -15,6 +15,7 @@ import PublishProject from '../../components/PublishProject'
 import ProjectDescription from './ProjectDescription'
 import { Loading } from '../../components/loading'
 import { Trans, useTranslation } from 'react-i18next'
+import DateAndVenue from './DateAndVenue'
 
 const Create = () => {
   const { t } = useTranslation('projects')
@@ -28,6 +29,7 @@ const Create = () => {
   const [roomMembers, setRoomMembers] = useState()
   const [saveTimestamp, setSaveTimestamp] = useState('')
   const [medienhausMeta, setMedienhausMeta] = useState([])
+  const [isPhysical, setIsPhysical] = useState(false)
   const [description, setDescription] = useState()
   const history = useHistory()
   const matrixClient = Matrix.getMatrixClient()
@@ -256,6 +258,13 @@ const Create = () => {
             <section className="project-image">
               <h3>{t('Project image')}</h3>
               {loading ? <Loading /> : <ProjectImage projectSpace={projectSpace} changeProjectImage={changeProjectImage} />}
+            </section>
+            <section className="date-venue">
+              <div>
+                <label htmlFor="checkbox"><Trans t={t} i18nKey="dateVenue">Is the project exhibited in physical space?</Trans></label>
+                <input id="checkbox" name="checkbox" type="checkbox" onChange={() => setIsPhysical(!isPhysical)} />
+              </div>
+              {isPhysical && <DateAndVenue />}
             </section>
             <section className="content">
               <h3>{t('Content')}</h3>

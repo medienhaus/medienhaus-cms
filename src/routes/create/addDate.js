@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-import LoadingSpinnerButton from '../../../components/LoadingSpinnerButton'
-import Matrix from '../../../Matrix'
+import LoadingSpinnerButton from '../../components/LoadingSpinnerButton'
+import Matrix from '../../Matrix'
 import { useTranslation } from 'react-i18next'
 
 const AddDate = ({ onCreateRoomForBlock, onBlockWasAddedSuccessfully }) => {

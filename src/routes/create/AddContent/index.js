@@ -3,7 +3,7 @@ import MediaUpload from './MediaUpload'
 import AddBlock from './AddBlock'
 import PeertubeEmbed from './peertubeEmbed'
 import AddLocation from './AddLocation'
-import AddDate from './addDate'
+import AddDate from '../addDate'
 import createBlock from '../matrix_create_room'
 import reorder from '../DisplayContent/matrix_reorder_rooms'
 import BigBlueButtonEmbed from './bigBlueButtonEmbed'
@@ -61,10 +61,12 @@ const AddContent = ({ number, projectSpace, blocks, reloadSpace, present }) => {
             <option value="playlist">{t('Playlist')}</option>
             <option value="bbb">{t('BigBlueButton-Session')}</option>
           </optgroup>
+          {/*
           <optgroup label="Meta">
             <option value="date">{t('Date & Time')}</option>
             {present !== 'digital' && <option value="location">{t('Venue')}</option>}
           </optgroup>
+          */}
         </select>
         <button className="cancel" onClick={(e) => { e.preventDefault(); setShowBlockTypeSelector(false); setSelectedBlockType('') }}>×</button>
       </div>
