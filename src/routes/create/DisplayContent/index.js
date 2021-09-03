@@ -85,6 +85,19 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace, time,
             setSaved()
           }, 1000)
         }
+      } else if (json.type === 'quote') {
+        const save = await matrixClient.sendMessage(roomId, {
+          body: localStorage.getItem(roomId),
+          format: 'org.matrix.custom.html',
+          msgtype: 'm.text',
+          formatted_body: '<blockquote>' + localStorage.getItem(roomId) + '</blockquote>'
+        })
+        if ('event_id' in save) {
+          setSaved('Saved!')
+          setTimeout(() => {
+            setSaved()
+          }, 1000)
+        }
       } else if (text) {
         const save = await matrixClient.sendMessage(roomId, {
           body: text,
