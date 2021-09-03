@@ -39,6 +39,11 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace, time,
   cms = cms[0]
   const matrixClient = Matrix.getMatrixClient()
   const isMounted = useRef(true)
+  const [content, setContent] = useState('')
+
+  useEffect(() => {
+    cms?.body && setContent(cms.body)
+  }, [cms])
 
   useEffect(() => {
     const fetchJson = async () => setJson(await matrixClient.getStateEvent(block.room_id, 'dev.medienhaus.meta'))
@@ -49,7 +54,7 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace, time,
     }
   }, [block.room_id, matrixClient])
 
-  const onSave = async (roomId) => {
+  const onSave = async (roomId, text) => {
     setReadOnly(true)
     try {
       if (json.type === 'ul' || json.type === 'ol') {
@@ -73,6 +78,19 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace, time,
           format: 'org.matrix.custom.html',
           msgtype: 'm.text',
           formatted_body: '<pre><code>' + localStorage.getItem(roomId) + '</code></pre>'
+        })
+        if ('event_id' in save) {
+          setSaved('Saved!')
+          setTimeout(() => {
+            setSaved()
+          }, 1000)
+        }
+      } else if (text) {
+        const save = await matrixClient.sendMessage(roomId, {
+          body: text,
+          format: 'org.matrix.custom.html',
+          msgtype: 'm.text',
+          formatted_body: '<h2>' + localStorage.getItem(roomId) + '</h2>'
         })
         if ('event_id' in save) {
           setSaved('Saved!')
@@ -276,7 +294,7 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace, time,
                                   </Popup>
                                 </Marker>
                               </MapContainer>
-                            }
+                          }
                             {cms.body.substring(cms.body.lastIndexOf('-') + 1).length > 0 && <input type="text" value={cms.body.substring(cms.body.lastIndexOf('-') + 1)} disabled />}
                           </div>
                           )
@@ -299,8 +317,20 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace, time,
                                     style={{ width: '100%', aspectRatio: '16 / 9', border: 'calc(var(--margin) * 0.2) solid var(--color-fg)' }}
                                   />
                                   )
-                                : (
-                                  <div className="center">
+                                : json.type === 'heading'
+                                  ? <div className="center">
+                                    <input
+                                      type="text"
+                                      value={content}
+                                      onChange={(e) => setContent(e.target.value)}
+                                      onBlur={(e) => {
+                                        if (cms !== undefined && content !== cms.body) {
+                                          onSave(block.room_id, content)
+                                        }
+                                      }}
+                                    />
+                                  </div>
+                                  : (<div className="center">
                                     <Editor
                                       dark={window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches}
                                       defaultValue={cms?.body}
@@ -336,7 +366,7 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace, time,
                                       key={block.room_id}
                                     />
                                   </div>
-                                  )}
+                                    )}
 
         <div className="right">
           <button
