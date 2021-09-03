@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Switch, Redirect, useLocation } from 'r
 import config from './config.json'
 
 import './assets/css/index.css'
+
 import Footer from './components/footer'
 import Nav from './components/nav'
 import { Loading } from './components/loading'
@@ -21,6 +22,7 @@ import Pages from './routes/pages'
 
 import { AuthProvider, useAuth } from './Auth'
 import PropTypes from 'prop-types'
+import Gutenberg from './routes/gutenberg'
 function PrivateRoute ({ children, ...rest }) {
   const auth = useAuth()
   const location = useLocation()
@@ -80,6 +82,7 @@ function App () {
               <PrivateRoute path="/create/:spaceId" component={Create} />
               <PrivateRoute path="/create" component={Create} />
               <PrivateRoute path="/boilerplate" component={Boilerplate} />
+              <PrivateRoute path="/gutenberg" component={Gutenberg} />
               <PrivateRoute path="/moderation" component={Moderation} />
               {config.function.content && <PrivateRoute path="/content" component={Content} />}
               {config.function.pages && <PrivateRoute path="/pages" component={Pages} />}
