@@ -58,7 +58,7 @@ const ProjectTitle = ({ title, projectSpace, callback }) => {
           // by default we create two subpsaces for localisation and one for events
           const en = await matrixClient.createRoom(opts('lang', 'en'))
           const de = await matrixClient.createRoom(opts('lang', 'de'))
-          const events = await matrixClient.createRoom(opts('events', 'event'))
+          const events = await matrixClient.createRoom(opts('events', 'events'))
           return [space.room_id, en.room_id, de.room_id, events.room_id]
         })
         .then(async (res) => {

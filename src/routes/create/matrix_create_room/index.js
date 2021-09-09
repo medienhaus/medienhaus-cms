@@ -4,7 +4,8 @@ import Matrix from '../../../Matrix'
 const createBlock = async (e, content, number, space) => {
   const matrixClient = Matrix.getMatrixClient()
   if (e) e.preventDefault()
-  const name = number + content && '_' + content
+  const name = content ? (number) + '_' + content : (number)
+  console.log(name)
   const opts = {
     name: name,
     preset: 'public_chat',

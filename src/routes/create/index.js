@@ -29,7 +29,7 @@ const Create = () => {
   const [roomMembers, setRoomMembers] = useState()
   const [saveTimestamp, setSaveTimestamp] = useState('')
   const [medienhausMeta, setMedienhausMeta] = useState([])
-  const [isPhysical, setIsPhysical] = useState(false)
+  const [events, setEvents] = useState()
   const [description, setDescription] = useState()
   const history = useHistory()
   const matrixClient = Matrix.getMatrixClient()
@@ -43,7 +43,8 @@ const Create = () => {
     setSaveTimestamp(date + ', ' + time)
   }, [])
 
-  const reloadSpace = async (roomId) => {
+  const reloadSpace = async (roomId, eventSpace) => {
+    eventSpace && setEvents(eventSpace)
     // roomId is needed in order to invite collaborators to newly created rooms.
     console.log('roomId = ' + roomId)
     // checking to see if the project is a collaboration, if so invite all collaborators and make them admin
@@ -102,9 +103,16 @@ const Create = () => {
       // we fetch the selected language content
       const spaceRooms = space.rooms.filter(room => room.name === contentLang)
       const getContent = await matrixClient.getSpaceSummary(spaceRooms[0].room_id)
+      console.log(space.rooms.filter(room => room.name === 'events'))
       setBlocks(getContent.rooms.filter(room => room.name !== contentLang).filter(room => room.name.charAt(0) !== 'x').sort((a, b) => {
         return a.name.substring(0, a.name.indexOf('_')) - b.name.substring(0, b.name.indexOf('_'))
       }))
+      // check if there is an events space
+      const checkForEventSpace = space.rooms.filter(room => room.name === 'events')
+      console.log(space.rooms)
+      const getEvents = checkForEventSpace[0] && await matrixClient.getSpaceSummary(space.rooms.filter(room => room.name === 'events')[0].room_id).catch(err => console.log(err + '. This means there is no Event space, yet'))
+      setEvents(checkForEventSpace[0] ? getEvents : 'depricated')
+      console.log('events = ' + events)
       getCurrentTime()
     } else {
       console.log('sync not done, trying again')
@@ -261,12 +269,7 @@ const Create = () => {
             </section>
             <section className="date-venue" id="date">
               <h3>{t('Date and Venue')}</h3>
-
-              <div>
-                <label htmlFor="checkbox"><Trans t={t} i18nKey="dateVenue">Is the project exhibited in physical space?</Trans></label>
-                <input id="checkbox" name="checkbox" type="checkbox" onChange={() => setIsPhysical(!isPhysical)} />
-              </div>
-              {isPhysical && <DateAndVenue reloadSpace={reloadSpace} projectSpace={projectSpace} />}
+              {medienhausMeta?.present !== 'digital' && <DateAndVenue reloadSpace={reloadSpace} projectSpace={projectSpace} events={events?.rooms !== undefined || events} matrixClient={matrixClient} />}
             </section>
             <section className="content">
               <h3>{t('Content')}</h3>

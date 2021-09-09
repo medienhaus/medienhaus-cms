@@ -14,7 +14,7 @@ const AddDate = ({ reloadSpace, projectSpace }) => {
   const handleSubmit = async () => {
     setLoading(true)
 
-    await createBlock(undefined, undefined, 1, projectSpace).then(async (res) =>
+    await createBlock(undefined, undefined, '1', projectSpace).then(async (res) =>
       await matrixClient.sendMessage(res, {
         msgtype: 'm.text',
         body: date + ' ' + time
