@@ -10,7 +10,6 @@ const AddDate = ({ onCreateRoomForBlock, onBlockWasAddedSuccessfully }) => {
   const matrixClient = Matrix.getMatrixClient()
   const { t } = useTranslation('date')
 
-  console.log(date, time)
   const handleSubmit = async () => {
     setLoading(true)
     await onCreateRoomForBlock().then(async (res) =>
@@ -25,7 +24,7 @@ const AddDate = ({ onCreateRoomForBlock, onBlockWasAddedSuccessfully }) => {
   return (
     <>
       <div>
-        <label htmlFor="date">Choose a date:</label>
+        <label htmlFor="date">{t('Choose a date:')}</label>
         <input
           id="date"
           name="date"
@@ -37,7 +36,7 @@ const AddDate = ({ onCreateRoomForBlock, onBlockWasAddedSuccessfully }) => {
         />
       </div>
       <div>
-        <label htmlFor="time">Choose a time:</label>
+        <label htmlFor="time">{t('Choose a time:')}</label>
         <input
           id="time" name="time" type="time" value={time} onChange={(e) => {
             setTime(e.target.value)
