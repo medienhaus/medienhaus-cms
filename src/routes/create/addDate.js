@@ -2,8 +2,9 @@ import React, { useState } from 'react'
 import LoadingSpinnerButton from '../../components/LoadingSpinnerButton'
 import Matrix from '../../Matrix'
 import { useTranslation } from 'react-i18next'
+import createBlock from './matrix_create_room'
 
-const AddDate = ({ onCreateRoomForBlock, onBlockWasAddedSuccessfully }) => {
+const AddDate = ({ reloadSpace, projectSpace }) => {
   const [date, setDate] = useState('')
   const [time, setTime] = useState('')
   const [loading, setLoading] = useState(false)
@@ -12,12 +13,13 @@ const AddDate = ({ onCreateRoomForBlock, onBlockWasAddedSuccessfully }) => {
 
   const handleSubmit = async () => {
     setLoading(true)
-    await onCreateRoomForBlock().then(async (res) =>
+
+    await createBlock(undefined, undefined, 1, projectSpace).then(async (res) =>
       await matrixClient.sendMessage(res, {
         msgtype: 'm.text',
         body: date + ' ' + time
       })).catch(console.log)
-    onBlockWasAddedSuccessfully()
+    reloadSpace()
     setLoading(false)
   }
 

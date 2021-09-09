@@ -1,9 +1,9 @@
 import React from 'react'
 import AddDate from '../addDate'
 
-const DateAndVenue = () => {
+const DateAndVenue = ({ reloadSpace, projectSpace }) => {
   return (
-    <AddDate />
+    <AddDate reloadSpace={reloadSpace} projectSpace={projectSpace} />
   )
 }
 export default DateAndVenue

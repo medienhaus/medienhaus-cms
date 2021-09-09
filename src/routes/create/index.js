@@ -266,7 +266,7 @@ const Create = () => {
                 <label htmlFor="checkbox"><Trans t={t} i18nKey="dateVenue">Is the project exhibited in physical space?</Trans></label>
                 <input id="checkbox" name="checkbox" type="checkbox" onChange={() => setIsPhysical(!isPhysical)} />
               </div>
-              {isPhysical && <DateAndVenue />}
+              {isPhysical && <DateAndVenue reloadSpace={reloadSpace} projectSpace={projectSpace} />}
             </section>
             <section className="content">
               <h3>{t('Content')}</h3>

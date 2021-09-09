@@ -4,9 +4,9 @@ import Matrix from '../../../Matrix'
 const createBlock = async (e, content, number, space) => {
   const matrixClient = Matrix.getMatrixClient()
   if (e) e.preventDefault()
-
+  const name = number + content && '_' + content
   const opts = {
-    name: (number) + '_' + content,
+    name: name,
     preset: 'public_chat',
     topic: '',
     creation_content: { 'm.federate': false },
