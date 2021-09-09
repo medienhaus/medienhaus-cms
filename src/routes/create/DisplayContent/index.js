@@ -11,6 +11,7 @@ import reorder from './matrix_reorder_rooms'
 import LoadingSpinnerButton from '../../../components/LoadingSpinnerButton'
 import TextareaAutosize from 'react-textarea-autosize'
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
+import { Trans, useTranslation } from 'react-i18next'
 
 import { ReactComponent as HeadingIcon } from '../../../assets/icons/remix/h-1.svg'
 import { ReactComponent as AudioIcon } from '../../../assets/icons/remix/volume-up.svg'
@@ -40,6 +41,7 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace, time,
   const matrixClient = Matrix.getMatrixClient()
   const isMounted = useRef(true)
   const [content, setContent] = useState('')
+  const { t } = useTranslation('date')
 
   useEffect(() => {
     cms?.body && setContent(cms.body)
@@ -296,7 +298,7 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace, time,
                           >
                             {
                             cms.body.substring(0, cms.body.indexOf(',')) + ',' + cms.body.substring(cms.body.indexOf(',') + 1, cms.body.indexOf('-')) !== '0.0, 0.0' &&
-                              <MapContainer className="center" center={[cms.body.substring(0, cms.body.indexOf(',')), cms.body.substring(cms.body.indexOf(',') + 1, cms.body.indexOf('-'))]} zoom={17} scrollWheelZoom={false} placeholder>
+                              <MapContainer className="center red-border" center={[cms.body.substring(0, cms.body.indexOf(',')), cms.body.substring(cms.body.indexOf(',') + 1, cms.body.indexOf('-'))]} zoom={17} scrollWheelZoom={false} placeholder>
                                 <TileLayer
                                   attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                                   url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -309,12 +311,22 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace, time,
                               </MapContainer>
                           }
                             {cms.body.substring(cms.body.lastIndexOf('-') + 1).length > 0 && <input type="text" value={cms.body.substring(cms.body.lastIndexOf('-') + 1)} disabled />}
+                            <p>❗️
+                              <Trans t={t} i18nkey="moveMap">Please add Venue and time with the new <a href="#date">Date and Venue</a> function.
+                                You can delete this element afterwards.
+                              </Trans>
+                            </p>
                           </div>
                           )
                         : json.type === 'date'
-                          ? <div className="center">
+                          ? <div className="center red-border">
                             {cms.body.split(' ')[0] && <input type="date" value={cms.body.split(' ')[0]} disabled required />}
                             {cms.body.split(' ')[1] && <input type="time" value={cms.body.split(' ')[1]} disabled required />}
+                            <p>❗️
+                              <Trans t={t} i18nkey="moveMap">Please add Venue and time with the new <a href="#date">Date and Venue</a> function.
+                                You can delete this element afterwards.
+                              </Trans>
+                            </p>
                             {/* eslint-disable-next-line react/jsx-indent */}
                             </div>
                           : json.type === 'bbb'

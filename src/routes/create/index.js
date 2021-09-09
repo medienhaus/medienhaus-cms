@@ -259,7 +259,9 @@ const Create = () => {
               <h3>{t('Project image')}</h3>
               {loading ? <Loading /> : <ProjectImage projectSpace={projectSpace} changeProjectImage={changeProjectImage} />}
             </section>
-            <section className="date-venue">
+            <section className="date-venue" id="date">
+              <h3>{t('Date and Venue')}</h3>
+
               <div>
                 <label htmlFor="checkbox"><Trans t={t} i18nKey="dateVenue">Is the project exhibited in physical space?</Trans></label>
                 <input id="checkbox" name="checkbox" type="checkbox" onChange={() => setIsPhysical(!isPhysical)} />
