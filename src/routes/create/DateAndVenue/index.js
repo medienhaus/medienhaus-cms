@@ -3,6 +3,7 @@ import AddDate from '../addDate'
 import AddLocation from '../AddContent/AddLocation'
 import { useTranslation } from 'react-i18next'
 import { Loading } from '../../../components/loading'
+import DisplayContent from '../DisplayContent'
 
 const DateAndVenue = ({ reloadSpace, projectSpace, events, matrixClient }) => {
   const [eventSpace, setEventSpace] = useState(events)
@@ -75,8 +76,8 @@ const DateAndVenue = ({ reloadSpace, projectSpace, events, matrixClient }) => {
   }
 
   const Events = () => {
-    return eventSpace.map(event => {
-      return <p key={event.name}>{event.name}</p>
+    return eventSpace.filter((element, i) => i > 0).map((event, i) => {
+      return <DisplayContent block={event} index={i} blocks={eventSpace} projectSpace={eventSpace} reloadSpace={reloadSpace} key={event + i} />
     })
   }
   if (!eventSpace) return <Loading />
