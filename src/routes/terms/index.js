@@ -38,11 +38,11 @@ const Terms = () => {
       </div>
       <div>
         <input id="checkbox5" name="checkbox5" type="checkbox" value={consent5} onChange={() => setConsent5(consent5 => !consent5)} />
-        <label htmlFor="checkbox5">{t('I accept this too.')}</label>
+        <label htmlFor="checkbox5">{t('I (we) hereby confirm that the premises for the project have been discussed with the Department for Facility Management, Occupational Health & Safety. Please contact Felix Wolf in advance (Head of Event, GA): felix.wolf@intra.udk-berlin.de')}</label>
       </div>
       <div>
         <input id="checkbox6" name="checkbox6" type="checkbox" value={consent6} onChange={() => setConsent6(consent6 => !consent6)} />
-        <label htmlFor="checkbox6">{t('and this too.')}</label>
+        <label htmlFor="checkbox6">{t('I (we) hereby confirm that the project will be carried out in compliance with the pandemic regulations in force at the UdK Berlin.')}</label>
       </div>
       <button
         name="submit" type="submit" disabled={!consent0 || !consent1 || !consent2 || !consent3 || !consent4 || !consent5 || !consent6} onClick={() => {
