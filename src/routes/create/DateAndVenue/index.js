@@ -88,7 +88,7 @@ const DateAndVenue = ({ reloadSpace, projectSpace, events, matrixClient }) => {
       <div className="add">
         <button className="add-button" onClick={(e) => { e.preventDefault(); setIsAddLocationVisible(!isAddLocationVisible) }}>+ {t('Location')}</button>
       </div>
-      {isAddLocationVisible && <AddLocation onBlockWasAddedSuccessfully={reloadSpace} callback={() => setIsAddLocationVisible(false)} />}
+      {isAddLocationVisible && <AddLocation projectSpace={eventSpace[0].room_id} onBlockWasAddedSuccessfully={reloadSpace} callback={() => setIsAddLocationVisible(false)} />}
       <div className="add">
         <button className="add-button" onClick={(e) => { e.preventDefault(); setIsAddDateVisible(!isAddDateVisible) }}>+ {t('Date')}</button>
       </div>
