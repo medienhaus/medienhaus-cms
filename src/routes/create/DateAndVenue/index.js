@@ -1,18 +1,18 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import AddDate from '../addDate'
 import AddLocation from '../AddContent/AddLocation'
 import { useTranslation } from 'react-i18next'
 import { Loading } from '../../../components/loading'
+import DisplayContent from '../DisplayContent'
 
-const DateAndVenue = ({ reloadSpace, projectSpace, events, matrixClient }) => {
+const DateAndVenue = ({ number, reloadSpace, projectSpace, events, matrixClient }) => {
   const [eventSpace, setEventSpace] = useState(events)
   const [isAddLocationVisible, setIsAddLocationVisible] = useState(false)
   const [isAddDateVisible, setIsAddDateVisible] = useState(false)
+  const [feedback, setFeedback] = useState('Migrating to new Event Space')
   const { t } = useTranslation('date')
-  console.log(events)
-  console.log(eventSpace)
-  const MigrateToEventSpace = () => {
-    const [feedback, setFeedback] = useState('Migrating to new Event Space')
+
+  useEffect(() => {
     const createEventSpace = async () => {
       const opts = (type, name) => {
         return {
@@ -69,35 +69,46 @@ const DateAndVenue = ({ reloadSpace, projectSpace, events, matrixClient }) => {
         console.log(err)
       }
     }
+    setEventSpace(events)
     events === 'depricated' && createEventSpace()
-    return (
-      <>
-        <p>{feedback}</p>
-        <Loading />
-      </>
-    )
-  }
+  }, [events, matrixClient, projectSpace])
 
   const Events = () => {
-    return eventSpace.map(event => {
-      return <p key={event.name}>yay events</p>
+    return eventSpace.filter((element, i) => i > 0).map((event, i) => {
+      return <DisplayContent block={event} index={i} blocks={eventSpace} projectSpace={eventSpace} reloadSpace={reloadSpace} key={event + i} mapComponent />
     })
   }
 
   if (!eventSpace) return <Loading />
-  if (eventSpace === 'depricated') return <MigrateToEventSpace />
+  if (eventSpace === 'depricated') return <><p>{feedback}</p><Loading /></>
 
   return (
     <>
       {eventSpace?.length > 1 && <Events />}
-      <div className="add">
-        <button className="add-button" onClick={(e) => { e.preventDefault(); setIsAddLocationVisible(!isAddLocationVisible) }}>+ {t('Location')}</button>
-      </div>
-      {isAddLocationVisible && <AddLocation onBlockWasAddedSuccessfully={reloadSpace} callback={() => setIsAddLocationVisible(false)} />}
-      <div className="add">
-        <button className="add-button" onClick={(e) => { e.preventDefault(); setIsAddDateVisible(!isAddDateVisible) }}>+ {t('Date')}</button>
-      </div>
-      {isAddDateVisible && <AddDate reloadSpace={reloadSpace} projectSpace={eventSpace[0].room_id} />}
+      <button
+        className="add-button"
+        onClick={(e) => { e.preventDefault(); setIsAddLocationVisible(!isAddLocationVisible) }}
+      >+ {t('Location')}
+      </button>
+      {isAddLocationVisible &&
+        <AddLocation
+          number={eventSpace.length}
+          projectSpace={eventSpace[0].room_id}
+          onBlockWasAddedSuccessfully={reloadSpace}
+          callback={() => setIsAddLocationVisible(false)}
+        />}
+      <button
+        className="add-button"
+        onClick={(e) => { e.preventDefault(); setIsAddDateVisible(!isAddDateVisible) }}
+      >+ {t('Date')}
+      </button>
+      {isAddDateVisible &&
+        <AddDate
+          number={eventSpace.length}
+          reloadSpace={reloadSpace}
+          projectSpace={eventSpace[0].room_id}
+          callback={() => setIsAddDateVisible(false)}
+        />}
     </>
   )
 }

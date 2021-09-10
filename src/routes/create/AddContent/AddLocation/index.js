@@ -4,8 +4,9 @@ import Matrix from '../../../../Matrix'
 import { useTranslation } from 'react-i18next'
 // assets
 import locations from '../../../../assets/data/locations.json'
+import createBlock from '../../matrix_create_room'
 
-const AddLocation = ({ onCreateRoomForBlock, onBlockWasAddedSuccessfully }) => {
+const AddLocation = ({ number, projectSpace, onBlockWasAddedSuccessfully, callback }) => {
   const [selectedLocation, setSelectedLocation] = useState('')
   const [room, setRoom] = useState('')
   const [loading, setLoading] = useState(false)
@@ -15,11 +16,12 @@ const AddLocation = ({ onCreateRoomForBlock, onBlockWasAddedSuccessfully }) => {
 
   const handleSubmit = async () => {
     setLoading(true)
-    await onCreateRoomForBlock().then(async (res) =>
+    await createBlock(undefined, 'location', number, projectSpace).then(async (res) =>
       await matrixClient.sendMessage(res, {
         msgtype: 'm.text',
         body: selectedLocation + '-' + room
       })).catch(console.log)
+    callback()
     onBlockWasAddedSuccessfully()
     setLoading(false)
   }

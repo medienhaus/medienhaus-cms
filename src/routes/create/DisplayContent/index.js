@@ -29,7 +29,7 @@ import { ReactComponent as DateIcon } from '../../../assets/icons/remix/date.svg
 
 import locations from '../../../assets/data/locations.json'
 
-const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace, time, present }) => {
+const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace, time, present, mapComponent }) => {
   const [clickedDelete, setClickedDelete] = useState(false)
   const [readOnly, setReadOnly] = useState(false)
   const [loading, setLoading] = useState(false)
@@ -200,10 +200,10 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace, time,
 
   return (
     <>
-      {index === 0 && <AddContent number={index} projectSpace={projectSpace} blocks={blocks} reloadSpace={reloadSpace} />}
+      {index === 0 && !mapComponent && <AddContent number={index} projectSpace={projectSpace} blocks={blocks} reloadSpace={reloadSpace} />}
       <div className="editor">
         <div className="left">
-          <LoadingSpinnerButton key={'up_' + block.room_id} disabled={index < 1} onClick={() => changeOrder(block.room_id, block.name, -1)}>↑</LoadingSpinnerButton>
+          <LoadingSpinnerButton key={'up_' + block.room_id} disabled={index < 1 || mapComponent} onClick={() => changeOrder(block.room_id, block.name, -1)}>↑</LoadingSpinnerButton>
           <figure className="icon-bg">
             {
               json.type === 'heading'
@@ -233,7 +233,7 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace, time,
                                       : <TextIcon fill="var(--color-fg)" />
             }
           </figure>
-          <LoadingSpinnerButton key={'down_' + block.room_id} disabled={index === blocks.length - 1} onClick={() => changeOrder(block.room_id, block.name, 1)}>↓</LoadingSpinnerButton>
+          <LoadingSpinnerButton key={'down_' + block.room_id} disabled={index === blocks.length - 1 || mapComponent} onClick={() => changeOrder(block.room_id, block.name, 1)}>↓</LoadingSpinnerButton>
         </div>
         {cms?.msgtype === 'm.image'
           ? (
@@ -298,7 +298,7 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace, time,
                           >
                             {
                             cms.body.substring(0, cms.body.indexOf(',')) + ',' + cms.body.substring(cms.body.indexOf(',') + 1, cms.body.indexOf('-')) !== '0.0, 0.0' &&
-                              <MapContainer className="center red-border" center={[cms.body.substring(0, cms.body.indexOf(',')), cms.body.substring(cms.body.indexOf(',') + 1, cms.body.indexOf('-'))]} zoom={17} scrollWheelZoom={false} placeholder>
+                              <MapContainer className={mapComponent ? 'center' : 'center red-border'} center={[cms.body.substring(0, cms.body.indexOf(',')), cms.body.substring(cms.body.indexOf(',') + 1, cms.body.indexOf('-'))]} zoom={17} scrollWheelZoom={false} placeholder>
                                 <TileLayer
                                   attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                                   url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -311,22 +311,24 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace, time,
                               </MapContainer>
                           }
                             {cms.body.substring(cms.body.lastIndexOf('-') + 1).length > 0 && <input type="text" value={cms.body.substring(cms.body.lastIndexOf('-') + 1)} disabled />}
-                            <p>❗️
-                              <Trans t={t} i18nkey="moveMap">Please add Venue and time with the new <a href="#date">Date and Venue</a> function.
-                                You can delete this element afterwards.
-                              </Trans>
-                            </p>
+                            {!mapComponent &&
+                              <p>❗️
+                                <Trans t={t} i18nkey="moveMap">Please add Venue and time with the new <a href="#date">Date and Venue</a> function.
+                                  You can delete this element afterwards.
+                                </Trans>
+                              </p>}
                           </div>
                           )
                         : json.type === 'date'
-                          ? <div className="center red-border">
+                          ? <div className={mapComponent ? 'center' : 'center red-border'}>
                             {cms.body.split(' ')[0] && <input type="date" value={cms.body.split(' ')[0]} disabled required />}
                             {cms.body.split(' ')[1] && <input type="time" value={cms.body.split(' ')[1]} disabled required />}
-                            <p>❗️
-                              <Trans t={t} i18nkey="moveMap">Please add Venue and time with the new <a href="#date">Date and Venue</a> function.
-                                You can delete this element afterwards.
-                              </Trans>
-                            </p>
+                            {!mapComponent &&
+                              <p>❗️
+                                <Trans t={t} i18nkey="moveMap">Please add Venue and time with the new <a href="#date">Date and Venue</a> function.
+                                  You can delete this element afterwards.
+                                </Trans>
+                              </p>}
                             {/* eslint-disable-next-line react/jsx-indent */}
                             </div>
                           : json.type === 'bbb'
@@ -411,7 +413,7 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace, time,
           </button>
         </div>
       </div>
-      <AddContent number={index + 1} projectSpace={projectSpace} blocks={blocks} reloadSpace={reloadSpace} present={present} />
+      {!mapComponent && <AddContent number={index + 1} projectSpace={projectSpace} blocks={blocks} reloadSpace={reloadSpace} present={present} />}
     </>
   )
 }

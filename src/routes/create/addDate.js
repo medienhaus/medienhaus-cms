@@ -4,7 +4,7 @@ import Matrix from '../../Matrix'
 import { useTranslation } from 'react-i18next'
 import createBlock from './matrix_create_room'
 
-const AddDate = ({ reloadSpace, projectSpace }) => {
+const AddDate = ({ number, reloadSpace, projectSpace, callback }) => {
   const [date, setDate] = useState('')
   const [time, setTime] = useState('')
   const [loading, setLoading] = useState(false)
@@ -14,11 +14,12 @@ const AddDate = ({ reloadSpace, projectSpace }) => {
   const handleSubmit = async () => {
     setLoading(true)
 
-    await createBlock(undefined, undefined, '1', projectSpace).then(async (res) =>
+    await createBlock(undefined, 'date', number, projectSpace).then(async (res) =>
       await matrixClient.sendMessage(res, {
         msgtype: 'm.text',
         body: date + ' ' + time
       })).catch(console.log)
+    callback()
     reloadSpace()
     setLoading(false)
   }
