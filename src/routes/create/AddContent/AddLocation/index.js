@@ -6,7 +6,7 @@ import { useTranslation } from 'react-i18next'
 import locations from '../../../../assets/data/locations.json'
 import createBlock from '../../matrix_create_room'
 
-const AddLocation = ({ projectSpace, onBlockWasAddedSuccessfully, callback }) => {
+const AddLocation = ({ number, projectSpace, onBlockWasAddedSuccessfully, callback }) => {
   const [selectedLocation, setSelectedLocation] = useState('')
   const [room, setRoom] = useState('')
   const [loading, setLoading] = useState(false)
@@ -16,7 +16,7 @@ const AddLocation = ({ projectSpace, onBlockWasAddedSuccessfully, callback }) =>
 
   const handleSubmit = async () => {
     setLoading(true)
-    await createBlock(undefined, undefined, 'Location', projectSpace).then(async (res) =>
+    await createBlock(undefined, 'location', number, projectSpace).then(async (res) =>
       await matrixClient.sendMessage(res, {
         msgtype: 'm.text',
         body: selectedLocation + '-' + room
