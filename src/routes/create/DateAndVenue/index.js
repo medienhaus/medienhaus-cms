@@ -83,6 +83,7 @@ const DateAndVenue = ({ reloadSpace, projectSpace, events, matrixClient }) => {
       return <p key={event.name}>yay events</p>
     })
   }
+
   if (!eventSpace) return <Loading />
   if (eventSpace === 'depricated') return <MigrateToEventSpace />
 

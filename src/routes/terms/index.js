@@ -42,7 +42,7 @@ const Terms = () => {
       </div>
       <div>
         <input id="checkbox6" name="checkbox6" type="checkbox" value={consent6} onChange={() => setConsent6(consent6 => !consent6)} />
-        <label htmlFor="checkbox6">{t('I accept this too.')}</label>
+        <label htmlFor="checkbox6">{t('and this too.')}</label>
       </div>
       <button
         name="submit" type="submit" disabled={!consent0 || !consent1 || !consent2 || !consent3 || !consent4 || !consent5 || !consent6} onClick={() => {

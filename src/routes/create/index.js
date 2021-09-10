@@ -109,10 +109,9 @@ const Create = () => {
       }))
       // check if there is an events space
       const checkForEventSpace = space.rooms.filter(room => room.name === 'events')
-      console.log(space.rooms)
-      const getEvents = checkForEventSpace[0] && await matrixClient.getSpaceSummary(space.rooms.filter(room => room.name === 'events')[0].room_id).catch(err => console.log(err + '. This means there is no Event space, yet'))
-      setEvents(checkForEventSpace[0] ? getEvents : 'depricated')
-      console.log('events = ' + events)
+      console.log(checkForEventSpace)
+      const getEvents = checkForEventSpace.length !== 0 && await matrixClient.getSpaceSummary(space.rooms.filter(room => room.name === 'events')[0].room_id).catch(err => console.log(err + '. This means there is no Event space, yet'))
+      setEvents(checkForEventSpace.length !== 0 ? getEvents : 'depricated')
       getCurrentTime()
     } else {
       console.log('sync not done, trying again')
@@ -269,7 +268,7 @@ const Create = () => {
             </section>
             <section className="date-venue" id="date">
               <h3>{t('Date and Venue')}</h3>
-              {medienhausMeta?.present !== 'digital' && <DateAndVenue reloadSpace={reloadSpace} projectSpace={projectSpace} events={events?.rooms !== undefined || events} matrixClient={matrixClient} />}
+              {medienhausMeta?.present !== 'digital' && <DateAndVenue reloadSpace={reloadSpace} projectSpace={projectSpace} events={events} matrixClient={matrixClient} />}
             </section>
             <section className="content">
               <h3>{t('Content')}</h3>
