@@ -349,9 +349,12 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace, time,
                                     <input
                                       type="text"
                                       value={content}
-                                      onChange={(e) => setContent(e.target.value)}
+                                      onChange={(e) => {
+                                        setContent(e.target.value)
+                                        console.log(content)
+                                      }}
                                       onBlur={(e) => {
-                                        if (cms !== undefined && content !== cms.body) {
+                                        if (content !== cms?.body) {
                                           onSave(block.room_id, content)
                                         }
                                       }}
