@@ -246,11 +246,6 @@ const Create = () => {
             <h3>{t('Project context')}</h3>
             <Category title={title} projectSpace={projectSpace} />
           </section>
-          {medienhausMeta?.present !== 'digital' &&
-            <section className="date-venue" id="date">
-              <h3>{t('Date and Venue')}</h3>
-              <DateAndVenue reloadSpace={reloadSpace} projectSpace={projectSpace} events={events === 'depricated' ? events : events?.rooms} matrixClient={matrixClient} />
-            </section>}
           <section className="present">
             <h3>{t('Format')}</h3>
             <p>{t('In what form is your project presented?')}</p>
@@ -261,6 +256,11 @@ const Create = () => {
             </ul>
             <PresentType presentValue={medienhausMeta?.present} projectSpace={projectSpace} callback={changePresentationType} />
           </section>
+          {medienhausMeta?.present !== 'digital' &&
+            <section className="date-venue" id="date">
+              <h3>{t('Date and Venue')}</h3>
+              <DateAndVenue reloadSpace={reloadSpace} projectSpace={projectSpace} events={events === 'depricated' ? events : events?.rooms} matrixClient={matrixClient} />
+            </section>}
           <section className="contributors">
             <Collaborators projectSpace={spaceObject?.rooms} members={roomMembers} time={getCurrentTime} startListeningToCollab={() => startListeningToCollab()} />
           </section>
