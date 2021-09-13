@@ -27,7 +27,7 @@ const AddDate = ({ number, reloadSpace, projectSpace, callback }) => {
   return (
     <>
       <div>
-        <label htmlFor="date">{t('Choose a date:')}</label>
+        <label htmlFor="date">{t('Choose a date')}:</label>
         <input
           id="date"
           name="date"
@@ -39,7 +39,7 @@ const AddDate = ({ number, reloadSpace, projectSpace, callback }) => {
         />
       </div>
       <div>
-        <label htmlFor="time">{t('Choose a time:')}</label>
+        <label htmlFor="time">{t('Choose a time')}:</label>
         <input
           id="time" name="time" type="time" value={time} onChange={(e) => {
             setTime(e.target.value)
@@ -47,8 +47,8 @@ const AddDate = ({ number, reloadSpace, projectSpace, callback }) => {
         />
       </div>
       <div className="confirmation">
-        <LoadingSpinnerButton disabled={loading || (!date && !time)} loading={loading} onClick={handleSubmit}>{t('SAVE')}</LoadingSpinnerButton>
         <button className="cancel" onClick={() => { callback() }}>{t('CANCEL')}</button>
+        <LoadingSpinnerButton disabled={loading || (!date && !time)} loading={loading} onClick={handleSubmit}>{t('SAVE')}</LoadingSpinnerButton>
       </div>
     </>
   )

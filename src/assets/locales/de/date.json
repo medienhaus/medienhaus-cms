@@ -1,7 +1,9 @@
 {
   "SAVE": "SPEICHERN",
   "CANCEL": "ABBRECHEN",
-  "DATE": "DATUM",
+  "Date": "DATUM",
   "Date and Venue": "Datum und Veranstaltungsort",
-  "Venue": "Veranstaltungsort"
+  "Venue": "Veranstaltungsort",
+  "Choose a time": "Wähle eine Uhrzeit",
+  "Choose a date": "Wähle ein Datum"
 }
