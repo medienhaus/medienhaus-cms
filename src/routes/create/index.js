@@ -246,6 +246,11 @@ const Create = () => {
             <h3>{t('Project context')}</h3>
             <Category title={title} projectSpace={projectSpace} />
           </section>
+          {medienhausMeta?.present !== 'digital' &&
+            <section className="date-venue" id="date">
+              <h3>{t('Date and Venue')}</h3>
+              <DateAndVenue reloadSpace={reloadSpace} projectSpace={projectSpace} events={events === 'depricated' ? events : events?.rooms} matrixClient={matrixClient} />
+            </section>}
           <section className="present">
             <h3>{t('Format')}</h3>
             <p>{t('In what form is your project presented?')}</p>
@@ -263,11 +268,6 @@ const Create = () => {
             <h3>{t('Project image')}</h3>
             {loading ? <Loading /> : <ProjectImage projectSpace={projectSpace} changeProjectImage={changeProjectImage} />}
           </section>
-          {medienhausMeta?.present !== 'digital' &&
-            <section className="date-venue" id="date">
-              <h3>{t('Date and Venue')}</h3>
-              <DateAndVenue reloadSpace={reloadSpace} projectSpace={projectSpace} events={events === 'depricated' ? events : events?.rooms} matrixClient={matrixClient} />
-            </section>}
           <section className="content">
             <h3>{t('Content')}</h3>
             <p><Trans t={t} i18nKey="contentInstructions1">You can add elements like texts, images, audio and video files, BigBlueButton sessions and livestreams by clicking the <code>+</code> button near the content block below.</Trans></p>
