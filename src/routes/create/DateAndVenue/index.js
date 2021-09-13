@@ -99,7 +99,6 @@ const DateAndVenue = ({ number, reloadSpace, projectSpace, events, matrixClient 
             projectSpace={eventSpace[0].room_id}
             callback={() => setIsAddDateVisible(false)}
           />
-          <button className="cancel" onClick={() => { setIsAddDateVisible(false) }}>{t('CANCEL')}</button>
         </>}
       {!isAddLocationVisible &&
         <button
@@ -115,7 +114,6 @@ const DateAndVenue = ({ number, reloadSpace, projectSpace, events, matrixClient 
             onBlockWasAddedSuccessfully={reloadSpace}
             callback={() => setIsAddLocationVisible(false)}
           />
-          <button className="cancel" onClick={() => { setIsAddLocationVisible(false) }}>{t('CANCEL')}</button>
         </>}
     </>
   )
