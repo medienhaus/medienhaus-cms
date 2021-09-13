@@ -12,7 +12,6 @@ const Terms = () => {
   const [consent2, setConsent2] = useState(initiallyChecked)
   const [consent3, setConsent3] = useState(initiallyChecked)
   const [consent4, setConsent4] = useState(initiallyChecked)
-  const [consent5, setConsent5] = useState(initiallyChecked)
   const [consent6, setConsent6] = useState(initiallyChecked)
   const { t } = useTranslation('terms')
 
@@ -40,15 +39,11 @@ const Terms = () => {
         <label htmlFor="checkbox4">{t('I (we) acknowledge and agree that in the event of an actual or potential breach of the principles set out in sections 1 and 2 above, the image, video and/or sound material may be removed from the platform, either in whole or in part.')}</label>
       </div>
       <div>
-        <input id="checkbox5" name="checkbox5" type="checkbox" checked={consent5} onChange={() => setConsent5(consent5 => !consent5)} />
-        <label htmlFor="checkbox5">{t('I (we) hereby confirm that the premises for the project have been discussed with the Department for Facility Management, Occupational Health & Safety. Please contact Felix Wolf in advance (Head of Event, GA): felix.wolf@intra.udk-berlin.de')}</label>
-      </div>
-      <div>
         <input id="checkbox6" name="checkbox6" type="checkbox" checked={consent6} onChange={() => setConsent6(consent6 => !consent6)} />
         <label htmlFor="checkbox6">{t('I (we) hereby confirm that the project will be carried out in compliance with the pandemic regulations in force at the UdK Berlin.')}</label>
       </div>
       <button
-        name="submit" type="submit" disabled={!consent0 || !consent1 || !consent2 || !consent3 || !consent4 || !consent5 || !consent6} onClick={() => {
+        name="submit" type="submit" disabled={!consent0 || !consent1 || !consent2 || !consent3 || !consent4 || !consent6} onClick={() => {
           localStorage.setItem('terms-consent', true)
           history.push('/')
         }}
