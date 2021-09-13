@@ -138,6 +138,7 @@ const FileUpload = (props) => {
               className="cancel"
               onClick={() => {
                 props.callback()
+                setSelectedFile('')
               }}
             >{t('CANCEL')}
             </button>
@@ -152,7 +153,6 @@ const FileUpload = (props) => {
           </div>
         </>
       )}
-      {!selectedFile && <button className="cancel" onClick={() => { props.callback() }}>{t('CANCEL')}</button>}
     </>
   )
 }
