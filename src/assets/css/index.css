@@ -910,6 +910,10 @@ textarea[disabled] {
   color: var(--color-fg);
 }
 
+.editor .warning {
+  border-color: var(--color-no) !important;
+}
+
 .invites > ul,
 .invites > ul > li {
   display: grid;

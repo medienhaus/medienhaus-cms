@@ -55,13 +55,15 @@ const ProjectTitle = ({ title, projectSpace, callback }) => {
       // create the project space for the student project
       await matrixClient.createRoom(opts('studentproject', title))
         .then(async (space) => {
-          // by default we create two subpsaces for localisation
+          // by default we create two subpsaces for localisation and one for events
           const en = await matrixClient.createRoom(opts('lang', 'en'))
           const de = await matrixClient.createRoom(opts('lang', 'de'))
-          return [space.room_id, en.room_id, de.room_id]
+          const events = await matrixClient.createRoom(opts('events', 'events'))
+          return [space.room_id, en.room_id, de.room_id, events.room_id]
         })
         .then(async (res) => {
           // and add those subspaces as children to the project space
+          // en
           await fetch(process.env.REACT_APP_MATRIX_BASE_URL + `/_matrix/client/r0/rooms/${res[0]}/state/m.space.child/${res[1]}`, {
             method: 'PUT',
             headers: { Authorization: 'Bearer ' + localStorage.getItem('medienhaus_access_token') },
@@ -72,7 +74,19 @@ const ProjectTitle = ({ title, projectSpace, callback }) => {
               auto_join: true
             })
           })
+          // de
           await fetch(process.env.REACT_APP_MATRIX_BASE_URL + `/_matrix/client/r0/rooms/${res[0]}/state/m.space.child/${res[2]}`, {
+            method: 'PUT',
+            headers: { Authorization: 'Bearer ' + localStorage.getItem('medienhaus_access_token') },
+            body: JSON.stringify({
+              via:
+                [process.env.REACT_APP_MATRIX_BASE_URL],
+              suggested: false,
+              auto_join: true
+            })
+          })
+          // events
+          await fetch(process.env.REACT_APP_MATRIX_BASE_URL + `/_matrix/client/r0/rooms/${res[0]}/state/m.space.child/${res[3]}`, {
             method: 'PUT',
             headers: { Authorization: 'Bearer ' + localStorage.getItem('medienhaus_access_token') },
             body: JSON.stringify({

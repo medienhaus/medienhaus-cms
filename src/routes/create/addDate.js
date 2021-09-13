@@ -1,31 +1,33 @@
 import React, { useState } from 'react'
-import LoadingSpinnerButton from '../../../components/LoadingSpinnerButton'
-import Matrix from '../../../Matrix'
+import LoadingSpinnerButton from '../../components/LoadingSpinnerButton'
+import Matrix from '../../Matrix'
 import { useTranslation } from 'react-i18next'
+import createBlock from './matrix_create_room'
 
-const AddDate = ({ onCreateRoomForBlock, onBlockWasAddedSuccessfully }) => {
+const AddDate = ({ number, reloadSpace, projectSpace, callback }) => {
   const [date, setDate] = useState('')
   const [time, setTime] = useState('')
   const [loading, setLoading] = useState(false)
   const matrixClient = Matrix.getMatrixClient()
   const { t } = useTranslation('date')
 
-  console.log(date, time)
   const handleSubmit = async () => {
     setLoading(true)
-    await onCreateRoomForBlock().then(async (res) =>
+
+    await createBlock(undefined, 'date', number, projectSpace).then(async (res) =>
       await matrixClient.sendMessage(res, {
         msgtype: 'm.text',
         body: date + ' ' + time
       })).catch(console.log)
-    onBlockWasAddedSuccessfully()
+    callback()
+    reloadSpace()
     setLoading(false)
   }
 
   return (
     <>
       <div>
-        <label htmlFor="date">Choose a date:</label>
+        <label htmlFor="date">{t('Choose a date')}:</label>
         <input
           id="date"
           name="date"
@@ -37,14 +39,17 @@ const AddDate = ({ onCreateRoomForBlock, onBlockWasAddedSuccessfully }) => {
         />
       </div>
       <div>
-        <label htmlFor="time">Choose a time:</label>
+        <label htmlFor="time">{t('Choose a time')}:</label>
         <input
           id="time" name="time" type="time" value={time} onChange={(e) => {
             setTime(e.target.value)
           }}
         />
       </div>
-      <LoadingSpinnerButton disabled={loading || (!date && !time)} loading={loading} onClick={handleSubmit}>{t('SAVE')}</LoadingSpinnerButton>
+      <div className="confirmation">
+        <button className="cancel" onClick={() => { callback() }}>{t('CANCEL')}</button>
+        <LoadingSpinnerButton disabled={loading || (!date && !time)} loading={loading} onClick={handleSubmit}>{t('SAVE')}</LoadingSpinnerButton>
+      </div>
     </>
   )
 }
