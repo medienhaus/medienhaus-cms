@@ -34,7 +34,10 @@ const AddLocation = ({ number, projectSpace, onBlockWasAddedSuccessfully, callba
         {locations.map(location => <option value={location.coordinates} key={location.coordinates}>{location.name}</option>)}
       </select>
       <input type="text" placeholder={t('room number or specific location')} onChange={(e) => setRoom(e.target.value)} />
-      <LoadingSpinnerButton disabled={loading || !selectedLocation || (selectedLocation === '0.0, 0.0' && !room)} onClick={handleSubmit}>{t('SAVE')}</LoadingSpinnerButton>
+      <div className="confirmation">
+        <LoadingSpinnerButton disabled={loading || !selectedLocation || (selectedLocation === '0.0, 0.0' && !room)} onClick={handleSubmit}>{t('SAVE')}</LoadingSpinnerButton>
+        <button className="cancel" onClick={() => { callback() }}>{t('CANCEL')}</button>
+      </div>
     </>
   )
 }

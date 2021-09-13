@@ -46,7 +46,10 @@ const AddDate = ({ number, reloadSpace, projectSpace, callback }) => {
           }}
         />
       </div>
-      <LoadingSpinnerButton disabled={loading || (!date && !time)} loading={loading} onClick={handleSubmit}>{t('SAVE')}</LoadingSpinnerButton>
+      <div className="confirmation">
+        <LoadingSpinnerButton disabled={loading || (!date && !time)} loading={loading} onClick={handleSubmit}>{t('SAVE')}</LoadingSpinnerButton>
+        <button className="cancel" onClick={() => { callback() }}>{t('CANCEL')}</button>
+      </div>
     </>
   )
 }
