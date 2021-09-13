@@ -806,10 +806,6 @@ textarea[disabled] {
   margin-top: var(--margin);
 }
 
-.red-border{
-  border-color: var(--color-no) !important;
-
-}
 /*
 .editor .center div {
   height: 100%;
@@ -912,6 +908,10 @@ textarea[disabled] {
   background-color: var(--color-bg);
   border: unset;
   color: var(--color-fg);
+}
+
+.editor .warning {
+  border-color: var(--color-no) !important;
 }
 
 .invites > ul,

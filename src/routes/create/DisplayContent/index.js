@@ -298,7 +298,7 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace, time,
                           >
                             {
                             cms.body.substring(0, cms.body.indexOf(',')) + ',' + cms.body.substring(cms.body.indexOf(',') + 1, cms.body.indexOf('-')) !== '0.0, 0.0' &&
-                              <MapContainer className={mapComponent ? 'center' : 'center red-border'} center={[cms.body.substring(0, cms.body.indexOf(',')), cms.body.substring(cms.body.indexOf(',') + 1, cms.body.indexOf('-'))]} zoom={17} scrollWheelZoom={false} placeholder>
+                              <MapContainer className={mapComponent ? 'center' : 'center warning'} center={[cms.body.substring(0, cms.body.indexOf(',')), cms.body.substring(cms.body.indexOf(',') + 1, cms.body.indexOf('-'))]} zoom={17} scrollWheelZoom={false} placeholder>
                                 <TileLayer
                                   attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                                   url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -320,7 +320,7 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace, time,
                           </div>
                           )
                         : json.type === 'date'
-                          ? <div className={mapComponent ? 'center' : 'center red-border'}>
+                          ? <div className={mapComponent ? 'center' : 'center warning'}>
                             {cms.body.split(' ')[0] && <input type="date" value={cms.body.split(' ')[0]} disabled required />}
                             {cms.body.split(' ')[1] && <input type="time" value={cms.body.split(' ')[1]} disabled required />}
                             {!mapComponent &&
