@@ -85,30 +85,38 @@ const DateAndVenue = ({ number, reloadSpace, projectSpace, events, matrixClient 
   return (
     <>
       {eventSpace?.length > 1 && <Events />}
-      <button
-        className="add-button"
-        onClick={(e) => { e.preventDefault(); setIsAddDateVisible(!isAddDateVisible) }}
-      >+ {t('Date')}
-      </button>
+      {!isAddDateVisible &&
+        <button
+          className="add-button"
+          onClick={(e) => { e.preventDefault(); setIsAddDateVisible(true) }}
+        >+ {t('Date')}
+        </button>}
       {isAddDateVisible &&
-        <AddDate
-          number={eventSpace.length}
-          reloadSpace={reloadSpace}
-          projectSpace={eventSpace[0].room_id}
-          callback={() => setIsAddDateVisible(false)}
-        />}
-      <button
-        className="add-button"
-        onClick={(e) => { e.preventDefault(); setIsAddLocationVisible(!isAddLocationVisible) }}
-      >+ {t('Location')}
-      </button>
+        <>
+          <AddDate
+            number={eventSpace.length}
+            reloadSpace={reloadSpace}
+            projectSpace={eventSpace[0].room_id}
+            callback={() => setIsAddDateVisible(false)}
+          />
+          <button className="cancel" onClick={() => { setIsAddDateVisible(false) }}>{t('CANCEL')}</button>
+        </>}
+      {!isAddLocationVisible &&
+        <button
+          className="add-button"
+          onClick={(e) => { e.preventDefault(); setIsAddLocationVisible(!isAddLocationVisible) }}
+        >+ {t('Venue')}
+        </button>}
       {isAddLocationVisible &&
-        <AddLocation
-          number={eventSpace.length}
-          projectSpace={eventSpace[0].room_id}
-          onBlockWasAddedSuccessfully={reloadSpace}
-          callback={() => setIsAddLocationVisible(false)}
-        />}
+        <>
+          <AddLocation
+            number={eventSpace.length}
+            projectSpace={eventSpace[0].room_id}
+            onBlockWasAddedSuccessfully={reloadSpace}
+            callback={() => setIsAddLocationVisible(false)}
+          />
+          <button className="cancel" onClick={() => { setIsAddLocationVisible(false) }}>{t('CANCEL')}</button>
+        </>}
     </>
   )
 }
