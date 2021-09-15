@@ -13,6 +13,12 @@ const Landing = () => {
     <section className="landing">
       <p>{t('Hello')}{profile && <strong> {profile?.displayname}</strong>}.</p>
       <h2>{t('Welcome to the Rundgang 2021 content management system!')}</h2>
+      {/* TODO: @marcel-klasse please add remaining days and or hours until noon; fix locales for <1>x days left …</1> */}
+      <p>
+        <Trans t={t} i18nKey="countdown">
+          Only projects that are being published (i.e. not drafts) until October 08 are eligible for the Rundgang 2021 print program. <strong style={{ color: 'rgb(228,9,59)' }}>x days left …</strong>
+        </Trans>
+      </p>
       <p>{t('The Rundgang – Open Days of the Berlin University of the Arts will take place for the first time in both analogue and digital space from 29–31 October 2021. On this platform, you will have the opportunity to create your own projects and thus add information on analogue offers or present digitally created semester projects.')}</p>
       {auth.user && (
         <>
