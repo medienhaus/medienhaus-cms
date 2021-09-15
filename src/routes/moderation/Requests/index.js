@@ -26,7 +26,6 @@ const Requests = ({ roomId, roomName, userName, userId, eventId }) => {
 
   const invite = async () => {
     setAllButtonsDisabled(true)
-
     try {
       await knockClient.invite(roomId, userId).then((res) => {
         console.log(res)
@@ -40,11 +39,12 @@ const Requests = ({ roomId, roomName, userName, userId, eventId }) => {
     }
   }
 
+  /*  @TODO what happens when reporting ?
   const report = () => {
-    setAllButtonsDisabled(true)
-    console.log('Reported ' + userName + ' for spamming in ' + roomName)
-    // @TODO what happens when reporting?
-  }
+      setAllButtonsDisabled(true)
+      console.log('Reported ' + userName + ' for spamming in ' + roomName)
+    }
+  */
   return (
     <div className="requests">
       <div>
@@ -53,7 +53,8 @@ const Requests = ({ roomId, roomName, userName, userId, eventId }) => {
           <LoadingSpinnerButton className="cancel" disabled={allButtonsDisabled} onClick={kick}>{t('REJECT')}</LoadingSpinnerButton>
           <LoadingSpinnerButton className="confirm" disabled={allButtonsDisabled} onClick={invite}>{t('ACCEPT')}</LoadingSpinnerButton>
         </div>
-        <LoadingSpinnerButton disabled={allButtonsDisabled} onClick={report}>{t('REPORT')}</LoadingSpinnerButton>
+        {// <LoadingSpinnerButton disabled={allButtonsDisabled} onClick={report}>{t('REPORT')}</LoadingSpinnerButton>
+        }
       </div>
     </div>
   )

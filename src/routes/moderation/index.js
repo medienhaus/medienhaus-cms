@@ -19,7 +19,8 @@ const Moderation = () => {
 
   useEffect(() => {
     if (joinedSpaces) {
-      const filteredRooms = joinedSpaces.filter(space => space.meta.type === 'context')
+      // check to see if a user has joined a room with the specific content type and is moderator or admin (at least power level 50)
+      const filteredRooms = joinedSpaces.filter(space => space.meta.type === 'context' && space.powerLevel > 49)
       setModerationRooms(filteredRooms)
     }
   }, [joinedSpaces])
@@ -27,10 +28,11 @@ const Moderation = () => {
   useEffect(() => {
     console.log(userToInvite)
   }, [userToInvite])
+
   const GetRequestPerRoom = ({ request }) => {
     const room = matrixClient.getRoom(request.room_id)
     // console.log(Object.values(room.currentState.members))
-    const knockingUsers = Object.values(room?.currentState.members).filter(user => user.membership === 'invite')
+    const knockingUsers = Object.values(room?.currentState.members).filter(user => user.membership === 'knock')
     // @TODO change back to knock when context is done
 
     if (knockingUsers.length < 1) return <p>{t('No requests at the moment.')}</p>

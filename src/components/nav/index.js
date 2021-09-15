@@ -28,7 +28,7 @@ const Nav = () => {
             .forEach(user => allKnocks.push(user))
         })
         // @TODO change back to knock when context is finished
-        setKnockAmount(allKnocks.filter(user => user.membership === 'invite').length)
+        setKnockAmount(allKnocks.filter(user => user.membership === 'knock').length)
       }
     }
   }, [joinedSpaces, auth.user, matrixClient, spacesErr])
@@ -76,11 +76,10 @@ const Nav = () => {
               </div>
               <div>
                 <NavLink to="/account">/account</NavLink>
-                {// fetchSpaces || <>
-                  // <NavLink activeclassname="active" to="/moderation">/moderation{knockAmount > 0 && <sup className="notification">●</sup>}</NavLink>
-                  // {/* eslint-disable-next-line react/jsx-closing-tag-location */}
-                  // </>
-                }
+                {fetchSpaces || <>
+                  <NavLink activeclassname="active" to="/moderation">/moderation{knockAmount > 0 && <sup className="notification">●</sup>}</NavLink>
+                  {/* eslint-disable-next-line react/jsx-closing-tag-location */}
+                </>}
               </div>
               <div>
                 <NavLink to="/feedback">/feedback</NavLink>
