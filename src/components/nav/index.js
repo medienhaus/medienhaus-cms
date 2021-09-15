@@ -76,11 +76,10 @@ const Nav = () => {
               </div>
               <div>
                 <NavLink to="/account">/account</NavLink>
-                {// fetchSpaces || <>
-                  // <NavLink activeclassname="active" to="/moderation">/moderation{knockAmount > 0 && <sup className="notification">●</sup>}</NavLink>
-                  // {/* eslint-disable-next-line react/jsx-closing-tag-location */}
-                  // </>
-                }
+                {fetchSpaces || <>
+                  <NavLink activeclassname="active" to="/moderation">/moderation{knockAmount > 0 && <sup className="notification">●</sup>}</NavLink>
+                  {/* eslint-disable-next-line react/jsx-closing-tag-location */}
+                </>}
               </div>
               <div>
                 <NavLink to="/feedback">/feedback</NavLink>
