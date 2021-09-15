@@ -1,19 +1,11 @@
 import React from 'react'
 import { useTranslation } from 'react-i18next'
-// import { useAuth } from '../../Auth'
-// import { NavLink, useHistory } from 'react-router-dom'
 
 const Credits = () => {
   const { t } = useTranslation('credits')
-  // const auth = useAuth()
-  // const profile = auth.user
-  // const history = useHistory()
 
   return (
     <section className="credits">
-      {/*
-      {auth.user && (
-      */}
       <h2>Credits & Team</h2>
       <p>{t('We would like to thank all students and teachers of the UdK Berlin for organising and presenting their work during the Rundgang – Open Days.')}</p>
       <p>{t('They are supported by the following core team:')}</p>
@@ -25,9 +17,6 @@ const Credits = () => {
       <p>{t('Press relations, online communication and social media: Press & Communication Unit headed by Claudia Assmann.')}</p>
       <p>{t('Pandemic advice is provided by the company doctor of the UdK Berlin Dr. Stefan Linnig')}</p>
       <p>{t('The Berlin University of the Arts is legally represented by the President Prof. Dr. Norbert Palz')}</p>
-      {/*
-      )}
-      */}
     </section>
   )
 }
