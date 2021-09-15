@@ -9,7 +9,7 @@ const Landing = () => {
   const profile = auth.user
   const history = useHistory()
 
-  const countdown = (dt, id) => {
+  const Countdown = (dt, id, unit) => {
     const end = new Date(dt)
 
     const _second = 1000
@@ -25,7 +25,11 @@ const Landing = () => {
     const hours = Math.floor((distance % _day) / _hour)
     const minutes = Math.floor((distance % _hour) / _minute)
 
-    return days + t(' days ') + hours + t(' hours ') + minutes + t(' minutes ')
+    return (
+      <strong style={{ color: 'rgb(228,9,59)' }}>
+        {days + t(' days ') + hours + t(' hours ') + minutes + t(' minutes left...')}
+      </strong>
+    )
   }
 
   return (
@@ -35,8 +39,9 @@ const Landing = () => {
       {/* TODO: @marcel-klasse please add remaining days and or hours until noon; fix locales for <1>x days left …</1> */}
       <p>
         <Trans t={t} i18nKey="countdown">
-          Only projects that are being published (i.e. not drafts) until October 08 are eligible for the Rundgang 2021 print program. <strong style={{ color: 'rgb(228,9,59)' }}>{countdown('10/08/2021 12:00 AM')}</strong> left...
+          Only projects that are being published (i.e. not drafts) until October 08 are eligible for the Rundgang 2021 print program.&nbsp;
         </Trans>
+        {Countdown('10/08/2021 12:00 AM')}
       </p>
       <p>{t('The Rundgang – Open Days of the Berlin University of the Arts will take place for the first time in both analogue and digital space from 29–31 October 2021. On this platform, you will have the opportunity to create your own projects and thus add information on analogue offers or present digitally created semester projects.')}</p>
       {auth.user && (
