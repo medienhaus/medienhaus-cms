@@ -41,8 +41,8 @@ const Landing = () => {
         <Trans t={t} i18nKey="countdown">
           Only projects that are being published (i.e. not drafts) until October 08 are eligible for the Rundgang 2021 print program.
         </Trans>
-        {Countdown('10/08/2021 12:00 AM')}
       </p>
+      <p>{Countdown('10/08/2021 12:00 AM')}</p>
       <p>{t('The Rundgang – Open Days of the Berlin University of the Arts will take place for the first time in both analogue and digital space from 29–31 October 2021. On this platform, you will have the opportunity to create your own projects and thus add information on analogue offers or present digitally created semester projects.')}</p>
       {auth.user && (
         <>
