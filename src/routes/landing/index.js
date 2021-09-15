@@ -10,10 +10,9 @@ const Landing = () => {
   const history = useHistory()
 
   return (
-    <div>
+    <section className="landing">
       <p>{t('Hello')}{profile && <strong> {profile?.displayname}</strong>}.</p>
-
-      <strong>{t('Welcome to the Rundgang 2021 content management system!')}</strong>
+      <h2>{t('Welcome to the Rundgang 2021 content management system!')}</h2>
       <p>{t('The Rundgang – Open Days of the Berlin University of the Arts will take place for the first time in both analogue and digital space from 29–31 October 2021. On this platform, you will have the opportunity to create your own projects and thus add information on analogue offers or present digitally created semester projects.')}</p>
       {auth.user && (
         <>
@@ -30,13 +29,17 @@ const Landing = () => {
           </p>
           <p>
             <Trans t={t} i18nKey="support">
-              If you need technical support for entering projects, please fill out the <NavLink to="/support">/support</NavLink> form.
+              Feedback will be evaluated, but will not be answered. If you have a question and/or need technical support for entering projects, please fill out the <NavLink to="/support">/support</NavLink> form and we will get back at you.
+            </Trans>
+          </p>
+          <p>
+            <Trans t={t} i18nKey="credits">
+              Credits & Team can be found on the <NavLink to="/credits">/credits</NavLink> page.
             </Trans>
           </p>
         </>
       )}
-      <p><em>{t('Please note: The public-facing Rundgang website on which all projects will be presented, is still under construction. Therefore, it is not yet possible to preview the projects that have been created.')}</em></p>
-    </div>
+    </section>
   )
 }
 
