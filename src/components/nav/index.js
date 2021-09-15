@@ -28,7 +28,7 @@ const Nav = () => {
             .forEach(user => allKnocks.push(user))
         })
         // @TODO change back to knock when context is finished
-        setKnockAmount(allKnocks.filter(user => user.membership === 'invite').length)
+        setKnockAmount(allKnocks.filter(user => user.membership === 'knock').length)
       }
     }
   }, [joinedSpaces, auth.user, matrixClient, spacesErr])
