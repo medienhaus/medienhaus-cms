@@ -10,7 +10,6 @@ const Projects = ({ space, visibility, index, removeProject }) => {
   const { t } = useTranslation('projects')
   const matrixClient = Matrix.getMatrixClient()
   const [showDeleteComponent, setShowDeleteComponent] = useState(false)
-  const context = false
 
   return (
     <>
@@ -37,7 +36,7 @@ const Projects = ({ space, visibility, index, removeProject }) => {
       {showDeleteComponent &&
         <DeleteProjectButton roomId={space.room_id} name={space.name} index={index} toggleDeleteButton={() => setShowDeleteComponent(false)} removeProject={removeProject} />}
       {!space.description && <p>❗️ {t('Please add a short description of your project.')}</p>}
-      {!context && <p>❗️ {t('Please add your project to a context.')}</p>}
+      {!space.meta.context && <p>❗️ {t('Please add your project to a context.')}</p>}
     </>
   )
 }
