@@ -35,6 +35,36 @@ const Category = ({ title, projectSpace }) => {
     setSubject('')
   }
 
+  async function onContextChosen (contextSpaceId) {
+    const projectSpaceMetaEvent = await matrixClient.getStateEvent(projectSpace, 'dev.medienhaus.meta')
+
+    if (projectSpaceMetaEvent.context && projectSpaceMetaEvent.context !== contextSpaceId) {
+      // If this project was in a different context previously we should try to take it out of the old context
+      const req = {
+        method: 'PUT',
+        headers: { Authorization: 'Bearer ' + localStorage.getItem('medienhaus_access_token') },
+        body: JSON.stringify({})
+      }
+      await fetch(process.env.REACT_APP_MATRIX_BASE_URL + `/_matrix/client/r0/rooms/${projectSpaceMetaEvent.context}/state/m.space.child/${projectSpace}`, req)
+    }
+
+    // Add this current project to the given context space
+    const req = {
+      method: 'PUT',
+      headers: { Authorization: 'Bearer ' + localStorage.getItem('medienhaus_access_token') },
+      body: JSON.stringify({
+        auto_join: false,
+        suggested: false,
+        via: [process.env.REACT_APP_MATRIX_BASE_URL.replace('https://', '')]
+      })
+    }
+    await fetch(process.env.REACT_APP_MATRIX_BASE_URL + `/_matrix/client/r0/rooms/${contextSpaceId}/state/m.space.child/${projectSpace}`, req)
+
+    // Set the new context in our meta event
+    projectSpaceMetaEvent.context = contextSpaceId
+    await matrixClient.sendStateEvent(projectSpace, 'dev.medienhaus.meta', projectSpaceMetaEvent)
+  }
+
   return (
     <>
       <p>{t('In which context do you want to publish your project?')}</p>
@@ -42,7 +72,7 @@ const Category = ({ title, projectSpace }) => {
       <p>{t('The context can be a class, a course, a seminar or a free project. If you are unsure, ask the professor of your class or the seminar leader.')}</p>
       <p>{t('You can scroll through the list, or filter/search the list by typing one or more keywords.')}</p>
       <div style={{ position: 'relative' }}>
-        <ContextDropdown callback={isMember} />
+        <ContextDropdown onItemChosen={onContextChosen} showRequestButton callback={isMember} />
       </div>
       {loading && <Loading />}
       {subject !== '' && !member && <Knock room={room} callback={callback} />}
