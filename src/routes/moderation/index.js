@@ -66,6 +66,7 @@ const Moderation = () => {
   }
 
   const invite = async () => {
+    // @TODO check why userToInvite is not cleared
     const id = userToInvite.substring(userToInvite.lastIndexOf(' ') + 1)
     const name = userToInvite.substring(0, userToInvite.lastIndexOf(' '))
     if (id !== localStorage.getItem('mx_user_id')) {
