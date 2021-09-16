@@ -9,11 +9,40 @@ const Landing = () => {
   const profile = auth.user
   const history = useHistory()
 
-  return (
-    <div>
-      <p>{t('Hello')}{profile && <strong> {profile?.displayname}</strong>}.</p>
+  const Countdown = (dt, id, unit) => {
+    const end = new Date(dt)
 
-      <strong>{t('Welcome to the Rundgang 2021 content management system!')}</strong>
+    const _second = 1000
+    const _minute = _second * 60
+    const _hour = _minute * 60
+    const _day = _hour * 24
+
+    const now = new Date()
+    const distance = end - now
+    if (distance < 0) return t('expired')
+
+    const days = Math.floor(distance / _day)
+    const hours = Math.floor((distance % _day) / _hour)
+    const minutes = Math.floor((distance % _hour) / _minute)
+
+    return (
+      <strong style={{ color: 'rgb(228,9,59)' }}>
+        {' ' + days + t(' days ') + hours + t(' hours ') + minutes + t(' minutes left …')}
+      </strong>
+    )
+  }
+
+  return (
+    <section className="landing">
+      <p>{t('Hello')}{profile && <strong> {profile?.displayname}</strong>}.</p>
+      <h2>{t('Welcome to the Rundgang 2021 content management system!')}</h2>
+      {/* TODO: @marcel-klasse please add remaining days and or hours until noon; fix locales for <1>x days left …</1> */}
+      <p>
+        <Trans t={t} i18nKey="countdown">
+          Only projects that are being published (i.e. not drafts) until October 08 are eligible for the Rundgang 2021 print program.
+        </Trans>
+      </p>
+      <p>{Countdown('10/08/2021 12:00 AM')}</p>
       <p>{t('The Rundgang – Open Days of the Berlin University of the Arts will take place for the first time in both analogue and digital space from 29–31 October 2021. On this platform, you will have the opportunity to create your own projects and thus add information on analogue offers or present digitally created semester projects.')}</p>
       {auth.user && (
         <>
@@ -30,13 +59,17 @@ const Landing = () => {
           </p>
           <p>
             <Trans t={t} i18nKey="support">
-              If you need technical support for entering projects, please fill out the <NavLink to="/support">/support</NavLink> form.
+              Feedback will be evaluated, but will not be answered. If you have a question and/or need technical support for entering projects, please fill out the <NavLink to="/support">/support</NavLink> form and we will get back at you.
+            </Trans>
+          </p>
+          <p>
+            <Trans t={t} i18nKey="credits">
+              Credits & Team can be found on the <NavLink to="/credits">/credits</NavLink> page.
             </Trans>
           </p>
         </>
       )}
-      <p><em>{t('Please note: The public-facing Rundgang website on which all projects will be presented, is still under construction. Therefore, it is not yet possible to preview the projects that have been created.')}</em></p>
-    </div>
+    </section>
   )
 }
 

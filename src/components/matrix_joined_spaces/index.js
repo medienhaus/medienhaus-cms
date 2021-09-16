@@ -25,7 +25,8 @@ const getAnswer = async () => {
         avatar_url: room.getMxcAvatarUrl(),
         meta: event,
         description: topic,
-        membership: room.getMyMembership()
+        membership: room.getMyMembership(),
+        powerLevel: room.currentState.members[localStorage.getItem('mx_user_id')].powerLevel
       }
     })
   return filteredRooms

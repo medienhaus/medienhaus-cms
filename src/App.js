@@ -14,6 +14,7 @@ import Create from './routes/create'
 import Moderation from './routes/moderation'
 import Support from './routes/support'
 import Feedback from './routes/feedback'
+import Credits from './routes/credits'
 import Terms from './routes/terms'
 import Account from './routes/account'
 import Request from './routes/request'
@@ -85,6 +86,7 @@ function App () {
               <PrivateRoute path="/support" component={Support} />
               <PrivateRoute path="/feedback" component={Feedback} />
               <PrivateRoute path="/request" component={Request} />
+              <PrivateRoute path="/credits" component={Credits} />
             </Switch>
           </main>
           <Footer />
