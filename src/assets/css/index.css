@@ -1122,6 +1122,15 @@ button > .loading {
 }
 
 /*
+.toggle {
+  display: grid;
+  align-items: center;
+  grid-gap: var(--margin);
+  grid-template-columns: 2rem 1fr;
+}
+*/
+
+/*
 .terms > div > input[type="checkbox"]:checked {
   background-color: var(--color-bg);
   color: var(--color-fg);
