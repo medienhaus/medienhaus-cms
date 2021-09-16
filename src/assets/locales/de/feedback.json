@@ -4,5 +4,6 @@
   "Thank you for your feedback!": "Vielen Dank für Ihr Feedback!",
   "submittedMessage": "Wir sammeln Ihr Feedback und evaluieren dieses im Anschluss an den Rundgang 2021. Sollten Sie technische Hilfe beim Erstellen Ihrer Beiträge benötigen, nutzen Sie bitte das <1>/support</1> Formular.",
   "This field can’t be empty.": "Dieses Feld muss ausgefüllt werden.",
-  "SUBMIT": "SENDEN"
+  "SUBMIT": "SENDEN",
+  "note": "Das Feedback wird evaluiert, aber nicht beantwortet. Falls Sie Fragen haben, oder technische Unterstützung bei der Eingabe von Projekten benötigen, füllen Sie bitte das Formular unter <1>/support</1> aus und wir werden uns bei Ihnen melden."
 }
