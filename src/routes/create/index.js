@@ -31,7 +31,7 @@ const Create = () => {
   const [medienhausMeta, setMedienhausMeta] = useState([])
   const [events, setEvents] = useState()
   const [description, setDescription] = useState()
-  const [preview, setPreview] = useState(false)
+  // const [preview, setPreview] = useState(false)
   const history = useHistory()
   const matrixClient = Matrix.getMatrixClient()
   const params = useParams()
@@ -285,24 +285,12 @@ const Create = () => {
               <option value="de">DE — Deutsch</option>
               <option value="en">EN — English</option>
             </select>
-            <div className="toggle">
-              <input id="preview" name="preview" type="checkbox" onChange={() => setPreview(preview => !preview)} />
-              <label htmlFor="preview">Preview</label>
-            </div>
-            {preview ? null : spaceObject && (description || description === '') ? <ProjectDescription description={description[contentLang]} callback={onChangeDescription} /> : <Loading />}
-            {preview
-              ? <section className="preview singleproject">
-                <main>
-                  <div className="projectmain">
-                    {blocks.map((content, i) => <DisplayContent preview={preview} block={content} index={i} blocks={blocks} projectSpace={spaceObject?.rooms.filter(room => room.name === contentLang)[0].room_id} reloadSpace={reloadSpace} time={getCurrentTime} present={medienhausMeta?.present} key={content + i + content?.lastUpdate} />)}
-                  </div>
-                </main>
-              </section>
-              : blocks.length === 0
-                ? <AddContent number={0} projectSpace={spaceObject?.rooms.filter(room => room.name === contentLang)[0].room_id} blocks={blocks} reloadSpace={reloadSpace} present={medienhausMeta?.present} />
-                : blocks.map((content, i) =>
-                  <DisplayContent preview={preview} block={content} index={i} blocks={blocks} projectSpace={spaceObject?.rooms.filter(room => room.name === contentLang)[0].room_id} reloadSpace={reloadSpace} time={getCurrentTime} present={medienhausMeta?.present} key={content + i + content?.lastUpdate} />
-                )}
+            {spaceObject && (description || description === '') ? <ProjectDescription description={description[contentLang]} callback={onChangeDescription} /> : <Loading />}
+            {blocks.length === 0
+              ? <AddContent number={0} projectSpace={spaceObject?.rooms.filter(room => room.name === contentLang)[0].room_id} blocks={blocks} reloadSpace={reloadSpace} present={medienhausMeta?.present} />
+              : blocks.map((content, i) =>
+                <DisplayContent block={content} index={i} blocks={blocks} projectSpace={spaceObject?.rooms.filter(room => room.name === contentLang)[0].room_id} reloadSpace={reloadSpace} time={getCurrentTime} present={medienhausMeta?.present} key={content + i + content?.lastUpdate} />
+              )}
           </section>
           {/* Placeholder to show preview next to editing
           {blocks.map((content, i) => <DisplayPreview content={content} key={i} matrixClient={matrixClient} />)}
@@ -325,7 +313,9 @@ const Create = () => {
                  </>)
               : <Loading />}
           </section>
+
           <section className="save">
+            <button onClick={() => history.push(`/preview/${projectSpace}`)} rel="external nofollow noopener noreferrer" target="_blank">{t('SHOW PREVIEW')} →</button>
             <button onClick={() => history.push('/projects')}>← {t('BACK TO OVERVIEW')}</button>
             {saveTimestamp && <p className="timestamp">↳ {t('Project last saved at')} {saveTimestamp}</p>}
           </section>

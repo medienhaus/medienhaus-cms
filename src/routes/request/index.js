@@ -9,7 +9,7 @@ const Request = () => {
   const { register, formState: { errors }, handleSubmit } = useForm()
   const [msg, setMsg] = useState('')
   const [context, setContext] = useState()
-  const [browser, setBrowser] = useState()
+  const [parent, setParent] = useState()
   const [sending, setSending] = useState(false)
   const [submitted, setSubmitted] = useState(false)
   const { t } = useTranslation('request')
@@ -19,7 +19,7 @@ const Request = () => {
   const profile = auth.user
 
   const changeMsg = e => setMsg(e.target.value)
-  const changeBrowser = e => setBrowser(e.target.value)
+  const changeParent = e => setParent(e.target.value)
   const changeContext = e => setContext(e.target.value)
 
   const onSubmit = async () => {
@@ -27,7 +27,7 @@ const Request = () => {
     const support =
       {
         displayname: `${profile.displayname} (${matrixClient.getUserId()})`,
-        browser: browser,
+        parent: parent,
         context: context,
         msg: msg
       }
@@ -59,23 +59,20 @@ const Request = () => {
       <section className="support">
         <p>{t('In case you are trying to find a context room but can´t find it, you can request it here.')}</p>
         <form onSubmit={handleSubmit(onSubmit)}>
-          <div><input {...register('operatingSystem', { required: true })} calue={context} name="context" id="context" placeholder="name of class" onBlur={changeContext} />
+          <div>
+            <input {...register('context', { required: true })} calue={context} type="text" name="context" id="context" placeholder="name of class" onBlur={changeContext} />
           </div>
           {errors?.operatingSystem && t('Please enter the name of the class.')}
           <div>
-            <select {...register('browser', { required: true })} name="browser" id="browser" defaultValue="" onBlur={changeBrowser}>
-              <option value="" disabled>{t('-- select web browser --')}</option>
-              <option value="Firefox">Firefox</option>
-              <option value="Chrome">Chrome</option>
-              <option value="Safari">Safari</option>
-              <option value="Opera">Opera</option>
-              <option value="Edge">Edge</option>
-              <option value="Internet Explorer">Internet Explorer</option>
+            <select {...register('parent', { required: true })} name="parent" id="parent" defaultValue="" onBlur={changeParent}>
+              <option value="" disabled>{t('-- please select the parent context --')}</option>
+              <option value="Firefox">Visuelle Kommunikation</option>
+              <option value="Chrome">Bildende Kunst</option>
               <option value="Other">(Other)</option>
             </select>
           </div>
-          {errors?.browser && t('Please select a web browser.')}
-          <textarea {...register('messageInput', { required: true })} name="messageInput" placeholder={t('Please describe the problem you encounter …')} rows="7" spellCheck="true" value={msg} onChange={changeMsg} />
+          {errors?.browser && t('Please select a parent context.')}
+          <textarea name="messageInput" placeholder={t('Additional information')} rows="7" spellCheck="true" value={msg} onChange={changeMsg} />
           {errors?.messageInput && t('This field can’t be empty.')}
           <button type="submit" disabled={sending}>{t('SUBMIT')}</button>
         </form>

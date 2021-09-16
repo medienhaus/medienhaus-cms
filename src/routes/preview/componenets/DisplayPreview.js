@@ -19,7 +19,7 @@ const DisplayPreview = ({ content, matrixClient, contentLoaded }) => {
   if (content.name.includes('code')) return <div className="code"><code>{cms.body}</code></div>
 
   if (content.name.includes('image')) return <div className="image"><img src={matrixClient.mxcUrlToHttp(cms.url)} alt={cms?.info?.alt} /></div>
-  if (content.name.includes('audio')) return <audio className="center" controls><source src={matrixClient.mxcUrlToHttp(cms.url)} /></audio>
+  if (content.name.includes('audio')) return <audio crossOrigin preload="none" controls><source src={matrixClient.mxcUrlToHttp(cms.url)} type="audio/mpeg" /></audio>
   if (content.name.includes('playlist' || 'video-playlists' || 'videos')) {
     return (
       <iframe
