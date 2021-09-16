@@ -5,6 +5,7 @@ import { isFunction } from 'lodash/lang'
 import LanguageSelector from '../LanguageSelector'
 import useJoinedSpaces from '../matrix_joined_spaces'
 import Matrix from '../../Matrix'
+
 const Nav = () => {
   const auth = useAuth()
   const history = useHistory()
@@ -84,6 +85,7 @@ const Nav = () => {
               <div>
                 <NavLink to="/feedback">/feedback</NavLink>
                 <NavLink to="/support">/support</NavLink>
+                {/* <NavLink to="/request">/request</NavLink> */}
               </div>
             </>
           )}

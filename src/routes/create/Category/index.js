@@ -1,39 +1,81 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Matrix from '../../../Matrix'
-import Knock from './Knock'
 import { Loading } from '../../../components/loading'
 import ContextDropdown from '../../../components/ContextDropdown'
 import { useTranslation } from 'react-i18next'
 
 const Category = ({ title, projectSpace }) => {
   const { t } = useTranslation('projects')
-  const [subject, setSubject] = useState('')
-  const [room, setRoom] = useState('')
-  const [loading, setLoading] = useState(false)
-  const [member, setMember] = useState(false)
+  // const [subject, setSubject] = useState('')
+  // const [room, setRoom] = useState('')
+  // const [member, setMember] = useState(false)
+  const [loading, setLoading] = useState(true)
+  const [currentContext, setCurrentContext] = useState(null)
   const matrixClient = Matrix.getMatrixClient()
 
-  const isMember = async (e) => {
-    e.preventDefault()
-    setLoading(true)
-    setMember(true)
-    setSubject(e.target.value)
-    setRoom(JSON.parse(e.target.value))
-    try {
-      await matrixClient.members(room.space + localStorage.getItem('mx_home_server')).catch(err => console.error(err)).then(res => {
-        setMember(res.chunk.map(a => a.sender).includes(localStorage.getItem('mx_user_id')))
-      })
-      console.log(member)
-    } catch (err) {
-      console.error(err)
-      setMember(false)
+  useEffect(() => {
+    async function getCurrentContext () {
+      const projectSpaceMetaEvent = await matrixClient.getStateEvent(projectSpace, 'dev.medienhaus.meta')
+      setCurrentContext(projectSpaceMetaEvent.context)
+      setLoading(false)
     }
 
-    setLoading(false)
+    getCurrentContext()
+  }, [matrixClient, projectSpace])
+
+  // const isMember = async (e) => {
+  //   e.preventDefault()
+  //   setLoading(true)
+  //   setMember(true)
+  //   setSubject(e.target.value)
+  //   setRoom(JSON.parse(e.target.value))
+  //   try {
+  //     await matrixClient.members(room.space + localStorage.getItem('mx_home_server')).catch(err => console.error(err)).then(res => {
+  //       setMember(res.chunk.map(a => a.sender).includes(localStorage.getItem('mx_user_id')))
+  //     })
+  //     console.log(member)
+  //   } catch (err) {
+  //     console.error(err)
+  //     setMember(false)
+  //   }
+  //
+  //   setLoading(false)
+  // }
+  // const callback = (requested) => {
+  //   setSubject('')
+  // }
+
+  async function onContextChosen (contextSpaceId) {
+    const projectSpaceMetaEvent = await matrixClient.getStateEvent(projectSpace, 'dev.medienhaus.meta')
+
+    if (projectSpaceMetaEvent.context && projectSpaceMetaEvent.context !== contextSpaceId) {
+      // If this project was in a different context previously we should try to take it out of the old context
+      const req = {
+        method: 'PUT',
+        headers: { Authorization: 'Bearer ' + localStorage.getItem('medienhaus_access_token') },
+        body: JSON.stringify({})
+      }
+      await fetch(process.env.REACT_APP_MATRIX_BASE_URL + `/_matrix/client/r0/rooms/${projectSpaceMetaEvent.context}/state/m.space.child/${projectSpace}`, req)
+    }
+
+    // Add this current project to the given context space
+    const req = {
+      method: 'PUT',
+      headers: { Authorization: 'Bearer ' + localStorage.getItem('medienhaus_access_token') },
+      body: JSON.stringify({
+        auto_join: false,
+        suggested: false,
+        via: [process.env.REACT_APP_MATRIX_BASE_URL.replace('https://', '')]
+      })
+    }
+    await fetch(process.env.REACT_APP_MATRIX_BASE_URL + `/_matrix/client/r0/rooms/${contextSpaceId}/state/m.space.child/${projectSpace}`, req)
+
+    // Set the new context in our meta event
+    projectSpaceMetaEvent.context = contextSpaceId
+    await matrixClient.sendStateEvent(projectSpace, 'dev.medienhaus.meta', projectSpaceMetaEvent)
   }
-  const callback = (requested) => {
-    setSubject('')
-  }
+
+  if (loading) { return <Loading /> }
 
   return (
     <>
@@ -42,11 +84,9 @@ const Category = ({ title, projectSpace }) => {
       <p>{t('The context can be a class, a course, a seminar or a free project. If you are unsure, ask the professor of your class or the seminar leader.')}</p>
       <p>{t('You can scroll through the list, or filter/search the list by typing one or more keywords.')}</p>
       <div style={{ position: 'relative' }}>
-        <ContextDropdown callback={isMember} />
+        <ContextDropdown onItemChosen={onContextChosen} selectedContext={currentContext} showRequestButton />
       </div>
-      <p>﹡ <em>{t('This is not yet possible; we will roll out an update soon; the context is required for publishing your project on the Rundgang 2021 website.')}</em></p>
-      {loading && <Loading />}
-      {subject !== '' && !member && <Knock room={room} callback={callback} />}
+      {/* {subject !== '' && !member && <Knock room={room} callback={callback} />} */}
     </>
   )
 }

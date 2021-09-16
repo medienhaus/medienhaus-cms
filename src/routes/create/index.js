@@ -31,6 +31,7 @@ const Create = () => {
   const [medienhausMeta, setMedienhausMeta] = useState([])
   const [events, setEvents] = useState()
   const [description, setDescription] = useState()
+  // const [preview, setPreview] = useState(false)
   const history = useHistory()
   const matrixClient = Matrix.getMatrixClient()
   const params = useParams()
@@ -291,6 +292,9 @@ const Create = () => {
                 <DisplayContent block={content} index={i} blocks={blocks} projectSpace={spaceObject?.rooms.filter(room => room.name === contentLang)[0].room_id} reloadSpace={reloadSpace} time={getCurrentTime} present={medienhausMeta?.present} key={content + i + content?.lastUpdate} />
               )}
           </section>
+          {/* Placeholder to show preview next to editing
+          {blocks.map((content, i) => <DisplayPreview content={content} key={i} matrixClient={matrixClient} />)}
+           */}
           <section className="visibility">
             <h3>{t('Visibility')}</h3>
             <p>
@@ -304,20 +308,14 @@ const Create = () => {
               ? (<>
                 <PublishProject space={spaceObject.rooms[0]} description={description?.en} published={visibility} time={getCurrentTime} />
                 {!description?.en && <p>❗️ {t('Please add a short description of your project.')}</p>}
-                {!medienhausMeta.context &&
-                  <>
-                    <p>
-                      ❗️ {t('Please add your project to a context.')}﹡
-                    </p>
-                    <p>
-                      ﹡ <em>{t('This is not yet possible; we will roll out an update soon; the context is required for publishing your project on the Rundgang 2021 website.')}</em>
-                    </p>
-                  </>}
+                {!medienhausMeta.context && <p>❗️ {t('Please add your project to a context.')}</p>}
                 {/* eslint-disable-next-line react/jsx-indent */}
                  </>)
               : <Loading />}
           </section>
+
           <section className="save">
+            <button onClick={() => history.push(`/preview/${projectSpace}`)} rel="external nofollow noopener noreferrer" target="_blank">{t('SHOW PREVIEW')} →</button>
             <button onClick={() => history.push('/projects')}>← {t('BACK TO OVERVIEW')}</button>
             {saveTimestamp && <p className="timestamp">↳ {t('Project last saved at')} {saveTimestamp}</p>}
           </section>

@@ -19,8 +19,17 @@ const Moderation = () => {
 
   useEffect(() => {
     if (joinedSpaces) {
+      const typeOfSpaces = ['context',
+        'class',
+        'course',
+        'institution',
+        'degree program',
+        'design department',
+        'faculty',
+        'institute',
+        'semester']
       // check to see if a user has joined a room with the specific content type and is moderator or admin (at least power level 50)
-      const filteredRooms = joinedSpaces.filter(space => space.meta.type === 'context' && space.powerLevel > 49)
+      const filteredRooms = joinedSpaces.filter(space => typeOfSpaces.includes(space.meta.type) && space.powerLevel > 49)
       setModerationRooms(filteredRooms)
     }
   }, [joinedSpaces])
@@ -33,12 +42,12 @@ const Moderation = () => {
     const room = matrixClient.getRoom(request.room_id)
     // console.log(Object.values(room.currentState.members))
     const knockingUsers = Object.values(room?.currentState.members).filter(user => user.membership === 'knock')
-    // @TODO change back to knock when context is done
+    // @TODO delete users from array after accepting/rejecting
 
     if (knockingUsers.length < 1) return <p>{t('No requests at the moment.')}</p>
 
     return knockingUsers.map((user, index) => {
-      return <Requests roomId={request.room_id} roomName={request.name} userId={user.user.userId} userName={user.name} key={index} />
+      return <Requests roomId={request.room_id} roomName={request.name} userId={user.userId} userName={user.name} matrixClient={matrixClient} key={index} />
     })
   }
 
@@ -57,6 +66,7 @@ const Moderation = () => {
   }
 
   const invite = async () => {
+    // @TODO check why userToInvite is not cleared
     const id = userToInvite.substring(userToInvite.lastIndexOf(' ') + 1)
     const name = userToInvite.substring(0, userToInvite.lastIndexOf(' '))
     if (id !== localStorage.getItem('mx_user_id')) {
@@ -76,8 +86,7 @@ const Moderation = () => {
       {moderationRooms.length > 0
         ? <>
           <section className="requests">
-            <h3>{t('Requests')}</h3>
-            {moderationRooms.map((request, index) => <GetRequestPerRoom request={request} key={index} />)}
+            {moderationRooms.map((request, index) => <React.Fragment key={request.name}><h3>{request.name}</h3><GetRequestPerRoom request={request} key={index} /></React.Fragment>)}
           </section>
           <section className="invite">
             <h3>{t('Invite students')}</h3>

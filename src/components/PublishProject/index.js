@@ -43,17 +43,15 @@ const PublishProject = ({ disabled, space, published, time }) => {
   if (!visibility) return <Loading />
 
   return (
-    <>
+    <div className="below">
       <select
         id="visibility" name="visibility" value={visibility} onChange={(e) => onChangeVisibility(e)} disabled={disabled}
       >
         <option value="invite">{t('Draft')}</option>
         <option value="public" disabled={!space.description || !context}>{t('Public')}</option>
       </select>
-      <div className="below">
-        {userFeedback && <p>{userFeedback}</p>}
-      </div>
-    </>
+      {userFeedback && <p>{userFeedback}</p>}
+    </div>
   )
 }
 

@@ -6,7 +6,7 @@ import debounce from 'lodash/debounce'
 import { Loading } from '../../../components/loading'
 import AddContent from '../AddContent'
 import List from './List'
-import Code from './Code'
+// import Code from './Code'
 import reorder from './matrix_reorder_rooms'
 import LoadingSpinnerButton from '../../../components/LoadingSpinnerButton'
 import TextareaAutosize from 'react-textarea-autosize'
@@ -28,16 +28,19 @@ import { ReactComponent as LocationIcon } from '../../../assets/icons/remix/loca
 import { ReactComponent as DateIcon } from '../../../assets/icons/remix/date.svg'
 
 import locations from '../../../assets/data/locations.json'
+// import DisplayPreview from '../../preview/componenets/DisplayPreview'
 
 const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace, time, present, mapComponent }) => {
   const [clickedDelete, setClickedDelete] = useState(false)
   const [readOnly, setReadOnly] = useState(false)
   const [loading, setLoading] = useState(false)
+  // eslint-disable-next-line no-unused-vars
   const [saved, setSaved] = useState(false)
   const [deleting, setDeleting] = useState(false)
   const [json, setJson] = useState({})
   let { cms, error, fetching } = FetchCms(block.room_id)
   cms = cms[0]
+  console.log(cms)
   const matrixClient = Matrix.getMatrixClient()
   const isMounted = useRef(true)
   const [content, setContent] = useState('')
@@ -76,10 +79,10 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace, time,
         }
       } else if (json.type === 'code') {
         const save = await matrixClient.sendMessage(roomId, {
-          body: localStorage.getItem(roomId),
+          body: content,
           format: 'org.matrix.custom.html',
           msgtype: 'm.text',
-          formatted_body: '<pre><code>' + localStorage.getItem(roomId) + '</code></pre>'
+          formatted_body: '<pre><code>' + content + '</code></pre>'
         })
         if ('event_id' in save) {
           setSaved('Saved!')
@@ -200,12 +203,17 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace, time,
 
   return (
     <>
-      {index === 0 && !mapComponent && <AddContent number={index} projectSpace={projectSpace} blocks={blocks} reloadSpace={reloadSpace} />}
-      <div className="editor">
-        <div className="left">
-          <LoadingSpinnerButton key={'up_' + block.room_id} disabled={index < 1 || mapComponent} onClick={() => changeOrder(block.room_id, block.name, -1)}>↑</LoadingSpinnerButton>
-          <figure className="icon-bg">
-            {
+      {/* preview
+        ? <DisplayPreview content={block} matrixClient={matrixClient} contentLoaded={cms} />
+        :
+        */
+        <>
+          {index === 0 && !mapComponent && <AddContent number={index} projectSpace={projectSpace} blocks={blocks} reloadSpace={reloadSpace} />}
+          <div className="editor">
+            <div className="left">
+              <LoadingSpinnerButton key={'up_' + block.room_id} disabled={index < 1 || mapComponent} onClick={() => changeOrder(block.room_id, block.name, -1)}>↑</LoadingSpinnerButton>
+              <figure className="icon-bg">
+                {
               json.type === 'heading'
                 ? <HeadingIcon fill="var(--color-fg)" />
                 : json.type === 'audio'
@@ -232,71 +240,84 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace, time,
                                       ? <PictureInPictureIcon fill="var(--color-fg)" />
                                       : <TextIcon fill="var(--color-fg)" />
             }
-          </figure>
-          <LoadingSpinnerButton key={'down_' + block.room_id} disabled={index === blocks.length - 1 || mapComponent} onClick={() => changeOrder(block.room_id, block.name, 1)}>↓</LoadingSpinnerButton>
-        </div>
-        {cms?.msgtype === 'm.image'
-          ? (
-            <div>
-              <figure className="center">
-                <img src={matrixClient.mxcUrlToHttp(cms.url)} alt={cms?.info?.alt} key={block.room_id} />
               </figure>
-              <input type="text" placeholder="author, credits, et cetera" value={cms.info.author} disabled />
-              <select id="license" name="license" value={cms.info.license} disabled>
-                <option value="cc0">CC0 1.0</option>
-                <option value="cc-by">CC BY 4.0</option>
-                <option value="cc-by-sa">CC BY-SA 4.0</option>
-                <option value="cc-by-nc">CC BY-NC 4.0</option>
-                <option value="cc-by-nc-sa">CC BY-NC-SA 4.0</option>
-                <option value="cc-by-nd">CC BY-ND 4.0</option>
-                <option value="cc-by-nc-nd">CC BY-NC-ND 4.0</option>
-              </select>
-              <TextareaAutosize rows={cms.info.alt.split('\n').length} value={cms.info.alt} disabled />
+              <LoadingSpinnerButton key={'down_' + block.room_id} disabled={index === blocks.length - 1 || mapComponent} onClick={() => changeOrder(block.room_id, block.name, 1)}>↓</LoadingSpinnerButton>
             </div>
-            )
-          : cms?.msgtype === 'm.audio'
-            ? (
-              <div>
-                <audio className="center" controls>
-                  <source src={matrixClient.mxcUrlToHttp(cms.url)} />
-                </audio>
-                <input type="text" value={cms.info.name} disabled />
-                <input type="text" value={cms.info.author} disabled />
-                <select id="license" name="license" value={cms.info.license} disabled>
-                  <option value="cc0">CC0 1.0</option>
-                  <option value="cc-by">CC BY 4.0</option>
-                  <option value="cc-by-sa">CC BY-SA 4.0</option>
-                  <option value="cc-by-nc">CC BY-NC 4.0</option>
-                  <option value="cc-by-nc-sa">CC BY-NC-SA 4.0</option>
-                  <option value="cc-by-nd">CC BY-ND 4.0</option>
-                  <option value="cc-by-nc-nd">CC BY-NC-ND 4.0</option>
-                </select>
-                <TextareaAutosize rows={cms.info.alt.split('\n').length} value={cms.info.alt} disabled />
-              </div>
-              )
-            : json.type === 'ul'
-              ? <List onSave={() => onSave(block.room_id)} storage={(list) => localStorage.setItem(block.room_id, list)} populated={cms?.body} type="ul" />
-              : json.type === 'ol'
-                ? <List onSave={() => onSave(block.room_id)} storage={(list) => localStorage.setItem(block.room_id, list)} populated={cms?.body} type="ol" />
-                : json.type === 'code'
-                  ? <Code onSave={() => onSave(block.room_id)} storage={(code) => localStorage.setItem(block.room_id, code)} saved={saved} content={cms?.body} />
-                  : (json.type === 'video' || json.type === 'livestream' || json.type === 'playlist')
-                      ? (
-                        <iframe
-                          src={`https://stream.udk-berlin.de/${(json.type === 'playlist' ? 'video-playlists' : 'videos')}/embed/${cms?.body}`}
-                          frameBorder="0"
-                          title={cms?.body}
-                          sandbox="allow-same-origin allow-scripts"
-                          allowFullScreen="allowfullscreen"
-                          style={{ width: '100%', aspectRatio: '16 / 9', border: 'calc(var(--margin) * 0.2) solid var(--color-fg)' }}
+            {cms?.msgtype === 'm.image'
+              ? (
+                <div>
+                  <figure className="center">
+                    <img src={matrixClient.mxcUrlToHttp(cms.url)} alt={cms?.info?.alt} key={block.room_id} />
+                  </figure>
+                  <input type="text" placeholder="author, credits, et cetera" value={cms.info.author} disabled />
+                  <select id="license" name="license" value={cms.info.license} disabled>
+                    <option value="cc0">CC0 1.0</option>
+                    <option value="cc-by">CC BY 4.0</option>
+                    <option value="cc-by-sa">CC BY-SA 4.0</option>
+                    <option value="cc-by-nc">CC BY-NC 4.0</option>
+                    <option value="cc-by-nc-sa">CC BY-NC-SA 4.0</option>
+                    <option value="cc-by-nd">CC BY-ND 4.0</option>
+                    <option value="cc-by-nc-nd">CC BY-NC-ND 4.0</option>
+                  </select>
+                  <TextareaAutosize rows={cms.info.alt.split('\n').length} value={cms.info.alt} disabled />
+                </div>
+                )
+              : cms?.msgtype === 'm.audio'
+                ? (
+                  <div>
+                    <audio className="center" controls>
+                      <source src={matrixClient.mxcUrlToHttp(cms.url)} />
+                    </audio>
+                    <input type="text" value={cms.info.name} disabled />
+                    <input type="text" value={cms.info.author} disabled />
+                    <select id="license" name="license" value={cms.info.license} disabled>
+                      <option value="cc0">CC0 1.0</option>
+                      <option value="cc-by">CC BY 4.0</option>
+                      <option value="cc-by-sa">CC BY-SA 4.0</option>
+                      <option value="cc-by-nc">CC BY-NC 4.0</option>
+                      <option value="cc-by-nc-sa">CC BY-NC-SA 4.0</option>
+                      <option value="cc-by-nd">CC BY-ND 4.0</option>
+                      <option value="cc-by-nc-nd">CC BY-NC-ND 4.0</option>
+                    </select>
+                    <TextareaAutosize rows={cms.info.alt.split('\n').length} value={cms.info.alt} disabled />
+                  </div>
+                  )
+                : json.type === 'ul'
+                  ? <List onSave={() => onSave(block.room_id)} storage={(list) => localStorage.setItem(block.room_id, list)} populated={cms?.body} type="ul" />
+                  : json.type === 'ol'
+                    ? <List onSave={() => onSave(block.room_id)} storage={(list) => localStorage.setItem(block.room_id, list)} populated={cms?.body} type="ol" />
+                    : json.type === 'code'
+                      ? <div className="center code">
+                        <TextareaAutosize
+                          value={content}
+                          onChange={(e) => {
+                            setContent(e.target.value)
+                            console.log(content)
+                          }}
+                          onBlur={(e) => {
+                            if (content !== cms?.body) {
+                              onSave(block.room_id, content)
+                            }
+                          }}
                         />
-                        )
-                      : json.type === 'location'
-                        ? (
-                          <div
-                            className={cms.body.substring(0, cms.body.indexOf(',')) + ',' + cms.body.substring(cms.body.indexOf(',') + 1, cms.body.indexOf('-')) === '0.0, 0.0' && 'center'}
-                          >
-                            {
+                      </div>
+                      : (json.type === 'video' || json.type === 'livestream' || json.type === 'playlist')
+                          ? (
+                            <iframe
+                              src={`https://stream.udk-berlin.de/${(json.type === 'playlist' ? 'video-playlists' : 'videos')}/embed/${cms?.body}`}
+                              frameBorder="0"
+                              title={cms?.body}
+                              sandbox="allow-same-origin allow-scripts"
+                              allowFullScreen="allowfullscreen"
+                              style={{ width: '100%', aspectRatio: '16 / 9', border: 'calc(var(--margin) * 0.2) solid var(--color-fg)' }}
+                            />
+                            )
+                          : json.type === 'location'
+                            ? (
+                              <div
+                                className={cms.body.substring(0, cms.body.indexOf(',')) + ',' + cms.body.substring(cms.body.indexOf(',') + 1, cms.body.indexOf('-')) === '0.0, 0.0' && 'center'}
+                              >
+                                {
                             cms.body.substring(0, cms.body.indexOf(',')) + ',' + cms.body.substring(cms.body.indexOf(',') + 1, cms.body.indexOf('-')) !== '0.0, 0.0' &&
                               <MapContainer className={mapComponent ? 'center' : 'center warning'} center={[cms.body.substring(0, cms.body.indexOf(',')), cms.body.substring(cms.body.indexOf(',') + 1, cms.body.indexOf('-'))]} zoom={17} scrollWheelZoom={false} placeholder>
                                 <TileLayer
@@ -310,113 +331,121 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace, time,
                                 </Marker>
                               </MapContainer>
                           }
-                            {cms.body.substring(cms.body.lastIndexOf('-') + 1).length > 0 && <input type="text" value={cms.body.substring(cms.body.lastIndexOf('-') + 1)} disabled />}
-                            {!mapComponent &&
-                              <p>❗️
-                                <Trans t={t} i18nkey="moveMap">Please add Venue and time with the new <a href="#date">Date and Venue</a> function.
-                                  You can delete this element afterwards.
-                                </Trans>
-                              </p>}
-                          </div>
-                          )
-                        : json.type === 'date'
-                          ? <div className={mapComponent ? 'center' : 'center warning'}>
-                            {cms.body.split(' ')[0] && <input type="date" value={cms.body.split(' ')[0]} disabled required />}
-                            {cms.body.split(' ')[1] && <input type="time" value={cms.body.split(' ')[1]} disabled required />}
-                            {!mapComponent &&
-                              <p>❗️
-                                <Trans t={t} i18nkey="moveMap">Please add Venue and time with the new <a href="#date">Date and Venue</a> function.
-                                  You can delete this element afterwards.
-                                </Trans>
-                              </p>}
-                            {/* eslint-disable-next-line react/jsx-indent */}
+                                {cms.body.substring(cms.body.lastIndexOf('-') + 1).length > 0 && <input type="text" value={cms.body.substring(cms.body.lastIndexOf('-') + 1)} disabled />}
+                                {!mapComponent &&
+                                  <p>❗️
+                                    <Trans t={t} i18nkey="moveMap">Please add Venue and time with the new <a href="#date">Date and Venue</a> function.
+                                      You can delete this element afterwards.
+                                    </Trans>
+                                  </p>}
+                              </div>
+                              )
+                            : json.type === 'date'
+                              ? <div className={mapComponent ? 'center' : 'center warning'}>
+                                {cms.body.split(' ')[0] && <input type="date" value={cms.body.split(' ')[0]} disabled required />}
+                                {cms.body.split(' ')[1] && <input type="time" value={cms.body.split(' ')[1]} disabled required />}
+                                {!mapComponent &&
+                                  <p>❗️
+                                    <Trans t={t} i18nkey="moveMap">Please add Venue and time with the new <a href="#date">Date and Venue</a> function.
+                                      You can delete this element afterwards.
+                                    </Trans>
+                                  </p>}
+                                {/* eslint-disable-next-line react/jsx-indent */}
                             </div>
-                          : json.type === 'bbb'
-                            ? <div>BigBlueButton-Session<br /><a href={cms?.body} target="_blank" rel="external nofollow noopener noreferrer">{cms?.body}</a></div>
-                            : (json.type === 'video' || json.type === 'livestream' || json.type === 'playlist')
-                                ? (
-                                  <iframe
-                                    src={`https://stream.udk-berlin.de/${(json.type === 'playlist' ? 'video-playlists' : 'videos')}/embed/${cms?.body}`}
-                                    frameBorder="0"
-                                    title={cms?.body}
-                                    sandbox="allow-same-origin allow-scripts"
-                                    allowFullScreen="allowfullscreen"
-                                    style={{ width: '100%', aspectRatio: '16 / 9', border: 'calc(var(--margin) * 0.2) solid var(--color-fg)' }}
-                                  />
-                                  )
-                                : json.type === 'heading'
-                                  ? <div className="center">
-                                    <input
-                                      type="text"
-                                      value={content}
-                                      onChange={(e) => {
-                                        setContent(e.target.value)
-                                        console.log(content)
-                                      }}
-                                      onBlur={(e) => {
-                                        if (content !== cms?.body) {
-                                          onSave(block.room_id, content)
-                                        }
-                                      }}
-                                    />
+                              : json.type === 'bbb'
+                                ? <div className="center">
+                                  <div>
+                                    <p>BigBlueButton-Session via:</p>
+                                    <br />
+                                    <p><a href={cms?.body} target="_blank" rel="external nofollow noopener noreferrer">{cms?.body}</a></p>
                                   </div>
-                                  : (<div className="center">
-                                    <Editor
-                                      dark={window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches}
-                                      defaultValue={cms?.body}
-                                      disableExtensions={['blockmenu', 'image', 'embed', 'table', 'tr', 'th', 'td', 'bullet_list', 'ordered_list', 'checkbox_item', 'checkbox_list', 'container_notice', 'blockquote', 'heading', 'hr', 'highlight']}
-                                      placeholder={json.type}
-                                      readOnly={readOnly}
-                                      onSave={({ done }) => {
-                                        if (localStorage.getItem(block.room_id) !== null && cms !== undefined && cms.body !== localStorage.getItem(block.room_id)) {
-                                          onSave(block.room_id)
-                                          localStorage.removeItem(block.room_id)
-                                        } else if (localStorage.getItem(block.room_id) !== null && cms === undefined) {
-                                          onSave(block.room_id)
-                                          localStorage.removeItem(block.room_id)
-                                        }
-                                      }}
-                                      onChange={debounce((value) => {
-                                        const text = value()
-                                        localStorage.setItem(block.room_id, text)
-                                      }, 250)}
-                                      handleDOMEvents={{
-                                        focus: () => {
-                                        }, // this could set MatrixClient"User.presence" to 'online', "User.currentlyActive" or 'typing. depending on which works best.
-                                        blur: (e) => {
-                                          if (localStorage.getItem(block.room_id) !== null && cms !== undefined && cms.body !== localStorage.getItem(block.room_id)) {
-                                            onSave(block.room_id)
-                                            localStorage.removeItem(block.room_id)
-                                          } else if (localStorage.getItem(block.room_id) !== null && cms === undefined) {
-                                            onSave(block.room_id)
-                                            localStorage.removeItem(block.room_id)
-                                          }
-                                        }
-                                      }}
-                                      key={block.room_id}
-                                    />
-                                  </div>
-                                    )}
+                                </div>
+                                : (json.type === 'video' || json.type === 'livestream' || json.type === 'playlist')
+                                    ? (
+                                      <iframe
+                                        src={`https://stream.udk-berlin.de/${(json.type === 'playlist' ? 'video-playlists' : 'videos')}/embed/${cms?.body}`}
+                                        frameBorder="0"
+                                        title={cms?.body}
+                                        sandbox="allow-same-origin allow-scripts"
+                                        allowFullScreen="allowfullscreen"
+                                        style={{ width: '100%', aspectRatio: '16 / 9', border: 'calc(var(--margin) * 0.2) solid var(--color-fg)' }}
+                                      />
+                                      )
+                                    : json.type === 'heading'
+                                      ? <div className="center">
+                                        <input
+                                          type="text"
+                                          value={content}
+                                          onChange={(e) => {
+                                            setContent(e.target.value)
+                                            console.log(content)
+                                          }}
+                                          onBlur={(e) => {
+                                            if (content !== cms?.body) {
+                                              onSave(block.room_id, content)
+                                            }
+                                          }}
+                                        />
+                                      </div>
+                                      : (<div className="center">
+                                        <Editor
+                                          dark={window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches}
+                                          defaultValue={cms?.body}
+                                          disableExtensions={['blockmenu', 'image', 'embed', 'table', 'tr', 'th', 'td', 'bullet_list', 'ordered_list', 'checkbox_item', 'checkbox_list', 'container_notice', 'blockquote', 'heading', 'hr', 'highlight']}
+                                          placeholder={json.type}
+                                          readOnly={readOnly}
+                                          onSave={({ done }) => {
+                                            if (localStorage.getItem(block.room_id) !== null && cms !== undefined && cms.body !== localStorage.getItem(block.room_id)) {
+                                              onSave(block.room_id)
+                                              localStorage.removeItem(block.room_id)
+                                            } else if (localStorage.getItem(block.room_id) !== null && cms === undefined) {
+                                              onSave(block.room_id)
+                                              localStorage.removeItem(block.room_id)
+                                            }
+                                          }}
+                                          onChange={debounce((value) => {
+                                            const text = value()
+                                            localStorage.setItem(block.room_id, text)
+                                          }, 250)}
+                                          handleDOMEvents={{
+                                            focus: () => {
+                                            }, // this could set MatrixClient"User.presence" to 'online', "User.currentlyActive" or 'typing. depending on which works best.
+                                            blur: (e) => {
+                                              if (localStorage.getItem(block.room_id) !== null && cms !== undefined && cms.body !== localStorage.getItem(block.room_id)) {
+                                                onSave(block.room_id)
+                                                localStorage.removeItem(block.room_id)
+                                              } else if (localStorage.getItem(block.room_id) !== null && cms === undefined) {
+                                                onSave(block.room_id)
+                                                localStorage.removeItem(block.room_id)
+                                              }
+                                            }
+                                          }}
+                                          key={block.room_id}
+                                        />
+                                      </div>
+                                        )}
 
-        <div className="right">
-          <button
-            key={'delete' + index} disabled={deleting} onClick={(e) => {
-              if (clickedDelete) {
-                onDelete(e, block.room_id, block.name, index)
-                setClickedDelete(false)
-                reloadSpace()
-              } else {
-                e.preventDefault()
-                setClickedDelete(true)
-              }
-                <p>{deleting}</p> // feedback that deleting was succesfull or has failed
-            }}
-          >
-            {clickedDelete ? '❓' : deleting ? <Loading /> : '×'}
-          </button>
-        </div>
-      </div>
-      {!mapComponent && <AddContent number={index + 1} projectSpace={projectSpace} blocks={blocks} reloadSpace={reloadSpace} present={present} />}
+            <div className="right">
+              <button
+                key={'delete' + index} disabled={deleting} onClick={(e) => {
+                  if (clickedDelete) {
+                    onDelete(e, block.room_id, block.name, index)
+                    setClickedDelete(false)
+                    reloadSpace()
+                  } else {
+                    e.preventDefault()
+                    setClickedDelete(true)
+                  }
+                    <p>{deleting}</p> // feedback that deleting was succesfull or has failed
+                }}
+              >
+                {clickedDelete ? '❓' : deleting ? <Loading /> : '×'}
+              </button>
+            </div>
+          </div>
+          {!mapComponent && <AddContent number={index + 1} projectSpace={projectSpace} blocks={blocks} reloadSpace={reloadSpace} present={present} />}
+        </>
+}
     </>
   )
 }
