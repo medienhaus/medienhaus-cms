@@ -1,2022 +1,4253 @@
 /* eslint-disable */
 const struktur = {
-  "!rMmnCTBTgMPPDQMaFr:dev.medienhaus.udk-berlin.de": {
-    "id": "!rMmnCTBTgMPPDQMaFr:dev.medienhaus.udk-berlin.de",
+  "!SNAOQOPYPkYxVbnVmf:dev.medienhaus.udk-berlin.de": {
+    "id": "!SNAOQOPYPkYxVbnVmf:dev.medienhaus.udk-berlin.de",
     "name": "sose2021",
     "children": {
-      "!ApZhPFTFQxiGiQLTxZ:dev.medienhaus.udk-berlin.de": {
-        "id": "!ApZhPFTFQxiGiQLTxZ:dev.medienhaus.udk-berlin.de",
-        "name": "Fakultät der Bildenen Kunst",
+      "!QubtdbizDKDfqSSTnb:dev.medienhaus.udk-berlin.de": {
+        "id": "!QubtdbizDKDfqSSTnb:dev.medienhaus.udk-berlin.de",
+        "name": "Fakultät Musik",
         "children": {
-          "!EujyfEBXHszRJSSbyL:dev.medienhaus.udk-berlin.de": {
-            "id": "!EujyfEBXHszRJSSbyL:dev.medienhaus.udk-berlin.de",
-            "name": "Institut für Kunst",
+          "!SVLlwRxgDtAwfNzuae:dev.medienhaus.udk-berlin.de": {
+            "id": "!SVLlwRxgDtAwfNzuae:dev.medienhaus.udk-berlin.de",
+            "name": "Institut für Künstlerische Ausbildung / Klavier",
+            "children": {}
+          },
+          "!qqBscLiprMGpuWRbcY:dev.medienhaus.udk-berlin.de": {
+            "id": "!qqBscLiprMGpuWRbcY:dev.medienhaus.udk-berlin.de",
+            "name": "Institut für Künstlerische Ausbildung / Orchesterinstrumente und Dirigieren",
+            "children": {}
+          },
+          "!bAtCoYZOzkoHIWBfMx:dev.medienhaus.udk-berlin.de": {
+            "id": "!bAtCoYZOzkoHIWBfMx:dev.medienhaus.udk-berlin.de",
+            "name": "Institut für Künstlerische Ausbildung / Alte Musik",
+            "children": {}
+          },
+          "!zVhQjCajMaebGklcDe:dev.medienhaus.udk-berlin.de": {
+            "id": "!zVhQjCajMaebGklcDe:dev.medienhaus.udk-berlin.de",
+            "name": "Institut für Künstlerische Ausbildung / Zeitgenössischer Jazz",
             "children": {
-              "!AzNKGzjUYwzkMXsyEf:dev.medienhaus.udk-berlin.de": {
-                "id": "!AzNKGzjUYwzkMXsyEf:dev.medienhaus.udk-berlin.de",
-                "name": "Bachelor Lehramt an Integrierten Sekundarschulen und Gymnasien mit dem Fach Bildende Kunst 2018",
-                "children": {
-                  "!xwJeqaldlMoyUSlOLO:dev.medienhaus.udk-berlin.de": {
-                    "id": "!xwJeqaldlMoyUSlOLO:dev.medienhaus.udk-berlin.de",
-                    "name": "„Sprechen über Kunst. Konzepte für Bildung und Vermittlung von Biennalen und musealen Sammlungen“",
-                    "children": {}
-                  },
-                  "!DvRHkihGfCGuSHidzJ:dev.medienhaus.udk-berlin.de": {
-                    "id": "!DvRHkihGfCGuSHidzJ:dev.medienhaus.udk-berlin.de",
-                    "name": "\"… they think these bodies can't …\" - otherism in classical music composition (KW)",
-                    "children": {}
-                  },
-                  "!QrYtDYRJrgNAxrIlaQ:dev.medienhaus.udk-berlin.de": {
-                    "id": "!QrYtDYRJrgNAxrIlaQ:dev.medienhaus.udk-berlin.de",
-                    "name": "Adding Insult to Injury: Bodies and their Objects (IK)",
-                    "children": {}
-                  },
-                  "!DvfOgLdJVCmCWnleiW:dev.medienhaus.udk-berlin.de": {
-                    "id": "!DvfOgLdJVCmCWnleiW:dev.medienhaus.udk-berlin.de",
-                    "name": "Aisthesis Decolonial – Dekoloniale Theorie in Kunst und Gestaltung",
-                    "children": {}
-                  },
-                  "!djerkhoFJxaPMSewid:dev.medienhaus.udk-berlin.de": {
-                    "id": "!djerkhoFJxaPMSewid:dev.medienhaus.udk-berlin.de",
-                    "name": "Analyse der Macht der Plattformen (KW)",
-                    "children": {}
-                  },
-                  "!PnxPQiTZytfwQNMebI:dev.medienhaus.udk-berlin.de": {
-                    "id": "!PnxPQiTZytfwQNMebI:dev.medienhaus.udk-berlin.de",
-                    "name": "Andy Warhols queere Filmfabrik",
-                    "children": {}
-                  },
-                  "!sKohfWQyYuptJFSjNA:dev.medienhaus.udk-berlin.de": {
-                    "id": "!sKohfWQyYuptJFSjNA:dev.medienhaus.udk-berlin.de",
-                    "name": "Arbeitsgespräche / Einzelkonsultationen",
-                    "children": {}
-                  },
-                  "!TrqOJZzSOwfJdpJetH:dev.medienhaus.udk-berlin.de": {
-                    "id": "!TrqOJZzSOwfJdpJetH:dev.medienhaus.udk-berlin.de",
-                    "name": "Archäologie des Selbst",
-                    "children": {}
-                  },
-                  "!AHwLzHonbOsViklvEG:dev.medienhaus.udk-berlin.de": {
-                    "id": "!AHwLzHonbOsViklvEG:dev.medienhaus.udk-berlin.de",
-                    "name": "Before Photography. Wie ein Medium entsteht",
-                    "children": {}
-                  },
-                  "!IFjZqjcdTTsdnVeDUg:dev.medienhaus.udk-berlin.de": {
-                    "id": "!IFjZqjcdTTsdnVeDUg:dev.medienhaus.udk-berlin.de",
-                    "name": "Begleitung der künstlerischen Praxis in Einzel- und Gruppenbesprechungen (Klasse Karsten Konrad)",
-                    "children": {}
-                  },
-                  "!ksNNrPLxNasSqUOYgT:dev.medienhaus.udk-berlin.de": {
-                    "id": "!ksNNrPLxNasSqUOYgT:dev.medienhaus.udk-berlin.de",
-                    "name": "Beyond UX – Zur Kultur und Geschichte des Interfaces (KW)",
-                    "children": {}
-                  },
-                  "!FzFCrHUgqBBWiZhjpy:dev.medienhaus.udk-berlin.de": {
-                    "id": "!FzFCrHUgqBBWiZhjpy:dev.medienhaus.udk-berlin.de",
-                    "name": "Bildende Kunst",
-                    "children": {}
-                  },
-                  "!OvuSWCAhISmvrxPwEW:dev.medienhaus.udk-berlin.de": {
-                    "id": "!OvuSWCAhISmvrxPwEW:dev.medienhaus.udk-berlin.de",
-                    "name": "Bildhauerei",
-                    "children": {}
-                  },
-                  "!wfrRNbbmRAeMsjPnqs:dev.medienhaus.udk-berlin.de": {
-                    "id": "!wfrRNbbmRAeMsjPnqs:dev.medienhaus.udk-berlin.de",
-                    "name": "Bildhauerei 1 und 2",
-                    "children": {}
-                  },
-                  "!vBMUHLkNherBLvttsy:dev.medienhaus.udk-berlin.de": {
-                    "id": "!vBMUHLkNherBLvttsy:dev.medienhaus.udk-berlin.de",
-                    "name": "Bodybuilding (IK)",
-                    "children": {}
-                  },
-                  "!uxzzpdhMeiUOuePPMg:dev.medienhaus.udk-berlin.de": {
-                    "id": "!uxzzpdhMeiUOuePPMg:dev.medienhaus.udk-berlin.de",
-                    "name": "Bucheinbandtechniken",
-                    "children": {}
-                  },
-                  "!FeTmwbsNiSBfGbjdsy:dev.medienhaus.udk-berlin.de": {
-                    "id": "!FeTmwbsNiSBfGbjdsy:dev.medienhaus.udk-berlin.de",
-                    "name": "Bullshit-Resistenz: Einführung ins kritische Denken (KW)",
-                    "children": {}
-                  },
-                  "!PMXXZQFhizYbMRWZIi:dev.medienhaus.udk-berlin.de": {
-                    "id": "!PMXXZQFhizYbMRWZIi:dev.medienhaus.udk-berlin.de",
-                    "name": "Colloquium: Besprechnung wissenschaftlicher Abschlussarbeiten",
-                    "children": {}
-                  },
-                  "!KSTHTctLlYCAEVXXoa:dev.medienhaus.udk-berlin.de": {
-                    "id": "!KSTHTctLlYCAEVXXoa:dev.medienhaus.udk-berlin.de",
-                    "name": "Colloquium: Besprechung wissenschaftlicher Abschlussarbeiten",
-                    "children": {}
-                  },
-                  "!REKvZphAFcwlBIoUXf:dev.medienhaus.udk-berlin.de": {
-                    "id": "!REKvZphAFcwlBIoUXf:dev.medienhaus.udk-berlin.de",
-                    "name": "Colorgroßfoto-Analog I",
-                    "children": {}
-                  },
-                  "!bdwakVJDbgxkfUSiwl:dev.medienhaus.udk-berlin.de": {
-                    "id": "!bdwakVJDbgxkfUSiwl:dev.medienhaus.udk-berlin.de",
-                    "name": "Colorgroßfoto-Analog II",
-                    "children": {}
-                  },
-                  "!DMJdBiHkyWBSXVcdkq:dev.medienhaus.udk-berlin.de": {
-                    "id": "!DMJdBiHkyWBSXVcdkq:dev.medienhaus.udk-berlin.de",
-                    "name": "Contemporary Art and Photography / Zeitgenössische Kunst und Fotografie",
-                    "children": {}
-                  },
-                  "!XFjRXwQBGpNibCyaeU:dev.medienhaus.udk-berlin.de": {
-                    "id": "!XFjRXwQBGpNibCyaeU:dev.medienhaus.udk-berlin.de",
-                    "name": "Contesting the Colonial Spatial Divide of the Humboldt Forum & Following Entangled Trajectories",
-                    "children": {}
-                  },
-                  "!uizWiRdBIBFXVwqmZT:dev.medienhaus.udk-berlin.de": {
-                    "id": "!uizWiRdBIBFXVwqmZT:dev.medienhaus.udk-berlin.de",
-                    "name": "Designtechniken Modedesign: Schnittkonstruktion",
-                    "children": {}
-                  },
-                  "!zwseqtJRhArxRvvuFx:dev.medienhaus.udk-berlin.de": {
-                    "id": "!zwseqtJRhArxRvvuFx:dev.medienhaus.udk-berlin.de",
-                    "name": "Die Idee der Kindheit (Walter Benjamin)",
-                    "children": {}
-                  },
-                  "!WABxWcEqSgdOrEbHvx:dev.medienhaus.udk-berlin.de": {
-                    "id": "!WABxWcEqSgdOrEbHvx:dev.medienhaus.udk-berlin.de",
-                    "name": "Die Vermögen der Körper (KW)",
-                    "children": {}
-                  },
-                  "!neXHzLQwMRqMTDnjSu:dev.medienhaus.udk-berlin.de": {
-                    "id": "!neXHzLQwMRqMTDnjSu:dev.medienhaus.udk-berlin.de",
-                    "name": "Die Zukunft der großen Geschichten",
-                    "children": {}
-                  },
-                  "!oaBdHwlyWPLSAsqXWZ:dev.medienhaus.udk-berlin.de": {
-                    "id": "!oaBdHwlyWPLSAsqXWZ:dev.medienhaus.udk-berlin.de",
-                    "name": "Digitalfotolabor - Digitalgroßfoto",
-                    "children": {}
-                  },
-                  "!slbuLMdEjbqTAzSgFQ:dev.medienhaus.udk-berlin.de": {
-                    "id": "!slbuLMdEjbqTAzSgFQ:dev.medienhaus.udk-berlin.de",
-                    "name": "Doktorandencolloquium",
-                    "children": {}
-                  },
-                  "!hmzIBrMWflMFJbHdgJ:dev.medienhaus.udk-berlin.de": {
-                    "id": "!hmzIBrMWflMFJbHdgJ:dev.medienhaus.udk-berlin.de",
-                    "name": "Drucken im Großformat – Hochdruck-Tiefdruck – experimentelle Druckgrafk",
-                    "children": {}
-                  },
-                  "!JXcOeihRynYSnDUxaO:dev.medienhaus.udk-berlin.de": {
-                    "id": "!JXcOeihRynYSnDUxaO:dev.medienhaus.udk-berlin.de",
-                    "name": "Einführung in bildhauerische Techniken mit dem Werkstoff Ton",
-                    "children": {}
-                  },
-                  "!XiKreRKlyMAuLjcufF:dev.medienhaus.udk-berlin.de": {
-                    "id": "!XiKreRKlyMAuLjcufF:dev.medienhaus.udk-berlin.de",
-                    "name": "Einführung in die Kunstwissenschaft und Ästhetik",
-                    "children": {}
-                  },
-                  "!FnjTmNZYnxLJnVAZQw:dev.medienhaus.udk-berlin.de": {
-                    "id": "!FnjTmNZYnxLJnVAZQw:dev.medienhaus.udk-berlin.de",
-                    "name": "Einführung in die Kunstwissenschaft und Ästhetik",
-                    "children": {}
-                  },
-                  "!KYnTCnFsKAbYjiXaHt:dev.medienhaus.udk-berlin.de": {
-                    "id": "!KYnTCnFsKAbYjiXaHt:dev.medienhaus.udk-berlin.de",
-                    "name": "Einführung in die Ölmalerei - ohne gesundheitsgefährdende Lösungsmittel (Online-Kurs)",
-                    "children": {}
-                  },
-                  "!vZREHwprIWytwJwwio:dev.medienhaus.udk-berlin.de": {
-                    "id": "!vZREHwprIWytwJwwio:dev.medienhaus.udk-berlin.de",
-                    "name": "Einführung in textile Werkverfahren",
-                    "children": {}
-                  },
-                  "!TKgHUKhyvqFcFGNQmC:dev.medienhaus.udk-berlin.de": {
-                    "id": "!TKgHUKhyvqFcFGNQmC:dev.medienhaus.udk-berlin.de",
-                    "name": "Einführungskurs, Individuelle Beratung und Betreuung von künstlerischen Projekten",
-                    "children": {}
-                  },
-                  "!PvLHYooasYSaSZWlEb:dev.medienhaus.udk-berlin.de": {
-                    "id": "!PvLHYooasYSaSZWlEb:dev.medienhaus.udk-berlin.de",
-                    "name": "Einstieg in das digitale Zeichnen und die 2D-Animation mit dem iPad",
-                    "children": {}
-                  },
-                  "!grWumahZykafeyUnsZ:dev.medienhaus.udk-berlin.de": {
-                    "id": "!grWumahZykafeyUnsZ:dev.medienhaus.udk-berlin.de",
-                    "name": "Eintritt in die dritte Dimension: Videoarbeiten mit 3D-Techniken",
-                    "children": {}
-                  },
-                  "!mrWLBfMPAWZOTQwTWV:dev.medienhaus.udk-berlin.de": {
-                    "id": "!mrWLBfMPAWZOTQwTWV:dev.medienhaus.udk-berlin.de",
-                    "name": "En plein air! – Wanderstaffelei, Farbentuben und festes Schuhwerk in analoger Praxis bei jeder Wetterlage (IK)",
-                    "children": {}
-                  },
-                  "!yhbsgvJNOiyovQNVlR:dev.medienhaus.udk-berlin.de": {
-                    "id": "!yhbsgvJNOiyovQNVlR:dev.medienhaus.udk-berlin.de",
-                    "name": "Erweitertes Bewegtbild / Video / 2D und 3D Animation - individuelle Projektbetreuung",
-                    "children": {}
-                  },
-                  "!lkEdWtVRGOHujdFqzC:dev.medienhaus.udk-berlin.de": {
-                    "id": "!lkEdWtVRGOHujdFqzC:dev.medienhaus.udk-berlin.de",
-                    "name": "Erzählerische, fiktionale Bildkonzepte",
-                    "children": {}
-                  },
-                  "!YOaTOdatNyTjXWJDrD:dev.medienhaus.udk-berlin.de": {
-                    "id": "!YOaTOdatNyTjXWJDrD:dev.medienhaus.udk-berlin.de",
-                    "name": "Essay als Form – in Kunst, Literatur, Ausstellung",
-                    "children": {}
-                  },
-                  "!NRgTxNbVXKBHDGVDXd:dev.medienhaus.udk-berlin.de": {
-                    "id": "!NRgTxNbVXKBHDGVDXd:dev.medienhaus.udk-berlin.de",
-                    "name": "Fachdidaktik I (Einführung)/ISS Gym BA",
-                    "children": {}
-                  },
-                  "!MLokAVsMamGuSHAqbj:dev.medienhaus.udk-berlin.de": {
-                    "id": "!MLokAVsMamGuSHAqbj:dev.medienhaus.udk-berlin.de",
-                    "name": "Fachdidaktik II (Theorie) »Aber Bitte, postdigital!«",
-                    "children": {}
-                  },
-                  "!prePIlrNOdicKhjrJK:dev.medienhaus.udk-berlin.de": {
-                    "id": "!prePIlrNOdicKhjrJK:dev.medienhaus.udk-berlin.de",
-                    "name": "Farb- und Materialtechnik",
-                    "children": {}
-                  },
-                  "!pefPGQSyTUNnOIdyAJ:dev.medienhaus.udk-berlin.de": {
-                    "id": "!pefPGQSyTUNnOIdyAJ:dev.medienhaus.udk-berlin.de",
-                    "name": "Film, Video und Audio - individuelle Projektbetreuung",
-                    "children": {}
-                  },
-                  "!dQMoVjJVagdBXRrLzy:dev.medienhaus.udk-berlin.de": {
-                    "id": "!dQMoVjJVagdBXRrLzy:dev.medienhaus.udk-berlin.de",
-                    "name": "Fleischwerdung des Wortes. Über eine Poetik des Körpers (KW)",
-                    "children": {}
-                  },
-                  "!orgLPCLZcKrFmpTdWq:dev.medienhaus.udk-berlin.de": {
-                    "id": "!orgLPCLZcKrFmpTdWq:dev.medienhaus.udk-berlin.de",
-                    "name": "Foto 1 und 2",
-                    "children": {}
-                  },
-                  "!QqeEZdjpChrUFoXbKB:dev.medienhaus.udk-berlin.de": {
-                    "id": "!QqeEZdjpChrUFoXbKB:dev.medienhaus.udk-berlin.de",
-                    "name": "Free Improv – Orchestra (IK)",
-                    "children": {}
-                  }
-                }
-              },
-              "!FSDpBAmceMhqDJbvgL:dev.medienhaus.udk-berlin.de": {
-                "id": "!FSDpBAmceMhqDJbvgL:dev.medienhaus.udk-berlin.de",
-                "name": "Master Lehramt an Integrierten Sekundarschulen und Gymnasien mit dem Fach Bildende Kunst 2018",
-                "children": {
-                  "!xwJeqaldlMoyUSlOLO:dev.medienhaus.udk-berlin.de": {
-                    "id": "!xwJeqaldlMoyUSlOLO:dev.medienhaus.udk-berlin.de",
-                    "name": "„Sprechen über Kunst. Konzepte für Bildung und Vermittlung von Biennalen und musealen Sammlungen“",
-                    "children": {}
-                  },
-                  "!xjfJACXfOKEMXwjWgm:dev.medienhaus.udk-berlin.de": {
-                    "id": "!xjfJACXfOKEMXwjWgm:dev.medienhaus.udk-berlin.de",
-                    "name": "Analog/Farbe",
-                    "children": {}
-                  },
-                  "!qADziAoGbyiklNTYQy:dev.medienhaus.udk-berlin.de": {
-                    "id": "!qADziAoGbyiklNTYQy:dev.medienhaus.udk-berlin.de",
-                    "name": "Analog SW/Fotografie und Labor",
-                    "children": {}
-                  },
-                  "!PnxPQiTZytfwQNMebI:dev.medienhaus.udk-berlin.de": {
-                    "id": "!PnxPQiTZytfwQNMebI:dev.medienhaus.udk-berlin.de",
-                    "name": "Andy Warhols queere Filmfabrik",
-                    "children": {}
-                  },
-                  "!AHwLzHonbOsViklvEG:dev.medienhaus.udk-berlin.de": {
-                    "id": "!AHwLzHonbOsViklvEG:dev.medienhaus.udk-berlin.de",
-                    "name": "Before Photography. Wie ein Medium entsteht",
-                    "children": {}
-                  },
-                  "!IFjZqjcdTTsdnVeDUg:dev.medienhaus.udk-berlin.de": {
-                    "id": "!IFjZqjcdTTsdnVeDUg:dev.medienhaus.udk-berlin.de",
-                    "name": "Begleitung der künstlerischen Praxis in Einzel- und Gruppenbesprechungen (Klasse Karsten Konrad)",
-                    "children": {}
-                  },
-                  "!FzFCrHUgqBBWiZhjpy:dev.medienhaus.udk-berlin.de": {
-                    "id": "!FzFCrHUgqBBWiZhjpy:dev.medienhaus.udk-berlin.de",
-                    "name": "Bildende Kunst",
-                    "children": {}
-                  },
-                  "!OvuSWCAhISmvrxPwEW:dev.medienhaus.udk-berlin.de": {
-                    "id": "!OvuSWCAhISmvrxPwEW:dev.medienhaus.udk-berlin.de",
-                    "name": "Bildhauerei",
-                    "children": {}
-                  },
-                  "!PMXXZQFhizYbMRWZIi:dev.medienhaus.udk-berlin.de": {
-                    "id": "!PMXXZQFhizYbMRWZIi:dev.medienhaus.udk-berlin.de",
-                    "name": "Colloquium: Besprechnung wissenschaftlicher Abschlussarbeiten",
-                    "children": {}
-                  },
-                  "!KSTHTctLlYCAEVXXoa:dev.medienhaus.udk-berlin.de": {
-                    "id": "!KSTHTctLlYCAEVXXoa:dev.medienhaus.udk-berlin.de",
-                    "name": "Colloquium: Besprechung wissenschaftlicher Abschlussarbeiten",
-                    "children": {}
-                  },
-                  "!REKvZphAFcwlBIoUXf:dev.medienhaus.udk-berlin.de": {
-                    "id": "!REKvZphAFcwlBIoUXf:dev.medienhaus.udk-berlin.de",
-                    "name": "Colorgroßfoto-Analog I",
-                    "children": {}
-                  },
-                  "!bdwakVJDbgxkfUSiwl:dev.medienhaus.udk-berlin.de": {
-                    "id": "!bdwakVJDbgxkfUSiwl:dev.medienhaus.udk-berlin.de",
-                    "name": "Colorgroßfoto-Analog II",
-                    "children": {}
-                  },
-                  "!DMJdBiHkyWBSXVcdkq:dev.medienhaus.udk-berlin.de": {
-                    "id": "!DMJdBiHkyWBSXVcdkq:dev.medienhaus.udk-berlin.de",
-                    "name": "Contemporary Art and Photography / Zeitgenössische Kunst und Fotografie",
-                    "children": {}
-                  },
-                  "!zwseqtJRhArxRvvuFx:dev.medienhaus.udk-berlin.de": {
-                    "id": "!zwseqtJRhArxRvvuFx:dev.medienhaus.udk-berlin.de",
-                    "name": "Die Idee der Kindheit (Walter Benjamin)",
-                    "children": {}
-                  },
-                  "!neXHzLQwMRqMTDnjSu:dev.medienhaus.udk-berlin.de": {
-                    "id": "!neXHzLQwMRqMTDnjSu:dev.medienhaus.udk-berlin.de",
-                    "name": "Die Zukunft der großen Geschichten",
-                    "children": {}
-                  },
-                  "!oaBdHwlyWPLSAsqXWZ:dev.medienhaus.udk-berlin.de": {
-                    "id": "!oaBdHwlyWPLSAsqXWZ:dev.medienhaus.udk-berlin.de",
-                    "name": "Digitalfotolabor - Digitalgroßfoto",
-                    "children": {}
-                  },
-                  "!slbuLMdEjbqTAzSgFQ:dev.medienhaus.udk-berlin.de": {
-                    "id": "!slbuLMdEjbqTAzSgFQ:dev.medienhaus.udk-berlin.de",
-                    "name": "Doktorandencolloquium",
-                    "children": {}
-                  },
-                  "!hmzIBrMWflMFJbHdgJ:dev.medienhaus.udk-berlin.de": {
-                    "id": "!hmzIBrMWflMFJbHdgJ:dev.medienhaus.udk-berlin.de",
-                    "name": "Drucken im Großformat – Hochdruck-Tiefdruck – experimentelle Druckgrafk",
-                    "children": {}
-                  },
-                  "!JXcOeihRynYSnDUxaO:dev.medienhaus.udk-berlin.de": {
-                    "id": "!JXcOeihRynYSnDUxaO:dev.medienhaus.udk-berlin.de",
-                    "name": "Einführung in bildhauerische Techniken mit dem Werkstoff Ton",
-                    "children": {}
-                  },
-                  "!KYnTCnFsKAbYjiXaHt:dev.medienhaus.udk-berlin.de": {
-                    "id": "!KYnTCnFsKAbYjiXaHt:dev.medienhaus.udk-berlin.de",
-                    "name": "Einführung in die Ölmalerei - ohne gesundheitsgefährdende Lösungsmittel (Online-Kurs)",
-                    "children": {}
-                  },
-                  "!TKgHUKhyvqFcFGNQmC:dev.medienhaus.udk-berlin.de": {
-                    "id": "!TKgHUKhyvqFcFGNQmC:dev.medienhaus.udk-berlin.de",
-                    "name": "Einführungskurs, Individuelle Beratung und Betreuung von künstlerischen Projekten",
-                    "children": {}
-                  },
-                  "!grWumahZykafeyUnsZ:dev.medienhaus.udk-berlin.de": {
-                    "id": "!grWumahZykafeyUnsZ:dev.medienhaus.udk-berlin.de",
-                    "name": "Eintritt in die dritte Dimension: Videoarbeiten mit 3D-Techniken",
-                    "children": {}
-                  },
-                  "!yhbsgvJNOiyovQNVlR:dev.medienhaus.udk-berlin.de": {
-                    "id": "!yhbsgvJNOiyovQNVlR:dev.medienhaus.udk-berlin.de",
-                    "name": "Erweitertes Bewegtbild / Video / 2D und 3D Animation - individuelle Projektbetreuung",
-                    "children": {}
-                  },
-                  "!lkEdWtVRGOHujdFqzC:dev.medienhaus.udk-berlin.de": {
-                    "id": "!lkEdWtVRGOHujdFqzC:dev.medienhaus.udk-berlin.de",
-                    "name": "Erzählerische, fiktionale Bildkonzepte",
-                    "children": {}
-                  },
-                  "!YOaTOdatNyTjXWJDrD:dev.medienhaus.udk-berlin.de": {
-                    "id": "!YOaTOdatNyTjXWJDrD:dev.medienhaus.udk-berlin.de",
-                    "name": "Essay als Form – in Kunst, Literatur, Ausstellung",
-                    "children": {}
-                  },
-                  "!mqOQbggIeTJvYdmcRX:dev.medienhaus.udk-berlin.de": {
-                    "id": "!mqOQbggIeTJvYdmcRX:dev.medienhaus.udk-berlin.de",
-                    "name": "Fachdidaktik II Forschungsprojekt/ Begleitseminar: Digitalisierung des Kunstunterrichts, Modul 5",
-                    "children": {}
-                  },
-                  "!pefPGQSyTUNnOIdyAJ:dev.medienhaus.udk-berlin.de": {
-                    "id": "!pefPGQSyTUNnOIdyAJ:dev.medienhaus.udk-berlin.de",
-                    "name": "Film, Video und Audio - individuelle Projektbetreuung",
-                    "children": {}
-                  },
-                  "!epBLaQYJgAcJvUUafp:dev.medienhaus.udk-berlin.de": {
-                    "id": "!epBLaQYJgAcJvUUafp:dev.medienhaus.udk-berlin.de",
-                    "name": "Forschen in der Kunstpädagogik",
-                    "children": {}
-                  },
-                  "!omJKiKIWDDQojCHifI:dev.medienhaus.udk-berlin.de": {
-                    "id": "!omJKiKIWDDQojCHifI:dev.medienhaus.udk-berlin.de",
-                    "name": "Forschungsperspektiven in der Kunstpädagogik und Kunstvermittlung - Einführung",
-                    "children": {}
-                  },
-                  "!itPuduptBRzMnEqVwI:dev.medienhaus.udk-berlin.de": {
-                    "id": "!itPuduptBRzMnEqVwI:dev.medienhaus.udk-berlin.de",
-                    "name": "Fotografie / Individuelle Projektbetreuung",
-                    "children": {}
-                  },
-                  "!FkFSrSCZfTcZHSFxja:dev.medienhaus.udk-berlin.de": {
-                    "id": "!FkFSrSCZfTcZHSFxja:dev.medienhaus.udk-berlin.de",
-                    "name": "Fotolabor/ freies Arbeiten für Studierende mit Grundkenntnissen",
-                    "children": {}
-                  },
-                  "!JCtyQdgrNbLuolBpNa:dev.medienhaus.udk-berlin.de": {
-                    "id": "!JCtyQdgrNbLuolBpNa:dev.medienhaus.udk-berlin.de",
-                    "name": "Freies Arbeiten für Fortgeschrittene",
-                    "children": {}
-                  },
-                  "!XivLjUxkUpqrwBzxXn:dev.medienhaus.udk-berlin.de": {
-                    "id": "!XivLjUxkUpqrwBzxXn:dev.medienhaus.udk-berlin.de",
-                    "name": "Fremde Wesen",
-                    "children": {}
-                  },
-                  "!rjCUzwIsWJwbdjFhxo:dev.medienhaus.udk-berlin.de": {
-                    "id": "!rjCUzwIsWJwbdjFhxo:dev.medienhaus.udk-berlin.de",
-                    "name": "Freundliche Kritik - Kolloquium für wissenschaftliches Arbeiten von Künstler*innen",
-                    "children": {}
-                  },
-                  "!gzMCLwhpgTuNKRlqlw:dev.medienhaus.udk-berlin.de": {
-                    "id": "!gzMCLwhpgTuNKRlqlw:dev.medienhaus.udk-berlin.de",
-                    "name": "From Concept To Performance",
-                    "children": {}
-                  },
-                  "!vPxTbCSdJjeJPdPwHn:dev.medienhaus.udk-berlin.de": {
-                    "id": "!vPxTbCSdJjeJPdPwHn:dev.medienhaus.udk-berlin.de",
-                    "name": "Gilles Deleuze, Differenz und Wiederholung",
-                    "children": {}
-                  },
-                  "!QRDnPNSBZEuACmgVXh:dev.medienhaus.udk-berlin.de": {
-                    "id": "!QRDnPNSBZEuACmgVXh:dev.medienhaus.udk-berlin.de",
-                    "name": "Grenzen der Vermittlung erkunden",
-                    "children": {}
-                  },
-                  "!IwPZvHYfqnpeXMkCPf:dev.medienhaus.udk-berlin.de": {
-                    "id": "!IwPZvHYfqnpeXMkCPf:dev.medienhaus.udk-berlin.de",
-                    "name": "Grundlagen der Steinbearbeitung für die Bildhauerei",
-                    "children": {}
-                  },
-                  "!jUeQmrJYDMqZfYLOCU:dev.medienhaus.udk-berlin.de": {
-                    "id": "!jUeQmrJYDMqZfYLOCU:dev.medienhaus.udk-berlin.de",
-                    "name": "Grundlagen Metall - individuelle Beratung und Betreuung",
-                    "children": {}
-                  },
-                  "!cvKnetKFNqFSGtTbGb:dev.medienhaus.udk-berlin.de": {
-                    "id": "!cvKnetKFNqFSGtTbGb:dev.medienhaus.udk-berlin.de",
-                    "name": "Grundlagen Metall - Werkstattkurs",
-                    "children": {}
-                  },
-                  "!CFBbFRuHxkFmivcVRx:dev.medienhaus.udk-berlin.de": {
-                    "id": "!CFBbFRuHxkFmivcVRx:dev.medienhaus.udk-berlin.de",
-                    "name": "Grundlagen zu Film und Video (Kamera, Ton, Licht, Postproduktion)",
-                    "children": {}
-                  },
-                  "!QdQCwgoJQsfKVLhfhL:dev.medienhaus.udk-berlin.de": {
-                    "id": "!QdQCwgoJQsfKVLhfhL:dev.medienhaus.udk-berlin.de",
-                    "name": "Holzpraxis I",
-                    "children": {}
-                  },
-                  "!yfpMNRYrndOnkJCzbd:dev.medienhaus.udk-berlin.de": {
-                    "id": "!yfpMNRYrndOnkJCzbd:dev.medienhaus.udk-berlin.de",
-                    "name": "Holzpraxis II",
-                    "children": {}
-                  },
-                  "!bEAOYjgFaOXIdjZEGb:dev.medienhaus.udk-berlin.de": {
-                    "id": "!bEAOYjgFaOXIdjZEGb:dev.medienhaus.udk-berlin.de",
-                    "name": "Holzschnitt - Einführung in die Vielschichtigkeit des Hochdrucks",
-                    "children": {}
-                  },
-                  "!IlJViEQrRxRRryYgiZ:dev.medienhaus.udk-berlin.de": {
-                    "id": "!IlJViEQrRxRRryYgiZ:dev.medienhaus.udk-berlin.de",
-                    "name": "Images in Motion",
-                    "children": {}
-                  },
-                  "!XuHevFqWclcXnILiDS:dev.medienhaus.udk-berlin.de": {
-                    "id": "!XuHevFqWclcXnILiDS:dev.medienhaus.udk-berlin.de",
-                    "name": "Individuelle Projektbetreuung für die Steinbildhauerei",
-                    "children": {}
-                  },
-                  "!KXlxpecxlHenGkmccU:dev.medienhaus.udk-berlin.de": {
-                    "id": "!KXlxpecxlHenGkmccU:dev.medienhaus.udk-berlin.de",
-                    "name": "Klassentreffen",
-                    "children": {}
-                  },
-                  "!MqePdduWoqyUzlRgPJ:dev.medienhaus.udk-berlin.de": {
-                    "id": "!MqePdduWoqyUzlRgPJ:dev.medienhaus.udk-berlin.de",
-                    "name": "Kunst und Biografie—Kunst als Biografie",
-                    "children": {}
-                  },
-                  "!OcalMeYfGVvFSbnits:dev.medienhaus.udk-berlin.de": {
-                    "id": "!OcalMeYfGVvFSbnits:dev.medienhaus.udk-berlin.de",
-                    "name": "Kunstunterricht und seine sozialen Bedingungen - historische Perspektiven auf ein komplexes Erbe",
-                    "children": {}
-                  }
-                }
-              },
-              "!zwkmtMFgikEssOWtgs:dev.medienhaus.udk-berlin.de": {
-                "id": "!zwkmtMFgikEssOWtgs:dev.medienhaus.udk-berlin.de",
-                "name": "Bildene Kunst",
-                "children": {
-                  "!xwJeqaldlMoyUSlOLO:dev.medienhaus.udk-berlin.de": {
-                    "id": "!xwJeqaldlMoyUSlOLO:dev.medienhaus.udk-berlin.de",
-                    "name": "„Sprechen über Kunst. Konzepte für Bildung und Vermittlung von Biennalen und musealen Sammlungen“",
-                    "children": {}
-                  },
-                  "!xjfJACXfOKEMXwjWgm:dev.medienhaus.udk-berlin.de": {
-                    "id": "!xjfJACXfOKEMXwjWgm:dev.medienhaus.udk-berlin.de",
-                    "name": "Analog/Farbe",
-                    "children": {}
-                  },
-                  "!qADziAoGbyiklNTYQy:dev.medienhaus.udk-berlin.de": {
-                    "id": "!qADziAoGbyiklNTYQy:dev.medienhaus.udk-berlin.de",
-                    "name": "Analog SW/Fotografie und Labor",
-                    "children": {}
-                  },
-                  "!PnxPQiTZytfwQNMebI:dev.medienhaus.udk-berlin.de": {
-                    "id": "!PnxPQiTZytfwQNMebI:dev.medienhaus.udk-berlin.de",
-                    "name": "Andy Warhols queere Filmfabrik",
-                    "children": {}
-                  },
-                  "!sKohfWQyYuptJFSjNA:dev.medienhaus.udk-berlin.de": {
-                    "id": "!sKohfWQyYuptJFSjNA:dev.medienhaus.udk-berlin.de",
-                    "name": "Arbeitsgespräche / Einzelkonsultationen",
-                    "children": {}
-                  },
-                  "!AHwLzHonbOsViklvEG:dev.medienhaus.udk-berlin.de": {
-                    "id": "!AHwLzHonbOsViklvEG:dev.medienhaus.udk-berlin.de",
-                    "name": "Before Photography. Wie ein Medium entsteht",
-                    "children": {}
-                  },
-                  "!IFjZqjcdTTsdnVeDUg:dev.medienhaus.udk-berlin.de": {
-                    "id": "!IFjZqjcdTTsdnVeDUg:dev.medienhaus.udk-berlin.de",
-                    "name": "Begleitung der künstlerischen Praxis in Einzel- und Gruppenbesprechungen (Klasse Karsten Konrad)",
-                    "children": {}
-                  },
-                  "!FzFCrHUgqBBWiZhjpy:dev.medienhaus.udk-berlin.de": {
-                    "id": "!FzFCrHUgqBBWiZhjpy:dev.medienhaus.udk-berlin.de",
-                    "name": "Bildende Kunst",
-                    "children": {}
-                  },
-                  "!OvuSWCAhISmvrxPwEW:dev.medienhaus.udk-berlin.de": {
-                    "id": "!OvuSWCAhISmvrxPwEW:dev.medienhaus.udk-berlin.de",
-                    "name": "Bildhauerei",
-                    "children": {}
-                  },
-                  "!wfrRNbbmRAeMsjPnqs:dev.medienhaus.udk-berlin.de": {
-                    "id": "!wfrRNbbmRAeMsjPnqs:dev.medienhaus.udk-berlin.de",
-                    "name": "Bildhauerei 1 und 2",
-                    "children": {}
-                  },
-                  "!uxzzpdhMeiUOuePPMg:dev.medienhaus.udk-berlin.de": {
-                    "id": "!uxzzpdhMeiUOuePPMg:dev.medienhaus.udk-berlin.de",
-                    "name": "Bucheinbandtechniken",
-                    "children": {}
-                  },
-                  "!REKvZphAFcwlBIoUXf:dev.medienhaus.udk-berlin.de": {
-                    "id": "!REKvZphAFcwlBIoUXf:dev.medienhaus.udk-berlin.de",
-                    "name": "Colorgroßfoto-Analog I",
-                    "children": {}
-                  },
-                  "!bdwakVJDbgxkfUSiwl:dev.medienhaus.udk-berlin.de": {
-                    "id": "!bdwakVJDbgxkfUSiwl:dev.medienhaus.udk-berlin.de",
-                    "name": "Colorgroßfoto-Analog II",
-                    "children": {}
-                  },
-                  "!DMJdBiHkyWBSXVcdkq:dev.medienhaus.udk-berlin.de": {
-                    "id": "!DMJdBiHkyWBSXVcdkq:dev.medienhaus.udk-berlin.de",
-                    "name": "Contemporary Art and Photography / Zeitgenössische Kunst und Fotografie",
-                    "children": {}
-                  },
-                  "!zwseqtJRhArxRvvuFx:dev.medienhaus.udk-berlin.de": {
-                    "id": "!zwseqtJRhArxRvvuFx:dev.medienhaus.udk-berlin.de",
-                    "name": "Die Idee der Kindheit (Walter Benjamin)",
-                    "children": {}
-                  },
-                  "!neXHzLQwMRqMTDnjSu:dev.medienhaus.udk-berlin.de": {
-                    "id": "!neXHzLQwMRqMTDnjSu:dev.medienhaus.udk-berlin.de",
-                    "name": "Die Zukunft der großen Geschichten",
-                    "children": {}
-                  },
-                  "!oaBdHwlyWPLSAsqXWZ:dev.medienhaus.udk-berlin.de": {
-                    "id": "!oaBdHwlyWPLSAsqXWZ:dev.medienhaus.udk-berlin.de",
-                    "name": "Digitalfotolabor - Digitalgroßfoto",
-                    "children": {}
-                  },
-                  "!hmzIBrMWflMFJbHdgJ:dev.medienhaus.udk-berlin.de": {
-                    "id": "!hmzIBrMWflMFJbHdgJ:dev.medienhaus.udk-berlin.de",
-                    "name": "Drucken im Großformat – Hochdruck-Tiefdruck – experimentelle Druckgrafk",
-                    "children": {}
-                  },
-                  "!JXcOeihRynYSnDUxaO:dev.medienhaus.udk-berlin.de": {
-                    "id": "!JXcOeihRynYSnDUxaO:dev.medienhaus.udk-berlin.de",
-                    "name": "Einführung in bildhauerische Techniken mit dem Werkstoff Ton",
-                    "children": {}
-                  },
-                  "!XiKreRKlyMAuLjcufF:dev.medienhaus.udk-berlin.de": {
-                    "id": "!XiKreRKlyMAuLjcufF:dev.medienhaus.udk-berlin.de",
-                    "name": "Einführung in die Kunstwissenschaft und Ästhetik",
-                    "children": {}
-                  },
-                  "!FnjTmNZYnxLJnVAZQw:dev.medienhaus.udk-berlin.de": {
-                    "id": "!FnjTmNZYnxLJnVAZQw:dev.medienhaus.udk-berlin.de",
-                    "name": "Einführung in die Kunstwissenschaft und Ästhetik",
-                    "children": {}
-                  },
-                  "!KYnTCnFsKAbYjiXaHt:dev.medienhaus.udk-berlin.de": {
-                    "id": "!KYnTCnFsKAbYjiXaHt:dev.medienhaus.udk-berlin.de",
-                    "name": "Einführung in die Ölmalerei - ohne gesundheitsgefährdende Lösungsmittel (Online-Kurs)",
-                    "children": {}
-                  },
-                  "!vZREHwprIWytwJwwio:dev.medienhaus.udk-berlin.de": {
-                    "id": "!vZREHwprIWytwJwwio:dev.medienhaus.udk-berlin.de",
-                    "name": "Einführung in textile Werkverfahren",
-                    "children": {}
-                  },
-                  "!TKgHUKhyvqFcFGNQmC:dev.medienhaus.udk-berlin.de": {
-                    "id": "!TKgHUKhyvqFcFGNQmC:dev.medienhaus.udk-berlin.de",
-                    "name": "Einführungskurs, Individuelle Beratung und Betreuung von künstlerischen Projekten",
-                    "children": {}
-                  },
-                  "!PvLHYooasYSaSZWlEb:dev.medienhaus.udk-berlin.de": {
-                    "id": "!PvLHYooasYSaSZWlEb:dev.medienhaus.udk-berlin.de",
-                    "name": "Einstieg in das digitale Zeichnen und die 2D-Animation mit dem iPad",
-                    "children": {}
-                  },
-                  "!grWumahZykafeyUnsZ:dev.medienhaus.udk-berlin.de": {
-                    "id": "!grWumahZykafeyUnsZ:dev.medienhaus.udk-berlin.de",
-                    "name": "Eintritt in die dritte Dimension: Videoarbeiten mit 3D-Techniken",
-                    "children": {}
-                  },
-                  "!yhbsgvJNOiyovQNVlR:dev.medienhaus.udk-berlin.de": {
-                    "id": "!yhbsgvJNOiyovQNVlR:dev.medienhaus.udk-berlin.de",
-                    "name": "Erweitertes Bewegtbild / Video / 2D und 3D Animation - individuelle Projektbetreuung",
-                    "children": {}
-                  },
-                  "!lkEdWtVRGOHujdFqzC:dev.medienhaus.udk-berlin.de": {
-                    "id": "!lkEdWtVRGOHujdFqzC:dev.medienhaus.udk-berlin.de",
-                    "name": "Erzählerische, fiktionale Bildkonzepte",
-                    "children": {}
-                  },
-                  "!prePIlrNOdicKhjrJK:dev.medienhaus.udk-berlin.de": {
-                    "id": "!prePIlrNOdicKhjrJK:dev.medienhaus.udk-berlin.de",
-                    "name": "Farb- und Materialtechnik",
-                    "children": {}
-                  },
-                  "!pefPGQSyTUNnOIdyAJ:dev.medienhaus.udk-berlin.de": {
-                    "id": "!pefPGQSyTUNnOIdyAJ:dev.medienhaus.udk-berlin.de",
-                    "name": "Film, Video und Audio - individuelle Projektbetreuung",
-                    "children": {}
-                  },
-                  "!itPuduptBRzMnEqVwI:dev.medienhaus.udk-berlin.de": {
-                    "id": "!itPuduptBRzMnEqVwI:dev.medienhaus.udk-berlin.de",
-                    "name": "Fotografie / Individuelle Projektbetreuung",
-                    "children": {}
-                  },
-                  "!FkFSrSCZfTcZHSFxja:dev.medienhaus.udk-berlin.de": {
-                    "id": "!FkFSrSCZfTcZHSFxja:dev.medienhaus.udk-berlin.de",
-                    "name": "Fotolabor/ freies Arbeiten für Studierende mit Grundkenntnissen",
-                    "children": {}
-                  },
-                  "!JCtyQdgrNbLuolBpNa:dev.medienhaus.udk-berlin.de": {
-                    "id": "!JCtyQdgrNbLuolBpNa:dev.medienhaus.udk-berlin.de",
-                    "name": "Freies Arbeiten für Fortgeschrittene",
-                    "children": {}
-                  },
-                  "!XivLjUxkUpqrwBzxXn:dev.medienhaus.udk-berlin.de": {
-                    "id": "!XivLjUxkUpqrwBzxXn:dev.medienhaus.udk-berlin.de",
-                    "name": "Fremde Wesen",
-                    "children": {}
-                  },
-                  "!gzMCLwhpgTuNKRlqlw:dev.medienhaus.udk-berlin.de": {
-                    "id": "!gzMCLwhpgTuNKRlqlw:dev.medienhaus.udk-berlin.de",
-                    "name": "From Concept To Performance",
-                    "children": {}
-                  },
-                  "!vPxTbCSdJjeJPdPwHn:dev.medienhaus.udk-berlin.de": {
-                    "id": "!vPxTbCSdJjeJPdPwHn:dev.medienhaus.udk-berlin.de",
-                    "name": "Gilles Deleuze, Differenz und Wiederholung",
-                    "children": {}
-                  },
-                  "!IwPZvHYfqnpeXMkCPf:dev.medienhaus.udk-berlin.de": {
-                    "id": "!IwPZvHYfqnpeXMkCPf:dev.medienhaus.udk-berlin.de",
-                    "name": "Grundlagen der Steinbearbeitung für die Bildhauerei",
-                    "children": {}
-                  },
-                  "!jUeQmrJYDMqZfYLOCU:dev.medienhaus.udk-berlin.de": {
-                    "id": "!jUeQmrJYDMqZfYLOCU:dev.medienhaus.udk-berlin.de",
-                    "name": "Grundlagen Metall - individuelle Beratung und Betreuung",
-                    "children": {}
-                  },
-                  "!cvKnetKFNqFSGtTbGb:dev.medienhaus.udk-berlin.de": {
-                    "id": "!cvKnetKFNqFSGtTbGb:dev.medienhaus.udk-berlin.de",
-                    "name": "Grundlagen Metall - Werkstattkurs",
-                    "children": {}
-                  },
-                  "!CFBbFRuHxkFmivcVRx:dev.medienhaus.udk-berlin.de": {
-                    "id": "!CFBbFRuHxkFmivcVRx:dev.medienhaus.udk-berlin.de",
-                    "name": "Grundlagen zu Film und Video (Kamera, Ton, Licht, Postproduktion)",
-                    "children": {}
-                  },
-                  "!hwohbbjPjINsrPLQIy:dev.medienhaus.udk-berlin.de": {
-                    "id": "!hwohbbjPjINsrPLQIy:dev.medienhaus.udk-berlin.de",
-                    "name": "Grundlehre: Großes Plenum",
-                    "children": {}
-                  },
-                  "!gxcjEZUcMAUzZvaWcK:dev.medienhaus.udk-berlin.de": {
-                    "id": "!gxcjEZUcMAUzZvaWcK:dev.medienhaus.udk-berlin.de",
-                    "name": "Grundlehre: Kleines Plenum",
-                    "children": {}
-                  },
-                  "!TpBjcxjJbRFsksEIAx:dev.medienhaus.udk-berlin.de": {
-                    "id": "!TpBjcxjJbRFsksEIAx:dev.medienhaus.udk-berlin.de",
-                    "name": "Grundlehre: Kolloquium",
-                    "children": {}
-                  },
-                  "!QdQCwgoJQsfKVLhfhL:dev.medienhaus.udk-berlin.de": {
-                    "id": "!QdQCwgoJQsfKVLhfhL:dev.medienhaus.udk-berlin.de",
-                    "name": "Holzpraxis I",
-                    "children": {}
-                  },
-                  "!yfpMNRYrndOnkJCzbd:dev.medienhaus.udk-berlin.de": {
-                    "id": "!yfpMNRYrndOnkJCzbd:dev.medienhaus.udk-berlin.de",
-                    "name": "Holzpraxis II",
-                    "children": {}
-                  },
-                  "!bEAOYjgFaOXIdjZEGb:dev.medienhaus.udk-berlin.de": {
-                    "id": "!bEAOYjgFaOXIdjZEGb:dev.medienhaus.udk-berlin.de",
-                    "name": "Holzschnitt - Einführung in die Vielschichtigkeit des Hochdrucks",
-                    "children": {}
-                  },
-                  "!IlJViEQrRxRRryYgiZ:dev.medienhaus.udk-berlin.de": {
-                    "id": "!IlJViEQrRxRRryYgiZ:dev.medienhaus.udk-berlin.de",
-                    "name": "Images in Motion",
-                    "children": {}
-                  },
-                  "!XuHevFqWclcXnILiDS:dev.medienhaus.udk-berlin.de": {
-                    "id": "!XuHevFqWclcXnILiDS:dev.medienhaus.udk-berlin.de",
-                    "name": "Individuelle Projektbetreuung für die Steinbildhauerei",
-                    "children": {}
-                  },
-                  "!WaBEwtCiPnmKKTKyHD:dev.medienhaus.udk-berlin.de": {
-                    "id": "!WaBEwtCiPnmKKTKyHD:dev.medienhaus.udk-berlin.de",
-                    "name": "Installation",
-                    "children": {}
-                  }
-                }
-              },
-              "!bqHkzSsdFPKqMOkMRw:dev.medienhaus.udk-berlin.de": {
-                "id": "!bqHkzSsdFPKqMOkMRw:dev.medienhaus.udk-berlin.de",
-                "name": "Bachelorstudiengang Lehramt mit dem Kernfach Bildende Kunst",
+              "!kEGKOMWmPhIAqHzveG:dev.medienhaus.udk-berlin.de": {
+                "id": "!kEGKOMWmPhIAqHzveG:dev.medienhaus.udk-berlin.de",
+                "name": "Bachelor of Music (Jazz)",
                 "children": {}
               },
-              "!JXhQkrmUuICjvCcKFn:dev.medienhaus.udk-berlin.de": {
-                "id": "!JXhQkrmUuICjvCcKFn:dev.medienhaus.udk-berlin.de",
-                "name": "Masterstudiengang Lehramt mit dem vertieften Fach Bildende Kunst",
-                "children": {
-                  "!xwJeqaldlMoyUSlOLO:dev.medienhaus.udk-berlin.de": {
-                    "id": "!xwJeqaldlMoyUSlOLO:dev.medienhaus.udk-berlin.de",
-                    "name": "„Sprechen über Kunst. Konzepte für Bildung und Vermittlung von Biennalen und musealen Sammlungen“",
-                    "children": {}
-                  },
-                  "!PnxPQiTZytfwQNMebI:dev.medienhaus.udk-berlin.de": {
-                    "id": "!PnxPQiTZytfwQNMebI:dev.medienhaus.udk-berlin.de",
-                    "name": "Andy Warhols queere Filmfabrik",
-                    "children": {}
-                  },
-                  "!QbBOVfZgKvkoVzMpeF:dev.medienhaus.udk-berlin.de": {
-                    "id": "!QbBOVfZgKvkoVzMpeF:dev.medienhaus.udk-berlin.de",
-                    "name": "Arbeiten im Raum",
-                    "children": {}
-                  },
-                  "!AHwLzHonbOsViklvEG:dev.medienhaus.udk-berlin.de": {
-                    "id": "!AHwLzHonbOsViklvEG:dev.medienhaus.udk-berlin.de",
-                    "name": "Before Photography. Wie ein Medium entsteht",
-                    "children": {}
-                  },
-                  "!REKvZphAFcwlBIoUXf:dev.medienhaus.udk-berlin.de": {
-                    "id": "!REKvZphAFcwlBIoUXf:dev.medienhaus.udk-berlin.de",
-                    "name": "Colorgroßfoto-Analog I",
-                    "children": {}
-                  },
-                  "!bdwakVJDbgxkfUSiwl:dev.medienhaus.udk-berlin.de": {
-                    "id": "!bdwakVJDbgxkfUSiwl:dev.medienhaus.udk-berlin.de",
-                    "name": "Colorgroßfoto-Analog II",
-                    "children": {}
-                  },
-                  "!zwseqtJRhArxRvvuFx:dev.medienhaus.udk-berlin.de": {
-                    "id": "!zwseqtJRhArxRvvuFx:dev.medienhaus.udk-berlin.de",
-                    "name": "Die Idee der Kindheit (Walter Benjamin)",
-                    "children": {}
-                  },
-                  "!neXHzLQwMRqMTDnjSu:dev.medienhaus.udk-berlin.de": {
-                    "id": "!neXHzLQwMRqMTDnjSu:dev.medienhaus.udk-berlin.de",
-                    "name": "Die Zukunft der großen Geschichten",
-                    "children": {}
-                  },
-                  "!oaBdHwlyWPLSAsqXWZ:dev.medienhaus.udk-berlin.de": {
-                    "id": "!oaBdHwlyWPLSAsqXWZ:dev.medienhaus.udk-berlin.de",
-                    "name": "Digitalfotolabor - Digitalgroßfoto",
-                    "children": {}
-                  },
-                  "!hmzIBrMWflMFJbHdgJ:dev.medienhaus.udk-berlin.de": {
-                    "id": "!hmzIBrMWflMFJbHdgJ:dev.medienhaus.udk-berlin.de",
-                    "name": "Drucken im Großformat – Hochdruck-Tiefdruck – experimentelle Druckgrafk",
-                    "children": {}
-                  },
-                  "!JXcOeihRynYSnDUxaO:dev.medienhaus.udk-berlin.de": {
-                    "id": "!JXcOeihRynYSnDUxaO:dev.medienhaus.udk-berlin.de",
-                    "name": "Einführung in bildhauerische Techniken mit dem Werkstoff Ton",
-                    "children": {}
-                  },
-                  "!KYnTCnFsKAbYjiXaHt:dev.medienhaus.udk-berlin.de": {
-                    "id": "!KYnTCnFsKAbYjiXaHt:dev.medienhaus.udk-berlin.de",
-                    "name": "Einführung in die Ölmalerei - ohne gesundheitsgefährdende Lösungsmittel (Online-Kurs)",
-                    "children": {}
-                  },
-                  "!TKgHUKhyvqFcFGNQmC:dev.medienhaus.udk-berlin.de": {
-                    "id": "!TKgHUKhyvqFcFGNQmC:dev.medienhaus.udk-berlin.de",
-                    "name": "Einführungskurs, Individuelle Beratung und Betreuung von künstlerischen Projekten",
-                    "children": {}
-                  },
-                  "!grWumahZykafeyUnsZ:dev.medienhaus.udk-berlin.de": {
-                    "id": "!grWumahZykafeyUnsZ:dev.medienhaus.udk-berlin.de",
-                    "name": "Eintritt in die dritte Dimension: Videoarbeiten mit 3D-Techniken",
-                    "children": {}
-                  },
-                  "!PltyFwdQsBtfrSfeSG:dev.medienhaus.udk-berlin.de": {
-                    "id": "!PltyFwdQsBtfrSfeSG:dev.medienhaus.udk-berlin.de",
-                    "name": "Einzelgespräche",
-                    "children": {}
-                  },
-                  "!yhbsgvJNOiyovQNVlR:dev.medienhaus.udk-berlin.de": {
-                    "id": "!yhbsgvJNOiyovQNVlR:dev.medienhaus.udk-berlin.de",
-                    "name": "Erweitertes Bewegtbild / Video / 2D und 3D Animation - individuelle Projektbetreuung",
-                    "children": {}
-                  },
-                  "!YOaTOdatNyTjXWJDrD:dev.medienhaus.udk-berlin.de": {
-                    "id": "!YOaTOdatNyTjXWJDrD:dev.medienhaus.udk-berlin.de",
-                    "name": "Essay als Form – in Kunst, Literatur, Ausstellung",
-                    "children": {}
-                  },
-                  "!pefPGQSyTUNnOIdyAJ:dev.medienhaus.udk-berlin.de": {
-                    "id": "!pefPGQSyTUNnOIdyAJ:dev.medienhaus.udk-berlin.de",
-                    "name": "Film, Video und Audio - individuelle Projektbetreuung",
-                    "children": {}
-                  },
-                  "!zYgqqJSDLkjnZBsufz:dev.medienhaus.udk-berlin.de": {
-                    "id": "!zYgqqJSDLkjnZBsufz:dev.medienhaus.udk-berlin.de",
-                    "name": "Forschungspositionen Ästhetische Bildung",
-                    "children": {}
-                  },
-                  "!zZRmhfDXhKoGMXUcil:dev.medienhaus.udk-berlin.de": {
-                    "id": "!zZRmhfDXhKoGMXUcil:dev.medienhaus.udk-berlin.de",
-                    "name": "Forschungspositionen Kunstdidaktik",
-                    "children": {}
-                  },
-                  "!JCtyQdgrNbLuolBpNa:dev.medienhaus.udk-berlin.de": {
-                    "id": "!JCtyQdgrNbLuolBpNa:dev.medienhaus.udk-berlin.de",
-                    "name": "Freies Arbeiten für Fortgeschrittene",
-                    "children": {}
-                  },
-                  "!rjCUzwIsWJwbdjFhxo:dev.medienhaus.udk-berlin.de": {
-                    "id": "!rjCUzwIsWJwbdjFhxo:dev.medienhaus.udk-berlin.de",
-                    "name": "Freundliche Kritik - Kolloquium für wissenschaftliches Arbeiten von Künstler*innen",
-                    "children": {}
-                  },
-                  "!vPxTbCSdJjeJPdPwHn:dev.medienhaus.udk-berlin.de": {
-                    "id": "!vPxTbCSdJjeJPdPwHn:dev.medienhaus.udk-berlin.de",
-                    "name": "Gilles Deleuze, Differenz und Wiederholung",
-                    "children": {}
-                  },
-                  "!IwPZvHYfqnpeXMkCPf:dev.medienhaus.udk-berlin.de": {
-                    "id": "!IwPZvHYfqnpeXMkCPf:dev.medienhaus.udk-berlin.de",
-                    "name": "Grundlagen der Steinbearbeitung für die Bildhauerei",
-                    "children": {}
-                  },
-                  "!jUeQmrJYDMqZfYLOCU:dev.medienhaus.udk-berlin.de": {
-                    "id": "!jUeQmrJYDMqZfYLOCU:dev.medienhaus.udk-berlin.de",
-                    "name": "Grundlagen Metall - individuelle Beratung und Betreuung",
-                    "children": {}
-                  },
-                  "!cvKnetKFNqFSGtTbGb:dev.medienhaus.udk-berlin.de": {
-                    "id": "!cvKnetKFNqFSGtTbGb:dev.medienhaus.udk-berlin.de",
-                    "name": "Grundlagen Metall - Werkstattkurs",
-                    "children": {}
-                  },
-                  "!QdQCwgoJQsfKVLhfhL:dev.medienhaus.udk-berlin.de": {
-                    "id": "!QdQCwgoJQsfKVLhfhL:dev.medienhaus.udk-berlin.de",
-                    "name": "Holzpraxis I",
-                    "children": {}
-                  },
-                  "!yfpMNRYrndOnkJCzbd:dev.medienhaus.udk-berlin.de": {
-                    "id": "!yfpMNRYrndOnkJCzbd:dev.medienhaus.udk-berlin.de",
-                    "name": "Holzpraxis II",
-                    "children": {}
-                  },
-                  "!bEAOYjgFaOXIdjZEGb:dev.medienhaus.udk-berlin.de": {
-                    "id": "!bEAOYjgFaOXIdjZEGb:dev.medienhaus.udk-berlin.de",
-                    "name": "Holzschnitt - Einführung in die Vielschichtigkeit des Hochdrucks",
-                    "children": {}
-                  },
-                  "!XuHevFqWclcXnILiDS:dev.medienhaus.udk-berlin.de": {
-                    "id": "!XuHevFqWclcXnILiDS:dev.medienhaus.udk-berlin.de",
-                    "name": "Individuelle Projektbetreuung für die Steinbildhauerei",
-                    "children": {}
-                  },
-                  "!PCXtOPxEldmlBnSrGe:dev.medienhaus.udk-berlin.de": {
-                    "id": "!PCXtOPxEldmlBnSrGe:dev.medienhaus.udk-berlin.de",
-                    "name": "Klassentreffen",
-                    "children": {}
-                  },
-                  "!AoNyDBvkReMhisMxag:dev.medienhaus.udk-berlin.de": {
-                    "id": "!AoNyDBvkReMhisMxag:dev.medienhaus.udk-berlin.de",
-                    "name": "Kolloquium",
-                    "children": {}
-                  },
-                  "!QwdNMpArggAbzLMRtp:dev.medienhaus.udk-berlin.de": {
-                    "id": "!QwdNMpArggAbzLMRtp:dev.medienhaus.udk-berlin.de",
-                    "name": "Malerei (Grundlagen)/Zeichnung (Grundlagen)",
-                    "children": {}
-                  },
-                  "!uRfmXOdPkdaGNUmlDH:dev.medienhaus.udk-berlin.de": {
-                    "id": "!uRfmXOdPkdaGNUmlDH:dev.medienhaus.udk-berlin.de",
-                    "name": "Marcuse – Kunst und Revolution",
-                    "children": {}
-                  },
-                  "!MCFvrVZCFmQqXGDTVK:dev.medienhaus.udk-berlin.de": {
-                    "id": "!MCFvrVZCFmQqXGDTVK:dev.medienhaus.udk-berlin.de",
-                    "name": "Material-, Form- und Gusstechniken - Grundkurs",
-                    "children": {}
-                  },
-                  "!heFsVVkimFjWozAXgj:dev.medienhaus.udk-berlin.de": {
-                    "id": "!heFsVVkimFjWozAXgj:dev.medienhaus.udk-berlin.de",
-                    "name": "Metallpraxis - individuelle Beratung und Betreuung von künstlerischen Projekten",
-                    "children": {}
-                  },
-                  "!mCkwLszagiPZvjyjym:dev.medienhaus.udk-berlin.de": {
-                    "id": "!mCkwLszagiPZvjyjym:dev.medienhaus.udk-berlin.de",
-                    "name": "Objektbezogenes Arbeiten",
-                    "children": {}
-                  },
-                  "!YDJPCNzBClNbptclHU:dev.medienhaus.udk-berlin.de": {
-                    "id": "!YDJPCNzBClNbptclHU:dev.medienhaus.udk-berlin.de",
-                    "name": "Offene Werkstatt - Formen und Gießen",
-                    "children": {}
-                  },
-                  "!HIUtNNsShEFZSqTVHE:dev.medienhaus.udk-berlin.de": {
-                    "id": "!HIUtNNsShEFZSqTVHE:dev.medienhaus.udk-berlin.de",
-                    "name": "Offene Werkstatt Textil",
-                    "children": {}
-                  },
-                  "!oPcMVhLiSuhhrAucMV:dev.medienhaus.udk-berlin.de": {
-                    "id": "!oPcMVhLiSuhhrAucMV:dev.medienhaus.udk-berlin.de",
-                    "name": "Online-Werkstatt Maltechnik",
-                    "children": {}
-                  },
-                  "!EIvmTXslespwJfupex:dev.medienhaus.udk-berlin.de": {
-                    "id": "!EIvmTXslespwJfupex:dev.medienhaus.udk-berlin.de",
-                    "name": "Performance",
-                    "children": {}
-                  },
-                  "!HcuDhUeCASqjohlRmY:dev.medienhaus.udk-berlin.de": {
-                    "id": "!HcuDhUeCASqjohlRmY:dev.medienhaus.udk-berlin.de",
-                    "name": "Performative Präsentationen: Die eigene künstlerische Arbeit im medialen Raum",
-                    "children": {}
-                  },
-                  "!MblpWKOAxOxziBFZxs:dev.medienhaus.udk-berlin.de": {
-                    "id": "!MblpWKOAxOxziBFZxs:dev.medienhaus.udk-berlin.de",
-                    "name": "Projektbetreuung Foto- und Bildbearbeitung / Druck",
-                    "children": {}
-                  },
-                  "!CUaiEqUUxsgfktUIod:dev.medienhaus.udk-berlin.de": {
-                    "id": "!CUaiEqUUxsgfktUIod:dev.medienhaus.udk-berlin.de",
-                    "name": "Projektbetreuung/ Prüfungsvorbereitungen (Malerei)",
-                    "children": {}
-                  },
-                  "!oOzSZzBcNXBtyXBTTx:dev.medienhaus.udk-berlin.de": {
-                    "id": "!oOzSZzBcNXBtyXBTTx:dev.medienhaus.udk-berlin.de",
-                    "name": "Raum und Objektzeichnen – Methoden, Material, Experiment",
-                    "children": {}
-                  },
-                  "!nxTrfOzTURMRrhIAVc:dev.medienhaus.udk-berlin.de": {
-                    "id": "!nxTrfOzTURMRrhIAVc:dev.medienhaus.udk-berlin.de",
-                    "name": "Sacred, Secular, Sensual and Sublime: Manuscript Painting in India between 15th to 18th Centuries",
-                    "children": {}
-                  },
-                  "!zNdFuoabOJPRvpBVNv:dev.medienhaus.udk-berlin.de": {
-                    "id": "!zNdFuoabOJPRvpBVNv:dev.medienhaus.udk-berlin.de",
-                    "name": "Schreiben als künstlerisch-forschende Praxis",
-                    "children": {}
-                  },
-                  "!TssqONimFkZFDQObVL:dev.medienhaus.udk-berlin.de": {
-                    "id": "!TssqONimFkZFDQObVL:dev.medienhaus.udk-berlin.de",
-                    "name": "Seminar Musiktheorie: Das universale Material? Modales Komponieren in Neuer Musik, Jazz und Rock/Pop",
-                    "children": {}
-                  },
-                  "!JqSucAWzJLrRlgkVXS:dev.medienhaus.udk-berlin.de": {
-                    "id": "!JqSucAWzJLrRlgkVXS:dev.medienhaus.udk-berlin.de",
-                    "name": "Siebdruck: Anfänger - Grundlegende Kenntnisse in Theorie und Praxis",
-                    "children": {}
-                  }
-                }
-              },
-              "!JjyQhgikBHXXmfnRMc:dev.medienhaus.udk-berlin.de": {
-                "id": "!JjyQhgikBHXXmfnRMc:dev.medienhaus.udk-berlin.de",
-                "name": "Postgradualer Masterstudiengang Art in Context",
+              "!YEEqbuJcNcHqWBiQfv:dev.medienhaus.udk-berlin.de": {
+                "id": "!YEEqbuJcNcHqWBiQfv:dev.medienhaus.udk-berlin.de",
+                "name": "Master of Music Arrangement/Composition (Jazz)",
                 "children": {}
               },
-              "!QEubnBSWgwTcgSqYGh:dev.medienhaus.udk-berlin.de": {
-                "id": "!QEubnBSWgwTcgSqYGh:dev.medienhaus.udk-berlin.de",
-                "name": "Bachelor Lehramt an Grundschulen mit dem vertieften Fach Bildende Kunst 2018",
+              "!WFEYwWzxPpkYkltkOP:dev.medienhaus.udk-berlin.de": {
+                "id": "!WFEYwWzxPpkYkltkOP:dev.medienhaus.udk-berlin.de",
+                "name": "European Jazz Master (EUJAM)",
                 "children": {}
               }
             }
           },
-          "!CBOvZkFOgytvXInrQS:dev.medienhaus.udk-berlin.de": {
-            "id": "!CBOvZkFOgytvXInrQS:dev.medienhaus.udk-berlin.de",
-            "name": "Institut für Kunstdidaktik und Ästhetische Bildung",
+          "!oYpCyaUfvNvrgjYNmY:dev.medienhaus.udk-berlin.de": {
+            "id": "!oYpCyaUfvNvrgjYNmY:dev.medienhaus.udk-berlin.de",
+            "name": "Institut für Musikpädagogik",
             "children": {}
           },
-          "!VYubrLmyeBNxdYtVzN:dev.medienhaus.udk-berlin.de": {
-            "id": "!VYubrLmyeBNxdYtVzN:dev.medienhaus.udk-berlin.de",
-            "name": "Institut für Kunstwissenschaft und Ästhetik",
+          "!xdibwFqgJKmdUaNgdC:dev.medienhaus.udk-berlin.de": {
+            "id": "!xdibwFqgJKmdUaNgdC:dev.medienhaus.udk-berlin.de",
+            "name": "Institut für Musikwissenschaft, Musiktheorie, Komposition und Musikübertragung",
             "children": {}
           },
-          "!CkTGmVKNBDkbpLXehS:dev.medienhaus.udk-berlin.de": {
-            "id": "!CkTGmVKNBDkbpLXehS:dev.medienhaus.udk-berlin.de",
-            "name": "Institut für Kunst im Kontext",
+          "!bmDzaVHwGdqxjNcufn:dev.medienhaus.udk-berlin.de": {
+            "id": "!bmDzaVHwGdqxjNcufn:dev.medienhaus.udk-berlin.de",
+            "name": "Institut für Kirchenmusik",
+            "children": {}
+          },
+          "!QNXblIUMhNenMHLCPG:dev.medienhaus.udk-berlin.de": {
+            "id": "!QNXblIUMhNenMHLCPG:dev.medienhaus.udk-berlin.de",
+            "name": "Institut für Neue Musik",
+            "children": {}
+          },
+          "!WRbWIuUApnHzAfNSTY:dev.medienhaus.udk-berlin.de": {
+            "id": "!WRbWIuUApnHzAfNSTY:dev.medienhaus.udk-berlin.de",
+            "name": "Julius-Stern-Institut für Nachwuchsförderung",
+            "children": {}
+          },
+          "!cbcaCqeCaudUhjuoMm:dev.medienhaus.udk-berlin.de": {
+            "id": "!cbcaCqeCaudUhjuoMm:dev.medienhaus.udk-berlin.de",
+            "name": "Kurt-Singer-Institut für Musikergesundheit",
+            "children": {}
+          },
+          "!GxvqNTaVEjhmVGqRmb:dev.medienhaus.udk-berlin.de": {
+            "id": "!GxvqNTaVEjhmVGqRmb:dev.medienhaus.udk-berlin.de",
+            "name": "Staats- und Domchor",
+            "children": {}
+          },
+          "!jZOetRvdDdmtEWJWLY:dev.medienhaus.udk-berlin.de": {
+            "id": "!jZOetRvdDdmtEWJWLY:dev.medienhaus.udk-berlin.de",
+            "name": "Instrumentalausbildung",
             "children": {
-              "!owSRBnsxyjCiKrSnJX:dev.medienhaus.udk-berlin.de": {
-                "id": "!owSRBnsxyjCiKrSnJX:dev.medienhaus.udk-berlin.de",
-                "name": "Postgradualer Masterstudiengang Art in Context",
+              "!SjjvVAFTAPAEzpeBQZ:dev.medienhaus.udk-berlin.de": {
+                "id": "!SjjvVAFTAPAEzpeBQZ:dev.medienhaus.udk-berlin.de",
+                "name": "Alban Berg \"Wozzeck\"",
+                "children": {}
+              },
+              "!NrZIQzFrTtrWdSsllF:dev.medienhaus.udk-berlin.de": {
+                "id": "!NrZIQzFrTtrWdSsllF:dev.medienhaus.udk-berlin.de",
+                "name": "Alexandertechnik",
+                "children": {}
+              },
+              "!vdmEXIkDZgvDeXLveX:dev.medienhaus.udk-berlin.de": {
+                "id": "!vdmEXIkDZgvDeXLveX:dev.medienhaus.udk-berlin.de",
+                "name": "Analyse und Interpretation",
+                "children": {}
+              },
+              "!XVXPWuiTISICSrLnXW:dev.medienhaus.udk-berlin.de": {
+                "id": "!XVXPWuiTISICSrLnXW:dev.medienhaus.udk-berlin.de",
+                "name": "Argentinischer Tango – verstehen und spielen",
+                "children": {}
+              },
+              "!phDavklbVBKeIQtKjV:dev.medienhaus.udk-berlin.de": {
+                "id": "!phDavklbVBKeIQtKjV:dev.medienhaus.udk-berlin.de",
+                "name": "Aufführungspraxis für Holzbläser",
+                "children": {}
+              },
+              "!TLFbARqridOCSsZnpt:dev.medienhaus.udk-berlin.de": {
+                "id": "!TLFbARqridOCSsZnpt:dev.medienhaus.udk-berlin.de",
+                "name": "Cellomethodik / Lehrpraxis",
+                "children": {}
+              },
+              "!TwVsbKSYCTrLieJDgZ:dev.medienhaus.udk-berlin.de": {
+                "id": "!TwVsbKSYCTrLieJDgZ:dev.medienhaus.udk-berlin.de",
+                "name": "Das Cembalo. Von Kielklavieren, Zupfklavieren, Spinetten, Virginalen und Schweinsköpfen.",
+                "children": {}
+              },
+              "!MexikURwBqwSStiUxU:dev.medienhaus.udk-berlin.de": {
+                "id": "!MexikURwBqwSStiUxU:dev.medienhaus.udk-berlin.de",
+                "name": "Das Kleine Klavierstück von Bach bis Schönberg. Zur Geschichte des Charakterstücks für",
+                "children": {}
+              },
+              "!GeHfROvftoCpmliiGh:dev.medienhaus.udk-berlin.de": {
+                "id": "!GeHfROvftoCpmliiGh:dev.medienhaus.udk-berlin.de",
+                "name": "Der Basso ostinato in westlicher Kunstmusik",
+                "children": {}
+              },
+              "!vjDzQlxCsSEjgUDykL:dev.medienhaus.udk-berlin.de": {
+                "id": "!vjDzQlxCsSEjgUDykL:dev.medienhaus.udk-berlin.de",
+                "name": "Einführung in die Musikwissenschaft",
+                "children": {}
+              },
+              "!uxvBMJKeQaKpDegdWD:dev.medienhaus.udk-berlin.de": {
+                "id": "!uxvBMJKeQaKpDegdWD:dev.medienhaus.udk-berlin.de",
+                "name": "Einführung in die Musikwissenschaft",
+                "children": {}
+              },
+              "!dcDJaWoCeioifxccNF:dev.medienhaus.udk-berlin.de": {
+                "id": "!dcDJaWoCeioifxccNF:dev.medienhaus.udk-berlin.de",
+                "name": "Ensemble ilinx \"Neue Wege zu Beethoven\" bei Crescendo 2021",
+                "children": {}
+              },
+              "!UrddBwGebTgGhpHBFk:dev.medienhaus.udk-berlin.de": {
+                "id": "!UrddBwGebTgGhpHBFk:dev.medienhaus.udk-berlin.de",
+                "name": "Fach-Didaktik/Lehrpraxis für Blechbläser",
+                "children": {}
+              },
+              "!KRAbdQdPfKcWvPDjPy:dev.medienhaus.udk-berlin.de": {
+                "id": "!KRAbdQdPfKcWvPDjPy:dev.medienhaus.udk-berlin.de",
+                "name": "Feldenkrais",
+                "children": {}
+              },
+              "!IxQYiZypixoeFYlJWf:dev.medienhaus.udk-berlin.de": {
+                "id": "!IxQYiZypixoeFYlJWf:dev.medienhaus.udk-berlin.de",
+                "name": "Franz Schuberts Kammermusik",
+                "children": {}
+              },
+              "!tJTYerUmaEdelXaCaQ:dev.medienhaus.udk-berlin.de": {
+                "id": "!tJTYerUmaEdelXaCaQ:dev.medienhaus.udk-berlin.de",
+                "name": "Großer Chor der UdK",
+                "children": {}
+              },
+              "!DaJeYKXMfXdwmqLcFp:dev.medienhaus.udk-berlin.de": {
+                "id": "!DaJeYKXMfXdwmqLcFp:dev.medienhaus.udk-berlin.de",
+                "name": "Grundlagenseminar Musikphysiologie",
+                "children": {}
+              },
+              "!SqRMCFJgPzhfXNeCHi:dev.medienhaus.udk-berlin.de": {
+                "id": "!SqRMCFJgPzhfXNeCHi:dev.medienhaus.udk-berlin.de",
+                "name": "Heimatkonstruktion, Musik und Medienkultur",
+                "children": {}
+              },
+              "!CZMYIvowkEMohnhQvB:dev.medienhaus.udk-berlin.de": {
+                "id": "!CZMYIvowkEMohnhQvB:dev.medienhaus.udk-berlin.de",
+                "name": "Heinrich Schütz",
+                "children": {}
+              },
+              "!yOBObKRZmrSiktIFYu:dev.medienhaus.udk-berlin.de": {
+                "id": "!yOBObKRZmrSiktIFYu:dev.medienhaus.udk-berlin.de",
+                "name": "Herrschaft und Emanzipation durch Musik: Gender, Klasse, Kirche, Staat",
+                "children": {}
+              },
+              "!kvZLEDdzPpRQbpHtdX:dev.medienhaus.udk-berlin.de": {
+                "id": "!kvZLEDdzPpRQbpHtdX:dev.medienhaus.udk-berlin.de",
+                "name": "Hollywood-Sound: Ästhetik und Geschichte eines filmmusikalischen Phänomens",
+                "children": {}
+              },
+              "!PEeSsydKHTlwmkdUNy:dev.medienhaus.udk-berlin.de": {
+                "id": "!PEeSsydKHTlwmkdUNy:dev.medienhaus.udk-berlin.de",
+                "name": "Instrumentenkunde KA/KPA",
+                "children": {}
+              },
+              "!TItMVNKvFBkPgCQSNI:dev.medienhaus.udk-berlin.de": {
+                "id": "!TItMVNKvFBkPgCQSNI:dev.medienhaus.udk-berlin.de",
+                "name": "Johannes Brahms",
+                "children": {}
+              },
+              "!cFDHXfCdClDgmsWDCw:dev.medienhaus.udk-berlin.de": {
+                "id": "!cFDHXfCdClDgmsWDCw:dev.medienhaus.udk-berlin.de",
+                "name": "Johannes Brahms und die Variation",
+                "children": {}
+              },
+              "!DMGiSoDOPCSCtjPiWh:dev.medienhaus.udk-berlin.de": {
+                "id": "!DMGiSoDOPCSCtjPiWh:dev.medienhaus.udk-berlin.de",
+                "name": "KA 1. Sem. Musiktheorie",
+                "children": {}
+              },
+              "!UWGZbozSzXbMDdNIHY:dev.medienhaus.udk-berlin.de": {
+                "id": "!UWGZbozSzXbMDdNIHY:dev.medienhaus.udk-berlin.de",
+                "name": "Kammerchor der Künste",
+                "children": {}
+              },
+              "!AJpmcUMjApSIcQJVgf:dev.medienhaus.udk-berlin.de": {
+                "id": "!AJpmcUMjApSIcQJVgf:dev.medienhaus.udk-berlin.de",
+                "name": "Kammermusik für historische Instrumente",
+                "children": {}
+              },
+              "!CtRPrESRdDLmwQyvpI:dev.medienhaus.udk-berlin.de": {
+                "id": "!CtRPrESRdDLmwQyvpI:dev.medienhaus.udk-berlin.de",
+                "name": "Kammermusik Gitarre und andere Instrumente",
+                "children": {}
+              },
+              "!cgObFPOzKWBMzGqKal:dev.medienhaus.udk-berlin.de": {
+                "id": "!cgObFPOzKWBMzGqKal:dev.medienhaus.udk-berlin.de",
+                "name": "Kammermusikunterricht",
+                "children": {}
+              },
+              "!XuDkvLZoSQqFYTNWED:dev.medienhaus.udk-berlin.de": {
+                "id": "!XuDkvLZoSQqFYTNWED:dev.medienhaus.udk-berlin.de",
+                "name": "KA Musiktheorie/Gehörbildung, 4.Sem.",
+                "children": {}
+              },
+              "!lZnWHYFwfHEFtrPlGV:dev.medienhaus.udk-berlin.de": {
+                "id": "!lZnWHYFwfHEFtrPlGV:dev.medienhaus.udk-berlin.de",
+                "name": "Klaviermethodik / Anfangsunterricht",
+                "children": {}
+              },
+              "!NJwyikULMvpDyEOtMY:dev.medienhaus.udk-berlin.de": {
+                "id": "!NJwyikULMvpDyEOtMY:dev.medienhaus.udk-berlin.de",
+                "name": "Korrepetition für Streicher (Hauptfach), KPA, ISS Gym, Tonmeister",
+                "children": {}
+              },
+              "!TSVgNjDQvjxvaQPewd:dev.medienhaus.udk-berlin.de": {
+                "id": "!TSVgNjDQvjxvaQPewd:dev.medienhaus.udk-berlin.de",
+                "name": "Kraftausdauer für Musiker",
+                "children": {}
+              },
+              "!vQLoppBuqMYdFUytBT:dev.medienhaus.udk-berlin.de": {
+                "id": "!vQLoppBuqMYdFUytBT:dev.medienhaus.udk-berlin.de",
+                "name": "Lehrpraxis Hohe Streicher",
+                "children": {}
+              },
+              "!lAoNmribFGZQWnOXKu:dev.medienhaus.udk-berlin.de": {
+                "id": "!lAoNmribFGZQWnOXKu:dev.medienhaus.udk-berlin.de",
+                "name": "Methodik/Didaktik/Lehrpraxis Blechbläser",
+                "children": {}
+              },
+              "!ttWvprgCqVNPYVXgff:dev.medienhaus.udk-berlin.de": {
+                "id": "!ttWvprgCqVNPYVXgff:dev.medienhaus.udk-berlin.de",
+                "name": "Methodik Hohe Streicher I",
+                "children": {}
+              },
+              "!gTWxtXloOFCRSLxEhp:dev.medienhaus.udk-berlin.de": {
+                "id": "!gTWxtXloOFCRSLxEhp:dev.medienhaus.udk-berlin.de",
+                "name": "Methodik /Lehrpraxis Gitarre",
+                "children": {}
+              },
+              "!AOQgbsUuSZHwPpgquF:dev.medienhaus.udk-berlin.de": {
+                "id": "!AOQgbsUuSZHwPpgquF:dev.medienhaus.udk-berlin.de",
+                "name": "Musikermedizinische Sprechstunde",
+                "children": {}
+              },
+              "!KupXqdeRIpxhxRBjXo:dev.medienhaus.udk-berlin.de": {
+                "id": "!KupXqdeRIpxhxRBjXo:dev.medienhaus.udk-berlin.de",
+                "name": "Musik im 20./21. Jhd.: Der gedehnte Augenblick in den kurzen Stücken von Schoenberg, Webern und Kurtág:",
+                "children": {}
+              },
+              "!fEegpivZDYxgDaKnlP:dev.medienhaus.udk-berlin.de": {
+                "id": "!fEegpivZDYxgDaKnlP:dev.medienhaus.udk-berlin.de",
+                "name": "Musikphysiologische Einzelberatung",
+                "children": {}
+              },
+              "!MFldHUSsAwhOiKTuSb:dev.medienhaus.udk-berlin.de": {
+                "id": "!MFldHUSsAwhOiKTuSb:dev.medienhaus.udk-berlin.de",
+                "name": "Musiktheorie/Gehörbildung KA 4. Semester",
+                "children": {}
+              },
+              "!aNZZMPxcqLOMXgbPCV:dev.medienhaus.udk-berlin.de": {
+                "id": "!aNZZMPxcqLOMXgbPCV:dev.medienhaus.udk-berlin.de",
+                "name": "Musik und Literatur im 20. Jahrhundert",
+                "children": {}
+              },
+              "!gckncFcuYwPMGpdrrp:dev.medienhaus.udk-berlin.de": {
+                "id": "!gckncFcuYwPMGpdrrp:dev.medienhaus.udk-berlin.de",
+                "name": "Musikwissenschaft für Musiker*innen / Musikwissenschaftliche Arbeitstechniken",
+                "children": {}
+              },
+              "!wQpckYxXEKJqgVdjim:dev.medienhaus.udk-berlin.de": {
+                "id": "!wQpckYxXEKJqgVdjim:dev.medienhaus.udk-berlin.de",
+                "name": "Orchesterpraxis für Streicher",
+                "children": {}
+              },
+              "!ztMNcLpwSeTmSfyNfi:dev.medienhaus.udk-berlin.de": {
+                "id": "!ztMNcLpwSeTmSfyNfi:dev.medienhaus.udk-berlin.de",
+                "name": "Orgelmethodik",
+                "children": {}
+              },
+              "!DLPaLLPSZnDqUKZDNg:dev.medienhaus.udk-berlin.de": {
+                "id": "!DLPaLLPSZnDqUKZDNg:dev.medienhaus.udk-berlin.de",
+                "name": "Original und Überlieferung – Die Toccata d-Moll BWV 565",
+                "children": {}
+              },
+              "!YUnFifkHWPsytGHBFP:dev.medienhaus.udk-berlin.de": {
+                "id": "!YUnFifkHWPsytGHBFP:dev.medienhaus.udk-berlin.de",
+                "name": "Satztechniken des 20./21. Jahrhunderts mit dem Schwerpunkt experimentelle Musik",
+                "children": {}
+              },
+              "!TAOtwvAHWbZWSJSfKC:dev.medienhaus.udk-berlin.de": {
+                "id": "!TAOtwvAHWbZWSJSfKC:dev.medienhaus.udk-berlin.de",
+                "name": "Schneller, höher, … besser? Konkurrenz und Wettbewerb in der Musik",
+                "children": {}
+              },
+              "!aGvtKHUdQPVdyyaQIr:dev.medienhaus.udk-berlin.de": {
+                "id": "!aGvtKHUdQPVdyyaQIr:dev.medienhaus.udk-berlin.de",
+                "name": "Super librum cantare – Mehrstimmige Vokalimprovisation im Stil der Renaissance",
                 "children": {}
               }
             }
+          },
+          "!tRyXxKhpMFymSHremd:dev.medienhaus.udk-berlin.de": {
+            "id": "!tRyXxKhpMFymSHremd:dev.medienhaus.udk-berlin.de",
+            "name": "Komposition",
+            "children": {
+              "!wDVzGfJQWMjeLxeHAL:dev.medienhaus.udk-berlin.de": {
+                "id": "!wDVzGfJQWMjeLxeHAL:dev.medienhaus.udk-berlin.de",
+                "name": "„Das Meisterwerk in der Musik“ - Die Lehre Heinrich Schenkers",
+                "children": {}
+              },
+              "!SjjvVAFTAPAEzpeBQZ:dev.medienhaus.udk-berlin.de": {
+                "id": "!SjjvVAFTAPAEzpeBQZ:dev.medienhaus.udk-berlin.de",
+                "name": "Alban Berg \"Wozzeck\"",
+                "children": {}
+              },
+              "!TwVsbKSYCTrLieJDgZ:dev.medienhaus.udk-berlin.de": {
+                "id": "!TwVsbKSYCTrLieJDgZ:dev.medienhaus.udk-berlin.de",
+                "name": "Das Cembalo. Von Kielklavieren, Zupfklavieren, Spinetten, Virginalen und Schweinsköpfen.",
+                "children": {}
+              },
+              "!MexikURwBqwSStiUxU:dev.medienhaus.udk-berlin.de": {
+                "id": "!MexikURwBqwSStiUxU:dev.medienhaus.udk-berlin.de",
+                "name": "Das Kleine Klavierstück von Bach bis Schönberg. Zur Geschichte des Charakterstücks für",
+                "children": {}
+              },
+              "!rtGtZGFRRuZizoeijR:dev.medienhaus.udk-berlin.de": {
+                "id": "!rtGtZGFRRuZizoeijR:dev.medienhaus.udk-berlin.de",
+                "name": "Das Verfertigen einer wissenschaftlichen Hausarbeit/BA- MA-Arbeit/Sprechstunde",
+                "children": {}
+              },
+              "!YytwKVOxtXxcKnFvBV:dev.medienhaus.udk-berlin.de": {
+                "id": "!YytwKVOxtXxcKnFvBV:dev.medienhaus.udk-berlin.de",
+                "name": "Das Verfertigen einer wissenschaftlichen Hausarbeit/BA- MA-Arbeit/Sprechstunde/Prüfungscolloquium",
+                "children": {}
+              },
+              "!vjDzQlxCsSEjgUDykL:dev.medienhaus.udk-berlin.de": {
+                "id": "!vjDzQlxCsSEjgUDykL:dev.medienhaus.udk-berlin.de",
+                "name": "Einführung in die Musikwissenschaft",
+                "children": {}
+              },
+              "!uxvBMJKeQaKpDegdWD:dev.medienhaus.udk-berlin.de": {
+                "id": "!uxvBMJKeQaKpDegdWD:dev.medienhaus.udk-berlin.de",
+                "name": "Einführung in die Musikwissenschaft",
+                "children": {}
+              },
+              "!YmocHKaAXSlDIDqMmn:dev.medienhaus.udk-berlin.de": {
+                "id": "!YmocHKaAXSlDIDqMmn:dev.medienhaus.udk-berlin.de",
+                "name": "Elektroakustische Komposition ENTER: SOUND - Klanggestaltung mit elektronischen Medien in Projekten aller Kunstsparten, offene Sprechstunde/Kolloquium für alle Studiengänge",
+                "children": {}
+              },
+              "!UjIjgrcazlShnUyhWm:dev.medienhaus.udk-berlin.de": {
+                "id": "!UjIjgrcazlShnUyhWm:dev.medienhaus.udk-berlin.de",
+                "name": "Elektroakustische Komposition - Sonic Agency in Time of Climate Crisis",
+                "children": {}
+              },
+              "!dcDJaWoCeioifxccNF:dev.medienhaus.udk-berlin.de": {
+                "id": "!dcDJaWoCeioifxccNF:dev.medienhaus.udk-berlin.de",
+                "name": "Ensemble ilinx \"Neue Wege zu Beethoven\" bei Crescendo 2021",
+                "children": {}
+              },
+              "!kIZgMcyuNshIaSArXs:dev.medienhaus.udk-berlin.de": {
+                "id": "!kIZgMcyuNshIaSArXs:dev.medienhaus.udk-berlin.de",
+                "name": "Experimental Coding with Supercollider Parametric abstract composing",
+                "children": {}
+              },
+              "!gMmbSMVLttFMrclSVf:dev.medienhaus.udk-berlin.de": {
+                "id": "!gMmbSMVLttFMrclSVf:dev.medienhaus.udk-berlin.de",
+                "name": "Experimentelle Musik, Gruppenleitung",
+                "children": {}
+              },
+              "!lPZGVKmJuDgiIrupYA:dev.medienhaus.udk-berlin.de": {
+                "id": "!lPZGVKmJuDgiIrupYA:dev.medienhaus.udk-berlin.de",
+                "name": "Experiments with Sound / online-Kurs",
+                "children": {}
+              },
+              "!yKxIJjmZTuwBjqeexz:dev.medienhaus.udk-berlin.de": {
+                "id": "!yKxIJjmZTuwBjqeexz:dev.medienhaus.udk-berlin.de",
+                "name": "FEM*_MUSIC*_READ",
+                "children": {}
+              },
+              "!IxQYiZypixoeFYlJWf:dev.medienhaus.udk-berlin.de": {
+                "id": "!IxQYiZypixoeFYlJWf:dev.medienhaus.udk-berlin.de",
+                "name": "Franz Schuberts Kammermusik",
+                "children": {}
+              },
+              "!mUtDxmFGeywdKxWfho:dev.medienhaus.udk-berlin.de": {
+                "id": "!mUtDxmFGeywdKxWfho:dev.medienhaus.udk-berlin.de",
+                "name": "Freie Klasse – Analyseseminar / Neue Musik der 2000er Jahre",
+                "children": {}
+              },
+              "!FeoxxWPTNlnWmDAbrW:dev.medienhaus.udk-berlin.de": {
+                "id": "!FeoxxWPTNlnWmDAbrW:dev.medienhaus.udk-berlin.de",
+                "name": "Gehörbildung und Improvisation",
+                "children": {}
+              },
+              "!tJTYerUmaEdelXaCaQ:dev.medienhaus.udk-berlin.de": {
+                "id": "!tJTYerUmaEdelXaCaQ:dev.medienhaus.udk-berlin.de",
+                "name": "Großer Chor der UdK",
+                "children": {}
+              },
+              "!ITSybNNtIKFcjgtCSB:dev.medienhaus.udk-berlin.de": {
+                "id": "!ITSybNNtIKFcjgtCSB:dev.medienhaus.udk-berlin.de",
+                "name": "Grundlagen der Elektroakustischen Komposition",
+                "children": {}
+              },
+              "!rkIuqqWgtxOaLkVtyE:dev.medienhaus.udk-berlin.de": {
+                "id": "!rkIuqqWgtxOaLkVtyE:dev.medienhaus.udk-berlin.de",
+                "name": "Hans Wüthrich „Das Glashaus“",
+                "children": {}
+              },
+              "!SqRMCFJgPzhfXNeCHi:dev.medienhaus.udk-berlin.de": {
+                "id": "!SqRMCFJgPzhfXNeCHi:dev.medienhaus.udk-berlin.de",
+                "name": "Heimatkonstruktion, Musik und Medienkultur",
+                "children": {}
+              },
+              "!CZMYIvowkEMohnhQvB:dev.medienhaus.udk-berlin.de": {
+                "id": "!CZMYIvowkEMohnhQvB:dev.medienhaus.udk-berlin.de",
+                "name": "Heinrich Schütz",
+                "children": {}
+              },
+              "!yOBObKRZmrSiktIFYu:dev.medienhaus.udk-berlin.de": {
+                "id": "!yOBObKRZmrSiktIFYu:dev.medienhaus.udk-berlin.de",
+                "name": "Herrschaft und Emanzipation durch Musik: Gender, Klasse, Kirche, Staat",
+                "children": {}
+              },
+              "!kvZLEDdzPpRQbpHtdX:dev.medienhaus.udk-berlin.de": {
+                "id": "!kvZLEDdzPpRQbpHtdX:dev.medienhaus.udk-berlin.de",
+                "name": "Hollywood-Sound: Ästhetik und Geschichte eines filmmusikalischen Phänomens",
+                "children": {}
+              },
+              "!lQtaUsIrSFYDwgONsa:dev.medienhaus.udk-berlin.de": {
+                "id": "!lQtaUsIrSFYDwgONsa:dev.medienhaus.udk-berlin.de",
+                "name": "Instrumentation",
+                "children": {}
+              },
+              "!sjbeGYJWELCROCAbdG:dev.medienhaus.udk-berlin.de": {
+                "id": "!sjbeGYJWELCROCAbdG:dev.medienhaus.udk-berlin.de",
+                "name": "Instrumentenkunde (Komposition, Tonmeister)",
+                "children": {}
+              },
+              "!cFDHXfCdClDgmsWDCw:dev.medienhaus.udk-berlin.de": {
+                "id": "!cFDHXfCdClDgmsWDCw:dev.medienhaus.udk-berlin.de",
+                "name": "Johannes Brahms und die Variation",
+                "children": {}
+              },
+              "!UWGZbozSzXbMDdNIHY:dev.medienhaus.udk-berlin.de": {
+                "id": "!UWGZbozSzXbMDdNIHY:dev.medienhaus.udk-berlin.de",
+                "name": "Kammerchor der Künste",
+                "children": {}
+              },
+              "!mRSxulOHAROkIMtbuI:dev.medienhaus.udk-berlin.de": {
+                "id": "!mRSxulOHAROkIMtbuI:dev.medienhaus.udk-berlin.de",
+                "name": "Komposition Analyse: Neues Musiktheater",
+                "children": {}
+              },
+              "!hRzVCgTTwAcDgBoRkq:dev.medienhaus.udk-berlin.de": {
+                "id": "!hRzVCgTTwAcDgBoRkq:dev.medienhaus.udk-berlin.de",
+                "name": "Komposition- Intensivwoche",
+                "children": {}
+              },
+              "!vpvQwlQeahQWrwYlkP:dev.medienhaus.udk-berlin.de": {
+                "id": "!vpvQwlQeahQWrwYlkP:dev.medienhaus.udk-berlin.de",
+                "name": "Kompositionslehre/Satztechniken des 20./21. Jahrhunderts",
+                "children": {}
+              },
+              "!LbVJxzqIERBhwcsEpF:dev.medienhaus.udk-berlin.de": {
+                "id": "!LbVJxzqIERBhwcsEpF:dev.medienhaus.udk-berlin.de",
+                "name": "Landkarten elektroakustischer Klangorganisation",
+                "children": {}
+              },
+              "!SjxgOpTlbvPTziocrJ:dev.medienhaus.udk-berlin.de": {
+                "id": "!SjxgOpTlbvPTziocrJ:dev.medienhaus.udk-berlin.de",
+                "name": "Music as a lecture / Lecture as music",
+                "children": {}
+              },
+              "!wisDkrmxUkzNNaxYzL:dev.medienhaus.udk-berlin.de": {
+                "id": "!wisDkrmxUkzNNaxYzL:dev.medienhaus.udk-berlin.de",
+                "name": "Musiktheorie/Historische Satztechniken",
+                "children": {}
+              },
+              "!aNZZMPxcqLOMXgbPCV:dev.medienhaus.udk-berlin.de": {
+                "id": "!aNZZMPxcqLOMXgbPCV:dev.medienhaus.udk-berlin.de",
+                "name": "Musik und Literatur im 20. Jahrhundert",
+                "children": {}
+              },
+              "!gckncFcuYwPMGpdrrp:dev.medienhaus.udk-berlin.de": {
+                "id": "!gckncFcuYwPMGpdrrp:dev.medienhaus.udk-berlin.de",
+                "name": "Musikwissenschaft für Musiker*innen / Musikwissenschaftliche Arbeitstechniken",
+                "children": {}
+              },
+              "!zJAMlLGbmxrOYbpijA:dev.medienhaus.udk-berlin.de": {
+                "id": "!zJAMlLGbmxrOYbpijA:dev.medienhaus.udk-berlin.de",
+                "name": "\"Ohne Musik wäre das Leben ein Irrtum\" - der musikalische Kosmos des Alexander Kluge",
+                "children": {}
+              },
+              "!DLPaLLPSZnDqUKZDNg:dev.medienhaus.udk-berlin.de": {
+                "id": "!DLPaLLPSZnDqUKZDNg:dev.medienhaus.udk-berlin.de",
+                "name": "Original und Überlieferung – Die Toccata d-Moll BWV 565",
+                "children": {}
+              },
+              "!YUnFifkHWPsytGHBFP:dev.medienhaus.udk-berlin.de": {
+                "id": "!YUnFifkHWPsytGHBFP:dev.medienhaus.udk-berlin.de",
+                "name": "Satztechniken des 20./21. Jahrhunderts mit dem Schwerpunkt experimentelle Musik",
+                "children": {}
+              },
+              "!TAOtwvAHWbZWSJSfKC:dev.medienhaus.udk-berlin.de": {
+                "id": "!TAOtwvAHWbZWSJSfKC:dev.medienhaus.udk-berlin.de",
+                "name": "Schneller, höher, … besser? Konkurrenz und Wettbewerb in der Musik",
+                "children": {}
+              },
+              "!qVVwJFZfaUtWFmqmUW:dev.medienhaus.udk-berlin.de": {
+                "id": "!qVVwJFZfaUtWFmqmUW:dev.medienhaus.udk-berlin.de",
+                "name": "Schreiben über neue Musik",
+                "children": {}
+              },
+              "!aGvtKHUdQPVdyyaQIr:dev.medienhaus.udk-berlin.de": {
+                "id": "!aGvtKHUdQPVdyyaQIr:dev.medienhaus.udk-berlin.de",
+                "name": "Super librum cantare – Mehrstimmige Vokalimprovisation im Stil der Renaissance",
+                "children": {}
+              },
+              "!eaLsaYNqycjnFUwLQz:dev.medienhaus.udk-berlin.de": {
+                "id": "!eaLsaYNqycjnFUwLQz:dev.medienhaus.udk-berlin.de",
+                "name": "THE NEW YORK SCHOOL UND DIE GESCHICHTE DER EXPERIMENTELLEN MUSIK",
+                "children": {}
+              },
+              "!aZEIdLogEiPEMWTMCt:dev.medienhaus.udk-berlin.de": {
+                "id": "!aZEIdLogEiPEMWTMCt:dev.medienhaus.udk-berlin.de",
+                "name": "Transitionen: Oper – Musiktheater – Musical in, aus und über Nordamerika ab dem 20. Jh.",
+                "children": {}
+              },
+              "!RGXHHicNwBIBZVCqVl:dev.medienhaus.udk-berlin.de": {
+                "id": "!RGXHHicNwBIBZVCqVl:dev.medienhaus.udk-berlin.de",
+                "name": "VoiceEvents 3",
+                "children": {}
+              },
+              "!NeWduVIBvOtzcAhJVJ:dev.medienhaus.udk-berlin.de": {
+                "id": "!NeWduVIBvOtzcAhJVJ:dev.medienhaus.udk-berlin.de",
+                "name": "Zoom + Focus",
+                "children": {}
+              },
+              "!RuBtHflsZxLxIlKuYT:dev.medienhaus.udk-berlin.de": {
+                "id": "!RuBtHflsZxLxIlKuYT:dev.medienhaus.udk-berlin.de",
+                "name": "Zwischen Lisztomanie und Clavierseuche. Pianistinnen und Pianisten im 19. Jahrhundert",
+                "children": {}
+              }
+            }
+          },
+          "!xnEzsFIHTAilofHktN:dev.medienhaus.udk-berlin.de": {
+            "id": "!xnEzsFIHTAilofHktN:dev.medienhaus.udk-berlin.de",
+            "name": "Dirigieren",
+            "children": {
+              "!SjjvVAFTAPAEzpeBQZ:dev.medienhaus.udk-berlin.de": {
+                "id": "!SjjvVAFTAPAEzpeBQZ:dev.medienhaus.udk-berlin.de",
+                "name": "Alban Berg \"Wozzeck\"",
+                "children": {}
+              },
+              "!TwVsbKSYCTrLieJDgZ:dev.medienhaus.udk-berlin.de": {
+                "id": "!TwVsbKSYCTrLieJDgZ:dev.medienhaus.udk-berlin.de",
+                "name": "Das Cembalo. Von Kielklavieren, Zupfklavieren, Spinetten, Virginalen und Schweinsköpfen.",
+                "children": {}
+              },
+              "!MexikURwBqwSStiUxU:dev.medienhaus.udk-berlin.de": {
+                "id": "!MexikURwBqwSStiUxU:dev.medienhaus.udk-berlin.de",
+                "name": "Das Kleine Klavierstück von Bach bis Schönberg. Zur Geschichte des Charakterstücks für",
+                "children": {}
+              },
+              "!uxvBMJKeQaKpDegdWD:dev.medienhaus.udk-berlin.de": {
+                "id": "!uxvBMJKeQaKpDegdWD:dev.medienhaus.udk-berlin.de",
+                "name": "Einführung in die Musikwissenschaft",
+                "children": {}
+              },
+              "!IxQYiZypixoeFYlJWf:dev.medienhaus.udk-berlin.de": {
+                "id": "!IxQYiZypixoeFYlJWf:dev.medienhaus.udk-berlin.de",
+                "name": "Franz Schuberts Kammermusik",
+                "children": {}
+              },
+              "!tJTYerUmaEdelXaCaQ:dev.medienhaus.udk-berlin.de": {
+                "id": "!tJTYerUmaEdelXaCaQ:dev.medienhaus.udk-berlin.de",
+                "name": "Großer Chor der UdK",
+                "children": {}
+              },
+              "!uqssDYRysdZSltRlXl:dev.medienhaus.udk-berlin.de": {
+                "id": "!uqssDYRysdZSltRlXl:dev.medienhaus.udk-berlin.de",
+                "name": "Grundlagen des Dirigierens Q2a – nur für Q-Master",
+                "children": {}
+              },
+              "!hGHndqvFWZVVQqbiBC:dev.medienhaus.udk-berlin.de": {
+                "id": "!hGHndqvFWZVVQqbiBC:dev.medienhaus.udk-berlin.de",
+                "name": "Grundlagen des Dirigierens Q2b – nur für Q-Master",
+                "children": {}
+              },
+              "!SqRMCFJgPzhfXNeCHi:dev.medienhaus.udk-berlin.de": {
+                "id": "!SqRMCFJgPzhfXNeCHi:dev.medienhaus.udk-berlin.de",
+                "name": "Heimatkonstruktion, Musik und Medienkultur",
+                "children": {}
+              },
+              "!CZMYIvowkEMohnhQvB:dev.medienhaus.udk-berlin.de": {
+                "id": "!CZMYIvowkEMohnhQvB:dev.medienhaus.udk-berlin.de",
+                "name": "Heinrich Schütz",
+                "children": {}
+              },
+              "!yOBObKRZmrSiktIFYu:dev.medienhaus.udk-berlin.de": {
+                "id": "!yOBObKRZmrSiktIFYu:dev.medienhaus.udk-berlin.de",
+                "name": "Herrschaft und Emanzipation durch Musik: Gender, Klasse, Kirche, Staat",
+                "children": {}
+              },
+              "!kvZLEDdzPpRQbpHtdX:dev.medienhaus.udk-berlin.de": {
+                "id": "!kvZLEDdzPpRQbpHtdX:dev.medienhaus.udk-berlin.de",
+                "name": "Hollywood-Sound: Ästhetik und Geschichte eines filmmusikalischen Phänomens",
+                "children": {}
+              },
+              "!lQtaUsIrSFYDwgONsa:dev.medienhaus.udk-berlin.de": {
+                "id": "!lQtaUsIrSFYDwgONsa:dev.medienhaus.udk-berlin.de",
+                "name": "Instrumentation",
+                "children": {}
+              },
+              "!cFDHXfCdClDgmsWDCw:dev.medienhaus.udk-berlin.de": {
+                "id": "!cFDHXfCdClDgmsWDCw:dev.medienhaus.udk-berlin.de",
+                "name": "Johannes Brahms und die Variation",
+                "children": {}
+              },
+              "!UWGZbozSzXbMDdNIHY:dev.medienhaus.udk-berlin.de": {
+                "id": "!UWGZbozSzXbMDdNIHY:dev.medienhaus.udk-berlin.de",
+                "name": "Kammerchor der Künste",
+                "children": {}
+              },
+              "!aNZZMPxcqLOMXgbPCV:dev.medienhaus.udk-berlin.de": {
+                "id": "!aNZZMPxcqLOMXgbPCV:dev.medienhaus.udk-berlin.de",
+                "name": "Musik und Literatur im 20. Jahrhundert",
+                "children": {}
+              },
+              "!DLPaLLPSZnDqUKZDNg:dev.medienhaus.udk-berlin.de": {
+                "id": "!DLPaLLPSZnDqUKZDNg:dev.medienhaus.udk-berlin.de",
+                "name": "Original und Überlieferung – Die Toccata d-Moll BWV 565",
+                "children": {}
+              },
+              "!YUnFifkHWPsytGHBFP:dev.medienhaus.udk-berlin.de": {
+                "id": "!YUnFifkHWPsytGHBFP:dev.medienhaus.udk-berlin.de",
+                "name": "Satztechniken des 20./21. Jahrhunderts mit dem Schwerpunkt experimentelle Musik",
+                "children": {}
+              },
+              "!TAOtwvAHWbZWSJSfKC:dev.medienhaus.udk-berlin.de": {
+                "id": "!TAOtwvAHWbZWSJSfKC:dev.medienhaus.udk-berlin.de",
+                "name": "Schneller, höher, … besser? Konkurrenz und Wettbewerb in der Musik",
+                "children": {}
+              },
+              "!aGvtKHUdQPVdyyaQIr:dev.medienhaus.udk-berlin.de": {
+                "id": "!aGvtKHUdQPVdyyaQIr:dev.medienhaus.udk-berlin.de",
+                "name": "Super librum cantare – Mehrstimmige Vokalimprovisation im Stil der Renaissance",
+                "children": {}
+              },
+              "!aZEIdLogEiPEMWTMCt:dev.medienhaus.udk-berlin.de": {
+                "id": "!aZEIdLogEiPEMWTMCt:dev.medienhaus.udk-berlin.de",
+                "name": "Transitionen: Oper – Musiktheater – Musical in, aus und über Nordamerika ab dem 20. Jh.",
+                "children": {}
+              },
+              "!RuBtHflsZxLxIlKuYT:dev.medienhaus.udk-berlin.de": {
+                "id": "!RuBtHflsZxLxIlKuYT:dev.medienhaus.udk-berlin.de",
+                "name": "Zwischen Lisztomanie und Clavierseuche. Pianistinnen und Pianisten im 19. Jahrhundert",
+                "children": {}
+              }
+            }
+          },
+          "!eQCuQkFeICnwTJdxYq:dev.medienhaus.udk-berlin.de": {
+            "id": "!eQCuQkFeICnwTJdxYq:dev.medienhaus.udk-berlin.de",
+            "name": "Chordirigieren (Ergänzungsstudiengang)",
+            "children": {
+              "!tJTYerUmaEdelXaCaQ:dev.medienhaus.udk-berlin.de": {
+                "id": "!tJTYerUmaEdelXaCaQ:dev.medienhaus.udk-berlin.de",
+                "name": "Großer Chor der UdK",
+                "children": {}
+              },
+              "!UWGZbozSzXbMDdNIHY:dev.medienhaus.udk-berlin.de": {
+                "id": "!UWGZbozSzXbMDdNIHY:dev.medienhaus.udk-berlin.de",
+                "name": "Kammerchor der Künste",
+                "children": {}
+              }
+            }
+          },
+          "!PAtpWbMXJMakHtTxVs:dev.medienhaus.udk-berlin.de": {
+            "id": "!PAtpWbMXJMakHtTxVs:dev.medienhaus.udk-berlin.de",
+            "name": "Kirchenmusik",
+            "children": {
+              "!SjjvVAFTAPAEzpeBQZ:dev.medienhaus.udk-berlin.de": {
+                "id": "!SjjvVAFTAPAEzpeBQZ:dev.medienhaus.udk-berlin.de",
+                "name": "Alban Berg \"Wozzeck\"",
+                "children": {}
+              },
+              "!NrZIQzFrTtrWdSsllF:dev.medienhaus.udk-berlin.de": {
+                "id": "!NrZIQzFrTtrWdSsllF:dev.medienhaus.udk-berlin.de",
+                "name": "Alexandertechnik",
+                "children": {}
+              },
+              "!DcadDYxaHLbcCKBVxI:dev.medienhaus.udk-berlin.de": {
+                "id": "!DcadDYxaHLbcCKBVxI:dev.medienhaus.udk-berlin.de",
+                "name": "Basic Impro",
+                "children": {}
+              },
+              "!VLFGeSxTlhPFYQqFfW:dev.medienhaus.udk-berlin.de": {
+                "id": "!VLFGeSxTlhPFYQqFfW:dev.medienhaus.udk-berlin.de",
+                "name": "Chorleitung",
+                "children": {}
+              },
+              "!wvOdOesTEnTamPpkQw:dev.medienhaus.udk-berlin.de": {
+                "id": "!wvOdOesTEnTamPpkQw:dev.medienhaus.udk-berlin.de",
+                "name": "Chorleitung",
+                "children": {}
+              },
+              "!YekpBCJaIAqyYlNCOu:dev.medienhaus.udk-berlin.de": {
+                "id": "!YekpBCJaIAqyYlNCOu:dev.medienhaus.udk-berlin.de",
+                "name": "Chorleitung",
+                "children": {}
+              },
+              "!TwVsbKSYCTrLieJDgZ:dev.medienhaus.udk-berlin.de": {
+                "id": "!TwVsbKSYCTrLieJDgZ:dev.medienhaus.udk-berlin.de",
+                "name": "Das Cembalo. Von Kielklavieren, Zupfklavieren, Spinetten, Virginalen und Schweinsköpfen.",
+                "children": {}
+              },
+              "!MexikURwBqwSStiUxU:dev.medienhaus.udk-berlin.de": {
+                "id": "!MexikURwBqwSStiUxU:dev.medienhaus.udk-berlin.de",
+                "name": "Das Kleine Klavierstück von Bach bis Schönberg. Zur Geschichte des Charakterstücks für",
+                "children": {}
+              },
+              "!vjDzQlxCsSEjgUDykL:dev.medienhaus.udk-berlin.de": {
+                "id": "!vjDzQlxCsSEjgUDykL:dev.medienhaus.udk-berlin.de",
+                "name": "Einführung in die Musikwissenschaft",
+                "children": {}
+              },
+              "!uxvBMJKeQaKpDegdWD:dev.medienhaus.udk-berlin.de": {
+                "id": "!uxvBMJKeQaKpDegdWD:dev.medienhaus.udk-berlin.de",
+                "name": "Einführung in die Musikwissenschaft",
+                "children": {}
+              },
+              "!ivTEafhwvsPcFGCFqf:dev.medienhaus.udk-berlin.de": {
+                "id": "!ivTEafhwvsPcFGCFqf:dev.medienhaus.udk-berlin.de",
+                "name": "Ensemble-Leitung im Profilmodul 8/ Master",
+                "children": {}
+              },
+              "!KRAbdQdPfKcWvPDjPy:dev.medienhaus.udk-berlin.de": {
+                "id": "!KRAbdQdPfKcWvPDjPy:dev.medienhaus.udk-berlin.de",
+                "name": "Feldenkrais",
+                "children": {}
+              },
+              "!IxQYiZypixoeFYlJWf:dev.medienhaus.udk-berlin.de": {
+                "id": "!IxQYiZypixoeFYlJWf:dev.medienhaus.udk-berlin.de",
+                "name": "Franz Schuberts Kammermusik",
+                "children": {}
+              },
+              "!tJTYerUmaEdelXaCaQ:dev.medienhaus.udk-berlin.de": {
+                "id": "!tJTYerUmaEdelXaCaQ:dev.medienhaus.udk-berlin.de",
+                "name": "Großer Chor der UdK",
+                "children": {}
+              },
+              "!DaJeYKXMfXdwmqLcFp:dev.medienhaus.udk-berlin.de": {
+                "id": "!DaJeYKXMfXdwmqLcFp:dev.medienhaus.udk-berlin.de",
+                "name": "Grundlagenseminar Musikphysiologie",
+                "children": {}
+              },
+              "!SqRMCFJgPzhfXNeCHi:dev.medienhaus.udk-berlin.de": {
+                "id": "!SqRMCFJgPzhfXNeCHi:dev.medienhaus.udk-berlin.de",
+                "name": "Heimatkonstruktion, Musik und Medienkultur",
+                "children": {}
+              },
+              "!CZMYIvowkEMohnhQvB:dev.medienhaus.udk-berlin.de": {
+                "id": "!CZMYIvowkEMohnhQvB:dev.medienhaus.udk-berlin.de",
+                "name": "Heinrich Schütz",
+                "children": {}
+              },
+              "!yOBObKRZmrSiktIFYu:dev.medienhaus.udk-berlin.de": {
+                "id": "!yOBObKRZmrSiktIFYu:dev.medienhaus.udk-berlin.de",
+                "name": "Herrschaft und Emanzipation durch Musik: Gender, Klasse, Kirche, Staat",
+                "children": {}
+              },
+              "!kvZLEDdzPpRQbpHtdX:dev.medienhaus.udk-berlin.de": {
+                "id": "!kvZLEDdzPpRQbpHtdX:dev.medienhaus.udk-berlin.de",
+                "name": "Hollywood-Sound: Ästhetik und Geschichte eines filmmusikalischen Phänomens",
+                "children": {}
+              },
+              "!IuVDWnCtFzMNyrWkgy:dev.medienhaus.udk-berlin.de": {
+                "id": "!IuVDWnCtFzMNyrWkgy:dev.medienhaus.udk-berlin.de",
+                "name": "Jazzensemble 1",
+                "children": {}
+              },
+              "!JaDGOAZhhEyEaDZxTq:dev.medienhaus.udk-berlin.de": {
+                "id": "!JaDGOAZhhEyEaDZxTq:dev.medienhaus.udk-berlin.de",
+                "name": "Jazz Ensemble 2",
+                "children": {}
+              },
+              "!cFDHXfCdClDgmsWDCw:dev.medienhaus.udk-berlin.de": {
+                "id": "!cFDHXfCdClDgmsWDCw:dev.medienhaus.udk-berlin.de",
+                "name": "Johannes Brahms und die Variation",
+                "children": {}
+              },
+              "!UWGZbozSzXbMDdNIHY:dev.medienhaus.udk-berlin.de": {
+                "id": "!UWGZbozSzXbMDdNIHY:dev.medienhaus.udk-berlin.de",
+                "name": "Kammerchor der Künste",
+                "children": {}
+              },
+              "!TSVgNjDQvjxvaQPewd:dev.medienhaus.udk-berlin.de": {
+                "id": "!TSVgNjDQvjxvaQPewd:dev.medienhaus.udk-berlin.de",
+                "name": "Kraftausdauer für Musiker",
+                "children": {}
+              },
+              "!AOQgbsUuSZHwPpgquF:dev.medienhaus.udk-berlin.de": {
+                "id": "!AOQgbsUuSZHwPpgquF:dev.medienhaus.udk-berlin.de",
+                "name": "Musikermedizinische Sprechstunde",
+                "children": {}
+              },
+              "!fEegpivZDYxgDaKnlP:dev.medienhaus.udk-berlin.de": {
+                "id": "!fEegpivZDYxgDaKnlP:dev.medienhaus.udk-berlin.de",
+                "name": "Musikphysiologische Einzelberatung",
+                "children": {}
+              },
+              "!ULxqbsKSbQoIQRZCiP:dev.medienhaus.udk-berlin.de": {
+                "id": "!ULxqbsKSbQoIQRZCiP:dev.medienhaus.udk-berlin.de",
+                "name": "Musiktheorie",
+                "children": {}
+              },
+              "!IbhWcqYrEhwIwTbMAh:dev.medienhaus.udk-berlin.de": {
+                "id": "!IbhWcqYrEhwIwTbMAh:dev.medienhaus.udk-berlin.de",
+                "name": "Musiktheorie BA Kirchenmusik 1 und 2",
+                "children": {}
+              },
+              "!aNZZMPxcqLOMXgbPCV:dev.medienhaus.udk-berlin.de": {
+                "id": "!aNZZMPxcqLOMXgbPCV:dev.medienhaus.udk-berlin.de",
+                "name": "Musik und Literatur im 20. Jahrhundert",
+                "children": {}
+              },
+              "!gckncFcuYwPMGpdrrp:dev.medienhaus.udk-berlin.de": {
+                "id": "!gckncFcuYwPMGpdrrp:dev.medienhaus.udk-berlin.de",
+                "name": "Musikwissenschaft für Musiker*innen / Musikwissenschaftliche Arbeitstechniken",
+                "children": {}
+              },
+              "!ztMNcLpwSeTmSfyNfi:dev.medienhaus.udk-berlin.de": {
+                "id": "!ztMNcLpwSeTmSfyNfi:dev.medienhaus.udk-berlin.de",
+                "name": "Orgelmethodik",
+                "children": {}
+              },
+              "!DLPaLLPSZnDqUKZDNg:dev.medienhaus.udk-berlin.de": {
+                "id": "!DLPaLLPSZnDqUKZDNg:dev.medienhaus.udk-berlin.de",
+                "name": "Original und Überlieferung – Die Toccata d-Moll BWV 565",
+                "children": {}
+              },
+              "!LCrNXngEmEPWhCvMCp:dev.medienhaus.udk-berlin.de": {
+                "id": "!LCrNXngEmEPWhCvMCp:dev.medienhaus.udk-berlin.de",
+                "name": "Percussion",
+                "children": {}
+              },
+              "!TAOtwvAHWbZWSJSfKC:dev.medienhaus.udk-berlin.de": {
+                "id": "!TAOtwvAHWbZWSJSfKC:dev.medienhaus.udk-berlin.de",
+                "name": "Schneller, höher, … besser? Konkurrenz und Wettbewerb in der Musik",
+                "children": {}
+              },
+              "!aZEIdLogEiPEMWTMCt:dev.medienhaus.udk-berlin.de": {
+                "id": "!aZEIdLogEiPEMWTMCt:dev.medienhaus.udk-berlin.de",
+                "name": "Transitionen: Oper – Musiktheater – Musical in, aus und über Nordamerika ab dem 20. Jh.",
+                "children": {}
+              },
+              "!RuBtHflsZxLxIlKuYT:dev.medienhaus.udk-berlin.de": {
+                "id": "!RuBtHflsZxLxIlKuYT:dev.medienhaus.udk-berlin.de",
+                "name": "Zwischen Lisztomanie und Clavierseuche. Pianistinnen und Pianisten im 19. Jahrhundert",
+                "children": {}
+              }
+            }
+          },
+          "!JvbudVbOUqLQVUDJxV:dev.medienhaus.udk-berlin.de": {
+            "id": "!JvbudVbOUqLQVUDJxV:dev.medienhaus.udk-berlin.de",
+            "name": "Tonmeister",
+            "children": {
+              "!SjjvVAFTAPAEzpeBQZ:dev.medienhaus.udk-berlin.de": {
+                "id": "!SjjvVAFTAPAEzpeBQZ:dev.medienhaus.udk-berlin.de",
+                "name": "Alban Berg \"Wozzeck\"",
+                "children": {}
+              },
+              "!NrZIQzFrTtrWdSsllF:dev.medienhaus.udk-berlin.de": {
+                "id": "!NrZIQzFrTtrWdSsllF:dev.medienhaus.udk-berlin.de",
+                "name": "Alexandertechnik",
+                "children": {}
+              },
+              "!sqrMGZDbtmfOgKKkGC:dev.medienhaus.udk-berlin.de": {
+                "id": "!sqrMGZDbtmfOgKKkGC:dev.medienhaus.udk-berlin.de",
+                "name": "Audiotechnik (Übung)",
+                "children": {}
+              },
+              "!DcadDYxaHLbcCKBVxI:dev.medienhaus.udk-berlin.de": {
+                "id": "!DcadDYxaHLbcCKBVxI:dev.medienhaus.udk-berlin.de",
+                "name": "Basic Impro",
+                "children": {}
+              },
+              "!TwVsbKSYCTrLieJDgZ:dev.medienhaus.udk-berlin.de": {
+                "id": "!TwVsbKSYCTrLieJDgZ:dev.medienhaus.udk-berlin.de",
+                "name": "Das Cembalo. Von Kielklavieren, Zupfklavieren, Spinetten, Virginalen und Schweinsköpfen.",
+                "children": {}
+              },
+              "!MexikURwBqwSStiUxU:dev.medienhaus.udk-berlin.de": {
+                "id": "!MexikURwBqwSStiUxU:dev.medienhaus.udk-berlin.de",
+                "name": "Das Kleine Klavierstück von Bach bis Schönberg. Zur Geschichte des Charakterstücks für",
+                "children": {}
+              },
+              "!lDZediqekVrrlNfxui:dev.medienhaus.udk-berlin.de": {
+                "id": "!lDZediqekVrrlNfxui:dev.medienhaus.udk-berlin.de",
+                "name": "Einführung in die digitale Signalverarbeitung",
+                "children": {}
+              },
+              "!vjDzQlxCsSEjgUDykL:dev.medienhaus.udk-berlin.de": {
+                "id": "!vjDzQlxCsSEjgUDykL:dev.medienhaus.udk-berlin.de",
+                "name": "Einführung in die Musikwissenschaft",
+                "children": {}
+              },
+              "!uxvBMJKeQaKpDegdWD:dev.medienhaus.udk-berlin.de": {
+                "id": "!uxvBMJKeQaKpDegdWD:dev.medienhaus.udk-berlin.de",
+                "name": "Einführung in die Musikwissenschaft",
+                "children": {}
+              },
+              "!lcRmIlVQtqUBAEZruF:dev.medienhaus.udk-berlin.de": {
+                "id": "!lcRmIlVQtqUBAEZruF:dev.medienhaus.udk-berlin.de",
+                "name": "Einzel - und Kleingruppenunterricht Möller",
+                "children": {}
+              },
+              "!ziStvhmBRtiKxgqvSi:dev.medienhaus.udk-berlin.de": {
+                "id": "!ziStvhmBRtiKxgqvSi:dev.medienhaus.udk-berlin.de",
+                "name": "Einzelunterricht",
+                "children": {}
+              },
+              "!UjIjgrcazlShnUyhWm:dev.medienhaus.udk-berlin.de": {
+                "id": "!UjIjgrcazlShnUyhWm:dev.medienhaus.udk-berlin.de",
+                "name": "Elektroakustische Komposition - Sonic Agency in Time of Climate Crisis",
+                "children": {}
+              },
+              "!ivTEafhwvsPcFGCFqf:dev.medienhaus.udk-berlin.de": {
+                "id": "!ivTEafhwvsPcFGCFqf:dev.medienhaus.udk-berlin.de",
+                "name": "Ensemble-Leitung im Profilmodul 8/ Master",
+                "children": {}
+              },
+              "!KRAbdQdPfKcWvPDjPy:dev.medienhaus.udk-berlin.de": {
+                "id": "!KRAbdQdPfKcWvPDjPy:dev.medienhaus.udk-berlin.de",
+                "name": "Feldenkrais",
+                "children": {}
+              },
+              "!IxQYiZypixoeFYlJWf:dev.medienhaus.udk-berlin.de": {
+                "id": "!IxQYiZypixoeFYlJWf:dev.medienhaus.udk-berlin.de",
+                "name": "Franz Schuberts Kammermusik",
+                "children": {}
+              },
+              "!JofRimHkinsXDAfIhz:dev.medienhaus.udk-berlin.de": {
+                "id": "!JofRimHkinsXDAfIhz:dev.medienhaus.udk-berlin.de",
+                "name": "Gehörbildung - Tonmeister",
+                "children": {}
+              },
+              "!NpWapjhCpAKrNghvNH:dev.medienhaus.udk-berlin.de": {
+                "id": "!NpWapjhCpAKrNghvNH:dev.medienhaus.udk-berlin.de",
+                "name": "Gehörbildung Tonmeister, 8. Semester",
+                "children": {}
+              },
+              "!tJTYerUmaEdelXaCaQ:dev.medienhaus.udk-berlin.de": {
+                "id": "!tJTYerUmaEdelXaCaQ:dev.medienhaus.udk-berlin.de",
+                "name": "Großer Chor der UdK",
+                "children": {}
+              },
+              "!DaJeYKXMfXdwmqLcFp:dev.medienhaus.udk-berlin.de": {
+                "id": "!DaJeYKXMfXdwmqLcFp:dev.medienhaus.udk-berlin.de",
+                "name": "Grundlagenseminar Musikphysiologie",
+                "children": {}
+              },
+              "!SqRMCFJgPzhfXNeCHi:dev.medienhaus.udk-berlin.de": {
+                "id": "!SqRMCFJgPzhfXNeCHi:dev.medienhaus.udk-berlin.de",
+                "name": "Heimatkonstruktion, Musik und Medienkultur",
+                "children": {}
+              },
+              "!CZMYIvowkEMohnhQvB:dev.medienhaus.udk-berlin.de": {
+                "id": "!CZMYIvowkEMohnhQvB:dev.medienhaus.udk-berlin.de",
+                "name": "Heinrich Schütz",
+                "children": {}
+              },
+              "!yOBObKRZmrSiktIFYu:dev.medienhaus.udk-berlin.de": {
+                "id": "!yOBObKRZmrSiktIFYu:dev.medienhaus.udk-berlin.de",
+                "name": "Herrschaft und Emanzipation durch Musik: Gender, Klasse, Kirche, Staat",
+                "children": {}
+              },
+              "!kvZLEDdzPpRQbpHtdX:dev.medienhaus.udk-berlin.de": {
+                "id": "!kvZLEDdzPpRQbpHtdX:dev.medienhaus.udk-berlin.de",
+                "name": "Hollywood-Sound: Ästhetik und Geschichte eines filmmusikalischen Phänomens",
+                "children": {}
+              },
+              "!NQWRncsemORdBgALAB:dev.medienhaus.udk-berlin.de": {
+                "id": "!NQWRncsemORdBgALAB:dev.medienhaus.udk-berlin.de",
+                "name": "Hörspielproduktion",
+                "children": {}
+              },
+              "!zdRpFGoTDZyCMGXzXJ:dev.medienhaus.udk-berlin.de": {
+                "id": "!zdRpFGoTDZyCMGXzXJ:dev.medienhaus.udk-berlin.de",
+                "name": "Informatik für Tonmeister",
+                "children": {}
+              },
+              "!sjbeGYJWELCROCAbdG:dev.medienhaus.udk-berlin.de": {
+                "id": "!sjbeGYJWELCROCAbdG:dev.medienhaus.udk-berlin.de",
+                "name": "Instrumentenkunde (Komposition, Tonmeister)",
+                "children": {}
+              },
+              "!EOnUvxskLSclldImrT:dev.medienhaus.udk-berlin.de": {
+                "id": "!EOnUvxskLSclldImrT:dev.medienhaus.udk-berlin.de",
+                "name": "Interpretationsvergleich und -kritik Klassik",
+                "children": {}
+              },
+              "!wGOYTTtSpISysQUKLZ:dev.medienhaus.udk-berlin.de": {
+                "id": "!wGOYTTtSpISysQUKLZ:dev.medienhaus.udk-berlin.de",
+                "name": "Jazz – Theorie – Gehörbildung",
+                "children": {}
+              },
+              "!UqiLxNzjsAJCzTEWqV:dev.medienhaus.udk-berlin.de": {
+                "id": "!UqiLxNzjsAJCzTEWqV:dev.medienhaus.udk-berlin.de",
+                "name": "Jazz-Ensemble",
+                "children": {}
+              },
+              "!IuVDWnCtFzMNyrWkgy:dev.medienhaus.udk-berlin.de": {
+                "id": "!IuVDWnCtFzMNyrWkgy:dev.medienhaus.udk-berlin.de",
+                "name": "Jazzensemble 1",
+                "children": {}
+              },
+              "!JaDGOAZhhEyEaDZxTq:dev.medienhaus.udk-berlin.de": {
+                "id": "!JaDGOAZhhEyEaDZxTq:dev.medienhaus.udk-berlin.de",
+                "name": "Jazz Ensemble 2",
+                "children": {}
+              },
+              "!PmUxnKOvApDAnSARcA:dev.medienhaus.udk-berlin.de": {
+                "id": "!PmUxnKOvApDAnSARcA:dev.medienhaus.udk-berlin.de",
+                "name": "Jazzklavier",
+                "children": {}
+              },
+              "!cFDHXfCdClDgmsWDCw:dev.medienhaus.udk-berlin.de": {
+                "id": "!cFDHXfCdClDgmsWDCw:dev.medienhaus.udk-berlin.de",
+                "name": "Johannes Brahms und die Variation",
+                "children": {}
+              },
+              "!UWGZbozSzXbMDdNIHY:dev.medienhaus.udk-berlin.de": {
+                "id": "!UWGZbozSzXbMDdNIHY:dev.medienhaus.udk-berlin.de",
+                "name": "Kammerchor der Künste",
+                "children": {}
+              },
+              "!TSVgNjDQvjxvaQPewd:dev.medienhaus.udk-berlin.de": {
+                "id": "!TSVgNjDQvjxvaQPewd:dev.medienhaus.udk-berlin.de",
+                "name": "Kraftausdauer für Musiker",
+                "children": {}
+              },
+              "!JPOcpTwPBIycqgqMdD:dev.medienhaus.udk-berlin.de": {
+                "id": "!JPOcpTwPBIycqgqMdD:dev.medienhaus.udk-berlin.de",
+                "name": "Mathematik II für Chemiker",
+                "children": {}
+              },
+              "!teLnWFMxnUZiWOzeEM:dev.medienhaus.udk-berlin.de": {
+                "id": "!teLnWFMxnUZiWOzeEM:dev.medienhaus.udk-berlin.de",
+                "name": "Mathematik II für Chemiker",
+                "children": {}
+              },
+              "!zVYCIMbKPyAiWzXnnB:dev.medienhaus.udk-berlin.de": {
+                "id": "!zVYCIMbKPyAiWzXnnB:dev.medienhaus.udk-berlin.de",
+                "name": "Mischung Klassik",
+                "children": {}
+              },
+              "!IRnernNWRyhUMSvnNe:dev.medienhaus.udk-berlin.de": {
+                "id": "!IRnernNWRyhUMSvnNe:dev.medienhaus.udk-berlin.de",
+                "name": "Musikalische Aufführungspraxis und Interpretation",
+                "children": {}
+              },
+              "!AOQgbsUuSZHwPpgquF:dev.medienhaus.udk-berlin.de": {
+                "id": "!AOQgbsUuSZHwPpgquF:dev.medienhaus.udk-berlin.de",
+                "name": "Musikermedizinische Sprechstunde",
+                "children": {}
+              },
+              "!fEegpivZDYxgDaKnlP:dev.medienhaus.udk-berlin.de": {
+                "id": "!fEegpivZDYxgDaKnlP:dev.medienhaus.udk-berlin.de",
+                "name": "Musikphysiologische Einzelberatung",
+                "children": {}
+              },
+              "!HFkKcAGhIrvnAwaXUf:dev.medienhaus.udk-berlin.de": {
+                "id": "!HFkKcAGhIrvnAwaXUf:dev.medienhaus.udk-berlin.de",
+                "name": "Musikproduktion 1 - Klassik",
+                "children": {}
+              },
+              "!WFxhYKjsZTwaUmIAoS:dev.medienhaus.udk-berlin.de": {
+                "id": "!WFxhYKjsZTwaUmIAoS:dev.medienhaus.udk-berlin.de",
+                "name": "Musikproduktion 1 (Popularmusik)",
+                "children": {}
+              },
+              "!MHlpBPWjGRrLwdCrNZ:dev.medienhaus.udk-berlin.de": {
+                "id": "!MHlpBPWjGRrLwdCrNZ:dev.medienhaus.udk-berlin.de",
+                "name": "Musikproduktion 2",
+                "children": {}
+              },
+              "!jheLVXcnpjzBOAdLYp:dev.medienhaus.udk-berlin.de": {
+                "id": "!jheLVXcnpjzBOAdLYp:dev.medienhaus.udk-berlin.de",
+                "name": "Musiktheorie Tonmeister, 4. Semester",
+                "children": {}
+              },
+              "!uKVroYMEcfvPslUCIZ:dev.medienhaus.udk-berlin.de": {
+                "id": "!uKVroYMEcfvPslUCIZ:dev.medienhaus.udk-berlin.de",
+                "name": "Musiktheorie/Werkanalyse und Tonsatz 6. Semester",
+                "children": {}
+              },
+              "!CWcjOyHLrPHtdESONh:dev.medienhaus.udk-berlin.de": {
+                "id": "!CWcjOyHLrPHtdESONh:dev.medienhaus.udk-berlin.de",
+                "name": "Musikübertragung Popularmusik",
+                "children": {}
+              },
+              "!nHOnXcSxMomcTtfdgS:dev.medienhaus.udk-berlin.de": {
+                "id": "!nHOnXcSxMomcTtfdgS:dev.medienhaus.udk-berlin.de",
+                "name": "Musikübertragung Ton zum Bild",
+                "children": {}
+              },
+              "!aNZZMPxcqLOMXgbPCV:dev.medienhaus.udk-berlin.de": {
+                "id": "!aNZZMPxcqLOMXgbPCV:dev.medienhaus.udk-berlin.de",
+                "name": "Musik und Literatur im 20. Jahrhundert",
+                "children": {}
+              }
+            }
+          },
+          "!LNmwdgPeqvwWkdiRoH:dev.medienhaus.udk-berlin.de": {
+            "id": "!LNmwdgPeqvwWkdiRoH:dev.medienhaus.udk-berlin.de",
+            "name": "BA Lehramt Musik ISS/Gym",
+            "children": {
+              "!cnTlXngjedobVbxOfH:dev.medienhaus.udk-berlin.de": {
+                "id": "!cnTlXngjedobVbxOfH:dev.medienhaus.udk-berlin.de",
+                "name": "„…muss in die alt hergebrachte Form ein anderes, ein wirklich poetisches Element kommen.“ Fugen in",
+                "children": {}
+              },
+              "!wDVzGfJQWMjeLxeHAL:dev.medienhaus.udk-berlin.de": {
+                "id": "!wDVzGfJQWMjeLxeHAL:dev.medienhaus.udk-berlin.de",
+                "name": "„Das Meisterwerk in der Musik“ - Die Lehre Heinrich Schenkers",
+                "children": {}
+              },
+              "!jZbyiCmVGzoCbZqnCG:dev.medienhaus.udk-berlin.de": {
+                "id": "!jZbyiCmVGzoCbZqnCG:dev.medienhaus.udk-berlin.de",
+                "name": "„Praktisches Arrangieren für Jazz/-Pop-Ensembles und Chöre“",
+                "children": {}
+              },
+              "!SjjvVAFTAPAEzpeBQZ:dev.medienhaus.udk-berlin.de": {
+                "id": "!SjjvVAFTAPAEzpeBQZ:dev.medienhaus.udk-berlin.de",
+                "name": "Alban Berg \"Wozzeck\"",
+                "children": {}
+              },
+              "!vdmEXIkDZgvDeXLveX:dev.medienhaus.udk-berlin.de": {
+                "id": "!vdmEXIkDZgvDeXLveX:dev.medienhaus.udk-berlin.de",
+                "name": "Analyse und Interpretation",
+                "children": {}
+              },
+              "!aWdLgczYriyxpnOSeg:dev.medienhaus.udk-berlin.de": {
+                "id": "!aWdLgczYriyxpnOSeg:dev.medienhaus.udk-berlin.de",
+                "name": "And Orff We Go!",
+                "children": {}
+              },
+              "!XVXPWuiTISICSrLnXW:dev.medienhaus.udk-berlin.de": {
+                "id": "!XVXPWuiTISICSrLnXW:dev.medienhaus.udk-berlin.de",
+                "name": "Argentinischer Tango – verstehen und spielen",
+                "children": {}
+              },
+              "!EphfYvGaikoHMRmarE:dev.medienhaus.udk-berlin.de": {
+                "id": "!EphfYvGaikoHMRmarE:dev.medienhaus.udk-berlin.de",
+                "name": "Authentizität vs. Rollenbild – Frauen und Männer im Dirigierberuf_",
+                "children": {}
+              },
+              "!NUsCSznUeZXcphxYvd:dev.medienhaus.udk-berlin.de": {
+                "id": "!NUsCSznUeZXcphxYvd:dev.medienhaus.udk-berlin.de",
+                "name": "BA LA ISS/Gym - Musiktheorie Basis (2. Semester)",
+                "children": {}
+              },
+              "!cjzhZZpzOUjgipBHVz:dev.medienhaus.udk-berlin.de": {
+                "id": "!cjzhZZpzOUjgipBHVz:dev.medienhaus.udk-berlin.de",
+                "name": "BA/MA Lehramt Musik Gym,/ISS Schulbezogenes Arrangieren",
+                "children": {}
+              },
+              "!DcadDYxaHLbcCKBVxI:dev.medienhaus.udk-berlin.de": {
+                "id": "!DcadDYxaHLbcCKBVxI:dev.medienhaus.udk-berlin.de",
+                "name": "Basic Impro",
+                "children": {}
+              },
+              "!nWqAesmlontEKQZiul:dev.medienhaus.udk-berlin.de": {
+                "id": "!nWqAesmlontEKQZiul:dev.medienhaus.udk-berlin.de",
+                "name": "Bewegungstraining",
+                "children": {}
+              },
+              "!YEzIoLMGjCQsAwsBTr:dev.medienhaus.udk-berlin.de": {
+                "id": "!YEzIoLMGjCQsAwsBTr:dev.medienhaus.udk-berlin.de",
+                "name": "Cajon 1",
+                "children": {}
+              },
+              "!PsGOQajTqoKHILnYhX:dev.medienhaus.udk-berlin.de": {
+                "id": "!PsGOQajTqoKHILnYhX:dev.medienhaus.udk-berlin.de",
+                "name": "Cajon 2",
+                "children": {}
+              },
+              "!MzBpPcaYIFyDuZChfk:dev.medienhaus.udk-berlin.de": {
+                "id": "!MzBpPcaYIFyDuZChfk:dev.medienhaus.udk-berlin.de",
+                "name": "Chor JRP",
+                "children": {}
+              },
+              "!SISdvlGkUlXDwFAvmV:dev.medienhaus.udk-berlin.de": {
+                "id": "!SISdvlGkUlXDwFAvmV:dev.medienhaus.udk-berlin.de",
+                "name": "Chorleitung 1a",
+                "children": {}
+              },
+              "!oPnSLJXijgyZRLXMly:dev.medienhaus.udk-berlin.de": {
+                "id": "!oPnSLJXijgyZRLXMly:dev.medienhaus.udk-berlin.de",
+                "name": "Chorleitung 1a",
+                "children": {}
+              },
+              "!gKXhlQbFJzCOhykKnw:dev.medienhaus.udk-berlin.de": {
+                "id": "!gKXhlQbFJzCOhykKnw:dev.medienhaus.udk-berlin.de",
+                "name": "Chorleitung 1 b",
+                "children": {}
+              },
+              "!NjtEcUUjaxkjfYSoDr:dev.medienhaus.udk-berlin.de": {
+                "id": "!NjtEcUUjaxkjfYSoDr:dev.medienhaus.udk-berlin.de",
+                "name": "Chorleitung 2 a",
+                "children": {}
+              },
+              "!YeYhOCnWFBkQbfGZcM:dev.medienhaus.udk-berlin.de": {
+                "id": "!YeYhOCnWFBkQbfGZcM:dev.medienhaus.udk-berlin.de",
+                "name": "Chorleitung 2 b",
+                "children": {}
+              },
+              "!JpOrboRzNyjbVIujux:dev.medienhaus.udk-berlin.de": {
+                "id": "!JpOrboRzNyjbVIujux:dev.medienhaus.udk-berlin.de",
+                "name": "Chorleitung 2 c",
+                "children": {}
+              },
+              "!voFTvJEPIRjcuuKGvn:dev.medienhaus.udk-berlin.de": {
+                "id": "!voFTvJEPIRjcuuKGvn:dev.medienhaus.udk-berlin.de",
+                "name": "Chorleitung Plus für CL 2a",
+                "children": {}
+              },
+              "!OUGPtVVgcssfJPjujJ:dev.medienhaus.udk-berlin.de": {
+                "id": "!OUGPtVVgcssfJPjujJ:dev.medienhaus.udk-berlin.de",
+                "name": "Chorleitung Plus für CL 2b",
+                "children": {}
+              },
+              "!mXeKnCsbBOeMDwVbPq:dev.medienhaus.udk-berlin.de": {
+                "id": "!mXeKnCsbBOeMDwVbPq:dev.medienhaus.udk-berlin.de",
+                "name": "Chorleitung Plus für CL 2 c",
+                "children": {}
+              },
+              "!nVLcjYPDMcnocnPbBn:dev.medienhaus.udk-berlin.de": {
+                "id": "!nVLcjYPDMcnocnPbBn:dev.medienhaus.udk-berlin.de",
+                "name": "Chorleitung (Profil) 1 a",
+                "children": {}
+              },
+              "!rpDjJspPdrgxTHxsvB:dev.medienhaus.udk-berlin.de": {
+                "id": "!rpDjJspPdrgxTHxsvB:dev.medienhaus.udk-berlin.de",
+                "name": "Chorleitung (Profil) 1 b",
+                "children": {}
+              },
+              "!eBUfDMVcnYMAczDqjr:dev.medienhaus.udk-berlin.de": {
+                "id": "!eBUfDMVcnYMAczDqjr:dev.medienhaus.udk-berlin.de",
+                "name": "Chorleitung (Profil) 2 a",
+                "children": {}
+              },
+              "!MnpJuburDhwqZRLjqn:dev.medienhaus.udk-berlin.de": {
+                "id": "!MnpJuburDhwqZRLjqn:dev.medienhaus.udk-berlin.de",
+                "name": "Chorleitung Profil 2 b",
+                "children": {}
+              },
+              "!fubUFHNvJROmqXcNPv:dev.medienhaus.udk-berlin.de": {
+                "id": "!fubUFHNvJROmqXcNPv:dev.medienhaus.udk-berlin.de",
+                "name": "ChorPraxis Chorische Stimmbildung und Singen mit Kindern und Jugendlichen:",
+                "children": {}
+              },
+              "!babBDeUQZGtIiXLFhu:dev.medienhaus.udk-berlin.de": {
+                "id": "!babBDeUQZGtIiXLFhu:dev.medienhaus.udk-berlin.de",
+                "name": "Combo (Bandarbeit in der Schule)",
+                "children": {}
+              },
+              "!IkIXYFjeXBmQQvlCzq:dev.medienhaus.udk-berlin.de": {
+                "id": "!IkIXYFjeXBmQQvlCzq:dev.medienhaus.udk-berlin.de",
+                "name": "Community Music in Theorie und Praxis",
+                "children": {}
+              },
+              "!TwVsbKSYCTrLieJDgZ:dev.medienhaus.udk-berlin.de": {
+                "id": "!TwVsbKSYCTrLieJDgZ:dev.medienhaus.udk-berlin.de",
+                "name": "Das Cembalo. Von Kielklavieren, Zupfklavieren, Spinetten, Virginalen und Schweinsköpfen.",
+                "children": {}
+              },
+              "!MexikURwBqwSStiUxU:dev.medienhaus.udk-berlin.de": {
+                "id": "!MexikURwBqwSStiUxU:dev.medienhaus.udk-berlin.de",
+                "name": "Das Kleine Klavierstück von Bach bis Schönberg. Zur Geschichte des Charakterstücks für",
+                "children": {}
+              },
+              "!GeHfROvftoCpmliiGh:dev.medienhaus.udk-berlin.de": {
+                "id": "!GeHfROvftoCpmliiGh:dev.medienhaus.udk-berlin.de",
+                "name": "Der Basso ostinato in westlicher Kunstmusik",
+                "children": {}
+              },
+              "!rOyjMqyljKaWYwqbqs:dev.medienhaus.udk-berlin.de": {
+                "id": "!rOyjMqyljKaWYwqbqs:dev.medienhaus.udk-berlin.de",
+                "name": "Der Computer als kreatives Musikinstrument (Neue Medien/Musikproduktion)",
+                "children": {}
+              },
+              "!USZeXesWWxbqphYAAg:dev.medienhaus.udk-berlin.de": {
+                "id": "!USZeXesWWxbqphYAAg:dev.medienhaus.udk-berlin.de",
+                "name": "Dirigieren Ensemble im Profilmodul Chor- und Ensembleleitung",
+                "children": {}
+              },
+              "!ZPzGArjZfEpDtcaYIl:dev.medienhaus.udk-berlin.de": {
+                "id": "!ZPzGArjZfEpDtcaYIl:dev.medienhaus.udk-berlin.de",
+                "name": "Dramaturgie der Filmmusik",
+                "children": {}
+              },
+              "!vjDzQlxCsSEjgUDykL:dev.medienhaus.udk-berlin.de": {
+                "id": "!vjDzQlxCsSEjgUDykL:dev.medienhaus.udk-berlin.de",
+                "name": "Einführung in die Musikwissenschaft",
+                "children": {}
+              },
+              "!uxvBMJKeQaKpDegdWD:dev.medienhaus.udk-berlin.de": {
+                "id": "!uxvBMJKeQaKpDegdWD:dev.medienhaus.udk-berlin.de",
+                "name": "Einführung in die Musikwissenschaft",
+                "children": {}
+              },
+              "!UzLKLXlISAhEimVSGy:dev.medienhaus.udk-berlin.de": {
+                "id": "!UzLKLXlISAhEimVSGy:dev.medienhaus.udk-berlin.de",
+                "name": "Einführung in Studium und Beruf (Einzeltermine)",
+                "children": {}
+              },
+              "!fFECEQgHOZjEFxkuIK:dev.medienhaus.udk-berlin.de": {
+                "id": "!fFECEQgHOZjEFxkuIK:dev.medienhaus.udk-berlin.de",
+                "name": "Einführung in Studium und Beruf (Tag)",
+                "children": {}
+              },
+              "!PAjcTDqadTVVWvDXUY:dev.medienhaus.udk-berlin.de": {
+                "id": "!PAjcTDqadTVVWvDXUY:dev.medienhaus.udk-berlin.de",
+                "name": "\"Einstieg ins Arrangieren\"",
+                "children": {}
+              },
+              "!dcDJaWoCeioifxccNF:dev.medienhaus.udk-berlin.de": {
+                "id": "!dcDJaWoCeioifxccNF:dev.medienhaus.udk-berlin.de",
+                "name": "Ensemble ilinx \"Neue Wege zu Beethoven\" bei Crescendo 2021",
+                "children": {}
+              },
+              "!ivTEafhwvsPcFGCFqf:dev.medienhaus.udk-berlin.de": {
+                "id": "!ivTEafhwvsPcFGCFqf:dev.medienhaus.udk-berlin.de",
+                "name": "Ensemble-Leitung im Profilmodul 8/ Master",
+                "children": {}
+              },
+              "!kIZgMcyuNshIaSArXs:dev.medienhaus.udk-berlin.de": {
+                "id": "!kIZgMcyuNshIaSArXs:dev.medienhaus.udk-berlin.de",
+                "name": "Experimental Coding with Supercollider Parametric abstract composing",
+                "children": {}
+              },
+              "!tDZGgLZDFRWiLBBdbe:dev.medienhaus.udk-berlin.de": {
+                "id": "!tDZGgLZDFRWiLBBdbe:dev.medienhaus.udk-berlin.de",
+                "name": "Experimentelle Komposition: Profilmodul Lehramt",
+                "children": {}
+              },
+              "!VxEkPDrsBKprYdAXUf:dev.medienhaus.udk-berlin.de": {
+                "id": "!VxEkPDrsBKprYdAXUf:dev.medienhaus.udk-berlin.de",
+                "name": "Experimentelle Musik 1, Gruppenarbeit",
+                "children": {}
+              },
+              "!gMmbSMVLttFMrclSVf:dev.medienhaus.udk-berlin.de": {
+                "id": "!gMmbSMVLttFMrclSVf:dev.medienhaus.udk-berlin.de",
+                "name": "Experimentelle Musik, Gruppenleitung",
+                "children": {}
+              },
+              "!lPZGVKmJuDgiIrupYA:dev.medienhaus.udk-berlin.de": {
+                "id": "!lPZGVKmJuDgiIrupYA:dev.medienhaus.udk-berlin.de",
+                "name": "Experiments with Sound / online-Kurs",
+                "children": {}
+              }
+            }
+          },
+          "!BQbNMTlOqImErnkORE:dev.medienhaus.udk-berlin.de": {
+            "id": "!BQbNMTlOqImErnkORE:dev.medienhaus.udk-berlin.de",
+            "name": "MA Lehramt Musik ISS",
+            "children": {
+              "!cnTlXngjedobVbxOfH:dev.medienhaus.udk-berlin.de": {
+                "id": "!cnTlXngjedobVbxOfH:dev.medienhaus.udk-berlin.de",
+                "name": "„…muss in die alt hergebrachte Form ein anderes, ein wirklich poetisches Element kommen.“ Fugen in",
+                "children": {}
+              },
+              "!wDVzGfJQWMjeLxeHAL:dev.medienhaus.udk-berlin.de": {
+                "id": "!wDVzGfJQWMjeLxeHAL:dev.medienhaus.udk-berlin.de",
+                "name": "„Das Meisterwerk in der Musik“ - Die Lehre Heinrich Schenkers",
+                "children": {}
+              },
+              "!jZbyiCmVGzoCbZqnCG:dev.medienhaus.udk-berlin.de": {
+                "id": "!jZbyiCmVGzoCbZqnCG:dev.medienhaus.udk-berlin.de",
+                "name": "„Praktisches Arrangieren für Jazz/-Pop-Ensembles und Chöre“",
+                "children": {}
+              },
+              "!SjjvVAFTAPAEzpeBQZ:dev.medienhaus.udk-berlin.de": {
+                "id": "!SjjvVAFTAPAEzpeBQZ:dev.medienhaus.udk-berlin.de",
+                "name": "Alban Berg \"Wozzeck\"",
+                "children": {}
+              },
+              "!NrZIQzFrTtrWdSsllF:dev.medienhaus.udk-berlin.de": {
+                "id": "!NrZIQzFrTtrWdSsllF:dev.medienhaus.udk-berlin.de",
+                "name": "Alexandertechnik",
+                "children": {}
+              },
+              "!vdmEXIkDZgvDeXLveX:dev.medienhaus.udk-berlin.de": {
+                "id": "!vdmEXIkDZgvDeXLveX:dev.medienhaus.udk-berlin.de",
+                "name": "Analyse und Interpretation",
+                "children": {}
+              },
+              "!aWdLgczYriyxpnOSeg:dev.medienhaus.udk-berlin.de": {
+                "id": "!aWdLgczYriyxpnOSeg:dev.medienhaus.udk-berlin.de",
+                "name": "And Orff We Go!",
+                "children": {}
+              },
+              "!XVXPWuiTISICSrLnXW:dev.medienhaus.udk-berlin.de": {
+                "id": "!XVXPWuiTISICSrLnXW:dev.medienhaus.udk-berlin.de",
+                "name": "Argentinischer Tango – verstehen und spielen",
+                "children": {}
+              },
+              "!EphfYvGaikoHMRmarE:dev.medienhaus.udk-berlin.de": {
+                "id": "!EphfYvGaikoHMRmarE:dev.medienhaus.udk-berlin.de",
+                "name": "Authentizität vs. Rollenbild – Frauen und Männer im Dirigierberuf_",
+                "children": {}
+              },
+              "!cjzhZZpzOUjgipBHVz:dev.medienhaus.udk-berlin.de": {
+                "id": "!cjzhZZpzOUjgipBHVz:dev.medienhaus.udk-berlin.de",
+                "name": "BA/MA Lehramt Musik Gym,/ISS Schulbezogenes Arrangieren",
+                "children": {}
+              },
+              "!DcadDYxaHLbcCKBVxI:dev.medienhaus.udk-berlin.de": {
+                "id": "!DcadDYxaHLbcCKBVxI:dev.medienhaus.udk-berlin.de",
+                "name": "Basic Impro",
+                "children": {}
+              },
+              "!nWqAesmlontEKQZiul:dev.medienhaus.udk-berlin.de": {
+                "id": "!nWqAesmlontEKQZiul:dev.medienhaus.udk-berlin.de",
+                "name": "Bewegungstraining",
+                "children": {}
+              },
+              "!YEzIoLMGjCQsAwsBTr:dev.medienhaus.udk-berlin.de": {
+                "id": "!YEzIoLMGjCQsAwsBTr:dev.medienhaus.udk-berlin.de",
+                "name": "Cajon 1",
+                "children": {}
+              },
+              "!PsGOQajTqoKHILnYhX:dev.medienhaus.udk-berlin.de": {
+                "id": "!PsGOQajTqoKHILnYhX:dev.medienhaus.udk-berlin.de",
+                "name": "Cajon 2",
+                "children": {}
+              },
+              "!MzBpPcaYIFyDuZChfk:dev.medienhaus.udk-berlin.de": {
+                "id": "!MzBpPcaYIFyDuZChfk:dev.medienhaus.udk-berlin.de",
+                "name": "Chor JRP",
+                "children": {}
+              },
+              "!SISdvlGkUlXDwFAvmV:dev.medienhaus.udk-berlin.de": {
+                "id": "!SISdvlGkUlXDwFAvmV:dev.medienhaus.udk-berlin.de",
+                "name": "Chorleitung 1a",
+                "children": {}
+              },
+              "!oPnSLJXijgyZRLXMly:dev.medienhaus.udk-berlin.de": {
+                "id": "!oPnSLJXijgyZRLXMly:dev.medienhaus.udk-berlin.de",
+                "name": "Chorleitung 1a",
+                "children": {}
+              },
+              "!gKXhlQbFJzCOhykKnw:dev.medienhaus.udk-berlin.de": {
+                "id": "!gKXhlQbFJzCOhykKnw:dev.medienhaus.udk-berlin.de",
+                "name": "Chorleitung 1 b",
+                "children": {}
+              },
+              "!NjtEcUUjaxkjfYSoDr:dev.medienhaus.udk-berlin.de": {
+                "id": "!NjtEcUUjaxkjfYSoDr:dev.medienhaus.udk-berlin.de",
+                "name": "Chorleitung 2 a",
+                "children": {}
+              },
+              "!YeYhOCnWFBkQbfGZcM:dev.medienhaus.udk-berlin.de": {
+                "id": "!YeYhOCnWFBkQbfGZcM:dev.medienhaus.udk-berlin.de",
+                "name": "Chorleitung 2 b",
+                "children": {}
+              },
+              "!JpOrboRzNyjbVIujux:dev.medienhaus.udk-berlin.de": {
+                "id": "!JpOrboRzNyjbVIujux:dev.medienhaus.udk-berlin.de",
+                "name": "Chorleitung 2 c",
+                "children": {}
+              },
+              "!voFTvJEPIRjcuuKGvn:dev.medienhaus.udk-berlin.de": {
+                "id": "!voFTvJEPIRjcuuKGvn:dev.medienhaus.udk-berlin.de",
+                "name": "Chorleitung Plus für CL 2a",
+                "children": {}
+              },
+              "!OUGPtVVgcssfJPjujJ:dev.medienhaus.udk-berlin.de": {
+                "id": "!OUGPtVVgcssfJPjujJ:dev.medienhaus.udk-berlin.de",
+                "name": "Chorleitung Plus für CL 2b",
+                "children": {}
+              },
+              "!mXeKnCsbBOeMDwVbPq:dev.medienhaus.udk-berlin.de": {
+                "id": "!mXeKnCsbBOeMDwVbPq:dev.medienhaus.udk-berlin.de",
+                "name": "Chorleitung Plus für CL 2 c",
+                "children": {}
+              },
+              "!nVLcjYPDMcnocnPbBn:dev.medienhaus.udk-berlin.de": {
+                "id": "!nVLcjYPDMcnocnPbBn:dev.medienhaus.udk-berlin.de",
+                "name": "Chorleitung (Profil) 1 a",
+                "children": {}
+              },
+              "!rpDjJspPdrgxTHxsvB:dev.medienhaus.udk-berlin.de": {
+                "id": "!rpDjJspPdrgxTHxsvB:dev.medienhaus.udk-berlin.de",
+                "name": "Chorleitung (Profil) 1 b",
+                "children": {}
+              },
+              "!eBUfDMVcnYMAczDqjr:dev.medienhaus.udk-berlin.de": {
+                "id": "!eBUfDMVcnYMAczDqjr:dev.medienhaus.udk-berlin.de",
+                "name": "Chorleitung (Profil) 2 a",
+                "children": {}
+              },
+              "!MnpJuburDhwqZRLjqn:dev.medienhaus.udk-berlin.de": {
+                "id": "!MnpJuburDhwqZRLjqn:dev.medienhaus.udk-berlin.de",
+                "name": "Chorleitung Profil 2 b",
+                "children": {}
+              },
+              "!fubUFHNvJROmqXcNPv:dev.medienhaus.udk-berlin.de": {
+                "id": "!fubUFHNvJROmqXcNPv:dev.medienhaus.udk-berlin.de",
+                "name": "ChorPraxis Chorische Stimmbildung und Singen mit Kindern und Jugendlichen:",
+                "children": {}
+              },
+              "!babBDeUQZGtIiXLFhu:dev.medienhaus.udk-berlin.de": {
+                "id": "!babBDeUQZGtIiXLFhu:dev.medienhaus.udk-berlin.de",
+                "name": "Combo (Bandarbeit in der Schule)",
+                "children": {}
+              },
+              "!USZeXesWWxbqphYAAg:dev.medienhaus.udk-berlin.de": {
+                "id": "!USZeXesWWxbqphYAAg:dev.medienhaus.udk-berlin.de",
+                "name": "Dirigieren Ensemble im Profilmodul Chor- und Ensembleleitung",
+                "children": {}
+              },
+              "!PAjcTDqadTVVWvDXUY:dev.medienhaus.udk-berlin.de": {
+                "id": "!PAjcTDqadTVVWvDXUY:dev.medienhaus.udk-berlin.de",
+                "name": "\"Einstieg ins Arrangieren\"",
+                "children": {}
+              },
+              "!dcDJaWoCeioifxccNF:dev.medienhaus.udk-berlin.de": {
+                "id": "!dcDJaWoCeioifxccNF:dev.medienhaus.udk-berlin.de",
+                "name": "Ensemble ilinx \"Neue Wege zu Beethoven\" bei Crescendo 2021",
+                "children": {}
+              },
+              "!ivTEafhwvsPcFGCFqf:dev.medienhaus.udk-berlin.de": {
+                "id": "!ivTEafhwvsPcFGCFqf:dev.medienhaus.udk-berlin.de",
+                "name": "Ensemble-Leitung im Profilmodul 8/ Master",
+                "children": {}
+              },
+              "!kIZgMcyuNshIaSArXs:dev.medienhaus.udk-berlin.de": {
+                "id": "!kIZgMcyuNshIaSArXs:dev.medienhaus.udk-berlin.de",
+                "name": "Experimental Coding with Supercollider Parametric abstract composing",
+                "children": {}
+              },
+              "!tDZGgLZDFRWiLBBdbe:dev.medienhaus.udk-berlin.de": {
+                "id": "!tDZGgLZDFRWiLBBdbe:dev.medienhaus.udk-berlin.de",
+                "name": "Experimentelle Komposition: Profilmodul Lehramt",
+                "children": {}
+              },
+              "!gMmbSMVLttFMrclSVf:dev.medienhaus.udk-berlin.de": {
+                "id": "!gMmbSMVLttFMrclSVf:dev.medienhaus.udk-berlin.de",
+                "name": "Experimentelle Musik, Gruppenleitung",
+                "children": {}
+              },
+              "!lPZGVKmJuDgiIrupYA:dev.medienhaus.udk-berlin.de": {
+                "id": "!lPZGVKmJuDgiIrupYA:dev.medienhaus.udk-berlin.de",
+                "name": "Experiments with Sound / online-Kurs",
+                "children": {}
+              },
+              "!nvLTVrlCPVnqLZdoLO:dev.medienhaus.udk-berlin.de": {
+                "id": "!nvLTVrlCPVnqLZdoLO:dev.medienhaus.udk-berlin.de",
+                "name": "Faust-Vertonungen",
+                "children": {}
+              },
+              "!KRAbdQdPfKcWvPDjPy:dev.medienhaus.udk-berlin.de": {
+                "id": "!KRAbdQdPfKcWvPDjPy:dev.medienhaus.udk-berlin.de",
+                "name": "Feldenkrais",
+                "children": {}
+              },
+              "!gJBlFMEPjuJsOdKaFw:dev.medienhaus.udk-berlin.de": {
+                "id": "!gJBlFMEPjuJsOdKaFw:dev.medienhaus.udk-berlin.de",
+                "name": "Get the vocal Groove",
+                "children": {}
+              },
+              "!tJTYerUmaEdelXaCaQ:dev.medienhaus.udk-berlin.de": {
+                "id": "!tJTYerUmaEdelXaCaQ:dev.medienhaus.udk-berlin.de",
+                "name": "Großer Chor der UdK",
+                "children": {}
+              },
+              "!DaJeYKXMfXdwmqLcFp:dev.medienhaus.udk-berlin.de": {
+                "id": "!DaJeYKXMfXdwmqLcFp:dev.medienhaus.udk-berlin.de",
+                "name": "Grundlagenseminar Musikphysiologie",
+                "children": {}
+              },
+              "!skHmialElCvBpxOxUJ:dev.medienhaus.udk-berlin.de": {
+                "id": "!skHmialElCvBpxOxUJ:dev.medienhaus.udk-berlin.de",
+                "name": "Grundschulbezogene Ensemblepraxis/ Master",
+                "children": {}
+              },
+              "!rkIuqqWgtxOaLkVtyE:dev.medienhaus.udk-berlin.de": {
+                "id": "!rkIuqqWgtxOaLkVtyE:dev.medienhaus.udk-berlin.de",
+                "name": "Hans Wüthrich „Das Glashaus“",
+                "children": {}
+              },
+              "!mqCYYfgBcpiLjcwcDG:dev.medienhaus.udk-berlin.de": {
+                "id": "!mqCYYfgBcpiLjcwcDG:dev.medienhaus.udk-berlin.de",
+                "name": "Improvisation für Sänger*innen",
+                "children": {}
+              },
+              "!naSKIncIEMtVRwfPwI:dev.medienhaus.udk-berlin.de": {
+                "id": "!naSKIncIEMtVRwfPwI:dev.medienhaus.udk-berlin.de",
+                "name": "Improvisation für Sänger*innen 2",
+                "children": {}
+              },
+              "!DJRhrDmujlvPbPvTLC:dev.medienhaus.udk-berlin.de": {
+                "id": "!DJRhrDmujlvPbPvTLC:dev.medienhaus.udk-berlin.de",
+                "name": "Jam On: Singen ohne Noten",
+                "children": {}
+              },
+              "!IuVDWnCtFzMNyrWkgy:dev.medienhaus.udk-berlin.de": {
+                "id": "!IuVDWnCtFzMNyrWkgy:dev.medienhaus.udk-berlin.de",
+                "name": "Jazzensemble 1",
+                "children": {}
+              }
+            }
+          },
+          "!CrEIYfBdNSMLIVeTGH:dev.medienhaus.udk-berlin.de": {
+            "id": "!CrEIYfBdNSMLIVeTGH:dev.medienhaus.udk-berlin.de",
+            "name": "MA Lehramt Musik Gym",
+            "children": {
+              "!cnTlXngjedobVbxOfH:dev.medienhaus.udk-berlin.de": {
+                "id": "!cnTlXngjedobVbxOfH:dev.medienhaus.udk-berlin.de",
+                "name": "„…muss in die alt hergebrachte Form ein anderes, ein wirklich poetisches Element kommen.“ Fugen in",
+                "children": {}
+              },
+              "!wDVzGfJQWMjeLxeHAL:dev.medienhaus.udk-berlin.de": {
+                "id": "!wDVzGfJQWMjeLxeHAL:dev.medienhaus.udk-berlin.de",
+                "name": "„Das Meisterwerk in der Musik“ - Die Lehre Heinrich Schenkers",
+                "children": {}
+              },
+              "!jZbyiCmVGzoCbZqnCG:dev.medienhaus.udk-berlin.de": {
+                "id": "!jZbyiCmVGzoCbZqnCG:dev.medienhaus.udk-berlin.de",
+                "name": "„Praktisches Arrangieren für Jazz/-Pop-Ensembles und Chöre“",
+                "children": {}
+              },
+              "!SjjvVAFTAPAEzpeBQZ:dev.medienhaus.udk-berlin.de": {
+                "id": "!SjjvVAFTAPAEzpeBQZ:dev.medienhaus.udk-berlin.de",
+                "name": "Alban Berg \"Wozzeck\"",
+                "children": {}
+              },
+              "!NrZIQzFrTtrWdSsllF:dev.medienhaus.udk-berlin.de": {
+                "id": "!NrZIQzFrTtrWdSsllF:dev.medienhaus.udk-berlin.de",
+                "name": "Alexandertechnik",
+                "children": {}
+              },
+              "!vdmEXIkDZgvDeXLveX:dev.medienhaus.udk-berlin.de": {
+                "id": "!vdmEXIkDZgvDeXLveX:dev.medienhaus.udk-berlin.de",
+                "name": "Analyse und Interpretation",
+                "children": {}
+              },
+              "!aWdLgczYriyxpnOSeg:dev.medienhaus.udk-berlin.de": {
+                "id": "!aWdLgczYriyxpnOSeg:dev.medienhaus.udk-berlin.de",
+                "name": "And Orff We Go!",
+                "children": {}
+              },
+              "!XVXPWuiTISICSrLnXW:dev.medienhaus.udk-berlin.de": {
+                "id": "!XVXPWuiTISICSrLnXW:dev.medienhaus.udk-berlin.de",
+                "name": "Argentinischer Tango – verstehen und spielen",
+                "children": {}
+              },
+              "!EphfYvGaikoHMRmarE:dev.medienhaus.udk-berlin.de": {
+                "id": "!EphfYvGaikoHMRmarE:dev.medienhaus.udk-berlin.de",
+                "name": "Authentizität vs. Rollenbild – Frauen und Männer im Dirigierberuf_",
+                "children": {}
+              },
+              "!cjzhZZpzOUjgipBHVz:dev.medienhaus.udk-berlin.de": {
+                "id": "!cjzhZZpzOUjgipBHVz:dev.medienhaus.udk-berlin.de",
+                "name": "BA/MA Lehramt Musik Gym,/ISS Schulbezogenes Arrangieren",
+                "children": {}
+              },
+              "!DcadDYxaHLbcCKBVxI:dev.medienhaus.udk-berlin.de": {
+                "id": "!DcadDYxaHLbcCKBVxI:dev.medienhaus.udk-berlin.de",
+                "name": "Basic Impro",
+                "children": {}
+              },
+              "!nWqAesmlontEKQZiul:dev.medienhaus.udk-berlin.de": {
+                "id": "!nWqAesmlontEKQZiul:dev.medienhaus.udk-berlin.de",
+                "name": "Bewegungstraining",
+                "children": {}
+              },
+              "!YEzIoLMGjCQsAwsBTr:dev.medienhaus.udk-berlin.de": {
+                "id": "!YEzIoLMGjCQsAwsBTr:dev.medienhaus.udk-berlin.de",
+                "name": "Cajon 1",
+                "children": {}
+              },
+              "!PsGOQajTqoKHILnYhX:dev.medienhaus.udk-berlin.de": {
+                "id": "!PsGOQajTqoKHILnYhX:dev.medienhaus.udk-berlin.de",
+                "name": "Cajon 2",
+                "children": {}
+              },
+              "!MzBpPcaYIFyDuZChfk:dev.medienhaus.udk-berlin.de": {
+                "id": "!MzBpPcaYIFyDuZChfk:dev.medienhaus.udk-berlin.de",
+                "name": "Chor JRP",
+                "children": {}
+              },
+              "!SISdvlGkUlXDwFAvmV:dev.medienhaus.udk-berlin.de": {
+                "id": "!SISdvlGkUlXDwFAvmV:dev.medienhaus.udk-berlin.de",
+                "name": "Chorleitung 1a",
+                "children": {}
+              },
+              "!oPnSLJXijgyZRLXMly:dev.medienhaus.udk-berlin.de": {
+                "id": "!oPnSLJXijgyZRLXMly:dev.medienhaus.udk-berlin.de",
+                "name": "Chorleitung 1a",
+                "children": {}
+              },
+              "!gKXhlQbFJzCOhykKnw:dev.medienhaus.udk-berlin.de": {
+                "id": "!gKXhlQbFJzCOhykKnw:dev.medienhaus.udk-berlin.de",
+                "name": "Chorleitung 1 b",
+                "children": {}
+              },
+              "!NjtEcUUjaxkjfYSoDr:dev.medienhaus.udk-berlin.de": {
+                "id": "!NjtEcUUjaxkjfYSoDr:dev.medienhaus.udk-berlin.de",
+                "name": "Chorleitung 2 a",
+                "children": {}
+              },
+              "!YeYhOCnWFBkQbfGZcM:dev.medienhaus.udk-berlin.de": {
+                "id": "!YeYhOCnWFBkQbfGZcM:dev.medienhaus.udk-berlin.de",
+                "name": "Chorleitung 2 b",
+                "children": {}
+              },
+              "!JpOrboRzNyjbVIujux:dev.medienhaus.udk-berlin.de": {
+                "id": "!JpOrboRzNyjbVIujux:dev.medienhaus.udk-berlin.de",
+                "name": "Chorleitung 2 c",
+                "children": {}
+              },
+              "!voFTvJEPIRjcuuKGvn:dev.medienhaus.udk-berlin.de": {
+                "id": "!voFTvJEPIRjcuuKGvn:dev.medienhaus.udk-berlin.de",
+                "name": "Chorleitung Plus für CL 2a",
+                "children": {}
+              },
+              "!OUGPtVVgcssfJPjujJ:dev.medienhaus.udk-berlin.de": {
+                "id": "!OUGPtVVgcssfJPjujJ:dev.medienhaus.udk-berlin.de",
+                "name": "Chorleitung Plus für CL 2b",
+                "children": {}
+              },
+              "!mXeKnCsbBOeMDwVbPq:dev.medienhaus.udk-berlin.de": {
+                "id": "!mXeKnCsbBOeMDwVbPq:dev.medienhaus.udk-berlin.de",
+                "name": "Chorleitung Plus für CL 2 c",
+                "children": {}
+              },
+              "!nVLcjYPDMcnocnPbBn:dev.medienhaus.udk-berlin.de": {
+                "id": "!nVLcjYPDMcnocnPbBn:dev.medienhaus.udk-berlin.de",
+                "name": "Chorleitung (Profil) 1 a",
+                "children": {}
+              },
+              "!rpDjJspPdrgxTHxsvB:dev.medienhaus.udk-berlin.de": {
+                "id": "!rpDjJspPdrgxTHxsvB:dev.medienhaus.udk-berlin.de",
+                "name": "Chorleitung (Profil) 1 b",
+                "children": {}
+              },
+              "!eBUfDMVcnYMAczDqjr:dev.medienhaus.udk-berlin.de": {
+                "id": "!eBUfDMVcnYMAczDqjr:dev.medienhaus.udk-berlin.de",
+                "name": "Chorleitung (Profil) 2 a",
+                "children": {}
+              },
+              "!MnpJuburDhwqZRLjqn:dev.medienhaus.udk-berlin.de": {
+                "id": "!MnpJuburDhwqZRLjqn:dev.medienhaus.udk-berlin.de",
+                "name": "Chorleitung Profil 2 b",
+                "children": {}
+              },
+              "!fubUFHNvJROmqXcNPv:dev.medienhaus.udk-berlin.de": {
+                "id": "!fubUFHNvJROmqXcNPv:dev.medienhaus.udk-berlin.de",
+                "name": "ChorPraxis Chorische Stimmbildung und Singen mit Kindern und Jugendlichen:",
+                "children": {}
+              },
+              "!babBDeUQZGtIiXLFhu:dev.medienhaus.udk-berlin.de": {
+                "id": "!babBDeUQZGtIiXLFhu:dev.medienhaus.udk-berlin.de",
+                "name": "Combo (Bandarbeit in der Schule)",
+                "children": {}
+              },
+              "!USZeXesWWxbqphYAAg:dev.medienhaus.udk-berlin.de": {
+                "id": "!USZeXesWWxbqphYAAg:dev.medienhaus.udk-berlin.de",
+                "name": "Dirigieren Ensemble im Profilmodul Chor- und Ensembleleitung",
+                "children": {}
+              },
+              "!PAjcTDqadTVVWvDXUY:dev.medienhaus.udk-berlin.de": {
+                "id": "!PAjcTDqadTVVWvDXUY:dev.medienhaus.udk-berlin.de",
+                "name": "\"Einstieg ins Arrangieren\"",
+                "children": {}
+              },
+              "!dcDJaWoCeioifxccNF:dev.medienhaus.udk-berlin.de": {
+                "id": "!dcDJaWoCeioifxccNF:dev.medienhaus.udk-berlin.de",
+                "name": "Ensemble ilinx \"Neue Wege zu Beethoven\" bei Crescendo 2021",
+                "children": {}
+              },
+              "!kIZgMcyuNshIaSArXs:dev.medienhaus.udk-berlin.de": {
+                "id": "!kIZgMcyuNshIaSArXs:dev.medienhaus.udk-berlin.de",
+                "name": "Experimental Coding with Supercollider Parametric abstract composing",
+                "children": {}
+              },
+              "!tDZGgLZDFRWiLBBdbe:dev.medienhaus.udk-berlin.de": {
+                "id": "!tDZGgLZDFRWiLBBdbe:dev.medienhaus.udk-berlin.de",
+                "name": "Experimentelle Komposition: Profilmodul Lehramt",
+                "children": {}
+              },
+              "!gMmbSMVLttFMrclSVf:dev.medienhaus.udk-berlin.de": {
+                "id": "!gMmbSMVLttFMrclSVf:dev.medienhaus.udk-berlin.de",
+                "name": "Experimentelle Musik, Gruppenleitung",
+                "children": {}
+              },
+              "!lPZGVKmJuDgiIrupYA:dev.medienhaus.udk-berlin.de": {
+                "id": "!lPZGVKmJuDgiIrupYA:dev.medienhaus.udk-berlin.de",
+                "name": "Experiments with Sound / online-Kurs",
+                "children": {}
+              },
+              "!nvLTVrlCPVnqLZdoLO:dev.medienhaus.udk-berlin.de": {
+                "id": "!nvLTVrlCPVnqLZdoLO:dev.medienhaus.udk-berlin.de",
+                "name": "Faust-Vertonungen",
+                "children": {}
+              },
+              "!KRAbdQdPfKcWvPDjPy:dev.medienhaus.udk-berlin.de": {
+                "id": "!KRAbdQdPfKcWvPDjPy:dev.medienhaus.udk-berlin.de",
+                "name": "Feldenkrais",
+                "children": {}
+              },
+              "!gJBlFMEPjuJsOdKaFw:dev.medienhaus.udk-berlin.de": {
+                "id": "!gJBlFMEPjuJsOdKaFw:dev.medienhaus.udk-berlin.de",
+                "name": "Get the vocal Groove",
+                "children": {}
+              },
+              "!tJTYerUmaEdelXaCaQ:dev.medienhaus.udk-berlin.de": {
+                "id": "!tJTYerUmaEdelXaCaQ:dev.medienhaus.udk-berlin.de",
+                "name": "Großer Chor der UdK",
+                "children": {}
+              },
+              "!DaJeYKXMfXdwmqLcFp:dev.medienhaus.udk-berlin.de": {
+                "id": "!DaJeYKXMfXdwmqLcFp:dev.medienhaus.udk-berlin.de",
+                "name": "Grundlagenseminar Musikphysiologie",
+                "children": {}
+              },
+              "!skHmialElCvBpxOxUJ:dev.medienhaus.udk-berlin.de": {
+                "id": "!skHmialElCvBpxOxUJ:dev.medienhaus.udk-berlin.de",
+                "name": "Grundschulbezogene Ensemblepraxis/ Master",
+                "children": {}
+              },
+              "!rkIuqqWgtxOaLkVtyE:dev.medienhaus.udk-berlin.de": {
+                "id": "!rkIuqqWgtxOaLkVtyE:dev.medienhaus.udk-berlin.de",
+                "name": "Hans Wüthrich „Das Glashaus“",
+                "children": {}
+              },
+              "!mqCYYfgBcpiLjcwcDG:dev.medienhaus.udk-berlin.de": {
+                "id": "!mqCYYfgBcpiLjcwcDG:dev.medienhaus.udk-berlin.de",
+                "name": "Improvisation für Sänger*innen",
+                "children": {}
+              },
+              "!naSKIncIEMtVRwfPwI:dev.medienhaus.udk-berlin.de": {
+                "id": "!naSKIncIEMtVRwfPwI:dev.medienhaus.udk-berlin.de",
+                "name": "Improvisation für Sänger*innen 2",
+                "children": {}
+              },
+              "!DJRhrDmujlvPbPvTLC:dev.medienhaus.udk-berlin.de": {
+                "id": "!DJRhrDmujlvPbPvTLC:dev.medienhaus.udk-berlin.de",
+                "name": "Jam On: Singen ohne Noten",
+                "children": {}
+              },
+              "!IuVDWnCtFzMNyrWkgy:dev.medienhaus.udk-berlin.de": {
+                "id": "!IuVDWnCtFzMNyrWkgy:dev.medienhaus.udk-berlin.de",
+                "name": "Jazzensemble 1",
+                "children": {}
+              },
+              "!JaDGOAZhhEyEaDZxTq:dev.medienhaus.udk-berlin.de": {
+                "id": "!JaDGOAZhhEyEaDZxTq:dev.medienhaus.udk-berlin.de",
+                "name": "Jazz Ensemble 2",
+                "children": {}
+              }
+            }
+          },
+          "!uLJNEIUvmwcTsdjIIx:dev.medienhaus.udk-berlin.de": {
+            "id": "!uLJNEIUvmwcTsdjIIx:dev.medienhaus.udk-berlin.de",
+            "name": "BA Lehramt Musik Grundschule",
+            "children": {
+              "!cnTlXngjedobVbxOfH:dev.medienhaus.udk-berlin.de": {
+                "id": "!cnTlXngjedobVbxOfH:dev.medienhaus.udk-berlin.de",
+                "name": "„…muss in die alt hergebrachte Form ein anderes, ein wirklich poetisches Element kommen.“ Fugen in",
+                "children": {}
+              },
+              "!jZbyiCmVGzoCbZqnCG:dev.medienhaus.udk-berlin.de": {
+                "id": "!jZbyiCmVGzoCbZqnCG:dev.medienhaus.udk-berlin.de",
+                "name": "„Praktisches Arrangieren für Jazz/-Pop-Ensembles und Chöre“",
+                "children": {}
+              },
+              "!SjjvVAFTAPAEzpeBQZ:dev.medienhaus.udk-berlin.de": {
+                "id": "!SjjvVAFTAPAEzpeBQZ:dev.medienhaus.udk-berlin.de",
+                "name": "Alban Berg \"Wozzeck\"",
+                "children": {}
+              },
+              "!aWdLgczYriyxpnOSeg:dev.medienhaus.udk-berlin.de": {
+                "id": "!aWdLgczYriyxpnOSeg:dev.medienhaus.udk-berlin.de",
+                "name": "And Orff We Go!",
+                "children": {}
+              },
+              "!bUUASEJPHsnAfqawCu:dev.medienhaus.udk-berlin.de": {
+                "id": "!bUUASEJPHsnAfqawCu:dev.medienhaus.udk-berlin.de",
+                "name": "BA Lehramt GrundschuleTonsatz/Gehörbildung Kurs 3",
+                "children": {}
+              },
+              "!DcadDYxaHLbcCKBVxI:dev.medienhaus.udk-berlin.de": {
+                "id": "!DcadDYxaHLbcCKBVxI:dev.medienhaus.udk-berlin.de",
+                "name": "Basic Impro",
+                "children": {}
+              },
+              "!YEzIoLMGjCQsAwsBTr:dev.medienhaus.udk-berlin.de": {
+                "id": "!YEzIoLMGjCQsAwsBTr:dev.medienhaus.udk-berlin.de",
+                "name": "Cajon 1",
+                "children": {}
+              },
+              "!PsGOQajTqoKHILnYhX:dev.medienhaus.udk-berlin.de": {
+                "id": "!PsGOQajTqoKHILnYhX:dev.medienhaus.udk-berlin.de",
+                "name": "Cajon 2",
+                "children": {}
+              },
+              "!MzBpPcaYIFyDuZChfk:dev.medienhaus.udk-berlin.de": {
+                "id": "!MzBpPcaYIFyDuZChfk:dev.medienhaus.udk-berlin.de",
+                "name": "Chor JRP",
+                "children": {}
+              },
+              "!SISdvlGkUlXDwFAvmV:dev.medienhaus.udk-berlin.de": {
+                "id": "!SISdvlGkUlXDwFAvmV:dev.medienhaus.udk-berlin.de",
+                "name": "Chorleitung 1a",
+                "children": {}
+              },
+              "!oPnSLJXijgyZRLXMly:dev.medienhaus.udk-berlin.de": {
+                "id": "!oPnSLJXijgyZRLXMly:dev.medienhaus.udk-berlin.de",
+                "name": "Chorleitung 1a",
+                "children": {}
+              },
+              "!gKXhlQbFJzCOhykKnw:dev.medienhaus.udk-berlin.de": {
+                "id": "!gKXhlQbFJzCOhykKnw:dev.medienhaus.udk-berlin.de",
+                "name": "Chorleitung 1 b",
+                "children": {}
+              },
+              "!NjtEcUUjaxkjfYSoDr:dev.medienhaus.udk-berlin.de": {
+                "id": "!NjtEcUUjaxkjfYSoDr:dev.medienhaus.udk-berlin.de",
+                "name": "Chorleitung 2 a",
+                "children": {}
+              },
+              "!YeYhOCnWFBkQbfGZcM:dev.medienhaus.udk-berlin.de": {
+                "id": "!YeYhOCnWFBkQbfGZcM:dev.medienhaus.udk-berlin.de",
+                "name": "Chorleitung 2 b",
+                "children": {}
+              },
+              "!JpOrboRzNyjbVIujux:dev.medienhaus.udk-berlin.de": {
+                "id": "!JpOrboRzNyjbVIujux:dev.medienhaus.udk-berlin.de",
+                "name": "Chorleitung 2 c",
+                "children": {}
+              },
+              "!voFTvJEPIRjcuuKGvn:dev.medienhaus.udk-berlin.de": {
+                "id": "!voFTvJEPIRjcuuKGvn:dev.medienhaus.udk-berlin.de",
+                "name": "Chorleitung Plus für CL 2a",
+                "children": {}
+              },
+              "!OUGPtVVgcssfJPjujJ:dev.medienhaus.udk-berlin.de": {
+                "id": "!OUGPtVVgcssfJPjujJ:dev.medienhaus.udk-berlin.de",
+                "name": "Chorleitung Plus für CL 2b",
+                "children": {}
+              },
+              "!mXeKnCsbBOeMDwVbPq:dev.medienhaus.udk-berlin.de": {
+                "id": "!mXeKnCsbBOeMDwVbPq:dev.medienhaus.udk-berlin.de",
+                "name": "Chorleitung Plus für CL 2 c",
+                "children": {}
+              },
+              "!nVLcjYPDMcnocnPbBn:dev.medienhaus.udk-berlin.de": {
+                "id": "!nVLcjYPDMcnocnPbBn:dev.medienhaus.udk-berlin.de",
+                "name": "Chorleitung (Profil) 1 a",
+                "children": {}
+              },
+              "!rpDjJspPdrgxTHxsvB:dev.medienhaus.udk-berlin.de": {
+                "id": "!rpDjJspPdrgxTHxsvB:dev.medienhaus.udk-berlin.de",
+                "name": "Chorleitung (Profil) 1 b",
+                "children": {}
+              },
+              "!eBUfDMVcnYMAczDqjr:dev.medienhaus.udk-berlin.de": {
+                "id": "!eBUfDMVcnYMAczDqjr:dev.medienhaus.udk-berlin.de",
+                "name": "Chorleitung (Profil) 2 a",
+                "children": {}
+              },
+              "!MnpJuburDhwqZRLjqn:dev.medienhaus.udk-berlin.de": {
+                "id": "!MnpJuburDhwqZRLjqn:dev.medienhaus.udk-berlin.de",
+                "name": "Chorleitung Profil 2 b",
+                "children": {}
+              },
+              "!fubUFHNvJROmqXcNPv:dev.medienhaus.udk-berlin.de": {
+                "id": "!fubUFHNvJROmqXcNPv:dev.medienhaus.udk-berlin.de",
+                "name": "ChorPraxis Chorische Stimmbildung und Singen mit Kindern und Jugendlichen:",
+                "children": {}
+              },
+              "!babBDeUQZGtIiXLFhu:dev.medienhaus.udk-berlin.de": {
+                "id": "!babBDeUQZGtIiXLFhu:dev.medienhaus.udk-berlin.de",
+                "name": "Combo (Bandarbeit in der Schule)",
+                "children": {}
+              },
+              "!IkIXYFjeXBmQQvlCzq:dev.medienhaus.udk-berlin.de": {
+                "id": "!IkIXYFjeXBmQQvlCzq:dev.medienhaus.udk-berlin.de",
+                "name": "Community Music in Theorie und Praxis",
+                "children": {}
+              },
+              "!TwVsbKSYCTrLieJDgZ:dev.medienhaus.udk-berlin.de": {
+                "id": "!TwVsbKSYCTrLieJDgZ:dev.medienhaus.udk-berlin.de",
+                "name": "Das Cembalo. Von Kielklavieren, Zupfklavieren, Spinetten, Virginalen und Schweinsköpfen.",
+                "children": {}
+              },
+              "!MexikURwBqwSStiUxU:dev.medienhaus.udk-berlin.de": {
+                "id": "!MexikURwBqwSStiUxU:dev.medienhaus.udk-berlin.de",
+                "name": "Das Kleine Klavierstück von Bach bis Schönberg. Zur Geschichte des Charakterstücks für",
+                "children": {}
+              },
+              "!vjDzQlxCsSEjgUDykL:dev.medienhaus.udk-berlin.de": {
+                "id": "!vjDzQlxCsSEjgUDykL:dev.medienhaus.udk-berlin.de",
+                "name": "Einführung in die Musikwissenschaft",
+                "children": {}
+              },
+              "!uxvBMJKeQaKpDegdWD:dev.medienhaus.udk-berlin.de": {
+                "id": "!uxvBMJKeQaKpDegdWD:dev.medienhaus.udk-berlin.de",
+                "name": "Einführung in die Musikwissenschaft",
+                "children": {}
+              },
+              "!UzLKLXlISAhEimVSGy:dev.medienhaus.udk-berlin.de": {
+                "id": "!UzLKLXlISAhEimVSGy:dev.medienhaus.udk-berlin.de",
+                "name": "Einführung in Studium und Beruf (Einzeltermine)",
+                "children": {}
+              },
+              "!fFECEQgHOZjEFxkuIK:dev.medienhaus.udk-berlin.de": {
+                "id": "!fFECEQgHOZjEFxkuIK:dev.medienhaus.udk-berlin.de",
+                "name": "Einführung in Studium und Beruf (Tag)",
+                "children": {}
+              },
+              "!PAjcTDqadTVVWvDXUY:dev.medienhaus.udk-berlin.de": {
+                "id": "!PAjcTDqadTVVWvDXUY:dev.medienhaus.udk-berlin.de",
+                "name": "\"Einstieg ins Arrangieren\"",
+                "children": {}
+              },
+              "!ivTEafhwvsPcFGCFqf:dev.medienhaus.udk-berlin.de": {
+                "id": "!ivTEafhwvsPcFGCFqf:dev.medienhaus.udk-berlin.de",
+                "name": "Ensemble-Leitung im Profilmodul 8/ Master",
+                "children": {}
+              },
+              "!hEnhFWXCGPYewwIZFl:dev.medienhaus.udk-berlin.de": {
+                "id": "!hEnhFWXCGPYewwIZFl:dev.medienhaus.udk-berlin.de",
+                "name": "Ensemblepraxis 2 (Kurs1)",
+                "children": {}
+              },
+              "!kIZgMcyuNshIaSArXs:dev.medienhaus.udk-berlin.de": {
+                "id": "!kIZgMcyuNshIaSArXs:dev.medienhaus.udk-berlin.de",
+                "name": "Experimental Coding with Supercollider Parametric abstract composing",
+                "children": {}
+              },
+              "!VxEkPDrsBKprYdAXUf:dev.medienhaus.udk-berlin.de": {
+                "id": "!VxEkPDrsBKprYdAXUf:dev.medienhaus.udk-berlin.de",
+                "name": "Experimentelle Musik 1, Gruppenarbeit",
+                "children": {}
+              },
+              "!vFnufAosWefueahuDs:dev.medienhaus.udk-berlin.de": {
+                "id": "!vFnufAosWefueahuDs:dev.medienhaus.udk-berlin.de",
+                "name": "Fachübergreifender Musiklunterricht",
+                "children": {}
+              },
+              "!nvLTVrlCPVnqLZdoLO:dev.medienhaus.udk-berlin.de": {
+                "id": "!nvLTVrlCPVnqLZdoLO:dev.medienhaus.udk-berlin.de",
+                "name": "Faust-Vertonungen",
+                "children": {}
+              },
+              "!IxQYiZypixoeFYlJWf:dev.medienhaus.udk-berlin.de": {
+                "id": "!IxQYiZypixoeFYlJWf:dev.medienhaus.udk-berlin.de",
+                "name": "Franz Schuberts Kammermusik",
+                "children": {}
+              },
+              "!ZxKOszPyCFpqGYQslI:dev.medienhaus.udk-berlin.de": {
+                "id": "!ZxKOszPyCFpqGYQslI:dev.medienhaus.udk-berlin.de",
+                "name": "Fremdverstehen und Ansprüche. Beobachten und Dokumentieren",
+                "children": {}
+              },
+              "!XguZbTIVQlLSCZCxol:dev.medienhaus.udk-berlin.de": {
+                "id": "!XguZbTIVQlLSCZCxol:dev.medienhaus.udk-berlin.de",
+                "name": "Gesten medialer (An)Wendung. Beobachten und Dokumentieren",
+                "children": {}
+              },
+              "!gJBlFMEPjuJsOdKaFw:dev.medienhaus.udk-berlin.de": {
+                "id": "!gJBlFMEPjuJsOdKaFw:dev.medienhaus.udk-berlin.de",
+                "name": "Get the vocal Groove",
+                "children": {}
+              },
+              "!tJTYerUmaEdelXaCaQ:dev.medienhaus.udk-berlin.de": {
+                "id": "!tJTYerUmaEdelXaCaQ:dev.medienhaus.udk-berlin.de",
+                "name": "Großer Chor der UdK",
+                "children": {}
+              },
+              "!JOnQtvAmWsCyXLXJkp:dev.medienhaus.udk-berlin.de": {
+                "id": "!JOnQtvAmWsCyXLXJkp:dev.medienhaus.udk-berlin.de",
+                "name": "Grundlagen des Dirigieren 1b",
+                "children": {}
+              },
+              "!kAXNBKTsZqXqcIIgkB:dev.medienhaus.udk-berlin.de": {
+                "id": "!kAXNBKTsZqXqcIIgkB:dev.medienhaus.udk-berlin.de",
+                "name": "Grundlagen des Dirigierens 1a",
+                "children": {}
+              },
+              "!nBCPKevSINSQHZaFWf:dev.medienhaus.udk-berlin.de": {
+                "id": "!nBCPKevSINSQHZaFWf:dev.medienhaus.udk-berlin.de",
+                "name": "Grundlagen des Dirigierens 1c",
+                "children": {}
+              },
+              "!kOuWnaXjqqmmpLFUCc:dev.medienhaus.udk-berlin.de": {
+                "id": "!kOuWnaXjqqmmpLFUCc:dev.medienhaus.udk-berlin.de",
+                "name": "Grundlagen des Dirigierens 1d",
+                "children": {}
+              },
+              "!qiBOjWKQkHyWwUSiZq:dev.medienhaus.udk-berlin.de": {
+                "id": "!qiBOjWKQkHyWwUSiZq:dev.medienhaus.udk-berlin.de",
+                "name": "Grundlagen des Dirigierens 2a",
+                "children": {}
+              },
+              "!RHvHSbGveccwSIySnE:dev.medienhaus.udk-berlin.de": {
+                "id": "!RHvHSbGveccwSIySnE:dev.medienhaus.udk-berlin.de",
+                "name": "Grundlagen des Dirigierens 2b",
+                "children": {}
+              }
+            }
+          },
+          "!rgwYkBfLgKUNJHcsSn:dev.medienhaus.udk-berlin.de": {
+            "id": "!rgwYkBfLgKUNJHcsSn:dev.medienhaus.udk-berlin.de",
+            "name": "MA Lehramt Musik Grundschule",
+            "children": {
+              "!UIlOIwoYtfmlFfAnkA:dev.medienhaus.udk-berlin.de": {
+                "id": "!UIlOIwoYtfmlFfAnkA:dev.medienhaus.udk-berlin.de",
+                "name": "„Formale Konzepte in der Musik der Wiener Klassik“",
+                "children": {}
+              },
+              "!jZbyiCmVGzoCbZqnCG:dev.medienhaus.udk-berlin.de": {
+                "id": "!jZbyiCmVGzoCbZqnCG:dev.medienhaus.udk-berlin.de",
+                "name": "„Praktisches Arrangieren für Jazz/-Pop-Ensembles und Chöre“",
+                "children": {}
+              },
+              "!NrZIQzFrTtrWdSsllF:dev.medienhaus.udk-berlin.de": {
+                "id": "!NrZIQzFrTtrWdSsllF:dev.medienhaus.udk-berlin.de",
+                "name": "Alexandertechnik",
+                "children": {}
+              },
+              "!aWdLgczYriyxpnOSeg:dev.medienhaus.udk-berlin.de": {
+                "id": "!aWdLgczYriyxpnOSeg:dev.medienhaus.udk-berlin.de",
+                "name": "And Orff We Go!",
+                "children": {}
+              },
+              "!jGjWAqwJNZTZVheEDE:dev.medienhaus.udk-berlin.de": {
+                "id": "!jGjWAqwJNZTZVheEDE:dev.medienhaus.udk-berlin.de",
+                "name": "Antirassistisches und vielfältiges Erzählen",
+                "children": {}
+              },
+              "!XVXPWuiTISICSrLnXW:dev.medienhaus.udk-berlin.de": {
+                "id": "!XVXPWuiTISICSrLnXW:dev.medienhaus.udk-berlin.de",
+                "name": "Argentinischer Tango – verstehen und spielen",
+                "children": {}
+              },
+              "!nYWLCWRzlYiVJHgYmo:dev.medienhaus.udk-berlin.de": {
+                "id": "!nYWLCWRzlYiVJHgYmo:dev.medienhaus.udk-berlin.de",
+                "name": "Aufzeichnungen im Austausch – Projektdurchführung",
+                "children": {}
+              },
+              "!pvZhfxWvPlGcyjwcni:dev.medienhaus.udk-berlin.de": {
+                "id": "!pvZhfxWvPlGcyjwcni:dev.medienhaus.udk-berlin.de",
+                "name": "Aufzeichnungen im Austausch – Projektvorbereitung",
+                "children": {}
+              },
+              "!EphfYvGaikoHMRmarE:dev.medienhaus.udk-berlin.de": {
+                "id": "!EphfYvGaikoHMRmarE:dev.medienhaus.udk-berlin.de",
+                "name": "Authentizität vs. Rollenbild – Frauen und Männer im Dirigierberuf_",
+                "children": {}
+              },
+              "!nWqAesmlontEKQZiul:dev.medienhaus.udk-berlin.de": {
+                "id": "!nWqAesmlontEKQZiul:dev.medienhaus.udk-berlin.de",
+                "name": "Bewegungstraining",
+                "children": {}
+              },
+              "!YEzIoLMGjCQsAwsBTr:dev.medienhaus.udk-berlin.de": {
+                "id": "!YEzIoLMGjCQsAwsBTr:dev.medienhaus.udk-berlin.de",
+                "name": "Cajon 1",
+                "children": {}
+              },
+              "!PsGOQajTqoKHILnYhX:dev.medienhaus.udk-berlin.de": {
+                "id": "!PsGOQajTqoKHILnYhX:dev.medienhaus.udk-berlin.de",
+                "name": "Cajon 2",
+                "children": {}
+              },
+              "!oPnSLJXijgyZRLXMly:dev.medienhaus.udk-berlin.de": {
+                "id": "!oPnSLJXijgyZRLXMly:dev.medienhaus.udk-berlin.de",
+                "name": "Chorleitung 1a",
+                "children": {}
+              },
+              "!gKXhlQbFJzCOhykKnw:dev.medienhaus.udk-berlin.de": {
+                "id": "!gKXhlQbFJzCOhykKnw:dev.medienhaus.udk-berlin.de",
+                "name": "Chorleitung 1 b",
+                "children": {}
+              },
+              "!NjtEcUUjaxkjfYSoDr:dev.medienhaus.udk-berlin.de": {
+                "id": "!NjtEcUUjaxkjfYSoDr:dev.medienhaus.udk-berlin.de",
+                "name": "Chorleitung 2 a",
+                "children": {}
+              },
+              "!YeYhOCnWFBkQbfGZcM:dev.medienhaus.udk-berlin.de": {
+                "id": "!YeYhOCnWFBkQbfGZcM:dev.medienhaus.udk-berlin.de",
+                "name": "Chorleitung 2 b",
+                "children": {}
+              },
+              "!JpOrboRzNyjbVIujux:dev.medienhaus.udk-berlin.de": {
+                "id": "!JpOrboRzNyjbVIujux:dev.medienhaus.udk-berlin.de",
+                "name": "Chorleitung 2 c",
+                "children": {}
+              },
+              "!voFTvJEPIRjcuuKGvn:dev.medienhaus.udk-berlin.de": {
+                "id": "!voFTvJEPIRjcuuKGvn:dev.medienhaus.udk-berlin.de",
+                "name": "Chorleitung Plus für CL 2a",
+                "children": {}
+              },
+              "!OUGPtVVgcssfJPjujJ:dev.medienhaus.udk-berlin.de": {
+                "id": "!OUGPtVVgcssfJPjujJ:dev.medienhaus.udk-berlin.de",
+                "name": "Chorleitung Plus für CL 2b",
+                "children": {}
+              },
+              "!mXeKnCsbBOeMDwVbPq:dev.medienhaus.udk-berlin.de": {
+                "id": "!mXeKnCsbBOeMDwVbPq:dev.medienhaus.udk-berlin.de",
+                "name": "Chorleitung Plus für CL 2 c",
+                "children": {}
+              },
+              "!nVLcjYPDMcnocnPbBn:dev.medienhaus.udk-berlin.de": {
+                "id": "!nVLcjYPDMcnocnPbBn:dev.medienhaus.udk-berlin.de",
+                "name": "Chorleitung (Profil) 1 a",
+                "children": {}
+              },
+              "!rpDjJspPdrgxTHxsvB:dev.medienhaus.udk-berlin.de": {
+                "id": "!rpDjJspPdrgxTHxsvB:dev.medienhaus.udk-berlin.de",
+                "name": "Chorleitung (Profil) 1 b",
+                "children": {}
+              },
+              "!eBUfDMVcnYMAczDqjr:dev.medienhaus.udk-berlin.de": {
+                "id": "!eBUfDMVcnYMAczDqjr:dev.medienhaus.udk-berlin.de",
+                "name": "Chorleitung (Profil) 2 a",
+                "children": {}
+              },
+              "!MnpJuburDhwqZRLjqn:dev.medienhaus.udk-berlin.de": {
+                "id": "!MnpJuburDhwqZRLjqn:dev.medienhaus.udk-berlin.de",
+                "name": "Chorleitung Profil 2 b",
+                "children": {}
+              },
+              "!fubUFHNvJROmqXcNPv:dev.medienhaus.udk-berlin.de": {
+                "id": "!fubUFHNvJROmqXcNPv:dev.medienhaus.udk-berlin.de",
+                "name": "ChorPraxis Chorische Stimmbildung und Singen mit Kindern und Jugendlichen:",
+                "children": {}
+              },
+              "!babBDeUQZGtIiXLFhu:dev.medienhaus.udk-berlin.de": {
+                "id": "!babBDeUQZGtIiXLFhu:dev.medienhaus.udk-berlin.de",
+                "name": "Combo (Bandarbeit in der Schule)",
+                "children": {}
+              },
+              "!PAjcTDqadTVVWvDXUY:dev.medienhaus.udk-berlin.de": {
+                "id": "!PAjcTDqadTVVWvDXUY:dev.medienhaus.udk-berlin.de",
+                "name": "\"Einstieg ins Arrangieren\"",
+                "children": {}
+              },
+              "!dcDJaWoCeioifxccNF:dev.medienhaus.udk-berlin.de": {
+                "id": "!dcDJaWoCeioifxccNF:dev.medienhaus.udk-berlin.de",
+                "name": "Ensemble ilinx \"Neue Wege zu Beethoven\" bei Crescendo 2021",
+                "children": {}
+              },
+              "!kIZgMcyuNshIaSArXs:dev.medienhaus.udk-berlin.de": {
+                "id": "!kIZgMcyuNshIaSArXs:dev.medienhaus.udk-berlin.de",
+                "name": "Experimental Coding with Supercollider Parametric abstract composing",
+                "children": {}
+              },
+              "!tDZGgLZDFRWiLBBdbe:dev.medienhaus.udk-berlin.de": {
+                "id": "!tDZGgLZDFRWiLBBdbe:dev.medienhaus.udk-berlin.de",
+                "name": "Experimentelle Komposition: Profilmodul Lehramt",
+                "children": {}
+              },
+              "!gMmbSMVLttFMrclSVf:dev.medienhaus.udk-berlin.de": {
+                "id": "!gMmbSMVLttFMrclSVf:dev.medienhaus.udk-berlin.de",
+                "name": "Experimentelle Musik, Gruppenleitung",
+                "children": {}
+              },
+              "!lPZGVKmJuDgiIrupYA:dev.medienhaus.udk-berlin.de": {
+                "id": "!lPZGVKmJuDgiIrupYA:dev.medienhaus.udk-berlin.de",
+                "name": "Experiments with Sound / online-Kurs",
+                "children": {}
+              },
+              "!KRAbdQdPfKcWvPDjPy:dev.medienhaus.udk-berlin.de": {
+                "id": "!KRAbdQdPfKcWvPDjPy:dev.medienhaus.udk-berlin.de",
+                "name": "Feldenkrais",
+                "children": {}
+              },
+              "!tJTYerUmaEdelXaCaQ:dev.medienhaus.udk-berlin.de": {
+                "id": "!tJTYerUmaEdelXaCaQ:dev.medienhaus.udk-berlin.de",
+                "name": "Großer Chor der UdK",
+                "children": {}
+              },
+              "!JOnQtvAmWsCyXLXJkp:dev.medienhaus.udk-berlin.de": {
+                "id": "!JOnQtvAmWsCyXLXJkp:dev.medienhaus.udk-berlin.de",
+                "name": "Grundlagen des Dirigieren 1b",
+                "children": {}
+              },
+              "!kAXNBKTsZqXqcIIgkB:dev.medienhaus.udk-berlin.de": {
+                "id": "!kAXNBKTsZqXqcIIgkB:dev.medienhaus.udk-berlin.de",
+                "name": "Grundlagen des Dirigierens 1a",
+                "children": {}
+              },
+              "!nBCPKevSINSQHZaFWf:dev.medienhaus.udk-berlin.de": {
+                "id": "!nBCPKevSINSQHZaFWf:dev.medienhaus.udk-berlin.de",
+                "name": "Grundlagen des Dirigierens 1c",
+                "children": {}
+              },
+              "!kOuWnaXjqqmmpLFUCc:dev.medienhaus.udk-berlin.de": {
+                "id": "!kOuWnaXjqqmmpLFUCc:dev.medienhaus.udk-berlin.de",
+                "name": "Grundlagen des Dirigierens 1d",
+                "children": {}
+              },
+              "!qiBOjWKQkHyWwUSiZq:dev.medienhaus.udk-berlin.de": {
+                "id": "!qiBOjWKQkHyWwUSiZq:dev.medienhaus.udk-berlin.de",
+                "name": "Grundlagen des Dirigierens 2a",
+                "children": {}
+              },
+              "!RHvHSbGveccwSIySnE:dev.medienhaus.udk-berlin.de": {
+                "id": "!RHvHSbGveccwSIySnE:dev.medienhaus.udk-berlin.de",
+                "name": "Grundlagen des Dirigierens 2b",
+                "children": {}
+              },
+              "!LkiKhptKLqBNTZtgJx:dev.medienhaus.udk-berlin.de": {
+                "id": "!LkiKhptKLqBNTZtgJx:dev.medienhaus.udk-berlin.de",
+                "name": "Grundlagen des Dirigierens 2c",
+                "children": {}
+              },
+              "!SgvKHNvwwEOyDhrdjs:dev.medienhaus.udk-berlin.de": {
+                "id": "!SgvKHNvwwEOyDhrdjs:dev.medienhaus.udk-berlin.de",
+                "name": "Grundlagen des Dirigierens 2e",
+                "children": {}
+              },
+              "!TWVEPnUUObnVkavpDQ:dev.medienhaus.udk-berlin.de": {
+                "id": "!TWVEPnUUObnVkavpDQ:dev.medienhaus.udk-berlin.de",
+                "name": "Grundlagen des Dirigierens 2f",
+                "children": {}
+              },
+              "!kvoNxJiZCMlAJpOAqw:dev.medienhaus.udk-berlin.de": {
+                "id": "!kvoNxJiZCMlAJpOAqw:dev.medienhaus.udk-berlin.de",
+                "name": "Grundlagen des Dirigierens 2g",
+                "children": {}
+              },
+              "!ErfVBtLMvENSwCfsaA:dev.medienhaus.udk-berlin.de": {
+                "id": "!ErfVBtLMvENSwCfsaA:dev.medienhaus.udk-berlin.de",
+                "name": "Grundlagen des Dirigierens 2h",
+                "children": {}
+              },
+              "!DaJeYKXMfXdwmqLcFp:dev.medienhaus.udk-berlin.de": {
+                "id": "!DaJeYKXMfXdwmqLcFp:dev.medienhaus.udk-berlin.de",
+                "name": "Grundlagenseminar Musikphysiologie",
+                "children": {}
+              },
+              "!skHmialElCvBpxOxUJ:dev.medienhaus.udk-berlin.de": {
+                "id": "!skHmialElCvBpxOxUJ:dev.medienhaus.udk-berlin.de",
+                "name": "Grundschulbezogene Ensemblepraxis/ Master",
+                "children": {}
+              },
+              "!rkIuqqWgtxOaLkVtyE:dev.medienhaus.udk-berlin.de": {
+                "id": "!rkIuqqWgtxOaLkVtyE:dev.medienhaus.udk-berlin.de",
+                "name": "Hans Wüthrich „Das Glashaus“",
+                "children": {}
+              },
+              "!IoZbpSkoEavQVSxsYe:dev.medienhaus.udk-berlin.de": {
+                "id": "!IoZbpSkoEavQVSxsYe:dev.medienhaus.udk-berlin.de",
+                "name": "Höranalyse",
+                "children": {}
+              }
+            }
+          },
+          "!tKXZZIBznmoLCITbwT:dev.medienhaus.udk-berlin.de": {
+            "id": "!tKXZZIBznmoLCITbwT:dev.medienhaus.udk-berlin.de",
+            "name": "BA Künstlerisch-Pädagogische Ausbildung",
+            "children": {
+              "!cnTlXngjedobVbxOfH:dev.medienhaus.udk-berlin.de": {
+                "id": "!cnTlXngjedobVbxOfH:dev.medienhaus.udk-berlin.de",
+                "name": "„…muss in die alt hergebrachte Form ein anderes, ein wirklich poetisches Element kommen.“ Fugen in",
+                "children": {}
+              },
+              "!jZbyiCmVGzoCbZqnCG:dev.medienhaus.udk-berlin.de": {
+                "id": "!jZbyiCmVGzoCbZqnCG:dev.medienhaus.udk-berlin.de",
+                "name": "„Praktisches Arrangieren für Jazz/-Pop-Ensembles und Chöre“",
+                "children": {}
+              },
+              "!SjjvVAFTAPAEzpeBQZ:dev.medienhaus.udk-berlin.de": {
+                "id": "!SjjvVAFTAPAEzpeBQZ:dev.medienhaus.udk-berlin.de",
+                "name": "Alban Berg \"Wozzeck\"",
+                "children": {}
+              },
+              "!NrZIQzFrTtrWdSsllF:dev.medienhaus.udk-berlin.de": {
+                "id": "!NrZIQzFrTtrWdSsllF:dev.medienhaus.udk-berlin.de",
+                "name": "Alexandertechnik",
+                "children": {}
+              },
+              "!XVXPWuiTISICSrLnXW:dev.medienhaus.udk-berlin.de": {
+                "id": "!XVXPWuiTISICSrLnXW:dev.medienhaus.udk-berlin.de",
+                "name": "Argentinischer Tango – verstehen und spielen",
+                "children": {}
+              },
+              "!EphfYvGaikoHMRmarE:dev.medienhaus.udk-berlin.de": {
+                "id": "!EphfYvGaikoHMRmarE:dev.medienhaus.udk-berlin.de",
+                "name": "Authentizität vs. Rollenbild – Frauen und Männer im Dirigierberuf_",
+                "children": {}
+              },
+              "!DcadDYxaHLbcCKBVxI:dev.medienhaus.udk-berlin.de": {
+                "id": "!DcadDYxaHLbcCKBVxI:dev.medienhaus.udk-berlin.de",
+                "name": "Basic Impro",
+                "children": {}
+              },
+              "!CSoOsBEbBfoOaVJekB:dev.medienhaus.udk-berlin.de": {
+                "id": "!CSoOsBEbBfoOaVJekB:dev.medienhaus.udk-berlin.de",
+                "name": "Begabung und Begabungsförderung",
+                "children": {}
+              },
+              "!nWqAesmlontEKQZiul:dev.medienhaus.udk-berlin.de": {
+                "id": "!nWqAesmlontEKQZiul:dev.medienhaus.udk-berlin.de",
+                "name": "Bewegungstraining",
+                "children": {}
+              },
+              "!YEzIoLMGjCQsAwsBTr:dev.medienhaus.udk-berlin.de": {
+                "id": "!YEzIoLMGjCQsAwsBTr:dev.medienhaus.udk-berlin.de",
+                "name": "Cajon 1",
+                "children": {}
+              },
+              "!PsGOQajTqoKHILnYhX:dev.medienhaus.udk-berlin.de": {
+                "id": "!PsGOQajTqoKHILnYhX:dev.medienhaus.udk-berlin.de",
+                "name": "Cajon 2",
+                "children": {}
+              },
+              "!TLFbARqridOCSsZnpt:dev.medienhaus.udk-berlin.de": {
+                "id": "!TLFbARqridOCSsZnpt:dev.medienhaus.udk-berlin.de",
+                "name": "Cellomethodik / Lehrpraxis",
+                "children": {}
+              },
+              "!MzBpPcaYIFyDuZChfk:dev.medienhaus.udk-berlin.de": {
+                "id": "!MzBpPcaYIFyDuZChfk:dev.medienhaus.udk-berlin.de",
+                "name": "Chor JRP",
+                "children": {}
+              },
+              "!SISdvlGkUlXDwFAvmV:dev.medienhaus.udk-berlin.de": {
+                "id": "!SISdvlGkUlXDwFAvmV:dev.medienhaus.udk-berlin.de",
+                "name": "Chorleitung 1a",
+                "children": {}
+              },
+              "!oPnSLJXijgyZRLXMly:dev.medienhaus.udk-berlin.de": {
+                "id": "!oPnSLJXijgyZRLXMly:dev.medienhaus.udk-berlin.de",
+                "name": "Chorleitung 1a",
+                "children": {}
+              },
+              "!gKXhlQbFJzCOhykKnw:dev.medienhaus.udk-berlin.de": {
+                "id": "!gKXhlQbFJzCOhykKnw:dev.medienhaus.udk-berlin.de",
+                "name": "Chorleitung 1 b",
+                "children": {}
+              },
+              "!NjtEcUUjaxkjfYSoDr:dev.medienhaus.udk-berlin.de": {
+                "id": "!NjtEcUUjaxkjfYSoDr:dev.medienhaus.udk-berlin.de",
+                "name": "Chorleitung 2 a",
+                "children": {}
+              },
+              "!YeYhOCnWFBkQbfGZcM:dev.medienhaus.udk-berlin.de": {
+                "id": "!YeYhOCnWFBkQbfGZcM:dev.medienhaus.udk-berlin.de",
+                "name": "Chorleitung 2 b",
+                "children": {}
+              },
+              "!JpOrboRzNyjbVIujux:dev.medienhaus.udk-berlin.de": {
+                "id": "!JpOrboRzNyjbVIujux:dev.medienhaus.udk-berlin.de",
+                "name": "Chorleitung 2 c",
+                "children": {}
+              },
+              "!voFTvJEPIRjcuuKGvn:dev.medienhaus.udk-berlin.de": {
+                "id": "!voFTvJEPIRjcuuKGvn:dev.medienhaus.udk-berlin.de",
+                "name": "Chorleitung Plus für CL 2a",
+                "children": {}
+              },
+              "!OUGPtVVgcssfJPjujJ:dev.medienhaus.udk-berlin.de": {
+                "id": "!OUGPtVVgcssfJPjujJ:dev.medienhaus.udk-berlin.de",
+                "name": "Chorleitung Plus für CL 2b",
+                "children": {}
+              },
+              "!mXeKnCsbBOeMDwVbPq:dev.medienhaus.udk-berlin.de": {
+                "id": "!mXeKnCsbBOeMDwVbPq:dev.medienhaus.udk-berlin.de",
+                "name": "Chorleitung Plus für CL 2 c",
+                "children": {}
+              },
+              "!nVLcjYPDMcnocnPbBn:dev.medienhaus.udk-berlin.de": {
+                "id": "!nVLcjYPDMcnocnPbBn:dev.medienhaus.udk-berlin.de",
+                "name": "Chorleitung (Profil) 1 a",
+                "children": {}
+              },
+              "!rpDjJspPdrgxTHxsvB:dev.medienhaus.udk-berlin.de": {
+                "id": "!rpDjJspPdrgxTHxsvB:dev.medienhaus.udk-berlin.de",
+                "name": "Chorleitung (Profil) 1 b",
+                "children": {}
+              },
+              "!eBUfDMVcnYMAczDqjr:dev.medienhaus.udk-berlin.de": {
+                "id": "!eBUfDMVcnYMAczDqjr:dev.medienhaus.udk-berlin.de",
+                "name": "Chorleitung (Profil) 2 a",
+                "children": {}
+              },
+              "!MnpJuburDhwqZRLjqn:dev.medienhaus.udk-berlin.de": {
+                "id": "!MnpJuburDhwqZRLjqn:dev.medienhaus.udk-berlin.de",
+                "name": "Chorleitung Profil 2 b",
+                "children": {}
+              },
+              "!babBDeUQZGtIiXLFhu:dev.medienhaus.udk-berlin.de": {
+                "id": "!babBDeUQZGtIiXLFhu:dev.medienhaus.udk-berlin.de",
+                "name": "Combo (Bandarbeit in der Schule)",
+                "children": {}
+              },
+              "!TwVsbKSYCTrLieJDgZ:dev.medienhaus.udk-berlin.de": {
+                "id": "!TwVsbKSYCTrLieJDgZ:dev.medienhaus.udk-berlin.de",
+                "name": "Das Cembalo. Von Kielklavieren, Zupfklavieren, Spinetten, Virginalen und Schweinsköpfen.",
+                "children": {}
+              },
+              "!MexikURwBqwSStiUxU:dev.medienhaus.udk-berlin.de": {
+                "id": "!MexikURwBqwSStiUxU:dev.medienhaus.udk-berlin.de",
+                "name": "Das Kleine Klavierstück von Bach bis Schönberg. Zur Geschichte des Charakterstücks für",
+                "children": {}
+              },
+              "!rtGtZGFRRuZizoeijR:dev.medienhaus.udk-berlin.de": {
+                "id": "!rtGtZGFRRuZizoeijR:dev.medienhaus.udk-berlin.de",
+                "name": "Das Verfertigen einer wissenschaftlichen Hausarbeit/BA- MA-Arbeit/Sprechstunde",
+                "children": {}
+              },
+              "!YytwKVOxtXxcKnFvBV:dev.medienhaus.udk-berlin.de": {
+                "id": "!YytwKVOxtXxcKnFvBV:dev.medienhaus.udk-berlin.de",
+                "name": "Das Verfertigen einer wissenschaftlichen Hausarbeit/BA- MA-Arbeit/Sprechstunde/Prüfungscolloquium",
+                "children": {}
+              },
+              "!rOyjMqyljKaWYwqbqs:dev.medienhaus.udk-berlin.de": {
+                "id": "!rOyjMqyljKaWYwqbqs:dev.medienhaus.udk-berlin.de",
+                "name": "Der Computer als kreatives Musikinstrument (Neue Medien/Musikproduktion)",
+                "children": {}
+              },
+              "!eoBReQQKSBydckbUHH:dev.medienhaus.udk-berlin.de": {
+                "id": "!eoBReQQKSBydckbUHH:dev.medienhaus.udk-berlin.de",
+                "name": "Dirigieren II",
+                "children": {}
+              },
+              "!vjDzQlxCsSEjgUDykL:dev.medienhaus.udk-berlin.de": {
+                "id": "!vjDzQlxCsSEjgUDykL:dev.medienhaus.udk-berlin.de",
+                "name": "Einführung in die Musikwissenschaft",
+                "children": {}
+              },
+              "!uxvBMJKeQaKpDegdWD:dev.medienhaus.udk-berlin.de": {
+                "id": "!uxvBMJKeQaKpDegdWD:dev.medienhaus.udk-berlin.de",
+                "name": "Einführung in die Musikwissenschaft",
+                "children": {}
+              },
+              "!PAjcTDqadTVVWvDXUY:dev.medienhaus.udk-berlin.de": {
+                "id": "!PAjcTDqadTVVWvDXUY:dev.medienhaus.udk-berlin.de",
+                "name": "\"Einstieg ins Arrangieren\"",
+                "children": {}
+              },
+              "!dcDJaWoCeioifxccNF:dev.medienhaus.udk-berlin.de": {
+                "id": "!dcDJaWoCeioifxccNF:dev.medienhaus.udk-berlin.de",
+                "name": "Ensemble ilinx \"Neue Wege zu Beethoven\" bei Crescendo 2021",
+                "children": {}
+              },
+              "!ivTEafhwvsPcFGCFqf:dev.medienhaus.udk-berlin.de": {
+                "id": "!ivTEafhwvsPcFGCFqf:dev.medienhaus.udk-berlin.de",
+                "name": "Ensemble-Leitung im Profilmodul 8/ Master",
+                "children": {}
+              },
+              "!uGAyBvjemJgVRoJGlb:dev.medienhaus.udk-berlin.de": {
+                "id": "!uGAyBvjemJgVRoJGlb:dev.medienhaus.udk-berlin.de",
+                "name": "Eutonie und Angewandte Anatomie",
+                "children": {}
+              },
+              "!YtlpXmIxpHmEaEVTnO:dev.medienhaus.udk-berlin.de": {
+                "id": "!YtlpXmIxpHmEaEVTnO:dev.medienhaus.udk-berlin.de",
+                "name": "Examenscolloquium",
+                "children": {}
+              },
+              "!kIZgMcyuNshIaSArXs:dev.medienhaus.udk-berlin.de": {
+                "id": "!kIZgMcyuNshIaSArXs:dev.medienhaus.udk-berlin.de",
+                "name": "Experimental Coding with Supercollider Parametric abstract composing",
+                "children": {}
+              },
+              "!VxEkPDrsBKprYdAXUf:dev.medienhaus.udk-berlin.de": {
+                "id": "!VxEkPDrsBKprYdAXUf:dev.medienhaus.udk-berlin.de",
+                "name": "Experimentelle Musik 1, Gruppenarbeit",
+                "children": {}
+              },
+              "!gMmbSMVLttFMrclSVf:dev.medienhaus.udk-berlin.de": {
+                "id": "!gMmbSMVLttFMrclSVf:dev.medienhaus.udk-berlin.de",
+                "name": "Experimentelle Musik, Gruppenleitung",
+                "children": {}
+              },
+              "!UrddBwGebTgGhpHBFk:dev.medienhaus.udk-berlin.de": {
+                "id": "!UrddBwGebTgGhpHBFk:dev.medienhaus.udk-berlin.de",
+                "name": "Fach-Didaktik/Lehrpraxis für Blechbläser",
+                "children": {}
+              },
+              "!cUcdwhvOLSCxKsCFFM:dev.medienhaus.udk-berlin.de": {
+                "id": "!cUcdwhvOLSCxKsCFFM:dev.medienhaus.udk-berlin.de",
+                "name": "Fachdidaktik Rhythmik",
+                "children": {}
+              },
+              "!nvLTVrlCPVnqLZdoLO:dev.medienhaus.udk-berlin.de": {
+                "id": "!nvLTVrlCPVnqLZdoLO:dev.medienhaus.udk-berlin.de",
+                "name": "Faust-Vertonungen",
+                "children": {}
+              },
+              "!KRAbdQdPfKcWvPDjPy:dev.medienhaus.udk-berlin.de": {
+                "id": "!KRAbdQdPfKcWvPDjPy:dev.medienhaus.udk-berlin.de",
+                "name": "Feldenkrais",
+                "children": {}
+              },
+              "!UMGwbeXxjxkVFKjQYQ:dev.medienhaus.udk-berlin.de": {
+                "id": "!UMGwbeXxjxkVFKjQYQ:dev.medienhaus.udk-berlin.de",
+                "name": "Filmmusik und Filmmusikproduktion (Neue Medien/Musikproduktion)",
+                "children": {}
+              },
+              "!IxQYiZypixoeFYlJWf:dev.medienhaus.udk-berlin.de": {
+                "id": "!IxQYiZypixoeFYlJWf:dev.medienhaus.udk-berlin.de",
+                "name": "Franz Schuberts Kammermusik",
+                "children": {}
+              }
+            }
+          },
+          "!uZvhcspjcTxsQuaRQn:dev.medienhaus.udk-berlin.de": {
+            "id": "!uZvhcspjcTxsQuaRQn:dev.medienhaus.udk-berlin.de",
+            "name": "MA Künstlerisch-Pädagogische Ausbildung",
+            "children": {
+              "!cnTlXngjedobVbxOfH:dev.medienhaus.udk-berlin.de": {
+                "id": "!cnTlXngjedobVbxOfH:dev.medienhaus.udk-berlin.de",
+                "name": "„…muss in die alt hergebrachte Form ein anderes, ein wirklich poetisches Element kommen.“ Fugen in",
+                "children": {}
+              },
+              "!wDVzGfJQWMjeLxeHAL:dev.medienhaus.udk-berlin.de": {
+                "id": "!wDVzGfJQWMjeLxeHAL:dev.medienhaus.udk-berlin.de",
+                "name": "„Das Meisterwerk in der Musik“ - Die Lehre Heinrich Schenkers",
+                "children": {}
+              },
+              "!jZbyiCmVGzoCbZqnCG:dev.medienhaus.udk-berlin.de": {
+                "id": "!jZbyiCmVGzoCbZqnCG:dev.medienhaus.udk-berlin.de",
+                "name": "„Praktisches Arrangieren für Jazz/-Pop-Ensembles und Chöre“",
+                "children": {}
+              },
+              "!SjjvVAFTAPAEzpeBQZ:dev.medienhaus.udk-berlin.de": {
+                "id": "!SjjvVAFTAPAEzpeBQZ:dev.medienhaus.udk-berlin.de",
+                "name": "Alban Berg \"Wozzeck\"",
+                "children": {}
+              },
+              "!XVXPWuiTISICSrLnXW:dev.medienhaus.udk-berlin.de": {
+                "id": "!XVXPWuiTISICSrLnXW:dev.medienhaus.udk-berlin.de",
+                "name": "Argentinischer Tango – verstehen und spielen",
+                "children": {}
+              },
+              "!EphfYvGaikoHMRmarE:dev.medienhaus.udk-berlin.de": {
+                "id": "!EphfYvGaikoHMRmarE:dev.medienhaus.udk-berlin.de",
+                "name": "Authentizität vs. Rollenbild – Frauen und Männer im Dirigierberuf_",
+                "children": {}
+              },
+              "!DcadDYxaHLbcCKBVxI:dev.medienhaus.udk-berlin.de": {
+                "id": "!DcadDYxaHLbcCKBVxI:dev.medienhaus.udk-berlin.de",
+                "name": "Basic Impro",
+                "children": {}
+              },
+              "!CSoOsBEbBfoOaVJekB:dev.medienhaus.udk-berlin.de": {
+                "id": "!CSoOsBEbBfoOaVJekB:dev.medienhaus.udk-berlin.de",
+                "name": "Begabung und Begabungsförderung",
+                "children": {}
+              },
+              "!nWqAesmlontEKQZiul:dev.medienhaus.udk-berlin.de": {
+                "id": "!nWqAesmlontEKQZiul:dev.medienhaus.udk-berlin.de",
+                "name": "Bewegungstraining",
+                "children": {}
+              },
+              "!SISdvlGkUlXDwFAvmV:dev.medienhaus.udk-berlin.de": {
+                "id": "!SISdvlGkUlXDwFAvmV:dev.medienhaus.udk-berlin.de",
+                "name": "Chorleitung 1a",
+                "children": {}
+              },
+              "!oPnSLJXijgyZRLXMly:dev.medienhaus.udk-berlin.de": {
+                "id": "!oPnSLJXijgyZRLXMly:dev.medienhaus.udk-berlin.de",
+                "name": "Chorleitung 1a",
+                "children": {}
+              },
+              "!gKXhlQbFJzCOhykKnw:dev.medienhaus.udk-berlin.de": {
+                "id": "!gKXhlQbFJzCOhykKnw:dev.medienhaus.udk-berlin.de",
+                "name": "Chorleitung 1 b",
+                "children": {}
+              },
+              "!NjtEcUUjaxkjfYSoDr:dev.medienhaus.udk-berlin.de": {
+                "id": "!NjtEcUUjaxkjfYSoDr:dev.medienhaus.udk-berlin.de",
+                "name": "Chorleitung 2 a",
+                "children": {}
+              },
+              "!YeYhOCnWFBkQbfGZcM:dev.medienhaus.udk-berlin.de": {
+                "id": "!YeYhOCnWFBkQbfGZcM:dev.medienhaus.udk-berlin.de",
+                "name": "Chorleitung 2 b",
+                "children": {}
+              },
+              "!JpOrboRzNyjbVIujux:dev.medienhaus.udk-berlin.de": {
+                "id": "!JpOrboRzNyjbVIujux:dev.medienhaus.udk-berlin.de",
+                "name": "Chorleitung 2 c",
+                "children": {}
+              },
+              "!voFTvJEPIRjcuuKGvn:dev.medienhaus.udk-berlin.de": {
+                "id": "!voFTvJEPIRjcuuKGvn:dev.medienhaus.udk-berlin.de",
+                "name": "Chorleitung Plus für CL 2a",
+                "children": {}
+              },
+              "!OUGPtVVgcssfJPjujJ:dev.medienhaus.udk-berlin.de": {
+                "id": "!OUGPtVVgcssfJPjujJ:dev.medienhaus.udk-berlin.de",
+                "name": "Chorleitung Plus für CL 2b",
+                "children": {}
+              },
+              "!mXeKnCsbBOeMDwVbPq:dev.medienhaus.udk-berlin.de": {
+                "id": "!mXeKnCsbBOeMDwVbPq:dev.medienhaus.udk-berlin.de",
+                "name": "Chorleitung Plus für CL 2 c",
+                "children": {}
+              },
+              "!nVLcjYPDMcnocnPbBn:dev.medienhaus.udk-berlin.de": {
+                "id": "!nVLcjYPDMcnocnPbBn:dev.medienhaus.udk-berlin.de",
+                "name": "Chorleitung (Profil) 1 a",
+                "children": {}
+              },
+              "!rpDjJspPdrgxTHxsvB:dev.medienhaus.udk-berlin.de": {
+                "id": "!rpDjJspPdrgxTHxsvB:dev.medienhaus.udk-berlin.de",
+                "name": "Chorleitung (Profil) 1 b",
+                "children": {}
+              },
+              "!eBUfDMVcnYMAczDqjr:dev.medienhaus.udk-berlin.de": {
+                "id": "!eBUfDMVcnYMAczDqjr:dev.medienhaus.udk-berlin.de",
+                "name": "Chorleitung (Profil) 2 a",
+                "children": {}
+              },
+              "!MnpJuburDhwqZRLjqn:dev.medienhaus.udk-berlin.de": {
+                "id": "!MnpJuburDhwqZRLjqn:dev.medienhaus.udk-berlin.de",
+                "name": "Chorleitung Profil 2 b",
+                "children": {}
+              },
+              "!rtGtZGFRRuZizoeijR:dev.medienhaus.udk-berlin.de": {
+                "id": "!rtGtZGFRRuZizoeijR:dev.medienhaus.udk-berlin.de",
+                "name": "Das Verfertigen einer wissenschaftlichen Hausarbeit/BA- MA-Arbeit/Sprechstunde",
+                "children": {}
+              },
+              "!YytwKVOxtXxcKnFvBV:dev.medienhaus.udk-berlin.de": {
+                "id": "!YytwKVOxtXxcKnFvBV:dev.medienhaus.udk-berlin.de",
+                "name": "Das Verfertigen einer wissenschaftlichen Hausarbeit/BA- MA-Arbeit/Sprechstunde/Prüfungscolloquium",
+                "children": {}
+              },
+              "!PAjcTDqadTVVWvDXUY:dev.medienhaus.udk-berlin.de": {
+                "id": "!PAjcTDqadTVVWvDXUY:dev.medienhaus.udk-berlin.de",
+                "name": "\"Einstieg ins Arrangieren\"",
+                "children": {}
+              },
+              "!dcDJaWoCeioifxccNF:dev.medienhaus.udk-berlin.de": {
+                "id": "!dcDJaWoCeioifxccNF:dev.medienhaus.udk-berlin.de",
+                "name": "Ensemble ilinx \"Neue Wege zu Beethoven\" bei Crescendo 2021",
+                "children": {}
+              },
+              "!ivTEafhwvsPcFGCFqf:dev.medienhaus.udk-berlin.de": {
+                "id": "!ivTEafhwvsPcFGCFqf:dev.medienhaus.udk-berlin.de",
+                "name": "Ensemble-Leitung im Profilmodul 8/ Master",
+                "children": {}
+              },
+              "!YtlpXmIxpHmEaEVTnO:dev.medienhaus.udk-berlin.de": {
+                "id": "!YtlpXmIxpHmEaEVTnO:dev.medienhaus.udk-berlin.de",
+                "name": "Examenscolloquium",
+                "children": {}
+              },
+              "!kIZgMcyuNshIaSArXs:dev.medienhaus.udk-berlin.de": {
+                "id": "!kIZgMcyuNshIaSArXs:dev.medienhaus.udk-berlin.de",
+                "name": "Experimental Coding with Supercollider Parametric abstract composing",
+                "children": {}
+              },
+              "!ylNIvkvrolABKfftZI:dev.medienhaus.udk-berlin.de": {
+                "id": "!ylNIvkvrolABKfftZI:dev.medienhaus.udk-berlin.de",
+                "name": "Fachdidaktik EMP",
+                "children": {}
+              },
+              "!nvLTVrlCPVnqLZdoLO:dev.medienhaus.udk-berlin.de": {
+                "id": "!nvLTVrlCPVnqLZdoLO:dev.medienhaus.udk-berlin.de",
+                "name": "Faust-Vertonungen",
+                "children": {}
+              },
+              "!tJTYerUmaEdelXaCaQ:dev.medienhaus.udk-berlin.de": {
+                "id": "!tJTYerUmaEdelXaCaQ:dev.medienhaus.udk-berlin.de",
+                "name": "Großer Chor der UdK",
+                "children": {}
+              },
+              "!rkIuqqWgtxOaLkVtyE:dev.medienhaus.udk-berlin.de": {
+                "id": "!rkIuqqWgtxOaLkVtyE:dev.medienhaus.udk-berlin.de",
+                "name": "Hans Wüthrich „Das Glashaus“",
+                "children": {}
+              },
+              "!IuVDWnCtFzMNyrWkgy:dev.medienhaus.udk-berlin.de": {
+                "id": "!IuVDWnCtFzMNyrWkgy:dev.medienhaus.udk-berlin.de",
+                "name": "Jazzensemble 1",
+                "children": {}
+              },
+              "!JaDGOAZhhEyEaDZxTq:dev.medienhaus.udk-berlin.de": {
+                "id": "!JaDGOAZhhEyEaDZxTq:dev.medienhaus.udk-berlin.de",
+                "name": "Jazz Ensemble 2",
+                "children": {}
+              },
+              "!SWBhalJPKBLPJPcfdv:dev.medienhaus.udk-berlin.de": {
+                "id": "!SWBhalJPKBLPJPcfdv:dev.medienhaus.udk-berlin.de",
+                "name": "Jazz-Standards-Ensemble",
+                "children": {}
+              },
+              "!UWGZbozSzXbMDdNIHY:dev.medienhaus.udk-berlin.de": {
+                "id": "!UWGZbozSzXbMDdNIHY:dev.medienhaus.udk-berlin.de",
+                "name": "Kammerchor der Künste",
+                "children": {}
+              },
+              "!rATALLHrjuQbelScto:dev.medienhaus.udk-berlin.de": {
+                "id": "!rATALLHrjuQbelScto:dev.medienhaus.udk-berlin.de",
+                "name": "Klassenmusizieren mit Bläserklasse",
+                "children": {}
+              },
+              "!gabYkXnVjoPSjqgmuQ:dev.medienhaus.udk-berlin.de": {
+                "id": "!gabYkXnVjoPSjqgmuQ:dev.medienhaus.udk-berlin.de",
+                "name": "Kolloquium zur Bachelor- und Masterarbeit",
+                "children": {}
+              },
+              "!mRSxulOHAROkIMtbuI:dev.medienhaus.udk-berlin.de": {
+                "id": "!mRSxulOHAROkIMtbuI:dev.medienhaus.udk-berlin.de",
+                "name": "Komposition Analyse: Neues Musiktheater",
+                "children": {}
+              },
+              "!UeqzvVDrfNIYeZwcAZ:dev.medienhaus.udk-berlin.de": {
+                "id": "!UeqzvVDrfNIYeZwcAZ:dev.medienhaus.udk-berlin.de",
+                "name": "Körper - Bewegung - Tanz (1)",
+                "children": {}
+              },
+              "!fALZzAXXUfbpHOZgHw:dev.medienhaus.udk-berlin.de": {
+                "id": "!fALZzAXXUfbpHOZgHw:dev.medienhaus.udk-berlin.de",
+                "name": "Körper-Bewegung-Tanz (2)",
+                "children": {}
+              },
+              "!LitAWlFdaouiTRuggA:dev.medienhaus.udk-berlin.de": {
+                "id": "!LitAWlFdaouiTRuggA:dev.medienhaus.udk-berlin.de",
+                "name": "KPA, Master, Musiktheorie, Tonsatz, Gehörbildung/Höranalyse",
+                "children": {}
+              },
+              "!hWMxiIqebeYWmIirMC:dev.medienhaus.udk-berlin.de": {
+                "id": "!hWMxiIqebeYWmIirMC:dev.medienhaus.udk-berlin.de",
+                "name": "Künstlerisch-pädagogische Praxis des Orff-Instrumentariums",
+                "children": {}
+              },
+              "!vQLoppBuqMYdFUytBT:dev.medienhaus.udk-berlin.de": {
+                "id": "!vQLoppBuqMYdFUytBT:dev.medienhaus.udk-berlin.de",
+                "name": "Lehrpraxis Hohe Streicher",
+                "children": {}
+              },
+              "!owBBOuJkpziBeehRYP:dev.medienhaus.udk-berlin.de": {
+                "id": "!owBBOuJkpziBeehRYP:dev.medienhaus.udk-berlin.de",
+                "name": "Lehrpraxis Kita EMP",
+                "children": {}
+              },
+              "!fbpGxJqxcIIBGGuMtW:dev.medienhaus.udk-berlin.de": {
+                "id": "!fbpGxJqxcIIBGGuMtW:dev.medienhaus.udk-berlin.de",
+                "name": "Lehrpraxis Senioren EMP",
+                "children": {}
+              },
+              "!ttWvprgCqVNPYVXgff:dev.medienhaus.udk-berlin.de": {
+                "id": "!ttWvprgCqVNPYVXgff:dev.medienhaus.udk-berlin.de",
+                "name": "Methodik Hohe Streicher I",
+                "children": {}
+              },
+              "!LuFqaCVpkAKvDYlKOF:dev.medienhaus.udk-berlin.de": {
+                "id": "!LuFqaCVpkAKvDYlKOF:dev.medienhaus.udk-berlin.de",
+                "name": "Methodik Hohe Streicher II",
+                "children": {}
+              }
+            }
+          },
+          "!lxxnLUgNgqMBEegpwL:dev.medienhaus.udk-berlin.de": {
+            "id": "!lxxnLUgNgqMBEegpwL:dev.medienhaus.udk-berlin.de",
+            "name": "Diplomstudiengang Pädagogische Ausbildung (auslaufend)",
+            "children": {
+              "!cnTlXngjedobVbxOfH:dev.medienhaus.udk-berlin.de": {
+                "id": "!cnTlXngjedobVbxOfH:dev.medienhaus.udk-berlin.de",
+                "name": "„…muss in die alt hergebrachte Form ein anderes, ein wirklich poetisches Element kommen.“ Fugen in",
+                "children": {}
+              },
+              "!jZbyiCmVGzoCbZqnCG:dev.medienhaus.udk-berlin.de": {
+                "id": "!jZbyiCmVGzoCbZqnCG:dev.medienhaus.udk-berlin.de",
+                "name": "„Praktisches Arrangieren für Jazz/-Pop-Ensembles und Chöre“",
+                "children": {}
+              },
+              "!SjjvVAFTAPAEzpeBQZ:dev.medienhaus.udk-berlin.de": {
+                "id": "!SjjvVAFTAPAEzpeBQZ:dev.medienhaus.udk-berlin.de",
+                "name": "Alban Berg \"Wozzeck\"",
+                "children": {}
+              },
+              "!XVXPWuiTISICSrLnXW:dev.medienhaus.udk-berlin.de": {
+                "id": "!XVXPWuiTISICSrLnXW:dev.medienhaus.udk-berlin.de",
+                "name": "Argentinischer Tango – verstehen und spielen",
+                "children": {}
+              },
+              "!EphfYvGaikoHMRmarE:dev.medienhaus.udk-berlin.de": {
+                "id": "!EphfYvGaikoHMRmarE:dev.medienhaus.udk-berlin.de",
+                "name": "Authentizität vs. Rollenbild – Frauen und Männer im Dirigierberuf_",
+                "children": {}
+              },
+              "!DcadDYxaHLbcCKBVxI:dev.medienhaus.udk-berlin.de": {
+                "id": "!DcadDYxaHLbcCKBVxI:dev.medienhaus.udk-berlin.de",
+                "name": "Basic Impro",
+                "children": {}
+              },
+              "!YEzIoLMGjCQsAwsBTr:dev.medienhaus.udk-berlin.de": {
+                "id": "!YEzIoLMGjCQsAwsBTr:dev.medienhaus.udk-berlin.de",
+                "name": "Cajon 1",
+                "children": {}
+              },
+              "!PsGOQajTqoKHILnYhX:dev.medienhaus.udk-berlin.de": {
+                "id": "!PsGOQajTqoKHILnYhX:dev.medienhaus.udk-berlin.de",
+                "name": "Cajon 2",
+                "children": {}
+              },
+              "!TLFbARqridOCSsZnpt:dev.medienhaus.udk-berlin.de": {
+                "id": "!TLFbARqridOCSsZnpt:dev.medienhaus.udk-berlin.de",
+                "name": "Cellomethodik / Lehrpraxis",
+                "children": {}
+              },
+              "!MzBpPcaYIFyDuZChfk:dev.medienhaus.udk-berlin.de": {
+                "id": "!MzBpPcaYIFyDuZChfk:dev.medienhaus.udk-berlin.de",
+                "name": "Chor JRP",
+                "children": {}
+              },
+              "!SISdvlGkUlXDwFAvmV:dev.medienhaus.udk-berlin.de": {
+                "id": "!SISdvlGkUlXDwFAvmV:dev.medienhaus.udk-berlin.de",
+                "name": "Chorleitung 1a",
+                "children": {}
+              },
+              "!oPnSLJXijgyZRLXMly:dev.medienhaus.udk-berlin.de": {
+                "id": "!oPnSLJXijgyZRLXMly:dev.medienhaus.udk-berlin.de",
+                "name": "Chorleitung 1a",
+                "children": {}
+              },
+              "!gKXhlQbFJzCOhykKnw:dev.medienhaus.udk-berlin.de": {
+                "id": "!gKXhlQbFJzCOhykKnw:dev.medienhaus.udk-berlin.de",
+                "name": "Chorleitung 1 b",
+                "children": {}
+              },
+              "!NjtEcUUjaxkjfYSoDr:dev.medienhaus.udk-berlin.de": {
+                "id": "!NjtEcUUjaxkjfYSoDr:dev.medienhaus.udk-berlin.de",
+                "name": "Chorleitung 2 a",
+                "children": {}
+              },
+              "!YeYhOCnWFBkQbfGZcM:dev.medienhaus.udk-berlin.de": {
+                "id": "!YeYhOCnWFBkQbfGZcM:dev.medienhaus.udk-berlin.de",
+                "name": "Chorleitung 2 b",
+                "children": {}
+              },
+              "!JpOrboRzNyjbVIujux:dev.medienhaus.udk-berlin.de": {
+                "id": "!JpOrboRzNyjbVIujux:dev.medienhaus.udk-berlin.de",
+                "name": "Chorleitung 2 c",
+                "children": {}
+              },
+              "!voFTvJEPIRjcuuKGvn:dev.medienhaus.udk-berlin.de": {
+                "id": "!voFTvJEPIRjcuuKGvn:dev.medienhaus.udk-berlin.de",
+                "name": "Chorleitung Plus für CL 2a",
+                "children": {}
+              },
+              "!OUGPtVVgcssfJPjujJ:dev.medienhaus.udk-berlin.de": {
+                "id": "!OUGPtVVgcssfJPjujJ:dev.medienhaus.udk-berlin.de",
+                "name": "Chorleitung Plus für CL 2b",
+                "children": {}
+              },
+              "!mXeKnCsbBOeMDwVbPq:dev.medienhaus.udk-berlin.de": {
+                "id": "!mXeKnCsbBOeMDwVbPq:dev.medienhaus.udk-berlin.de",
+                "name": "Chorleitung Plus für CL 2 c",
+                "children": {}
+              },
+              "!nVLcjYPDMcnocnPbBn:dev.medienhaus.udk-berlin.de": {
+                "id": "!nVLcjYPDMcnocnPbBn:dev.medienhaus.udk-berlin.de",
+                "name": "Chorleitung (Profil) 1 a",
+                "children": {}
+              },
+              "!rpDjJspPdrgxTHxsvB:dev.medienhaus.udk-berlin.de": {
+                "id": "!rpDjJspPdrgxTHxsvB:dev.medienhaus.udk-berlin.de",
+                "name": "Chorleitung (Profil) 1 b",
+                "children": {}
+              },
+              "!MnpJuburDhwqZRLjqn:dev.medienhaus.udk-berlin.de": {
+                "id": "!MnpJuburDhwqZRLjqn:dev.medienhaus.udk-berlin.de",
+                "name": "Chorleitung Profil 2 b",
+                "children": {}
+              },
+              "!TwVsbKSYCTrLieJDgZ:dev.medienhaus.udk-berlin.de": {
+                "id": "!TwVsbKSYCTrLieJDgZ:dev.medienhaus.udk-berlin.de",
+                "name": "Das Cembalo. Von Kielklavieren, Zupfklavieren, Spinetten, Virginalen und Schweinsköpfen.",
+                "children": {}
+              },
+              "!MexikURwBqwSStiUxU:dev.medienhaus.udk-berlin.de": {
+                "id": "!MexikURwBqwSStiUxU:dev.medienhaus.udk-berlin.de",
+                "name": "Das Kleine Klavierstück von Bach bis Schönberg. Zur Geschichte des Charakterstücks für",
+                "children": {}
+              },
+              "!rtGtZGFRRuZizoeijR:dev.medienhaus.udk-berlin.de": {
+                "id": "!rtGtZGFRRuZizoeijR:dev.medienhaus.udk-berlin.de",
+                "name": "Das Verfertigen einer wissenschaftlichen Hausarbeit/BA- MA-Arbeit/Sprechstunde",
+                "children": {}
+              },
+              "!YytwKVOxtXxcKnFvBV:dev.medienhaus.udk-berlin.de": {
+                "id": "!YytwKVOxtXxcKnFvBV:dev.medienhaus.udk-berlin.de",
+                "name": "Das Verfertigen einer wissenschaftlichen Hausarbeit/BA- MA-Arbeit/Sprechstunde/Prüfungscolloquium",
+                "children": {}
+              },
+              "!vjDzQlxCsSEjgUDykL:dev.medienhaus.udk-berlin.de": {
+                "id": "!vjDzQlxCsSEjgUDykL:dev.medienhaus.udk-berlin.de",
+                "name": "Einführung in die Musikwissenschaft",
+                "children": {}
+              },
+              "!uxvBMJKeQaKpDegdWD:dev.medienhaus.udk-berlin.de": {
+                "id": "!uxvBMJKeQaKpDegdWD:dev.medienhaus.udk-berlin.de",
+                "name": "Einführung in die Musikwissenschaft",
+                "children": {}
+              },
+              "!PAjcTDqadTVVWvDXUY:dev.medienhaus.udk-berlin.de": {
+                "id": "!PAjcTDqadTVVWvDXUY:dev.medienhaus.udk-berlin.de",
+                "name": "\"Einstieg ins Arrangieren\"",
+                "children": {}
+              },
+              "!ivTEafhwvsPcFGCFqf:dev.medienhaus.udk-berlin.de": {
+                "id": "!ivTEafhwvsPcFGCFqf:dev.medienhaus.udk-berlin.de",
+                "name": "Ensemble-Leitung im Profilmodul 8/ Master",
+                "children": {}
+              },
+              "!kIZgMcyuNshIaSArXs:dev.medienhaus.udk-berlin.de": {
+                "id": "!kIZgMcyuNshIaSArXs:dev.medienhaus.udk-berlin.de",
+                "name": "Experimental Coding with Supercollider Parametric abstract composing",
+                "children": {}
+              },
+              "!VxEkPDrsBKprYdAXUf:dev.medienhaus.udk-berlin.de": {
+                "id": "!VxEkPDrsBKprYdAXUf:dev.medienhaus.udk-berlin.de",
+                "name": "Experimentelle Musik 1, Gruppenarbeit",
+                "children": {}
+              },
+              "!gMmbSMVLttFMrclSVf:dev.medienhaus.udk-berlin.de": {
+                "id": "!gMmbSMVLttFMrclSVf:dev.medienhaus.udk-berlin.de",
+                "name": "Experimentelle Musik, Gruppenleitung",
+                "children": {}
+              },
+              "!nvLTVrlCPVnqLZdoLO:dev.medienhaus.udk-berlin.de": {
+                "id": "!nvLTVrlCPVnqLZdoLO:dev.medienhaus.udk-berlin.de",
+                "name": "Faust-Vertonungen",
+                "children": {}
+              },
+              "!IxQYiZypixoeFYlJWf:dev.medienhaus.udk-berlin.de": {
+                "id": "!IxQYiZypixoeFYlJWf:dev.medienhaus.udk-berlin.de",
+                "name": "Franz Schuberts Kammermusik",
+                "children": {}
+              },
+              "!gJBlFMEPjuJsOdKaFw:dev.medienhaus.udk-berlin.de": {
+                "id": "!gJBlFMEPjuJsOdKaFw:dev.medienhaus.udk-berlin.de",
+                "name": "Get the vocal Groove",
+                "children": {}
+              },
+              "!tJTYerUmaEdelXaCaQ:dev.medienhaus.udk-berlin.de": {
+                "id": "!tJTYerUmaEdelXaCaQ:dev.medienhaus.udk-berlin.de",
+                "name": "Großer Chor der UdK",
+                "children": {}
+              },
+              "!DaJeYKXMfXdwmqLcFp:dev.medienhaus.udk-berlin.de": {
+                "id": "!DaJeYKXMfXdwmqLcFp:dev.medienhaus.udk-berlin.de",
+                "name": "Grundlagenseminar Musikphysiologie",
+                "children": {}
+              },
+              "!rkIuqqWgtxOaLkVtyE:dev.medienhaus.udk-berlin.de": {
+                "id": "!rkIuqqWgtxOaLkVtyE:dev.medienhaus.udk-berlin.de",
+                "name": "Hans Wüthrich „Das Glashaus“",
+                "children": {}
+              },
+              "!SqRMCFJgPzhfXNeCHi:dev.medienhaus.udk-berlin.de": {
+                "id": "!SqRMCFJgPzhfXNeCHi:dev.medienhaus.udk-berlin.de",
+                "name": "Heimatkonstruktion, Musik und Medienkultur",
+                "children": {}
+              },
+              "!CZMYIvowkEMohnhQvB:dev.medienhaus.udk-berlin.de": {
+                "id": "!CZMYIvowkEMohnhQvB:dev.medienhaus.udk-berlin.de",
+                "name": "Heinrich Schütz",
+                "children": {}
+              },
+              "!yOBObKRZmrSiktIFYu:dev.medienhaus.udk-berlin.de": {
+                "id": "!yOBObKRZmrSiktIFYu:dev.medienhaus.udk-berlin.de",
+                "name": "Herrschaft und Emanzipation durch Musik: Gender, Klasse, Kirche, Staat",
+                "children": {}
+              },
+              "!kvZLEDdzPpRQbpHtdX:dev.medienhaus.udk-berlin.de": {
+                "id": "!kvZLEDdzPpRQbpHtdX:dev.medienhaus.udk-berlin.de",
+                "name": "Hollywood-Sound: Ästhetik und Geschichte eines filmmusikalischen Phänomens",
+                "children": {}
+              },
+              "!DJRhrDmujlvPbPvTLC:dev.medienhaus.udk-berlin.de": {
+                "id": "!DJRhrDmujlvPbPvTLC:dev.medienhaus.udk-berlin.de",
+                "name": "Jam On: Singen ohne Noten",
+                "children": {}
+              },
+              "!IuVDWnCtFzMNyrWkgy:dev.medienhaus.udk-berlin.de": {
+                "id": "!IuVDWnCtFzMNyrWkgy:dev.medienhaus.udk-berlin.de",
+                "name": "Jazzensemble 1",
+                "children": {}
+              },
+              "!JaDGOAZhhEyEaDZxTq:dev.medienhaus.udk-berlin.de": {
+                "id": "!JaDGOAZhhEyEaDZxTq:dev.medienhaus.udk-berlin.de",
+                "name": "Jazz Ensemble 2",
+                "children": {}
+              },
+              "!SWBhalJPKBLPJPcfdv:dev.medienhaus.udk-berlin.de": {
+                "id": "!SWBhalJPKBLPJPcfdv:dev.medienhaus.udk-berlin.de",
+                "name": "Jazz-Standards-Ensemble",
+                "children": {}
+              },
+              "!cFDHXfCdClDgmsWDCw:dev.medienhaus.udk-berlin.de": {
+                "id": "!cFDHXfCdClDgmsWDCw:dev.medienhaus.udk-berlin.de",
+                "name": "Johannes Brahms und die Variation",
+                "children": {}
+              },
+              "!UWGZbozSzXbMDdNIHY:dev.medienhaus.udk-berlin.de": {
+                "id": "!UWGZbozSzXbMDdNIHY:dev.medienhaus.udk-berlin.de",
+                "name": "Kammerchor der Künste",
+                "children": {}
+              }
+            }
+          },
+          "!qZLFyYKWZRYxUQFhiO:dev.medienhaus.udk-berlin.de": {
+            "id": "!qZLFyYKWZRYxUQFhiO:dev.medienhaus.udk-berlin.de",
+            "name": "Musiktherapie",
+            "children": {}
+          },
+          "!rfkeWfohnCyqozPbNZ:dev.medienhaus.udk-berlin.de": {
+            "id": "!rfkeWfohnCyqozPbNZ:dev.medienhaus.udk-berlin.de",
+            "name": "Sound Studies",
+            "children": {}
+          },
+          "!RvIbIGJskiEMcYYQOB:dev.medienhaus.udk-berlin.de": {
+            "id": "!RvIbIGJskiEMcYYQOB:dev.medienhaus.udk-berlin.de",
+            "name": "Musikalische Nachwuchsförderung (Julius-Stern-Institut)",
+            "children": {
+              "!NrZIQzFrTtrWdSsllF:dev.medienhaus.udk-berlin.de": {
+                "id": "!NrZIQzFrTtrWdSsllF:dev.medienhaus.udk-berlin.de",
+                "name": "Alexandertechnik",
+                "children": {}
+              },
+              "!KRAbdQdPfKcWvPDjPy:dev.medienhaus.udk-berlin.de": {
+                "id": "!KRAbdQdPfKcWvPDjPy:dev.medienhaus.udk-berlin.de",
+                "name": "Feldenkrais",
+                "children": {}
+              },
+              "!IfZrGxaLyJrReYQSow:dev.medienhaus.udk-berlin.de": {
+                "id": "!IfZrGxaLyJrReYQSow:dev.medienhaus.udk-berlin.de",
+                "name": "Gehörbildung/Musiktheorie JSI, 3. Semester",
+                "children": {}
+              },
+              "!DaJeYKXMfXdwmqLcFp:dev.medienhaus.udk-berlin.de": {
+                "id": "!DaJeYKXMfXdwmqLcFp:dev.medienhaus.udk-berlin.de",
+                "name": "Grundlagenseminar Musikphysiologie",
+                "children": {}
+              },
+              "!tYBQyPngVlXCvjGVYG:dev.medienhaus.udk-berlin.de": {
+                "id": "!tYBQyPngVlXCvjGVYG:dev.medienhaus.udk-berlin.de",
+                "name": "JSI, 1. Semester, Musiktheorie/Gehörbildung",
+                "children": {}
+              },
+              "!FOkcKngfgLHiyDGLLv:dev.medienhaus.udk-berlin.de": {
+                "id": "!FOkcKngfgLHiyDGLLv:dev.medienhaus.udk-berlin.de",
+                "name": "JSI Musiktheorie/Gehörbildung, 2. Semester",
+                "children": {}
+              },
+              "!iDIFBtxbetbadPOUYm:dev.medienhaus.udk-berlin.de": {
+                "id": "!iDIFBtxbetbadPOUYm:dev.medienhaus.udk-berlin.de",
+                "name": "Komposition (JSI)",
+                "children": {}
+              },
+              "!TSVgNjDQvjxvaQPewd:dev.medienhaus.udk-berlin.de": {
+                "id": "!TSVgNjDQvjxvaQPewd:dev.medienhaus.udk-berlin.de",
+                "name": "Kraftausdauer für Musiker",
+                "children": {}
+              },
+              "!AOQgbsUuSZHwPpgquF:dev.medienhaus.udk-berlin.de": {
+                "id": "!AOQgbsUuSZHwPpgquF:dev.medienhaus.udk-berlin.de",
+                "name": "Musikermedizinische Sprechstunde",
+                "children": {}
+              },
+              "!fEegpivZDYxgDaKnlP:dev.medienhaus.udk-berlin.de": {
+                "id": "!fEegpivZDYxgDaKnlP:dev.medienhaus.udk-berlin.de",
+                "name": "Musikphysiologische Einzelberatung",
+                "children": {}
+              },
+              "!EnlQQxHsUBWteupEEr:dev.medienhaus.udk-berlin.de": {
+                "id": "!EnlQQxHsUBWteupEEr:dev.medienhaus.udk-berlin.de",
+                "name": "Musiktheorie/Gehörbildung JSI",
+                "children": {}
+              }
+            }
+          },
+          "!prhilWRHYXWuKYqoGh:dev.medienhaus.udk-berlin.de": {
+            "id": "!prhilWRHYXWuKYqoGh:dev.medienhaus.udk-berlin.de",
+            "name": "Q-Master Querstieg Musik",
+            "children": {
+              "!BBydxAIjQqUJidGSgi:dev.medienhaus.udk-berlin.de": {
+                "id": "!BBydxAIjQqUJidGSgi:dev.medienhaus.udk-berlin.de",
+                "name": "Schulbezogenes Arrangieren",
+                "children": {}
+              }
+            }
+          },
+          "!qLxKWSCxyrQAvUpBSJ:dev.medienhaus.udk-berlin.de": {
+            "id": "!qLxKWSCxyrQAvUpBSJ:dev.medienhaus.udk-berlin.de",
+            "name": "Doktorandencolloquium Musikpädagogik",
+            "children": {}
+          },
+          "!buzvlmmAUYMrDemwyC:dev.medienhaus.udk-berlin.de": {
+            "id": "!buzvlmmAUYMrDemwyC:dev.medienhaus.udk-berlin.de",
+            "name": "Examenscolloquium",
+            "children": {}
+          },
+          "!JpeBNLCqgBiZeIlnvK:dev.medienhaus.udk-berlin.de": {
+            "id": "!JpeBNLCqgBiZeIlnvK:dev.medienhaus.udk-berlin.de",
+            "name": "Examenscolloquium",
+            "children": {}
+          },
+          "!szlZSOfazyqWsvkGeh:dev.medienhaus.udk-berlin.de": {
+            "id": "!szlZSOfazyqWsvkGeh:dev.medienhaus.udk-berlin.de",
+            "name": "Gehörbildung",
+            "children": {}
+          },
+          "!NveariBPbfwSSMOPMU:dev.medienhaus.udk-berlin.de": {
+            "id": "!NveariBPbfwSSMOPMU:dev.medienhaus.udk-berlin.de",
+            "name": "Kolloquium für Examenskandidatinnen und -kandidaten",
+            "children": {}
+          },
+          "!pVZNUtXewtlpYmCunj:dev.medienhaus.udk-berlin.de": {
+            "id": "!pVZNUtXewtlpYmCunj:dev.medienhaus.udk-berlin.de",
+            "name": "Kolloquium zu aktuellen Forschungsfragen",
+            "children": {}
+          },
+          "!cZefmycWdGiQnNnFTU:dev.medienhaus.udk-berlin.de": {
+            "id": "!cZefmycWdGiQnNnFTU:dev.medienhaus.udk-berlin.de",
+            "name": "Kolloquium zu aktuellen Forschungsfragen",
+            "children": {}
+          },
+          "!QxmCHmlpsJyHJrLBZR:dev.medienhaus.udk-berlin.de": {
+            "id": "!QxmCHmlpsJyHJrLBZR:dev.medienhaus.udk-berlin.de",
+            "name": "Kolloquium zu aktuellen Forschungsfragen",
+            "children": {}
+          },
+          "!NuCNAfIOVQDUBtCEbB:dev.medienhaus.udk-berlin.de": {
+            "id": "!NuCNAfIOVQDUBtCEbB:dev.medienhaus.udk-berlin.de",
+            "name": "Musiktheorie \"Das universale Material? Modales Komponieren in Neuer Musik, Jazz und Rock/Pop",
+            "children": {}
+          },
+          "!vkpeXZgfuvZrQiYWyv:dev.medienhaus.udk-berlin.de": {
+            "id": "!vkpeXZgfuvZrQiYWyv:dev.medienhaus.udk-berlin.de",
+            "name": "Populäre und traditionelle Musikkulturen der Karibik",
+            "children": {}
           }
         }
       },
-      "!duhYLqDiAkvAlGxocX:dev.medienhaus.udk-berlin.de": {
-        "id": "!duhYLqDiAkvAlGxocX:dev.medienhaus.udk-berlin.de",
+      "!hIPlcWqpvKFlDafBiW:dev.medienhaus.udk-berlin.de": {
+        "id": "!hIPlcWqpvKFlDafBiW:dev.medienhaus.udk-berlin.de",
         "name": "Studium Generale \"Diversität im Dialog\"",
         "children": {}
       },
-      "!fZZnZujEXfXvatPcTk:dev.medienhaus.udk-berlin.de": {
-        "id": "!fZZnZujEXfXvatPcTk:dev.medienhaus.udk-berlin.de",
+      "!kEibRmyuAgDrWYRMbk:dev.medienhaus.udk-berlin.de": {
+        "id": "!kEibRmyuAgDrWYRMbk:dev.medienhaus.udk-berlin.de",
         "name": "Fakultät Gestaltung",
         "children": {
-          "!xfblTSfbTQtBBlXzCr:dev.medienhaus.udk-berlin.de": {
-            "id": "!xfblTSfbTQtBBlXzCr:dev.medienhaus.udk-berlin.de",
+          "!sSXGSbuZoiyKktCGna:dev.medienhaus.udk-berlin.de": {
+            "id": "!sSXGSbuZoiyKktCGna:dev.medienhaus.udk-berlin.de",
             "name": "Bachelor Architektur",
             "children": {
-              "!unVEFXakfbqUdfbDHE:dev.medienhaus.udk-berlin.de": {
-                "id": "!unVEFXakfbqUdfbDHE:dev.medienhaus.udk-berlin.de",
+              "!CaPTwuNUczOwQDwGkf:dev.medienhaus.udk-berlin.de": {
+                "id": "!CaPTwuNUczOwQDwGkf:dev.medienhaus.udk-berlin.de",
                 "name": "„Eine Philosophie der Ernährung und der Umwelt“",
                 "children": {}
               },
-              "!MoczXjruUpaWMavCCX:dev.medienhaus.udk-berlin.de": {
-                "id": "!MoczXjruUpaWMavCCX:dev.medienhaus.udk-berlin.de",
+              "!FQeBvBymlprJvfWEKv:dev.medienhaus.udk-berlin.de": {
+                "id": "!FQeBvBymlprJvfWEKv:dev.medienhaus.udk-berlin.de",
                 "name": "CAD II ArchiCad - Architekturdarstellung",
                 "children": {}
               },
-              "!nBSRevFumGVrAlIvGh:dev.medienhaus.udk-berlin.de": {
-                "id": "!nBSRevFumGVrAlIvGh:dev.medienhaus.udk-berlin.de",
+              "!bgFhDcndesznRnsJzB:dev.medienhaus.udk-berlin.de": {
+                "id": "!bgFhDcndesznRnsJzB:dev.medienhaus.udk-berlin.de",
                 "name": "CAD II - digitale Veranstaltung",
                 "children": {}
               },
-              "!sVCkOFbkijdSJklrls:dev.medienhaus.udk-berlin.de": {
-                "id": "!sVCkOFbkijdSJklrls:dev.medienhaus.udk-berlin.de",
+              "!cQmbBygvwMZoqgkRKA:dev.medienhaus.udk-berlin.de": {
+                "id": "!cQmbBygvwMZoqgkRKA:dev.medienhaus.udk-berlin.de",
                 "name": "Dekoloniale Rauminspektion",
                 "children": {}
               },
-              "!hJoWbILwRDKlCRyJqF:dev.medienhaus.udk-berlin.de": {
-                "id": "!hJoWbILwRDKlCRyJqF:dev.medienhaus.udk-berlin.de",
+              "!qAQAGNeSPueQByzHNh:dev.medienhaus.udk-berlin.de": {
+                "id": "!qAQAGNeSPueQByzHNh:dev.medienhaus.udk-berlin.de",
                 "name": "Die 80er in Deutschland: \"And the age of our innocence is somewhere in the garden.\" Eine Bestandsaufnahme",
                 "children": {}
               },
-              "!rbzDLidnSWATbFscGs:dev.medienhaus.udk-berlin.de": {
-                "id": "!rbzDLidnSWATbFscGs:dev.medienhaus.udk-berlin.de",
+              "!xFZslybyLBvYlwBgPh:dev.medienhaus.udk-berlin.de": {
+                "id": "!xFZslybyLBvYlwBgPh:dev.medienhaus.udk-berlin.de",
                 "name": "Do what you want",
                 "children": {}
               },
-              "!FBZIGTlBahMLpFkGzc:dev.medienhaus.udk-berlin.de": {
-                "id": "!FBZIGTlBahMLpFkGzc:dev.medienhaus.udk-berlin.de",
+              "!kdTblgASquXELclydE:dev.medienhaus.udk-berlin.de": {
+                "id": "!kdTblgASquXELclydE:dev.medienhaus.udk-berlin.de",
                 "name": "Entwurfsprojekt Sobejano",
                 "children": {}
               },
-              "!bkDcFrpXJMdhXxUjZh:dev.medienhaus.udk-berlin.de": {
-                "id": "!bkDcFrpXJMdhXxUjZh:dev.medienhaus.udk-berlin.de",
+              "!SiBvegXBpVhEAuGFWK:dev.medienhaus.udk-berlin.de": {
+                "id": "!SiBvegXBpVhEAuGFWK:dev.medienhaus.udk-berlin.de",
                 "name": "Grundkurs Architekturgeschichte und -Theorie Modul 12/14 BA und 03/05 MA",
                 "children": {}
               },
-              "!xxeUnyaKAgNjCtonKR:dev.medienhaus.udk-berlin.de": {
-                "id": "!xxeUnyaKAgNjCtonKR:dev.medienhaus.udk-berlin.de",
+              "!UEouhIajOHYPoyZgcW:dev.medienhaus.udk-berlin.de": {
+                "id": "!UEouhIajOHYPoyZgcW:dev.medienhaus.udk-berlin.de",
                 "name": "Grundkurs II: Architektur, Raum, Gesellschaft - Kulturwissenschaftliche Grundlagen",
                 "children": {}
               },
-              "!FbQFWQUjatYFbjwuIx:dev.medienhaus.udk-berlin.de": {
-                "id": "!FbQFWQUjatYFbjwuIx:dev.medienhaus.udk-berlin.de",
+              "!dvtDjKvRdbeIAnRCvJ:dev.medienhaus.udk-berlin.de": {
+                "id": "!dvtDjKvRdbeIAnRCvJ:dev.medienhaus.udk-berlin.de",
                 "name": "Grundlagen des Entwerfens",
                 "children": {}
               },
-              "!vQUcgcpPnnyTfjcCdl:dev.medienhaus.udk-berlin.de": {
-                "id": "!vQUcgcpPnnyTfjcCdl:dev.medienhaus.udk-berlin.de",
+              "!cqjRpIzmtnGLbiPIoO:dev.medienhaus.udk-berlin.de": {
+                "id": "!cqjRpIzmtnGLbiPIoO:dev.medienhaus.udk-berlin.de",
                 "name": "Grundlagen und Praxis der Darstellung",
                 "children": {}
               },
-              "!yijSWLzpIAxqnXEDqk:dev.medienhaus.udk-berlin.de": {
-                "id": "!yijSWLzpIAxqnXEDqk:dev.medienhaus.udk-berlin.de",
+              "!fLBfJfBBTBuJDKhNgB:dev.medienhaus.udk-berlin.de": {
+                "id": "!fLBfJfBBTBuJDKhNgB:dev.medienhaus.udk-berlin.de",
                 "name": "Land, Ressourcen und Immobilien: Kritische Eigentumsdiskurse in Architektur und Kunst",
                 "children": {}
               },
-              "!vpHZTqDucjYyEvDVwz:dev.medienhaus.udk-berlin.de": {
-                "id": "!vpHZTqDucjYyEvDVwz:dev.medienhaus.udk-berlin.de",
+              "!kBSvIKroEyieZQFmLi:dev.medienhaus.udk-berlin.de": {
+                "id": "!kBSvIKroEyieZQFmLi:dev.medienhaus.udk-berlin.de",
                 "name": "Quellentexte der Architekturtheorie. Von der Antike bis zum Klassizismus.",
                 "children": {}
               },
-              "!HbeaCmaJEMFQYoxcjV:dev.medienhaus.udk-berlin.de": {
-                "id": "!HbeaCmaJEMFQYoxcjV:dev.medienhaus.udk-berlin.de",
+              "!UGSDyxAuTkLXbbwXIF:dev.medienhaus.udk-berlin.de": {
+                "id": "!UGSDyxAuTkLXbbwXIF:dev.medienhaus.udk-berlin.de",
                 "name": "Rückzug in die Welt.",
                 "children": {}
               },
-              "!GZQkaTDgGLTxtBIgBO:dev.medienhaus.udk-berlin.de": {
-                "id": "!GZQkaTDgGLTxtBIgBO:dev.medienhaus.udk-berlin.de",
+              "!CKddDMlNmVEczgOgco:dev.medienhaus.udk-berlin.de": {
+                "id": "!CKddDMlNmVEczgOgco:dev.medienhaus.udk-berlin.de",
                 "name": "studio raumproduktion: How Together",
                 "children": {}
               },
-              "!iBrMcwGStERrSqErGE:dev.medienhaus.udk-berlin.de": {
-                "id": "!iBrMcwGStERrSqErGE:dev.medienhaus.udk-berlin.de",
+              "!WVmVTATahkEcEWsglD:dev.medienhaus.udk-berlin.de": {
+                "id": "!WVmVTATahkEcEWsglD:dev.medienhaus.udk-berlin.de",
                 "name": "Über Pflanzen in Kunst und Architektur",
                 "children": {}
               }
             }
           },
-          "!cVcoAoVdxvSKQwGSwT:dev.medienhaus.udk-berlin.de": {
-            "id": "!cVcoAoVdxvSKQwGSwT:dev.medienhaus.udk-berlin.de",
+          "!qBosJPrBmSDXHnBAaH:dev.medienhaus.udk-berlin.de": {
+            "id": "!qBosJPrBmSDXHnBAaH:dev.medienhaus.udk-berlin.de",
             "name": "Master Architektur",
             "children": {
-              "!unVEFXakfbqUdfbDHE:dev.medienhaus.udk-berlin.de": {
-                "id": "!unVEFXakfbqUdfbDHE:dev.medienhaus.udk-berlin.de",
+              "!CaPTwuNUczOwQDwGkf:dev.medienhaus.udk-berlin.de": {
+                "id": "!CaPTwuNUczOwQDwGkf:dev.medienhaus.udk-berlin.de",
                 "name": "„Eine Philosophie der Ernährung und der Umwelt“",
                 "children": {}
               },
-              "!sVCkOFbkijdSJklrls:dev.medienhaus.udk-berlin.de": {
-                "id": "!sVCkOFbkijdSJklrls:dev.medienhaus.udk-berlin.de",
+              "!cQmbBygvwMZoqgkRKA:dev.medienhaus.udk-berlin.de": {
+                "id": "!cQmbBygvwMZoqgkRKA:dev.medienhaus.udk-berlin.de",
                 "name": "Dekoloniale Rauminspektion",
                 "children": {}
               },
-              "!hJoWbILwRDKlCRyJqF:dev.medienhaus.udk-berlin.de": {
-                "id": "!hJoWbILwRDKlCRyJqF:dev.medienhaus.udk-berlin.de",
+              "!qAQAGNeSPueQByzHNh:dev.medienhaus.udk-berlin.de": {
+                "id": "!qAQAGNeSPueQByzHNh:dev.medienhaus.udk-berlin.de",
                 "name": "Die 80er in Deutschland: \"And the age of our innocence is somewhere in the garden.\" Eine Bestandsaufnahme",
                 "children": {}
               },
-              "!rbzDLidnSWATbFscGs:dev.medienhaus.udk-berlin.de": {
-                "id": "!rbzDLidnSWATbFscGs:dev.medienhaus.udk-berlin.de",
+              "!xFZslybyLBvYlwBgPh:dev.medienhaus.udk-berlin.de": {
+                "id": "!xFZslybyLBvYlwBgPh:dev.medienhaus.udk-berlin.de",
                 "name": "Do what you want",
                 "children": {}
               },
-              "!FBZIGTlBahMLpFkGzc:dev.medienhaus.udk-berlin.de": {
-                "id": "!FBZIGTlBahMLpFkGzc:dev.medienhaus.udk-berlin.de",
+              "!kdTblgASquXELclydE:dev.medienhaus.udk-berlin.de": {
+                "id": "!kdTblgASquXELclydE:dev.medienhaus.udk-berlin.de",
                 "name": "Entwurfsprojekt Sobejano",
                 "children": {}
               },
-              "!yijSWLzpIAxqnXEDqk:dev.medienhaus.udk-berlin.de": {
-                "id": "!yijSWLzpIAxqnXEDqk:dev.medienhaus.udk-berlin.de",
+              "!fLBfJfBBTBuJDKhNgB:dev.medienhaus.udk-berlin.de": {
+                "id": "!fLBfJfBBTBuJDKhNgB:dev.medienhaus.udk-berlin.de",
                 "name": "Land, Ressourcen und Immobilien: Kritische Eigentumsdiskurse in Architektur und Kunst",
                 "children": {}
               },
-              "!vpHZTqDucjYyEvDVwz:dev.medienhaus.udk-berlin.de": {
-                "id": "!vpHZTqDucjYyEvDVwz:dev.medienhaus.udk-berlin.de",
+              "!kBSvIKroEyieZQFmLi:dev.medienhaus.udk-berlin.de": {
+                "id": "!kBSvIKroEyieZQFmLi:dev.medienhaus.udk-berlin.de",
                 "name": "Quellentexte der Architekturtheorie. Von der Antike bis zum Klassizismus.",
                 "children": {}
               },
-              "!HbeaCmaJEMFQYoxcjV:dev.medienhaus.udk-berlin.de": {
-                "id": "!HbeaCmaJEMFQYoxcjV:dev.medienhaus.udk-berlin.de",
+              "!UGSDyxAuTkLXbbwXIF:dev.medienhaus.udk-berlin.de": {
+                "id": "!UGSDyxAuTkLXbbwXIF:dev.medienhaus.udk-berlin.de",
                 "name": "Rückzug in die Welt.",
                 "children": {}
               },
-              "!GZQkaTDgGLTxtBIgBO:dev.medienhaus.udk-berlin.de": {
-                "id": "!GZQkaTDgGLTxtBIgBO:dev.medienhaus.udk-berlin.de",
+              "!CKddDMlNmVEczgOgco:dev.medienhaus.udk-berlin.de": {
+                "id": "!CKddDMlNmVEczgOgco:dev.medienhaus.udk-berlin.de",
                 "name": "studio raumproduktion: How Together",
                 "children": {}
               },
-              "!iBrMcwGStERrSqErGE:dev.medienhaus.udk-berlin.de": {
-                "id": "!iBrMcwGStERrSqErGE:dev.medienhaus.udk-berlin.de",
+              "!WVmVTATahkEcEWsglD:dev.medienhaus.udk-berlin.de": {
+                "id": "!WVmVTATahkEcEWsglD:dev.medienhaus.udk-berlin.de",
                 "name": "Über Pflanzen in Kunst und Architektur",
                 "children": {}
               }
             }
           },
-          "!ZBFjBTqqDFjzTPRJZk:dev.medienhaus.udk-berlin.de": {
-            "id": "!ZBFjBTqqDFjzTPRJZk:dev.medienhaus.udk-berlin.de",
+          "!yMSprQhqWHuJlxyjvR:dev.medienhaus.udk-berlin.de": {
+            "id": "!yMSprQhqWHuJlxyjvR:dev.medienhaus.udk-berlin.de",
             "name": "Bachelor Design",
             "children": {
-              "!zTFPmwThuYOgfiFwnV:dev.medienhaus.udk-berlin.de": {
-                "id": "!zTFPmwThuYOgfiFwnV:dev.medienhaus.udk-berlin.de",
+              "!MKJeZZzMqGoHetlEaG:dev.medienhaus.udk-berlin.de": {
+                "id": "!MKJeZZzMqGoHetlEaG:dev.medienhaus.udk-berlin.de",
                 "name": "98% Polyester 2% Cotton",
                 "children": {}
               },
-              "!fNBBmWGArfnqaMnYhQ:dev.medienhaus.udk-berlin.de": {
-                "id": "!fNBBmWGArfnqaMnYhQ:dev.medienhaus.udk-berlin.de",
+              "!ruYFkLakLYjWChLhBp:dev.medienhaus.udk-berlin.de": {
+                "id": "!ruYFkLakLYjWChLhBp:dev.medienhaus.udk-berlin.de",
                 "name": "Artisanal Week",
                 "children": {}
               },
-              "!mjDOWWmDDLukhzdZAm:dev.medienhaus.udk-berlin.de": {
-                "id": "!mjDOWWmDDLukhzdZAm:dev.medienhaus.udk-berlin.de",
+              "!oLTYFglPMeDFNsqsge:dev.medienhaus.udk-berlin.de": {
+                "id": "!oLTYFglPMeDFNsqsge:dev.medienhaus.udk-berlin.de",
                 "name": "BA Colloqium Technologie",
                 "children": {}
               },
-              "!EYGCnQuuuomDcvmrcx:dev.medienhaus.udk-berlin.de": {
-                "id": "!EYGCnQuuuomDcvmrcx:dev.medienhaus.udk-berlin.de",
+              "!MMbbpJqtubFOxFcIzF:dev.medienhaus.udk-berlin.de": {
+                "id": "!MMbbpJqtubFOxFcIzF:dev.medienhaus.udk-berlin.de",
                 "name": "Basisprojekt Modedesign: HOODIE GUT, ALLES GUT",
                 "children": {}
               },
-              "!SjoOPPMAJAexkNjhPE:dev.medienhaus.udk-berlin.de": {
-                "id": "!SjoOPPMAJAexkNjhPE:dev.medienhaus.udk-berlin.de",
+              "!RoBWSpoxGBgKEaXwMe:dev.medienhaus.udk-berlin.de": {
+                "id": "!RoBWSpoxGBgKEaXwMe:dev.medienhaus.udk-berlin.de",
                 "name": "Basisprojekt Produktdesign: fixperts in quarantine",
                 "children": {}
               },
-              "!AsqxlZOAPNMHcNrcqb:dev.medienhaus.udk-berlin.de": {
-                "id": "!AsqxlZOAPNMHcNrcqb:dev.medienhaus.udk-berlin.de",
+              "!JdHCPRfTDeTLGGZYyf:dev.medienhaus.udk-berlin.de": {
+                "id": "!JdHCPRfTDeTLGGZYyf:dev.medienhaus.udk-berlin.de",
                 "name": "CAD I Mode Pflichtseminar 2. Sem.",
                 "children": {}
               },
-              "!gcxRNqYZJdhlxLzIyB:dev.medienhaus.udk-berlin.de": {
-                "id": "!gcxRNqYZJdhlxLzIyB:dev.medienhaus.udk-berlin.de",
+              "!ZYhUXKdxejJvqpojwU:dev.medienhaus.udk-berlin.de": {
+                "id": "!ZYhUXKdxejJvqpojwU:dev.medienhaus.udk-berlin.de",
                 "name": "Craft Utopia",
                 "children": {}
               },
-              "!CNJshZuUtFckvBnAyp:dev.medienhaus.udk-berlin.de": {
-                "id": "!CNJshZuUtFckvBnAyp:dev.medienhaus.udk-berlin.de",
+              "!ivQZifNReiEwklKHBt:dev.medienhaus.udk-berlin.de": {
+                "id": "!ivQZifNReiEwklKHBt:dev.medienhaus.udk-berlin.de",
                 "name": "Darstellungstechniken Zeichnen Mode",
                 "children": {}
               },
-              "!uhHImDXrJIdNCGCGiI:dev.medienhaus.udk-berlin.de": {
-                "id": "!uhHImDXrJIdNCGCGiI:dev.medienhaus.udk-berlin.de",
+              "!xYUAhhWTnORQYTPCzL:dev.medienhaus.udk-berlin.de": {
+                "id": "!xYUAhhWTnORQYTPCzL:dev.medienhaus.udk-berlin.de",
                 "name": "Das Portfolioprojekt",
                 "children": {}
               },
-              "!MkVvmAUVYyCgcCZthN:dev.medienhaus.udk-berlin.de": {
-                "id": "!MkVvmAUVYyCgcCZthN:dev.medienhaus.udk-berlin.de",
+              "!EMKuTNDDiZOYpLylAe:dev.medienhaus.udk-berlin.de": {
+                "id": "!EMKuTNDDiZOYpLylAe:dev.medienhaus.udk-berlin.de",
                 "name": "Designtechniken 2: Einführung Strick",
                 "children": {}
               },
-              "!owufEFkgPWeVfMMtQA:dev.medienhaus.udk-berlin.de": {
-                "id": "!owufEFkgPWeVfMMtQA:dev.medienhaus.udk-berlin.de",
+              "!cMMQktLqBSjAqAPtat:dev.medienhaus.udk-berlin.de": {
+                "id": "!cMMQktLqBSjAqAPtat:dev.medienhaus.udk-berlin.de",
                 "name": "Designtechniken/Mode 1: Schnittgestaltung",
                 "children": {}
               },
-              "!uizWiRdBIBFXVwqmZT:dev.medienhaus.udk-berlin.de": {
-                "id": "!uizWiRdBIBFXVwqmZT:dev.medienhaus.udk-berlin.de",
+              "!arFwqNHCsWlugsxRTI:dev.medienhaus.udk-berlin.de": {
+                "id": "!arFwqNHCsWlugsxRTI:dev.medienhaus.udk-berlin.de",
                 "name": "Designtechniken Modedesign: Schnittkonstruktion",
                 "children": {}
               },
-              "!YOaTOdatNyTjXWJDrD:dev.medienhaus.udk-berlin.de": {
-                "id": "!YOaTOdatNyTjXWJDrD:dev.medienhaus.udk-berlin.de",
+              "!cBGotpJfzRvApNYHJw:dev.medienhaus.udk-berlin.de": {
+                "id": "!cBGotpJfzRvApNYHJw:dev.medienhaus.udk-berlin.de",
                 "name": "Essay als Form – in Kunst, Literatur, Ausstellung",
                 "children": {}
               },
-              "!hxRoGDohHwTXUSNsLj:dev.medienhaus.udk-berlin.de": {
-                "id": "!hxRoGDohHwTXUSNsLj:dev.medienhaus.udk-berlin.de",
+              "!pSysPNzxvdrPPGCMjU:dev.medienhaus.udk-berlin.de": {
+                "id": "!pSysPNzxvdrPPGCMjU:dev.medienhaus.udk-berlin.de",
                 "name": "GETTING THERE. ANKOMMEN!",
                 "children": {}
               },
-              "!kDoxlmBDWrUbQRzudo:dev.medienhaus.udk-berlin.de": {
-                "id": "!kDoxlmBDWrUbQRzudo:dev.medienhaus.udk-berlin.de",
+              "!jGOQKdCddGjqQvihac:dev.medienhaus.udk-berlin.de": {
+                "id": "!jGOQKdCddGjqQvihac:dev.medienhaus.udk-berlin.de",
                 "name": "Grundpraktikum",
                 "children": {}
               },
-              "!hEDMVIgAtHlYlScqWK:dev.medienhaus.udk-berlin.de": {
-                "id": "!hEDMVIgAtHlYlScqWK:dev.medienhaus.udk-berlin.de",
+              "!YdMAmSNDRZGpcCiuwF:dev.medienhaus.udk-berlin.de": {
+                "id": "!YdMAmSNDRZGpcCiuwF:dev.medienhaus.udk-berlin.de",
                 "name": "Grundpraktikum",
                 "children": {}
               },
-              "!xFHItljFrgXlGYKvvi:dev.medienhaus.udk-berlin.de": {
-                "id": "!xFHItljFrgXlGYKvvi:dev.medienhaus.udk-berlin.de",
+              "!IsuTJBxYSdvzysLYlR:dev.medienhaus.udk-berlin.de": {
+                "id": "!IsuTJBxYSdvzysLYlR:dev.medienhaus.udk-berlin.de",
                 "name": "ICH BIN AUCH DIE DIE SCHON DA WAREN",
                 "children": {}
               },
-              "!dJYEbJeOhlzGWuyPbp:dev.medienhaus.udk-berlin.de": {
-                "id": "!dJYEbJeOhlzGWuyPbp:dev.medienhaus.udk-berlin.de",
+              "!LJLWZLczYaRahsMHVW:dev.medienhaus.udk-berlin.de": {
+                "id": "!LJLWZLczYaRahsMHVW:dev.medienhaus.udk-berlin.de",
                 "name": "In Bewegung / Interaktive Systeme I",
                 "children": {}
               },
-              "!DrRTQFJZdfUbnbuhHe:dev.medienhaus.udk-berlin.de": {
-                "id": "!DrRTQFJZdfUbnbuhHe:dev.medienhaus.udk-berlin.de",
+              "!vrWOYhmtpcvuwNNyiw:dev.medienhaus.udk-berlin.de": {
+                "id": "!vrWOYhmtpcvuwNNyiw:dev.medienhaus.udk-berlin.de",
                 "name": "LUX (Live!)",
                 "children": {}
               },
-              "!ganlAmlmGFGrbGmJSm:dev.medienhaus.udk-berlin.de": {
-                "id": "!ganlAmlmGFGrbGmJSm:dev.medienhaus.udk-berlin.de",
+              "!wthMsroTsRBjpPTAgl:dev.medienhaus.udk-berlin.de": {
+                "id": "!wthMsroTsRBjpPTAgl:dev.medienhaus.udk-berlin.de",
                 "name": "MA Colloqium Technologie",
                 "children": {}
               },
-              "!CINKdpmNXaGyUThegP:dev.medienhaus.udk-berlin.de": {
-                "id": "!CINKdpmNXaGyUThegP:dev.medienhaus.udk-berlin.de",
+              "!VBPIvHDkiHSiBbaBPS:dev.medienhaus.udk-berlin.de": {
+                "id": "!VBPIvHDkiHSiBbaBPS:dev.medienhaus.udk-berlin.de",
                 "name": "Materialien, Halbzeuge, Fertigung 2",
                 "children": {}
               },
-              "!jyHHpflPeSziehjYxP:dev.medienhaus.udk-berlin.de": {
-                "id": "!jyHHpflPeSziehjYxP:dev.medienhaus.udk-berlin.de",
+              "!aPiOEOjsBmzScrsqXl:dev.medienhaus.udk-berlin.de": {
+                "id": "!aPiOEOjsBmzScrsqXl:dev.medienhaus.udk-berlin.de",
                 "name": "Modegeschichte 2: MODE.KULTUR.ZEIT",
                 "children": {}
               },
-              "!MWBvzfFLzRepEDXAaT:dev.medienhaus.udk-berlin.de": {
-                "id": "!MWBvzfFLzRepEDXAaT:dev.medienhaus.udk-berlin.de",
+              "!JaMKkFzFCKmltkjqwy:dev.medienhaus.udk-berlin.de": {
+                "id": "!JaMKkFzFCKmltkjqwy:dev.medienhaus.udk-berlin.de",
                 "name": "Modetheorie 2: Die Wahrnehmungsstörung der Mode: Vom Produkt zum Prozess",
                 "children": {}
               },
-              "!EjDvazMnEMurVzqGrJ:dev.medienhaus.udk-berlin.de": {
-                "id": "!EjDvazMnEMurVzqGrJ:dev.medienhaus.udk-berlin.de",
+              "!GdSYnBOkUSmmgQyuiH:dev.medienhaus.udk-berlin.de": {
+                "id": "!GdSYnBOkUSmmgQyuiH:dev.medienhaus.udk-berlin.de",
                 "name": "Modul 12: Technologie und Konstruktion 1, Hauptseminar",
                 "children": {}
               },
-              "!uXIXcwhlDALJArIVuq:dev.medienhaus.udk-berlin.de": {
-                "id": "!uXIXcwhlDALJArIVuq:dev.medienhaus.udk-berlin.de",
+              "!pDAUvJKkhfaACUegFG:dev.medienhaus.udk-berlin.de": {
+                "id": "!pDAUvJKkhfaACUegFG:dev.medienhaus.udk-berlin.de",
                 "name": "Modul 3: ALTE STOFFE & NEUE MATERIALIEN",
                 "children": {}
               },
-              "!JufHffslhYWzYLKiGQ:dev.medienhaus.udk-berlin.de": {
-                "id": "!JufHffslhYWzYLKiGQ:dev.medienhaus.udk-berlin.de",
+              "!eGmfaaWdQPihskzOAG:dev.medienhaus.udk-berlin.de": {
+                "id": "!eGmfaaWdQPihskzOAG:dev.medienhaus.udk-berlin.de",
                 "name": "Modul 3: Technologie und Konstruktion 1: Konstruktion 2 + CAD 1",
                 "children": {}
               },
-              "!LfnMpjsUOfcDSGjqhn:dev.medienhaus.udk-berlin.de": {
-                "id": "!LfnMpjsUOfcDSGjqhn:dev.medienhaus.udk-berlin.de",
+              "!uVtcMEqkOcBRCqVGca:dev.medienhaus.udk-berlin.de": {
+                "id": "!uVtcMEqkOcBRCqVGca:dev.medienhaus.udk-berlin.de",
                 "name": "Modul 7: Konstruktion 4, CAD-Anteil, Produktdesign",
                 "children": {}
               },
-              "!CDZaNUDpTHVMrJdstC:dev.medienhaus.udk-berlin.de": {
-                "id": "!CDZaNUDpTHVMrJdstC:dev.medienhaus.udk-berlin.de",
+              "!pSavsNEEBfckxMZfTx:dev.medienhaus.udk-berlin.de": {
+                "id": "!pSavsNEEBfckxMZfTx:dev.medienhaus.udk-berlin.de",
                 "name": "Modul 7: Technologie und Konstruktion 2: Konstruktion 4",
                 "children": {}
               },
-              "!aJiCEcYxBBlkwAulwe:dev.medienhaus.udk-berlin.de": {
-                "id": "!aJiCEcYxBBlkwAulwe:dev.medienhaus.udk-berlin.de",
+              "!DRPCPhkuLDJzuyZfJD:dev.medienhaus.udk-berlin.de": {
+                "id": "!DRPCPhkuLDJzuyZfJD:dev.medienhaus.udk-berlin.de",
                 "name": "Neobionten vol. II",
                 "children": {}
               },
-              "!bdMfmPDdJUpZaGNhlY:dev.medienhaus.udk-berlin.de": {
-                "id": "!bdMfmPDdJUpZaGNhlY:dev.medienhaus.udk-berlin.de",
+              "!IxqcLMiFMelcseoval:dev.medienhaus.udk-berlin.de": {
+                "id": "!IxqcLMiFMelcseoval:dev.medienhaus.udk-berlin.de",
                 "name": "Radikalität",
                 "children": {}
               },
-              "!zNdFuoabOJPRvpBVNv:dev.medienhaus.udk-berlin.de": {
-                "id": "!zNdFuoabOJPRvpBVNv:dev.medienhaus.udk-berlin.de",
+              "!AYirvGGnWCwIEiRJiu:dev.medienhaus.udk-berlin.de": {
+                "id": "!AYirvGGnWCwIEiRJiu:dev.medienhaus.udk-berlin.de",
                 "name": "Schreiben als künstlerisch-forschende Praxis",
                 "children": {}
               },
-              "!CejNZqeFTIAyyGRCUq:dev.medienhaus.udk-berlin.de": {
-                "id": "!CejNZqeFTIAyyGRCUq:dev.medienhaus.udk-berlin.de",
+              "!PTtfTukIexOAJGGYeR:dev.medienhaus.udk-berlin.de": {
+                "id": "!PTtfTukIexOAJGGYeR:dev.medienhaus.udk-berlin.de",
                 "name": "Signaturen",
                 "children": {}
               },
-              "!nPPyqJtbziTifZChAV:dev.medienhaus.udk-berlin.de": {
-                "id": "!nPPyqJtbziTifZChAV:dev.medienhaus.udk-berlin.de",
+              "!LroqeTIfPAzCoDbNCC:dev.medienhaus.udk-berlin.de": {
+                "id": "!LroqeTIfPAzCoDbNCC:dev.medienhaus.udk-berlin.de",
                 "name": "The design of culinary delight.",
                 "children": {}
               },
-              "!NcOdkyQZnbZoAuWHJf:dev.medienhaus.udk-berlin.de": {
-                "id": "!NcOdkyQZnbZoAuWHJf:dev.medienhaus.udk-berlin.de",
+              "!DzuqFpHSRwtcWSFKNA:dev.medienhaus.udk-berlin.de": {
+                "id": "!DzuqFpHSRwtcWSFKNA:dev.medienhaus.udk-berlin.de",
                 "name": "True Colour",
                 "children": {}
               },
-              "!xgrwSyBOvnZFXcjyAA:dev.medienhaus.udk-berlin.de": {
-                "id": "!xgrwSyBOvnZFXcjyAA:dev.medienhaus.udk-berlin.de",
+              "!NhJseZDxlSuXxyNLsA:dev.medienhaus.udk-berlin.de": {
+                "id": "!NhJseZDxlSuXxyNLsA:dev.medienhaus.udk-berlin.de",
                 "name": "Virtual Design Research Colloquium: „Outside the Bubble“",
                 "children": {}
               },
-              "!slXzuHUNxOhFjVYNsR:dev.medienhaus.udk-berlin.de": {
-                "id": "!slXzuHUNxOhFjVYNsR:dev.medienhaus.udk-berlin.de",
+              "!qnlWIyJknksXJbLiFR:dev.medienhaus.udk-berlin.de": {
+                "id": "!qnlWIyJknksXJbLiFR:dev.medienhaus.udk-berlin.de",
                 "name": "Was bedeutet das alles? Transformationen des Design nach 1945",
                 "children": {}
               },
-              "!VadfIsCOOXyJYsfaiw:dev.medienhaus.udk-berlin.de": {
-                "id": "!VadfIsCOOXyJYsfaiw:dev.medienhaus.udk-berlin.de",
+              "!BokzaLpPRkXmMsaguA:dev.medienhaus.udk-berlin.de": {
+                "id": "!BokzaLpPRkXmMsaguA:dev.medienhaus.udk-berlin.de",
                 "name": "Zukunftsforschung",
                 "children": {}
               }
             }
           },
-          "!RhrDfMvhfWLmZQKXju:dev.medienhaus.udk-berlin.de": {
-            "id": "!RhrDfMvhfWLmZQKXju:dev.medienhaus.udk-berlin.de",
+          "!droAPRjLIpTRiMhUqc:dev.medienhaus.udk-berlin.de": {
+            "id": "!droAPRjLIpTRiMhUqc:dev.medienhaus.udk-berlin.de",
             "name": "Master Design",
             "children": {
-              "!YOaTOdatNyTjXWJDrD:dev.medienhaus.udk-berlin.de": {
-                "id": "!YOaTOdatNyTjXWJDrD:dev.medienhaus.udk-berlin.de",
+              "!cBGotpJfzRvApNYHJw:dev.medienhaus.udk-berlin.de": {
+                "id": "!cBGotpJfzRvApNYHJw:dev.medienhaus.udk-berlin.de",
                 "name": "Essay als Form – in Kunst, Literatur, Ausstellung",
                 "children": {}
               },
-              "!hxRoGDohHwTXUSNsLj:dev.medienhaus.udk-berlin.de": {
-                "id": "!hxRoGDohHwTXUSNsLj:dev.medienhaus.udk-berlin.de",
+              "!pSysPNzxvdrPPGCMjU:dev.medienhaus.udk-berlin.de": {
+                "id": "!pSysPNzxvdrPPGCMjU:dev.medienhaus.udk-berlin.de",
                 "name": "GETTING THERE. ANKOMMEN!",
                 "children": {}
               },
-              "!ganlAmlmGFGrbGmJSm:dev.medienhaus.udk-berlin.de": {
-                "id": "!ganlAmlmGFGrbGmJSm:dev.medienhaus.udk-berlin.de",
+              "!wthMsroTsRBjpPTAgl:dev.medienhaus.udk-berlin.de": {
+                "id": "!wthMsroTsRBjpPTAgl:dev.medienhaus.udk-berlin.de",
                 "name": "MA Colloqium Technologie",
                 "children": {}
               },
-              "!iUVlJBDnbdUaIivPIM:dev.medienhaus.udk-berlin.de": {
-                "id": "!iUVlJBDnbdUaIivPIM:dev.medienhaus.udk-berlin.de",
+              "!luRmPnLHCVWqwvhiFX:dev.medienhaus.udk-berlin.de": {
+                "id": "!luRmPnLHCVWqwvhiFX:dev.medienhaus.udk-berlin.de",
                 "name": "Masterkolloquium",
                 "children": {}
               },
-              "!zNdFuoabOJPRvpBVNv:dev.medienhaus.udk-berlin.de": {
-                "id": "!zNdFuoabOJPRvpBVNv:dev.medienhaus.udk-berlin.de",
+              "!AYirvGGnWCwIEiRJiu:dev.medienhaus.udk-berlin.de": {
+                "id": "!AYirvGGnWCwIEiRJiu:dev.medienhaus.udk-berlin.de",
                 "name": "Schreiben als künstlerisch-forschende Praxis",
                 "children": {}
               },
-              "!CejNZqeFTIAyyGRCUq:dev.medienhaus.udk-berlin.de": {
-                "id": "!CejNZqeFTIAyyGRCUq:dev.medienhaus.udk-berlin.de",
+              "!PTtfTukIexOAJGGYeR:dev.medienhaus.udk-berlin.de": {
+                "id": "!PTtfTukIexOAJGGYeR:dev.medienhaus.udk-berlin.de",
                 "name": "Signaturen",
                 "children": {}
               },
-              "!VadfIsCOOXyJYsfaiw:dev.medienhaus.udk-berlin.de": {
-                "id": "!VadfIsCOOXyJYsfaiw:dev.medienhaus.udk-berlin.de",
+              "!BokzaLpPRkXmMsaguA:dev.medienhaus.udk-berlin.de": {
+                "id": "!BokzaLpPRkXmMsaguA:dev.medienhaus.udk-berlin.de",
                 "name": "Zukunftsforschung",
                 "children": {}
               }
             }
           },
-          "!uGvvbDGAJTuSoxXycQ:dev.medienhaus.udk-berlin.de": {
-            "id": "!uGvvbDGAJTuSoxXycQ:dev.medienhaus.udk-berlin.de",
+          "!sObcfWhxNMmGTIPrbJ:dev.medienhaus.udk-berlin.de": {
+            "id": "!sObcfWhxNMmGTIPrbJ:dev.medienhaus.udk-berlin.de",
             "name": "Institut für Geschichte und Theorie der Gestaltung",
             "children": {}
           },
-          "!SLSKuIIMuUyRqZovMY:dev.medienhaus.udk-berlin.de": {
-            "id": "!SLSKuIIMuUyRqZovMY:dev.medienhaus.udk-berlin.de",
+          "!vzexTODwLXhcLPFZMx:dev.medienhaus.udk-berlin.de": {
+            "id": "!vzexTODwLXhcLPFZMx:dev.medienhaus.udk-berlin.de",
             "name": "Institut für Architektur und Städtebau",
             "children": {}
           },
-          "!vHSkGZkKHOdmjTIwtL:dev.medienhaus.udk-berlin.de": {
-            "id": "!vHSkGZkKHOdmjTIwtL:dev.medienhaus.udk-berlin.de",
+          "!GaadQaGVuoaXyCofUV:dev.medienhaus.udk-berlin.de": {
+            "id": "!GaadQaGVuoaXyCofUV:dev.medienhaus.udk-berlin.de",
             "name": "Institut für Produkt- und Prozeßgestaltung",
             "children": {}
           },
-          "!GHDblUXjhueQzfIaiI:dev.medienhaus.udk-berlin.de": {
-            "id": "!GHDblUXjhueQzfIaiI:dev.medienhaus.udk-berlin.de",
+          "!NaRIqiZHnyFtyJEObt:dev.medienhaus.udk-berlin.de": {
+            "id": "!NaRIqiZHnyFtyJEObt:dev.medienhaus.udk-berlin.de",
             "name": "Institut für experimentelles Bekleidungs- und Textildesign",
             "children": {}
           },
-          "!KCNwFTBSxzdoHHHFvP:dev.medienhaus.udk-berlin.de": {
-            "id": "!KCNwFTBSxzdoHHHFvP:dev.medienhaus.udk-berlin.de",
+          "!MdygtrKtmyEHwuwgfE:dev.medienhaus.udk-berlin.de": {
+            "id": "!MdygtrKtmyEHwuwgfE:dev.medienhaus.udk-berlin.de",
             "name": "Institut für zeitbasierte Medien",
             "children": {}
           },
-          "!fFXpXvAuBpyFdvRDoJ:dev.medienhaus.udk-berlin.de": {
-            "id": "!fFXpXvAuBpyFdvRDoJ:dev.medienhaus.udk-berlin.de",
+          "!JuWyYJfrcXtnRiXrXX:dev.medienhaus.udk-berlin.de": {
+            "id": "!JuWyYJfrcXtnRiXrXX:dev.medienhaus.udk-berlin.de",
             "name": "Institut für transmediale Gestaltung",
             "children": {}
           },
-          "!tXXEpnCeSsVVRcEGbh:dev.medienhaus.udk-berlin.de": {
-            "id": "!tXXEpnCeSsVVRcEGbh:dev.medienhaus.udk-berlin.de",
+          "!BxvDeaHNSEyAYJMLlY:dev.medienhaus.udk-berlin.de": {
+            "id": "!BxvDeaHNSEyAYJMLlY:dev.medienhaus.udk-berlin.de",
             "name": "Institut für Theorie und Praxis der Kommunikation",
             "children": {}
           },
-          "!WYYsHnETlEDuuWNNJP:dev.medienhaus.udk-berlin.de": {
-            "id": "!WYYsHnETlEDuuWNNJP:dev.medienhaus.udk-berlin.de",
+          "!rfzjCIWiGRcmduqSQv:dev.medienhaus.udk-berlin.de": {
+            "id": "!rfzjCIWiGRcmduqSQv:dev.medienhaus.udk-berlin.de",
             "name": "Design Transfer",
             "children": {}
           },
-          "!vNdNuwtSkUwSmTlVBn:dev.medienhaus.udk-berlin.de": {
-            "id": "!vNdNuwtSkUwSmTlVBn:dev.medienhaus.udk-berlin.de",
+          "!YEnYNKRlHSREceNlMP:dev.medienhaus.udk-berlin.de": {
+            "id": "!YEnYNKRlHSREceNlMP:dev.medienhaus.udk-berlin.de",
             "name": "Bachelor Visuelle Kommunikation",
             "children": {
-              "!yZJUiZZxakWwoTFran:dev.medienhaus.udk-berlin.de": {
-                "id": "!yZJUiZZxakWwoTFran:dev.medienhaus.udk-berlin.de",
+              "!CsJdfphBDJepmQUZyr:dev.medienhaus.udk-berlin.de": {
+                "id": "!CsJdfphBDJepmQUZyr:dev.medienhaus.udk-berlin.de",
                 "name": "Grafikdesign",
                 "children": {
-                  "!iPfbzDIlLaQojZlHdh:dev.medienhaus.udk-berlin.de": {
-                    "id": "!iPfbzDIlLaQojZlHdh:dev.medienhaus.udk-berlin.de",
+                  "!nPUnpWKwIVWaMsglOW:dev.medienhaus.udk-berlin.de": {
+                    "id": "!nPUnpWKwIVWaMsglOW:dev.medienhaus.udk-berlin.de",
                     "name": "LAND-LEBEN - Gestaltung des bewegten Bildes",
                     "children": {}
                   }
                 }
               },
-              "!aIhlmPyrcNwUANJmqe:dev.medienhaus.udk-berlin.de": {
-                "id": "!aIhlmPyrcNwUANJmqe:dev.medienhaus.udk-berlin.de",
+              "!CMGtOzLOEwyFJYDbyY:dev.medienhaus.udk-berlin.de": {
+                "id": "!CMGtOzLOEwyFJYDbyY:dev.medienhaus.udk-berlin.de",
                 "name": "Illustration",
                 "children": {
-                  "!TMuUNNShOVopMoZjim:dev.medienhaus.udk-berlin.de": {
-                    "id": "!TMuUNNShOVopMoZjim:dev.medienhaus.udk-berlin.de",
+                  "!tSkkuJSdXjuaPsOlCf:dev.medienhaus.udk-berlin.de": {
+                    "id": "!tSkkuJSdXjuaPsOlCf:dev.medienhaus.udk-berlin.de",
                     "name": "Comics zeichnen – Von Humor bis zum bitteren Ernst",
                     "children": {}
                   }
                 }
               },
-              "!tSPwgBYGTSAFuHXnSj:dev.medienhaus.udk-berlin.de": {
-                "id": "!tSPwgBYGTSAFuHXnSj:dev.medienhaus.udk-berlin.de",
+              "!oRpxjmkSnPesZavDVl:dev.medienhaus.udk-berlin.de": {
+                "id": "!oRpxjmkSnPesZavDVl:dev.medienhaus.udk-berlin.de",
                 "name": "Visuelle Systeme",
                 "children": {
-                  "!InoeFmhngHBzPxGwYI:dev.medienhaus.udk-berlin.de": {
-                    "id": "!InoeFmhngHBzPxGwYI:dev.medienhaus.udk-berlin.de",
+                  "!wXbXzKdVMAOpfAlEDz:dev.medienhaus.udk-berlin.de": {
+                    "id": "!wXbXzKdVMAOpfAlEDz:dev.medienhaus.udk-berlin.de",
                     "name": "Infodesign Lab",
                     "children": {}
                   },
-                  "!GqXmgwGkzXLrMaPvcO:dev.medienhaus.udk-berlin.de": {
-                    "id": "!GqXmgwGkzXLrMaPvcO:dev.medienhaus.udk-berlin.de",
+                  "!bFMPNOjVbKbAWAGEML:dev.medienhaus.udk-berlin.de": {
+                    "id": "!bFMPNOjVbKbAWAGEML:dev.medienhaus.udk-berlin.de",
                     "name": "Infodesign Studio",
                     "children": {}
                   }
                 }
               },
-              "!CMVJQwhapDqQsJTtcz:dev.medienhaus.udk-berlin.de": {
-                "id": "!CMVJQwhapDqQsJTtcz:dev.medienhaus.udk-berlin.de",
+              "!qzieFNyXcpCxSXFVFw:dev.medienhaus.udk-berlin.de": {
+                "id": "!qzieFNyXcpCxSXFVFw:dev.medienhaus.udk-berlin.de",
                 "name": "Werbung",
                 "children": {
-                  "!CFUIeLmLieKvyucUtc:dev.medienhaus.udk-berlin.de": {
-                    "id": "!CFUIeLmLieKvyucUtc:dev.medienhaus.udk-berlin.de",
+                  "!GTdcTARTfXSLoHmorE:dev.medienhaus.udk-berlin.de": {
+                    "id": "!GTdcTARTfXSLoHmorE:dev.medienhaus.udk-berlin.de",
                     "name": "Corporate Identity und Kommunikation für das neue UdK-Hub",
                     "children": {}
                   }
                 }
               },
-              "!zMGmXAvqBDWlAsPylv:dev.medienhaus.udk-berlin.de": {
-                "id": "!zMGmXAvqBDWlAsPylv:dev.medienhaus.udk-berlin.de",
+              "!EUszEAOslUUGJsOhtT:dev.medienhaus.udk-berlin.de": {
+                "id": "!EUszEAOslUUGJsOhtT:dev.medienhaus.udk-berlin.de",
                 "name": "Ausstellungsgestaltung",
                 "children": {
-                  "!BXVbDUAmbANUfxPggK:dev.medienhaus.udk-berlin.de": {
-                    "id": "!BXVbDUAmbANUfxPggK:dev.medienhaus.udk-berlin.de",
+                  "!TouRFaCDuDQliTwpqv:dev.medienhaus.udk-berlin.de": {
+                    "id": "!TouRFaCDuDQliTwpqv:dev.medienhaus.udk-berlin.de",
                     "name": "FROM SURFACE TO SPACE",
                     "children": {}
                   }
                 }
               },
-              "!sVzscIiozAdVQYoqVH:dev.medienhaus.udk-berlin.de": {
-                "id": "!sVzscIiozAdVQYoqVH:dev.medienhaus.udk-berlin.de",
+              "!PYmGXpFPqLbOtRYNyS:dev.medienhaus.udk-berlin.de": {
+                "id": "!PYmGXpFPqLbOtRYNyS:dev.medienhaus.udk-berlin.de",
                 "name": "New Media",
                 "children": {}
               },
-              "!DvfOgLdJVCmCWnleiW:dev.medienhaus.udk-berlin.de": {
-                "id": "!DvfOgLdJVCmCWnleiW:dev.medienhaus.udk-berlin.de",
+              "!DvDedTpNGJbJBDMkgW:dev.medienhaus.udk-berlin.de": {
+                "id": "!DvDedTpNGJbJBDMkgW:dev.medienhaus.udk-berlin.de",
                 "name": "Aisthesis Decolonial – Dekoloniale Theorie in Kunst und Gestaltung",
                 "children": {}
               },
-              "!cTKITnvZPkjXCbzaWG:dev.medienhaus.udk-berlin.de": {
-                "id": "!cTKITnvZPkjXCbzaWG:dev.medienhaus.udk-berlin.de",
+              "!cEtkSkxNNeXXEWXFdC:dev.medienhaus.udk-berlin.de": {
+                "id": "!cEtkSkxNNeXXEWXFdC:dev.medienhaus.udk-berlin.de",
                 "name": "Analytisches Zeichnen /Stadtspaziergänge",
                 "children": {}
               },
-              "!ZZKmIiuwcTyILSzqlJ:dev.medienhaus.udk-berlin.de": {
-                "id": "!ZZKmIiuwcTyILSzqlJ:dev.medienhaus.udk-berlin.de",
+              "!RFUwihneEaYGNExkaC:dev.medienhaus.udk-berlin.de": {
+                "id": "!RFUwihneEaYGNExkaC:dev.medienhaus.udk-berlin.de",
                 "name": "Archäologie der Gestaltung. Eine Einführung vor Ort (Exkursion)",
                 "children": {}
               },
-              "!TrqOJZzSOwfJdpJetH:dev.medienhaus.udk-berlin.de": {
-                "id": "!TrqOJZzSOwfJdpJetH:dev.medienhaus.udk-berlin.de",
+              "!WsELJqQdioUUbadjhG:dev.medienhaus.udk-berlin.de": {
+                "id": "!WsELJqQdioUUbadjhG:dev.medienhaus.udk-berlin.de",
                 "name": "Archäologie des Selbst",
                 "children": {}
               },
-              "!owaErqOKNkeSukDqUE:dev.medienhaus.udk-berlin.de": {
-                "id": "!owaErqOKNkeSukDqUE:dev.medienhaus.udk-berlin.de",
+              "!VreVHdkFRgtWjmFGzS:dev.medienhaus.udk-berlin.de": {
+                "id": "!VreVHdkFRgtWjmFGzS:dev.medienhaus.udk-berlin.de",
                 "name": "Auf dem Land. Von neuen und alten Existenzweisen",
                 "children": {}
               },
-              "!lQyOqAoBnFKqqZjqrF:dev.medienhaus.udk-berlin.de": {
-                "id": "!lQyOqAoBnFKqqZjqrF:dev.medienhaus.udk-berlin.de",
+              "!wFkywFacALOtzGuluX:dev.medienhaus.udk-berlin.de": {
+                "id": "!wFkywFacALOtzGuluX:dev.medienhaus.udk-berlin.de",
                 "name": "Comics – Szenische Experimente",
                 "children": {}
               },
-              "!OCEdkoyRQdSNzRsBFg:dev.medienhaus.udk-berlin.de": {
-                "id": "!OCEdkoyRQdSNzRsBFg:dev.medienhaus.udk-berlin.de",
+              "!vwcCLJaJxsutrWIbcR:dev.medienhaus.udk-berlin.de": {
+                "id": "!vwcCLJaJxsutrWIbcR:dev.medienhaus.udk-berlin.de",
                 "name": "Connection Space",
                 "children": {}
               },
-              "!mamZgdkSKwUasIYvJp:dev.medienhaus.udk-berlin.de": {
-                "id": "!mamZgdkSKwUasIYvJp:dev.medienhaus.udk-berlin.de",
+              "!CmHzvRzeeSVHAFOVTB:dev.medienhaus.udk-berlin.de": {
+                "id": "!CmHzvRzeeSVHAFOVTB:dev.medienhaus.udk-berlin.de",
                 "name": "Corporate Design für das neue UdK-Hub",
                 "children": {}
               },
-              "!CFUIeLmLieKvyucUtc:dev.medienhaus.udk-berlin.de": {
-                "id": "!CFUIeLmLieKvyucUtc:dev.medienhaus.udk-berlin.de",
+              "!GTdcTARTfXSLoHmorE:dev.medienhaus.udk-berlin.de": {
+                "id": "!GTdcTARTfXSLoHmorE:dev.medienhaus.udk-berlin.de",
                 "name": "Corporate Identity und Kommunikation für das neue UdK-Hub",
                 "children": {}
               },
-              "!sPdiYoxqOtFXkZodtR:dev.medienhaus.udk-berlin.de": {
-                "id": "!sPdiYoxqOtFXkZodtR:dev.medienhaus.udk-berlin.de",
+              "!jpeYTwhjujeVJuffhu:dev.medienhaus.udk-berlin.de": {
+                "id": "!jpeYTwhjujeVJuffhu:dev.medienhaus.udk-berlin.de",
                 "name": "Corporate Wording für das neue UdK-Hub",
                 "children": {}
               },
-              "!fssfuSnnSsIPrBjKme:dev.medienhaus.udk-berlin.de": {
-                "id": "!fssfuSnnSsIPrBjKme:dev.medienhaus.udk-berlin.de",
+              "!njgSBNfVrKHQmapHGp:dev.medienhaus.udk-berlin.de": {
+                "id": "!njgSBNfVrKHQmapHGp:dev.medienhaus.udk-berlin.de",
                 "name": "Creativ Coding I",
                 "children": {}
               },
-              "!kVyIfalrOjYdkolBKt:dev.medienhaus.udk-berlin.de": {
-                "id": "!kVyIfalrOjYdkolBKt:dev.medienhaus.udk-berlin.de",
+              "!aCRfIQhHpDGFbCLwVi:dev.medienhaus.udk-berlin.de": {
+                "id": "!aCRfIQhHpDGFbCLwVi:dev.medienhaus.udk-berlin.de",
                 "name": "Cube Loops - Einführung in Fusion und 3D Druck",
                 "children": {}
               },
-              "!VWKWsntiFknzuuTmEi:dev.medienhaus.udk-berlin.de": {
-                "id": "!VWKWsntiFknzuuTmEi:dev.medienhaus.udk-berlin.de",
+              "!DeiHWsKwkTxrobxTST:dev.medienhaus.udk-berlin.de": {
+                "id": "!DeiHWsKwkTxrobxTST:dev.medienhaus.udk-berlin.de",
                 "name": "Das Comic-Panel im Raum",
                 "children": {}
               },
-              "!HqayDESDOORCfRdbfh:dev.medienhaus.udk-berlin.de": {
-                "id": "!HqayDESDOORCfRdbfh:dev.medienhaus.udk-berlin.de",
+              "!DSsBAZRqdYBWvmMImO:dev.medienhaus.udk-berlin.de": {
+                "id": "!DSsBAZRqdYBWvmMImO:dev.medienhaus.udk-berlin.de",
                 "name": "Das Vierte Druckverfahren",
                 "children": {}
               },
-              "!CwAGQPuIeuewRxlOeQ:dev.medienhaus.udk-berlin.de": {
-                "id": "!CwAGQPuIeuewRxlOeQ:dev.medienhaus.udk-berlin.de",
+              "!eSrjrMTZrdEvoGfGQW:dev.medienhaus.udk-berlin.de": {
+                "id": "!eSrjrMTZrdEvoGfGQW:dev.medienhaus.udk-berlin.de",
                 "name": "Digitale Film- und Tonmontage - Einführung",
                 "children": {}
               },
-              "!DAMcGqFBgaNkTwumYU:dev.medienhaus.udk-berlin.de": {
-                "id": "!DAMcGqFBgaNkTwumYU:dev.medienhaus.udk-berlin.de",
+              "!XKBsePRrmQdpnyfgQp:dev.medienhaus.udk-berlin.de": {
+                "id": "!XKBsePRrmQdpnyfgQp:dev.medienhaus.udk-berlin.de",
                 "name": "Einführung in den Modellbau",
                 "children": {}
               },
-              "!sifmVwYiRrgvKUTTpM:dev.medienhaus.udk-berlin.de": {
-                "id": "!sifmVwYiRrgvKUTTpM:dev.medienhaus.udk-berlin.de",
+              "!rpHQLBCDhwtGZjZwZf:dev.medienhaus.udk-berlin.de": {
+                "id": "!rpHQLBCDhwtGZjZwZf:dev.medienhaus.udk-berlin.de",
                 "name": "Einführung in die Siebdruckwerkstatt",
                 "children": {}
               },
-              "!hygjDgDdBzxPTYhghf:dev.medienhaus.udk-berlin.de": {
-                "id": "!hygjDgDdBzxPTYhghf:dev.medienhaus.udk-berlin.de",
+              "!roylGnKtFcAUPKrzcB:dev.medienhaus.udk-berlin.de": {
+                "id": "!roylGnKtFcAUPKrzcB:dev.medienhaus.udk-berlin.de",
                 "name": "Experimentelles Zeichnen / Rapportieren",
                 "children": {}
               },
-              "!kYrlXvgHtryRlnAQyY:dev.medienhaus.udk-berlin.de": {
-                "id": "!kYrlXvgHtryRlnAQyY:dev.medienhaus.udk-berlin.de",
+              "!DNrayravEWpvXfAZBQ:dev.medienhaus.udk-berlin.de": {
+                "id": "!DNrayravEWpvXfAZBQ:dev.medienhaus.udk-berlin.de",
                 "name": "Filmprojekt / Klassenprojekt",
                 "children": {}
               },
-              "!yHsGRHxHNNCTTySIHW:dev.medienhaus.udk-berlin.de": {
-                "id": "!yHsGRHxHNNCTTySIHW:dev.medienhaus.udk-berlin.de",
+              "!hhTWLJUciYlvHOMVQM:dev.medienhaus.udk-berlin.de": {
+                "id": "!hhTWLJUciYlvHOMVQM:dev.medienhaus.udk-berlin.de",
                 "name": "Flow Flow",
                 "children": {}
               },
-              "!BywFMsuGzEMwbKduMR:dev.medienhaus.udk-berlin.de": {
-                "id": "!BywFMsuGzEMwbKduMR:dev.medienhaus.udk-berlin.de",
+              "!nBWZlcPQgoXLZSxCeY:dev.medienhaus.udk-berlin.de": {
+                "id": "!nBWZlcPQgoXLZSxCeY:dev.medienhaus.udk-berlin.de",
                 "name": "Fotografie 1 - Perspektive",
                 "children": {}
               },
-              "!fTgwmHbUejECVQTsEX:dev.medienhaus.udk-berlin.de": {
-                "id": "!fTgwmHbUejECVQTsEX:dev.medienhaus.udk-berlin.de",
+              "!lGiIfhImsWZGRBtmxV:dev.medienhaus.udk-berlin.de": {
+                "id": "!lGiIfhImsWZGRBtmxV:dev.medienhaus.udk-berlin.de",
                 "name": "Fotografie 2 - open projects",
                 "children": {}
               },
-              "!kfWRcVlxxviitJMouZ:dev.medienhaus.udk-berlin.de": {
-                "id": "!kfWRcVlxxviitJMouZ:dev.medienhaus.udk-berlin.de",
+              "!ikaBswsoHOpCMEBESw:dev.medienhaus.udk-berlin.de": {
+                "id": "!ikaBswsoHOpCMEBESw:dev.medienhaus.udk-berlin.de",
                 "name": "Grundlagen Bewegtbild I",
                 "children": {}
               },
-              "!SPqJLFguiOuqiOADzR:dev.medienhaus.udk-berlin.de": {
-                "id": "!SPqJLFguiOuqiOADzR:dev.medienhaus.udk-berlin.de",
+              "!pSzKzyXHaQaQkBDTnn:dev.medienhaus.udk-berlin.de": {
+                "id": "!pSzKzyXHaQaQkBDTnn:dev.medienhaus.udk-berlin.de",
                 "name": "HUMANS AND (OTHER) ANIMALS. Experimentelle 2D-Darstellungstechniken",
                 "children": {}
               },
-              "!OgpDfsGKsQGmtOIBAI:dev.medienhaus.udk-berlin.de": {
-                "id": "!OgpDfsGKsQGmtOIBAI:dev.medienhaus.udk-berlin.de",
+              "!IUHAnzpFZUWoNjcUEx:dev.medienhaus.udk-berlin.de": {
+                "id": "!IUHAnzpFZUWoNjcUEx:dev.medienhaus.udk-berlin.de",
                 "name": "Kamera, Licht und Ton - Einführung",
                 "children": {}
               },
-              "!QPcqbwUpHiLjKUwvhs:dev.medienhaus.udk-berlin.de": {
-                "id": "!QPcqbwUpHiLjKUwvhs:dev.medienhaus.udk-berlin.de",
+              "!jTxpqpblnHKSvHTCwY:dev.medienhaus.udk-berlin.de": {
+                "id": "!jTxpqpblnHKSvHTCwY:dev.medienhaus.udk-berlin.de",
                 "name": "Motion Graphics - Einführung",
                 "children": {}
               },
-              "!kIEKHOvFmxYthPuOdI:dev.medienhaus.udk-berlin.de": {
-                "id": "!kIEKHOvFmxYthPuOdI:dev.medienhaus.udk-berlin.de",
+              "!uQxsdqJGmUMHeceWrc:dev.medienhaus.udk-berlin.de": {
+                "id": "!uQxsdqJGmUMHeceWrc:dev.medienhaus.udk-berlin.de",
                 "name": "Pharmapolitische Fiktionen. Seltsame Substanzen und prekäre Stoffe der Science-Fiction-",
                 "children": {}
               },
-              "!EbAUkEZLYGCIdDiMHF:dev.medienhaus.udk-berlin.de": {
-                "id": "!EbAUkEZLYGCIdDiMHF:dev.medienhaus.udk-berlin.de",
+              "!mqsaiCYzzRpYamVdAw:dev.medienhaus.udk-berlin.de": {
+                "id": "!mqsaiCYzzRpYamVdAw:dev.medienhaus.udk-berlin.de",
                 "name": "Projektentwicklung durch experimentellen Umgang mit Material und Werkzeug",
                 "children": {}
               },
-              "!RZbXJmHDlwGPshFqVb:dev.medienhaus.udk-berlin.de": {
-                "id": "!RZbXJmHDlwGPshFqVb:dev.medienhaus.udk-berlin.de",
+              "!CDvTGPpTjUzsdzzGKz:dev.medienhaus.udk-berlin.de": {
+                "id": "!CDvTGPpTjUzsdzzGKz:dev.medienhaus.udk-berlin.de",
                 "name": "Quarantäne-Ästhetiken – Reflexionen über Digitalität, social distancing & Körperbilder in Zeiten der Pandemie",
                 "children": {}
               },
-              "!FuNfVShedfgAmSUGvR:dev.medienhaus.udk-berlin.de": {
-                "id": "!FuNfVShedfgAmSUGvR:dev.medienhaus.udk-berlin.de",
+              "!YKehHytVJgFQYJPIQR:dev.medienhaus.udk-berlin.de": {
+                "id": "!YKehHytVJgFQYJPIQR:dev.medienhaus.udk-berlin.de",
                 "name": "Schrift und Raum",
                 "children": {}
               },
-              "!QBaRNuepOZWNLeghQX:dev.medienhaus.udk-berlin.de": {
-                "id": "!QBaRNuepOZWNLeghQX:dev.medienhaus.udk-berlin.de",
+              "!SVZDcVdvituKvijUZI:dev.medienhaus.udk-berlin.de": {
+                "id": "!SVZDcVdvituKvijUZI:dev.medienhaus.udk-berlin.de",
                 "name": "Spatial Display as Agency",
                 "children": {}
               },
-              "!vBVQbtgQAmloLgQbYt:dev.medienhaus.udk-berlin.de": {
-                "id": "!vBVQbtgQAmloLgQbYt:dev.medienhaus.udk-berlin.de",
+              "!EpZwtqxQBhIxJKTdgT:dev.medienhaus.udk-berlin.de": {
+                "id": "!EpZwtqxQBhIxJKTdgT:dev.medienhaus.udk-berlin.de",
                 "name": "teacher.solar 0 :: Design & Deployment of a solar-powered artefact :: Sound & Klang",
                 "children": {}
               },
-              "!iBrMcwGStERrSqErGE:dev.medienhaus.udk-berlin.de": {
-                "id": "!iBrMcwGStERrSqErGE:dev.medienhaus.udk-berlin.de",
+              "!WVmVTATahkEcEWsglD:dev.medienhaus.udk-berlin.de": {
+                "id": "!WVmVTATahkEcEWsglD:dev.medienhaus.udk-berlin.de",
                 "name": "Über Pflanzen in Kunst und Architektur",
                 "children": {}
               }
             }
           },
-          "!arpKDSCpfyBmvbCdat:dev.medienhaus.udk-berlin.de": {
-            "id": "!arpKDSCpfyBmvbCdat:dev.medienhaus.udk-berlin.de",
+          "!YNXuxXogiLroqnZfeY:dev.medienhaus.udk-berlin.de": {
+            "id": "!YNXuxXogiLroqnZfeY:dev.medienhaus.udk-berlin.de",
             "name": "Master Visuelle Kommunikation",
             "children": {
-              "!qiuMDpCSIjviXfZvoe:dev.medienhaus.udk-berlin.de": {
-                "id": "!qiuMDpCSIjviXfZvoe:dev.medienhaus.udk-berlin.de",
+              "!ncfoCAbvJurpFVvyua:dev.medienhaus.udk-berlin.de": {
+                "id": "!ncfoCAbvJurpFVvyua:dev.medienhaus.udk-berlin.de",
                 "name": "Grafikdesign",
                 "children": {
-                  "!iPfbzDIlLaQojZlHdh:dev.medienhaus.udk-berlin.de": {
-                    "id": "!iPfbzDIlLaQojZlHdh:dev.medienhaus.udk-berlin.de",
+                  "!nPUnpWKwIVWaMsglOW:dev.medienhaus.udk-berlin.de": {
+                    "id": "!nPUnpWKwIVWaMsglOW:dev.medienhaus.udk-berlin.de",
                     "name": "LAND-LEBEN - Gestaltung des bewegten Bildes",
                     "children": {}
                   }
                 }
               },
-              "!WBSVefLTUPIOezuFQF:dev.medienhaus.udk-berlin.de": {
-                "id": "!WBSVefLTUPIOezuFQF:dev.medienhaus.udk-berlin.de",
+              "!cWniHiBnMbMXtUGPCj:dev.medienhaus.udk-berlin.de": {
+                "id": "!cWniHiBnMbMXtUGPCj:dev.medienhaus.udk-berlin.de",
                 "name": "Illustration",
                 "children": {
-                  "!TMuUNNShOVopMoZjim:dev.medienhaus.udk-berlin.de": {
-                    "id": "!TMuUNNShOVopMoZjim:dev.medienhaus.udk-berlin.de",
+                  "!tSkkuJSdXjuaPsOlCf:dev.medienhaus.udk-berlin.de": {
+                    "id": "!tSkkuJSdXjuaPsOlCf:dev.medienhaus.udk-berlin.de",
                     "name": "Comics zeichnen – Von Humor bis zum bitteren Ernst",
                     "children": {}
                   }
                 }
               },
-              "!oHydoxbwPtpjEiDbsJ:dev.medienhaus.udk-berlin.de": {
-                "id": "!oHydoxbwPtpjEiDbsJ:dev.medienhaus.udk-berlin.de",
+              "!CcYWlZuICyorfdFiPC:dev.medienhaus.udk-berlin.de": {
+                "id": "!CcYWlZuICyorfdFiPC:dev.medienhaus.udk-berlin.de",
                 "name": "Visuelle Systeme",
                 "children": {
-                  "!InoeFmhngHBzPxGwYI:dev.medienhaus.udk-berlin.de": {
-                    "id": "!InoeFmhngHBzPxGwYI:dev.medienhaus.udk-berlin.de",
+                  "!wXbXzKdVMAOpfAlEDz:dev.medienhaus.udk-berlin.de": {
+                    "id": "!wXbXzKdVMAOpfAlEDz:dev.medienhaus.udk-berlin.de",
                     "name": "Infodesign Lab",
                     "children": {}
                   },
-                  "!GqXmgwGkzXLrMaPvcO:dev.medienhaus.udk-berlin.de": {
-                    "id": "!GqXmgwGkzXLrMaPvcO:dev.medienhaus.udk-berlin.de",
+                  "!bFMPNOjVbKbAWAGEML:dev.medienhaus.udk-berlin.de": {
+                    "id": "!bFMPNOjVbKbAWAGEML:dev.medienhaus.udk-berlin.de",
                     "name": "Infodesign Studio",
                     "children": {}
                   }
                 }
               },
-              "!iglTroLLKAFtbLSZKW:dev.medienhaus.udk-berlin.de": {
-                "id": "!iglTroLLKAFtbLSZKW:dev.medienhaus.udk-berlin.de",
+              "!QkmWuRjFxWiYViLREV:dev.medienhaus.udk-berlin.de": {
+                "id": "!QkmWuRjFxWiYViLREV:dev.medienhaus.udk-berlin.de",
                 "name": "Werbung",
                 "children": {
-                  "!CFUIeLmLieKvyucUtc:dev.medienhaus.udk-berlin.de": {
-                    "id": "!CFUIeLmLieKvyucUtc:dev.medienhaus.udk-berlin.de",
+                  "!GTdcTARTfXSLoHmorE:dev.medienhaus.udk-berlin.de": {
+                    "id": "!GTdcTARTfXSLoHmorE:dev.medienhaus.udk-berlin.de",
                     "name": "Corporate Identity und Kommunikation für das neue UdK-Hub",
                     "children": {}
                   }
                 }
               },
-              "!fLSbzdGOqLcspekgqL:dev.medienhaus.udk-berlin.de": {
-                "id": "!fLSbzdGOqLcspekgqL:dev.medienhaus.udk-berlin.de",
+              "!GIVDJaPJNnCmpPbInd:dev.medienhaus.udk-berlin.de": {
+                "id": "!GIVDJaPJNnCmpPbInd:dev.medienhaus.udk-berlin.de",
                 "name": "Ausstellungsgestaltung",
                 "children": {
-                  "!BXVbDUAmbANUfxPggK:dev.medienhaus.udk-berlin.de": {
-                    "id": "!BXVbDUAmbANUfxPggK:dev.medienhaus.udk-berlin.de",
+                  "!TouRFaCDuDQliTwpqv:dev.medienhaus.udk-berlin.de": {
+                    "id": "!TouRFaCDuDQliTwpqv:dev.medienhaus.udk-berlin.de",
                     "name": "FROM SURFACE TO SPACE",
                     "children": {}
                   }
                 }
               },
-              "!DvfOgLdJVCmCWnleiW:dev.medienhaus.udk-berlin.de": {
-                "id": "!DvfOgLdJVCmCWnleiW:dev.medienhaus.udk-berlin.de",
+              "!DvDedTpNGJbJBDMkgW:dev.medienhaus.udk-berlin.de": {
+                "id": "!DvDedTpNGJbJBDMkgW:dev.medienhaus.udk-berlin.de",
                 "name": "Aisthesis Decolonial – Dekoloniale Theorie in Kunst und Gestaltung",
                 "children": {}
               },
-              "!TrqOJZzSOwfJdpJetH:dev.medienhaus.udk-berlin.de": {
-                "id": "!TrqOJZzSOwfJdpJetH:dev.medienhaus.udk-berlin.de",
+              "!WsELJqQdioUUbadjhG:dev.medienhaus.udk-berlin.de": {
+                "id": "!WsELJqQdioUUbadjhG:dev.medienhaus.udk-berlin.de",
                 "name": "Archäologie des Selbst",
                 "children": {}
               },
-              "!owaErqOKNkeSukDqUE:dev.medienhaus.udk-berlin.de": {
-                "id": "!owaErqOKNkeSukDqUE:dev.medienhaus.udk-berlin.de",
+              "!VreVHdkFRgtWjmFGzS:dev.medienhaus.udk-berlin.de": {
+                "id": "!VreVHdkFRgtWjmFGzS:dev.medienhaus.udk-berlin.de",
                 "name": "Auf dem Land. Von neuen und alten Existenzweisen",
                 "children": {}
               },
-              "!OCEdkoyRQdSNzRsBFg:dev.medienhaus.udk-berlin.de": {
-                "id": "!OCEdkoyRQdSNzRsBFg:dev.medienhaus.udk-berlin.de",
+              "!vwcCLJaJxsutrWIbcR:dev.medienhaus.udk-berlin.de": {
+                "id": "!vwcCLJaJxsutrWIbcR:dev.medienhaus.udk-berlin.de",
                 "name": "Connection Space",
                 "children": {}
               },
-              "!HqayDESDOORCfRdbfh:dev.medienhaus.udk-berlin.de": {
-                "id": "!HqayDESDOORCfRdbfh:dev.medienhaus.udk-berlin.de",
+              "!DSsBAZRqdYBWvmMImO:dev.medienhaus.udk-berlin.de": {
+                "id": "!DSsBAZRqdYBWvmMImO:dev.medienhaus.udk-berlin.de",
                 "name": "Das Vierte Druckverfahren",
                 "children": {}
               },
-              "!DAMcGqFBgaNkTwumYU:dev.medienhaus.udk-berlin.de": {
-                "id": "!DAMcGqFBgaNkTwumYU:dev.medienhaus.udk-berlin.de",
+              "!XKBsePRrmQdpnyfgQp:dev.medienhaus.udk-berlin.de": {
+                "id": "!XKBsePRrmQdpnyfgQp:dev.medienhaus.udk-berlin.de",
                 "name": "Einführung in den Modellbau",
                 "children": {}
               },
-              "!SPqJLFguiOuqiOADzR:dev.medienhaus.udk-berlin.de": {
-                "id": "!SPqJLFguiOuqiOADzR:dev.medienhaus.udk-berlin.de",
+              "!pSzKzyXHaQaQkBDTnn:dev.medienhaus.udk-berlin.de": {
+                "id": "!pSzKzyXHaQaQkBDTnn:dev.medienhaus.udk-berlin.de",
                 "name": "HUMANS AND (OTHER) ANIMALS. Experimentelle 2D-Darstellungstechniken",
                 "children": {}
               },
-              "!kIEKHOvFmxYthPuOdI:dev.medienhaus.udk-berlin.de": {
-                "id": "!kIEKHOvFmxYthPuOdI:dev.medienhaus.udk-berlin.de",
+              "!uQxsdqJGmUMHeceWrc:dev.medienhaus.udk-berlin.de": {
+                "id": "!uQxsdqJGmUMHeceWrc:dev.medienhaus.udk-berlin.de",
                 "name": "Pharmapolitische Fiktionen. Seltsame Substanzen und prekäre Stoffe der Science-Fiction-",
                 "children": {}
               },
-              "!EbAUkEZLYGCIdDiMHF:dev.medienhaus.udk-berlin.de": {
-                "id": "!EbAUkEZLYGCIdDiMHF:dev.medienhaus.udk-berlin.de",
+              "!mqsaiCYzzRpYamVdAw:dev.medienhaus.udk-berlin.de": {
+                "id": "!mqsaiCYzzRpYamVdAw:dev.medienhaus.udk-berlin.de",
                 "name": "Projektentwicklung durch experimentellen Umgang mit Material und Werkzeug",
                 "children": {}
               },
-              "!RZbXJmHDlwGPshFqVb:dev.medienhaus.udk-berlin.de": {
-                "id": "!RZbXJmHDlwGPshFqVb:dev.medienhaus.udk-berlin.de",
+              "!CDvTGPpTjUzsdzzGKz:dev.medienhaus.udk-berlin.de": {
+                "id": "!CDvTGPpTjUzsdzzGKz:dev.medienhaus.udk-berlin.de",
                 "name": "Quarantäne-Ästhetiken – Reflexionen über Digitalität, social distancing & Körperbilder in Zeiten der Pandemie",
                 "children": {}
               },
-              "!FuNfVShedfgAmSUGvR:dev.medienhaus.udk-berlin.de": {
-                "id": "!FuNfVShedfgAmSUGvR:dev.medienhaus.udk-berlin.de",
+              "!YKehHytVJgFQYJPIQR:dev.medienhaus.udk-berlin.de": {
+                "id": "!YKehHytVJgFQYJPIQR:dev.medienhaus.udk-berlin.de",
                 "name": "Schrift und Raum",
                 "children": {}
               },
-              "!QBaRNuepOZWNLeghQX:dev.medienhaus.udk-berlin.de": {
-                "id": "!QBaRNuepOZWNLeghQX:dev.medienhaus.udk-berlin.de",
+              "!SVZDcVdvituKvijUZI:dev.medienhaus.udk-berlin.de": {
+                "id": "!SVZDcVdvituKvijUZI:dev.medienhaus.udk-berlin.de",
                 "name": "Spatial Display as Agency",
                 "children": {}
               },
-              "!iBrMcwGStERrSqErGE:dev.medienhaus.udk-berlin.de": {
-                "id": "!iBrMcwGStERrSqErGE:dev.medienhaus.udk-berlin.de",
+              "!WVmVTATahkEcEWsglD:dev.medienhaus.udk-berlin.de": {
+                "id": "!WVmVTATahkEcEWsglD:dev.medienhaus.udk-berlin.de",
                 "name": "Über Pflanzen in Kunst und Architektur",
                 "children": {}
               }
             }
           },
-          "!pFIXzjqzZhZGXcYGIP:dev.medienhaus.udk-berlin.de": {
-            "id": "!pFIXzjqzZhZGXcYGIP:dev.medienhaus.udk-berlin.de",
+          "!fpjZxKFoewCOLmxXEK:dev.medienhaus.udk-berlin.de": {
+            "id": "!fpjZxKFoewCOLmxXEK:dev.medienhaus.udk-berlin.de",
             "name": "Bachelor Gesellschafts- und Wirtschaftskommunikation",
             "children": {}
           },
-          "!dYuNazWCUbtoKAaMXj:dev.medienhaus.udk-berlin.de": {
-            "id": "!dYuNazWCUbtoKAaMXj:dev.medienhaus.udk-berlin.de",
+          "!CkRbBZYwhRLkeckAWR:dev.medienhaus.udk-berlin.de": {
+            "id": "!CkRbBZYwhRLkeckAWR:dev.medienhaus.udk-berlin.de",
             "name": "Master Gesellschafts- und Wirtschaftskommunikation",
             "children": {}
           },
-          "!IDyLBzeubMxUZFRHOL:dev.medienhaus.udk-berlin.de": {
-            "id": "!IDyLBzeubMxUZFRHOL:dev.medienhaus.udk-berlin.de",
+          "!IZWhsPfvLmJlloTerG:dev.medienhaus.udk-berlin.de": {
+            "id": "!IZWhsPfvLmJlloTerG:dev.medienhaus.udk-berlin.de",
             "name": "Kunst und Medien",
             "children": {
-              "!tChBcBQJiAjOpQTtHl:dev.medienhaus.udk-berlin.de": {
-                "id": "!tChBcBQJiAjOpQTtHl:dev.medienhaus.udk-berlin.de",
+              "!wOYUujSfKBwOpeFLAG:dev.medienhaus.udk-berlin.de": {
+                "id": "!wOYUujSfKBwOpeFLAG:dev.medienhaus.udk-berlin.de",
                 "name": "“MORGEN IST DIE FRAGE” – Current Issues of Berlin’s Club Culture",
                 "children": {}
               },
-              "!TrqOJZzSOwfJdpJetH:dev.medienhaus.udk-berlin.de": {
-                "id": "!TrqOJZzSOwfJdpJetH:dev.medienhaus.udk-berlin.de",
+              "!WsELJqQdioUUbadjhG:dev.medienhaus.udk-berlin.de": {
+                "id": "!WsELJqQdioUUbadjhG:dev.medienhaus.udk-berlin.de",
                 "name": "Archäologie des Selbst",
                 "children": {}
               },
-              "!owaErqOKNkeSukDqUE:dev.medienhaus.udk-berlin.de": {
-                "id": "!owaErqOKNkeSukDqUE:dev.medienhaus.udk-berlin.de",
+              "!VreVHdkFRgtWjmFGzS:dev.medienhaus.udk-berlin.de": {
+                "id": "!VreVHdkFRgtWjmFGzS:dev.medienhaus.udk-berlin.de",
                 "name": "Auf dem Land. Von neuen und alten Existenzweisen",
                 "children": {}
               },
-              "!QzmAcNMqAfxlUysMRn:dev.medienhaus.udk-berlin.de": {
-                "id": "!QzmAcNMqAfxlUysMRn:dev.medienhaus.udk-berlin.de",
+              "!jAvauWkSgovSKcNaQA:dev.medienhaus.udk-berlin.de": {
+                "id": "!jAvauWkSgovSKcNaQA:dev.medienhaus.udk-berlin.de",
                 "name": "Boredom and its Contents: exploring the creative, contemplative and existential aspects of switching off",
                 "children": {}
               },
-              "!dYGfjlczVDzpqRrOqh:dev.medienhaus.udk-berlin.de": {
-                "id": "!dYGfjlczVDzpqRrOqh:dev.medienhaus.udk-berlin.de",
+              "!ZqpmhUvmshwRJONbqQ:dev.medienhaus.udk-berlin.de": {
+                "id": "!ZqpmhUvmshwRJONbqQ:dev.medienhaus.udk-berlin.de",
                 "name": "Code Experiments: Back to the Future Voices",
                 "children": {}
               },
-              "!bjCeghuOQpnyQsgvre:dev.medienhaus.udk-berlin.de": {
-                "id": "!bjCeghuOQpnyQsgvre:dev.medienhaus.udk-berlin.de",
+              "!QlfUVoyVZNPpeNVqZt:dev.medienhaus.udk-berlin.de": {
+                "id": "!QlfUVoyVZNPpeNVqZt:dev.medienhaus.udk-berlin.de",
                 "name": "Design with Code",
                 "children": {}
               },
-              "!KFBcWjRgMFhwaEDeQI:dev.medienhaus.udk-berlin.de": {
-                "id": "!KFBcWjRgMFhwaEDeQI:dev.medienhaus.udk-berlin.de",
+              "!AnkLMysSGjDGGBAXuU:dev.medienhaus.udk-berlin.de": {
+                "id": "!AnkLMysSGjDGGBAXuU:dev.medienhaus.udk-berlin.de",
                 "name": "Expanded Reality Worlds",
                 "children": {}
               },
-              "!qYluRtaaxxMtSQvUOB:dev.medienhaus.udk-berlin.de": {
-                "id": "!qYluRtaaxxMtSQvUOB:dev.medienhaus.udk-berlin.de",
+              "!niEtKqkqIIxAApqnPj:dev.medienhaus.udk-berlin.de": {
+                "id": "!niEtKqkqIIxAApqnPj:dev.medienhaus.udk-berlin.de",
                 "name": "Fachklasse Experimenteller Film / Medienkunst",
                 "children": {}
               },
-              "!IAxmGRIjJnDkDMNugD:dev.medienhaus.udk-berlin.de": {
-                "id": "!IAxmGRIjJnDkDMNugD:dev.medienhaus.udk-berlin.de",
+              "!mvTMEGqFWqAUEyvysa:dev.medienhaus.udk-berlin.de": {
+                "id": "!mvTMEGqFWqAUEyvysa:dev.medienhaus.udk-berlin.de",
                 "name": "Fachklasse Generative Kunst / Computational Art",
                 "children": {}
               },
-              "!eXfONOZGisgIyneaSW:dev.medienhaus.udk-berlin.de": {
-                "id": "!eXfONOZGisgIyneaSW:dev.medienhaus.udk-berlin.de",
+              "!xIAgvdhIXTIwUmHpAL:dev.medienhaus.udk-berlin.de": {
+                "id": "!xIAgvdhIXTIwUmHpAL:dev.medienhaus.udk-berlin.de",
                 "name": "Fachklasse Narrativer Film / Narration in und mit technischen Bildmedien",
                 "children": {}
               },
-              "!UTgLVSNApIWtiMiPGi:dev.medienhaus.udk-berlin.de": {
-                "id": "!UTgLVSNApIWtiMiPGi:dev.medienhaus.udk-berlin.de",
+              "!nWorSQVUVDlImivOiu:dev.medienhaus.udk-berlin.de": {
+                "id": "!nWorSQVUVDlImivOiu:dev.medienhaus.udk-berlin.de",
                 "name": "Filmproduktion für Filmkünstler*innen",
                 "children": {}
               },
-              "!rPGKanqssZAMzOjOCw:dev.medienhaus.udk-berlin.de": {
-                "id": "!rPGKanqssZAMzOjOCw:dev.medienhaus.udk-berlin.de",
+              "!UNQhaBLjhDHhfmaKYv:dev.medienhaus.udk-berlin.de": {
+                "id": "!UNQhaBLjhDHhfmaKYv:dev.medienhaus.udk-berlin.de",
                 "name": "GANerative GANomaly for GANsters",
                 "children": {}
               },
-              "!kfWRcVlxxviitJMouZ:dev.medienhaus.udk-berlin.de": {
-                "id": "!kfWRcVlxxviitJMouZ:dev.medienhaus.udk-berlin.de",
+              "!ikaBswsoHOpCMEBESw:dev.medienhaus.udk-berlin.de": {
+                "id": "!ikaBswsoHOpCMEBESw:dev.medienhaus.udk-berlin.de",
                 "name": "Grundlagen Bewegtbild I",
                 "children": {}
               },
-              "!wiIyWiXfbmZYWKeuia:dev.medienhaus.udk-berlin.de": {
-                "id": "!wiIyWiXfbmZYWKeuia:dev.medienhaus.udk-berlin.de",
+              "!rlDXLjeYGnyyEgSSBd:dev.medienhaus.udk-berlin.de": {
+                "id": "!rlDXLjeYGnyyEgSSBd:dev.medienhaus.udk-berlin.de",
                 "name": "Hybrid Systems: Silences, Soundscapes & Sonoaviatics",
                 "children": {}
               },
-              "!UAZCmlGNiGngjsVzjT:dev.medienhaus.udk-berlin.de": {
-                "id": "!UAZCmlGNiGngjsVzjT:dev.medienhaus.udk-berlin.de",
+              "!tLEDvuUeGCoKycVIJZ:dev.medienhaus.udk-berlin.de": {
+                "id": "!tLEDvuUeGCoKycVIJZ:dev.medienhaus.udk-berlin.de",
                 "name": "Im Hotel - Entwicklung von Szenen für einen Omnibusfilm",
                 "children": {}
               },
-              "!dJYEbJeOhlzGWuyPbp:dev.medienhaus.udk-berlin.de": {
-                "id": "!dJYEbJeOhlzGWuyPbp:dev.medienhaus.udk-berlin.de",
+              "!LJLWZLczYaRahsMHVW:dev.medienhaus.udk-berlin.de": {
+                "id": "!LJLWZLczYaRahsMHVW:dev.medienhaus.udk-berlin.de",
                 "name": "In Bewegung / Interaktive Systeme I",
                 "children": {}
               },
-              "!mHHDecUxvoKRBRyCFv:dev.medienhaus.udk-berlin.de": {
-                "id": "!mHHDecUxvoKRBRyCFv:dev.medienhaus.udk-berlin.de",
+              "!gqNyyacbCukHQHOVPF:dev.medienhaus.udk-berlin.de": {
+                "id": "!gqNyyacbCukHQHOVPF:dev.medienhaus.udk-berlin.de",
                 "name": "IoT - Island of Things",
                 "children": {}
               },
-              "!VzHGSjXMOgfKNqrVjC:dev.medienhaus.udk-berlin.de": {
-                "id": "!VzHGSjXMOgfKNqrVjC:dev.medienhaus.udk-berlin.de",
+              "!QUgwoSTQqgAmkhHNWL:dev.medienhaus.udk-berlin.de": {
+                "id": "!QUgwoSTQqgAmkhHNWL:dev.medienhaus.udk-berlin.de",
                 "name": "Kameraberatung und Projektbesprechung",
                 "children": {}
               },
-              "!JMFbdmogOyPOuQVeTK:dev.medienhaus.udk-berlin.de": {
-                "id": "!JMFbdmogOyPOuQVeTK:dev.medienhaus.udk-berlin.de",
+              "!MdFBodqomwmpQbdyfg:dev.medienhaus.udk-berlin.de": {
+                "id": "!MdFBodqomwmpQbdyfg:dev.medienhaus.udk-berlin.de",
                 "name": "Kamera für Fortgeschrittene PRAKTISCHE ÜBUNGEN ZU DIGITALEN KAMERAS",
                 "children": {}
               },
-              "!OgpDfsGKsQGmtOIBAI:dev.medienhaus.udk-berlin.de": {
-                "id": "!OgpDfsGKsQGmtOIBAI:dev.medienhaus.udk-berlin.de",
+              "!IUHAnzpFZUWoNjcUEx:dev.medienhaus.udk-berlin.de": {
+                "id": "!IUHAnzpFZUWoNjcUEx:dev.medienhaus.udk-berlin.de",
                 "name": "Kamera, Licht und Ton - Einführung",
                 "children": {}
               },
-              "!iPfbzDIlLaQojZlHdh:dev.medienhaus.udk-berlin.de": {
-                "id": "!iPfbzDIlLaQojZlHdh:dev.medienhaus.udk-berlin.de",
+              "!nPUnpWKwIVWaMsglOW:dev.medienhaus.udk-berlin.de": {
+                "id": "!nPUnpWKwIVWaMsglOW:dev.medienhaus.udk-berlin.de",
                 "name": "LAND-LEBEN - Gestaltung des bewegten Bildes",
                 "children": {}
               },
-              "!lHxdnhGmKaRmTPucVO:dev.medienhaus.udk-berlin.de": {
-                "id": "!lHxdnhGmKaRmTPucVO:dev.medienhaus.udk-berlin.de",
+              "!dnUTypSbdJTuuMtqPn:dev.medienhaus.udk-berlin.de": {
+                "id": "!dnUTypSbdJTuuMtqPn:dev.medienhaus.udk-berlin.de",
                 "name": "Montage-Seminar",
                 "children": {}
               },
-              "!XlLsSVRWiPabhHwvDD:dev.medienhaus.udk-berlin.de": {
-                "id": "!XlLsSVRWiPabhHwvDD:dev.medienhaus.udk-berlin.de",
+              "!joSReOGsblBOetsykx:dev.medienhaus.udk-berlin.de": {
+                "id": "!joSReOGsblBOetsykx:dev.medienhaus.udk-berlin.de",
                 "name": "Neue Perspektiven - Tiere in der Stadt 2 / praktisches Filmseminar",
                 "children": {}
               },
-              "!zYiVCFzxvPnuoPsJlq:dev.medienhaus.udk-berlin.de": {
-                "id": "!zYiVCFzxvPnuoPsJlq:dev.medienhaus.udk-berlin.de",
+              "!jGBNvjvOfRIrJLJzvm:dev.medienhaus.udk-berlin.de": {
+                "id": "!jGBNvjvOfRIrJLJzvm:dev.medienhaus.udk-berlin.de",
                 "name": "New forms of research: more-than-human perspectives and tentacular thinking",
                 "children": {}
               },
-              "!wCPAyYAIgZNmrNvJIN:dev.medienhaus.udk-berlin.de": {
-                "id": "!wCPAyYAIgZNmrNvJIN:dev.medienhaus.udk-berlin.de",
+              "!XeMLcGKqNrJUaHLtsK:dev.medienhaus.udk-berlin.de": {
+                "id": "!XeMLcGKqNrJUaHLtsK:dev.medienhaus.udk-berlin.de",
                 "name": "Scrapbook of the Sixties« – Film und Experiment in New York",
                 "children": {}
               },
-              "!TvPadsSZGtCtZqYmBb:dev.medienhaus.udk-berlin.de": {
-                "id": "!TvPadsSZGtCtZqYmBb:dev.medienhaus.udk-berlin.de",
+              "!pLbagwuAznZHTnDkIk:dev.medienhaus.udk-berlin.de": {
+                "id": "!pLbagwuAznZHTnDkIk:dev.medienhaus.udk-berlin.de",
                 "name": "SOUNDDESIGN / POSTPRODUKTIONS-BERATUNG",
                 "children": {}
               },
-              "!JOSatcOAfFdEUZYeqv:dev.medienhaus.udk-berlin.de": {
-                "id": "!JOSatcOAfFdEUZYeqv:dev.medienhaus.udk-berlin.de",
+              "!VOuwNrsMHDJpAnJCkP:dev.medienhaus.udk-berlin.de": {
+                "id": "!VOuwNrsMHDJpAnJCkP:dev.medienhaus.udk-berlin.de",
                 "name": "space, environment and context: (noise and) silence",
                 "children": {}
               },
-              "!vBVQbtgQAmloLgQbYt:dev.medienhaus.udk-berlin.de": {
-                "id": "!vBVQbtgQAmloLgQbYt:dev.medienhaus.udk-berlin.de",
+              "!EpZwtqxQBhIxJKTdgT:dev.medienhaus.udk-berlin.de": {
+                "id": "!EpZwtqxQBhIxJKTdgT:dev.medienhaus.udk-berlin.de",
                 "name": "teacher.solar 0 :: Design & Deployment of a solar-powered artefact :: Sound & Klang",
                 "children": {}
               },
-              "!XiflmodiCEHwbZXnFb:dev.medienhaus.udk-berlin.de": {
-                "id": "!XiflmodiCEHwbZXnFb:dev.medienhaus.udk-berlin.de",
+              "!hXJVUemthIktjXDGoP:dev.medienhaus.udk-berlin.de": {
+                "id": "!hXJVUemthIktjXDGoP:dev.medienhaus.udk-berlin.de",
                 "name": "Technische Betreuung und Unterweisung der Nutzer/innen der AV-Geräte täglich nach Absprache",
                 "children": {}
               },
-              "!jZHJCgYXASuWVRJFNI:dev.medienhaus.udk-berlin.de": {
-                "id": "!jZHJCgYXASuWVRJFNI:dev.medienhaus.udk-berlin.de",
+              "!MafJytuATCtlwFGXPr:dev.medienhaus.udk-berlin.de": {
+                "id": "!MafJytuATCtlwFGXPr:dev.medienhaus.udk-berlin.de",
                 "name": "The Hitchhikersvto the Internet",
                 "children": {}
               },
-              "!moxrgkJbPJuQpNKyDy:dev.medienhaus.udk-berlin.de": {
-                "id": "!moxrgkJbPJuQpNKyDy:dev.medienhaus.udk-berlin.de",
+              "!OheNrmUzjJqNDCpLrE:dev.medienhaus.udk-berlin.de": {
+                "id": "!OheNrmUzjJqNDCpLrE:dev.medienhaus.udk-berlin.de",
                 "name": "Tonaufnahme-Seminar",
                 "children": {}
               },
-              "!MMAWuMUJnndQBHPLDy:dev.medienhaus.udk-berlin.de": {
-                "id": "!MMAWuMUJnndQBHPLDy:dev.medienhaus.udk-berlin.de",
+              "!ygTVnfiCwTKogMWLGU:dev.medienhaus.udk-berlin.de": {
+                "id": "!ygTVnfiCwTKogMWLGU:dev.medienhaus.udk-berlin.de",
                 "name": "Video Performance II : Dokumentation im Feld der Performancekunst",
                 "children": {}
               }
@@ -2024,3979 +4255,1748 @@ const struktur = {
           }
         }
       },
-      "!iwTrpWIRLwfUaXMTqV:dev.medienhaus.udk-berlin.de": {
-        "id": "!iwTrpWIRLwfUaXMTqV:dev.medienhaus.udk-berlin.de",
-        "name": "Fakultät Musik",
+      "!vOHZYCjoprMEUhfFBc:dev.medienhaus.udk-berlin.de": {
+        "id": "!vOHZYCjoprMEUhfFBc:dev.medienhaus.udk-berlin.de",
+        "name": "Fakultät der Bildenen Kunst",
         "children": {
-          "!BYGFjPSKLGdCRtMnlD:dev.medienhaus.udk-berlin.de": {
-            "id": "!BYGFjPSKLGdCRtMnlD:dev.medienhaus.udk-berlin.de",
-            "name": "Institut für Künstlerische Ausbildung / Klavier",
-            "children": {}
-          },
-          "!cDGKzVTBIMDaEoZKUa:dev.medienhaus.udk-berlin.de": {
-            "id": "!cDGKzVTBIMDaEoZKUa:dev.medienhaus.udk-berlin.de",
-            "name": "Institut für Künstlerische Ausbildung / Orchesterinstrumente und Dirigieren",
-            "children": {}
-          },
-          "!YSsiJBescwCdleJilu:dev.medienhaus.udk-berlin.de": {
-            "id": "!YSsiJBescwCdleJilu:dev.medienhaus.udk-berlin.de",
-            "name": "Institut für Künstlerische Ausbildung / Alte Musik",
-            "children": {}
-          },
-          "!bdTumJEwntDVRbRaIQ:dev.medienhaus.udk-berlin.de": {
-            "id": "!bdTumJEwntDVRbRaIQ:dev.medienhaus.udk-berlin.de",
-            "name": "Institut für Künstlerische Ausbildung / Zeitgenössischer Jazz",
+          "!EfVbeXnWsStjKOqvTq:dev.medienhaus.udk-berlin.de": {
+            "id": "!EfVbeXnWsStjKOqvTq:dev.medienhaus.udk-berlin.de",
+            "name": "Institut für Kunst",
             "children": {
-              "!bSxycrWZwmcbNBehzf:dev.medienhaus.udk-berlin.de": {
-                "id": "!bSxycrWZwmcbNBehzf:dev.medienhaus.udk-berlin.de",
-                "name": "Bachelor of Music (Jazz)",
+              "!TigIUKyWgUrQMiLznu:dev.medienhaus.udk-berlin.de": {
+                "id": "!TigIUKyWgUrQMiLznu:dev.medienhaus.udk-berlin.de",
+                "name": "Bachelor Lehramt an Integrierten Sekundarschulen und Gymnasien mit dem Fach Bildende Kunst 2018",
+                "children": {
+                  "!TMjcnCRihrerIdRMsb:dev.medienhaus.udk-berlin.de": {
+                    "id": "!TMjcnCRihrerIdRMsb:dev.medienhaus.udk-berlin.de",
+                    "name": "„Sprechen über Kunst. Konzepte für Bildung und Vermittlung von Biennalen und musealen Sammlungen“",
+                    "children": {}
+                  },
+                  "!ujnnoqryItDMUJZtze:dev.medienhaus.udk-berlin.de": {
+                    "id": "!ujnnoqryItDMUJZtze:dev.medienhaus.udk-berlin.de",
+                    "name": "\"… they think these bodies can't …\" - otherism in classical music composition (KW)",
+                    "children": {}
+                  },
+                  "!oWRAzqjXhGgdcTIfkG:dev.medienhaus.udk-berlin.de": {
+                    "id": "!oWRAzqjXhGgdcTIfkG:dev.medienhaus.udk-berlin.de",
+                    "name": "Adding Insult to Injury: Bodies and their Objects (IK)",
+                    "children": {}
+                  },
+                  "!DvDedTpNGJbJBDMkgW:dev.medienhaus.udk-berlin.de": {
+                    "id": "!DvDedTpNGJbJBDMkgW:dev.medienhaus.udk-berlin.de",
+                    "name": "Aisthesis Decolonial – Dekoloniale Theorie in Kunst und Gestaltung",
+                    "children": {}
+                  },
+                  "!EksZZYFMrEjdrOuNzx:dev.medienhaus.udk-berlin.de": {
+                    "id": "!EksZZYFMrEjdrOuNzx:dev.medienhaus.udk-berlin.de",
+                    "name": "Analyse der Macht der Plattformen (KW)",
+                    "children": {}
+                  },
+                  "!MWZPAeDLNPwqImQKbM:dev.medienhaus.udk-berlin.de": {
+                    "id": "!MWZPAeDLNPwqImQKbM:dev.medienhaus.udk-berlin.de",
+                    "name": "Andy Warhols queere Filmfabrik",
+                    "children": {}
+                  },
+                  "!djXEjRtWAOyiGnizVX:dev.medienhaus.udk-berlin.de": {
+                    "id": "!djXEjRtWAOyiGnizVX:dev.medienhaus.udk-berlin.de",
+                    "name": "Arbeitsgespräche / Einzelkonsultationen",
+                    "children": {}
+                  },
+                  "!WsELJqQdioUUbadjhG:dev.medienhaus.udk-berlin.de": {
+                    "id": "!WsELJqQdioUUbadjhG:dev.medienhaus.udk-berlin.de",
+                    "name": "Archäologie des Selbst",
+                    "children": {}
+                  },
+                  "!IxwGvjpcPCizkqqSVN:dev.medienhaus.udk-berlin.de": {
+                    "id": "!IxwGvjpcPCizkqqSVN:dev.medienhaus.udk-berlin.de",
+                    "name": "Before Photography. Wie ein Medium entsteht",
+                    "children": {}
+                  },
+                  "!DgwIMRjcxADbiWDAvZ:dev.medienhaus.udk-berlin.de": {
+                    "id": "!DgwIMRjcxADbiWDAvZ:dev.medienhaus.udk-berlin.de",
+                    "name": "Begleitung der künstlerischen Praxis in Einzel- und Gruppenbesprechungen (Klasse Karsten Konrad)",
+                    "children": {}
+                  },
+                  "!NbwYwovLRrnFDNJsRY:dev.medienhaus.udk-berlin.de": {
+                    "id": "!NbwYwovLRrnFDNJsRY:dev.medienhaus.udk-berlin.de",
+                    "name": "Beyond UX – Zur Kultur und Geschichte des Interfaces (KW)",
+                    "children": {}
+                  },
+                  "!BkkjzqKpaYJGGqFNSb:dev.medienhaus.udk-berlin.de": {
+                    "id": "!BkkjzqKpaYJGGqFNSb:dev.medienhaus.udk-berlin.de",
+                    "name": "Bildende Kunst",
+                    "children": {}
+                  },
+                  "!qCuhPiKhmePGwezyRP:dev.medienhaus.udk-berlin.de": {
+                    "id": "!qCuhPiKhmePGwezyRP:dev.medienhaus.udk-berlin.de",
+                    "name": "Bildhauerei",
+                    "children": {}
+                  },
+                  "!btUTbUYjTGZZbsdngB:dev.medienhaus.udk-berlin.de": {
+                    "id": "!btUTbUYjTGZZbsdngB:dev.medienhaus.udk-berlin.de",
+                    "name": "Bildhauerei 1 und 2",
+                    "children": {}
+                  },
+                  "!LWdOXcWePtiWGupWTp:dev.medienhaus.udk-berlin.de": {
+                    "id": "!LWdOXcWePtiWGupWTp:dev.medienhaus.udk-berlin.de",
+                    "name": "Bodybuilding (IK)",
+                    "children": {}
+                  },
+                  "!BBWQsVROlzWiFmQrPd:dev.medienhaus.udk-berlin.de": {
+                    "id": "!BBWQsVROlzWiFmQrPd:dev.medienhaus.udk-berlin.de",
+                    "name": "Bucheinbandtechniken",
+                    "children": {}
+                  },
+                  "!ogsDpgFrydgNLOytrT:dev.medienhaus.udk-berlin.de": {
+                    "id": "!ogsDpgFrydgNLOytrT:dev.medienhaus.udk-berlin.de",
+                    "name": "Bullshit-Resistenz: Einführung ins kritische Denken (KW)",
+                    "children": {}
+                  },
+                  "!ChmXPzeyTixviHnMUR:dev.medienhaus.udk-berlin.de": {
+                    "id": "!ChmXPzeyTixviHnMUR:dev.medienhaus.udk-berlin.de",
+                    "name": "Colloquium: Besprechnung wissenschaftlicher Abschlussarbeiten",
+                    "children": {}
+                  },
+                  "!tkMpsOotHGxKOhBeMt:dev.medienhaus.udk-berlin.de": {
+                    "id": "!tkMpsOotHGxKOhBeMt:dev.medienhaus.udk-berlin.de",
+                    "name": "Colloquium: Besprechung wissenschaftlicher Abschlussarbeiten",
+                    "children": {}
+                  },
+                  "!AvDeRYgONbSFWWvtBr:dev.medienhaus.udk-berlin.de": {
+                    "id": "!AvDeRYgONbSFWWvtBr:dev.medienhaus.udk-berlin.de",
+                    "name": "Colorgroßfoto-Analog I",
+                    "children": {}
+                  },
+                  "!JsIrccmVygGWbuOiaS:dev.medienhaus.udk-berlin.de": {
+                    "id": "!JsIrccmVygGWbuOiaS:dev.medienhaus.udk-berlin.de",
+                    "name": "Colorgroßfoto-Analog II",
+                    "children": {}
+                  },
+                  "!mQooMDuNqWMCssxTHm:dev.medienhaus.udk-berlin.de": {
+                    "id": "!mQooMDuNqWMCssxTHm:dev.medienhaus.udk-berlin.de",
+                    "name": "Contemporary Art and Photography / Zeitgenössische Kunst und Fotografie",
+                    "children": {}
+                  },
+                  "!iyFMjHGsXLDfpaDXsm:dev.medienhaus.udk-berlin.de": {
+                    "id": "!iyFMjHGsXLDfpaDXsm:dev.medienhaus.udk-berlin.de",
+                    "name": "Contesting the Colonial Spatial Divide of the Humboldt Forum & Following Entangled Trajectories",
+                    "children": {}
+                  },
+                  "!arFwqNHCsWlugsxRTI:dev.medienhaus.udk-berlin.de": {
+                    "id": "!arFwqNHCsWlugsxRTI:dev.medienhaus.udk-berlin.de",
+                    "name": "Designtechniken Modedesign: Schnittkonstruktion",
+                    "children": {}
+                  },
+                  "!KYxdApXNqoJaViOrsU:dev.medienhaus.udk-berlin.de": {
+                    "id": "!KYxdApXNqoJaViOrsU:dev.medienhaus.udk-berlin.de",
+                    "name": "Die Idee der Kindheit (Walter Benjamin)",
+                    "children": {}
+                  },
+                  "!VGBroDbhOgpzBziMan:dev.medienhaus.udk-berlin.de": {
+                    "id": "!VGBroDbhOgpzBziMan:dev.medienhaus.udk-berlin.de",
+                    "name": "Die Vermögen der Körper (KW)",
+                    "children": {}
+                  },
+                  "!eYujGLCoXCgbEEkFmX:dev.medienhaus.udk-berlin.de": {
+                    "id": "!eYujGLCoXCgbEEkFmX:dev.medienhaus.udk-berlin.de",
+                    "name": "Die Zukunft der großen Geschichten",
+                    "children": {}
+                  },
+                  "!AawtcshCfVZgOXsric:dev.medienhaus.udk-berlin.de": {
+                    "id": "!AawtcshCfVZgOXsric:dev.medienhaus.udk-berlin.de",
+                    "name": "Digitalfotolabor - Digitalgroßfoto",
+                    "children": {}
+                  },
+                  "!JmuXjvxeyvIpujgUjy:dev.medienhaus.udk-berlin.de": {
+                    "id": "!JmuXjvxeyvIpujgUjy:dev.medienhaus.udk-berlin.de",
+                    "name": "Doktorandencolloquium",
+                    "children": {}
+                  },
+                  "!ZOcqzSvaKFuQDKkEjQ:dev.medienhaus.udk-berlin.de": {
+                    "id": "!ZOcqzSvaKFuQDKkEjQ:dev.medienhaus.udk-berlin.de",
+                    "name": "Drucken im Großformat – Hochdruck-Tiefdruck – experimentelle Druckgrafk",
+                    "children": {}
+                  },
+                  "!IMiLIFoKJuRUqADiEj:dev.medienhaus.udk-berlin.de": {
+                    "id": "!IMiLIFoKJuRUqADiEj:dev.medienhaus.udk-berlin.de",
+                    "name": "Einführung in bildhauerische Techniken mit dem Werkstoff Ton",
+                    "children": {}
+                  },
+                  "!GUoACGJOgHuuJbbVuY:dev.medienhaus.udk-berlin.de": {
+                    "id": "!GUoACGJOgHuuJbbVuY:dev.medienhaus.udk-berlin.de",
+                    "name": "Einführung in die Kunstwissenschaft und Ästhetik",
+                    "children": {}
+                  },
+                  "!YkzudbjgYcWUwqHtrg:dev.medienhaus.udk-berlin.de": {
+                    "id": "!YkzudbjgYcWUwqHtrg:dev.medienhaus.udk-berlin.de",
+                    "name": "Einführung in die Kunstwissenschaft und Ästhetik",
+                    "children": {}
+                  },
+                  "!LSSHkJtwUYAbXxLPZX:dev.medienhaus.udk-berlin.de": {
+                    "id": "!LSSHkJtwUYAbXxLPZX:dev.medienhaus.udk-berlin.de",
+                    "name": "Einführung in die Ölmalerei - ohne gesundheitsgefährdende Lösungsmittel (Online-Kurs)",
+                    "children": {}
+                  },
+                  "!CIgycaXOJwWlKIgSeb:dev.medienhaus.udk-berlin.de": {
+                    "id": "!CIgycaXOJwWlKIgSeb:dev.medienhaus.udk-berlin.de",
+                    "name": "Einführung in textile Werkverfahren",
+                    "children": {}
+                  },
+                  "!CMtrPCwzuqlDTHiYpe:dev.medienhaus.udk-berlin.de": {
+                    "id": "!CMtrPCwzuqlDTHiYpe:dev.medienhaus.udk-berlin.de",
+                    "name": "Einführungskurs, Individuelle Beratung und Betreuung von künstlerischen Projekten",
+                    "children": {}
+                  },
+                  "!AujnneHCJykyXhJtDh:dev.medienhaus.udk-berlin.de": {
+                    "id": "!AujnneHCJykyXhJtDh:dev.medienhaus.udk-berlin.de",
+                    "name": "Einstieg in das digitale Zeichnen und die 2D-Animation mit dem iPad",
+                    "children": {}
+                  },
+                  "!fUugeyjRltASfoTfur:dev.medienhaus.udk-berlin.de": {
+                    "id": "!fUugeyjRltASfoTfur:dev.medienhaus.udk-berlin.de",
+                    "name": "Eintritt in die dritte Dimension: Videoarbeiten mit 3D-Techniken",
+                    "children": {}
+                  },
+                  "!ZQqqWeaGXDxXGSFbku:dev.medienhaus.udk-berlin.de": {
+                    "id": "!ZQqqWeaGXDxXGSFbku:dev.medienhaus.udk-berlin.de",
+                    "name": "En plein air! – Wanderstaffelei, Farbentuben und festes Schuhwerk in analoger Praxis bei jeder Wetterlage (IK)",
+                    "children": {}
+                  },
+                  "!bRhGYCzOBiIgbNxaRq:dev.medienhaus.udk-berlin.de": {
+                    "id": "!bRhGYCzOBiIgbNxaRq:dev.medienhaus.udk-berlin.de",
+                    "name": "Erweitertes Bewegtbild / Video / 2D und 3D Animation - individuelle Projektbetreuung",
+                    "children": {}
+                  },
+                  "!ExhUfoNkdYSitPRLmG:dev.medienhaus.udk-berlin.de": {
+                    "id": "!ExhUfoNkdYSitPRLmG:dev.medienhaus.udk-berlin.de",
+                    "name": "Erzählerische, fiktionale Bildkonzepte",
+                    "children": {}
+                  },
+                  "!cBGotpJfzRvApNYHJw:dev.medienhaus.udk-berlin.de": {
+                    "id": "!cBGotpJfzRvApNYHJw:dev.medienhaus.udk-berlin.de",
+                    "name": "Essay als Form – in Kunst, Literatur, Ausstellung",
+                    "children": {}
+                  },
+                  "!BETFkiqoRUWvFYByhT:dev.medienhaus.udk-berlin.de": {
+                    "id": "!BETFkiqoRUWvFYByhT:dev.medienhaus.udk-berlin.de",
+                    "name": "Fachdidaktik I (Einführung)/ISS Gym BA",
+                    "children": {}
+                  },
+                  "!KYRZOVjrypCAEWGohU:dev.medienhaus.udk-berlin.de": {
+                    "id": "!KYRZOVjrypCAEWGohU:dev.medienhaus.udk-berlin.de",
+                    "name": "Fachdidaktik II (Theorie) »Aber Bitte, postdigital!«",
+                    "children": {}
+                  },
+                  "!tvjJgAfvZtGqkribyB:dev.medienhaus.udk-berlin.de": {
+                    "id": "!tvjJgAfvZtGqkribyB:dev.medienhaus.udk-berlin.de",
+                    "name": "Farb- und Materialtechnik",
+                    "children": {}
+                  },
+                  "!idVjhzpagZSWUIPPdG:dev.medienhaus.udk-berlin.de": {
+                    "id": "!idVjhzpagZSWUIPPdG:dev.medienhaus.udk-berlin.de",
+                    "name": "Film, Video und Audio - individuelle Projektbetreuung",
+                    "children": {}
+                  },
+                  "!EWgHICsSTceiKtUXTe:dev.medienhaus.udk-berlin.de": {
+                    "id": "!EWgHICsSTceiKtUXTe:dev.medienhaus.udk-berlin.de",
+                    "name": "Fleischwerdung des Wortes. Über eine Poetik des Körpers (KW)",
+                    "children": {}
+                  },
+                  "!uGwhMSfSdsMgUdeJiI:dev.medienhaus.udk-berlin.de": {
+                    "id": "!uGwhMSfSdsMgUdeJiI:dev.medienhaus.udk-berlin.de",
+                    "name": "Foto 1 und 2",
+                    "children": {}
+                  },
+                  "!sqouhRswtypZFNOiHX:dev.medienhaus.udk-berlin.de": {
+                    "id": "!sqouhRswtypZFNOiHX:dev.medienhaus.udk-berlin.de",
+                    "name": "Free Improv – Orchestra (IK)",
+                    "children": {}
+                  }
+                }
+              },
+              "!MuueSoeHQdoGclCdYi:dev.medienhaus.udk-berlin.de": {
+                "id": "!MuueSoeHQdoGclCdYi:dev.medienhaus.udk-berlin.de",
+                "name": "Master Lehramt an Integrierten Sekundarschulen und Gymnasien mit dem Fach Bildende Kunst 2018",
+                "children": {
+                  "!TMjcnCRihrerIdRMsb:dev.medienhaus.udk-berlin.de": {
+                    "id": "!TMjcnCRihrerIdRMsb:dev.medienhaus.udk-berlin.de",
+                    "name": "„Sprechen über Kunst. Konzepte für Bildung und Vermittlung von Biennalen und musealen Sammlungen“",
+                    "children": {}
+                  },
+                  "!kzChowdBWqFHfurBai:dev.medienhaus.udk-berlin.de": {
+                    "id": "!kzChowdBWqFHfurBai:dev.medienhaus.udk-berlin.de",
+                    "name": "Analog/Farbe",
+                    "children": {}
+                  },
+                  "!uVAsAgpjWVrGMoUKeU:dev.medienhaus.udk-berlin.de": {
+                    "id": "!uVAsAgpjWVrGMoUKeU:dev.medienhaus.udk-berlin.de",
+                    "name": "Analog SW/Fotografie und Labor",
+                    "children": {}
+                  },
+                  "!MWZPAeDLNPwqImQKbM:dev.medienhaus.udk-berlin.de": {
+                    "id": "!MWZPAeDLNPwqImQKbM:dev.medienhaus.udk-berlin.de",
+                    "name": "Andy Warhols queere Filmfabrik",
+                    "children": {}
+                  },
+                  "!IxwGvjpcPCizkqqSVN:dev.medienhaus.udk-berlin.de": {
+                    "id": "!IxwGvjpcPCizkqqSVN:dev.medienhaus.udk-berlin.de",
+                    "name": "Before Photography. Wie ein Medium entsteht",
+                    "children": {}
+                  },
+                  "!DgwIMRjcxADbiWDAvZ:dev.medienhaus.udk-berlin.de": {
+                    "id": "!DgwIMRjcxADbiWDAvZ:dev.medienhaus.udk-berlin.de",
+                    "name": "Begleitung der künstlerischen Praxis in Einzel- und Gruppenbesprechungen (Klasse Karsten Konrad)",
+                    "children": {}
+                  },
+                  "!BkkjzqKpaYJGGqFNSb:dev.medienhaus.udk-berlin.de": {
+                    "id": "!BkkjzqKpaYJGGqFNSb:dev.medienhaus.udk-berlin.de",
+                    "name": "Bildende Kunst",
+                    "children": {}
+                  },
+                  "!qCuhPiKhmePGwezyRP:dev.medienhaus.udk-berlin.de": {
+                    "id": "!qCuhPiKhmePGwezyRP:dev.medienhaus.udk-berlin.de",
+                    "name": "Bildhauerei",
+                    "children": {}
+                  },
+                  "!ChmXPzeyTixviHnMUR:dev.medienhaus.udk-berlin.de": {
+                    "id": "!ChmXPzeyTixviHnMUR:dev.medienhaus.udk-berlin.de",
+                    "name": "Colloquium: Besprechnung wissenschaftlicher Abschlussarbeiten",
+                    "children": {}
+                  },
+                  "!tkMpsOotHGxKOhBeMt:dev.medienhaus.udk-berlin.de": {
+                    "id": "!tkMpsOotHGxKOhBeMt:dev.medienhaus.udk-berlin.de",
+                    "name": "Colloquium: Besprechung wissenschaftlicher Abschlussarbeiten",
+                    "children": {}
+                  },
+                  "!AvDeRYgONbSFWWvtBr:dev.medienhaus.udk-berlin.de": {
+                    "id": "!AvDeRYgONbSFWWvtBr:dev.medienhaus.udk-berlin.de",
+                    "name": "Colorgroßfoto-Analog I",
+                    "children": {}
+                  },
+                  "!JsIrccmVygGWbuOiaS:dev.medienhaus.udk-berlin.de": {
+                    "id": "!JsIrccmVygGWbuOiaS:dev.medienhaus.udk-berlin.de",
+                    "name": "Colorgroßfoto-Analog II",
+                    "children": {}
+                  },
+                  "!mQooMDuNqWMCssxTHm:dev.medienhaus.udk-berlin.de": {
+                    "id": "!mQooMDuNqWMCssxTHm:dev.medienhaus.udk-berlin.de",
+                    "name": "Contemporary Art and Photography / Zeitgenössische Kunst und Fotografie",
+                    "children": {}
+                  },
+                  "!KYxdApXNqoJaViOrsU:dev.medienhaus.udk-berlin.de": {
+                    "id": "!KYxdApXNqoJaViOrsU:dev.medienhaus.udk-berlin.de",
+                    "name": "Die Idee der Kindheit (Walter Benjamin)",
+                    "children": {}
+                  },
+                  "!eYujGLCoXCgbEEkFmX:dev.medienhaus.udk-berlin.de": {
+                    "id": "!eYujGLCoXCgbEEkFmX:dev.medienhaus.udk-berlin.de",
+                    "name": "Die Zukunft der großen Geschichten",
+                    "children": {}
+                  },
+                  "!AawtcshCfVZgOXsric:dev.medienhaus.udk-berlin.de": {
+                    "id": "!AawtcshCfVZgOXsric:dev.medienhaus.udk-berlin.de",
+                    "name": "Digitalfotolabor - Digitalgroßfoto",
+                    "children": {}
+                  },
+                  "!JmuXjvxeyvIpujgUjy:dev.medienhaus.udk-berlin.de": {
+                    "id": "!JmuXjvxeyvIpujgUjy:dev.medienhaus.udk-berlin.de",
+                    "name": "Doktorandencolloquium",
+                    "children": {}
+                  },
+                  "!ZOcqzSvaKFuQDKkEjQ:dev.medienhaus.udk-berlin.de": {
+                    "id": "!ZOcqzSvaKFuQDKkEjQ:dev.medienhaus.udk-berlin.de",
+                    "name": "Drucken im Großformat – Hochdruck-Tiefdruck – experimentelle Druckgrafk",
+                    "children": {}
+                  },
+                  "!IMiLIFoKJuRUqADiEj:dev.medienhaus.udk-berlin.de": {
+                    "id": "!IMiLIFoKJuRUqADiEj:dev.medienhaus.udk-berlin.de",
+                    "name": "Einführung in bildhauerische Techniken mit dem Werkstoff Ton",
+                    "children": {}
+                  },
+                  "!LSSHkJtwUYAbXxLPZX:dev.medienhaus.udk-berlin.de": {
+                    "id": "!LSSHkJtwUYAbXxLPZX:dev.medienhaus.udk-berlin.de",
+                    "name": "Einführung in die Ölmalerei - ohne gesundheitsgefährdende Lösungsmittel (Online-Kurs)",
+                    "children": {}
+                  },
+                  "!CMtrPCwzuqlDTHiYpe:dev.medienhaus.udk-berlin.de": {
+                    "id": "!CMtrPCwzuqlDTHiYpe:dev.medienhaus.udk-berlin.de",
+                    "name": "Einführungskurs, Individuelle Beratung und Betreuung von künstlerischen Projekten",
+                    "children": {}
+                  },
+                  "!fUugeyjRltASfoTfur:dev.medienhaus.udk-berlin.de": {
+                    "id": "!fUugeyjRltASfoTfur:dev.medienhaus.udk-berlin.de",
+                    "name": "Eintritt in die dritte Dimension: Videoarbeiten mit 3D-Techniken",
+                    "children": {}
+                  },
+                  "!bRhGYCzOBiIgbNxaRq:dev.medienhaus.udk-berlin.de": {
+                    "id": "!bRhGYCzOBiIgbNxaRq:dev.medienhaus.udk-berlin.de",
+                    "name": "Erweitertes Bewegtbild / Video / 2D und 3D Animation - individuelle Projektbetreuung",
+                    "children": {}
+                  },
+                  "!ExhUfoNkdYSitPRLmG:dev.medienhaus.udk-berlin.de": {
+                    "id": "!ExhUfoNkdYSitPRLmG:dev.medienhaus.udk-berlin.de",
+                    "name": "Erzählerische, fiktionale Bildkonzepte",
+                    "children": {}
+                  },
+                  "!cBGotpJfzRvApNYHJw:dev.medienhaus.udk-berlin.de": {
+                    "id": "!cBGotpJfzRvApNYHJw:dev.medienhaus.udk-berlin.de",
+                    "name": "Essay als Form – in Kunst, Literatur, Ausstellung",
+                    "children": {}
+                  },
+                  "!tWxeGUDvDEiDrxfMkn:dev.medienhaus.udk-berlin.de": {
+                    "id": "!tWxeGUDvDEiDrxfMkn:dev.medienhaus.udk-berlin.de",
+                    "name": "Fachdidaktik II Forschungsprojekt/ Begleitseminar: Digitalisierung des Kunstunterrichts, Modul 5",
+                    "children": {}
+                  },
+                  "!idVjhzpagZSWUIPPdG:dev.medienhaus.udk-berlin.de": {
+                    "id": "!idVjhzpagZSWUIPPdG:dev.medienhaus.udk-berlin.de",
+                    "name": "Film, Video und Audio - individuelle Projektbetreuung",
+                    "children": {}
+                  },
+                  "!UwsRxAZiCuGssCNhrU:dev.medienhaus.udk-berlin.de": {
+                    "id": "!UwsRxAZiCuGssCNhrU:dev.medienhaus.udk-berlin.de",
+                    "name": "Forschen in der Kunstpädagogik",
+                    "children": {}
+                  },
+                  "!BNtgmRgLgcDtQvIeuu:dev.medienhaus.udk-berlin.de": {
+                    "id": "!BNtgmRgLgcDtQvIeuu:dev.medienhaus.udk-berlin.de",
+                    "name": "Forschungsperspektiven in der Kunstpädagogik und Kunstvermittlung - Einführung",
+                    "children": {}
+                  },
+                  "!fluCGjKiJUNhnapmjO:dev.medienhaus.udk-berlin.de": {
+                    "id": "!fluCGjKiJUNhnapmjO:dev.medienhaus.udk-berlin.de",
+                    "name": "Fotografie / Individuelle Projektbetreuung",
+                    "children": {}
+                  },
+                  "!SeFfjRrZQcPvLBfGDQ:dev.medienhaus.udk-berlin.de": {
+                    "id": "!SeFfjRrZQcPvLBfGDQ:dev.medienhaus.udk-berlin.de",
+                    "name": "Fotolabor/ freies Arbeiten für Studierende mit Grundkenntnissen",
+                    "children": {}
+                  },
+                  "!ajOUlsFrjcjQTWqUhe:dev.medienhaus.udk-berlin.de": {
+                    "id": "!ajOUlsFrjcjQTWqUhe:dev.medienhaus.udk-berlin.de",
+                    "name": "Freies Arbeiten für Fortgeschrittene",
+                    "children": {}
+                  },
+                  "!tMIoTnXIUkbjIrbKwu:dev.medienhaus.udk-berlin.de": {
+                    "id": "!tMIoTnXIUkbjIrbKwu:dev.medienhaus.udk-berlin.de",
+                    "name": "Fremde Wesen",
+                    "children": {}
+                  },
+                  "!FPubzEuZeDTjLocBew:dev.medienhaus.udk-berlin.de": {
+                    "id": "!FPubzEuZeDTjLocBew:dev.medienhaus.udk-berlin.de",
+                    "name": "Freundliche Kritik - Kolloquium für wissenschaftliches Arbeiten von Künstler*innen",
+                    "children": {}
+                  },
+                  "!rqBstCsSYwaxxzSQyL:dev.medienhaus.udk-berlin.de": {
+                    "id": "!rqBstCsSYwaxxzSQyL:dev.medienhaus.udk-berlin.de",
+                    "name": "From Concept To Performance",
+                    "children": {}
+                  },
+                  "!gpuqpJzHoWNwHLdmPF:dev.medienhaus.udk-berlin.de": {
+                    "id": "!gpuqpJzHoWNwHLdmPF:dev.medienhaus.udk-berlin.de",
+                    "name": "Gilles Deleuze, Differenz und Wiederholung",
+                    "children": {}
+                  },
+                  "!mleapoPCPRbQVSdCFi:dev.medienhaus.udk-berlin.de": {
+                    "id": "!mleapoPCPRbQVSdCFi:dev.medienhaus.udk-berlin.de",
+                    "name": "Grenzen der Vermittlung erkunden",
+                    "children": {}
+                  },
+                  "!DcNrJkLEmobpJnjrOJ:dev.medienhaus.udk-berlin.de": {
+                    "id": "!DcNrJkLEmobpJnjrOJ:dev.medienhaus.udk-berlin.de",
+                    "name": "Grundlagen der Steinbearbeitung für die Bildhauerei",
+                    "children": {}
+                  },
+                  "!QpRlAqLsiCzAmMWvYi:dev.medienhaus.udk-berlin.de": {
+                    "id": "!QpRlAqLsiCzAmMWvYi:dev.medienhaus.udk-berlin.de",
+                    "name": "Grundlagen Metall - individuelle Beratung und Betreuung",
+                    "children": {}
+                  },
+                  "!YmvPzYKFpuKkMyIfLx:dev.medienhaus.udk-berlin.de": {
+                    "id": "!YmvPzYKFpuKkMyIfLx:dev.medienhaus.udk-berlin.de",
+                    "name": "Grundlagen Metall - Werkstattkurs",
+                    "children": {}
+                  },
+                  "!zEPHYRgFjfIMYvHDFk:dev.medienhaus.udk-berlin.de": {
+                    "id": "!zEPHYRgFjfIMYvHDFk:dev.medienhaus.udk-berlin.de",
+                    "name": "Grundlagen zu Film und Video (Kamera, Ton, Licht, Postproduktion)",
+                    "children": {}
+                  },
+                  "!fHnemDcukXYxeAVchk:dev.medienhaus.udk-berlin.de": {
+                    "id": "!fHnemDcukXYxeAVchk:dev.medienhaus.udk-berlin.de",
+                    "name": "Holzpraxis I",
+                    "children": {}
+                  },
+                  "!YPZxwpZkNvdaSORPsr:dev.medienhaus.udk-berlin.de": {
+                    "id": "!YPZxwpZkNvdaSORPsr:dev.medienhaus.udk-berlin.de",
+                    "name": "Holzpraxis II",
+                    "children": {}
+                  },
+                  "!wcPPFVUbzuwntZpDHV:dev.medienhaus.udk-berlin.de": {
+                    "id": "!wcPPFVUbzuwntZpDHV:dev.medienhaus.udk-berlin.de",
+                    "name": "Holzschnitt - Einführung in die Vielschichtigkeit des Hochdrucks",
+                    "children": {}
+                  },
+                  "!gqAljwPPZIMbDulOlG:dev.medienhaus.udk-berlin.de": {
+                    "id": "!gqAljwPPZIMbDulOlG:dev.medienhaus.udk-berlin.de",
+                    "name": "Images in Motion",
+                    "children": {}
+                  },
+                  "!hckFpYzuIDcQarqxsg:dev.medienhaus.udk-berlin.de": {
+                    "id": "!hckFpYzuIDcQarqxsg:dev.medienhaus.udk-berlin.de",
+                    "name": "Individuelle Projektbetreuung für die Steinbildhauerei",
+                    "children": {}
+                  },
+                  "!xdbVmrjbRjvnSIxhEo:dev.medienhaus.udk-berlin.de": {
+                    "id": "!xdbVmrjbRjvnSIxhEo:dev.medienhaus.udk-berlin.de",
+                    "name": "Klassentreffen",
+                    "children": {}
+                  },
+                  "!HPSaBHYmmWUlIJsdKC:dev.medienhaus.udk-berlin.de": {
+                    "id": "!HPSaBHYmmWUlIJsdKC:dev.medienhaus.udk-berlin.de",
+                    "name": "Kunst und Biografie—Kunst als Biografie",
+                    "children": {}
+                  },
+                  "!ZOmWWqaqPluBrBTYOF:dev.medienhaus.udk-berlin.de": {
+                    "id": "!ZOmWWqaqPluBrBTYOF:dev.medienhaus.udk-berlin.de",
+                    "name": "Kunstunterricht und seine sozialen Bedingungen - historische Perspektiven auf ein komplexes Erbe",
+                    "children": {}
+                  }
+                }
+              },
+              "!SmbJbSaAiYHmXedLBV:dev.medienhaus.udk-berlin.de": {
+                "id": "!SmbJbSaAiYHmXedLBV:dev.medienhaus.udk-berlin.de",
+                "name": "Bildene Kunst",
+                "children": {
+                  "!TMjcnCRihrerIdRMsb:dev.medienhaus.udk-berlin.de": {
+                    "id": "!TMjcnCRihrerIdRMsb:dev.medienhaus.udk-berlin.de",
+                    "name": "„Sprechen über Kunst. Konzepte für Bildung und Vermittlung von Biennalen und musealen Sammlungen“",
+                    "children": {}
+                  },
+                  "!kzChowdBWqFHfurBai:dev.medienhaus.udk-berlin.de": {
+                    "id": "!kzChowdBWqFHfurBai:dev.medienhaus.udk-berlin.de",
+                    "name": "Analog/Farbe",
+                    "children": {}
+                  },
+                  "!uVAsAgpjWVrGMoUKeU:dev.medienhaus.udk-berlin.de": {
+                    "id": "!uVAsAgpjWVrGMoUKeU:dev.medienhaus.udk-berlin.de",
+                    "name": "Analog SW/Fotografie und Labor",
+                    "children": {}
+                  },
+                  "!MWZPAeDLNPwqImQKbM:dev.medienhaus.udk-berlin.de": {
+                    "id": "!MWZPAeDLNPwqImQKbM:dev.medienhaus.udk-berlin.de",
+                    "name": "Andy Warhols queere Filmfabrik",
+                    "children": {}
+                  },
+                  "!djXEjRtWAOyiGnizVX:dev.medienhaus.udk-berlin.de": {
+                    "id": "!djXEjRtWAOyiGnizVX:dev.medienhaus.udk-berlin.de",
+                    "name": "Arbeitsgespräche / Einzelkonsultationen",
+                    "children": {}
+                  },
+                  "!IxwGvjpcPCizkqqSVN:dev.medienhaus.udk-berlin.de": {
+                    "id": "!IxwGvjpcPCizkqqSVN:dev.medienhaus.udk-berlin.de",
+                    "name": "Before Photography. Wie ein Medium entsteht",
+                    "children": {}
+                  },
+                  "!DgwIMRjcxADbiWDAvZ:dev.medienhaus.udk-berlin.de": {
+                    "id": "!DgwIMRjcxADbiWDAvZ:dev.medienhaus.udk-berlin.de",
+                    "name": "Begleitung der künstlerischen Praxis in Einzel- und Gruppenbesprechungen (Klasse Karsten Konrad)",
+                    "children": {}
+                  },
+                  "!BkkjzqKpaYJGGqFNSb:dev.medienhaus.udk-berlin.de": {
+                    "id": "!BkkjzqKpaYJGGqFNSb:dev.medienhaus.udk-berlin.de",
+                    "name": "Bildende Kunst",
+                    "children": {}
+                  },
+                  "!qCuhPiKhmePGwezyRP:dev.medienhaus.udk-berlin.de": {
+                    "id": "!qCuhPiKhmePGwezyRP:dev.medienhaus.udk-berlin.de",
+                    "name": "Bildhauerei",
+                    "children": {}
+                  },
+                  "!btUTbUYjTGZZbsdngB:dev.medienhaus.udk-berlin.de": {
+                    "id": "!btUTbUYjTGZZbsdngB:dev.medienhaus.udk-berlin.de",
+                    "name": "Bildhauerei 1 und 2",
+                    "children": {}
+                  },
+                  "!BBWQsVROlzWiFmQrPd:dev.medienhaus.udk-berlin.de": {
+                    "id": "!BBWQsVROlzWiFmQrPd:dev.medienhaus.udk-berlin.de",
+                    "name": "Bucheinbandtechniken",
+                    "children": {}
+                  },
+                  "!AvDeRYgONbSFWWvtBr:dev.medienhaus.udk-berlin.de": {
+                    "id": "!AvDeRYgONbSFWWvtBr:dev.medienhaus.udk-berlin.de",
+                    "name": "Colorgroßfoto-Analog I",
+                    "children": {}
+                  },
+                  "!JsIrccmVygGWbuOiaS:dev.medienhaus.udk-berlin.de": {
+                    "id": "!JsIrccmVygGWbuOiaS:dev.medienhaus.udk-berlin.de",
+                    "name": "Colorgroßfoto-Analog II",
+                    "children": {}
+                  },
+                  "!mQooMDuNqWMCssxTHm:dev.medienhaus.udk-berlin.de": {
+                    "id": "!mQooMDuNqWMCssxTHm:dev.medienhaus.udk-berlin.de",
+                    "name": "Contemporary Art and Photography / Zeitgenössische Kunst und Fotografie",
+                    "children": {}
+                  },
+                  "!KYxdApXNqoJaViOrsU:dev.medienhaus.udk-berlin.de": {
+                    "id": "!KYxdApXNqoJaViOrsU:dev.medienhaus.udk-berlin.de",
+                    "name": "Die Idee der Kindheit (Walter Benjamin)",
+                    "children": {}
+                  },
+                  "!eYujGLCoXCgbEEkFmX:dev.medienhaus.udk-berlin.de": {
+                    "id": "!eYujGLCoXCgbEEkFmX:dev.medienhaus.udk-berlin.de",
+                    "name": "Die Zukunft der großen Geschichten",
+                    "children": {}
+                  },
+                  "!AawtcshCfVZgOXsric:dev.medienhaus.udk-berlin.de": {
+                    "id": "!AawtcshCfVZgOXsric:dev.medienhaus.udk-berlin.de",
+                    "name": "Digitalfotolabor - Digitalgroßfoto",
+                    "children": {}
+                  },
+                  "!ZOcqzSvaKFuQDKkEjQ:dev.medienhaus.udk-berlin.de": {
+                    "id": "!ZOcqzSvaKFuQDKkEjQ:dev.medienhaus.udk-berlin.de",
+                    "name": "Drucken im Großformat – Hochdruck-Tiefdruck – experimentelle Druckgrafk",
+                    "children": {}
+                  },
+                  "!IMiLIFoKJuRUqADiEj:dev.medienhaus.udk-berlin.de": {
+                    "id": "!IMiLIFoKJuRUqADiEj:dev.medienhaus.udk-berlin.de",
+                    "name": "Einführung in bildhauerische Techniken mit dem Werkstoff Ton",
+                    "children": {}
+                  },
+                  "!GUoACGJOgHuuJbbVuY:dev.medienhaus.udk-berlin.de": {
+                    "id": "!GUoACGJOgHuuJbbVuY:dev.medienhaus.udk-berlin.de",
+                    "name": "Einführung in die Kunstwissenschaft und Ästhetik",
+                    "children": {}
+                  },
+                  "!YkzudbjgYcWUwqHtrg:dev.medienhaus.udk-berlin.de": {
+                    "id": "!YkzudbjgYcWUwqHtrg:dev.medienhaus.udk-berlin.de",
+                    "name": "Einführung in die Kunstwissenschaft und Ästhetik",
+                    "children": {}
+                  },
+                  "!LSSHkJtwUYAbXxLPZX:dev.medienhaus.udk-berlin.de": {
+                    "id": "!LSSHkJtwUYAbXxLPZX:dev.medienhaus.udk-berlin.de",
+                    "name": "Einführung in die Ölmalerei - ohne gesundheitsgefährdende Lösungsmittel (Online-Kurs)",
+                    "children": {}
+                  },
+                  "!CIgycaXOJwWlKIgSeb:dev.medienhaus.udk-berlin.de": {
+                    "id": "!CIgycaXOJwWlKIgSeb:dev.medienhaus.udk-berlin.de",
+                    "name": "Einführung in textile Werkverfahren",
+                    "children": {}
+                  },
+                  "!CMtrPCwzuqlDTHiYpe:dev.medienhaus.udk-berlin.de": {
+                    "id": "!CMtrPCwzuqlDTHiYpe:dev.medienhaus.udk-berlin.de",
+                    "name": "Einführungskurs, Individuelle Beratung und Betreuung von künstlerischen Projekten",
+                    "children": {}
+                  },
+                  "!AujnneHCJykyXhJtDh:dev.medienhaus.udk-berlin.de": {
+                    "id": "!AujnneHCJykyXhJtDh:dev.medienhaus.udk-berlin.de",
+                    "name": "Einstieg in das digitale Zeichnen und die 2D-Animation mit dem iPad",
+                    "children": {}
+                  },
+                  "!fUugeyjRltASfoTfur:dev.medienhaus.udk-berlin.de": {
+                    "id": "!fUugeyjRltASfoTfur:dev.medienhaus.udk-berlin.de",
+                    "name": "Eintritt in die dritte Dimension: Videoarbeiten mit 3D-Techniken",
+                    "children": {}
+                  },
+                  "!bRhGYCzOBiIgbNxaRq:dev.medienhaus.udk-berlin.de": {
+                    "id": "!bRhGYCzOBiIgbNxaRq:dev.medienhaus.udk-berlin.de",
+                    "name": "Erweitertes Bewegtbild / Video / 2D und 3D Animation - individuelle Projektbetreuung",
+                    "children": {}
+                  },
+                  "!ExhUfoNkdYSitPRLmG:dev.medienhaus.udk-berlin.de": {
+                    "id": "!ExhUfoNkdYSitPRLmG:dev.medienhaus.udk-berlin.de",
+                    "name": "Erzählerische, fiktionale Bildkonzepte",
+                    "children": {}
+                  },
+                  "!tvjJgAfvZtGqkribyB:dev.medienhaus.udk-berlin.de": {
+                    "id": "!tvjJgAfvZtGqkribyB:dev.medienhaus.udk-berlin.de",
+                    "name": "Farb- und Materialtechnik",
+                    "children": {}
+                  },
+                  "!idVjhzpagZSWUIPPdG:dev.medienhaus.udk-berlin.de": {
+                    "id": "!idVjhzpagZSWUIPPdG:dev.medienhaus.udk-berlin.de",
+                    "name": "Film, Video und Audio - individuelle Projektbetreuung",
+                    "children": {}
+                  },
+                  "!fluCGjKiJUNhnapmjO:dev.medienhaus.udk-berlin.de": {
+                    "id": "!fluCGjKiJUNhnapmjO:dev.medienhaus.udk-berlin.de",
+                    "name": "Fotografie / Individuelle Projektbetreuung",
+                    "children": {}
+                  },
+                  "!SeFfjRrZQcPvLBfGDQ:dev.medienhaus.udk-berlin.de": {
+                    "id": "!SeFfjRrZQcPvLBfGDQ:dev.medienhaus.udk-berlin.de",
+                    "name": "Fotolabor/ freies Arbeiten für Studierende mit Grundkenntnissen",
+                    "children": {}
+                  },
+                  "!ajOUlsFrjcjQTWqUhe:dev.medienhaus.udk-berlin.de": {
+                    "id": "!ajOUlsFrjcjQTWqUhe:dev.medienhaus.udk-berlin.de",
+                    "name": "Freies Arbeiten für Fortgeschrittene",
+                    "children": {}
+                  },
+                  "!tMIoTnXIUkbjIrbKwu:dev.medienhaus.udk-berlin.de": {
+                    "id": "!tMIoTnXIUkbjIrbKwu:dev.medienhaus.udk-berlin.de",
+                    "name": "Fremde Wesen",
+                    "children": {}
+                  },
+                  "!rqBstCsSYwaxxzSQyL:dev.medienhaus.udk-berlin.de": {
+                    "id": "!rqBstCsSYwaxxzSQyL:dev.medienhaus.udk-berlin.de",
+                    "name": "From Concept To Performance",
+                    "children": {}
+                  },
+                  "!gpuqpJzHoWNwHLdmPF:dev.medienhaus.udk-berlin.de": {
+                    "id": "!gpuqpJzHoWNwHLdmPF:dev.medienhaus.udk-berlin.de",
+                    "name": "Gilles Deleuze, Differenz und Wiederholung",
+                    "children": {}
+                  },
+                  "!DcNrJkLEmobpJnjrOJ:dev.medienhaus.udk-berlin.de": {
+                    "id": "!DcNrJkLEmobpJnjrOJ:dev.medienhaus.udk-berlin.de",
+                    "name": "Grundlagen der Steinbearbeitung für die Bildhauerei",
+                    "children": {}
+                  },
+                  "!QpRlAqLsiCzAmMWvYi:dev.medienhaus.udk-berlin.de": {
+                    "id": "!QpRlAqLsiCzAmMWvYi:dev.medienhaus.udk-berlin.de",
+                    "name": "Grundlagen Metall - individuelle Beratung und Betreuung",
+                    "children": {}
+                  },
+                  "!YmvPzYKFpuKkMyIfLx:dev.medienhaus.udk-berlin.de": {
+                    "id": "!YmvPzYKFpuKkMyIfLx:dev.medienhaus.udk-berlin.de",
+                    "name": "Grundlagen Metall - Werkstattkurs",
+                    "children": {}
+                  },
+                  "!zEPHYRgFjfIMYvHDFk:dev.medienhaus.udk-berlin.de": {
+                    "id": "!zEPHYRgFjfIMYvHDFk:dev.medienhaus.udk-berlin.de",
+                    "name": "Grundlagen zu Film und Video (Kamera, Ton, Licht, Postproduktion)",
+                    "children": {}
+                  },
+                  "!HnqGUKbeSfheQwlrSH:dev.medienhaus.udk-berlin.de": {
+                    "id": "!HnqGUKbeSfheQwlrSH:dev.medienhaus.udk-berlin.de",
+                    "name": "Grundlehre: Großes Plenum",
+                    "children": {}
+                  },
+                  "!YtTUZUBYAiFhsonONk:dev.medienhaus.udk-berlin.de": {
+                    "id": "!YtTUZUBYAiFhsonONk:dev.medienhaus.udk-berlin.de",
+                    "name": "Grundlehre: Kleines Plenum",
+                    "children": {}
+                  },
+                  "!bJNlnHidcVYYfTTsuO:dev.medienhaus.udk-berlin.de": {
+                    "id": "!bJNlnHidcVYYfTTsuO:dev.medienhaus.udk-berlin.de",
+                    "name": "Grundlehre: Kolloquium",
+                    "children": {}
+                  },
+                  "!fHnemDcukXYxeAVchk:dev.medienhaus.udk-berlin.de": {
+                    "id": "!fHnemDcukXYxeAVchk:dev.medienhaus.udk-berlin.de",
+                    "name": "Holzpraxis I",
+                    "children": {}
+                  },
+                  "!YPZxwpZkNvdaSORPsr:dev.medienhaus.udk-berlin.de": {
+                    "id": "!YPZxwpZkNvdaSORPsr:dev.medienhaus.udk-berlin.de",
+                    "name": "Holzpraxis II",
+                    "children": {}
+                  },
+                  "!wcPPFVUbzuwntZpDHV:dev.medienhaus.udk-berlin.de": {
+                    "id": "!wcPPFVUbzuwntZpDHV:dev.medienhaus.udk-berlin.de",
+                    "name": "Holzschnitt - Einführung in die Vielschichtigkeit des Hochdrucks",
+                    "children": {}
+                  },
+                  "!gqAljwPPZIMbDulOlG:dev.medienhaus.udk-berlin.de": {
+                    "id": "!gqAljwPPZIMbDulOlG:dev.medienhaus.udk-berlin.de",
+                    "name": "Images in Motion",
+                    "children": {}
+                  },
+                  "!hckFpYzuIDcQarqxsg:dev.medienhaus.udk-berlin.de": {
+                    "id": "!hckFpYzuIDcQarqxsg:dev.medienhaus.udk-berlin.de",
+                    "name": "Individuelle Projektbetreuung für die Steinbildhauerei",
+                    "children": {}
+                  },
+                  "!JUqolJExRvcQYaigYT:dev.medienhaus.udk-berlin.de": {
+                    "id": "!JUqolJExRvcQYaigYT:dev.medienhaus.udk-berlin.de",
+                    "name": "Installation",
+                    "children": {}
+                  }
+                }
+              },
+              "!XXsWUeekuAMvILqtyf:dev.medienhaus.udk-berlin.de": {
+                "id": "!XXsWUeekuAMvILqtyf:dev.medienhaus.udk-berlin.de",
+                "name": "Bachelorstudiengang Lehramt mit dem Kernfach Bildende Kunst",
                 "children": {}
               },
-              "!WSwtpbnMPwFMmZqTia:dev.medienhaus.udk-berlin.de": {
-                "id": "!WSwtpbnMPwFMmZqTia:dev.medienhaus.udk-berlin.de",
-                "name": "Master of Music Arrangement/Composition (Jazz)",
+              "!NoKzvIGPnRWdgCujGp:dev.medienhaus.udk-berlin.de": {
+                "id": "!NoKzvIGPnRWdgCujGp:dev.medienhaus.udk-berlin.de",
+                "name": "Masterstudiengang Lehramt mit dem vertieften Fach Bildende Kunst",
+                "children": {
+                  "!TMjcnCRihrerIdRMsb:dev.medienhaus.udk-berlin.de": {
+                    "id": "!TMjcnCRihrerIdRMsb:dev.medienhaus.udk-berlin.de",
+                    "name": "„Sprechen über Kunst. Konzepte für Bildung und Vermittlung von Biennalen und musealen Sammlungen“",
+                    "children": {}
+                  },
+                  "!MWZPAeDLNPwqImQKbM:dev.medienhaus.udk-berlin.de": {
+                    "id": "!MWZPAeDLNPwqImQKbM:dev.medienhaus.udk-berlin.de",
+                    "name": "Andy Warhols queere Filmfabrik",
+                    "children": {}
+                  },
+                  "!LHIYKnbeHcYIkTFCRr:dev.medienhaus.udk-berlin.de": {
+                    "id": "!LHIYKnbeHcYIkTFCRr:dev.medienhaus.udk-berlin.de",
+                    "name": "Arbeiten im Raum",
+                    "children": {}
+                  },
+                  "!IxwGvjpcPCizkqqSVN:dev.medienhaus.udk-berlin.de": {
+                    "id": "!IxwGvjpcPCizkqqSVN:dev.medienhaus.udk-berlin.de",
+                    "name": "Before Photography. Wie ein Medium entsteht",
+                    "children": {}
+                  },
+                  "!AvDeRYgONbSFWWvtBr:dev.medienhaus.udk-berlin.de": {
+                    "id": "!AvDeRYgONbSFWWvtBr:dev.medienhaus.udk-berlin.de",
+                    "name": "Colorgroßfoto-Analog I",
+                    "children": {}
+                  },
+                  "!JsIrccmVygGWbuOiaS:dev.medienhaus.udk-berlin.de": {
+                    "id": "!JsIrccmVygGWbuOiaS:dev.medienhaus.udk-berlin.de",
+                    "name": "Colorgroßfoto-Analog II",
+                    "children": {}
+                  },
+                  "!KYxdApXNqoJaViOrsU:dev.medienhaus.udk-berlin.de": {
+                    "id": "!KYxdApXNqoJaViOrsU:dev.medienhaus.udk-berlin.de",
+                    "name": "Die Idee der Kindheit (Walter Benjamin)",
+                    "children": {}
+                  },
+                  "!eYujGLCoXCgbEEkFmX:dev.medienhaus.udk-berlin.de": {
+                    "id": "!eYujGLCoXCgbEEkFmX:dev.medienhaus.udk-berlin.de",
+                    "name": "Die Zukunft der großen Geschichten",
+                    "children": {}
+                  },
+                  "!AawtcshCfVZgOXsric:dev.medienhaus.udk-berlin.de": {
+                    "id": "!AawtcshCfVZgOXsric:dev.medienhaus.udk-berlin.de",
+                    "name": "Digitalfotolabor - Digitalgroßfoto",
+                    "children": {}
+                  },
+                  "!ZOcqzSvaKFuQDKkEjQ:dev.medienhaus.udk-berlin.de": {
+                    "id": "!ZOcqzSvaKFuQDKkEjQ:dev.medienhaus.udk-berlin.de",
+                    "name": "Drucken im Großformat – Hochdruck-Tiefdruck – experimentelle Druckgrafk",
+                    "children": {}
+                  },
+                  "!IMiLIFoKJuRUqADiEj:dev.medienhaus.udk-berlin.de": {
+                    "id": "!IMiLIFoKJuRUqADiEj:dev.medienhaus.udk-berlin.de",
+                    "name": "Einführung in bildhauerische Techniken mit dem Werkstoff Ton",
+                    "children": {}
+                  },
+                  "!LSSHkJtwUYAbXxLPZX:dev.medienhaus.udk-berlin.de": {
+                    "id": "!LSSHkJtwUYAbXxLPZX:dev.medienhaus.udk-berlin.de",
+                    "name": "Einführung in die Ölmalerei - ohne gesundheitsgefährdende Lösungsmittel (Online-Kurs)",
+                    "children": {}
+                  },
+                  "!CMtrPCwzuqlDTHiYpe:dev.medienhaus.udk-berlin.de": {
+                    "id": "!CMtrPCwzuqlDTHiYpe:dev.medienhaus.udk-berlin.de",
+                    "name": "Einführungskurs, Individuelle Beratung und Betreuung von künstlerischen Projekten",
+                    "children": {}
+                  },
+                  "!fUugeyjRltASfoTfur:dev.medienhaus.udk-berlin.de": {
+                    "id": "!fUugeyjRltASfoTfur:dev.medienhaus.udk-berlin.de",
+                    "name": "Eintritt in die dritte Dimension: Videoarbeiten mit 3D-Techniken",
+                    "children": {}
+                  },
+                  "!UfvqyecOTkptLkyUcf:dev.medienhaus.udk-berlin.de": {
+                    "id": "!UfvqyecOTkptLkyUcf:dev.medienhaus.udk-berlin.de",
+                    "name": "Einzelgespräche",
+                    "children": {}
+                  },
+                  "!bRhGYCzOBiIgbNxaRq:dev.medienhaus.udk-berlin.de": {
+                    "id": "!bRhGYCzOBiIgbNxaRq:dev.medienhaus.udk-berlin.de",
+                    "name": "Erweitertes Bewegtbild / Video / 2D und 3D Animation - individuelle Projektbetreuung",
+                    "children": {}
+                  },
+                  "!cBGotpJfzRvApNYHJw:dev.medienhaus.udk-berlin.de": {
+                    "id": "!cBGotpJfzRvApNYHJw:dev.medienhaus.udk-berlin.de",
+                    "name": "Essay als Form – in Kunst, Literatur, Ausstellung",
+                    "children": {}
+                  },
+                  "!idVjhzpagZSWUIPPdG:dev.medienhaus.udk-berlin.de": {
+                    "id": "!idVjhzpagZSWUIPPdG:dev.medienhaus.udk-berlin.de",
+                    "name": "Film, Video und Audio - individuelle Projektbetreuung",
+                    "children": {}
+                  },
+                  "!VwONjrzScHtReSWPuz:dev.medienhaus.udk-berlin.de": {
+                    "id": "!VwONjrzScHtReSWPuz:dev.medienhaus.udk-berlin.de",
+                    "name": "Forschungspositionen Ästhetische Bildung",
+                    "children": {}
+                  },
+                  "!XdoNSQTjIFUOajVaYU:dev.medienhaus.udk-berlin.de": {
+                    "id": "!XdoNSQTjIFUOajVaYU:dev.medienhaus.udk-berlin.de",
+                    "name": "Forschungspositionen Kunstdidaktik",
+                    "children": {}
+                  },
+                  "!ajOUlsFrjcjQTWqUhe:dev.medienhaus.udk-berlin.de": {
+                    "id": "!ajOUlsFrjcjQTWqUhe:dev.medienhaus.udk-berlin.de",
+                    "name": "Freies Arbeiten für Fortgeschrittene",
+                    "children": {}
+                  },
+                  "!FPubzEuZeDTjLocBew:dev.medienhaus.udk-berlin.de": {
+                    "id": "!FPubzEuZeDTjLocBew:dev.medienhaus.udk-berlin.de",
+                    "name": "Freundliche Kritik - Kolloquium für wissenschaftliches Arbeiten von Künstler*innen",
+                    "children": {}
+                  },
+                  "!gpuqpJzHoWNwHLdmPF:dev.medienhaus.udk-berlin.de": {
+                    "id": "!gpuqpJzHoWNwHLdmPF:dev.medienhaus.udk-berlin.de",
+                    "name": "Gilles Deleuze, Differenz und Wiederholung",
+                    "children": {}
+                  },
+                  "!DcNrJkLEmobpJnjrOJ:dev.medienhaus.udk-berlin.de": {
+                    "id": "!DcNrJkLEmobpJnjrOJ:dev.medienhaus.udk-berlin.de",
+                    "name": "Grundlagen der Steinbearbeitung für die Bildhauerei",
+                    "children": {}
+                  },
+                  "!QpRlAqLsiCzAmMWvYi:dev.medienhaus.udk-berlin.de": {
+                    "id": "!QpRlAqLsiCzAmMWvYi:dev.medienhaus.udk-berlin.de",
+                    "name": "Grundlagen Metall - individuelle Beratung und Betreuung",
+                    "children": {}
+                  },
+                  "!YmvPzYKFpuKkMyIfLx:dev.medienhaus.udk-berlin.de": {
+                    "id": "!YmvPzYKFpuKkMyIfLx:dev.medienhaus.udk-berlin.de",
+                    "name": "Grundlagen Metall - Werkstattkurs",
+                    "children": {}
+                  },
+                  "!fHnemDcukXYxeAVchk:dev.medienhaus.udk-berlin.de": {
+                    "id": "!fHnemDcukXYxeAVchk:dev.medienhaus.udk-berlin.de",
+                    "name": "Holzpraxis I",
+                    "children": {}
+                  },
+                  "!YPZxwpZkNvdaSORPsr:dev.medienhaus.udk-berlin.de": {
+                    "id": "!YPZxwpZkNvdaSORPsr:dev.medienhaus.udk-berlin.de",
+                    "name": "Holzpraxis II",
+                    "children": {}
+                  },
+                  "!wcPPFVUbzuwntZpDHV:dev.medienhaus.udk-berlin.de": {
+                    "id": "!wcPPFVUbzuwntZpDHV:dev.medienhaus.udk-berlin.de",
+                    "name": "Holzschnitt - Einführung in die Vielschichtigkeit des Hochdrucks",
+                    "children": {}
+                  },
+                  "!hckFpYzuIDcQarqxsg:dev.medienhaus.udk-berlin.de": {
+                    "id": "!hckFpYzuIDcQarqxsg:dev.medienhaus.udk-berlin.de",
+                    "name": "Individuelle Projektbetreuung für die Steinbildhauerei",
+                    "children": {}
+                  },
+                  "!tYVmoXbGyMuBBCdDET:dev.medienhaus.udk-berlin.de": {
+                    "id": "!tYVmoXbGyMuBBCdDET:dev.medienhaus.udk-berlin.de",
+                    "name": "Klassentreffen",
+                    "children": {}
+                  },
+                  "!RKTMToOSJzZxBmFsVy:dev.medienhaus.udk-berlin.de": {
+                    "id": "!RKTMToOSJzZxBmFsVy:dev.medienhaus.udk-berlin.de",
+                    "name": "Kolloquium",
+                    "children": {}
+                  },
+                  "!RRJucQpIQCLYwrWdZv:dev.medienhaus.udk-berlin.de": {
+                    "id": "!RRJucQpIQCLYwrWdZv:dev.medienhaus.udk-berlin.de",
+                    "name": "Malerei (Grundlagen)/Zeichnung (Grundlagen)",
+                    "children": {}
+                  },
+                  "!BayKnmgerKMOCUdvHw:dev.medienhaus.udk-berlin.de": {
+                    "id": "!BayKnmgerKMOCUdvHw:dev.medienhaus.udk-berlin.de",
+                    "name": "Marcuse – Kunst und Revolution",
+                    "children": {}
+                  },
+                  "!stAKgKrqCIeDrBsglg:dev.medienhaus.udk-berlin.de": {
+                    "id": "!stAKgKrqCIeDrBsglg:dev.medienhaus.udk-berlin.de",
+                    "name": "Material-, Form- und Gusstechniken - Grundkurs",
+                    "children": {}
+                  },
+                  "!CIrGHEIFqjehKUulOt:dev.medienhaus.udk-berlin.de": {
+                    "id": "!CIrGHEIFqjehKUulOt:dev.medienhaus.udk-berlin.de",
+                    "name": "Metallpraxis - individuelle Beratung und Betreuung von künstlerischen Projekten",
+                    "children": {}
+                  },
+                  "!yEJhhYwBqsPBiEEweo:dev.medienhaus.udk-berlin.de": {
+                    "id": "!yEJhhYwBqsPBiEEweo:dev.medienhaus.udk-berlin.de",
+                    "name": "Objektbezogenes Arbeiten",
+                    "children": {}
+                  },
+                  "!zqtCYRhsQPrhSyGDyk:dev.medienhaus.udk-berlin.de": {
+                    "id": "!zqtCYRhsQPrhSyGDyk:dev.medienhaus.udk-berlin.de",
+                    "name": "Offene Werkstatt - Formen und Gießen",
+                    "children": {}
+                  },
+                  "!KyXApkEuUAhmTjORbf:dev.medienhaus.udk-berlin.de": {
+                    "id": "!KyXApkEuUAhmTjORbf:dev.medienhaus.udk-berlin.de",
+                    "name": "Offene Werkstatt Textil",
+                    "children": {}
+                  },
+                  "!rUKnNgigDnIMHoGCil:dev.medienhaus.udk-berlin.de": {
+                    "id": "!rUKnNgigDnIMHoGCil:dev.medienhaus.udk-berlin.de",
+                    "name": "Online-Werkstatt Maltechnik",
+                    "children": {}
+                  },
+                  "!qjVCELUIjBwRzqrirA:dev.medienhaus.udk-berlin.de": {
+                    "id": "!qjVCELUIjBwRzqrirA:dev.medienhaus.udk-berlin.de",
+                    "name": "Performance",
+                    "children": {}
+                  },
+                  "!glICceiFcBOHkDtHMM:dev.medienhaus.udk-berlin.de": {
+                    "id": "!glICceiFcBOHkDtHMM:dev.medienhaus.udk-berlin.de",
+                    "name": "Performative Präsentationen: Die eigene künstlerische Arbeit im medialen Raum",
+                    "children": {}
+                  },
+                  "!xrfkNroauvnUYpuUVv:dev.medienhaus.udk-berlin.de": {
+                    "id": "!xrfkNroauvnUYpuUVv:dev.medienhaus.udk-berlin.de",
+                    "name": "Projektbetreuung Foto- und Bildbearbeitung / Druck",
+                    "children": {}
+                  },
+                  "!BEqZwHSRCqVrKOySll:dev.medienhaus.udk-berlin.de": {
+                    "id": "!BEqZwHSRCqVrKOySll:dev.medienhaus.udk-berlin.de",
+                    "name": "Projektbetreuung/ Prüfungsvorbereitungen (Malerei)",
+                    "children": {}
+                  },
+                  "!RagWxXrgLuAWFjBJFK:dev.medienhaus.udk-berlin.de": {
+                    "id": "!RagWxXrgLuAWFjBJFK:dev.medienhaus.udk-berlin.de",
+                    "name": "Raum und Objektzeichnen – Methoden, Material, Experiment",
+                    "children": {}
+                  },
+                  "!WDLnNJNnvPHFhDwWfT:dev.medienhaus.udk-berlin.de": {
+                    "id": "!WDLnNJNnvPHFhDwWfT:dev.medienhaus.udk-berlin.de",
+                    "name": "Sacred, Secular, Sensual and Sublime: Manuscript Painting in India between 15th to 18th Centuries",
+                    "children": {}
+                  },
+                  "!AYirvGGnWCwIEiRJiu:dev.medienhaus.udk-berlin.de": {
+                    "id": "!AYirvGGnWCwIEiRJiu:dev.medienhaus.udk-berlin.de",
+                    "name": "Schreiben als künstlerisch-forschende Praxis",
+                    "children": {}
+                  },
+                  "!hEbrkRZKhxrWxhJeEe:dev.medienhaus.udk-berlin.de": {
+                    "id": "!hEbrkRZKhxrWxhJeEe:dev.medienhaus.udk-berlin.de",
+                    "name": "Seminar Musiktheorie: Das universale Material? Modales Komponieren in Neuer Musik, Jazz und Rock/Pop",
+                    "children": {}
+                  },
+                  "!vcZucHklkJPczVWgHa:dev.medienhaus.udk-berlin.de": {
+                    "id": "!vcZucHklkJPczVWgHa:dev.medienhaus.udk-berlin.de",
+                    "name": "Siebdruck: Anfänger - Grundlegende Kenntnisse in Theorie und Praxis",
+                    "children": {}
+                  }
+                }
+              },
+              "!BZXHOsPfiIUqUEBaid:dev.medienhaus.udk-berlin.de": {
+                "id": "!BZXHOsPfiIUqUEBaid:dev.medienhaus.udk-berlin.de",
+                "name": "Postgradualer Masterstudiengang Art in Context",
                 "children": {}
               },
-              "!GAWKiXMgRfEHJtVWdZ:dev.medienhaus.udk-berlin.de": {
-                "id": "!GAWKiXMgRfEHJtVWdZ:dev.medienhaus.udk-berlin.de",
-                "name": "European Jazz Master (EUJAM)",
+              "!TpgBflmolCuUcueLhF:dev.medienhaus.udk-berlin.de": {
+                "id": "!TpgBflmolCuUcueLhF:dev.medienhaus.udk-berlin.de",
+                "name": "Bachelor Lehramt an Grundschulen mit dem vertieften Fach Bildende Kunst 2018",
                 "children": {}
               }
             }
           },
-          "!TxVFxtEEpsrElnwJrT:dev.medienhaus.udk-berlin.de": {
-            "id": "!TxVFxtEEpsrElnwJrT:dev.medienhaus.udk-berlin.de",
-            "name": "Institut für Musikpädagogik",
+          "!XGmpYHXmTfgChEiFjC:dev.medienhaus.udk-berlin.de": {
+            "id": "!XGmpYHXmTfgChEiFjC:dev.medienhaus.udk-berlin.de",
+            "name": "Institut für Kunstdidaktik und Ästhetische Bildung",
             "children": {}
           },
-          "!lYOdEbtoaNfneWZGkR:dev.medienhaus.udk-berlin.de": {
-            "id": "!lYOdEbtoaNfneWZGkR:dev.medienhaus.udk-berlin.de",
-            "name": "Institut für Musikwissenschaft, Musiktheorie, Komposition und Musikübertragung",
+          "!EWdBxReuIRDyLNFuBy:dev.medienhaus.udk-berlin.de": {
+            "id": "!EWdBxReuIRDyLNFuBy:dev.medienhaus.udk-berlin.de",
+            "name": "Institut für Kunstwissenschaft und Ästhetik",
             "children": {}
           },
-          "!OhvgHhyRCJgWsIfBPS:dev.medienhaus.udk-berlin.de": {
-            "id": "!OhvgHhyRCJgWsIfBPS:dev.medienhaus.udk-berlin.de",
-            "name": "Institut für Kirchenmusik",
-            "children": {}
-          },
-          "!xwsxzOoVqODgMiaFTY:dev.medienhaus.udk-berlin.de": {
-            "id": "!xwsxzOoVqODgMiaFTY:dev.medienhaus.udk-berlin.de",
-            "name": "Institut für Neue Musik",
-            "children": {}
-          },
-          "!eJSnMuCkRydAJqwdPI:dev.medienhaus.udk-berlin.de": {
-            "id": "!eJSnMuCkRydAJqwdPI:dev.medienhaus.udk-berlin.de",
-            "name": "Julius-Stern-Institut für Nachwuchsförderung",
-            "children": {}
-          },
-          "!jchJnbQVzYXTAQFqDf:dev.medienhaus.udk-berlin.de": {
-            "id": "!jchJnbQVzYXTAQFqDf:dev.medienhaus.udk-berlin.de",
-            "name": "Kurt-Singer-Institut für Musikergesundheit",
-            "children": {}
-          },
-          "!FsAmzihAYNFPmfBUnF:dev.medienhaus.udk-berlin.de": {
-            "id": "!FsAmzihAYNFPmfBUnF:dev.medienhaus.udk-berlin.de",
-            "name": "Staats- und Domchor",
-            "children": {}
-          },
-          "!mWxduWWQJsWADFJZoF:dev.medienhaus.udk-berlin.de": {
-            "id": "!mWxduWWQJsWADFJZoF:dev.medienhaus.udk-berlin.de",
-            "name": "Instrumentalausbildung",
+          "!QSMvKyUAuKcLjHoFGU:dev.medienhaus.udk-berlin.de": {
+            "id": "!QSMvKyUAuKcLjHoFGU:dev.medienhaus.udk-berlin.de",
+            "name": "Institut für Kunst im Kontext",
             "children": {
-              "!eGuMIutQYWUlbDaPLm:dev.medienhaus.udk-berlin.de": {
-                "id": "!eGuMIutQYWUlbDaPLm:dev.medienhaus.udk-berlin.de",
-                "name": "Alban Berg \"Wozzeck\"",
-                "children": {}
-              },
-              "!SVUqlsAPWbwUZcZMIY:dev.medienhaus.udk-berlin.de": {
-                "id": "!SVUqlsAPWbwUZcZMIY:dev.medienhaus.udk-berlin.de",
-                "name": "Alexandertechnik",
-                "children": {}
-              },
-              "!QiziifyVzPdmyLmBRn:dev.medienhaus.udk-berlin.de": {
-                "id": "!QiziifyVzPdmyLmBRn:dev.medienhaus.udk-berlin.de",
-                "name": "Analyse und Interpretation",
-                "children": {}
-              },
-              "!VNqBBCbDUFGIhIHUjy:dev.medienhaus.udk-berlin.de": {
-                "id": "!VNqBBCbDUFGIhIHUjy:dev.medienhaus.udk-berlin.de",
-                "name": "Argentinischer Tango – verstehen und spielen",
-                "children": {}
-              },
-              "!QsbvaidEYYtZplgdcj:dev.medienhaus.udk-berlin.de": {
-                "id": "!QsbvaidEYYtZplgdcj:dev.medienhaus.udk-berlin.de",
-                "name": "Aufführungspraxis für Holzbläser",
-                "children": {}
-              },
-              "!IcCOlOLkaovvhVBoCa:dev.medienhaus.udk-berlin.de": {
-                "id": "!IcCOlOLkaovvhVBoCa:dev.medienhaus.udk-berlin.de",
-                "name": "Cellomethodik / Lehrpraxis",
-                "children": {}
-              },
-              "!jlFIDJrKyjMedyyjfu:dev.medienhaus.udk-berlin.de": {
-                "id": "!jlFIDJrKyjMedyyjfu:dev.medienhaus.udk-berlin.de",
-                "name": "Das Cembalo. Von Kielklavieren, Zupfklavieren, Spinetten, Virginalen und Schweinsköpfen.",
-                "children": {}
-              },
-              "!uUERZZMMADBYCruFyK:dev.medienhaus.udk-berlin.de": {
-                "id": "!uUERZZMMADBYCruFyK:dev.medienhaus.udk-berlin.de",
-                "name": "Das Kleine Klavierstück von Bach bis Schönberg. Zur Geschichte des Charakterstücks für",
-                "children": {}
-              },
-              "!UXSobQdCoDvibQWdGg:dev.medienhaus.udk-berlin.de": {
-                "id": "!UXSobQdCoDvibQWdGg:dev.medienhaus.udk-berlin.de",
-                "name": "Der Basso ostinato in westlicher Kunstmusik",
-                "children": {}
-              },
-              "!cywTceJEmzwomJuFEp:dev.medienhaus.udk-berlin.de": {
-                "id": "!cywTceJEmzwomJuFEp:dev.medienhaus.udk-berlin.de",
-                "name": "Einführung in die Musikwissenschaft",
-                "children": {}
-              },
-              "!ZXDkmOHZaOZfWhQmnB:dev.medienhaus.udk-berlin.de": {
-                "id": "!ZXDkmOHZaOZfWhQmnB:dev.medienhaus.udk-berlin.de",
-                "name": "Einführung in die Musikwissenschaft",
-                "children": {}
-              },
-              "!yNOUxsniRedUmPJVLZ:dev.medienhaus.udk-berlin.de": {
-                "id": "!yNOUxsniRedUmPJVLZ:dev.medienhaus.udk-berlin.de",
-                "name": "Ensemble ilinx \"Neue Wege zu Beethoven\" bei Crescendo 2021",
-                "children": {}
-              },
-              "!YnkMRFfhybMGYjufJy:dev.medienhaus.udk-berlin.de": {
-                "id": "!YnkMRFfhybMGYjufJy:dev.medienhaus.udk-berlin.de",
-                "name": "Fach-Didaktik/Lehrpraxis für Blechbläser",
-                "children": {}
-              },
-              "!JLsYuyzeWkfBNKZGvc:dev.medienhaus.udk-berlin.de": {
-                "id": "!JLsYuyzeWkfBNKZGvc:dev.medienhaus.udk-berlin.de",
-                "name": "Feldenkrais",
-                "children": {}
-              },
-              "!fWiMyTXLDMbLOPqvud:dev.medienhaus.udk-berlin.de": {
-                "id": "!fWiMyTXLDMbLOPqvud:dev.medienhaus.udk-berlin.de",
-                "name": "Franz Schuberts Kammermusik",
-                "children": {}
-              },
-              "!ieBmcSyfbaHnZXGhpf:dev.medienhaus.udk-berlin.de": {
-                "id": "!ieBmcSyfbaHnZXGhpf:dev.medienhaus.udk-berlin.de",
-                "name": "Großer Chor der UdK",
-                "children": {}
-              },
-              "!qRwyNmPAPJtxNieMFB:dev.medienhaus.udk-berlin.de": {
-                "id": "!qRwyNmPAPJtxNieMFB:dev.medienhaus.udk-berlin.de",
-                "name": "Grundlagenseminar Musikphysiologie",
-                "children": {}
-              },
-              "!lRZGPjlyLIiCxhpHPP:dev.medienhaus.udk-berlin.de": {
-                "id": "!lRZGPjlyLIiCxhpHPP:dev.medienhaus.udk-berlin.de",
-                "name": "Heimatkonstruktion, Musik und Medienkultur",
-                "children": {}
-              },
-              "!OVtTUdrvkygOklTJtg:dev.medienhaus.udk-berlin.de": {
-                "id": "!OVtTUdrvkygOklTJtg:dev.medienhaus.udk-berlin.de",
-                "name": "Heinrich Schütz",
-                "children": {}
-              },
-              "!UJHgiVrZuCRaGPfgCd:dev.medienhaus.udk-berlin.de": {
-                "id": "!UJHgiVrZuCRaGPfgCd:dev.medienhaus.udk-berlin.de",
-                "name": "Herrschaft und Emanzipation durch Musik: Gender, Klasse, Kirche, Staat",
-                "children": {}
-              },
-              "!HkfRdHbJYaWUmoDrNb:dev.medienhaus.udk-berlin.de": {
-                "id": "!HkfRdHbJYaWUmoDrNb:dev.medienhaus.udk-berlin.de",
-                "name": "Hollywood-Sound: Ästhetik und Geschichte eines filmmusikalischen Phänomens",
-                "children": {}
-              },
-              "!LlcGSBvOEWdTenSJXg:dev.medienhaus.udk-berlin.de": {
-                "id": "!LlcGSBvOEWdTenSJXg:dev.medienhaus.udk-berlin.de",
-                "name": "Instrumentenkunde KA/KPA",
-                "children": {}
-              },
-              "!DxEreoDufTnXzoFSxs:dev.medienhaus.udk-berlin.de": {
-                "id": "!DxEreoDufTnXzoFSxs:dev.medienhaus.udk-berlin.de",
-                "name": "Johannes Brahms",
-                "children": {}
-              },
-              "!wEilWwzTxCUCGlsirO:dev.medienhaus.udk-berlin.de": {
-                "id": "!wEilWwzTxCUCGlsirO:dev.medienhaus.udk-berlin.de",
-                "name": "Johannes Brahms und die Variation",
-                "children": {}
-              },
-              "!WhOAcCNHjKmMTbrKbD:dev.medienhaus.udk-berlin.de": {
-                "id": "!WhOAcCNHjKmMTbrKbD:dev.medienhaus.udk-berlin.de",
-                "name": "KA 1. Sem. Musiktheorie",
-                "children": {}
-              },
-              "!oFySkxXOzqqqyZqKTv:dev.medienhaus.udk-berlin.de": {
-                "id": "!oFySkxXOzqqqyZqKTv:dev.medienhaus.udk-berlin.de",
-                "name": "Kammerchor der Künste",
-                "children": {}
-              },
-              "!imneBKHCuafRnZPhux:dev.medienhaus.udk-berlin.de": {
-                "id": "!imneBKHCuafRnZPhux:dev.medienhaus.udk-berlin.de",
-                "name": "Kammermusik für historische Instrumente",
-                "children": {}
-              },
-              "!kWFqRMAyTkKmxeuUzR:dev.medienhaus.udk-berlin.de": {
-                "id": "!kWFqRMAyTkKmxeuUzR:dev.medienhaus.udk-berlin.de",
-                "name": "Kammermusik Gitarre und andere Instrumente",
-                "children": {}
-              },
-              "!iasuPudXAJhCjUbDcR:dev.medienhaus.udk-berlin.de": {
-                "id": "!iasuPudXAJhCjUbDcR:dev.medienhaus.udk-berlin.de",
-                "name": "Kammermusikunterricht",
-                "children": {}
-              },
-              "!mrSdPruHrLNAFZBfEP:dev.medienhaus.udk-berlin.de": {
-                "id": "!mrSdPruHrLNAFZBfEP:dev.medienhaus.udk-berlin.de",
-                "name": "KA Musiktheorie/Gehörbildung, 4.Sem.",
-                "children": {}
-              },
-              "!qkCocapBOcZgZClolK:dev.medienhaus.udk-berlin.de": {
-                "id": "!qkCocapBOcZgZClolK:dev.medienhaus.udk-berlin.de",
-                "name": "Klaviermethodik / Anfangsunterricht",
-                "children": {}
-              },
-              "!YKKVIHZYuuuDzgpdKA:dev.medienhaus.udk-berlin.de": {
-                "id": "!YKKVIHZYuuuDzgpdKA:dev.medienhaus.udk-berlin.de",
-                "name": "Korrepetition für Streicher (Hauptfach), KPA, ISS Gym, Tonmeister",
-                "children": {}
-              },
-              "!yaqfhgnQouNZgiuPwZ:dev.medienhaus.udk-berlin.de": {
-                "id": "!yaqfhgnQouNZgiuPwZ:dev.medienhaus.udk-berlin.de",
-                "name": "Kraftausdauer für Musiker",
-                "children": {}
-              },
-              "!HGnOviWGTdwGOcjSrk:dev.medienhaus.udk-berlin.de": {
-                "id": "!HGnOviWGTdwGOcjSrk:dev.medienhaus.udk-berlin.de",
-                "name": "Lehrpraxis Hohe Streicher",
-                "children": {}
-              },
-              "!VjJGUXdtdQjQtqTvCL:dev.medienhaus.udk-berlin.de": {
-                "id": "!VjJGUXdtdQjQtqTvCL:dev.medienhaus.udk-berlin.de",
-                "name": "Methodik/Didaktik/Lehrpraxis Blechbläser",
-                "children": {}
-              },
-              "!slQBzeoYxZjVbyiAht:dev.medienhaus.udk-berlin.de": {
-                "id": "!slQBzeoYxZjVbyiAht:dev.medienhaus.udk-berlin.de",
-                "name": "Methodik Hohe Streicher I",
-                "children": {}
-              },
-              "!vfHvygoATFIIJlCewa:dev.medienhaus.udk-berlin.de": {
-                "id": "!vfHvygoATFIIJlCewa:dev.medienhaus.udk-berlin.de",
-                "name": "Methodik /Lehrpraxis Gitarre",
-                "children": {}
-              },
-              "!PKgIDfgEaSupmGAKQD:dev.medienhaus.udk-berlin.de": {
-                "id": "!PKgIDfgEaSupmGAKQD:dev.medienhaus.udk-berlin.de",
-                "name": "Musikermedizinische Sprechstunde",
-                "children": {}
-              },
-              "!baoBFKSSZzQuYsmkBd:dev.medienhaus.udk-berlin.de": {
-                "id": "!baoBFKSSZzQuYsmkBd:dev.medienhaus.udk-berlin.de",
-                "name": "Musik im 20./21. Jhd.: Der gedehnte Augenblick in den kurzen Stücken von Schoenberg, Webern und Kurtág:",
-                "children": {}
-              },
-              "!oBSDiInkdCNYvVzSUj:dev.medienhaus.udk-berlin.de": {
-                "id": "!oBSDiInkdCNYvVzSUj:dev.medienhaus.udk-berlin.de",
-                "name": "Musikphysiologische Einzelberatung",
-                "children": {}
-              },
-              "!AMdYwHfIjJdLWlecyp:dev.medienhaus.udk-berlin.de": {
-                "id": "!AMdYwHfIjJdLWlecyp:dev.medienhaus.udk-berlin.de",
-                "name": "Musiktheorie/Gehörbildung KA 4. Semester",
-                "children": {}
-              },
-              "!TbOrJJgCPvThJRgoPs:dev.medienhaus.udk-berlin.de": {
-                "id": "!TbOrJJgCPvThJRgoPs:dev.medienhaus.udk-berlin.de",
-                "name": "Musik und Literatur im 20. Jahrhundert",
-                "children": {}
-              },
-              "!GBJwtzGcrMrtHRZmHb:dev.medienhaus.udk-berlin.de": {
-                "id": "!GBJwtzGcrMrtHRZmHb:dev.medienhaus.udk-berlin.de",
-                "name": "Musikwissenschaft für Musiker*innen / Musikwissenschaftliche Arbeitstechniken",
-                "children": {}
-              },
-              "!lsHXRvOaRdWFOlFaQz:dev.medienhaus.udk-berlin.de": {
-                "id": "!lsHXRvOaRdWFOlFaQz:dev.medienhaus.udk-berlin.de",
-                "name": "Orchesterpraxis für Streicher",
-                "children": {}
-              },
-              "!JQEsVmYqibkzBRZWNV:dev.medienhaus.udk-berlin.de": {
-                "id": "!JQEsVmYqibkzBRZWNV:dev.medienhaus.udk-berlin.de",
-                "name": "Orgelmethodik",
-                "children": {}
-              },
-              "!ovYJdZxzjKCRJftQbk:dev.medienhaus.udk-berlin.de": {
-                "id": "!ovYJdZxzjKCRJftQbk:dev.medienhaus.udk-berlin.de",
-                "name": "Original und Überlieferung – Die Toccata d-Moll BWV 565",
-                "children": {}
-              },
-              "!KfhjIDeJUPbFVabLUt:dev.medienhaus.udk-berlin.de": {
-                "id": "!KfhjIDeJUPbFVabLUt:dev.medienhaus.udk-berlin.de",
-                "name": "Satztechniken des 20./21. Jahrhunderts mit dem Schwerpunkt experimentelle Musik",
-                "children": {}
-              },
-              "!IwddsDkPXhgOlQqCfX:dev.medienhaus.udk-berlin.de": {
-                "id": "!IwddsDkPXhgOlQqCfX:dev.medienhaus.udk-berlin.de",
-                "name": "Schneller, höher, … besser? Konkurrenz und Wettbewerb in der Musik",
-                "children": {}
-              },
-              "!iHjqcClLHSqoLVPgGG:dev.medienhaus.udk-berlin.de": {
-                "id": "!iHjqcClLHSqoLVPgGG:dev.medienhaus.udk-berlin.de",
-                "name": "Super librum cantare – Mehrstimmige Vokalimprovisation im Stil der Renaissance",
+              "!rDALutRahrYuDXJRns:dev.medienhaus.udk-berlin.de": {
+                "id": "!rDALutRahrYuDXJRns:dev.medienhaus.udk-berlin.de",
+                "name": "Postgradualer Masterstudiengang Art in Context",
                 "children": {}
               }
             }
-          },
-          "!vkBPirPgzVVyXBUoJk:dev.medienhaus.udk-berlin.de": {
-            "id": "!vkBPirPgzVVyXBUoJk:dev.medienhaus.udk-berlin.de",
-            "name": "Komposition",
-            "children": {
-              "!WEaaAEaZsQbZXmzqKN:dev.medienhaus.udk-berlin.de": {
-                "id": "!WEaaAEaZsQbZXmzqKN:dev.medienhaus.udk-berlin.de",
-                "name": "„Das Meisterwerk in der Musik“ - Die Lehre Heinrich Schenkers",
-                "children": {}
-              },
-              "!eGuMIutQYWUlbDaPLm:dev.medienhaus.udk-berlin.de": {
-                "id": "!eGuMIutQYWUlbDaPLm:dev.medienhaus.udk-berlin.de",
-                "name": "Alban Berg \"Wozzeck\"",
-                "children": {}
-              },
-              "!jlFIDJrKyjMedyyjfu:dev.medienhaus.udk-berlin.de": {
-                "id": "!jlFIDJrKyjMedyyjfu:dev.medienhaus.udk-berlin.de",
-                "name": "Das Cembalo. Von Kielklavieren, Zupfklavieren, Spinetten, Virginalen und Schweinsköpfen.",
-                "children": {}
-              },
-              "!uUERZZMMADBYCruFyK:dev.medienhaus.udk-berlin.de": {
-                "id": "!uUERZZMMADBYCruFyK:dev.medienhaus.udk-berlin.de",
-                "name": "Das Kleine Klavierstück von Bach bis Schönberg. Zur Geschichte des Charakterstücks für",
-                "children": {}
-              },
-              "!yYqfpzHNrVBcTmDFqB:dev.medienhaus.udk-berlin.de": {
-                "id": "!yYqfpzHNrVBcTmDFqB:dev.medienhaus.udk-berlin.de",
-                "name": "Das Verfertigen einer wissenschaftlichen Hausarbeit/BA- MA-Arbeit/Sprechstunde",
-                "children": {}
-              },
-              "!AfIOzsgKPRjXaScuHR:dev.medienhaus.udk-berlin.de": {
-                "id": "!AfIOzsgKPRjXaScuHR:dev.medienhaus.udk-berlin.de",
-                "name": "Das Verfertigen einer wissenschaftlichen Hausarbeit/BA- MA-Arbeit/Sprechstunde/Prüfungscolloquium",
-                "children": {}
-              },
-              "!cywTceJEmzwomJuFEp:dev.medienhaus.udk-berlin.de": {
-                "id": "!cywTceJEmzwomJuFEp:dev.medienhaus.udk-berlin.de",
-                "name": "Einführung in die Musikwissenschaft",
-                "children": {}
-              },
-              "!ZXDkmOHZaOZfWhQmnB:dev.medienhaus.udk-berlin.de": {
-                "id": "!ZXDkmOHZaOZfWhQmnB:dev.medienhaus.udk-berlin.de",
-                "name": "Einführung in die Musikwissenschaft",
-                "children": {}
-              },
-              "!BGSPfCqzgChIVByHGB:dev.medienhaus.udk-berlin.de": {
-                "id": "!BGSPfCqzgChIVByHGB:dev.medienhaus.udk-berlin.de",
-                "name": "Elektroakustische Komposition ENTER: SOUND - Klanggestaltung mit elektronischen Medien in Projekten aller Kunstsparten, offene Sprechstunde/Kolloquium für alle Studiengänge",
-                "children": {}
-              },
-              "!ydAIGGKBKXOYkUjQlq:dev.medienhaus.udk-berlin.de": {
-                "id": "!ydAIGGKBKXOYkUjQlq:dev.medienhaus.udk-berlin.de",
-                "name": "Elektroakustische Komposition - Sonic Agency in Time of Climate Crisis",
-                "children": {}
-              },
-              "!yNOUxsniRedUmPJVLZ:dev.medienhaus.udk-berlin.de": {
-                "id": "!yNOUxsniRedUmPJVLZ:dev.medienhaus.udk-berlin.de",
-                "name": "Ensemble ilinx \"Neue Wege zu Beethoven\" bei Crescendo 2021",
-                "children": {}
-              },
-              "!hsZaZWQrqFbtrpdUCy:dev.medienhaus.udk-berlin.de": {
-                "id": "!hsZaZWQrqFbtrpdUCy:dev.medienhaus.udk-berlin.de",
-                "name": "Experimental Coding with Supercollider Parametric abstract composing",
-                "children": {}
-              },
-              "!sGSbwKlTULOQGnVrqa:dev.medienhaus.udk-berlin.de": {
-                "id": "!sGSbwKlTULOQGnVrqa:dev.medienhaus.udk-berlin.de",
-                "name": "Experimentelle Musik, Gruppenleitung",
-                "children": {}
-              },
-              "!mLwkIPZlBOaXRfoCFS:dev.medienhaus.udk-berlin.de": {
-                "id": "!mLwkIPZlBOaXRfoCFS:dev.medienhaus.udk-berlin.de",
-                "name": "Experiments with Sound / online-Kurs",
-                "children": {}
-              },
-              "!QbXqLAjdQYtNBZGMoN:dev.medienhaus.udk-berlin.de": {
-                "id": "!QbXqLAjdQYtNBZGMoN:dev.medienhaus.udk-berlin.de",
-                "name": "FEM*_MUSIC*_READ",
-                "children": {}
-              },
-              "!fWiMyTXLDMbLOPqvud:dev.medienhaus.udk-berlin.de": {
-                "id": "!fWiMyTXLDMbLOPqvud:dev.medienhaus.udk-berlin.de",
-                "name": "Franz Schuberts Kammermusik",
-                "children": {}
-              },
-              "!WvQKqsdeIUdtskdqaR:dev.medienhaus.udk-berlin.de": {
-                "id": "!WvQKqsdeIUdtskdqaR:dev.medienhaus.udk-berlin.de",
-                "name": "Freie Klasse – Analyseseminar / Neue Musik der 2000er Jahre",
-                "children": {}
-              },
-              "!xyMUoCSxBPOpwJtGht:dev.medienhaus.udk-berlin.de": {
-                "id": "!xyMUoCSxBPOpwJtGht:dev.medienhaus.udk-berlin.de",
-                "name": "Gehörbildung und Improvisation",
-                "children": {}
-              },
-              "!ieBmcSyfbaHnZXGhpf:dev.medienhaus.udk-berlin.de": {
-                "id": "!ieBmcSyfbaHnZXGhpf:dev.medienhaus.udk-berlin.de",
-                "name": "Großer Chor der UdK",
-                "children": {}
-              },
-              "!NYfwCbknKxqtFHrrSb:dev.medienhaus.udk-berlin.de": {
-                "id": "!NYfwCbknKxqtFHrrSb:dev.medienhaus.udk-berlin.de",
-                "name": "Grundlagen der Elektroakustischen Komposition",
-                "children": {}
-              },
-              "!pqyhCyFvftnQWIEXFH:dev.medienhaus.udk-berlin.de": {
-                "id": "!pqyhCyFvftnQWIEXFH:dev.medienhaus.udk-berlin.de",
-                "name": "Hans Wüthrich „Das Glashaus“",
-                "children": {}
-              },
-              "!lRZGPjlyLIiCxhpHPP:dev.medienhaus.udk-berlin.de": {
-                "id": "!lRZGPjlyLIiCxhpHPP:dev.medienhaus.udk-berlin.de",
-                "name": "Heimatkonstruktion, Musik und Medienkultur",
-                "children": {}
-              },
-              "!OVtTUdrvkygOklTJtg:dev.medienhaus.udk-berlin.de": {
-                "id": "!OVtTUdrvkygOklTJtg:dev.medienhaus.udk-berlin.de",
-                "name": "Heinrich Schütz",
-                "children": {}
-              },
-              "!UJHgiVrZuCRaGPfgCd:dev.medienhaus.udk-berlin.de": {
-                "id": "!UJHgiVrZuCRaGPfgCd:dev.medienhaus.udk-berlin.de",
-                "name": "Herrschaft und Emanzipation durch Musik: Gender, Klasse, Kirche, Staat",
-                "children": {}
-              },
-              "!HkfRdHbJYaWUmoDrNb:dev.medienhaus.udk-berlin.de": {
-                "id": "!HkfRdHbJYaWUmoDrNb:dev.medienhaus.udk-berlin.de",
-                "name": "Hollywood-Sound: Ästhetik und Geschichte eines filmmusikalischen Phänomens",
-                "children": {}
-              },
-              "!pjuwlWKaObTmffyust:dev.medienhaus.udk-berlin.de": {
-                "id": "!pjuwlWKaObTmffyust:dev.medienhaus.udk-berlin.de",
-                "name": "Instrumentation",
-                "children": {}
-              },
-              "!rTYrlGUjuhnvXWYpqd:dev.medienhaus.udk-berlin.de": {
-                "id": "!rTYrlGUjuhnvXWYpqd:dev.medienhaus.udk-berlin.de",
-                "name": "Instrumentenkunde (Komposition, Tonmeister)",
-                "children": {}
-              },
-              "!wEilWwzTxCUCGlsirO:dev.medienhaus.udk-berlin.de": {
-                "id": "!wEilWwzTxCUCGlsirO:dev.medienhaus.udk-berlin.de",
-                "name": "Johannes Brahms und die Variation",
-                "children": {}
-              },
-              "!oFySkxXOzqqqyZqKTv:dev.medienhaus.udk-berlin.de": {
-                "id": "!oFySkxXOzqqqyZqKTv:dev.medienhaus.udk-berlin.de",
-                "name": "Kammerchor der Künste",
-                "children": {}
-              },
-              "!TNVzlUAsvxsYxqEKtH:dev.medienhaus.udk-berlin.de": {
-                "id": "!TNVzlUAsvxsYxqEKtH:dev.medienhaus.udk-berlin.de",
-                "name": "Komposition Analyse: Neues Musiktheater",
-                "children": {}
-              },
-              "!LKBjIhnbjZXSpRLzlc:dev.medienhaus.udk-berlin.de": {
-                "id": "!LKBjIhnbjZXSpRLzlc:dev.medienhaus.udk-berlin.de",
-                "name": "Komposition- Intensivwoche",
-                "children": {}
-              },
-              "!ZGbGrJTwpOQOzddAbo:dev.medienhaus.udk-berlin.de": {
-                "id": "!ZGbGrJTwpOQOzddAbo:dev.medienhaus.udk-berlin.de",
-                "name": "Kompositionslehre/Satztechniken des 20./21. Jahrhunderts",
-                "children": {}
-              },
-              "!iiJaJygSGVKujPKCYV:dev.medienhaus.udk-berlin.de": {
-                "id": "!iiJaJygSGVKujPKCYV:dev.medienhaus.udk-berlin.de",
-                "name": "Landkarten elektroakustischer Klangorganisation",
-                "children": {}
-              },
-              "!uLwPDgxWwRwVtanUDG:dev.medienhaus.udk-berlin.de": {
-                "id": "!uLwPDgxWwRwVtanUDG:dev.medienhaus.udk-berlin.de",
-                "name": "Music as a lecture / Lecture as music",
-                "children": {}
-              },
-              "!kAOIUzYVzBkHwloDNP:dev.medienhaus.udk-berlin.de": {
-                "id": "!kAOIUzYVzBkHwloDNP:dev.medienhaus.udk-berlin.de",
-                "name": "Musiktheorie/Historische Satztechniken",
-                "children": {}
-              },
-              "!TbOrJJgCPvThJRgoPs:dev.medienhaus.udk-berlin.de": {
-                "id": "!TbOrJJgCPvThJRgoPs:dev.medienhaus.udk-berlin.de",
-                "name": "Musik und Literatur im 20. Jahrhundert",
-                "children": {}
-              },
-              "!GBJwtzGcrMrtHRZmHb:dev.medienhaus.udk-berlin.de": {
-                "id": "!GBJwtzGcrMrtHRZmHb:dev.medienhaus.udk-berlin.de",
-                "name": "Musikwissenschaft für Musiker*innen / Musikwissenschaftliche Arbeitstechniken",
-                "children": {}
-              },
-              "!FdXvFbXanrfFtComum:dev.medienhaus.udk-berlin.de": {
-                "id": "!FdXvFbXanrfFtComum:dev.medienhaus.udk-berlin.de",
-                "name": "\"Ohne Musik wäre das Leben ein Irrtum\" - der musikalische Kosmos des Alexander Kluge",
-                "children": {}
-              },
-              "!ovYJdZxzjKCRJftQbk:dev.medienhaus.udk-berlin.de": {
-                "id": "!ovYJdZxzjKCRJftQbk:dev.medienhaus.udk-berlin.de",
-                "name": "Original und Überlieferung – Die Toccata d-Moll BWV 565",
-                "children": {}
-              },
-              "!KfhjIDeJUPbFVabLUt:dev.medienhaus.udk-berlin.de": {
-                "id": "!KfhjIDeJUPbFVabLUt:dev.medienhaus.udk-berlin.de",
-                "name": "Satztechniken des 20./21. Jahrhunderts mit dem Schwerpunkt experimentelle Musik",
-                "children": {}
-              },
-              "!IwddsDkPXhgOlQqCfX:dev.medienhaus.udk-berlin.de": {
-                "id": "!IwddsDkPXhgOlQqCfX:dev.medienhaus.udk-berlin.de",
-                "name": "Schneller, höher, … besser? Konkurrenz und Wettbewerb in der Musik",
-                "children": {}
-              },
-              "!NsyiyLILwVrUbqAMMo:dev.medienhaus.udk-berlin.de": {
-                "id": "!NsyiyLILwVrUbqAMMo:dev.medienhaus.udk-berlin.de",
-                "name": "Schreiben über neue Musik",
-                "children": {}
-              },
-              "!iHjqcClLHSqoLVPgGG:dev.medienhaus.udk-berlin.de": {
-                "id": "!iHjqcClLHSqoLVPgGG:dev.medienhaus.udk-berlin.de",
-                "name": "Super librum cantare – Mehrstimmige Vokalimprovisation im Stil der Renaissance",
-                "children": {}
-              },
-              "!SrNsUGLikCPUNGiFxE:dev.medienhaus.udk-berlin.de": {
-                "id": "!SrNsUGLikCPUNGiFxE:dev.medienhaus.udk-berlin.de",
-                "name": "THE NEW YORK SCHOOL UND DIE GESCHICHTE DER EXPERIMENTELLEN MUSIK",
-                "children": {}
-              },
-              "!OsgoHexpPZeUFIsfYR:dev.medienhaus.udk-berlin.de": {
-                "id": "!OsgoHexpPZeUFIsfYR:dev.medienhaus.udk-berlin.de",
-                "name": "Transitionen: Oper – Musiktheater – Musical in, aus und über Nordamerika ab dem 20. Jh.",
-                "children": {}
-              },
-              "!PsRpEJVxUFmVelYrHU:dev.medienhaus.udk-berlin.de": {
-                "id": "!PsRpEJVxUFmVelYrHU:dev.medienhaus.udk-berlin.de",
-                "name": "VoiceEvents 3",
-                "children": {}
-              },
-              "!ZBHsrkhBnQisCmOGNz:dev.medienhaus.udk-berlin.de": {
-                "id": "!ZBHsrkhBnQisCmOGNz:dev.medienhaus.udk-berlin.de",
-                "name": "Zoom + Focus",
-                "children": {}
-              },
-              "!OZhRrkgYGMqYLRcymi:dev.medienhaus.udk-berlin.de": {
-                "id": "!OZhRrkgYGMqYLRcymi:dev.medienhaus.udk-berlin.de",
-                "name": "Zwischen Lisztomanie und Clavierseuche. Pianistinnen und Pianisten im 19. Jahrhundert",
-                "children": {}
-              }
-            }
-          },
-          "!poebeJpwIxjPQwGwNV:dev.medienhaus.udk-berlin.de": {
-            "id": "!poebeJpwIxjPQwGwNV:dev.medienhaus.udk-berlin.de",
-            "name": "Dirigieren",
-            "children": {
-              "!eGuMIutQYWUlbDaPLm:dev.medienhaus.udk-berlin.de": {
-                "id": "!eGuMIutQYWUlbDaPLm:dev.medienhaus.udk-berlin.de",
-                "name": "Alban Berg \"Wozzeck\"",
-                "children": {}
-              },
-              "!jlFIDJrKyjMedyyjfu:dev.medienhaus.udk-berlin.de": {
-                "id": "!jlFIDJrKyjMedyyjfu:dev.medienhaus.udk-berlin.de",
-                "name": "Das Cembalo. Von Kielklavieren, Zupfklavieren, Spinetten, Virginalen und Schweinsköpfen.",
-                "children": {}
-              },
-              "!uUERZZMMADBYCruFyK:dev.medienhaus.udk-berlin.de": {
-                "id": "!uUERZZMMADBYCruFyK:dev.medienhaus.udk-berlin.de",
-                "name": "Das Kleine Klavierstück von Bach bis Schönberg. Zur Geschichte des Charakterstücks für",
-                "children": {}
-              },
-              "!ZXDkmOHZaOZfWhQmnB:dev.medienhaus.udk-berlin.de": {
-                "id": "!ZXDkmOHZaOZfWhQmnB:dev.medienhaus.udk-berlin.de",
-                "name": "Einführung in die Musikwissenschaft",
-                "children": {}
-              },
-              "!fWiMyTXLDMbLOPqvud:dev.medienhaus.udk-berlin.de": {
-                "id": "!fWiMyTXLDMbLOPqvud:dev.medienhaus.udk-berlin.de",
-                "name": "Franz Schuberts Kammermusik",
-                "children": {}
-              },
-              "!ieBmcSyfbaHnZXGhpf:dev.medienhaus.udk-berlin.de": {
-                "id": "!ieBmcSyfbaHnZXGhpf:dev.medienhaus.udk-berlin.de",
-                "name": "Großer Chor der UdK",
-                "children": {}
-              },
-              "!TWuVkXuEyuZGnsCkqO:dev.medienhaus.udk-berlin.de": {
-                "id": "!TWuVkXuEyuZGnsCkqO:dev.medienhaus.udk-berlin.de",
-                "name": "Grundlagen des Dirigierens Q2a – nur für Q-Master",
-                "children": {}
-              },
-              "!szfIJvqVGyvdnLHiCB:dev.medienhaus.udk-berlin.de": {
-                "id": "!szfIJvqVGyvdnLHiCB:dev.medienhaus.udk-berlin.de",
-                "name": "Grundlagen des Dirigierens Q2b – nur für Q-Master",
-                "children": {}
-              },
-              "!lRZGPjlyLIiCxhpHPP:dev.medienhaus.udk-berlin.de": {
-                "id": "!lRZGPjlyLIiCxhpHPP:dev.medienhaus.udk-berlin.de",
-                "name": "Heimatkonstruktion, Musik und Medienkultur",
-                "children": {}
-              },
-              "!OVtTUdrvkygOklTJtg:dev.medienhaus.udk-berlin.de": {
-                "id": "!OVtTUdrvkygOklTJtg:dev.medienhaus.udk-berlin.de",
-                "name": "Heinrich Schütz",
-                "children": {}
-              },
-              "!UJHgiVrZuCRaGPfgCd:dev.medienhaus.udk-berlin.de": {
-                "id": "!UJHgiVrZuCRaGPfgCd:dev.medienhaus.udk-berlin.de",
-                "name": "Herrschaft und Emanzipation durch Musik: Gender, Klasse, Kirche, Staat",
-                "children": {}
-              },
-              "!HkfRdHbJYaWUmoDrNb:dev.medienhaus.udk-berlin.de": {
-                "id": "!HkfRdHbJYaWUmoDrNb:dev.medienhaus.udk-berlin.de",
-                "name": "Hollywood-Sound: Ästhetik und Geschichte eines filmmusikalischen Phänomens",
-                "children": {}
-              },
-              "!pjuwlWKaObTmffyust:dev.medienhaus.udk-berlin.de": {
-                "id": "!pjuwlWKaObTmffyust:dev.medienhaus.udk-berlin.de",
-                "name": "Instrumentation",
-                "children": {}
-              },
-              "!wEilWwzTxCUCGlsirO:dev.medienhaus.udk-berlin.de": {
-                "id": "!wEilWwzTxCUCGlsirO:dev.medienhaus.udk-berlin.de",
-                "name": "Johannes Brahms und die Variation",
-                "children": {}
-              },
-              "!oFySkxXOzqqqyZqKTv:dev.medienhaus.udk-berlin.de": {
-                "id": "!oFySkxXOzqqqyZqKTv:dev.medienhaus.udk-berlin.de",
-                "name": "Kammerchor der Künste",
-                "children": {}
-              },
-              "!TbOrJJgCPvThJRgoPs:dev.medienhaus.udk-berlin.de": {
-                "id": "!TbOrJJgCPvThJRgoPs:dev.medienhaus.udk-berlin.de",
-                "name": "Musik und Literatur im 20. Jahrhundert",
-                "children": {}
-              },
-              "!ovYJdZxzjKCRJftQbk:dev.medienhaus.udk-berlin.de": {
-                "id": "!ovYJdZxzjKCRJftQbk:dev.medienhaus.udk-berlin.de",
-                "name": "Original und Überlieferung – Die Toccata d-Moll BWV 565",
-                "children": {}
-              },
-              "!KfhjIDeJUPbFVabLUt:dev.medienhaus.udk-berlin.de": {
-                "id": "!KfhjIDeJUPbFVabLUt:dev.medienhaus.udk-berlin.de",
-                "name": "Satztechniken des 20./21. Jahrhunderts mit dem Schwerpunkt experimentelle Musik",
-                "children": {}
-              },
-              "!IwddsDkPXhgOlQqCfX:dev.medienhaus.udk-berlin.de": {
-                "id": "!IwddsDkPXhgOlQqCfX:dev.medienhaus.udk-berlin.de",
-                "name": "Schneller, höher, … besser? Konkurrenz und Wettbewerb in der Musik",
-                "children": {}
-              },
-              "!iHjqcClLHSqoLVPgGG:dev.medienhaus.udk-berlin.de": {
-                "id": "!iHjqcClLHSqoLVPgGG:dev.medienhaus.udk-berlin.de",
-                "name": "Super librum cantare – Mehrstimmige Vokalimprovisation im Stil der Renaissance",
-                "children": {}
-              },
-              "!OsgoHexpPZeUFIsfYR:dev.medienhaus.udk-berlin.de": {
-                "id": "!OsgoHexpPZeUFIsfYR:dev.medienhaus.udk-berlin.de",
-                "name": "Transitionen: Oper – Musiktheater – Musical in, aus und über Nordamerika ab dem 20. Jh.",
-                "children": {}
-              },
-              "!OZhRrkgYGMqYLRcymi:dev.medienhaus.udk-berlin.de": {
-                "id": "!OZhRrkgYGMqYLRcymi:dev.medienhaus.udk-berlin.de",
-                "name": "Zwischen Lisztomanie und Clavierseuche. Pianistinnen und Pianisten im 19. Jahrhundert",
-                "children": {}
-              }
-            }
-          },
-          "!fUYVQtbMOwcvmBHPtA:dev.medienhaus.udk-berlin.de": {
-            "id": "!fUYVQtbMOwcvmBHPtA:dev.medienhaus.udk-berlin.de",
-            "name": "Chordirigieren (Ergänzungsstudiengang)",
-            "children": {
-              "!ieBmcSyfbaHnZXGhpf:dev.medienhaus.udk-berlin.de": {
-                "id": "!ieBmcSyfbaHnZXGhpf:dev.medienhaus.udk-berlin.de",
-                "name": "Großer Chor der UdK",
-                "children": {}
-              },
-              "!oFySkxXOzqqqyZqKTv:dev.medienhaus.udk-berlin.de": {
-                "id": "!oFySkxXOzqqqyZqKTv:dev.medienhaus.udk-berlin.de",
-                "name": "Kammerchor der Künste",
-                "children": {}
-              }
-            }
-          },
-          "!PCGkwgWyzdkpDekTMl:dev.medienhaus.udk-berlin.de": {
-            "id": "!PCGkwgWyzdkpDekTMl:dev.medienhaus.udk-berlin.de",
-            "name": "Kirchenmusik",
-            "children": {
-              "!eGuMIutQYWUlbDaPLm:dev.medienhaus.udk-berlin.de": {
-                "id": "!eGuMIutQYWUlbDaPLm:dev.medienhaus.udk-berlin.de",
-                "name": "Alban Berg \"Wozzeck\"",
-                "children": {}
-              },
-              "!SVUqlsAPWbwUZcZMIY:dev.medienhaus.udk-berlin.de": {
-                "id": "!SVUqlsAPWbwUZcZMIY:dev.medienhaus.udk-berlin.de",
-                "name": "Alexandertechnik",
-                "children": {}
-              },
-              "!AdJitWktKgrkjhZckY:dev.medienhaus.udk-berlin.de": {
-                "id": "!AdJitWktKgrkjhZckY:dev.medienhaus.udk-berlin.de",
-                "name": "Basic Impro",
-                "children": {}
-              },
-              "!ShdQFyaCXsHvWfNvno:dev.medienhaus.udk-berlin.de": {
-                "id": "!ShdQFyaCXsHvWfNvno:dev.medienhaus.udk-berlin.de",
-                "name": "Chorleitung",
-                "children": {}
-              },
-              "!aBOahYmlMZxVROnvnE:dev.medienhaus.udk-berlin.de": {
-                "id": "!aBOahYmlMZxVROnvnE:dev.medienhaus.udk-berlin.de",
-                "name": "Chorleitung",
-                "children": {}
-              },
-              "!KSyDbemgfolZTSpZGG:dev.medienhaus.udk-berlin.de": {
-                "id": "!KSyDbemgfolZTSpZGG:dev.medienhaus.udk-berlin.de",
-                "name": "Chorleitung",
-                "children": {}
-              },
-              "!jlFIDJrKyjMedyyjfu:dev.medienhaus.udk-berlin.de": {
-                "id": "!jlFIDJrKyjMedyyjfu:dev.medienhaus.udk-berlin.de",
-                "name": "Das Cembalo. Von Kielklavieren, Zupfklavieren, Spinetten, Virginalen und Schweinsköpfen.",
-                "children": {}
-              },
-              "!uUERZZMMADBYCruFyK:dev.medienhaus.udk-berlin.de": {
-                "id": "!uUERZZMMADBYCruFyK:dev.medienhaus.udk-berlin.de",
-                "name": "Das Kleine Klavierstück von Bach bis Schönberg. Zur Geschichte des Charakterstücks für",
-                "children": {}
-              },
-              "!cywTceJEmzwomJuFEp:dev.medienhaus.udk-berlin.de": {
-                "id": "!cywTceJEmzwomJuFEp:dev.medienhaus.udk-berlin.de",
-                "name": "Einführung in die Musikwissenschaft",
-                "children": {}
-              },
-              "!ZXDkmOHZaOZfWhQmnB:dev.medienhaus.udk-berlin.de": {
-                "id": "!ZXDkmOHZaOZfWhQmnB:dev.medienhaus.udk-berlin.de",
-                "name": "Einführung in die Musikwissenschaft",
-                "children": {}
-              },
-              "!MfsJqTcUUnazYXDjGf:dev.medienhaus.udk-berlin.de": {
-                "id": "!MfsJqTcUUnazYXDjGf:dev.medienhaus.udk-berlin.de",
-                "name": "Ensemble-Leitung im Profilmodul 8/ Master",
-                "children": {}
-              },
-              "!JLsYuyzeWkfBNKZGvc:dev.medienhaus.udk-berlin.de": {
-                "id": "!JLsYuyzeWkfBNKZGvc:dev.medienhaus.udk-berlin.de",
-                "name": "Feldenkrais",
-                "children": {}
-              },
-              "!fWiMyTXLDMbLOPqvud:dev.medienhaus.udk-berlin.de": {
-                "id": "!fWiMyTXLDMbLOPqvud:dev.medienhaus.udk-berlin.de",
-                "name": "Franz Schuberts Kammermusik",
-                "children": {}
-              },
-              "!ieBmcSyfbaHnZXGhpf:dev.medienhaus.udk-berlin.de": {
-                "id": "!ieBmcSyfbaHnZXGhpf:dev.medienhaus.udk-berlin.de",
-                "name": "Großer Chor der UdK",
-                "children": {}
-              },
-              "!qRwyNmPAPJtxNieMFB:dev.medienhaus.udk-berlin.de": {
-                "id": "!qRwyNmPAPJtxNieMFB:dev.medienhaus.udk-berlin.de",
-                "name": "Grundlagenseminar Musikphysiologie",
-                "children": {}
-              },
-              "!lRZGPjlyLIiCxhpHPP:dev.medienhaus.udk-berlin.de": {
-                "id": "!lRZGPjlyLIiCxhpHPP:dev.medienhaus.udk-berlin.de",
-                "name": "Heimatkonstruktion, Musik und Medienkultur",
-                "children": {}
-              },
-              "!OVtTUdrvkygOklTJtg:dev.medienhaus.udk-berlin.de": {
-                "id": "!OVtTUdrvkygOklTJtg:dev.medienhaus.udk-berlin.de",
-                "name": "Heinrich Schütz",
-                "children": {}
-              },
-              "!UJHgiVrZuCRaGPfgCd:dev.medienhaus.udk-berlin.de": {
-                "id": "!UJHgiVrZuCRaGPfgCd:dev.medienhaus.udk-berlin.de",
-                "name": "Herrschaft und Emanzipation durch Musik: Gender, Klasse, Kirche, Staat",
-                "children": {}
-              },
-              "!HkfRdHbJYaWUmoDrNb:dev.medienhaus.udk-berlin.de": {
-                "id": "!HkfRdHbJYaWUmoDrNb:dev.medienhaus.udk-berlin.de",
-                "name": "Hollywood-Sound: Ästhetik und Geschichte eines filmmusikalischen Phänomens",
-                "children": {}
-              },
-              "!IRXTkLfmnrOXBEBjiW:dev.medienhaus.udk-berlin.de": {
-                "id": "!IRXTkLfmnrOXBEBjiW:dev.medienhaus.udk-berlin.de",
-                "name": "Jazzensemble 1",
-                "children": {}
-              },
-              "!vgfmyKIkaMlFGOHzgg:dev.medienhaus.udk-berlin.de": {
-                "id": "!vgfmyKIkaMlFGOHzgg:dev.medienhaus.udk-berlin.de",
-                "name": "Jazz Ensemble 2",
-                "children": {}
-              },
-              "!wEilWwzTxCUCGlsirO:dev.medienhaus.udk-berlin.de": {
-                "id": "!wEilWwzTxCUCGlsirO:dev.medienhaus.udk-berlin.de",
-                "name": "Johannes Brahms und die Variation",
-                "children": {}
-              },
-              "!oFySkxXOzqqqyZqKTv:dev.medienhaus.udk-berlin.de": {
-                "id": "!oFySkxXOzqqqyZqKTv:dev.medienhaus.udk-berlin.de",
-                "name": "Kammerchor der Künste",
-                "children": {}
-              },
-              "!yaqfhgnQouNZgiuPwZ:dev.medienhaus.udk-berlin.de": {
-                "id": "!yaqfhgnQouNZgiuPwZ:dev.medienhaus.udk-berlin.de",
-                "name": "Kraftausdauer für Musiker",
-                "children": {}
-              },
-              "!PKgIDfgEaSupmGAKQD:dev.medienhaus.udk-berlin.de": {
-                "id": "!PKgIDfgEaSupmGAKQD:dev.medienhaus.udk-berlin.de",
-                "name": "Musikermedizinische Sprechstunde",
-                "children": {}
-              },
-              "!oBSDiInkdCNYvVzSUj:dev.medienhaus.udk-berlin.de": {
-                "id": "!oBSDiInkdCNYvVzSUj:dev.medienhaus.udk-berlin.de",
-                "name": "Musikphysiologische Einzelberatung",
-                "children": {}
-              },
-              "!ojKBYMQKVgusCKdBcw:dev.medienhaus.udk-berlin.de": {
-                "id": "!ojKBYMQKVgusCKdBcw:dev.medienhaus.udk-berlin.de",
-                "name": "Musiktheorie",
-                "children": {}
-              },
-              "!ndGCSaWwgsPmGHtobs:dev.medienhaus.udk-berlin.de": {
-                "id": "!ndGCSaWwgsPmGHtobs:dev.medienhaus.udk-berlin.de",
-                "name": "Musiktheorie BA Kirchenmusik 1 und 2",
-                "children": {}
-              },
-              "!TbOrJJgCPvThJRgoPs:dev.medienhaus.udk-berlin.de": {
-                "id": "!TbOrJJgCPvThJRgoPs:dev.medienhaus.udk-berlin.de",
-                "name": "Musik und Literatur im 20. Jahrhundert",
-                "children": {}
-              },
-              "!GBJwtzGcrMrtHRZmHb:dev.medienhaus.udk-berlin.de": {
-                "id": "!GBJwtzGcrMrtHRZmHb:dev.medienhaus.udk-berlin.de",
-                "name": "Musikwissenschaft für Musiker*innen / Musikwissenschaftliche Arbeitstechniken",
-                "children": {}
-              },
-              "!JQEsVmYqibkzBRZWNV:dev.medienhaus.udk-berlin.de": {
-                "id": "!JQEsVmYqibkzBRZWNV:dev.medienhaus.udk-berlin.de",
-                "name": "Orgelmethodik",
-                "children": {}
-              },
-              "!ovYJdZxzjKCRJftQbk:dev.medienhaus.udk-berlin.de": {
-                "id": "!ovYJdZxzjKCRJftQbk:dev.medienhaus.udk-berlin.de",
-                "name": "Original und Überlieferung – Die Toccata d-Moll BWV 565",
-                "children": {}
-              },
-              "!wwkKYUNNdwhsYeoybK:dev.medienhaus.udk-berlin.de": {
-                "id": "!wwkKYUNNdwhsYeoybK:dev.medienhaus.udk-berlin.de",
-                "name": "Percussion",
-                "children": {}
-              },
-              "!IwddsDkPXhgOlQqCfX:dev.medienhaus.udk-berlin.de": {
-                "id": "!IwddsDkPXhgOlQqCfX:dev.medienhaus.udk-berlin.de",
-                "name": "Schneller, höher, … besser? Konkurrenz und Wettbewerb in der Musik",
-                "children": {}
-              },
-              "!OsgoHexpPZeUFIsfYR:dev.medienhaus.udk-berlin.de": {
-                "id": "!OsgoHexpPZeUFIsfYR:dev.medienhaus.udk-berlin.de",
-                "name": "Transitionen: Oper – Musiktheater – Musical in, aus und über Nordamerika ab dem 20. Jh.",
-                "children": {}
-              },
-              "!OZhRrkgYGMqYLRcymi:dev.medienhaus.udk-berlin.de": {
-                "id": "!OZhRrkgYGMqYLRcymi:dev.medienhaus.udk-berlin.de",
-                "name": "Zwischen Lisztomanie und Clavierseuche. Pianistinnen und Pianisten im 19. Jahrhundert",
-                "children": {}
-              }
-            }
-          },
-          "!kiYKeAirYshzlPjGEx:dev.medienhaus.udk-berlin.de": {
-            "id": "!kiYKeAirYshzlPjGEx:dev.medienhaus.udk-berlin.de",
-            "name": "Tonmeister",
-            "children": {
-              "!eGuMIutQYWUlbDaPLm:dev.medienhaus.udk-berlin.de": {
-                "id": "!eGuMIutQYWUlbDaPLm:dev.medienhaus.udk-berlin.de",
-                "name": "Alban Berg \"Wozzeck\"",
-                "children": {}
-              },
-              "!SVUqlsAPWbwUZcZMIY:dev.medienhaus.udk-berlin.de": {
-                "id": "!SVUqlsAPWbwUZcZMIY:dev.medienhaus.udk-berlin.de",
-                "name": "Alexandertechnik",
-                "children": {}
-              },
-              "!usGDflOkdBjLCvcwZx:dev.medienhaus.udk-berlin.de": {
-                "id": "!usGDflOkdBjLCvcwZx:dev.medienhaus.udk-berlin.de",
-                "name": "Audiotechnik (Übung)",
-                "children": {}
-              },
-              "!AdJitWktKgrkjhZckY:dev.medienhaus.udk-berlin.de": {
-                "id": "!AdJitWktKgrkjhZckY:dev.medienhaus.udk-berlin.de",
-                "name": "Basic Impro",
-                "children": {}
-              },
-              "!jlFIDJrKyjMedyyjfu:dev.medienhaus.udk-berlin.de": {
-                "id": "!jlFIDJrKyjMedyyjfu:dev.medienhaus.udk-berlin.de",
-                "name": "Das Cembalo. Von Kielklavieren, Zupfklavieren, Spinetten, Virginalen und Schweinsköpfen.",
-                "children": {}
-              },
-              "!uUERZZMMADBYCruFyK:dev.medienhaus.udk-berlin.de": {
-                "id": "!uUERZZMMADBYCruFyK:dev.medienhaus.udk-berlin.de",
-                "name": "Das Kleine Klavierstück von Bach bis Schönberg. Zur Geschichte des Charakterstücks für",
-                "children": {}
-              },
-              "!luCYQJgkmMKzWRaUHF:dev.medienhaus.udk-berlin.de": {
-                "id": "!luCYQJgkmMKzWRaUHF:dev.medienhaus.udk-berlin.de",
-                "name": "Einführung in die digitale Signalverarbeitung",
-                "children": {}
-              },
-              "!cywTceJEmzwomJuFEp:dev.medienhaus.udk-berlin.de": {
-                "id": "!cywTceJEmzwomJuFEp:dev.medienhaus.udk-berlin.de",
-                "name": "Einführung in die Musikwissenschaft",
-                "children": {}
-              },
-              "!ZXDkmOHZaOZfWhQmnB:dev.medienhaus.udk-berlin.de": {
-                "id": "!ZXDkmOHZaOZfWhQmnB:dev.medienhaus.udk-berlin.de",
-                "name": "Einführung in die Musikwissenschaft",
-                "children": {}
-              },
-              "!eJHJbJwhFLnPtXUsVO:dev.medienhaus.udk-berlin.de": {
-                "id": "!eJHJbJwhFLnPtXUsVO:dev.medienhaus.udk-berlin.de",
-                "name": "Einzel - und Kleingruppenunterricht Möller",
-                "children": {}
-              },
-              "!BxleGbOCfVYcUFnwdN:dev.medienhaus.udk-berlin.de": {
-                "id": "!BxleGbOCfVYcUFnwdN:dev.medienhaus.udk-berlin.de",
-                "name": "Einzelunterricht",
-                "children": {}
-              },
-              "!ydAIGGKBKXOYkUjQlq:dev.medienhaus.udk-berlin.de": {
-                "id": "!ydAIGGKBKXOYkUjQlq:dev.medienhaus.udk-berlin.de",
-                "name": "Elektroakustische Komposition - Sonic Agency in Time of Climate Crisis",
-                "children": {}
-              },
-              "!MfsJqTcUUnazYXDjGf:dev.medienhaus.udk-berlin.de": {
-                "id": "!MfsJqTcUUnazYXDjGf:dev.medienhaus.udk-berlin.de",
-                "name": "Ensemble-Leitung im Profilmodul 8/ Master",
-                "children": {}
-              },
-              "!JLsYuyzeWkfBNKZGvc:dev.medienhaus.udk-berlin.de": {
-                "id": "!JLsYuyzeWkfBNKZGvc:dev.medienhaus.udk-berlin.de",
-                "name": "Feldenkrais",
-                "children": {}
-              },
-              "!fWiMyTXLDMbLOPqvud:dev.medienhaus.udk-berlin.de": {
-                "id": "!fWiMyTXLDMbLOPqvud:dev.medienhaus.udk-berlin.de",
-                "name": "Franz Schuberts Kammermusik",
-                "children": {}
-              },
-              "!kQPKiJqUaPfhIbxAcv:dev.medienhaus.udk-berlin.de": {
-                "id": "!kQPKiJqUaPfhIbxAcv:dev.medienhaus.udk-berlin.de",
-                "name": "Gehörbildung - Tonmeister",
-                "children": {}
-              },
-              "!SjxRNIKjQpnRLTaoxP:dev.medienhaus.udk-berlin.de": {
-                "id": "!SjxRNIKjQpnRLTaoxP:dev.medienhaus.udk-berlin.de",
-                "name": "Gehörbildung Tonmeister, 8. Semester",
-                "children": {}
-              },
-              "!ieBmcSyfbaHnZXGhpf:dev.medienhaus.udk-berlin.de": {
-                "id": "!ieBmcSyfbaHnZXGhpf:dev.medienhaus.udk-berlin.de",
-                "name": "Großer Chor der UdK",
-                "children": {}
-              },
-              "!qRwyNmPAPJtxNieMFB:dev.medienhaus.udk-berlin.de": {
-                "id": "!qRwyNmPAPJtxNieMFB:dev.medienhaus.udk-berlin.de",
-                "name": "Grundlagenseminar Musikphysiologie",
-                "children": {}
-              },
-              "!lRZGPjlyLIiCxhpHPP:dev.medienhaus.udk-berlin.de": {
-                "id": "!lRZGPjlyLIiCxhpHPP:dev.medienhaus.udk-berlin.de",
-                "name": "Heimatkonstruktion, Musik und Medienkultur",
-                "children": {}
-              },
-              "!OVtTUdrvkygOklTJtg:dev.medienhaus.udk-berlin.de": {
-                "id": "!OVtTUdrvkygOklTJtg:dev.medienhaus.udk-berlin.de",
-                "name": "Heinrich Schütz",
-                "children": {}
-              },
-              "!UJHgiVrZuCRaGPfgCd:dev.medienhaus.udk-berlin.de": {
-                "id": "!UJHgiVrZuCRaGPfgCd:dev.medienhaus.udk-berlin.de",
-                "name": "Herrschaft und Emanzipation durch Musik: Gender, Klasse, Kirche, Staat",
-                "children": {}
-              },
-              "!HkfRdHbJYaWUmoDrNb:dev.medienhaus.udk-berlin.de": {
-                "id": "!HkfRdHbJYaWUmoDrNb:dev.medienhaus.udk-berlin.de",
-                "name": "Hollywood-Sound: Ästhetik und Geschichte eines filmmusikalischen Phänomens",
-                "children": {}
-              },
-              "!pxLSLtBzAHhBUYsglo:dev.medienhaus.udk-berlin.de": {
-                "id": "!pxLSLtBzAHhBUYsglo:dev.medienhaus.udk-berlin.de",
-                "name": "Hörspielproduktion",
-                "children": {}
-              },
-              "!RwUXgsqVMrospeWvcR:dev.medienhaus.udk-berlin.de": {
-                "id": "!RwUXgsqVMrospeWvcR:dev.medienhaus.udk-berlin.de",
-                "name": "Informatik für Tonmeister",
-                "children": {}
-              },
-              "!rTYrlGUjuhnvXWYpqd:dev.medienhaus.udk-berlin.de": {
-                "id": "!rTYrlGUjuhnvXWYpqd:dev.medienhaus.udk-berlin.de",
-                "name": "Instrumentenkunde (Komposition, Tonmeister)",
-                "children": {}
-              },
-              "!JKtyzJouZtdXGKOGbK:dev.medienhaus.udk-berlin.de": {
-                "id": "!JKtyzJouZtdXGKOGbK:dev.medienhaus.udk-berlin.de",
-                "name": "Interpretationsvergleich und -kritik Klassik",
-                "children": {}
-              },
-              "!gQoZUqZMIPVOYuwsYS:dev.medienhaus.udk-berlin.de": {
-                "id": "!gQoZUqZMIPVOYuwsYS:dev.medienhaus.udk-berlin.de",
-                "name": "Jazz – Theorie – Gehörbildung",
-                "children": {}
-              },
-              "!IaIujsBjJwXpSTsTji:dev.medienhaus.udk-berlin.de": {
-                "id": "!IaIujsBjJwXpSTsTji:dev.medienhaus.udk-berlin.de",
-                "name": "Jazz-Ensemble",
-                "children": {}
-              },
-              "!IRXTkLfmnrOXBEBjiW:dev.medienhaus.udk-berlin.de": {
-                "id": "!IRXTkLfmnrOXBEBjiW:dev.medienhaus.udk-berlin.de",
-                "name": "Jazzensemble 1",
-                "children": {}
-              },
-              "!vgfmyKIkaMlFGOHzgg:dev.medienhaus.udk-berlin.de": {
-                "id": "!vgfmyKIkaMlFGOHzgg:dev.medienhaus.udk-berlin.de",
-                "name": "Jazz Ensemble 2",
-                "children": {}
-              },
-              "!WREfGIGQPuxMGNYZXl:dev.medienhaus.udk-berlin.de": {
-                "id": "!WREfGIGQPuxMGNYZXl:dev.medienhaus.udk-berlin.de",
-                "name": "Jazzklavier",
-                "children": {}
-              },
-              "!wEilWwzTxCUCGlsirO:dev.medienhaus.udk-berlin.de": {
-                "id": "!wEilWwzTxCUCGlsirO:dev.medienhaus.udk-berlin.de",
-                "name": "Johannes Brahms und die Variation",
-                "children": {}
-              },
-              "!oFySkxXOzqqqyZqKTv:dev.medienhaus.udk-berlin.de": {
-                "id": "!oFySkxXOzqqqyZqKTv:dev.medienhaus.udk-berlin.de",
-                "name": "Kammerchor der Künste",
-                "children": {}
-              },
-              "!yaqfhgnQouNZgiuPwZ:dev.medienhaus.udk-berlin.de": {
-                "id": "!yaqfhgnQouNZgiuPwZ:dev.medienhaus.udk-berlin.de",
-                "name": "Kraftausdauer für Musiker",
-                "children": {}
-              },
-              "!onXZYUztxyfNHZQnnz:dev.medienhaus.udk-berlin.de": {
-                "id": "!onXZYUztxyfNHZQnnz:dev.medienhaus.udk-berlin.de",
-                "name": "Mathematik II für Chemiker",
-                "children": {}
-              },
-              "!DRwouUrvYGtTTIlFMl:dev.medienhaus.udk-berlin.de": {
-                "id": "!DRwouUrvYGtTTIlFMl:dev.medienhaus.udk-berlin.de",
-                "name": "Mathematik II für Chemiker",
-                "children": {}
-              },
-              "!TkcBoPZqlHkvLardTn:dev.medienhaus.udk-berlin.de": {
-                "id": "!TkcBoPZqlHkvLardTn:dev.medienhaus.udk-berlin.de",
-                "name": "Mischung Klassik",
-                "children": {}
-              },
-              "!rioiHnGtzXqyseIDIg:dev.medienhaus.udk-berlin.de": {
-                "id": "!rioiHnGtzXqyseIDIg:dev.medienhaus.udk-berlin.de",
-                "name": "Musikalische Aufführungspraxis und Interpretation",
-                "children": {}
-              },
-              "!PKgIDfgEaSupmGAKQD:dev.medienhaus.udk-berlin.de": {
-                "id": "!PKgIDfgEaSupmGAKQD:dev.medienhaus.udk-berlin.de",
-                "name": "Musikermedizinische Sprechstunde",
-                "children": {}
-              },
-              "!oBSDiInkdCNYvVzSUj:dev.medienhaus.udk-berlin.de": {
-                "id": "!oBSDiInkdCNYvVzSUj:dev.medienhaus.udk-berlin.de",
-                "name": "Musikphysiologische Einzelberatung",
-                "children": {}
-              },
-              "!rmGNyXsMlamVQldjfE:dev.medienhaus.udk-berlin.de": {
-                "id": "!rmGNyXsMlamVQldjfE:dev.medienhaus.udk-berlin.de",
-                "name": "Musikproduktion 1 - Klassik",
-                "children": {}
-              },
-              "!XdTMoNHVpOHeXcrJFQ:dev.medienhaus.udk-berlin.de": {
-                "id": "!XdTMoNHVpOHeXcrJFQ:dev.medienhaus.udk-berlin.de",
-                "name": "Musikproduktion 1 (Popularmusik)",
-                "children": {}
-              },
-              "!PbkllxHFBIeCAAkYtB:dev.medienhaus.udk-berlin.de": {
-                "id": "!PbkllxHFBIeCAAkYtB:dev.medienhaus.udk-berlin.de",
-                "name": "Musikproduktion 2",
-                "children": {}
-              },
-              "!ghgEjMcqLbRZIpCzfc:dev.medienhaus.udk-berlin.de": {
-                "id": "!ghgEjMcqLbRZIpCzfc:dev.medienhaus.udk-berlin.de",
-                "name": "Musiktheorie Tonmeister, 4. Semester",
-                "children": {}
-              },
-              "!nfJywcofxxZKjGHnog:dev.medienhaus.udk-berlin.de": {
-                "id": "!nfJywcofxxZKjGHnog:dev.medienhaus.udk-berlin.de",
-                "name": "Musiktheorie/Werkanalyse und Tonsatz 6. Semester",
-                "children": {}
-              },
-              "!oWlUTFdHiWMDVkuFgy:dev.medienhaus.udk-berlin.de": {
-                "id": "!oWlUTFdHiWMDVkuFgy:dev.medienhaus.udk-berlin.de",
-                "name": "Musikübertragung Popularmusik",
-                "children": {}
-              },
-              "!cAhFipxdjwcWtTHVEY:dev.medienhaus.udk-berlin.de": {
-                "id": "!cAhFipxdjwcWtTHVEY:dev.medienhaus.udk-berlin.de",
-                "name": "Musikübertragung Ton zum Bild",
-                "children": {}
-              },
-              "!TbOrJJgCPvThJRgoPs:dev.medienhaus.udk-berlin.de": {
-                "id": "!TbOrJJgCPvThJRgoPs:dev.medienhaus.udk-berlin.de",
-                "name": "Musik und Literatur im 20. Jahrhundert",
-                "children": {}
-              }
-            }
-          },
-          "!qRLCrVecSWuFGJTtCd:dev.medienhaus.udk-berlin.de": {
-            "id": "!qRLCrVecSWuFGJTtCd:dev.medienhaus.udk-berlin.de",
-            "name": "BA Lehramt Musik ISS/Gym",
-            "children": {
-              "!OtEMpbRqgMSNztBQTv:dev.medienhaus.udk-berlin.de": {
-                "id": "!OtEMpbRqgMSNztBQTv:dev.medienhaus.udk-berlin.de",
-                "name": "„…muss in die alt hergebrachte Form ein anderes, ein wirklich poetisches Element kommen.“ Fugen in",
-                "children": {}
-              },
-              "!WEaaAEaZsQbZXmzqKN:dev.medienhaus.udk-berlin.de": {
-                "id": "!WEaaAEaZsQbZXmzqKN:dev.medienhaus.udk-berlin.de",
-                "name": "„Das Meisterwerk in der Musik“ - Die Lehre Heinrich Schenkers",
-                "children": {}
-              },
-              "!dTImxzJvpLMOAbEqJW:dev.medienhaus.udk-berlin.de": {
-                "id": "!dTImxzJvpLMOAbEqJW:dev.medienhaus.udk-berlin.de",
-                "name": "„Praktisches Arrangieren für Jazz/-Pop-Ensembles und Chöre“",
-                "children": {}
-              },
-              "!eGuMIutQYWUlbDaPLm:dev.medienhaus.udk-berlin.de": {
-                "id": "!eGuMIutQYWUlbDaPLm:dev.medienhaus.udk-berlin.de",
-                "name": "Alban Berg \"Wozzeck\"",
-                "children": {}
-              },
-              "!QiziifyVzPdmyLmBRn:dev.medienhaus.udk-berlin.de": {
-                "id": "!QiziifyVzPdmyLmBRn:dev.medienhaus.udk-berlin.de",
-                "name": "Analyse und Interpretation",
-                "children": {}
-              },
-              "!vcXkwNZTzywzDCjbCU:dev.medienhaus.udk-berlin.de": {
-                "id": "!vcXkwNZTzywzDCjbCU:dev.medienhaus.udk-berlin.de",
-                "name": "And Orff We Go!",
-                "children": {}
-              },
-              "!VNqBBCbDUFGIhIHUjy:dev.medienhaus.udk-berlin.de": {
-                "id": "!VNqBBCbDUFGIhIHUjy:dev.medienhaus.udk-berlin.de",
-                "name": "Argentinischer Tango – verstehen und spielen",
-                "children": {}
-              },
-              "!HjoBbnDJdpSmyCYEzF:dev.medienhaus.udk-berlin.de": {
-                "id": "!HjoBbnDJdpSmyCYEzF:dev.medienhaus.udk-berlin.de",
-                "name": "Authentizität vs. Rollenbild – Frauen und Männer im Dirigierberuf_",
-                "children": {}
-              },
-              "!KCRTdqRIWyiFSFBDbV:dev.medienhaus.udk-berlin.de": {
-                "id": "!KCRTdqRIWyiFSFBDbV:dev.medienhaus.udk-berlin.de",
-                "name": "BA LA ISS/Gym - Musiktheorie Basis (2. Semester)",
-                "children": {}
-              },
-              "!OscVfQrIyDxbXrkrKI:dev.medienhaus.udk-berlin.de": {
-                "id": "!OscVfQrIyDxbXrkrKI:dev.medienhaus.udk-berlin.de",
-                "name": "BA/MA Lehramt Musik Gym,/ISS Schulbezogenes Arrangieren",
-                "children": {}
-              },
-              "!AdJitWktKgrkjhZckY:dev.medienhaus.udk-berlin.de": {
-                "id": "!AdJitWktKgrkjhZckY:dev.medienhaus.udk-berlin.de",
-                "name": "Basic Impro",
-                "children": {}
-              },
-              "!JCQTZyGxccvJPxXjPr:dev.medienhaus.udk-berlin.de": {
-                "id": "!JCQTZyGxccvJPxXjPr:dev.medienhaus.udk-berlin.de",
-                "name": "Bewegungstraining",
-                "children": {}
-              },
-              "!NFXeCNClYHqAAgZoJe:dev.medienhaus.udk-berlin.de": {
-                "id": "!NFXeCNClYHqAAgZoJe:dev.medienhaus.udk-berlin.de",
-                "name": "Cajon 1",
-                "children": {}
-              },
-              "!oCkLgUDmlUVupuuWBu:dev.medienhaus.udk-berlin.de": {
-                "id": "!oCkLgUDmlUVupuuWBu:dev.medienhaus.udk-berlin.de",
-                "name": "Cajon 2",
-                "children": {}
-              },
-              "!SoqETNSXpgfuCIsKJY:dev.medienhaus.udk-berlin.de": {
-                "id": "!SoqETNSXpgfuCIsKJY:dev.medienhaus.udk-berlin.de",
-                "name": "Chor JRP",
-                "children": {}
-              },
-              "!AYcHgWcBoVtxXYDaPz:dev.medienhaus.udk-berlin.de": {
-                "id": "!AYcHgWcBoVtxXYDaPz:dev.medienhaus.udk-berlin.de",
-                "name": "Chorleitung 1a",
-                "children": {}
-              },
-              "!BhdIsVvgQmwGTHUtWT:dev.medienhaus.udk-berlin.de": {
-                "id": "!BhdIsVvgQmwGTHUtWT:dev.medienhaus.udk-berlin.de",
-                "name": "Chorleitung 1a",
-                "children": {}
-              },
-              "!HCQxhvezBRlrBDLOjr:dev.medienhaus.udk-berlin.de": {
-                "id": "!HCQxhvezBRlrBDLOjr:dev.medienhaus.udk-berlin.de",
-                "name": "Chorleitung 1 b",
-                "children": {}
-              },
-              "!YpqyeEtKTITKyCEfkE:dev.medienhaus.udk-berlin.de": {
-                "id": "!YpqyeEtKTITKyCEfkE:dev.medienhaus.udk-berlin.de",
-                "name": "Chorleitung 2 a",
-                "children": {}
-              },
-              "!rQzgJaaNqZwvexZLzu:dev.medienhaus.udk-berlin.de": {
-                "id": "!rQzgJaaNqZwvexZLzu:dev.medienhaus.udk-berlin.de",
-                "name": "Chorleitung 2 b",
-                "children": {}
-              },
-              "!sreXCGNwQWWSiHaQIV:dev.medienhaus.udk-berlin.de": {
-                "id": "!sreXCGNwQWWSiHaQIV:dev.medienhaus.udk-berlin.de",
-                "name": "Chorleitung 2 c",
-                "children": {}
-              },
-              "!vfdcDqaaARLAaEIznF:dev.medienhaus.udk-berlin.de": {
-                "id": "!vfdcDqaaARLAaEIznF:dev.medienhaus.udk-berlin.de",
-                "name": "Chorleitung Plus für CL 2a",
-                "children": {}
-              },
-              "!VxOMLjdBVnCneAdmMa:dev.medienhaus.udk-berlin.de": {
-                "id": "!VxOMLjdBVnCneAdmMa:dev.medienhaus.udk-berlin.de",
-                "name": "Chorleitung Plus für CL 2b",
-                "children": {}
-              },
-              "!EJdutCudChyqgiZuSS:dev.medienhaus.udk-berlin.de": {
-                "id": "!EJdutCudChyqgiZuSS:dev.medienhaus.udk-berlin.de",
-                "name": "Chorleitung Plus für CL 2 c",
-                "children": {}
-              },
-              "!ANrhZXyDHamBdorJJn:dev.medienhaus.udk-berlin.de": {
-                "id": "!ANrhZXyDHamBdorJJn:dev.medienhaus.udk-berlin.de",
-                "name": "Chorleitung (Profil) 1 a",
-                "children": {}
-              },
-              "!pmNGpJjmjYUmIcMsRa:dev.medienhaus.udk-berlin.de": {
-                "id": "!pmNGpJjmjYUmIcMsRa:dev.medienhaus.udk-berlin.de",
-                "name": "Chorleitung (Profil) 1 b",
-                "children": {}
-              },
-              "!uVkOjThmdsvNJFsmKi:dev.medienhaus.udk-berlin.de": {
-                "id": "!uVkOjThmdsvNJFsmKi:dev.medienhaus.udk-berlin.de",
-                "name": "Chorleitung (Profil) 2 a",
-                "children": {}
-              },
-              "!vxBLEdEXxMuubdXYNq:dev.medienhaus.udk-berlin.de": {
-                "id": "!vxBLEdEXxMuubdXYNq:dev.medienhaus.udk-berlin.de",
-                "name": "Chorleitung Profil 2 b",
-                "children": {}
-              },
-              "!PcsxuSFnCgNpoLzjEv:dev.medienhaus.udk-berlin.de": {
-                "id": "!PcsxuSFnCgNpoLzjEv:dev.medienhaus.udk-berlin.de",
-                "name": "ChorPraxis Chorische Stimmbildung und Singen mit Kindern und Jugendlichen:",
-                "children": {}
-              },
-              "!vzMQKGNBWDGFJmaYEa:dev.medienhaus.udk-berlin.de": {
-                "id": "!vzMQKGNBWDGFJmaYEa:dev.medienhaus.udk-berlin.de",
-                "name": "Combo (Bandarbeit in der Schule)",
-                "children": {}
-              },
-              "!baQvQFousAWdzoVBUF:dev.medienhaus.udk-berlin.de": {
-                "id": "!baQvQFousAWdzoVBUF:dev.medienhaus.udk-berlin.de",
-                "name": "Community Music in Theorie und Praxis",
-                "children": {}
-              },
-              "!jlFIDJrKyjMedyyjfu:dev.medienhaus.udk-berlin.de": {
-                "id": "!jlFIDJrKyjMedyyjfu:dev.medienhaus.udk-berlin.de",
-                "name": "Das Cembalo. Von Kielklavieren, Zupfklavieren, Spinetten, Virginalen und Schweinsköpfen.",
-                "children": {}
-              },
-              "!uUERZZMMADBYCruFyK:dev.medienhaus.udk-berlin.de": {
-                "id": "!uUERZZMMADBYCruFyK:dev.medienhaus.udk-berlin.de",
-                "name": "Das Kleine Klavierstück von Bach bis Schönberg. Zur Geschichte des Charakterstücks für",
-                "children": {}
-              },
-              "!UXSobQdCoDvibQWdGg:dev.medienhaus.udk-berlin.de": {
-                "id": "!UXSobQdCoDvibQWdGg:dev.medienhaus.udk-berlin.de",
-                "name": "Der Basso ostinato in westlicher Kunstmusik",
-                "children": {}
-              },
-              "!eoqYTtewYTvBosoQNA:dev.medienhaus.udk-berlin.de": {
-                "id": "!eoqYTtewYTvBosoQNA:dev.medienhaus.udk-berlin.de",
-                "name": "Der Computer als kreatives Musikinstrument (Neue Medien/Musikproduktion)",
-                "children": {}
-              },
-              "!rIkdVmmIoDPypYWxAh:dev.medienhaus.udk-berlin.de": {
-                "id": "!rIkdVmmIoDPypYWxAh:dev.medienhaus.udk-berlin.de",
-                "name": "Dirigieren Ensemble im Profilmodul Chor- und Ensembleleitung",
-                "children": {}
-              },
-              "!xHkrhqFFKUrKrDZMBw:dev.medienhaus.udk-berlin.de": {
-                "id": "!xHkrhqFFKUrKrDZMBw:dev.medienhaus.udk-berlin.de",
-                "name": "Dramaturgie der Filmmusik",
-                "children": {}
-              },
-              "!cywTceJEmzwomJuFEp:dev.medienhaus.udk-berlin.de": {
-                "id": "!cywTceJEmzwomJuFEp:dev.medienhaus.udk-berlin.de",
-                "name": "Einführung in die Musikwissenschaft",
-                "children": {}
-              },
-              "!ZXDkmOHZaOZfWhQmnB:dev.medienhaus.udk-berlin.de": {
-                "id": "!ZXDkmOHZaOZfWhQmnB:dev.medienhaus.udk-berlin.de",
-                "name": "Einführung in die Musikwissenschaft",
-                "children": {}
-              },
-              "!xmiwJIcmWKAIaTOkvI:dev.medienhaus.udk-berlin.de": {
-                "id": "!xmiwJIcmWKAIaTOkvI:dev.medienhaus.udk-berlin.de",
-                "name": "Einführung in Studium und Beruf (Einzeltermine)",
-                "children": {}
-              },
-              "!FxRRmFWcEuHmiggGhe:dev.medienhaus.udk-berlin.de": {
-                "id": "!FxRRmFWcEuHmiggGhe:dev.medienhaus.udk-berlin.de",
-                "name": "Einführung in Studium und Beruf (Tag)",
-                "children": {}
-              },
-              "!gBnZBGgYcfAAUqKJyT:dev.medienhaus.udk-berlin.de": {
-                "id": "!gBnZBGgYcfAAUqKJyT:dev.medienhaus.udk-berlin.de",
-                "name": "\"Einstieg ins Arrangieren\"",
-                "children": {}
-              },
-              "!yNOUxsniRedUmPJVLZ:dev.medienhaus.udk-berlin.de": {
-                "id": "!yNOUxsniRedUmPJVLZ:dev.medienhaus.udk-berlin.de",
-                "name": "Ensemble ilinx \"Neue Wege zu Beethoven\" bei Crescendo 2021",
-                "children": {}
-              },
-              "!MfsJqTcUUnazYXDjGf:dev.medienhaus.udk-berlin.de": {
-                "id": "!MfsJqTcUUnazYXDjGf:dev.medienhaus.udk-berlin.de",
-                "name": "Ensemble-Leitung im Profilmodul 8/ Master",
-                "children": {}
-              },
-              "!hsZaZWQrqFbtrpdUCy:dev.medienhaus.udk-berlin.de": {
-                "id": "!hsZaZWQrqFbtrpdUCy:dev.medienhaus.udk-berlin.de",
-                "name": "Experimental Coding with Supercollider Parametric abstract composing",
-                "children": {}
-              },
-              "!NTwKbNPPyvzTJgeNul:dev.medienhaus.udk-berlin.de": {
-                "id": "!NTwKbNPPyvzTJgeNul:dev.medienhaus.udk-berlin.de",
-                "name": "Experimentelle Komposition: Profilmodul Lehramt",
-                "children": {}
-              },
-              "!aJdqOeRvENtwKsLOul:dev.medienhaus.udk-berlin.de": {
-                "id": "!aJdqOeRvENtwKsLOul:dev.medienhaus.udk-berlin.de",
-                "name": "Experimentelle Musik 1, Gruppenarbeit",
-                "children": {}
-              },
-              "!sGSbwKlTULOQGnVrqa:dev.medienhaus.udk-berlin.de": {
-                "id": "!sGSbwKlTULOQGnVrqa:dev.medienhaus.udk-berlin.de",
-                "name": "Experimentelle Musik, Gruppenleitung",
-                "children": {}
-              },
-              "!mLwkIPZlBOaXRfoCFS:dev.medienhaus.udk-berlin.de": {
-                "id": "!mLwkIPZlBOaXRfoCFS:dev.medienhaus.udk-berlin.de",
-                "name": "Experiments with Sound / online-Kurs",
-                "children": {}
-              }
-            }
-          },
-          "!DpPUHGdSffZfKQuVNL:dev.medienhaus.udk-berlin.de": {
-            "id": "!DpPUHGdSffZfKQuVNL:dev.medienhaus.udk-berlin.de",
-            "name": "MA Lehramt Musik ISS",
-            "children": {
-              "!OtEMpbRqgMSNztBQTv:dev.medienhaus.udk-berlin.de": {
-                "id": "!OtEMpbRqgMSNztBQTv:dev.medienhaus.udk-berlin.de",
-                "name": "„…muss in die alt hergebrachte Form ein anderes, ein wirklich poetisches Element kommen.“ Fugen in",
-                "children": {}
-              },
-              "!WEaaAEaZsQbZXmzqKN:dev.medienhaus.udk-berlin.de": {
-                "id": "!WEaaAEaZsQbZXmzqKN:dev.medienhaus.udk-berlin.de",
-                "name": "„Das Meisterwerk in der Musik“ - Die Lehre Heinrich Schenkers",
-                "children": {}
-              },
-              "!dTImxzJvpLMOAbEqJW:dev.medienhaus.udk-berlin.de": {
-                "id": "!dTImxzJvpLMOAbEqJW:dev.medienhaus.udk-berlin.de",
-                "name": "„Praktisches Arrangieren für Jazz/-Pop-Ensembles und Chöre“",
-                "children": {}
-              },
-              "!eGuMIutQYWUlbDaPLm:dev.medienhaus.udk-berlin.de": {
-                "id": "!eGuMIutQYWUlbDaPLm:dev.medienhaus.udk-berlin.de",
-                "name": "Alban Berg \"Wozzeck\"",
-                "children": {}
-              },
-              "!SVUqlsAPWbwUZcZMIY:dev.medienhaus.udk-berlin.de": {
-                "id": "!SVUqlsAPWbwUZcZMIY:dev.medienhaus.udk-berlin.de",
-                "name": "Alexandertechnik",
-                "children": {}
-              },
-              "!QiziifyVzPdmyLmBRn:dev.medienhaus.udk-berlin.de": {
-                "id": "!QiziifyVzPdmyLmBRn:dev.medienhaus.udk-berlin.de",
-                "name": "Analyse und Interpretation",
-                "children": {}
-              },
-              "!vcXkwNZTzywzDCjbCU:dev.medienhaus.udk-berlin.de": {
-                "id": "!vcXkwNZTzywzDCjbCU:dev.medienhaus.udk-berlin.de",
-                "name": "And Orff We Go!",
-                "children": {}
-              },
-              "!VNqBBCbDUFGIhIHUjy:dev.medienhaus.udk-berlin.de": {
-                "id": "!VNqBBCbDUFGIhIHUjy:dev.medienhaus.udk-berlin.de",
-                "name": "Argentinischer Tango – verstehen und spielen",
-                "children": {}
-              },
-              "!HjoBbnDJdpSmyCYEzF:dev.medienhaus.udk-berlin.de": {
-                "id": "!HjoBbnDJdpSmyCYEzF:dev.medienhaus.udk-berlin.de",
-                "name": "Authentizität vs. Rollenbild – Frauen und Männer im Dirigierberuf_",
-                "children": {}
-              },
-              "!OscVfQrIyDxbXrkrKI:dev.medienhaus.udk-berlin.de": {
-                "id": "!OscVfQrIyDxbXrkrKI:dev.medienhaus.udk-berlin.de",
-                "name": "BA/MA Lehramt Musik Gym,/ISS Schulbezogenes Arrangieren",
-                "children": {}
-              },
-              "!AdJitWktKgrkjhZckY:dev.medienhaus.udk-berlin.de": {
-                "id": "!AdJitWktKgrkjhZckY:dev.medienhaus.udk-berlin.de",
-                "name": "Basic Impro",
-                "children": {}
-              },
-              "!JCQTZyGxccvJPxXjPr:dev.medienhaus.udk-berlin.de": {
-                "id": "!JCQTZyGxccvJPxXjPr:dev.medienhaus.udk-berlin.de",
-                "name": "Bewegungstraining",
-                "children": {}
-              },
-              "!NFXeCNClYHqAAgZoJe:dev.medienhaus.udk-berlin.de": {
-                "id": "!NFXeCNClYHqAAgZoJe:dev.medienhaus.udk-berlin.de",
-                "name": "Cajon 1",
-                "children": {}
-              },
-              "!oCkLgUDmlUVupuuWBu:dev.medienhaus.udk-berlin.de": {
-                "id": "!oCkLgUDmlUVupuuWBu:dev.medienhaus.udk-berlin.de",
-                "name": "Cajon 2",
-                "children": {}
-              },
-              "!SoqETNSXpgfuCIsKJY:dev.medienhaus.udk-berlin.de": {
-                "id": "!SoqETNSXpgfuCIsKJY:dev.medienhaus.udk-berlin.de",
-                "name": "Chor JRP",
-                "children": {}
-              },
-              "!HCQxhvezBRlrBDLOjr:dev.medienhaus.udk-berlin.de": {
-                "id": "!HCQxhvezBRlrBDLOjr:dev.medienhaus.udk-berlin.de",
-                "name": "Chorleitung 1 b",
-                "children": {}
-              },
-              "!YpqyeEtKTITKyCEfkE:dev.medienhaus.udk-berlin.de": {
-                "id": "!YpqyeEtKTITKyCEfkE:dev.medienhaus.udk-berlin.de",
-                "name": "Chorleitung 2 a",
-                "children": {}
-              },
-              "!rQzgJaaNqZwvexZLzu:dev.medienhaus.udk-berlin.de": {
-                "id": "!rQzgJaaNqZwvexZLzu:dev.medienhaus.udk-berlin.de",
-                "name": "Chorleitung 2 b",
-                "children": {}
-              },
-              "!sreXCGNwQWWSiHaQIV:dev.medienhaus.udk-berlin.de": {
-                "id": "!sreXCGNwQWWSiHaQIV:dev.medienhaus.udk-berlin.de",
-                "name": "Chorleitung 2 c",
-                "children": {}
-              },
-              "!vfdcDqaaARLAaEIznF:dev.medienhaus.udk-berlin.de": {
-                "id": "!vfdcDqaaARLAaEIznF:dev.medienhaus.udk-berlin.de",
-                "name": "Chorleitung Plus für CL 2a",
-                "children": {}
-              },
-              "!VxOMLjdBVnCneAdmMa:dev.medienhaus.udk-berlin.de": {
-                "id": "!VxOMLjdBVnCneAdmMa:dev.medienhaus.udk-berlin.de",
-                "name": "Chorleitung Plus für CL 2b",
-                "children": {}
-              },
-              "!EJdutCudChyqgiZuSS:dev.medienhaus.udk-berlin.de": {
-                "id": "!EJdutCudChyqgiZuSS:dev.medienhaus.udk-berlin.de",
-                "name": "Chorleitung Plus für CL 2 c",
-                "children": {}
-              },
-              "!ANrhZXyDHamBdorJJn:dev.medienhaus.udk-berlin.de": {
-                "id": "!ANrhZXyDHamBdorJJn:dev.medienhaus.udk-berlin.de",
-                "name": "Chorleitung (Profil) 1 a",
-                "children": {}
-              },
-              "!pmNGpJjmjYUmIcMsRa:dev.medienhaus.udk-berlin.de": {
-                "id": "!pmNGpJjmjYUmIcMsRa:dev.medienhaus.udk-berlin.de",
-                "name": "Chorleitung (Profil) 1 b",
-                "children": {}
-              },
-              "!uVkOjThmdsvNJFsmKi:dev.medienhaus.udk-berlin.de": {
-                "id": "!uVkOjThmdsvNJFsmKi:dev.medienhaus.udk-berlin.de",
-                "name": "Chorleitung (Profil) 2 a",
-                "children": {}
-              },
-              "!vxBLEdEXxMuubdXYNq:dev.medienhaus.udk-berlin.de": {
-                "id": "!vxBLEdEXxMuubdXYNq:dev.medienhaus.udk-berlin.de",
-                "name": "Chorleitung Profil 2 b",
-                "children": {}
-              },
-              "!PcsxuSFnCgNpoLzjEv:dev.medienhaus.udk-berlin.de": {
-                "id": "!PcsxuSFnCgNpoLzjEv:dev.medienhaus.udk-berlin.de",
-                "name": "ChorPraxis Chorische Stimmbildung und Singen mit Kindern und Jugendlichen:",
-                "children": {}
-              },
-              "!vzMQKGNBWDGFJmaYEa:dev.medienhaus.udk-berlin.de": {
-                "id": "!vzMQKGNBWDGFJmaYEa:dev.medienhaus.udk-berlin.de",
-                "name": "Combo (Bandarbeit in der Schule)",
-                "children": {}
-              },
-              "!rIkdVmmIoDPypYWxAh:dev.medienhaus.udk-berlin.de": {
-                "id": "!rIkdVmmIoDPypYWxAh:dev.medienhaus.udk-berlin.de",
-                "name": "Dirigieren Ensemble im Profilmodul Chor- und Ensembleleitung",
-                "children": {}
-              },
-              "!gBnZBGgYcfAAUqKJyT:dev.medienhaus.udk-berlin.de": {
-                "id": "!gBnZBGgYcfAAUqKJyT:dev.medienhaus.udk-berlin.de",
-                "name": "\"Einstieg ins Arrangieren\"",
-                "children": {}
-              },
-              "!yNOUxsniRedUmPJVLZ:dev.medienhaus.udk-berlin.de": {
-                "id": "!yNOUxsniRedUmPJVLZ:dev.medienhaus.udk-berlin.de",
-                "name": "Ensemble ilinx \"Neue Wege zu Beethoven\" bei Crescendo 2021",
-                "children": {}
-              },
-              "!MfsJqTcUUnazYXDjGf:dev.medienhaus.udk-berlin.de": {
-                "id": "!MfsJqTcUUnazYXDjGf:dev.medienhaus.udk-berlin.de",
-                "name": "Ensemble-Leitung im Profilmodul 8/ Master",
-                "children": {}
-              },
-              "!hsZaZWQrqFbtrpdUCy:dev.medienhaus.udk-berlin.de": {
-                "id": "!hsZaZWQrqFbtrpdUCy:dev.medienhaus.udk-berlin.de",
-                "name": "Experimental Coding with Supercollider Parametric abstract composing",
-                "children": {}
-              },
-              "!NTwKbNPPyvzTJgeNul:dev.medienhaus.udk-berlin.de": {
-                "id": "!NTwKbNPPyvzTJgeNul:dev.medienhaus.udk-berlin.de",
-                "name": "Experimentelle Komposition: Profilmodul Lehramt",
-                "children": {}
-              },
-              "!sGSbwKlTULOQGnVrqa:dev.medienhaus.udk-berlin.de": {
-                "id": "!sGSbwKlTULOQGnVrqa:dev.medienhaus.udk-berlin.de",
-                "name": "Experimentelle Musik, Gruppenleitung",
-                "children": {}
-              },
-              "!mLwkIPZlBOaXRfoCFS:dev.medienhaus.udk-berlin.de": {
-                "id": "!mLwkIPZlBOaXRfoCFS:dev.medienhaus.udk-berlin.de",
-                "name": "Experiments with Sound / online-Kurs",
-                "children": {}
-              },
-              "!TgYLhRUkxInOKraIoq:dev.medienhaus.udk-berlin.de": {
-                "id": "!TgYLhRUkxInOKraIoq:dev.medienhaus.udk-berlin.de",
-                "name": "Faust-Vertonungen",
-                "children": {}
-              },
-              "!JLsYuyzeWkfBNKZGvc:dev.medienhaus.udk-berlin.de": {
-                "id": "!JLsYuyzeWkfBNKZGvc:dev.medienhaus.udk-berlin.de",
-                "name": "Feldenkrais",
-                "children": {}
-              },
-              "!YbkWmuEoNdaYCZWPob:dev.medienhaus.udk-berlin.de": {
-                "id": "!YbkWmuEoNdaYCZWPob:dev.medienhaus.udk-berlin.de",
-                "name": "Get the vocal Groove",
-                "children": {}
-              },
-              "!ieBmcSyfbaHnZXGhpf:dev.medienhaus.udk-berlin.de": {
-                "id": "!ieBmcSyfbaHnZXGhpf:dev.medienhaus.udk-berlin.de",
-                "name": "Großer Chor der UdK",
-                "children": {}
-              },
-              "!qRwyNmPAPJtxNieMFB:dev.medienhaus.udk-berlin.de": {
-                "id": "!qRwyNmPAPJtxNieMFB:dev.medienhaus.udk-berlin.de",
-                "name": "Grundlagenseminar Musikphysiologie",
-                "children": {}
-              },
-              "!MVhjGfJbRPEszrYRoC:dev.medienhaus.udk-berlin.de": {
-                "id": "!MVhjGfJbRPEszrYRoC:dev.medienhaus.udk-berlin.de",
-                "name": "Grundschulbezogene Ensemblepraxis/ Master",
-                "children": {}
-              },
-              "!pqyhCyFvftnQWIEXFH:dev.medienhaus.udk-berlin.de": {
-                "id": "!pqyhCyFvftnQWIEXFH:dev.medienhaus.udk-berlin.de",
-                "name": "Hans Wüthrich „Das Glashaus“",
-                "children": {}
-              },
-              "!NXxVAABAkFvgvylhHG:dev.medienhaus.udk-berlin.de": {
-                "id": "!NXxVAABAkFvgvylhHG:dev.medienhaus.udk-berlin.de",
-                "name": "Improvisation für Sänger*innen",
-                "children": {}
-              },
-              "!jqUCyFdpAYoLOAoFYh:dev.medienhaus.udk-berlin.de": {
-                "id": "!jqUCyFdpAYoLOAoFYh:dev.medienhaus.udk-berlin.de",
-                "name": "Improvisation für Sänger*innen 2",
-                "children": {}
-              },
-              "!SDjoGPjsvJlLvwnRlz:dev.medienhaus.udk-berlin.de": {
-                "id": "!SDjoGPjsvJlLvwnRlz:dev.medienhaus.udk-berlin.de",
-                "name": "Jam On: Singen ohne Noten",
-                "children": {}
-              },
-              "!IRXTkLfmnrOXBEBjiW:dev.medienhaus.udk-berlin.de": {
-                "id": "!IRXTkLfmnrOXBEBjiW:dev.medienhaus.udk-berlin.de",
-                "name": "Jazzensemble 1",
-                "children": {}
-              },
-              "!vgfmyKIkaMlFGOHzgg:dev.medienhaus.udk-berlin.de": {
-                "id": "!vgfmyKIkaMlFGOHzgg:dev.medienhaus.udk-berlin.de",
-                "name": "Jazz Ensemble 2",
-                "children": {}
-              },
-              "!trDoqlvoTdoBAkVkqW:dev.medienhaus.udk-berlin.de": {
-                "id": "!trDoqlvoTdoBAkVkqW:dev.medienhaus.udk-berlin.de",
-                "name": "Jazz-Standards-Ensemble",
-                "children": {}
-              }
-            }
-          },
-          "!evsCSLfLvUSTgXAabd:dev.medienhaus.udk-berlin.de": {
-            "id": "!evsCSLfLvUSTgXAabd:dev.medienhaus.udk-berlin.de",
-            "name": "MA Lehramt Musik Gym",
-            "children": {
-              "!OtEMpbRqgMSNztBQTv:dev.medienhaus.udk-berlin.de": {
-                "id": "!OtEMpbRqgMSNztBQTv:dev.medienhaus.udk-berlin.de",
-                "name": "„…muss in die alt hergebrachte Form ein anderes, ein wirklich poetisches Element kommen.“ Fugen in",
-                "children": {}
-              },
-              "!WEaaAEaZsQbZXmzqKN:dev.medienhaus.udk-berlin.de": {
-                "id": "!WEaaAEaZsQbZXmzqKN:dev.medienhaus.udk-berlin.de",
-                "name": "„Das Meisterwerk in der Musik“ - Die Lehre Heinrich Schenkers",
-                "children": {}
-              },
-              "!dTImxzJvpLMOAbEqJW:dev.medienhaus.udk-berlin.de": {
-                "id": "!dTImxzJvpLMOAbEqJW:dev.medienhaus.udk-berlin.de",
-                "name": "„Praktisches Arrangieren für Jazz/-Pop-Ensembles und Chöre“",
-                "children": {}
-              },
-              "!eGuMIutQYWUlbDaPLm:dev.medienhaus.udk-berlin.de": {
-                "id": "!eGuMIutQYWUlbDaPLm:dev.medienhaus.udk-berlin.de",
-                "name": "Alban Berg \"Wozzeck\"",
-                "children": {}
-              },
-              "!SVUqlsAPWbwUZcZMIY:dev.medienhaus.udk-berlin.de": {
-                "id": "!SVUqlsAPWbwUZcZMIY:dev.medienhaus.udk-berlin.de",
-                "name": "Alexandertechnik",
-                "children": {}
-              },
-              "!QiziifyVzPdmyLmBRn:dev.medienhaus.udk-berlin.de": {
-                "id": "!QiziifyVzPdmyLmBRn:dev.medienhaus.udk-berlin.de",
-                "name": "Analyse und Interpretation",
-                "children": {}
-              },
-              "!vcXkwNZTzywzDCjbCU:dev.medienhaus.udk-berlin.de": {
-                "id": "!vcXkwNZTzywzDCjbCU:dev.medienhaus.udk-berlin.de",
-                "name": "And Orff We Go!",
-                "children": {}
-              },
-              "!VNqBBCbDUFGIhIHUjy:dev.medienhaus.udk-berlin.de": {
-                "id": "!VNqBBCbDUFGIhIHUjy:dev.medienhaus.udk-berlin.de",
-                "name": "Argentinischer Tango – verstehen und spielen",
-                "children": {}
-              },
-              "!HjoBbnDJdpSmyCYEzF:dev.medienhaus.udk-berlin.de": {
-                "id": "!HjoBbnDJdpSmyCYEzF:dev.medienhaus.udk-berlin.de",
-                "name": "Authentizität vs. Rollenbild – Frauen und Männer im Dirigierberuf_",
-                "children": {}
-              },
-              "!OscVfQrIyDxbXrkrKI:dev.medienhaus.udk-berlin.de": {
-                "id": "!OscVfQrIyDxbXrkrKI:dev.medienhaus.udk-berlin.de",
-                "name": "BA/MA Lehramt Musik Gym,/ISS Schulbezogenes Arrangieren",
-                "children": {}
-              },
-              "!AdJitWktKgrkjhZckY:dev.medienhaus.udk-berlin.de": {
-                "id": "!AdJitWktKgrkjhZckY:dev.medienhaus.udk-berlin.de",
-                "name": "Basic Impro",
-                "children": {}
-              },
-              "!JCQTZyGxccvJPxXjPr:dev.medienhaus.udk-berlin.de": {
-                "id": "!JCQTZyGxccvJPxXjPr:dev.medienhaus.udk-berlin.de",
-                "name": "Bewegungstraining",
-                "children": {}
-              },
-              "!NFXeCNClYHqAAgZoJe:dev.medienhaus.udk-berlin.de": {
-                "id": "!NFXeCNClYHqAAgZoJe:dev.medienhaus.udk-berlin.de",
-                "name": "Cajon 1",
-                "children": {}
-              },
-              "!oCkLgUDmlUVupuuWBu:dev.medienhaus.udk-berlin.de": {
-                "id": "!oCkLgUDmlUVupuuWBu:dev.medienhaus.udk-berlin.de",
-                "name": "Cajon 2",
-                "children": {}
-              },
-              "!SoqETNSXpgfuCIsKJY:dev.medienhaus.udk-berlin.de": {
-                "id": "!SoqETNSXpgfuCIsKJY:dev.medienhaus.udk-berlin.de",
-                "name": "Chor JRP",
-                "children": {}
-              },
-              "!AYcHgWcBoVtxXYDaPz:dev.medienhaus.udk-berlin.de": {
-                "id": "!AYcHgWcBoVtxXYDaPz:dev.medienhaus.udk-berlin.de",
-                "name": "Chorleitung 1a",
-                "children": {}
-              },
-              "!BhdIsVvgQmwGTHUtWT:dev.medienhaus.udk-berlin.de": {
-                "id": "!BhdIsVvgQmwGTHUtWT:dev.medienhaus.udk-berlin.de",
-                "name": "Chorleitung 1a",
-                "children": {}
-              },
-              "!HCQxhvezBRlrBDLOjr:dev.medienhaus.udk-berlin.de": {
-                "id": "!HCQxhvezBRlrBDLOjr:dev.medienhaus.udk-berlin.de",
-                "name": "Chorleitung 1 b",
-                "children": {}
-              },
-              "!YpqyeEtKTITKyCEfkE:dev.medienhaus.udk-berlin.de": {
-                "id": "!YpqyeEtKTITKyCEfkE:dev.medienhaus.udk-berlin.de",
-                "name": "Chorleitung 2 a",
-                "children": {}
-              },
-              "!rQzgJaaNqZwvexZLzu:dev.medienhaus.udk-berlin.de": {
-                "id": "!rQzgJaaNqZwvexZLzu:dev.medienhaus.udk-berlin.de",
-                "name": "Chorleitung 2 b",
-                "children": {}
-              },
-              "!sreXCGNwQWWSiHaQIV:dev.medienhaus.udk-berlin.de": {
-                "id": "!sreXCGNwQWWSiHaQIV:dev.medienhaus.udk-berlin.de",
-                "name": "Chorleitung 2 c",
-                "children": {}
-              },
-              "!vfdcDqaaARLAaEIznF:dev.medienhaus.udk-berlin.de": {
-                "id": "!vfdcDqaaARLAaEIznF:dev.medienhaus.udk-berlin.de",
-                "name": "Chorleitung Plus für CL 2a",
-                "children": {}
-              },
-              "!VxOMLjdBVnCneAdmMa:dev.medienhaus.udk-berlin.de": {
-                "id": "!VxOMLjdBVnCneAdmMa:dev.medienhaus.udk-berlin.de",
-                "name": "Chorleitung Plus für CL 2b",
-                "children": {}
-              },
-              "!EJdutCudChyqgiZuSS:dev.medienhaus.udk-berlin.de": {
-                "id": "!EJdutCudChyqgiZuSS:dev.medienhaus.udk-berlin.de",
-                "name": "Chorleitung Plus für CL 2 c",
-                "children": {}
-              },
-              "!ANrhZXyDHamBdorJJn:dev.medienhaus.udk-berlin.de": {
-                "id": "!ANrhZXyDHamBdorJJn:dev.medienhaus.udk-berlin.de",
-                "name": "Chorleitung (Profil) 1 a",
-                "children": {}
-              },
-              "!pmNGpJjmjYUmIcMsRa:dev.medienhaus.udk-berlin.de": {
-                "id": "!pmNGpJjmjYUmIcMsRa:dev.medienhaus.udk-berlin.de",
-                "name": "Chorleitung (Profil) 1 b",
-                "children": {}
-              },
-              "!uVkOjThmdsvNJFsmKi:dev.medienhaus.udk-berlin.de": {
-                "id": "!uVkOjThmdsvNJFsmKi:dev.medienhaus.udk-berlin.de",
-                "name": "Chorleitung (Profil) 2 a",
-                "children": {}
-              },
-              "!vxBLEdEXxMuubdXYNq:dev.medienhaus.udk-berlin.de": {
-                "id": "!vxBLEdEXxMuubdXYNq:dev.medienhaus.udk-berlin.de",
-                "name": "Chorleitung Profil 2 b",
-                "children": {}
-              },
-              "!PcsxuSFnCgNpoLzjEv:dev.medienhaus.udk-berlin.de": {
-                "id": "!PcsxuSFnCgNpoLzjEv:dev.medienhaus.udk-berlin.de",
-                "name": "ChorPraxis Chorische Stimmbildung und Singen mit Kindern und Jugendlichen:",
-                "children": {}
-              },
-              "!vzMQKGNBWDGFJmaYEa:dev.medienhaus.udk-berlin.de": {
-                "id": "!vzMQKGNBWDGFJmaYEa:dev.medienhaus.udk-berlin.de",
-                "name": "Combo (Bandarbeit in der Schule)",
-                "children": {}
-              },
-              "!rIkdVmmIoDPypYWxAh:dev.medienhaus.udk-berlin.de": {
-                "id": "!rIkdVmmIoDPypYWxAh:dev.medienhaus.udk-berlin.de",
-                "name": "Dirigieren Ensemble im Profilmodul Chor- und Ensembleleitung",
-                "children": {}
-              },
-              "!gBnZBGgYcfAAUqKJyT:dev.medienhaus.udk-berlin.de": {
-                "id": "!gBnZBGgYcfAAUqKJyT:dev.medienhaus.udk-berlin.de",
-                "name": "\"Einstieg ins Arrangieren\"",
-                "children": {}
-              },
-              "!yNOUxsniRedUmPJVLZ:dev.medienhaus.udk-berlin.de": {
-                "id": "!yNOUxsniRedUmPJVLZ:dev.medienhaus.udk-berlin.de",
-                "name": "Ensemble ilinx \"Neue Wege zu Beethoven\" bei Crescendo 2021",
-                "children": {}
-              },
-              "!hsZaZWQrqFbtrpdUCy:dev.medienhaus.udk-berlin.de": {
-                "id": "!hsZaZWQrqFbtrpdUCy:dev.medienhaus.udk-berlin.de",
-                "name": "Experimental Coding with Supercollider Parametric abstract composing",
-                "children": {}
-              },
-              "!NTwKbNPPyvzTJgeNul:dev.medienhaus.udk-berlin.de": {
-                "id": "!NTwKbNPPyvzTJgeNul:dev.medienhaus.udk-berlin.de",
-                "name": "Experimentelle Komposition: Profilmodul Lehramt",
-                "children": {}
-              },
-              "!sGSbwKlTULOQGnVrqa:dev.medienhaus.udk-berlin.de": {
-                "id": "!sGSbwKlTULOQGnVrqa:dev.medienhaus.udk-berlin.de",
-                "name": "Experimentelle Musik, Gruppenleitung",
-                "children": {}
-              },
-              "!mLwkIPZlBOaXRfoCFS:dev.medienhaus.udk-berlin.de": {
-                "id": "!mLwkIPZlBOaXRfoCFS:dev.medienhaus.udk-berlin.de",
-                "name": "Experiments with Sound / online-Kurs",
-                "children": {}
-              },
-              "!TgYLhRUkxInOKraIoq:dev.medienhaus.udk-berlin.de": {
-                "id": "!TgYLhRUkxInOKraIoq:dev.medienhaus.udk-berlin.de",
-                "name": "Faust-Vertonungen",
-                "children": {}
-              },
-              "!JLsYuyzeWkfBNKZGvc:dev.medienhaus.udk-berlin.de": {
-                "id": "!JLsYuyzeWkfBNKZGvc:dev.medienhaus.udk-berlin.de",
-                "name": "Feldenkrais",
-                "children": {}
-              },
-              "!YbkWmuEoNdaYCZWPob:dev.medienhaus.udk-berlin.de": {
-                "id": "!YbkWmuEoNdaYCZWPob:dev.medienhaus.udk-berlin.de",
-                "name": "Get the vocal Groove",
-                "children": {}
-              },
-              "!ieBmcSyfbaHnZXGhpf:dev.medienhaus.udk-berlin.de": {
-                "id": "!ieBmcSyfbaHnZXGhpf:dev.medienhaus.udk-berlin.de",
-                "name": "Großer Chor der UdK",
-                "children": {}
-              },
-              "!qRwyNmPAPJtxNieMFB:dev.medienhaus.udk-berlin.de": {
-                "id": "!qRwyNmPAPJtxNieMFB:dev.medienhaus.udk-berlin.de",
-                "name": "Grundlagenseminar Musikphysiologie",
-                "children": {}
-              },
-              "!MVhjGfJbRPEszrYRoC:dev.medienhaus.udk-berlin.de": {
-                "id": "!MVhjGfJbRPEszrYRoC:dev.medienhaus.udk-berlin.de",
-                "name": "Grundschulbezogene Ensemblepraxis/ Master",
-                "children": {}
-              },
-              "!pqyhCyFvftnQWIEXFH:dev.medienhaus.udk-berlin.de": {
-                "id": "!pqyhCyFvftnQWIEXFH:dev.medienhaus.udk-berlin.de",
-                "name": "Hans Wüthrich „Das Glashaus“",
-                "children": {}
-              },
-              "!NXxVAABAkFvgvylhHG:dev.medienhaus.udk-berlin.de": {
-                "id": "!NXxVAABAkFvgvylhHG:dev.medienhaus.udk-berlin.de",
-                "name": "Improvisation für Sänger*innen",
-                "children": {}
-              },
-              "!jqUCyFdpAYoLOAoFYh:dev.medienhaus.udk-berlin.de": {
-                "id": "!jqUCyFdpAYoLOAoFYh:dev.medienhaus.udk-berlin.de",
-                "name": "Improvisation für Sänger*innen 2",
-                "children": {}
-              },
-              "!SDjoGPjsvJlLvwnRlz:dev.medienhaus.udk-berlin.de": {
-                "id": "!SDjoGPjsvJlLvwnRlz:dev.medienhaus.udk-berlin.de",
-                "name": "Jam On: Singen ohne Noten",
-                "children": {}
-              },
-              "!IRXTkLfmnrOXBEBjiW:dev.medienhaus.udk-berlin.de": {
-                "id": "!IRXTkLfmnrOXBEBjiW:dev.medienhaus.udk-berlin.de",
-                "name": "Jazzensemble 1",
-                "children": {}
-              },
-              "!vgfmyKIkaMlFGOHzgg:dev.medienhaus.udk-berlin.de": {
-                "id": "!vgfmyKIkaMlFGOHzgg:dev.medienhaus.udk-berlin.de",
-                "name": "Jazz Ensemble 2",
-                "children": {}
-              }
-            }
-          },
-          "!rjoZipUJpbGZxILDxr:dev.medienhaus.udk-berlin.de": {
-            "id": "!rjoZipUJpbGZxILDxr:dev.medienhaus.udk-berlin.de",
-            "name": "BA Lehramt Musik Grundschule",
-            "children": {
-              "!OtEMpbRqgMSNztBQTv:dev.medienhaus.udk-berlin.de": {
-                "id": "!OtEMpbRqgMSNztBQTv:dev.medienhaus.udk-berlin.de",
-                "name": "„…muss in die alt hergebrachte Form ein anderes, ein wirklich poetisches Element kommen.“ Fugen in",
-                "children": {}
-              },
-              "!dTImxzJvpLMOAbEqJW:dev.medienhaus.udk-berlin.de": {
-                "id": "!dTImxzJvpLMOAbEqJW:dev.medienhaus.udk-berlin.de",
-                "name": "„Praktisches Arrangieren für Jazz/-Pop-Ensembles und Chöre“",
-                "children": {}
-              },
-              "!eGuMIutQYWUlbDaPLm:dev.medienhaus.udk-berlin.de": {
-                "id": "!eGuMIutQYWUlbDaPLm:dev.medienhaus.udk-berlin.de",
-                "name": "Alban Berg \"Wozzeck\"",
-                "children": {}
-              },
-              "!vcXkwNZTzywzDCjbCU:dev.medienhaus.udk-berlin.de": {
-                "id": "!vcXkwNZTzywzDCjbCU:dev.medienhaus.udk-berlin.de",
-                "name": "And Orff We Go!",
-                "children": {}
-              },
-              "!AdJitWktKgrkjhZckY:dev.medienhaus.udk-berlin.de": {
-                "id": "!AdJitWktKgrkjhZckY:dev.medienhaus.udk-berlin.de",
-                "name": "Basic Impro",
-                "children": {}
-              },
-              "!NFXeCNClYHqAAgZoJe:dev.medienhaus.udk-berlin.de": {
-                "id": "!NFXeCNClYHqAAgZoJe:dev.medienhaus.udk-berlin.de",
-                "name": "Cajon 1",
-                "children": {}
-              },
-              "!oCkLgUDmlUVupuuWBu:dev.medienhaus.udk-berlin.de": {
-                "id": "!oCkLgUDmlUVupuuWBu:dev.medienhaus.udk-berlin.de",
-                "name": "Cajon 2",
-                "children": {}
-              },
-              "!SoqETNSXpgfuCIsKJY:dev.medienhaus.udk-berlin.de": {
-                "id": "!SoqETNSXpgfuCIsKJY:dev.medienhaus.udk-berlin.de",
-                "name": "Chor JRP",
-                "children": {}
-              },
-              "!AYcHgWcBoVtxXYDaPz:dev.medienhaus.udk-berlin.de": {
-                "id": "!AYcHgWcBoVtxXYDaPz:dev.medienhaus.udk-berlin.de",
-                "name": "Chorleitung 1a",
-                "children": {}
-              },
-              "!BhdIsVvgQmwGTHUtWT:dev.medienhaus.udk-berlin.de": {
-                "id": "!BhdIsVvgQmwGTHUtWT:dev.medienhaus.udk-berlin.de",
-                "name": "Chorleitung 1a",
-                "children": {}
-              },
-              "!HCQxhvezBRlrBDLOjr:dev.medienhaus.udk-berlin.de": {
-                "id": "!HCQxhvezBRlrBDLOjr:dev.medienhaus.udk-berlin.de",
-                "name": "Chorleitung 1 b",
-                "children": {}
-              },
-              "!YpqyeEtKTITKyCEfkE:dev.medienhaus.udk-berlin.de": {
-                "id": "!YpqyeEtKTITKyCEfkE:dev.medienhaus.udk-berlin.de",
-                "name": "Chorleitung 2 a",
-                "children": {}
-              },
-              "!rQzgJaaNqZwvexZLzu:dev.medienhaus.udk-berlin.de": {
-                "id": "!rQzgJaaNqZwvexZLzu:dev.medienhaus.udk-berlin.de",
-                "name": "Chorleitung 2 b",
-                "children": {}
-              },
-              "!sreXCGNwQWWSiHaQIV:dev.medienhaus.udk-berlin.de": {
-                "id": "!sreXCGNwQWWSiHaQIV:dev.medienhaus.udk-berlin.de",
-                "name": "Chorleitung 2 c",
-                "children": {}
-              },
-              "!vfdcDqaaARLAaEIznF:dev.medienhaus.udk-berlin.de": {
-                "id": "!vfdcDqaaARLAaEIznF:dev.medienhaus.udk-berlin.de",
-                "name": "Chorleitung Plus für CL 2a",
-                "children": {}
-              },
-              "!VxOMLjdBVnCneAdmMa:dev.medienhaus.udk-berlin.de": {
-                "id": "!VxOMLjdBVnCneAdmMa:dev.medienhaus.udk-berlin.de",
-                "name": "Chorleitung Plus für CL 2b",
-                "children": {}
-              },
-              "!EJdutCudChyqgiZuSS:dev.medienhaus.udk-berlin.de": {
-                "id": "!EJdutCudChyqgiZuSS:dev.medienhaus.udk-berlin.de",
-                "name": "Chorleitung Plus für CL 2 c",
-                "children": {}
-              },
-              "!ANrhZXyDHamBdorJJn:dev.medienhaus.udk-berlin.de": {
-                "id": "!ANrhZXyDHamBdorJJn:dev.medienhaus.udk-berlin.de",
-                "name": "Chorleitung (Profil) 1 a",
-                "children": {}
-              },
-              "!pmNGpJjmjYUmIcMsRa:dev.medienhaus.udk-berlin.de": {
-                "id": "!pmNGpJjmjYUmIcMsRa:dev.medienhaus.udk-berlin.de",
-                "name": "Chorleitung (Profil) 1 b",
-                "children": {}
-              },
-              "!uVkOjThmdsvNJFsmKi:dev.medienhaus.udk-berlin.de": {
-                "id": "!uVkOjThmdsvNJFsmKi:dev.medienhaus.udk-berlin.de",
-                "name": "Chorleitung (Profil) 2 a",
-                "children": {}
-              },
-              "!vxBLEdEXxMuubdXYNq:dev.medienhaus.udk-berlin.de": {
-                "id": "!vxBLEdEXxMuubdXYNq:dev.medienhaus.udk-berlin.de",
-                "name": "Chorleitung Profil 2 b",
-                "children": {}
-              },
-              "!PcsxuSFnCgNpoLzjEv:dev.medienhaus.udk-berlin.de": {
-                "id": "!PcsxuSFnCgNpoLzjEv:dev.medienhaus.udk-berlin.de",
-                "name": "ChorPraxis Chorische Stimmbildung und Singen mit Kindern und Jugendlichen:",
-                "children": {}
-              },
-              "!vzMQKGNBWDGFJmaYEa:dev.medienhaus.udk-berlin.de": {
-                "id": "!vzMQKGNBWDGFJmaYEa:dev.medienhaus.udk-berlin.de",
-                "name": "Combo (Bandarbeit in der Schule)",
-                "children": {}
-              },
-              "!baQvQFousAWdzoVBUF:dev.medienhaus.udk-berlin.de": {
-                "id": "!baQvQFousAWdzoVBUF:dev.medienhaus.udk-berlin.de",
-                "name": "Community Music in Theorie und Praxis",
-                "children": {}
-              },
-              "!jlFIDJrKyjMedyyjfu:dev.medienhaus.udk-berlin.de": {
-                "id": "!jlFIDJrKyjMedyyjfu:dev.medienhaus.udk-berlin.de",
-                "name": "Das Cembalo. Von Kielklavieren, Zupfklavieren, Spinetten, Virginalen und Schweinsköpfen.",
-                "children": {}
-              },
-              "!uUERZZMMADBYCruFyK:dev.medienhaus.udk-berlin.de": {
-                "id": "!uUERZZMMADBYCruFyK:dev.medienhaus.udk-berlin.de",
-                "name": "Das Kleine Klavierstück von Bach bis Schönberg. Zur Geschichte des Charakterstücks für",
-                "children": {}
-              },
-              "!cywTceJEmzwomJuFEp:dev.medienhaus.udk-berlin.de": {
-                "id": "!cywTceJEmzwomJuFEp:dev.medienhaus.udk-berlin.de",
-                "name": "Einführung in die Musikwissenschaft",
-                "children": {}
-              },
-              "!ZXDkmOHZaOZfWhQmnB:dev.medienhaus.udk-berlin.de": {
-                "id": "!ZXDkmOHZaOZfWhQmnB:dev.medienhaus.udk-berlin.de",
-                "name": "Einführung in die Musikwissenschaft",
-                "children": {}
-              },
-              "!xmiwJIcmWKAIaTOkvI:dev.medienhaus.udk-berlin.de": {
-                "id": "!xmiwJIcmWKAIaTOkvI:dev.medienhaus.udk-berlin.de",
-                "name": "Einführung in Studium und Beruf (Einzeltermine)",
-                "children": {}
-              },
-              "!FxRRmFWcEuHmiggGhe:dev.medienhaus.udk-berlin.de": {
-                "id": "!FxRRmFWcEuHmiggGhe:dev.medienhaus.udk-berlin.de",
-                "name": "Einführung in Studium und Beruf (Tag)",
-                "children": {}
-              },
-              "!gBnZBGgYcfAAUqKJyT:dev.medienhaus.udk-berlin.de": {
-                "id": "!gBnZBGgYcfAAUqKJyT:dev.medienhaus.udk-berlin.de",
-                "name": "\"Einstieg ins Arrangieren\"",
-                "children": {}
-              },
-              "!MfsJqTcUUnazYXDjGf:dev.medienhaus.udk-berlin.de": {
-                "id": "!MfsJqTcUUnazYXDjGf:dev.medienhaus.udk-berlin.de",
-                "name": "Ensemble-Leitung im Profilmodul 8/ Master",
-                "children": {}
-              },
-              "!DIPuoaxknDCfvERmLU:dev.medienhaus.udk-berlin.de": {
-                "id": "!DIPuoaxknDCfvERmLU:dev.medienhaus.udk-berlin.de",
-                "name": "Ensemblepraxis 2 (Kurs1)",
-                "children": {}
-              },
-              "!hsZaZWQrqFbtrpdUCy:dev.medienhaus.udk-berlin.de": {
-                "id": "!hsZaZWQrqFbtrpdUCy:dev.medienhaus.udk-berlin.de",
-                "name": "Experimental Coding with Supercollider Parametric abstract composing",
-                "children": {}
-              },
-              "!aJdqOeRvENtwKsLOul:dev.medienhaus.udk-berlin.de": {
-                "id": "!aJdqOeRvENtwKsLOul:dev.medienhaus.udk-berlin.de",
-                "name": "Experimentelle Musik 1, Gruppenarbeit",
-                "children": {}
-              },
-              "!HxYGUqyQBbVKfnizQX:dev.medienhaus.udk-berlin.de": {
-                "id": "!HxYGUqyQBbVKfnizQX:dev.medienhaus.udk-berlin.de",
-                "name": "Fachübergreifender Musiklunterricht",
-                "children": {}
-              },
-              "!TgYLhRUkxInOKraIoq:dev.medienhaus.udk-berlin.de": {
-                "id": "!TgYLhRUkxInOKraIoq:dev.medienhaus.udk-berlin.de",
-                "name": "Faust-Vertonungen",
-                "children": {}
-              },
-              "!fWiMyTXLDMbLOPqvud:dev.medienhaus.udk-berlin.de": {
-                "id": "!fWiMyTXLDMbLOPqvud:dev.medienhaus.udk-berlin.de",
-                "name": "Franz Schuberts Kammermusik",
-                "children": {}
-              },
-              "!jaFUodmjxUmixGkqOW:dev.medienhaus.udk-berlin.de": {
-                "id": "!jaFUodmjxUmixGkqOW:dev.medienhaus.udk-berlin.de",
-                "name": "Fremdverstehen und Ansprüche. Beobachten und Dokumentieren",
-                "children": {}
-              },
-              "!YctdwxevAgFNJeanvc:dev.medienhaus.udk-berlin.de": {
-                "id": "!YctdwxevAgFNJeanvc:dev.medienhaus.udk-berlin.de",
-                "name": "Gesten medialer (An)Wendung. Beobachten und Dokumentieren",
-                "children": {}
-              },
-              "!YbkWmuEoNdaYCZWPob:dev.medienhaus.udk-berlin.de": {
-                "id": "!YbkWmuEoNdaYCZWPob:dev.medienhaus.udk-berlin.de",
-                "name": "Get the vocal Groove",
-                "children": {}
-              },
-              "!ieBmcSyfbaHnZXGhpf:dev.medienhaus.udk-berlin.de": {
-                "id": "!ieBmcSyfbaHnZXGhpf:dev.medienhaus.udk-berlin.de",
-                "name": "Großer Chor der UdK",
-                "children": {}
-              },
-              "!lZLwcZQyaCwZyonuIX:dev.medienhaus.udk-berlin.de": {
-                "id": "!lZLwcZQyaCwZyonuIX:dev.medienhaus.udk-berlin.de",
-                "name": "Grundlagen des Dirigieren 1b",
-                "children": {}
-              },
-              "!YhkqbeQMpqhyZWougM:dev.medienhaus.udk-berlin.de": {
-                "id": "!YhkqbeQMpqhyZWougM:dev.medienhaus.udk-berlin.de",
-                "name": "Grundlagen des Dirigierens 1a",
-                "children": {}
-              },
-              "!UHxQLAaoEUudCOHvSR:dev.medienhaus.udk-berlin.de": {
-                "id": "!UHxQLAaoEUudCOHvSR:dev.medienhaus.udk-berlin.de",
-                "name": "Grundlagen des Dirigierens 1c",
-                "children": {}
-              },
-              "!UUDgmqGdrPhXDVDZCc:dev.medienhaus.udk-berlin.de": {
-                "id": "!UUDgmqGdrPhXDVDZCc:dev.medienhaus.udk-berlin.de",
-                "name": "Grundlagen des Dirigierens 1d",
-                "children": {}
-              },
-              "!CaDlqMcpQxPyWhsQPY:dev.medienhaus.udk-berlin.de": {
-                "id": "!CaDlqMcpQxPyWhsQPY:dev.medienhaus.udk-berlin.de",
-                "name": "Grundlagen des Dirigierens 2a",
-                "children": {}
-              },
-              "!TrMtqgNSxdIfJrOQui:dev.medienhaus.udk-berlin.de": {
-                "id": "!TrMtqgNSxdIfJrOQui:dev.medienhaus.udk-berlin.de",
-                "name": "Grundlagen des Dirigierens 2b",
-                "children": {}
-              },
-              "!IRSJpITGtwjXpAxKOM:dev.medienhaus.udk-berlin.de": {
-                "id": "!IRSJpITGtwjXpAxKOM:dev.medienhaus.udk-berlin.de",
-                "name": "Grundlagen des Dirigierens 2c",
-                "children": {}
-              }
-            }
-          },
-          "!fwiaPxxwNMqVFAeoLw:dev.medienhaus.udk-berlin.de": {
-            "id": "!fwiaPxxwNMqVFAeoLw:dev.medienhaus.udk-berlin.de",
-            "name": "MA Lehramt Musik Grundschule",
-            "children": {
-              "!CSIOKfsnevmFGxKsQk:dev.medienhaus.udk-berlin.de": {
-                "id": "!CSIOKfsnevmFGxKsQk:dev.medienhaus.udk-berlin.de",
-                "name": "„Formale Konzepte in der Musik der Wiener Klassik“",
-                "children": {}
-              },
-              "!dTImxzJvpLMOAbEqJW:dev.medienhaus.udk-berlin.de": {
-                "id": "!dTImxzJvpLMOAbEqJW:dev.medienhaus.udk-berlin.de",
-                "name": "„Praktisches Arrangieren für Jazz/-Pop-Ensembles und Chöre“",
-                "children": {}
-              },
-              "!SVUqlsAPWbwUZcZMIY:dev.medienhaus.udk-berlin.de": {
-                "id": "!SVUqlsAPWbwUZcZMIY:dev.medienhaus.udk-berlin.de",
-                "name": "Alexandertechnik",
-                "children": {}
-              },
-              "!vcXkwNZTzywzDCjbCU:dev.medienhaus.udk-berlin.de": {
-                "id": "!vcXkwNZTzywzDCjbCU:dev.medienhaus.udk-berlin.de",
-                "name": "And Orff We Go!",
-                "children": {}
-              },
-              "!JZoOSyRUZmgwKWVWwv:dev.medienhaus.udk-berlin.de": {
-                "id": "!JZoOSyRUZmgwKWVWwv:dev.medienhaus.udk-berlin.de",
-                "name": "Antirassistisches und vielfältiges Erzählen",
-                "children": {}
-              },
-              "!VNqBBCbDUFGIhIHUjy:dev.medienhaus.udk-berlin.de": {
-                "id": "!VNqBBCbDUFGIhIHUjy:dev.medienhaus.udk-berlin.de",
-                "name": "Argentinischer Tango – verstehen und spielen",
-                "children": {}
-              },
-              "!pWyJyWMQeMscULBpJa:dev.medienhaus.udk-berlin.de": {
-                "id": "!pWyJyWMQeMscULBpJa:dev.medienhaus.udk-berlin.de",
-                "name": "Aufzeichnungen im Austausch – Projektdurchführung",
-                "children": {}
-              },
-              "!WoUrmHgdfggLvQopkg:dev.medienhaus.udk-berlin.de": {
-                "id": "!WoUrmHgdfggLvQopkg:dev.medienhaus.udk-berlin.de",
-                "name": "Aufzeichnungen im Austausch – Projektvorbereitung",
-                "children": {}
-              },
-              "!HjoBbnDJdpSmyCYEzF:dev.medienhaus.udk-berlin.de": {
-                "id": "!HjoBbnDJdpSmyCYEzF:dev.medienhaus.udk-berlin.de",
-                "name": "Authentizität vs. Rollenbild – Frauen und Männer im Dirigierberuf_",
-                "children": {}
-              },
-              "!JCQTZyGxccvJPxXjPr:dev.medienhaus.udk-berlin.de": {
-                "id": "!JCQTZyGxccvJPxXjPr:dev.medienhaus.udk-berlin.de",
-                "name": "Bewegungstraining",
-                "children": {}
-              },
-              "!NFXeCNClYHqAAgZoJe:dev.medienhaus.udk-berlin.de": {
-                "id": "!NFXeCNClYHqAAgZoJe:dev.medienhaus.udk-berlin.de",
-                "name": "Cajon 1",
-                "children": {}
-              },
-              "!oCkLgUDmlUVupuuWBu:dev.medienhaus.udk-berlin.de": {
-                "id": "!oCkLgUDmlUVupuuWBu:dev.medienhaus.udk-berlin.de",
-                "name": "Cajon 2",
-                "children": {}
-              },
-              "!BhdIsVvgQmwGTHUtWT:dev.medienhaus.udk-berlin.de": {
-                "id": "!BhdIsVvgQmwGTHUtWT:dev.medienhaus.udk-berlin.de",
-                "name": "Chorleitung 1a",
-                "children": {}
-              },
-              "!HCQxhvezBRlrBDLOjr:dev.medienhaus.udk-berlin.de": {
-                "id": "!HCQxhvezBRlrBDLOjr:dev.medienhaus.udk-berlin.de",
-                "name": "Chorleitung 1 b",
-                "children": {}
-              },
-              "!YpqyeEtKTITKyCEfkE:dev.medienhaus.udk-berlin.de": {
-                "id": "!YpqyeEtKTITKyCEfkE:dev.medienhaus.udk-berlin.de",
-                "name": "Chorleitung 2 a",
-                "children": {}
-              },
-              "!rQzgJaaNqZwvexZLzu:dev.medienhaus.udk-berlin.de": {
-                "id": "!rQzgJaaNqZwvexZLzu:dev.medienhaus.udk-berlin.de",
-                "name": "Chorleitung 2 b",
-                "children": {}
-              },
-              "!sreXCGNwQWWSiHaQIV:dev.medienhaus.udk-berlin.de": {
-                "id": "!sreXCGNwQWWSiHaQIV:dev.medienhaus.udk-berlin.de",
-                "name": "Chorleitung 2 c",
-                "children": {}
-              },
-              "!vfdcDqaaARLAaEIznF:dev.medienhaus.udk-berlin.de": {
-                "id": "!vfdcDqaaARLAaEIznF:dev.medienhaus.udk-berlin.de",
-                "name": "Chorleitung Plus für CL 2a",
-                "children": {}
-              },
-              "!VxOMLjdBVnCneAdmMa:dev.medienhaus.udk-berlin.de": {
-                "id": "!VxOMLjdBVnCneAdmMa:dev.medienhaus.udk-berlin.de",
-                "name": "Chorleitung Plus für CL 2b",
-                "children": {}
-              },
-              "!EJdutCudChyqgiZuSS:dev.medienhaus.udk-berlin.de": {
-                "id": "!EJdutCudChyqgiZuSS:dev.medienhaus.udk-berlin.de",
-                "name": "Chorleitung Plus für CL 2 c",
-                "children": {}
-              },
-              "!ANrhZXyDHamBdorJJn:dev.medienhaus.udk-berlin.de": {
-                "id": "!ANrhZXyDHamBdorJJn:dev.medienhaus.udk-berlin.de",
-                "name": "Chorleitung (Profil) 1 a",
-                "children": {}
-              },
-              "!pmNGpJjmjYUmIcMsRa:dev.medienhaus.udk-berlin.de": {
-                "id": "!pmNGpJjmjYUmIcMsRa:dev.medienhaus.udk-berlin.de",
-                "name": "Chorleitung (Profil) 1 b",
-                "children": {}
-              },
-              "!uVkOjThmdsvNJFsmKi:dev.medienhaus.udk-berlin.de": {
-                "id": "!uVkOjThmdsvNJFsmKi:dev.medienhaus.udk-berlin.de",
-                "name": "Chorleitung (Profil) 2 a",
-                "children": {}
-              },
-              "!vxBLEdEXxMuubdXYNq:dev.medienhaus.udk-berlin.de": {
-                "id": "!vxBLEdEXxMuubdXYNq:dev.medienhaus.udk-berlin.de",
-                "name": "Chorleitung Profil 2 b",
-                "children": {}
-              },
-              "!PcsxuSFnCgNpoLzjEv:dev.medienhaus.udk-berlin.de": {
-                "id": "!PcsxuSFnCgNpoLzjEv:dev.medienhaus.udk-berlin.de",
-                "name": "ChorPraxis Chorische Stimmbildung und Singen mit Kindern und Jugendlichen:",
-                "children": {}
-              },
-              "!vzMQKGNBWDGFJmaYEa:dev.medienhaus.udk-berlin.de": {
-                "id": "!vzMQKGNBWDGFJmaYEa:dev.medienhaus.udk-berlin.de",
-                "name": "Combo (Bandarbeit in der Schule)",
-                "children": {}
-              },
-              "!gBnZBGgYcfAAUqKJyT:dev.medienhaus.udk-berlin.de": {
-                "id": "!gBnZBGgYcfAAUqKJyT:dev.medienhaus.udk-berlin.de",
-                "name": "\"Einstieg ins Arrangieren\"",
-                "children": {}
-              },
-              "!yNOUxsniRedUmPJVLZ:dev.medienhaus.udk-berlin.de": {
-                "id": "!yNOUxsniRedUmPJVLZ:dev.medienhaus.udk-berlin.de",
-                "name": "Ensemble ilinx \"Neue Wege zu Beethoven\" bei Crescendo 2021",
-                "children": {}
-              },
-              "!hsZaZWQrqFbtrpdUCy:dev.medienhaus.udk-berlin.de": {
-                "id": "!hsZaZWQrqFbtrpdUCy:dev.medienhaus.udk-berlin.de",
-                "name": "Experimental Coding with Supercollider Parametric abstract composing",
-                "children": {}
-              },
-              "!NTwKbNPPyvzTJgeNul:dev.medienhaus.udk-berlin.de": {
-                "id": "!NTwKbNPPyvzTJgeNul:dev.medienhaus.udk-berlin.de",
-                "name": "Experimentelle Komposition: Profilmodul Lehramt",
-                "children": {}
-              },
-              "!sGSbwKlTULOQGnVrqa:dev.medienhaus.udk-berlin.de": {
-                "id": "!sGSbwKlTULOQGnVrqa:dev.medienhaus.udk-berlin.de",
-                "name": "Experimentelle Musik, Gruppenleitung",
-                "children": {}
-              },
-              "!mLwkIPZlBOaXRfoCFS:dev.medienhaus.udk-berlin.de": {
-                "id": "!mLwkIPZlBOaXRfoCFS:dev.medienhaus.udk-berlin.de",
-                "name": "Experiments with Sound / online-Kurs",
-                "children": {}
-              },
-              "!JLsYuyzeWkfBNKZGvc:dev.medienhaus.udk-berlin.de": {
-                "id": "!JLsYuyzeWkfBNKZGvc:dev.medienhaus.udk-berlin.de",
-                "name": "Feldenkrais",
-                "children": {}
-              },
-              "!ieBmcSyfbaHnZXGhpf:dev.medienhaus.udk-berlin.de": {
-                "id": "!ieBmcSyfbaHnZXGhpf:dev.medienhaus.udk-berlin.de",
-                "name": "Großer Chor der UdK",
-                "children": {}
-              },
-              "!lZLwcZQyaCwZyonuIX:dev.medienhaus.udk-berlin.de": {
-                "id": "!lZLwcZQyaCwZyonuIX:dev.medienhaus.udk-berlin.de",
-                "name": "Grundlagen des Dirigieren 1b",
-                "children": {}
-              },
-              "!YhkqbeQMpqhyZWougM:dev.medienhaus.udk-berlin.de": {
-                "id": "!YhkqbeQMpqhyZWougM:dev.medienhaus.udk-berlin.de",
-                "name": "Grundlagen des Dirigierens 1a",
-                "children": {}
-              },
-              "!UHxQLAaoEUudCOHvSR:dev.medienhaus.udk-berlin.de": {
-                "id": "!UHxQLAaoEUudCOHvSR:dev.medienhaus.udk-berlin.de",
-                "name": "Grundlagen des Dirigierens 1c",
-                "children": {}
-              },
-              "!UUDgmqGdrPhXDVDZCc:dev.medienhaus.udk-berlin.de": {
-                "id": "!UUDgmqGdrPhXDVDZCc:dev.medienhaus.udk-berlin.de",
-                "name": "Grundlagen des Dirigierens 1d",
-                "children": {}
-              },
-              "!CaDlqMcpQxPyWhsQPY:dev.medienhaus.udk-berlin.de": {
-                "id": "!CaDlqMcpQxPyWhsQPY:dev.medienhaus.udk-berlin.de",
-                "name": "Grundlagen des Dirigierens 2a",
-                "children": {}
-              },
-              "!TrMtqgNSxdIfJrOQui:dev.medienhaus.udk-berlin.de": {
-                "id": "!TrMtqgNSxdIfJrOQui:dev.medienhaus.udk-berlin.de",
-                "name": "Grundlagen des Dirigierens 2b",
-                "children": {}
-              },
-              "!IRSJpITGtwjXpAxKOM:dev.medienhaus.udk-berlin.de": {
-                "id": "!IRSJpITGtwjXpAxKOM:dev.medienhaus.udk-berlin.de",
-                "name": "Grundlagen des Dirigierens 2c",
-                "children": {}
-              },
-              "!ddEZZooiFBDqVFhMyf:dev.medienhaus.udk-berlin.de": {
-                "id": "!ddEZZooiFBDqVFhMyf:dev.medienhaus.udk-berlin.de",
-                "name": "Grundlagen des Dirigierens 2e",
-                "children": {}
-              },
-              "!TvMuHOdjQywrrOuHHU:dev.medienhaus.udk-berlin.de": {
-                "id": "!TvMuHOdjQywrrOuHHU:dev.medienhaus.udk-berlin.de",
-                "name": "Grundlagen des Dirigierens 2f",
-                "children": {}
-              },
-              "!ZKuFLSxHEFgYLTDKlo:dev.medienhaus.udk-berlin.de": {
-                "id": "!ZKuFLSxHEFgYLTDKlo:dev.medienhaus.udk-berlin.de",
-                "name": "Grundlagen des Dirigierens 2g",
-                "children": {}
-              },
-              "!QdNKOvZXZHUFuJtEfc:dev.medienhaus.udk-berlin.de": {
-                "id": "!QdNKOvZXZHUFuJtEfc:dev.medienhaus.udk-berlin.de",
-                "name": "Grundlagen des Dirigierens 2h",
-                "children": {}
-              },
-              "!qRwyNmPAPJtxNieMFB:dev.medienhaus.udk-berlin.de": {
-                "id": "!qRwyNmPAPJtxNieMFB:dev.medienhaus.udk-berlin.de",
-                "name": "Grundlagenseminar Musikphysiologie",
-                "children": {}
-              },
-              "!MVhjGfJbRPEszrYRoC:dev.medienhaus.udk-berlin.de": {
-                "id": "!MVhjGfJbRPEszrYRoC:dev.medienhaus.udk-berlin.de",
-                "name": "Grundschulbezogene Ensemblepraxis/ Master",
-                "children": {}
-              },
-              "!TgbNJKKiFfFDPlehEz:dev.medienhaus.udk-berlin.de": {
-                "id": "!TgbNJKKiFfFDPlehEz:dev.medienhaus.udk-berlin.de",
-                "name": "Höranalyse ii",
-                "children": {}
-              },
-              "!NXxVAABAkFvgvylhHG:dev.medienhaus.udk-berlin.de": {
-                "id": "!NXxVAABAkFvgvylhHG:dev.medienhaus.udk-berlin.de",
-                "name": "Improvisation für Sänger*innen",
-                "children": {}
-              }
-            }
-          },
-          "!XVOLZdlOEypTyYtlOu:dev.medienhaus.udk-berlin.de": {
-            "id": "!XVOLZdlOEypTyYtlOu:dev.medienhaus.udk-berlin.de",
-            "name": "BA Künstlerisch-Pädagogische Ausbildung",
-            "children": {
-              "!OtEMpbRqgMSNztBQTv:dev.medienhaus.udk-berlin.de": {
-                "id": "!OtEMpbRqgMSNztBQTv:dev.medienhaus.udk-berlin.de",
-                "name": "„…muss in die alt hergebrachte Form ein anderes, ein wirklich poetisches Element kommen.“ Fugen in",
-                "children": {}
-              },
-              "!dTImxzJvpLMOAbEqJW:dev.medienhaus.udk-berlin.de": {
-                "id": "!dTImxzJvpLMOAbEqJW:dev.medienhaus.udk-berlin.de",
-                "name": "„Praktisches Arrangieren für Jazz/-Pop-Ensembles und Chöre“",
-                "children": {}
-              },
-              "!eGuMIutQYWUlbDaPLm:dev.medienhaus.udk-berlin.de": {
-                "id": "!eGuMIutQYWUlbDaPLm:dev.medienhaus.udk-berlin.de",
-                "name": "Alban Berg \"Wozzeck\"",
-                "children": {}
-              },
-              "!SVUqlsAPWbwUZcZMIY:dev.medienhaus.udk-berlin.de": {
-                "id": "!SVUqlsAPWbwUZcZMIY:dev.medienhaus.udk-berlin.de",
-                "name": "Alexandertechnik",
-                "children": {}
-              },
-              "!VNqBBCbDUFGIhIHUjy:dev.medienhaus.udk-berlin.de": {
-                "id": "!VNqBBCbDUFGIhIHUjy:dev.medienhaus.udk-berlin.de",
-                "name": "Argentinischer Tango – verstehen und spielen",
-                "children": {}
-              },
-              "!HjoBbnDJdpSmyCYEzF:dev.medienhaus.udk-berlin.de": {
-                "id": "!HjoBbnDJdpSmyCYEzF:dev.medienhaus.udk-berlin.de",
-                "name": "Authentizität vs. Rollenbild – Frauen und Männer im Dirigierberuf_",
-                "children": {}
-              },
-              "!AdJitWktKgrkjhZckY:dev.medienhaus.udk-berlin.de": {
-                "id": "!AdJitWktKgrkjhZckY:dev.medienhaus.udk-berlin.de",
-                "name": "Basic Impro",
-                "children": {}
-              },
-              "!IFJhbdRgBoBBiBdocq:dev.medienhaus.udk-berlin.de": {
-                "id": "!IFJhbdRgBoBBiBdocq:dev.medienhaus.udk-berlin.de",
-                "name": "Begabung und Begabungsförderung",
-                "children": {}
-              },
-              "!JCQTZyGxccvJPxXjPr:dev.medienhaus.udk-berlin.de": {
-                "id": "!JCQTZyGxccvJPxXjPr:dev.medienhaus.udk-berlin.de",
-                "name": "Bewegungstraining",
-                "children": {}
-              },
-              "!NFXeCNClYHqAAgZoJe:dev.medienhaus.udk-berlin.de": {
-                "id": "!NFXeCNClYHqAAgZoJe:dev.medienhaus.udk-berlin.de",
-                "name": "Cajon 1",
-                "children": {}
-              },
-              "!oCkLgUDmlUVupuuWBu:dev.medienhaus.udk-berlin.de": {
-                "id": "!oCkLgUDmlUVupuuWBu:dev.medienhaus.udk-berlin.de",
-                "name": "Cajon 2",
-                "children": {}
-              },
-              "!IcCOlOLkaovvhVBoCa:dev.medienhaus.udk-berlin.de": {
-                "id": "!IcCOlOLkaovvhVBoCa:dev.medienhaus.udk-berlin.de",
-                "name": "Cellomethodik / Lehrpraxis",
-                "children": {}
-              },
-              "!SoqETNSXpgfuCIsKJY:dev.medienhaus.udk-berlin.de": {
-                "id": "!SoqETNSXpgfuCIsKJY:dev.medienhaus.udk-berlin.de",
-                "name": "Chor JRP",
-                "children": {}
-              },
-              "!AYcHgWcBoVtxXYDaPz:dev.medienhaus.udk-berlin.de": {
-                "id": "!AYcHgWcBoVtxXYDaPz:dev.medienhaus.udk-berlin.de",
-                "name": "Chorleitung 1a",
-                "children": {}
-              },
-              "!BhdIsVvgQmwGTHUtWT:dev.medienhaus.udk-berlin.de": {
-                "id": "!BhdIsVvgQmwGTHUtWT:dev.medienhaus.udk-berlin.de",
-                "name": "Chorleitung 1a",
-                "children": {}
-              },
-              "!HCQxhvezBRlrBDLOjr:dev.medienhaus.udk-berlin.de": {
-                "id": "!HCQxhvezBRlrBDLOjr:dev.medienhaus.udk-berlin.de",
-                "name": "Chorleitung 1 b",
-                "children": {}
-              },
-              "!YpqyeEtKTITKyCEfkE:dev.medienhaus.udk-berlin.de": {
-                "id": "!YpqyeEtKTITKyCEfkE:dev.medienhaus.udk-berlin.de",
-                "name": "Chorleitung 2 a",
-                "children": {}
-              },
-              "!rQzgJaaNqZwvexZLzu:dev.medienhaus.udk-berlin.de": {
-                "id": "!rQzgJaaNqZwvexZLzu:dev.medienhaus.udk-berlin.de",
-                "name": "Chorleitung 2 b",
-                "children": {}
-              },
-              "!sreXCGNwQWWSiHaQIV:dev.medienhaus.udk-berlin.de": {
-                "id": "!sreXCGNwQWWSiHaQIV:dev.medienhaus.udk-berlin.de",
-                "name": "Chorleitung 2 c",
-                "children": {}
-              },
-              "!vfdcDqaaARLAaEIznF:dev.medienhaus.udk-berlin.de": {
-                "id": "!vfdcDqaaARLAaEIznF:dev.medienhaus.udk-berlin.de",
-                "name": "Chorleitung Plus für CL 2a",
-                "children": {}
-              },
-              "!VxOMLjdBVnCneAdmMa:dev.medienhaus.udk-berlin.de": {
-                "id": "!VxOMLjdBVnCneAdmMa:dev.medienhaus.udk-berlin.de",
-                "name": "Chorleitung Plus für CL 2b",
-                "children": {}
-              },
-              "!EJdutCudChyqgiZuSS:dev.medienhaus.udk-berlin.de": {
-                "id": "!EJdutCudChyqgiZuSS:dev.medienhaus.udk-berlin.de",
-                "name": "Chorleitung Plus für CL 2 c",
-                "children": {}
-              },
-              "!ANrhZXyDHamBdorJJn:dev.medienhaus.udk-berlin.de": {
-                "id": "!ANrhZXyDHamBdorJJn:dev.medienhaus.udk-berlin.de",
-                "name": "Chorleitung (Profil) 1 a",
-                "children": {}
-              },
-              "!pmNGpJjmjYUmIcMsRa:dev.medienhaus.udk-berlin.de": {
-                "id": "!pmNGpJjmjYUmIcMsRa:dev.medienhaus.udk-berlin.de",
-                "name": "Chorleitung (Profil) 1 b",
-                "children": {}
-              },
-              "!uVkOjThmdsvNJFsmKi:dev.medienhaus.udk-berlin.de": {
-                "id": "!uVkOjThmdsvNJFsmKi:dev.medienhaus.udk-berlin.de",
-                "name": "Chorleitung (Profil) 2 a",
-                "children": {}
-              },
-              "!vxBLEdEXxMuubdXYNq:dev.medienhaus.udk-berlin.de": {
-                "id": "!vxBLEdEXxMuubdXYNq:dev.medienhaus.udk-berlin.de",
-                "name": "Chorleitung Profil 2 b",
-                "children": {}
-              },
-              "!vzMQKGNBWDGFJmaYEa:dev.medienhaus.udk-berlin.de": {
-                "id": "!vzMQKGNBWDGFJmaYEa:dev.medienhaus.udk-berlin.de",
-                "name": "Combo (Bandarbeit in der Schule)",
-                "children": {}
-              },
-              "!jlFIDJrKyjMedyyjfu:dev.medienhaus.udk-berlin.de": {
-                "id": "!jlFIDJrKyjMedyyjfu:dev.medienhaus.udk-berlin.de",
-                "name": "Das Cembalo. Von Kielklavieren, Zupfklavieren, Spinetten, Virginalen und Schweinsköpfen.",
-                "children": {}
-              },
-              "!uUERZZMMADBYCruFyK:dev.medienhaus.udk-berlin.de": {
-                "id": "!uUERZZMMADBYCruFyK:dev.medienhaus.udk-berlin.de",
-                "name": "Das Kleine Klavierstück von Bach bis Schönberg. Zur Geschichte des Charakterstücks für",
-                "children": {}
-              },
-              "!yYqfpzHNrVBcTmDFqB:dev.medienhaus.udk-berlin.de": {
-                "id": "!yYqfpzHNrVBcTmDFqB:dev.medienhaus.udk-berlin.de",
-                "name": "Das Verfertigen einer wissenschaftlichen Hausarbeit/BA- MA-Arbeit/Sprechstunde",
-                "children": {}
-              },
-              "!AfIOzsgKPRjXaScuHR:dev.medienhaus.udk-berlin.de": {
-                "id": "!AfIOzsgKPRjXaScuHR:dev.medienhaus.udk-berlin.de",
-                "name": "Das Verfertigen einer wissenschaftlichen Hausarbeit/BA- MA-Arbeit/Sprechstunde/Prüfungscolloquium",
-                "children": {}
-              },
-              "!eoqYTtewYTvBosoQNA:dev.medienhaus.udk-berlin.de": {
-                "id": "!eoqYTtewYTvBosoQNA:dev.medienhaus.udk-berlin.de",
-                "name": "Der Computer als kreatives Musikinstrument (Neue Medien/Musikproduktion)",
-                "children": {}
-              },
-              "!OkHZpXcLVimeQmwAsr:dev.medienhaus.udk-berlin.de": {
-                "id": "!OkHZpXcLVimeQmwAsr:dev.medienhaus.udk-berlin.de",
-                "name": "Dirigieren II",
-                "children": {}
-              },
-              "!cywTceJEmzwomJuFEp:dev.medienhaus.udk-berlin.de": {
-                "id": "!cywTceJEmzwomJuFEp:dev.medienhaus.udk-berlin.de",
-                "name": "Einführung in die Musikwissenschaft",
-                "children": {}
-              },
-              "!ZXDkmOHZaOZfWhQmnB:dev.medienhaus.udk-berlin.de": {
-                "id": "!ZXDkmOHZaOZfWhQmnB:dev.medienhaus.udk-berlin.de",
-                "name": "Einführung in die Musikwissenschaft",
-                "children": {}
-              },
-              "!gBnZBGgYcfAAUqKJyT:dev.medienhaus.udk-berlin.de": {
-                "id": "!gBnZBGgYcfAAUqKJyT:dev.medienhaus.udk-berlin.de",
-                "name": "\"Einstieg ins Arrangieren\"",
-                "children": {}
-              },
-              "!yNOUxsniRedUmPJVLZ:dev.medienhaus.udk-berlin.de": {
-                "id": "!yNOUxsniRedUmPJVLZ:dev.medienhaus.udk-berlin.de",
-                "name": "Ensemble ilinx \"Neue Wege zu Beethoven\" bei Crescendo 2021",
-                "children": {}
-              },
-              "!MfsJqTcUUnazYXDjGf:dev.medienhaus.udk-berlin.de": {
-                "id": "!MfsJqTcUUnazYXDjGf:dev.medienhaus.udk-berlin.de",
-                "name": "Ensemble-Leitung im Profilmodul 8/ Master",
-                "children": {}
-              },
-              "!AQsXOYmjZafxoQCFIo:dev.medienhaus.udk-berlin.de": {
-                "id": "!AQsXOYmjZafxoQCFIo:dev.medienhaus.udk-berlin.de",
-                "name": "Eutonie und Angewandte Anatomie",
-                "children": {}
-              },
-              "!fbOMclXjfZjPWETfjK:dev.medienhaus.udk-berlin.de": {
-                "id": "!fbOMclXjfZjPWETfjK:dev.medienhaus.udk-berlin.de",
-                "name": "Examenscolloquium",
-                "children": {}
-              },
-              "!hsZaZWQrqFbtrpdUCy:dev.medienhaus.udk-berlin.de": {
-                "id": "!hsZaZWQrqFbtrpdUCy:dev.medienhaus.udk-berlin.de",
-                "name": "Experimental Coding with Supercollider Parametric abstract composing",
-                "children": {}
-              },
-              "!aJdqOeRvENtwKsLOul:dev.medienhaus.udk-berlin.de": {
-                "id": "!aJdqOeRvENtwKsLOul:dev.medienhaus.udk-berlin.de",
-                "name": "Experimentelle Musik 1, Gruppenarbeit",
-                "children": {}
-              },
-              "!sGSbwKlTULOQGnVrqa:dev.medienhaus.udk-berlin.de": {
-                "id": "!sGSbwKlTULOQGnVrqa:dev.medienhaus.udk-berlin.de",
-                "name": "Experimentelle Musik, Gruppenleitung",
-                "children": {}
-              },
-              "!YnkMRFfhybMGYjufJy:dev.medienhaus.udk-berlin.de": {
-                "id": "!YnkMRFfhybMGYjufJy:dev.medienhaus.udk-berlin.de",
-                "name": "Fach-Didaktik/Lehrpraxis für Blechbläser",
-                "children": {}
-              },
-              "!hVFbbYAlpSwKsBAqdB:dev.medienhaus.udk-berlin.de": {
-                "id": "!hVFbbYAlpSwKsBAqdB:dev.medienhaus.udk-berlin.de",
-                "name": "Fachdidaktik Rhythmik",
-                "children": {}
-              },
-              "!TgYLhRUkxInOKraIoq:dev.medienhaus.udk-berlin.de": {
-                "id": "!TgYLhRUkxInOKraIoq:dev.medienhaus.udk-berlin.de",
-                "name": "Faust-Vertonungen",
-                "children": {}
-              },
-              "!JLsYuyzeWkfBNKZGvc:dev.medienhaus.udk-berlin.de": {
-                "id": "!JLsYuyzeWkfBNKZGvc:dev.medienhaus.udk-berlin.de",
-                "name": "Feldenkrais",
-                "children": {}
-              },
-              "!tcdwOSCxESZjTNNabk:dev.medienhaus.udk-berlin.de": {
-                "id": "!tcdwOSCxESZjTNNabk:dev.medienhaus.udk-berlin.de",
-                "name": "Filmmusik und Filmmusikproduktion (Neue Medien/Musikproduktion)",
-                "children": {}
-              },
-              "!fWiMyTXLDMbLOPqvud:dev.medienhaus.udk-berlin.de": {
-                "id": "!fWiMyTXLDMbLOPqvud:dev.medienhaus.udk-berlin.de",
-                "name": "Franz Schuberts Kammermusik",
-                "children": {}
-              }
-            }
-          },
-          "!lTXcSyAiiXsnvZQDjI:dev.medienhaus.udk-berlin.de": {
-            "id": "!lTXcSyAiiXsnvZQDjI:dev.medienhaus.udk-berlin.de",
-            "name": "MA Künstlerisch-Pädagogische Ausbildung",
-            "children": {
-              "!OtEMpbRqgMSNztBQTv:dev.medienhaus.udk-berlin.de": {
-                "id": "!OtEMpbRqgMSNztBQTv:dev.medienhaus.udk-berlin.de",
-                "name": "„…muss in die alt hergebrachte Form ein anderes, ein wirklich poetisches Element kommen.“ Fugen in",
-                "children": {}
-              },
-              "!WEaaAEaZsQbZXmzqKN:dev.medienhaus.udk-berlin.de": {
-                "id": "!WEaaAEaZsQbZXmzqKN:dev.medienhaus.udk-berlin.de",
-                "name": "„Das Meisterwerk in der Musik“ - Die Lehre Heinrich Schenkers",
-                "children": {}
-              },
-              "!dTImxzJvpLMOAbEqJW:dev.medienhaus.udk-berlin.de": {
-                "id": "!dTImxzJvpLMOAbEqJW:dev.medienhaus.udk-berlin.de",
-                "name": "„Praktisches Arrangieren für Jazz/-Pop-Ensembles und Chöre“",
-                "children": {}
-              },
-              "!eGuMIutQYWUlbDaPLm:dev.medienhaus.udk-berlin.de": {
-                "id": "!eGuMIutQYWUlbDaPLm:dev.medienhaus.udk-berlin.de",
-                "name": "Alban Berg \"Wozzeck\"",
-                "children": {}
-              },
-              "!VNqBBCbDUFGIhIHUjy:dev.medienhaus.udk-berlin.de": {
-                "id": "!VNqBBCbDUFGIhIHUjy:dev.medienhaus.udk-berlin.de",
-                "name": "Argentinischer Tango – verstehen und spielen",
-                "children": {}
-              },
-              "!HjoBbnDJdpSmyCYEzF:dev.medienhaus.udk-berlin.de": {
-                "id": "!HjoBbnDJdpSmyCYEzF:dev.medienhaus.udk-berlin.de",
-                "name": "Authentizität vs. Rollenbild – Frauen und Männer im Dirigierberuf_",
-                "children": {}
-              },
-              "!AdJitWktKgrkjhZckY:dev.medienhaus.udk-berlin.de": {
-                "id": "!AdJitWktKgrkjhZckY:dev.medienhaus.udk-berlin.de",
-                "name": "Basic Impro",
-                "children": {}
-              },
-              "!IFJhbdRgBoBBiBdocq:dev.medienhaus.udk-berlin.de": {
-                "id": "!IFJhbdRgBoBBiBdocq:dev.medienhaus.udk-berlin.de",
-                "name": "Begabung und Begabungsförderung",
-                "children": {}
-              },
-              "!JCQTZyGxccvJPxXjPr:dev.medienhaus.udk-berlin.de": {
-                "id": "!JCQTZyGxccvJPxXjPr:dev.medienhaus.udk-berlin.de",
-                "name": "Bewegungstraining",
-                "children": {}
-              },
-              "!AYcHgWcBoVtxXYDaPz:dev.medienhaus.udk-berlin.de": {
-                "id": "!AYcHgWcBoVtxXYDaPz:dev.medienhaus.udk-berlin.de",
-                "name": "Chorleitung 1a",
-                "children": {}
-              },
-              "!BhdIsVvgQmwGTHUtWT:dev.medienhaus.udk-berlin.de": {
-                "id": "!BhdIsVvgQmwGTHUtWT:dev.medienhaus.udk-berlin.de",
-                "name": "Chorleitung 1a",
-                "children": {}
-              },
-              "!HCQxhvezBRlrBDLOjr:dev.medienhaus.udk-berlin.de": {
-                "id": "!HCQxhvezBRlrBDLOjr:dev.medienhaus.udk-berlin.de",
-                "name": "Chorleitung 1 b",
-                "children": {}
-              },
-              "!YpqyeEtKTITKyCEfkE:dev.medienhaus.udk-berlin.de": {
-                "id": "!YpqyeEtKTITKyCEfkE:dev.medienhaus.udk-berlin.de",
-                "name": "Chorleitung 2 a",
-                "children": {}
-              },
-              "!rQzgJaaNqZwvexZLzu:dev.medienhaus.udk-berlin.de": {
-                "id": "!rQzgJaaNqZwvexZLzu:dev.medienhaus.udk-berlin.de",
-                "name": "Chorleitung 2 b",
-                "children": {}
-              },
-              "!sreXCGNwQWWSiHaQIV:dev.medienhaus.udk-berlin.de": {
-                "id": "!sreXCGNwQWWSiHaQIV:dev.medienhaus.udk-berlin.de",
-                "name": "Chorleitung 2 c",
-                "children": {}
-              },
-              "!vfdcDqaaARLAaEIznF:dev.medienhaus.udk-berlin.de": {
-                "id": "!vfdcDqaaARLAaEIznF:dev.medienhaus.udk-berlin.de",
-                "name": "Chorleitung Plus für CL 2a",
-                "children": {}
-              },
-              "!VxOMLjdBVnCneAdmMa:dev.medienhaus.udk-berlin.de": {
-                "id": "!VxOMLjdBVnCneAdmMa:dev.medienhaus.udk-berlin.de",
-                "name": "Chorleitung Plus für CL 2b",
-                "children": {}
-              },
-              "!EJdutCudChyqgiZuSS:dev.medienhaus.udk-berlin.de": {
-                "id": "!EJdutCudChyqgiZuSS:dev.medienhaus.udk-berlin.de",
-                "name": "Chorleitung Plus für CL 2 c",
-                "children": {}
-              },
-              "!ANrhZXyDHamBdorJJn:dev.medienhaus.udk-berlin.de": {
-                "id": "!ANrhZXyDHamBdorJJn:dev.medienhaus.udk-berlin.de",
-                "name": "Chorleitung (Profil) 1 a",
-                "children": {}
-              },
-              "!pmNGpJjmjYUmIcMsRa:dev.medienhaus.udk-berlin.de": {
-                "id": "!pmNGpJjmjYUmIcMsRa:dev.medienhaus.udk-berlin.de",
-                "name": "Chorleitung (Profil) 1 b",
-                "children": {}
-              },
-              "!uVkOjThmdsvNJFsmKi:dev.medienhaus.udk-berlin.de": {
-                "id": "!uVkOjThmdsvNJFsmKi:dev.medienhaus.udk-berlin.de",
-                "name": "Chorleitung (Profil) 2 a",
-                "children": {}
-              },
-              "!vxBLEdEXxMuubdXYNq:dev.medienhaus.udk-berlin.de": {
-                "id": "!vxBLEdEXxMuubdXYNq:dev.medienhaus.udk-berlin.de",
-                "name": "Chorleitung Profil 2 b",
-                "children": {}
-              },
-              "!yYqfpzHNrVBcTmDFqB:dev.medienhaus.udk-berlin.de": {
-                "id": "!yYqfpzHNrVBcTmDFqB:dev.medienhaus.udk-berlin.de",
-                "name": "Das Verfertigen einer wissenschaftlichen Hausarbeit/BA- MA-Arbeit/Sprechstunde",
-                "children": {}
-              },
-              "!AfIOzsgKPRjXaScuHR:dev.medienhaus.udk-berlin.de": {
-                "id": "!AfIOzsgKPRjXaScuHR:dev.medienhaus.udk-berlin.de",
-                "name": "Das Verfertigen einer wissenschaftlichen Hausarbeit/BA- MA-Arbeit/Sprechstunde/Prüfungscolloquium",
-                "children": {}
-              },
-              "!gBnZBGgYcfAAUqKJyT:dev.medienhaus.udk-berlin.de": {
-                "id": "!gBnZBGgYcfAAUqKJyT:dev.medienhaus.udk-berlin.de",
-                "name": "\"Einstieg ins Arrangieren\"",
-                "children": {}
-              },
-              "!yNOUxsniRedUmPJVLZ:dev.medienhaus.udk-berlin.de": {
-                "id": "!yNOUxsniRedUmPJVLZ:dev.medienhaus.udk-berlin.de",
-                "name": "Ensemble ilinx \"Neue Wege zu Beethoven\" bei Crescendo 2021",
-                "children": {}
-              },
-              "!MfsJqTcUUnazYXDjGf:dev.medienhaus.udk-berlin.de": {
-                "id": "!MfsJqTcUUnazYXDjGf:dev.medienhaus.udk-berlin.de",
-                "name": "Ensemble-Leitung im Profilmodul 8/ Master",
-                "children": {}
-              },
-              "!fbOMclXjfZjPWETfjK:dev.medienhaus.udk-berlin.de": {
-                "id": "!fbOMclXjfZjPWETfjK:dev.medienhaus.udk-berlin.de",
-                "name": "Examenscolloquium",
-                "children": {}
-              },
-              "!hsZaZWQrqFbtrpdUCy:dev.medienhaus.udk-berlin.de": {
-                "id": "!hsZaZWQrqFbtrpdUCy:dev.medienhaus.udk-berlin.de",
-                "name": "Experimental Coding with Supercollider Parametric abstract composing",
-                "children": {}
-              },
-              "!XbaXTNwWudqyAZmQQc:dev.medienhaus.udk-berlin.de": {
-                "id": "!XbaXTNwWudqyAZmQQc:dev.medienhaus.udk-berlin.de",
-                "name": "Fachdidaktik EMP",
-                "children": {}
-              },
-              "!TgYLhRUkxInOKraIoq:dev.medienhaus.udk-berlin.de": {
-                "id": "!TgYLhRUkxInOKraIoq:dev.medienhaus.udk-berlin.de",
-                "name": "Faust-Vertonungen",
-                "children": {}
-              },
-              "!ieBmcSyfbaHnZXGhpf:dev.medienhaus.udk-berlin.de": {
-                "id": "!ieBmcSyfbaHnZXGhpf:dev.medienhaus.udk-berlin.de",
-                "name": "Großer Chor der UdK",
-                "children": {}
-              },
-              "!pqyhCyFvftnQWIEXFH:dev.medienhaus.udk-berlin.de": {
-                "id": "!pqyhCyFvftnQWIEXFH:dev.medienhaus.udk-berlin.de",
-                "name": "Hans Wüthrich „Das Glashaus“",
-                "children": {}
-              },
-              "!IRXTkLfmnrOXBEBjiW:dev.medienhaus.udk-berlin.de": {
-                "id": "!IRXTkLfmnrOXBEBjiW:dev.medienhaus.udk-berlin.de",
-                "name": "Jazzensemble 1",
-                "children": {}
-              },
-              "!vgfmyKIkaMlFGOHzgg:dev.medienhaus.udk-berlin.de": {
-                "id": "!vgfmyKIkaMlFGOHzgg:dev.medienhaus.udk-berlin.de",
-                "name": "Jazz Ensemble 2",
-                "children": {}
-              },
-              "!trDoqlvoTdoBAkVkqW:dev.medienhaus.udk-berlin.de": {
-                "id": "!trDoqlvoTdoBAkVkqW:dev.medienhaus.udk-berlin.de",
-                "name": "Jazz-Standards-Ensemble",
-                "children": {}
-              },
-              "!oFySkxXOzqqqyZqKTv:dev.medienhaus.udk-berlin.de": {
-                "id": "!oFySkxXOzqqqyZqKTv:dev.medienhaus.udk-berlin.de",
-                "name": "Kammerchor der Künste",
-                "children": {}
-              },
-              "!CvXJmAjFLHbqAHjDkx:dev.medienhaus.udk-berlin.de": {
-                "id": "!CvXJmAjFLHbqAHjDkx:dev.medienhaus.udk-berlin.de",
-                "name": "Klassenmusizieren mit Bläserklasse",
-                "children": {}
-              },
-              "!AdzcMITkXKDhLMUetz:dev.medienhaus.udk-berlin.de": {
-                "id": "!AdzcMITkXKDhLMUetz:dev.medienhaus.udk-berlin.de",
-                "name": "Kolloquium zur Bachelor- und Masterarbeit",
-                "children": {}
-              },
-              "!TNVzlUAsvxsYxqEKtH:dev.medienhaus.udk-berlin.de": {
-                "id": "!TNVzlUAsvxsYxqEKtH:dev.medienhaus.udk-berlin.de",
-                "name": "Komposition Analyse: Neues Musiktheater",
-                "children": {}
-              },
-              "!YXnCpJctGxWrfgswdd:dev.medienhaus.udk-berlin.de": {
-                "id": "!YXnCpJctGxWrfgswdd:dev.medienhaus.udk-berlin.de",
-                "name": "Körper - Bewegung - Tanz (1)",
-                "children": {}
-              },
-              "!QminTLUvOFzjPnfQcI:dev.medienhaus.udk-berlin.de": {
-                "id": "!QminTLUvOFzjPnfQcI:dev.medienhaus.udk-berlin.de",
-                "name": "Körper-Bewegung-Tanz (2)",
-                "children": {}
-              },
-              "!eDEEmnDMgEETbozAVC:dev.medienhaus.udk-berlin.de": {
-                "id": "!eDEEmnDMgEETbozAVC:dev.medienhaus.udk-berlin.de",
-                "name": "Künstlerisch-pädagogische Praxis des Orff-Instrumentariums",
-                "children": {}
-              },
-              "!HGnOviWGTdwGOcjSrk:dev.medienhaus.udk-berlin.de": {
-                "id": "!HGnOviWGTdwGOcjSrk:dev.medienhaus.udk-berlin.de",
-                "name": "Lehrpraxis Hohe Streicher",
-                "children": {}
-              },
-              "!ZVGjeapeKzKxELdIOK:dev.medienhaus.udk-berlin.de": {
-                "id": "!ZVGjeapeKzKxELdIOK:dev.medienhaus.udk-berlin.de",
-                "name": "Lehrpraxis Kita EMP",
-                "children": {}
-              },
-              "!zuRLFJoGIHSLrXlhnh:dev.medienhaus.udk-berlin.de": {
-                "id": "!zuRLFJoGIHSLrXlhnh:dev.medienhaus.udk-berlin.de",
-                "name": "Lehrpraxis Senioren EMP",
-                "children": {}
-              },
-              "!slQBzeoYxZjVbyiAht:dev.medienhaus.udk-berlin.de": {
-                "id": "!slQBzeoYxZjVbyiAht:dev.medienhaus.udk-berlin.de",
-                "name": "Methodik Hohe Streicher I",
-                "children": {}
-              },
-              "!JhdsIEiLhreVojhMuz:dev.medienhaus.udk-berlin.de": {
-                "id": "!JhdsIEiLhreVojhMuz:dev.medienhaus.udk-berlin.de",
-                "name": "Methodik Hohe Streicher II",
-                "children": {}
-              },
-              "!vfHvygoATFIIJlCewa:dev.medienhaus.udk-berlin.de": {
-                "id": "!vfHvygoATFIIJlCewa:dev.medienhaus.udk-berlin.de",
-                "name": "Methodik /Lehrpraxis Gitarre",
-                "children": {}
-              }
-            }
-          },
-          "!LrdPyobjNSoBkQxThk:dev.medienhaus.udk-berlin.de": {
-            "id": "!LrdPyobjNSoBkQxThk:dev.medienhaus.udk-berlin.de",
-            "name": "Diplomstudiengang Pädagogische Ausbildung (auslaufend)",
-            "children": {
-              "!OtEMpbRqgMSNztBQTv:dev.medienhaus.udk-berlin.de": {
-                "id": "!OtEMpbRqgMSNztBQTv:dev.medienhaus.udk-berlin.de",
-                "name": "„…muss in die alt hergebrachte Form ein anderes, ein wirklich poetisches Element kommen.“ Fugen in",
-                "children": {}
-              },
-              "!dTImxzJvpLMOAbEqJW:dev.medienhaus.udk-berlin.de": {
-                "id": "!dTImxzJvpLMOAbEqJW:dev.medienhaus.udk-berlin.de",
-                "name": "„Praktisches Arrangieren für Jazz/-Pop-Ensembles und Chöre“",
-                "children": {}
-              },
-              "!eGuMIutQYWUlbDaPLm:dev.medienhaus.udk-berlin.de": {
-                "id": "!eGuMIutQYWUlbDaPLm:dev.medienhaus.udk-berlin.de",
-                "name": "Alban Berg \"Wozzeck\"",
-                "children": {}
-              },
-              "!VNqBBCbDUFGIhIHUjy:dev.medienhaus.udk-berlin.de": {
-                "id": "!VNqBBCbDUFGIhIHUjy:dev.medienhaus.udk-berlin.de",
-                "name": "Argentinischer Tango – verstehen und spielen",
-                "children": {}
-              },
-              "!NFXeCNClYHqAAgZoJe:dev.medienhaus.udk-berlin.de": {
-                "id": "!NFXeCNClYHqAAgZoJe:dev.medienhaus.udk-berlin.de",
-                "name": "Cajon 1",
-                "children": {}
-              },
-              "!oCkLgUDmlUVupuuWBu:dev.medienhaus.udk-berlin.de": {
-                "id": "!oCkLgUDmlUVupuuWBu:dev.medienhaus.udk-berlin.de",
-                "name": "Cajon 2",
-                "children": {}
-              },
-              "!IcCOlOLkaovvhVBoCa:dev.medienhaus.udk-berlin.de": {
-                "id": "!IcCOlOLkaovvhVBoCa:dev.medienhaus.udk-berlin.de",
-                "name": "Cellomethodik / Lehrpraxis",
-                "children": {}
-              },
-              "!SoqETNSXpgfuCIsKJY:dev.medienhaus.udk-berlin.de": {
-                "id": "!SoqETNSXpgfuCIsKJY:dev.medienhaus.udk-berlin.de",
-                "name": "Chor JRP",
-                "children": {}
-              },
-              "!AYcHgWcBoVtxXYDaPz:dev.medienhaus.udk-berlin.de": {
-                "id": "!AYcHgWcBoVtxXYDaPz:dev.medienhaus.udk-berlin.de",
-                "name": "Chorleitung 1a",
-                "children": {}
-              },
-              "!BhdIsVvgQmwGTHUtWT:dev.medienhaus.udk-berlin.de": {
-                "id": "!BhdIsVvgQmwGTHUtWT:dev.medienhaus.udk-berlin.de",
-                "name": "Chorleitung 1a",
-                "children": {}
-              },
-              "!HCQxhvezBRlrBDLOjr:dev.medienhaus.udk-berlin.de": {
-                "id": "!HCQxhvezBRlrBDLOjr:dev.medienhaus.udk-berlin.de",
-                "name": "Chorleitung 1 b",
-                "children": {}
-              },
-              "!YpqyeEtKTITKyCEfkE:dev.medienhaus.udk-berlin.de": {
-                "id": "!YpqyeEtKTITKyCEfkE:dev.medienhaus.udk-berlin.de",
-                "name": "Chorleitung 2 a",
-                "children": {}
-              },
-              "!rQzgJaaNqZwvexZLzu:dev.medienhaus.udk-berlin.de": {
-                "id": "!rQzgJaaNqZwvexZLzu:dev.medienhaus.udk-berlin.de",
-                "name": "Chorleitung 2 b",
-                "children": {}
-              },
-              "!sreXCGNwQWWSiHaQIV:dev.medienhaus.udk-berlin.de": {
-                "id": "!sreXCGNwQWWSiHaQIV:dev.medienhaus.udk-berlin.de",
-                "name": "Chorleitung 2 c",
-                "children": {}
-              },
-              "!vfdcDqaaARLAaEIznF:dev.medienhaus.udk-berlin.de": {
-                "id": "!vfdcDqaaARLAaEIznF:dev.medienhaus.udk-berlin.de",
-                "name": "Chorleitung Plus für CL 2a",
-                "children": {}
-              },
-              "!VxOMLjdBVnCneAdmMa:dev.medienhaus.udk-berlin.de": {
-                "id": "!VxOMLjdBVnCneAdmMa:dev.medienhaus.udk-berlin.de",
-                "name": "Chorleitung Plus für CL 2b",
-                "children": {}
-              },
-              "!EJdutCudChyqgiZuSS:dev.medienhaus.udk-berlin.de": {
-                "id": "!EJdutCudChyqgiZuSS:dev.medienhaus.udk-berlin.de",
-                "name": "Chorleitung Plus für CL 2 c",
-                "children": {}
-              },
-              "!ANrhZXyDHamBdorJJn:dev.medienhaus.udk-berlin.de": {
-                "id": "!ANrhZXyDHamBdorJJn:dev.medienhaus.udk-berlin.de",
-                "name": "Chorleitung (Profil) 1 a",
-                "children": {}
-              },
-              "!pmNGpJjmjYUmIcMsRa:dev.medienhaus.udk-berlin.de": {
-                "id": "!pmNGpJjmjYUmIcMsRa:dev.medienhaus.udk-berlin.de",
-                "name": "Chorleitung (Profil) 1 b",
-                "children": {}
-              },
-              "!vxBLEdEXxMuubdXYNq:dev.medienhaus.udk-berlin.de": {
-                "id": "!vxBLEdEXxMuubdXYNq:dev.medienhaus.udk-berlin.de",
-                "name": "Chorleitung Profil 2 b",
-                "children": {}
-              },
-              "!jlFIDJrKyjMedyyjfu:dev.medienhaus.udk-berlin.de": {
-                "id": "!jlFIDJrKyjMedyyjfu:dev.medienhaus.udk-berlin.de",
-                "name": "Das Cembalo. Von Kielklavieren, Zupfklavieren, Spinetten, Virginalen und Schweinsköpfen.",
-                "children": {}
-              },
-              "!uUERZZMMADBYCruFyK:dev.medienhaus.udk-berlin.de": {
-                "id": "!uUERZZMMADBYCruFyK:dev.medienhaus.udk-berlin.de",
-                "name": "Das Kleine Klavierstück von Bach bis Schönberg. Zur Geschichte des Charakterstücks für",
-                "children": {}
-              },
-              "!yYqfpzHNrVBcTmDFqB:dev.medienhaus.udk-berlin.de": {
-                "id": "!yYqfpzHNrVBcTmDFqB:dev.medienhaus.udk-berlin.de",
-                "name": "Das Verfertigen einer wissenschaftlichen Hausarbeit/BA- MA-Arbeit/Sprechstunde",
-                "children": {}
-              },
-              "!AfIOzsgKPRjXaScuHR:dev.medienhaus.udk-berlin.de": {
-                "id": "!AfIOzsgKPRjXaScuHR:dev.medienhaus.udk-berlin.de",
-                "name": "Das Verfertigen einer wissenschaftlichen Hausarbeit/BA- MA-Arbeit/Sprechstunde/Prüfungscolloquium",
-                "children": {}
-              },
-              "!cywTceJEmzwomJuFEp:dev.medienhaus.udk-berlin.de": {
-                "id": "!cywTceJEmzwomJuFEp:dev.medienhaus.udk-berlin.de",
-                "name": "Einführung in die Musikwissenschaft",
-                "children": {}
-              },
-              "!ZXDkmOHZaOZfWhQmnB:dev.medienhaus.udk-berlin.de": {
-                "id": "!ZXDkmOHZaOZfWhQmnB:dev.medienhaus.udk-berlin.de",
-                "name": "Einführung in die Musikwissenschaft",
-                "children": {}
-              },
-              "!gBnZBGgYcfAAUqKJyT:dev.medienhaus.udk-berlin.de": {
-                "id": "!gBnZBGgYcfAAUqKJyT:dev.medienhaus.udk-berlin.de",
-                "name": "\"Einstieg ins Arrangieren\"",
-                "children": {}
-              },
-              "!MfsJqTcUUnazYXDjGf:dev.medienhaus.udk-berlin.de": {
-                "id": "!MfsJqTcUUnazYXDjGf:dev.medienhaus.udk-berlin.de",
-                "name": "Ensemble-Leitung im Profilmodul 8/ Master",
-                "children": {}
-              },
-              "!hsZaZWQrqFbtrpdUCy:dev.medienhaus.udk-berlin.de": {
-                "id": "!hsZaZWQrqFbtrpdUCy:dev.medienhaus.udk-berlin.de",
-                "name": "Experimental Coding with Supercollider Parametric abstract composing",
-                "children": {}
-              },
-              "!aJdqOeRvENtwKsLOul:dev.medienhaus.udk-berlin.de": {
-                "id": "!aJdqOeRvENtwKsLOul:dev.medienhaus.udk-berlin.de",
-                "name": "Experimentelle Musik 1, Gruppenarbeit",
-                "children": {}
-              },
-              "!sGSbwKlTULOQGnVrqa:dev.medienhaus.udk-berlin.de": {
-                "id": "!sGSbwKlTULOQGnVrqa:dev.medienhaus.udk-berlin.de",
-                "name": "Experimentelle Musik, Gruppenleitung",
-                "children": {}
-              },
-              "!TgYLhRUkxInOKraIoq:dev.medienhaus.udk-berlin.de": {
-                "id": "!TgYLhRUkxInOKraIoq:dev.medienhaus.udk-berlin.de",
-                "name": "Faust-Vertonungen",
-                "children": {}
-              },
-              "!fWiMyTXLDMbLOPqvud:dev.medienhaus.udk-berlin.de": {
-                "id": "!fWiMyTXLDMbLOPqvud:dev.medienhaus.udk-berlin.de",
-                "name": "Franz Schuberts Kammermusik",
-                "children": {}
-              },
-              "!YbkWmuEoNdaYCZWPob:dev.medienhaus.udk-berlin.de": {
-                "id": "!YbkWmuEoNdaYCZWPob:dev.medienhaus.udk-berlin.de",
-                "name": "Get the vocal Groove",
-                "children": {}
-              },
-              "!ieBmcSyfbaHnZXGhpf:dev.medienhaus.udk-berlin.de": {
-                "id": "!ieBmcSyfbaHnZXGhpf:dev.medienhaus.udk-berlin.de",
-                "name": "Großer Chor der UdK",
-                "children": {}
-              },
-              "!qRwyNmPAPJtxNieMFB:dev.medienhaus.udk-berlin.de": {
-                "id": "!qRwyNmPAPJtxNieMFB:dev.medienhaus.udk-berlin.de",
-                "name": "Grundlagenseminar Musikphysiologie",
-                "children": {}
-              },
-              "!pqyhCyFvftnQWIEXFH:dev.medienhaus.udk-berlin.de": {
-                "id": "!pqyhCyFvftnQWIEXFH:dev.medienhaus.udk-berlin.de",
-                "name": "Hans Wüthrich „Das Glashaus“",
-                "children": {}
-              },
-              "!lRZGPjlyLIiCxhpHPP:dev.medienhaus.udk-berlin.de": {
-                "id": "!lRZGPjlyLIiCxhpHPP:dev.medienhaus.udk-berlin.de",
-                "name": "Heimatkonstruktion, Musik und Medienkultur",
-                "children": {}
-              },
-              "!OVtTUdrvkygOklTJtg:dev.medienhaus.udk-berlin.de": {
-                "id": "!OVtTUdrvkygOklTJtg:dev.medienhaus.udk-berlin.de",
-                "name": "Heinrich Schütz",
-                "children": {}
-              },
-              "!UJHgiVrZuCRaGPfgCd:dev.medienhaus.udk-berlin.de": {
-                "id": "!UJHgiVrZuCRaGPfgCd:dev.medienhaus.udk-berlin.de",
-                "name": "Herrschaft und Emanzipation durch Musik: Gender, Klasse, Kirche, Staat",
-                "children": {}
-              },
-              "!HkfRdHbJYaWUmoDrNb:dev.medienhaus.udk-berlin.de": {
-                "id": "!HkfRdHbJYaWUmoDrNb:dev.medienhaus.udk-berlin.de",
-                "name": "Hollywood-Sound: Ästhetik und Geschichte eines filmmusikalischen Phänomens",
-                "children": {}
-              },
-              "!SDjoGPjsvJlLvwnRlz:dev.medienhaus.udk-berlin.de": {
-                "id": "!SDjoGPjsvJlLvwnRlz:dev.medienhaus.udk-berlin.de",
-                "name": "Jam On: Singen ohne Noten",
-                "children": {}
-              },
-              "!IRXTkLfmnrOXBEBjiW:dev.medienhaus.udk-berlin.de": {
-                "id": "!IRXTkLfmnrOXBEBjiW:dev.medienhaus.udk-berlin.de",
-                "name": "Jazzensemble 1",
-                "children": {}
-              },
-              "!vgfmyKIkaMlFGOHzgg:dev.medienhaus.udk-berlin.de": {
-                "id": "!vgfmyKIkaMlFGOHzgg:dev.medienhaus.udk-berlin.de",
-                "name": "Jazz Ensemble 2",
-                "children": {}
-              },
-              "!trDoqlvoTdoBAkVkqW:dev.medienhaus.udk-berlin.de": {
-                "id": "!trDoqlvoTdoBAkVkqW:dev.medienhaus.udk-berlin.de",
-                "name": "Jazz-Standards-Ensemble",
-                "children": {}
-              },
-              "!wEilWwzTxCUCGlsirO:dev.medienhaus.udk-berlin.de": {
-                "id": "!wEilWwzTxCUCGlsirO:dev.medienhaus.udk-berlin.de",
-                "name": "Johannes Brahms und die Variation",
-                "children": {}
-              },
-              "!oFySkxXOzqqqyZqKTv:dev.medienhaus.udk-berlin.de": {
-                "id": "!oFySkxXOzqqqyZqKTv:dev.medienhaus.udk-berlin.de",
-                "name": "Kammerchor der Künste",
-                "children": {}
-              },
-              "!qkCocapBOcZgZClolK:dev.medienhaus.udk-berlin.de": {
-                "id": "!qkCocapBOcZgZClolK:dev.medienhaus.udk-berlin.de",
-                "name": "Klaviermethodik / Anfangsunterricht",
-                "children": {}
-              },
-              "!yaqfhgnQouNZgiuPwZ:dev.medienhaus.udk-berlin.de": {
-                "id": "!yaqfhgnQouNZgiuPwZ:dev.medienhaus.udk-berlin.de",
-                "name": "Kraftausdauer für Musiker",
-                "children": {}
-              }
-            }
-          },
-          "!NpkxPDVBkWmwFGvRYz:dev.medienhaus.udk-berlin.de": {
-            "id": "!NpkxPDVBkWmwFGvRYz:dev.medienhaus.udk-berlin.de",
-            "name": "Musiktherapie",
-            "children": {}
-          },
-          "!dNwbMuoXtCHdlWDLvL:dev.medienhaus.udk-berlin.de": {
-            "id": "!dNwbMuoXtCHdlWDLvL:dev.medienhaus.udk-berlin.de",
-            "name": "Sound Studies",
-            "children": {}
-          },
-          "!wfAdhXsLAcJKzCrbHr:dev.medienhaus.udk-berlin.de": {
-            "id": "!wfAdhXsLAcJKzCrbHr:dev.medienhaus.udk-berlin.de",
-            "name": "Musikalische Nachwuchsförderung (Julius-Stern-Institut)",
-            "children": {
-              "!SVUqlsAPWbwUZcZMIY:dev.medienhaus.udk-berlin.de": {
-                "id": "!SVUqlsAPWbwUZcZMIY:dev.medienhaus.udk-berlin.de",
-                "name": "Alexandertechnik",
-                "children": {}
-              },
-              "!JLsYuyzeWkfBNKZGvc:dev.medienhaus.udk-berlin.de": {
-                "id": "!JLsYuyzeWkfBNKZGvc:dev.medienhaus.udk-berlin.de",
-                "name": "Feldenkrais",
-                "children": {}
-              },
-              "!NqrajVSTmDTMwCdycF:dev.medienhaus.udk-berlin.de": {
-                "id": "!NqrajVSTmDTMwCdycF:dev.medienhaus.udk-berlin.de",
-                "name": "Gehörbildung/Musiktheorie JSI, 3. Semester",
-                "children": {}
-              },
-              "!qRwyNmPAPJtxNieMFB:dev.medienhaus.udk-berlin.de": {
-                "id": "!qRwyNmPAPJtxNieMFB:dev.medienhaus.udk-berlin.de",
-                "name": "Grundlagenseminar Musikphysiologie",
-                "children": {}
-              },
-              "!vwKrICGQgRaNWFyLzY:dev.medienhaus.udk-berlin.de": {
-                "id": "!vwKrICGQgRaNWFyLzY:dev.medienhaus.udk-berlin.de",
-                "name": "JSI, 1. Semester, Musiktheorie/Gehörbildung",
-                "children": {}
-              },
-              "!lbOoMmlhoLDibWaCHh:dev.medienhaus.udk-berlin.de": {
-                "id": "!lbOoMmlhoLDibWaCHh:dev.medienhaus.udk-berlin.de",
-                "name": "JSI Musiktheorie/Gehörbildung, 2. Semester",
-                "children": {}
-              },
-              "!bGOMLwObrwMengtFrC:dev.medienhaus.udk-berlin.de": {
-                "id": "!bGOMLwObrwMengtFrC:dev.medienhaus.udk-berlin.de",
-                "name": "Komposition (JSI)",
-                "children": {}
-              },
-              "!yaqfhgnQouNZgiuPwZ:dev.medienhaus.udk-berlin.de": {
-                "id": "!yaqfhgnQouNZgiuPwZ:dev.medienhaus.udk-berlin.de",
-                "name": "Kraftausdauer für Musiker",
-                "children": {}
-              },
-              "!PKgIDfgEaSupmGAKQD:dev.medienhaus.udk-berlin.de": {
-                "id": "!PKgIDfgEaSupmGAKQD:dev.medienhaus.udk-berlin.de",
-                "name": "Musikermedizinische Sprechstunde",
-                "children": {}
-              },
-              "!oBSDiInkdCNYvVzSUj:dev.medienhaus.udk-berlin.de": {
-                "id": "!oBSDiInkdCNYvVzSUj:dev.medienhaus.udk-berlin.de",
-                "name": "Musikphysiologische Einzelberatung",
-                "children": {}
-              },
-              "!pDhJYhKtCCBThVhIVd:dev.medienhaus.udk-berlin.de": {
-                "id": "!pDhJYhKtCCBThVhIVd:dev.medienhaus.udk-berlin.de",
-                "name": "Musiktheorie/Gehörbildung JSI",
-                "children": {}
-              }
-            }
-          },
-          "!kPyPopXRLgWzcxsnSh:dev.medienhaus.udk-berlin.de": {
-            "id": "!kPyPopXRLgWzcxsnSh:dev.medienhaus.udk-berlin.de",
-            "name": "Q-Master Querstieg Musik",
-            "children": {
-              "!zPQnGJvtEpHmsATYmM:dev.medienhaus.udk-berlin.de": {
-                "id": "!zPQnGJvtEpHmsATYmM:dev.medienhaus.udk-berlin.de",
-                "name": "Schulbezogenes Arrangieren",
-                "children": {}
-              }
-            }
-          },
-          "!KyVUfrdhtllRIrzxvm:dev.medienhaus.udk-berlin.de": {
-            "id": "!KyVUfrdhtllRIrzxvm:dev.medienhaus.udk-berlin.de",
-            "name": "Doktorandencolloquium Musikpädagogik",
-            "children": {}
-          },
-          "!SHbjPfLRpFAxfioLSJ:dev.medienhaus.udk-berlin.de": {
-            "id": "!SHbjPfLRpFAxfioLSJ:dev.medienhaus.udk-berlin.de",
-            "name": "Examenscolloquium",
-            "children": {}
-          },
-          "!PEiCMNOGJBJMaHekfE:dev.medienhaus.udk-berlin.de": {
-            "id": "!PEiCMNOGJBJMaHekfE:dev.medienhaus.udk-berlin.de",
-            "name": "Examenscolloquium",
-            "children": {}
-          },
-          "!xVFQZQJKBKndzRtFbA:dev.medienhaus.udk-berlin.de": {
-            "id": "!xVFQZQJKBKndzRtFbA:dev.medienhaus.udk-berlin.de",
-            "name": "Gehörbildung",
-            "children": {}
-          },
-          "!JqLTldhieYRopruuMD:dev.medienhaus.udk-berlin.de": {
-            "id": "!JqLTldhieYRopruuMD:dev.medienhaus.udk-berlin.de",
-            "name": "Kolloquium für Examenskandidatinnen und -kandidaten",
-            "children": {}
-          },
-          "!tDqGHmRHYbvkcoyRHW:dev.medienhaus.udk-berlin.de": {
-            "id": "!tDqGHmRHYbvkcoyRHW:dev.medienhaus.udk-berlin.de",
-            "name": "Kolloquium zu aktuellen Forschungsfragen",
-            "children": {}
-          },
-          "!riIttsfNvNDkBbZffh:dev.medienhaus.udk-berlin.de": {
-            "id": "!riIttsfNvNDkBbZffh:dev.medienhaus.udk-berlin.de",
-            "name": "Kolloquium zu aktuellen Forschungsfragen",
-            "children": {}
-          },
-          "!rxiDqmyAVVhZHumoFn:dev.medienhaus.udk-berlin.de": {
-            "id": "!rxiDqmyAVVhZHumoFn:dev.medienhaus.udk-berlin.de",
-            "name": "Kolloquium zu aktuellen Forschungsfragen",
-            "children": {}
-          },
-          "!jkwjFjeYqIlsRWJcTv:dev.medienhaus.udk-berlin.de": {
-            "id": "!jkwjFjeYqIlsRWJcTv:dev.medienhaus.udk-berlin.de",
-            "name": "Musiktheorie \"Das universale Material? Modales Komponieren in Neuer Musik, Jazz und Rock/Pop",
-            "children": {}
-          },
-          "!JqzwVUfAzMicoQfNsn:dev.medienhaus.udk-berlin.de": {
-            "id": "!JqzwVUfAzMicoQfNsn:dev.medienhaus.udk-berlin.de",
-            "name": "Populäre und traditionelle Musikkulturen der Karibik",
-            "children": {}
           }
         }
       },
-      "!ZcfCmNkUTTNUYXsEga:dev.medienhaus.udk-berlin.de": {
-        "id": "!ZcfCmNkUTTNUYXsEga:dev.medienhaus.udk-berlin.de",
+      "!luMrRaSLfKLBYZzQPp:dev.medienhaus.udk-berlin.de": {
+        "id": "!luMrRaSLfKLBYZzQPp:dev.medienhaus.udk-berlin.de",
         "name": "Fakultät Darstellende Kunst",
         "children": {
-          "!TOLpuoIpsORNcAojXL:dev.medienhaus.udk-berlin.de": {
-            "id": "!TOLpuoIpsORNcAojXL:dev.medienhaus.udk-berlin.de",
+          "!BswvfjeYsOFucLJjjb:dev.medienhaus.udk-berlin.de": {
+            "id": "!BswvfjeYsOFucLJjjb:dev.medienhaus.udk-berlin.de",
             "name": "Gesang/Musiktheater",
             "children": {}
           },
-          "!gcGRkGkwTOiAeiXmTo:dev.medienhaus.udk-berlin.de": {
-            "id": "!gcGRkGkwTOiAeiXmTo:dev.medienhaus.udk-berlin.de",
+          "!hZEFzUYJMuaEAuDSCS:dev.medienhaus.udk-berlin.de": {
+            "id": "!hZEFzUYJMuaEAuDSCS:dev.medienhaus.udk-berlin.de",
             "name": "Schauspiel",
             "children": {
-              "!ofmSbxhjkwXRLfRjfe:dev.medienhaus.udk-berlin.de": {
-                "id": "!ofmSbxhjkwXRLfRjfe:dev.medienhaus.udk-berlin.de",
+              "!usjuZPxlgVwqYKahGL:dev.medienhaus.udk-berlin.de": {
+                "id": "!usjuZPxlgVwqYKahGL:dev.medienhaus.udk-berlin.de",
                 "name": "Theorie und Geschichte des Theaters: Europäische Theatergeschichte, Teil 2: \"Neoavantgarden, Postdramatik und die Zukunft des Theaters\"",
                 "children": {}
               }
             }
           },
-          "!IrwjJTkFHXYvrqbbEs:dev.medienhaus.udk-berlin.de": {
-            "id": "!IrwjJTkFHXYvrqbbEs:dev.medienhaus.udk-berlin.de",
+          "!bTaDbqJziXfZyihfKa:dev.medienhaus.udk-berlin.de": {
+            "id": "!bTaDbqJziXfZyihfKa:dev.medienhaus.udk-berlin.de",
             "name": "Musical-Show",
             "children": {
-              "!LLdFFGyxGqvCIhfwhD:dev.medienhaus.udk-berlin.de": {
-                "id": "!LLdFFGyxGqvCIhfwhD:dev.medienhaus.udk-berlin.de",
+              "!dqouEueifJhynXSwFb:dev.medienhaus.udk-berlin.de": {
+                "id": "!dqouEueifJhynXSwFb:dev.medienhaus.udk-berlin.de",
                 "name": "Akrobatik - 2. Jg. Musical/Show",
                 "children": {}
               },
-              "!UfwWHgzruPfFARJIOY:dev.medienhaus.udk-berlin.de": {
-                "id": "!UfwWHgzruPfFARJIOY:dev.medienhaus.udk-berlin.de",
+              "!unPQeRQlRPYAwiSrtE:dev.medienhaus.udk-berlin.de": {
+                "id": "!unPQeRQlRPYAwiSrtE:dev.medienhaus.udk-berlin.de",
                 "name": "Ballett - 1. Jg. Musical/Show",
                 "children": {}
               },
-              "!UblGlSIbpUmNzXpPjd:dev.medienhaus.udk-berlin.de": {
-                "id": "!UblGlSIbpUmNzXpPjd:dev.medienhaus.udk-berlin.de",
+              "!JTdLPAMcsfEqgYvxpG:dev.medienhaus.udk-berlin.de": {
+                "id": "!JTdLPAMcsfEqgYvxpG:dev.medienhaus.udk-berlin.de",
                 "name": "Ballett - 2. Jg. Musical/Show",
                 "children": {}
               },
-              "!bPHiBcKIRcbnQfguNZ:dev.medienhaus.udk-berlin.de": {
-                "id": "!bPHiBcKIRcbnQfguNZ:dev.medienhaus.udk-berlin.de",
+              "!mHMxUUxCQRfLYYRUvD:dev.medienhaus.udk-berlin.de": {
+                "id": "!mHMxUUxCQRfLYYRUvD:dev.medienhaus.udk-berlin.de",
                 "name": "Ballett - 3. Jg. Musical/Show",
                 "children": {}
               },
-              "!aVrfhUpPYIeXfTGngi:dev.medienhaus.udk-berlin.de": {
-                "id": "!aVrfhUpPYIeXfTGngi:dev.medienhaus.udk-berlin.de",
+              "!RROAXgnMnyCrbWmFCl:dev.medienhaus.udk-berlin.de": {
+                "id": "!RROAXgnMnyCrbWmFCl:dev.medienhaus.udk-berlin.de",
                 "name": "Gesang - 1. Jg. Musical/Show",
                 "children": {}
               },
-              "!zRvjWJBZJvQXivhAIz:dev.medienhaus.udk-berlin.de": {
-                "id": "!zRvjWJBZJvQXivhAIz:dev.medienhaus.udk-berlin.de",
+              "!BRcEmAGyqdGLBpLdSQ:dev.medienhaus.udk-berlin.de": {
+                "id": "!BRcEmAGyqdGLBpLdSQ:dev.medienhaus.udk-berlin.de",
                 "name": "Gesang - 2. Jg. Musical/Show",
                 "children": {}
               },
-              "!FvbQuhPqglIrNswxJk:dev.medienhaus.udk-berlin.de": {
-                "id": "!FvbQuhPqglIrNswxJk:dev.medienhaus.udk-berlin.de",
+              "!KalpyyzJwDEFDBfirA:dev.medienhaus.udk-berlin.de": {
+                "id": "!KalpyyzJwDEFDBfirA:dev.medienhaus.udk-berlin.de",
                 "name": "Gesang - 2. Jg. Musica/Show",
                 "children": {}
               },
-              "!vJFmMmlpUVHLrVAviz:dev.medienhaus.udk-berlin.de": {
-                "id": "!vJFmMmlpUVHLrVAviz:dev.medienhaus.udk-berlin.de",
+              "!NpRKpuFlXzFdrYGfvw:dev.medienhaus.udk-berlin.de": {
+                "id": "!NpRKpuFlXzFdrYGfvw:dev.medienhaus.udk-berlin.de",
                 "name": "Gesang - 3. Jg. Musical/Show",
                 "children": {}
               },
-              "!oqQGRGjfpbNnoRLfie:dev.medienhaus.udk-berlin.de": {
-                "id": "!oqQGRGjfpbNnoRLfie:dev.medienhaus.udk-berlin.de",
+              "!jVZqiTIajvishItyXG:dev.medienhaus.udk-berlin.de": {
+                "id": "!jVZqiTIajvishItyXG:dev.medienhaus.udk-berlin.de",
                 "name": "Jazz - 1. Jg. Musical/Show",
                 "children": {}
               },
-              "!LGLuVcnVtQNbBRiEKP:dev.medienhaus.udk-berlin.de": {
-                "id": "!LGLuVcnVtQNbBRiEKP:dev.medienhaus.udk-berlin.de",
+              "!OJDUTXdaoeSphiBYvF:dev.medienhaus.udk-berlin.de": {
+                "id": "!OJDUTXdaoeSphiBYvF:dev.medienhaus.udk-berlin.de",
                 "name": "Jazz - 2. Jg. Musical/Show",
                 "children": {}
               },
-              "!FNyqOYloWSuncqzXEq:dev.medienhaus.udk-berlin.de": {
-                "id": "!FNyqOYloWSuncqzXEq:dev.medienhaus.udk-berlin.de",
+              "!OepaxFnuyskfeNcFnZ:dev.medienhaus.udk-berlin.de": {
+                "id": "!OepaxFnuyskfeNcFnZ:dev.medienhaus.udk-berlin.de",
                 "name": "Jazz - 3. Jg. Musical/Show",
                 "children": {}
               },
-              "!zmfSejoImSxKszDqxo:dev.medienhaus.udk-berlin.de": {
-                "id": "!zmfSejoImSxKszDqxo:dev.medienhaus.udk-berlin.de",
+              "!vHuNSYKQVBNdLGLRfq:dev.medienhaus.udk-berlin.de": {
+                "id": "!vHuNSYKQVBNdLGLRfq:dev.medienhaus.udk-berlin.de",
                 "name": "Klavierunterricht - 2. Jg. Musical/Show",
                 "children": {}
               },
-              "!hfLsaJQyfWQmsonXto:dev.medienhaus.udk-berlin.de": {
-                "id": "!hfLsaJQyfWQmsonXto:dev.medienhaus.udk-berlin.de",
+              "!HRhFxOnpdoBqeUveqD:dev.medienhaus.udk-berlin.de": {
+                "id": "!HRhFxOnpdoBqeUveqD:dev.medienhaus.udk-berlin.de",
                 "name": "Klavierunterricht - 3. Jg. Musical/Show",
                 "children": {}
               },
-              "!ioiZoWSrdlSPrSPELK:dev.medienhaus.udk-berlin.de": {
-                "id": "!ioiZoWSrdlSPrSPELK:dev.medienhaus.udk-berlin.de",
+              "!TlqzRtxuTcfQDseTTY:dev.medienhaus.udk-berlin.de": {
+                "id": "!TlqzRtxuTcfQDseTTY:dev.medienhaus.udk-berlin.de",
                 "name": "Korrepetition - 1. Jg. Musical/Show",
                 "children": {}
               },
-              "!fzMoELjEPxxnRDCuoU:dev.medienhaus.udk-berlin.de": {
-                "id": "!fzMoELjEPxxnRDCuoU:dev.medienhaus.udk-berlin.de",
+              "!vMvKHBPUQlcktrPxHX:dev.medienhaus.udk-berlin.de": {
+                "id": "!vMvKHBPUQlcktrPxHX:dev.medienhaus.udk-berlin.de",
                 "name": "Korrepetition - 2. Jg. Musical/Show",
                 "children": {}
               },
-              "!GsAvbMRJtNmwiNFRtp:dev.medienhaus.udk-berlin.de": {
-                "id": "!GsAvbMRJtNmwiNFRtp:dev.medienhaus.udk-berlin.de",
+              "!JIpjGgzPTZrXnCBpkn:dev.medienhaus.udk-berlin.de": {
+                "id": "!JIpjGgzPTZrXnCBpkn:dev.medienhaus.udk-berlin.de",
                 "name": "Korrepetition - 3. Jg. Musical/Show",
                 "children": {}
               },
-              "!QXdWLZxjyBjqRtvDNs:dev.medienhaus.udk-berlin.de": {
-                "id": "!QXdWLZxjyBjqRtvDNs:dev.medienhaus.udk-berlin.de",
+              "!OnJsXltYwdRBlIBHbE:dev.medienhaus.udk-berlin.de": {
+                "id": "!OnJsXltYwdRBlIBHbE:dev.medienhaus.udk-berlin.de",
                 "name": "Labor - 1. Jg. Musical/Show",
                 "children": {}
               },
-              "!XwvlZTZXNvdYOfQOez:dev.medienhaus.udk-berlin.de": {
-                "id": "!XwvlZTZXNvdYOfQOez:dev.medienhaus.udk-berlin.de",
+              "!QrlyGzmZyTdVGgHRGZ:dev.medienhaus.udk-berlin.de": {
+                "id": "!QrlyGzmZyTdVGgHRGZ:dev.medienhaus.udk-berlin.de",
                 "name": "Musical- und Theatergeschichte - 1. Jg. Musical/Show",
                 "children": {}
               },
-              "!GBZDBPgwBzZAGhdujX:dev.medienhaus.udk-berlin.de": {
-                "id": "!GBZDBPgwBzZAGhdujX:dev.medienhaus.udk-berlin.de",
+              "!gngJugQqHnViGMbWey:dev.medienhaus.udk-berlin.de": {
+                "id": "!gngJugQqHnViGMbWey:dev.medienhaus.udk-berlin.de",
                 "name": "Musical- und Theatergeschichte - 2. Jg. Musical/Show",
                 "children": {}
               },
-              "!HuXqANqKAXxCxOCfeX:dev.medienhaus.udk-berlin.de": {
-                "id": "!HuXqANqKAXxCxOCfeX:dev.medienhaus.udk-berlin.de",
+              "!yFJqTAaMZujfogtTOl:dev.medienhaus.udk-berlin.de": {
+                "id": "!yFJqTAaMZujfogtTOl:dev.medienhaus.udk-berlin.de",
                 "name": "Musikgeschichte - 1. Jg. Musical/Show",
                 "children": {}
               },
-              "!kZVnPprSJZBHSdndtg:dev.medienhaus.udk-berlin.de": {
-                "id": "!kZVnPprSJZBHSdndtg:dev.medienhaus.udk-berlin.de",
+              "!GhVOOPhIMuMQRbMeiQ:dev.medienhaus.udk-berlin.de": {
+                "id": "!GhVOOPhIMuMQRbMeiQ:dev.medienhaus.udk-berlin.de",
                 "name": "Musikgeschichte - 2. Jg. Musical/Show",
                 "children": {}
               },
-              "!YNIsTJGsNNcaIjBKXK:dev.medienhaus.udk-berlin.de": {
-                "id": "!YNIsTJGsNNcaIjBKXK:dev.medienhaus.udk-berlin.de",
+              "!ZbJChRdFwmRJVCDDhN:dev.medienhaus.udk-berlin.de": {
+                "id": "!ZbJChRdFwmRJVCDDhN:dev.medienhaus.udk-berlin.de",
                 "name": "Musiktheorie & Gehörbildung - 1. Jg. Musical/Show",
                 "children": {}
               },
-              "!gtSCQIvgScryAhLJPP:dev.medienhaus.udk-berlin.de": {
-                "id": "!gtSCQIvgScryAhLJPP:dev.medienhaus.udk-berlin.de",
+              "!CPgTQLwLTiegDrNFCt:dev.medienhaus.udk-berlin.de": {
+                "id": "!CPgTQLwLTiegDrNFCt:dev.medienhaus.udk-berlin.de",
                 "name": "Musiktheorie & Gehörbildung - 2. Jg. Musical/Show",
                 "children": {}
               },
-              "!nwInbCisrbmYftcbRL:dev.medienhaus.udk-berlin.de": {
-                "id": "!nwInbCisrbmYftcbRL:dev.medienhaus.udk-berlin.de",
+              "!NVMuiUzXOSxhrlDGvo:dev.medienhaus.udk-berlin.de": {
+                "id": "!NVMuiUzXOSxhrlDGvo:dev.medienhaus.udk-berlin.de",
                 "name": "Musiktheorie & Gehörbildung (Praxis) - 3. Jg. Musical/Show",
                 "children": {}
               },
-              "!FWKXyTdrpWTMdcwXLK:dev.medienhaus.udk-berlin.de": {
-                "id": "!FWKXyTdrpWTMdcwXLK:dev.medienhaus.udk-berlin.de",
+              "!HhGVnPFmiqScoTcCma:dev.medienhaus.udk-berlin.de": {
+                "id": "!HhGVnPFmiqScoTcCma:dev.medienhaus.udk-berlin.de",
                 "name": "Neuköllner Oper-Projekt - 3. Jg. Musical/Show",
                 "children": {}
               },
-              "!epWnkEBUzCnQUmvaaZ:dev.medienhaus.udk-berlin.de": {
-                "id": "!epWnkEBUzCnQUmvaaZ:dev.medienhaus.udk-berlin.de",
+              "!SoukxRNkoOxReMRFcp:dev.medienhaus.udk-berlin.de": {
+                "id": "!SoukxRNkoOxReMRFcp:dev.medienhaus.udk-berlin.de",
                 "name": "Projekt Musical - 2. Jg. Musical/Show",
                 "children": {}
               },
-              "!JOysuLScduxgnOZlPg:dev.medienhaus.udk-berlin.de": {
-                "id": "!JOysuLScduxgnOZlPg:dev.medienhaus.udk-berlin.de",
+              "!IiaOMprjqNYfrjsAYC:dev.medienhaus.udk-berlin.de": {
+                "id": "!IiaOMprjqNYfrjsAYC:dev.medienhaus.udk-berlin.de",
                 "name": "Schauspiel - 1. Jg. Musical/Show",
                 "children": {}
               },
-              "!hUQmDJXstLDSWKXmkG:dev.medienhaus.udk-berlin.de": {
-                "id": "!hUQmDJXstLDSWKXmkG:dev.medienhaus.udk-berlin.de",
+              "!TfOPwrPBDpRIZfWhUO:dev.medienhaus.udk-berlin.de": {
+                "id": "!TfOPwrPBDpRIZfWhUO:dev.medienhaus.udk-berlin.de",
                 "name": "Sprechen - 1. Jg. Musical/Show",
                 "children": {}
               },
-              "!FHwuYeQmTDwRLbDudA:dev.medienhaus.udk-berlin.de": {
-                "id": "!FHwuYeQmTDwRLbDudA:dev.medienhaus.udk-berlin.de",
+              "!ZEwkMBfpUHuYIEvolm:dev.medienhaus.udk-berlin.de": {
+                "id": "!ZEwkMBfpUHuYIEvolm:dev.medienhaus.udk-berlin.de",
                 "name": "Sprechen - 1. Jg. Musical/Show (Gruppe)",
                 "children": {}
               },
-              "!YnmHRBfCJMIzVTQwuw:dev.medienhaus.udk-berlin.de": {
-                "id": "!YnmHRBfCJMIzVTQwuw:dev.medienhaus.udk-berlin.de",
+              "!DrzxWLAXrqZaGvaxcs:dev.medienhaus.udk-berlin.de": {
+                "id": "!DrzxWLAXrqZaGvaxcs:dev.medienhaus.udk-berlin.de",
                 "name": "Sprechen - 2. Jg. Musical/Show",
                 "children": {}
               },
-              "!PxjKQkUfLBkWGVzJmE:dev.medienhaus.udk-berlin.de": {
-                "id": "!PxjKQkUfLBkWGVzJmE:dev.medienhaus.udk-berlin.de",
+              "!VFqcbqZpBMUOPYIPxg:dev.medienhaus.udk-berlin.de": {
+                "id": "!VFqcbqZpBMUOPYIPxg:dev.medienhaus.udk-berlin.de",
                 "name": "Sprechen - 3. Jg. Musical/Show",
                 "children": {}
               },
-              "!UeZsjTqGrOVPdqexuP:dev.medienhaus.udk-berlin.de": {
-                "id": "!UeZsjTqGrOVPdqexuP:dev.medienhaus.udk-berlin.de",
+              "!DwmHYrmnCIetNXjjmq:dev.medienhaus.udk-berlin.de": {
+                "id": "!DwmHYrmnCIetNXjjmq:dev.medienhaus.udk-berlin.de",
                 "name": "Step - 1. Jg. Musical/Show",
                 "children": {}
               },
-              "!kMvEurYjCrlUVCqcxI:dev.medienhaus.udk-berlin.de": {
-                "id": "!kMvEurYjCrlUVCqcxI:dev.medienhaus.udk-berlin.de",
+              "!bhYTQoZWHOMQfZvuBY:dev.medienhaus.udk-berlin.de": {
+                "id": "!bhYTQoZWHOMQfZvuBY:dev.medienhaus.udk-berlin.de",
                 "name": "Step - 2. Jg. Musical/Show",
                 "children": {}
               },
-              "!VXgwCfAzSwbObMqbMJ:dev.medienhaus.udk-berlin.de": {
-                "id": "!VXgwCfAzSwbObMqbMJ:dev.medienhaus.udk-berlin.de",
+              "!WXGNlHZKsZeulHrOsG:dev.medienhaus.udk-berlin.de": {
+                "id": "!WXGNlHZKsZeulHrOsG:dev.medienhaus.udk-berlin.de",
                 "name": "Step - 3. Jg. Musical/Show",
                 "children": {}
               }
             }
           },
-          "!syPRbJIIdQQzxyVVae:dev.medienhaus.udk-berlin.de": {
-            "id": "!syPRbJIIdQQzxyVVae:dev.medienhaus.udk-berlin.de",
+          "!SzUPQquXDxtWdfzYkO:dev.medienhaus.udk-berlin.de": {
+            "id": "!SzUPQquXDxtWdfzYkO:dev.medienhaus.udk-berlin.de",
             "name": "Kostümbild",
             "children": {
-              "!WylGIeqVGyefTDbcBj:dev.medienhaus.udk-berlin.de": {
-                "id": "!WylGIeqVGyefTDbcBj:dev.medienhaus.udk-berlin.de",
+              "!srQyWmvxTGEsCEwvON:dev.medienhaus.udk-berlin.de": {
+                "id": "!srQyWmvxTGEsCEwvON:dev.medienhaus.udk-berlin.de",
                 "name": "Basiskenntnisse in Textil Bearbeitung - 1. Semester",
                 "children": {}
               },
-              "!JesmFioMfFRCqXnDda:dev.medienhaus.udk-berlin.de": {
-                "id": "!JesmFioMfFRCqXnDda:dev.medienhaus.udk-berlin.de",
+              "!mtsiAnFjFhWenncGTq:dev.medienhaus.udk-berlin.de": {
+                "id": "!mtsiAnFjFhWenncGTq:dev.medienhaus.udk-berlin.de",
                 "name": "Basiskenntnisse Kostümbearbeitung - 3. Semester",
                 "children": {}
               },
-              "!WkzQHPcGvlSWQRbeOt:dev.medienhaus.udk-berlin.de": {
-                "id": "!WkzQHPcGvlSWQRbeOt:dev.medienhaus.udk-berlin.de",
+              "!nDlVbVusHbguJDzVor:dev.medienhaus.udk-berlin.de": {
+                "id": "!nDlVbVusHbguJDzVor:dev.medienhaus.udk-berlin.de",
                 "name": "Basiskenntnisse praktische Kostümumsetzung - 1. und 3. Semester",
                 "children": {}
               },
-              "!MEDReaSldBtKASnbCO:dev.medienhaus.udk-berlin.de": {
-                "id": "!MEDReaSldBtKASnbCO:dev.medienhaus.udk-berlin.de",
+              "!ZIpCBZgoSHZBLBUEev:dev.medienhaus.udk-berlin.de": {
+                "id": "!ZIpCBZgoSHZBLBUEev:dev.medienhaus.udk-berlin.de",
                 "name": "Basiskenntnisse praktische Kostümumsetzung - 5. Semester",
                 "children": {}
               },
-              "!bhWDNvbOxsEGiuAvFn:dev.medienhaus.udk-berlin.de": {
-                "id": "!bhWDNvbOxsEGiuAvFn:dev.medienhaus.udk-berlin.de",
+              "!RPmlMshBVyKkNdQERR:dev.medienhaus.udk-berlin.de": {
+                "id": "!RPmlMshBVyKkNdQERR:dev.medienhaus.udk-berlin.de",
                 "name": "Darstellungsmethoden - 1. Semester",
                 "children": {}
               },
-              "!MlAruSKXkErgDmGnEE:dev.medienhaus.udk-berlin.de": {
-                "id": "!MlAruSKXkErgDmGnEE:dev.medienhaus.udk-berlin.de",
+              "!NqgzbYAKmomhrvEfRo:dev.medienhaus.udk-berlin.de": {
+                "id": "!NqgzbYAKmomhrvEfRo:dev.medienhaus.udk-berlin.de",
                 "name": "Darstellungstechniken - 3. Semester",
                 "children": {}
               },
-              "!nIKhaoPTktlLDSrhcD:dev.medienhaus.udk-berlin.de": {
-                "id": "!nIKhaoPTktlLDSrhcD:dev.medienhaus.udk-berlin.de",
+              "!DTTrAupTxtTpextwCP:dev.medienhaus.udk-berlin.de": {
+                "id": "!DTTrAupTxtTpextwCP:dev.medienhaus.udk-berlin.de",
                 "name": "Digitale Medien - 1., 3. und 5. Semester",
                 "children": {}
               },
-              "!jZhfeAHcPKUUlZrYzn:dev.medienhaus.udk-berlin.de": {
-                "id": "!jZhfeAHcPKUUlZrYzn:dev.medienhaus.udk-berlin.de",
+              "!fyywPPnOGMfcLWCTbN:dev.medienhaus.udk-berlin.de": {
+                "id": "!fyywPPnOGMfcLWCTbN:dev.medienhaus.udk-berlin.de",
                 "name": "Einführung in Maskenbild",
                 "children": {}
               },
-              "!NjXMYhVAfIfzwaMymo:dev.medienhaus.udk-berlin.de": {
-                "id": "!NjXMYhVAfIfzwaMymo:dev.medienhaus.udk-berlin.de",
+              "!CpasYhYPlBHQJzrWVS:dev.medienhaus.udk-berlin.de": {
+                "id": "!CpasYhYPlBHQJzrWVS:dev.medienhaus.udk-berlin.de",
                 "name": "Figurine C - 5. Semester",
                 "children": {}
               },
-              "!NJvxubSsGCkXBmyjcw:dev.medienhaus.udk-berlin.de": {
-                "id": "!NJvxubSsGCkXBmyjcw:dev.medienhaus.udk-berlin.de",
+              "!mhMeMTUZkZxXSpyzgc:dev.medienhaus.udk-berlin.de": {
+                "id": "!mhMeMTUZkZxXSpyzgc:dev.medienhaus.udk-berlin.de",
                 "name": "Filmprojekt A - 1. Semester",
                 "children": {}
               },
-              "!lGPNnPWsNlfTREVrCI:dev.medienhaus.udk-berlin.de": {
-                "id": "!lGPNnPWsNlfTREVrCI:dev.medienhaus.udk-berlin.de",
+              "!tvbKzLFIbydyzupvnS:dev.medienhaus.udk-berlin.de": {
+                "id": "!tvbKzLFIbydyzupvnS:dev.medienhaus.udk-berlin.de",
                 "name": "Filmprojekt C - 3. Semester",
                 "children": {}
               },
-              "!tZVXTnIAefNostrwwx:dev.medienhaus.udk-berlin.de": {
-                "id": "!tZVXTnIAefNostrwwx:dev.medienhaus.udk-berlin.de",
+              "!XutvrXqkHqVpyuMfbI:dev.medienhaus.udk-berlin.de": {
+                "id": "!XutvrXqkHqVpyuMfbI:dev.medienhaus.udk-berlin.de",
                 "name": "Filmtheorie Grundlagen - 1. und 3. Semester",
                 "children": {}
               },
-              "!twuOWOpCrefemaQTnU:dev.medienhaus.udk-berlin.de": {
-                "id": "!twuOWOpCrefemaQTnU:dev.medienhaus.udk-berlin.de",
+              "!klNJqdJSETzezgkrSZ:dev.medienhaus.udk-berlin.de": {
+                "id": "!klNJqdJSETzezgkrSZ:dev.medienhaus.udk-berlin.de",
                 "name": "Fotografie - 3. Semester",
                 "children": {}
               },
-              "!IJDKIfYBCCQzmmBXGH:dev.medienhaus.udk-berlin.de": {
-                "id": "!IJDKIfYBCCQzmmBXGH:dev.medienhaus.udk-berlin.de",
+              "!DMlcaGIfwPbVAEpCzB:dev.medienhaus.udk-berlin.de": {
+                "id": "!DMlcaGIfwPbVAEpCzB:dev.medienhaus.udk-berlin.de",
                 "name": "Grundlagen des Filmkostüms - 1. Semester",
                 "children": {}
               },
-              "!hyvewWWiXjNEiELhzX:dev.medienhaus.udk-berlin.de": {
-                "id": "!hyvewWWiXjNEiELhzX:dev.medienhaus.udk-berlin.de",
+              "!LCnUmbRyYdBSLmMHKP:dev.medienhaus.udk-berlin.de": {
+                "id": "!LCnUmbRyYdBSLmMHKP:dev.medienhaus.udk-berlin.de",
                 "name": "Körper Forschung - Nachtgestalten",
                 "children": {}
               },
-              "!YWDHmdFtuGBtuWQbBP:dev.medienhaus.udk-berlin.de": {
-                "id": "!YWDHmdFtuGBtuWQbBP:dev.medienhaus.udk-berlin.de",
+              "!joZQJFzkcnAQtClQLA:dev.medienhaus.udk-berlin.de": {
+                "id": "!joZQJFzkcnAQtClQLA:dev.medienhaus.udk-berlin.de",
                 "name": "Körper Forschung - Nachtgestalten - 1. Semester",
                 "children": {}
               },
-              "!oqiFWCqEVzyZkFIVGB:dev.medienhaus.udk-berlin.de": {
-                "id": "!oqiFWCqEVzyZkFIVGB:dev.medienhaus.udk-berlin.de",
+              "!KbZGAfmXYYoswPNinw:dev.medienhaus.udk-berlin.de": {
+                "id": "!KbZGAfmXYYoswPNinw:dev.medienhaus.udk-berlin.de",
                 "name": "Körper Forschung - Nachtgestalten - 3. Semester",
                 "children": {}
               },
-              "!ZJvbJzNMokdhLntZAO:dev.medienhaus.udk-berlin.de": {
-                "id": "!ZJvbJzNMokdhLntZAO:dev.medienhaus.udk-berlin.de",
+              "!UrFWxqWmgKvDLZHFcV:dev.medienhaus.udk-berlin.de": {
+                "id": "!UrFWxqWmgKvDLZHFcV:dev.medienhaus.udk-berlin.de",
                 "name": "Kulturgeschichte der Kleidung und Modetheorie - 1. Semester",
                 "children": {}
               },
-              "!DmvLXeMxjIByQjzEte:dev.medienhaus.udk-berlin.de": {
-                "id": "!DmvLXeMxjIByQjzEte:dev.medienhaus.udk-berlin.de",
+              "!PEinYfVNHLihKEGAan:dev.medienhaus.udk-berlin.de": {
+                "id": "!PEinYfVNHLihKEGAan:dev.medienhaus.udk-berlin.de",
                 "name": "Kulturgeschichte der Kleidung und Modetheorie für Fortgeschrittene - 1. und 3. Semester",
                 "children": {}
               },
-              "!MsXXtmiIPWjhJStBXH:dev.medienhaus.udk-berlin.de": {
-                "id": "!MsXXtmiIPWjhJStBXH:dev.medienhaus.udk-berlin.de",
+              "!NqOfPbePxuYMrMKRBr:dev.medienhaus.udk-berlin.de": {
+                "id": "!NqOfPbePxuYMrMKRBr:dev.medienhaus.udk-berlin.de",
                 "name": "Kulturgeschichte der Klleidung - 3. Semester",
                 "children": {}
               },
-              "!nhJTmsKqoCSmHhZGVx:dev.medienhaus.udk-berlin.de": {
-                "id": "!nhJTmsKqoCSmHhZGVx:dev.medienhaus.udk-berlin.de",
+              "!ZZGHUViKFyOBTQorQA:dev.medienhaus.udk-berlin.de": {
+                "id": "!ZZGHUViKFyOBTQorQA:dev.medienhaus.udk-berlin.de",
                 "name": "Künstlerische Konzeption / Dramaturgie Projekt - Nachgestalten",
                 "children": {}
               },
-              "!XEqWjdRXFpdXkDDDtl:dev.medienhaus.udk-berlin.de": {
-                "id": "!XEqWjdRXFpdXkDDDtl:dev.medienhaus.udk-berlin.de",
+              "!RuYBNIgGzkkjugowwC:dev.medienhaus.udk-berlin.de": {
+                "id": "!RuYBNIgGzkkjugowwC:dev.medienhaus.udk-berlin.de",
                 "name": "Masterprojekt",
                 "children": {}
               },
-              "!BAFXNCoenSZyqBKuvQ:dev.medienhaus.udk-berlin.de": {
-                "id": "!BAFXNCoenSZyqBKuvQ:dev.medienhaus.udk-berlin.de",
+              "!zLmRjNXEgylmwbwiuR:dev.medienhaus.udk-berlin.de": {
+                "id": "!zLmRjNXEgylmwbwiuR:dev.medienhaus.udk-berlin.de",
                 "name": "Raumkonzeption - 1. und 3. Semester",
                 "children": {}
               },
-              "!tsCJtpjLqwbGQOuCzK:dev.medienhaus.udk-berlin.de": {
-                "id": "!tsCJtpjLqwbGQOuCzK:dev.medienhaus.udk-berlin.de",
+              "!nYIDyzJDTgsaIKKzds:dev.medienhaus.udk-berlin.de": {
+                "id": "!nYIDyzJDTgsaIKKzds:dev.medienhaus.udk-berlin.de",
                 "name": "Theater Praxis - Entwurf - 5. Semester",
                 "children": {}
               }
             }
           },
-          "!JDeNBSZcGWMuQWRSVa:dev.medienhaus.udk-berlin.de": {
-            "id": "!JDeNBSZcGWMuQWRSVa:dev.medienhaus.udk-berlin.de",
+          "!ZXlrMuJWsccKmzOUwo:dev.medienhaus.udk-berlin.de": {
+            "id": "!ZXlrMuJWsccKmzOUwo:dev.medienhaus.udk-berlin.de",
             "name": "Bühnenbild",
             "children": {
-              "!XiKxPWfwEWLrBXjRVK:dev.medienhaus.udk-berlin.de": {
-                "id": "!XiKxPWfwEWLrBXjRVK:dev.medienhaus.udk-berlin.de",
+              "!ufhKJuqWLskkNapVZn:dev.medienhaus.udk-berlin.de": {
+                "id": "!ufhKJuqWLskkNapVZn:dev.medienhaus.udk-berlin.de",
                 "name": "AUTOCAD - 4. Semester",
                 "children": {}
               },
-              "!VCaUseCgRTkvgJKJqv:dev.medienhaus.udk-berlin.de": {
-                "id": "!VCaUseCgRTkvgJKJqv:dev.medienhaus.udk-berlin.de",
+              "!VSSBYSrETVgmfhsVYx:dev.medienhaus.udk-berlin.de": {
+                "id": "!VSSBYSrETVgmfhsVYx:dev.medienhaus.udk-berlin.de",
                 "name": "Brecht ab 2. Semester",
                 "children": {}
               },
-              "!oOJsPdHaOkgGJbUxYE:dev.medienhaus.udk-berlin.de": {
-                "id": "!oOJsPdHaOkgGJbUxYE:dev.medienhaus.udk-berlin.de",
+              "!gGSuXPwYvADxSlgcgQ:dev.medienhaus.udk-berlin.de": {
+                "id": "!gGSuXPwYvADxSlgcgQ:dev.medienhaus.udk-berlin.de",
                 "name": "Brecht ab 6. Semester",
                 "children": {}
               },
-              "!OZgTibYZXZWlIhjvfz:dev.medienhaus.udk-berlin.de": {
-                "id": "!OZgTibYZXZWlIhjvfz:dev.medienhaus.udk-berlin.de",
+              "!SodMwmlkDxetQIpSxO:dev.medienhaus.udk-berlin.de": {
+                "id": "!SodMwmlkDxetQIpSxO:dev.medienhaus.udk-berlin.de",
                 "name": "Bühnenbildgeschichte II",
                 "children": {}
               },
-              "!zigPnorcHBaFLnaGwA:dev.medienhaus.udk-berlin.de": {
-                "id": "!zigPnorcHBaFLnaGwA:dev.medienhaus.udk-berlin.de",
+              "!hkiuVbbjfCoNGQfuwW:dev.medienhaus.udk-berlin.de": {
+                "id": "!hkiuVbbjfCoNGQfuwW:dev.medienhaus.udk-berlin.de",
                 "name": "Fliegende Bühne ab 2. Semester",
                 "children": {}
               },
-              "!odoVkOrrzcvOKyvtOw:dev.medienhaus.udk-berlin.de": {
-                "id": "!odoVkOrrzcvOKyvtOw:dev.medienhaus.udk-berlin.de",
+              "!lEYAQUahOPVDkpsyQv:dev.medienhaus.udk-berlin.de": {
+                "id": "!lEYAQUahOPVDkpsyQv:dev.medienhaus.udk-berlin.de",
                 "name": "Fliegende Bühne ab 4. Semester",
                 "children": {}
               },
-              "!HYPiYNmpYFNhHWfFdS:dev.medienhaus.udk-berlin.de": {
-                "id": "!HYPiYNmpYFNhHWfFdS:dev.medienhaus.udk-berlin.de",
+              "!FkLkNhKVDwFKnvebTk:dev.medienhaus.udk-berlin.de": {
+                "id": "!FkLkNhKVDwFKnvebTk:dev.medienhaus.udk-berlin.de",
                 "name": "Fliegende Bühne / Green Screen",
                 "children": {}
               },
-              "!VmzgTRoHFdfvdcfJSK:dev.medienhaus.udk-berlin.de": {
-                "id": "!VmzgTRoHFdfvdcfJSK:dev.medienhaus.udk-berlin.de",
+              "!ugKPiuWOyPGHkcjgmt:dev.medienhaus.udk-berlin.de": {
+                "id": "!ugKPiuWOyPGHkcjgmt:dev.medienhaus.udk-berlin.de",
                 "name": "Grundlagen visueller Wahrnehmung und Gestaltung - 2. Semester",
                 "children": {}
               },
-              "!IIzhVoRvOqWtteXQYx:dev.medienhaus.udk-berlin.de": {
-                "id": "!IIzhVoRvOqWtteXQYx:dev.medienhaus.udk-berlin.de",
+              "!vgPuEXHiaKYUOgqSho:dev.medienhaus.udk-berlin.de": {
+                "id": "!vgPuEXHiaKYUOgqSho:dev.medienhaus.udk-berlin.de",
                 "name": "Grundmotive des Theaters - 4. Semester",
                 "children": {}
               },
-              "!GeZNGSjoNFfSnmoYWu:dev.medienhaus.udk-berlin.de": {
-                "id": "!GeZNGSjoNFfSnmoYWu:dev.medienhaus.udk-berlin.de",
+              "!mYKnIEqNkyAkNHceyp:dev.medienhaus.udk-berlin.de": {
+                "id": "!mYKnIEqNkyAkNHceyp:dev.medienhaus.udk-berlin.de",
                 "name": "Guerilla Theater - Fliegende Bühne ab 2. Semester",
                 "children": {}
               },
-              "!XUQNQPixWrGWiNYyFC:dev.medienhaus.udk-berlin.de": {
-                "id": "!XUQNQPixWrGWiNYyFC:dev.medienhaus.udk-berlin.de",
+              "!pFEmBCJCteVJUVCaos:dev.medienhaus.udk-berlin.de": {
+                "id": "!pFEmBCJCteVJUVCaos:dev.medienhaus.udk-berlin.de",
                 "name": "Inszenierungsanalyse - 2. und 4. Sem.",
                 "children": {}
               },
-              "!AAgmRzzKytEDvjHsbC:dev.medienhaus.udk-berlin.de": {
-                "id": "!AAgmRzzKytEDvjHsbC:dev.medienhaus.udk-berlin.de",
+              "!mJbiQIbiNJPtsbJhHo:dev.medienhaus.udk-berlin.de": {
+                "id": "!mJbiQIbiNJPtsbJhHo:dev.medienhaus.udk-berlin.de",
                 "name": "Intermediale Raumtheorien 2 - ab 4. Semester",
                 "children": {}
               },
-              "!PWBEEypAGoNwaJrZEy:dev.medienhaus.udk-berlin.de": {
-                "id": "!PWBEEypAGoNwaJrZEy:dev.medienhaus.udk-berlin.de",
+              "!HPFYbrzevqMuweXIUx:dev.medienhaus.udk-berlin.de": {
+                "id": "!HPFYbrzevqMuweXIUx:dev.medienhaus.udk-berlin.de",
                 "name": "Kuhle Wampe oder wem gehört die Welt ab 2. Semester",
                 "children": {}
               },
-              "!MgfKThcfdYMSdAybPb:dev.medienhaus.udk-berlin.de": {
-                "id": "!MgfKThcfdYMSdAybPb:dev.medienhaus.udk-berlin.de",
+              "!ohJyJYOBUxsYRqvBEA:dev.medienhaus.udk-berlin.de": {
+                "id": "!ohJyJYOBUxsYRqvBEA:dev.medienhaus.udk-berlin.de",
                 "name": "Modellbau - 2. Semester",
                 "children": {}
               },
-              "!dsUOxhfEwcKzvoTRCh:dev.medienhaus.udk-berlin.de": {
-                "id": "!dsUOxhfEwcKzvoTRCh:dev.medienhaus.udk-berlin.de",
+              "!wZgARAELLtKKqImuKR:dev.medienhaus.udk-berlin.de": {
+                "id": "!wZgARAELLtKKqImuKR:dev.medienhaus.udk-berlin.de",
                 "name": "Neue Medien des Theaters ab 2. Semester",
                 "children": {}
               },
-              "!GwaiDvWTFJcgDZdzgh:dev.medienhaus.udk-berlin.de": {
-                "id": "!GwaiDvWTFJcgDZdzgh:dev.medienhaus.udk-berlin.de",
+              "!OjyqOnMKdgikMfvokS:dev.medienhaus.udk-berlin.de": {
+                "id": "!OjyqOnMKdgikMfvokS:dev.medienhaus.udk-berlin.de",
                 "name": "Neue Medien des Theaters ab 4. Semester",
                 "children": {}
               },
-              "!HjQMqruApWYxTIfQfH:dev.medienhaus.udk-berlin.de": {
-                "id": "!HjQMqruApWYxTIfQfH:dev.medienhaus.udk-berlin.de",
+              "!BxnRsdFlHraYYSLdDB:dev.medienhaus.udk-berlin.de": {
+                "id": "!BxnRsdFlHraYYSLdDB:dev.medienhaus.udk-berlin.de",
                 "name": "Projektarbeit I",
                 "children": {}
               },
-              "!AnKvYVRpXlZWyYaSYb:dev.medienhaus.udk-berlin.de": {
-                "id": "!AnKvYVRpXlZWyYaSYb:dev.medienhaus.udk-berlin.de",
+              "!xGHlvUhXvlXnbwZfxl:dev.medienhaus.udk-berlin.de": {
+                "id": "!xGHlvUhXvlXnbwZfxl:dev.medienhaus.udk-berlin.de",
                 "name": "Projektbetreuung -Fliegende Bühne - 2. bis 6. Semester",
                 "children": {}
               },
-              "!ItyqlValKXIxEVLsQN:dev.medienhaus.udk-berlin.de": {
-                "id": "!ItyqlValKXIxEVLsQN:dev.medienhaus.udk-berlin.de",
+              "!fNOIwzvcgjKxJWZJQc:dev.medienhaus.udk-berlin.de": {
+                "id": "!fNOIwzvcgjKxJWZJQc:dev.medienhaus.udk-berlin.de",
                 "name": "Projektbetreuung -Fliegende Bühne -ab 2. Semester",
                 "children": {}
               },
-              "!bRFbnPlexUGMlMZtOI:dev.medienhaus.udk-berlin.de": {
-                "id": "!bRFbnPlexUGMlMZtOI:dev.medienhaus.udk-berlin.de",
+              "!WumPKBaDaFzdcUtKii:dev.medienhaus.udk-berlin.de": {
+                "id": "!WumPKBaDaFzdcUtKii:dev.medienhaus.udk-berlin.de",
                 "name": "Projektbetreuung II",
                 "children": {}
               },
-              "!KibwbneOVeMRYqCTKu:dev.medienhaus.udk-berlin.de": {
-                "id": "!KibwbneOVeMRYqCTKu:dev.medienhaus.udk-berlin.de",
+              "!tiXUwOqHJVWSxjIIfT:dev.medienhaus.udk-berlin.de": {
+                "id": "!tiXUwOqHJVWSxjIIfT:dev.medienhaus.udk-berlin.de",
                 "name": "Projekt Fakultät Darstellende Kunst",
                 "children": {}
               },
-              "!cdOOKtfDFHwoKuFocd:dev.medienhaus.udk-berlin.de": {
-                "id": "!cdOOKtfDFHwoKuFocd:dev.medienhaus.udk-berlin.de",
+              "!eqijRrjmlZLZxzFueP:dev.medienhaus.udk-berlin.de": {
+                "id": "!eqijRrjmlZLZxzFueP:dev.medienhaus.udk-berlin.de",
                 "name": "Räume unter Queerfeministischen Vorzeichen. Eine Veranstaltung der Filmbühne",
                 "children": {}
               },
-              "!JIQkVRvIIbcvhmASMR:dev.medienhaus.udk-berlin.de": {
-                "id": "!JIQkVRvIIbcvhmASMR:dev.medienhaus.udk-berlin.de",
+              "!yktHZunCPVBRsRaImk:dev.medienhaus.udk-berlin.de": {
+                "id": "!yktHZunCPVBRsRaImk:dev.medienhaus.udk-berlin.de",
                 "name": "Repertoire - 2. Semester",
                 "children": {}
               },
-              "!CImCtfrMPakrubgKgg:dev.medienhaus.udk-berlin.de": {
-                "id": "!CImCtfrMPakrubgKgg:dev.medienhaus.udk-berlin.de",
+              "!vNwOMPDOInMvOqPcvb:dev.medienhaus.udk-berlin.de": {
+                "id": "!vNwOMPDOInMvOqPcvb:dev.medienhaus.udk-berlin.de",
                 "name": "Studioprojekt",
                 "children": {}
               },
-              "!ofmSbxhjkwXRLfRjfe:dev.medienhaus.udk-berlin.de": {
-                "id": "!ofmSbxhjkwXRLfRjfe:dev.medienhaus.udk-berlin.de",
+              "!usjuZPxlgVwqYKahGL:dev.medienhaus.udk-berlin.de": {
+                "id": "!usjuZPxlgVwqYKahGL:dev.medienhaus.udk-berlin.de",
                 "name": "Theorie und Geschichte des Theaters: Europäische Theatergeschichte, Teil 2: \"Neoavantgarden, Postdramatik und die Zukunft des Theaters\"",
                 "children": {}
               },
-              "!UPYsMiZUoebBInIQdH:dev.medienhaus.udk-berlin.de": {
-                "id": "!UPYsMiZUoebBInIQdH:dev.medienhaus.udk-berlin.de",
+              "!kwkAejonlgWkPPepoK:dev.medienhaus.udk-berlin.de": {
+                "id": "!kwkAejonlgWkPPepoK:dev.medienhaus.udk-berlin.de",
                 "name": "Wanderbühne. Temporäre Architekturen als Bühnenräume - 2. Semester",
                 "children": {}
               },
-              "!RnpYOnCILYDmbtEFaO:dev.medienhaus.udk-berlin.de": {
-                "id": "!RnpYOnCILYDmbtEFaO:dev.medienhaus.udk-berlin.de",
+              "!RoLAWUFDzFTOgABJyU:dev.medienhaus.udk-berlin.de": {
+                "id": "!RoLAWUFDzFTOgABJyU:dev.medienhaus.udk-berlin.de",
                 "name": "Werkstattzeichnen",
                 "children": {}
               },
-              "!lEpHuEAWtJufbdqwKe:dev.medienhaus.udk-berlin.de": {
-                "id": "!lEpHuEAWtJufbdqwKe:dev.medienhaus.udk-berlin.de",
+              "!gMJsMYhWbJvXnAfACS:dev.medienhaus.udk-berlin.de": {
+                "id": "!gMJsMYhWbJvXnAfACS:dev.medienhaus.udk-berlin.de",
                 "name": "Wissenschaftliche Projektbegleitung - ab 6. Semester",
                 "children": {}
               },
-              "!TjywkQuzQUcNTYIGWd:dev.medienhaus.udk-berlin.de": {
-                "id": "!TjywkQuzQUcNTYIGWd:dev.medienhaus.udk-berlin.de",
+              "!BxGArCHPPKqhMcTOvn:dev.medienhaus.udk-berlin.de": {
+                "id": "!BxGArCHPPKqhMcTOvn:dev.medienhaus.udk-berlin.de",
                 "name": "Workshop 3 D Modelling. Blockseminar für Anfänger*Innen",
                 "children": {}
               },
-              "!IqcYrheoXtMQPgBdhT:dev.medienhaus.udk-berlin.de": {
-                "id": "!IqcYrheoXtMQPgBdhT:dev.medienhaus.udk-berlin.de",
+              "!iUAWMxHWmHljjPlGfr:dev.medienhaus.udk-berlin.de": {
+                "id": "!iUAWMxHWmHljjPlGfr:dev.medienhaus.udk-berlin.de",
                 "name": "Workshop 3D Modelling. Blockseminar für Fortgeschrittene",
                 "children": {}
               }
             }
           },
-          "!gZkfaCuiWrpMqNzbTM:dev.medienhaus.udk-berlin.de": {
-            "id": "!gZkfaCuiWrpMqNzbTM:dev.medienhaus.udk-berlin.de",
+          "!NqaqpTzzzOxXULQgeI:dev.medienhaus.udk-berlin.de": {
+            "id": "!NqaqpTzzzOxXULQgeI:dev.medienhaus.udk-berlin.de",
             "name": "Szenisches Schreiben",
             "children": {
-              "!ZrCzlHWbpBdjXUthuz:dev.medienhaus.udk-berlin.de": {
-                "id": "!ZrCzlHWbpBdjXUthuz:dev.medienhaus.udk-berlin.de",
+              "!UrLOXPOeEnwvXDNfxd:dev.medienhaus.udk-berlin.de": {
+                "id": "!UrLOXPOeEnwvXDNfxd:dev.medienhaus.udk-berlin.de",
                 "name": "bat Werkstatt Neue Stücke Betreuung und Vorbereitung - 15. Jahrgang",
                 "children": {}
               },
-              "!XhRiYeaxEMprYqaMVz:dev.medienhaus.udk-berlin.de": {
-                "id": "!XhRiYeaxEMprYqaMVz:dev.medienhaus.udk-berlin.de",
+              "!DUdMiIPHchNIpuyuda:dev.medienhaus.udk-berlin.de": {
+                "id": "!DUdMiIPHchNIpuyuda:dev.medienhaus.udk-berlin.de",
                 "name": "Bürgerliches Trauerspiel - 16. Jahrgang",
                 "children": {}
               },
-              "!EJsTjWBXHFWYyTRFRZ:dev.medienhaus.udk-berlin.de": {
-                "id": "!EJsTjWBXHFWYyTRFRZ:dev.medienhaus.udk-berlin.de",
+              "!CRurSGtpBmMOmNqxFN:dev.medienhaus.udk-berlin.de": {
+                "id": "!CRurSGtpBmMOmNqxFN:dev.medienhaus.udk-berlin.de",
                 "name": "Film-Dramaturgie / Figurenanalyse - 16. Jahrgang",
                 "children": {}
               },
-              "!nHfXDYPBcRKgrbhtMl:dev.medienhaus.udk-berlin.de": {
-                "id": "!nHfXDYPBcRKgrbhtMl:dev.medienhaus.udk-berlin.de",
+              "!DIUlIpgUXKttaYBJyL:dev.medienhaus.udk-berlin.de": {
+                "id": "!DIUlIpgUXKttaYBJyL:dev.medienhaus.udk-berlin.de",
                 "name": "Kurzfilm - Drehbuch-Entwicklung - 15. Jahrgang",
                 "children": {}
               },
-              "!uCOYTcmjVDRiGHigQt:dev.medienhaus.udk-berlin.de": {
-                "id": "!uCOYTcmjVDRiGHigQt:dev.medienhaus.udk-berlin.de",
+              "!WoSQSXQkTCeWigPeSy:dev.medienhaus.udk-berlin.de": {
+                "id": "!WoSQSXQkTCeWigPeSy:dev.medienhaus.udk-berlin.de",
                 "name": "Postkoloniale Dramatik - 15. Jahrgang",
                 "children": {}
               },
-              "!ofmSbxhjkwXRLfRjfe:dev.medienhaus.udk-berlin.de": {
-                "id": "!ofmSbxhjkwXRLfRjfe:dev.medienhaus.udk-berlin.de",
+              "!usjuZPxlgVwqYKahGL:dev.medienhaus.udk-berlin.de": {
+                "id": "!usjuZPxlgVwqYKahGL:dev.medienhaus.udk-berlin.de",
                 "name": "Theorie und Geschichte des Theaters: Europäische Theatergeschichte, Teil 2: \"Neoavantgarden, Postdramatik und die Zukunft des Theaters\"",
                 "children": {}
               }
             }
           },
-          "!aGFUFRinGWFwOdAHfd:dev.medienhaus.udk-berlin.de": {
-            "id": "!aGFUFRinGWFwOdAHfd:dev.medienhaus.udk-berlin.de",
+          "!mnKYjteYUnGfCPUNeJ:dev.medienhaus.udk-berlin.de": {
+            "id": "!mnKYjteYUnGfCPUNeJ:dev.medienhaus.udk-berlin.de",
             "name": "Theaterpädagogik",
             "children": {
-              "!ujkoOncafaUPxHPAby:dev.medienhaus.udk-berlin.de": {
-                "id": "!ujkoOncafaUPxHPAby:dev.medienhaus.udk-berlin.de",
+              "!AiWQYhZSSconPavXmE:dev.medienhaus.udk-berlin.de": {
+                "id": "!AiWQYhZSSconPavXmE:dev.medienhaus.udk-berlin.de",
                 "name": "Atem, Stimme, Text 2 (Modul M 1)",
                 "children": {}
               },
-              "!HzktEcVykdONUxQUas:dev.medienhaus.udk-berlin.de": {
-                "id": "!HzktEcVykdONUxQUas:dev.medienhaus.udk-berlin.de",
+              "!zgpHNzlYwoOgRNcpYZ:dev.medienhaus.udk-berlin.de": {
+                "id": "!zgpHNzlYwoOgRNcpYZ:dev.medienhaus.udk-berlin.de",
                 "name": "Atem, Stimme, Text: \"Stimme. Stimmt! S' ist stimmig\" - Modul FP II",
                 "children": {}
               },
-              "!BkdhRbqKuzwkLzQQIi:dev.medienhaus.udk-berlin.de": {
-                "id": "!BkdhRbqKuzwkLzQQIi:dev.medienhaus.udk-berlin.de",
+              "!fBAUUrTCYcQHtWNgla:dev.medienhaus.udk-berlin.de": {
+                "id": "!fBAUUrTCYcQHtWNgla:dev.medienhaus.udk-berlin.de",
                 "name": "Auswertungswoche (Modul FP III)",
                 "children": {}
               },
-              "!qsmZplYEmccSHihqZO:dev.medienhaus.udk-berlin.de": {
-                "id": "!qsmZplYEmccSHihqZO:dev.medienhaus.udk-berlin.de",
+              "!hqvcuuWmGEmJWbHIRn:dev.medienhaus.udk-berlin.de": {
+                "id": "!hqvcuuWmGEmJWbHIRn:dev.medienhaus.udk-berlin.de",
                 "name": "Bewegung und Choreographie: \"Composing while dancing\" - Modul FP II",
                 "children": {}
               },
-              "!MNxIywNJuCEEqMIxSP:dev.medienhaus.udk-berlin.de": {
-                "id": "!MNxIywNJuCEEqMIxSP:dev.medienhaus.udk-berlin.de",
+              "!NYwkGKTgDBwhBEoQoM:dev.medienhaus.udk-berlin.de": {
+                "id": "!NYwkGKTgDBwhBEoQoM:dev.medienhaus.udk-berlin.de",
                 "name": "Bewegung und Choreographie: Composing while dancing (Modul M 1)",
                 "children": {}
               },
-              "!oHnsBMgSPMAGzRmBvu:dev.medienhaus.udk-berlin.de": {
-                "id": "!oHnsBMgSPMAGzRmBvu:dev.medienhaus.udk-berlin.de",
+              "!sLKTfLeckDwHNnaCBF:dev.medienhaus.udk-berlin.de": {
+                "id": "!sLKTfLeckDwHNnaCBF:dev.medienhaus.udk-berlin.de",
                 "name": "Didaktische Ansätze der Künste - Modul M 5",
                 "children": {}
               },
-              "!CDQLBfqnMCHRrLhVge:dev.medienhaus.udk-berlin.de": {
-                "id": "!CDQLBfqnMCHRrLhVge:dev.medienhaus.udk-berlin.de",
+              "!yWPVTqDufrRugvUAhk:dev.medienhaus.udk-berlin.de": {
+                "id": "!yWPVTqDufrRugvUAhk:dev.medienhaus.udk-berlin.de",
                 "name": "Didaktische Positionierung - Modul M 6",
                 "children": {}
               },
-              "!HPwEZHMdvRPiIilqdD:dev.medienhaus.udk-berlin.de": {
-                "id": "!HPwEZHMdvRPiIilqdD:dev.medienhaus.udk-berlin.de",
+              "!BnGxynufwwnxLBBAeR:dev.medienhaus.udk-berlin.de": {
+                "id": "!BnGxynufwwnxLBBAeR:dev.medienhaus.udk-berlin.de",
                 "name": "Dramaturgie I - Theaterpädagogik (Modul FW I)",
                 "children": {}
               },
-              "!BYBPrIHjqTOwQnZALR:dev.medienhaus.udk-berlin.de": {
-                "id": "!BYBPrIHjqTOwQnZALR:dev.medienhaus.udk-berlin.de",
+              "!UsCQzXGmbmWTKuMAjO:dev.medienhaus.udk-berlin.de": {
+                "id": "!UsCQzXGmbmWTKuMAjO:dev.medienhaus.udk-berlin.de",
                 "name": "Einführungstage - Modul FP I",
                 "children": {}
               },
-              "!sKUDWLbeVjHTfAOePv:dev.medienhaus.udk-berlin.de": {
-                "id": "!sKUDWLbeVjHTfAOePv:dev.medienhaus.udk-berlin.de",
+              "!cpbmerYDSjubdTzeIW:dev.medienhaus.udk-berlin.de": {
+                "id": "!cpbmerYDSjubdTzeIW:dev.medienhaus.udk-berlin.de",
                 "name": "Einstiege - Theaterpädagogische Vor- und Nachbereitung für Werke des Spielplan",
                 "children": {}
               },
-              "!DaRABMmolguQudZDRq:dev.medienhaus.udk-berlin.de": {
-                "id": "!DaRABMmolguQudZDRq:dev.medienhaus.udk-berlin.de",
+              "!RyGXfyNfCvbBItFMyC:dev.medienhaus.udk-berlin.de": {
+                "id": "!RyGXfyNfCvbBItFMyC:dev.medienhaus.udk-berlin.de",
                 "name": "Examenskolloquium (Modul FW II)",
                 "children": {}
               },
-              "!wFAdKasMlssAzSSRFT:dev.medienhaus.udk-berlin.de": {
-                "id": "!wFAdKasMlssAzSSRFT:dev.medienhaus.udk-berlin.de",
+              "!UTUwMhrlzUXouIWgZX:dev.medienhaus.udk-berlin.de": {
+                "id": "!UTUwMhrlzUXouIWgZX:dev.medienhaus.udk-berlin.de",
                 "name": "Examenskolloquium - Modul M 7",
                 "children": {}
               },
-              "!WPydvRzsNSWytlhOQh:dev.medienhaus.udk-berlin.de": {
-                "id": "!WPydvRzsNSWytlhOQh:dev.medienhaus.udk-berlin.de",
+              "!RHkgEofxGBuAPihKBR:dev.medienhaus.udk-berlin.de": {
+                "id": "!RHkgEofxGBuAPihKBR:dev.medienhaus.udk-berlin.de",
                 "name": "Festival als theaterpädagogisches Format: Bundeswettbewerb \"Theatertreffen der Jugend\" bei den Berliner Festspielen",
                 "children": {}
               },
-              "!djhVOfmpvPoncDNYMD:dev.medienhaus.udk-berlin.de": {
-                "id": "!djhVOfmpvPoncDNYMD:dev.medienhaus.udk-berlin.de",
+              "!eGRSYSbJBCstuZmwAW:dev.medienhaus.udk-berlin.de": {
+                "id": "!eGRSYSbJBCstuZmwAW:dev.medienhaus.udk-berlin.de",
                 "name": "Fragen an die Theorie und Praxis der Theaterpädagogik 2 (Modul FW II)",
                 "children": {}
               },
-              "!rlgoLkWecZACskJeHJ:dev.medienhaus.udk-berlin.de": {
-                "id": "!rlgoLkWecZACskJeHJ:dev.medienhaus.udk-berlin.de",
+              "!yAPLIiRuGPVRATziLl:dev.medienhaus.udk-berlin.de": {
+                "id": "!yAPLIiRuGPVRATziLl:dev.medienhaus.udk-berlin.de",
                 "name": "Fragen an die Theorie und Praxis der Theaterpädagogik, Teil 1 (Modul FW I)",
                 "children": {}
               },
-              "!IoZpLLrwbhLDHXthzH:dev.medienhaus.udk-berlin.de": {
-                "id": "!IoZpLLrwbhLDHXthzH:dev.medienhaus.udk-berlin.de",
+              "!eopsONfEIFwSoUpzDZ:dev.medienhaus.udk-berlin.de": {
+                "id": "!eopsONfEIFwSoUpzDZ:dev.medienhaus.udk-berlin.de",
                 "name": "Klassenstunde",
                 "children": {}
               },
-              "!OJWgwJDKlSAYTflWqV:dev.medienhaus.udk-berlin.de": {
-                "id": "!OJWgwJDKlSAYTflWqV:dev.medienhaus.udk-berlin.de",
+              "!NPLCnfrwxusyaDNqjW:dev.medienhaus.udk-berlin.de": {
+                "id": "!NPLCnfrwxusyaDNqjW:dev.medienhaus.udk-berlin.de",
                 "name": "Kulturmanagement (Modul PB I)",
                 "children": {}
               },
-              "!TmNskWFJSXYClqfSPh:dev.medienhaus.udk-berlin.de": {
-                "id": "!TmNskWFJSXYClqfSPh:dev.medienhaus.udk-berlin.de",
+              "!ntEYwPWLxUttozbUFp:dev.medienhaus.udk-berlin.de": {
+                "id": "!ntEYwPWLxUttozbUFp:dev.medienhaus.udk-berlin.de",
                 "name": "Künstlerisches Erzählen: \"Eine Einführung in die Kunst des freien Erzählens\" (Modul FP II)",
                 "children": {}
               },
-              "!peYdXqOPNJGjRUhtAo:dev.medienhaus.udk-berlin.de": {
-                "id": "!peYdXqOPNJGjRUhtAo:dev.medienhaus.udk-berlin.de",
+              "!ONKMAkQIpQmsnJAxCg:dev.medienhaus.udk-berlin.de": {
+                "id": "!ONKMAkQIpQmsnJAxCg:dev.medienhaus.udk-berlin.de",
                 "name": "Künstlerisches Erzählen: \"Es war einmal ... - Eine Einführung in die Kunst des freien Erzählens\" (Modul FP II)",
                 "children": {}
               },
-              "!JSpRdZvMYlXXtCgXWt:dev.medienhaus.udk-berlin.de": {
-                "id": "!JSpRdZvMYlXXtCgXWt:dev.medienhaus.udk-berlin.de",
+              "!pPBBCPyMplEnUrzIeU:dev.medienhaus.udk-berlin.de": {
+                "id": "!pPBBCPyMplEnUrzIeU:dev.medienhaus.udk-berlin.de",
                 "name": "Künstlerisches Projekt - Modul M 3",
                 "children": {}
               },
-              "!zLFybpeJiVdZkexcYb:dev.medienhaus.udk-berlin.de": {
-                "id": "!zLFybpeJiVdZkexcYb:dev.medienhaus.udk-berlin.de",
+              "!WmQEyoixMwbylLiaFu:dev.medienhaus.udk-berlin.de": {
+                "id": "!WmQEyoixMwbylLiaFu:dev.medienhaus.udk-berlin.de",
                 "name": "Labor (Modul M 2)",
                 "children": {}
               },
-              "!SBRTbtCPlLWHOYHLiP:dev.medienhaus.udk-berlin.de": {
-                "id": "!SBRTbtCPlLWHOYHLiP:dev.medienhaus.udk-berlin.de",
+              "!apoyKupvzeNioQiRLn:dev.medienhaus.udk-berlin.de": {
+                "id": "!apoyKupvzeNioQiRLn:dev.medienhaus.udk-berlin.de",
                 "name": "Lichttechnik-Grundlagen: Optik, Scheinwerfertypen und deren Anwendungsbereiche, Wirkung von Farben",
                 "children": {}
               },
-              "!KBdAbsSbNjoEeqySMe:dev.medienhaus.udk-berlin.de": {
-                "id": "!KBdAbsSbNjoEeqySMe:dev.medienhaus.udk-berlin.de",
+              "!DWQohXOYRwZSNTOOCA:dev.medienhaus.udk-berlin.de": {
+                "id": "!DWQohXOYRwZSNTOOCA:dev.medienhaus.udk-berlin.de",
                 "name": "Maske / Körper - Modul FP I",
                 "children": {}
               },
-              "!evWJOScRRTyRqJwQwx:dev.medienhaus.udk-berlin.de": {
-                "id": "!evWJOScRRTyRqJwQwx:dev.medienhaus.udk-berlin.de",
+              "!WMeDjjCVnbkjTyanaR:dev.medienhaus.udk-berlin.de": {
+                "id": "!WMeDjjCVnbkjTyanaR:dev.medienhaus.udk-berlin.de",
                 "name": "Masterprojekte (Modul PB III)",
                 "children": {}
               },
-              "!cqHaAYZaFIPodCZuaN:dev.medienhaus.udk-berlin.de": {
-                "id": "!cqHaAYZaFIPodCZuaN:dev.medienhaus.udk-berlin.de",
+              "!nifInpGJfXqGSuoneH:dev.medienhaus.udk-berlin.de": {
+                "id": "!nifInpGJfXqGSuoneH:dev.medienhaus.udk-berlin.de",
                 "name": "Physical Theatre (Modul M 2)",
                 "children": {}
               },
-              "!HOZvUcyeovsKdtiLsv:dev.medienhaus.udk-berlin.de": {
-                "id": "!HOZvUcyeovsKdtiLsv:dev.medienhaus.udk-berlin.de",
+              "!quYQNpgshuEmtjrraS:dev.medienhaus.udk-berlin.de": {
+                "id": "!quYQNpgshuEmtjrraS:dev.medienhaus.udk-berlin.de",
                 "name": "Postkoloniale Diskurse im zeitgenössischen Theater",
                 "children": {}
               },
-              "!nUnWzknjNoubAIoJhT:dev.medienhaus.udk-berlin.de": {
-                "id": "!nUnWzknjNoubAIoJhT:dev.medienhaus.udk-berlin.de",
+              "!VnmjeZWyLnunoqWuaN:dev.medienhaus.udk-berlin.de": {
+                "id": "!VnmjeZWyLnunoqWuaN:dev.medienhaus.udk-berlin.de",
                 "name": "Schauspielgrundlagen - Modul FP II",
                 "children": {}
               },
-              "!MeqNdSHTvumvSFWhid:dev.medienhaus.udk-berlin.de": {
-                "id": "!MeqNdSHTvumvSFWhid:dev.medienhaus.udk-berlin.de",
+              "!HaDYtAlEVWPNGWqKpP:dev.medienhaus.udk-berlin.de": {
+                "id": "!HaDYtAlEVWPNGWqKpP:dev.medienhaus.udk-berlin.de",
                 "name": "Schauspielgrundlagen (Modul M 1)",
                 "children": {}
               },
-              "!GlaAdjDTrsmEywNcyS:dev.medienhaus.udk-berlin.de": {
-                "id": "!GlaAdjDTrsmEywNcyS:dev.medienhaus.udk-berlin.de",
+              "!kQvqpagURPvQDdHGML:dev.medienhaus.udk-berlin.de": {
+                "id": "!kQvqpagURPvQDdHGML:dev.medienhaus.udk-berlin.de",
                 "name": "Spielleitung II: \"Einführung in die Grundlagen des theaterpädagogischen Arbeitens\" (Modul FD II)",
                 "children": {}
               },
-              "!lgipNnVPgLpMbPbyMv:dev.medienhaus.udk-berlin.de": {
-                "id": "!lgipNnVPgLpMbPbyMv:dev.medienhaus.udk-berlin.de",
+              "!drHJXpqOqOTuvonzbs:dev.medienhaus.udk-berlin.de": {
+                "id": "!drHJXpqOqOTuvonzbs:dev.medienhaus.udk-berlin.de",
                 "name": "Theater in der Schule I - Modul M 6",
                 "children": {}
               },
-              "!UrZnXGgUdlNNjZtTbT:dev.medienhaus.udk-berlin.de": {
-                "id": "!UrZnXGgUdlNNjZtTbT:dev.medienhaus.udk-berlin.de",
+              "!KrtjeSFcENuckBuHgV:dev.medienhaus.udk-berlin.de": {
+                "id": "!KrtjeSFcENuckBuHgV:dev.medienhaus.udk-berlin.de",
                 "name": "Theater / Video / Medien: Der Einsatz von Medien in der theatralen und performativen Inszenierung\" - Modul M 3",
                 "children": {}
               },
-              "!ofmSbxhjkwXRLfRjfe:dev.medienhaus.udk-berlin.de": {
-                "id": "!ofmSbxhjkwXRLfRjfe:dev.medienhaus.udk-berlin.de",
+              "!usjuZPxlgVwqYKahGL:dev.medienhaus.udk-berlin.de": {
+                "id": "!usjuZPxlgVwqYKahGL:dev.medienhaus.udk-berlin.de",
                 "name": "Theorie und Geschichte des Theaters: Europäische Theatergeschichte, Teil 2: \"Neoavantgarden, Postdramatik und die Zukunft des Theaters\"",
                 "children": {}
               },
-              "!PdLfLVfyNcLxDqXFwW:dev.medienhaus.udk-berlin.de": {
-                "id": "!PdLfLVfyNcLxDqXFwW:dev.medienhaus.udk-berlin.de",
+              "!bXNhgiFUxSAJJOhpdM:dev.medienhaus.udk-berlin.de": {
+                "id": "!bXNhgiFUxSAJJOhpdM:dev.medienhaus.udk-berlin.de",
                 "name": "Tutorium (Modul M4)",
                 "children": {}
               },
-              "!IWqBHiKyHCoNvOVRsA:dev.medienhaus.udk-berlin.de": {
-                "id": "!IWqBHiKyHCoNvOVRsA:dev.medienhaus.udk-berlin.de",
+              "!eVrivwIgVOCmuraxDa:dev.medienhaus.udk-berlin.de": {
+                "id": "!eVrivwIgVOCmuraxDa:dev.medienhaus.udk-berlin.de",
                 "name": "Werkstatt \"Wissenschaftliches Schreiben\" (Hausarbeiten)",
                 "children": {}
               },
-              "!pgalfSJvtfJlCdrzsI:dev.medienhaus.udk-berlin.de": {
-                "id": "!pgalfSJvtfJlCdrzsI:dev.medienhaus.udk-berlin.de",
+              "!BSYtcOfKkLnXwgydPf:dev.medienhaus.udk-berlin.de": {
+                "id": "!BSYtcOfKkLnXwgydPf:dev.medienhaus.udk-berlin.de",
                 "name": "Zentrales Seminar: \"Konzepte und Methoden der Theaterpädagogik II\"",
                 "children": {}
               }
@@ -6004,244 +6004,229 @@ const struktur = {
           }
         }
       },
-      "!ehPOvVOimBDSsoioLL:dev.medienhaus.udk-berlin.de": {
-        "id": "!ehPOvVOimBDSsoioLL:dev.medienhaus.udk-berlin.de",
+      "!vcGouceVfLSZeJgqMF:dev.medienhaus.udk-berlin.de": {
+        "id": "!vcGouceVfLSZeJgqMF:dev.medienhaus.udk-berlin.de",
         "name": "Gender Studies und Intersektionalität",
         "children": {
-          "!xwJeqaldlMoyUSlOLO:dev.medienhaus.udk-berlin.de": {
-            "id": "!xwJeqaldlMoyUSlOLO:dev.medienhaus.udk-berlin.de",
+          "!TMjcnCRihrerIdRMsb:dev.medienhaus.udk-berlin.de": {
+            "id": "!TMjcnCRihrerIdRMsb:dev.medienhaus.udk-berlin.de",
             "name": "„Sprechen über Kunst. Konzepte für Bildung und Vermittlung von Biennalen und musealen Sammlungen“",
             "children": {}
           },
-          "!PnxPQiTZytfwQNMebI:dev.medienhaus.udk-berlin.de": {
-            "id": "!PnxPQiTZytfwQNMebI:dev.medienhaus.udk-berlin.de",
+          "!MWZPAeDLNPwqImQKbM:dev.medienhaus.udk-berlin.de": {
+            "id": "!MWZPAeDLNPwqImQKbM:dev.medienhaus.udk-berlin.de",
             "name": "Andy Warhols queere Filmfabrik",
             "children": {}
           },
-          "!JZoOSyRUZmgwKWVWwv:dev.medienhaus.udk-berlin.de": {
-            "id": "!JZoOSyRUZmgwKWVWwv:dev.medienhaus.udk-berlin.de",
+          "!jGjWAqwJNZTZVheEDE:dev.medienhaus.udk-berlin.de": {
+            "id": "!jGjWAqwJNZTZVheEDE:dev.medienhaus.udk-berlin.de",
             "name": "Antirassistisches und vielfältiges Erzählen",
             "children": {}
           },
-          "!pWyJyWMQeMscULBpJa:dev.medienhaus.udk-berlin.de": {
-            "id": "!pWyJyWMQeMscULBpJa:dev.medienhaus.udk-berlin.de",
+          "!nYWLCWRzlYiVJHgYmo:dev.medienhaus.udk-berlin.de": {
+            "id": "!nYWLCWRzlYiVJHgYmo:dev.medienhaus.udk-berlin.de",
             "name": "Aufzeichnungen im Austausch – Projektdurchführung",
             "children": {}
           },
-          "!WoUrmHgdfggLvQopkg:dev.medienhaus.udk-berlin.de": {
-            "id": "!WoUrmHgdfggLvQopkg:dev.medienhaus.udk-berlin.de",
+          "!pvZhfxWvPlGcyjwcni:dev.medienhaus.udk-berlin.de": {
+            "id": "!pvZhfxWvPlGcyjwcni:dev.medienhaus.udk-berlin.de",
             "name": "Aufzeichnungen im Austausch – Projektvorbereitung",
             "children": {}
           },
-          "!DjAjBPQVcreBCgXOCN:dev.medienhaus.udk-berlin.de": {
-            "id": "!DjAjBPQVcreBCgXOCN:dev.medienhaus.udk-berlin.de",
+          "!jryNojOWFhRUoKukkq:dev.medienhaus.udk-berlin.de": {
+            "id": "!jryNojOWFhRUoKukkq:dev.medienhaus.udk-berlin.de",
             "name": "Differenzreflexive Fotovermittlung",
             "children": {}
           },
-          "!XiKreRKlyMAuLjcufF:dev.medienhaus.udk-berlin.de": {
-            "id": "!XiKreRKlyMAuLjcufF:dev.medienhaus.udk-berlin.de",
+          "!GUoACGJOgHuuJbbVuY:dev.medienhaus.udk-berlin.de": {
+            "id": "!GUoACGJOgHuuJbbVuY:dev.medienhaus.udk-berlin.de",
             "name": "Einführung in die Kunstwissenschaft und Ästhetik",
             "children": {}
           },
-          "!YOaTOdatNyTjXWJDrD:dev.medienhaus.udk-berlin.de": {
-            "id": "!YOaTOdatNyTjXWJDrD:dev.medienhaus.udk-berlin.de",
+          "!cBGotpJfzRvApNYHJw:dev.medienhaus.udk-berlin.de": {
+            "id": "!cBGotpJfzRvApNYHJw:dev.medienhaus.udk-berlin.de",
             "name": "Essay als Form – in Kunst, Literatur, Ausstellung",
             "children": {}
           },
-          "!hBqOTicPmEAmwOWXPo:dev.medienhaus.udk-berlin.de": {
-            "id": "!hBqOTicPmEAmwOWXPo:dev.medienhaus.udk-berlin.de",
+          "!nmLqqMEgxIvdVAFygO:dev.medienhaus.udk-berlin.de": {
+            "id": "!nmLqqMEgxIvdVAFygO:dev.medienhaus.udk-berlin.de",
             "name": "FEMINISMEN II - Schriften & Kunstwerke",
             "children": {}
           },
-          "!dTleaZCBNLZhGCNlat:dev.medienhaus.udk-berlin.de": {
-            "id": "!dTleaZCBNLZhGCNlat:dev.medienhaus.udk-berlin.de",
+          "!cVGhafqpHXnDHCYjWr:dev.medienhaus.udk-berlin.de": {
+            "id": "!cVGhafqpHXnDHCYjWr:dev.medienhaus.udk-berlin.de",
             "name": "FEMINISMS-INTERVENTION II",
             "children": {}
           },
-          "!zYgqqJSDLkjnZBsufz:dev.medienhaus.udk-berlin.de": {
-            "id": "!zYgqqJSDLkjnZBsufz:dev.medienhaus.udk-berlin.de",
+          "!VwONjrzScHtReSWPuz:dev.medienhaus.udk-berlin.de": {
+            "id": "!VwONjrzScHtReSWPuz:dev.medienhaus.udk-berlin.de",
             "name": "Forschungspositionen Ästhetische Bildung",
             "children": {}
           },
-          "!zZRmhfDXhKoGMXUcil:dev.medienhaus.udk-berlin.de": {
-            "id": "!zZRmhfDXhKoGMXUcil:dev.medienhaus.udk-berlin.de",
+          "!XdoNSQTjIFUOajVaYU:dev.medienhaus.udk-berlin.de": {
+            "id": "!XdoNSQTjIFUOajVaYU:dev.medienhaus.udk-berlin.de",
             "name": "Forschungspositionen Kunstdidaktik",
             "children": {}
           },
-          "!XivLjUxkUpqrwBzxXn:dev.medienhaus.udk-berlin.de": {
-            "id": "!XivLjUxkUpqrwBzxXn:dev.medienhaus.udk-berlin.de",
+          "!tMIoTnXIUkbjIrbKwu:dev.medienhaus.udk-berlin.de": {
+            "id": "!tMIoTnXIUkbjIrbKwu:dev.medienhaus.udk-berlin.de",
             "name": "Fremde Wesen",
             "children": {}
           },
-          "!rjCUzwIsWJwbdjFhxo:dev.medienhaus.udk-berlin.de": {
-            "id": "!rjCUzwIsWJwbdjFhxo:dev.medienhaus.udk-berlin.de",
+          "!FPubzEuZeDTjLocBew:dev.medienhaus.udk-berlin.de": {
+            "id": "!FPubzEuZeDTjLocBew:dev.medienhaus.udk-berlin.de",
             "name": "Freundliche Kritik - Kolloquium für wissenschaftliches Arbeiten von Künstler*innen",
             "children": {}
           },
-          "!gzMCLwhpgTuNKRlqlw:dev.medienhaus.udk-berlin.de": {
-            "id": "!gzMCLwhpgTuNKRlqlw:dev.medienhaus.udk-berlin.de",
+          "!rqBstCsSYwaxxzSQyL:dev.medienhaus.udk-berlin.de": {
+            "id": "!rqBstCsSYwaxxzSQyL:dev.medienhaus.udk-berlin.de",
             "name": "From Concept To Performance",
             "children": {}
           },
-          "!QRDnPNSBZEuACmgVXh:dev.medienhaus.udk-berlin.de": {
-            "id": "!QRDnPNSBZEuACmgVXh:dev.medienhaus.udk-berlin.de",
+          "!mleapoPCPRbQVSdCFi:dev.medienhaus.udk-berlin.de": {
+            "id": "!mleapoPCPRbQVSdCFi:dev.medienhaus.udk-berlin.de",
             "name": "Grenzen der Vermittlung erkunden",
             "children": {}
           },
-          "!UJHgiVrZuCRaGPfgCd:dev.medienhaus.udk-berlin.de": {
-            "id": "!UJHgiVrZuCRaGPfgCd:dev.medienhaus.udk-berlin.de",
+          "!yOBObKRZmrSiktIFYu:dev.medienhaus.udk-berlin.de": {
+            "id": "!yOBObKRZmrSiktIFYu:dev.medienhaus.udk-berlin.de",
             "name": "Herrschaft und Emanzipation durch Musik: Gender, Klasse, Kirche, Staat",
             "children": {}
           },
-          "!wiIyWiXfbmZYWKeuia:dev.medienhaus.udk-berlin.de": {
-            "id": "!wiIyWiXfbmZYWKeuia:dev.medienhaus.udk-berlin.de",
+          "!rlDXLjeYGnyyEgSSBd:dev.medienhaus.udk-berlin.de": {
+            "id": "!rlDXLjeYGnyyEgSSBd:dev.medienhaus.udk-berlin.de",
             "name": "Hybrid Systems: Silences, Soundscapes & Sonoaviatics",
             "children": {}
           },
-          "!hQDBMEhatxOXJrDAGv:dev.medienhaus.udk-berlin.de": {
-            "id": "!hQDBMEhatxOXJrDAGv:dev.medienhaus.udk-berlin.de",
+          "!WwROXFDuGjEBryEXTZ:dev.medienhaus.udk-berlin.de": {
+            "id": "!WwROXFDuGjEBryEXTZ:dev.medienhaus.udk-berlin.de",
             "name": "Ich und Du und Ich im Dialog. Beobachten und Dokumentieren",
             "children": {}
           },
-          "!QpFapECqcfpFgvHROh:dev.medienhaus.udk-berlin.de": {
-            "id": "!QpFapECqcfpFgvHROh:dev.medienhaus.udk-berlin.de",
+          "!cpcfVxhNCbuvNmekic:dev.medienhaus.udk-berlin.de": {
+            "id": "!cpcfVxhNCbuvNmekic:dev.medienhaus.udk-berlin.de",
             "name": "Ins Museum! Durchführung",
             "children": {}
           },
-          "!OTpDQfoeeeHcQMTaJN:dev.medienhaus.udk-berlin.de": {
-            "id": "!OTpDQfoeeeHcQMTaJN:dev.medienhaus.udk-berlin.de",
+          "!JbVwLtWQGttupmYaOs:dev.medienhaus.udk-berlin.de": {
+            "id": "!JbVwLtWQGttupmYaOs:dev.medienhaus.udk-berlin.de",
             "name": "Ins Museum! Vorbereitung",
             "children": {}
           },
-          "!AoNyDBvkReMhisMxag:dev.medienhaus.udk-berlin.de": {
-            "id": "!AoNyDBvkReMhisMxag:dev.medienhaus.udk-berlin.de",
+          "!RKTMToOSJzZxBmFsVy:dev.medienhaus.udk-berlin.de": {
+            "id": "!RKTMToOSJzZxBmFsVy:dev.medienhaus.udk-berlin.de",
             "name": "Kolloquium",
             "children": {}
           },
-          "!LYLPCJGOvBQSbZBiJy:dev.medienhaus.udk-berlin.de": {
-            "id": "!LYLPCJGOvBQSbZBiJy:dev.medienhaus.udk-berlin.de",
+          "!wLdyErDKyfpQJPcWZc:dev.medienhaus.udk-berlin.de": {
+            "id": "!wLdyErDKyfpQJPcWZc:dev.medienhaus.udk-berlin.de",
             "name": "Kunstdidaktik anders denken – Öffentlicher und privater Raum",
             "children": {}
           },
-          "!JZPosNFuOqBzBYbcjx:dev.medienhaus.udk-berlin.de": {
-            "id": "!JZPosNFuOqBzBYbcjx:dev.medienhaus.udk-berlin.de",
+          "!bxcupwsXaMudqImNtQ:dev.medienhaus.udk-berlin.de": {
+            "id": "!bxcupwsXaMudqImNtQ:dev.medienhaus.udk-berlin.de",
             "name": "Kunstdidaktik anders denken – Zeitgenössisches Bilderbuch",
             "children": {}
           },
-          "!UjhEkTEoDpzmnADFUz:dev.medienhaus.udk-berlin.de": {
-            "id": "!UjhEkTEoDpzmnADFUz:dev.medienhaus.udk-berlin.de",
+          "!JDLoqkNeVlvPIMoTQz:dev.medienhaus.udk-berlin.de": {
+            "id": "!JDLoqkNeVlvPIMoTQz:dev.medienhaus.udk-berlin.de",
             "name": "Material im Kontext von den Künsten und Bildung 1",
             "children": {}
           },
-          "!IrjEhSeJNhEjpBfvrR:dev.medienhaus.udk-berlin.de": {
-            "id": "!IrjEhSeJNhEjpBfvrR:dev.medienhaus.udk-berlin.de",
+          "!yguCWrtIwelZcsWzUr:dev.medienhaus.udk-berlin.de": {
+            "id": "!yguCWrtIwelZcsWzUr:dev.medienhaus.udk-berlin.de",
             "name": "Material im Kontext von den Künsten und Bildung 2",
             "children": {}
           },
-          "!JViBNHWLTctIYAUsvB:dev.medienhaus.udk-berlin.de": {
-            "id": "!JViBNHWLTctIYAUsvB:dev.medienhaus.udk-berlin.de",
+          "!sgUonctMMUkVIJLBrV:dev.medienhaus.udk-berlin.de": {
+            "id": "!sgUonctMMUkVIJLBrV:dev.medienhaus.udk-berlin.de",
             "name": "Ort und Raum im Kontext von den Künsten und Bildung 1",
             "children": {}
           },
-          "!CzrRgsBnoVHwseHlII:dev.medienhaus.udk-berlin.de": {
-            "id": "!CzrRgsBnoVHwseHlII:dev.medienhaus.udk-berlin.de",
+          "!cnUSNbKMPrspOqShvd:dev.medienhaus.udk-berlin.de": {
+            "id": "!cnUSNbKMPrspOqShvd:dev.medienhaus.udk-berlin.de",
             "name": "Ort und Raum im Kontext von den Künsten und Bildung 2",
             "children": {}
           },
-          "!vpHZTqDucjYyEvDVwz:dev.medienhaus.udk-berlin.de": {
-            "id": "!vpHZTqDucjYyEvDVwz:dev.medienhaus.udk-berlin.de",
+          "!kBSvIKroEyieZQFmLi:dev.medienhaus.udk-berlin.de": {
+            "id": "!kBSvIKroEyieZQFmLi:dev.medienhaus.udk-berlin.de",
             "name": "Quellentexte der Architekturtheorie. Von der Antike bis zum Klassizismus.",
             "children": {}
           },
-          "!zNdFuoabOJPRvpBVNv:dev.medienhaus.udk-berlin.de": {
-            "id": "!zNdFuoabOJPRvpBVNv:dev.medienhaus.udk-berlin.de",
+          "!AYirvGGnWCwIEiRJiu:dev.medienhaus.udk-berlin.de": {
+            "id": "!AYirvGGnWCwIEiRJiu:dev.medienhaus.udk-berlin.de",
             "name": "Schreiben als künstlerisch-forschende Praxis",
             "children": {}
           },
-          "!fPDiBXImPafXGYxGDX:dev.medienhaus.udk-berlin.de": {
-            "id": "!fPDiBXImPafXGYxGDX:dev.medienhaus.udk-berlin.de",
+          "!XOZHWgRWZhhofOejGJ:dev.medienhaus.udk-berlin.de": {
+            "id": "!XOZHWgRWZhhofOejGJ:dev.medienhaus.udk-berlin.de",
             "name": "THEY: LIVE – student lives revealed through context-based art practices – an EACE Project",
             "children": {}
           },
-          "!kamFfORHNMrryXjktj:dev.medienhaus.udk-berlin.de": {
-            "id": "!kamFfORHNMrryXjktj:dev.medienhaus.udk-berlin.de",
+          "!XypxsnqJTHMaSfKMVs:dev.medienhaus.udk-berlin.de": {
+            "id": "!XypxsnqJTHMaSfKMVs:dev.medienhaus.udk-berlin.de",
             "name": "Unphotographing stereotypes",
             "children": {}
           },
-          "!MMAWuMUJnndQBHPLDy:dev.medienhaus.udk-berlin.de": {
-            "id": "!MMAWuMUJnndQBHPLDy:dev.medienhaus.udk-berlin.de",
+          "!ygTVnfiCwTKogMWLGU:dev.medienhaus.udk-berlin.de": {
+            "id": "!ygTVnfiCwTKogMWLGU:dev.medienhaus.udk-berlin.de",
             "name": "Video Performance II : Dokumentation im Feld der Performancekunst",
             "children": {}
           },
-          "!pyjLBAzZsXWjdvaUYp:dev.medienhaus.udk-berlin.de": {
-            "id": "!pyjLBAzZsXWjdvaUYp:dev.medienhaus.udk-berlin.de",
+          "!ghBtGbMqKynjNOIGQW:dev.medienhaus.udk-berlin.de": {
+            "id": "!ghBtGbMqKynjNOIGQW:dev.medienhaus.udk-berlin.de",
             "name": "Vom Konzept zur Aufführung",
             "children": {}
           },
-          "!XyIsLEekRVcmsqIdVX:dev.medienhaus.udk-berlin.de": {
-            "id": "!XyIsLEekRVcmsqIdVX:dev.medienhaus.udk-berlin.de",
+          "!HHPlcjcIytgkgxRKUi:dev.medienhaus.udk-berlin.de": {
+            "id": "!HHPlcjcIytgkgxRKUi:dev.medienhaus.udk-berlin.de",
             "name": "Vom Wesen der Anwesenheit. Beobachten und Dokumentieren",
             "children": {}
           },
-          "!eoKegTQpsAFFkLDTTV:dev.medienhaus.udk-berlin.de": {
-            "id": "!eoKegTQpsAFFkLDTTV:dev.medienhaus.udk-berlin.de",
+          "!PHaDABdtAXnmdIoUcn:dev.medienhaus.udk-berlin.de": {
+            "id": "!PHaDABdtAXnmdIoUcn:dev.medienhaus.udk-berlin.de",
             "name": "Wer hat Angst vor der Klitoris? Formen des weiblichen Genießens von 1968 bis heute",
             "children": {}
           },
-          "!yMkcdcmKBTvXoBiZPG:dev.medienhaus.udk-berlin.de": {
-            "id": "!yMkcdcmKBTvXoBiZPG:dev.medienhaus.udk-berlin.de",
+          "!CnNCAairxHQxlnDHIZ:dev.medienhaus.udk-berlin.de": {
+            "id": "!CnNCAairxHQxlnDHIZ:dev.medienhaus.udk-berlin.de",
             "name": "What about our ´Invisible´ past? (kritische Fragen zur UdK Vergangenheit im Rahmen des Olympia Geländes)",
-            "children": {}
-          },
-          "!RtiEZUNHVZrNOZDXKi:dev.medienhaus.udk-berlin.de": {
-            "id": "!RtiEZUNHVZrNOZDXKi:dev.medienhaus.udk-berlin.de",
-            "name": "Zeitlichkeit in der zeitgenössischen Kunst. Konzepte, Verfahren, Stationen der Kunst seit den 60er Jahren.",
             "children": {}
           }
         }
       },
-      "!NNstHnKmNNGHapqlvY:dev.medienhaus.udk-berlin.de": {
-        "id": "!NNstHnKmNNGHapqlvY:dev.medienhaus.udk-berlin.de",
-        "name": "Zentralinstitut für Weiterbildung (ZIW)",
-        "children": {}
-      },
-      "!oizpqMTpILNUgpCZUl:dev.medienhaus.udk-berlin.de": {
-        "id": "!oizpqMTpILNUgpCZUl:dev.medienhaus.udk-berlin.de",
-        "name": "Weiterbildende Studiengänge und Veranstaltungen",
-        "children": {}
-      },
-      "!RGALpWaPgjORfDwKho:dev.medienhaus.udk-berlin.de": {
-        "id": "!RGALpWaPgjORfDwKho:dev.medienhaus.udk-berlin.de",
+      "!ZQXAUJWTIhSfkZfkuU:dev.medienhaus.udk-berlin.de": {
+        "id": "!ZQXAUJWTIhSfkZfkuU:dev.medienhaus.udk-berlin.de",
         "name": "Hochschulübergreifendes Zentrum Tanz",
         "children": {}
       },
-      "!WinwGwrIVisVJnPfCZ:dev.medienhaus.udk-berlin.de": {
-        "id": "!WinwGwrIVisVJnPfCZ:dev.medienhaus.udk-berlin.de",
+      "!uVHzbSMvILtQoBUeff:dev.medienhaus.udk-berlin.de": {
+        "id": "!uVHzbSMvILtQoBUeff:dev.medienhaus.udk-berlin.de",
         "name": "Universitätsbibliothek",
         "children": {}
       },
-      "!VufyJzgQwTWzaRYYfq:dev.medienhaus.udk-berlin.de": {
-        "id": "!VufyJzgQwTWzaRYYfq:dev.medienhaus.udk-berlin.de",
+      "!hkfayEBgXYwZBCqtHB:dev.medienhaus.udk-berlin.de": {
+        "id": "!hkfayEBgXYwZBCqtHB:dev.medienhaus.udk-berlin.de",
         "name": "Berlin Career College",
         "children": {}
       },
-      "!FvvgesfawWtguxisre:dev.medienhaus.udk-berlin.de": {
-        "id": "!FvvgesfawWtguxisre:dev.medienhaus.udk-berlin.de",
+      "!pbJsEgnMeIDHKDMoXk:dev.medienhaus.udk-berlin.de": {
+        "id": "!pbJsEgnMeIDHKDMoXk:dev.medienhaus.udk-berlin.de",
         "name": "International Office",
         "children": {}
       },
-      "!FDuMsSTeRurLBCMMbV:dev.medienhaus.udk-berlin.de": {
-        "id": "!FDuMsSTeRurLBCMMbV:dev.medienhaus.udk-berlin.de",
+      "!depbKQcyYhZXlPbLNd:dev.medienhaus.udk-berlin.de": {
+        "id": "!depbKQcyYhZXlPbLNd:dev.medienhaus.udk-berlin.de",
         "name": "Allgemeine Studienberatung",
         "children": {}
       },
-      "!PITdzSyXPafMwNZobc:dev.medienhaus.udk-berlin.de": {
-        "id": "!PITdzSyXPafMwNZobc:dev.medienhaus.udk-berlin.de",
+      "!DKZTrgEMQZuEpDldru:dev.medienhaus.udk-berlin.de": {
+        "id": "!DKZTrgEMQZuEpDldru:dev.medienhaus.udk-berlin.de",
         "name": "Frauenbeauftragte",
         "children": {}
       },
-      "!JveSQbaEbmVjhJckLx:dev.medienhaus.udk-berlin.de": {
-        "id": "!JveSQbaEbmVjhJckLx:dev.medienhaus.udk-berlin.de",
+      "!kwQOYmqqMqPMvbFdfb:dev.medienhaus.udk-berlin.de": {
+        "id": "!kwQOYmqqMqPMvbFdfb:dev.medienhaus.udk-berlin.de",
         "name": "Studium Generale",
         "children": {}
       }
