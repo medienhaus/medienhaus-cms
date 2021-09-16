@@ -86,8 +86,7 @@ const Moderation = () => {
       {moderationRooms.length > 0
         ? <>
           <section className="requests">
-            <h3>{t('Requests')}</h3>
-            {moderationRooms.map((request, index) => <GetRequestPerRoom request={request} key={index} />)}
+            {moderationRooms.map((request, index) => <React.Fragment key={request.name}><h3>{request.name}</h3><GetRequestPerRoom request={request} key={index} /></React.Fragment>)}
           </section>
           <section className="invite">
             <h3>{t('Invite students')}</h3>
