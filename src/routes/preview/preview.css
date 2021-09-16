@@ -43,7 +43,7 @@ body {
 }
 */
 
-.preview > main {
+.singleproject > main {
   border-color: var(--color-lo);
   border-radius: unset;
   border-style: solid;
@@ -51,39 +51,39 @@ body {
   padding: calc(var(--margin) * 1);
 }
 
-.preview h1 {
+.singleproject h1 {
   font-family: "BauPro";
   font-weight: 500;
   font-size: 48px;
 }
 
-.preview h2 {
+.singleproject h2 {
   font-family: "BauPro";
   font-weight: 500;
   font-size: 34px;
 }
 
-.preview h3 {
+.singleproject h3 {
   font-family: "BauPro";
   font-weight: 500;
   font-size: 20px;
 }
 
-.preview p {
+.singleproject p {
   font-family: "BauPro";
   font-weight: normal;
   font-size: 20px;
   line-height: 24px;
 }
 
-.preview ul {
+.singleproject ul {
   list-style-position: outside;
   list-style-type: "–  ";
   padding: 0;
   padding-left: 22px;
 }
 
-.preview ol {
+.singleproject ol {
   list-style-position: outside;
   padding: 0;
   padding-left: 25px;
