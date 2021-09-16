@@ -3,10 +3,11 @@ import { Loading } from '../../../components/loading'
 import FetchCms from '../../../components/matrix_fetch_cms'
 import { useTranslation } from 'react-i18next'
 
-const DisplayPreview = ({ content, matrixClient }) => {
+const DisplayPreview = ({ content, matrixClient, contentLoaded }) => {
   const { t } = useTranslation('projects')
-  let { cms, error, fetching } = FetchCms(content.room_id)
-  cms = cms[0]
+  console.log(contentLoaded)
+  let { cms, error, fetching } = contentLoaded ? { cms: contentLoaded, error: false, fetching: false } : FetchCms(content?.room_id)
+  if (!contentLoaded) cms = cms[0]
 
   if (fetching) return <Loading />
   if (error) return <p>{t('There was an error while fetching your data:')}</p>
@@ -15,6 +16,8 @@ const DisplayPreview = ({ content, matrixClient }) => {
   if (content.name.includes('ul')) return <div dangerouslySetInnerHTML={{ __html: cms.formatted_body }} />
   if (content.name.includes('ol')) return <div dangerouslySetInnerHTML={{ __html: cms.formatted_body }} />
   if (content.name.includes('quote')) return <blockquote>{cms.body}</blockquote>
+  if (content.name.includes('code')) return <div className="code"><code>{cms.body}</code></div>
+
   if (content.name.includes('image')) return <div className="image"><img src={matrixClient.mxcUrlToHttp(cms.url)} alt={cms?.info?.alt} /></div>
   if (content.name.includes('audio')) return <audio className="center" controls><source src={matrixClient.mxcUrlToHttp(cms.url)} /></audio>
   if (content.name.includes('playlist' || 'video-playlists' || 'videos')) {
@@ -25,6 +28,8 @@ const DisplayPreview = ({ content, matrixClient }) => {
         title={cms?.body}
         sandbox="allow-same-origin allow-scripts"
         allowFullScreen="allowfullscreen"
+        width="560"
+        height="315"
         style={{ width: '100%', aspectRatio: '16 / 9', border: 'calc(var(--margin) * 0.2) solid var(--color-fg)' }}
       />
     )

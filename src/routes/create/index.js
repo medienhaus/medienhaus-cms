@@ -16,7 +16,6 @@ import ProjectDescription from './ProjectDescription'
 import { Loading } from '../../components/loading'
 import { Trans, useTranslation } from 'react-i18next'
 import DateAndVenue from './DateAndVenue'
-// import DisplayPreview from '../preview/componenets/DisplayPreview'
 
 const Create = () => {
   const { t } = useTranslation('projects')
@@ -32,6 +31,7 @@ const Create = () => {
   const [medienhausMeta, setMedienhausMeta] = useState([])
   const [events, setEvents] = useState()
   const [description, setDescription] = useState()
+  const [preview, setPreview] = useState(false)
   const history = useHistory()
   const matrixClient = Matrix.getMatrixClient()
   const params = useParams()
@@ -285,12 +285,24 @@ const Create = () => {
               <option value="de">DE — Deutsch</option>
               <option value="en">EN — English</option>
             </select>
-            {spaceObject && (description || description === '') ? <ProjectDescription description={description[contentLang]} callback={onChangeDescription} /> : <Loading />}
-            {blocks.length === 0
-              ? <AddContent number={0} projectSpace={spaceObject?.rooms.filter(room => room.name === contentLang)[0].room_id} blocks={blocks} reloadSpace={reloadSpace} present={medienhausMeta?.present} />
-              : blocks.map((content, i) =>
-                <DisplayContent block={content} index={i} blocks={blocks} projectSpace={spaceObject?.rooms.filter(room => room.name === contentLang)[0].room_id} reloadSpace={reloadSpace} time={getCurrentTime} present={medienhausMeta?.present} key={content + i + content?.lastUpdate} />
-              )}
+            <div>
+              <label htmlFor="checkbox">Preview</label>
+              <input id="checkbox" name="checkbox" type="checkbox" onChange={() => setPreview(preview => !preview)} />
+            </div>
+            {preview ? null : spaceObject && (description || description === '') ? <ProjectDescription description={description[contentLang]} callback={onChangeDescription} /> : <Loading />}
+            {preview
+              ? <section className="preview singleproject">
+                <main>
+                  <div className="projectmain">
+                    {blocks.map((content, i) => <DisplayContent preview={preview} block={content} index={i} blocks={blocks} projectSpace={spaceObject?.rooms.filter(room => room.name === contentLang)[0].room_id} reloadSpace={reloadSpace} time={getCurrentTime} present={medienhausMeta?.present} key={content + i + content?.lastUpdate} />)}
+                  </div>
+                </main>
+              </section>
+              : blocks.length === 0
+                ? <AddContent number={0} projectSpace={spaceObject?.rooms.filter(room => room.name === contentLang)[0].room_id} blocks={blocks} reloadSpace={reloadSpace} present={medienhausMeta?.present} />
+                : blocks.map((content, i) =>
+                  <DisplayContent preview={preview} block={content} index={i} blocks={blocks} projectSpace={spaceObject?.rooms.filter(room => room.name === contentLang)[0].room_id} reloadSpace={reloadSpace} time={getCurrentTime} present={medienhausMeta?.present} key={content + i + content?.lastUpdate} />
+                )}
           </section>
           {/* Placeholder to show preview next to editing
           {blocks.map((content, i) => <DisplayPreview content={content} key={i} matrixClient={matrixClient} />)}
