@@ -353,7 +353,13 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace, time,
                                 {/* eslint-disable-next-line react/jsx-indent */}
                             </div>
                               : json.type === 'bbb'
-                                ? <div>BigBlueButton-Session<br /><a href={cms?.body} target="_blank" rel="external nofollow noopener noreferrer">{cms?.body}</a></div>
+                                ? <div className="center">
+                                  <div>
+                                    <p>BigBlueButton-Session via:</p>
+                                    <br />
+                                    <p><a href={cms?.body} target="_blank" rel="external nofollow noopener noreferrer">{cms?.body}</a></p>
+                                  </div>
+                                </div>
                                 : (json.type === 'video' || json.type === 'livestream' || json.type === 'playlist')
                                     ? (
                                       <iframe
