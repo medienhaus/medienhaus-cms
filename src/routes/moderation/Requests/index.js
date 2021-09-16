@@ -1,23 +1,15 @@
 import React, { useState } from 'react'
-import matrixcs from 'matrix-js-sdk'
 import LoadingSpinnerButton from '../../../components/LoadingSpinnerButton'
 import { useTranslation } from 'react-i18next'
 
-const knockClient = matrixcs.createClient({
-  baseUrl: process.env.REACT_APP_MATRIX_BASE_URL,
-  accessToken: process.env.REACT_APP_KNOCK_BOT_TOKEN,
-  userId: process.env.REACT_APP_KNOCK_BOT_ACCOUNT,
-  useAuthorizationHeader: true
-})
-
-const Requests = ({ roomId, roomName, userName, userId, eventId }) => {
+const Requests = ({ roomId, roomName, userName, userId, eventId, matrixClient }) => {
   const { t } = useTranslation()
   const [allButtonsDisabled, setAllButtonsDisabled] = useState(false)
 
   const kick = async () => {
     setAllButtonsDisabled(true)
     try {
-      await knockClient.kick(roomId, userId).then(console.log)
+      await matrixClient.kick(roomId, userId).then(console.log)
     } catch (err) {
       console.error(err)
       setAllButtonsDisabled(false)
@@ -27,7 +19,7 @@ const Requests = ({ roomId, roomName, userName, userId, eventId }) => {
   const invite = async () => {
     setAllButtonsDisabled(true)
     try {
-      await knockClient.invite(roomId, userId).then((res) => {
+      await matrixClient.invite(roomId, userId).then((res) => {
         console.log(res)
         // in case we need to change power level for users
         // knockClient.getRoom(projectSpace)

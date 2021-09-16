@@ -47,7 +47,7 @@ const Moderation = () => {
     if (knockingUsers.length < 1) return <p>{t('No requests at the moment.')}</p>
 
     return knockingUsers.map((user, index) => {
-      return <Requests roomId={request.room_id} roomName={request.name} userId={user.user.userId} userName={user.name} key={index} />
+      return <Requests roomId={request.room_id} roomName={request.name} userId={user.userId} userName={user.name} matrixClient={matrixClient} key={index} />
     })
   }
 
