@@ -29,9 +29,15 @@ function ContextDropdown ({ onItemChosen, selectedContext, showRequestButton = f
   const [currentlyShownInputItems, setCurrentlyShownInputItems] = useState(items)
   const { t } = useTranslation('context')
 
-  async function requestAccessToSpace () {
-    // eslint-disable-next-line promise/param-names
-    await new Promise(r => setTimeout(r, 1500))
+  async function requestAccessToSpace (contextSpaceId) {
+    const req = {
+      method: 'POST',
+      headers: { Authorization: 'Bearer ' + localStorage.getItem('medienhaus_access_token') },
+      body: JSON.stringify({
+        reason: 'knock-knock'
+      })
+    }
+    await fetch(process.env.REACT_APP_MATRIX_BASE_URL + `/_matrix/client/unstable/knock/${contextSpaceId}`, req)
   }
 
   useEffect(() => {
@@ -150,7 +156,7 @@ function ContextDropdown ({ onItemChosen, selectedContext, showRequestButton = f
             </div>
             {showRequestButton && !item.member && (
               <LoadingSpinnerButton
-                onClick={requestAccessToSpace}
+                onClick={() => requestAccessToSpace(item.id)}
                 stopPropagationOnClick
                 style={{ width: '140px', alignSelf: 'start', flex: '0 0' }}
               >
