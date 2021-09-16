@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useCombobox } from 'downshift'
-import _, { get, map, orderBy, remove, uniqBy } from 'lodash'
+import _, { find, get, map, orderBy, remove, uniqBy } from 'lodash'
 import mapDeep from 'deepdash/es/mapDeep'
 import struktur from '../struktur'
 import { findValueDeep } from 'deepdash/es/standalone'
@@ -24,14 +24,20 @@ let items = uniqBy(mapDeep(struktur, (value, key, parent, context) => {
   return value
 }, { leavesOnly: true, childrenPath: 'children', includeRoot: false, rootIsChildren: true }), 'id')
 
-function ContextDropdown ({ onItemChosen, showRequestButton = false }) {
+function ContextDropdown ({ onItemChosen, selectedContext, showRequestButton = false }) {
   const [inputItems, setInputItems] = useState(items)
   const [currentlyShownInputItems, setCurrentlyShownInputItems] = useState(items)
   const { t } = useTranslation('context')
 
-  async function requestAccessToSpace () {
-    // eslint-disable-next-line promise/param-names
-    await new Promise(r => setTimeout(r, 1500))
+  async function requestAccessToSpace (contextSpaceId) {
+    const req = {
+      method: 'POST',
+      headers: { Authorization: 'Bearer ' + localStorage.getItem('medienhaus_access_token') },
+      body: JSON.stringify({
+        reason: 'knock-knock'
+      })
+    }
+    await fetch(process.env.REACT_APP_MATRIX_BASE_URL + `/_matrix/client/unstable/knock/${contextSpaceId}`, req)
   }
 
   useEffect(() => {
@@ -68,6 +74,7 @@ function ContextDropdown ({ onItemChosen, showRequestButton = false }) {
     reset
   } = useCombobox({
     items: currentlyShownInputItems,
+    selectedItem: find(inputItems, { id: selectedContext }),
     itemToString: (item) => item.name,
     onInputValueChange: ({ inputValue }) => {
       if (!inputValue) { setCurrentlyShownInputItems(inputItems) }
@@ -149,7 +156,7 @@ function ContextDropdown ({ onItemChosen, showRequestButton = false }) {
             </div>
             {showRequestButton && !item.member && (
               <LoadingSpinnerButton
-                onClick={requestAccessToSpace}
+                onClick={() => requestAccessToSpace(item.id)}
                 stopPropagationOnClick
                 style={{ width: '140px', alignSelf: 'start', flex: '0 0' }}
               >
