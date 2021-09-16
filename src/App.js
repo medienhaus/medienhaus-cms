@@ -16,6 +16,8 @@ import Support from './routes/support'
 import Feedback from './routes/feedback'
 import Terms from './routes/terms'
 import Account from './routes/account'
+import Request from './routes/request'
+import Preview from './routes/preview'
 
 import { AuthProvider, useAuth } from './Auth'
 import PropTypes from 'prop-types'
@@ -77,10 +79,12 @@ function App () {
               <PrivateRoute path="/boilerplate" component={Boilerplate} />
               <PrivateRoute path="/projects" component={Projects} />
               <PrivateRoute path="/create/:spaceId" component={Create} />
+              <PrivateRoute path="/preview/:spaceId" component={Preview} />
               <PrivateRoute path="/create" component={Create} />
               <PrivateRoute path="/moderation" component={Moderation} />
               <PrivateRoute path="/support" component={Support} />
               <PrivateRoute path="/feedback" component={Feedback} />
+              <PrivateRoute path="/request" component={Request} />
             </Switch>
           </main>
           <Footer />
