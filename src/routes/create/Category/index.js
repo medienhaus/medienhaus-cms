@@ -35,7 +35,19 @@ const Category = ({ title, projectSpace }) => {
     setSubject('')
   }
 
-  function onContextChosen (contextSpaceId) {
+  async function onContextChosen (contextSpaceId) {
+    const projectSpaceMetaEvent = await matrixClient.getStateEvent(projectSpace, 'dev.medienhaus.meta')
+
+    if (projectSpaceMetaEvent.context && projectSpaceMetaEvent.context !== contextSpaceId) {
+      // If this project was in a different context previously we should try to take it out of the old context
+      const req = {
+        method: 'PUT',
+        headers: { Authorization: 'Bearer ' + localStorage.getItem('medienhaus_access_token') },
+        body: JSON.stringify({})
+      }
+      await fetch(process.env.REACT_APP_MATRIX_BASE_URL + `/_matrix/client/r0/rooms/${projectSpaceMetaEvent.context}/state/m.space.child/${projectSpace}`, req)
+    }
+
     // Add this current project to the given context space
     const req = {
       method: 'PUT',
@@ -46,7 +58,11 @@ const Category = ({ title, projectSpace }) => {
         via: [process.env.REACT_APP_MATRIX_BASE_URL.replace('https://', '')]
       })
     }
-    fetch(process.env.REACT_APP_MATRIX_BASE_URL + `/_matrix/client/r0/rooms/${contextSpaceId}/state/m.space.child/${projectSpace}`, req)
+    await fetch(process.env.REACT_APP_MATRIX_BASE_URL + `/_matrix/client/r0/rooms/${contextSpaceId}/state/m.space.child/${projectSpace}`, req)
+
+    // Set the new context in our meta event
+    projectSpaceMetaEvent.context = contextSpaceId
+    await matrixClient.sendStateEvent(projectSpace, 'dev.medienhaus.meta', projectSpaceMetaEvent)
   }
 
   return (
