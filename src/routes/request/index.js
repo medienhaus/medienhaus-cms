@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next'
 import { makeRequest } from '../../Backend'
 import Matrix from '../../Matrix'
 import { useAuth } from '../../Auth'
+import ContextDropdown from '../../components/ContextDropdown'
 
 const Request = () => {
   const { register, formState: { errors }, handleSubmit } = useForm()
@@ -22,6 +23,11 @@ const Request = () => {
   const changeParent = e => setParent(e.target.value)
   const changeContext = e => setContext(e.target.value)
 
+  const getContextSpaces = async () => {
+    console.log(await matrixClient.getSpaceSummary('!rMmnCTBTgMPPDQMaFr:dev.medienhaus.udk-berlin.de'))
+  }
+
+  getContextSpaces()
   const onSubmit = async () => {
     setSending(true)
     const support =
@@ -63,14 +69,7 @@ const Request = () => {
             <input {...register('context', { required: true })} calue={context} type="text" name="context" id="context" placeholder="name of class" onBlur={changeContext} />
           </div>
           {errors?.operatingSystem && t('Please enter the name of the class.')}
-          <div>
-            <select {...register('parent', { required: true })} name="parent" id="parent" defaultValue="" onBlur={changeParent}>
-              <option value="" disabled>{t('-- please select the parent context --')}</option>
-              <option value="Firefox">Visuelle Kommunikation</option>
-              <option value="Chrome">Bildende Kunst</option>
-              <option value="Other">(Other)</option>
-            </select>
-          </div>
+          <ContextDropdown callback={changeParent} />
           {errors?.browser && t('Please select a parent context.')}
           <textarea name="messageInput" placeholder={t('Additional information')} rows="7" spellCheck="true" value={msg} onChange={changeMsg} />
           {errors?.messageInput && t('This field can’t be empty.')}
