@@ -364,30 +364,29 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace, time,
                                           }}
                                         />
                                       </div>
-                                      : (<div className="center">
-                                        <Editor
-                                          dark={window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches}
-                                          defaultValue={cms?.body}
-                                          disableExtensions={['blockmenu', 'image', 'embed', 'table', 'tr', 'th', 'td', 'bullet_list', 'ordered_list', 'checkbox_item', 'checkbox_list', 'container_notice', 'blockquote', 'heading', 'hr', 'highlight']}
-                                          placeholder={json.type}
-                                          readOnly={readOnly}
-                                          onSave={({ done }) => {
-                                            if (localStorage.getItem(block.room_id) !== null && cms !== undefined && cms.body !== localStorage.getItem(block.room_id)) {
-                                              onSave(block.room_id)
-                                              localStorage.removeItem(block.room_id)
-                                            } else if (localStorage.getItem(block.room_id) !== null && cms === undefined) {
-                                              onSave(block.room_id)
-                                              localStorage.removeItem(block.room_id)
-                                            }
-                                          }}
-                                          onChange={debounce((value) => {
-                                            const text = value()
-                                            localStorage.setItem(block.room_id, text)
-                                          }, 250)}
-                                          handleDOMEvents={{
-                                            focus: () => {
-                                            }, // this could set MatrixClient"User.presence" to 'online', "User.currentlyActive" or 'typing. depending on which works best.
-                                            blur: (e) => {
+                                      : json.type === 'quote'
+                                        ? <TextareaAutosize
+                                            rows={cms?.body.split('\n').length}
+                                            value={cms?.body}
+                                            placeholder="your quote"
+                                            onChange={(e) => {
+                                              setContent(e.target.value)
+                                              console.log(content)
+                                            }}
+                                            onBlur={(e) => {
+                                              if (content !== cms?.body) {
+                                                onSave(block.room_id, content)
+                                              }
+                                            }}
+                                          />
+                                        : (<div className="center">
+                                          <Editor
+                                            dark={window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches}
+                                            defaultValue={cms?.body}
+                                            disableExtensions={['blockmenu', 'image', 'embed', 'table', 'tr', 'th', 'td', 'bullet_list', 'ordered_list', 'checkbox_item', 'checkbox_list', 'container_notice', 'blockquote', 'heading', 'hr', 'highlight']}
+                                            placeholder={json.type}
+                                            readOnly={readOnly}
+                                            onSave={({ done }) => {
                                               if (localStorage.getItem(block.room_id) !== null && cms !== undefined && cms.body !== localStorage.getItem(block.room_id)) {
                                                 onSave(block.room_id)
                                                 localStorage.removeItem(block.room_id)
@@ -395,12 +394,28 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace, time,
                                                 onSave(block.room_id)
                                                 localStorage.removeItem(block.room_id)
                                               }
-                                            }
-                                          }}
-                                          key={block.room_id}
-                                        />
-                                      </div>
-                                        )}
+                                            }}
+                                            onChange={debounce((value) => {
+                                              const text = value()
+                                              localStorage.setItem(block.room_id, text)
+                                            }, 250)}
+                                            handleDOMEvents={{
+                                              focus: () => {
+                                              }, // this could set MatrixClient"User.presence" to 'online', "User.currentlyActive" or 'typing. depending on which works best.
+                                              blur: (e) => {
+                                                if (localStorage.getItem(block.room_id) !== null && cms !== undefined && cms.body !== localStorage.getItem(block.room_id)) {
+                                                  onSave(block.room_id)
+                                                  localStorage.removeItem(block.room_id)
+                                                } else if (localStorage.getItem(block.room_id) !== null && cms === undefined) {
+                                                  onSave(block.room_id)
+                                                  localStorage.removeItem(block.room_id)
+                                                }
+                                              }
+                                            }}
+                                            key={block.room_id}
+                                          />
+                                        </div>
+                                          )}
 
             <div className="right">
               <button
