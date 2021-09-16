@@ -35,6 +35,10 @@ const Category = ({ title, projectSpace }) => {
     setSubject('')
   }
 
+  function onContextChosen (contextSpaceId) {
+    // d
+  }
+
   return (
     <>
       <p>{t('In which context do you want to publish your project?')}</p>
@@ -42,9 +46,8 @@ const Category = ({ title, projectSpace }) => {
       <p>{t('The context can be a class, a course, a seminar or a free project. If you are unsure, ask the professor of your class or the seminar leader.')}</p>
       <p>{t('You can scroll through the list, or filter/search the list by typing one or more keywords.')}</p>
       <div style={{ position: 'relative' }}>
-        <ContextDropdown callback={isMember} />
+        <ContextDropdown onItemChosen={onContextChosen} showRequestButton callback={isMember} />
       </div>
-      <p>﹡ <em>{t('This is not yet possible; we will roll out an update soon; the context is required for publishing your project on the Rundgang 2021 website.')}</em></p>
       {loading && <Loading />}
       {subject !== '' && !member && <Knock room={room} callback={callback} />}
     </>
