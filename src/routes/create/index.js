@@ -16,6 +16,7 @@ import ProjectDescription from './ProjectDescription'
 import { Loading } from '../../components/loading'
 import { Trans, useTranslation } from 'react-i18next'
 import DateAndVenue from './DateAndVenue'
+// import DisplayPreview from '../preview/componenets/DisplayPreview'
 
 const Create = () => {
   const { t } = useTranslation('projects')
@@ -291,6 +292,9 @@ const Create = () => {
                 <DisplayContent block={content} index={i} blocks={blocks} projectSpace={spaceObject?.rooms.filter(room => room.name === contentLang)[0].room_id} reloadSpace={reloadSpace} time={getCurrentTime} present={medienhausMeta?.present} key={content + i + content?.lastUpdate} />
               )}
           </section>
+          {/* Placeholder to show preview next to editing
+          {blocks.map((content, i) => <DisplayPreview content={content} key={i} matrixClient={matrixClient} />)}
+           */}
           <section className="visibility">
             <h3>{t('Visibility')}</h3>
             <p>
