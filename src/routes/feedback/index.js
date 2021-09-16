@@ -58,6 +58,13 @@ const Feedback = () => {
           {errors?.messageInput && t('This field can’t be empty.')}
           <button type="submit" disabled={sending}>{t('SUBMIT')}</button>
         </form>
+        <p>
+          * <em>
+            <Trans t={t} i18nKey="note">
+              Feedback will be evaluated, but will not be answered. If you have a question and/or need technical support for entering projects, please fill out the <NavLink to="/support">/support</NavLink> form and we will get back at you.
+            </Trans>
+          </em>
+        </p>
       </section>
     </>
   )

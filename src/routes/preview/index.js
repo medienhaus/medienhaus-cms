@@ -94,7 +94,7 @@ const Preview = () => {
   if (loading) return <Loading />
 
   return (
-    <div className="preview singleproject">
+    <section className="preview singleproject">
       <select
         id="subject" name="subject" defaultValue="" value={contentLang} onChange={(e) => {
           setContentLang(e.target.value)
@@ -145,7 +145,7 @@ const Preview = () => {
         </div>
 
       </main>
-    </div>
+    </section>
   )
 }
 export default Preview

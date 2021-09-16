@@ -304,15 +304,7 @@ const Create = () => {
               ? (<>
                 <PublishProject space={spaceObject.rooms[0]} description={description?.en} published={visibility} time={getCurrentTime} />
                 {!description?.en && <p>❗️ {t('Please add a short description of your project.')}</p>}
-                {!medienhausMeta.context &&
-                  <>
-                    <p>
-                      ❗️ {t('Please add your project to a context.')}﹡
-                    </p>
-                    <p>
-                      ﹡ <em>{t('This is not yet possible; we will roll out an update soon; the context is required for publishing your project on the Rundgang 2021 website.')}</em>
-                    </p>
-                  </>}
+                {!medienhausMeta.context && <p>❗️ {t('Please add your project to a context.')}</p>}
                 {/* eslint-disable-next-line react/jsx-indent */}
                  </>)
               : <Loading />}

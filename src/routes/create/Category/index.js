@@ -44,7 +44,6 @@ const Category = ({ title, projectSpace }) => {
       <div style={{ position: 'relative' }}>
         <ContextDropdown callback={isMember} />
       </div>
-      <p>﹡ <em>{t('This is not yet possible; we will roll out an update soon; the context is required for publishing your project on the Rundgang 2021 website.')}</em></p>
       {loading && <Loading />}
       {subject !== '' && !member && <Knock room={room} callback={callback} />}
     </>

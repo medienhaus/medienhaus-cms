@@ -1,4 +1,5 @@
 @charset "UTF-8";
+
 @font-face {
   font-family: "BauPro";
   src: url("../../assets/fonts/BauPro.woff") format("woff2"), url("../../assets/fonts/BauPro.woff") format("woff");
@@ -6,16 +7,13 @@
   font-style: normal;
   font-display: swap;
 }
+
 @font-face {
   font-family: "BauPro";
   src: url("../../assets/fonts/BauPro-Medium.woff2") format("woff2"), url("../../assets/fonts/BauPro-Medium.woff") format("woff");
   font-weight: 500;
   font-style: normal;
   font-display: swap;
-}
-::-moz-selection {
-  background: #dcf3ff;
-  color: black;
 }
 
 ::selection {
@@ -44,6 +42,14 @@ body {
   padding-right: 20px;
 }
 */
+
+.preview > main {
+  border-color: var(--color-lo);
+  border-radius: unset;
+  border-style: solid;
+  border-width: calc(var(--margin) * 0.2);
+  padding: calc(var(--margin) * 1);
+}
 
 .preview h1 {
   font-family: "BauPro";
@@ -114,6 +120,7 @@ header .topline {
   left: 20px;
   z-index: 900;
 }
+
 header .topline h1 {
   font-size: 20px;
   font-weight: 500;
@@ -127,6 +134,7 @@ header .topline h1 {
   line-height: 35px;
   letter-spacing: -0.5px;
 }
+
 .singleproject .projectclose {
   width: 15px;
   height: 15px;
@@ -135,30 +143,42 @@ header .topline h1 {
   top: 85px;
   cursor: pointer;
 }
+
 .singleproject .projectclose img {
   width: 100%;
   margin: 0;
 }
+
+/*
 .singleproject .students.tagbubble {
   margin-bottom: 40px;
 }
+*/
+
 .singleproject .projectmain {
+  /*
   width: 50%;
+  */
   position: relative;
+  /*
   padding-top: 95px;
   padding-bottom: 60px;
+  */
   box-sizing: border-box;
   margin: 0 auto;
 }
+
 .singleproject .projectmain .thumb img {
   margin-top: 0;
 }
+
 .singleproject .projectmain img {
   width: 100%;
   height: auto;
   margin-top: 40px;
   margin-bottom: 40px;
 }
+
 .singleproject .projectmain h2 {
   font-size: 34px;
   font-weight: 500;
@@ -167,75 +187,96 @@ header .topline h1 {
   line-height: 35px;
   letter-spacing: -0.5px;
 }
+
 .singleproject .projectmain .thumb + h2 {
   margin-top: 10px;
 }
+
 .singleproject .projectmain blockquote {
   margin: 0;
   margin-top: 1em;
   margin-bottom: 1em;
   position: relative;
 }
+
 .singleproject .projectmain blockquote:before {
   content: open-quote;
 }
+
 .singleproject .projectmain blockquote:after {
   content: close-quote;
 }
+
 .singleproject .info {
+  /*
   width: 50%;
+  */
   position: relative;
+  /*
   padding-bottom: 100px;
+  */
   box-sizing: border-box;
   margin: 0 auto;
 }
+
 .singleproject .info div.label {
   margin-bottom: 8px;
   margin-top: 20px;
 }
 
 /** RESPONSIVE STYLES **/
+/*
 @media only screen and (min-width: 1600px) {
-  .singleproject .projectmain,
-.singleproject .info {
+  .singleproject .info,
+  .singleproject .projectmain {
     max-width: 900px;
   }
 }
+*/
+
 @media only screen and (max-width: 1400px) {
-  .singleproject .projectmain,
-.singleproject .info {
+  /*
+  .singleproject .info,
+  .singleproject .projectmain {
     width: 65%;
   }
-
+  */
   header .topline {
     background-color: white;
   }
 }
+
+/*
 @media only screen and (max-width: 1300px) {
-  .singleproject .projectmain,
-.singleproject .info {
+  .singleproject .info,
+  .singleproject .projectmain {
     width: 70%;
   }
 }
+
 @media only screen and (max-width: 1200px) {
-  .singleproject .projectmain,
-.singleproject .info {
+  .singleproject .info,
+  .singleproject .projectmain {
     width: 75%;
   }
 }
+
 @media only screen and (max-width: 1000px) {
-  .singleproject .projectmain,
-.singleproject .info {
+  .singleproject .info,
+  .singleproject .projectmain {
     width: 85%;
   }
 }
+*/
+
 @media only screen and (max-width: 800px) {
-  .singleproject .projectmain,
-.singleproject .info {
+  /*
+  .singleproject .info,
+  .singleproject .projectmain {
     position: relative;
     width: 100%;
   }
-
+  */
   .singleproject .projectclose {
     top: 0px;
   }
