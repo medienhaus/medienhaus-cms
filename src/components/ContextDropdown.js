@@ -1,14 +1,15 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useCombobox } from 'downshift'
-import { get, map, remove, uniqBy } from 'lodash'
+import _, { get, map, orderBy, remove, uniqBy } from 'lodash'
 import mapDeep from 'deepdash/es/mapDeep'
 import struktur from '../struktur'
 import { findValueDeep } from 'deepdash/es/standalone'
 import LoadingSpinnerButton from './LoadingSpinnerButton'
 import { useTranslation } from 'react-i18next'
 import Fuse from 'fuse.js'
+import Matrix from '../Matrix'
 
-const items = uniqBy(mapDeep(struktur, (value, key, parent, context) => {
+let items = uniqBy(mapDeep(struktur, (value, key, parent, context) => {
   // Add "path" parameter to create breadcrumbs from first hierarchy element up to "myself"
   value.path = remove(context._item.path, spaceId => spaceId !== 'children')
   // Remove myself from breadcrumbs
@@ -25,6 +26,7 @@ const items = uniqBy(mapDeep(struktur, (value, key, parent, context) => {
 
 function ContextDropdown () {
   const [inputItems, setInputItems] = useState(items)
+  const [currentlyShownInputItems, setCurrentlyShownInputItems] = useState(items)
   const { t } = useTranslation('context')
 
   async function requestAccessToSpace () {
@@ -32,7 +34,23 @@ function ContextDropdown () {
     await new Promise(r => setTimeout(r, 1500))
   }
 
-  const fuse = new Fuse(items, {
+  useEffect(() => {
+    // Make sure we mark the contexts as "member" where we are a member of already
+    async function markJoinedContexts () {
+      const joinedRooms = await Matrix.getMatrixClient().getJoinedRooms()
+      for (const i in joinedRooms.joined_rooms) {
+        const contextWeAreMemberOf = _.find(items, { id: joinedRooms.joined_rooms[i] })
+        if (!contextWeAreMemberOf) continue
+        contextWeAreMemberOf.member = true
+      }
+      items = orderBy(items, 'member', 'asc')
+      setInputItems(items)
+    }
+
+    markJoinedContexts()
+  }, [setInputItems])
+
+  const fuse = new Fuse(inputItems, {
     keys: ['name']
   })
 
@@ -45,12 +63,15 @@ function ContextDropdown () {
     highlightedIndex,
     getItemProps
   } = useCombobox({
-    items: inputItems,
+    items: currentlyShownInputItems,
     itemToString: (item) => item.name,
     onInputValueChange: ({ inputValue }) => {
-      setInputItems(
+      setCurrentlyShownInputItems(
         map(fuse.search(inputValue), 'item')
       )
+    },
+    onSelectedItemChange: (event) => {
+      console.log(event.selectedItem)
     }
   })
 
@@ -92,8 +113,7 @@ function ContextDropdown () {
             : { display: 'none', position: 'absolute', overflow: 'auto', maxHeight: '50vh', backgroundColor: 'var(--color-bg)', width: '100%', border: 'solid black', borderWidth: '0 3px 3px 3px' }
         }
       >
-        {isOpen &&
-        inputItems.map((item, index) => (
+        {isOpen && currentlyShownInputItems.map((item, index) => (
           <li
             style={
               highlightedIndex === index
@@ -115,13 +135,15 @@ function ContextDropdown () {
                 ))}
               </small>
             </div>
-            <LoadingSpinnerButton
-              onClick={requestAccessToSpace}
-              stopPropagationOnClick
-              style={{ width: '140px', alignSelf: 'start', flex: '0 0' }}
-            >
-              REQUEST
-            </LoadingSpinnerButton>
+            {!item.member && (
+              <LoadingSpinnerButton
+                onClick={requestAccessToSpace}
+                stopPropagationOnClick
+                style={{ width: '140px', alignSelf: 'start', flex: '0 0' }}
+              >
+                REQUEST
+              </LoadingSpinnerButton>
+            )}
           </li>
         ))}
       </ul>
