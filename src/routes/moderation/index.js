@@ -42,7 +42,7 @@ const Moderation = () => {
     const room = matrixClient.getRoom(request.room_id)
     // console.log(Object.values(room.currentState.members))
     const knockingUsers = Object.values(room?.currentState.members).filter(user => user.membership === 'knock')
-    // @TODO change back to knock when context is done
+    // @TODO delete users from array after accepting/rejecting
 
     if (knockingUsers.length < 1) return <p>{t('No requests at the moment.')}</p>
 
