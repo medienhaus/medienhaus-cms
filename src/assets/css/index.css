@@ -764,13 +764,27 @@ textarea[disabled] {
   border: unset;
 }
 
+/* TODO */
 .editor .center > div {
+  /*
   padding: 0 calc(var(--margin) * 0.4);
+  */
+  padding: calc(var(--margin) * 0.4);
 }
 
 .editor .center > textarea {
   height: 100%;
   resize: none;
+}
+
+.editor .center a[href*="//meetings.udk-berlin.de/"] {
+  white-space: pre-wrap !important;
+  word-break: break-all;
+}
+
+.editor .center.code {
+  font-family: "Roboto Mono", monospace;
+  font-weight: normal;
 }
 
 .editor .center.leaflet-container {
