@@ -30,7 +30,7 @@ import { ReactComponent as DateIcon } from '../../../assets/icons/remix/date.svg
 import locations from '../../../assets/data/locations.json'
 // import DisplayPreview from '../../preview/componenets/DisplayPreview'
 
-const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace, time, present, mapComponent, preview }) => {
+const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace, time, present, mapComponent }) => {
   const [clickedDelete, setClickedDelete] = useState(false)
   const [readOnly, setReadOnly] = useState(false)
   const [loading, setLoading] = useState(false)
