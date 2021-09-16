@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useCombobox } from 'downshift'
-import _, { get, map, orderBy, remove, uniqBy } from 'lodash'
+import _, { find, get, map, orderBy, remove, uniqBy } from 'lodash'
 import mapDeep from 'deepdash/es/mapDeep'
 import struktur from '../struktur'
 import { findValueDeep } from 'deepdash/es/standalone'
@@ -24,7 +24,7 @@ let items = uniqBy(mapDeep(struktur, (value, key, parent, context) => {
   return value
 }, { leavesOnly: true, childrenPath: 'children', includeRoot: false, rootIsChildren: true }), 'id')
 
-function ContextDropdown ({ onItemChosen, showRequestButton = false }) {
+function ContextDropdown ({ onItemChosen, selectedContext, showRequestButton = false }) {
   const [inputItems, setInputItems] = useState(items)
   const [currentlyShownInputItems, setCurrentlyShownInputItems] = useState(items)
   const { t } = useTranslation('context')
@@ -68,6 +68,7 @@ function ContextDropdown ({ onItemChosen, showRequestButton = false }) {
     reset
   } = useCombobox({
     items: currentlyShownInputItems,
+    selectedItem: find(inputItems, { id: selectedContext }),
     itemToString: (item) => item.name,
     onInputValueChange: ({ inputValue }) => {
       if (!inputValue) { setCurrentlyShownInputItems(inputItems) }
