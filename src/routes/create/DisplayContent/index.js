@@ -287,7 +287,7 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace, time,
                   : json.type === 'ol'
                     ? <List onSave={() => onSave(block.room_id)} storage={(list) => localStorage.setItem(block.room_id, list)} populated={cms?.body} type="ol" />
                     : json.type === 'code'
-                      ? <div className="center">
+                      ? <div className="center code">
                         <TextareaAutosize
                           value={content}
                           onChange={(e) => {

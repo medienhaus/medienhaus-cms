@@ -773,6 +773,11 @@ textarea[disabled] {
   resize: none;
 }
 
+.editor .center.code {
+  font-family: "Roboto Mono", monospace;
+  font-weight: normal;
+}
+
 .editor .center.leaflet-container {
   height: calc(var(--margin) * 12);
 }
