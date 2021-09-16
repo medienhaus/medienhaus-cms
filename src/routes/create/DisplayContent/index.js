@@ -6,7 +6,7 @@ import debounce from 'lodash/debounce'
 import { Loading } from '../../../components/loading'
 import AddContent from '../AddContent'
 import List from './List'
-import Code from './Code'
+// import Code from './Code'
 import reorder from './matrix_reorder_rooms'
 import LoadingSpinnerButton from '../../../components/LoadingSpinnerButton'
 import TextareaAutosize from 'react-textarea-autosize'
@@ -34,6 +34,7 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace, time,
   const [clickedDelete, setClickedDelete] = useState(false)
   const [readOnly, setReadOnly] = useState(false)
   const [loading, setLoading] = useState(false)
+  // eslint-disable-next-line no-unused-vars
   const [saved, setSaved] = useState(false)
   const [deleting, setDeleting] = useState(false)
   const [json, setJson] = useState({})
@@ -78,10 +79,10 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace, time,
         }
       } else if (json.type === 'code') {
         const save = await matrixClient.sendMessage(roomId, {
-          body: localStorage.getItem(roomId),
+          body: content,
           format: 'org.matrix.custom.html',
           msgtype: 'm.text',
-          formatted_body: '<pre><code>' + localStorage.getItem(roomId) + '</code></pre>'
+          formatted_body: '<pre><code>' + content + '</code></pre>'
         })
         if ('event_id' in save) {
           setSaved('Saved!')
@@ -286,7 +287,20 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace, time,
                   : json.type === 'ol'
                     ? <List onSave={() => onSave(block.room_id)} storage={(list) => localStorage.setItem(block.room_id, list)} populated={cms?.body} type="ol" />
                     : json.type === 'code'
-                      ? <Code onSave={() => onSave(block.room_id)} storage={(code) => localStorage.setItem(block.room_id, code)} saved={saved} content={cms?.body} />
+                      ? <div className="center">
+                        <TextareaAutosize
+                          value={content}
+                          onChange={(e) => {
+                            setContent(e.target.value)
+                            console.log(content)
+                          }}
+                          onBlur={(e) => {
+                            if (content !== cms?.body) {
+                              onSave(block.room_id, content)
+                            }
+                          }}
+                        />
+                      </div>
                       : (json.type === 'video' || json.type === 'livestream' || json.type === 'playlist')
                           ? (
                             <iframe
