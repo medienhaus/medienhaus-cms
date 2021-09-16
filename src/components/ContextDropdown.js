@@ -1,13 +1,15 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useCombobox } from 'downshift'
-import { get, remove, uniqBy } from 'lodash'
+import _, { get, map, orderBy, remove, uniqBy } from 'lodash'
 import mapDeep from 'deepdash/es/mapDeep'
 import struktur from '../struktur'
 import { findValueDeep } from 'deepdash/es/standalone'
 import LoadingSpinnerButton from './LoadingSpinnerButton'
 import { useTranslation } from 'react-i18next'
+import Fuse from 'fuse.js'
+import Matrix from '../Matrix'
 
-const items = uniqBy(mapDeep(struktur, (value, key, parent, context) => {
+let items = uniqBy(mapDeep(struktur, (value, key, parent, context) => {
   // Add "path" parameter to create breadcrumbs from first hierarchy element up to "myself"
   value.path = remove(context._item.path, spaceId => spaceId !== 'children')
   // Remove myself from breadcrumbs
@@ -24,12 +26,33 @@ const items = uniqBy(mapDeep(struktur, (value, key, parent, context) => {
 
 function ContextDropdown () {
   const [inputItems, setInputItems] = useState(items)
+  const [currentlyShownInputItems, setCurrentlyShownInputItems] = useState(items)
   const { t } = useTranslation('context')
 
   async function requestAccessToSpace () {
     // eslint-disable-next-line promise/param-names
     await new Promise(r => setTimeout(r, 1500))
   }
+
+  useEffect(() => {
+    // Make sure we mark the contexts as "member" where we are a member of already
+    async function markJoinedContexts () {
+      const joinedRooms = await Matrix.getMatrixClient().getJoinedRooms()
+      for (const i in joinedRooms.joined_rooms) {
+        const contextWeAreMemberOf = _.find(items, { id: joinedRooms.joined_rooms[i] })
+        if (!contextWeAreMemberOf) continue
+        contextWeAreMemberOf.member = true
+      }
+      items = orderBy(items, 'member', 'asc')
+      setInputItems(items)
+    }
+
+    markJoinedContexts()
+  }, [setInputItems])
+
+  const fuse = new Fuse(inputItems, {
+    keys: ['name']
+  })
 
   const {
     isOpen,
@@ -40,14 +63,15 @@ function ContextDropdown () {
     highlightedIndex,
     getItemProps
   } = useCombobox({
-    items: inputItems,
+    items: currentlyShownInputItems,
     itemToString: (item) => item.name,
     onInputValueChange: ({ inputValue }) => {
-      setInputItems(
-        items.filter(item =>
-          item.name.toLowerCase().includes(inputValue.toLowerCase())
-        )
+      setCurrentlyShownInputItems(
+        map(fuse.search(inputValue), 'item')
       )
+    },
+    onSelectedItemChange: (event) => {
+      console.log(event.selectedItem)
     }
   })
 
@@ -55,7 +79,6 @@ function ContextDropdown () {
     <>
       <div style={{ display: 'flex' }} {...getComboboxProps()}>
         <input
-          disabled
           type="text" placeholder={t('-- search or select context --')} {...getInputProps()} style={{
             flex: '1 0',
             backgroundImage: 'url(data:image/svg+xml;base64,PHN2ZyBoZWlnaHQ9IjMwMHB4IiB3aWR0aD0iMzAwcHgiIGZpbGw9InJnYigxMjgsMTI4LDEyOCkiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgdmlld0JveD0iMCAwIDEwMCAxMDAiIHg9IjBweCIgeT0iMHB4Ij48cG9seWdvbiBwb2ludHM9IjUwIDU3LjEzIDIzLjE5IDMwLjQ2IDE2LjEzIDM3LjU1IDUwIDcxLjIzIDgzLjg2IDM3LjU1IDc2LjgxIDMwLjQ2IDUwIDU3LjEzIj48L3BvbHlnb24+PC9zdmc+)',
@@ -65,7 +88,6 @@ function ContextDropdown () {
           }}
         />
         <button
-          disabled
           type="button"
           {...getToggleButtonProps()}
           aria-label="toggle menu"
@@ -91,8 +113,7 @@ function ContextDropdown () {
             : { display: 'none', position: 'absolute', overflow: 'auto', maxHeight: '50vh', backgroundColor: 'var(--color-bg)', width: '100%', border: 'solid black', borderWidth: '0 3px 3px 3px' }
         }
       >
-        {isOpen &&
-        inputItems.map((item, index) => (
+        {isOpen && currentlyShownInputItems.map((item, index) => (
           <li
             style={
               highlightedIndex === index
@@ -114,13 +135,15 @@ function ContextDropdown () {
                 ))}
               </small>
             </div>
-            <LoadingSpinnerButton
-              onClick={requestAccessToSpace}
-              stopPropagationOnClick
-              style={{ width: '140px', alignSelf: 'start', flex: '0 0' }}
-            >
-              REQUEST
-            </LoadingSpinnerButton>
+            {!item.member && (
+              <LoadingSpinnerButton
+                onClick={requestAccessToSpace}
+                stopPropagationOnClick
+                style={{ width: '140px', alignSelf: 'start', flex: '0 0' }}
+              >
+                REQUEST
+              </LoadingSpinnerButton>
+            )}
           </li>
         ))}
       </ul>
