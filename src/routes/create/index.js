@@ -285,9 +285,9 @@ const Create = () => {
               <option value="de">DE — Deutsch</option>
               <option value="en">EN — English</option>
             </select>
-            <div>
-              <label htmlFor="checkbox">Preview</label>
-              <input id="checkbox" name="checkbox" type="checkbox" onChange={() => setPreview(preview => !preview)} />
+            <div className="toggle">
+              <input id="preview" name="preview" type="checkbox" onChange={() => setPreview(preview => !preview)} />
+              <label htmlFor="preview">Preview</label>
             </div>
             {preview ? null : spaceObject && (description || description === '') ? <ProjectDescription description={description[contentLang]} callback={onChangeDescription} /> : <Loading />}
             {preview
