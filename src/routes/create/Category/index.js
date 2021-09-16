@@ -36,7 +36,17 @@ const Category = ({ title, projectSpace }) => {
   }
 
   function onContextChosen (contextSpaceId) {
-    // d
+    // Add this current project to the given context space
+    const req = {
+      method: 'PUT',
+      headers: { Authorization: 'Bearer ' + localStorage.getItem('medienhaus_access_token') },
+      body: JSON.stringify({
+        auto_join: false,
+        suggested: false,
+        via: [process.env.REACT_APP_MATRIX_BASE_URL.replace('https://', '')]
+      })
+    }
+    fetch(process.env.REACT_APP_MATRIX_BASE_URL + `/_matrix/client/r0/rooms/${contextSpaceId}/state/m.space.child/${projectSpace}`, req)
   }
 
   return (
