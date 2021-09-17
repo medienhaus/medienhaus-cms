@@ -57,7 +57,7 @@ const Support = () => {
   return (
     <>
       <section className="support">
-        <p>{t('In case you didn’t find an answer to your question here, please provide us some details and tell us about the problem you encounter via the support form below.')}</p>
+        <p>{t('Please provide some details and tell us about the problem you encounter.')}</p>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div>
             <select {...register('operatingSystem', { required: true })} name="operatingSystem" id="operatingSystem" defaultValue="" onBlur={changeSystem}>
