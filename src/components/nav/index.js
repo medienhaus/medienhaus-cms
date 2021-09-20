@@ -10,27 +10,48 @@ const Nav = () => {
   const auth = useAuth()
   const history = useHistory()
   const [isNavigationOpen, setIsNavigationOpen] = useState(false)
-  // eslint-disable-next-line no-unused-vars
+  const [isModeratingSpaces, setIsModeratingSpaces] = useState(false)
   const [knockAmount, setKnockAmount] = useState(0)
-  // eslint-disable-next-line no-unused-vars
-  const { joinedSpaces, spacesErr, fetchSpaces } = useJoinedSpaces(false)
+  const { joinedSpaces, spacesErr } = useJoinedSpaces(false)
   const matrixClient = Matrix.getMatrixClient()
 
   useEffect(() => {
     if (spacesErr) console.log(spacesErr)
     if (joinedSpaces && auth.user) {
-      const filteredRooms = joinedSpaces.filter(space => space.meta.type === 'context').map(space => {
-        return matrixClient.getRoom(space.room_id)
-      })
-      if (filteredRooms.length > 0) {
-        const allKnocks = []
-        filteredRooms.forEach(room => {
-          Object.values(room.currentState.members)
-            .forEach(user => allKnocks.push(user))
+      const typesOfSpaces = ['context',
+        'class',
+        'course',
+        'institution',
+        'degree program',
+        'design department',
+        'faculty',
+        'institute',
+        'semester']
+      // To "moderate" a space it must have one of the given types and we must be at least power level 50
+      const moderatingSpaces = joinedSpaces.filter(space => typesOfSpaces.includes(space.meta.type) && space.powerLevel >= 50)
+
+      // If we are not moderating any spaces we can cancel the rest here ...
+      if (moderatingSpaces.length < 1) return
+
+      // ... but if we -are- indeed moderating at least one space, we want to find out if there are any pending knocks
+      setIsModeratingSpaces(true)
+
+      async function getAmountOfPendingKnocks () {
+        const fullRoomObjectForModeratingSpaces = await Promise.all(moderatingSpaces.map(async (space) => await matrixClient.getRoom(space.room_id)))
+
+        const pendingKnocks = []
+        // For each space we're moderating...
+        fullRoomObjectForModeratingSpaces.forEach(room => {
+          // ... go through every room member...
+          Object.values(room.currentState.members).forEach(user => {
+            // .. and if they're currently knocking add them to the pendingKnocks array.
+            if (user.membership === 'knock') pendingKnocks.push(user)
+          })
         })
-        // @TODO change back to knock when context is finished
-        setKnockAmount(allKnocks.filter(user => user.membership === 'knock').length)
+        setKnockAmount(pendingKnocks.length)
       }
+
+      getAmountOfPendingKnocks()
     }
   }, [joinedSpaces, auth.user, matrixClient, spacesErr])
 
@@ -38,10 +59,11 @@ const Nav = () => {
     return null
   }
 
-  const NavLink = ({ to, onClick, children }) => {
+  const NavLink = ({ to, onClick, children, className }) => {
     return (
       <Link
         to={to}
+        className={className}
         onClick={() => {
           setIsNavigationOpen(false)
           if (onClick && isFunction(onClick)) onClick()
@@ -77,10 +99,7 @@ const Nav = () => {
               </div>
               <div>
                 <NavLink to="/account">/account</NavLink>
-                {fetchSpaces || <>
-                  <NavLink activeclassname="active" to="/moderation">/moderation{knockAmount > 0 && <sup className="notification">●</sup>}</NavLink>
-                  {/* eslint-disable-next-line react/jsx-closing-tag-location */}
-                </>}
+                <NavLink to="/moderation" className={!isModeratingSpaces && 'disabled'}>/moderation{knockAmount > 0 && <sup className="notification">●</sup>}</NavLink>
               </div>
               <div>
                 <NavLink to="/feedback">/feedback</NavLink>
