@@ -102,21 +102,20 @@ const Preview = () => {
 
         </div>
 
-        <div className="info">
-          <div className="label">{t('Fakultät')}</div>
-          <div className="tagbubble">
-            {Object.values(roomMembers).map((member) => {
-              return <span key={member.rawDisplayName}>{member.rawDisplayName}</span>
-            })}
-          </div>
+        {/* <div className="info"> */}
+        {/*  <div className="label">{t('Fakultät')}</div> */}
+        {/*  <div className="tagbubble"> */}
+        {/*    {Object.values(roomMembers).map((member) => { */}
+        {/*      return <span key={member.rawDisplayName}>{member.rawDisplayName}</span> */}
+        {/*    })} */}
+        {/*  </div> */}
 
-          <div className="label">Fakultät</div>
-          <div className="tagbubble"><span>Visuelle Kommunikation</span><span>Raumklasse, Prof. Gabi Schillig</span></div>
+        {/*  <div className="label">Fakultät</div> */}
+        {/*  <div className="tagbubble"><span>Visuelle Kommunikation</span><span>Raumklasse, Prof. Gabi Schillig</span></div> */}
 
-          <div className="label">Ort</div>
-          <div className="tagbubble"><span>Grunewaldstraße 4–5</span><span>Raum 105/106</span></div>
-        </div>
-
+        {/*  <div className="label">Ort</div> */}
+        {/*  <div className="tagbubble"><span>Grunewaldstraße 4–5</span><span>Raum 105/106</span></div> */}
+        {/* </div> */}
       </main>
     </section>
   )
