@@ -7,7 +7,7 @@ import DisplayPreview from './componenets/DisplayPreview'
 import './preview.css?v=1.0'
 
 const Preview = () => {
-  const { t } = useTranslation('projects')
+  const { t } = useTranslation('preview')
   const [title, setTitle] = useState('')
   const [loading, setLoading] = useState(true)
   const [blocks, setBlocks] = useState([])
@@ -67,6 +67,7 @@ const Preview = () => {
 
   return (
     <section className="preview singleproject">
+      <p>❗️ {t('Please note: Some parts of your project can’t be previewed, yet. We’re still working on displaying all attributes and content blocks in the preview, and if you miss some attributes like date, time or venue, please check back in some days.')}</p>
       <select
         id="subject" name="subject" defaultValue="" value={contentLang} onChange={(e) => {
           setContentLang(e.target.value)
