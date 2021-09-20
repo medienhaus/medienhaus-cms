@@ -282,6 +282,11 @@ nav a {
   font-weight: bold;
 }
 
+nav a.disabled {
+  pointer-events: none;
+  opacity: 0.2;
+}
+
 /* @andi addd this */
 /*
 .button-group {
@@ -999,6 +1004,10 @@ button > .loading {
   font-size: 0.6rem;
   font-weight: 900;
   vertical-align: super;
+}
+
+.notification.hidden {
+  visibility: hidden;
 }
 
 .project {

@@ -99,7 +99,7 @@ const Nav = () => {
               </div>
               <div>
                 <NavLink to="/account">/account</NavLink>
-                <NavLink to="/moderation" className={!isModeratingSpaces && 'disabled'}>/moderation{knockAmount > 0 && <sup className="notification">●</sup>}</NavLink>
+                <NavLink to="/moderation" className={!isModeratingSpaces ? 'disabled' : ''}>/moderation<sup className={`notification ${knockAmount < 1 ? 'hidden' : ''}`}>●</sup></NavLink>
               </div>
               <div>
                 <NavLink to="/feedback">/feedback</NavLink>
