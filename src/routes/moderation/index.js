@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import Requests from './Requests'
+import Requests from './components/Requests'
 import { Loading } from '../../components/loading'
 import useJoinedSpaces from '../../components/matrix_joined_spaces'
 import Matrix from '../../Matrix'
