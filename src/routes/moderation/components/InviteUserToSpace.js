@@ -47,13 +47,20 @@ const InviteUserToSpace = ({ matrixClient, moderationRooms }) => {
     const id = userToInvite.substring(userToInvite.lastIndexOf(' ') + 1)
     const name = userToInvite.substring(0, userToInvite.lastIndexOf(' '))
     if (id !== localStorage.getItem('mx_user_id')) {
-      await matrixClient.invite(selectedRoom, id)
-      promoteToModerator && setPower(selectedRoom, id, 50)
-      setInviteFeedback('invited' + name + ' successfully')
-      setTimeout(() => {
-        setInviteFeedback('')
-        setUserToInvite('')
-      }, 2000)
+      try {
+        await matrixClient.invite(selectedRoom, id)
+        promoteToModerator && setPower(selectedRoom, id, 50)
+        setInviteFeedback('invited' + name + ' successfully')
+        setTimeout(() => {
+          setInviteFeedback('')
+          setUserToInvite('')
+        }, 2000)
+      } catch (err) {
+        setInviteFeedback(err.data.error)
+        setTimeout(() => {
+          setInviteFeedback('')
+        }, 2000)
+      }
     }
   }
 
@@ -86,7 +93,7 @@ const InviteUserToSpace = ({ matrixClient, moderationRooms }) => {
         <label htmlFor="checkbox">{t('Promote user to moderator (this can\'t be undone!)')}</label>
         <input id="checkbox" name="checkbox" type="checkbox" value={promoteToModerator} onClick={() => setPromoteToModerator(promoteToModerator => !promoteToModerator)} />
       </div>
-      <LoadingSpinnerButton disabled={fetching || inviteFeedback} onClick={invite}>{t('INVITE')}</LoadingSpinnerButton>
+      <LoadingSpinnerButton disabled={fetching || inviteFeedback || !selectedRoom} onClick={invite}>{t('INVITE')}</LoadingSpinnerButton>
       {inviteFeedback &&
         <p>{inviteFeedback}</p>}
     </section>
