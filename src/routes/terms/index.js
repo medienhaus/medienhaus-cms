@@ -1,9 +1,11 @@
 import React, { useState } from 'react'
 import { useHistory } from 'react-router'
 import { useTranslation } from 'react-i18next'
+import { useLocation } from 'react-router-dom'
 
 const Terms = () => {
   const history = useHistory()
+  const location = useLocation()
 
   const initiallyChecked = process.env.NODE_ENV === 'development'
 
@@ -14,6 +16,8 @@ const Terms = () => {
   const [consent4, setConsent4] = useState(initiallyChecked)
   const [consent6, setConsent6] = useState(initiallyChecked)
   const { t } = useTranslation('terms')
+
+  const { from } = location.state || { from: { pathname: '/' } }
 
   return (
     <section className="terms">
@@ -45,7 +49,7 @@ const Terms = () => {
       <button
         name="submit" type="submit" disabled={!consent0 || !consent1 || !consent2 || !consent3 || !consent4 || !consent6} onClick={() => {
           localStorage.setItem('terms-consent', true)
-          history.push('/')
+          history.push(from)
         }}
       >{t('ACCEPT & SAVE')}
       </button>

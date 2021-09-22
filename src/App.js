@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { BrowserRouter as Router, Route, Switch, Redirect, useLocation } from 'react-router-dom'
 
 import './assets/css/index.css'
@@ -42,8 +42,8 @@ function PrivateRoute ({ children, ...rest }) {
       />
     )
   }
-  // Consent not given to terms
 
+  // Consent not given to terms
   if (!localStorage.getItem('terms-consent')) {
     return (
       <Redirect
@@ -61,6 +61,16 @@ function PrivateRoute ({ children, ...rest }) {
   )
 }
 
+function ScrollToTop () {
+  const { pathname } = useLocation()
+
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [pathname])
+
+  return null
+}
+
 PrivateRoute.propTypes = {
   children: PropTypes.element
 }
@@ -70,6 +80,7 @@ function App () {
     <>
       <AuthProvider>
         <Router basename="/rundgang">
+          <ScrollToTop />
           <Nav />
           <main>
             <Switch>
