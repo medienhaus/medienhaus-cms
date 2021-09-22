@@ -15,6 +15,7 @@ const Request = () => {
   const [submitted, setSubmitted] = useState(false)
   const [supervisor, setSupervisor] = useState('')
   const [contact, setContact] = useState('')
+  const [feedback, setFeedback] = useState('')
   const { t } = useTranslation('request')
   const matrixClient = Matrix.getMatrixClient()
 
@@ -49,7 +50,7 @@ const Request = () => {
       setContext('')
     } catch (e) {
       console.log(e)
-      alert('Couldn’t send your message. ' + e)
+      setFeedback('Couldn’t send your message. ' + e)
       setSending(false)
     }
   }
@@ -67,9 +68,9 @@ const Request = () => {
         <p>{t('In case you are trying to find a context room but can\'t find it, you can request it here.')}</p>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div>
-            <input {...register('context', { required: true })} calue={context} type="text" name="context" id="context" placeholder={t('name of class')} onBlur={changeContext} />
+            <input {...register('context', { required: true })} calue={context} type="text" name="context" id="context" placeholder={t('name of context')} onBlur={changeContext} />
           </div>
-          {errors?.context && t('Please enter the name of the class.')}
+          {errors?.context && t('Please enter the name of the context.')}
           <div>
             <input {...register('supervisor', { required: true })} calue={context} type="text" name="supervisor" id="supervisor" placeholder={t('supervisor')} onBlur={changeSupervisor} />
           </div>
@@ -80,10 +81,10 @@ const Request = () => {
           {errors?.superv && t('Please enter a UdK email address.')}
           <ContextDropdown onItemChosen={changeParent} />
           {errors?.browser && t('Please select a parent context.')}
-          <textarea name="messageInput" placeholder={t('Additional information')} rows="7" spellCheck="true" value={msg} onChange={changeMsg} />
-          {errors?.messageInput && t('This field can’t be empty.')}
+          <textarea name="messageInput" placeholder={t('additional information')} rows="7" spellCheck="true" value={msg} onChange={changeMsg} />
           <button type="submit" disabled={sending}>{t('SUBMIT')}</button>
         </form>
+        {feedback}
       </section>
     </>
   )
