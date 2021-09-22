@@ -9,6 +9,7 @@ import InviteUserToSpace from './components/InviteUserToSpace'
 const Moderation = () => {
   const { joinedSpaces, spacesErr, fetchSpaces } = useJoinedSpaces(false)
   const [moderationRooms, setModerationRooms] = useState()
+  const [selection, setSelection] = useState('')
   const matrixClient = Matrix.getMatrixClient()
   const { t } = useTranslation()
 
@@ -42,23 +43,49 @@ const Moderation = () => {
     })
   }
 
+  const RightsManagement = () => {
+    return <div>Hello</div>
+  }
+  const renderSelection = () => {
+    switch (selection) {
+      case 'invite':
+        return <InviteUserToSpace matrixClient={matrixClient} moderationRooms={moderationRooms} />
+      case 'rights':
+        return <RightsManagement matrixClient={matrixClient} moderationRooms={moderationRooms} />
+      default:
+        return (
+          moderationRooms.length > 0
+            ? <>
+
+              <section className="requests">
+                {moderationRooms.map((request, index) => <React.Fragment key={request.name}><h3>{request.name}</h3><GetRequestPerRoom request={request} key={index} /></React.Fragment>)}
+              </section>
+              {/* eslint-disable-next-line react/jsx-closing-tag-location */}
+            </>
+            : (
+              <div>
+                {t('Looks like you are not moderating any spaces.')}
+              </div>
+              )
+        )
+    }
+  }
+
   if (fetchSpaces || !matrixClient.isInitialSyncComplete()) return <Loading />
   if (spacesErr) return <p>{spacesErr}</p>
   return (
     <>
-      {moderationRooms.length > 0
-        ? <>
-          <section className="requests">
-            {moderationRooms.map((request, index) => <React.Fragment key={request.name}><h3>{request.name}</h3><GetRequestPerRoom request={request} key={index} /></React.Fragment>)}
-          </section>
-          {<InviteUserToSpace matrixClient={matrixClient} moderationRooms={moderationRooms} />}
-          {/* eslint-disable-next-line react/jsx-closing-tag-location */}
-        </>
-        : (
-          <div>
-            {t('Looks like you are not moderating any spaces.')}
-          </div>
-          )}
+      <section className="request">
+        <div id="formchooser">
+          <input type="radio" id="add-user" name={t('Add Account')} checked={selection === ''} onChange={() => setSelection('')} />
+          <label htmlFor="add-user">{t('Add Account')}</label>
+          <input type="radio" id="invite-users" name={t('Invite Users')} value="invite-user" checked={selection === 'invite'} onChange={() => setSelection('invite')} />
+          <label htmlFor="invite-users-invite-users">{t('Invite Users')}</label>
+          <input type="radio" id="rights-management" name={t('Promote Users')} value="rights-management" checked={selection === 'rights'} onChange={() => setSelection('rights')} />
+          <label htmlFor="rights-management">{t('Promote Users')}</label>
+        </div>
+      </section>
+      {renderSelection()}
     </>
   )
 }
