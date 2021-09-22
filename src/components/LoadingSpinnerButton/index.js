@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { Loading } from '../loading'
 
-const LoadingSpinnerButton = ({ className, disabled, onClick: callback, style, children, stopPropagationOnClick }) => {
+const LoadingSpinnerButton = ({ className, disabled, onClick: callback, style, children, stopPropagationOnClick, onError }) => {
   const [loading, setLoading] = useState(false)
   const isMounted = useRef(true)
 
@@ -21,6 +21,7 @@ const LoadingSpinnerButton = ({ className, disabled, onClick: callback, style, c
       await callback()
     } catch (err) {
       console.log(err)
+      onError(err)
     } finally {
       if (isMounted.current) {
         setLoading(false)
