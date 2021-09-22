@@ -15,6 +15,8 @@ const RightsManagement = ({ matrixClient, moderationRooms, setPower, fetchUsers,
 
     setTimeout(() => {
       setPromoteFeedback('')
+      setUserToPromote('')
+      setSelectedRoom('')
     }, 2000)
   }
   const onError = (err) => {
@@ -25,9 +27,10 @@ const RightsManagement = ({ matrixClient, moderationRooms, setPower, fetchUsers,
     }, 2000)
   }
   const checkIfUserIsInRoom = (id, name) => {
+    if (!selectedRoom) return
     const room = matrixClient.getRoom(selectedRoom)
     id in room.currentState.members
-      ? console.log('user is a member of the selected space')
+      ? setPromoteFeedback('')
       : setPromoteFeedback(name + t(' is not a member of this space. Please invite them first.'))
   }
 
@@ -56,7 +59,7 @@ const RightsManagement = ({ matrixClient, moderationRooms, setPower, fetchUsers,
           return <option key={i} value={users.display_name + ' ' + users.user_id} />
         })}
       </datalist>
-      <LoadingSpinnerButton disabled={fetching || promoteFeedback || !selectedRoom} onClick={promote} onError={onError}>{t('PROMTE TO MODERATOR')}</LoadingSpinnerButton>
+      <LoadingSpinnerButton disabled={fetching || promoteFeedback || !selectedRoom} onClick={promote} onError={onError}>{t('PROMOTE TO MODERATOR')}</LoadingSpinnerButton>
       {promoteFeedback &&
         <p>{promoteFeedback}</p>}
     </section>
