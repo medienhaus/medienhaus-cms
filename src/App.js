@@ -27,13 +27,19 @@ function PrivateRoute ({ children, ...rest }) {
   const auth = useAuth()
   const location = useLocation()
 
-  const [hasAcceptedTerms, setHasAcceptedTerms] = useState(process.env.NODE_ENV === 'development' ? true : null)
+  const [hasAcceptedTerms, setHasAcceptedTerms] = useState(null)
 
   useEffect(() => {
+    // On development environments we will just always assume that the user has accepted T&C
+    if (process.env.NODE_ENV === 'development') {
+      setHasAcceptedTerms(true)
+      return
+    }
+
     makeRequest('rundgang/terms', null, 'GET').then(({ hasAcceptedTerms }) => {
       setHasAcceptedTerms(hasAcceptedTerms)
     })
-  })
+  }, [])
 
   // Still loading information...
   if (auth.user === null || hasAcceptedTerms === null) {
