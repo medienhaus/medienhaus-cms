@@ -8,7 +8,7 @@ import LoadingSpinnerButton from './LoadingSpinnerButton'
 import { useTranslation } from 'react-i18next'
 import Fuse from 'fuse.js'
 import Matrix from '../Matrix'
-
+// @TODO return course if no request button
 let items = uniqBy(mapDeep(struktur, (value, key, parent, context) => {
   // Add "path" parameter to create breadcrumbs from first hierarchy element up to "myself"
   value.path = remove(context._item.path, spaceId => spaceId !== 'children')
@@ -89,7 +89,6 @@ function ContextDropdown ({ onItemChosen, selectedContext, showRequestButton = f
         reset()
         return
       }
-
       onItemChosen(selectedItem.id)
     }
   })

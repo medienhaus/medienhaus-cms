@@ -23,14 +23,14 @@ const Request = () => {
   const profile = auth.user
 
   const changeMsg = e => setMsg(e.target.value)
-  const changeParent = e => setParent(e)
+  const changeParent = e => { console.log(e); setParent(e) }
   const changeContext = e => setContext(e.target.value)
   const changeSupervisor = e => setSupervisor(e.target.value)
   const changeContact = e => setContact(e.target.value)
 
   const onSubmit = async () => {
     setSending(true)
-    const support =
+    const request =
       {
         displayname: `${profile.displayname} (${matrixClient.getUserId()})`,
         supervisor: supervisor,
@@ -40,7 +40,7 @@ const Request = () => {
         msg: msg
       }
     try {
-      await makeRequest('messenger/support', support)
+      await makeRequest('messenger/requestAcc', request)
         .then(msg => {
           console.log(msg)
         })
@@ -76,7 +76,7 @@ const Request = () => {
           </div>
           {errors?.supervisor && t('Please enter the name of the person in charge.')}
           <div>
-            <input {...register('contact', { required: true })} calue={context} type="text" name="contact" id="contact" placeholder={t('UdK (!) email address')} onBlur={changeContact} />
+            <input calue={context} type="text" name="contact" id="contact" placeholder={t('UdK (!) email address')} onBlur={changeContact} />
           </div>
           {errors?.superv && t('Please enter a UdK email address.')}
           <ContextDropdown onItemChosen={changeParent} />
