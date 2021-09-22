@@ -10,7 +10,6 @@ import DisplayContent from './DisplayContent'
 import AddContent from './AddContent'
 import ProjectImage from './ProjectImage'
 import ProjectTitle from './ProjectTitle'
-import PresentType from './PresentType'
 import PublishProject from '../../components/PublishProject'
 import ProjectDescription from './ProjectDescription'
 import { Loading } from '../../components/loading'
@@ -218,10 +217,6 @@ const Create = () => {
     // @TODO setSpaceObject(spaceObject => ({...spaceObject, rooms: [...spaceObject.rooms, ]}))
     return changeTopic
   }
-  const changePresentationType = (newMedienhausMeta) => {
-    console.log(newMedienhausMeta)
-    setMedienhausMeta(newMedienhausMeta)
-  }
 
   if (!matrixClient.isInitialSyncComplete()) return <Loading />
 
@@ -247,21 +242,10 @@ const Create = () => {
             <h3>{t('Project context')}</h3>
             <Category title={title} projectSpace={projectSpace} />
           </section>
-          <section className="present">
-            <h3>{t('Format')}</h3>
-            <p>{t('In what form is your project presented?')}</p>
-            <ul>
-              <li>{t('Analog: in a physical location and without digital elements')}</li>
-              <li>{t('Digital: exclusively in digital space, at no physical location')}</li>
-              <li>{t('Hybrid: both at a physical location and digitally (e.g. by streaming a performance to which guests can also come, etc.)')}</li>
-            </ul>
-            <PresentType presentValue={medienhausMeta?.present} projectSpace={projectSpace} callback={changePresentationType} />
+          <section className="date-venue" id="date">
+            <h3>{t('Date and Venue')}</h3>
+            <DateAndVenue reloadSpace={reloadSpace} projectSpace={projectSpace} events={events === 'depricated' ? events : events?.rooms} matrixClient={matrixClient} />
           </section>
-          {medienhausMeta?.present !== 'digital' &&
-            <section className="date-venue" id="date">
-              <h3>{t('Date and Venue')}</h3>
-              <DateAndVenue reloadSpace={reloadSpace} projectSpace={projectSpace} events={events === 'depricated' ? events : events?.rooms} matrixClient={matrixClient} />
-            </section>}
           <section className="contributors">
             <Collaborators projectSpace={spaceObject?.rooms} members={roomMembers} time={getCurrentTime} startListeningToCollab={() => startListeningToCollab()} />
           </section>
@@ -287,9 +271,9 @@ const Create = () => {
             </select>
             {spaceObject && (description || description === '') ? <ProjectDescription description={description[contentLang]} callback={onChangeDescription} /> : <Loading />}
             {blocks.length === 0
-              ? <AddContent number={0} projectSpace={spaceObject?.rooms.filter(room => room.name === contentLang)[0].room_id} blocks={blocks} reloadSpace={reloadSpace} present={medienhausMeta?.present} />
+              ? <AddContent number={0} projectSpace={spaceObject?.rooms.filter(room => room.name === contentLang)[0].room_id} blocks={blocks} reloadSpace={reloadSpace} />
               : blocks.map((content, i) =>
-                <DisplayContent block={content} index={i} blocks={blocks} projectSpace={spaceObject?.rooms.filter(room => room.name === contentLang)[0].room_id} reloadSpace={reloadSpace} time={getCurrentTime} present={medienhausMeta?.present} key={content + i + content?.lastUpdate} />
+                <DisplayContent block={content} index={i} blocks={blocks} projectSpace={spaceObject?.rooms.filter(room => room.name === contentLang)[0].room_id} reloadSpace={reloadSpace} time={getCurrentTime} key={content + i + content?.lastUpdate} />
               )}
           </section>
           {/* Placeholder to show preview next to editing

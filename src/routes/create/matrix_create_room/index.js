@@ -66,7 +66,7 @@ const createBlock = async (e, content, number, space) => {
         }
         await matrixClient.sendStateEvent(res[0], 'dev.medienhaus.meta', {
           type: content,
-          version: '0.1'
+          version: '0.2'
         })
         return res[0]
       })

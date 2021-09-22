@@ -30,7 +30,7 @@ import { ReactComponent as DateIcon } from '../../../assets/icons/remix/date.svg
 import locations from '../../../assets/data/locations.json'
 // import DisplayPreview from '../../preview/componenets/DisplayPreview'
 
-const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace, time, present, mapComponent }) => {
+const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace, time, mapComponent }) => {
   const [clickedDelete, setClickedDelete] = useState(false)
   const [readOnly, setReadOnly] = useState(false)
   const [loading, setLoading] = useState(false)
@@ -443,7 +443,7 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace, time,
               </button>
             </div>
           </div>
-          {!mapComponent && <AddContent number={index + 1} projectSpace={projectSpace} blocks={blocks} reloadSpace={reloadSpace} present={present} />}
+          {!mapComponent && <AddContent number={index + 1} projectSpace={projectSpace} blocks={blocks} reloadSpace={reloadSpace} />}
         </>
 }
     </>

@@ -9,7 +9,7 @@ import reorder from '../DisplayContent/matrix_reorder_rooms'
 import BigBlueButtonEmbed from './bigBlueButtonEmbed'
 import { useTranslation } from 'react-i18next'
 
-const AddContent = ({ number, projectSpace, blocks, reloadSpace, present }) => {
+const AddContent = ({ number, projectSpace, blocks, reloadSpace }) => {
   const [selectedBlockType, setSelectedBlockType] = useState('')
   const [showBlockTypeSelector, setShowBlockTypeSelector] = useState(false)
   const { t } = useTranslation('content')
@@ -61,12 +61,6 @@ const AddContent = ({ number, projectSpace, blocks, reloadSpace, present }) => {
             <option value="playlist">{t('Playlist')}</option>
             <option value="bbb">{t('BigBlueButton-Session')}</option>
           </optgroup>
-          {/*
-          <optgroup label="Meta">
-            <option value="date">{t('Date & Time')}</option>
-            {present !== 'digital' && <option value="location">{t('Venue')}</option>}
-          </optgroup>
-          */}
         </select>
         <button className="cancel" onClick={(e) => { e.preventDefault(); setShowBlockTypeSelector(false); setSelectedBlockType('') }}>×</button>
       </div>
