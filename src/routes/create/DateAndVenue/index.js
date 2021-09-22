@@ -29,8 +29,7 @@ const DateAndVenue = ({ number, reloadSpace, projectSpace, events, matrixClient 
             content: {
               version: '0.1',
               rundgang: 21,
-              type: type,
-              present: 'analog'
+              type: type
             }
           },
           {
