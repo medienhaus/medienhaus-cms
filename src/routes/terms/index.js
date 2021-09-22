@@ -12,15 +12,12 @@ const Terms = () => {
   const { t } = useTranslation('terms')
   const { from } = location.state || { from: { pathname: '/' } }
 
-  // On development environments we want the checkboxes to be checked by default
-  const initiallyChecked = process.env.NODE_ENV === 'development'
-
-  const [consent0, setConsent0] = useState(initiallyChecked)
-  const [consent1, setConsent1] = useState(initiallyChecked)
-  const [consent2, setConsent2] = useState(initiallyChecked)
-  const [consent3, setConsent3] = useState(initiallyChecked)
-  const [consent4, setConsent4] = useState(initiallyChecked)
-  const [consent6, setConsent6] = useState(initiallyChecked)
+  const [consent0, setConsent0] = useState(false)
+  const [consent1, setConsent1] = useState(false)
+  const [consent2, setConsent2] = useState(false)
+  const [consent3, setConsent3] = useState(false)
+  const [consent4, setConsent4] = useState(false)
+  const [consent6, setConsent6] = useState(false)
 
   const [initialSyncCompleted, setInitialSyncCompleted] = useState(false)
 

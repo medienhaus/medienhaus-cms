@@ -27,7 +27,7 @@ function PrivateRoute ({ children, ...rest }) {
   const auth = useAuth()
   const location = useLocation()
 
-  const [hasAcceptedTerms, setHasAcceptedTerms] = useState(null)
+  const [hasAcceptedTerms, setHasAcceptedTerms] = useState(process.env.NODE_ENV === 'development' ? true : null)
 
   useEffect(() => {
     makeRequest('rundgang/terms', null, 'GET').then(({ hasAcceptedTerms }) => {
