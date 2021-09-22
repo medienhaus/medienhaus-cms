@@ -88,11 +88,10 @@ const InviteUserToSpace = ({ matrixClient, moderationRooms }) => {
           return <option key={i} value={users.display_name + ' ' + users.user_id} />
         })}
       </datalist>
-      <div>
-        {/* @TODO checkbox needs padding and jumps when being clicked */}
-        <label htmlFor="checkbox">{t('Promote user to moderator (this can\'t be undone!)')}</label>
-        <input id="checkbox" name="checkbox" type="checkbox" value={promoteToModerator} onClick={() => setPromoteToModerator(promoteToModerator => !promoteToModerator)} />
-      </div>
+      <select value={promoteToModerator} onChange={(event) => { setPromoteToModerator(event.target.value === 'true') }}>
+        <option value="false">🚫 {t('CANNOT moderate the context')}</option>
+        <option value="true">⚠️ {t('CAN moderate the context')}</option>
+      </select>
       <LoadingSpinnerButton disabled={fetching || inviteFeedback || !selectedRoom} onClick={invite}>{t('INVITE')}</LoadingSpinnerButton>
       {inviteFeedback &&
         <p>{inviteFeedback}</p>}
