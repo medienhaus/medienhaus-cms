@@ -27,7 +27,7 @@ const DateAndVenue = ({ number, reloadSpace, projectSpace, events, matrixClient 
           {
             type: 'dev.medienhaus.meta',
             content: {
-              version: '0.1',
+              version: '0.2',
               rundgang: 21,
               type: type
             }
