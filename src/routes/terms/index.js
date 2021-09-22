@@ -1,12 +1,18 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useHistory } from 'react-router'
 import { useTranslation } from 'react-i18next'
 import { useLocation } from 'react-router-dom'
+import { Loading } from '../../components/loading'
+import Matrix from '../../Matrix'
+import { makeRequest } from '../../Backend'
 
 const Terms = () => {
   const history = useHistory()
   const location = useLocation()
+  const { t } = useTranslation('terms')
+  const { from } = location.state || { from: { pathname: '/' } }
 
+  // On development environments we want the checkboxes to be checked by default
   const initiallyChecked = process.env.NODE_ENV === 'development'
 
   const [consent0, setConsent0] = useState(initiallyChecked)
@@ -15,9 +21,55 @@ const Terms = () => {
   const [consent3, setConsent3] = useState(initiallyChecked)
   const [consent4, setConsent4] = useState(initiallyChecked)
   const [consent6, setConsent6] = useState(initiallyChecked)
-  const { t } = useTranslation('terms')
 
-  const { from } = location.state || { from: { pathname: '/' } }
+  const [initialSyncCompleted, setInitialSyncCompleted] = useState(false)
+
+  useEffect(() => {
+    function checkForInitialSyncCompleted () {
+      if (Matrix.getMatrixClient().isInitialSyncComplete()) {
+        setInitialSyncCompleted(true)
+      } else {
+        setTimeout(checkForInitialSyncCompleted, 250)
+      }
+    }
+
+    if (!initialSyncCompleted) checkForInitialSyncCompleted()
+  }, [initialSyncCompleted])
+
+  // Returns the "terms and conditions" space of this user if they have created one already
+  async function getTermsRoomId () {
+    const answer = await Matrix.getMatrixClient().getJoinedRooms()
+    for (const index in answer.joined_rooms) {
+      const roomId = answer.joined_rooms[index]
+      const metaEvent = await Matrix.getMatrixClient().getStateEvent(roomId, 'dev.medienhaus.meta').catch(e => console.log(e))
+      if (!metaEvent) continue
+      const createEvent = await Matrix.getMatrixClient().getStateEvent(roomId, 'm.room.create').catch(e => console.log(e))
+      if (!createEvent) continue
+
+      if (metaEvent.type === 'termsAndConditions' && createEvent.creator === Matrix.getMatrixClient().getUserId()) {
+        return roomId
+      }
+    }
+  }
+
+  async function createTermsRoom () {
+    return await Matrix.getMatrixClient().createRoom({
+      preset: 'private_chat',
+      name: 'termsAndConditions',
+      room_version: '7',
+      initial_state: [{
+        type: 'dev.medienhaus.meta',
+        content: {
+          version: '0.2',
+          rundgang: 21,
+          type: 'termsAndConditions'
+        }
+      }],
+      visibility: 'private'
+    })
+  }
+
+  if (!initialSyncCompleted) return <Loading />
 
   return (
     <section className="terms">
@@ -48,8 +100,19 @@ const Terms = () => {
       </div>
       <button
         name="submit" type="submit" disabled={!consent0 || !consent1 || !consent2 || !consent3 || !consent4 || !consent6} onClick={() => {
-          localStorage.setItem('terms-consent', true)
-          history.push(from)
+          const acceptTerms = async function () {
+            let termsRoomId = await getTermsRoomId()
+            if (!termsRoomId) {
+              termsRoomId = (await createTermsRoom()).room_id
+            }
+
+            // Tell the backend that we accept the terms
+            await makeRequest('rundgang/terms', { termsRoomId })
+
+            history.push(from)
+          }
+
+          acceptTerms()
         }}
       >{t('ACCEPT & SAVE')}
       </button>
