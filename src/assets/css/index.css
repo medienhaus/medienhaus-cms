@@ -933,6 +933,49 @@ textarea[disabled] {
   border-color: var(--color-no) !important;
 }
 
+.formchooser {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: var(--margin);
+}
+
+.formchooser input[type="radio"]::after {
+  content: attr(name);
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.formchooser input[type="radio"] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-color: var(--color-fg);
+  border-color: var(--color-fg);
+  border-style: solid;
+  border-radius: unset;
+  border-width: calc(var(--margin) * 0.2);
+  color: var(--color-bg);
+  cursor: pointer;
+  opacity: 0.3;
+  padding: calc(var(--margin) * 0.2);
+  text-align: center;
+  width: 100%;
+}
+
+.formchooser input[type="radio"]:checked,
+.formchooser input[type="radio"]:checked + label {
+  cursor: auto;
+  opacity: 1;
+}
+
+.formchooser input[type="radio"]:not(:checked):hover {
+  opacity: 1;
+}
+
+.request #formchooser input[type="radio"] + label {
+  display: none;
+}
+
 .invites > ul,
 .invites > ul > li {
   display: grid;

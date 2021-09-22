@@ -76,9 +76,9 @@ const Moderation = () => {
   return (
     <>
       <section className="request">
-        <div id="formchooser">
-          <input type="radio" id="add-user" name={t('Add Account')} checked={selection === ''} onChange={() => setSelection('')} />
-          <label htmlFor="add-user">{t('Add Account')}</label>
+        <div className="formchooser">
+          <input type="radio" id="requests" name={t('Requests')} checked={selection === ''} onChange={() => setSelection('')} />
+          <label htmlFor="requests">{t('Requests')}</label>
           <input type="radio" id="invite-users" name={t('Invite Users')} value="invite-user" checked={selection === 'invite'} onChange={() => setSelection('invite')} />
           <label htmlFor="invite-users-invite-users">{t('Invite Users')}</label>
           <input type="radio" id="rights-management" name={t('Promote Users')} value="rights-management" checked={selection === 'rights'} onChange={() => setSelection('rights')} />
