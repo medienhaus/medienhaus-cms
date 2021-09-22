@@ -1,0 +1,14 @@
+{
+  "Hello": "Hallo",
+  "Welcome to the Rundgang 2021 content management system!": "Willkommen im Content Management System für den Rundgang 2021!",
+  "countdown": "Nur Projekte, die bis zum 08. Oktober veröffentlicht wurden (d.h. keine Entwürfe), kommen zur Auswahl für das Rundgang 2021 Print-Programm infrage. ",
+  "The Rundgang – Open Days of the Berlin University of the Arts will take place for the first time in both analogue and digital space from 29–31 October 2021. On this platform, you will have the opportunity to create your own projects and thus add information on analogue offers or present digitally created semester projects.": "Der Rundgang der Universität der Künste Berlin findet vom 29.–31. Oktober 2021 zum ersten Mal sowohl im analogen als auch im digitalen Raum statt. Auf dieser Plattform haben Sie die Gelegenheit, Ihre eigenen Projekte anzulegen und so Informationen zu Ihren analog stattfindenden Angeboten hinzuzufügen oder Ihre digital entstandenen Semesterarbeiten zu präsentieren.",
+  "bbbAndPeertube": "Wir bieten Ihnen außerdem die Möglichkeit, über das Videokonferenz Tool BigBlueButton <1>udk/meet</1> den Rundgang-Besucher*innen Termine anzubieten und über <1>udk/stream</1> Videos und Livestreams auf Ihrer eigenen Projektseite einzubinden.",
+  "create new project": "neues Projekt anlegen",
+  "feedback": "Da die Plattform ein neues Tool ist, das auch in Zukunft den Rundgang bereichern kann, freuen wir uns, wenn Sie uns Ihr Feedback über das Formular unter <1>/feedback</1> zusenden.",
+  "support": "Das Feedback wird evaluiert, aber nicht beantwortet. Falls Sie Fragen haben, oder technische Unterstützung bei der Eingabe von Projekten benötigen, füllen Sie bitte das Formular unter <1>/support</1> aus und wir werden uns bei Ihnen melden.",
+  "credits": "Credits und Informationen zum Team sind via <1>/credits</1> zu finden.",
+  " days ": " Tage ",
+  " hours ": " Stunden ",
+  " minutes left …": " Minuten übrig …"
+}

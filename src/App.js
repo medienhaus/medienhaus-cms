@@ -1,157 +1,110 @@
-import { useState } from 'react';
-//import { Link } from 'react-router-dom'
-//import './App.css';
-import './assets/css/index.css';
+import React, { useEffect } from 'react'
+import { BrowserRouter as Router, Route, Switch, Redirect, useLocation } from 'react-router-dom'
 
-function App() {
-  const [title, setTitle] = useState('');
-  const [subject, setSubject] = useState('');
-  const [klasse, setKlasse] = useState('');
-  //const [colab, setColab] = useState('');
-  //const [description, setDescription] = useState('');
+import './assets/css/index.css'
+import Footer from './components/footer'
+import Nav from './components/nav'
+import { Loading } from './components/loading'
 
+import Landing from './routes/landing'
+import Login from './routes/login'
+import Boilerplate from './routes/boilerplate'
+import Projects from './routes/projects'
+import Create from './routes/create'
+import Moderation from './routes/moderation'
+import Support from './routes/support'
+import Feedback from './routes/feedback'
+import Credits from './routes/credits'
+import Terms from './routes/terms'
+import Account from './routes/account'
+// import Request from './routes/request'
+import Preview from './routes/preview'
+
+import { AuthProvider, useAuth } from './Auth'
+import PropTypes from 'prop-types'
+function PrivateRoute ({ children, ...rest }) {
+  const auth = useAuth()
+  const location = useLocation()
+
+  // Still loading...
+  if (auth.user === null) {
+    return <Loading />
+  }
+
+  // Not logged in
+  if (auth.user === false) {
+    return (
+      <Redirect
+        to={{
+          pathname: '/login',
+          state: { from: location }
+        }}
+      />
+    )
+  }
+
+  // Consent not given to terms
+  if (!localStorage.getItem('terms-consent')) {
+    return (
+      <Redirect
+        to={{
+          pathname: '/terms',
+          state: { from: location }
+        }}
+      />
+    )
+  }
+
+  // Logged in - render our actual route components
   return (
-    <>
-      <header>
-        {/*
-        <Link to={auth.user ? '/dashboard' : '/'}>
-          <h1>medienhaus/</h1>
-        </Link>
-        */}
-        <a href='/'>
-          <h1>medienhaus/cms</h1>
-        </a>
-      </header>
-      <main>
-        <form>
-          <div>
-            <label htmlFor="subject">Studiengang</label>
-            <select id="subject" name="subject" value={subject} onChange={(e) => setSubject(e.target.value)}>
-              <option value="vk">VK</option>
-              <option value="act">Schauspiel</option>
-              <option value="clown">Clown</option>
-              <option value="kunst">Kunst</option>
-            </select>
-            {
-            // sollte es hier die möglichkeit geben mehrere auszuwählen? also studiengang übergreifende projekte
-            }
-          </div>
-          <div>
-            <label htmlFor="klasse">Fachklasse</label>
-            <select id="klasse" name="klasse" value={klasse} onChange={(e) => setKlasse(e.target.value)}>
-              <option value="newmedia">New Media</option>
-            </select>
-          </div>
-          <div>
-            <label htmlFor="title">Project Title</label>
-            <input id="title" name="title" placeholder="project title" type="text" value={title} onChange={(e) => setTitle(e.target.value)} />
-          </div>
-          {/*
-          <div>
-            <p id="student">matrixClient.getUserName()</p>
-            <label htmlFor="collab">Collaborators</label>
-            <input id="collab" name="collab" type="text" value={colab} onChange={(e) => setColab(e.target.value)} />
-          </div>
-          */}
-          {
-          // vermutlich sollten auch hier mehrere studierende hinzugefügt werden können, evtl dann direkt matrix users durchsuchen fürs richtige zuordnen
-          }
-          <div className="grid">
-            <button>Add Text</button>
-            <button>Add Image</button>
-            <button>Add Video</button>
-            <button>Add Audio</button>
-            {/*
-            // fetch("https://stream.udk-berlin.de/api/userId/myVideos")
-            */}
-          </div>
-          <div>
-            <label htmlFor="checkbox">Check Box</label>
-            <input id="checkbox" name="checkbox" type="checkbox" />
-          </div>
-          <div>
-            <label htmlFor="color">Add Color</label>
-            <input id="color" name="color" type="color" />
-          </div>
-          <div>
-            <label htmlFor="date">Date</label>
-            <input id="date" name="date" type="date" />
-          </div>
-          <div>
-            <label htmlFor="email">Email</label>
-            <input id="email" name="email" placeholder="u.name@udk-berlin.de" type="email" />
-          </div>
-          <div>
-            <label htmlFor="file">Files</label>
-            <input id="file" name="file" type="file" />
-          </div>
-          <div>
-            <label htmlFor="number">Number</label>
-            <input id="number" name="number" placeholder="0" type="number" />
-          </div>
-          <div>
-            <label htmlFor="password">Password</label>
-            <input id="password" name="password" placeholder="••••••••••••••••••••••••" type="password" />
-          </div>
-          <div>
-            <label htmlFor="radio01">Radio #01</label>
-            <input id="radio01" name="radio" type="radio" />
-            <label htmlFor="radio02">Radio #02</label>
-            <input id="radio02" name="radio" type="radio" />
-            <label htmlFor="radio03">Radio #03</label>
-            <input id="radio03" name="radio" type="radio" />
-          </div>
-          <div>
-            <label htmlFor="range">Range</label>
-            <input id="range" name="range" type="range" />
-          </div>
-          <div>
-            <label htmlFor="search">Search</label>
-            <input id="search" name="search" placeholder="search …" type="search" />
-          </div>
-          <div>
-            <label htmlFor="submit">Submit</label>
-            <input id="submit" name="submit" type="submit" value="SUBMIT" />
-          </div>
-          <div>
-            <label htmlFor="tel">Tel</label>
-            <input id="tel" name="tel" placeholder="+49 30 3185 0" type="tel" />
-          </div>
-          <div>
-            <label htmlFor="text">Text</label>
-            <input id="text" name="text" placeholder="some text" type="text" />
-          </div>
-          <div>
-            <label htmlFor="time">Time</label>
-            <input id="time" name="time" type="time" />
-          </div>
-          <div>
-            <label htmlFor="url">URL</label>
-            <input id="url" name="url" placeholder="https://udk-berlin.de/example/" type="url" />
-          </div>
-        </form>
-      </main>
-      <nav>
-        <div>
-          <div>
-            <a href='/'>/hello</a>
-          </div>
-          <div>
-            <a href='/'>/world</a>
-            <a href='/'>/sidebar</a>
-            <a href='/'>/links</a>
-          </div>
-        </div>
-      </nav>
-      <section>
-        <button>EN</button>
-        <button>DE</button>
-      </section>
-      <footer>
-        <p className="copyleft">&#x1f12f; 2021 <a href="mailto:info@medienhaus.udk-berlin.de?subject=medienhaus/cms" rel="nofollow noopener noreferrer"><strong>medienhaus/</strong></a></p>
-      </footer>
-    </>
-  );
+    <Route {...rest}>{children}</Route>
+  )
 }
 
-export default App;
+function ScrollToTop () {
+  const { pathname } = useLocation()
+
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [pathname])
+
+  return null
+}
+
+PrivateRoute.propTypes = {
+  children: PropTypes.element
+}
+
+function App () {
+  return (
+    <>
+      <AuthProvider>
+        <Router basename="/rundgang">
+          <ScrollToTop />
+          <Nav />
+          <main>
+            <Switch>
+              <Route path="/" exact component={Landing} />
+              <Route path="/login" component={Login} />
+              <Route path="/terms" component={Terms} />
+              <PrivateRoute path="/account" component={Account} />
+              <PrivateRoute path="/boilerplate" component={Boilerplate} />
+              <PrivateRoute path="/projects" component={Projects} />
+              <PrivateRoute path="/create/:spaceId" component={Create} />
+              <PrivateRoute path="/preview/:spaceId" component={Preview} />
+              <PrivateRoute path="/create" component={Create} />
+              <PrivateRoute path="/moderation" component={Moderation} />
+              <PrivateRoute path="/support" component={Support} />
+              <PrivateRoute path="/feedback" component={Feedback} />
+              {/* <PrivateRoute path="/request" component={Request} /> */}
+              <PrivateRoute path="/credits" component={Credits} />
+            </Switch>
+          </main>
+          <Footer />
+        </Router>
+      </AuthProvider>
+    </>
+  )
+}
+
+export default App

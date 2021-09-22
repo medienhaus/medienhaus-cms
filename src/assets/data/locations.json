@@ -1,0 +1,70 @@
+[
+    {
+        "name": "Hardenbergstr. 33, 10623 Berlin",
+        "coordinates": "52.50893832945276, 13.328045756372312"
+    },
+    {
+        "name": "Universitätsbibliothek im Volkswagen-Haus, Fasanenstr. 88, 10624 Berlin",
+        "coordinates": "52.51035490505003, 13.33019394102799"
+    },
+    {
+        "name": "Str. des 17. Juni 118, 10623 Berlin",
+        "coordinates": "52.513904723230915, 13.329303512192054"
+    },
+    {
+        "name": "Medienhaus, Grunewaldstr. 2–5, 10823 Berlin",
+        "coordinates": "52.49082496403345, 13.3595672852078"
+    },
+    {
+        "name": "Lietzenburger Str. 45, 10789 Berlin",
+        "coordinates": "52.50001283127866, 13.332853627535915"
+    },
+    {
+        "name": "Mierendorffstr. 30, 10589 Berlin",
+        "coordinates": "52.52472611550576, 13.303810927536668"
+    },
+    {
+        "name": "Konzertsaal der UdK Berlin, Hardenbergstr./Ecke Fasanenstr., 10623 Berlin",
+        "coordinates": "52.508846909728646, 13.328002841028002"
+    },
+    {
+        "name": "Karlsruher Str. 7a, 10711 Berlin",
+        "coordinates": "52.49978324397309, 13.29472164102763"
+    },
+    {
+        "name": "Hardenbergstr. 41, 10623 Berlin",
+        "coordinates": "52.51136993151621, 13.32335888335587"
+    },
+    {
+        "name": "Bundesallee 1–12, 10719 Berlin",
+        "coordinates": "52.49884512443705, 13.32995634288022"
+    },
+    {
+        "name": "Fasanenstr. 1b, 10623 Berlin",
+        "coordinates": "52.50919098886368, 13.32846072753614"
+    },
+    {
+        "name": "Jazz-Institut Berlin, Einsteinufer 43-53, 10587 Berlin",
+        "coordinates": "52.51709564151452, 13.323078790766152"
+    },
+    {
+        "name": "designstransfer, Einsteinufer 43-53, 10587 Berlin",
+        "coordinates": "52.51732414757127, 13.322746196847742"
+    },
+    {
+        "name": "Einsteinufer 43–53, 10587 Berlin",
+        "coordinates": "52.517271917720215, 13.322113195519155"
+    },
+    {
+        "name": "UNI.T, Fasanenstr. 1b, 10623 Berlin",
+        "coordinates": "52.51009829740333, 13.329050794009817"
+    },
+    {
+        "name": "HZT Berlin, Uferstr. 23, 13357 Berlin",
+        "coordinates": "52.551912998961505, 13.374770994996302"
+    },
+    {
+        "name": "Grainauer Str. 12, 10777 Berlin",
+        "coordinates": "52.496642889026305, 13.334328574756974"
+    }
+]
