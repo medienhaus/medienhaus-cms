@@ -128,8 +128,8 @@ function ContextDropdown ({ onItemChosen, selectedContext, showRequestButton = f
         {...getMenuProps()}
         style={
           isOpen
-            ? { display: 'block', position: 'absolute', overflow: 'auto', maxHeight: '50vh', backgroundColor: 'var(--color-bg)', width: '100%', border: 'solid black', borderWidth: '0 3px 3px 3px' }
-            : { display: 'none', position: 'absolute', overflow: 'auto', maxHeight: '50vh', backgroundColor: 'var(--color-bg)', width: '100%', border: 'solid black', borderWidth: '0 3px 3px 3px' }
+            ? { display: 'block', position: 'absolute', overflow: 'auto', maxHeight: '50vh', backgroundColor: 'var(--color-bg)', width: '100%', border: 'solid black', borderWidth: '0 3px 3px 3px', zIndex: 9999 }
+            : { display: 'none', position: 'absolute', overflow: 'auto', maxHeight: '50vh', backgroundColor: 'var(--color-bg)', width: '100%', border: 'solid black', borderWidth: '0 3px 3px 3px', zIndex: 9999 }
         }
       >
         {isOpen && currentlyShownInputItems.map((item, index) => (
