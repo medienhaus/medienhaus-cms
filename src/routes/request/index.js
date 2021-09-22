@@ -13,6 +13,8 @@ const Request = () => {
   const [parent, setParent] = useState()
   const [sending, setSending] = useState(false)
   const [submitted, setSubmitted] = useState(false)
+  const [supervisor, setSupervisor] = useState('')
+  const [contact, setContact] = useState('')
   const { t } = useTranslation('request')
   const matrixClient = Matrix.getMatrixClient()
 
@@ -20,20 +22,19 @@ const Request = () => {
   const profile = auth.user
 
   const changeMsg = e => setMsg(e.target.value)
-  const changeParent = e => setParent(e.target.value)
+  const changeParent = e => setParent(e)
   const changeContext = e => setContext(e.target.value)
+  const changeSupervisor = e => setSupervisor(e.target.value)
+  const changeContact = e => setContact(e.target.value)
 
-  const getContextSpaces = async () => {
-    console.log(await matrixClient.getSpaceSummary('!rMmnCTBTgMPPDQMaFr:dev.medienhaus.udk-berlin.de'))
-  }
-
-  getContextSpaces()
   const onSubmit = async () => {
     setSending(true)
     const support =
       {
         displayname: `${profile.displayname} (${matrixClient.getUserId()})`,
+        supervisor: supervisor,
         parent: parent,
+        contact: contact,
         context: context,
         msg: msg
       }
@@ -63,13 +64,21 @@ const Request = () => {
   return (
     <>
       <section className="support">
-        <p>{t('In case you are trying to find a context room but can´t find it, you can request it here.')}</p>
+        <p>{t('In case you are trying to find a context room but can\'t find it, you can request it here.')}</p>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div>
-            <input {...register('context', { required: true })} calue={context} type="text" name="context" id="context" placeholder="name of class" onBlur={changeContext} />
+            <input {...register('context', { required: true })} calue={context} type="text" name="context" id="context" placeholder={t('name of class')} onBlur={changeContext} />
           </div>
-          {errors?.operatingSystem && t('Please enter the name of the class.')}
-          <ContextDropdown callback={changeParent} />
+          {errors?.context && t('Please enter the name of the class.')}
+          <div>
+            <input {...register('supervisor', { required: true })} calue={context} type="text" name="supervisor" id="supervisor" placeholder={t('supervisor')} onBlur={changeSupervisor} />
+          </div>
+          {errors?.supervisor && t('Please enter the name of the person in charge.')}
+          <div>
+            <input {...register('contact', { required: true })} calue={context} type="text" name="contact" id="contact" placeholder={t('UdK (!) email address')} onBlur={changeContact} />
+          </div>
+          {errors?.superv && t('Please enter a UdK email address.')}
+          <ContextDropdown onItemChosen={changeParent} />
           {errors?.browser && t('Please select a parent context.')}
           <textarea name="messageInput" placeholder={t('Additional information')} rows="7" spellCheck="true" value={msg} onChange={changeMsg} />
           {errors?.messageInput && t('This field can’t be empty.')}
