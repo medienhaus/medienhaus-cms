@@ -78,7 +78,7 @@ const Request = () => {
           <div>
             <input {...register('contact', { required: true })} value={contact} type="text" name="contact" id="contact" placeholder={t('UdK (!) email address')} onChange={changeContact} />
           </div>
-          {errors?.supervisor && t('Please enter a UdK email address.')}
+          {errors?.contaact && t('Please enter a UdK email address.')}
           <div>
             <input {...register('parent', { required: true })} value={parent} type="text" name="parent" id="parent" placeholder={t('Parent space, e.g. Faculty Design.')} onChange={changeParent} />
             {/* @TODO Needs hint or longer explanation what this means */}
