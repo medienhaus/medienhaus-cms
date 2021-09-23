@@ -25,7 +25,7 @@ const AddLocation = ({ number, projectSpace, onBlockWasAddedSuccessfully, callba
     onBlockWasAddedSuccessfully()
     setLoading(false)
   }
-
+  console.log(selectedLocation)
   return (
     <>
       <select name="location-select" value={selectedLocation} id="location-select" onChange={(e) => setSelectedLocation(e.target.value)}>
@@ -34,6 +34,7 @@ const AddLocation = ({ number, projectSpace, onBlockWasAddedSuccessfully, callba
         {locations.map(location => <option value={location.coordinates} key={location.coordinates}>{location.name}</option>)}
       </select>
       <input type="text" placeholder={t('room number or specific location')} onChange={(e) => setRoom(e.target.value)} />
+      {selectedLocation === '0.0, 0.0' && <div>custom location</div>}
       <div className="confirmation">
         <button className="cancel" onClick={() => { callback() }}>{t('CANCEL')}</button>
         <LoadingSpinnerButton disabled={loading || !selectedLocation || (selectedLocation === '0.0, 0.0' && !room)} onClick={handleSubmit}>{t('SAVE')}</LoadingSpinnerButton>
