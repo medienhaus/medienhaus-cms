@@ -668,6 +668,13 @@ textarea[disabled] {
   color: var(--color-fg);
 }
 
+.checkboxWrapper{
+  display: grid;
+  align-items: center;
+  grid-gap: var(--margin);
+  grid-template-columns: minmax(10ch, auto) 1fr;
+}
+
 /*
 .confirm {
   background-color: var(--color-fg);

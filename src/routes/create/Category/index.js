@@ -74,6 +74,16 @@ const Category = ({ title, projectSpace }) => {
     projectSpaceMetaEvent.context = contextSpaceId
     await matrixClient.sendStateEvent(projectSpace, 'dev.medienhaus.meta', projectSpaceMetaEvent)
   }
+  const FreeContext = () => {
+    return (
+
+      <div className="checkboxWrapper">
+        <label htmlFor="checkbox">{t('Add this project to a free context.')}</label>
+        <input id="checkbox" name="checkbox" type="checkbox" />
+      </div>
+
+    )
+  }
 
   if (loading) { return <Loading /> }
 
@@ -86,6 +96,7 @@ const Category = ({ title, projectSpace }) => {
       <div style={{ position: 'relative' }}>
         <ContextDropdown onItemChosen={onContextChosen} selectedContext={currentContext} showRequestButton />
       </div>
+      <FreeContext />
       {/* {subject !== '' && !member && <Knock room={room} callback={callback} />} */}
     </>
   )
