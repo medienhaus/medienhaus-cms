@@ -15,7 +15,7 @@ const Login = () => {
 
   const auth = useAuth()
 
-  const { from } = location.state || { from: { pathname: !localStorage.getItem('terms-consent') ? '/terms' : '/' } }
+  const { from } = location.state || { from: { pathname: '/' } }
 
   const onSubmit = data => {
     if (isLoading) { return }
