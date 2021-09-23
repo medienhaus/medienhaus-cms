@@ -373,12 +373,11 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace, time,
                                       )
                                     : json.type === 'heading'
                                       ? <div className="center">
-                                        <input
-                                          type="text"
+                                        <TextareaAutosize
+                                          minRows={6}
                                           value={content}
                                           onChange={(e) => {
                                             setContent(e.target.value)
-                                            console.log(content)
                                           }}
                                           onBlur={(e) => {
                                             if (content !== cms?.body) {

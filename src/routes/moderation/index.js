@@ -12,7 +12,7 @@ const Moderation = () => {
   const { joinedSpaces, spacesErr, fetchSpaces } = useJoinedSpaces(false)
   const [moderationRooms, setModerationRooms] = useState()
   const [userSearch, setUserSearch] = useState([])
-  const [selection, setSelection] = useState('')
+  // const [selection, setSelection] = useState('')
   const [fetching, setFetching] = useState(false)
   const matrixClient = Matrix.getMatrixClient()
   const { t } = useTranslation()
@@ -68,7 +68,7 @@ const Moderation = () => {
       return <Requests roomId={request.room_id} roomName={request.name} userId={user.userId} userName={user.name} matrixClient={matrixClient} key={index} />
     })
   }
-
+  /* Placeholder will be needed in the future
   const renderSelection = () => {
     switch (selection) {
       case 'invite':
@@ -82,7 +82,6 @@ const Moderation = () => {
               <section className="requests">
                 {moderationRooms.map((request, index) => <React.Fragment key={request.name}><h3>{request.name}</h3><GetRequestPerRoom request={request} key={index} /></React.Fragment>)}
               </section>
-              {/* eslint-disable-next-line react/jsx-closing-tag-location */}
             </>
             : (
               <div>
@@ -92,11 +91,13 @@ const Moderation = () => {
         )
     }
   }
+  */
 
   if (fetchSpaces || !matrixClient.isInitialSyncComplete()) return <Loading />
   if (spacesErr) return <p>{spacesErr}</p>
   return (
     <>
+      {/*
       <section className="request">
         <select value={selection} onChange={(e) => setSelection(e.target.value)}>
           <option id="requests" value="" onChange={() => setSelection('')}>{t('Requests')}</option>
@@ -105,8 +106,25 @@ const Moderation = () => {
           <option id="rights-management" value="rights" onChange={() => setSelection('rights')}>
             {t('Promote Users')}</option>
         </select>
+
       </section>
-      {renderSelection()}
+      */}
+      <h2>{t('Accept user requests')}</h2>
+      {moderationRooms.length > 0
+        ? <>
+          <section className="requests">
+            {moderationRooms.map((request, index) => <React.Fragment key={request.name}><h3>{request.name}</h3><GetRequestPerRoom request={request} key={index} /></React.Fragment>)}
+          </section>
+        </>
+        : (
+          <div>
+            {t('Looks like you are not moderating any spaces.')}
+          </div>)}
+      <hr />
+      <InviteUserToSpace matrixClient={matrixClient} moderationRooms={moderationRooms} setPower={setPower} fetchUsers={fetchUsers} fetching={fetching} userSearch={userSearch} />
+      <hr />
+      <RightsManagement matrixClient={matrixClient} moderationRooms={moderationRooms} setPower={setPower} fetchUsers={fetchUsers} fetching={fetching} userSearch={userSearch} />
+
     </>
   )
 }
