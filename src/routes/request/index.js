@@ -38,7 +38,6 @@ const Request = () => {
         context: context,
         msg: msg
       }
-    console.log(request)
     try {
       await makeRequest('messenger/requestContext', request)
         .then(msg => {
