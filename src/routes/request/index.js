@@ -1,10 +1,9 @@
 import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
-import { useTranslation } from 'react-i18next'
+import { useTranslation, Trans } from 'react-i18next'
 import { makeRequest } from '../../Backend'
 import Matrix from '../../Matrix'
 import { useAuth } from '../../Auth'
-import ContextDropdown from '../../components/ContextDropdown'
 
 const Request = () => {
   const { register, formState: { errors }, handleSubmit } = useForm()
@@ -62,10 +61,11 @@ const Request = () => {
       </section>
     )
   }
+
   return (
     <>
       <section className="support">
-        <p>{t('In case you are trying to find a context room but can\'t find it, you can request it here.')}</p>
+        <p><Trans i18nkey="introduction">In case you are trying to find a context room but can\'t find it, you can request it here.</Trans></p>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div>
             <input {...register('context', { required: true })} calue={context} type="text" name="context" id="context" placeholder={t('name of context')} onBlur={changeContext} />
@@ -78,13 +78,17 @@ const Request = () => {
           <div>
             <input calue={context} type="text" name="contact" id="contact" placeholder={t('UdK (!) email address')} onBlur={changeContact} />
           </div>
-          {errors?.superv && t('Please enter a UdK email address.')}
-          <ContextDropdown onItemChosen={changeParent} />
-          {errors?.browser && t('Please select a parent context.')}
+          {errors?.supervisor && t('Please enter a UdK email address.')}
+          <div>
+            <input calue={context} type="text" name="parent" id="parent" placeholder={t('Parent space, e.g. Faculty Design.')} onBlur={changeParent} />
+            {/* @TODO Needs hint or longer explanation what this means */}
+          </div>
+          {errors?.parent && t('Please enter a parent space. For example the faculty in which the class is taking place.')}
           <textarea name="messageInput" placeholder={t('additional information')} rows="7" spellCheck="true" value={msg} onChange={changeMsg} />
           <button type="submit" disabled={sending}>{t('SUBMIT')}</button>
         </form>
         {feedback}
+        {errors}
       </section>
     </>
   )
