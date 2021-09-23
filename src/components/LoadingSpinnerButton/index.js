@@ -21,7 +21,6 @@ const LoadingSpinnerButton = ({ className, disabled, onClick: callback, style, c
       await callback()
     } catch (err) {
       console.log(err)
-      onError(err)
     } finally {
       if (isMounted.current) {
         setLoading(false)
