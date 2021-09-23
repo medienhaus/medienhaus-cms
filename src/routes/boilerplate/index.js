@@ -1,5 +1,8 @@
 import React, { useState } from 'react'
 import ContextDropdown from '../../components/ContextDropdown'
+import mapDeep from 'deepdash/es/mapDeep'
+import struktur from '../../struktur'
+import filterDeep from 'deepdash/es/filterDeep'
 
 const Boilerplate = () => {
   const [title, setTitle] = useState('')
@@ -13,6 +16,21 @@ const Boilerplate = () => {
         <div style={{ display: 'block', position: 'relative' }}>
           <ContextDropdown />
         </div>
+      </div>
+      <div>
+        <label htmlFor="subject">Kontext (ohne "courses")</label>
+        <select>
+          {mapDeep(filterDeep(struktur['!TCqCDYYsBUxmjWOZWV:content.udk-berlin.de'].children, (value, key, parent, context) => {
+            // Exclude all "courses"
+            if (value?.type === 'course') return false
+            return true
+          }, { childrenPath: 'children', includeRoot: false, rootIsChildren: true }), (value, key, parent, context) => {
+            value.name = ' --- '.repeat(context.depth - 1) + value.name
+            return value
+          }, { childrenPath: 'children', includeRoot: false, rootIsChildren: true }).map(x => (
+            <option key={x.id} value={x.id}>{x.name}</option>
+          ))}
+        </select>
       </div>
       <div>
         <label htmlFor="klasse">Fachklasse</label>
