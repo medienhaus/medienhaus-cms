@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { BrowserRouter as Router, Route, Switch, Redirect, useLocation } from 'react-router-dom'
 
 import './assets/css/index.css'
@@ -22,12 +22,27 @@ import Preview from './routes/preview'
 
 import { AuthProvider, useAuth } from './Auth'
 import PropTypes from 'prop-types'
+import { makeRequest } from './Backend'
 function PrivateRoute ({ children, ...rest }) {
   const auth = useAuth()
   const location = useLocation()
 
-  // Still loading...
-  if (auth.user === null) {
+  const [hasAcceptedTerms, setHasAcceptedTerms] = useState(null)
+
+  useEffect(() => {
+    // On development environments we will just always assume that the user has accepted T&C
+    if (process.env.NODE_ENV === 'development') {
+      setHasAcceptedTerms(true)
+      return
+    }
+
+    makeRequest('rundgang/terms', null, 'GET').then(({ hasAcceptedTerms }) => {
+      setHasAcceptedTerms(hasAcceptedTerms)
+    })
+  }, [])
+
+  // Still loading information...
+  if (auth.user === null || hasAcceptedTerms === null) {
     return <Loading />
   }
 
@@ -44,7 +59,7 @@ function PrivateRoute ({ children, ...rest }) {
   }
 
   // Consent not given to terms
-  if (!localStorage.getItem('terms-consent')) {
+  if (!hasAcceptedTerms) {
     return (
       <Redirect
         to={{
