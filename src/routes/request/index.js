@@ -68,19 +68,19 @@ const Request = () => {
         <p><Trans i18nkey="introduction">In case you are trying to find a context room but can\'t find it, you can request it here.</Trans></p>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div>
-            <input {...register('context', { required: true })} calue={context} type="text" name="context" id="context" placeholder={t('name of context')} onBlur={changeContext} />
+            <input {...register('context', { required: true })} value={context} type="text" name="context" id="context" placeholder={t('name of context')} onBlur={changeContext} />
           </div>
           {errors?.context && t('Please enter the name of the context.')}
           <div>
-            <input {...register('supervisor', { required: true })} calue={context} type="text" name="supervisor" id="supervisor" placeholder={t('supervisor')} onBlur={changeSupervisor} />
+            <input {...register('supervisor', { required: true })} value={context} type="text" name="supervisor" id="supervisor" placeholder={t('supervisor')} onBlur={changeSupervisor} />
           </div>
           {errors?.supervisor && t('Please enter the name of the person in charge.')}
           <div>
-            <input calue={context} type="text" name="contact" id="contact" placeholder={t('UdK (!) email address')} onBlur={changeContact} />
+            <input {...register('contact', { required: true })} value={context} type="text" name="contact" id="contact" placeholder={t('UdK (!) email address')} onBlur={changeContact} />
           </div>
           {errors?.supervisor && t('Please enter a UdK email address.')}
           <div>
-            <input calue={context} type="text" name="parent" id="parent" placeholder={t('Parent space, e.g. Faculty Design.')} onBlur={changeParent} />
+            <input {...register('parent', { required: true })} value={parent} type="text" name="parent" id="parent" placeholder={t('Parent space, e.g. Faculty Design.')} onBlur={changeParent} />
             {/* @TODO Needs hint or longer explanation what this means */}
           </div>
           {errors?.parent && t('Please enter a parent space. For example the faculty in which the class is taking place.')}
@@ -88,7 +88,6 @@ const Request = () => {
           <button type="submit" disabled={sending}>{t('SUBMIT')}</button>
         </form>
         {feedback}
-        {errors}
       </section>
     </>
   )
