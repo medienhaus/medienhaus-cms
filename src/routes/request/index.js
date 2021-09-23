@@ -65,7 +65,7 @@ const Request = () => {
   return (
     <>
       <section className="support">
-        <p><Trans i18nkey="introduction">In case you are trying to find a context room but can\'t find it, you can request it here.</Trans></p>
+        <p><Trans i18nkey="introduction">In case you are trying to find a context room but can't find it, you can request it here.</Trans></p>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div>
             <input {...register('context', { required: true })} value={context} type="text" name="context" id="context" placeholder={t('name of context')} onChange={changeContext} />
