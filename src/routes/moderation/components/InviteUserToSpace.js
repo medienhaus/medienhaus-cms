@@ -1,47 +1,14 @@
 import React, { useState } from 'react'
-import { MatrixEvent } from 'matrix-js-sdk'
 import LoadingSpinnerButton from '../../../components/LoadingSpinnerButton'
 import { useTranslation } from 'react-i18next'
 
-const InviteUserToSpace = ({ matrixClient, moderationRooms }) => {
+const InviteUserToSpace = ({ matrixClient, moderationRooms, setPower, fetchUsers, fetching, userSearch }) => {
   const [promoteToModerator, setPromoteToModerator] = useState(false)
   const [selectedRoom, setSelectedRoom] = useState(false)
   const [userToInvite, setUserToInvite] = useState('')
-  const [userSearch, setUserSearch] = useState([])
-  const [fetching, setFetching] = useState(false)
   const [inviteFeedback, setInviteFeedback] = useState('')
   const { t } = useTranslation()
 
-  const fetchUsers = async (e, search) => {
-    e.preventDefault()
-    setFetching(true)
-    try {
-      const users = await matrixClient.searchUserDirectory({ term: search })
-      // we only update the state if the returned array has entries, to be able to check if users a matrix users or not further down in the code (otherwise the array gets set to [] as soon as you selected an option from the datalist)
-      users.results.length > 0 && setUserSearch(users.results)
-    } catch (err) {
-      console.error('Error whhile trying to fetch users: ' + err)
-    } finally {
-      setFetching(false)
-    }
-  }
-
-  const setPower = async (roomId, userId, level) => {
-    console.log('changing power level for ' + userId)
-    matrixClient.getStateEvent(roomId, 'm.room.power_levels', '').then(async (res) => {
-      const powerEvent = new MatrixEvent({
-        type: 'm.room.power_levels',
-        content: res
-      }
-      )
-      try {
-        // something here is going wrong for collab > 2
-        await matrixClient.setPowerLevel(roomId, userId, level, powerEvent)
-      } catch (err) {
-        console.error(err)
-      }
-    })
-  }
   const invite = async () => {
     // @TODO check why userToInvite is not cleared
     const id = userToInvite.substring(userToInvite.lastIndexOf(' ') + 1)
@@ -50,7 +17,7 @@ const InviteUserToSpace = ({ matrixClient, moderationRooms }) => {
       try {
         await matrixClient.invite(selectedRoom, id)
         promoteToModerator && setPower(selectedRoom, id, 50)
-        setInviteFeedback('invited' + name + ' successfully')
+        setInviteFeedback('invited ' + name + ' successfully')
         setTimeout(() => {
           setInviteFeedback('')
           setUserToInvite('')

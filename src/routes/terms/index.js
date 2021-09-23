@@ -1,27 +1,76 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useHistory } from 'react-router'
 import { useTranslation } from 'react-i18next'
 import { useLocation } from 'react-router-dom'
+import { Loading } from '../../components/loading'
+import Matrix from '../../Matrix'
+import { makeRequest } from '../../Backend'
 
 const Terms = () => {
   const history = useHistory()
   const location = useLocation()
-
-  const initiallyChecked = process.env.NODE_ENV === 'development'
-
-  const [consent0, setConsent0] = useState(initiallyChecked)
-  const [consent1, setConsent1] = useState(initiallyChecked)
-  const [consent2, setConsent2] = useState(initiallyChecked)
-  const [consent3, setConsent3] = useState(initiallyChecked)
-  const [consent4, setConsent4] = useState(initiallyChecked)
-  const [consent6, setConsent6] = useState(initiallyChecked)
   const { t } = useTranslation('terms')
-
   const { from } = location.state || { from: { pathname: '/' } }
+
+  const [consent0, setConsent0] = useState(false)
+  const [consent1, setConsent1] = useState(false)
+  const [consent2, setConsent2] = useState(false)
+  const [consent3, setConsent3] = useState(false)
+  const [consent4, setConsent4] = useState(false)
+  const [consent6, setConsent6] = useState(false)
+
+  const [initialSyncCompleted, setInitialSyncCompleted] = useState(false)
+
+  useEffect(() => {
+    function checkForInitialSyncCompleted () {
+      if (Matrix.getMatrixClient().isInitialSyncComplete()) {
+        setInitialSyncCompleted(true)
+      } else {
+        setTimeout(checkForInitialSyncCompleted, 250)
+      }
+    }
+
+    if (!initialSyncCompleted) checkForInitialSyncCompleted()
+  }, [initialSyncCompleted])
+
+  // Returns the "terms and conditions" space of this user if they have created one already
+  async function getTermsRoomId () {
+    const answer = await Matrix.getMatrixClient().getJoinedRooms()
+    for (const index in answer.joined_rooms) {
+      const roomId = answer.joined_rooms[index]
+      const metaEvent = await Matrix.getMatrixClient().getStateEvent(roomId, 'dev.medienhaus.meta').catch(e => console.log(e))
+      if (!metaEvent) continue
+      const createEvent = await Matrix.getMatrixClient().getStateEvent(roomId, 'm.room.create').catch(e => console.log(e))
+      if (!createEvent) continue
+
+      if (metaEvent.type === 'termsAndConditions' && createEvent.creator === Matrix.getMatrixClient().getUserId()) {
+        return roomId
+      }
+    }
+  }
+
+  async function createTermsRoom () {
+    return await Matrix.getMatrixClient().createRoom({
+      preset: 'private_chat',
+      name: 'termsAndConditions',
+      room_version: '7',
+      initial_state: [{
+        type: 'dev.medienhaus.meta',
+        content: {
+          version: '0.2',
+          rundgang: 21,
+          type: 'termsAndConditions'
+        }
+      }],
+      visibility: 'private'
+    })
+  }
+
+  if (!initialSyncCompleted) return <Loading />
 
   return (
     <section className="terms">
-      <p>{t('Before uploading any content, we kindly ask you to read through and accept the following terms & conditions and content violation policies. You only have to do this twice.')}</p>
+      <p>{t('Before uploading any content, we kindly ask you to read through and accept the following terms & conditions and content violation policies.')}</p>
       <div>
         <input id="checkbox0" name="checkbox0" type="checkbox" checked={consent0} onChange={() => setConsent0(consent0 => !consent0)} />
         <label htmlFor="checkbox0">{t('I (we) hereby confirm that the rights to the image, video and/or sound material uploaded here belong to me (us) and that I (we) have all the rights required to make the image, video and/or sound material publicly accessible, to reproduce, distribute and exhibit it as part of the tour of the Berlin University of the Arts. I (we) confirm that the use of the uploaded image, video and/or sound material for this purpose does not infringe any third-party rights, in particular copyright, ancillary copyright, trademark or patent rights, title protection rights, trade secrets, personal rights or other rights or property rights of third parties.')}</label>
@@ -48,8 +97,19 @@ const Terms = () => {
       </div>
       <button
         name="submit" type="submit" disabled={!consent0 || !consent1 || !consent2 || !consent3 || !consent4 || !consent6} onClick={() => {
-          localStorage.setItem('terms-consent', true)
-          history.push(from)
+          const acceptTerms = async function () {
+            let termsRoomId = await getTermsRoomId()
+            if (!termsRoomId) {
+              termsRoomId = (await createTermsRoom()).room_id
+            }
+
+            // Tell the backend that we accept the terms
+            await makeRequest('rundgang/terms', { termsRoomId })
+
+            history.push(from)
+          }
+
+          acceptTerms()
         }}
       >{t('ACCEPT & SAVE')}
       </button>

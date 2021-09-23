@@ -3,8 +3,11 @@ function makeRequest (url, payload, method = 'POST', authenticate = true) {
     method: method,
     headers: {
       'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(payload)
+    }
+  }
+
+  if (payload) {
+    requestMetadata.body = JSON.stringify(payload)
   }
 
   if (authenticate) {
