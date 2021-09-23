@@ -9,7 +9,7 @@ const Request = () => {
   const { register, formState: { errors }, handleSubmit } = useForm()
   const [msg, setMsg] = useState('')
   const [context, setContext] = useState()
-  const [parent, setParent] = useState()
+  const [parent, setParent] = useState('')
   const [sending, setSending] = useState(false)
   const [submitted, setSubmitted] = useState(false)
   const [supervisor, setSupervisor] = useState('')
@@ -22,7 +22,7 @@ const Request = () => {
   const profile = auth.user
 
   const changeMsg = e => setMsg(e.target.value)
-  const changeParent = e => { console.log(e); setParent(e) }
+  const changeParent = e => setParent(e.target.value)
   const changeContext = e => setContext(e.target.value)
   const changeSupervisor = e => setSupervisor(e.target.value)
   const changeContact = e => setContact(e.target.value)
@@ -38,8 +38,9 @@ const Request = () => {
         context: context,
         msg: msg
       }
+    console.log(request)
     try {
-      await makeRequest('messenger/requestAcc', request)
+      await makeRequest('messenger/requestContext', request)
         .then(msg => {
           console.log(msg)
         })
@@ -68,19 +69,19 @@ const Request = () => {
         <p><Trans i18nkey="introduction">In case you are trying to find a context room but can\'t find it, you can request it here.</Trans></p>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div>
-            <input {...register('context', { required: true })} value={context} type="text" name="context" id="context" placeholder={t('name of context')} onBlur={changeContext} />
+            <input {...register('context', { required: true })} value={context} type="text" name="context" id="context" placeholder={t('name of context')} onChange={changeContext} />
           </div>
           {errors?.context && t('Please enter the name of the context.')}
           <div>
-            <input {...register('supervisor', { required: true })} value={context} type="text" name="supervisor" id="supervisor" placeholder={t('supervisor')} onBlur={changeSupervisor} />
+            <input {...register('supervisor', { required: true })} value={supervisor} type="text" name="supervisor" id="supervisor" placeholder={t('supervisor')} onChange={changeSupervisor} />
           </div>
           {errors?.supervisor && t('Please enter the name of the person in charge.')}
           <div>
-            <input {...register('contact', { required: true })} value={context} type="text" name="contact" id="contact" placeholder={t('UdK (!) email address')} onBlur={changeContact} />
+            <input {...register('contact', { required: true })} value={contact} type="text" name="contact" id="contact" placeholder={t('UdK (!) email address')} onChange={changeContact} />
           </div>
           {errors?.supervisor && t('Please enter a UdK email address.')}
           <div>
-            <input {...register('parent', { required: true })} value={parent} type="text" name="parent" id="parent" placeholder={t('Parent space, e.g. Faculty Design.')} onBlur={changeParent} />
+            <input {...register('parent', { required: true })} value={parent} type="text" name="parent" id="parent" placeholder={t('Parent space, e.g. Faculty Design.')} onChange={changeParent} />
             {/* @TODO Needs hint or longer explanation what this means */}
           </div>
           {errors?.parent && t('Please enter a parent space. For example the faculty in which the class is taking place.')}
