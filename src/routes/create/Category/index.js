@@ -44,18 +44,21 @@ const Category = ({ title, projectSpace }) => {
   // const callback = (requested) => {
   //   setSubject('')
   // }
+  async function removeFromContext (spaceId) {
+    const req = {
+      method: 'PUT',
+      headers: { Authorization: 'Bearer ' + localStorage.getItem('medienhaus_access_token') },
+      body: JSON.stringify({})
+    }
+    await fetch(process.env.REACT_APP_MATRIX_BASE_URL + `/_matrix/client/r0/rooms/${spaceId}/state/m.space.child/${projectSpace}`, req)
+  }
 
   async function onContextChosen (contextSpaceId) {
     const projectSpaceMetaEvent = await matrixClient.getStateEvent(projectSpace, 'dev.medienhaus.meta')
 
     if (projectSpaceMetaEvent.context && projectSpaceMetaEvent.context !== contextSpaceId) {
       // If this project was in a different context previously we should try to take it out of the old context
-      const req = {
-        method: 'PUT',
-        headers: { Authorization: 'Bearer ' + localStorage.getItem('medienhaus_access_token') },
-        body: JSON.stringify({})
-      }
-      await fetch(process.env.REACT_APP_MATRIX_BASE_URL + `/_matrix/client/r0/rooms/${projectSpaceMetaEvent.context}/state/m.space.child/${projectSpace}`, req)
+      await removeFromContext(projectSpaceMetaEvent.context)
     }
 
     // Add this current project to the given context space
@@ -75,11 +78,21 @@ const Category = ({ title, projectSpace }) => {
     await matrixClient.sendStateEvent(projectSpace, 'dev.medienhaus.meta', projectSpaceMetaEvent)
   }
   const FreeContext = () => {
+    const [addToFreeContext, setAddToFreeContext] = useState(false)
+
+    useEffect(() => {
+      if (addToFreeContext) {
+        onContextChosen('!AdCHWsaxBxaGLzDabX:dev.medienhaus.udk-berlin.de')
+      } else {
+        removeFromContext('!AdCHWsaxBxaGLzDabX:dev.medienhaus.udk-berlin.de')
+      }
+    }, [addToFreeContext])
+
     return (
 
       <div className="checkboxWrapper">
         <label htmlFor="checkbox">{t('Add this project to a free context.')}</label>
-        <input id="checkbox" name="checkbox" type="checkbox" />
+        <input id="checkbox" checked={addToFreeContext} name="checkbox" type="checkbox" onChange={() => setAddToFreeContext(addToFreeContext => !addToFreeContext)} />
       </div>
 
     )
