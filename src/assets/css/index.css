@@ -977,6 +977,20 @@ button > .loading {
   margin-top: calc(var(--margin) * 0.5);
 }
 
+.map{
+  display: grid;
+  grid-gap: var(--margin);
+  height: calc(var(--margin) * 12);
+  margin-top: var(--margin);
+  border-color: var(--color-fg);
+  border-style: solid;
+  border-radius: unset;
+  border-width: calc(var(--margin) * 0.2);
+  padding: calc(var(--margin) * 0.4);
+  height: calc(var(--margin) * 12);
+  margin-top: var(--margin);
+}
+
 .maxlength {
   display: grid;
 }
