@@ -327,9 +327,9 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace, time,
                                 <Marker position={[cms.body.substring(0, cms.body.indexOf(',')), cms.body.substring(cms.body.indexOf(',') + 1, cms.body.indexOf('-'))]}>
                                   <Popup>
                                     {locations.find(coord => coord.coordinates === cms.body.substring(0, cms.body.indexOf(',')) + ',' + cms.body.substring(cms.body.indexOf(',') + 1, cms.body.lastIndexOf('-')))?.name ||
-                                        cms.body.substring(cms.body.lastIndexOf('-') + 1).length > 0
-                                      ? cms.body.substring(cms.body.lastIndexOf('-') + 1)
-                                      : 'Custom location'}
+                                        cms.body.substring(cms.body.lastIndexOf('-') + 1).length > 0 // if the location is not in our location.json we check if the custom input field was filled in
+                                      ? cms.body.substring(cms.body.lastIndexOf('-') + 1) // if true, we display that text on the popup otherwise we show the lat and long coordinates
+                                      : cms.body.substring(0, cms.body.indexOf(',')) + ',' + cms.body.substring(cms.body.indexOf(',') + 1)}
                                   </Popup>
                                 </Marker>
                               </MapContainer>
