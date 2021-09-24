@@ -4,6 +4,9 @@ import { useTranslation, Trans } from 'react-i18next'
 import { makeRequest } from '../../Backend'
 import Matrix from '../../Matrix'
 import { useAuth } from '../../Auth'
+import mapDeep from 'deepdash/es/mapDeep'
+import filterDeep from 'deepdash/es/filterDeep'
+import struktur from '../../struktur'
 
 const Request = () => {
   const { register, formState: { errors }, handleSubmit } = useForm()
@@ -80,8 +83,21 @@ const Request = () => {
           </div>
           {errors?.contact && t('Please enter a UdK email address.')}
           <div>
-            <input {...register('parent', { required: true })} value={parent} type="text" name="parent" id="parent" placeholder={t('Parent space, e.g. Faculty Design.')} onChange={changeParent} />
+            {/* <input {...register('parent', { required: true })} value={parent} type="text" name="parent" id="parent" placeholder={t('Parent space, e.g. Faculty Design.')} onChange={changeParent} /> */}
             {/* @TODO Needs hint or longer explanation what this means */}
+            <select onChange={(e) => changeParent(e)}>
+              <option disabled value="">-- {t('Please select the superordinated institution/faculty of your class.')} --</option>
+              {mapDeep(filterDeep(struktur['!TCqCDYYsBUxmjWOZWV:content.udk-berlin.de'].children, (value, key, parent, context) => {
+                // Exclude all "courses"
+                if (value?.type === 'course') return false
+                return true
+              }, { childrenPath: 'children', includeRoot: false, rootIsChildren: true }), (value, key, parent, context) => {
+                value.name = ' --- '.repeat(context.depth - 1) + value.name
+                return value
+              }, { childrenPath: 'children', includeRoot: false, rootIsChildren: true }).map(x => (
+                <option key={x.id} value={x.name + ' ' + x.id}>{x.name}</option>
+              ))}
+            </select>
           </div>
           {errors?.parent && t('Please enter a parent space. For example the faculty in which the class is taking place.')}
           <textarea name="messageInput" placeholder={t('additional information')} rows="7" spellCheck="true" value={msg} onChange={changeMsg} />
