@@ -7,8 +7,11 @@ import { useAuth } from '../../Auth'
 import mapDeep from 'deepdash/es/mapDeep'
 import filterDeep from 'deepdash/es/filterDeep'
 import struktur from '../../struktur'
+import strukturDev from '../../struktur-dev'
 
 const Request = () => {
+  const contextMenuWithoutCourses = process.env.NODE_ENV === 'development' ? strukturDev['!ijJyXjLNqgeJkRerIG:dev.medienhaus.udk-berlin.de'].children : struktur['!TCqCDYYsBUxmjWOZWV:content.udk-berlin.de'].children
+
   const { register, formState: { errors }, handleSubmit } = useForm()
   const [msg, setMsg] = useState('')
   const [context, setContext] = useState()
@@ -86,7 +89,7 @@ const Request = () => {
           <div>
             <select {...register('parent', { required: true })} value={parent} onChange={changeParent}>
               <option disabled value="">-- {t('please select the superordinate course/institute/faculty')} --</option>
-              {mapDeep(filterDeep(struktur['!TCqCDYYsBUxmjWOZWV:content.udk-berlin.de'].children, (value, key, parent, context) => {
+              {mapDeep(filterDeep(contextMenuWithoutCourses, (value, key, parent, context) => {
                 // exclude all "courses"
                 if (value?.type === 'course') return false
                 return true

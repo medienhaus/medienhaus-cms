@@ -2,11 +2,13 @@ import React, { useState } from 'react'
 import ContextDropdown from '../../components/ContextDropdown'
 import mapDeep from 'deepdash/es/mapDeep'
 import struktur from '../../struktur'
+import strukturDev from '../../struktur-dev'
 import filterDeep from 'deepdash/es/filterDeep'
 
 const Boilerplate = () => {
-  const [title, setTitle] = useState('')
+  const contextMenuWithoutCourses = process.env.NODE_ENV === 'development' ? strukturDev['!ijJyXjLNqgeJkRerIG:dev.medienhaus.udk-berlin.de'].children : struktur['!TCqCDYYsBUxmjWOZWV:content.udk-berlin.de'].children
 
+  const [title, setTitle] = useState('')
   const [klasse, setKlasse] = useState('')
 
   return (
@@ -20,7 +22,7 @@ const Boilerplate = () => {
       <div>
         <label htmlFor="subject">Kontext (ohne "courses")</label>
         <select>
-          {mapDeep(filterDeep(struktur['!TCqCDYYsBUxmjWOZWV:content.udk-berlin.de'].children, (value, key, parent, context) => {
+          {mapDeep(filterDeep(contextMenuWithoutCourses, (value, key, parent, context) => {
             // Exclude all "courses"
             if (value?.type === 'course') return false
             return true

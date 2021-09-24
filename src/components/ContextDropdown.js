@@ -3,13 +3,14 @@ import { useCombobox } from 'downshift'
 import _, { find, get, map, orderBy, remove, uniqBy } from 'lodash'
 import mapDeep from 'deepdash/es/mapDeep'
 import struktur from '../struktur'
+import strukturDev from '../struktur-dev'
 import { findValueDeep } from 'deepdash/es/standalone'
 import LoadingSpinnerButton from './LoadingSpinnerButton'
 import { useTranslation } from 'react-i18next'
 import Fuse from 'fuse.js'
 import Matrix from '../Matrix'
 // @TODO return course if no request button
-let items = uniqBy(mapDeep(struktur, (value, key, parent, context) => {
+let items = uniqBy(mapDeep(process.env.NODE_ENV === 'development' ? strukturDev : struktur, (value, key, parent, context) => {
   // Add "path" parameter to create breadcrumbs from first hierarchy element up to "myself"
   value.path = remove(context._item.path, spaceId => spaceId !== 'children')
   // Remove myself from breadcrumbs
@@ -18,7 +19,7 @@ let items = uniqBy(mapDeep(struktur, (value, key, parent, context) => {
   value.path.shift()
   // Replace space IDs with their corresponding names
   value.path = value.path.map((spaceId) => {
-    return get(findValueDeep(struktur, (value, key) => key === spaceId, { leavesOnly: false, childrenPath: 'children', includeRoot: false, rootIsChildren: true }), 'name')
+    return get(findValueDeep(process.env.NODE_ENV === 'development' ? strukturDev : struktur, (value, key) => key === spaceId, { leavesOnly: false, childrenPath: 'children', includeRoot: false, rootIsChildren: true }), 'name')
   })
   delete value.children
   return value
