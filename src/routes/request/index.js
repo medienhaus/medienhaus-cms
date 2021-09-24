@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
-// import { useTranslation, Trans } from 'react-i18next'
 import { useTranslation } from 'react-i18next'
 import { makeRequest } from '../../Backend'
 import Matrix from '../../Matrix'
@@ -85,10 +84,8 @@ const Request = () => {
           </div>
           {errors?.contact && t('Please enter a valid @(intra.)udk-berlin.de mail address.')}
           <div>
-            {/* <input {...register('parent', { required: true })} value={parent} type="text" name="parent" id="parent" placeholder={t('Parent space, e.g. Faculty Design.')} onChange={changeParent} /> */}
-            {/* @TODO needs hint or longer explanation what this means */}
-            <select onChange={(e) => changeParent(e)}>
-              <option disabled selected value="">-- {t('please select the superordinate course/institute/faculty')} --</option>
+            <select {...register('parent', { required: true })} value={parent} onChange={changeParent}>
+              <option disabled value="">-- {t('please select the superordinate course/institute/faculty')} --</option>
               {mapDeep(filterDeep(struktur['!TCqCDYYsBUxmjWOZWV:content.udk-berlin.de'].children, (value, key, parent, context) => {
                 // exclude all "courses"
                 if (value?.type === 'course') return false
