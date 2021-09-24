@@ -918,6 +918,10 @@ textarea[disabled] {
   grid-gap: var(--margin);
 }
 
+.editor .del {
+  background-color: var(--color-no);
+}
+
 .editor .list > div {
   display: grid;
   grid-template-columns: auto 2em;

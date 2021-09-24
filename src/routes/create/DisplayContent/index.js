@@ -426,6 +426,7 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace, time,
 
             <div className="right">
               <button
+                className={clickedDelete && 'del'}
                 key={'delete' + index} disabled={deleting} onClick={(e) => {
                   if (clickedDelete) {
                     onDelete(e, block.room_id, block.name, index)
@@ -438,7 +439,7 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace, time,
                     <p>{deleting}</p> // feedback that deleting was succesfull or has failed
                 }}
               >
-                {clickedDelete ? '❓' : deleting ? <Loading /> : '×'}
+                {clickedDelete ? '␡' : deleting ? <Loading /> : '×'}
               </button>
             </div>
           </div>
