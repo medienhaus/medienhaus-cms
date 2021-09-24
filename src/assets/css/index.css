@@ -1686,6 +1686,10 @@ button > .loading {
 @import url("./fonts.css");
 */
 
+.leaflet-container {
+  z-index: 0;
+}
+
 .leaflet-container,
 .leaflet-container a:link,
 .leaflet-container a:hover {
