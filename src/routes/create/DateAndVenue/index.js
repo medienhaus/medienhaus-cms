@@ -7,8 +7,7 @@ import DisplayContent from '../DisplayContent'
 
 const DateAndVenue = ({ number, reloadSpace, projectSpace, events, matrixClient }) => {
   const [eventSpace, setEventSpace] = useState(events)
-  const [isAddLocationVisible, setIsAddLocationVisible] = useState(false)
-  const [isAddDateVisible, setIsAddDateVisible] = useState(false)
+  const [isAddEventVisible, setIsAddEventVisible] = useState(false)
   const [feedback, setFeedback] = useState('Migrating to new Event Space')
   const { t } = useTranslation('date')
 
@@ -84,34 +83,25 @@ const DateAndVenue = ({ number, reloadSpace, projectSpace, events, matrixClient 
   return (
     <>
       {eventSpace?.length > 1 && <Events />}
-      {!isAddDateVisible &&
+      {!isAddEventVisible &&
         <button
           className="add-button"
-          onClick={(e) => { e.preventDefault(); setIsAddDateVisible(true) }}
-        >+ {t('Date')}
+          onClick={(e) => { e.preventDefault(); setIsAddEventVisible(true) }}
+        >+ {t('Add Event')}
         </button>}
-      {isAddDateVisible &&
+      {isAddEventVisible &&
         <>
           <AddDate
             number={eventSpace.length}
             reloadSpace={reloadSpace}
             projectSpace={eventSpace[0].room_id}
-            callback={() => setIsAddDateVisible(false)}
+            callback={() => setIsAddEventVisible(false)}
           />
-        </>}
-      {!isAddLocationVisible &&
-        <button
-          className="add-button"
-          onClick={(e) => { e.preventDefault(); setIsAddLocationVisible(!isAddLocationVisible) }}
-        >+ {t('Venue')}
-        </button>}
-      {isAddLocationVisible &&
-        <>
           <AddLocation
             number={eventSpace.length}
             projectSpace={eventSpace[0].room_id}
             onBlockWasAddedSuccessfully={reloadSpace}
-            callback={() => setIsAddLocationVisible(false)}
+            callback={() => setIsAddEventVisible(false)}
           />
         </>}
     </>

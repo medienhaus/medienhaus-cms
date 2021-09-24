@@ -4,7 +4,7 @@ import Matrix from '../../Matrix'
 import { useTranslation } from 'react-i18next'
 import createBlock from './matrix_create_room'
 
-const AddDate = ({ number, reloadSpace, projectSpace, callback }) => {
+const AddDate = ({ number, reloadSpace, projectSpace, saveButton, callback }) => {
   const [date, setDate] = useState('')
   const [time, setTime] = useState('')
   const [loading, setLoading] = useState(false)
@@ -46,10 +46,11 @@ const AddDate = ({ number, reloadSpace, projectSpace, callback }) => {
           }}
         />
       </div>
-      <div className="confirmation">
-        <button className="cancel" onClick={() => { callback() }}>{t('CANCEL')}</button>
-        <LoadingSpinnerButton disabled={loading || (!date && !time)} loading={loading} onClick={handleSubmit}>{t('SAVE')}</LoadingSpinnerButton>
-      </div>
+      {saveButton &&
+        <div className="confirmation">
+          <button className="cancel" onClick={() => { callback() }}>{t('CANCEL')}</button>
+          <LoadingSpinnerButton disabled={loading || (!date && !time)} loading={loading} onClick={handleSubmit}>{t('SAVE')}</LoadingSpinnerButton>
+        </div>}
     </>
   )
 }
