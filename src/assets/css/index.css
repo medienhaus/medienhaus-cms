@@ -1696,3 +1696,43 @@ button > .loading {
   color: rgb(0,0,0);
   text-decoration: none;
 }
+
+.contextDropdown ul {
+  position: absolute;
+  overflow: auto;
+  max-height: 50vh;
+  background-color: var(--color-bg);
+  width: 100%;
+  border: solid var(--color-fg);
+  border-width: 0 3px 3px 3px;
+  z-index: 9999;
+}
+
+@media (max-width: 29.938em) {
+  .contextDropdown ul {
+    max-height: 70vh;
+  }
+}
+
+.contextDropdown ul li {
+  cursor: pointer;
+  padding: 10px 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.contextDropdown ul li div small {
+  color: gray;
+}
+
+.contextDropdown ul li.disabled {
+  cursor: default;
+}
+.contextDropdown ul li.disabled div {
+  opacity: 0.6;
+}
+
+.contextDropdown ul li:not(.disabled):hover {
+  background-color: var(--color-lo);
+}

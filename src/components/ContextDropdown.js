@@ -70,7 +70,6 @@ function ContextDropdown ({ onItemChosen, selectedContext, showRequestButton = f
     getMenuProps,
     getInputProps,
     getComboboxProps,
-    highlightedIndex,
     getItemProps,
     reset
   } = useCombobox({
@@ -95,7 +94,7 @@ function ContextDropdown ({ onItemChosen, selectedContext, showRequestButton = f
   })
 
   return (
-    <>
+    <div className="contextDropdown">
       <div style={{ display: 'flex' }} {...getComboboxProps()}>
         <input
           type="text" placeholder={t('-- search or select context --')} {...getInputProps()} style={{
@@ -128,29 +127,27 @@ function ContextDropdown ({ onItemChosen, selectedContext, showRequestButton = f
         {...getMenuProps()}
         style={
           isOpen
-            ? { display: 'block', position: 'absolute', overflow: 'auto', maxHeight: '50vh', backgroundColor: 'var(--color-bg)', width: '100%', border: 'solid black', borderWidth: '0 3px 3px 3px', zIndex: 9999 }
-            : { display: 'none', position: 'absolute', overflow: 'auto', maxHeight: '50vh', backgroundColor: 'var(--color-bg)', width: '100%', border: 'solid black', borderWidth: '0 3px 3px 3px', zIndex: 9999 }
+            ? { display: 'block' }
+            : { display: 'none' }
         }
       >
         {isOpen && currentlyShownInputItems.map((item, index) => (
           <li
-            style={
-              highlightedIndex === index
-                ? { padding: '10px 14px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }
-                : { padding: '10px 14px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }
-            }
             key={`${item.id}${index}`}
+            className={showRequestButton && !item.member ? 'disabled' : ''}
             {...getItemProps({ item, index })}
           >
-            <div style={{ display: 'block' }}>
+            <div>
               {item.name}
               <br />
-              <small style={{ color: 'gray' }}>
+              <small>
                 {item.path.map((breadcrumb, i) => (
-                  <span style={{ display: 'block', paddingLeft: `${i * 15}px` }} key={i + breadcrumb}>
-                    {i !== 0 && <>&raquo; </>}
-                    {breadcrumb}
-                  </span>
+                  <div key={i + breadcrumb} style={{ position: 'relative' }}>
+                    {i !== 0 && <span style={{ position: 'absolute', left: `${(i - 1) * 25}px` }}>↳ </span>}
+                    <span style={{ display: 'block', paddingLeft: `${i * 25}px` }}>
+                      {breadcrumb}
+                    </span>
+                  </div>
                 ))}
               </small>
             </div>
@@ -166,7 +163,7 @@ function ContextDropdown ({ onItemChosen, selectedContext, showRequestButton = f
           </li>
         ))}
       </ul>
-    </>
+    </div>
   )
 }
 
