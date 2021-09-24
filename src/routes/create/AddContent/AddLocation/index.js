@@ -9,31 +9,36 @@ import createBlock from '../../matrix_create_room'
 
 const AddLocation = ({ number, projectSpace, onBlockWasAddedSuccessfully, callback }) => {
   const [selectedLocation, setSelectedLocation] = useState('')
-  const [customLocation, setCustomLocation] = useState('')
   const [room, setRoom] = useState('')
   const [loading, setLoading] = useState(false)
   const matrixClient = Matrix.getMatrixClient()
   const { t } = useTranslation('locations')
   const center = {
-    lat: 52.4908249640345,
-    lng: 13.359567285078
+    lat: 52.49082495640345,
+    lng: 13.3595672835078
   }
+  const [position, setPosition] = useState(center)
+
+  const dev = false
 
   const handleSubmit = async () => {
     setLoading(true)
-    const location = selectedLocation === 'custom' ? customLocation : selectedLocation
-    await createBlock(undefined, 'location', number, projectSpace).then(async (res) =>
-      await matrixClient.sendMessage(res, {
-        msgtype: 'm.text',
-        body: location + '-' + room
-      })).catch(console.log)
-    callback()
-    onBlockWasAddedSuccessfully()
+    const location = selectedLocation === 'custom' ? position.lat + ', ' + position.lng : selectedLocation
+    if (dev) {
+      console.log(location)
+    } else {
+      await createBlock(undefined, 'location', number, projectSpace).then(async (res) =>
+        await matrixClient.sendMessage(res, {
+          msgtype: 'm.text',
+          body: location + '-' + room
+        })).catch(console.log)
+      callback()
+      onBlockWasAddedSuccessfully()
+    }
     setLoading(false)
   }
 
   function DraggableMarker () {
-    const [position, setPosition] = useState(center)
     const markerRef = useRef(null)
 
     const eventHandlers = useMemo(
@@ -42,10 +47,10 @@ const AddLocation = ({ number, projectSpace, onBlockWasAddedSuccessfully, callba
           const marker = markerRef.current
           if (marker != null) {
             setPosition(marker.getLatLng())
-            setCustomLocation(position.lat + ', ' + position.lng)
           }
         }
       }),
+      // eslint-disable-next-line react-hooks/exhaustive-deps
       []
     )
 

@@ -326,7 +326,10 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace, time,
                                 />
                                 <Marker position={[cms.body.substring(0, cms.body.indexOf(',')), cms.body.substring(cms.body.indexOf(',') + 1, cms.body.indexOf('-'))]}>
                                   <Popup>
-                                    {locations.find(coord => coord.coordinates === cms.body.substring(0, cms.body.indexOf(',')) + ',' + cms.body.substring(cms.body.indexOf(',') + 1, cms.body.lastIndexOf('-'))).name}
+                                    {locations.find(coord => coord.coordinates === cms.body.substring(0, cms.body.indexOf(',')) + ',' + cms.body.substring(cms.body.indexOf(',') + 1, cms.body.lastIndexOf('-')))?.name ||
+                                        cms.body.substring(cms.body.lastIndexOf('-') + 1).length > 0
+                                      ? cms.body.substring(cms.body.lastIndexOf('-') + 1)
+                                      : 'Custom location'}
                                   </Popup>
                                 </Marker>
                               </MapContainer>
