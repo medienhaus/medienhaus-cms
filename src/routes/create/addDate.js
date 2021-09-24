@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import LoadingSpinnerButton from '../../components/LoadingSpinnerButton'
 import Matrix from '../../Matrix'
 import { useTranslation } from 'react-i18next'
@@ -23,6 +23,10 @@ const AddDate = ({ number, reloadSpace, projectSpace, saveButton, callback }) =>
     reloadSpace()
     setLoading(false)
   }
+
+  useEffect(() => {
+    if (!saveButton) callback(time, date)
+  }, [callback, date, saveButton, time])
 
   return (
     <>
