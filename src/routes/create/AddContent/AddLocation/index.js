@@ -1,7 +1,7 @@
 import React, { useMemo, useRef, useState } from 'react'
 import LoadingSpinnerButton from '../../../../components/LoadingSpinnerButton'
 import Matrix from '../../../../Matrix'
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
+import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet'
 import { useTranslation } from 'react-i18next'
 // assets
 import locations from '../../../../assets/data/locations.json'
@@ -40,6 +40,8 @@ const AddLocation = ({ number, projectSpace, onBlockWasAddedSuccessfully, callba
 
   function DraggableMarker () {
     const markerRef = useRef(null)
+    const map = useMap()
+    map.once('focus', function () { map.scrollWheelZoom.enable() })
 
     const eventHandlers = useMemo(
       () => ({
