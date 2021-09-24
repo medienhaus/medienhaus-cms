@@ -112,10 +112,11 @@ const Overview = () => {
 
             </ul>
           </section>
-          <h3>{t('Projects')}</h3>
+          <hr />
         </>
       )}
-      <section>
+      <section className="projects">
+        <h3>{t('Projects')}</h3>
         {spacesErr
           ? console.error(spacesErr)
           : projects?.length === 0
