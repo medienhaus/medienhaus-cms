@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
-import { useTranslation, Trans } from 'react-i18next'
+import { useTranslation } from 'react-i18next'
 import { makeRequest } from '../../Backend'
 import Matrix from '../../Matrix'
 import { useAuth } from '../../Auth'
@@ -68,40 +68,39 @@ const Request = () => {
   return (
     <>
       <section className="support">
-        <p><Trans i18nkey="introduction">In case you are trying to find a context room but can't find it, you can request it here.</Trans></p>
+        <p>{t('In case your context is not listed in the context menu, please fill out the form below and we will evaluate your request. Thank you!')}</p>
+        <p><em>{t('Note: context can be a class, course, seminar, workshop, et cetera …')}</em></p>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div>
-            <input {...register('context', { required: true })} value={context} type="text" name="context" id="context" placeholder={t('name of context')} onChange={changeContext} />
+            <input {...register('context', { required: true })} value={context} type="text" name="context" id="context" placeholder={t('name of your context')} onChange={changeContext} />
           </div>
           {errors?.context && t('Please enter the name of the context.')}
           <div>
-            <input {...register('supervisor', { required: true })} value={supervisor} type="text" name="supervisor" id="supervisor" placeholder={t('supervisor')} onChange={changeSupervisor} />
+            <input {...register('supervisor', { required: true })} value={supervisor} type="text" name="supervisor" id="supervisor" placeholder={t('person responsible')} onChange={changeSupervisor} />
           </div>
-          {errors?.supervisor && t('Please enter the name of the person in charge.')}
+          {errors?.supervisor && t('Please enter the name of the person responsible.')}
           <div>
-            <input {...register('contact', { required: true })} value={contact} type="text" name="contact" id="contact" placeholder={t('UdK (!) email address')} onChange={changeContact} />
+            <input {...register('contact', { required: true })} value={contact} type="text" name="contact" id="contact" placeholder={t('person responsible’s @(intra.)udk-berlin.de❗️ mail address')} onChange={changeContact} />
           </div>
-          {errors?.contact && t('Please enter a UdK email address.')}
+          {errors?.contact && t('Please enter a valid @(intra.)udk-berlin.de mail address.')}
           <div>
-            {/* <input {...register('parent', { required: true })} value={parent} type="text" name="parent" id="parent" placeholder={t('Parent space, e.g. Faculty Design.')} onChange={changeParent} /> */}
-            {/* @TODO Needs hint or longer explanation what this means */}
-            <select onChange={(e) => changeParent(e)}>
-              <option disabled value="">-- {t('Please select the superordinated institution/faculty of your class.')} --</option>
+            <select {...register('parent', { required: true })} value={parent} onChange={changeParent}>
+              <option disabled value="">-- {t('please select the superordinate course/institute/faculty')} --</option>
               {mapDeep(filterDeep(struktur['!TCqCDYYsBUxmjWOZWV:content.udk-berlin.de'].children, (value, key, parent, context) => {
-                // Exclude all "courses"
+                // exclude all "courses"
                 if (value?.type === 'course') return false
                 return true
               }, { childrenPath: 'children', includeRoot: false, rootIsChildren: true }), (value, key, parent, context) => {
-                value.name = ' --- '.repeat(context.depth - 1) + value.name
+                value.name = ' ↳ '.repeat(context.depth - 1) + value.name
                 return value
               }, { childrenPath: 'children', includeRoot: false, rootIsChildren: true }).map(x => (
                 <option key={x.id} value={x.name + ' ' + x.id}>{x.name}</option>
               ))}
             </select>
           </div>
-          {errors?.parent && t('Please enter a parent space. For example the faculty in which the class is taking place.')}
+          {errors?.parent && t('Please enter the the superordinate course/institute/faculty')}
           <textarea name="messageInput" placeholder={t('additional information')} rows="7" spellCheck="true" value={msg} onChange={changeMsg} />
-          <button type="submit" disabled={sending}>{t('SUBMIT')}</button>
+          <button type="submit" disabled={sending}>{t('REQUEST')}</button>
         </form>
         {feedback}
       </section>

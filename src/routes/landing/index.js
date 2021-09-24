@@ -51,6 +51,11 @@ const Landing = () => {
               We also offer you the possibility to offer virtual meetings via the video conferencing tool BigBlueButton at <a href="https://meetings.udk-berlin.de" rel="external nofollow noopener noreferrer" target="_blank">udk/meet</a> and to integrate videos and live streams via <a href="https://stream.udk-berlin.de" rel="external nofollow noopener noreferrer" target="_blank">udk/stream</a> on your own project page.
             </Trans>
           </p>
+          <p>
+            <Trans t={t} i18nKey="information">
+              For more information on the Rundgang 2021 (opening hours, safety and hygiene measures, etc.), please visit: <a href="https://udk-berlin.de/rundgang" rel="external nofollow noopener noreferrer" target="_blank">udk-berlin.de/rundgang</a>
+            </Trans>
+          </p>
           <button onClick={() => history.push('/create')}>{t('create new project')}</button>
           <p>
             <Trans t={t} i18nKey="feedback">
