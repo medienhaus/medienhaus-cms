@@ -108,7 +108,7 @@ const Create = () => {
       }))
       // check if there is an events space
       const checkForEventSpace = space.rooms.filter(room => room.name === 'events')
-      const getEvents = checkForEventSpace.length > 0 && await matrixClient.getSpaceSummary(space.rooms.filter(room => room.name === 'events')[0].room_id).catch(err => console.log(err + '. This means there is no Event space, yet'))
+      const getEvents = checkForEventSpace.length > 0 && await matrixClient.getSpaceSummary(space.rooms.filter(room => room.name === 'events')[0].room_id, 0).catch(err => console.log(err + '. This means there is no Event space, yet'))
       setEvents(getEvents || 'depricated')
       getCurrentTime()
     } else {

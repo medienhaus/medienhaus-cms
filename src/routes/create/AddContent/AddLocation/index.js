@@ -81,7 +81,7 @@ const AddLocation = ({ number, projectSpace, onBlockWasAddedSuccessfully, callba
       callback()
       onBlockWasAddedSuccessfully()
     } catch (err) {
-
+      console.log(err)
     }
 
     setLoading(false)

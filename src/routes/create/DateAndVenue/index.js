@@ -58,7 +58,7 @@ const DateAndVenue = ({ reloadSpace, projectSpace, events, matrixClient }) => {
             setFeedback('Reloading')
             return res.room_id
           }).then(async (res) => {
-            const eventSummary = await matrixClient.getSpaceSummary(res).catch(err => console.log(err))
+            const eventSummary = await matrixClient.getSpaceSummary(res, 0).catch(err => console.log(err))
             setEventSpace(eventSummary)
           })
         console.log(events)
