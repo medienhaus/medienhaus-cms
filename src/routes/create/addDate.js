@@ -13,7 +13,6 @@ const AddDate = ({ number, reloadSpace, projectSpace, saveButton, callback }) =>
 
   const handleSubmit = async () => {
     setLoading(true)
-
     await createBlock(undefined, 'date', number, projectSpace).then(async (res) =>
       await matrixClient.sendMessage(res, {
         msgtype: 'm.text',
@@ -26,7 +25,8 @@ const AddDate = ({ number, reloadSpace, projectSpace, saveButton, callback }) =>
 
   useEffect(() => {
     if (!saveButton) callback(time, date)
-  }, [callback, date, saveButton, time])
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [date, saveButton, time])
 
   return (
     <>

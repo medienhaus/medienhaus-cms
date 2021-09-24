@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import AddDate from '../addDate'
 import AddLocation from '../AddContent/AddLocation'
 import { useTranslation } from 'react-i18next'
 import { Loading } from '../../../components/loading'
@@ -8,10 +7,8 @@ import DisplayContent from '../DisplayContent'
 const DateAndVenue = ({ reloadSpace, projectSpace, events, matrixClient }) => {
   const [eventSpace, setEventSpace] = useState(events)
   const [isAddEventVisible, setIsAddEventVisible] = useState(false)
-  const [timeDate, setTimeDate] = useState([])
   const [feedback, setFeedback] = useState('Migrating to new Event Space')
   const { t } = useTranslation('date')
-  console.log(timeDate)
 
   useEffect(() => {
     const createEventSpace = async () => {
@@ -93,13 +90,7 @@ const DateAndVenue = ({ reloadSpace, projectSpace, events, matrixClient }) => {
         </button>}
       {isAddEventVisible &&
         <>
-          <AddDate
-            number={eventSpace.length}
-            reloadSpace={reloadSpace}
-            projectSpace={eventSpace[0].room_id}
-            saveButton={false}
-            callback={(time, date) => setTimeDate([time, date])}
-          />
+
           <AddLocation
             number={eventSpace.length}
             projectSpace={eventSpace[0].room_id}
