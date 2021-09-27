@@ -287,14 +287,6 @@ nav a.disabled {
   opacity: 0.2;
 }
 
-/* @andi addd this */
-/*
-.button-group {
-  display: flex;
-  flex-direction: column;
-}
-*/
-
 /*
 section a:link {
   text-decoration: underline;
@@ -834,6 +826,12 @@ textarea[disabled] {
 .editor .right > :only-child {
   grid-row: 2;
   align-self: center;
+}
+
+.editor .left > button,
+.editor .right > button {
+  display: grid;
+  place-content: center;
 }
 
 .editor .left,
