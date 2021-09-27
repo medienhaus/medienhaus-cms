@@ -6,6 +6,7 @@ import DisplayContent from '../DisplayContent'
 
 const DateAndVenue = ({ reloadSpace, projectSpace, events, matrixClient }) => {
   const [eventSpace, setEventSpace] = useState(events)
+  const [eventContent, setEventContent] = useState([])
   const [isAddEventVisible, setIsAddEventVisible] = useState(false)
   const [feedback, setFeedback] = useState('Migrating to new Event Space')
   const { t } = useTranslation('date')
@@ -66,18 +67,42 @@ const DateAndVenue = ({ reloadSpace, projectSpace, events, matrixClient }) => {
         console.log(err)
       }
     }
+    const fetchEvents = async () => {
+      const filterDepricatedEvents = eventSpace.filter(room => room.room_type === 'm.space').filter((room, i) => i > 0) // as always, first space is the space itself therefore we filter it
+      const eventSummary = await Promise.all(filterDepricatedEvents.map(room => matrixClient.getSpaceSummary(room.room_id, 0).catch(err => console.log(err)))) // then we fetch the summary of all spaces within the event space
+      const onlyEvents = eventSummary.map(event => event.rooms.filter(room => room.room_type !== 'm.space')).flat(1) // finally we remove any spaces in here since we only want the content room and then flatten the nested array to one layer
+      setEventContent(onlyEvents)
+    }
     setEventSpace(events)
-    events === 'depricated' && createEventSpace()
-  }, [events, matrixClient, projectSpace])
+    events === 'depricated'
+      ? createEventSpace()
+      : eventSpace && fetchEvents(events)
+  }, [eventSpace, events, matrixClient, projectSpace])
 
   const Events = () => {
-    return eventSpace.filter((element, i) => i > 0).filter(room => room.name.charAt(0) !== 'x').map((event, i) => {
-      return <DisplayContent block={event} index={i} blocks={eventSpace} projectSpace={eventSpace} reloadSpace={reloadSpace} key={event + i} mapComponent />
-    })
+    const oldEvents = eventSpace.filter((room, i) => i > 0) // ignore the first element since its the space itself
+      .filter(room => room.name.charAt(0) !== 'x') // filter rooms that were deleted
+
+    return (
+      <>
+        {oldEvents
+          .filter(room => room.room_type !== 'm.space') // filter all newly created events
+          .map((event, i) => {
+            console.log(event)
+            return <DisplayContent block={event} index={i} blocks={eventSpace} projectSpace={eventSpace} reloadSpace={reloadSpace} key={event + i} mapComponent />
+          })}
+        {eventContent
+          .filter(room => room.name.charAt(0) !== 'x') // filter rooms that were deleted
+          .map((event, i) => {
+            return <DisplayContent block={event} index={i} blocks={eventSpace} projectSpace={eventSpace} reloadSpace={reloadSpace} key={event + i} mapComponent />
+          })}
+      </>
+    )
   }
 
   if (!eventSpace) return <Loading />
   if (eventSpace === 'depricated') return <><p>{feedback}</p><Loading /></>
+  console.log(eventSpace)
 
   return (
     <>

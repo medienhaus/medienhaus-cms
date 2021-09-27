@@ -296,8 +296,7 @@ nav a.disabled {
 }
 */
 
-=======
->>>>>>> main
+=======>>>>>>>main
 /*
 section a:link {
   text-decoration: underline;
@@ -814,20 +813,12 @@ textarea[disabled] {
   align-self: center;
 }
 
-<<<<<<< HEAD
-.editor .left, .editor .left>*, .editor .right, .editor .right>* {
-=======
-.editor .left > button,
-.editor .right > button {
+.editor .left>button, .editor .right>button {
   display: grid;
   place-content: center;
 }
 
-.editor .left,
-.editor .left > *,
-.editor .right,
-.editor .right > * {
->>>>>>> main
+.editor .left, .editor .left>*, .editor .right, .editor .right>* {
   min-height: 2rem;
   width: 2rem;
 }
@@ -906,15 +897,7 @@ textarea[disabled] {
   grid-gap: var(--margin);
 }
 
-<<<<<<< HEAD
 .editor .list>div {
-=======
-.editor .del {
-  background-color: var(--color-no);
-}
-
-.editor .list > div {
->>>>>>> main
   display: grid;
   grid-template-columns: auto 2em;
 }
@@ -1692,20 +1675,17 @@ button>.loading {
 @import url("./fonts.css");
 */
 
-<<<<<<< HEAD
-.leaflet-container, .leaflet-container a:link, .leaflet-container a:hover {
+<<<<<<< HEAD .leaflet-container, .leaflet-container a:link, .leaflet-container a:hover {
   color: rgb(0, 0, 0);
   text-decoration: none;
 }
-=======
-.leaflet-container {
+
+=======.leaflet-container {
   z-index: 0;
 }
 
-.leaflet-container,
-.leaflet-container a:link,
-.leaflet-container a:hover {
-  color: rgb(0,0,0);
+.leaflet-container, .leaflet-container a:link, .leaflet-container a:hover {
+  color: rgb(0, 0, 0);
   text-decoration: none;
 }
 
@@ -1741,6 +1721,7 @@ button>.loading {
 .contextDropdown ul li.disabled {
   cursor: default;
 }
+
 .contextDropdown ul li.disabled div {
   opacity: 0.6;
 }
@@ -1748,4 +1729,3 @@ button>.loading {
 .contextDropdown ul li:not(.disabled):hover {
   background-color: var(--color-lo);
 }
->>>>>>> main
