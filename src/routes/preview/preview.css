@@ -23,7 +23,7 @@ html {
 .singleproject {
   font-family: "BauPro";
   font-weight: normal;
-  width: calc(100% - calc(var(--margin) * 1.4));
+  width: calc(100% - calc(var(--margin) * 0.7));
 }
 
 .singleproject > * + *,
@@ -154,13 +154,11 @@ html {
 }
 */
 
-/*
 .singleproject .tagbubble {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(16ch, 1fr));
   grid-gap: calc(var(--margin) * 0.5);
 }
-*/
 
 .singleproject .tagbubble > * {
   background-color: var(--color-fg);
@@ -171,9 +169,12 @@ html {
   font-weight: 500;
   padding: calc(var(--margin) * 0.3) calc(var(--margin) * 0.6);
   text-align: center;
+  /*
   white-space: nowrap;
+  */
 }
 
+/*
 .singleproject .tagbubble > *:not(:first-child):not(:only-child) {
   margin-left: calc(var(--margin) * 0.2);
 }
@@ -181,6 +182,7 @@ html {
 .singleproject .tagbubble > *:not(:last-child):not(:only-child) {
   margin-right: calc(var(--margin) * 0.2);
 }
+*/
 
 /* TODO: not yet created dynamically; needs testing */
 .singleproject .info {
