@@ -76,6 +76,13 @@ html {
   content: close-quote;
 }
 
+.singleproject code {
+  background-color: var(--color-lo);
+  font-family: "Lucida Console", Monaco, monospace;
+  font-size: 0.8rem;
+  padding: 0 calc(var(--margin) * 0.2);
+}
+
 .singleproject .code {
   background-color: var(--color-fg);
   box-sizing: border-box;
