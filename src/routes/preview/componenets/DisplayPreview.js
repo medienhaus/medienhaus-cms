@@ -28,7 +28,7 @@ const DisplayPreview = ({ content, matrixClient, contentLoaded }) => {
   if (content.name.includes('heading')) {
     return (
       <div className="headline">
-        <h2>{cms.body}</h2>
+        <h3>{cms.body}</h3>
       </div>
     )
   }
