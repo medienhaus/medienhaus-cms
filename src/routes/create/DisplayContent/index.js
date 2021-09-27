@@ -41,7 +41,6 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace, time,
   const [json, setJson] = useState({})
   let { cms, error, fetching } = FetchCms(block.room_id)
   cms = cms[0]
-  console.log(cms)
   const matrixClient = Matrix.getMatrixClient()
   const isMounted = useRef(true)
   const [content, setContent] = useState('')

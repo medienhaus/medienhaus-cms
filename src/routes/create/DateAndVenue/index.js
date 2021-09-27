@@ -41,10 +41,9 @@ const DateAndVenue = ({ reloadSpace, projectSpace, events, matrixClient }) => {
       }
 
       try {
-        const events = await matrixClient.createRoom(opts('events', 'events'))
+        await matrixClient.createRoom(opts('events', 'events'))
           .then(async (res) => {
             setFeedback('Event space created. Now adding to parent Space')
-            console.log(projectSpace)
             // and add those subspaces as children to the project space
             await fetch(process.env.REACT_APP_MATRIX_BASE_URL + `/_matrix/client/r0/rooms/${projectSpace}/state/m.space.child/${res.room_id}`, {
               method: 'PUT',
@@ -62,7 +61,6 @@ const DateAndVenue = ({ reloadSpace, projectSpace, events, matrixClient }) => {
             const eventSummary = await matrixClient.getSpaceSummary(res, 0).catch(err => console.log(err))
             setEventSpace(eventSummary)
           })
-        console.log(events)
       } catch (err) {
         console.log(err)
       }
@@ -88,7 +86,6 @@ const DateAndVenue = ({ reloadSpace, projectSpace, events, matrixClient }) => {
         {oldEvents
           .filter(room => room.room_type !== 'm.space') // filter all newly created events
           .map((event, i) => {
-            console.log(event)
             return <DisplayContent block={event} index={i} blocks={eventSpace} projectSpace={eventSpace} reloadSpace={reloadSpace} key={event + i} mapComponent />
           })}
         {eventContent
@@ -102,7 +99,6 @@ const DateAndVenue = ({ reloadSpace, projectSpace, events, matrixClient }) => {
 
   if (!eventSpace) return <Loading />
   if (eventSpace === 'depricated') return <><p>{feedback}</p><Loading /></>
-  console.log(eventSpace)
 
   return (
     <>
