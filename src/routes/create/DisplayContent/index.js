@@ -26,6 +26,7 @@ import { ReactComponent as PlaylistIcon } from '../../../assets/icons/remix/play
 import { ReactComponent as PictureInPictureIcon } from '../../../assets/icons/remix/picture-in-picture.svg'
 import { ReactComponent as LocationIcon } from '../../../assets/icons/remix/location.svg'
 import { ReactComponent as DateIcon } from '../../../assets/icons/remix/date.svg'
+import { ReactComponent as TrashIcon } from '../../../assets/icons/remix/trash.svg'
 
 import locations from '../../../assets/data/locations.json'
 // import DisplayPreview from '../../preview/componenets/DisplayPreview'
@@ -439,7 +440,7 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace, time,
                     <p>{deleting}</p> // feedback that deleting was succesfull or has failed
                 }}
               >
-                {clickedDelete ? '⚠' : deleting ? <Loading /> : '×'}
+                {clickedDelete ? <TrashIcon fill="var(--color-bg)" /> : deleting ? <Loading /> : '×'}
               </button>
             </div>
           </div>
