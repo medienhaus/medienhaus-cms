@@ -80,7 +80,9 @@ const DateAndVenue = ({ reloadSpace, projectSpace, events, matrixClient }) => {
       )
       const filterDepricatedEvents = eventSpace.filter(room => room.room_type === 'm.space').filter((room, i) => i > 0) // as always, first space is the space itself therefore we filter it
       const eventSummary = await Promise.all(filterDepricatedEvents.map(room => matrixClient.getSpaceSummary(room.room_id, 0).catch(err => console.log(err)))) // then we fetch the summary of all spaces within the event space
-      const onlyEvents = eventSummary.map(event => event.rooms.filter(room => room.room_type !== 'm.space')) // finally we remove any spaces in here since we only want the content room
+      const onlyEvents = eventSummary
+        ?.filter(room => room !== undefined) // we filter undefined results. DOM seems to be rendering to quickly here. Due to time pressure this will have to do for now.
+        .map(event => event?.rooms.filter(room => room.room_type !== 'm.space')) // finally we remove any spaces in here since we only want the content room
       setEventContent(onlyEvents)
     }
     setEventSpace(events)
@@ -90,14 +92,15 @@ const DateAndVenue = ({ reloadSpace, projectSpace, events, matrixClient }) => {
   }, [eventSpace, events, matrixClient, projectSpace])
 
   const onDelete = async (e, roomId, name, index) => {
+    console.log(roomId, name, index)
     e.preventDefault()
     setDeleting(true)
     try {
-      deleteContentBlock(name, roomId, index)
-      reloadSpace()
+      await deleteContentBlock(name, roomId, index)
+      // reloadSpace()
     } catch (err) {
       console.error(err)
-      setDeleting('couldn’t delet eevent, please try again or try reloading the page')
+      setDeleting('couldn’t delete event, please try again or try reloading the page')
       setTimeout(() => {
         setDeleting()
       }, 2000)
@@ -110,7 +113,7 @@ const DateAndVenue = ({ reloadSpace, projectSpace, events, matrixClient }) => {
     return (
       <>
         {oldEvents
-          .map((event, i) => {
+          ?.map((event, i) => {
             return <DisplayContent block={event} index={i} blocks={eventSpace} projectSpace={eventSpace} reloadSpace={reloadSpace} key={event + i} mapComponent />
           })}
         {eventContent.map((event, i) => {
@@ -119,7 +122,7 @@ const DateAndVenue = ({ reloadSpace, projectSpace, events, matrixClient }) => {
               <div className="left event">
                 <figure className="icon-bg">🎭</figure>
               </div>
-              <div>{
+              <div className="center">{
               event.filter(room => room.name.charAt(0) !== 'x') // filter rooms that were deleted
                 .map((event, i) => {
                   let { cms, error, fetching } = FetchCms(event.room_id)
@@ -164,7 +167,7 @@ const DateAndVenue = ({ reloadSpace, projectSpace, events, matrixClient }) => {
 }</div>
               <div className="right">
                 <DeleteButton
-                  deleting={deleting} onDelete={onDelete} block={eventSpace[oldEvents.length + i + 1]} index={i} reloadSpace={reloadSpace}
+                  deleting={deleting} onDelete={onDelete} block={eventSpace[oldEvents.length + i + 1]} index={oldEvents.length + i + 1} reloadSpace={reloadSpace}
                 />
               </div>
             </div>
@@ -176,7 +179,6 @@ const DateAndVenue = ({ reloadSpace, projectSpace, events, matrixClient }) => {
 
   if (!eventSpace) return <Loading />
   if (eventSpace === 'depricated') return <><p>{feedback}</p><Loading /></>
-
   return (
     <>
       {eventSpace?.length > 1 && <Events />}
