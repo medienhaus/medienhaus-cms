@@ -27,7 +27,7 @@ const Landing = () => {
 
     return (
       <strong style={{ color: 'rgb(228,9,59)' }}>
-        {' ' + days + t(' days ') + hours + t(' hours ') + minutes + t(' minutes left …')}
+        {t('You have ') + days + t(' days ') + hours + t(' hours ') + minutes + t(' minutes left.')}
       </strong>
     )
   }
@@ -39,7 +39,7 @@ const Landing = () => {
       {/* TODO: @marcel-klasse please add remaining days and or hours until noon; fix locales for <1>x days left …</1> */}
       <p>
         <Trans t={t} i18nKey="countdown">
-          Only projects that are being published (i.e. not drafts) until October 08 are eligible for the Rundgang 2021 print program.
+          Only projects published here by October 08 will be included in the printed programme booklet. Drafts will not be considered. 
         </Trans>
       </p>
       <p>{Countdown('10/08/2021 12:00 AM')}</p>
