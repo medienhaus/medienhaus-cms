@@ -38,7 +38,6 @@ const Create = () => {
   const projectSpace = params.spaceId
   const getCurrentTime = useCallback(() => {
     const today = new Date()
-    console.log('looooog' + today.getMonth())
     const month = today.getMonth() + 1 // JS starts month with 0
     const time = today.getHours().toString().padStart(2, '0') + ':' + today.getMinutes().toString().padStart(2, '0') + ':' + today.getSeconds().toString().padStart(2, '0')
     const date = today.getFullYear() + '-' + month.toString().padStart(2, '0') + '-' + today.getDate().toString().padStart(2, '0')
