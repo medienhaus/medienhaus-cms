@@ -287,7 +287,7 @@ const Create = () => {
                 Would you like to save your project as a draft or release it for publishing on the Rundgang platform? The released projects will be published for the Rundgang on October 29, 2021.
               </Trans>
             </p>
-            <p>{t('If you still want to make changes to your contributions after publishing, you can continue to do so. Please note, however, that content on analogue and hybrid projects will be pulled from the system on October 8, 2021 for the printed Rundgang programme. Projects that have not been approved by you for publishing by then will not be included in the programme booklet.')}</p>
+            <p>{t('If you still want to make changes to your contributions after publishing, you can continue to do so. Please note, however, that content on projects with a physical location will be pulled from the system on October 8, 2021 for the printed Rundgang programme. Projects that have not been approved by you for publishing by then will not be included in the programme booklet.')}</p>
             {spaceObject
               ? (<>
                 <PublishProject space={spaceObject.rooms[0]} metaEvent={medienhausMeta} description={description?.en} published={visibility} time={getCurrentTime} />
