@@ -68,7 +68,7 @@ const DateAndVenue = ({ reloadSpace, projectSpace, events, matrixClient }) => {
     const fetchEvents = async () => {
       const filterDepricatedEvents = eventSpace.filter(room => room.room_type === 'm.space').filter((room, i) => i > 0) // as always, first space is the space itself therefore we filter it
       const eventSummary = await Promise.all(filterDepricatedEvents.map(room => matrixClient.getSpaceSummary(room.room_id, 0).catch(err => console.log(err)))) // then we fetch the summary of all spaces within the event space
-      const onlyEvents = eventSummary.map(event => event.rooms.filter(room => room.room_type !== 'm.space')).flat(1) // finally we remove any spaces in here since we only want the content room and then flatten the nested array to one layer
+      const onlyEvents = eventSummary.map(event => event.rooms.filter(room => room.room_type !== 'm.space')) // finally we remove any spaces in here since we only want the content room
       setEventContent(onlyEvents)
     }
     setEventSpace(events)
@@ -88,11 +88,23 @@ const DateAndVenue = ({ reloadSpace, projectSpace, events, matrixClient }) => {
           .map((event, i) => {
             return <DisplayContent block={event} index={i} blocks={eventSpace} projectSpace={eventSpace} reloadSpace={reloadSpace} key={event + i} mapComponent />
           })}
-        {eventContent
-          .filter(room => room.name.charAt(0) !== 'x') // filter rooms that were deleted
-          .map((event, i) => {
-            return <DisplayContent block={event} index={i} blocks={eventSpace} projectSpace={eventSpace} reloadSpace={reloadSpace} key={event + i} mapComponent />
-          })}
+        {eventContent.map(event => {
+          return (
+            <React.Fragment key={event}>
+              <div>{
+              event.filter(room => room.name.charAt(0) !== 'x') // filter rooms that were deleted
+                .map((event, i) => {
+                  return <DisplayContent block={event} index={i} blocks={eventSpace} projectSpace={eventSpace} reloadSpace={reloadSpace} key={event + i} mapComponent />
+                })
+}</div>
+              <div className="right">
+                <button>
+                  ×
+                </button>
+              </div>
+            </React.Fragment>
+          )
+        })}
       </>
     )
   }

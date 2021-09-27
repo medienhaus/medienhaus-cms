@@ -426,25 +426,25 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace, time,
                                         />
                                       </div>
                                         )}
-
-            <div className="right">
-              <button
-                className={clickedDelete && 'del'}
-                key={'delete' + index} disabled={deleting} onClick={(e) => {
-                  if (clickedDelete) {
-                    onDelete(e, block.room_id, block.name, index)
-                    setClickedDelete(false)
-                    reloadSpace()
-                  } else {
-                    e.preventDefault()
-                    setClickedDelete(true)
-                  }
-                    <p>{deleting}</p> // feedback that deleting was succesfull or has failed
-                }}
-              >
-                {clickedDelete ? <TrashIcon fill="var(--color-bg)" /> : deleting ? <Loading /> : '×'}
-              </button>
-            </div>
+            {!mapComponent &&
+              <div className="right">
+                <button
+                  className={clickedDelete && 'del'}
+                  key={'delete' + index} disabled={deleting} onClick={(e) => {
+                    if (clickedDelete) {
+                      onDelete(e, block.room_id, block.name, index)
+                      setClickedDelete(false)
+                      reloadSpace()
+                    } else {
+                      e.preventDefault()
+                      setClickedDelete(true)
+                    }
+                      <p>{deleting}</p> // feedback that deleting was succesfull or has failed
+                  }}
+                >
+                  {clickedDelete ? <TrashIcon fill="var(--color-bg)" /> : deleting ? <Loading /> : '×'}
+                </button>
+              </div>}
           </div>
           {!mapComponent && <AddContent number={index + 1} projectSpace={projectSpace} blocks={blocks} reloadSpace={reloadSpace} />}
         </>
