@@ -13,13 +13,16 @@ const AddDate = ({ number, reloadSpace, projectSpace, saveButton, callback }) =>
 
   const handleSubmit = async () => {
     setLoading(true)
-    await createBlock(undefined, 'date', number, projectSpace).then(async (res) =>
-      await matrixClient.sendMessage(res, {
-        msgtype: 'm.text',
-        body: date + ' ' + time
-      })).catch(console.log)
+
+    const createRoom = await createBlock(undefined, 'date', number, projectSpace)
+      .catch(console.log)
+    await matrixClient.sendMessage(createRoom, {
+      msgtype: 'm.text',
+      body: date + ' ' + time
+    }).catch(console.log)
+    reloadSpace(createRoom)
     callback()
-    reloadSpace()
+
     setLoading(false)
   }
 

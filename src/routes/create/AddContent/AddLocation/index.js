@@ -70,6 +70,7 @@ const AddLocation = ({ number, projectSpace, onBlockWasAddedSuccessfully, callba
         msgtype: 'm.text',
         body: location + '-' + room
       })
+      onBlockWasAddedSuccessfully(locationRoom)
       // we only create a date room if either time or date are specified
       if (timeDate.length > 0 && (timeDate[0] !== '' || timeDate[1] !== '')) {
         const dateRoom = await createBlock(undefined, 'date', number.toString(), event.room_id)
@@ -77,9 +78,9 @@ const AddLocation = ({ number, projectSpace, onBlockWasAddedSuccessfully, callba
           msgtype: 'm.text',
           body: timeDate[1] + ' ' + timeDate[0]
         })
+        onBlockWasAddedSuccessfully(dateRoom)
       }
       callback()
-      onBlockWasAddedSuccessfully()
     } catch (err) {
       console.log(err)
     }

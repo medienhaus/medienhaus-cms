@@ -38,8 +38,9 @@ const Create = () => {
   const projectSpace = params.spaceId
   const getCurrentTime = useCallback(() => {
     const today = new Date()
+    const month = today.getMonth() + 1 // JS starts month with 0
     const time = today.getHours().toString().padStart(2, '0') + ':' + today.getMinutes().toString().padStart(2, '0') + ':' + today.getSeconds().toString().padStart(2, '0')
-    const date = today.getFullYear() + '-' + today.getMonth().toString().padStart(2, '0') + '-' + today.getDay().toString().padStart(2, '0')
+    const date = today.getFullYear() + '-' + month.toString().padStart(2, '0') + '-' + today.getDate().toString().padStart(2, '0')
     setSaveTimestamp(date + ', ' + time)
   }, [])
 
@@ -289,11 +290,10 @@ const Create = () => {
             <p>{t('If you still want to make changes to your contributions after publishing, you can continue to do so. Please note, however, that content on analogue and hybrid projects will be pulled from the system on October 8, 2021 for the printed Rundgang programme. Projects that have not been approved by you for publishing by then will not be included in the programme booklet.')}</p>
             {spaceObject
               ? (<>
-                <PublishProject space={spaceObject.rooms[0]} description={description?.en} published={visibility} time={getCurrentTime} />
+                <PublishProject space={spaceObject.rooms[0]} metaEvent={medienhausMeta} description={description?.en} published={visibility} time={getCurrentTime} />
                 {!description?.en && <p>❗️ {t('Please add a short description of your project.')}</p>}
                 {!medienhausMeta.context && <p>❗️ {t('Please add your project to a context.')}</p>}
-                {/* eslint-disable-next-line react/jsx-indent */}
-                 </>)
+              </>)
               : <Loading />}
           </section>
 
@@ -304,7 +304,6 @@ const Create = () => {
           </section>
         </>
       )}
-      {/* eslint-disable-next-line react/jsx-indent */}
     </>
   )
 }

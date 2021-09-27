@@ -16,7 +16,7 @@ const Preview = () => {
   // const [medienhausMeta, setMedienhausMeta] = useState([])
   const [roomMembers, setRoomMembers] = useState([])
   const [projectImage, setProjectImage] = useState([])
-  const [description, setDescription] = useState()
+  const [description, setDescription] = useState('')
   const params = useParams()
   const projectSpace = params.spaceId
   const matrixClient = Matrix.getMatrixClient()
@@ -34,7 +34,7 @@ const Preview = () => {
       setRoomMembers(spaceDetails.currentState.members)
       console.log(spaceDetails.currentState.members)
       // set the topic depending on selected language
-      setDescription({ en: space.rooms.filter(room => room.name === 'en')[0].topic || '', de: space.rooms.filter(room => room.name === 'de')[0].topic || '' })
+      setDescription(contentLang === 'de' ? (space.rooms.filter(room => room.name === 'de')[0].topic || '') : (space.rooms.filter(room => room.name === 'en')[0].topic || ''))
       // fetch custom medienhaus event
       const meta = spaceDetails.currentState.events.get('dev.medienhaus.meta').values().next().value.event.content
       // setMedienhausMeta(meta)
@@ -71,7 +71,6 @@ const Preview = () => {
       <select
         id="subject" name="subject" defaultValue="" value={contentLang} onChange={(e) => {
           setContentLang(e.target.value)
-          setDescription()
         }}
       >
         <option value="de">DE — Deutsch</option>
@@ -92,7 +91,7 @@ const Preview = () => {
 
           {// <h2>{t('Description')}</h2>
                   }
-          <p>{description?.en}</p>
+          <p>{description}</p>
           {blocks?.map((content) => {
             console.log(content)
             return <DisplayPreview content={content} matrixClient={matrixClient} key={content.name} />

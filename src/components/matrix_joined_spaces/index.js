@@ -24,7 +24,7 @@ const getAnswer = async () => {
         collab: collab,
         avatar_url: room.getMxcAvatarUrl(),
         meta: event,
-        description: topic,
+        topic: topic,
         membership: room.getMyMembership(),
         powerLevel: room.currentState.members[localStorage.getItem('mx_user_id')].powerLevel
       }

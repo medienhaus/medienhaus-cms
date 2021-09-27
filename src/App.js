@@ -17,7 +17,7 @@ import Feedback from './routes/feedback'
 import Credits from './routes/credits'
 import Terms from './routes/terms'
 import Account from './routes/account'
-// import Request from './routes/request'
+import Request from './routes/request'
 import Preview from './routes/preview'
 
 import { AuthProvider, useAuth } from './Auth'
@@ -111,7 +111,7 @@ function App () {
               <PrivateRoute path="/moderation" component={Moderation} />
               <PrivateRoute path="/support" component={Support} />
               <PrivateRoute path="/feedback" component={Feedback} />
-              {/* <PrivateRoute path="/request" component={Request} /> */}
+              <PrivateRoute path="/request" component={Request} />
               <PrivateRoute path="/credits" component={Credits} />
             </Switch>
           </main>
