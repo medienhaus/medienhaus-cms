@@ -298,8 +298,10 @@ const Create = () => {
           </section>
 
           <section className="save">
-            <button onClick={() => history.push(`/preview/${projectSpace}`)} rel="external nofollow noopener noreferrer" target="_blank">{t('SHOW PREVIEW')} →</button>
-            <button onClick={() => history.push('/projects')}>← {t('BACK TO OVERVIEW')}</button>
+            <div className="confirmation">
+              <button className="cancel" onClick={() => history.push('/projects')}>← {t('BACK TO OVERVIEW')}</button>
+              <button className="confirm" onClick={() => history.push(`/preview/${projectSpace}`)} rel="external nofollow noopener noreferrer" target="_blank">{t('SHOW PREVIEW')} →</button>
+            </div>
             {saveTimestamp && <p className="timestamp">↳ {t('Project last saved at')} {saveTimestamp}</p>}
           </section>
         </>
