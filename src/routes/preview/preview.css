@@ -98,6 +98,8 @@ html {
   font-size: 0.8rem;
   font-weight: 500;
   padding: calc(var(--margin) * 0.5);
+  text-align: center;
+  width: 100%;
 }
 
 .singleproject .video {
@@ -145,15 +147,22 @@ html {
 }
 */
 
-.singleproject .tagbubble > span {
+.singleproject .tagbubble {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(16ch, 1fr));
+  grid-gap: calc(var(--margin) * 0.5);
+}
+
+.singleproject .tagbubble > * {
   background-color: var(--color-fg);
   color: var(--color-bg);
   border-radius: var(--margin);
   cursor: pointer;
-  display: inline-block;
   font-size: 0.8rem;
   font-weight: 500;
-  padding: calc(var(--margin) * 0.5);
+  padding: calc(var(--margin) * 0.3);
+  text-align: center;
+  white-space: nowrap;
 }
 
 /* TODO: not yet created dynamically; needs testing */
