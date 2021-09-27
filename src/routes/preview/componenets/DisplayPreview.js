@@ -103,7 +103,7 @@ const DisplayPreview = ({ content, matrixClient, contentLoaded }) => {
   if (content.name.includes('bbb')) {
     return (
       <div className="bbb">
-        <a className="bbbLink" href={cms?.body}>{t('Link to BBB Session')}</a>
+        <a className="bbblink" href={cms?.body}>{t('Link to BBB Session')}</a>
       </div>
     )
   }
