@@ -78,7 +78,9 @@ const Preview = () => {
       </select>
       <main>
         <div className="projectmain">
-          <h1 className="projecttitle">{title}</h1>
+          <div className="headline">
+            <h1 className="projecttitle">{title}</h1>
+          </div>
           <div className="students tagbubble">
             {Object.values(roomMembers).map((member) => {
               return <span key={member.rawDisplayName}>{member.rawDisplayName}</span>
@@ -88,10 +90,9 @@ const Preview = () => {
             <div className="featureimage image">
               <img src={matrixClient.mxcUrlToHttp(projectImage.url)} alt={projectImage.alt} />
             </div>}
-
-          {// <h2>{t('Description')}</h2>
-                  }
-          <p>{description}</p>
+          <div className="description">
+            <p>{description}</p>
+          </div>
           {blocks?.map((content) => {
             console.log(content)
             return <DisplayPreview content={content} matrixClient={matrixClient} key={content.name} />
@@ -119,4 +120,5 @@ const Preview = () => {
     </section>
   )
 }
+
 export default Preview
