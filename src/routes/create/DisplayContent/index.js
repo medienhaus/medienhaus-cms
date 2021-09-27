@@ -353,8 +353,7 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace, time,
                                       You can delete this element afterwards.
                                     </Trans>
                                   </p>}
-                                {/* eslint-disable-next-line react/jsx-indent */}
-                            </div>
+                              </div>
                               : json.type === 'bbb'
                                 ? <div className="center">
                                   <div>

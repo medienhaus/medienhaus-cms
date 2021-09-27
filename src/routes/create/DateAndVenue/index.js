@@ -3,10 +3,15 @@ import AddLocation from '../AddContent/AddLocation'
 import { useTranslation } from 'react-i18next'
 import { Loading } from '../../../components/loading'
 import DisplayContent from '../DisplayContent'
+import FetchCms from '../../../components/matrix_fetch_cms'
+import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet'
+
+import locations from '../../../assets/data/locations.json'
 
 const DateAndVenue = ({ reloadSpace, projectSpace, events, matrixClient }) => {
   const [eventSpace, setEventSpace] = useState(events)
   const [eventContent, setEventContent] = useState([])
+  const [oldEvents, setOldEvents] = useState([])
   const [isAddEventVisible, setIsAddEventVisible] = useState(false)
   const [feedback, setFeedback] = useState('Migrating to new Event Space')
   const { t } = useTranslation('date')
@@ -66,6 +71,10 @@ const DateAndVenue = ({ reloadSpace, projectSpace, events, matrixClient }) => {
       }
     }
     const fetchEvents = async () => {
+      setOldEvents(eventSpace.filter((room, i) => i > 0) // ignore the first element since its the space itself
+        .filter(room => room.room_type !== 'm.space') // filter all newly created events
+        .filter(room => room.name.charAt(0) !== 'x') // filter rooms that were deleted
+      )
       const filterDepricatedEvents = eventSpace.filter(room => room.room_type === 'm.space').filter((room, i) => i > 0) // as always, first space is the space itself therefore we filter it
       const eventSummary = await Promise.all(filterDepricatedEvents.map(room => matrixClient.getSpaceSummary(room.room_id, 0).catch(err => console.log(err)))) // then we fetch the summary of all spaces within the event space
       const onlyEvents = eventSummary.map(event => event.rooms.filter(room => room.room_type !== 'm.space')) // finally we remove any spaces in here since we only want the content room
@@ -78,10 +87,6 @@ const DateAndVenue = ({ reloadSpace, projectSpace, events, matrixClient }) => {
   }, [eventSpace, events, matrixClient, projectSpace])
 
   const Events = () => {
-    const oldEvents = eventSpace.filter((room, i) => i > 0) // ignore the first element since its the space itself
-      .filter(room => room.room_type !== 'm.space') // filter all newly created events
-      .filter(room => room.name.charAt(0) !== 'x') // filter rooms that were deleted
-
     return (
       <>
         {oldEvents
@@ -90,11 +95,48 @@ const DateAndVenue = ({ reloadSpace, projectSpace, events, matrixClient }) => {
           })}
         {eventContent.map(event => {
           return (
-            <React.Fragment key={event}>
+            <div key={event}>
               <div>{
               event.filter(room => room.name.charAt(0) !== 'x') // filter rooms that were deleted
                 .map((event, i) => {
-                  return <DisplayContent block={event} index={i} blocks={eventSpace} projectSpace={eventSpace} reloadSpace={reloadSpace} key={event + i} mapComponent />
+                  let { cms, error, fetching } = FetchCms(event.room_id)
+                  cms = cms[0]
+                  if (fetching) return <Loading />
+                  if (error) return <p>{t('something went wrong.')}</p>
+                  if (event.name.includes('location')) {
+                    return (
+                      <div
+                        key={i}
+                        className={cms.body.substring(0, cms.body.indexOf(',')) + ',' + cms.body.substring(cms.body.indexOf(',') + 1, cms.body.indexOf('-')) === '0.0, 0.0' && 'center'}
+                      >
+                        {
+                          cms.body.substring(0, cms.body.indexOf(',')) + ',' + cms.body.substring(cms.body.indexOf(',') + 1, cms.body.indexOf('-')) !== '0.0, 0.0' &&
+                            <MapContainer className="center" center={[cms.body.substring(0, cms.body.indexOf(',')), cms.body.substring(cms.body.indexOf(',') + 1, cms.body.indexOf('-'))]} zoom={17} scrollWheelZoom={false} placeholder>
+                              <TileLayer
+                                attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+                                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                              />
+                              <Marker position={[cms.body.substring(0, cms.body.indexOf(',')), cms.body.substring(cms.body.indexOf(',') + 1, cms.body.indexOf('-'))]}>
+                                <Popup>
+                                  {locations.find(coord => coord.coordinates === cms.body.substring(0, cms.body.indexOf(',')) + ',' + cms.body.substring(cms.body.indexOf(',') + 1, cms.body.lastIndexOf('-')))?.name || // if the location is not in our location.json
+                                  cms.body.substring(cms.body.lastIndexOf('-') + 1).length > 0 // we check if the custom input field was filled in
+                                    ? cms.body.substring(cms.body.lastIndexOf('-') + 1) // if true, we display that text on the popup otherwise we show the lat and long coordinates
+                                    : cms.body.substring(0, cms.body.indexOf(',')) + ',' + cms.body.substring(cms.body.indexOf(',') + 1)}
+                                </Popup>
+                              </Marker>
+                            </MapContainer>
+                        }
+                        {cms.body.substring(cms.body.lastIndexOf('-') + 1).length > 0 && <input type="text" value={cms.body.substring(cms.body.lastIndexOf('-') + 1)} disabled />}
+                      </div>
+                    )
+                  } else {
+                    return (
+                      <div className="center">
+                        {cms.body.split(' ')[0] && <input type="date" value={cms.body.split(' ')[0]} disabled required />}
+                        {cms.body.split(' ')[1] && <input type="time" value={cms.body.split(' ')[1]} disabled required />}
+                      </div>
+                    )
+                  }
                 })
 }</div>
               <div className="right">
@@ -102,7 +144,7 @@ const DateAndVenue = ({ reloadSpace, projectSpace, events, matrixClient }) => {
                   ×
                 </button>
               </div>
-            </React.Fragment>
+            </div>
           )
         })}
       </>
@@ -123,7 +165,6 @@ const DateAndVenue = ({ reloadSpace, projectSpace, events, matrixClient }) => {
         </button>}
       {isAddEventVisible &&
         <>
-
           <AddLocation
             number={eventSpace.length}
             projectSpace={eventSpace[0].room_id}

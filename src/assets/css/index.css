@@ -769,11 +769,11 @@ textarea[disabled] {
   font-weight: normal;
 }
 
-.editor .center.leaflet-container {
+.center.leaflet-container {
   height: calc(var(--margin) * 12);
 }
 
-.editor .center.leaflet-container+* {
+.center.leaflet-container+* {
   margin-top: var(--margin);
 }
 
