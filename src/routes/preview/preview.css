@@ -147,11 +147,13 @@ html {
 }
 */
 
+/*
 .singleproject .tagbubble {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(16ch, 1fr));
   grid-gap: calc(var(--margin) * 0.5);
 }
+*/
 
 .singleproject .tagbubble > * {
   background-color: var(--color-fg);
@@ -160,9 +162,17 @@ html {
   cursor: pointer;
   font-size: 0.8rem;
   font-weight: 500;
-  padding: calc(var(--margin) * 0.3);
+  padding: calc(var(--margin) * 0.3) calc(var(--margin) * 0.6);
   text-align: center;
   white-space: nowrap;
+}
+
+.singleproject .tagbubble > *:not(:first-child):not(:only-child) {
+  margin-left: calc(var(--margin) * 0.2);
+}
+
+.singleproject .tagbubble > *:not(:last-child):not(:only-child) {
+  margin-right: calc(var(--margin) * 0.2);
 }
 
 /* TODO: not yet created dynamically; needs testing */
