@@ -7,11 +7,14 @@ import FetchCms from '../../../components/matrix_fetch_cms'
 import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet'
 
 import locations from '../../../assets/data/locations.json'
+import DeleteButton from '../components/DeleteButton'
+import deleteContentBlock from '../functions/deleteContentBlock'
 
 const DateAndVenue = ({ reloadSpace, projectSpace, events, matrixClient }) => {
   const [eventSpace, setEventSpace] = useState(events)
   const [eventContent, setEventContent] = useState([])
   const [oldEvents, setOldEvents] = useState([])
+  const [deleting, setDeleting] = useState(false)
   const [isAddEventVisible, setIsAddEventVisible] = useState(false)
   const [feedback, setFeedback] = useState('Migrating to new Event Space')
   const { t } = useTranslation('date')
@@ -86,6 +89,23 @@ const DateAndVenue = ({ reloadSpace, projectSpace, events, matrixClient }) => {
       : eventSpace && fetchEvents(events)
   }, [eventSpace, events, matrixClient, projectSpace])
 
+  const onDelete = async (e, roomId, name, index) => {
+    e.preventDefault()
+    setDeleting(true)
+    try {
+      deleteContentBlock(name, roomId, index)
+      reloadSpace()
+    } catch (err) {
+      console.error(err)
+      setDeleting('couldn’t delet eevent, please try again or try reloading the page')
+      setTimeout(() => {
+        setDeleting()
+      }, 2000)
+    } finally {
+      setDeleting()
+    }
+  }
+
   const Events = () => {
     return (
       <>
@@ -93,7 +113,7 @@ const DateAndVenue = ({ reloadSpace, projectSpace, events, matrixClient }) => {
           .map((event, i) => {
             return <DisplayContent block={event} index={i} blocks={eventSpace} projectSpace={eventSpace} reloadSpace={reloadSpace} key={event + i} mapComponent />
           })}
-        {eventContent.map(event => {
+        {eventContent.map((event, i) => {
           return (
             <div className="editor" key={event}>
               <div className="left event">
@@ -143,9 +163,9 @@ const DateAndVenue = ({ reloadSpace, projectSpace, events, matrixClient }) => {
                 })
 }</div>
               <div className="right">
-                <button>
-                  ×
-                </button>
+                <DeleteButton
+                  deleting={deleting} onDelete={onDelete} block={event} index={i} reloadSpace={reloadSpace}
+                />
               </div>
             </div>
           )

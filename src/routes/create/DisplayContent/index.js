@@ -6,6 +6,7 @@ import debounce from 'lodash/debounce'
 import { Loading } from '../../../components/loading'
 import AddContent from '../AddContent'
 import List from './List'
+import DeleteButton from '../components/DeleteButton'
 // import Code from './Code'
 import reorder from './matrix_reorder_rooms'
 import LoadingSpinnerButton from '../../../components/LoadingSpinnerButton'
@@ -26,13 +27,12 @@ import { ReactComponent as PlaylistIcon } from '../../../assets/icons/remix/play
 import { ReactComponent as PictureInPictureIcon } from '../../../assets/icons/remix/picture-in-picture.svg'
 import { ReactComponent as LocationIcon } from '../../../assets/icons/remix/location.svg'
 import { ReactComponent as DateIcon } from '../../../assets/icons/remix/date.svg'
-import { ReactComponent as TrashIcon } from '../../../assets/icons/remix/trash.svg'
 
 import locations from '../../../assets/data/locations.json'
+import deleteContentBlock from '../functions/deleteContentBlock'
 // import DisplayPreview from '../../preview/componenets/DisplayPreview'
 
 const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace, time, mapComponent }) => {
-  const [clickedDelete, setClickedDelete] = useState(false)
   const [readOnly, setReadOnly] = useState(false)
   const [loading, setLoading] = useState(false)
   // eslint-disable-next-line no-unused-vars
@@ -147,13 +147,7 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace, time,
     setDeleting(true)
     setReadOnly(true)
     try {
-      const roomType = name.split('_')
-      await matrixClient.setRoomName(roomId, 'x_' + roomType[1])
-      const count = await matrixClient.getJoinedRoomMembers(roomId)
-      Object.keys(count.joined).length > 1 && Object.keys(count.joined).forEach(name => {
-        localStorage.getItem('medienhaus_user_id') !== name && matrixClient.kick(roomId, name)
-      })
-      await matrixClient.leave(roomId)
+      deleteContentBlock(name, roomId, index)
       blocks.filter(room => room.name.charAt(0) !== 'x').forEach((block, i) => {
         if (i > index) {
           reorder(block.name, block.room_id, true)
@@ -427,22 +421,10 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace, time,
                                         )}
             {!mapComponent &&
               <div className="right">
-                <button
-                  className={clickedDelete && 'del'}
-                  key={'delete' + index} disabled={deleting} onClick={(e) => {
-                    if (clickedDelete) {
-                      onDelete(e, block.room_id, block.name, index)
-                      setClickedDelete(false)
-                      reloadSpace()
-                    } else {
-                      e.preventDefault()
-                      setClickedDelete(true)
-                    }
-                      <p>{deleting}</p> // feedback that deleting was succesfull or has failed
-                  }}
-                >
-                  {clickedDelete ? <TrashIcon fill="var(--color-bg)" /> : deleting ? <Loading /> : '×'}
-                </button>
+                <DeleteButton
+                  key={'delete' + index}
+                  deleting={deleting} onDelete={onDelete} block={block} index={index} reloadSpace={reloadSpace}
+                />
               </div>}
           </div>
           {!mapComponent && <AddContent number={index + 1} projectSpace={projectSpace} blocks={blocks} reloadSpace={reloadSpace} />}
