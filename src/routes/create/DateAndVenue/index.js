@@ -115,7 +115,7 @@ const DateAndVenue = ({ reloadSpace, projectSpace, events, matrixClient }) => {
           })}
         {eventContent.map((event, i) => {
           return (
-            <div className="editor" key={event}>
+            <div className="editor" key={event.name}>
               <div className="left event">
                 <figure className="icon-bg">🎭</figure>
               </div>
@@ -164,7 +164,7 @@ const DateAndVenue = ({ reloadSpace, projectSpace, events, matrixClient }) => {
 }</div>
               <div className="right">
                 <DeleteButton
-                  deleting={deleting} onDelete={onDelete} block={event} index={i} reloadSpace={reloadSpace}
+                  deleting={deleting} onDelete={onDelete} block={eventSpace[oldEvents.length + i + 1]} index={i} reloadSpace={reloadSpace}
                 />
               </div>
             </div>
