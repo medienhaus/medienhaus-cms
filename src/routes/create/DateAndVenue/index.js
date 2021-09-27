@@ -79,12 +79,12 @@ const DateAndVenue = ({ reloadSpace, projectSpace, events, matrixClient }) => {
 
   const Events = () => {
     const oldEvents = eventSpace.filter((room, i) => i > 0) // ignore the first element since its the space itself
+      .filter(room => room.room_type !== 'm.space') // filter all newly created events
       .filter(room => room.name.charAt(0) !== 'x') // filter rooms that were deleted
 
     return (
       <>
         {oldEvents
-          .filter(room => room.room_type !== 'm.space') // filter all newly created events
           .map((event, i) => {
             return <DisplayContent block={event} index={i} blocks={eventSpace} projectSpace={eventSpace} reloadSpace={reloadSpace} key={event + i} mapComponent />
           })}
