@@ -286,17 +286,6 @@ nav a.disabled {
   opacity: 0.2;
 }
 
-<<<<<<< HEAD
-/* @andi addd this */
-
-/*
-.button-group {
-  display: flex;
-  flex-direction: column;
-}
-*/
-
-=======>>>>>>>main
 /*
 section a:link {
   text-decoration: underline;
@@ -691,6 +680,15 @@ textarea[disabled] {
   display: grid;
   grid-template-columns: auto 1fr auto;
   grid-gap: var(--margin);
+}
+
+.event {
+  display: inline !important;
+  align-self: center;
+  background-image: none !important;
+  background-image: none !important;
+  background-position: none !important;
+  background-repeat: none !important;
 }
 
 .editor .left, .editor .right {
@@ -1675,12 +1673,7 @@ button>.loading {
 @import url("./fonts.css");
 */
 
-<<<<<<< HEAD .leaflet-container, .leaflet-container a:link, .leaflet-container a:hover {
-  color: rgb(0, 0, 0);
-  text-decoration: none;
-}
-
-=======.leaflet-container {
+.leaflet-container {
   z-index: 0;
 }
 
