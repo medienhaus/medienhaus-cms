@@ -35,6 +35,7 @@ const DisplayPreview = ({ content, matrixClient, contentLoaded }) => {
     )
   }
   if (content.name.includes('bbb')) return <a href={cms?.body}>{t('Link to BBB Session')}</a>
-  else return <p>{content.body}</p>
+
+  return <div dangerouslySetInnerHTML={{ __html: cms.formatted_body }} />
 }
 export default DisplayPreview
