@@ -23,7 +23,6 @@ html {
 .singleproject {
   font-family: "BauPro";
   font-weight: normal;
-  width: calc(100% - calc(var(--margin) * 0.7));
 }
 
 .singleproject > * + *,
@@ -61,6 +60,7 @@ html {
 
 .singleproject blockquote {
   border-left-color: var(--color-fg);
+  border-left-radius: unset;
   border-left-style: solid;
   border-left-width: 0.2rem;
   font-style: italic;
@@ -85,7 +85,6 @@ html {
 
 .singleproject .code {
   background-color: var(--color-fg);
-  box-sizing: border-box;
   color: var(--color-bg);
   font-family: "Lucida Console", Monaco, monospace;
   font-size: 0.8rem;
@@ -93,7 +92,7 @@ html {
 }
 
 .singleproject .code > * {
-  overflow-x: scroll;
+  white-space: pre-wrap;
 }
 
 .singleproject .bbb .bbblink {
