@@ -155,7 +155,7 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace, time,
         localStorage.getItem('medienhaus_user_id') !== name && matrixClient.kick(roomId, name)
       })
       await matrixClient.leave(roomId)
-      blocks.forEach((block, i) => {
+      blocks.filter(room => room.name.charAt(0) !== 'x').forEach((block, i) => {
         if (i > index) {
           reorder(block.name, block.room_id, true)
         }
