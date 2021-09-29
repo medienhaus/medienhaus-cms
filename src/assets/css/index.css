@@ -287,14 +287,6 @@ nav a.disabled {
   opacity: 0.2;
 }
 
-/* @andi addd this */
-/*
-.button-group {
-  display: flex;
-  flex-direction: column;
-}
-*/
-
 /*
 section a:link {
   text-decoration: underline;
@@ -836,6 +828,12 @@ textarea[disabled] {
   align-self: center;
 }
 
+.editor .left > button,
+.editor .right > button {
+  display: grid;
+  place-content: center;
+}
+
 .editor .left,
 .editor .left > *,
 .editor .right,
@@ -916,6 +914,10 @@ textarea[disabled] {
   display: grid;
   grid-auto-flow: row;
   grid-gap: var(--margin);
+}
+
+.editor .del {
+  background-color: var(--color-no);
 }
 
 .editor .list > div {
@@ -1686,9 +1688,53 @@ button > .loading {
 @import url("./fonts.css");
 */
 
+.leaflet-container {
+  z-index: 0;
+}
+
 .leaflet-container,
 .leaflet-container a:link,
 .leaflet-container a:hover {
   color: rgb(0,0,0);
   text-decoration: none;
+}
+
+.contextDropdown ul {
+  position: absolute;
+  overflow: auto;
+  max-height: 50vh;
+  background-color: var(--color-bg);
+  width: 100%;
+  border: solid var(--color-fg);
+  border-width: 0 3px 3px 3px;
+  z-index: 9999;
+}
+
+@media (max-width: 29.938em) {
+  .contextDropdown ul {
+    max-height: 70vh;
+  }
+}
+
+.contextDropdown ul li {
+  cursor: pointer;
+  padding: 10px 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.contextDropdown ul li div small {
+  color: gray;
+}
+
+.contextDropdown ul li.disabled {
+  cursor: default;
+}
+.contextDropdown ul li.disabled div {
+  opacity: 0.6;
+}
+
+.contextDropdown ul li:not(.disabled):hover {
+  background-color: var(--color-lo);
 }

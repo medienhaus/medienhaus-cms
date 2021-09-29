@@ -23,7 +23,7 @@ const Overview = () => {
     const allRooms = matrixClient.getRooms()
     allRooms.forEach(async room => {
       // ignore rooms that aren't spaces (or are language spaces) and only return invites
-      if (room.getMyMembership() !== 'invite' || room.getType() !== 'm.space' || room.name === 'de' || room.name === 'en') return
+      if (room.getMyMembership() !== 'invite' || room.getType() !== 'm.space' || room.name === 'de' || room.name === 'en' || room.name === 'events') return
       const roomMembers = await room._loadMembersFromServer().catch(console.error)
       if (roomMembers < 1) return
       setInvites(invites => Object.assign({}, invites, {
@@ -38,7 +38,7 @@ const Overview = () => {
 
     async function handleRoomEvent (room) {
       // Ignore event if this is not about a space or if it is a language space
-      if (room.getType() !== 'm.space' || room.name === 'de' || room.name === 'en') return
+      if (room.getType() !== 'm.space' || room.name === 'de' || room.name === 'en' || room.name === 'events') return
 
       const roomMembers = await room._loadMembersFromServer().catch(console.error)
       // room.getMyMembership() is only available after the current call stack has cleared (_.defer),
@@ -85,7 +85,6 @@ const Overview = () => {
       Object.entries(invites).filter(([key]) => key !== room)))
     reload(true)
   }
-  console.log(invites)
   if (!invites || fetchSpaces || !matrixClient.isInitialSyncComplete()) return <Loading />
 
   return (
@@ -113,10 +112,11 @@ const Overview = () => {
 
             </ul>
           </section>
-          <h3>{t('Projects')}</h3>
+          <hr />
         </>
       )}
-      <section>
+      <section className="projects">
+        <h3>{t('Projects')}</h3>
         {spacesErr
           ? console.error(spacesErr)
           : projects?.length === 0

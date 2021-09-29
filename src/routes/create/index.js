@@ -38,7 +38,6 @@ const Create = () => {
   const projectSpace = params.spaceId
   const getCurrentTime = useCallback(() => {
     const today = new Date()
-    console.log('looooog' + today.getMonth())
     const month = today.getMonth() + 1 // JS starts month with 0
     const time = today.getHours().toString().padStart(2, '0') + ':' + today.getMinutes().toString().padStart(2, '0') + ':' + today.getSeconds().toString().padStart(2, '0')
     const date = today.getFullYear() + '-' + month.toString().padStart(2, '0') + '-' + today.getDate().toString().padStart(2, '0')
@@ -288,25 +287,25 @@ const Create = () => {
                 Would you like to save your project as a draft or release it for publishing on the Rundgang platform? The released projects will be published for the Rundgang on October 29, 2021.
               </Trans>
             </p>
-            <p>{t('If you still want to make changes to your contributions after publishing, you can continue to do so. Please note, however, that content on analogue and hybrid projects will be pulled from the system on October 8, 2021 for the printed Rundgang programme. Projects that have not been approved by you for publishing by then will not be included in the programme booklet.')}</p>
+            <p>{t('If you still want to make changes to your contributions after publishing, you can continue to do so. Please note, however, that content on projects with a physical location will be pulled from the system on October 8, 2021 for the printed Rundgang programme. Projects that have not been approved by you for publishing by then will not be included in the programme booklet.')}</p>
             {spaceObject
               ? (<>
-                <PublishProject space={spaceObject.rooms[0]} description={description?.en} published={visibility} time={getCurrentTime} />
+                <PublishProject space={spaceObject.rooms[0]} metaEvent={medienhausMeta} description={description?.en} published={visibility} time={getCurrentTime} />
                 {!description?.en && <p>❗️ {t('Please add a short description of your project.')}</p>}
                 {!medienhausMeta.context && <p>❗️ {t('Please add your project to a context.')}</p>}
-                {/* eslint-disable-next-line react/jsx-indent */}
-                 </>)
+              </>)
               : <Loading />}
           </section>
 
           <section className="save">
-            <button onClick={() => history.push(`/preview/${projectSpace}`)} rel="external nofollow noopener noreferrer" target="_blank">{t('SHOW PREVIEW')} →</button>
-            <button onClick={() => history.push('/projects')}>← {t('BACK TO OVERVIEW')}</button>
+            <div className="confirmation">
+              <button className="cancel" onClick={() => history.push('/projects')}>← {t('BACK TO OVERVIEW')}</button>
+              <button className="confirm" onClick={() => history.push(`/preview/${projectSpace}`)} rel="external nofollow noopener noreferrer" target="_blank">{t('SHOW PREVIEW')} →</button>
+            </div>
             {saveTimestamp && <p className="timestamp">↳ {t('Project last saved at')} {saveTimestamp}</p>}
           </section>
         </>
       )}
-      {/* eslint-disable-next-line react/jsx-indent */}
     </>
   )
 }

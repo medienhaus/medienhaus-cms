@@ -7,7 +7,7 @@ const struktur = {
     "children": {
       "!CZSVqFjoKkBzzcbwVy:content.udk-berlin.de": {
         "id": "!CZSVqFjoKkBzzcbwVy:content.udk-berlin.de",
-        "name": "Fakultät der Bildenen Kunst",
+        "name": "Fakultät der Bildenden Kunst",
         "type": "faculty",
         "children": {
           "!cDMEUIzoSGoqjzOZXP:content.udk-berlin.de": {

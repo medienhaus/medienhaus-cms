@@ -73,7 +73,7 @@ const DateAndVenue = ({ number, reloadSpace, projectSpace, events, matrixClient 
   }, [events, matrixClient, projectSpace])
 
   const Events = () => {
-    return eventSpace.filter((element, i) => i > 0).map((event, i) => {
+    return eventSpace.filter((element, i) => i > 0).filter(room => room.name.charAt(0) !== 'x').map((event, i) => {
       return <DisplayContent block={event} index={i} blocks={eventSpace} projectSpace={eventSpace} reloadSpace={reloadSpace} key={event + i} mapComponent />
     })
   }

@@ -16,7 +16,7 @@ const Preview = () => {
   // const [medienhausMeta, setMedienhausMeta] = useState([])
   const [roomMembers, setRoomMembers] = useState([])
   const [projectImage, setProjectImage] = useState([])
-  const [description, setDescription] = useState()
+  const [description, setDescription] = useState('')
   const params = useParams()
   const projectSpace = params.spaceId
   const matrixClient = Matrix.getMatrixClient()
@@ -34,7 +34,7 @@ const Preview = () => {
       setRoomMembers(spaceDetails.currentState.members)
       console.log(spaceDetails.currentState.members)
       // set the topic depending on selected language
-      setDescription({ en: space.rooms.filter(room => room.name === 'en')[0].topic || '', de: space.rooms.filter(room => room.name === 'de')[0].topic || '' })
+      setDescription(contentLang === 'de' ? (space.rooms.filter(room => room.name === 'de')[0].topic || '') : (space.rooms.filter(room => room.name === 'en')[0].topic || ''))
       // fetch custom medienhaus event
       const meta = spaceDetails.currentState.events.get('dev.medienhaus.meta').values().next().value.event.content
       // setMedienhausMeta(meta)
@@ -71,53 +71,52 @@ const Preview = () => {
       <select
         id="subject" name="subject" defaultValue="" value={contentLang} onChange={(e) => {
           setContentLang(e.target.value)
-          setDescription()
         }}
       >
         <option value="de">DE — Deutsch</option>
         <option value="en">EN — English</option>
       </select>
-      <main>
-        <div className="projectmain">
-          <h1 className="projecttitle">{title}</h1>
-          <div className="students tagbubble">
-            {Object.values(roomMembers).map((member) => {
-              return <span key={member.rawDisplayName}>{member.rawDisplayName}</span>
-            })}
-          </div>
-          {projectImage &&
-            <div className="featureimage image">
-              <img src={matrixClient.mxcUrlToHttp(projectImage.url)} alt={projectImage.alt} />
-            </div>}
-
-          {// <h2>{t('Description')}</h2>
-                  }
-          <p>{description?.en}</p>
-          {blocks?.map((content) => {
-            console.log(content)
-            return <DisplayPreview content={content} matrixClient={matrixClient} key={content.name} />
-          }
-            // <DisplayContent block={content} index={i} blocks={blocks} projectSpace={spaceObject?.rooms.filter(room => room.name === contentLang)[0].room_id} reloadSpace={reloadSpace} time={getCurrentTime} key={content + i + content?.lastUpdate} />
-          )}
-
+      <div className="projectmain">
+        <div className="headline">
+          <h2 className="projecttitle">{title}</h2>
         </div>
+        <div className="students tagbubble">
+          {Object.values(roomMembers).map((member) => {
+            return <span key={member.rawDisplayName}>{member.rawDisplayName}</span>
+          })}
+        </div>
+        {projectImage &&
+          <div className="featureimage image">
+            <img src={matrixClient.mxcUrlToHttp(projectImage.url)} alt={projectImage.alt} />
+          </div>}
+        <div className="description">
+          <p>{description}</p>
+        </div>
+        {blocks?.map((content) => {
+          console.log(content)
+          return <DisplayPreview content={content} matrixClient={matrixClient} key={content.name} />
+        }
+          // <DisplayContent block={content} index={i} blocks={blocks} projectSpace={spaceObject?.rooms.filter(room => room.name === contentLang)[0].room_id} reloadSpace={reloadSpace} time={getCurrentTime} key={content + i + content?.lastUpdate} />
+        )}
 
-        {/* <div className="info"> */}
-        {/*  <div className="label">{t('Fakultät')}</div> */}
-        {/*  <div className="tagbubble"> */}
-        {/*    {Object.values(roomMembers).map((member) => { */}
-        {/*      return <span key={member.rawDisplayName}>{member.rawDisplayName}</span> */}
-        {/*    })} */}
-        {/*  </div> */}
+      </div>
 
-        {/*  <div className="label">Fakultät</div> */}
-        {/*  <div className="tagbubble"><span>Visuelle Kommunikation</span><span>Raumklasse, Prof. Gabi Schillig</span></div> */}
+      {/* <div className="info"> */}
+      {/*  <div className="label">{t('Fakultät')}</div> */}
+      {/*  <div className="tagbubble"> */}
+      {/*    {Object.values(roomMembers).map((member) => { */}
+      {/*      return <span key={member.rawDisplayName}>{member.rawDisplayName}</span> */}
+      {/*    })} */}
+      {/*  </div> */}
 
-        {/*  <div className="label">Ort</div> */}
-        {/*  <div className="tagbubble"><span>Grunewaldstraße 4–5</span><span>Raum 105/106</span></div> */}
-        {/* </div> */}
-      </main>
+      {/*  <div className="label">Fakultät</div> */}
+      {/*  <div className="tagbubble"><span>Visuelle Kommunikation</span><span>Raumklasse, Prof. Gabi Schillig</span></div> */}
+
+      {/*  <div className="label">Ort</div> */}
+      {/*  <div className="tagbubble"><span>Grunewaldstraße 4–5</span><span>Raum 105/106</span></div> */}
+      {/* </div> */}
     </section>
   )
 }
+
 export default Preview
