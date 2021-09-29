@@ -309,7 +309,7 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace, time,
                           : json.type === 'location'
                             ? (
                               <div
-                                className={cms.body.substring(0, cms.body.indexOf(',')) + ',' + cms.body.substring(cms.body.indexOf(',') + 1, cms.body.indexOf('-')) === '0.0, 0.0' && 'center'}
+                                className={cms.body.substring(0, cms.body.indexOf(',')) + ',' + cms.body.substring(cms.body.indexOf(',') + 1, cms.body.indexOf('-')) === '0.0, 0.0' ? 'center' : null}
                               >
                                 {
                             cms.body.substring(0, cms.body.indexOf(',')) + ',' + cms.body.substring(cms.body.indexOf(',') + 1, cms.body.indexOf('-')) !== '0.0, 0.0' &&
@@ -419,12 +419,11 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace, time,
                                         />
                                       </div>
                                         )}
-            {!mapComponent &&
-              <div className="right">
-                <DeleteButton
-                  deleting={deleting} onDelete={onDelete} block={block} index={index} reloadSpace={reloadSpace}
-                />
-              </div>}
+            <div className="right">
+              <DeleteButton
+                deleting={deleting} onDelete={onDelete} block={block} index={index} reloadSpace={reloadSpace}
+              />
+            </div>
           </div>
           {!mapComponent && <AddContent number={index + 1} projectSpace={projectSpace} blocks={blocks} reloadSpace={reloadSpace} />}
         </>

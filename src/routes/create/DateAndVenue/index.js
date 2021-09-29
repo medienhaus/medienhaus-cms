@@ -131,10 +131,7 @@ const DateAndVenue = ({ reloadSpace, projectSpace, events, matrixClient }) => {
                   if (error) return <p>{t('something went wrong.')}</p>
                   if (event.name.includes('location')) {
                     return (
-                      <div
-                        key={i}
-                        className={cms.body.substring(0, cms.body.indexOf(',')) + ',' + cms.body.substring(cms.body.indexOf(',') + 1, cms.body.indexOf('-')) === '0.0, 0.0' && 'center'}
-                      >
+                      <div key={i}>
                         {
                           cms.body.substring(0, cms.body.indexOf(',')) + ',' + cms.body.substring(cms.body.indexOf(',') + 1, cms.body.indexOf('-')) !== '0.0, 0.0' &&
                             <MapContainer className="center" center={[cms.body.substring(0, cms.body.indexOf(',')), cms.body.substring(cms.body.indexOf(',') + 1, cms.body.indexOf('-'))]} zoom={17} scrollWheelZoom={false} placeholder>
@@ -191,7 +188,7 @@ const DateAndVenue = ({ reloadSpace, projectSpace, events, matrixClient }) => {
       {isAddEventVisible &&
         <>
           <AddLocation
-            number={eventSpace.length}
+            number={eventSpace.filter(space => space.room_type === 'm.space').length} // only return the number of new event spaces
             projectSpace={eventSpace[0].room_id}
             onBlockWasAddedSuccessfully={reloadSpace}
             callback={() => setIsAddEventVisible(false)}
