@@ -8,7 +8,7 @@ import { useTranslation } from 'react-i18next'
 import locations from '../../../../assets/data/locations.json'
 import createBlock from '../../matrix_create_room'
 
-const AddLocation = ({ number, projectSpace, onBlockWasAddedSuccessfully, callback }) => {
+const AddLocation = ({ number, projectSpace, handleOnBlockWasAddedSuccessfully, callback }) => {
   const [selectedLocation, setSelectedLocation] = useState('')
   const [timeDate, setTimeDate] = useState([])
   const [room, setRoom] = useState('')
@@ -70,7 +70,7 @@ const AddLocation = ({ number, projectSpace, onBlockWasAddedSuccessfully, callba
         msgtype: 'm.text',
         body: location + '-' + room
       })
-      onBlockWasAddedSuccessfully(locationRoom)
+      handleOnBlockWasAddedSuccessfully(locationRoom)
       // we only create a date room if either time or date are specified
       if (timeDate.length > 0 && (timeDate[0] !== '' || timeDate[1] !== '')) {
         const dateRoom = await createBlock(undefined, 'date', number.toString(), event.room_id)
@@ -78,7 +78,7 @@ const AddLocation = ({ number, projectSpace, onBlockWasAddedSuccessfully, callba
           msgtype: 'm.text',
           body: timeDate[1] + ' ' + timeDate[0]
         })
-        onBlockWasAddedSuccessfully(dateRoom)
+        handleOnBlockWasAddedSuccessfully(dateRoom)
       }
       callback()
     } catch (err) {
@@ -129,6 +129,7 @@ const AddLocation = ({ number, projectSpace, onBlockWasAddedSuccessfully, callba
         saveButton={false}
         callback={(time, date) => setTimeDate([time, date])}
       />
+      <p>{t('Venue')}</p>
       <select name="location-select" value={selectedLocation} id="location-select" onChange={(e) => setSelectedLocation(e.target.value)}>
         <option value="" disabled>{t('-- select venue --')}</option>
         <option value="custom">{t('other venue, please enter below')}</option>
