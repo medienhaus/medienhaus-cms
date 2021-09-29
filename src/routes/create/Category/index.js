@@ -46,7 +46,9 @@ const Category = ({ title, projectSpace }) => {
   // }
 
   async function onContextChosen (contextSpaceId) {
-    const projectSpaceMetaEvent = await matrixClient.getStateEvent(projectSpace, 'dev.medienhaus.meta')
+    let projectSpaceMetaEvent = await matrixClient.getStateEvent(projectSpace, 'dev.medienhaus.meta')
+
+    setLoading(true)
 
     if (projectSpaceMetaEvent.context && projectSpaceMetaEvent.context !== contextSpaceId) {
       // If this project was in a different context previously we should try to take it out of the old context
@@ -73,9 +75,12 @@ const Category = ({ title, projectSpace }) => {
     // Set the new context in our meta event
     projectSpaceMetaEvent.context = contextSpaceId
     await matrixClient.sendStateEvent(projectSpace, 'dev.medienhaus.meta', projectSpaceMetaEvent)
-  }
 
-  if (loading) { return <Loading /> }
+    // Get the freshly updated state event and save it in our state
+    projectSpaceMetaEvent = await matrixClient.getStateEvent(projectSpace, 'dev.medienhaus.meta')
+    setCurrentContext(projectSpaceMetaEvent.context)
+    setLoading(false)
+  }
 
   return (
     <>
@@ -84,7 +89,9 @@ const Category = ({ title, projectSpace }) => {
       <p>{t('The context can be a class, a course, a seminar or a free project. If you are unsure, ask the professor of your class or the seminar leader.')}</p>
       <p>{t('You can scroll through the list, or filter/search the list by typing one or more keywords.')}</p>
       <div style={{ position: 'relative' }}>
-        <ContextDropdown onItemChosen={onContextChosen} selectedContext={currentContext} showRequestButton />
+        {loading
+          ? <Loading />
+          : <ContextDropdown onItemChosen={onContextChosen} selectedContext={currentContext} showRequestButton />}
       </div>
       {/* {subject !== '' && !member && <Knock room={room} callback={callback} />} */}
     </>
