@@ -1,0 +1,16 @@
+{
+"Your message has been sent! We will get back to you.": "Die Nachricht wurde gesendet. Wir werden uns bei Ihnen melden.",
+  "SUBMIT": "SENDEN",
+  "Couldn’t send your message. ": "Ihre Nachricht konnte nicht gesendet werden: ",
+  "introduction" : "Falls Sie einen Kontext suchen und diesen nicht finden können, können Sie Ihn hier anfragen.",
+  "name of context": "name des kontexts",
+  "Please enter the name of the context.": "Bitte tragen Sie den Name des Kontexts ein.",
+  "supervisor": "betreuer*in",
+  "Please enter the name of the person in charge.": "Bitte fügen Sie den Namen der/des Betreuer*in ein",
+  "UdK (!) email address": "UdK (!) email Adresse",
+  "Please enter a UdK email address.": "Bitte fügen Sie eine UdK email Adresse ein.",
+  "Please select a parent context.": "Bitte wählen Sie einen übergeordneten Kontext aus.",
+  "Parent space, e.g. Faculty Design.": "Übergeordnete Space, bspw. Fakultät Design.",
+  "additional information": "zusätzliche Informationen"
+
+}
