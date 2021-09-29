@@ -1,21 +1,18 @@
 import React, { useEffect, useState } from 'react'
-import AddLocation from '../AddContent/AddLocation'
+import AddEvent from './components/AddEvent'
 import { useTranslation } from 'react-i18next'
 import { Loading } from '../../../components/loading'
 import DisplayContent from '../DisplayContent'
-import FetchCms from '../../../components/matrix_fetch_cms'
-import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet'
 
-import locations from '../../../assets/data/locations.json'
 import DeleteButton from '../components/DeleteButton'
 // import deleteContentBlock from '../functions/deleteContentBlock'
+import DisplayEvents from './components/DisplayEvents'
 
 const DateAndVenue = ({ reloadSpace, projectSpace, events, matrixClient }) => {
   const [eventSpace, setEventSpace] = useState(events)
   const [eventContent, setEventContent] = useState([])
   const [oldEvents, setOldEvents] = useState([])
   const [deleting, setDeleting] = useState(false)
-  const [isAddEventVisible, setIsAddEventVisible] = useState(false)
   const [feedback, setFeedback] = useState('Migrating to new Event Space')
   const { t } = useTranslation('date')
 
@@ -110,95 +107,40 @@ const DateAndVenue = ({ reloadSpace, projectSpace, events, matrixClient }) => {
     }
   }
 
-  const Events = () => {
-    return (
-      <>
-        {oldEvents
-          ?.map((event, i) => {
-            return <DisplayContent block={event} index={i} blocks={eventSpace} projectSpace={eventSpace} reloadSpace={reloadSpace} key={event + i} mapComponent />
-          })}
-        {eventContent.map((event, i) => {
-          console.log(eventSpace)
-          return (
-            <div className="editor" key={event.name}>
-              <div className="left event">
-                <figure className="icon-bg">🎭</figure>
-              </div>
-              <div className="center">{
-              event.filter(room => room.name.charAt(0) !== 'x') // filter rooms that were deleted
-                .map((event, i) => {
-                  let { cms, error, fetching } = FetchCms(event.room_id)
-                  cms = cms[0]
-                  if (fetching) return <Loading />
-                  if (error) return <p>{t('something went wrong.')}</p>
-                  if (event.name.includes('location')) {
-                    return (
-                      <div
-                        key={i}
-                        className={cms.body.substring(0, cms.body.indexOf(',')) + ',' + cms.body.substring(cms.body.indexOf(',') + 1, cms.body.indexOf('-')) === '0.0, 0.0' && 'center'}
-                      >
-                        {
-                          cms.body.substring(0, cms.body.indexOf(',')) + ',' + cms.body.substring(cms.body.indexOf(',') + 1, cms.body.indexOf('-')) !== '0.0, 0.0' &&
-                            <MapContainer className="center" center={[cms.body.substring(0, cms.body.indexOf(',')), cms.body.substring(cms.body.indexOf(',') + 1, cms.body.indexOf('-'))]} zoom={17} scrollWheelZoom={false} placeholder>
-                              <TileLayer
-                                attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-                                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                              />
-                              <Marker position={[cms.body.substring(0, cms.body.indexOf(',')), cms.body.substring(cms.body.indexOf(',') + 1, cms.body.indexOf('-'))]}>
-                                <Popup>
-                                  {locations.find(coord => coord.coordinates === cms.body.substring(0, cms.body.indexOf(',')) + ',' + cms.body.substring(cms.body.indexOf(',') + 1, cms.body.lastIndexOf('-')))?.name || // if the location is not in our location.json
-                                  cms.body.substring(cms.body.lastIndexOf('-') + 1).length > 0 // we check if the custom input field was filled in
-                                    ? cms.body.substring(cms.body.lastIndexOf('-') + 1) // if true, we display that text on the popup otherwise we show the lat and long coordinates
-                                    : cms.body.substring(0, cms.body.indexOf(',')) + ',' + cms.body.substring(cms.body.indexOf(',') + 1)}
-                                </Popup>
-                              </Marker>
-                            </MapContainer>
-                        }
-                        {cms.body.substring(cms.body.lastIndexOf('-') + 1).length > 0 && <input type="text" value={cms.body.substring(cms.body.lastIndexOf('-') + 1)} disabled />}
-                      </div>
-                    )
-                  } else {
-                    return (
-                      <div className="center">
-                        {cms.body.split(' ')[0] && <input type="date" value={cms.body.split(' ')[0]} disabled required />}
-                        {cms.body.split(' ')[1] && <input type="time" value={cms.body.split(' ')[1]} disabled required />}
-                      </div>
-                    )
-                  }
-                })
-}</div>
-              <div className="right">
-                <DeleteButton
-                  deleting={deleting} onDelete={onDelete} block={event} index={oldEvents.length + i + 1} reloadSpace={reloadSpace}
-                />
-              </div>
-            </div>
-          )
-        })}
-      </>
-    )
-  }
-
   if (!eventSpace) return <Loading />
   if (eventSpace === 'depricated') return <><p>{feedback}</p><Loading /></>
   return (
     <>
-      {eventSpace?.length > 1 && <Events />}
-      {!isAddEventVisible &&
-        <button
-          className="add-button"
-          onClick={(e) => { e.preventDefault(); setIsAddEventVisible(true) }}
-        >+ {t('Add Event')}
-        </button>}
-      {isAddEventVisible &&
-        <>
-          <AddLocation
-            number={eventSpace.length}
-            projectSpace={eventSpace[0].room_id}
-            onBlockWasAddedSuccessfully={reloadSpace}
-            callback={() => setIsAddEventVisible(false)}
-          />
-        </>}
+      {oldEvents
+        ?.map((event, i) => {
+          return <DisplayContent block={event} index={i} blocks={eventSpace} projectSpace={eventSpace} reloadSpace={reloadSpace} key={event + i} mapComponent />
+        })}
+      {eventSpace?.length > 1 && (eventContent.map((event, i) => {
+        return (
+          <div className="editor" key={event.name}>
+            <div className="left event">
+              <figure className="icon-bg">🎭</figure>
+            </div>
+            <div className="center">
+              {event.filter(room => room.name.charAt(0) !== 'x') // filter rooms that were deleted
+                .map((event, i) => {
+                  return <DisplayEvents event={event} i={i} key={i} />
+                })}
+            </div>
+            <div className="right">
+              <DeleteButton
+                deleting={deleting} onDelete={onDelete} block={eventSpace[oldEvents.length + i + 1]} index={oldEvents.length + i + 1} reloadSpace={reloadSpace}
+              />
+            </div>
+          </div>
+        )
+      }))}
+      <AddEvent
+        length={eventSpace.filter(space => space.room_type === 'm.space').length}
+        room_id={eventSpace[0].room_id}
+        t={t}
+        reloadSpace={reloadSpace}
+      />
     </>
   )
 }

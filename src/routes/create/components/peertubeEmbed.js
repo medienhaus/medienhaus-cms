@@ -5,7 +5,7 @@ import LoadingSpinnerButton from '../../../components/LoadingSpinnerButton'
 import { Trans, useTranslation } from 'react-i18next'
 // import createBlock from '../matrix_create_room'
 
-const PeertubeEmbed = ({ type, onCreateRoomForBlock, onBlockWasAddedSuccessfully }) => {
+const PeertubeEmbed = ({ type, onCreateRoomForBlock, onBlockWasAddedSuccessfully, saveButton, callback }) => {
   const [loading, setLoading] = useState(false)
   const [entries, setEntries] = useState([])
   const [selectedEntry, setSelectedEntry] = useState('')
@@ -57,6 +57,7 @@ const PeertubeEmbed = ({ type, onCreateRoomForBlock, onBlockWasAddedSuccessfully
 
   function selectEntry (e) {
     setSelectedEntry(e.target.value)
+    !saveButton && callback(e.target.value)
   }
 
   if (loading) {
@@ -80,7 +81,7 @@ const PeertubeEmbed = ({ type, onCreateRoomForBlock, onBlockWasAddedSuccessfully
       {type === 'video' && <p>↳ <Trans t={t} i18nKey="linkToVideo">You can upload videos via <a href="https://stream.udk-berlin.de/videos/upload" rel="external nofollow noopener noreferrer" target="_blank">udk/stream</a></Trans></p>}
       {type === 'livestream' && <p>↳ <Trans t={t} i18nKey="linkToStream">You can start a livestream via <a href="https://stream.udk-berlin.de/videos/upload" rel="external nofollow noopener noreferrer" target="_blank">udk/stream</a></Trans></p>}
       {type === 'playlist' && <p>↳ <Trans t={t} i18nKey="linkToPlaylist">You can create playlists via <a href="https://stream.udk-berlin.de/videos/upload" rel="external nofollow noopener noreferrer" target="_blank">udk/stream</a></Trans></p>}
-      <LoadingSpinnerButton onClick={handleSubmit} disabled={entries.length < 1 || !selectedEntry}>Add Content</LoadingSpinnerButton>
+      {saveButton && <LoadingSpinnerButton onClick={handleSubmit} disabled={entries.length < 1 || !selectedEntry}>Add Content</LoadingSpinnerButton>}
     </div>
   )
 }

@@ -5,7 +5,6 @@ import { useTranslation } from 'react-i18next'
 
 const DisplayPreview = ({ content, matrixClient, contentLoaded }) => {
   const { t } = useTranslation('projects')
-  console.log(contentLoaded)
 
   let { cms, error, fetching } = contentLoaded ? { cms: contentLoaded, error: false, fetching: false } : FetchCms(content?.room_id)
 

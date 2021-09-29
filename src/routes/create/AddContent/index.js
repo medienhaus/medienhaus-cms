@@ -1,12 +1,12 @@
 import React, { useState } from 'react'
 import MediaUpload from './MediaUpload'
 import AddBlock from './AddBlock'
-import PeertubeEmbed from './peertubeEmbed'
+import PeertubeEmbed from '../components/peertubeEmbed'
 import AddLocation from './AddLocation'
 import AddDate from '../addDate'
 import createBlock from '../matrix_create_room'
 import reorder from '../DisplayContent/matrix_reorder_rooms'
-import BigBlueButtonEmbed from './bigBlueButtonEmbed'
+import BigBlueButtonEmbed from '../components/bigBlueButtonEmbed'
 import { useTranslation } from 'react-i18next'
 
 const AddContent = ({ number, projectSpace, blocks, reloadSpace }) => {
@@ -68,13 +68,13 @@ const AddContent = ({ number, projectSpace, blocks, reloadSpace }) => {
         selectedBlockType === 'image' || selectedBlockType === 'audio'
           ? <MediaUpload fileType={selectedBlockType} number={number} space={projectSpace} blocks={blocks} reloadSpace={reloadSpace} displayPlusButton={displayPlusButton} />
           : selectedBlockType === 'video' || selectedBlockType === 'livestream' || selectedBlockType === 'playlist'
-            ? <PeertubeEmbed type={selectedBlockType} onCreateRoomForBlock={onCreateBlockRoom} onBlockWasAddedSuccessfully={onBlockWasAddedSuccessfully} />
+            ? <PeertubeEmbed type={selectedBlockType} onCreateRoomForBlock={onCreateBlockRoom} onBlockWasAddedSuccessfully={onBlockWasAddedSuccessfully} saveButton />
             : selectedBlockType === 'location'
               ? <AddLocation onCreateRoomForBlock={onCreateBlockRoom} onBlockWasAddedSuccessfully={onBlockWasAddedSuccessfully} />
               : selectedBlockType === 'date'
                 ? <AddDate onCreateRoomForBlock={onCreateBlockRoom} onBlockWasAddedSuccessfully={onBlockWasAddedSuccessfully} />
                 : selectedBlockType === 'bbb'
-                  ? <BigBlueButtonEmbed onCreateRoomForBlock={onCreateBlockRoom} onBlockWasAddedSuccessfully={onBlockWasAddedSuccessfully} />
+                  ? <BigBlueButtonEmbed onCreateRoomForBlock={onCreateBlockRoom} onBlockWasAddedSuccessfully={onBlockWasAddedSuccessfully} saveButton />
                   : <AddBlock contentSelect={selectedBlockType} number={number} projectSpace={projectSpace} blocks={blocks} reloadSpace={reloadSpace} displayPlusButton={displayPlusButton} />
       }
     </>
