@@ -419,12 +419,12 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace, time,
                                         />
                                       </div>
                                         )}
-            {!mapComponent &&
-              <div className="right">
-                <DeleteButton
-                  deleting={deleting} onDelete={onDelete} block={block} index={index} reloadSpace={reloadSpace}
-                />
-              </div>}
+
+            <div className="right">
+              <DeleteButton
+                deleting={deleting} onDelete={onDelete} block={block} index={index} reloadSpace={reloadSpace}
+              />
+            </div>
           </div>
           {!mapComponent && <AddContent number={index + 1} projectSpace={projectSpace} blocks={blocks} reloadSpace={reloadSpace} />}
         </>

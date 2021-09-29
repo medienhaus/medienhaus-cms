@@ -8,7 +8,7 @@ import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet'
 
 import locations from '../../../assets/data/locations.json'
 import DeleteButton from '../components/DeleteButton'
-import deleteContentBlock from '../functions/deleteContentBlock'
+// import deleteContentBlock from '../functions/deleteContentBlock'
 
 const DateAndVenue = ({ reloadSpace, projectSpace, events, matrixClient }) => {
   const [eventSpace, setEventSpace] = useState(events)
@@ -92,11 +92,12 @@ const DateAndVenue = ({ reloadSpace, projectSpace, events, matrixClient }) => {
   }, [eventSpace, events, matrixClient, projectSpace])
 
   const onDelete = async (e, roomId, name, index) => {
-    console.log(roomId, name, index)
+    console.log(eventSpace)
     e.preventDefault()
     setDeleting(true)
     try {
-      await deleteContentBlock(name, roomId, index)
+      console.log(roomId, name, index)
+      // await deleteContentBlock(name, roomId, index)
       // reloadSpace()
     } catch (err) {
       console.error(err)
@@ -117,6 +118,7 @@ const DateAndVenue = ({ reloadSpace, projectSpace, events, matrixClient }) => {
             return <DisplayContent block={event} index={i} blocks={eventSpace} projectSpace={eventSpace} reloadSpace={reloadSpace} key={event + i} mapComponent />
           })}
         {eventContent.map((event, i) => {
+          console.log(eventSpace)
           return (
             <div className="editor" key={event.name}>
               <div className="left event">
@@ -167,7 +169,7 @@ const DateAndVenue = ({ reloadSpace, projectSpace, events, matrixClient }) => {
 }</div>
               <div className="right">
                 <DeleteButton
-                  deleting={deleting} onDelete={onDelete} block={eventSpace[oldEvents.length + i + 1]} index={oldEvents.length + i + 1} reloadSpace={reloadSpace}
+                  deleting={deleting} onDelete={onDelete} block={event} index={oldEvents.length + i + 1} reloadSpace={reloadSpace}
                 />
               </div>
             </div>
