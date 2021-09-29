@@ -7,12 +7,18 @@ import { useTranslation } from 'react-i18next'
 // assets
 import locations from '../../../../assets/data/locations.json'
 import createBlock from '../../matrix_create_room'
+import BigBlueButtonEmbed from '../../components/bigBlueButtonEmbed'
+import PeertubeEmbed from '../../components/peertubeEmbed'
 
 const AddLocation = ({ number, projectSpace, handleOnBlockWasAddedSuccessfully, callback }) => {
   const [selectedLocation, setSelectedLocation] = useState('')
   const [timeDate, setTimeDate] = useState([])
   const [room, setRoom] = useState('')
   const [loading, setLoading] = useState(false)
+  const [bbbLink, setBbbLink] = useState('')
+  const [validBbbLink, setValidBbbLink] = useState(false)
+  const [selectedBlockType, setSelectedBlockType] = useState('')
+  const [livestream, setLivestream] = useState()
   const matrixClient = Matrix.getMatrixClient()
   const { t } = useTranslation('locations')
   const center = {
@@ -23,7 +29,6 @@ const AddLocation = ({ number, projectSpace, handleOnBlockWasAddedSuccessfully, 
 
   const handleSubmit = async () => {
     setLoading(true)
-    // first we create a new space for this event
     const opts = (type, name) => {
       return {
         preset: 'private_chat',
@@ -52,6 +57,7 @@ const AddLocation = ({ number, projectSpace, handleOnBlockWasAddedSuccessfully, 
     }
     try {
       console.log(number)
+      // first we create a new space for this event
       const event = await matrixClient.createRoom(opts('event', number.toString()))
       // and add those subspaces as children to the project space
       await fetch(process.env.REACT_APP_MATRIX_BASE_URL + `/_matrix/client/r0/rooms/${projectSpace}/state/m.space.child/${event.room_id}`, {
@@ -79,6 +85,22 @@ const AddLocation = ({ number, projectSpace, handleOnBlockWasAddedSuccessfully, 
           body: timeDate[1] + ' ' + timeDate[0]
         })
         handleOnBlockWasAddedSuccessfully(dateRoom)
+      }
+      // if a bbb link was specified we create a room for it
+      if (bbbLink) {
+        const bbbRoom = await createBlock(undefined, 'bbb', number.toString(), event.room_id)
+        await matrixClient.sendMessage(bbbRoom, {
+          body: bbbLink,
+          msgtype: 'm.text'
+        })
+      }
+      // if a livestream was specified we create a room for it
+      if (livestream) {
+        const streamRoom = await createBlock(undefined, 'livestream', number.toString(), event.room_id)
+        await matrixClient.sendMessage(streamRoom, {
+          body: livestream,
+          msgtype: 'm.text'
+        })
       }
       callback()
     } catch (err) {
@@ -125,17 +147,17 @@ const AddLocation = ({ number, projectSpace, handleOnBlockWasAddedSuccessfully, 
 
   return (
     <>
-      <AddDate
-        saveButton={false}
-        callback={(time, date) => setTimeDate([time, date])}
-      />
-      <p>{t('Venue')}</p>
-      <select name="location-select" value={selectedLocation} id="location-select" onChange={(e) => setSelectedLocation(e.target.value)}>
-        <option value="" disabled>{t('-- select venue --')}</option>
-        <option value="custom">{t('other venue, please enter below')}</option>
-        {locations.map(location => <option value={location.coordinates} key={location.coordinates}>{location.name}</option>)}
-      </select>
-
+      <div className="add">
+        <select name="content-select" value={selectedBlockType} id="content-select" onChange={(e) => setSelectedBlockType(e.target.value)}>
+          <option value="">{t('No stream or video conference')}</option>
+          <option value="livestream">{t('Live stream')}</option>
+          <option value="bbb">{t('BigBlueButton-Session')}</option>
+        </select>
+      </div>
+      {selectedBlockType === 'bbb'
+        ? <BigBlueButtonEmbed callback={(link, validLink) => { setBbbLink(link); setValidBbbLink(validLink); console.log(validLink) }} onBlockWasAddedSuccessfully={handleOnBlockWasAddedSuccessfully} />
+        : selectedBlockType === 'livestream' &&
+          <PeertubeEmbed type="livestream" onBlockWasAddedSuccessfully={handleOnBlockWasAddedSuccessfully} callback={(stream) => setLivestream(stream)} />}
       {selectedLocation === 'custom' && <>
         <p>{t('Drag the marker to the desired location.')}</p>
         <div className="map">
@@ -148,11 +170,23 @@ const AddLocation = ({ number, projectSpace, handleOnBlockWasAddedSuccessfully, 
           </MapContainer>
         </div>
       </>}
+
+      <p>{t('Venue')}</p>
+      <select name="location-select" value={selectedLocation} id="location-select" onChange={(e) => setSelectedLocation(e.target.value)}>
+        <option value="" disabled>{t('-- select venue --')}</option>
+        <option value="custom">{t('other venue, please enter below')}</option>
+        {locations.map(location => <option value={location.coordinates} key={location.coordinates}>{location.name}</option>)}
+      </select>
       <input type="text" placeholder={t('room number or specific location')} onChange={(e) => setRoom(e.target.value)} />
+
+      <AddDate
+        saveButton={false}
+        callback={(time, date) => setTimeDate([time, date])}
+      />
 
       <div className="confirmation">
         <button className="cancel" onClick={() => { callback() }}>{t('CANCEL')}</button>
-        <LoadingSpinnerButton disabled={loading || !selectedLocation || (selectedLocation === '0.0, 0.0' && !room)} onClick={handleSubmit}>{t('SAVE')}</LoadingSpinnerButton>
+        <LoadingSpinnerButton disabled={loading || !selectedLocation || (selectedLocation === '0.0, 0.0' && !room) || (selectedBlockType === 'bbb' && !validBbbLink)} onClick={handleSubmit}>{t('SAVE')}</LoadingSpinnerButton>
       </div>
     </>
   )
