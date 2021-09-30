@@ -17,6 +17,7 @@ const DisplayEvents = ({ event, i }) => {
     return (
 
       <div key={i}>
+        {event.room_id}
         {cms.body.substring(0, cms.body.indexOf(',')) + ',' + cms.body.substring(cms.body.indexOf(',') + 1, cms.body.indexOf('-')) !== '0.0, 0.0' &&
           <MapContainer className="center" center={[cms.body.substring(0, cms.body.indexOf(',')), cms.body.substring(cms.body.indexOf(',') + 1, cms.body.indexOf('-'))]} zoom={17} scrollWheelZoom={false} placeholder>
             <TileLayer
@@ -40,6 +41,7 @@ const DisplayEvents = ({ event, i }) => {
   } else {
     return (
       <div className="center">
+        {event.room_id}
         {cms.body.split(' ')[0] && <input type="date" value={cms.body.split(' ')[0]} disabled required />}
         {cms.body.split(' ')[1] && <input type="time" value={cms.body.split(' ')[1]} disabled required />}
       </div>

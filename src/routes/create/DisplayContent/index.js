@@ -311,7 +311,7 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace, time,
                             ? (
                               <div
                                 className={cms.body.substring(0, cms.body.indexOf(',')) + ',' + cms.body.substring(cms.body.indexOf(',') + 1, cms.body.indexOf('-')) === '0.0, 0.0' ? 'center' : null}
-                              >
+                              >{block.room_id}
                                 {
                                 cms.body.substring(0, cms.body.indexOf(',')) + ',' + cms.body.substring(cms.body.indexOf(',') + 1, cms.body.indexOf('-')) !== '0.0, 0.0' &&
                                   <MapContainer className={mapComponent ? 'center' : 'center warning'} center={[cms.body.substring(0, cms.body.indexOf(',')), cms.body.substring(cms.body.indexOf(',') + 1, cms.body.indexOf('-'))]} zoom={17} scrollWheelZoom={false} placeholder>

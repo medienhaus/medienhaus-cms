@@ -143,7 +143,11 @@ const DateAndVenue = ({ reloadSpace, projectSpace, events, matrixClient }) => {
             </div>
             <div className="right">
               <DeleteButton
-                deleting={deleting} onDelete={onDelete} block={eventSpace[i]} index={oldEvents.length + i + 1} reloadSpace={reloadSpace}
+                deleting={deleting}
+                onDelete={onDelete}
+                block={event}
+                index={oldEvents.length + i + 1}
+                reloadSpace={reloadSpace}
               />
             </div>
           </div>
