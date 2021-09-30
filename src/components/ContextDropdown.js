@@ -63,7 +63,10 @@ function ContextDropdown ({ onItemChosen, selectedContext, showRequestButton = f
 
   // Set up our fuzzy search engine
   const fuse = new Fuse(items, {
-    keys: ['name']
+    keys: ['name'],
+    threshold: 0.25,
+    ignoreLocation: true,
+    findAllMatches: true
   })
 
   const {
