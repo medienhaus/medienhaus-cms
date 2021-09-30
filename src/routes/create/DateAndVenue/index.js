@@ -106,7 +106,6 @@ const DateAndVenue = ({ reloadSpace, projectSpace, events, matrixClient }) => {
     e.preventDefault()
     setDeleting(true)
     try {
-      console.log(roomId, name, index)
       await deleteContentBlock(name, roomId, index)
       reloadSpace()
     } catch (err) {
