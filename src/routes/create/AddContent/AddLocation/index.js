@@ -78,7 +78,6 @@ const AddLocation = ({ number, projectSpace, handleOnBlockWasAddedSuccessfully, 
           msgtype: 'm.text',
           body: location + '-' + room
         })
-        handleOnBlockWasAddedSuccessfully(locationRoom)
       }
       // we only create a date room if either time or date are specified
       if (timeDate.length > 0 && (timeDate[0] !== '' || timeDate[1] !== '')) {
@@ -87,7 +86,6 @@ const AddLocation = ({ number, projectSpace, handleOnBlockWasAddedSuccessfully, 
           msgtype: 'm.text',
           body: timeDate[1] + ' ' + timeDate[0]
         })
-        handleOnBlockWasAddedSuccessfully(dateRoom)
       }
       // if a bbb link was specified we create a room for it
       if (bbbLink) {
@@ -105,6 +103,7 @@ const AddLocation = ({ number, projectSpace, handleOnBlockWasAddedSuccessfully, 
           msgtype: 'm.text'
         })
       }
+      handleOnBlockWasAddedSuccessfully()
       callback()
     } catch (err) {
       console.log(err)
@@ -147,6 +146,7 @@ const AddLocation = ({ number, projectSpace, handleOnBlockWasAddedSuccessfully, 
       </Marker>
     )
   }
+
   return (
     <>
       <p>{t('Live stream or Video Conference')}</p>
