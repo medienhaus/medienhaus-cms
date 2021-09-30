@@ -34,7 +34,7 @@ const AddDate = ({ number, reloadSpace, projectSpace, saveButton, callback }) =>
   return (
     <>
       <div>
-        <label htmlFor="date">{t('Choose a date')}:</label>
+        <label htmlFor="date">{t('Date')}</label>
         <input
           id="date"
           name="date"
@@ -46,7 +46,7 @@ const AddDate = ({ number, reloadSpace, projectSpace, saveButton, callback }) =>
         />
       </div>
       <div>
-        <label htmlFor="time">{t('Choose a time')}:</label>
+        <label htmlFor="time">{t('Time')}</label>
         <input
           id="time" name="time" type="time" value={time} onChange={(e) => {
             setTime(e.target.value)

@@ -243,7 +243,7 @@ const Create = () => {
             <h3>{t('Project context')}</h3>
             <Category title={title} projectSpace={projectSpace} />
           </section>
-          <section className="date-venue" id="date">
+          <section className="events">
             <h3>{t('Events')}</h3>
             <DateAndVenue reloadSpace={reloadSpace} projectSpace={projectSpace} events={events} matrixClient={matrixClient} />
           </section>
