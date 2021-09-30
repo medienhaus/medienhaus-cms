@@ -28,21 +28,17 @@ const items = uniqBy(mapDeep(process.env.NODE_ENV === 'development' ? strukturDe
 }, { leavesOnly: true, childrenPath: 'children', includeRoot: false, rootIsChildren: true }), 'id')
 
 function ContextDropdown ({ onItemChosen, selectedContext, showRequestButton = false }) {
-  const [inputItems, setInputItems] = useState(items)
   const [joinedRooms, setJoinedRooms] = useState([])
+  const [inputItems, setInputItems] = useState(items)
   const [requestedContexts, setRequestedContexts] = useState([])
   const { t } = useTranslation('context')
-
-  async function fetchJoinedRooms () {
-    setJoinedRooms((await Matrix.getMatrixClient().getJoinedRooms()).joined_rooms)
-  }
 
   async function requestAccessToSpace (contextSpaceId) {
     const knockResult = await makeRequest('rundgang/knock', { contextSpaceId })
 
     if (knockResult.joined) {
       // we automatically joined the space!
-      return fetchJoinedRooms()
+      setJoinedRooms(uniq([contextSpaceId, ...requestedContexts]))
     } else {
       // Add the space ID to the list of requested contexts
       setRequestedContexts(uniq([contextSpaceId, ...requestedContexts]))
@@ -50,6 +46,16 @@ function ContextDropdown ({ onItemChosen, selectedContext, showRequestButton = f
   }
 
   useEffect(() => {
+    async function fetchJoinedRooms () {
+      const joinedRooms = (await Matrix.getMatrixClient().getJoinedRooms()).joined_rooms
+      setJoinedRooms(joinedRooms)
+      setInputItems(prevState => {
+        return sortBy(prevState, item => {
+          return !joinedRooms.includes(item.id)
+        })
+      })
+    }
+
     if (showRequestButton) {
       fetchJoinedRooms()
     }
@@ -60,11 +66,6 @@ function ContextDropdown ({ onItemChosen, selectedContext, showRequestButton = f
     keys: ['name']
   })
 
-  // Sort our contexts by if we are a member of them already or not
-  const sortedInputItems = sortBy(inputItems, item => {
-    return !joinedRooms.includes(item.id)
-  })
-
   const {
     isOpen,
     getToggleButtonProps,
@@ -72,10 +73,11 @@ function ContextDropdown ({ onItemChosen, selectedContext, showRequestButton = f
     getInputProps,
     getComboboxProps,
     getItemProps,
-    inputValue
+    inputValue,
+    selectedItem
   } = useCombobox({
-    items: sortedInputItems,
-    selectedItem: find(sortedInputItems, { id: selectedContext }),
+    items: inputItems,
+    selectedItem: find(inputItems, { id: selectedContext }),
     itemToString: (item) => item.name,
     onInputValueChange: ({ inputValue }) => {
       if (!inputValue) {
@@ -133,7 +135,7 @@ function ContextDropdown ({ onItemChosen, selectedContext, showRequestButton = f
             : { display: 'none' }
         }
       >
-        {(inputValue && showRequestButton && sortedInputItems.filter(item => joinedRooms.includes(item.id)).length < 1 && sortedInputItems.length > 0) && (
+        {(inputValue && showRequestButton && inputItems.filter(item => joinedRooms.includes(item.id)).length < 1 && inputItems.length > 0) && (
           <li
             className="disabled" style={{
               borderBottom: '2px solid var(--color-fg)',
@@ -153,7 +155,7 @@ function ContextDropdown ({ onItemChosen, selectedContext, showRequestButton = f
             >It looks like you currently do not have access to any contexts matching "{inputValue}". Please request access below.</div>
           </li>
         )}
-        {(inputValue && sortedInputItems.length < 1) && (
+        {(inputValue && inputItems.length < 1) && (
           <li
             className="disabled" style={{
               padding: '10px'
@@ -172,38 +174,42 @@ function ContextDropdown ({ onItemChosen, selectedContext, showRequestButton = f
             >We could not find any contexts matching your search query. If you think your context is missing please use our <Link to="/request" target="_blank">/request</Link> form.</div>
           </li>
         )}
-        {sortedInputItems.map((item, index) => (
-          <li
-            key={`${item.id}${index}`}
-            className={showRequestButton && !joinedRooms.includes(item.id) ? 'disabled' : ''}
-            {...getItemProps({ item, index })}
-          >
-            <div>
-              {item.name}
-              <br />
-              <small>
-                {item.path.map((breadcrumb, i) => (
-                  <div key={i + breadcrumb} style={{ position: 'relative' }}>
-                    {i !== 0 && <span style={{ position: 'absolute', left: `${(i - 1) * 25}px` }}>↳ </span>}
-                    <span style={{ display: 'block', paddingLeft: `${i * 25}px` }}>
-                      {breadcrumb}
-                    </span>
-                  </div>
-                ))}
-              </small>
-            </div>
-            {showRequestButton && !joinedRooms.includes(item.id) && (
-              <LoadingSpinnerButton
-                disabled={requestedContexts.includes(item.id)}
-                onClick={() => requestAccessToSpace(item.id)}
-                stopPropagationOnClick
-                style={{ width: '140px', alignSelf: 'start', flex: '0 0' }}
-              >
-                {requestedContexts.includes(item.id) ? 'REQUESTED' : 'REQUEST'}
-              </LoadingSpinnerButton>
-            )}
-          </li>
-        ))}
+        {inputItems.map((item, index) => {
+          const disabledClass = showRequestButton && !joinedRooms.includes(item.id) ? 'disabled' : ''
+          const selectedClass = item === selectedItem ? 'selected' : ''
+          return (
+            <li
+              key={`${item.id}${index}`}
+              className={`${disabledClass} ${selectedClass}`}
+              {...getItemProps({ item, index })}
+            >
+              <div>
+                {item.name}
+                <br />
+                <small>
+                  {item.path.map((breadcrumb, i) => (
+                    <div key={i + breadcrumb} style={{ position: 'relative' }}>
+                      {i !== 0 && <span style={{ position: 'absolute', left: `${(i - 1) * 25}px` }}>↳ </span>}
+                      <span style={{ display: 'block', paddingLeft: `${i * 25}px` }}>
+                        {breadcrumb}
+                      </span>
+                    </div>
+                  ))}
+                </small>
+              </div>
+              {showRequestButton && !joinedRooms.includes(item.id) && (
+                <LoadingSpinnerButton
+                  disabled={requestedContexts.includes(item.id)}
+                  onClick={() => requestAccessToSpace(item.id)}
+                  stopPropagationOnClick
+                  style={{ width: '140px', alignSelf: 'start', flex: '0 0' }}
+                >
+                  {requestedContexts.includes(item.id) ? 'REQUESTED' : 'REQUEST'}
+                </LoadingSpinnerButton>
+              )}
+            </li>
+          )
+        })}
       </ul>
     </div>
   )
