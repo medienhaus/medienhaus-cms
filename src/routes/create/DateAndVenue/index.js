@@ -49,7 +49,6 @@ const DateAndVenue = ({ reloadSpace, projectSpace, events, matrixClient }) => {
       }
 
       try {
-        console.log('creating event space')
         await matrixClient.createRoom(opts('events', 'events'))
           .then(async (res) => {
             setFeedback('Event space created. Now adding to parent Space')
@@ -101,7 +100,6 @@ const DateAndVenue = ({ reloadSpace, projectSpace, events, matrixClient }) => {
   }, [events])
 
   const onDelete = async (e, roomId, name, index) => {
-    console.log(eventSpace)
     e.preventDefault()
     setDeleting(true)
     try {
