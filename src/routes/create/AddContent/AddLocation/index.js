@@ -26,7 +26,7 @@ const AddLocation = ({ number, projectSpace, handleOnBlockWasAddedSuccessfully, 
     lng: 13.3595672835078
   }
   const [position, setPosition] = useState(center)
-
+  console.log(selectedLocation)
   const handleSubmit = async () => {
     setLoading(true)
     const opts = (type, name) => {
@@ -70,13 +70,16 @@ const AddLocation = ({ number, projectSpace, handleOnBlockWasAddedSuccessfully, 
           auto_join: true
         })
       })
-      const location = selectedLocation === 'custom' ? position.lat + ', ' + position.lng : selectedLocation
-      const locationRoom = await createBlock(undefined, 'location', number.toString(), event.room_id)
-      await matrixClient.sendMessage(locationRoom, {
-        msgtype: 'm.text',
-        body: location + '-' + room
-      })
-      handleOnBlockWasAddedSuccessfully(locationRoom)
+      // only create a location room if a selection is specefied
+      if (selectedLocation) {
+        const location = selectedLocation === 'custom' ? position.lat + ', ' + position.lng : selectedLocation
+        const locationRoom = await createBlock(undefined, 'location', number.toString(), event.room_id)
+        await matrixClient.sendMessage(locationRoom, {
+          msgtype: 'm.text',
+          body: location + '-' + room
+        })
+        handleOnBlockWasAddedSuccessfully(locationRoom)
+      }
       // we only create a date room if either time or date are specified
       if (timeDate.length > 0 && (timeDate[0] !== '' || timeDate[1] !== '')) {
         const dateRoom = await createBlock(undefined, 'date', number.toString(), event.room_id)
@@ -162,6 +165,13 @@ const AddLocation = ({ number, projectSpace, handleOnBlockWasAddedSuccessfully, 
           />
         : selectedBlockType === 'livestream' &&
           <PeertubeEmbed type="livestream" onBlockWasAddedSuccessfully={handleOnBlockWasAddedSuccessfully} callback={(stream) => setLivestream(stream)} />}
+
+      <p>{t('Venue')}</p>
+      <select name="location-select" value={selectedLocation} id="location-select" onChange={(e) => setSelectedLocation(e.target.value)}>
+        <option value="">{t('-- select venue --')}</option>
+        <option value="custom">{t('other venue, please enter below')}</option>
+        {locations.map(location => <option value={location.coordinates} key={location.coordinates}>{location.name}</option>)}
+      </select>
       {selectedLocation === 'custom' && <>
         <p>{t('Drag the marker to the desired location.')}</p>
         <div className="map">
@@ -174,13 +184,6 @@ const AddLocation = ({ number, projectSpace, handleOnBlockWasAddedSuccessfully, 
           </MapContainer>
         </div>
       </>}
-
-      <p>{t('Venue')}</p>
-      <select name="location-select" value={selectedLocation} id="location-select" onChange={(e) => setSelectedLocation(e.target.value)}>
-        <option value="" disabled>{t('-- select venue --')}</option>
-        <option value="custom">{t('other venue, please enter below')}</option>
-        {locations.map(location => <option value={location.coordinates} key={location.coordinates}>{location.name}</option>)}
-      </select>
       <input type="text" placeholder={t('room number or specific location')} onChange={(e) => setRoom(e.target.value)} />
 
       <AddDate
@@ -191,7 +194,7 @@ const AddLocation = ({ number, projectSpace, handleOnBlockWasAddedSuccessfully, 
       <div className="confirmation">
         <button className="cancel" onClick={() => { callback() }}>{t('CANCEL')}</button>
         <LoadingSpinnerButton
-          disabled={loading || !selectedLocation || (selectedBlockType === 'bbb' && !validBbbLink)}
+          disabled={loading || (selectedBlockType === '' && !selectedLocation) || (selectedBlockType === 'bbb' && !validBbbLink)}
           onClick={handleSubmit}
         >{t('SAVE')}</LoadingSpinnerButton>
       </div>

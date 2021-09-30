@@ -4,6 +4,7 @@ import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet'
 import locations from '../../../../assets/data/locations.json'
 import { Loading } from '../../../../components/loading'
 import { useTranslation } from 'react-i18next'
+import DisplayBbb from '../../components/DisplayBbb'
 
 const DisplayEvents = ({ event, i }) => {
   const { t } = useTranslation('date')
@@ -34,6 +35,8 @@ const DisplayEvents = ({ event, i }) => {
         {cms.body.substring(cms.body.lastIndexOf('-') + 1).length > 0 && <input type="text" value={cms.body.substring(cms.body.lastIndexOf('-') + 1)} disabled />}
       </div>
     )
+  } else if (event.name.includes('bbb')) {
+    return <DisplayBbb cms={cms} key={i} />
   } else {
     return (
       <div className="center">

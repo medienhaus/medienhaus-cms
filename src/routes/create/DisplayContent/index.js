@@ -7,6 +7,7 @@ import { Loading } from '../../../components/loading'
 import AddContent from '../AddContent'
 import List from './List'
 import DeleteButton from '../components/DeleteButton'
+import DisplayBbb from '../components/DisplayBbb'
 // import Code from './Code'
 import reorder from './matrix_reorder_rooms'
 import LoadingSpinnerButton from '../../../components/LoadingSpinnerButton'
@@ -208,32 +209,32 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace, time,
               <LoadingSpinnerButton key={'up_' + block.room_id} disabled={index < 1 || mapComponent} onClick={() => changeOrder(block.room_id, block.name, -1)}>↑</LoadingSpinnerButton>
               <figure className="icon-bg">
                 {
-              json.type === 'heading'
-                ? <HeadingIcon fill="var(--color-fg)" />
-                : json.type === 'audio'
-                  ? <AudioIcon fill="var(--color-fg)" />
-                  : json.type === 'image'
-                    ? <ImageIcon fill="var(--color-fg)" />
-                    : json.type === 'ul'
-                      ? <UlIcon fill="var(--color-fg)" />
-                      : json.type === 'ol'
-                        ? <OlIcon fill="var(--color-fg)" />
-                        : json.type === 'quote'
-                          ? <QuoteIcon fill="var(--color-fg)" />
-                          : json.type === 'code'
-                            ? <CodeIcon fill="var(--color-fg)" />
-                            : json.type === 'video'
-                              ? <VideoIcon fill="var(--color-fg)" />
-                              : json.type === 'playlist'
-                                ? <PlaylistIcon fill="var(--color-fg)" />
-                                : json.type === 'location'
-                                  ? <LocationIcon fill="var(--color-fg)" />
-                                  : json.type === 'date'
-                                    ? <DateIcon fill="var(--color-fg)" />
-                                    : json.type === 'bbb'
-                                      ? <PictureInPictureIcon fill="var(--color-fg)" />
-                                      : <TextIcon fill="var(--color-fg)" />
-            }
+                  json.type === 'heading'
+                    ? <HeadingIcon fill="var(--color-fg)" />
+                    : json.type === 'audio'
+                      ? <AudioIcon fill="var(--color-fg)" />
+                      : json.type === 'image'
+                        ? <ImageIcon fill="var(--color-fg)" />
+                        : json.type === 'ul'
+                          ? <UlIcon fill="var(--color-fg)" />
+                          : json.type === 'ol'
+                            ? <OlIcon fill="var(--color-fg)" />
+                            : json.type === 'quote'
+                              ? <QuoteIcon fill="var(--color-fg)" />
+                              : json.type === 'code'
+                                ? <CodeIcon fill="var(--color-fg)" />
+                                : json.type === 'video'
+                                  ? <VideoIcon fill="var(--color-fg)" />
+                                  : json.type === 'playlist'
+                                    ? <PlaylistIcon fill="var(--color-fg)" />
+                                    : json.type === 'location'
+                                      ? <LocationIcon fill="var(--color-fg)" />
+                                      : json.type === 'date'
+                                        ? <DateIcon fill="var(--color-fg)" />
+                                        : json.type === 'bbb'
+                                          ? <PictureInPictureIcon fill="var(--color-fg)" />
+                                          : <TextIcon fill="var(--color-fg)" />
+                }
               </figure>
               <LoadingSpinnerButton key={'down_' + block.room_id} disabled={index === blocks.length - 1 || mapComponent} onClick={() => changeOrder(block.room_id, block.name, 1)}>↓</LoadingSpinnerButton>
             </div>
@@ -312,22 +313,22 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace, time,
                                 className={cms.body.substring(0, cms.body.indexOf(',')) + ',' + cms.body.substring(cms.body.indexOf(',') + 1, cms.body.indexOf('-')) === '0.0, 0.0' ? 'center' : null}
                               >
                                 {
-                            cms.body.substring(0, cms.body.indexOf(',')) + ',' + cms.body.substring(cms.body.indexOf(',') + 1, cms.body.indexOf('-')) !== '0.0, 0.0' &&
-                              <MapContainer className={mapComponent ? 'center' : 'center warning'} center={[cms.body.substring(0, cms.body.indexOf(',')), cms.body.substring(cms.body.indexOf(',') + 1, cms.body.indexOf('-'))]} zoom={17} scrollWheelZoom={false} placeholder>
-                                <TileLayer
-                                  attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-                                  url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                                />
-                                <Marker position={[cms.body.substring(0, cms.body.indexOf(',')), cms.body.substring(cms.body.indexOf(',') + 1, cms.body.indexOf('-'))]}>
-                                  <Popup>
-                                    {locations.find(coord => coord.coordinates === cms.body.substring(0, cms.body.indexOf(',')) + ',' + cms.body.substring(cms.body.indexOf(',') + 1, cms.body.lastIndexOf('-')))?.name || // if the location is not in our location.json
+                                cms.body.substring(0, cms.body.indexOf(',')) + ',' + cms.body.substring(cms.body.indexOf(',') + 1, cms.body.indexOf('-')) !== '0.0, 0.0' &&
+                                  <MapContainer className={mapComponent ? 'center' : 'center warning'} center={[cms.body.substring(0, cms.body.indexOf(',')), cms.body.substring(cms.body.indexOf(',') + 1, cms.body.indexOf('-'))]} zoom={17} scrollWheelZoom={false} placeholder>
+                                    <TileLayer
+                                      attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+                                      url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                                    />
+                                    <Marker position={[cms.body.substring(0, cms.body.indexOf(',')), cms.body.substring(cms.body.indexOf(',') + 1, cms.body.indexOf('-'))]}>
+                                      <Popup>
+                                        {locations.find(coord => coord.coordinates === cms.body.substring(0, cms.body.indexOf(',')) + ',' + cms.body.substring(cms.body.indexOf(',') + 1, cms.body.lastIndexOf('-')))?.name || // if the location is not in our location.json
                                         cms.body.substring(cms.body.lastIndexOf('-') + 1).length > 0 // we check if the custom input field was filled in
-                                      ? cms.body.substring(cms.body.lastIndexOf('-') + 1) // if true, we display that text on the popup otherwise we show the lat and long coordinates
-                                      : cms.body.substring(0, cms.body.indexOf(',')) + ',' + cms.body.substring(cms.body.indexOf(',') + 1)}
-                                  </Popup>
-                                </Marker>
-                              </MapContainer>
-                          }
+                                          ? cms.body.substring(cms.body.lastIndexOf('-') + 1) // if true, we display that text on the popup otherwise we show the lat and long coordinates
+                                          : cms.body.substring(0, cms.body.indexOf(',')) + ',' + cms.body.substring(cms.body.indexOf(',') + 1)}
+                                      </Popup>
+                                    </Marker>
+                                  </MapContainer>
+                              }
                                 {cms.body.substring(cms.body.lastIndexOf('-') + 1).length > 0 && <input type="text" value={cms.body.substring(cms.body.lastIndexOf('-') + 1)} disabled />}
                                 {!mapComponent &&
                                   <p>❗️
@@ -349,13 +350,7 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace, time,
                                   </p>}
                               </div>
                               : json.type === 'bbb'
-                                ? <div className="center">
-                                  <div>
-                                    <p>BigBlueButton-Session via:</p>
-                                    <br />
-                                    <p><a href={cms?.body} target="_blank" rel="external nofollow noopener noreferrer">{cms?.body}</a></p>
-                                  </div>
-                                </div>
+                                ? <DisplayBbb cms={cms} />
                                 : (json.type === 'video' || json.type === 'livestream' || json.type === 'playlist')
                                     ? (
                                       <iframe
@@ -427,7 +422,7 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace, time,
           </div>
           {!mapComponent && <AddContent number={index + 1} projectSpace={projectSpace} blocks={blocks} reloadSpace={reloadSpace} />}
         </>
-}
+      }
     </>
   )
 }

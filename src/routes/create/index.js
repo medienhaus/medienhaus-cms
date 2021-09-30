@@ -110,7 +110,7 @@ const Create = () => {
       // check if there is an events space
       const checkForEventSpace = space.rooms.filter(room => room.name === 'events')
       const getEvents = checkForEventSpace.length > 0 && await matrixClient.getSpaceSummary(space.rooms.filter(room => room.name === 'events')[0].room_id, 0).catch(err => console.log(err + '. This means there is no Event space, yet'))
-      setEvents(getEvents || 'depricated')
+      setEvents(getEvents?.rooms || 'depricated')
       getCurrentTime()
     } else {
       console.log('sync not done, trying again')
@@ -245,7 +245,7 @@ const Create = () => {
           </section>
           <section className="date-venue" id="date">
             <h3>{t('Date and Venue')}</h3>
-            <DateAndVenue reloadSpace={reloadSpace} projectSpace={projectSpace} events={events === 'depricated' ? events : events?.rooms} matrixClient={matrixClient} />
+            <DateAndVenue reloadSpace={reloadSpace} projectSpace={projectSpace} events={events} matrixClient={matrixClient} />
           </section>
           <section className="contributors">
             <Collaborators projectSpace={spaceObject?.rooms} members={roomMembers} time={getCurrentTime} startListeningToCollab={() => startListeningToCollab()} />

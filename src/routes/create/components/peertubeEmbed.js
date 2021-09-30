@@ -17,7 +17,7 @@ const PeertubeEmbed = ({ type, onCreateRoomForBlock, onBlockWasAddedSuccessfully
     async function fetchEntries () {
       setLoading(true)
       const resourceType = (type === 'playlist' ? 'video-playlists' : 'videos')
-      const request = await fetch(`https://stream.udk-berlin.de/api/v1/accounts/${username}/${resourceType}?count=100`)
+      const request = process.env.NODE_ENV === 'development' ? await fetch(`https://stream.udk-berlin.de/api/v1/accounts/d.erdmann/${resourceType}?count=100`) : await fetch(`https://stream.udk-berlin.de/api/v1/accounts/${username}/${resourceType}?count=100`)
       // TODO: pagination for more than 100 entries
       let entries = await request.json()
 
