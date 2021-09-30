@@ -144,18 +144,22 @@ const AddLocation = ({ number, projectSpace, handleOnBlockWasAddedSuccessfully, 
       </Marker>
     )
   }
-
   return (
     <>
-      <div className="add">
-        <select name="content-select" value={selectedBlockType} id="content-select" onChange={(e) => setSelectedBlockType(e.target.value)}>
-          <option value="">{t('No stream or video conference')}</option>
-          <option value="livestream">{t('Live stream')}</option>
-          <option value="bbb">{t('BigBlueButton-Session')}</option>
-        </select>
-      </div>
+      <p>{t('Live stream or Video Conference')}</p>
+      <select name="content-select" value={selectedBlockType} id="content-select" onChange={(e) => setSelectedBlockType(e.target.value)}>
+        <option value="">{t('No stream or video conference')}</option>
+        <option value="livestream">{t('Live stream')}</option>
+        <option value="bbb">{t('BigBlueButton-Session')}</option>
+      </select>
+
       {selectedBlockType === 'bbb'
-        ? <BigBlueButtonEmbed callback={(link, validLink) => { setBbbLink(link); setValidBbbLink(validLink); console.log(validLink) }} onBlockWasAddedSuccessfully={handleOnBlockWasAddedSuccessfully} />
+        ? <BigBlueButtonEmbed
+            callback={(link) => {
+              setBbbLink(link)
+              setValidBbbLink(link.startsWith('https://meetings.udk-berlin.de/') && link.substr(33, 100).match(/^([a-zA-Z0-9]{3}-){3}([a-zA-Z0-9]{3}){1}$/gi))
+            }} onBlockWasAddedSuccessfully={handleOnBlockWasAddedSuccessfully}
+          />
         : selectedBlockType === 'livestream' &&
           <PeertubeEmbed type="livestream" onBlockWasAddedSuccessfully={handleOnBlockWasAddedSuccessfully} callback={(stream) => setLivestream(stream)} />}
       {selectedLocation === 'custom' && <>
@@ -186,7 +190,10 @@ const AddLocation = ({ number, projectSpace, handleOnBlockWasAddedSuccessfully, 
 
       <div className="confirmation">
         <button className="cancel" onClick={() => { callback() }}>{t('CANCEL')}</button>
-        <LoadingSpinnerButton disabled={loading || !selectedLocation || (selectedLocation === '0.0, 0.0' && !room) || (selectedBlockType === 'bbb' && !validBbbLink)} onClick={handleSubmit}>{t('SAVE')}</LoadingSpinnerButton>
+        <LoadingSpinnerButton
+          disabled={loading || !selectedLocation || (selectedBlockType === 'bbb' && !validBbbLink)}
+          onClick={handleSubmit}
+        >{t('SAVE')}</LoadingSpinnerButton>
       </div>
     </>
   )

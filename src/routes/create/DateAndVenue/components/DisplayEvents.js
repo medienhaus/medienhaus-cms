@@ -16,23 +16,21 @@ const DisplayEvents = ({ event, i }) => {
     return (
 
       <div key={i}>
-        {
-            cms.body.substring(0, cms.body.indexOf(',')) + ',' + cms.body.substring(cms.body.indexOf(',') + 1, cms.body.indexOf('-')) !== '0.0, 0.0' &&
-              <MapContainer className="center" center={[cms.body.substring(0, cms.body.indexOf(',')), cms.body.substring(cms.body.indexOf(',') + 1, cms.body.indexOf('-'))]} zoom={17} scrollWheelZoom={false} placeholder>
-                <TileLayer
-                  attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-                  url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                />
-                <Marker position={[cms.body.substring(0, cms.body.indexOf(',')), cms.body.substring(cms.body.indexOf(',') + 1, cms.body.indexOf('-'))]}>
-                  <Popup>
-                    {locations.find(coord => coord.coordinates === cms.body.substring(0, cms.body.indexOf(',')) + ',' + cms.body.substring(cms.body.indexOf(',') + 1, cms.body.lastIndexOf('-')))?.name || // if the location is not in our location.json
+        {cms.body.substring(0, cms.body.indexOf(',')) + ',' + cms.body.substring(cms.body.indexOf(',') + 1, cms.body.indexOf('-')) !== '0.0, 0.0' &&
+          <MapContainer className="center" center={[cms.body.substring(0, cms.body.indexOf(',')), cms.body.substring(cms.body.indexOf(',') + 1, cms.body.indexOf('-'))]} zoom={17} scrollWheelZoom={false} placeholder>
+            <TileLayer
+              attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+            />
+            <Marker position={[cms.body.substring(0, cms.body.indexOf(',')), cms.body.substring(cms.body.indexOf(',') + 1, cms.body.indexOf('-'))]}>
+              <Popup>
+                {locations.find(coord => coord.coordinates === cms.body.substring(0, cms.body.indexOf(',')) + ',' + cms.body.substring(cms.body.indexOf(',') + 1, cms.body.lastIndexOf('-')))?.name || // if the location is not in our location.json
                     cms.body.substring(cms.body.lastIndexOf('-') + 1).length > 0 // we check if the custom input field was filled in
-                      ? cms.body.substring(cms.body.lastIndexOf('-') + 1) // if true, we display that text on the popup otherwise we show the lat and long coordinates
-                      : cms.body.substring(0, cms.body.indexOf(',')) + ',' + cms.body.substring(cms.body.indexOf(',') + 1)}
-                  </Popup>
-                </Marker>
-              </MapContainer>
-          }
+                  ? cms.body.substring(cms.body.lastIndexOf('-') + 1) // if true, we display that text on the popup otherwise we show the lat and long coordinates
+                  : cms.body.substring(0, cms.body.indexOf(',')) + ',' + cms.body.substring(cms.body.indexOf(',') + 1)}
+              </Popup>
+            </Marker>
+          </MapContainer>}
         {cms.body.substring(cms.body.lastIndexOf('-') + 1).length > 0 && <input type="text" value={cms.body.substring(cms.body.lastIndexOf('-') + 1)} disabled />}
       </div>
     )
