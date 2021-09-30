@@ -244,7 +244,7 @@ const Create = () => {
             <Category title={title} projectSpace={projectSpace} />
           </section>
           <section className="date-venue" id="date">
-            <h3>{t('Date and Venue')}</h3>
+            <h3>{t('Events')}</h3>
             <DateAndVenue reloadSpace={reloadSpace} projectSpace={projectSpace} events={events} matrixClient={matrixClient} />
           </section>
           <section className="contributors">
