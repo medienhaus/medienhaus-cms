@@ -86,9 +86,12 @@ const DateAndVenue = ({ reloadSpace, projectSpace, events, matrixClient }) => {
       )
       const filterDepricatedEvents = eventSpace?.filter(room => room.room_type === 'm.space').filter((room, i) => i > 0) // as always, first space is the space itself therefore we filter it
       const eventSummary = await Promise.all(filterDepricatedEvents.map(room => matrixClient.getSpaceSummary(room.room_id, 0).catch(err => console.log(err)))) // then we fetch the summary of all spaces within the event space
+      console.log(eventSummary)
       const onlyEvents = eventSummary
-        ?.filter(room => room !== undefined) // we filter undefined results. DOM seems to be rendering to quickly here. better solution needed
-        .map(event => event?.rooms.filter(room => room.room_type !== 'm.space')) // finally we remove any spaces in here since we only want the content room
+        ?.filter(room => room !== undefined) // we filter undefined results. @TODO DOM seems to be rendering to quickly here. better solution needed
+        .map(event => event?.rooms) // finally we remove any spaces in here since we only want the content room
+      // check for empty event spaces and delete those
+      // onlyEvents.filter(space => space.length === 0).map(emptySpace => onDelete(null, emptySpace.))
       setEventContent(onlyEvents)
     }
     if (eventSpace === 'depricated') createEventSpace()
@@ -132,7 +135,7 @@ const DateAndVenue = ({ reloadSpace, projectSpace, events, matrixClient }) => {
               <span>🎭</span>
             </div>
             <div className="center">
-              {event.filter(room => room.name.charAt(0) !== 'x') // filter rooms that were deleted
+              {event.filter(room => room.room_type !== 'm.space').filter(room => room.name.charAt(0) !== 'x') // filter rooms that were deleted
                 .map((event, i) => {
                   if (event.name.includes('livestream')) {
                     return <DisplayContent block={event} index={i} blocks={eventSpace} projectSpace={eventSpace} reloadSpace={reloadSpace} key={event + i} mapComponent />
@@ -145,7 +148,7 @@ const DateAndVenue = ({ reloadSpace, projectSpace, events, matrixClient }) => {
               <DeleteButton
                 deleting={deleting}
                 onDelete={onDelete}
-                block={event}
+                block={event[0]}
                 index={oldEvents.length + i + 1}
                 reloadSpace={reloadSpace}
               />

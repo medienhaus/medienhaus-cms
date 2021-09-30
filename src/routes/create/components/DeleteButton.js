@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Loading } from '../../../components/loading'
 import { ReactComponent as TrashIcon } from '../../../assets/icons/remix/trash.svg'
-import { isArray } from 'lodash'
+// import { isArray } from 'lodash'
 
 function DeleteButton (props) {
   const [clickedDelete, setClickedDelete] = useState(false)
@@ -14,11 +14,7 @@ function DeleteButton (props) {
 
         if (clickedDelete) {
           setDeleting(true)
-          isArray(props.block)
-            ? await Promise.all(props.block.map(async (block) => {
-              return await props.onDelete(e, block.room_id, block.name)
-            }))
-            : await props.onDelete(e, props.block.room_id, props.block.name, props.index)
+          await props.onDelete(e, props.block.room_id, props.block.name, props.index)
           setClickedDelete(false)
           // await props.reloadSpace()
           setDeleting(false)
