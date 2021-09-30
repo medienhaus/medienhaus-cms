@@ -10,6 +10,7 @@ import { useTranslation } from 'react-i18next'
 import Fuse from 'fuse.js'
 import Matrix from '../Matrix'
 import { Link } from 'react-router-dom'
+import { makeRequest } from '../Backend'
 
 const items = uniqBy(mapDeep(process.env.NODE_ENV === 'development' ? strukturDev : struktur, (value, key, parent, context) => {
   // Add "path" parameter to create breadcrumbs from first hierarchy element up to "myself"
@@ -32,29 +33,27 @@ function ContextDropdown ({ onItemChosen, selectedContext, showRequestButton = f
   const [requestedContexts, setRequestedContexts] = useState([])
   const { t } = useTranslation('context')
 
-  async function requestAccessToSpace (contextSpaceId) {
-    const req = {
-      method: 'POST',
-      headers: { Authorization: 'Bearer ' + localStorage.getItem('medienhaus_access_token') },
-      body: JSON.stringify({
-        reason: 'knock-knock'
-      })
-    }
-    await fetch(process.env.REACT_APP_MATRIX_BASE_URL + `/_matrix/client/unstable/knock/${contextSpaceId}`, req)
+  async function fetchJoinedRooms () {
+    setJoinedRooms((await Matrix.getMatrixClient().getJoinedRooms()).joined_rooms)
+  }
 
-    // Add the space ID to the list of requested contexts
-    setRequestedContexts(uniq([contextSpaceId, ...requestedContexts]))
+  async function requestAccessToSpace (contextSpaceId) {
+    const knockResult = await makeRequest('rundgang/knock', { contextSpaceId })
+
+    if (knockResult.joined) {
+      // we automatically joined the space!
+      return fetchJoinedRooms()
+    } else {
+      // Add the space ID to the list of requested contexts
+      setRequestedContexts(uniq([contextSpaceId, ...requestedContexts]))
+    }
   }
 
   useEffect(() => {
-    async function fetchJoinedRooms () {
-      setJoinedRooms((await Matrix.getMatrixClient().getJoinedRooms()).joined_rooms)
-    }
-
     if (showRequestButton) {
       fetchJoinedRooms()
     }
-  }, [showRequestButton, inputItems, setInputItems])
+  }, [showRequestButton])
 
   // Set up our fuzzy search engine
   const fuse = new Fuse(items, {
