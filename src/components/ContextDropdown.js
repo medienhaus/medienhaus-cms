@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { useCombobox } from 'downshift'
-import { find, get, map, remove, sortBy, uniq, uniqBy } from 'lodash'
+import { find, map, sortBy, uniq, uniqBy } from 'lodash'
 import mapDeep from 'deepdash/es/mapDeep'
 import struktur from '../struktur'
 import strukturDev from '../struktur-dev'
-import { findValueDeep } from 'deepdash/es/standalone'
 import LoadingSpinnerButton from './LoadingSpinnerButton'
 import { useTranslation } from 'react-i18next'
 import Fuse from 'fuse.js'
@@ -12,20 +11,22 @@ import Matrix from '../Matrix'
 import { Link } from 'react-router-dom'
 import { makeRequest } from '../Backend'
 
-const items = uniqBy(mapDeep(process.env.NODE_ENV === 'development' ? strukturDev : struktur, (value, key, parent, context) => {
-  // Add "path" parameter to create breadcrumbs from first hierarchy element up to "myself"
-  value.path = remove(context._item.path, spaceId => spaceId !== 'children')
-  // Remove myself from breadcrumbs
-  value.path.pop()
-  // Remove "UdK" from breadcrumbs
-  value.path.shift()
-  // Replace space IDs with their corresponding names
-  value.path = value.path.map((spaceId) => {
-    return get(findValueDeep(process.env.NODE_ENV === 'development' ? strukturDev : struktur, (value, key) => key === spaceId, { leavesOnly: false, childrenPath: 'children', includeRoot: false, rootIsChildren: true }), 'name')
-  })
-  delete value.children
+const items = uniqBy(mapDeep(process.env.NODE_ENV === 'development' ? strukturDev['!ijJyXjLNqgeJkRerIG:dev.medienhaus.udk-berlin.de'].children : struktur['!TCqCDYYsBUxmjWOZWV:content.udk-berlin.de'].children, (value, key, parent, context) => {
+  // Recursively loop through all parents to add them to the "path" which we later on need for displaying breadcrumbs
+  value.path = []
+  function addParentToPath (item) {
+    if (item.parentItem.value.name) {
+      value.path.unshift(item.parentItem.value.name)
+      // Recursion: If this parent has yet another parent item, go check that out
+      if (item.parentItem.parentItem) {
+        addParentToPath(item.parentItem)
+      }
+    }
+  }
+  addParentToPath(context._item)
+
   return value
-}, { leavesOnly: true, childrenPath: 'children', includeRoot: false, rootIsChildren: true }), 'id')
+}, { childrenPath: 'children', includeRoot: false, rootIsChildren: true }), 'id')
 
 function ContextDropdown ({ onItemChosen, selectedContext, showRequestButton = false }) {
   const [joinedRooms, setJoinedRooms] = useState([])
