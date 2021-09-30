@@ -14,9 +14,10 @@ function DeleteButton (props) {
 
         if (clickedDelete) {
           setDeleting(true)
+          // @TODO delete rooms within space when deleting event space
           await props.onDelete(e, props.block.room_id, props.block.name, props.index)
           setClickedDelete(false)
-          // await props.reloadSpace()
+          await props.reloadSpace()
           setDeleting(false)
         } else {
           e.preventDefault()
