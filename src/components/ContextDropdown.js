@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useCombobox } from 'downshift'
-import _, { find, get, map, orderBy, remove, uniqBy } from 'lodash'
+import { find, get, map, remove, sortBy, uniq, uniqBy } from 'lodash'
 import mapDeep from 'deepdash/es/mapDeep'
 import struktur from '../struktur'
 import strukturDev from '../struktur-dev'
@@ -9,8 +9,9 @@ import LoadingSpinnerButton from './LoadingSpinnerButton'
 import { useTranslation } from 'react-i18next'
 import Fuse from 'fuse.js'
 import Matrix from '../Matrix'
-// @TODO return course if no request button
-let items = uniqBy(mapDeep(process.env.NODE_ENV === 'development' ? strukturDev : struktur, (value, key, parent, context) => {
+import { Link } from 'react-router-dom'
+
+const items = uniqBy(mapDeep(process.env.NODE_ENV === 'development' ? strukturDev : struktur, (value, key, parent, context) => {
   // Add "path" parameter to create breadcrumbs from first hierarchy element up to "myself"
   value.path = remove(context._item.path, spaceId => spaceId !== 'children')
   // Remove myself from breadcrumbs
@@ -27,7 +28,8 @@ let items = uniqBy(mapDeep(process.env.NODE_ENV === 'development' ? strukturDev 
 
 function ContextDropdown ({ onItemChosen, selectedContext, showRequestButton = false }) {
   const [inputItems, setInputItems] = useState(items)
-  const [currentlyShownInputItems, setCurrentlyShownInputItems] = useState(items)
+  const [joinedRooms, setJoinedRooms] = useState([])
+  const [requestedContexts, setRequestedContexts] = useState([])
   const { t } = useTranslation('context')
 
   async function requestAccessToSpace (contextSpaceId) {
@@ -39,29 +41,29 @@ function ContextDropdown ({ onItemChosen, selectedContext, showRequestButton = f
       })
     }
     await fetch(process.env.REACT_APP_MATRIX_BASE_URL + `/_matrix/client/unstable/knock/${contextSpaceId}`, req)
+
+    // Add the space ID to the list of requested contexts
+    setRequestedContexts(uniq([contextSpaceId, ...requestedContexts]))
   }
 
   useEffect(() => {
-    // Make sure we mark the contexts as "member" where we are a member of already
-    async function markJoinedContexts () {
-      const joinedRooms = await Matrix.getMatrixClient().getJoinedRooms()
-      for (const i in joinedRooms.joined_rooms) {
-        const contextWeAreMemberOf = _.find(items, { id: joinedRooms.joined_rooms[i] })
-        if (!contextWeAreMemberOf) continue
-        contextWeAreMemberOf.member = true
-      }
-      items = orderBy(items, 'member', 'asc')
-      setInputItems(items)
-      setCurrentlyShownInputItems(items)
+    async function fetchJoinedRooms () {
+      setJoinedRooms((await Matrix.getMatrixClient().getJoinedRooms()).joined_rooms)
     }
 
     if (showRequestButton) {
-      markJoinedContexts()
+      fetchJoinedRooms()
     }
-  }, [showRequestButton, setInputItems])
+  }, [showRequestButton, inputItems, setInputItems])
 
-  const fuse = new Fuse(inputItems, {
+  // Set up our fuzzy search engine
+  const fuse = new Fuse(items, {
     keys: ['name']
+  })
+
+  // Sort our contexts by if we are a member of them already or not
+  const sortedInputItems = sortBy(inputItems, item => {
+    return !joinedRooms.includes(item.id)
   })
 
   const {
@@ -71,22 +73,23 @@ function ContextDropdown ({ onItemChosen, selectedContext, showRequestButton = f
     getInputProps,
     getComboboxProps,
     getItemProps,
-    reset
+    inputValue
   } = useCombobox({
-    items: currentlyShownInputItems,
-    selectedItem: find(inputItems, { id: selectedContext }),
+    items: sortedInputItems,
+    selectedItem: find(sortedInputItems, { id: selectedContext }),
     itemToString: (item) => item.name,
     onInputValueChange: ({ inputValue }) => {
-      if (!inputValue) { setCurrentlyShownInputItems(inputItems) }
-      setCurrentlyShownInputItems(
+      if (!inputValue) {
+        setInputItems(items)
+      }
+      setInputItems(
         map(fuse.search(inputValue), 'item')
       )
     },
     onSelectedItemChange: ({ selectedItem }) => {
       if (!selectedItem) { return }
-      if (!selectedItem.member) {
+      if (!joinedRooms.includes(selectedItem.id)) {
         // clear the combobox again if the user selected a context they are not a member of yet
-        reset()
         return
       }
       onItemChosen(selectedItem.id)
@@ -131,10 +134,49 @@ function ContextDropdown ({ onItemChosen, selectedContext, showRequestButton = f
             : { display: 'none' }
         }
       >
-        {isOpen && currentlyShownInputItems.map((item, index) => (
+        {(inputValue && showRequestButton && sortedInputItems.filter(item => joinedRooms.includes(item.id)).length < 1 && sortedInputItems.length > 0) && (
+          <li
+            className="disabled" style={{
+              borderBottom: '2px solid var(--color-fg)',
+              padding: '10px'
+            }}
+          >
+            <div style={{
+              display: 'block',
+              opacity: '1',
+              width: '100%',
+              background: '#dedede',
+              borderRadius: '5px',
+              margin: '0',
+              padding: '15px',
+              textAlign: 'center'
+            }}
+            >It looks like you currently do not have access to any contexts matching "{inputValue}". Please request access below.</div>
+          </li>
+        )}
+        {(inputValue && sortedInputItems.length < 1) && (
+          <li
+            className="disabled" style={{
+              padding: '10px'
+            }}
+          >
+            <div style={{
+              display: 'block',
+              opacity: '1',
+              width: '100%',
+              background: '#dedede',
+              borderRadius: '5px',
+              margin: '0',
+              padding: '15px',
+              textAlign: 'center'
+            }}
+            >We could not find any contexts matching your search query. If you think your context is missing please use our <Link to="/request" target="_blank">/request</Link> form.</div>
+          </li>
+        )}
+        {sortedInputItems.map((item, index) => (
           <li
             key={`${item.id}${index}`}
-            className={showRequestButton && !item.member ? 'disabled' : ''}
+            className={showRequestButton && !joinedRooms.includes(item.id) ? 'disabled' : ''}
             {...getItemProps({ item, index })}
           >
             <div>
@@ -151,13 +193,14 @@ function ContextDropdown ({ onItemChosen, selectedContext, showRequestButton = f
                 ))}
               </small>
             </div>
-            {showRequestButton && !item.member && (
+            {showRequestButton && !joinedRooms.includes(item.id) && (
               <LoadingSpinnerButton
+                disabled={requestedContexts.includes(item.id)}
                 onClick={() => requestAccessToSpace(item.id)}
                 stopPropagationOnClick
                 style={{ width: '140px', alignSelf: 'start', flex: '0 0' }}
               >
-                REQUEST
+                {requestedContexts.includes(item.id) ? 'REQUESTED' : 'REQUEST'}
               </LoadingSpinnerButton>
             )}
           </li>
