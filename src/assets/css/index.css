@@ -945,6 +945,14 @@ textarea[disabled] {
 }
 */
 
+.events .left > :only-child {
+  background-color: var(--color-bg);
+  display: grid;
+  grid-row: 2;
+  align-self: center;
+  place-content: center;
+}
+
 .events label + * {
   margin-top: calc(var(--margin) * 0.5);
 }

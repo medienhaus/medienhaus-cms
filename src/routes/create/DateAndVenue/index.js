@@ -130,8 +130,8 @@ const DateAndVenue = ({ reloadSpace, projectSpace, events, matrixClient }) => {
       {eventSpace?.length > 1 && (eventContent.map((event, i) => {
         return (
           <div className="editor" key={event.name}>
-            <div className="left event">
-              <figure className="icon-bg">🎭</figure>
+            <div className="left">
+              <span>🎭</span>
             </div>
             <div className="center">
               {event.filter(room => room.name.charAt(0) !== 'x') // filter rooms that were deleted
