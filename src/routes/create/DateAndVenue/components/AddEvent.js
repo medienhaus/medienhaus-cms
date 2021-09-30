@@ -14,7 +14,7 @@ function AddEvent (props) {
           setIsAddEventVisible(true)
         }}
                              >
-        + {t('Add Event')}
+        + {t('Add event')}
       </button>}
       {isAddEventVisible &&
         <AddLocation

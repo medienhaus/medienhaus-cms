@@ -1,5 +1,12 @@
 {
+  "Live stream or audio/video conference?": "Livestream oder Audio-/Video-Konferenz?",
+  "NONE": "OHNE",
+  "WITH live stream": "MIT Livestream",
+  "WITH audio/video conference": "MIT Audio-/Video-Konferenz",
+  "Venue": "Veranstaltungsort",
   "-- select venue --": "-- wählen Sie Ihren Veranstaltungsort --",
   "other venue, please enter below": "anderer Veranstaltungsort, bitte unten eingeben",
-  "room number or specific location": "Raumnummer oder bestimmter Veranstaltungsort"
+  "room number or specific location": "Raumnummer oder bestimmter Veranstaltungsort",
+  "CANCEL": "ABBRECHEN",
+  "SAVE": "SPEICHERN"
 }

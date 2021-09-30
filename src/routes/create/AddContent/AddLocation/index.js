@@ -149,12 +149,14 @@ const AddLocation = ({ number, projectSpace, handleOnBlockWasAddedSuccessfully, 
   }
   return (
     <>
-      <p>{t('Live stream or Video Conference')}</p>
-      <select name="content-select" value={selectedBlockType} id="content-select" onChange={(e) => setSelectedBlockType(e.target.value)}>
-        <option value="">{t('No stream or video conference')}</option>
-        <option value="livestream">{t('Live stream')}</option>
-        <option value="bbb">{t('BigBlueButton-Session')}</option>
-      </select>
+      <div>
+        <label htmlFor="content-select">{t('Live stream or audio/video conference?')}</label>
+        <select name="content-select" value={selectedBlockType} id="content-select" onChange={(e) => setSelectedBlockType(e.target.value)}>
+          <option value="" selected>{t('NONE')}</option>
+          <option value="livestream">{t('WITH live stream')}</option>
+          <option value="bbb">{t('WITH audio/video conference')}</option>
+        </select>
+      </div>
 
       {selectedBlockType === 'bbb'
         ? <BigBlueButtonEmbed
@@ -166,12 +168,15 @@ const AddLocation = ({ number, projectSpace, handleOnBlockWasAddedSuccessfully, 
         : selectedBlockType === 'livestream' &&
           <PeertubeEmbed type="livestream" onBlockWasAddedSuccessfully={handleOnBlockWasAddedSuccessfully} callback={(stream) => setLivestream(stream)} />}
 
-      <p>{t('Venue')}</p>
-      <select name="location-select" value={selectedLocation} id="location-select" onChange={(e) => setSelectedLocation(e.target.value)}>
-        <option value="">{t('-- select venue --')}</option>
-        <option value="custom">{t('other venue, please enter below')}</option>
-        {locations.map(location => <option value={location.coordinates} key={location.coordinates}>{location.name}</option>)}
-      </select>
+      <div>
+        <label htmlFor="location-select">{t('Venue')}</label>
+        <select name="location-select" value={selectedLocation} id="location-select" onChange={(e) => setSelectedLocation(e.target.value)}>
+          <option value="">{t('-- select venue --')}</option>
+          <option value="custom">{t('other venue, please enter below')}</option>
+          {locations.map(location => <option value={location.coordinates} key={location.coordinates}>{location.name}</option>)}
+        </select>
+      </div>
+
       {selectedLocation === 'custom' && <>
         <p>{t('Drag the marker to the desired location.')}</p>
         <div className="map">
