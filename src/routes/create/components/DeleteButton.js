@@ -8,19 +8,17 @@ function DeleteButton (props) {
 
   return (
     <button
-      className={props.clickedDelete && 'del'} disabled={props.deleting} onClick={e => {
+      className={clickedDelete && 'del'} disabled={deleting} onClick={async (e) => {
         if (clickedDelete) {
           setDeleting(true)
-          props.onDelete(e, props.block.room_id, props.block.name, props.index)
+          await props.onDelete(e, props.block.room_id, props.block.name, props.index)
           setClickedDelete(false)
-          props.reloadSpace()
+          await props.reloadSpace()
           setDeleting(false)
         } else {
           e.preventDefault()
           setClickedDelete(true)
         }
-
-          <p>{props.deleting}</p> // feedback that deleting was succesfull or has failed
       }}
     >
       {clickedDelete ? <TrashIcon fill="var(--color-bg)" /> : deleting ? <Loading /> : '×'}
