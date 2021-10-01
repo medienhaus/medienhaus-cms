@@ -27,7 +27,7 @@ function PrivateRoute ({ children, ...rest }) {
   const auth = useAuth()
   const location = useLocation()
 
-  const [hasAcceptedTerms, setHasAcceptedTerms] = useState(false)
+  const [hasAcceptedTerms, setHasAcceptedTerms] = useState(null)
 
   useEffect(() => {
     // On development environments we will just always assume that the user has accepted T&C
@@ -37,7 +37,7 @@ function PrivateRoute ({ children, ...rest }) {
     }
 
     makeRequest('rundgang/terms', null, 'GET').then(({ hasAcceptedTerms }) => {
-      setHasAcceptedTerms(false)
+      setHasAcceptedTerms(hasAcceptedTerms)
     })
   }, [])
 
