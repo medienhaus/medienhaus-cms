@@ -27,7 +27,7 @@ function PrivateRoute ({ children, ...rest }) {
   const auth = useAuth()
   const location = useLocation()
 
-  const [hasAcceptedTerms, setHasAcceptedTerms] = useState(null)
+  const [hasAcceptedTerms, setHasAcceptedTerms] = useState(false)
 
   useEffect(() => {
     // On development environments we will just always assume that the user has accepted T&C
@@ -37,7 +37,7 @@ function PrivateRoute ({ children, ...rest }) {
     }
 
     makeRequest('rundgang/terms', null, 'GET').then(({ hasAcceptedTerms }) => {
-      setHasAcceptedTerms(hasAcceptedTerms)
+      setHasAcceptedTerms(false)
     })
   }, [])
 
@@ -59,7 +59,8 @@ function PrivateRoute ({ children, ...rest }) {
   }
 
   // Consent not given to terms
-  if (!hasAcceptedTerms) {
+  if (!hasAcceptedTerms && location.pathname !== '/support') {
+    console.log(location)
     return (
       <Redirect
         to={{
