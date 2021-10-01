@@ -175,7 +175,7 @@ function ContextDropdown ({ onItemChosen, selectedContext, showRequestButton = f
               padding: '15px',
               textAlign: 'center'
             }}
-            >We could not find any contexts matching your search query. If you think your context is missing please use our <Link to="/request" target="_blank">/request</Link> form.</div>
+            >We could not find any contexts matching your search query. If you think your context is missing please use our <Link to="/request" target="_blank" rel="noopener noreferrer">/request</Link> form.</div>
           </li>
         )}
         {inputItems.map((item, index) => {
