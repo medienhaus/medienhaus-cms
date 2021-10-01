@@ -152,7 +152,7 @@ const AddLocation = ({ number, projectSpace, handleOnBlockWasAddedSuccessfully, 
       <div>
         <label htmlFor="content-select">{t('Live stream or audio/video conference?')}</label>
         <select name="content-select" value={selectedBlockType} id="content-select" onChange={(e) => setSelectedBlockType(e.target.value)}>
-          <option value="" selected>{t('NONE')}</option>
+          <option value="">{t('NONE')}</option>
           <option value="livestream">{t('WITH live stream')}</option>
           <option value="bbb">{t('WITH audio/video conference')}</option>
         </select>
