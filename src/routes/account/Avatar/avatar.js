@@ -32,7 +32,6 @@ const Avatar = ({ avatarUrl, name }) => {
   return (
 
     <div className="profile-image">
-      {console.log(name)}
       <h3>Profile image</h3>
       <p>Here you can change your profile image. The profile image will be shown on the public Rundgang website along with your project.</p>
       {currentAvatar ? <img className="avatar" src={src} alt={`profile avatar of ${name}`} /> : <canvas className="avatar" />}
