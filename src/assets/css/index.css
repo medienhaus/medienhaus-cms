@@ -1735,6 +1735,11 @@ button > .loading {
   opacity: 0.6;
 }
 
-.contextDropdown ul li:not(.disabled):hover {
+.contextDropdown ul li.selected {
+  background-color: var(--color-fg);
+  color: var(--color-bg)
+}
+
+.contextDropdown ul li:not(.disabled):not(.selected):hover {
   background-color: var(--color-lo);
 }
