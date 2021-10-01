@@ -60,7 +60,6 @@ function PrivateRoute ({ children, ...rest }) {
 
   // Consent not given to terms
   if (!hasAcceptedTerms && location.pathname !== '/support') {
-    console.log(location)
     return (
       <Redirect
         to={{
