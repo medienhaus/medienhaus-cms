@@ -6,7 +6,7 @@ import LoadingSpinnerButton from '../../../components/LoadingSpinnerButton'
 import { useTranslation } from 'react-i18next'
 
 const ProjectTitle = ({ title, projectSpace, callback }) => {
-  const { t } = useTranslation('projects')
+  const { t } = useTranslation('content')
   const [projectTitle, setProjectTitle] = useState('')
   const [edit, setEdit] = useState(false)
   const [newProject, setNewProject] = useState(false)

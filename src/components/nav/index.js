@@ -95,7 +95,7 @@ const Nav = () => {
             <>
               <div>
                 <NavLink to="/create">/create</NavLink>
-                <NavLink to="/projects">/projects</NavLink>
+                <NavLink to="/content">/content</NavLink>
               </div>
               <div>
                 <NavLink to="/account">/account</NavLink>

@@ -9,7 +9,7 @@ import { Loading } from './components/loading'
 import Landing from './routes/landing'
 import Login from './routes/login'
 import Boilerplate from './routes/boilerplate'
-import Projects from './routes/projects'
+import Content from './routes/content'
 import Create from './routes/create'
 import Moderation from './routes/moderation'
 import Support from './routes/support'
@@ -104,7 +104,7 @@ function App () {
               <Route path="/terms" component={Terms} />
               <PrivateRoute path="/account" component={Account} />
               <PrivateRoute path="/boilerplate" component={Boilerplate} />
-              <PrivateRoute path="/projects" component={Projects} />
+              <PrivateRoute path="/content" component={Content} />
               <PrivateRoute path="/create/:spaceId" component={Create} />
               <PrivateRoute path="/preview/:spaceId" component={Preview} />
               <PrivateRoute path="/create" component={Create} />

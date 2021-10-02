@@ -9,7 +9,7 @@ const ProjectImage = ({ projectSpace, changeProjectImage }) => {
   const [loading, setLoading] = useState(false)
   const [projectImage, setProjectImage] = useState()
   const matrixClient = Matrix.getMatrixClient()
-  const { t } = useTranslation('projects')
+  const { t } = useTranslation('content')
 
   const fetchProjectImage = useCallback(async () => {
     const avatar = await matrixClient.getStateEvent(projectSpace, 'm.room.avatar')
