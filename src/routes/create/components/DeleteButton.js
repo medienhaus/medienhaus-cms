@@ -9,7 +9,7 @@ function DeleteButton (props) {
 
   return (
     <button
-      className={clickedDelete && 'del'} disabled={deleting} onClick={async (e) => {
+      className={clickedDelete ? 'del' : ''} disabled={deleting} onClick={async (e) => {
         if (clickedDelete) {
           setDeleting(true)
           // @TODO delete rooms within space when deleting event space
