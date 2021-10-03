@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom'
 import Matrix from '../../Matrix'
 import { useTranslation } from 'react-i18next'
 import { Loading } from '../../components/loading'
-import DisplayPreview from './componenets/DisplayPreview'
+import DisplayPreview from './components/DisplayPreview'
 import './preview.css?v=1.0'
 
 const Preview = () => {
