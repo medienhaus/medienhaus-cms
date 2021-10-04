@@ -154,11 +154,16 @@ const Create = () => {
         fetchSpace()
       } else
       */
+      // since our events space contains nested spaces we need to escape them here from being updated too early and therefore causing FetchCms in DateAndVenue to return an empty array
+      if (event.event.content?.name?.includes('location' || 'bbb' | 'livestream' || 'date')) return
       if (event.event.type === 'm.room.name' && blocks?.filter(({ roomId }) => event.sender?.roomId.includes(roomId))) {
         // listen to room order changes or deletions (room names being changed)
+        console.log(event.getRelation())
+        console.log(event.event.content.name.includes('location'))
         fetchSpace()
       } else if (event.event.type === 'm.space.child' && event.event.room_id === projectSpace && event.event.sender !== localStorage.getItem('mx_user_id')) {
         // new content room being added
+        console.log(event.event)
         fetchSpace()
         matrixClient.joinRoom(event.event.state_key)
       }/* else if (event.event.state_key === projectSpace) {
