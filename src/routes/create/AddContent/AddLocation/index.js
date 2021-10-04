@@ -58,7 +58,7 @@ const AddLocation = ({ number, projectSpace, handleOnBlockWasAddedSuccessfully, 
     try {
       console.log(number)
       // first we create a new space for this event
-      const event = await matrixClient.createRoom(opts('event', number.toString()))
+      const event = await matrixClient.createRoom(opts('event', number.toString() + '_event'))
       // and add those subspaces as children to the project space
       await fetch(process.env.REACT_APP_MATRIX_BASE_URL + `/_matrix/client/r0/rooms/${projectSpace}/state/m.space.child/${event.room_id}`, {
         method: 'PUT',

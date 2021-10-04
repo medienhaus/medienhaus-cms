@@ -117,7 +117,7 @@ const ProjectTitle = ({ title, projectSpace, callback }) => {
       */}{loading
       ? <Loading />
       : edit && (projectTitle !== oldTitle) &&
-        <div className={!newProject && 'confirmation'}>
+        <div className={!newProject ? 'confirmation' : null}>
           {!newProject && <button className="cancel" onClick={(e) => { e.preventDefault(); setEdit(false); setProjectTitle(oldTitle) }}>CANCEL</button>}
           {!title && newProject &&
             <LoadingSpinnerButton
