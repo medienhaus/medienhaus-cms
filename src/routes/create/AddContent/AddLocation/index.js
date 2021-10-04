@@ -26,7 +26,6 @@ const AddLocation = ({ number, projectSpace, handleOnBlockWasAddedSuccessfully, 
     lng: 13.3595672835078
   }
   const [position, setPosition] = useState(center)
-  console.log(selectedLocation)
   const handleSubmit = async () => {
     setLoading(true)
     const opts = (type, name) => {
@@ -56,7 +55,6 @@ const AddLocation = ({ number, projectSpace, handleOnBlockWasAddedSuccessfully, 
       }
     }
     try {
-      console.log(number)
       // first we create a new space for this event
       const event = await matrixClient.createRoom(opts('event', number.toString() + '_event'))
       // and add those subspaces as children to the project space
@@ -103,7 +101,7 @@ const AddLocation = ({ number, projectSpace, handleOnBlockWasAddedSuccessfully, 
           msgtype: 'm.text'
         })
       }
-      handleOnBlockWasAddedSuccessfully()
+      handleOnBlockWasAddedSuccessfully() // @TODO delay between menu collapsing and event reloading
       callback()
     } catch (err) {
       console.log(err)

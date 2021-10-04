@@ -164,18 +164,13 @@ const Create = () => {
         event.event.content?.name?.includes('bbb') ||
         event.event.content?.name?.includes('livestream') ||
       event.event.content?.name?.includes('date')) {
-        console.log('contains + ' + event.event.content.name)
         return
       }
       if (event.event.type === 'm.room.name' && blocks?.filter(({ roomId }) => event.sender?.roomId.includes(roomId))) {
         // listen to room order changes or deletions (room names being changed)
-        console.log(event.event.content?.name)
-        console.log('we are fetching')
-        console.log(event.event)
         fetchSpace()
       } else if (event.event.type === 'm.space.child' && event.event.room_id === projectSpace && event.event.sender !== localStorage.getItem('mx_user_id')) {
         // new content room being added
-        console.log(event.event)
         fetchSpace()
         matrixClient.joinRoom(event.event.state_key)
       }/* else if (event.event.state_key === projectSpace) {
