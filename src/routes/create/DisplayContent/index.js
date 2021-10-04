@@ -31,7 +31,7 @@ import { ReactComponent as DateIcon } from '../../../assets/icons/remix/date.svg
 
 import locations from '../../../assets/data/locations.json'
 import deleteContentBlock from '../functions/deleteContentBlock'
-// import DisplayPreview from '../../preview/componenets/DisplayPreview'
+// import DisplayPreview from '../../preview/components/DisplayPreview'
 
 const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace, time, mapComponent }) => {
   const [readOnly, setReadOnly] = useState(false)

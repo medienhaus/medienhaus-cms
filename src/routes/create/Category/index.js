@@ -5,7 +5,7 @@ import ContextDropdown from '../../../components/ContextDropdown'
 import { useTranslation } from 'react-i18next'
 
 const Category = ({ title, projectSpace }) => {
-  const { t } = useTranslation('projects')
+  const { t } = useTranslation('content')
   // const [subject, setSubject] = useState('')
   // const [room, setRoom] = useState('')
   // const [member, setMember] = useState(false)

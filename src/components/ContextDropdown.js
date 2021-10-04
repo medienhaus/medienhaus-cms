@@ -156,7 +156,7 @@ function ContextDropdown ({ onItemChosen, selectedContext, showRequestButton = f
               padding: '15px',
               textAlign: 'center'
             }}
-            >It looks like you currently do not have access to any contexts matching "{inputValue}". Please request access below.</div>
+            >It looks like you currently do not have access to any contexts matching “{inputValue}”. Please <Link to="/request" target="_blank" rel="noopener noreferrer">/request</Link> access below.</div>
           </li>
         )}
         {(inputValue && inputItems.length < 1) && (

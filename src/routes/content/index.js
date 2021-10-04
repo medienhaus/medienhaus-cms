@@ -9,7 +9,7 @@ import { sortBy } from 'lodash'
 import deleteProject from './deleteProject'
 
 const Overview = () => {
-  const { t } = useTranslation('projects')
+  const { t } = useTranslation('content')
   const matrixClient = Matrix.getMatrixClient()
   const [projects, setProjects] = useState({})
   const [invites, setInvites] = useState()
@@ -19,7 +19,7 @@ const Overview = () => {
 
   // Listen for room events to populate our "pending invites" state
   useEffect(() => {
-    // when navigating away from /projects we need the following code to retreive our pending invites from memoryStore
+    // when navigating away from /content we need the following code to retreive our pending invites from memoryStore
     const allRooms = matrixClient.getRooms()
     allRooms.forEach(async room => {
       // ignore rooms that aren't spaces (or are language spaces) and only return invites
@@ -116,12 +116,12 @@ const Overview = () => {
         </>
       )}
       <section className="projects">
-        <h3>{t('Projects')}</h3>
+        <h3>{t('Content')}</h3>
         {spacesErr
           ? console.error(spacesErr)
           : projects?.length === 0
             ? (
-              <p>{t('Welcome to the content management system for Rundgang 2021. Looks like you haven\'t uploaded any projects, yet.')}</p>
+              <p>{t('Welcome to the content management system for Rundgang 2021. Looks like you haven\'t uploaded any content, yet.')}</p>
               )
             : projects.map((space, index) => (
               <React.Fragment key={index}>

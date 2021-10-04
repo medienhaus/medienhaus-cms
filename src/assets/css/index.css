@@ -957,6 +957,10 @@ textarea[disabled] {
   margin-top: calc(var(--margin) * 0.5);
 }
 
+.events select + p {
+  margin-top: var(--margin);
+}
+
 .map {
   border-color: var(--color-fg);
   border-style: solid;

@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next'
 import TextareaAutosize from 'react-textarea-autosize'
 
 const ProjectDescription = ({ description: intro, callback }) => {
-  const { t } = useTranslation('projects')
+  const { t } = useTranslation('content')
   const [description, setDescription] = useState(intro)
   const [backupDescription, setBackupDescription] = useState()
 
