@@ -18,8 +18,7 @@ const ProjectTitle = ({ title, projectSpace, callback }) => {
   useEffect(() => {
     setProjectTitle(title)
     title === '' ? setNewProject(true) : setNewProject(false)
-    // eslint-disable-next-line
-    }, [title]);
+  }, [title])
 
   const createProject = async (title) => {
     setLoading(true)
