@@ -131,7 +131,6 @@ const Create = () => {
       // We do not listen for any room-specific events if we are not currently editing a project
       return
     }
-
     async function handleRoomTimelineEvent (event) {
       if (event.event.type === 'm.room.message' && blocks?.filter(({ roomId }) => event.event.room_id.includes(roomId)) && event.event.sender !== localStorage.getItem('mx_user_id')) {
         // If a given content block room received a new message, we set the "lastUpdate" property of the appropriate

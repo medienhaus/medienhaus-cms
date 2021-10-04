@@ -13,6 +13,7 @@ const DisplayEvents = ({ event, i }) => {
 
   if (fetching) return <Loading />
   if (error) return <p>{t('something went wrong.')}</p>
+  if (!cms) return <p>{t('Event appears to be empty')}</p>
   if (event.name.includes('location')) {
     return (
 
