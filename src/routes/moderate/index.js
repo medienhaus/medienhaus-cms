@@ -8,7 +8,7 @@ import { useTranslation } from 'react-i18next'
 import InviteUserToSpace from './components/InviteUserToSpace'
 import RightsManagement from './components/RightsManagement'
 
-const Moderation = () => {
+const Moderate = () => {
   const { joinedSpaces, spacesErr, fetchSpaces } = useJoinedSpaces(false)
   const [moderationRooms, setModerationRooms] = useState()
   const [userSearch, setUserSearch] = useState([])
@@ -129,4 +129,4 @@ const Moderation = () => {
   )
 }
 
-export default Moderation
+export default Moderate
