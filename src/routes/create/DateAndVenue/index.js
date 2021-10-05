@@ -34,7 +34,7 @@ const DateAndVenue = ({ reloadSpace, inviteCollaborators, projectSpace, events, 
           {
             type: 'dev.medienhaus.meta',
             content: {
-              version: '0.2',
+              version: '0.3',
               rundgang: 21,
               type: type
             }

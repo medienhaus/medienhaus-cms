@@ -36,9 +36,10 @@ const ProjectTitle = ({ title, projectSpace, callback }) => {
         {
           type: 'dev.medienhaus.meta',
           content: {
-            version: '0.2',
+            version: '0.3',
             rundgang: 21,
-            type: type
+            type: type,
+            published: 'draft'
           }
         },
         {
