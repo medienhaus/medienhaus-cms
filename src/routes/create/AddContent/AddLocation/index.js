@@ -10,7 +10,7 @@ import createBlock from '../../matrix_create_room'
 import BigBlueButtonEmbed from '../../components/bigBlueButtonEmbed'
 import PeertubeEmbed from '../../components/peertubeEmbed'
 
-const AddLocation = ({ number, projectSpace, handleOnBlockWasAddedSuccessfully, callback }) => {
+const AddLocation = ({ number, inviteCollaborators, projectSpace, handleOnBlockWasAddedSuccessfully, callback }) => {
   const [selectedLocation, setSelectedLocation] = useState('')
   const [timeDate, setTimeDate] = useState([])
   const [room, setRoom] = useState('')
@@ -68,6 +68,7 @@ const AddLocation = ({ number, projectSpace, handleOnBlockWasAddedSuccessfully, 
           auto_join: true
         })
       })
+      inviteCollaborators(event.room_id)
       // only create a location room if a selection is specefied
       if (selectedLocation) {
         const location = selectedLocation === 'custom' ? position.lat + ', ' + position.lng : selectedLocation
@@ -76,6 +77,7 @@ const AddLocation = ({ number, projectSpace, handleOnBlockWasAddedSuccessfully, 
           msgtype: 'm.text',
           body: location + '-' + room
         })
+        inviteCollaborators(locationRoom)
       }
       // we only create a date room if either time or date are specified
       if (timeDate.length > 0 && (timeDate[0] !== '' || timeDate[1] !== '')) {
@@ -84,6 +86,7 @@ const AddLocation = ({ number, projectSpace, handleOnBlockWasAddedSuccessfully, 
           msgtype: 'm.text',
           body: timeDate[1] + ' ' + timeDate[0]
         })
+        inviteCollaborators(dateRoom)
       }
       // if a bbb link was specified we create a room for it
       if (bbbLink) {
@@ -92,6 +95,7 @@ const AddLocation = ({ number, projectSpace, handleOnBlockWasAddedSuccessfully, 
           body: bbbLink,
           msgtype: 'm.text'
         })
+        inviteCollaborators(bbbRoom)
       }
       // if a livestream was specified we create a room for it
       if (livestream) {
@@ -100,6 +104,7 @@ const AddLocation = ({ number, projectSpace, handleOnBlockWasAddedSuccessfully, 
           body: livestream,
           msgtype: 'm.text'
         })
+        inviteCollaborators(streamRoom)
       }
       handleOnBlockWasAddedSuccessfully() // @TODO delay between menu collapsing and event reloading
       callback()

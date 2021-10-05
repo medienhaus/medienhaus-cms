@@ -162,7 +162,7 @@ const Create = () => {
         event.event.content?.name?.includes('event') ||
         event.event.content?.name?.includes('bbb') ||
         event.event.content?.name?.includes('livestream') ||
-      event.event.content?.name?.includes('date')) {
+        event.event.content?.name?.includes('date')) {
         return
       }
       if (event.event.type === 'm.room.name' && blocks?.filter(({ roomId }) => event.sender?.roomId.includes(roomId))) {
@@ -256,7 +256,7 @@ const Create = () => {
           </section>
           <section className="events">
             <h3>{t('Events')}</h3>
-            <DateAndVenue reloadSpace={reloadSpace} projectSpace={projectSpace} events={events} matrixClient={matrixClient} />
+            <DateAndVenue inviteCollaborators={inviteCollaborators} reloadSpace={reloadSpace} projectSpace={projectSpace} events={events} matrixClient={matrixClient} />
           </section>
           <section className="contributors">
             <Collaborators projectSpace={spaceObject?.rooms} members={roomMembers} time={getCurrentTime} startListeningToCollab={() => startListeningToCollab()} />

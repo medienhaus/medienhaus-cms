@@ -9,7 +9,7 @@ import deleteContentBlock from '../functions/deleteContentBlock'
 import DisplayEvents from './components/DisplayEvents'
 import { isArray } from 'lodash'
 
-const DateAndVenue = ({ reloadSpace, projectSpace, events, matrixClient }) => {
+const DateAndVenue = ({ reloadSpace, inviteCollaborators, projectSpace, events, matrixClient }) => {
   const [eventSpace, setEventSpace] = useState(events)
   const [eventContent, setEventContent] = useState([])
   const [oldEvents, setOldEvents] = useState([])
@@ -159,6 +159,7 @@ const DateAndVenue = ({ reloadSpace, projectSpace, events, matrixClient }) => {
         room_id={eventSpace[0].room_id}
         t={t}
         reloadSpace={reloadSpace}
+        inviteCollaborators={inviteCollaborators}
       />
     </>
   )

@@ -21,6 +21,7 @@ function AddEvent (props) {
           number={props.length} // only return the number of new event spaces
           projectSpace={props.room_id}
           handleOnBlockWasAddedSuccessfully={props.reloadSpace}
+          inviteCollaborators={props.inviteCollaborators}
           callback={() => setIsAddEventVisible(false)}
         />}
     </>
