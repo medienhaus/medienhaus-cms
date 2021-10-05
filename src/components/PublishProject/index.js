@@ -13,27 +13,32 @@ const PublishProject = ({ disabled, space, published, time, metaEvent }) => {
 
   const onChangeVisibility = async (e) => {
     setVisibility(e.target.value)
-    const req = {
+    const joinRules = {
       method: 'PUT',
       headers: { Authorization: 'Bearer ' + localStorage.getItem('medienhaus_access_token') },
       body: JSON.stringify({ join_rule: e.target.value })
     }
+    const historyVisibility = {
+      method: 'PUT',
+      headers: { Authorization: 'Bearer ' + localStorage.getItem('medienhaus_access_token') },
+      body: JSON.stringify({ history_visibility: e.target.value === 'invite' ? 'shared' : 'world_readable' })
+    }
     try {
-      await fetch(process.env.REACT_APP_MATRIX_BASE_URL + `/_matrix/client/r0/rooms/${space.room_id}/state/m.room.join_rules/`, req)
-        .then(response => {
-          if (response.ok) {
-            setUserFeedback(t('Changed successfully!'))
-            time && time()
-            setTimeout(() => {
-              setUserFeedback()
-            }, 3000)
-          } else {
-            setUserFeedback(t('Oh no, something went wrong.'))
-            setTimeout(() => {
-              setUserFeedback()
-            }, 3000)
-          }
-        })
+      const changeJoinRule = await fetch(process.env.REACT_APP_MATRIX_BASE_URL + `/_matrix/client/r0/rooms/${space.room_id}/state/m.room.join_rules/`, joinRules)
+      const changeHistoryVisibility = await fetch(process.env.REACT_APP_MATRIX_BASE_URL + `/_matrix/client/r0/rooms/${space.room_id}/state/m.room.history_visibility/`, historyVisibility)
+
+      if (changeJoinRule.ok && changeHistoryVisibility.ok) {
+        setUserFeedback(t('Changed successfully!'))
+        time && time()
+        setTimeout(() => {
+          setUserFeedback()
+        }, 3000)
+      } else {
+        setUserFeedback(t('Oh no, something went wrong.'))
+        setTimeout(() => {
+          setUserFeedback()
+        }, 3000)
+      }
     } catch (err) {
       console.error(err)
     }

@@ -24,7 +24,7 @@ const Overview = () => {
     allRooms.forEach(async room => {
       // ignore rooms that aren't spaces (or are language spaces) and only return invites
       if (room.getMyMembership() !== 'invite' || room.getType() !== 'm.space' || room.name === 'de' || room.name === 'en' || room.name === 'events') return
-      const roomMembers = await room._loadMembersFromServer().catch(console.error)
+      const roomMembers = await room.loadMembersFromServer().catch(console.error)
       if (roomMembers < 1) return
       setInvites(invites => Object.assign({}, invites, {
         [room.roomId]:
@@ -39,8 +39,7 @@ const Overview = () => {
     async function handleRoomEvent (room) {
       // Ignore event if this is not about a space or if it is a language space
       if (room.getType() !== 'm.space' || room.name === 'de' || room.name === 'en' || room.name === 'events') return
-
-      const roomMembers = await room._loadMembersFromServer().catch(console.error)
+      const roomMembers = await room.loadMembersFromServer().catch(console.error)
       // room.getMyMembership() is only available after the current call stack has cleared (_.defer),
       // so we put it behind the "await"
       if (room.getMyMembership() !== 'invite' || roomMembers.length < 1) {

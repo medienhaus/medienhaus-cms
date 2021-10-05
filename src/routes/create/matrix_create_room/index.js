@@ -8,6 +8,7 @@ const createBlock = async (e, content, number, space) => {
   console.log(name)
   const opts = {
     name: name,
+    room_version: '7',
     preset: 'public_chat',
     topic: '',
     creation_content: { 'm.federate': false },
@@ -20,7 +21,7 @@ const createBlock = async (e, content, number, space) => {
       state_key: space
     }, {
       type: 'm.room.history_visibility',
-      content: { history_visibility: 'world_readable' }
+      content: { history_visibility: 'shared' }
     }],
     power_level_content_override: {
       ban: 50,
