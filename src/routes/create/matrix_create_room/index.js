@@ -28,7 +28,7 @@ const createBlock = async (e, content, number, space) => {
         'm.room.name': 50,
         'm.room.power_levels': 50
       },
-      events_default: 0,
+      events_default: 50,
       invite: 50,
       kick: 50,
       notifications: {
