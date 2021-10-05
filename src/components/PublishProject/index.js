@@ -83,7 +83,7 @@ const PublishProject = ({ disabled, space, published, time, metaEvent }) => {
         id="visibility" name="visibility" value={visibility} onChange={(e) => onChangeVisibility(e.target.value)} disabled={disabled}
       >
         <option value="draft">{t('Draft')}</option>
-        <option value="public" disabled={!space.topic}>{t('Public')}</option>
+        <option value="public" disabled={!space.topic || !space.published}>{t('Public')}</option>
       </select>
       {userFeedback && <p>{userFeedback}</p>}
     </div>
