@@ -75,6 +75,7 @@ const Overview = () => {
       // then we update our array to not display the just deleted projects and only display joined rooms
       const updatedProjects = joinedSpaces?.filter(space => !space.meta?.deleted && space.meta.type === 'studentproject')
       setProjects(sortBy(updatedProjects, 'name'))
+      console.log(updatedProjects)
     }
   }, [joinedSpaces])
 
@@ -124,7 +125,7 @@ const Overview = () => {
               )
             : projects.map((space, index) => (
               <React.Fragment key={index}>
-                <Projects space={space} visibility={space.published} index={index} removeProject={removeProject} />
+                <Projects space={space} metaEvent={space.meta} visibility={space.published} index={index} removeProject={removeProject} />
                 {index < projects.length - 1 && <hr />}
               </React.Fragment>
             ))}

@@ -22,7 +22,7 @@ const getAnswer = async () => {
       return {
         name: room.name,
         room_id: room.roomId,
-        published: room.getJoinRule(),
+        published: event?.published || room.getJoinRule(),
         collab: collab,
         avatar_url: room.getMxcAvatarUrl(),
         meta: event,

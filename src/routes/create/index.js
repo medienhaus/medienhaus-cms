@@ -96,11 +96,11 @@ const Create = () => {
       setDescription({ en: space.rooms.filter(room => room.name === 'en')[0].topic || '', de: space.rooms.filter(room => room.name === 'de')[0].topic || '' })
       // checking if the project is a collaboration
       setRoomMembers(spaceDetails.currentState.members)
-      // check if project is published or draft
-      setVisibility(spaceDetails.getJoinRule())
       // fetch custom medienhaus event
       const meta = spaceDetails.currentState.events.get('dev.medienhaus.meta').values().next().value.event.content
       setMedienhausMeta(meta)
+      // check if project is published or draft
+      setVisibility(meta.published)
       // we fetch the selected language content
       const spaceRooms = space.rooms.filter(room => room.name === contentLang)
       const getContent = await matrixClient.getSpaceSummary(spaceRooms[0].room_id)
