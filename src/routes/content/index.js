@@ -73,7 +73,6 @@ const Overview = () => {
       // then we update our array to not display the just deleted projects and only display joined rooms
       const updatedProjects = joinedSpaces?.filter(space => !space.meta?.deleted && space.meta.type === 'studentproject')
       setProjects(sortBy(updatedProjects, 'name'))
-      console.log(updatedProjects)
     }
   }, [joinedSpaces])
 
