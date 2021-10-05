@@ -20,7 +20,7 @@ const PeertubeEmbed = ({ type, onCreateRoomForBlock, onBlockWasAddedSuccessfully
       const request = process.env.NODE_ENV === 'development' ? await fetch(`https://stream.udk-berlin.de/api/v1/accounts/d.erdmann/${resourceType}?count=100`) : await fetch(`https://stream.udk-berlin.de/api/v1/accounts/${username}/${resourceType}?count=100`)
       // TODO: pagination for more than 100 entries
       let entries = await request.json()
-
+      console.log(entries)
       if (!(entries && entries.data && entries.data.length > 0)) {
         setEntries([])
         setSelectedEntry('')

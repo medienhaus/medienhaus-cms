@@ -163,6 +163,7 @@ const Create = () => {
         event.event.content?.name?.includes('bbb') ||
         event.event.content?.name?.includes('livestream') ||
         event.event.content?.name?.includes('date')) {
+        console.log(event)
         return
       }
       if (event.event.type === 'm.room.name' && blocks?.filter(({ roomId }) => event.sender?.roomId.includes(roomId))) {

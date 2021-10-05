@@ -31,7 +31,7 @@ const ProjectTitle = ({ title, projectSpace, callback }) => {
         creation_content: { type: 'm.space' },
         initial_state: [{
           type: 'm.room.history_visibility',
-          content: { history_visibility: 'shared' } // world_readable
+          content: { history_visibility: 'world_readable' } // world_readable
         },
         {
           type: 'dev.medienhaus.meta',
