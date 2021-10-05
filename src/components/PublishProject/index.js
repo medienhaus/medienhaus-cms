@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import { Loading } from '../loading'
 import { useTranslation } from 'react-i18next'
+import Matrix from '../../Matrix'
 
 const PublishProject = ({ disabled, space, published, time, metaEvent }) => {
   const { t } = useTranslation('publish')
+  // eslint-disable-next-line no-unused-vars
   const [userFeedback, setUserFeedback] = useState()
   const [visibility, setVisibility] = useState(published)
+  const matrixClient = Matrix.getMatrixClient()
 
   useEffect(() => {
     setVisibility(published)
@@ -13,6 +16,8 @@ const PublishProject = ({ disabled, space, published, time, metaEvent }) => {
 
   const onChangeVisibility = async (e) => {
     setVisibility(e.target.value)
+    const hierarchy = await matrixClient.getRoomHierarchy(space.room_id)
+
     const joinRules = {
       method: 'PUT',
       headers: { Authorization: 'Bearer ' + localStorage.getItem('medienhaus_access_token') },
@@ -24,23 +29,23 @@ const PublishProject = ({ disabled, space, published, time, metaEvent }) => {
       body: JSON.stringify({ history_visibility: e.target.value === 'invite' ? 'shared' : 'world_readable' })
     }
     try {
-      const changeJoinRule = await fetch(process.env.REACT_APP_MATRIX_BASE_URL + `/_matrix/client/r0/rooms/${space.room_id}/state/m.room.join_rules/`, joinRules)
-      const changeHistoryVisibility = await fetch(process.env.REACT_APP_MATRIX_BASE_URL + `/_matrix/client/r0/rooms/${space.room_id}/state/m.room.history_visibility/`, historyVisibility)
+      for (const room of hierarchy.rooms) {
+        const changeJoinRule = await fetch(process.env.REACT_APP_MATRIX_BASE_URL + `/_matrix/client/r0/rooms/${room.room_id}/state/m.room.join_rules/`, joinRules)
+        const changeHistoryVisibility = await fetch(process.env.REACT_APP_MATRIX_BASE_URL + `/_matrix/client/r0/rooms/${room.room_id}/state/m.room.history_visibility/`, historyVisibility)
 
-      if (changeJoinRule.ok && changeHistoryVisibility.ok) {
-        setUserFeedback(t('Changed successfully!'))
-        time && time()
-        setTimeout(() => {
-          setUserFeedback()
-        }, 3000)
-      } else {
-        setUserFeedback(t('Oh no, something went wrong.'))
-        setTimeout(() => {
-          setUserFeedback()
-        }, 3000)
+        if (changeJoinRule.ok && changeHistoryVisibility.ok) {
+          console.log('Changed ' + room.name + ' successfully!')
+        } else {
+          console.log('Oh no, something went wrong with room ' + room.name)
+        }
       }
+      console.log('--- All changed Succesfully to ' + e.target.value + ' ---')
+      setUserFeedback(t('Changed successfully!'))
+      setTimeout(() => setUserFeedback(''), 3000)
     } catch (err) {
       console.error(err)
+      setUserFeedback(t('Oh no, something went wrong.'))
+      setTimeout(() => setUserFeedback(''), 3000)
     }
   }
 
