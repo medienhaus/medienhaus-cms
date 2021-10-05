@@ -12,10 +12,7 @@ const ProjectImage = ({ projectSpace, changeProjectImage }) => {
   const { t } = useTranslation('projects')
 
   const fetchProjectImage = useCallback(async () => {
-    const avatar = await matrixClient.getStateEvent(projectSpace, 'm.room.avatar')
-      .catch(res => {
-        res.data.error === 'Event not found.' && console.log('No Avatar set, yet')
-      })
+    const avatar = await matrixClient.getStateEvent(projectSpace, 'm.room.avatar').catch(() => {})
     avatar && setProjectImage(avatar)
   }, [matrixClient, projectSpace])
 

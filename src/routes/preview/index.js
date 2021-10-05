@@ -12,8 +12,6 @@ const Preview = () => {
   const [loading, setLoading] = useState(true)
   const [blocks, setBlocks] = useState([])
   const [contentLang, setContentLang] = useState('en')
-  // const [spaceObject, setSpaceObject] = useState()
-  // const [medienhausMeta, setMedienhausMeta] = useState([])
   const [roomMembers, setRoomMembers] = useState([])
   const [projectImage, setProjectImage] = useState([])
   const [description, setDescription] = useState('')
@@ -26,24 +24,15 @@ const Preview = () => {
     if (matrixClient.isInitialSyncComplete()) {
       // here we collect all necessary information about the project
       const space = await matrixClient.getSpaceSummary(projectSpace)
-      // setSpaceObject(space)
       const spaceDetails = await matrixClient.getRoom(projectSpace)
       // setting title to project space name
       setTitle(space.rooms[0].name)
       // get names of artists
       setRoomMembers(spaceDetails.currentState.members)
-      console.log(spaceDetails.currentState.members)
       // set the topic depending on selected language
       setDescription(contentLang === 'de' ? (space.rooms.filter(room => room.name === 'de')[0].topic || '') : (space.rooms.filter(room => room.name === 'en')[0].topic || ''))
-      // fetch custom medienhaus event
-      const meta = spaceDetails.currentState.events.get('dev.medienhaus.meta').values().next().value.event.content
-      // setMedienhausMeta(meta)
-      console.log(meta)
       // fetch project image if available
-      const avatar = await matrixClient.getStateEvent(projectSpace, 'm.room.avatar')
-        .catch(res => {
-          res.data.error === 'Event not found.' && console.log('No Avatar set, yet')
-        })
+      const avatar = await matrixClient.getStateEvent(projectSpace, 'm.room.avatar').catch(() => {})
       avatar && setProjectImage(avatar)
       // we fetch the selected language content
       const spaceRooms = space.rooms.filter(room => room.name === contentLang)
@@ -69,7 +58,7 @@ const Preview = () => {
     <section className="preview singleproject">
       <p>❗️ {t('Please note: Some parts of your project can’t be previewed, yet. We’re still working on displaying all attributes and content blocks in the preview, and if you miss some attributes like date, time or venue, please check back in some days.')}</p>
       <select
-        id="subject" name="subject" defaultValue="" value={contentLang} onChange={(e) => {
+        id="subject" name="subject" value={contentLang} onChange={(e) => {
           setContentLang(e.target.value)
         }}
       >
@@ -92,13 +81,7 @@ const Preview = () => {
         <div className="description">
           <p>{description}</p>
         </div>
-        {blocks?.map((content) => {
-          console.log(content)
-          return <DisplayPreview content={content} matrixClient={matrixClient} key={content.name} />
-        }
-          // <DisplayContent block={content} index={i} blocks={blocks} projectSpace={spaceObject?.rooms.filter(room => room.name === contentLang)[0].room_id} reloadSpace={reloadSpace} time={getCurrentTime} key={content + i + content?.lastUpdate} />
-        )}
-
+        {blocks?.map((content) => <DisplayPreview content={content} matrixClient={matrixClient} key={content.name} />)}
       </div>
 
       {/* <div className="info"> */}
