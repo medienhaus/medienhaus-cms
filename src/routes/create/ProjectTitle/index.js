@@ -23,7 +23,7 @@ const ProjectTitle = ({ title, projectSpace, callback }) => {
   const createProject = async (title) => {
     setLoading(true)
 
-    const opts = (type, name) => {
+    const opts = (type, name, history) => {
       return {
         preset: 'private_chat',
         name: name,
@@ -31,14 +31,15 @@ const ProjectTitle = ({ title, projectSpace, callback }) => {
         creation_content: { type: 'm.space' },
         initial_state: [{
           type: 'm.room.history_visibility',
-          content: { history_visibility: 'shared' } // world_readable
+          content: { history_visibility: history } //  world_readable
         },
         {
           type: 'dev.medienhaus.meta',
           content: {
-            version: '0.2',
+            version: '0.3',
             rundgang: 21,
-            type: type
+            type: type,
+            published: 'draft'
           }
         },
         {
@@ -51,12 +52,12 @@ const ProjectTitle = ({ title, projectSpace, callback }) => {
     }
     try {
       // create the project space for the student project
-      await matrixClient.createRoom(opts('studentproject', title))
+      await matrixClient.createRoom(opts('studentproject', title, 'world_readable'))
         .then(async (space) => {
           // by default we create two subpsaces for localisation and one for events
-          const en = await matrixClient.createRoom(opts('lang', 'en'))
-          const de = await matrixClient.createRoom(opts('lang', 'de'))
-          const events = await matrixClient.createRoom(opts('events', 'events'))
+          const en = await matrixClient.createRoom(opts('lang', 'en', 'shared'))
+          const de = await matrixClient.createRoom(opts('lang', 'de', 'shared'))
+          const events = await matrixClient.createRoom(opts('events', 'events', 'shared'))
           return [space.room_id, en.room_id, de.room_id, events.room_id]
         })
         .then(async (res) => {

@@ -36,7 +36,7 @@ const Overview = () => {
       const metaEvent = await matrixClient.getStateEvent(room.roomId, 'dev.medienhaus.meta').catch(() => {})
       if (!metaEvent || !metaEvent.type || !typesOfSpaces.includes(metaEvent.type)) return
       // Ignore if this is not an invitation (getMyMembership() only works correctly after calling _loadMembersFromServer())
-      await room._loadMembersFromServer().catch(console.error)
+      await room.loadMembersFromServer().catch(console.error)
       if (room.getMyMembership() !== 'invite') return
       // At this point we're sure that this is an invitation we want to display, so we add it to the state:
       setInvites(invites => Object.assign({}, invites, {
@@ -73,6 +73,7 @@ const Overview = () => {
       // then we update our array to not display the just deleted projects and only display joined rooms
       const updatedProjects = joinedSpaces?.filter(space => !space.meta?.deleted && space.meta.type === 'studentproject')
       setProjects(sortBy(updatedProjects, 'name'))
+      console.log(updatedProjects)
     }
   }, [joinedSpaces])
 
@@ -123,7 +124,7 @@ const Overview = () => {
               )
             : projects.map((space, index) => (
               <React.Fragment key={index}>
-                <Projects space={space} visibility={space.published} index={index} removeProject={removeProject} />
+                <Projects space={space} metaEvent={space.meta} visibility={space.published} index={index} removeProject={removeProject} />
                 {index < projects.length - 1 && <hr />}
               </React.Fragment>
             ))}

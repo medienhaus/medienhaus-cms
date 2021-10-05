@@ -29,12 +29,12 @@ const DateAndVenue = ({ reloadSpace, inviteCollaborators, projectSpace, events, 
           creation_content: { type: 'm.space' },
           initial_state: [{
             type: 'm.room.history_visibility',
-            content: { history_visibility: 'world_readable' }
+            content: { history_visibility: 'shared' }
           },
           {
             type: 'dev.medienhaus.meta',
             content: {
-              version: '0.2',
+              version: '0.3',
               rundgang: 21,
               type: type
             }
