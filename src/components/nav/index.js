@@ -12,6 +12,7 @@ const Nav = () => {
   const [isNavigationOpen, setIsNavigationOpen] = useState(false)
   const [isModeratingSpaces, setIsModeratingSpaces] = useState(false)
   const [knockAmount, setKnockAmount] = useState(0)
+  const [invites, setInvites] = useState([])
   const { joinedSpaces, spacesErr } = useJoinedSpaces(false)
   const matrixClient = Matrix.getMatrixClient()
 
@@ -29,7 +30,6 @@ const Nav = () => {
         'semester']
       // To "moderate" a space it must have one of the given types and we must be at least power level 50
       const moderatingSpaces = joinedSpaces.filter(space => typesOfSpaces.includes(space.meta.type) && space.powerLevel >= 50)
-
       // If we are not moderating any spaces we can cancel the rest here ...
       if (moderatingSpaces.length < 1) return
 
@@ -54,6 +54,50 @@ const Nav = () => {
       getAmountOfPendingKnocks()
     }
   }, [joinedSpaces, auth.user, matrixClient, spacesErr])
+
+  useEffect(() => {
+    async function checkRoomForPossibleInvite (room) {
+      // Types of spaces for which we want to count invites for
+      const typesOfSpaces = [
+        'studentproject',
+        'context',
+        'class',
+        'course',
+        'institution',
+        'degree program',
+        'design department',
+        'faculty',
+        'institute',
+        'semester']
+
+      // Ignore if this is not a space
+      if (room.getType() !== 'm.space') return
+      // Ignore if this is not a student project or a "context"
+      const metaEvent = await matrixClient.getStateEvent(room.roomId, 'dev.medienhaus.meta').catch(() => { })
+      if (!metaEvent || !metaEvent.type || !typesOfSpaces.includes(metaEvent.type)) return
+      // Ignore if this is not an invitation (getMyMembership() only works correctly after calling _loadMembersFromServer())
+      await room.loadMembersFromServer().catch(console.error)
+      // At this point we're sure that the room we're checking for is either
+      if (room.getMyMembership() === 'invite') {
+        // ... 1. an invitation we want to display, so we add it to the state, or ...
+        setInvites((invites) => [...invites, room.roomId])
+      } else {
+        // ... 2. a room that the membership has changed for to something other than "invite", so we do -not- want it to be in the state in case it's there right now:
+        setInvites(invites => invites.filter(invite => invite !== room.roomId))
+      }
+    }
+
+    // On page load: Get current set of invitations
+    const allRooms = matrixClient.getRooms()
+    allRooms.forEach(checkRoomForPossibleInvite)
+
+    // While on the page: Listen for incoming room events to add possibly new invitations to the state
+    matrixClient.on('Room.myMembership', checkRoomForPossibleInvite)
+    // When navigating away from /content we want to stop listening for those room events again
+    return () => {
+      matrixClient.removeListener('Room.myMembership', checkRoomForPossibleInvite)
+    }
+  }, [matrixClient])
 
   if (auth.user === null) {
     return null
@@ -95,7 +139,7 @@ const Nav = () => {
             <>
               <div>
                 <NavLink to="/create">/create</NavLink>
-                <NavLink to="/content">/content</NavLink>
+                <NavLink to="/content">/content <sup className={`notification ${invites.length > 0 ? '' : 'hidden'}`}>●</sup></NavLink>
               </div>
               <div>
                 <NavLink to="/account">/account</NavLink>
