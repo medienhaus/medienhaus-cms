@@ -5,9 +5,9 @@ import PublishProject from '../../../components/PublishProject'
 import { useTranslation } from 'react-i18next'
 import DeleteProjectButton from './DeleteProjectButton'
 
-const Projects = ({ space, visibility, index, removeProject }) => {
+const Content = ({ space, visibility, index, removeProject }) => {
   const history = useHistory()
-  const { t } = useTranslation('projects')
+  const { t } = useTranslation('content')
   const matrixClient = Matrix.getMatrixClient()
   const [showDeleteComponent, setShowDeleteComponent] = useState(false)
 
@@ -34,4 +34,5 @@ const Projects = ({ space, visibility, index, removeProject }) => {
     </>
   )
 }
-export default Projects
+
+export default Content

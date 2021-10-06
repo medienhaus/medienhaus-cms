@@ -17,7 +17,7 @@ import { Trans, useTranslation } from 'react-i18next'
 import DateAndVenue from './DateAndVenue'
 
 const Create = () => {
-  const { t } = useTranslation('projects')
+  const { t } = useTranslation('content')
   const [title, setTitle] = useState('')
   const [visibility, setVisibility] = useState('')
   const [loading, setLoading] = useState(false)
@@ -96,11 +96,11 @@ const Create = () => {
       setDescription({ en: space.rooms.filter(room => room.name === 'en')[0].topic || '', de: space.rooms.filter(room => room.name === 'de')[0].topic || '' })
       // checking if the project is a collaboration
       setRoomMembers(spaceDetails.currentState.members)
-      // check if project is published or draft
-      setVisibility(spaceDetails.getJoinRule())
       // fetch custom medienhaus event
       const meta = spaceDetails.currentState.events.get('dev.medienhaus.meta').values().next().value.event.content
       setMedienhausMeta(meta)
+      // check if project is published or draft
+      setVisibility(meta.published)
       // we fetch the selected language content
       const spaceRooms = space.rooms.filter(room => room.name === contentLang)
       const getContent = await matrixClient.getSpaceSummary(spaceRooms[0].room_id)
@@ -109,8 +109,8 @@ const Create = () => {
       }))
       // check if there is an events space
       const checkForEventSpace = space.rooms.filter(room => room.name === 'events')
-      const getEvents = checkForEventSpace.length > 0 && await matrixClient.getSpaceSummary(space.rooms.filter(room => room.name === 'events')[0].room_id).catch(err => console.log(err + '. This means there is no Event space, yet'))
-      setEvents(getEvents || 'depricated')
+      const getEvents = checkForEventSpace.length > 0 && await matrixClient.getSpaceSummary(space.rooms.filter(room => room.name === 'events')[0].room_id, 0).catch(err => console.log(err + '. This means there is no Event space, yet'))
+      setEvents(getEvents?.rooms || 'depricated')
       getCurrentTime()
     } else {
       console.log('sync not done, trying again')
@@ -119,7 +119,10 @@ const Create = () => {
   }, [matrixClient, projectSpace, getCurrentTime, contentLang])
 
   useEffect(() => {
-    projectSpace || setTitle('')
+    if (!projectSpace) {
+      setTitle('')
+      setEvents()
+    }
     projectSpace && fetchSpace()
   }, [projectSpace, fetchSpace, title])
 
@@ -128,7 +131,6 @@ const Create = () => {
       // We do not listen for any room-specific events if we are not currently editing a project
       return
     }
-
     async function handleRoomTimelineEvent (event) {
       if (event.event.type === 'm.room.message' && blocks?.filter(({ roomId }) => event.event.room_id.includes(roomId)) && event.event.sender !== localStorage.getItem('mx_user_id')) {
         // If a given content block room received a new message, we set the "lastUpdate" property of the appropriate
@@ -154,6 +156,16 @@ const Create = () => {
         fetchSpace()
       } else
       */
+
+      // since our events space contains nested spaces we need to escape them here from being updated too early and therefore causing FetchCms in DateAndVenue to return an empty array
+      if (event.event.content?.name?.includes('location') ||
+        event.event.content?.name?.includes('event') ||
+        event.event.content?.name?.includes('bbb') ||
+        event.event.content?.name?.includes('livestream') ||
+        event.event.content?.name?.includes('date')) {
+        console.log(event)
+        return
+      }
       if (event.event.type === 'm.room.name' && blocks?.filter(({ roomId }) => event.sender?.roomId.includes(roomId))) {
         // listen to room order changes or deletions (room names being changed)
         fetchSpace()
@@ -230,7 +242,7 @@ const Create = () => {
             : <strong>{t('Create and upload new project')}</strong>}
         </p>
         <p>{t('This is the project page. Please add the context in which the project was created, a project name, descriptive text and a thumbnail. You can also add more images, videos, livestreams and BigBlueButton sessions.')}</p>
-        <p><Trans t={t} i18nKey="submitInstructions2">If you want to continue at a later point in time, the project is automatically saved as a draft and you can find it in your collection under <NavLink to="/projects">/projects</NavLink>.</Trans></p>
+        <p><Trans t={t} i18nKey="submitInstructions2">If you want to continue at a later point in time, the project is automatically saved as a draft and you can find it in your collection under <NavLink to="/content">/content</NavLink>.</Trans></p>
         <p>{t('The Rundgang website will be available in English and German. The project name can only be entered in one language and will therefore be used for both pages. Other texts should ideally be entered in both languages, otherwise the text will appear on both pages in only one language.')}</p>
       </section>
       <section className="project-title">
@@ -243,9 +255,9 @@ const Create = () => {
             <h3>{t('Project context')}</h3>
             <Category title={title} projectSpace={projectSpace} />
           </section>
-          <section className="date-venue" id="date">
-            <h3>{t('Date and Venue')}</h3>
-            <DateAndVenue reloadSpace={reloadSpace} projectSpace={projectSpace} events={events === 'depricated' ? events : events?.rooms} matrixClient={matrixClient} />
+          <section className="events">
+            <h3>{t('Events')}</h3>
+            <DateAndVenue inviteCollaborators={inviteCollaborators} reloadSpace={reloadSpace} projectSpace={projectSpace} events={events} matrixClient={matrixClient} />
           </section>
           <section className="contributors">
             <Collaborators projectSpace={spaceObject?.rooms} members={roomMembers} time={getCurrentTime} startListeningToCollab={() => startListeningToCollab()} />
@@ -299,7 +311,7 @@ const Create = () => {
 
           <section className="save">
             <div className="confirmation">
-              <button className="cancel" onClick={() => history.push('/projects')}>← {t('BACK TO OVERVIEW')}</button>
+              <button className="cancel" onClick={() => history.push('/content')}>← {t('BACK TO OVERVIEW')}</button>
               <button className="confirm" onClick={() => history.push(`/preview/${projectSpace}`)} rel="external nofollow noopener noreferrer" target="_blank">{t('SHOW PREVIEW')} →</button>
             </div>
             {saveTimestamp && <p className="timestamp">↳ {t('Project last saved at')} {saveTimestamp}</p>}

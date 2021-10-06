@@ -8,7 +8,8 @@ const createBlock = async (e, content, number, space) => {
   console.log(name)
   const opts = {
     name: name,
-    preset: 'public_chat',
+    room_version: '7',
+    preset: 'private_chat',
     topic: '',
     creation_content: { 'm.federate': false },
     initial_state: [{
@@ -21,6 +22,10 @@ const createBlock = async (e, content, number, space) => {
     }, {
       type: 'm.room.history_visibility',
       content: { history_visibility: 'world_readable' }
+    },
+    {
+      type: 'm.room.join_rules',
+      content: { join_rule: 'invite' }
     }],
     power_level_content_override: {
       ban: 50,
@@ -28,7 +33,7 @@ const createBlock = async (e, content, number, space) => {
         'm.room.name': 50,
         'm.room.power_levels': 50
       },
-      events_default: 0,
+      events_default: 50,
       invite: 50,
       kick: 50,
       notifications: {
@@ -66,7 +71,7 @@ const createBlock = async (e, content, number, space) => {
         }
         await matrixClient.sendStateEvent(res[0], 'dev.medienhaus.meta', {
           type: content,
-          version: '0.2'
+          version: '0.3'
         })
         return res[0]
       })

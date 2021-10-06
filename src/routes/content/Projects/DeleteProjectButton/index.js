@@ -8,7 +8,7 @@ const DeleteProjectButton = ({ roomId, name, index, toggleDeleteButton, removePr
   const [leaving, setLeaving] = useState(false)
   const isMounted = useRef(true)
 
-  const { t } = useTranslation('projects')
+  const { t } = useTranslation('content')
 
   useEffect(() => {
     // needed to add this cleanup useEffect to prevent memory leaks

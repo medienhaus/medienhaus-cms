@@ -4,7 +4,7 @@ import Matrix from '../../../Matrix'
 import LoadingSpinnerButton from '../../../components/LoadingSpinnerButton'
 
 const Name = ({ name, callback }) => {
-  const { t } = useTranslation('projects')
+  const { t } = useTranslation('content')
   const [editDisplayName, setEditDisplayName] = useState(false)
   const [newDisplayName, setNewDisplayName] = useState(name)
   const matrixClient = Matrix.getMatrixClient()
