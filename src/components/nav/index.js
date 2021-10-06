@@ -158,7 +158,7 @@ const Nav = () => {
             <>
               <div>
                 <NavLink to="/create">/create</NavLink>
-                <NavLink to="/content">/content <sup className={`notification ${Object.keys(invites).length > 0 ? '' : 'hidden'}`}>●</sup></NavLink>
+                <NavLink to="/content">/content <sup className={`notification ${invites.length > 0 ? '' : 'hidden'}`}>●</sup></NavLink>
               </div>
               <div>
                 <NavLink to="/account">/account</NavLink>
