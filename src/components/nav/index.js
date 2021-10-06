@@ -57,7 +57,7 @@ const Nav = () => {
 
   useEffect(() => {
     async function checkRoomForPossibleInvite (room) {
-      // Types of spaces for which we want to show invites
+      // Types of spaces for which we want to count invites for
       const typesOfSpaces = [
         'studentproject',
         'context',
@@ -77,31 +77,14 @@ const Nav = () => {
       if (!metaEvent || !metaEvent.type || !typesOfSpaces.includes(metaEvent.type)) return
       // Ignore if this is not an invitation (getMyMembership() only works correctly after calling _loadMembersFromServer())
       await room.loadMembersFromServer().catch(console.error)
-      if (room.getMyMembership() !== 'invite') return
-      // At this point we're sure that this is an invitation we want to display, so we add it to the state:
-      setInvites((invites) => [...invites, room.roomId])
-    }
-
-    async function removeInvites (room) {
-      const typesOfSpaces = [
-        'studentproject',
-        'context',
-        'class',
-        'course',
-        'institution',
-        'degree program',
-        'design department',
-        'faculty',
-        'institute',
-        'semester']
-
-      // Ignore if this is not a space
-      if (room.getType() !== 'm.space') return
-      // Ignore if this is not a student project or a "context"
-      const metaEvent = await matrixClient.getStateEvent(room.roomId, 'dev.medienhaus.meta').catch(() => { })
-      if (!metaEvent || !metaEvent.type || !typesOfSpaces.includes(metaEvent.type)) return
-      if (room.selfMembership === 'invite') return // we want invites to stay in the array
-      setInvites(invites => invites.filter(invite => invite !== room.roomId))
+      // At this point we're sure that the room we're checking for is either
+      if (room.getMyMembership() === 'invite') {
+        // ... 1. an invitation we want to display, so we add it to the state, or ...
+        setInvites((invites) => [...invites, room.roomId])
+      } else {
+        // ... 2. a room that the membership has changed for to something other than "invite", so we do -not- want it to be in the state in case it's there right now:
+        setInvites(invites => invites.filter(invite => invite !== room.roomId))
+      }
     }
 
     // On page load: Get current set of invitations
@@ -109,12 +92,10 @@ const Nav = () => {
     allRooms.forEach(checkRoomForPossibleInvite)
 
     // While on the page: Listen for incoming room events to add possibly new invitations to the state
-    matrixClient.on('Room', checkRoomForPossibleInvite)
-    matrixClient.on('Room.myMembership', removeInvites)
+    matrixClient.on('Room.myMembership', checkRoomForPossibleInvite)
     // When navigating away from /content we want to stop listening for those room events again
     return () => {
-      matrixClient.removeListener('Room', checkRoomForPossibleInvite)
-      matrixClient.removeListener('Room.myMembership', removeInvites)
+      matrixClient.removeListener('Room.myMembership', checkRoomForPossibleInvite)
     }
   }, [matrixClient])
 
