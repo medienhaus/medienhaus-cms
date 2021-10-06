@@ -80,7 +80,9 @@ const PublishProject = ({ disabled, space, published, time, metaEvent }) => {
   return (
     <div className="below">
       <select
-        id="visibility" name="visibility" value={visibility} onChange={(e) => onChangeVisibility(e.target.value)} disabled={disabled}
+        id="visibility" name="visibility" value={visibility} onChange={(e) => {
+          if (space.topic && space.context) onChangeVisibility(e.target.value)
+        }} disabled={disabled}
       >
         <option value="draft">{t('Draft')}</option>
         <option value="public" disabled={!space.topic || !space.context}>{t('Public')}</option>
