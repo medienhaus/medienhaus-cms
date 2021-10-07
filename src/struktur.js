@@ -11509,12 +11509,6 @@ const struktur = {
                 "name": "Fliegende Bühne ab 4. Semester",
                 "type": "course",
                 "children": {}
-              },
-              "!XsFApADjnlLDdTqNAJ:content.udk-berlin.de": {
-                "id": "!XsFApADjnlLDdTqNAJ:content.udk-berlin.de",
-                "name": "demo_projekt_1",
-                "type": "studentproject",
-                "children": {}
               }
             }
           },
