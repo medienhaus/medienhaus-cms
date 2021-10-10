@@ -138,14 +138,14 @@ const Collaborators = ({ projectSpace, members, time, startListeningToCollab }) 
           members && Object.keys(members).length > 1 &&
             <ul>
               <h4><strong>{t('CAN edit and delete(!) the project')}</strong></h4>
-              {Object.values(members).map((name, i) => {
+              {Object.values(members).filter(name => name.membership !== 'leave').map((name, i) => {
+              // we filter users with the status leave since they either rejected our invitation or left the project
                 startListeningToCollab()
                 return name.rawDisplayName !== profile.displayname &&
                 (
                   <li key={name.user?.displayName || name.rawDisplayName}>
                     <span title={name.userId}>⚠️ {name.user?.displayName || name.rawDisplayName}
                       {name.membership === 'invite' && <em> (invited)</em>}
-                      {name.membership === 'leave' && <em> (rejected)</em>}
                     </span>
                     <LoadingSpinnerButton
                       // revoking invitations / kicking a user is only possible if a users powerLevel is bigger than that of the user's in question
