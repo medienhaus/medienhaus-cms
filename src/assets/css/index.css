@@ -935,6 +935,43 @@ textarea[disabled] {
   border-color: var(--color-no) !important;
 }
 
+/*
+.event {
+  align-self: center;
+  background-image: none;
+  background-position: none;
+  background-repeat: none;
+  display: inline;
+}
+*/
+
+.events .left > :only-child {
+  background-color: var(--color-bg);
+  display: grid;
+  grid-row: 2;
+  align-self: center;
+  place-content: center;
+}
+
+.events label + * {
+  margin-top: calc(var(--margin) * 0.5);
+}
+
+.events select + p {
+  margin-top: var(--margin);
+}
+
+.map {
+  border-color: var(--color-fg);
+  border-style: solid;
+  border-radius: unset;
+  border-width: calc(var(--margin) * 0.2);
+  display: grid;
+  grid-gap: var(--margin);
+  height: calc(var(--margin) * 12);
+  margin-top: var(--margin);
+}
+
 .invites > ul,
 .invites > ul > li {
   display: grid;
@@ -1735,6 +1772,11 @@ button > .loading {
   opacity: 0.6;
 }
 
-.contextDropdown ul li:not(.disabled):hover {
+.contextDropdown ul li.selected {
+  background-color: var(--color-fg);
+  color: var(--color-bg)
+}
+
+.contextDropdown ul li:not(.disabled):not(.selected):hover {
   background-color: var(--color-lo);
 }

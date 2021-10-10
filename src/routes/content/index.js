@@ -9,60 +9,57 @@ import { sortBy } from 'lodash'
 import deleteProject from './deleteProject'
 
 const Overview = () => {
-  const { t } = useTranslation('projects')
+  const { t } = useTranslation('content')
   const matrixClient = Matrix.getMatrixClient()
   const [projects, setProjects] = useState({})
-  const [invites, setInvites] = useState()
+  const [invites, setInvites] = useState({})
   const { joinedSpaces, spacesErr, fetchSpaces, reload } = useJoinedSpaces(false)
 
-  // @TODO: Check for existing invites on page load
-
-  // Listen for room events to populate our "pending invites" state
   useEffect(() => {
-    // when navigating away from /projects we need the following code to retreive our pending invites from memoryStore
+    async function checkRoomForPossibleInvite (room) {
+      // Types of spaces for which we want to show invites
+      const typesOfSpaces = [
+        'studentproject',
+        'context',
+        'class',
+        'course',
+        'institution',
+        'degree program',
+        'design department',
+        'faculty',
+        'institute',
+        'semester']
+
+      // Ignore if this is not a space
+      if (room.getType() !== 'm.space') return
+      // Ignore if this is not a student project or a "context"
+      const metaEvent = await matrixClient.getStateEvent(room.roomId, 'dev.medienhaus.meta').catch(() => {})
+      if (!metaEvent || !metaEvent.type || !typesOfSpaces.includes(metaEvent.type)) return
+      // Ignore if this is not an invitation (getMyMembership() only works correctly after calling _loadMembersFromServer())
+      await room.loadMembersFromServer().catch(console.error)
+      if (room.getMyMembership() !== 'invite') return
+      // At this point we're sure that this is an invitation we want to display, so we add it to the state:
+      setInvites(invites => Object.assign({}, invites, {
+        [room.roomId]:
+          {
+            name: room.name,
+            id: room.roomId,
+            membership: room._selfMembership
+          }
+      }))
+    }
+
+    // On page load: Get current set of invitations
     const allRooms = matrixClient.getRooms()
-    allRooms.forEach(async room => {
-      // ignore rooms that aren't spaces (or are language spaces) and only return invites
-      if (room.getMyMembership() !== 'invite' || room.getType() !== 'm.space' || room.name === 'de' || room.name === 'en' || room.name === 'events') return
-      const roomMembers = await room._loadMembersFromServer().catch(console.error)
-      if (roomMembers < 1) return
-      setInvites(invites => Object.assign({}, invites, {
-        [room.roomId]:
-          {
-            name: room.name,
-            id: room.roomId,
-            membership: room._selfMembership
-          }
-      }))
-    })
+    allRooms.forEach(checkRoomForPossibleInvite)
 
-    async function handleRoomEvent (room) {
-      // Ignore event if this is not about a space or if it is a language space
-      if (room.getType() !== 'm.space' || room.name === 'de' || room.name === 'en' || room.name === 'events') return
+    // While on the page: Listen for incoming room events to add possibly new invitations to the state
+    matrixClient.on('Room', checkRoomForPossibleInvite)
 
-      const roomMembers = await room._loadMembersFromServer().catch(console.error)
-      // room.getMyMembership() is only available after the current call stack has cleared (_.defer),
-      // so we put it behind the "await"
-      if (room.getMyMembership() !== 'invite' || roomMembers.length < 1) {
-        return
-      }
-      setInvites(invites => Object.assign({}, invites, {
-        [room.roomId]:
-          {
-            name: room.name,
-            id: room.roomId,
-            membership: room._selfMembership
-          }
-      }))
-    }
-    matrixClient.on('Room', handleRoomEvent)
-    if (!invites) setInvites({}) // if we dont have any pending invites we set invites to an empty array to stop displaying the loading spinner
-    // When navigating away from /profile we want to stop listening for those room events again
+    // When navigating away from /content we want to stop listening for those room events again
     return () => {
-      matrixClient.removeListener('Room', handleRoomEvent)
-      console.log('stopped listening')
+      matrixClient.removeListener('Room', checkRoomForPossibleInvite)
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [matrixClient])
 
   const removeProject = (index) => {
@@ -85,7 +82,8 @@ const Overview = () => {
       Object.entries(invites).filter(([key]) => key !== room)))
     reload(true)
   }
-  if (!invites || fetchSpaces || !matrixClient.isInitialSyncComplete()) return <Loading />
+
+  if (fetchSpaces || !matrixClient.isInitialSyncComplete()) return <Loading />
 
   return (
     <div>
@@ -95,7 +93,7 @@ const Overview = () => {
             <h3>{t('Invites')}</h3>
             <p>
               <Trans t={t} i18nKey="pendingInvites" count={Object.keys(invites).length}>
-                You have been invited to join the following project{Object.keys(invites).length > 1 ? 's' : ''}. When you accept an invitation, the project will be listed below with your others. You can edit collaborative projects, delete them, or change their visibility.
+                You have been invited to join the following project{Object.keys(invites).length > 1 ? 's' : ''}/context{Object.keys(invites).length > 1 ? 's' : ''}. When you accept an invitation for a project, it will be listed below with your others. You can edit collaborative projects, delete them, or change their visibility.
               </Trans>
             </p>
             <ul>
@@ -116,16 +114,16 @@ const Overview = () => {
         </>
       )}
       <section className="projects">
-        <h3>{t('Projects')}</h3>
+        <h3>{t('Content')}</h3>
         {spacesErr
           ? console.error(spacesErr)
           : projects?.length === 0
             ? (
-              <p>{t('Welcome to the content management system for Rundgang 2021. Looks like you haven\'t uploaded any projects, yet.')}</p>
+              <p>{t('Welcome to the content management system for Rundgang 2021. Looks like you haven\'t uploaded any content, yet.')}</p>
               )
             : projects.map((space, index) => (
               <React.Fragment key={index}>
-                <Projects space={space} visibility={space.published} index={index} removeProject={removeProject} />
+                <Projects space={space} metaEvent={space.meta} visibility={space.published} index={index} removeProject={removeProject} />
                 {index < projects.length - 1 && <hr />}
               </React.Fragment>
             ))}

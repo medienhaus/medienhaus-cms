@@ -163,7 +163,9 @@ html {
   background-color: var(--color-fg);
   color: var(--color-bg);
   border-radius: var(--margin);
+  /*
   cursor: pointer;
+  */
   font-size: 0.8rem;
   font-weight: 500;
   padding: calc(var(--margin) * 0.3) calc(var(--margin) * 0.6);

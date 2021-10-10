@@ -4,6 +4,7 @@
   "Date": "DATUM",
   "Date and Venue": "Datum und Veranstaltungsort",
   "Venue": "Veranstaltungsort",
-  "Choose a time": "Wähle eine Uhrzeit",
-  "Choose a date": "Wähle ein Datum"
+  "Add event": "Veranstaltung hinzufügen",
+  "Date": "Datum",
+  "Time": "Uhrzeit"
 }
