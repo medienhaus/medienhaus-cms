@@ -287,7 +287,6 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace, time,
                           value={content}
                           onChange={(e) => {
                             setContent(e.target.value)
-                            console.log(content)
                           }}
                           onBlur={(e) => {
                             if (content !== cms?.body) {
