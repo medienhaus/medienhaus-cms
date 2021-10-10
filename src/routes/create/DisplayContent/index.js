@@ -109,7 +109,7 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace, time,
           body: text,
           format: 'org.matrix.custom.html',
           msgtype: 'm.text',
-          formatted_body: '<h2>' + localStorage.getItem(roomId) + '</h2>'
+          formatted_body: '<h2>' + text + '</h2>'
         })
         if ('event_id' in save) {
           setSaved('Saved!')
