@@ -6,6 +6,7 @@ import Footer from './components/footer'
 import Nav from './components/nav'
 import { Loading } from './components/loading'
 
+import Admin from './routes/admin'
 import Landing from './routes/landing'
 import Login from './routes/login'
 import Boilerplate from './routes/boilerplate'
@@ -103,6 +104,7 @@ function App () {
               <Route path="/login" component={Login} />
               <Route path="/terms" component={Terms} />
               <PrivateRoute path="/account" component={Account} />
+              <PrivateRoute path="/admin" component={Admin} />
               <PrivateRoute path="/boilerplate" component={Boilerplate} />
               <PrivateRoute path="/content" component={Content} />
               <PrivateRoute path="/create/:spaceId" component={Create} />

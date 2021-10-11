@@ -4,7 +4,7 @@ import Projects from './Projects'
 import Invites from './Invites'
 import Matrix from '../../Matrix'
 import { Loading } from '../../components/loading'
-import { Trans, useTranslation } from 'react-i18next'
+import { useTranslation } from 'react-i18next'
 import { sortBy } from 'lodash'
 import deleteProject from './deleteProject'
 
@@ -91,11 +91,13 @@ const Overview = () => {
         <>
           <section className="invites">
             <h3>{t('Invites')}</h3>
+            {/* }
             <p>
               <Trans t={t} i18nKey="pendingInvites" count={Object.keys(invites).length}>
                 You have been invited to join the following project{Object.keys(invites).length > 1 ? 's' : ''}/context{Object.keys(invites).length > 1 ? 's' : ''}. When you accept an invitation for a project, it will be listed below with your others. You can edit collaborative projects, delete them, or change their visibility.
               </Trans>
             </p>
+      */}
             <ul>
               {Object.values(invites).map((space, index) => {
                 return (
@@ -119,7 +121,7 @@ const Overview = () => {
           ? console.error(spacesErr)
           : projects?.length === 0
             ? (
-              <p>{t('Welcome to the content management system for Rundgang 2021. Looks like you haven\'t uploaded any content, yet.')}</p>
+              <p>{t('Welcome to the content management system. Looks like you haven\'t uploaded any content, yet.')}</p>
               )
             : projects.map((space, index) => (
               <React.Fragment key={index}>

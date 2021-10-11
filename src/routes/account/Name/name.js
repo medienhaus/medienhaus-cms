@@ -18,7 +18,7 @@ const Name = ({ name, callback }) => {
   return (
     <div className="name">
       <h3>Profile name</h3>
-      <p>Here you can change your profile name. The profile name will be shown on the public Rundgang website along with your project.</p>
+      <p>Here you can change your profile name.</p>
       <input id="title" maxLength="100" name="title" type="text" value={newDisplayName} onChange={(e) => { setEditDisplayName(true); setNewDisplayName(e.target.value) }} />
       <div className="confirmation">
         {editDisplayName &&
