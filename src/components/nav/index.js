@@ -11,6 +11,7 @@ const Nav = () => {
   const history = useHistory()
   const [isNavigationOpen, setIsNavigationOpen] = useState(false)
   const [isModeratingSpaces, setIsModeratingSpaces] = useState(false)
+  const [isAdmin, setIsAdmin] = useState(false)
   const [knockAmount, setKnockAmount] = useState(0)
   const [invites, setInvites] = useState([])
   const { joinedSpaces, spacesErr } = useJoinedSpaces(false)
@@ -99,6 +100,13 @@ const Nav = () => {
     }
   }, [matrixClient])
 
+  useEffect(() => {
+    const checkAdminPriviliges = async () => {
+      setIsAdmin(await matrixClient.isSynapseAdministrator().catch(console.log))
+    }
+    checkAdminPriviliges()
+  }, [matrixClient])
+
   if (auth.user === null) {
     return null
   }
@@ -143,6 +151,7 @@ const Nav = () => {
               </div>
               <div>
                 <NavLink to="/account">/account</NavLink>
+                <NavLink to="/admin" className={!isAdmin ? 'disabled' : ''}>/admin</NavLink>
                 <NavLink to="/moderate" className={!isModeratingSpaces ? 'disabled' : ''}>/moderate<sup className={`notification ${knockAmount < 1 ? 'hidden' : ''}`}>●</sup></NavLink>
               </div>
               <div>
