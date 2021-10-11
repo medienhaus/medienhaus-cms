@@ -154,13 +154,14 @@ const DateAndVenue = ({ reloadSpace, inviteCollaborators, projectSpace, events, 
           </div>
         )
       }))}
-      <AddEvent
-        length={eventSpace.filter(space => space.room_type === 'm.space').length}
-        room_id={eventSpace[0].room_id}
-        t={t}
-        reloadSpace={reloadSpace}
-        inviteCollaborators={inviteCollaborators}
-      />
+      {eventContent?.length < 1 &&
+        <AddEvent
+          length={eventSpace.filter(space => space.room_type === 'm.space').length}
+          room_id={eventSpace[0].room_id}
+          t={t}
+          reloadSpace={reloadSpace}
+          inviteCollaborators={inviteCollaborators}
+        />}
     </>
   )
 }

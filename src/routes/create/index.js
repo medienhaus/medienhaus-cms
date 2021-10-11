@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react'
-import { useParams, useHistory, NavLink } from 'react-router-dom'
+import { useParams, useHistory } from 'react-router-dom'
 import Matrix from '../../Matrix'
 import { MatrixEvent } from 'matrix-js-sdk'
 
@@ -13,7 +13,7 @@ import ProjectTitle from './ProjectTitle'
 import PublishProject from '../../components/PublishProject'
 import ProjectDescription from './ProjectDescription'
 import { Loading } from '../../components/loading'
-import { Trans, useTranslation } from 'react-i18next'
+import { useTranslation } from 'react-i18next'
 import DateAndVenue from './DateAndVenue'
 
 const Create = () => {
@@ -235,20 +235,24 @@ const Create = () => {
 
   return (
     <>
+      {/* }
       <section className="welcome">
         <p>
           {projectSpace
             ? <strong>{t('Edit project')}</strong>
             : <strong>{t('Create and upload new project')}</strong>}
         </p>
+
         <p>{t('This is the project page. Please add the context in which the project was created, a project name, descriptive text and a thumbnail. You can also add more images, videos, livestreams and BigBlueButton sessions.')}</p>
         <p><Trans t={t} i18nKey="submitInstructions2">If you want to continue at a later point in time, the project is automatically saved as a draft and you can find it in your collection under <NavLink to="/content">/content</NavLink>.</Trans></p>
         <p>{t('The Rundgang website will be available in English and German. The project name can only be entered in one language and will therefore be used for both pages. Other texts should ideally be entered in both languages, otherwise the text will appear on both pages in only one language.')}</p>
       </section>
+      */}
       <section className="project-title">
         <h3>{t('Project title')}</h3>
         <ProjectTitle title={title} projectSpace={projectSpace} callback={changeTitle} />
       </section>
+
       {projectSpace && (
         <>
           <section className="context">
@@ -268,11 +272,13 @@ const Create = () => {
           </section>
           <section className="content">
             <h3>{t('Content')}</h3>
+            {/*
             <p><Trans t={t} i18nKey="contentInstructions1">You can add elements like texts, images, audio and video files, BigBlueButton sessions and livestreams by clicking the <code>+</code> button near the content block below.</Trans></p>
             <p><Trans t={t} i18nKey="contentInstructions2">The first content block&thinsp;&mdash;&thinsp;which is the introduction to your project&thinsp;&mdash;&thinsp;is required.</Trans></p>
             <p><Trans t={t} i18nKey="contentInstructions3">In all other text content blocks, you can format your input text by highlighting the to be formatted text with your cursor.</Trans></p>
             <p><Trans t={t} i18nKey="contentInstructions4">You can use the <code>↑</code> and <code>↓</code> arrows to rearrange existing blocks.</Trans></p>
             <p><Trans t={t} i18nKey="contentInstructions5">You can provide content and information in multiple languages. We would recommend to provide the content in both, English and German. If you provide contents for just one language that content will appear on both Rundgang website versions, the English and the German one.</Trans></p>
+            */}
             <select
               value={contentLang} onChange={(e) => {
                 setContentLang(e.target.value)
@@ -294,12 +300,14 @@ const Create = () => {
            */}
           <section className="visibility">
             <h3>{t('Visibility')}</h3>
+            {/*
             <p>
               <Trans t={t} i18nKey="visibilityInstructions1">
                 Would you like to save your project as a draft or release it for publishing on the Rundgang platform? The released projects will be published for the Rundgang on October 29, 2021.
               </Trans>
             </p>
             <p>{t('If you still want to make changes to your contributions after publishing, you can continue to do so. Please note, however, that content on projects with a physical location will be pulled from the system on October 8, 2021 for the printed Rundgang programme. Projects that have not been approved by you for publishing by then will not be included in the programme booklet.')}</p>
+            */}
             {spaceObject
               ? (<>
                 <PublishProject space={spaceObject.rooms[0]} metaEvent={medienhausMeta} description={description?.en} published={visibility} time={getCurrentTime} />

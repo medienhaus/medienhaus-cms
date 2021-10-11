@@ -2,10 +2,8 @@ import React, { useEffect, useState } from 'react'
 import Matrix from '../../../Matrix'
 import { Loading } from '../../../components/loading'
 import ContextDropdown from '../../../components/ContextDropdown'
-import { useTranslation } from 'react-i18next'
 
 const Category = ({ title, projectSpace }) => {
-  const { t } = useTranslation('content')
   // const [subject, setSubject] = useState('')
   // const [room, setRoom] = useState('')
   // const [member, setMember] = useState(false)
@@ -84,10 +82,12 @@ const Category = ({ title, projectSpace }) => {
 
   return (
     <>
+      {/* }
       <p>{t('In which context do you want to publish your project?')}</p>
       <p>{t('This information is necessary to show your project in the right place on the Rundgang 2021 website, and must therefore be specified when you change the visibility of the project to public.')}</p>
       <p>{t('The context can be a class, a course, a seminar or a free project. If you are unsure, ask the professor of your class or the seminar leader.')}</p>
       <p>{t('You can scroll through the list, or filter/search the list by typing one or more keywords.')}</p>
+  */}
       <div style={{ position: 'relative' }}>
         {loading
           ? <Loading />
