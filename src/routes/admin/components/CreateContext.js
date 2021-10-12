@@ -1,4 +1,5 @@
 import React from 'react'
+import { Loading } from '../../../components/loading'
 
 function CreateContext (props) {
   return (
@@ -9,7 +10,7 @@ function CreateContext (props) {
         <input type="text" onChange={(e) => props.setNewContext(e.target.value)} />
       </div>
 
-      <button type="submit" onClick={(e) => props.callback(e)}>{props.t('SUBMIT')}</button>
+      <button type="submit" onClick={(e) => props.callback(e)}>{props.loading ? <Loading /> : props.t('SUBMIT')}</button>
     </form>
   )
 }
