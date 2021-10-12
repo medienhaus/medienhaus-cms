@@ -33,7 +33,7 @@ const Admin = () => {
   const renderSelection = () => {
     switch (selection) {
       case 'contexts':
-        return <ManageContexts />
+        return <ManageContexts matrixClient={matrixClient} />
       case 'password':
         return <ChangePassword />
       case 'delete':
