@@ -13,7 +13,7 @@ const Credits = () => {
       <p>{t('Head of Event: Felix Wolf (Department for Facility Management, Occupational Health & Safety)')}</p>
       <p>{t('Deputy Head of Event: Jan Krause (Department for Facility Management, Occupational Health & Safety)')}</p>
       <p>{t('Marketing and Rundgang online platform in cooperation with the medienhaus/ team: Marketing & University Events Department under the direction of Dr. Michaela Conen')}</p>
-      <p>{t('Rundgang online platform: medienhaus/ team, supervised by Andi Rueckel, Robert Schnüll and Prof. Klaus Gasteier, in cooperation with Insa Ruckdeschel, Project Manager of the Marketing & University Events Department')}</p>
+      <p>{t('Rundgang online platform: medienhaus/ team, supervised by Andi Rueckel, Robert Schnüll,')} <a title="Florian Weber">🥷</a>, <a title="Marcel Haupt">🥷</a>{t(',  and Prof. Klaus Gasteier, in cooperation with Insa Ruckdeschel, Project Manager of the Marketing & University Events Department')}</p>
       <p>{t('Press relations, online communication and social media: Press & Communication Unit headed by Claudia Assmann.')}</p>
       <p>{t('Pandemic advice is provided by the company doctor of the UdK Berlin Dr. Stefan Linnig')}</p>
       <p>{t('The Berlin University of the Arts is legally represented by the President Prof. Dr. Norbert Palz')}</p>

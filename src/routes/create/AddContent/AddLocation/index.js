@@ -10,7 +10,7 @@ import createBlock from '../../matrix_create_room'
 import BigBlueButtonEmbed from '../../components/bigBlueButtonEmbed'
 import PeertubeEmbed from '../../components/peertubeEmbed'
 
-const AddLocation = ({ number, inviteCollaborators, projectSpace, handleOnBlockWasAddedSuccessfully, callback }) => {
+const AddLocation = ({ number, inviteCollaborators, projectSpace, handleOnBlockWasAddedSuccessfully, peertube, time, callback }) => {
   const [selectedLocation, setSelectedLocation] = useState('')
   const [timeDate, setTimeDate] = useState([])
   const [room, setRoom] = useState('')
@@ -152,15 +152,15 @@ const AddLocation = ({ number, inviteCollaborators, projectSpace, handleOnBlockW
 
   return (
     <>
-      <div>
-        <label htmlFor="content-select">{t('Live stream or audio/video conference?')}</label>
-        <select name="content-select" value={selectedBlockType} id="content-select" onChange={(e) => setSelectedBlockType(e.target.value)}>
-          <option value="">{t('NONE')}</option>
-          <option value="livestream">{t('WITH live stream')}</option>
-          <option value="bbb">{t('WITH audio/video conference')}</option>
-        </select>
-      </div>
-
+      {peertube &&
+        <div>
+          <label htmlFor="content-select">{t('Live stream or audio/video conference?')}</label>
+          <select name="content-select" value={selectedBlockType} id="content-select" onChange={(e) => setSelectedBlockType(e.target.value)}>
+            <option value="">{t('NONE')}</option>
+            <option value="livestream">{t('WITH live stream')}</option>
+            <option value="bbb">{t('WITH audio/video conference')}</option>
+          </select>
+        </div>}
       {selectedBlockType === 'bbb'
         ? <BigBlueButtonEmbed
             callback={(link) => {
@@ -172,7 +172,7 @@ const AddLocation = ({ number, inviteCollaborators, projectSpace, handleOnBlockW
           <PeertubeEmbed type="livestream" onBlockWasAddedSuccessfully={handleOnBlockWasAddedSuccessfully} callback={(stream) => setLivestream(stream)} />}
 
       <div>
-        <label htmlFor="location-select">{t('Venue')}</label>
+        <label htmlFor="location-select">{t('Location')}</label>
         <select name="location-select" value={selectedLocation} id="location-select" onChange={(e) => setSelectedLocation(e.target.value)}>
           <option value="">{t('-- select venue --')}</option>
           <option value="custom">{t('other venue, please enter below')}</option>
@@ -194,18 +194,20 @@ const AddLocation = ({ number, inviteCollaborators, projectSpace, handleOnBlockW
       </>}
       <input type="text" placeholder={t('room number or specific location')} onChange={(e) => setRoom(e.target.value)} />
 
-      <AddDate
-        saveButton={false}
-        callback={(time, date) => setTimeDate([time, date])}
-      />
-
+      {time &&
+        <AddDate
+          saveButton={false}
+          callback={(time, date) => setTimeDate([time, date])}
+        />}
       <div className="confirmation">
         <button className="cancel" onClick={() => { callback() }}>{t('CANCEL')}</button>
         <LoadingSpinnerButton
           disabled={loading || (selectedBlockType === '' && !selectedLocation) || (selectedBlockType === 'bbb' && !validBbbLink)}
           onClick={handleSubmit}
-        >{t('SAVE')}</LoadingSpinnerButton>
+        >{t('SAVE')}
+        </LoadingSpinnerButton>
       </div>
+
     </>
   )
 }

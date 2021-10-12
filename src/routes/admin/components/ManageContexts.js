@@ -4,10 +4,12 @@ import CreateContext from './CreateContext'
 import { RemoveContext } from './RemoveContext'
 import * as _ from 'lodash'
 import { Loading } from '../../../components/loading'
+import ProjectImage from '../../create/ProjectImage'
+import AddLocation from '../../create/AddContent/AddLocation'
 
 const ManageContexts = (props) => {
   const { t } = useTranslation('admin')
-  const [selectedContext] = useState('!EyRTeozehwfsYePWMl:dev.medienhaus.udk-berlin.de')
+  const [selectedContext, setSelectedContext] = useState('!EyRTeozehwfsYePWMl:dev.medienhaus.udk-berlin.de')
   const [structure, setStructure] = useState(null)
   const [newContext, setNewContext] = useState('')
   const [parentName] = useState('Stechlin')
@@ -61,7 +63,7 @@ const ManageContexts = (props) => {
         console.log(`getting children for ${spaceId} / ${spaceName}`)
         for (const event of stateEvents) {
           if (event.type !== 'm.space.child' && !includeRooms) continue
-          if (event.type === 'm.space.child' && _.size(event.content) === 0) continue
+          if (event.type === 'm.space.child' && _.size(event.content) === 0) continue // check to see if body of content is empty, therefore space has been removed
           if (event.room_id !== spaceId) continue
           // if (event.sender !== process.env.RUNDGANG_BOT_USERID && !includeRooms) continue
 
@@ -125,6 +127,7 @@ const ManageContexts = (props) => {
       headers: { Authorization: 'Bearer ' + localStorage.getItem('medienhaus_access_token') },
       body: JSON.stringify(add ? body : { }) // if we add a space to an existing one we need to send the object 'body', to remove a space we send an empty object.
     }).catch(console.log)
+    createStructurObject()
   }
 
   function addSpace (e) {
@@ -170,17 +173,28 @@ const ManageContexts = (props) => {
     }
     createSpace(newContext)
   }
+
   useEffect(() => {
+    console.log('yes i was fired')
     createStructurObject()
   }, [])
+
   return (
     <>
       <h2>Manage Contexts</h2>
-      {structure ? <p>Crazy circles</p> : <Loading />}
+      {structure
+        ? <div>{Object.entries(structure).map(parent => {
+          return Object.entries(parent[1].children).map(room => {
+            return <button key={room.id} value={room[1].name} style={selectedContext === room[1].id ? { color: 'red' } : null} onClick={() => setSelectedContext(room[1].id)}>{room[1].name}</button>
+          })
+        })}</div>
+        : <Loading />}
       <label htmlFor="name">{t('Parent')}: </label>
       <input type="text" value={parentName} disabled />
       <RemoveContext t={t} selectedContext={selectedContext} parent={parent} parentName={parentName} disableButton={disableButton} callback={spaceChild} />
       <CreateContext t={t} parent={parent} matrixClient={props.matrixClient} setNewContext={setNewContext} parentName={parentName} disableButton={disableButton} callback={addSpace} />
+      <ProjectImage projectSpace={selectedContext} changeProjectImage={() => console.log('changed image')} />
+      <AddLocation callback={() => console.log('callback')} />
     </>
   )
 }

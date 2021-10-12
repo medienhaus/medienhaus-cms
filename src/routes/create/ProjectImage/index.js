@@ -3,6 +3,7 @@ import Matrix from '../../../Matrix'
 import FileUpload from '../../../components/FileUpload'
 import TextareaAutosize from 'react-textarea-autosize'
 import { useTranslation } from 'react-i18next'
+import { Loading } from '../../../components/loading'
 
 const ProjectImage = ({ projectSpace, changeProjectImage }) => {
   const [edit, setEdit] = useState(false)
@@ -12,8 +13,10 @@ const ProjectImage = ({ projectSpace, changeProjectImage }) => {
   const { t } = useTranslation('content')
 
   const fetchProjectImage = useCallback(async () => {
-    const avatar = await matrixClient.getStateEvent(projectSpace, 'm.room.avatar').catch(() => {})
+    setLoading(true)
+    const avatar = await matrixClient.getStateEvent(projectSpace, 'm.room.avatar').catch(() => { setProjectImage() })
     avatar && setProjectImage(avatar)
+    setLoading(false)
   }, [matrixClient, projectSpace])
 
   useEffect(() => {
@@ -53,6 +56,7 @@ const ProjectImage = ({ projectSpace, changeProjectImage }) => {
 
   const fileUpload = <FileUpload fileType="image" handleSubmission={handleSubmission} loading={loading} callback={() => setEdit(edit => !edit)} />
 
+  if (loading) return <Loading />
   if (!projectImage) {
     return fileUpload
   }
