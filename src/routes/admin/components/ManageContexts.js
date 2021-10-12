@@ -10,6 +10,7 @@ import AddLocation from '../../create/AddContent/AddLocation'
 const ManageContexts = (props) => {
   const { t } = useTranslation('admin')
   const [selectedContext, setSelectedContext] = useState('!EyRTeozehwfsYePWMl:dev.medienhaus.udk-berlin.de')
+  const [selectedContextName, setSelectedContextName] = useState('')
   const [structure, setStructure] = useState(null)
   const [newContext, setNewContext] = useState('')
   const [parentName] = useState('Stechlin')
@@ -122,7 +123,7 @@ const ManageContexts = (props) => {
       suggested: false,
       auto_join: true
     }
-    await fetch(process.env.REACT_APP_MATRIX_BASE_URL + `/_matrix/client/r0/rooms/${parent}/state/m.space.child/${space}`, {
+    await fetch(process.env.REACT_APP_MATRIX_BASE_URL + `/_matrix/client/r0/rooms/${selectedContext}/state/m.space.child/${space}`, {
       method: 'PUT',
       headers: { Authorization: 'Bearer ' + localStorage.getItem('medienhaus_access_token') },
       body: JSON.stringify(add ? body : { }) // if we add a space to an existing one we need to send the object 'body', to remove a space we send an empty object.
@@ -185,12 +186,19 @@ const ManageContexts = (props) => {
       {structure
         ? <div>{Object.entries(structure).map(parent => {
           return Object.entries(parent[1].children).map(room => {
-            return <button key={room.id} value={room[1].name} style={selectedContext === room[1].id ? { color: 'red' } : null} onClick={() => setSelectedContext(room[1].id)}>{room[1].name}</button>
+            return (
+              <button
+                key={room.id} value={room[1].name} style={selectedContext === room[1].id ? { color: 'red' } : null} onClick={() => {
+                  setSelectedContext(room[1].id)
+                  setSelectedContextName(room[1].name)
+                }}
+              >{room[1].name}</button>
+            )
           })
         })}</div>
         : <Loading />}
       <label htmlFor="name">{t('Parent')}: </label>
-      <input type="text" value={parentName} disabled />
+      <input type="text" value={selectedContextName} disabled />
       <RemoveContext t={t} selectedContext={selectedContext} parent={parent} parentName={parentName} disableButton={disableButton} callback={spaceChild} />
       <CreateContext t={t} parent={parent} matrixClient={props.matrixClient} setNewContext={setNewContext} parentName={parentName} disableButton={disableButton} callback={addSpace} />
       <ProjectImage projectSpace={selectedContext} changeProjectImage={() => console.log('changed image')} />
