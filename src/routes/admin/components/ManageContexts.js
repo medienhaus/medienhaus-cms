@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import CreateContext from './CreateContext'
 import { RemoveContext } from './RemoveContext'
+import { ShowContexts } from './ShowContexts'
 import * as _ from 'lodash'
 import { Loading } from '../../../components/loading'
 import ProjectImage from '../../create/ProjectImage'
@@ -203,6 +204,10 @@ const ManageContexts = (props) => {
       <CreateContext t={t} parent={parent} matrixClient={props.matrixClient} setNewContext={setNewContext} parentName={parentName} disableButton={disableButton} callback={addSpace} />
       <ProjectImage projectSpace={selectedContext} changeProjectImage={() => console.log('changed image')} />
       <AddLocation callback={() => console.log('callback')} />
+
+      <h2> Show Context</h2>
+      <ShowContexts t={t} selectedContext={selectedContext} parent={parent} parentName={parentName} disableButton={disableButton} callback={spaceChild} />
+
     </>
   )
 }
