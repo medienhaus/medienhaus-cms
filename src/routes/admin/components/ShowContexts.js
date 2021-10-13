@@ -7,8 +7,8 @@ export function ShowContexts (props) {
   const MultilineChart = () => {
     const svgRef = React.useRef(null)
 
-    const width = 932
-    const height = 932
+    const width = 900
+    const height = 900
 
     const color = d3.scaleLinear()
       .domain([0, 5])
@@ -18,8 +18,7 @@ export function ShowContexts (props) {
     const pack = data => d3.pack()
       .size([width, height])
       .padding(3)(d3.hierarchy(data)
-        .sum(d => d.value)
-        .sort((a, b) => b.value - a.value))
+        .sum(d => 100))
 
     const root = pack(bingo)
     let focus = root
@@ -43,12 +42,12 @@ export function ShowContexts (props) {
       .on('mouseover', function () { d3.select(this).attr('fill-opacity', '1') })
       .on('mouseout', function () { d3.select(this).attr('fill-opacity', '0') })
       .on('click', (event, d) => {
-        console.log(d)
+        props.callback(d)
         return focus !== d && (zoom(event, d), event.stopPropagation())
       })
 
     const label = svg.append('g')
-      .style('font', '10px sans-serif')
+      .style('font', '24px sans-serif')
       .attr('fill', 'black')
       .attr('pointer-events', 'none')
       .attr('text-anchor', 'middle')
@@ -94,7 +93,7 @@ export function ShowContexts (props) {
         svgRef.current.appendChild(svg.node())
       }
     }, [node, svg])
-    return <svg ref={svgRef} />
+    return <svg ref={svgRef} width="900" height="900" />
   }
 
   return (

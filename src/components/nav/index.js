@@ -130,7 +130,7 @@ const Nav = () => {
     <>
       <header>
         <NavLink to="/">
-          <h1>udk/rundgang</h1>
+          <h1>spaces/cms</h1>
         </NavLink>
         {auth.user
           ? <button type="button" className={isNavigationOpen ? 'close' : 'open'} onClick={() => setIsNavigationOpen(!isNavigationOpen)}>{isNavigationOpen ? '×' : '|||'}</button>
@@ -154,11 +154,11 @@ const Nav = () => {
                 <NavLink to="/admin" className={!isAdmin ? 'disabled' : ''}>/admin</NavLink>
                 <NavLink to="/moderate" className={!isModeratingSpaces ? 'disabled' : ''}>/moderate<sup className={`notification ${knockAmount < 1 ? 'hidden' : ''}`}>●</sup></NavLink>
               </div>
-              <div>
+              {/* <div>
                 <NavLink to="/feedback">/feedback</NavLink>
                 <NavLink to="/support">/support</NavLink>
                 <NavLink to="/request">/request</NavLink>
-              </div>
+              </div> */}
             </>
           )}
         </div>

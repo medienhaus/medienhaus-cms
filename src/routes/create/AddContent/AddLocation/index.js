@@ -10,7 +10,7 @@ import createBlock from '../../matrix_create_room'
 import BigBlueButtonEmbed from '../../components/bigBlueButtonEmbed'
 import PeertubeEmbed from '../../components/peertubeEmbed'
 
-const AddLocation = ({ number, inviteCollaborators, projectSpace, handleOnBlockWasAddedSuccessfully, peertube, time, callback }) => {
+const AddLocation = ({ number, inviteCollaborators, projectSpace, handleOnBlockWasAddedSuccessfully, peertube, time, locationDropdown, callback }) => {
   const [selectedLocation, setSelectedLocation] = useState('')
   const [timeDate, setTimeDate] = useState([])
   const [room, setRoom] = useState('')
@@ -152,6 +152,7 @@ const AddLocation = ({ number, inviteCollaborators, projectSpace, handleOnBlockW
 
   return (
     <>
+      <h2>Location</h2>
       {peertube &&
         <div>
           <label htmlFor="content-select">{t('Live stream or audio/video conference?')}</label>
@@ -170,17 +171,16 @@ const AddLocation = ({ number, inviteCollaborators, projectSpace, handleOnBlockW
           />
         : selectedBlockType === 'livestream' &&
           <PeertubeEmbed type="livestream" onBlockWasAddedSuccessfully={handleOnBlockWasAddedSuccessfully} callback={(stream) => setLivestream(stream)} />}
-
-      <div>
-        <label htmlFor="location-select">{t('Location')}</label>
-        <select name="location-select" value={selectedLocation} id="location-select" onChange={(e) => setSelectedLocation(e.target.value)}>
-          <option value="">{t('-- select venue --')}</option>
-          <option value="custom">{t('other venue, please enter below')}</option>
-          {locations.map(location => <option value={location.coordinates} key={location.coordinates}>{location.name}</option>)}
-        </select>
-      </div>
-
-      {selectedLocation === 'custom' && <>
+      {locationDropdown &&
+        <div>
+          <label htmlFor="location-select">{t('Location')}</label>
+          <select name="location-select" value={selectedLocation} id="location-select" onChange={(e) => setSelectedLocation(e.target.value)}>
+            <option value="">{t('-- select venue --')}</option>
+            <option value="custom">{t('other venue, please enter below')}</option>
+            {locations.map(location => <option value={location.coordinates} key={location.coordinates}>{location.name}</option>)}
+          </select>
+        </div>}
+      <>
         <p>{t('Drag the marker to the desired location.')}</p>
         <div className="map">
           <MapContainer className="center" center={center} zoom={12} scrollWheelZoom={false}>
@@ -191,7 +191,7 @@ const AddLocation = ({ number, inviteCollaborators, projectSpace, handleOnBlockW
             <DraggableMarker />
           </MapContainer>
         </div>
-      </>}
+      </>
       <input type="text" placeholder={t('room number or specific location')} onChange={(e) => setRoom(e.target.value)} />
 
       {time &&

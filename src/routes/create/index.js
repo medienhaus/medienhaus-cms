@@ -260,7 +260,7 @@ const Create = () => {
             <Category title={title} projectSpace={projectSpace} />
           </section>
           <section className="events">
-            <h3>{t('Events')}</h3>
+            <h3>{t('Location')}</h3>
             <DateAndVenue inviteCollaborators={inviteCollaborators} reloadSpace={reloadSpace} projectSpace={projectSpace} events={events} matrixClient={matrixClient} />
           </section>
           <section className="contributors">

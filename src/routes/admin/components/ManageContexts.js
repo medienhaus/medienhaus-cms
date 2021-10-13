@@ -4,7 +4,6 @@ import CreateContext from './CreateContext'
 import { RemoveContext } from './RemoveContext'
 import { ShowContexts } from './ShowContexts'
 import * as _ from 'lodash'
-import { Loading } from '../../../components/loading'
 import ProjectImage from '../../create/ProjectImage'
 import AddLocation from '../../create/AddContent/AddLocation'
 
@@ -20,7 +19,7 @@ const ManageContexts = (props) => {
   const [parent] = useState('!ZbMmIxgnJIhuROlgKJ:dev.medienhaus.udk-berlin.de')
 
   const createStructurObject = async () => {
-    async function getSpaceStructure (matrixClient, motherSpaceRoomId, includeRooms, hierarchy) {
+    async function getSpaceStructure (matrixClient, motherSpaceRoomId, includeRooms) {
       const result = {}
 
       function createSpaceObject (id, name, metaEvent) {
@@ -31,7 +30,7 @@ const ManageContexts = (props) => {
           children: {}
         }
       }
-
+      /*
       const typesOfSpaces = ['context',
         'class',
         'course',
@@ -41,7 +40,7 @@ const ManageContexts = (props) => {
         'faculty',
         'institute',
         'semester']
-
+*/
       async function scanForAndAddSpaceChildren (spaceId, path) {
         if (spaceId === 'undefined') return
         const stateEvents = await matrixClient.roomState(spaceId).catch(console.log)
@@ -51,14 +50,15 @@ const ManageContexts = (props) => {
         // const metaEvent = await matrixClient.getStateEvent(spaceId, 'dev.medienhaus.meta')
         const metaEvent = _.find(stateEvents, { type: 'dev.medienhaus.meta' })
         if (!metaEvent) return
-        if (!typesOfSpaces.includes(metaEvent.content.type)) return
+        // if (!typesOfSpaces.includes(metaEvent.content.type)) return
 
         const nameEvent = _.find(stateEvents, { type: 'm.room.name' })
         if (!nameEvent) return
         const spaceName = nameEvent.content.name
 
         // if (initial) {
-        _.set(result, [...path, spaceId], createSpaceObject(spaceId, spaceName, metaEvent, stateEvents))
+        // result.push(createSpaceObject(spaceId, spaceName, metaEvent))
+        _.set(result, [...path, spaceId], createSpaceObject(spaceId, spaceName, metaEvent))
         // }
 
         // const spaceSummary = await matrixClient.getSpaceSummary(spaceId)
@@ -110,9 +110,8 @@ const ManageContexts = (props) => {
       return result
     }
     console.log('---- started structure ----')
-    const hierarchy = await props.matrixClient.getRoomHierarchy(parent, 50, 10)
-    const tree = await getSpaceStructure(props.matrixClient, parent, false, hierarchy)
-    console.log(tree)
+    const tree = await getSpaceStructure(props.matrixClient, parent, false)
+    console.log(tree[Object.keys(tree)[0]])
     setStructure(tree)
   }
 
@@ -176,6 +175,12 @@ const ManageContexts = (props) => {
     createSpace(newContext)
   }
 
+  const contextualise = (d3) => {
+    console.log(d3)
+    setSelectedContext(d3.data.id)
+    setSelectedContextName(d3.data.name)
+  }
+
   useEffect(() => {
     console.log('yes i was fired')
     createStructurObject()
@@ -184,30 +189,16 @@ const ManageContexts = (props) => {
   return (
     <>
       <h2>Manage Contexts</h2>
-      {structure
-        ? <div>{Object.entries(structure).map(parent => {
-          return Object.entries(parent[1].children).map(room => {
-            return (
-              <button
-                key={room.id} value={room[1].name} style={selectedContext === room[1].id ? { color: 'red' } : null} onClick={() => {
-                  setSelectedContext(room[1].id)
-                  setSelectedContextName(room[1].name)
-                }}
-              >{room[1].name}</button>
-            )
-          })
-        })}</div>
-        : <Loading />}
+      <ShowContexts structure={structure} t={t} selectedContext={selectedContext} parent={parent} parentName={parentName} disableButton={disableButton} callback={contextualise} />
       <label htmlFor="name">{t('Parent')}: </label>
       <input type="text" value={selectedContextName} disabled />
       <RemoveContext t={t} selectedContext={selectedContext} parent={parent} parentName={parentName} disableButton={disableButton} callback={spaceChild} />
       <CreateContext t={t} parent={parent} matrixClient={props.matrixClient} setNewContext={setNewContext} parentName={parentName} disableButton={disableButton} callback={addSpace} />
-      <ProjectImage projectSpace={selectedContext} changeProjectImage={() => console.log('changed image')} />
+      <div>
+        <h2>Image</h2>
+        <ProjectImage projectSpace={selectedContext} changeProjectImage={() => console.log('changed image')} />
+      </div>
       <AddLocation callback={() => console.log('callback')} />
-
-      <h2> Show Context</h2>
-      <ShowContexts t={t} selectedContext={selectedContext} parent={parent} parentName={parentName} disableButton={disableButton} callback={spaceChild} />
-
     </>
   )
 }
