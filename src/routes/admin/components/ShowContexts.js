@@ -1,7 +1,6 @@
 
 import React from 'react'
 import * as d3 from 'd3'
-import bingo from '../../../assets/data/dummyData.json'
 
 export function ShowContexts (props) {
   const MultilineChart = () => {
@@ -20,7 +19,7 @@ export function ShowContexts (props) {
       .padding(3)(d3.hierarchy(data)
         .sum(d => 100))
 
-    const root = pack(bingo)
+    const root = pack(props.structure)
     let focus = root
     let view
 

@@ -1,3 +1,5 @@
+/* eslint-disable no-prototype-builtins */
+/* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import CreateContext from './CreateContext'
@@ -6,12 +8,13 @@ import { ShowContexts } from './ShowContexts'
 import * as _ from 'lodash'
 import ProjectImage from '../../create/ProjectImage'
 import AddLocation from '../../create/AddContent/AddLocation'
+import { Loading } from '../../../components/loading'
 
 const ManageContexts = (props) => {
   const { t } = useTranslation('admin')
   const [selectedContext, setSelectedContext] = useState('!EyRTeozehwfsYePWMl:dev.medienhaus.udk-berlin.de')
   const [selectedContextName, setSelectedContextName] = useState('')
-  const [structure, setStructure] = useState(null)
+  const [structure, setStructure] = useState()
   const [newContext, setNewContext] = useState('')
   const [parentName] = useState('Stechlin')
   // eslint-disable-next-line no-unused-vars
@@ -109,12 +112,35 @@ const ManageContexts = (props) => {
 
       return result
     }
+    function translateJson (origin) {
+      origin.childs = []
+      if (origin.children && Object.keys(origin.children).length > 0) {
+        const childs = parseChilds(origin.children)
+        childs.forEach((child, i) => {
+          origin.childs[i] = translateJson(child)
+        })
+      }
+      origin.children = origin.childs
+      delete origin.childs
+      return origin
+    }
+
+    function parseChilds (data) {
+      if (data) {
+        const result = []
+        for (const key in data) {
+          if (data.hasOwnProperty(key)) {
+            result.push(key)
+          }
+        }
+        return result.map(r => data[r])
+      } else { return {} }
+    }
     console.log('---- started structure ----')
     const tree = await getSpaceStructure(props.matrixClient, parent, false)
-    console.log(tree[Object.keys(tree)[0]])
-    setStructure(tree)
+    const translatedJson = translateJson(tree[Object.keys(tree)[0]])
+    setStructure(translatedJson)
   }
-
   const spaceChild = async (e, space, add) => {
     e && e.preventDefault()
     const body = {
@@ -184,12 +210,13 @@ const ManageContexts = (props) => {
   useEffect(() => {
     console.log('yes i was fired')
     createStructurObject()
+    // createD3Json()
   }, [])
 
   return (
     <>
       <h2>Manage Contexts</h2>
-      <ShowContexts structure={structure} t={t} selectedContext={selectedContext} parent={parent} parentName={parentName} disableButton={disableButton} callback={contextualise} />
+      {!structure ? <Loading /> : <ShowContexts structure={structure} t={t} selectedContext={selectedContext} parent={parent} parentName={parentName} disableButton={disableButton} callback={contextualise} />}
       <label htmlFor="name">{t('Parent')}: </label>
       <input type="text" value={selectedContextName} disabled />
       <RemoveContext t={t} selectedContext={selectedContext} parent={parent} parentName={parentName} disableButton={disableButton} callback={spaceChild} />
