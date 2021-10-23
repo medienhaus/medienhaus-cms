@@ -148,7 +148,7 @@ const Nav = () => {
               <div>
                 <NavLink to="/feedback">/feedback</NavLink>
                 <NavLink to="/support">/support</NavLink>
-                <NavLink to="/request">/request</NavLink>
+                <NavLink to="/request" className="disabled">/request</NavLink>
               </div>
             </>
           )}
