@@ -63,7 +63,6 @@ const PeertubeEmbed = ({ type, onCreateRoomForBlock, onBlockWasAddedSuccessfully
   }
 */
   function pasteEntry (e) {
-    console.log(e.target.value.substring(e.target.value.lastIndexOf('/') + 1))
     setSelectedEntry(e.target.value.substring(e.target.value.lastIndexOf('/') + 1))
     setPastedEntry(e.target.value)
   }
