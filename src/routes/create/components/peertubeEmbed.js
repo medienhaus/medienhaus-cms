@@ -11,13 +11,14 @@ const PeertubeEmbed = ({ type, onCreateRoomForBlock, onBlockWasAddedSuccessfully
   const [selectedEntry, setSelectedEntry] = useState('')
   const matrixClient = Matrix.getMatrixClient()
   const username = matrixClient.getUserIdLocalpart()
+  const usernameModified = username.replace('-', '_')
   const { t } = useTranslation('peertube')
 
   useEffect(() => {
     async function fetchEntries () {
       setLoading(true)
       const resourceType = (type === 'playlist' ? 'video-playlists' : 'videos')
-      const request = process.env.NODE_ENV === 'development' ? await fetch(`https://stream.udk-berlin.de/api/v1/accounts/d.erdmann/${resourceType}?count=100`) : await fetch(`https://stream.udk-berlin.de/api/v1/accounts/${username}/${resourceType}?count=100`)
+      const request = process.env.NODE_ENV === 'development' ? await fetch(`https://stream.udk-berlin.de/api/v1/accounts/d.erdmann/${resourceType}?count=100`) : await fetch(`https://stream.udk-berlin.de/api/v1/accounts/${usernameModified}/${resourceType}?count=100`)
       // TODO: pagination for more than 100 entries
       let entries = await request.json()
       console.log(entries)
@@ -44,7 +45,7 @@ const PeertubeEmbed = ({ type, onCreateRoomForBlock, onBlockWasAddedSuccessfully
       setLoading(false)
     }
     fetchEntries()
-  }, [type, username])
+  }, [type, usernameModified])
 
   async function handleSubmit () {
     const blockRoomId = await onCreateRoomForBlock()
