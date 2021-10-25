@@ -68,7 +68,7 @@ const PeertubeEmbed = ({ type, onCreateRoomForBlock, onBlockWasAddedSuccessfully
     setPastedEntry(e.target.value)
     !saveButton && callback(e.target.value)
   }
-  const validInputValue = pastedEntry.includes('stream.udk-berlin.de/')
+  const validInputValue = pastedEntry.startsWith('https://stream.udk-berlin.de/videos/watch')
 
   if (loading) {
     return <Loading />
