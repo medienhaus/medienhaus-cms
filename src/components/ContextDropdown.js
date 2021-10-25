@@ -8,7 +8,6 @@ import LoadingSpinnerButton from './LoadingSpinnerButton'
 import { useTranslation } from 'react-i18next'
 import Fuse from 'fuse.js'
 import Matrix from '../Matrix'
-import { Link } from 'react-router-dom'
 import { makeRequest } from '../Backend'
 
 const items = uniqBy(mapDeep(process.env.NODE_ENV === 'development' ? strukturDev['!ijJyXjLNqgeJkRerIG:dev.medienhaus.udk-berlin.de'].children : struktur['!TCqCDYYsBUxmjWOZWV:content.udk-berlin.de'].children, (value, key, parent, context) => {
@@ -156,7 +155,8 @@ function ContextDropdown ({ onItemChosen, selectedContext, showRequestButton = f
               padding: '15px',
               textAlign: 'center'
             }}
-            >It looks like you currently do not have access to any contexts matching “{inputValue}”. Please <Link to="/request" target="_blank" rel="noopener noreferrer">/request</Link> access below.</div>
+            // >It looks like you currently do not have access to any contexts matching “{inputValue}”. Please <Link to="/request" target="_blank" rel="noopener noreferrer">/request</Link> access below.</div>
+            >It looks like you currently do not have access to any contexts matching “{inputValue}”.</div>
           </li>
         )}
         {(inputValue && inputItems.length < 1) && (
@@ -175,7 +175,8 @@ function ContextDropdown ({ onItemChosen, selectedContext, showRequestButton = f
               padding: '15px',
               textAlign: 'center'
             }}
-            >We could not find any contexts matching your search query. If you think your context is missing please use our <Link to="/request" target="_blank" rel="noopener noreferrer">/request</Link> form.</div>
+            // >We could not find any contexts matching your search query. If you think your context is missing please use our <Link to="/request" target="_blank" rel="noopener noreferrer">/request</Link> form.</div>
+            >We could not find any contexts matching your search query.</div>
           </li>
         )}
         {inputItems.map((item, index) => {
