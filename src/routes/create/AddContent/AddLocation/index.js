@@ -173,7 +173,7 @@ const AddLocation = ({ number, inviteCollaborators, projectSpace, handleOnBlockW
           <PeertubeEmbed
             type="livestream" onBlockWasAddedSuccessfully={handleOnBlockWasAddedSuccessfully} callback={(stream) => {
               setLivestream(stream)
-              setValidStreamLink(stream.startsWith('https://stream.udk-berlin.de/'))
+              setValidStreamLink(stream.startsWith('https://stream.udk-berlin.de/videos/watch/'))
             }}
           />}
 
