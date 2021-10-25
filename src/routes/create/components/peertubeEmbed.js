@@ -7,6 +7,7 @@ import { Trans, useTranslation } from 'react-i18next'
 
 const PeertubeEmbed = ({ type, onCreateRoomForBlock, onBlockWasAddedSuccessfully, saveButton, callback }) => {
   const [loading, setLoading] = useState(false)
+  // eslint-disable-next-line no-unused-vars
   const [entries, setEntries] = useState([])
   const [selectedEntry, setSelectedEntry] = useState('')
   const [pastedEntry, setPastedEntry] = useState('')
@@ -67,7 +68,7 @@ const PeertubeEmbed = ({ type, onCreateRoomForBlock, onBlockWasAddedSuccessfully
     setPastedEntry(e.target.value)
     !saveButton && callback(e.target.value)
   }
-  const validInputValue = pastedEntry.startsWith('https://stream.udk-berlin.de/')
+  const validInputValue = pastedEntry.includes('stream.udk-berlin.de/')
 
   if (loading) {
     return <Loading />
@@ -98,7 +99,7 @@ const PeertubeEmbed = ({ type, onCreateRoomForBlock, onBlockWasAddedSuccessfully
       {type === 'livestream' && <p>↳ <Trans t={t} i18nKey="linkToStream">You can start a live stream via <a href="https://stream.udk-berlin.de/videos/upload" rel="external nofollow noopener noreferrer" target="_blank">udk/stream</a></Trans></p>}
       {type === 'playlist' && <p>↳ <Trans t={t} i18nKey="linkToPlaylist">You can create playlists via <a href="https://stream.udk-berlin.de/videos/upload" rel="external nofollow noopener noreferrer" target="_blank">udk/stream</a></Trans></p>}
 
-      {saveButton && <LoadingSpinnerButton onClick={handleSubmit} disabled={entries.length < 1 || !selectedEntry || !validInputValue}>Add Content</LoadingSpinnerButton>}
+      {saveButton && <LoadingSpinnerButton onClick={handleSubmit} disabled={!selectedEntry || !validInputValue}>Add Content</LoadingSpinnerButton>}
     </div>
   )
 }

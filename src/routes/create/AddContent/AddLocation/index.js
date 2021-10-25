@@ -166,14 +166,14 @@ const AddLocation = ({ number, inviteCollaborators, projectSpace, handleOnBlockW
         ? <BigBlueButtonEmbed
             callback={(link) => {
               setBbbLink(link)
-              setValidBbbLink(link.startsWith('https://meetings.udk-berlin.de/') && link.substr(33, 100).match(/^([a-zA-Z0-9]{3}-){3}([a-zA-Z0-9]{3}){1}$/gi))
+              setValidBbbLink(link.includes('meetings.udk-berlin.de/') && link.substr(33, 100).match(/^([a-zA-Z0-9]{3}-){3}([a-zA-Z0-9]{3}){1}$/gi))
             }} onBlockWasAddedSuccessfully={handleOnBlockWasAddedSuccessfully}
           />
         : selectedBlockType === 'livestream' &&
           <PeertubeEmbed
             type="livestream" onBlockWasAddedSuccessfully={handleOnBlockWasAddedSuccessfully} callback={(stream) => {
               setLivestream(stream)
-              setValidStreamLink(stream.startsWith('https://stream.udk-berlin.de/'))
+              setValidStreamLink(stream.includes('stream.udk-berlin.de/'))
             }}
           />}
 
