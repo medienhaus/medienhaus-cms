@@ -9664,12 +9664,6 @@ const struktur = {
             "name": "Populäre und traditionelle Musikkulturen der Karibik",
             "type": "course",
             "children": {}
-          },
-          "!oifVuGfeDeiymtbKeM:content.udk-berlin.de": {
-            "id": "!oifVuGfeDeiymtbKeM:content.udk-berlin.de",
-            "name": "Sound Studies and Sonic Arts",
-            "type": "degree program",
-            "children": {}
           }
         }
       },
@@ -11286,12 +11280,6 @@ const struktur = {
                 "name": "Find a Fact and Act",
                 "type": "course",
                 "children": {}
-              },
-              "!JdTYfbEjgXRafEaPoR:content.udk-berlin.de": {
-                "id": "!JdTYfbEjgXRafEaPoR:content.udk-berlin.de",
-                "name": "Das Portfolioprojekt",
-                "type": "course",
-                "children": {}
               }
             }
           },
@@ -11368,18 +11356,6 @@ const struktur = {
             "name": "Institut für Produkt- und Prozeßgestaltung",
             "type": "institute",
             "children": {
-              "!FovJlDEbizZvDGARET:content.udk-berlin.de": {
-                "id": "!FovJlDEbizZvDGARET:content.udk-berlin.de",
-                "name": "BA + MA Abschlussarbeiten",
-                "type": "course",
-                "children": {}
-              },
-              "!GAbXLiUiBcTsbQxnAY:content.udk-berlin.de": {
-                "id": "!GAbXLiUiBcTsbQxnAY:content.udk-berlin.de",
-                "name": "Das Ungeheuer das aus der Tiefe kam",
-                "type": "course",
-                "children": {}
-              },
               "!HlFCPXOpHeEcpeJtuN:content.udk-berlin.de": {
                 "id": "!HlFCPXOpHeEcpeJtuN:content.udk-berlin.de",
                 "name": "Kunst + Design",
@@ -11428,24 +11404,6 @@ const struktur = {
                 "name": "Design & Technologie",
                 "type": "course",
                 "children": {}
-              },
-              "!XzMNwdCMEYLuSQxPIS:content.udk-berlin.de": {
-                "id": "!XzMNwdCMEYLuSQxPIS:content.udk-berlin.de",
-                "name": "Dark Liquid",
-                "type": "course",
-                "children": {}
-              },
-              "!sGyoXXAzDSurtquECp:content.udk-berlin.de": {
-                "id": "!sGyoXXAzDSurtquECp:content.udk-berlin.de",
-                "name": "Wir sind auch die die schon da waren",
-                "type": "course",
-                "children": {}
-              },
-              "!wGsdjrxOuajQAQWNOK:content.udk-berlin.de": {
-                "id": "!wGsdjrxOuajQAQWNOK:content.udk-berlin.de",
-                "name": "Zukunftsforschung",
-                "type": "course",
-                "children": {}
               }
             }
           },
@@ -11483,14 +11441,7 @@ const struktur = {
                 "id": "!JXuzLnuGJaTXJBNBdC:content.udk-berlin.de",
                 "name": "Grafikdesign",
                 "type": "design department",
-                "children": {
-                  "!LdfFqavPWcNTXyiGLs:content.udk-berlin.de": {
-                    "id": "!LdfFqavPWcNTXyiGLs:content.udk-berlin.de",
-                    "name": "Gestaltung des bewegten Bildes",
-                    "type": "course",
-                    "children": {}
-                  }
-                }
+                "children": {}
               },
               "!QDrYgRrqTHrctArECm:content.udk-berlin.de": {
                 "id": "!QDrYgRrqTHrctArECm:content.udk-berlin.de",
@@ -11819,14 +11770,7 @@ const struktur = {
                 "id": "!zmoaTHXYRRdgNbdufB:content.udk-berlin.de",
                 "name": "Grafikdesign",
                 "type": "design department",
-                "children": {
-                  "!LdfFqavPWcNTXyiGLs:content.udk-berlin.de": {
-                    "id": "!LdfFqavPWcNTXyiGLs:content.udk-berlin.de",
-                    "name": "Gestaltung des bewegten Bildes",
-                    "type": "course",
-                    "children": {}
-                  }
-                }
+                "children": {}
               },
               "!UuSYrqRgYmJMjgJabN:content.udk-berlin.de": {
                 "id": "!UuSYrqRgYmJMjgJabN:content.udk-berlin.de",
