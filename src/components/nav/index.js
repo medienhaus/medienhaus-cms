@@ -138,7 +138,7 @@ const Nav = () => {
           {auth.user && (
             <>
               <div>
-                <NavLink to="/create">/create</NavLink>
+                <NavLink to="/create" className="disabled">/create</NavLink>
                 <NavLink to="/content">/content <sup className={`notification ${invites.length > 0 ? '' : 'hidden'}`}>●</sup></NavLink>
               </div>
               <div>

@@ -10,6 +10,10 @@ import struktur from '../../struktur'
 import strukturDev from '../../struktur-dev'
 
 const Request = () => {
+  // TEMPORARILY DISABLING /REQUEST ROUTE
+  /* eslint-disable no-unreachable */
+  return null
+
   const contextMenuWithoutCourses = process.env.NODE_ENV === 'development' ? strukturDev['!ijJyXjLNqgeJkRerIG:dev.medienhaus.udk-berlin.de'].children : struktur['!TCqCDYYsBUxmjWOZWV:content.udk-berlin.de'].children
 
   const { register, formState: { errors }, handleSubmit } = useForm()

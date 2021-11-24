@@ -44,6 +44,10 @@ const Create = () => {
     setSaveTimestamp(date + ', ' + time)
   }, [])
 
+  // TEMPORARILY DISABLING CREATING NEW CONTENT
+  /* eslint-disable no-unreachable, react-hooks/rules-of-hooks */
+  if (!projectSpace) return null
+
   const reloadSpace = async (roomId, eventSpace) => {
     eventSpace && setEvents(eventSpace)
     // roomId is needed in order to invite collaborators to newly created rooms.
