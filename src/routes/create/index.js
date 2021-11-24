@@ -231,7 +231,7 @@ const Create = () => {
     return changeTopic
   }
 
-  if (!matrixClient.isInitialSyncComplete()) return <Loading />
+  if (projectSpace && !matrixClient.isInitialSyncComplete()) return <Loading />
 
   return (
     <>
