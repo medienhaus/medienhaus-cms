@@ -37,12 +37,12 @@ jobs:
 
       - uses: up9cloud/action-rsync@v1.1
         env:
-          HOST: ruralmindshift.org
-          KEY: ${{secrets.SSH_DEV_MEDIENHAUS_UDK_BERLIN_DE}}
-          TARGET: /var/www/html/cms/
+          HOST: stechlin-institut.ruralmindshift.org
+          KEY: ${{secrets.SSH_STECHLIN_INSTITUT_RURALMINDSHIFT_ORG}}
+          TARGET: /var/www/cms/
           VERBOSE: true
           USER: root
-          PORT: 22
+          PORT: 22422
           ARGS: --recursive --update --delete --compress --exclude=/.git/
           SSH_ARGS: '-o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no'
           SOURCE: ./build/

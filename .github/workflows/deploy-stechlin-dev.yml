@@ -42,7 +42,7 @@ jobs:
         env:
           HOST: dev.medienhaus.udk-berlin.de
           KEY: ${{secrets.SSH_DEV_MEDIENHAUS_UDK_BERLIN_DE}}
-          TARGET: /var/www/html/stechlin-cms/
+          TARGET: /var/www/stechlin-cms/
           VERBOSE: true
           USER: root
           PORT: 22
