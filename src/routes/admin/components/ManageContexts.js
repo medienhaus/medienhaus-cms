@@ -211,6 +211,7 @@ const ManageContexts = (props) => {
     console.log('yes i was fired')
     createStructurObject()
     // createD3Json()
+    // eslint-disable-next-line
   }, [])
 
   return (
