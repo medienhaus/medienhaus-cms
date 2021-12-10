@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { BrowserRouter as Router, Route, Switch, Redirect, useLocation } from 'react-router-dom'
 
 import './assets/css/index.css'
@@ -16,34 +16,18 @@ import Moderate from './routes/moderate'
 import Support from './routes/support'
 import Feedback from './routes/feedback'
 import Credits from './routes/credits'
-import Terms from './routes/terms'
 import Account from './routes/account'
 import Request from './routes/request'
 import Preview from './routes/preview'
 
 import { AuthProvider, useAuth } from './Auth'
 import PropTypes from 'prop-types'
-import { makeRequest } from './Backend'
 function PrivateRoute ({ children, ...rest }) {
   const auth = useAuth()
   const location = useLocation()
 
-  const [hasAcceptedTerms, setHasAcceptedTerms] = useState(null)
-
-  useEffect(() => {
-    // On development environments we will just always assume that the user has accepted T&C
-    if (process.env.NODE_ENV === 'development') {
-      setHasAcceptedTerms(true)
-      return
-    }
-
-    makeRequest('rundgang/terms', null, 'GET').then(({ hasAcceptedTerms }) => {
-      setHasAcceptedTerms(hasAcceptedTerms)
-    })
-  }, [])
-
   // Still loading information...
-  if (auth.user === null || hasAcceptedTerms === null) {
+  if (auth.user === null) {
     return <Loading />
   }
 
@@ -53,18 +37,6 @@ function PrivateRoute ({ children, ...rest }) {
       <Redirect
         to={{
           pathname: '/login',
-          state: { from: location }
-        }}
-      />
-    )
-  }
-
-  // Consent not given to terms
-  if (!hasAcceptedTerms && location.pathname !== '/support') {
-    return (
-      <Redirect
-        to={{
-          pathname: '/terms',
           state: { from: location }
         }}
       />
@@ -95,14 +67,13 @@ function App () {
   return (
     <>
       <AuthProvider>
-        <Router basename="/rundgang">
+        <Router basename={process.env.REACT_APP_BASENAME}>
           <ScrollToTop />
           <Nav />
           <main>
             <Switch>
               <Route path="/" exact component={Landing} />
               <Route path="/login" component={Login} />
-              <Route path="/terms" component={Terms} />
               <PrivateRoute path="/account" component={Account} />
               <PrivateRoute path="/admin" component={Admin} />
               <PrivateRoute path="/boilerplate" component={Boilerplate} />

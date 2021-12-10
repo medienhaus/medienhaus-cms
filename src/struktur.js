@@ -2,39 +2,20 @@
 const struktur = {
   "!TCqCDYYsBUxmjWOZWV:content.udk-berlin.de": {
     "id": "!TCqCDYYsBUxmjWOZWV:content.udk-berlin.de",
-    "name": "sose2021",
+    "name": "Rundgang 2021",
     "type": "semester",
     "children": {
+      "!AOByVTyaIrYYkGtYJg:content.udk-berlin.de": {
+        "id": "!AOByVTyaIrYYkGtYJg:content.udk-berlin.de",
+        "name": "UdK:Shop",
+        "type": "faculty",
+        "children": {}
+      },
       "!CZSVqFjoKkBzzcbwVy:content.udk-berlin.de": {
         "id": "!CZSVqFjoKkBzzcbwVy:content.udk-berlin.de",
         "name": "Fakultät der Bildenden Kunst",
         "type": "faculty",
         "children": {
-          "!GyluFazrNTQrgSUBMd:content.udk-berlin.de": {
-            "id": "!GyluFazrNTQrgSUBMd:content.udk-berlin.de",
-            "name": "Institut für Kunstdidaktik und Ästhetische Bildung",
-            "type": "institute",
-            "children": {}
-          },
-          "!VXRmuJWNzoPMVvkeJZ:content.udk-berlin.de": {
-            "id": "!VXRmuJWNzoPMVvkeJZ:content.udk-berlin.de",
-            "name": "Institut für Kunst im Kontext",
-            "type": "institute",
-            "children": {
-              "!XTCQWCFEPsbdsFvwXR:content.udk-berlin.de": {
-                "id": "!XTCQWCFEPsbdsFvwXR:content.udk-berlin.de",
-                "name": "Art in Context",
-                "type": "degree program",
-                "children": {}
-              }
-            }
-          },
-          "!axwsBJIlWeoMDpaZXV:content.udk-berlin.de": {
-            "id": "!axwsBJIlWeoMDpaZXV:content.udk-berlin.de",
-            "name": "Institut für Kunstwissenschaft und Ästhetik",
-            "type": "institute",
-            "children": {}
-          },
           "!cDMEUIzoSGoqjzOZXP:content.udk-berlin.de": {
             "id": "!cDMEUIzoSGoqjzOZXP:content.udk-berlin.de",
             "name": "Institut für Kunst",
@@ -45,27 +26,117 @@ const struktur = {
                 "name": "Bildende Kunst",
                 "type": "degree program",
                 "children": {
-                  "!AdLVtLXzRryjvpXoBJ:content.udk-berlin.de": {
-                    "id": "!AdLVtLXzRryjvpXoBJ:content.udk-berlin.de",
-                    "name": "Werkstattlehre: Radierung / Freie Grafik / Fortgeschrittene",
+                  "!TCvmBcehYzhroojokv:content.udk-berlin.de": {
+                    "id": "!TCvmBcehYzhroojokv:content.udk-berlin.de",
+                    "name": "Class for Time Based Media and Performance",
                     "type": "course",
                     "children": {}
                   },
-                  "!BSqyUqIIRXbcgcbPOO:content.udk-berlin.de": {
-                    "id": "!BSqyUqIIRXbcgcbPOO:content.udk-berlin.de",
-                    "name": "Installation",
+                  "!gKKllwcjgyWvutOrzV:content.udk-berlin.de": {
+                    "id": "!gKKllwcjgyWvutOrzV:content.udk-berlin.de",
+                    "name": "„Sprechen über Kunst. Konzepte für Bildung und Vermittlung von Biennalen und musealen Sammlungen“",
                     "type": "course",
                     "children": {}
                   },
-                  "!BfUjoHEuaJUVxmcdhW:content.udk-berlin.de": {
-                    "id": "!BfUjoHEuaJUVxmcdhW:content.udk-berlin.de",
-                    "name": "Erweitertes Bewegtbild / Video / 2D und 3D Animation - individuelle Projektbetreuung",
+                  "!RprcCKUOPKMLyNdlFO:content.udk-berlin.de": {
+                    "id": "!RprcCKUOPKMLyNdlFO:content.udk-berlin.de",
+                    "name": "Analog/Farbe",
                     "type": "course",
                     "children": {}
                   },
-                  "!DDfPTGozKrPgzgSPtv:content.udk-berlin.de": {
-                    "id": "!DDfPTGozKrPgzgSPtv:content.udk-berlin.de",
-                    "name": "Introduction to Art History and aesthetics",
+                  "!rXstptUlOMdulnZrys:content.udk-berlin.de": {
+                    "id": "!rXstptUlOMdulnZrys:content.udk-berlin.de",
+                    "name": "Analog SW/Fotografie und Labor",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!hZyOfZsfmYMNZYFcIF:content.udk-berlin.de": {
+                    "id": "!hZyOfZsfmYMNZYFcIF:content.udk-berlin.de",
+                    "name": "Andy Warhols queere Filmfabrik",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!dueBcsJvztfXmpBtvh:content.udk-berlin.de": {
+                    "id": "!dueBcsJvztfXmpBtvh:content.udk-berlin.de",
+                    "name": "Arbeitsgespräche / Einzelkonsultationen",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!PkDOygZPleUJDVdnqQ:content.udk-berlin.de": {
+                    "id": "!PkDOygZPleUJDVdnqQ:content.udk-berlin.de",
+                    "name": "Before Photography. Wie ein Medium entsteht",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!wQNPiBRVOUHfxSDbbg:content.udk-berlin.de": {
+                    "id": "!wQNPiBRVOUHfxSDbbg:content.udk-berlin.de",
+                    "name": "Begleitung der künstlerischen Praxis in Einzel- und Gruppenbesprechungen (Klasse Karsten Konrad)",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!kzpEhFoMQBrSwGTyRe:content.udk-berlin.de": {
+                    "id": "!kzpEhFoMQBrSwGTyRe:content.udk-berlin.de",
+                    "name": "Bildende Kunst",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!wmwIRpTJtioFVCSith:content.udk-berlin.de": {
+                    "id": "!wmwIRpTJtioFVCSith:content.udk-berlin.de",
+                    "name": "Bildhauerei",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!lZADQXDleOZBCsSmik:content.udk-berlin.de": {
+                    "id": "!lZADQXDleOZBCsSmik:content.udk-berlin.de",
+                    "name": "Bildhauerei 1 und 2",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!ywbZexhvAhDpKHYOyq:content.udk-berlin.de": {
+                    "id": "!ywbZexhvAhDpKHYOyq:content.udk-berlin.de",
+                    "name": "Bucheinbandtechniken",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!jhOxbFVpcSJPoixaHz:content.udk-berlin.de": {
+                    "id": "!jhOxbFVpcSJPoixaHz:content.udk-berlin.de",
+                    "name": "Colorgroßfoto-Analog I",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!xjzUtDlINjAYbnRLjS:content.udk-berlin.de": {
+                    "id": "!xjzUtDlINjAYbnRLjS:content.udk-berlin.de",
+                    "name": "Colorgroßfoto-Analog II",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!cKFFuJMPgisNxsjYjn:content.udk-berlin.de": {
+                    "id": "!cKFFuJMPgisNxsjYjn:content.udk-berlin.de",
+                    "name": "Contemporary Art and Photography / Zeitgenössische Kunst und Fotografie",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!aEJcCJzmOXuhRDIZdI:content.udk-berlin.de": {
+                    "id": "!aEJcCJzmOXuhRDIZdI:content.udk-berlin.de",
+                    "name": "Die Idee der Kindheit (Walter Benjamin)",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!bIeyiwSyRYQzQLeavx:content.udk-berlin.de": {
+                    "id": "!bIeyiwSyRYQzQLeavx:content.udk-berlin.de",
+                    "name": "Die Zukunft der großen Geschichten",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!ZMYyQWYyRykRVvbCNP:content.udk-berlin.de": {
+                    "id": "!ZMYyQWYyRykRVvbCNP:content.udk-berlin.de",
+                    "name": "Digitalfotolabor - Digitalgroßfoto",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!tPXKEWdPiACvhudeOZ:content.udk-berlin.de": {
+                    "id": "!tPXKEWdPiACvhudeOZ:content.udk-berlin.de",
+                    "name": "Drucken im Großformat – Hochdruck-Tiefdruck – experimentelle Druckgrafk",
                     "type": "course",
                     "children": {}
                   },
@@ -75,57 +146,33 @@ const struktur = {
                     "type": "course",
                     "children": {}
                   },
-                  "!DhZmUkxnoszSKiqxXY:content.udk-berlin.de": {
-                    "id": "!DhZmUkxnoszSKiqxXY:content.udk-berlin.de",
-                    "name": "Performative Präsentationen: Die eigene künstlerische Arbeit im medialen Raum",
+                  "!MzvpxFUSmMdHLEgJNW:content.udk-berlin.de": {
+                    "id": "!MzvpxFUSmMdHLEgJNW:content.udk-berlin.de",
+                    "name": "Einführung in die Kunstwissenschaft und Ästhetik",
                     "type": "course",
                     "children": {}
                   },
-                  "!DwSyDVXmlXBulpygdw:content.udk-berlin.de": {
-                    "id": "!DwSyDVXmlXBulpygdw:content.udk-berlin.de",
-                    "name": "Zeitgenössische Malerei",
+                  "!gUpmDWghHzTlheabrD:content.udk-berlin.de": {
+                    "id": "!gUpmDWghHzTlheabrD:content.udk-berlin.de",
+                    "name": "Einführung in die Kunstwissenschaft und Ästhetik",
                     "type": "course",
                     "children": {}
                   },
-                  "!EupVptfujEanKDMtUx:content.udk-berlin.de": {
-                    "id": "!EupVptfujEanKDMtUx:content.udk-berlin.de",
-                    "name": "Siebdruck: Anfänger - Grundlegende Kenntnisse in Theorie und Praxis",
+                  "!SUXdHvZRJQjHrvvyzW:content.udk-berlin.de": {
+                    "id": "!SUXdHvZRJQjHrvvyzW:content.udk-berlin.de",
+                    "name": "Einführung in die Ölmalerei - ohne gesundheitsgefährdende Lösungsmittel (Online-Kurs)",
                     "type": "course",
                     "children": {}
                   },
-                  "!FUxEXfndPGPhtDffys:content.udk-berlin.de": {
-                    "id": "!FUxEXfndPGPhtDffys:content.udk-berlin.de",
-                    "name": "Fremde Wesen",
+                  "!mXQcsmageGHfwUjZoB:content.udk-berlin.de": {
+                    "id": "!mXQcsmageGHfwUjZoB:content.udk-berlin.de",
+                    "name": "Einführung in textile Werkverfahren",
                     "type": "course",
                     "children": {}
                   },
-                  "!HyJwwXOcuRdRlJoXNU:content.udk-berlin.de": {
-                    "id": "!HyJwwXOcuRdRlJoXNU:content.udk-berlin.de",
-                    "name": "Zeitlichkeit in der zeitgenössischen Kunst. Konzepte, Verfahren, Stationen der Kunst seit den 60er Jahren.",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!ICiVOKOSafWMrwCnqZ:content.udk-berlin.de": {
-                    "id": "!ICiVOKOSafWMrwCnqZ:content.udk-berlin.de",
-                    "name": "Individuelle Projektbetreuung für die Steinbildhauerei",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!IDwDRmmOkHsxCvijvU:content.udk-berlin.de": {
-                    "id": "!IDwDRmmOkHsxCvijvU:content.udk-berlin.de",
-                    "name": "Video 1 und 2",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!IillycvZnbKQbBcPWF:content.udk-berlin.de": {
-                    "id": "!IillycvZnbKQbBcPWF:content.udk-berlin.de",
-                    "name": "Fotografie / Individuelle Projektbetreuung",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!JHYSBsuwgkBuFrZNxb:content.udk-berlin.de": {
-                    "id": "!JHYSBsuwgkBuFrZNxb:content.udk-berlin.de",
-                    "name": "Malerei",
+                  "!twnXMoysEcHnITDGtL:content.udk-berlin.de": {
+                    "id": "!twnXMoysEcHnITDGtL:content.udk-berlin.de",
+                    "name": "Einführungskurs, Individuelle Beratung und Betreuung von künstlerischen Projekten",
                     "type": "course",
                     "children": {}
                   },
@@ -141,69 +188,21 @@ const struktur = {
                     "type": "course",
                     "children": {}
                   },
-                  "!MUupJzwbbCHwThfymg:content.udk-berlin.de": {
-                    "id": "!MUupJzwbbCHwThfymg:content.udk-berlin.de",
-                    "name": "Sacred, Secular, Sensual and Sublime: Manuscript Painting in India between 15th to 18th Centuries",
+                  "!BfUjoHEuaJUVxmcdhW:content.udk-berlin.de": {
+                    "id": "!BfUjoHEuaJUVxmcdhW:content.udk-berlin.de",
+                    "name": "Erweitertes Bewegtbild / Video / 2D und 3D Animation - individuelle Projektbetreuung",
                     "type": "course",
                     "children": {}
                   },
-                  "!MecsQrOmFYmMErPWyp:content.udk-berlin.de": {
-                    "id": "!MecsQrOmFYmMErPWyp:content.udk-berlin.de",
-                    "name": "Werkstattlehre: Radierung Freie Grafik, Grundkurs für Anfänger",
+                  "!bNpubEWrKXwdpHRduD:content.udk-berlin.de": {
+                    "id": "!bNpubEWrKXwdpHRduD:content.udk-berlin.de",
+                    "name": "Erzählerische, fiktionale Bildkonzepte",
                     "type": "course",
                     "children": {}
                   },
-                  "!MzvpxFUSmMdHLEgJNW:content.udk-berlin.de": {
-                    "id": "!MzvpxFUSmMdHLEgJNW:content.udk-berlin.de",
-                    "name": "Einführung in die Kunstwissenschaft und Ästhetik",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!NfblQubkPdyZnUUmEa:content.udk-berlin.de": {
-                    "id": "!NfblQubkPdyZnUUmEa:content.udk-berlin.de",
-                    "name": "Technik und Theorie der Wandmalerei",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!NmzekIonCDyKdEJRot:content.udk-berlin.de": {
-                    "id": "!NmzekIonCDyKdEJRot:content.udk-berlin.de",
-                    "name": "Malerei - Besto Berlino",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!NwpzUDhtBypMZgHzIM:content.udk-berlin.de": {
-                    "id": "!NwpzUDhtBypMZgHzIM:content.udk-berlin.de",
-                    "name": "Projektbetreuung/ Prüfungsvorbereitungen (Malerei)",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!OZCUWIqeposgQrssjX:content.udk-berlin.de": {
-                    "id": "!OZCUWIqeposgQrssjX:content.udk-berlin.de",
-                    "name": "Grundlagen Metall - individuelle Beratung und Betreuung",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!OwrbxrwajXGoClYlGr:content.udk-berlin.de": {
-                    "id": "!OwrbxrwajXGoClYlGr:content.udk-berlin.de",
-                    "name": "Zeichnung – individuelle Begleitung und Aufgabenstellung",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!PNSxsXTAPUZhnCoHez:content.udk-berlin.de": {
-                    "id": "!PNSxsXTAPUZhnCoHez:content.udk-berlin.de",
-                    "name": "Raum und Objektzeichnen – Methoden, Material, Experiment",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!PkDOygZPleUJDVdnqQ:content.udk-berlin.de": {
-                    "id": "!PkDOygZPleUJDVdnqQ:content.udk-berlin.de",
-                    "name": "Before Photography. Wie ein Medium entsteht",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!RRgZnUuZiMoLWwKUEk:content.udk-berlin.de": {
-                    "id": "!RRgZnUuZiMoLWwKUEk:content.udk-berlin.de",
-                    "name": "Wer hat Angst vor der Klitoris? Formen des weiblichen Genießens von 1968 bis heute",
+                  "!deMLonmXSkEPogOujp:content.udk-berlin.de": {
+                    "id": "!deMLonmXSkEPogOujp:content.udk-berlin.de",
+                    "name": "Farb- und Materialtechnik",
                     "type": "course",
                     "children": {}
                   },
@@ -213,39 +212,63 @@ const struktur = {
                     "type": "course",
                     "children": {}
                   },
-                  "!RTShPKoYLLYniPJcBD:content.udk-berlin.de": {
-                    "id": "!RTShPKoYLLYniPJcBD:content.udk-berlin.de",
-                    "name": "Things are generally different behind closed doors Praxis der Kunst im öffentlichen Raum / Kunst am Bau",
+                  "!IillycvZnbKQbBcPWF:content.udk-berlin.de": {
+                    "id": "!IillycvZnbKQbBcPWF:content.udk-berlin.de",
+                    "name": "Fotografie / Individuelle Projektbetreuung",
                     "type": "course",
                     "children": {}
                   },
-                  "!RprcCKUOPKMLyNdlFO:content.udk-berlin.de": {
-                    "id": "!RprcCKUOPKMLyNdlFO:content.udk-berlin.de",
-                    "name": "Analog/Farbe",
+                  "!mTpXfTCUSfvAjVGqOy:content.udk-berlin.de": {
+                    "id": "!mTpXfTCUSfvAjVGqOy:content.udk-berlin.de",
+                    "name": "Fotolabor/ freies Arbeiten für Studierende mit Grundkenntnissen",
                     "type": "course",
                     "children": {}
                   },
-                  "!RwqadGnFnHmQkTbFbj:content.udk-berlin.de": {
-                    "id": "!RwqadGnFnHmQkTbFbj:content.udk-berlin.de",
-                    "name": "What about our ´Invisible´ past? (kritische Fragen zur UdK Vergangenheit im Rahmen des Olympia Geländes)",
+                  "!OZCUWIqeposgQrssjX:content.udk-berlin.de": {
+                    "id": "!OZCUWIqeposgQrssjX:content.udk-berlin.de",
+                    "name": "Grundlagen Metall - individuelle Beratung und Betreuung",
                     "type": "course",
                     "children": {}
                   },
-                  "!SUXdHvZRJQjHrvvyzW:content.udk-berlin.de": {
-                    "id": "!SUXdHvZRJQjHrvvyzW:content.udk-berlin.de",
-                    "name": "Einführung in die Ölmalerei - ohne gesundheitsgefährdende Lösungsmittel (Online-Kurs)",
+                  "!wUQhOSgSbDgaKBauld:content.udk-berlin.de": {
+                    "id": "!wUQhOSgSbDgaKBauld:content.udk-berlin.de",
+                    "name": "Malerei",
                     "type": "course",
                     "children": {}
                   },
-                  "!TCvmBcehYzhroojokv:content.udk-berlin.de": {
-                    "id": "!TCvmBcehYzhroojokv:content.udk-berlin.de",
-                    "name": "Class for Time Based Media and Performance",
+                  "!YlnfMmgttFJXMfGMoS:content.udk-berlin.de": {
+                    "id": "!YlnfMmgttFJXMfGMoS:content.udk-berlin.de",
+                    "name": "Metallpraxis - individuelle Beratung und Betreuung von künstlerischen Projekten",
                     "type": "course",
                     "children": {}
                   },
-                  "!TOjpZLjXtmlyNlEdlw:content.udk-berlin.de": {
-                    "id": "!TOjpZLjXtmlyNlEdlw:content.udk-berlin.de",
-                    "name": "Images in Motion",
+                  "!nhxzZQOUYijYWOVbZk:content.udk-berlin.de": {
+                    "id": "!nhxzZQOUYijYWOVbZk:content.udk-berlin.de",
+                    "name": "Über den gezielten Kontrollverlust bei Material-, Form- und Gusstechniken Kunstwissenschaftliches und praktisches Seminar",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!qxjbYYyZlDnlBqBUxK:content.udk-berlin.de": {
+                    "id": "!qxjbYYyZlDnlBqBUxK:content.udk-berlin.de",
+                    "name": "Vom Konzept zur Aufführung",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!RRgZnUuZiMoLWwKUEk:content.udk-berlin.de": {
+                    "id": "!RRgZnUuZiMoLWwKUEk:content.udk-berlin.de",
+                    "name": "Wer hat Angst vor der Klitoris? Formen des weiblichen Genießens von 1968 bis heute",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!ljyeaqvJvWmjxkSkGv:content.udk-berlin.de": {
+                    "id": "!ljyeaqvJvWmjxkSkGv:content.udk-berlin.de",
+                    "name": "Freies Arbeiten für Fortgeschrittene",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!FUxEXfndPGPhtDffys:content.udk-berlin.de": {
+                    "id": "!FUxEXfndPGPhtDffys:content.udk-berlin.de",
+                    "name": "Fremde Wesen",
                     "type": "course",
                     "children": {}
                   },
@@ -261,243 +284,9 @@ const struktur = {
                     "type": "course",
                     "children": {}
                   },
-                  "!UokNYjwgYVoEiFeglE:content.udk-berlin.de": {
-                    "id": "!UokNYjwgYVoEiFeglE:content.udk-berlin.de",
-                    "name": "Gilles Deleuze, Differenz und Wiederholung",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!UyQSEqpYPGOpDGPtxd:content.udk-berlin.de": {
-                    "id": "!UyQSEqpYPGOpDGPtxd:content.udk-berlin.de",
-                    "name": "Online-Werkstatt Maltechnik",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!VkXvhTqygnxuAmYmyG:content.udk-berlin.de": {
-                    "id": "!VkXvhTqygnxuAmYmyG:content.udk-berlin.de",
-                    "name": "Transdisziplinare Malerei",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!WNIDPTaqYoTEtqkZSC:content.udk-berlin.de": {
-                    "id": "!WNIDPTaqYoTEtqkZSC:content.udk-berlin.de",
-                    "name": "Grundlagen der Steinbearbeitung für die Bildhauerei",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!WOkyzmEGSltHVEVoXI:content.udk-berlin.de": {
-                    "id": "!WOkyzmEGSltHVEVoXI:content.udk-berlin.de",
-                    "name": "Objektbezogenes Arbeiten",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!WTcqojRUTvsMIqLOyT:content.udk-berlin.de": {
-                    "id": "!WTcqojRUTvsMIqLOyT:content.udk-berlin.de",
-                    "name": "Seminar Musiktheorie: Das universale Material? Modales Komponieren in Neuer Musik, Jazz und Rock/Pop",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!XrLvznZuTPzUDTDseB:content.udk-berlin.de": {
-                    "id": "!XrLvznZuTPzUDTDseB:content.udk-berlin.de",
-                    "name": "Zeichnung und Kritische Digitalität",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!YGOssoJqUUjwuxQUgC:content.udk-berlin.de": {
-                    "id": "!YGOssoJqUUjwuxQUgC:content.udk-berlin.de",
-                    "name": "Grundlehre: Großes Plenum",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!YgMUaoegQOcmkjzlYc:content.udk-berlin.de": {
-                    "id": "!YgMUaoegQOcmkjzlYc:content.udk-berlin.de",
-                    "name": "Malerei, Freie Grafik (Fachklasse)",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!YlnfMmgttFJXMfGMoS:content.udk-berlin.de": {
-                    "id": "!YlnfMmgttFJXMfGMoS:content.udk-berlin.de",
-                    "name": "Metallpraxis - individuelle Beratung und Betreuung von künstlerischen Projekten",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!ZMYyQWYyRykRVvbCNP:content.udk-berlin.de": {
-                    "id": "!ZMYyQWYyRykRVvbCNP:content.udk-berlin.de",
-                    "name": "Digitalfotolabor - Digitalgroßfoto",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!aApckRMzdGvWSeFtUJ:content.udk-berlin.de": {
-                    "id": "!aApckRMzdGvWSeFtUJ:content.udk-berlin.de",
-                    "name": "Projektbetreuung Foto- und Bildbearbeitung / Druck",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!aEJcCJzmOXuhRDIZdI:content.udk-berlin.de": {
-                    "id": "!aEJcCJzmOXuhRDIZdI:content.udk-berlin.de",
-                    "name": "Die Idee der Kindheit (Walter Benjamin)",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!ampXfDbRyWESXfnogq:content.udk-berlin.de": {
-                    "id": "!ampXfDbRyWESXfnogq:content.udk-berlin.de",
-                    "name": "objekt-bild-hauerei",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!ayIvXUUILDQjacoDRu:content.udk-berlin.de": {
-                    "id": "!ayIvXUUILDQjacoDRu:content.udk-berlin.de",
-                    "name": "Raum Umraum",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!bIeyiwSyRYQzQLeavx:content.udk-berlin.de": {
-                    "id": "!bIeyiwSyRYQzQLeavx:content.udk-berlin.de",
-                    "name": "Die Zukunft der großen Geschichten",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!bNpubEWrKXwdpHRduD:content.udk-berlin.de": {
-                    "id": "!bNpubEWrKXwdpHRduD:content.udk-berlin.de",
-                    "name": "Erzählerische, fiktionale Bildkonzepte",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!bfJZGUoTHgvxWCzJIk:content.udk-berlin.de": {
-                    "id": "!bfJZGUoTHgvxWCzJIk:content.udk-berlin.de",
-                    "name": "Siebdruck: Einführung - Grundlegende Kenntnisse in Theorie und Praxis",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!cKFFuJMPgisNxsjYjn:content.udk-berlin.de": {
-                    "id": "!cKFFuJMPgisNxsjYjn:content.udk-berlin.de",
-                    "name": "Contemporary Art and Photography / Zeitgenössische Kunst und Fotografie",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!dDRneodMoVZINSLzQA:content.udk-berlin.de": {
-                    "id": "!dDRneodMoVZINSLzQA:content.udk-berlin.de",
-                    "name": "Material-, Form- und Gusstechniken - Grundkurs",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!deMLonmXSkEPogOujp:content.udk-berlin.de": {
-                    "id": "!deMLonmXSkEPogOujp:content.udk-berlin.de",
-                    "name": "Farb- und Materialtechnik",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!dueBcsJvztfXmpBtvh:content.udk-berlin.de": {
-                    "id": "!dueBcsJvztfXmpBtvh:content.udk-berlin.de",
-                    "name": "Arbeitsgespräche / Einzelkonsultationen",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!dyAYbIrvWTStbJXoOI:content.udk-berlin.de": {
-                    "id": "!dyAYbIrvWTStbJXoOI:content.udk-berlin.de",
-                    "name": "Offene Werkstatt - Formen und Gießen",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!fQfdGUTuAyUWiFOADh:content.udk-berlin.de": {
-                    "id": "!fQfdGUTuAyUWiFOADh:content.udk-berlin.de",
-                    "name": "Malerei und Zeichnung",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!fbIxsrxCilKBPHLLFo:content.udk-berlin.de": {
-                    "id": "!fbIxsrxCilKBPHLLFo:content.udk-berlin.de",
-                    "name": "material life",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!fbzRQxxCcozOEKXHaU:content.udk-berlin.de": {
-                    "id": "!fbzRQxxCcozOEKXHaU:content.udk-berlin.de",
-                    "name": "Photoshop für Anfänger",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!fzmIkEYisOJbjKUvkA:content.udk-berlin.de": {
-                    "id": "!fzmIkEYisOJbjKUvkA:content.udk-berlin.de",
-                    "name": "Kunst und Biografie—Kunst als Biografie",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!gJGpcgIcqKfFKHMciS:content.udk-berlin.de": {
-                    "id": "!gJGpcgIcqKfFKHMciS:content.udk-berlin.de",
-                    "name": "Tiefdruck- experimentelle Verfahren",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!gKKllwcjgyWvutOrzV:content.udk-berlin.de": {
-                    "id": "!gKKllwcjgyWvutOrzV:content.udk-berlin.de",
-                    "name": "„Sprechen über Kunst. Konzepte für Bildung und Vermittlung von Biennalen und musealen Sammlungen“",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!gUpmDWghHzTlheabrD:content.udk-berlin.de": {
-                    "id": "!gUpmDWghHzTlheabrD:content.udk-berlin.de",
-                    "name": "Einführung in die Kunstwissenschaft und Ästhetik",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!hZyOfZsfmYMNZYFcIF:content.udk-berlin.de": {
-                    "id": "!hZyOfZsfmYMNZYFcIF:content.udk-berlin.de",
-                    "name": "Andy Warhols queere Filmfabrik",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!jeWNefDIceXCUTdLBo:content.udk-berlin.de": {
-                    "id": "!jeWNefDIceXCUTdLBo:content.udk-berlin.de",
-                    "name": "Offene Werkstatt Textil",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!jfrMyshmjFgjmDtodC:content.udk-berlin.de": {
-                    "id": "!jfrMyshmjFgjmDtodC:content.udk-berlin.de",
-                    "name": "Was heißt: Denken am Ende der Welt?",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!jhOxbFVpcSJPoixaHz:content.udk-berlin.de": {
-                    "id": "!jhOxbFVpcSJPoixaHz:content.udk-berlin.de",
-                    "name": "Colorgroßfoto-Analog I",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!kzpEhFoMQBrSwGTyRe:content.udk-berlin.de": {
-                    "id": "!kzpEhFoMQBrSwGTyRe:content.udk-berlin.de",
-                    "name": "Bildende Kunst",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!lGMLLIeiLmSYaUTlAQ:content.udk-berlin.de": {
-                    "id": "!lGMLLIeiLmSYaUTlAQ:content.udk-berlin.de",
-                    "name": "Holzpraxis II",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!lZADQXDleOZBCsSmik:content.udk-berlin.de": {
-                    "id": "!lZADQXDleOZBCsSmik:content.udk-berlin.de",
-                    "name": "Bildhauerei 1 und 2",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!ljyeaqvJvWmjxkSkGv:content.udk-berlin.de": {
-                    "id": "!ljyeaqvJvWmjxkSkGv:content.udk-berlin.de",
-                    "name": "Freies Arbeiten für Fortgeschrittene",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!mTpXfTCUSfvAjVGqOy:content.udk-berlin.de": {
-                    "id": "!mTpXfTCUSfvAjVGqOy:content.udk-berlin.de",
-                    "name": "Fotolabor/ freies Arbeiten für Studierende mit Grundkenntnissen",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!mXQcsmageGHfwUjZoB:content.udk-berlin.de": {
-                    "id": "!mXQcsmageGHfwUjZoB:content.udk-berlin.de",
-                    "name": "Einführung in textile Werkverfahren",
+                  "!BSqyUqIIRXbcgcbPOO:content.udk-berlin.de": {
+                    "id": "!BSqyUqIIRXbcgcbPOO:content.udk-berlin.de",
+                    "name": "Installation",
                     "type": "course",
                     "children": {}
                   },
@@ -507,63 +296,21 @@ const struktur = {
                     "type": "course",
                     "children": {}
                   },
-                  "!nWioJDBYWMcjuwOFsw:content.udk-berlin.de": {
-                    "id": "!nWioJDBYWMcjuwOFsw:content.udk-berlin.de",
-                    "name": "Working with sound - from recording to presentation (english)",
+                  "!dDRneodMoVZINSLzQA:content.udk-berlin.de": {
+                    "id": "!dDRneodMoVZINSLzQA:content.udk-berlin.de",
+                    "name": "Material-, Form- und Gusstechniken - Grundkurs",
                     "type": "course",
                     "children": {}
                   },
-                  "!nhxzZQOUYijYWOVbZk:content.udk-berlin.de": {
-                    "id": "!nhxzZQOUYijYWOVbZk:content.udk-berlin.de",
-                    "name": "Über den gezielten Kontrollverlust bei Material-, Form- und Gusstechniken Kunstwissenschaftliches und praktisches Seminar",
+                  "!ampXfDbRyWESXfnogq:content.udk-berlin.de": {
+                    "id": "!ampXfDbRyWESXfnogq:content.udk-berlin.de",
+                    "name": "objekt-bild-hauerei",
                     "type": "course",
                     "children": {}
                   },
-                  "!ojxRLdbtWgqVWjubvP:content.udk-berlin.de": {
-                    "id": "!ojxRLdbtWgqVWjubvP:content.udk-berlin.de",
-                    "name": "Offene Sprechstunde - für Studierende der Grundlehre",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!pGxAvjHTsSmwoVEgNq:content.udk-berlin.de": {
-                    "id": "!pGxAvjHTsSmwoVEgNq:content.udk-berlin.de",
-                    "name": "Grundlagen zu Film und Video (Kamera, Ton, Licht, Postproduktion)",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!peNLkbjXRJLftTjzOB:content.udk-berlin.de": {
-                    "id": "!peNLkbjXRJLftTjzOB:content.udk-berlin.de",
-                    "name": "Kunstgeschichte im Überblick II: 1750 bis Gegenwart",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!pnOppXfSqjyHIMNAyY:content.udk-berlin.de": {
-                    "id": "!pnOppXfSqjyHIMNAyY:content.udk-berlin.de",
-                    "name": "From Concept To Performance",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!qGpMVCbNrKsMSjVcPQ:content.udk-berlin.de": {
-                    "id": "!qGpMVCbNrKsMSjVcPQ:content.udk-berlin.de",
-                    "name": "multimediale Skulptur und Installation",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!qJhUrHCAtUBJeNVAAi:content.udk-berlin.de": {
-                    "id": "!qJhUrHCAtUBJeNVAAi:content.udk-berlin.de",
-                    "name": "We’ll work on the other side of time",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!qxjbYYyZlDnlBqBUxK:content.udk-berlin.de": {
-                    "id": "!qxjbYYyZlDnlBqBUxK:content.udk-berlin.de",
-                    "name": "Vom Konzept zur Aufführung",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!rXstptUlOMdulnZrys:content.udk-berlin.de": {
-                    "id": "!rXstptUlOMdulnZrys:content.udk-berlin.de",
-                    "name": "Analog SW/Fotografie und Labor",
+                  "!DhZmUkxnoszSKiqxXY:content.udk-berlin.de": {
+                    "id": "!DhZmUkxnoszSKiqxXY:content.udk-berlin.de",
+                    "name": "Performative Präsentationen: Die eigene künstlerische Arbeit im medialen Raum",
                     "type": "course",
                     "children": {}
                   },
@@ -573,51 +320,51 @@ const struktur = {
                     "type": "course",
                     "children": {}
                   },
-                  "!tPXKEWdPiACvhudeOZ:content.udk-berlin.de": {
-                    "id": "!tPXKEWdPiACvhudeOZ:content.udk-berlin.de",
-                    "name": "Drucken im Großformat – Hochdruck-Tiefdruck – experimentelle Druckgrafk",
+                  "!EupVptfujEanKDMtUx:content.udk-berlin.de": {
+                    "id": "!EupVptfujEanKDMtUx:content.udk-berlin.de",
+                    "name": "Siebdruck: Anfänger - Grundlegende Kenntnisse in Theorie und Praxis",
                     "type": "course",
                     "children": {}
                   },
-                  "!twnXMoysEcHnITDGtL:content.udk-berlin.de": {
-                    "id": "!twnXMoysEcHnITDGtL:content.udk-berlin.de",
-                    "name": "Einführungskurs, Individuelle Beratung und Betreuung von künstlerischen Projekten",
+                  "!gJGpcgIcqKfFKHMciS:content.udk-berlin.de": {
+                    "id": "!gJGpcgIcqKfFKHMciS:content.udk-berlin.de",
+                    "name": "Tiefdruck- experimentelle Verfahren",
                     "type": "course",
                     "children": {}
                   },
-                  "!vBjZXKPBnAbzgVnOVv:content.udk-berlin.de": {
-                    "id": "!vBjZXKPBnAbzgVnOVv:content.udk-berlin.de",
-                    "name": "Holzschnitt - Einführung in die Vielschichtigkeit des Hochdrucks",
+                  "!jfrMyshmjFgjmDtodC:content.udk-berlin.de": {
+                    "id": "!jfrMyshmjFgjmDtodC:content.udk-berlin.de",
+                    "name": "Was heißt: Denken am Ende der Welt?",
                     "type": "course",
                     "children": {}
                   },
-                  "!vyRiriFSsflJUPAtbX:content.udk-berlin.de": {
-                    "id": "!vyRiriFSsflJUPAtbX:content.udk-berlin.de",
-                    "name": "Marcuse – Kunst und Revolution",
+                  "!AdLVtLXzRryjvpXoBJ:content.udk-berlin.de": {
+                    "id": "!AdLVtLXzRryjvpXoBJ:content.udk-berlin.de",
+                    "name": "Werkstattlehre: Radierung / Freie Grafik / Fortgeschrittene",
                     "type": "course",
                     "children": {}
                   },
-                  "!wQNPiBRVOUHfxSDbbg:content.udk-berlin.de": {
-                    "id": "!wQNPiBRVOUHfxSDbbg:content.udk-berlin.de",
-                    "name": "Begleitung der künstlerischen Praxis in Einzel- und Gruppenbesprechungen (Klasse Karsten Konrad)",
+                  "!XrLvznZuTPzUDTDseB:content.udk-berlin.de": {
+                    "id": "!XrLvznZuTPzUDTDseB:content.udk-berlin.de",
+                    "name": "Zeichnung und Kritische Digitalität",
                     "type": "course",
                     "children": {}
                   },
-                  "!wUQhOSgSbDgaKBauld:content.udk-berlin.de": {
-                    "id": "!wUQhOSgSbDgaKBauld:content.udk-berlin.de",
-                    "name": "Malerei",
+                  "!pnOppXfSqjyHIMNAyY:content.udk-berlin.de": {
+                    "id": "!pnOppXfSqjyHIMNAyY:content.udk-berlin.de",
+                    "name": "From Concept To Performance",
                     "type": "course",
                     "children": {}
                   },
-                  "!wmwIRpTJtioFVCSith:content.udk-berlin.de": {
-                    "id": "!wmwIRpTJtioFVCSith:content.udk-berlin.de",
-                    "name": "Bildhauerei",
+                  "!pGxAvjHTsSmwoVEgNq:content.udk-berlin.de": {
+                    "id": "!pGxAvjHTsSmwoVEgNq:content.udk-berlin.de",
+                    "name": "Grundlagen zu Film und Video (Kamera, Ton, Licht, Postproduktion)",
                     "type": "course",
                     "children": {}
                   },
-                  "!xDqcYIAYpzSXVBueDG:content.udk-berlin.de": {
-                    "id": "!xDqcYIAYpzSXVBueDG:content.udk-berlin.de",
-                    "name": "Grundlehre: Kleines Plenum",
+                  "!lGMLLIeiLmSYaUTlAQ:content.udk-berlin.de": {
+                    "id": "!lGMLLIeiLmSYaUTlAQ:content.udk-berlin.de",
+                    "name": "Holzpraxis II",
                     "type": "course",
                     "children": {}
                   },
@@ -627,9 +374,105 @@ const struktur = {
                     "type": "course",
                     "children": {}
                   },
-                  "!xjzUtDlINjAYbnRLjS:content.udk-berlin.de": {
-                    "id": "!xjzUtDlINjAYbnRLjS:content.udk-berlin.de",
-                    "name": "Colorgroßfoto-Analog II",
+                  "!NmzekIonCDyKdEJRot:content.udk-berlin.de": {
+                    "id": "!NmzekIonCDyKdEJRot:content.udk-berlin.de",
+                    "name": "Malerei - Besto Berlino",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!fbIxsrxCilKBPHLLFo:content.udk-berlin.de": {
+                    "id": "!fbIxsrxCilKBPHLLFo:content.udk-berlin.de",
+                    "name": "material life",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!ojxRLdbtWgqVWjubvP:content.udk-berlin.de": {
+                    "id": "!ojxRLdbtWgqVWjubvP:content.udk-berlin.de",
+                    "name": "Offene Sprechstunde - für Studierende der Grundlehre",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!ayIvXUUILDQjacoDRu:content.udk-berlin.de": {
+                    "id": "!ayIvXUUILDQjacoDRu:content.udk-berlin.de",
+                    "name": "Raum Umraum",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!bfJZGUoTHgvxWCzJIk:content.udk-berlin.de": {
+                    "id": "!bfJZGUoTHgvxWCzJIk:content.udk-berlin.de",
+                    "name": "Siebdruck: Einführung - Grundlegende Kenntnisse in Theorie und Praxis",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!VkXvhTqygnxuAmYmyG:content.udk-berlin.de": {
+                    "id": "!VkXvhTqygnxuAmYmyG:content.udk-berlin.de",
+                    "name": "Transdisziplinare Malerei",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!qJhUrHCAtUBJeNVAAi:content.udk-berlin.de": {
+                    "id": "!qJhUrHCAtUBJeNVAAi:content.udk-berlin.de",
+                    "name": "We’ll work on the other side of time",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!MecsQrOmFYmMErPWyp:content.udk-berlin.de": {
+                    "id": "!MecsQrOmFYmMErPWyp:content.udk-berlin.de",
+                    "name": "Werkstattlehre: Radierung Freie Grafik, Grundkurs für Anfänger",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!DwSyDVXmlXBulpygdw:content.udk-berlin.de": {
+                    "id": "!DwSyDVXmlXBulpygdw:content.udk-berlin.de",
+                    "name": "Zeitgenössische Malerei",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!UokNYjwgYVoEiFeglE:content.udk-berlin.de": {
+                    "id": "!UokNYjwgYVoEiFeglE:content.udk-berlin.de",
+                    "name": "Gilles Deleuze, Differenz und Wiederholung",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!ICiVOKOSafWMrwCnqZ:content.udk-berlin.de": {
+                    "id": "!ICiVOKOSafWMrwCnqZ:content.udk-berlin.de",
+                    "name": "Individuelle Projektbetreuung für die Steinbildhauerei",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!peNLkbjXRJLftTjzOB:content.udk-berlin.de": {
+                    "id": "!peNLkbjXRJLftTjzOB:content.udk-berlin.de",
+                    "name": "Kunstgeschichte im Überblick II: 1750 bis Gegenwart",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!NwpzUDhtBypMZgHzIM:content.udk-berlin.de": {
+                    "id": "!NwpzUDhtBypMZgHzIM:content.udk-berlin.de",
+                    "name": "Projektbetreuung/ Prüfungsvorbereitungen (Malerei)",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!WTcqojRUTvsMIqLOyT:content.udk-berlin.de": {
+                    "id": "!WTcqojRUTvsMIqLOyT:content.udk-berlin.de",
+                    "name": "Seminar Musiktheorie: Das universale Material? Modales Komponieren in Neuer Musik, Jazz und Rock/Pop",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!WNIDPTaqYoTEtqkZSC:content.udk-berlin.de": {
+                    "id": "!WNIDPTaqYoTEtqkZSC:content.udk-berlin.de",
+                    "name": "Grundlagen der Steinbearbeitung für die Bildhauerei",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!xDqcYIAYpzSXVBueDG:content.udk-berlin.de": {
+                    "id": "!xDqcYIAYpzSXVBueDG:content.udk-berlin.de",
+                    "name": "Grundlehre: Kleines Plenum",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!TOjpZLjXtmlyNlEdlw:content.udk-berlin.de": {
+                    "id": "!TOjpZLjXtmlyNlEdlw:content.udk-berlin.de",
+                    "name": "Images in Motion",
                     "type": "course",
                     "children": {}
                   },
@@ -639,21 +482,159 @@ const struktur = {
                     "type": "course",
                     "children": {}
                   },
-                  "!ylRQXgfSgoimxYsLpm:content.udk-berlin.de": {
-                    "id": "!ylRQXgfSgoimxYsLpm:content.udk-berlin.de",
-                    "name": "Grundlehre: Kolloquium",
+                  "!fQfdGUTuAyUWiFOADh:content.udk-berlin.de": {
+                    "id": "!fQfdGUTuAyUWiFOADh:content.udk-berlin.de",
+                    "name": "Malerei und Zeichnung",
                     "type": "course",
                     "children": {}
                   },
-                  "!ywbZexhvAhDpKHYOyq:content.udk-berlin.de": {
-                    "id": "!ywbZexhvAhDpKHYOyq:content.udk-berlin.de",
-                    "name": "Bucheinbandtechniken",
+                  "!qGpMVCbNrKsMSjVcPQ:content.udk-berlin.de": {
+                    "id": "!qGpMVCbNrKsMSjVcPQ:content.udk-berlin.de",
+                    "name": "multimediale Skulptur und Installation",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!aApckRMzdGvWSeFtUJ:content.udk-berlin.de": {
+                    "id": "!aApckRMzdGvWSeFtUJ:content.udk-berlin.de",
+                    "name": "Projektbetreuung Foto- und Bildbearbeitung / Druck",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!MUupJzwbbCHwThfymg:content.udk-berlin.de": {
+                    "id": "!MUupJzwbbCHwThfymg:content.udk-berlin.de",
+                    "name": "Sacred, Secular, Sensual and Sublime: Manuscript Painting in India between 15th to 18th Centuries",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!NfblQubkPdyZnUUmEa:content.udk-berlin.de": {
+                    "id": "!NfblQubkPdyZnUUmEa:content.udk-berlin.de",
+                    "name": "Technik und Theorie der Wandmalerei",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!IDwDRmmOkHsxCvijvU:content.udk-berlin.de": {
+                    "id": "!IDwDRmmOkHsxCvijvU:content.udk-berlin.de",
+                    "name": "Video 1 und 2",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!YGOssoJqUUjwuxQUgC:content.udk-berlin.de": {
+                    "id": "!YGOssoJqUUjwuxQUgC:content.udk-berlin.de",
+                    "name": "Grundlehre: Großes Plenum",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!fzmIkEYisOJbjKUvkA:content.udk-berlin.de": {
+                    "id": "!fzmIkEYisOJbjKUvkA:content.udk-berlin.de",
+                    "name": "Kunst und Biografie—Kunst als Biografie",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!YgMUaoegQOcmkjzlYc:content.udk-berlin.de": {
+                    "id": "!YgMUaoegQOcmkjzlYc:content.udk-berlin.de",
+                    "name": "Malerei, Freie Grafik (Fachklasse)",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!vyRiriFSsflJUPAtbX:content.udk-berlin.de": {
+                    "id": "!vyRiriFSsflJUPAtbX:content.udk-berlin.de",
+                    "name": "Marcuse – Kunst und Revolution",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!WOkyzmEGSltHVEVoXI:content.udk-berlin.de": {
+                    "id": "!WOkyzmEGSltHVEVoXI:content.udk-berlin.de",
+                    "name": "Objektbezogenes Arbeiten",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!dyAYbIrvWTStbJXoOI:content.udk-berlin.de": {
+                    "id": "!dyAYbIrvWTStbJXoOI:content.udk-berlin.de",
+                    "name": "Offene Werkstatt - Formen und Gießen",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!UyQSEqpYPGOpDGPtxd:content.udk-berlin.de": {
+                    "id": "!UyQSEqpYPGOpDGPtxd:content.udk-berlin.de",
+                    "name": "Online-Werkstatt Maltechnik",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!fbzRQxxCcozOEKXHaU:content.udk-berlin.de": {
+                    "id": "!fbzRQxxCcozOEKXHaU:content.udk-berlin.de",
+                    "name": "Photoshop für Anfänger",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!PNSxsXTAPUZhnCoHez:content.udk-berlin.de": {
+                    "id": "!PNSxsXTAPUZhnCoHez:content.udk-berlin.de",
+                    "name": "Raum und Objektzeichnen – Methoden, Material, Experiment",
                     "type": "course",
                     "children": {}
                   },
                   "!zPQlUPZkxMdpjMzoCv:content.udk-berlin.de": {
                     "id": "!zPQlUPZkxMdpjMzoCv:content.udk-berlin.de",
                     "name": "Siebdruck: Fortgeschrittene - Grundlegende Kenntnisse in Theorie und Praxis",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!RTShPKoYLLYniPJcBD:content.udk-berlin.de": {
+                    "id": "!RTShPKoYLLYniPJcBD:content.udk-berlin.de",
+                    "name": "Things are generally different behind closed doors Praxis der Kunst im öffentlichen Raum / Kunst am Bau",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!RwqadGnFnHmQkTbFbj:content.udk-berlin.de": {
+                    "id": "!RwqadGnFnHmQkTbFbj:content.udk-berlin.de",
+                    "name": "What about our ´Invisible´ past? (kritische Fragen zur UdK Vergangenheit im Rahmen des Olympia Geländes)",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!HyJwwXOcuRdRlJoXNU:content.udk-berlin.de": {
+                    "id": "!HyJwwXOcuRdRlJoXNU:content.udk-berlin.de",
+                    "name": "Zeitlichkeit in der zeitgenössischen Kunst. Konzepte, Verfahren, Stationen der Kunst seit den 60er Jahren.",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!ylRQXgfSgoimxYsLpm:content.udk-berlin.de": {
+                    "id": "!ylRQXgfSgoimxYsLpm:content.udk-berlin.de",
+                    "name": "Grundlehre: Kolloquium",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!vBjZXKPBnAbzgVnOVv:content.udk-berlin.de": {
+                    "id": "!vBjZXKPBnAbzgVnOVv:content.udk-berlin.de",
+                    "name": "Holzschnitt - Einführung in die Vielschichtigkeit des Hochdrucks",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!DDfPTGozKrPgzgSPtv:content.udk-berlin.de": {
+                    "id": "!DDfPTGozKrPgzgSPtv:content.udk-berlin.de",
+                    "name": "Introduction to Art History and aesthetics",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!OwrbxrwajXGoClYlGr:content.udk-berlin.de": {
+                    "id": "!OwrbxrwajXGoClYlGr:content.udk-berlin.de",
+                    "name": "Zeichnung – individuelle Begleitung und Aufgabenstellung",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!JHYSBsuwgkBuFrZNxb:content.udk-berlin.de": {
+                    "id": "!JHYSBsuwgkBuFrZNxb:content.udk-berlin.de",
+                    "name": "Malerei",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!jeWNefDIceXCUTdLBo:content.udk-berlin.de": {
+                    "id": "!jeWNefDIceXCUTdLBo:content.udk-berlin.de",
+                    "name": "Offene Werkstatt Textil",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!nWioJDBYWMcjuwOFsw:content.udk-berlin.de": {
+                    "id": "!nWioJDBYWMcjuwOFsw:content.udk-berlin.de",
+                    "name": "Working with sound - from recording to presentation (english)",
                     "type": "course",
                     "children": {}
                   }
@@ -664,39 +645,171 @@ const struktur = {
                 "name": "Bachelor Lehramt an Integrierten Sekundarschulen und Gymnasien mit dem Fach Bildende Kunst 2018",
                 "type": "degree program",
                 "children": {
-                  "!AdLVtLXzRryjvpXoBJ:content.udk-berlin.de": {
-                    "id": "!AdLVtLXzRryjvpXoBJ:content.udk-berlin.de",
-                    "name": "Werkstattlehre: Radierung / Freie Grafik / Fortgeschrittene",
+                  "!wQNPiBRVOUHfxSDbbg:content.udk-berlin.de": {
+                    "id": "!wQNPiBRVOUHfxSDbbg:content.udk-berlin.de",
+                    "name": "Begleitung der künstlerischen Praxis in Einzel- und Gruppenbesprechungen (Klasse Karsten Konrad)",
                     "type": "course",
                     "children": {}
                   },
-                  "!BSqyUqIIRXbcgcbPOO:content.udk-berlin.de": {
-                    "id": "!BSqyUqIIRXbcgcbPOO:content.udk-berlin.de",
-                    "name": "Installation",
+                  "!VLOnqckCZMHUaHxoPs:content.udk-berlin.de": {
+                    "id": "!VLOnqckCZMHUaHxoPs:content.udk-berlin.de",
+                    "name": "Beyond UX – Zur Kultur und Geschichte des Interfaces (KW)",
                     "type": "course",
                     "children": {}
                   },
-                  "!BfUjoHEuaJUVxmcdhW:content.udk-berlin.de": {
-                    "id": "!BfUjoHEuaJUVxmcdhW:content.udk-berlin.de",
-                    "name": "Erweitertes Bewegtbild / Video / 2D und 3D Animation - individuelle Projektbetreuung",
+                  "!xjzUtDlINjAYbnRLjS:content.udk-berlin.de": {
+                    "id": "!xjzUtDlINjAYbnRLjS:content.udk-berlin.de",
+                    "name": "Colorgroßfoto-Analog II",
                     "type": "course",
                     "children": {}
                   },
-                  "!BsXSfHtqEsgorvGXqF:content.udk-berlin.de": {
-                    "id": "!BsXSfHtqEsgorvGXqF:content.udk-berlin.de",
-                    "name": "Freundliche Kritik - Kolloquium für wissenschaftliches Arbeiten von Künstler*innen",
+                  "!bIeyiwSyRYQzQLeavx:content.udk-berlin.de": {
+                    "id": "!bIeyiwSyRYQzQLeavx:content.udk-berlin.de",
+                    "name": "Die Zukunft der großen Geschichten",
                     "type": "course",
                     "children": {}
                   },
-                  "!DDfPTGozKrPgzgSPtv:content.udk-berlin.de": {
-                    "id": "!DDfPTGozKrPgzgSPtv:content.udk-berlin.de",
-                    "name": "Introduction to Art History and aesthetics",
+                  "!uOAoFFvajtbbVgKZdH:content.udk-berlin.de": {
+                    "id": "!uOAoFFvajtbbVgKZdH:content.udk-berlin.de",
+                    "name": "Doktorandencolloquium",
                     "type": "course",
                     "children": {}
                   },
-                  "!DQniuJtXFUEdsomgfB:content.udk-berlin.de": {
-                    "id": "!DQniuJtXFUEdsomgfB:content.udk-berlin.de",
-                    "name": "Taktiken der Enthaltsamkeit. Übungen in und jenseits der Krise (KW)",
+                  "!tPXKEWdPiACvhudeOZ:content.udk-berlin.de": {
+                    "id": "!tPXKEWdPiACvhudeOZ:content.udk-berlin.de",
+                    "name": "Drucken im Großformat – Hochdruck-Tiefdruck – experimentelle Druckgrafk",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!SUXdHvZRJQjHrvvyzW:content.udk-berlin.de": {
+                    "id": "!SUXdHvZRJQjHrvvyzW:content.udk-berlin.de",
+                    "name": "Einführung in die Ölmalerei - ohne gesundheitsgefährdende Lösungsmittel (Online-Kurs)",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!deMLonmXSkEPogOujp:content.udk-berlin.de": {
+                    "id": "!deMLonmXSkEPogOujp:content.udk-berlin.de",
+                    "name": "Farb- und Materialtechnik",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!OiIWhmjtwCIFLsBYZF:content.udk-berlin.de": {
+                    "id": "!OiIWhmjtwCIFLsBYZF:content.udk-berlin.de",
+                    "name": "\"… they think these bodies can't …\" - otherism in classical music composition (KW)",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!suOGefRgcADsoZZtZl:content.udk-berlin.de": {
+                    "id": "!suOGefRgcADsoZZtZl:content.udk-berlin.de",
+                    "name": "Aisthesis Decolonial – Dekoloniale Theorie in Kunst und Gestaltung",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!FhQwUtMjhitIDCHfgn:content.udk-berlin.de": {
+                    "id": "!FhQwUtMjhitIDCHfgn:content.udk-berlin.de",
+                    "name": "Analyse der Macht der Plattformen (KW)",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!dueBcsJvztfXmpBtvh:content.udk-berlin.de": {
+                    "id": "!dueBcsJvztfXmpBtvh:content.udk-berlin.de",
+                    "name": "Arbeitsgespräche / Einzelkonsultationen",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!jhOxbFVpcSJPoixaHz:content.udk-berlin.de": {
+                    "id": "!jhOxbFVpcSJPoixaHz:content.udk-berlin.de",
+                    "name": "Colorgroßfoto-Analog I",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!gKKllwcjgyWvutOrzV:content.udk-berlin.de": {
+                    "id": "!gKKllwcjgyWvutOrzV:content.udk-berlin.de",
+                    "name": "„Sprechen über Kunst. Konzepte für Bildung und Vermittlung von Biennalen und musealen Sammlungen“",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!bpLrHEOwuZMIHNyKrI:content.udk-berlin.de": {
+                    "id": "!bpLrHEOwuZMIHNyKrI:content.udk-berlin.de",
+                    "name": "Adding Insult to Injury: Bodies and their Objects (IK)",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!hZyOfZsfmYMNZYFcIF:content.udk-berlin.de": {
+                    "id": "!hZyOfZsfmYMNZYFcIF:content.udk-berlin.de",
+                    "name": "Andy Warhols queere Filmfabrik",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!dRurlBdOOwGqzVNpPZ:content.udk-berlin.de": {
+                    "id": "!dRurlBdOOwGqzVNpPZ:content.udk-berlin.de",
+                    "name": "Archäologie des Selbst",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!PkDOygZPleUJDVdnqQ:content.udk-berlin.de": {
+                    "id": "!PkDOygZPleUJDVdnqQ:content.udk-berlin.de",
+                    "name": "Before Photography. Wie ein Medium entsteht",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!kzpEhFoMQBrSwGTyRe:content.udk-berlin.de": {
+                    "id": "!kzpEhFoMQBrSwGTyRe:content.udk-berlin.de",
+                    "name": "Bildende Kunst",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!wmwIRpTJtioFVCSith:content.udk-berlin.de": {
+                    "id": "!wmwIRpTJtioFVCSith:content.udk-berlin.de",
+                    "name": "Bildhauerei",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!lZADQXDleOZBCsSmik:content.udk-berlin.de": {
+                    "id": "!lZADQXDleOZBCsSmik:content.udk-berlin.de",
+                    "name": "Bildhauerei 1 und 2",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!qdqOKLduhokROAfWws:content.udk-berlin.de": {
+                    "id": "!qdqOKLduhokROAfWws:content.udk-berlin.de",
+                    "name": "Colloquium: Besprechnung wissenschaftlicher Abschlussarbeiten",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!cKFFuJMPgisNxsjYjn:content.udk-berlin.de": {
+                    "id": "!cKFFuJMPgisNxsjYjn:content.udk-berlin.de",
+                    "name": "Contemporary Art and Photography / Zeitgenössische Kunst und Fotografie",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!MzvpxFUSmMdHLEgJNW:content.udk-berlin.de": {
+                    "id": "!MzvpxFUSmMdHLEgJNW:content.udk-berlin.de",
+                    "name": "Einführung in die Kunstwissenschaft und Ästhetik",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!twnXMoysEcHnITDGtL:content.udk-berlin.de": {
+                    "id": "!twnXMoysEcHnITDGtL:content.udk-berlin.de",
+                    "name": "Einführungskurs, Individuelle Beratung und Betreuung von künstlerischen Projekten",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!ywbZexhvAhDpKHYOyq:content.udk-berlin.de": {
+                    "id": "!ywbZexhvAhDpKHYOyq:content.udk-berlin.de",
+                    "name": "Bucheinbandtechniken",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!IkGxAyvDntgXOTrkiz:content.udk-berlin.de": {
+                    "id": "!IkGxAyvDntgXOTrkiz:content.udk-berlin.de",
+                    "name": "Colloquium: Besprechung wissenschaftlicher Abschlussarbeiten",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!ncKyjrjUyXNfSMABaf:content.udk-berlin.de": {
+                    "id": "!ncKyjrjUyXNfSMABaf:content.udk-berlin.de",
+                    "name": "Designtechniken Modedesign: Schnittkonstruktion",
                     "type": "course",
                     "children": {}
                   },
@@ -706,9 +819,723 @@ const struktur = {
                     "type": "course",
                     "children": {}
                   },
+                  "!mXQcsmageGHfwUjZoB:content.udk-berlin.de": {
+                    "id": "!mXQcsmageGHfwUjZoB:content.udk-berlin.de",
+                    "name": "Einführung in textile Werkverfahren",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!BfUjoHEuaJUVxmcdhW:content.udk-berlin.de": {
+                    "id": "!BfUjoHEuaJUVxmcdhW:content.udk-berlin.de",
+                    "name": "Erweitertes Bewegtbild / Video / 2D und 3D Animation - individuelle Projektbetreuung",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!bxKGOQXGGBfELVmBWg:content.udk-berlin.de": {
+                    "id": "!bxKGOQXGGBfELVmBWg:content.udk-berlin.de",
+                    "name": "Essay als Form – in Kunst, Literatur, Ausstellung",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!sXNrGePMfBdklIYTcX:content.udk-berlin.de": {
+                    "id": "!sXNrGePMfBdklIYTcX:content.udk-berlin.de",
+                    "name": "Fachdidaktik I (Einführung)/ISS Gym BA",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!GBxPMsmLSCENlyyTWM:content.udk-berlin.de": {
+                    "id": "!GBxPMsmLSCENlyyTWM:content.udk-berlin.de",
+                    "name": "Fachdidaktik II (Theorie) »Aber Bitte, postdigital!«",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!BsXSfHtqEsgorvGXqF:content.udk-berlin.de": {
+                    "id": "!BsXSfHtqEsgorvGXqF:content.udk-berlin.de",
+                    "name": "Freundliche Kritik - Kolloquium für wissenschaftliches Arbeiten von Künstler*innen",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!UokNYjwgYVoEiFeglE:content.udk-berlin.de": {
+                    "id": "!UokNYjwgYVoEiFeglE:content.udk-berlin.de",
+                    "name": "Gilles Deleuze, Differenz und Wiederholung",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!WNIDPTaqYoTEtqkZSC:content.udk-berlin.de": {
+                    "id": "!WNIDPTaqYoTEtqkZSC:content.udk-berlin.de",
+                    "name": "Grundlagen der Steinbearbeitung für die Bildhauerei",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!bPHjpANsjsJWvjyxYL:content.udk-berlin.de": {
+                    "id": "!bPHjpANsjsJWvjyxYL:content.udk-berlin.de",
+                    "name": "Bodybuilding (IK)",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!QbnozYRhFFOgFFHnzi:content.udk-berlin.de": {
+                    "id": "!QbnozYRhFFOgFFHnzi:content.udk-berlin.de",
+                    "name": "En plein air! – Wanderstaffelei, Farbentuben und festes Schuhwerk in analoger Praxis bei jeder Wetterlage (IK)",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!qHuqLRUSqSjHDcGKbz:content.udk-berlin.de": {
+                    "id": "!qHuqLRUSqSjHDcGKbz:content.udk-berlin.de",
+                    "name": "Fleischwerdung des Wortes. Über eine Poetik des Körpers (KW)",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!pGxAvjHTsSmwoVEgNq:content.udk-berlin.de": {
+                    "id": "!pGxAvjHTsSmwoVEgNq:content.udk-berlin.de",
+                    "name": "Grundlagen zu Film und Video (Kamera, Ton, Licht, Postproduktion)",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!YGOssoJqUUjwuxQUgC:content.udk-berlin.de": {
+                    "id": "!YGOssoJqUUjwuxQUgC:content.udk-berlin.de",
+                    "name": "Grundlehre: Großes Plenum",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!rpvOWUpDjqsOYRYROD:content.udk-berlin.de": {
+                    "id": "!rpvOWUpDjqsOYRYROD:content.udk-berlin.de",
+                    "name": "Is LOL Contagious?: Clowning in Digital Times (IK)",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!fzmIkEYisOJbjKUvkA:content.udk-berlin.de": {
+                    "id": "!fzmIkEYisOJbjKUvkA:content.udk-berlin.de",
+                    "name": "Kunst und Biografie—Kunst als Biografie",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!SyQzVIyLVEsIcyevOS:content.udk-berlin.de": {
+                    "id": "!SyQzVIyLVEsIcyevOS:content.udk-berlin.de",
+                    "name": "Contesting the Colonial Spatial Divide of the Humboldt Forum & Following Entangled Trajectories",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!ljyeaqvJvWmjxkSkGv:content.udk-berlin.de": {
+                    "id": "!ljyeaqvJvWmjxkSkGv:content.udk-berlin.de",
+                    "name": "Freies Arbeiten für Fortgeschrittene",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!pnOppXfSqjyHIMNAyY:content.udk-berlin.de": {
+                    "id": "!pnOppXfSqjyHIMNAyY:content.udk-berlin.de",
+                    "name": "From Concept To Performance",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!SngUGMVfAFRmftXKGP:content.udk-berlin.de": {
+                    "id": "!SngUGMVfAFRmftXKGP:content.udk-berlin.de",
+                    "name": "Bullshit-Resistenz: Einführung ins kritische Denken (KW)",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!aEJcCJzmOXuhRDIZdI:content.udk-berlin.de": {
+                    "id": "!aEJcCJzmOXuhRDIZdI:content.udk-berlin.de",
+                    "name": "Die Idee der Kindheit (Walter Benjamin)",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!PHhjUtSLcORIZkmPVU:content.udk-berlin.de": {
+                    "id": "!PHhjUtSLcORIZkmPVU:content.udk-berlin.de",
+                    "name": "Die Vermögen der Körper (KW)",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!ZMYyQWYyRykRVvbCNP:content.udk-berlin.de": {
+                    "id": "!ZMYyQWYyRykRVvbCNP:content.udk-berlin.de",
+                    "name": "Digitalfotolabor - Digitalgroßfoto",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!gUpmDWghHzTlheabrD:content.udk-berlin.de": {
+                    "id": "!gUpmDWghHzTlheabrD:content.udk-berlin.de",
+                    "name": "Einführung in die Kunstwissenschaft und Ästhetik",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!bNpubEWrKXwdpHRduD:content.udk-berlin.de": {
+                    "id": "!bNpubEWrKXwdpHRduD:content.udk-berlin.de",
+                    "name": "Erzählerische, fiktionale Bildkonzepte",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!RSLuHrbdnEHVIlKTvA:content.udk-berlin.de": {
+                    "id": "!RSLuHrbdnEHVIlKTvA:content.udk-berlin.de",
+                    "name": "Film, Video und Audio - individuelle Projektbetreuung",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!PvqhMTzSuecMjxJfrR:content.udk-berlin.de": {
+                    "id": "!PvqhMTzSuecMjxJfrR:content.udk-berlin.de",
+                    "name": "Foto 1 und 2",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!xDqcYIAYpzSXVBueDG:content.udk-berlin.de": {
+                    "id": "!xDqcYIAYpzSXVBueDG:content.udk-berlin.de",
+                    "name": "Grundlehre: Kleines Plenum",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!DDfPTGozKrPgzgSPtv:content.udk-berlin.de": {
+                    "id": "!DDfPTGozKrPgzgSPtv:content.udk-berlin.de",
+                    "name": "Introduction to Art History and aesthetics",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!OChnYlvSwCBxtGfxai:content.udk-berlin.de": {
+                    "id": "!OChnYlvSwCBxtGfxai:content.udk-berlin.de",
+                    "name": "\"It’s a family affair\" (KW)",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!JhDStLCNlktIZSsqoW:content.udk-berlin.de": {
+                    "id": "!JhDStLCNlktIZSsqoW:content.udk-berlin.de",
+                    "name": "Free Improv – Orchestra (IK)",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!mJnXmEHJAUVQxcdGXz:content.udk-berlin.de": {
+                    "id": "!mJnXmEHJAUVQxcdGXz:content.udk-berlin.de",
+                    "name": "Medienästhetik der Faszination (KW)",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!mMnNkvFGLYaWAluFyc:content.udk-berlin.de": {
+                    "id": "!mMnNkvFGLYaWAluFyc:content.udk-berlin.de",
+                    "name": "Moralische Identität (KW)",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!JhCyvfRKYFaIjyQmGA:content.udk-berlin.de": {
+                    "id": "!JhCyvfRKYFaIjyQmGA:content.udk-berlin.de",
+                    "name": "Einstieg in das digitale Zeichnen und die 2D-Animation mit dem iPad",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!KmJTGliKISDEUGjjGn:content.udk-berlin.de": {
+                    "id": "!KmJTGliKISDEUGjjGn:content.udk-berlin.de",
+                    "name": "Eintritt in die dritte Dimension: Videoarbeiten mit 3D-Techniken",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!ITThvxoaYyCfzRqNUk:content.udk-berlin.de": {
+                    "id": "!ITThvxoaYyCfzRqNUk:content.udk-berlin.de",
+                    "name": "\"Genau wie früher\" (IK)",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!dyVDsamcPIjrpqKCRo:content.udk-berlin.de": {
+                    "id": "!dyVDsamcPIjrpqKCRo:content.udk-berlin.de",
+                    "name": "Get going. Exploring ways through the climate disaster / Wirklich handeln. Den Klimanotstand als Epochenwandel gestalten (KW)",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!OZCUWIqeposgQrssjX:content.udk-berlin.de": {
+                    "id": "!OZCUWIqeposgQrssjX:content.udk-berlin.de",
+                    "name": "Grundlagen Metall - individuelle Beratung und Betreuung",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!TRWbPkgYwlGSkpwzQe:content.udk-berlin.de": {
+                    "id": "!TRWbPkgYwlGSkpwzQe:content.udk-berlin.de",
+                    "name": "Grundlagen Metall - Werkstattkurs",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!UFwTTEXetNbiRtWrFF:content.udk-berlin.de": {
+                    "id": "!UFwTTEXetNbiRtWrFF:content.udk-berlin.de",
+                    "name": "Holzpraxis I",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!xhaxvCIFsSGtQJqgIC:content.udk-berlin.de": {
+                    "id": "!xhaxvCIFsSGtQJqgIC:content.udk-berlin.de",
+                    "name": "Installation/Sound",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!lGMLLIeiLmSYaUTlAQ:content.udk-berlin.de": {
+                    "id": "!lGMLLIeiLmSYaUTlAQ:content.udk-berlin.de",
+                    "name": "Holzpraxis II",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!TOjpZLjXtmlyNlEdlw:content.udk-berlin.de": {
+                    "id": "!TOjpZLjXtmlyNlEdlw:content.udk-berlin.de",
+                    "name": "Images in Motion",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!BSqyUqIIRXbcgcbPOO:content.udk-berlin.de": {
+                    "id": "!BSqyUqIIRXbcgcbPOO:content.udk-berlin.de",
+                    "name": "Installation",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!JHYSBsuwgkBuFrZNxb:content.udk-berlin.de": {
+                    "id": "!JHYSBsuwgkBuFrZNxb:content.udk-berlin.de",
+                    "name": "Malerei",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!vBjZXKPBnAbzgVnOVv:content.udk-berlin.de": {
+                    "id": "!vBjZXKPBnAbzgVnOVv:content.udk-berlin.de",
+                    "name": "Holzschnitt - Einführung in die Vielschichtigkeit des Hochdrucks",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!ICiVOKOSafWMrwCnqZ:content.udk-berlin.de": {
+                    "id": "!ICiVOKOSafWMrwCnqZ:content.udk-berlin.de",
+                    "name": "Individuelle Projektbetreuung für die Steinbildhauerei",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!ygMaRnUakGrCileKvZ:content.udk-berlin.de": {
+                    "id": "!ygMaRnUakGrCileKvZ:content.udk-berlin.de",
+                    "name": "Louise Bourgeois- Das textile Werk / The textile works",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!fbIxsrxCilKBPHLLFo:content.udk-berlin.de": {
+                    "id": "!fbIxsrxCilKBPHLLFo:content.udk-berlin.de",
+                    "name": "material life",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!ylRQXgfSgoimxYsLpm:content.udk-berlin.de": {
+                    "id": "!ylRQXgfSgoimxYsLpm:content.udk-berlin.de",
+                    "name": "Grundlehre: Kolloquium",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!yjiUOEBXpgWUDQmyHr:content.udk-berlin.de": {
+                    "id": "!yjiUOEBXpgWUDQmyHr:content.udk-berlin.de",
+                    "name": "Klassentreffen",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!kBksYOQqDIsHitfWRd:content.udk-berlin.de": {
+                    "id": "!kBksYOQqDIsHitfWRd:content.udk-berlin.de",
+                    "name": "Körperkontakt auf Entzug – performative Aktionen und Interventionen (IK)",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!YgMUaoegQOcmkjzlYc:content.udk-berlin.de": {
+                    "id": "!YgMUaoegQOcmkjzlYc:content.udk-berlin.de",
+                    "name": "Malerei, Freie Grafik (Fachklasse)",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!dDRneodMoVZINSLzQA:content.udk-berlin.de": {
+                    "id": "!dDRneodMoVZINSLzQA:content.udk-berlin.de",
+                    "name": "Material-, Form- und Gusstechniken - Grundkurs",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!ojxRLdbtWgqVWjubvP:content.udk-berlin.de": {
+                    "id": "!ojxRLdbtWgqVWjubvP:content.udk-berlin.de",
+                    "name": "Offene Sprechstunde - für Studierende der Grundlehre",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!peNLkbjXRJLftTjzOB:content.udk-berlin.de": {
+                    "id": "!peNLkbjXRJLftTjzOB:content.udk-berlin.de",
+                    "name": "Kunstgeschichte im Überblick II: 1750 bis Gegenwart",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!NEyrNEjPfhkJHABEJo:content.udk-berlin.de": {
+                    "id": "!NEyrNEjPfhkJHABEJo:content.udk-berlin.de",
+                    "name": "LAMENTO / MEMENTO – im Kraftfeld der Erinnerungen. Individuelle Formen des Trauerns, des Erinnerns und Gedenkens (IK)",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!fQfdGUTuAyUWiFOADh:content.udk-berlin.de": {
+                    "id": "!fQfdGUTuAyUWiFOADh:content.udk-berlin.de",
+                    "name": "Malerei und Zeichnung",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!vyRiriFSsflJUPAtbX:content.udk-berlin.de": {
+                    "id": "!vyRiriFSsflJUPAtbX:content.udk-berlin.de",
+                    "name": "Marcuse – Kunst und Revolution",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!qGpMVCbNrKsMSjVcPQ:content.udk-berlin.de": {
+                    "id": "!qGpMVCbNrKsMSjVcPQ:content.udk-berlin.de",
+                    "name": "multimediale Skulptur und Installation",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!jeWNefDIceXCUTdLBo:content.udk-berlin.de": {
+                    "id": "!jeWNefDIceXCUTdLBo:content.udk-berlin.de",
+                    "name": "Offene Werkstatt Textil",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!UyQSEqpYPGOpDGPtxd:content.udk-berlin.de": {
+                    "id": "!UyQSEqpYPGOpDGPtxd:content.udk-berlin.de",
+                    "name": "Online-Werkstatt Maltechnik",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!mLJSGqGONjbRrDCIlP:content.udk-berlin.de": {
+                    "id": "!mLJSGqGONjbRrDCIlP:content.udk-berlin.de",
+                    "name": "Kunstdidaktik I (Einführung)",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!OjwViCskZEidfXtJrD:content.udk-berlin.de": {
+                    "id": "!OjwViCskZEidfXtJrD:content.udk-berlin.de",
+                    "name": "Kunst und Pädagogik - aktuelle Forschungsansätze und Wege in die Praxis",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!mrvlZuhYOlkgcpZeZI:content.udk-berlin.de": {
+                    "id": "!mrvlZuhYOlkgcpZeZI:content.udk-berlin.de",
+                    "name": "Malerei 1, 2 und 3",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!NmzekIonCDyKdEJRot:content.udk-berlin.de": {
+                    "id": "!NmzekIonCDyKdEJRot:content.udk-berlin.de",
+                    "name": "Malerei - Besto Berlino",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!YlnfMmgttFJXMfGMoS:content.udk-berlin.de": {
+                    "id": "!YlnfMmgttFJXMfGMoS:content.udk-berlin.de",
+                    "name": "Metallpraxis - individuelle Beratung und Betreuung von künstlerischen Projekten",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!PkiKdrOfhNLzbTMPuA:content.udk-berlin.de": {
+                    "id": "!PkiKdrOfhNLzbTMPuA:content.udk-berlin.de",
+                    "name": "Narration des Selbst im Portrait (IK)",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!dyAYbIrvWTStbJXoOI:content.udk-berlin.de": {
+                    "id": "!dyAYbIrvWTStbJXoOI:content.udk-berlin.de",
+                    "name": "Offene Werkstatt - Formen und Gießen",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!wUQhOSgSbDgaKBauld:content.udk-berlin.de": {
+                    "id": "!wUQhOSgSbDgaKBauld:content.udk-berlin.de",
+                    "name": "Malerei",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!QkoSLnyNUoDBimutGT:content.udk-berlin.de": {
+                    "id": "!QkoSLnyNUoDBimutGT:content.udk-berlin.de",
+                    "name": "Nothing is Original. Challenging Notions of Artistic Autonomy (KW)",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!ampXfDbRyWESXfnogq:content.udk-berlin.de": {
+                    "id": "!ampXfDbRyWESXfnogq:content.udk-berlin.de",
+                    "name": "objekt-bild-hauerei",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!HQxAtOXmMeLfLdScMe:content.udk-berlin.de": {
+                    "id": "!HQxAtOXmMeLfLdScMe:content.udk-berlin.de",
+                    "name": "\"MORGEN IST DIE FRAGE\" – Current Issues of Berlin’s Club Culture (KW)",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!WOkyzmEGSltHVEVoXI:content.udk-berlin.de": {
+                    "id": "!WOkyzmEGSltHVEVoXI:content.udk-berlin.de",
+                    "name": "Objektbezogenes Arbeiten",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!FuIsOTmrhTfniuGfWY:content.udk-berlin.de": {
+                    "id": "!FuIsOTmrhTfniuGfWY:content.udk-berlin.de",
+                    "name": "OPEN CALL Freie studentische Projekte unter Supervision",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!KevSuusjrPtmWXdzPc:content.udk-berlin.de": {
+                    "id": "!KevSuusjrPtmWXdzPc:content.udk-berlin.de",
+                    "name": "PAF CAMPUS – Workshop, Aufführungsbesuch und -reflexion (IK)",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!jJWWIVrLjsUvUTNPEa:content.udk-berlin.de": {
+                    "id": "!jJWWIVrLjsUvUTNPEa:content.udk-berlin.de",
+                    "name": "Performative Methods of Continuing (IK)",
+                    "type": "course",
+                    "children": {}
+                  },
                   "!DhZmUkxnoszSKiqxXY:content.udk-berlin.de": {
                     "id": "!DhZmUkxnoszSKiqxXY:content.udk-berlin.de",
                     "name": "Performative Präsentationen: Die eigene künstlerische Arbeit im medialen Raum",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!iMxvZYYzNDxsXyKtzh:content.udk-berlin.de": {
+                    "id": "!iMxvZYYzNDxsXyKtzh:content.udk-berlin.de",
+                    "name": "Pharmapolitische Fiktionen. Seltsame Substanzen und prekäre Stoffe der Science-Fiction-",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!fbzRQxxCcozOEKXHaU:content.udk-berlin.de": {
+                    "id": "!fbzRQxxCcozOEKXHaU:content.udk-berlin.de",
+                    "name": "Photoshop für Anfänger",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!baxDycFefSXeIlMsWC:content.udk-berlin.de": {
+                    "id": "!baxDycFefSXeIlMsWC:content.udk-berlin.de",
+                    "name": "Praxisorientiertes Seminar (Modul BA 6.3) - Alternativen des Wissenserwerbs im Kunstunterricht -",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!MUupJzwbbCHwThfymg:content.udk-berlin.de": {
+                    "id": "!MUupJzwbbCHwThfymg:content.udk-berlin.de",
+                    "name": "Sacred, Secular, Sensual and Sublime: Manuscript Painting in India between 15th to 18th Centuries",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!EinbtNzedjYrlkbytL:content.udk-berlin.de": {
+                    "id": "!EinbtNzedjYrlkbytL:content.udk-berlin.de",
+                    "name": "Über das Geistige in der Kunst (KW)",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!MfcaECEjjCuOJvIgBk:content.udk-berlin.de": {
+                    "id": "!MfcaECEjjCuOJvIgBk:content.udk-berlin.de",
+                    "name": "Von der grafischen Notation hin zur \"abstrakten visuellen Referenz\" (IK)",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!jfrMyshmjFgjmDtodC:content.udk-berlin.de": {
+                    "id": "!jfrMyshmjFgjmDtodC:content.udk-berlin.de",
+                    "name": "Was heißt: Denken am Ende der Welt?",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!RRgZnUuZiMoLWwKUEk:content.udk-berlin.de": {
+                    "id": "!RRgZnUuZiMoLWwKUEk:content.udk-berlin.de",
+                    "name": "Wer hat Angst vor der Klitoris? Formen des weiblichen Genießens von 1968 bis heute",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!aApckRMzdGvWSeFtUJ:content.udk-berlin.de": {
+                    "id": "!aApckRMzdGvWSeFtUJ:content.udk-berlin.de",
+                    "name": "Projektbetreuung Foto- und Bildbearbeitung / Druck",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!EupVptfujEanKDMtUx:content.udk-berlin.de": {
+                    "id": "!EupVptfujEanKDMtUx:content.udk-berlin.de",
+                    "name": "Siebdruck: Anfänger - Grundlegende Kenntnisse in Theorie und Praxis",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!GxpVnRdCcSsxzNfGxT:content.udk-berlin.de": {
+                    "id": "!GxpVnRdCcSsxzNfGxT:content.udk-berlin.de",
+                    "name": "Tierethische Grundlagen für eine tiersensible Kunstpädagogik",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!IDwDRmmOkHsxCvijvU:content.udk-berlin.de": {
+                    "id": "!IDwDRmmOkHsxCvijvU:content.udk-berlin.de",
+                    "name": "Video 1 und 2",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!dLNbyolXMdfEPJDZDl:content.udk-berlin.de": {
+                    "id": "!dLNbyolXMdfEPJDZDl:content.udk-berlin.de",
+                    "name": "Wahrnehmung und Konstitution (KW)",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!ZGInerSifizhaiVZCv:content.udk-berlin.de": {
+                    "id": "!ZGInerSifizhaiVZCv:content.udk-berlin.de",
+                    "name": "Prüfungskolloquium",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!NwpzUDhtBypMZgHzIM:content.udk-berlin.de": {
+                    "id": "!NwpzUDhtBypMZgHzIM:content.udk-berlin.de",
+                    "name": "Projektbetreuung/ Prüfungsvorbereitungen (Malerei)",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!rdWSVHFsDOqALDwtgg:content.udk-berlin.de": {
+                    "id": "!rdWSVHFsDOqALDwtgg:content.udk-berlin.de",
+                    "name": "Projektbezogene Arbeit/Lithographie",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!ayIvXUUILDQjacoDRu:content.udk-berlin.de": {
+                    "id": "!ayIvXUUILDQjacoDRu:content.udk-berlin.de",
+                    "name": "Raum Umraum",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!MTKeudzdsgaalJURYd:content.udk-berlin.de": {
+                    "id": "!MTKeudzdsgaalJURYd:content.udk-berlin.de",
+                    "name": "Sensing the City (IK)",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!NfblQubkPdyZnUUmEa:content.udk-berlin.de": {
+                    "id": "!NfblQubkPdyZnUUmEa:content.udk-berlin.de",
+                    "name": "Technik und Theorie der Wandmalerei",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!SFgcEOFEdFmUAVqvWM:content.udk-berlin.de": {
+                    "id": "!SFgcEOFEdFmUAVqvWM:content.udk-berlin.de",
+                    "name": "prepare and share: Künstlerische und diskriminierungskritische Methoden für die Auseinandersetzung mit Kunst in der Schule.",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!KbGjISGYUfLotmYYfJ:content.udk-berlin.de": {
+                    "id": "!KbGjISGYUfLotmYYfJ:content.udk-berlin.de",
+                    "name": "Quarantäne-Ästhetiken – Reflexionen über Digitalität, social distancing & Körperbilder in Zeiten der Pandemie",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!WTcqojRUTvsMIqLOyT:content.udk-berlin.de": {
+                    "id": "!WTcqojRUTvsMIqLOyT:content.udk-berlin.de",
+                    "name": "Seminar Musiktheorie: Das universale Material? Modales Komponieren in Neuer Musik, Jazz und Rock/Pop",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!AdLVtLXzRryjvpXoBJ:content.udk-berlin.de": {
+                    "id": "!AdLVtLXzRryjvpXoBJ:content.udk-berlin.de",
+                    "name": "Werkstattlehre: Radierung / Freie Grafik / Fortgeschrittene",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!nWioJDBYWMcjuwOFsw:content.udk-berlin.de": {
+                    "id": "!nWioJDBYWMcjuwOFsw:content.udk-berlin.de",
+                    "name": "Working with sound - from recording to presentation (english)",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!FlzuuepJHkuMGRShKc:content.udk-berlin.de": {
+                    "id": "!FlzuuepJHkuMGRShKc:content.udk-berlin.de",
+                    "name": "Zerrissene Verknüpfungen skizzenhafter Welterzeugung – in Literatur, Musik und Zeichnungen (KW)",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!PNSxsXTAPUZhnCoHez:content.udk-berlin.de": {
+                    "id": "!PNSxsXTAPUZhnCoHez:content.udk-berlin.de",
+                    "name": "Raum und Objektzeichnen – Methoden, Material, Experiment",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!zPQlUPZkxMdpjMzoCv:content.udk-berlin.de": {
+                    "id": "!zPQlUPZkxMdpjMzoCv:content.udk-berlin.de",
+                    "name": "Siebdruck: Fortgeschrittene - Grundlegende Kenntnisse in Theorie und Praxis",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!nhxzZQOUYijYWOVbZk:content.udk-berlin.de": {
+                    "id": "!nhxzZQOUYijYWOVbZk:content.udk-berlin.de",
+                    "name": "Über den gezielten Kontrollverlust bei Material-, Form- und Gusstechniken Kunstwissenschaftliches und praktisches Seminar",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!MecsQrOmFYmMErPWyp:content.udk-berlin.de": {
+                    "id": "!MecsQrOmFYmMErPWyp:content.udk-berlin.de",
+                    "name": "Werkstattlehre: Radierung Freie Grafik, Grundkurs für Anfänger",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!mKKhmAiawHYjsurzoQ:content.udk-berlin.de": {
+                    "id": "!mKKhmAiawHYjsurzoQ:content.udk-berlin.de",
+                    "name": "Zeichnung 1 und 2",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!XrLvznZuTPzUDTDseB:content.udk-berlin.de": {
+                    "id": "!XrLvznZuTPzUDTDseB:content.udk-berlin.de",
+                    "name": "Zeichnung und Kritische Digitalität",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!acnXfqaNsocIHwgJgL:content.udk-berlin.de": {
+                    "id": "!acnXfqaNsocIHwgJgL:content.udk-berlin.de",
+                    "name": "SCHRIFTKÖRPER/KÖRPERSCHRIFT (KW)",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!DQniuJtXFUEdsomgfB:content.udk-berlin.de": {
+                    "id": "!DQniuJtXFUEdsomgfB:content.udk-berlin.de",
+                    "name": "Taktiken der Enthaltsamkeit. Übungen in und jenseits der Krise (KW)",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!gJGpcgIcqKfFKHMciS:content.udk-berlin.de": {
+                    "id": "!gJGpcgIcqKfFKHMciS:content.udk-berlin.de",
+                    "name": "Tiefdruck- experimentelle Verfahren",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!OwrbxrwajXGoClYlGr:content.udk-berlin.de": {
+                    "id": "!OwrbxrwajXGoClYlGr:content.udk-berlin.de",
+                    "name": "Zeichnung – individuelle Begleitung und Aufgabenstellung",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!bWgmvAQGbuCvpSTVEE:content.udk-berlin.de": {
+                    "id": "!bWgmvAQGbuCvpSTVEE:content.udk-berlin.de",
+                    "name": "Resonanzkörper (KW)",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!wAuotooyVRoqBxIWpm:content.udk-berlin.de": {
+                    "id": "!wAuotooyVRoqBxIWpm:content.udk-berlin.de",
+                    "name": "Schwarz und Weiß in der Musik",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!bfJZGUoTHgvxWCzJIk:content.udk-berlin.de": {
+                    "id": "!bfJZGUoTHgvxWCzJIk:content.udk-berlin.de",
+                    "name": "Siebdruck: Einführung - Grundlegende Kenntnisse in Theorie und Praxis",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!ElvAPYuRqJTCKIUvKo:content.udk-berlin.de": {
+                    "id": "!ElvAPYuRqJTCKIUvKo:content.udk-berlin.de",
+                    "name": "There is always Urgency: Artistic, Political and Social Speculations on the Climate Disaster (IK)",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!RTShPKoYLLYniPJcBD:content.udk-berlin.de": {
+                    "id": "!RTShPKoYLLYniPJcBD:content.udk-berlin.de",
+                    "name": "Things are generally different behind closed doors Praxis der Kunst im öffentlichen Raum / Kunst am Bau",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!VkXvhTqygnxuAmYmyG:content.udk-berlin.de": {
+                    "id": "!VkXvhTqygnxuAmYmyG:content.udk-berlin.de",
+                    "name": "Transdisziplinare Malerei",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!qxjbYYyZlDnlBqBUxK:content.udk-berlin.de": {
+                    "id": "!qxjbYYyZlDnlBqBUxK:content.udk-berlin.de",
+                    "name": "Vom Konzept zur Aufführung",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!qJhUrHCAtUBJeNVAAi:content.udk-berlin.de": {
+                    "id": "!qJhUrHCAtUBJeNVAAi:content.udk-berlin.de",
+                    "name": "We’ll work on the other side of time",
                     "type": "course",
                     "children": {}
                   },
@@ -724,855 +1551,9 @@ const struktur = {
                     "type": "course",
                     "children": {}
                   },
-                  "!EinbtNzedjYrlkbytL:content.udk-berlin.de": {
-                    "id": "!EinbtNzedjYrlkbytL:content.udk-berlin.de",
-                    "name": "Über das Geistige in der Kunst (KW)",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!ElvAPYuRqJTCKIUvKo:content.udk-berlin.de": {
-                    "id": "!ElvAPYuRqJTCKIUvKo:content.udk-berlin.de",
-                    "name": "There is always Urgency: Artistic, Political and Social Speculations on the Climate Disaster (IK)",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!EupVptfujEanKDMtUx:content.udk-berlin.de": {
-                    "id": "!EupVptfujEanKDMtUx:content.udk-berlin.de",
-                    "name": "Siebdruck: Anfänger - Grundlegende Kenntnisse in Theorie und Praxis",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!FhQwUtMjhitIDCHfgn:content.udk-berlin.de": {
-                    "id": "!FhQwUtMjhitIDCHfgn:content.udk-berlin.de",
-                    "name": "Analyse der Macht der Plattformen (KW)",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!FlzuuepJHkuMGRShKc:content.udk-berlin.de": {
-                    "id": "!FlzuuepJHkuMGRShKc:content.udk-berlin.de",
-                    "name": "Zerrissene Verknüpfungen skizzenhafter Welterzeugung – in Literatur, Musik und Zeichnungen (KW)",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!FuIsOTmrhTfniuGfWY:content.udk-berlin.de": {
-                    "id": "!FuIsOTmrhTfniuGfWY:content.udk-berlin.de",
-                    "name": "OPEN CALL Freie studentische Projekte unter Supervision",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!GBxPMsmLSCENlyyTWM:content.udk-berlin.de": {
-                    "id": "!GBxPMsmLSCENlyyTWM:content.udk-berlin.de",
-                    "name": "Fachdidaktik II (Theorie) »Aber Bitte, postdigital!«",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!GxpVnRdCcSsxzNfGxT:content.udk-berlin.de": {
-                    "id": "!GxpVnRdCcSsxzNfGxT:content.udk-berlin.de",
-                    "name": "Tierethische Grundlagen für eine tiersensible Kunstpädagogik",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!HQxAtOXmMeLfLdScMe:content.udk-berlin.de": {
-                    "id": "!HQxAtOXmMeLfLdScMe:content.udk-berlin.de",
-                    "name": "\"MORGEN IST DIE FRAGE\" – Current Issues of Berlin’s Club Culture (KW)",
-                    "type": "course",
-                    "children": {}
-                  },
                   "!HyJwwXOcuRdRlJoXNU:content.udk-berlin.de": {
                     "id": "!HyJwwXOcuRdRlJoXNU:content.udk-berlin.de",
                     "name": "Zeitlichkeit in der zeitgenössischen Kunst. Konzepte, Verfahren, Stationen der Kunst seit den 60er Jahren.",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!ICiVOKOSafWMrwCnqZ:content.udk-berlin.de": {
-                    "id": "!ICiVOKOSafWMrwCnqZ:content.udk-berlin.de",
-                    "name": "Individuelle Projektbetreuung für die Steinbildhauerei",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!IDwDRmmOkHsxCvijvU:content.udk-berlin.de": {
-                    "id": "!IDwDRmmOkHsxCvijvU:content.udk-berlin.de",
-                    "name": "Video 1 und 2",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!ITThvxoaYyCfzRqNUk:content.udk-berlin.de": {
-                    "id": "!ITThvxoaYyCfzRqNUk:content.udk-berlin.de",
-                    "name": "\"Genau wie früher\" (IK)",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!IkGxAyvDntgXOTrkiz:content.udk-berlin.de": {
-                    "id": "!IkGxAyvDntgXOTrkiz:content.udk-berlin.de",
-                    "name": "Colloquium: Besprechung wissenschaftlicher Abschlussarbeiten",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!JHYSBsuwgkBuFrZNxb:content.udk-berlin.de": {
-                    "id": "!JHYSBsuwgkBuFrZNxb:content.udk-berlin.de",
-                    "name": "Malerei",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!JhCyvfRKYFaIjyQmGA:content.udk-berlin.de": {
-                    "id": "!JhCyvfRKYFaIjyQmGA:content.udk-berlin.de",
-                    "name": "Einstieg in das digitale Zeichnen und die 2D-Animation mit dem iPad",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!JhDStLCNlktIZSsqoW:content.udk-berlin.de": {
-                    "id": "!JhDStLCNlktIZSsqoW:content.udk-berlin.de",
-                    "name": "Free Improv – Orchestra (IK)",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!KbGjISGYUfLotmYYfJ:content.udk-berlin.de": {
-                    "id": "!KbGjISGYUfLotmYYfJ:content.udk-berlin.de",
-                    "name": "Quarantäne-Ästhetiken – Reflexionen über Digitalität, social distancing & Körperbilder in Zeiten der Pandemie",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!KevSuusjrPtmWXdzPc:content.udk-berlin.de": {
-                    "id": "!KevSuusjrPtmWXdzPc:content.udk-berlin.de",
-                    "name": "PAF CAMPUS – Workshop, Aufführungsbesuch und -reflexion (IK)",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!KmJTGliKISDEUGjjGn:content.udk-berlin.de": {
-                    "id": "!KmJTGliKISDEUGjjGn:content.udk-berlin.de",
-                    "name": "Eintritt in die dritte Dimension: Videoarbeiten mit 3D-Techniken",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!MTKeudzdsgaalJURYd:content.udk-berlin.de": {
-                    "id": "!MTKeudzdsgaalJURYd:content.udk-berlin.de",
-                    "name": "Sensing the City (IK)",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!MUupJzwbbCHwThfymg:content.udk-berlin.de": {
-                    "id": "!MUupJzwbbCHwThfymg:content.udk-berlin.de",
-                    "name": "Sacred, Secular, Sensual and Sublime: Manuscript Painting in India between 15th to 18th Centuries",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!MecsQrOmFYmMErPWyp:content.udk-berlin.de": {
-                    "id": "!MecsQrOmFYmMErPWyp:content.udk-berlin.de",
-                    "name": "Werkstattlehre: Radierung Freie Grafik, Grundkurs für Anfänger",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!MfcaECEjjCuOJvIgBk:content.udk-berlin.de": {
-                    "id": "!MfcaECEjjCuOJvIgBk:content.udk-berlin.de",
-                    "name": "Von der grafischen Notation hin zur \"abstrakten visuellen Referenz\" (IK)",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!MzvpxFUSmMdHLEgJNW:content.udk-berlin.de": {
-                    "id": "!MzvpxFUSmMdHLEgJNW:content.udk-berlin.de",
-                    "name": "Einführung in die Kunstwissenschaft und Ästhetik",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!NEyrNEjPfhkJHABEJo:content.udk-berlin.de": {
-                    "id": "!NEyrNEjPfhkJHABEJo:content.udk-berlin.de",
-                    "name": "LAMENTO / MEMENTO – im Kraftfeld der Erinnerungen. Individuelle Formen des Trauerns, des Erinnerns und Gedenkens (IK)",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!NfblQubkPdyZnUUmEa:content.udk-berlin.de": {
-                    "id": "!NfblQubkPdyZnUUmEa:content.udk-berlin.de",
-                    "name": "Technik und Theorie der Wandmalerei",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!NmzekIonCDyKdEJRot:content.udk-berlin.de": {
-                    "id": "!NmzekIonCDyKdEJRot:content.udk-berlin.de",
-                    "name": "Malerei - Besto Berlino",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!NwpzUDhtBypMZgHzIM:content.udk-berlin.de": {
-                    "id": "!NwpzUDhtBypMZgHzIM:content.udk-berlin.de",
-                    "name": "Projektbetreuung/ Prüfungsvorbereitungen (Malerei)",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!OChnYlvSwCBxtGfxai:content.udk-berlin.de": {
-                    "id": "!OChnYlvSwCBxtGfxai:content.udk-berlin.de",
-                    "name": "\"It’s a family affair\" (KW)",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!OZCUWIqeposgQrssjX:content.udk-berlin.de": {
-                    "id": "!OZCUWIqeposgQrssjX:content.udk-berlin.de",
-                    "name": "Grundlagen Metall - individuelle Beratung und Betreuung",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!OiIWhmjtwCIFLsBYZF:content.udk-berlin.de": {
-                    "id": "!OiIWhmjtwCIFLsBYZF:content.udk-berlin.de",
-                    "name": "\"… they think these bodies can't …\" - otherism in classical music composition (KW)",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!OjwViCskZEidfXtJrD:content.udk-berlin.de": {
-                    "id": "!OjwViCskZEidfXtJrD:content.udk-berlin.de",
-                    "name": "Kunst und Pädagogik - aktuelle Forschungsansätze und Wege in die Praxis",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!OwrbxrwajXGoClYlGr:content.udk-berlin.de": {
-                    "id": "!OwrbxrwajXGoClYlGr:content.udk-berlin.de",
-                    "name": "Zeichnung – individuelle Begleitung und Aufgabenstellung",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!PHhjUtSLcORIZkmPVU:content.udk-berlin.de": {
-                    "id": "!PHhjUtSLcORIZkmPVU:content.udk-berlin.de",
-                    "name": "Die Vermögen der Körper (KW)",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!PNSxsXTAPUZhnCoHez:content.udk-berlin.de": {
-                    "id": "!PNSxsXTAPUZhnCoHez:content.udk-berlin.de",
-                    "name": "Raum und Objektzeichnen – Methoden, Material, Experiment",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!PkDOygZPleUJDVdnqQ:content.udk-berlin.de": {
-                    "id": "!PkDOygZPleUJDVdnqQ:content.udk-berlin.de",
-                    "name": "Before Photography. Wie ein Medium entsteht",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!PkiKdrOfhNLzbTMPuA:content.udk-berlin.de": {
-                    "id": "!PkiKdrOfhNLzbTMPuA:content.udk-berlin.de",
-                    "name": "Narration des Selbst im Portrait (IK)",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!PvqhMTzSuecMjxJfrR:content.udk-berlin.de": {
-                    "id": "!PvqhMTzSuecMjxJfrR:content.udk-berlin.de",
-                    "name": "Foto 1 und 2",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!QbnozYRhFFOgFFHnzi:content.udk-berlin.de": {
-                    "id": "!QbnozYRhFFOgFFHnzi:content.udk-berlin.de",
-                    "name": "En plein air! – Wanderstaffelei, Farbentuben und festes Schuhwerk in analoger Praxis bei jeder Wetterlage (IK)",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!QkoSLnyNUoDBimutGT:content.udk-berlin.de": {
-                    "id": "!QkoSLnyNUoDBimutGT:content.udk-berlin.de",
-                    "name": "Nothing is Original. Challenging Notions of Artistic Autonomy (KW)",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!RRgZnUuZiMoLWwKUEk:content.udk-berlin.de": {
-                    "id": "!RRgZnUuZiMoLWwKUEk:content.udk-berlin.de",
-                    "name": "Wer hat Angst vor der Klitoris? Formen des weiblichen Genießens von 1968 bis heute",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!RSLuHrbdnEHVIlKTvA:content.udk-berlin.de": {
-                    "id": "!RSLuHrbdnEHVIlKTvA:content.udk-berlin.de",
-                    "name": "Film, Video und Audio - individuelle Projektbetreuung",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!RTShPKoYLLYniPJcBD:content.udk-berlin.de": {
-                    "id": "!RTShPKoYLLYniPJcBD:content.udk-berlin.de",
-                    "name": "Things are generally different behind closed doors Praxis der Kunst im öffentlichen Raum / Kunst am Bau",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!SFgcEOFEdFmUAVqvWM:content.udk-berlin.de": {
-                    "id": "!SFgcEOFEdFmUAVqvWM:content.udk-berlin.de",
-                    "name": "prepare and share: Künstlerische und diskriminierungskritische Methoden für die Auseinandersetzung mit Kunst in der Schule.",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!SUXdHvZRJQjHrvvyzW:content.udk-berlin.de": {
-                    "id": "!SUXdHvZRJQjHrvvyzW:content.udk-berlin.de",
-                    "name": "Einführung in die Ölmalerei - ohne gesundheitsgefährdende Lösungsmittel (Online-Kurs)",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!SngUGMVfAFRmftXKGP:content.udk-berlin.de": {
-                    "id": "!SngUGMVfAFRmftXKGP:content.udk-berlin.de",
-                    "name": "Bullshit-Resistenz: Einführung ins kritische Denken (KW)",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!SyQzVIyLVEsIcyevOS:content.udk-berlin.de": {
-                    "id": "!SyQzVIyLVEsIcyevOS:content.udk-berlin.de",
-                    "name": "Contesting the Colonial Spatial Divide of the Humboldt Forum & Following Entangled Trajectories",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!TOjpZLjXtmlyNlEdlw:content.udk-berlin.de": {
-                    "id": "!TOjpZLjXtmlyNlEdlw:content.udk-berlin.de",
-                    "name": "Images in Motion",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!TRWbPkgYwlGSkpwzQe:content.udk-berlin.de": {
-                    "id": "!TRWbPkgYwlGSkpwzQe:content.udk-berlin.de",
-                    "name": "Grundlagen Metall - Werkstattkurs",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!UFwTTEXetNbiRtWrFF:content.udk-berlin.de": {
-                    "id": "!UFwTTEXetNbiRtWrFF:content.udk-berlin.de",
-                    "name": "Holzpraxis I",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!UokNYjwgYVoEiFeglE:content.udk-berlin.de": {
-                    "id": "!UokNYjwgYVoEiFeglE:content.udk-berlin.de",
-                    "name": "Gilles Deleuze, Differenz und Wiederholung",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!UyQSEqpYPGOpDGPtxd:content.udk-berlin.de": {
-                    "id": "!UyQSEqpYPGOpDGPtxd:content.udk-berlin.de",
-                    "name": "Online-Werkstatt Maltechnik",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!VLOnqckCZMHUaHxoPs:content.udk-berlin.de": {
-                    "id": "!VLOnqckCZMHUaHxoPs:content.udk-berlin.de",
-                    "name": "Beyond UX – Zur Kultur und Geschichte des Interfaces (KW)",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!VkXvhTqygnxuAmYmyG:content.udk-berlin.de": {
-                    "id": "!VkXvhTqygnxuAmYmyG:content.udk-berlin.de",
-                    "name": "Transdisziplinare Malerei",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!WNIDPTaqYoTEtqkZSC:content.udk-berlin.de": {
-                    "id": "!WNIDPTaqYoTEtqkZSC:content.udk-berlin.de",
-                    "name": "Grundlagen der Steinbearbeitung für die Bildhauerei",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!WOkyzmEGSltHVEVoXI:content.udk-berlin.de": {
-                    "id": "!WOkyzmEGSltHVEVoXI:content.udk-berlin.de",
-                    "name": "Objektbezogenes Arbeiten",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!WTcqojRUTvsMIqLOyT:content.udk-berlin.de": {
-                    "id": "!WTcqojRUTvsMIqLOyT:content.udk-berlin.de",
-                    "name": "Seminar Musiktheorie: Das universale Material? Modales Komponieren in Neuer Musik, Jazz und Rock/Pop",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!XrLvznZuTPzUDTDseB:content.udk-berlin.de": {
-                    "id": "!XrLvznZuTPzUDTDseB:content.udk-berlin.de",
-                    "name": "Zeichnung und Kritische Digitalität",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!YGOssoJqUUjwuxQUgC:content.udk-berlin.de": {
-                    "id": "!YGOssoJqUUjwuxQUgC:content.udk-berlin.de",
-                    "name": "Grundlehre: Großes Plenum",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!YgMUaoegQOcmkjzlYc:content.udk-berlin.de": {
-                    "id": "!YgMUaoegQOcmkjzlYc:content.udk-berlin.de",
-                    "name": "Malerei, Freie Grafik (Fachklasse)",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!YlnfMmgttFJXMfGMoS:content.udk-berlin.de": {
-                    "id": "!YlnfMmgttFJXMfGMoS:content.udk-berlin.de",
-                    "name": "Metallpraxis - individuelle Beratung und Betreuung von künstlerischen Projekten",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!ZGInerSifizhaiVZCv:content.udk-berlin.de": {
-                    "id": "!ZGInerSifizhaiVZCv:content.udk-berlin.de",
-                    "name": "Prüfungskolloquium",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!ZMYyQWYyRykRVvbCNP:content.udk-berlin.de": {
-                    "id": "!ZMYyQWYyRykRVvbCNP:content.udk-berlin.de",
-                    "name": "Digitalfotolabor - Digitalgroßfoto",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!aApckRMzdGvWSeFtUJ:content.udk-berlin.de": {
-                    "id": "!aApckRMzdGvWSeFtUJ:content.udk-berlin.de",
-                    "name": "Projektbetreuung Foto- und Bildbearbeitung / Druck",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!aEJcCJzmOXuhRDIZdI:content.udk-berlin.de": {
-                    "id": "!aEJcCJzmOXuhRDIZdI:content.udk-berlin.de",
-                    "name": "Die Idee der Kindheit (Walter Benjamin)",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!acnXfqaNsocIHwgJgL:content.udk-berlin.de": {
-                    "id": "!acnXfqaNsocIHwgJgL:content.udk-berlin.de",
-                    "name": "SCHRIFTKÖRPER/KÖRPERSCHRIFT (KW)",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!ampXfDbRyWESXfnogq:content.udk-berlin.de": {
-                    "id": "!ampXfDbRyWESXfnogq:content.udk-berlin.de",
-                    "name": "objekt-bild-hauerei",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!ayIvXUUILDQjacoDRu:content.udk-berlin.de": {
-                    "id": "!ayIvXUUILDQjacoDRu:content.udk-berlin.de",
-                    "name": "Raum Umraum",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!bIeyiwSyRYQzQLeavx:content.udk-berlin.de": {
-                    "id": "!bIeyiwSyRYQzQLeavx:content.udk-berlin.de",
-                    "name": "Die Zukunft der großen Geschichten",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!bNpubEWrKXwdpHRduD:content.udk-berlin.de": {
-                    "id": "!bNpubEWrKXwdpHRduD:content.udk-berlin.de",
-                    "name": "Erzählerische, fiktionale Bildkonzepte",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!bPHjpANsjsJWvjyxYL:content.udk-berlin.de": {
-                    "id": "!bPHjpANsjsJWvjyxYL:content.udk-berlin.de",
-                    "name": "Bodybuilding (IK)",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!bWgmvAQGbuCvpSTVEE:content.udk-berlin.de": {
-                    "id": "!bWgmvAQGbuCvpSTVEE:content.udk-berlin.de",
-                    "name": "Resonanzkörper (KW)",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!baxDycFefSXeIlMsWC:content.udk-berlin.de": {
-                    "id": "!baxDycFefSXeIlMsWC:content.udk-berlin.de",
-                    "name": "Praxisorientiertes Seminar (Modul BA 6.3) - Alternativen des Wissenserwerbs im Kunstunterricht -",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!bfJZGUoTHgvxWCzJIk:content.udk-berlin.de": {
-                    "id": "!bfJZGUoTHgvxWCzJIk:content.udk-berlin.de",
-                    "name": "Siebdruck: Einführung - Grundlegende Kenntnisse in Theorie und Praxis",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!bpLrHEOwuZMIHNyKrI:content.udk-berlin.de": {
-                    "id": "!bpLrHEOwuZMIHNyKrI:content.udk-berlin.de",
-                    "name": "Adding Insult to Injury: Bodies and their Objects (IK)",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!bxKGOQXGGBfELVmBWg:content.udk-berlin.de": {
-                    "id": "!bxKGOQXGGBfELVmBWg:content.udk-berlin.de",
-                    "name": "Essay als Form – in Kunst, Literatur, Ausstellung",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!cKFFuJMPgisNxsjYjn:content.udk-berlin.de": {
-                    "id": "!cKFFuJMPgisNxsjYjn:content.udk-berlin.de",
-                    "name": "Contemporary Art and Photography / Zeitgenössische Kunst und Fotografie",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!dDRneodMoVZINSLzQA:content.udk-berlin.de": {
-                    "id": "!dDRneodMoVZINSLzQA:content.udk-berlin.de",
-                    "name": "Material-, Form- und Gusstechniken - Grundkurs",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!dLNbyolXMdfEPJDZDl:content.udk-berlin.de": {
-                    "id": "!dLNbyolXMdfEPJDZDl:content.udk-berlin.de",
-                    "name": "Wahrnehmung und Konstitution (KW)",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!dRurlBdOOwGqzVNpPZ:content.udk-berlin.de": {
-                    "id": "!dRurlBdOOwGqzVNpPZ:content.udk-berlin.de",
-                    "name": "Archäologie des Selbst",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!deMLonmXSkEPogOujp:content.udk-berlin.de": {
-                    "id": "!deMLonmXSkEPogOujp:content.udk-berlin.de",
-                    "name": "Farb- und Materialtechnik",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!dueBcsJvztfXmpBtvh:content.udk-berlin.de": {
-                    "id": "!dueBcsJvztfXmpBtvh:content.udk-berlin.de",
-                    "name": "Arbeitsgespräche / Einzelkonsultationen",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!dyAYbIrvWTStbJXoOI:content.udk-berlin.de": {
-                    "id": "!dyAYbIrvWTStbJXoOI:content.udk-berlin.de",
-                    "name": "Offene Werkstatt - Formen und Gießen",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!dyVDsamcPIjrpqKCRo:content.udk-berlin.de": {
-                    "id": "!dyVDsamcPIjrpqKCRo:content.udk-berlin.de",
-                    "name": "Get going. Exploring ways through the climate disaster / Wirklich handeln. Den Klimanotstand als Epochenwandel gestalten (KW)",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!fQfdGUTuAyUWiFOADh:content.udk-berlin.de": {
-                    "id": "!fQfdGUTuAyUWiFOADh:content.udk-berlin.de",
-                    "name": "Malerei und Zeichnung",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!fbIxsrxCilKBPHLLFo:content.udk-berlin.de": {
-                    "id": "!fbIxsrxCilKBPHLLFo:content.udk-berlin.de",
-                    "name": "material life",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!fbzRQxxCcozOEKXHaU:content.udk-berlin.de": {
-                    "id": "!fbzRQxxCcozOEKXHaU:content.udk-berlin.de",
-                    "name": "Photoshop für Anfänger",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!fzmIkEYisOJbjKUvkA:content.udk-berlin.de": {
-                    "id": "!fzmIkEYisOJbjKUvkA:content.udk-berlin.de",
-                    "name": "Kunst und Biografie—Kunst als Biografie",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!gJGpcgIcqKfFKHMciS:content.udk-berlin.de": {
-                    "id": "!gJGpcgIcqKfFKHMciS:content.udk-berlin.de",
-                    "name": "Tiefdruck- experimentelle Verfahren",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!gKKllwcjgyWvutOrzV:content.udk-berlin.de": {
-                    "id": "!gKKllwcjgyWvutOrzV:content.udk-berlin.de",
-                    "name": "„Sprechen über Kunst. Konzepte für Bildung und Vermittlung von Biennalen und musealen Sammlungen“",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!gUpmDWghHzTlheabrD:content.udk-berlin.de": {
-                    "id": "!gUpmDWghHzTlheabrD:content.udk-berlin.de",
-                    "name": "Einführung in die Kunstwissenschaft und Ästhetik",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!hZyOfZsfmYMNZYFcIF:content.udk-berlin.de": {
-                    "id": "!hZyOfZsfmYMNZYFcIF:content.udk-berlin.de",
-                    "name": "Andy Warhols queere Filmfabrik",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!iMxvZYYzNDxsXyKtzh:content.udk-berlin.de": {
-                    "id": "!iMxvZYYzNDxsXyKtzh:content.udk-berlin.de",
-                    "name": "Pharmapolitische Fiktionen. Seltsame Substanzen und prekäre Stoffe der Science-Fiction-",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!jJWWIVrLjsUvUTNPEa:content.udk-berlin.de": {
-                    "id": "!jJWWIVrLjsUvUTNPEa:content.udk-berlin.de",
-                    "name": "Performative Methods of Continuing (IK)",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!jeWNefDIceXCUTdLBo:content.udk-berlin.de": {
-                    "id": "!jeWNefDIceXCUTdLBo:content.udk-berlin.de",
-                    "name": "Offene Werkstatt Textil",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!jfrMyshmjFgjmDtodC:content.udk-berlin.de": {
-                    "id": "!jfrMyshmjFgjmDtodC:content.udk-berlin.de",
-                    "name": "Was heißt: Denken am Ende der Welt?",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!jhOxbFVpcSJPoixaHz:content.udk-berlin.de": {
-                    "id": "!jhOxbFVpcSJPoixaHz:content.udk-berlin.de",
-                    "name": "Colorgroßfoto-Analog I",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!kBksYOQqDIsHitfWRd:content.udk-berlin.de": {
-                    "id": "!kBksYOQqDIsHitfWRd:content.udk-berlin.de",
-                    "name": "Körperkontakt auf Entzug – performative Aktionen und Interventionen (IK)",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!kzpEhFoMQBrSwGTyRe:content.udk-berlin.de": {
-                    "id": "!kzpEhFoMQBrSwGTyRe:content.udk-berlin.de",
-                    "name": "Bildende Kunst",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!lGMLLIeiLmSYaUTlAQ:content.udk-berlin.de": {
-                    "id": "!lGMLLIeiLmSYaUTlAQ:content.udk-berlin.de",
-                    "name": "Holzpraxis II",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!lZADQXDleOZBCsSmik:content.udk-berlin.de": {
-                    "id": "!lZADQXDleOZBCsSmik:content.udk-berlin.de",
-                    "name": "Bildhauerei 1 und 2",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!ljyeaqvJvWmjxkSkGv:content.udk-berlin.de": {
-                    "id": "!ljyeaqvJvWmjxkSkGv:content.udk-berlin.de",
-                    "name": "Freies Arbeiten für Fortgeschrittene",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!mJnXmEHJAUVQxcdGXz:content.udk-berlin.de": {
-                    "id": "!mJnXmEHJAUVQxcdGXz:content.udk-berlin.de",
-                    "name": "Medienästhetik der Faszination (KW)",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!mKKhmAiawHYjsurzoQ:content.udk-berlin.de": {
-                    "id": "!mKKhmAiawHYjsurzoQ:content.udk-berlin.de",
-                    "name": "Zeichnung 1 und 2",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!mLJSGqGONjbRrDCIlP:content.udk-berlin.de": {
-                    "id": "!mLJSGqGONjbRrDCIlP:content.udk-berlin.de",
-                    "name": "Kunstdidaktik I (Einführung)",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!mMnNkvFGLYaWAluFyc:content.udk-berlin.de": {
-                    "id": "!mMnNkvFGLYaWAluFyc:content.udk-berlin.de",
-                    "name": "Moralische Identität (KW)",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!mXQcsmageGHfwUjZoB:content.udk-berlin.de": {
-                    "id": "!mXQcsmageGHfwUjZoB:content.udk-berlin.de",
-                    "name": "Einführung in textile Werkverfahren",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!mrvlZuhYOlkgcpZeZI:content.udk-berlin.de": {
-                    "id": "!mrvlZuhYOlkgcpZeZI:content.udk-berlin.de",
-                    "name": "Malerei 1, 2 und 3",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!nWioJDBYWMcjuwOFsw:content.udk-berlin.de": {
-                    "id": "!nWioJDBYWMcjuwOFsw:content.udk-berlin.de",
-                    "name": "Working with sound - from recording to presentation (english)",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!ncKyjrjUyXNfSMABaf:content.udk-berlin.de": {
-                    "id": "!ncKyjrjUyXNfSMABaf:content.udk-berlin.de",
-                    "name": "Designtechniken Modedesign: Schnittkonstruktion",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!nhxzZQOUYijYWOVbZk:content.udk-berlin.de": {
-                    "id": "!nhxzZQOUYijYWOVbZk:content.udk-berlin.de",
-                    "name": "Über den gezielten Kontrollverlust bei Material-, Form- und Gusstechniken Kunstwissenschaftliches und praktisches Seminar",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!ojxRLdbtWgqVWjubvP:content.udk-berlin.de": {
-                    "id": "!ojxRLdbtWgqVWjubvP:content.udk-berlin.de",
-                    "name": "Offene Sprechstunde - für Studierende der Grundlehre",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!pGxAvjHTsSmwoVEgNq:content.udk-berlin.de": {
-                    "id": "!pGxAvjHTsSmwoVEgNq:content.udk-berlin.de",
-                    "name": "Grundlagen zu Film und Video (Kamera, Ton, Licht, Postproduktion)",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!peNLkbjXRJLftTjzOB:content.udk-berlin.de": {
-                    "id": "!peNLkbjXRJLftTjzOB:content.udk-berlin.de",
-                    "name": "Kunstgeschichte im Überblick II: 1750 bis Gegenwart",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!pnOppXfSqjyHIMNAyY:content.udk-berlin.de": {
-                    "id": "!pnOppXfSqjyHIMNAyY:content.udk-berlin.de",
-                    "name": "From Concept To Performance",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!qGpMVCbNrKsMSjVcPQ:content.udk-berlin.de": {
-                    "id": "!qGpMVCbNrKsMSjVcPQ:content.udk-berlin.de",
-                    "name": "multimediale Skulptur und Installation",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!qHuqLRUSqSjHDcGKbz:content.udk-berlin.de": {
-                    "id": "!qHuqLRUSqSjHDcGKbz:content.udk-berlin.de",
-                    "name": "Fleischwerdung des Wortes. Über eine Poetik des Körpers (KW)",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!qJhUrHCAtUBJeNVAAi:content.udk-berlin.de": {
-                    "id": "!qJhUrHCAtUBJeNVAAi:content.udk-berlin.de",
-                    "name": "We’ll work on the other side of time",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!qdqOKLduhokROAfWws:content.udk-berlin.de": {
-                    "id": "!qdqOKLduhokROAfWws:content.udk-berlin.de",
-                    "name": "Colloquium: Besprechnung wissenschaftlicher Abschlussarbeiten",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!qxjbYYyZlDnlBqBUxK:content.udk-berlin.de": {
-                    "id": "!qxjbYYyZlDnlBqBUxK:content.udk-berlin.de",
-                    "name": "Vom Konzept zur Aufführung",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!rdWSVHFsDOqALDwtgg:content.udk-berlin.de": {
-                    "id": "!rdWSVHFsDOqALDwtgg:content.udk-berlin.de",
-                    "name": "Projektbezogene Arbeit/Lithographie",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!rpvOWUpDjqsOYRYROD:content.udk-berlin.de": {
-                    "id": "!rpvOWUpDjqsOYRYROD:content.udk-berlin.de",
-                    "name": "Is LOL Contagious?: Clowning in Digital Times (IK)",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!sXNrGePMfBdklIYTcX:content.udk-berlin.de": {
-                    "id": "!sXNrGePMfBdklIYTcX:content.udk-berlin.de",
-                    "name": "Fachdidaktik I (Einführung)/ISS Gym BA",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!suOGefRgcADsoZZtZl:content.udk-berlin.de": {
-                    "id": "!suOGefRgcADsoZZtZl:content.udk-berlin.de",
-                    "name": "Aisthesis Decolonial – Dekoloniale Theorie in Kunst und Gestaltung",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!tPXKEWdPiACvhudeOZ:content.udk-berlin.de": {
-                    "id": "!tPXKEWdPiACvhudeOZ:content.udk-berlin.de",
-                    "name": "Drucken im Großformat – Hochdruck-Tiefdruck – experimentelle Druckgrafk",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!twnXMoysEcHnITDGtL:content.udk-berlin.de": {
-                    "id": "!twnXMoysEcHnITDGtL:content.udk-berlin.de",
-                    "name": "Einführungskurs, Individuelle Beratung und Betreuung von künstlerischen Projekten",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!uOAoFFvajtbbVgKZdH:content.udk-berlin.de": {
-                    "id": "!uOAoFFvajtbbVgKZdH:content.udk-berlin.de",
-                    "name": "Doktorandencolloquium",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!vBjZXKPBnAbzgVnOVv:content.udk-berlin.de": {
-                    "id": "!vBjZXKPBnAbzgVnOVv:content.udk-berlin.de",
-                    "name": "Holzschnitt - Einführung in die Vielschichtigkeit des Hochdrucks",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!vyRiriFSsflJUPAtbX:content.udk-berlin.de": {
-                    "id": "!vyRiriFSsflJUPAtbX:content.udk-berlin.de",
-                    "name": "Marcuse – Kunst und Revolution",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!wAuotooyVRoqBxIWpm:content.udk-berlin.de": {
-                    "id": "!wAuotooyVRoqBxIWpm:content.udk-berlin.de",
-                    "name": "Schwarz und Weiß in der Musik",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!wQNPiBRVOUHfxSDbbg:content.udk-berlin.de": {
-                    "id": "!wQNPiBRVOUHfxSDbbg:content.udk-berlin.de",
-                    "name": "Begleitung der künstlerischen Praxis in Einzel- und Gruppenbesprechungen (Klasse Karsten Konrad)",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!wUQhOSgSbDgaKBauld:content.udk-berlin.de": {
-                    "id": "!wUQhOSgSbDgaKBauld:content.udk-berlin.de",
-                    "name": "Malerei",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!wmwIRpTJtioFVCSith:content.udk-berlin.de": {
-                    "id": "!wmwIRpTJtioFVCSith:content.udk-berlin.de",
-                    "name": "Bildhauerei",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!xDqcYIAYpzSXVBueDG:content.udk-berlin.de": {
-                    "id": "!xDqcYIAYpzSXVBueDG:content.udk-berlin.de",
-                    "name": "Grundlehre: Kleines Plenum",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!xhaxvCIFsSGtQJqgIC:content.udk-berlin.de": {
-                    "id": "!xhaxvCIFsSGtQJqgIC:content.udk-berlin.de",
-                    "name": "Installation/Sound",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!xjzUtDlINjAYbnRLjS:content.udk-berlin.de": {
-                    "id": "!xjzUtDlINjAYbnRLjS:content.udk-berlin.de",
-                    "name": "Colorgroßfoto-Analog II",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!ygMaRnUakGrCileKvZ:content.udk-berlin.de": {
-                    "id": "!ygMaRnUakGrCileKvZ:content.udk-berlin.de",
-                    "name": "Louise Bourgeois- Das textile Werk / The textile works",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!yjiUOEBXpgWUDQmyHr:content.udk-berlin.de": {
-                    "id": "!yjiUOEBXpgWUDQmyHr:content.udk-berlin.de",
-                    "name": "Klassentreffen",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!ylRQXgfSgoimxYsLpm:content.udk-berlin.de": {
-                    "id": "!ylRQXgfSgoimxYsLpm:content.udk-berlin.de",
-                    "name": "Grundlehre: Kolloquium",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!ywbZexhvAhDpKHYOyq:content.udk-berlin.de": {
-                    "id": "!ywbZexhvAhDpKHYOyq:content.udk-berlin.de",
-                    "name": "Bucheinbandtechniken",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!zPQlUPZkxMdpjMzoCv:content.udk-berlin.de": {
-                    "id": "!zPQlUPZkxMdpjMzoCv:content.udk-berlin.de",
-                    "name": "Siebdruck: Fortgeschrittene - Grundlegende Kenntnisse in Theorie und Praxis",
                     "type": "course",
                     "children": {}
                   }
@@ -2583,1469 +2564,70 @@ const struktur = {
                 "children": {}
               }
             }
+          },
+          "!axwsBJIlWeoMDpaZXV:content.udk-berlin.de": {
+            "id": "!axwsBJIlWeoMDpaZXV:content.udk-berlin.de",
+            "name": "Institut für Kunstwissenschaft und Ästhetik",
+            "type": "institute",
+            "children": {}
+          },
+          "!GyluFazrNTQrgSUBMd:content.udk-berlin.de": {
+            "id": "!GyluFazrNTQrgSUBMd:content.udk-berlin.de",
+            "name": "Institut für Kunstdidaktik und Ästhetische Bildung",
+            "type": "institute",
+            "children": {}
+          },
+          "!VXRmuJWNzoPMVvkeJZ:content.udk-berlin.de": {
+            "id": "!VXRmuJWNzoPMVvkeJZ:content.udk-berlin.de",
+            "name": "Institut für Kunst im Kontext",
+            "type": "institute",
+            "children": {
+              "!XTCQWCFEPsbdsFvwXR:content.udk-berlin.de": {
+                "id": "!XTCQWCFEPsbdsFvwXR:content.udk-berlin.de",
+                "name": "Art in Context",
+                "type": "degree program",
+                "children": {}
+              }
+            }
+          },
+          "!MCwYmENdSKcHBFgBEo:content.udk-berlin.de": {
+            "id": "!MCwYmENdSKcHBFgBEo:content.udk-berlin.de",
+            "name": "Arbeitsproben der Studierenden der Fachklasse Husain & Naprushkina",
+            "type": "course",
+            "children": {}
           }
         }
       },
-      "!twLnJbaaYDIoswgCDl:content.udk-berlin.de": {
-        "id": "!twLnJbaaYDIoswgCDl:content.udk-berlin.de",
-        "name": "Fakultät Gestaltung",
-        "type": "faculty",
+      "!PIZnKjMWljdFHfugiJ:content.udk-berlin.de": {
+        "id": "!PIZnKjMWljdFHfugiJ:content.udk-berlin.de",
+        "name": "Berlin Career College",
+        "type": "institution",
         "children": {
-          "!EdPyNKPOmwJRRSWTtZ:content.udk-berlin.de": {
-            "id": "!EdPyNKPOmwJRRSWTtZ:content.udk-berlin.de",
-            "name": "Institut für Geschichte und Theorie der Gestaltung",
-            "type": "institute",
+          "!leNHytnZdIfmkxQKIe:content.udk-berlin.de": {
+            "id": "!leNHytnZdIfmkxQKIe:content.udk-berlin.de",
+            "name": "Artist Training",
+            "type": "course",
             "children": {}
-          },
-          "!JqAKEZtqItDOlxnmCr:content.udk-berlin.de": {
-            "id": "!JqAKEZtqItDOlxnmCr:content.udk-berlin.de",
-            "name": "Master Visuelle Kommunikation",
-            "type": "degree program",
-            "children": {
-              "!GPdtCWWiyFqOManxhx:content.udk-berlin.de": {
-                "id": "!GPdtCWWiyFqOManxhx:content.udk-berlin.de",
-                "name": "New Media Graduates",
-                "type": "course",
-                "children": {}
-              },
-              "!IXKYDWpZbDiLzITaXq:content.udk-berlin.de": {
-                "id": "!IXKYDWpZbDiLzITaXq:content.udk-berlin.de",
-                "name": "Auf dem Land. Von neuen und alten Existenzweisen",
-                "type": "course",
-                "children": {}
-              },
-              "!JSjWuTRaaAyUrNuqSn:content.udk-berlin.de": {
-                "id": "!JSjWuTRaaAyUrNuqSn:content.udk-berlin.de",
-                "name": "Connection Space",
-                "type": "course",
-                "children": {}
-              },
-              "!JzYxKFMnLXGREVSmVq:content.udk-berlin.de": {
-                "id": "!JzYxKFMnLXGREVSmVq:content.udk-berlin.de",
-                "name": "Einführung in den Modellbau",
-                "type": "course",
-                "children": {}
-              },
-              "!KbGjISGYUfLotmYYfJ:content.udk-berlin.de": {
-                "id": "!KbGjISGYUfLotmYYfJ:content.udk-berlin.de",
-                "name": "Quarantäne-Ästhetiken – Reflexionen über Digitalität, social distancing & Körperbilder in Zeiten der Pandemie",
-                "type": "course",
-                "children": {}
-              },
-              "!LdfFqavPWcNTXyiGLs:content.udk-berlin.de": {
-                "id": "!LdfFqavPWcNTXyiGLs:content.udk-berlin.de",
-                "name": "Gestaltung des bewegten Bildes",
-                "type": "course",
-                "children": {}
-              },
-              "!QqDJxifMfSxZZJzBmj:content.udk-berlin.de": {
-                "id": "!QqDJxifMfSxZZJzBmj:content.udk-berlin.de",
-                "name": "HUMANS AND (OTHER) ANIMALS. Experimentelle 2D-Darstellungstechniken",
-                "type": "course",
-                "children": {}
-              },
-              "!RECHncgkduaAKwPrMl:content.udk-berlin.de": {
-                "id": "!RECHncgkduaAKwPrMl:content.udk-berlin.de",
-                "name": "Designed Uncertainty",
-                "type": "course",
-                "children": {}
-              },
-              "!ScGlFEDAKYIZItPato:content.udk-berlin.de": {
-                "id": "!ScGlFEDAKYIZItPato:content.udk-berlin.de",
-                "name": "Spatial Display as Agency",
-                "type": "course",
-                "children": {}
-              },
-              "!UuSYrqRgYmJMjgJabN:content.udk-berlin.de": {
-                "id": "!UuSYrqRgYmJMjgJabN:content.udk-berlin.de",
-                "name": "Illustration",
-                "type": "design department",
-                "children": {
-                  "!MrwhqMEftglPotndmJ:content.udk-berlin.de": {
-                    "id": "!MrwhqMEftglPotndmJ:content.udk-berlin.de",
-                    "name": "Comics zeichnen – Von Humor bis zum bitteren Ernst",
-                    "type": "course",
-                    "children": {}
-                  }
-                }
-              },
-              "!WEWBNEvpeVBXHtClqP:content.udk-berlin.de": {
-                "id": "!WEWBNEvpeVBXHtClqP:content.udk-berlin.de",
-                "name": "Ausstellungsgestaltung",
-                "type": "design department",
-                "children": {
-                  "!OwqzFtitzXdRYGbAwG:content.udk-berlin.de": {
-                    "id": "!OwqzFtitzXdRYGbAwG:content.udk-berlin.de",
-                    "name": "FROM SURFACE TO SPACE",
-                    "type": "course",
-                    "children": {}
-                  }
-                }
-              },
-              "!XOtlUEGwYGMPYYXIbG:content.udk-berlin.de": {
-                "id": "!XOtlUEGwYGMPYYXIbG:content.udk-berlin.de",
-                "name": "New Media",
-                "type": "design department",
-                "children": {
-                  "!RCqpiyAVwzBLhIpDgU:content.udk-berlin.de": {
-                    "id": "!RCqpiyAVwzBLhIpDgU:content.udk-berlin.de",
-                    "name": "IoT - Island of Things",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!ZhtCtAgmyDHtgucKQv:content.udk-berlin.de": {
-                    "id": "!ZhtCtAgmyDHtgucKQv:content.udk-berlin.de",
-                    "name": "Convergence",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!nUfOjTUeYFObEMARJN:content.udk-berlin.de": {
-                    "id": "!nUfOjTUeYFObEMARJN:content.udk-berlin.de",
-                    "name": "Concretely Unimaginable",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!GPdtCWWiyFqOManxhx:content.udk-berlin.de": {
-                    "id": "!GPdtCWWiyFqOManxhx:content.udk-berlin.de",
-                    "name": "New Media Graduates",
-                    "type": "course",
-                    "children": {}
-                  }
-                }
-              },
-              "!YeYlfYsoxyJVJAjThK:content.udk-berlin.de": {
-                "id": "!YeYlfYsoxyJVJAjThK:content.udk-berlin.de",
-                "name": "Visuelle Systeme",
-                "type": "design department",
-                "children": {
-                  "!AtJiGlvrHVTJweVNEU:content.udk-berlin.de": {
-                    "id": "!AtJiGlvrHVTJweVNEU:content.udk-berlin.de",
-                    "name": "Infodesign Lab",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!CQnLNUXSueOvstHEkw:content.udk-berlin.de": {
-                    "id": "!CQnLNUXSueOvstHEkw:content.udk-berlin.de",
-                    "name": "Infodesign Studio",
-                    "type": "course",
-                    "children": {}
-                  }
-                }
-              },
-              "!aBJuWGGvwGuSblDNmg:content.udk-berlin.de": {
-                "id": "!aBJuWGGvwGuSblDNmg:content.udk-berlin.de",
-                "name": "Projektentwicklung durch experimentellen Umgang mit Material und Werkzeug",
-                "type": "course",
-                "children": {}
-              },
-              "!dRurlBdOOwGqzVNpPZ:content.udk-berlin.de": {
-                "id": "!dRurlBdOOwGqzVNpPZ:content.udk-berlin.de",
-                "name": "Archäologie des Selbst",
-                "type": "course",
-                "children": {}
-              },
-              "!hMzgDgyymhdhZMiYKO:content.udk-berlin.de": {
-                "id": "!hMzgDgyymhdhZMiYKO:content.udk-berlin.de",
-                "name": "New Wilderness",
-                "type": "course",
-                "children": {}
-              },
-              "!hsQFEdaqsAYpxaVhqg:content.udk-berlin.de": {
-                "id": "!hsQFEdaqsAYpxaVhqg:content.udk-berlin.de",
-                "name": "Über Pflanzen in Kunst und Architektur",
-                "type": "course",
-                "children": {}
-              },
-              "!iMxvZYYzNDxsXyKtzh:content.udk-berlin.de": {
-                "id": "!iMxvZYYzNDxsXyKtzh:content.udk-berlin.de",
-                "name": "Pharmapolitische Fiktionen. Seltsame Substanzen und prekäre Stoffe der Science-Fiction-",
-                "type": "course",
-                "children": {}
-              },
-              "!kgAAiYquZKanKVDlUK:content.udk-berlin.de": {
-                "id": "!kgAAiYquZKanKVDlUK:content.udk-berlin.de",
-                "name": "Das Vierte Druckverfahren",
-                "type": "course",
-                "children": {}
-              },
-              "!suOGefRgcADsoZZtZl:content.udk-berlin.de": {
-                "id": "!suOGefRgcADsoZZtZl:content.udk-berlin.de",
-                "name": "Aisthesis Decolonial – Dekoloniale Theorie in Kunst und Gestaltung",
-                "type": "course",
-                "children": {}
-              },
-              "!vjjiveXiFEwLvKEeWU:content.udk-berlin.de": {
-                "id": "!vjjiveXiFEwLvKEeWU:content.udk-berlin.de",
-                "name": "The Hitchhikers to the Internet",
-                "type": "course",
-                "children": {}
-              },
-              "!vrOIUijCuglAtgdhKa:content.udk-berlin.de": {
-                "id": "!vrOIUijCuglAtgdhKa:content.udk-berlin.de",
-                "name": "Werbung",
-                "type": "design department",
-                "children": {
-                  "!LECLCKxmzeprEVfMKY:content.udk-berlin.de": {
-                    "id": "!LECLCKxmzeprEVfMKY:content.udk-berlin.de",
-                    "name": "Corporate Identity und Kommunikation für das neue UdK-Hub",
-                    "type": "course",
-                    "children": {}
-                  }
-                }
-              },
-              "!zJkcNJrkxdqpqMkOFv:content.udk-berlin.de": {
-                "id": "!zJkcNJrkxdqpqMkOFv:content.udk-berlin.de",
-                "name": "Schrift und Raum",
-                "type": "course",
-                "children": {}
-              },
-              "!zmoaTHXYRRdgNbdufB:content.udk-berlin.de": {
-                "id": "!zmoaTHXYRRdgNbdufB:content.udk-berlin.de",
-                "name": "Grafikdesign",
-                "type": "design department",
-                "children": {
-                  "!LdfFqavPWcNTXyiGLs:content.udk-berlin.de": {
-                    "id": "!LdfFqavPWcNTXyiGLs:content.udk-berlin.de",
-                    "name": "Gestaltung des bewegten Bildes",
-                    "type": "course",
-                    "children": {}
-                  }
-                }
-              }
-            }
-          },
-          "!KtWoeRhyppPMSXpdpC:content.udk-berlin.de": {
-            "id": "!KtWoeRhyppPMSXpdpC:content.udk-berlin.de",
-            "name": "Master Gesellschafts- und Wirtschaftskommunikation",
-            "type": "degree program",
-            "children": {}
-          },
-          "!NwHTjZgTjyfTOcRwuk:content.udk-berlin.de": {
-            "id": "!NwHTjZgTjyfTOcRwuk:content.udk-berlin.de",
-            "name": "Institut für Theorie und Praxis der Kommunikation",
-            "type": "institute",
-            "children": {}
-          },
-          "!QAIZyZivxvvtgtmsTO:content.udk-berlin.de": {
-            "id": "!QAIZyZivxvvtgtmsTO:content.udk-berlin.de",
-            "name": "Master Architektur",
-            "type": "degree program",
-            "children": {
-              "!EEjsfrlQZxPBTCceWW:content.udk-berlin.de": {
-                "id": "!EEjsfrlQZxPBTCceWW:content.udk-berlin.de",
-                "name": "studio raumproduktion: How Together",
-                "type": "course",
-                "children": {}
-              },
-              "!GKehszwoEurdgSXsBu:content.udk-berlin.de": {
-                "id": "!GKehszwoEurdgSXsBu:content.udk-berlin.de",
-                "name": "Quellentexte der Architekturtheorie. Von der Antike bis zum Klassizismus.",
-                "type": "course",
-                "children": {}
-              },
-              "!NXlXmbguLhvoWOFRaG:content.udk-berlin.de": {
-                "id": "!NXlXmbguLhvoWOFRaG:content.udk-berlin.de",
-                "name": "Dekoloniale Rauminspektion",
-                "type": "course",
-                "children": {}
-              },
-              "!YyslQoeDKEfxIzBqrW:content.udk-berlin.de": {
-                "id": "!YyslQoeDKEfxIzBqrW:content.udk-berlin.de",
-                "name": "Die 80er in Deutschland: \"And the age of our innocence is somewhere in the garden.\" Eine Bestandsaufnahme",
-                "type": "course",
-                "children": {}
-              },
-              "!hsQFEdaqsAYpxaVhqg:content.udk-berlin.de": {
-                "id": "!hsQFEdaqsAYpxaVhqg:content.udk-berlin.de",
-                "name": "Über Pflanzen in Kunst und Architektur",
-                "type": "course",
-                "children": {}
-              },
-              "!mZsLVeIlMBKzhGiFOV:content.udk-berlin.de": {
-                "id": "!mZsLVeIlMBKzhGiFOV:content.udk-berlin.de",
-                "name": "„Eine Philosophie der Ernährung und der Umwelt“",
-                "type": "course",
-                "children": {}
-              },
-              "!pkkGWRWFFAYypdimyB:content.udk-berlin.de": {
-                "id": "!pkkGWRWFFAYypdimyB:content.udk-berlin.de",
-                "name": "Entwurfsprojekt Sobejano",
-                "type": "course",
-                "children": {}
-              },
-              "!tKjgYLIKjmURdRKFRp:content.udk-berlin.de": {
-                "id": "!tKjgYLIKjmURdRKFRp:content.udk-berlin.de",
-                "name": "Land, Ressourcen und Immobilien: Kritische Eigentumsdiskurse in Architektur und Kunst",
-                "type": "course",
-                "children": {}
-              },
-              "!vioHewFtPwlFUykaTf:content.udk-berlin.de": {
-                "id": "!vioHewFtPwlFUykaTf:content.udk-berlin.de",
-                "name": "Do what you want",
-                "type": "course",
-                "children": {}
-              },
-              "!xCdRTUkhUfOgQudDgp:content.udk-berlin.de": {
-                "id": "!xCdRTUkhUfOgQudDgp:content.udk-berlin.de",
-                "name": "Rückzug in die Welt.",
-                "type": "course",
-                "children": {}
-              }
-            }
-          },
-          "!QfMBPbiqkBqVfRFkbp:content.udk-berlin.de": {
-            "id": "!QfMBPbiqkBqVfRFkbp:content.udk-berlin.de",
-            "name": "Institut für Architektur und Städtebau",
-            "type": "institute",
-            "children": {
-              "!OfMuTxrqbIMabWrKpj:content.udk-berlin.de": {
-                "id": "!OfMuTxrqbIMabWrKpj:content.udk-berlin.de",
-                "name": "Lehrstuhl Entwerfen und Baukonstruktion",
-                "type": "course",
-                "children": {}
-              },
-              "!bwKjtOSVlyxXwdWpxw:content.udk-berlin.de": {
-                "id": "!bwKjtOSVlyxXwdWpxw:content.udk-berlin.de",
-                "name": "Gastdozentur Städtebau",
-                "type": "course",
-                "children": {}
-              },
-              "!mbBUIdNcgeznDAIEUn:content.udk-berlin.de": {
-                "id": "!mbBUIdNcgeznDAIEUn:content.udk-berlin.de",
-                "name": "Architekturgeschichte + Architekturtheorie",
-                "type": "course",
-                "children": {
-                  "!CEukofSEFLBiRYfCyS:content.udk-berlin.de": {
-                    "id": "!CEukofSEFLBiRYfCyS:content.udk-berlin.de",
-                    "name": "Streben nach dem Ideal – Vorstellungen von Stadt und Gesellschaft",
-                    "type": "course",
-                    "children": {}
-                  }
-                }
-              },
-              "!nizhmBaUcqsrdBJQvJ:content.udk-berlin.de": {
-                "id": "!nizhmBaUcqsrdBJQvJ:content.udk-berlin.de",
-                "name": "Konstruktives Entwerfen und Tragwerksplanung (KET)",
-                "type": "course",
-                "children": {}
-              },
-              "!XLinddgRCJNJkeJlsy:content.udk-berlin.de": {
-                "id": "!XLinddgRCJNJkeJlsy:content.udk-berlin.de",
-                "name": "OPEN THE HOUSE",
-                "type": "course",
-                "children": {}
-              },
-              "!zZcuNOJkeTTnJNKuKu:content.udk-berlin.de": {
-                "id": "!zZcuNOJkeTTnJNKuKu:content.udk-berlin.de",
-                "name": "Das Freibad der Zukunft",
-                "type": "course",
-                "children": {}
-              },
-              "!XPBNfGgumEjgYBscua:content.udk-berlin.de": {
-                "id": "!XPBNfGgumEjgYBscua:content.udk-berlin.de",
-                "name": "hello, robot!",
-                "type": "course",
-                "children": {}
-              },
-              "!nrOGwwFvludMxzvVfh:content.udk-berlin.de": {
-                "id": "!nrOGwwFvludMxzvVfh:content.udk-berlin.de",
-                "name": "Digitales und Experimentelles Entwerfen",
-                "type": "course",
-                "children": {}
-              }
-            }
-          },
-          "!SWThVGByWfRMqMIbuS:content.udk-berlin.de": {
-            "id": "!SWThVGByWfRMqMIbuS:content.udk-berlin.de",
-            "name": "Bachelor Gesellschafts- und Wirtschaftskommunikation",
-            "type": "degree program",
-            "children": {
-              "!BWSWDxbeoOBKjDyOIu:content.udk-berlin.de": {
-                "id": "!BWSWDxbeoOBKjDyOIu:content.udk-berlin.de",
-                "name": "Wintersemester 2020 / 2021, Modul 06, Einführung in die angewandte Entwurfsarbeit (Creative Brief & Photoshop)",
-                "type": "course",
-                "children": {}
-              },
-              "!GTHsGnnmTnRXLbdckw:content.udk-berlin.de": {
-                "id": "!GTHsGnnmTnRXLbdckw:content.udk-berlin.de",
-                "name": "meta.dating",
-                "type": "course",
-                "children": {}
-              },
-              "!HDOQAyphXGAwIorDsV:content.udk-berlin.de": {
-                "id": "!HDOQAyphXGAwIorDsV:content.udk-berlin.de",
-                "name": "Sommersemester 2021, Modul 06, Strategische Mediengestaltung zum Thema 'World Ocean Day', Kooperationspartner Greenpeace",
-                "type": "course",
-                "children": {}
-              },
-              "!fjdLFMIfqLlKzEuAvT:content.udk-berlin.de": {
-                "id": "!fjdLFMIfqLlKzEuAvT:content.udk-berlin.de",
-                "name": "Art and Feminisms",
-                "type": "course",
-                "children": {}
-              },
-              "!qlKimcqQITYdvYeXov:content.udk-berlin.de": {
-                "id": "!qlKimcqQITYdvYeXov:content.udk-berlin.de",
-                "name": "Flanieren, umherschweifen, spazieren - Wissen(schaft) durch Bewegung",
-                "type": "course",
-                "children": {}
-              },
-              "!syMfsqnDpwiIMCYRHz:content.udk-berlin.de": {
-                "id": "!syMfsqnDpwiIMCYRHz:content.udk-berlin.de",
-                "name": "Wintersemester 2021, Modul 15, Das Interview als journalistische Darstellungsform",
-                "type": "course",
-                "children": {}
-              },
-              "!zFjYibmLdNYwiYYmYy:content.udk-berlin.de": {
-                "id": "!zFjYibmLdNYwiYYmYy:content.udk-berlin.de",
-                "name": "Sommersemester 2021, Modul 06, Einführung in die angewandte Entwurfsarbeit (Creative Brief & Photoshop), Kooperationspartner Clubcommission / United We Stream / Berlin Club Memes",
-                "type": "course",
-                "children": {}
-              }
-            }
-          },
-          "!SeCcQFyvKxNLuCnFYI:content.udk-berlin.de": {
-            "id": "!SeCcQFyvKxNLuCnFYI:content.udk-berlin.de",
-            "name": "Institut für zeitbasierte Medien",
-            "type": "institute",
-            "children": {
-              "!NAzsXmxDXbgQPPBAgg:content.udk-berlin.de": {
-                "id": "!NAzsXmxDXbgQPPBAgg:content.udk-berlin.de",
-                "name": "Video Performance",
-                "type": "course",
-                "children": {}
-              },
-              "!ezUeZQBwkUJMOiKQQR:content.udk-berlin.de": {
-                "id": "!ezUeZQBwkUJMOiKQQR:content.udk-berlin.de",
-                "name": "Video Performance I & II",
-                "type": "course",
-                "children": {}
-              }
-            }
-          },
-          "!VRpSrZzmBnwfeIhEPy:content.udk-berlin.de": {
-            "id": "!VRpSrZzmBnwfeIhEPy:content.udk-berlin.de",
-            "name": "Institut für Produkt- und Prozeßgestaltung",
-            "type": "institute",
-            "children": {
-              "!HlFCPXOpHeEcpeJtuN:content.udk-berlin.de": {
-                "id": "!HlFCPXOpHeEcpeJtuN:content.udk-berlin.de",
-                "name": "Kunst + Design",
-                "type": "course",
-                "children": {}
-              }
-            }
-          },
-          "!WHXBAQiZEfAhiQQIJC:content.udk-berlin.de": {
-            "id": "!WHXBAQiZEfAhiQQIJC:content.udk-berlin.de",
-            "name": "Institut für experimentelles Bekleidungs- und Textildesign",
-            "type": "institute",
-            "children": {
-              "!sBULzfrFduQpUhPsNk:content.udk-berlin.de": {
-                "id": "!sBULzfrFduQpUhPsNk:content.udk-berlin.de",
-                "name": "Crafting Textile Data",
-                "type": "course",
-                "children": {}
-              }
-            }
-          },
-          "!WjfZQCrXdnhYMHjwuK:content.udk-berlin.de": {
-            "id": "!WjfZQCrXdnhYMHjwuK:content.udk-berlin.de",
-            "name": "Bachelor Visuelle Kommunikation",
-            "type": "degree program",
-            "children": {
-              "!AMJvfJcQxDfCLVCeXW:content.udk-berlin.de": {
-                "id": "!AMJvfJcQxDfCLVCeXW:content.udk-berlin.de",
-                "name": "Werbung",
-                "type": "design department",
-                "children": {
-                  "!LECLCKxmzeprEVfMKY:content.udk-berlin.de": {
-                    "id": "!LECLCKxmzeprEVfMKY:content.udk-berlin.de",
-                    "name": "Corporate Identity und Kommunikation für das neue UdK-Hub",
-                    "type": "course",
-                    "children": {}
-                  }
-                }
-              },
-              "!CIAkmrXysOuDciewxT:content.udk-berlin.de": {
-                "id": "!CIAkmrXysOuDciewxT:content.udk-berlin.de",
-                "name": "Motion Graphics - Einführung",
-                "type": "course",
-                "children": {}
-              },
-              "!ExHgGsnUeguqYhDiaG:content.udk-berlin.de": {
-                "id": "!ExHgGsnUeguqYhDiaG:content.udk-berlin.de",
-                "name": "Creativ Coding I",
-                "type": "course",
-                "children": {}
-              },
-              "!FWjYuWSvewufzRiUBe:content.udk-berlin.de": {
-                "id": "!FWjYuWSvewufzRiUBe:content.udk-berlin.de",
-                "name": "Fotografie 1 - Perspektive",
-                "type": "course",
-                "children": {}
-              },
-              "!FaOoNlaWSwdIzLgzoc:content.udk-berlin.de": {
-                "id": "!FaOoNlaWSwdIzLgzoc:content.udk-berlin.de",
-                "name": "Ausstellungsgestaltung",
-                "type": "design department",
-                "children": {
-                  "!OwqzFtitzXdRYGbAwG:content.udk-berlin.de": {
-                    "id": "!OwqzFtitzXdRYGbAwG:content.udk-berlin.de",
-                    "name": "FROM SURFACE TO SPACE",
-                    "type": "course",
-                    "children": {}
-                  }
-                }
-              },
-              "!GPdtCWWiyFqOManxhx:content.udk-berlin.de": {
-                "id": "!GPdtCWWiyFqOManxhx:content.udk-berlin.de",
-                "name": "New Media Graduates",
-                "type": "course",
-                "children": {}
-              },
-              "!GixXvaYAuahAkKFTvS:content.udk-berlin.de": {
-                "id": "!GixXvaYAuahAkKFTvS:content.udk-berlin.de",
-                "name": "Experimentelles Zeichnen / Rapportieren",
-                "type": "course",
-                "children": {}
-              },
-              "!HEkAjAMAvaKmOYALrn:content.udk-berlin.de": {
-                "id": "!HEkAjAMAvaKmOYALrn:content.udk-berlin.de",
-                "name": "Comics – Szenische Experimente",
-                "type": "course",
-                "children": {}
-              },
-              "!ISTkNoRHAfDogKhrsp:content.udk-berlin.de": {
-                "id": "!ISTkNoRHAfDogKhrsp:content.udk-berlin.de",
-                "name": "Grundlagen Bewegtbild I",
-                "type": "course",
-                "children": {}
-              },
-              "!IXKYDWpZbDiLzITaXq:content.udk-berlin.de": {
-                "id": "!IXKYDWpZbDiLzITaXq:content.udk-berlin.de",
-                "name": "Auf dem Land. Von neuen und alten Existenzweisen",
-                "type": "course",
-                "children": {}
-              },
-              "!JSjWuTRaaAyUrNuqSn:content.udk-berlin.de": {
-                "id": "!JSjWuTRaaAyUrNuqSn:content.udk-berlin.de",
-                "name": "Connection Space",
-                "type": "course",
-                "children": {}
-              },
-              "!JXuzLnuGJaTXJBNBdC:content.udk-berlin.de": {
-                "id": "!JXuzLnuGJaTXJBNBdC:content.udk-berlin.de",
-                "name": "Grafikdesign",
-                "type": "design department",
-                "children": {
-                  "!LdfFqavPWcNTXyiGLs:content.udk-berlin.de": {
-                    "id": "!LdfFqavPWcNTXyiGLs:content.udk-berlin.de",
-                    "name": "Gestaltung des bewegten Bildes",
-                    "type": "course",
-                    "children": {}
-                  }
-                }
-              },
-              "!JzYxKFMnLXGREVSmVq:content.udk-berlin.de": {
-                "id": "!JzYxKFMnLXGREVSmVq:content.udk-berlin.de",
-                "name": "Einführung in den Modellbau",
-                "type": "course",
-                "children": {}
-              },
-              "!KbGjISGYUfLotmYYfJ:content.udk-berlin.de": {
-                "id": "!KbGjISGYUfLotmYYfJ:content.udk-berlin.de",
-                "name": "Quarantäne-Ästhetiken – Reflexionen über Digitalität, social distancing & Körperbilder in Zeiten der Pandemie",
-                "type": "course",
-                "children": {}
-              },
-              "!LECLCKxmzeprEVfMKY:content.udk-berlin.de": {
-                "id": "!LECLCKxmzeprEVfMKY:content.udk-berlin.de",
-                "name": "Corporate Identity und Kommunikation für das neue UdK-Hub",
-                "type": "course",
-                "children": {}
-              },
-              "!LarmDMoKUPPRzvNssf:content.udk-berlin.de": {
-                "id": "!LarmDMoKUPPRzvNssf:content.udk-berlin.de",
-                "name": "Corporate Wording für das neue UdK-Hub",
-                "type": "course",
-                "children": {}
-              },
-              "!LdfFqavPWcNTXyiGLs:content.udk-berlin.de": {
-                "id": "!LdfFqavPWcNTXyiGLs:content.udk-berlin.de",
-                "name": "Gestaltung des bewegten Bildes",
-                "type": "course",
-                "children": {}
-              },
-              "!NSArehBXDKcjVkEKPL:content.udk-berlin.de": {
-                "id": "!NSArehBXDKcjVkEKPL:content.udk-berlin.de",
-                "name": "Filmprojekt / Klassenprojekt",
-                "type": "course",
-                "children": {}
-              },
-              "!NhniXFeFDoaoMIMXFX:content.udk-berlin.de": {
-                "id": "!NhniXFeFDoaoMIMXFX:content.udk-berlin.de",
-                "name": "Analytisches Zeichnen /Stadtspaziergänge",
-                "type": "course",
-                "children": {}
-              },
-              "!NtUveHeCFNDrlwiNrz:content.udk-berlin.de": {
-                "id": "!NtUveHeCFNDrlwiNrz:content.udk-berlin.de",
-                "name": "Kamera, Licht und Ton - Einführung",
-                "type": "course",
-                "children": {}
-              },
-              "!OLCyWgniQdgslPHLsm:content.udk-berlin.de": {
-                "id": "!OLCyWgniQdgslPHLsm:content.udk-berlin.de",
-                "name": "Archäologie der Gestaltung. Eine Einführung vor Ort (Exkursion)",
-                "type": "course",
-                "children": {}
-              },
-              "!QDrYgRrqTHrctArECm:content.udk-berlin.de": {
-                "id": "!QDrYgRrqTHrctArECm:content.udk-berlin.de",
-                "name": "Einführung in die Siebdruckwerkstatt",
-                "type": "course",
-                "children": {}
-              },
-              "!QqDJxifMfSxZZJzBmj:content.udk-berlin.de": {
-                "id": "!QqDJxifMfSxZZJzBmj:content.udk-berlin.de",
-                "name": "HUMANS AND (OTHER) ANIMALS. Experimentelle 2D-Darstellungstechniken",
-                "type": "course",
-                "children": {}
-              },
-              "!RECHncgkduaAKwPrMl:content.udk-berlin.de": {
-                "id": "!RECHncgkduaAKwPrMl:content.udk-berlin.de",
-                "name": "Designed Uncertainty",
-                "type": "course",
-                "children": {}
-              },
-              "!ScGlFEDAKYIZItPato:content.udk-berlin.de": {
-                "id": "!ScGlFEDAKYIZItPato:content.udk-berlin.de",
-                "name": "Spatial Display as Agency",
-                "type": "course",
-                "children": {}
-              },
-              "!SdlDBlZFvQdRNfBfRW:content.udk-berlin.de": {
-                "id": "!SdlDBlZFvQdRNfBfRW:content.udk-berlin.de",
-                "name": "Cube Loops - Einführung in Fusion und 3D Druck",
-                "type": "course",
-                "children": {}
-              },
-              "!XOtlUEGwYGMPYYXIbG:content.udk-berlin.de": {
-                "id": "!XOtlUEGwYGMPYYXIbG:content.udk-berlin.de",
-                "name": "New Media",
-                "type": "design department",
-                "children": {
-                  "!RCqpiyAVwzBLhIpDgU:content.udk-berlin.de": {
-                    "id": "!RCqpiyAVwzBLhIpDgU:content.udk-berlin.de",
-                    "name": "IoT - Island of Things",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!ZhtCtAgmyDHtgucKQv:content.udk-berlin.de": {
-                    "id": "!ZhtCtAgmyDHtgucKQv:content.udk-berlin.de",
-                    "name": "Convergence",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!nUfOjTUeYFObEMARJN:content.udk-berlin.de": {
-                    "id": "!nUfOjTUeYFObEMARJN:content.udk-berlin.de",
-                    "name": "Concretely Unimaginable",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!GPdtCWWiyFqOManxhx:content.udk-berlin.de": {
-                    "id": "!GPdtCWWiyFqOManxhx:content.udk-berlin.de",
-                    "name": "New Media Graduates",
-                    "type": "course",
-                    "children": {}
-                  }
-                }
-              },
-              "!aBJuWGGvwGuSblDNmg:content.udk-berlin.de": {
-                "id": "!aBJuWGGvwGuSblDNmg:content.udk-berlin.de",
-                "name": "Projektentwicklung durch experimentellen Umgang mit Material und Werkzeug",
-                "type": "course",
-                "children": {}
-              },
-              "!bZWwnqybRacKaOJniK:content.udk-berlin.de": {
-                "id": "!bZWwnqybRacKaOJniK:content.udk-berlin.de",
-                "name": "teacher.solar 0 :: Design & Deployment of a solar-powered artefact :: Sound & Klang",
-                "type": "course",
-                "children": {}
-              },
-              "!bdcTwTLDfvHkjpZPZi:content.udk-berlin.de": {
-                "id": "!bdcTwTLDfvHkjpZPZi:content.udk-berlin.de",
-                "name": "Das Comic-Panel im Raum",
-                "type": "course",
-                "children": {}
-              },
-              "!dRurlBdOOwGqzVNpPZ:content.udk-berlin.de": {
-                "id": "!dRurlBdOOwGqzVNpPZ:content.udk-berlin.de",
-                "name": "Archäologie des Selbst",
-                "type": "course",
-                "children": {}
-              },
-              "!fsiTWbHboaHrsNTWuR:content.udk-berlin.de": {
-                "id": "!fsiTWbHboaHrsNTWuR:content.udk-berlin.de",
-                "name": "Corporate Design für das neue UdK-Hub",
-                "type": "course",
-                "children": {}
-              },
-              "!hMzgDgyymhdhZMiYKO:content.udk-berlin.de": {
-                "id": "!hMzgDgyymhdhZMiYKO:content.udk-berlin.de",
-                "name": "New Wilderness",
-                "type": "course",
-                "children": {}
-              },
-              "!hacaczNAXWOroXpoPY:content.udk-berlin.de": {
-                "id": "!hacaczNAXWOroXpoPY:content.udk-berlin.de",
-                "name": "Illustration",
-                "type": "design department",
-                "children": {
-                  "!MrwhqMEftglPotndmJ:content.udk-berlin.de": {
-                    "id": "!MrwhqMEftglPotndmJ:content.udk-berlin.de",
-                    "name": "Comics zeichnen – Von Humor bis zum bitteren Ernst",
-                    "type": "course",
-                    "children": {}
-                  }
-                }
-              },
-              "!hsQFEdaqsAYpxaVhqg:content.udk-berlin.de": {
-                "id": "!hsQFEdaqsAYpxaVhqg:content.udk-berlin.de",
-                "name": "Über Pflanzen in Kunst und Architektur",
-                "type": "course",
-                "children": {}
-              },
-              "!hvUvQXkpuiqMVRSunu:content.udk-berlin.de": {
-                "id": "!hvUvQXkpuiqMVRSunu:content.udk-berlin.de",
-                "name": "Visuelle Systeme",
-                "type": "design department",
-                "children": {
-                  "!AtJiGlvrHVTJweVNEU:content.udk-berlin.de": {
-                    "id": "!AtJiGlvrHVTJweVNEU:content.udk-berlin.de",
-                    "name": "Infodesign Lab",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!CQnLNUXSueOvstHEkw:content.udk-berlin.de": {
-                    "id": "!CQnLNUXSueOvstHEkw:content.udk-berlin.de",
-                    "name": "Infodesign Studio",
-                    "type": "course",
-                    "children": {}
-                  }
-                }
-              },
-              "!iMxvZYYzNDxsXyKtzh:content.udk-berlin.de": {
-                "id": "!iMxvZYYzNDxsXyKtzh:content.udk-berlin.de",
-                "name": "Pharmapolitische Fiktionen. Seltsame Substanzen und prekäre Stoffe der Science-Fiction-",
-                "type": "course",
-                "children": {}
-              },
-              "!jJHgbuJgxaZOcFfBaU:content.udk-berlin.de": {
-                "id": "!jJHgbuJgxaZOcFfBaU:content.udk-berlin.de",
-                "name": "Flow Flow",
-                "type": "course",
-                "children": {}
-              },
-              "!kgAAiYquZKanKVDlUK:content.udk-berlin.de": {
-                "id": "!kgAAiYquZKanKVDlUK:content.udk-berlin.de",
-                "name": "Das Vierte Druckverfahren",
-                "type": "course",
-                "children": {}
-              },
-              "!rUjWhyiYWskrJfTngn:content.udk-berlin.de": {
-                "id": "!rUjWhyiYWskrJfTngn:content.udk-berlin.de",
-                "name": "Digitale Film- und Tonmontage - Einführung",
-                "type": "course",
-                "children": {}
-              },
-              "!suOGefRgcADsoZZtZl:content.udk-berlin.de": {
-                "id": "!suOGefRgcADsoZZtZl:content.udk-berlin.de",
-                "name": "Aisthesis Decolonial – Dekoloniale Theorie in Kunst und Gestaltung",
-                "type": "course",
-                "children": {}
-              },
-              "!tHYQvSiVXcNDePjMjR:content.udk-berlin.de": {
-                "id": "!tHYQvSiVXcNDePjMjR:content.udk-berlin.de",
-                "name": "Basics – Grundlagen des Entwerfens",
-                "type": "course",
-                "children": {}
-              },
-              "!vjjiveXiFEwLvKEeWU:content.udk-berlin.de": {
-                "id": "!vjjiveXiFEwLvKEeWU:content.udk-berlin.de",
-                "name": "The Hitchhikers to the Internet",
-                "type": "course",
-                "children": {}
-              },
-              "!yYESKEVpNEmStkxQNV:content.udk-berlin.de": {
-                "id": "!yYESKEVpNEmStkxQNV:content.udk-berlin.de",
-                "name": "Fotografie 2 - open projects",
-                "type": "course",
-                "children": {}
-              },
-              "!zJkcNJrkxdqpqMkOFv:content.udk-berlin.de": {
-                "id": "!zJkcNJrkxdqpqMkOFv:content.udk-berlin.de",
-                "name": "Schrift und Raum",
-                "type": "course",
-                "children": {}
-              }
-            }
-          },
-          "!YBOkaZDOlptyUrZCKo:content.udk-berlin.de": {
-            "id": "!YBOkaZDOlptyUrZCKo:content.udk-berlin.de",
-            "name": "Bachelor Design",
-            "type": "degree program",
-            "children": {
-              "!hWWVnCIBxCiKTCxDCE:content.udk-berlin.de": {
-                "id": "!hWWVnCIBxCiKTCxDCE:content.udk-berlin.de",
-                "name": "Basisprojekt Produktdesign: fixperts in quarantine",
-                "type": "course",
-                "children": {}
-              },
-              "!NxGJOmQDfMUWZNvJCE:content.udk-berlin.de": {
-                "id": "!NxGJOmQDfMUWZNvJCE:content.udk-berlin.de",
-                "name": "BA Colloqium Technologie",
-                "type": "course",
-                "children": {}
-              },
-              "!OtfMlzhNjFGdOzRWFD:content.udk-berlin.de": {
-                "id": "!OtfMlzhNjFGdOzRWFD:content.udk-berlin.de",
-                "name": "Designtechniken/Mode 1: Schnittgestaltung",
-                "type": "course",
-                "children": {}
-              },
-              "!ncashziklgNyjHDvLm:content.udk-berlin.de": {
-                "id": "!ncashziklgNyjHDvLm:content.udk-berlin.de",
-                "name": "Grundpraktikum",
-                "type": "course",
-                "children": {}
-              },
-              "!TxuMAsvaxPdGjzNstu:content.udk-berlin.de": {
-                "id": "!TxuMAsvaxPdGjzNstu:content.udk-berlin.de",
-                "name": "Modetheorie 2: Die Wahrnehmungsstörung der Mode: Vom Produkt zum Prozess",
-                "type": "course",
-                "children": {}
-              },
-              "!cRDmlwArfmUesXKPUt:content.udk-berlin.de": {
-                "id": "!cRDmlwArfmUesXKPUt:content.udk-berlin.de",
-                "name": "Darstellungstechniken Zeichnen Mode",
-                "type": "course",
-                "children": {}
-              },
-              "!CPHNFveioIQKZBEMIi:content.udk-berlin.de": {
-                "id": "!CPHNFveioIQKZBEMIi:content.udk-berlin.de",
-                "name": "LUX (Live!)",
-                "type": "course",
-                "children": {}
-              },
-              "!pEvwbOpatXKhybtfhL:content.udk-berlin.de": {
-                "id": "!pEvwbOpatXKhybtfhL:content.udk-berlin.de",
-                "name": "Modul 7: Konstruktion 4, CAD-Anteil, Produktdesign",
-                "type": "course",
-                "children": {}
-              },
-              "!husxKuEQWGGeKmZmIa:content.udk-berlin.de": {
-                "id": "!husxKuEQWGGeKmZmIa:content.udk-berlin.de",
-                "name": "98% Polyester 2% Cotton",
-                "type": "course",
-                "children": {}
-              },
-              "!MAvquQJGMkppEUpOWR:content.udk-berlin.de": {
-                "id": "!MAvquQJGMkppEUpOWR:content.udk-berlin.de",
-                "name": "CAD I Mode Pflichtseminar 2. Sem.",
-                "type": "course",
-                "children": {}
-              },
-              "!cIytjNbqUAfthuKmtC:content.udk-berlin.de": {
-                "id": "!cIytjNbqUAfthuKmtC:content.udk-berlin.de",
-                "name": "Craft Utopia",
-                "type": "course",
-                "children": {}
-              },
-              "!tAvxgpheKyXhGNROdA:content.udk-berlin.de": {
-                "id": "!tAvxgpheKyXhGNROdA:content.udk-berlin.de",
-                "name": "MA Colloqium Technologie",
-                "type": "course",
-                "children": {}
-              },
-              "!KfQeIUdYTNwFvYyqfi:content.udk-berlin.de": {
-                "id": "!KfQeIUdYTNwFvYyqfi:content.udk-berlin.de",
-                "name": "Materialien, Halbzeuge, Fertigung 2",
-                "type": "course",
-                "children": {}
-              },
-              "!OMMDpwNBFAQvuDHpfP:content.udk-berlin.de": {
-                "id": "!OMMDpwNBFAQvuDHpfP:content.udk-berlin.de",
-                "name": "Basisprojekt Modedesign: HOODIE GUT, ALLES GUT",
-                "type": "course",
-                "children": {}
-              },
-              "!PlnxEASakIRLOjdsVk:content.udk-berlin.de": {
-                "id": "!PlnxEASakIRLOjdsVk:content.udk-berlin.de",
-                "name": "Radikalität",
-                "type": "course",
-                "children": {}
-              },
-              "!meRigHMonjULOLCWLM:content.udk-berlin.de": {
-                "id": "!meRigHMonjULOLCWLM:content.udk-berlin.de",
-                "name": "Artisanal Week",
-                "type": "course",
-                "children": {}
-              },
-              "!AVlclCICIrHgyXWkXg:content.udk-berlin.de": {
-                "id": "!AVlclCICIrHgyXWkXg:content.udk-berlin.de",
-                "name": "Designtechniken 2: Einführung Strick",
-                "type": "course",
-                "children": {}
-              },
-              "!NrJuWTWbhpWAsSkauT:content.udk-berlin.de": {
-                "id": "!NrJuWTWbhpWAsSkauT:content.udk-berlin.de",
-                "name": "Modegeschichte 2: MODE.KULTUR.ZEIT",
-                "type": "course",
-                "children": {}
-              },
-              "!odqHBzkhSnZfgHLZkG:content.udk-berlin.de": {
-                "id": "!odqHBzkhSnZfgHLZkG:content.udk-berlin.de",
-                "name": "GETTING THERE. ANKOMMEN!",
-                "type": "course",
-                "children": {}
-              },
-              "!aVcbbnKBSUGmSQaYGK:content.udk-berlin.de": {
-                "id": "!aVcbbnKBSUGmSQaYGK:content.udk-berlin.de",
-                "name": "The design of culinary delight.",
-                "type": "course",
-                "children": {}
-              },
-              "!AASGpkBOwEbVyHUtnG:content.udk-berlin.de": {
-                "id": "!AASGpkBOwEbVyHUtnG:content.udk-berlin.de",
-                "name": "True Colour",
-                "type": "course",
-                "children": {}
-              },
-              "!bxKGOQXGGBfELVmBWg:content.udk-berlin.de": {
-                "id": "!bxKGOQXGGBfELVmBWg:content.udk-berlin.de",
-                "name": "Essay als Form – in Kunst, Literatur, Ausstellung",
-                "type": "course",
-                "children": {}
-              },
-              "!DeooArekZlTwHeOhCC:content.udk-berlin.de": {
-                "id": "!DeooArekZlTwHeOhCC:content.udk-berlin.de",
-                "name": "Modul 12: Technologie und Konstruktion 1, Hauptseminar",
-                "type": "course",
-                "children": {}
-              },
-              "!txPeHPUdajaqWrVCBR:content.udk-berlin.de": {
-                "id": "!txPeHPUdajaqWrVCBR:content.udk-berlin.de",
-                "name": "Signaturen",
-                "type": "course",
-                "children": {}
-              },
-              "!JdTYfbEjgXRafEaPoR:content.udk-berlin.de": {
-                "id": "!JdTYfbEjgXRafEaPoR:content.udk-berlin.de",
-                "name": "Das Portfolioprojekt",
-                "type": "course",
-                "children": {}
-              },
-              "!ncKyjrjUyXNfSMABaf:content.udk-berlin.de": {
-                "id": "!ncKyjrjUyXNfSMABaf:content.udk-berlin.de",
-                "name": "Designtechniken Modedesign: Schnittkonstruktion",
-                "type": "course",
-                "children": {}
-              },
-              "!YPzRonkpbRPaTUzWfC:content.udk-berlin.de": {
-                "id": "!YPzRonkpbRPaTUzWfC:content.udk-berlin.de",
-                "name": "Grundpraktikum",
-                "type": "course",
-                "children": {}
-              },
-              "!uREreyBYMTpGuRzMdE:content.udk-berlin.de": {
-                "id": "!uREreyBYMTpGuRzMdE:content.udk-berlin.de",
-                "name": "ICH BIN AUCH DIE DIE SCHON DA WAREN",
-                "type": "course",
-                "children": {}
-              },
-              "!cWpMVBOtmVTwXkeEeV:content.udk-berlin.de": {
-                "id": "!cWpMVBOtmVTwXkeEeV:content.udk-berlin.de",
-                "name": "Schreiben als künstlerisch-forschende Praxis",
-                "type": "course",
-                "children": {}
-              },
-              "!IktKBFHVaFNVUvgrFG:content.udk-berlin.de": {
-                "id": "!IktKBFHVaFNVUvgrFG:content.udk-berlin.de",
-                "name": "Was bedeutet das alles? Transformationen des Design nach 1945",
-                "type": "course",
-                "children": {}
-              },
-              "!DPBdJnBkfJiMWQMvPY:content.udk-berlin.de": {
-                "id": "!DPBdJnBkfJiMWQMvPY:content.udk-berlin.de",
-                "name": "In Bewegung / Interaktive Systeme I",
-                "type": "course",
-                "children": {}
-              },
-              "!teyspXzijDvgOKoMrG:content.udk-berlin.de": {
-                "id": "!teyspXzijDvgOKoMrG:content.udk-berlin.de",
-                "name": "Modul 3: ALTE STOFFE & NEUE MATERIALIEN",
-                "type": "course",
-                "children": {}
-              },
-              "!dvIrmLKiFsRXiSXAdI:content.udk-berlin.de": {
-                "id": "!dvIrmLKiFsRXiSXAdI:content.udk-berlin.de",
-                "name": "Modul 3: Technologie und Konstruktion 1: Konstruktion 2 + CAD 1",
-                "type": "course",
-                "children": {}
-              },
-              "!aRcbwINgTaSfAaNndA:content.udk-berlin.de": {
-                "id": "!aRcbwINgTaSfAaNndA:content.udk-berlin.de",
-                "name": "Neobionten",
-                "type": "course",
-                "children": {}
-              },
-              "!HiVoxNdiFnMjYEsNgH:content.udk-berlin.de": {
-                "id": "!HiVoxNdiFnMjYEsNgH:content.udk-berlin.de",
-                "name": "Modul 7: Technologie und Konstruktion 2: Konstruktion 4",
-                "type": "course",
-                "children": {}
-              },
-              "!GacLYTiaoZfYoAGOqk:content.udk-berlin.de": {
-                "id": "!GacLYTiaoZfYoAGOqk:content.udk-berlin.de",
-                "name": "Virtual Design Research Colloquium: „Outside the Bubble“",
-                "type": "course",
-                "children": {}
-              },
-              "!GMwpovekuKHDyrBqjH:content.udk-berlin.de": {
-                "id": "!GMwpovekuKHDyrBqjH:content.udk-berlin.de",
-                "name": "Zukunftsforschung",
-                "type": "course",
-                "children": {}
-              }
-            }
-          },
-          "!gGIQqEPODyuoAyCoTt:content.udk-berlin.de": {
-            "id": "!gGIQqEPODyuoAyCoTt:content.udk-berlin.de",
-            "name": "Institut für transmediale Gestaltung",
-            "type": "institute",
-            "children": {}
-          },
-          "!iSvAGFDROLvUOSFzFI:content.udk-berlin.de": {
-            "id": "!iSvAGFDROLvUOSFzFI:content.udk-berlin.de",
-            "name": "Design Transfer",
-            "type": "institute",
-            "children": {}
-          },
-          "!oBRYpwSRIQBoJikDrr:content.udk-berlin.de": {
-            "id": "!oBRYpwSRIQBoJikDrr:content.udk-berlin.de",
-            "name": "Bachelor Architektur",
-            "type": "degree program",
-            "children": {
-              "!CINFnOgmcPhwGrcPqb:content.udk-berlin.de": {
-                "id": "!CINFnOgmcPhwGrcPqb:content.udk-berlin.de",
-                "name": "Grundlagen des Entwerfens",
-                "type": "course",
-                "children": {}
-              },
-              "!CJTzHwtbjKioopYlUq:content.udk-berlin.de": {
-                "id": "!CJTzHwtbjKioopYlUq:content.udk-berlin.de",
-                "name": "Grundlagen und Praxis der Darstellung",
-                "type": "course",
-                "children": {}
-              },
-              "!EEjsfrlQZxPBTCceWW:content.udk-berlin.de": {
-                "id": "!EEjsfrlQZxPBTCceWW:content.udk-berlin.de",
-                "name": "studio raumproduktion: How Together",
-                "type": "course",
-                "children": {}
-              },
-              "!GKehszwoEurdgSXsBu:content.udk-berlin.de": {
-                "id": "!GKehszwoEurdgSXsBu:content.udk-berlin.de",
-                "name": "Quellentexte der Architekturtheorie. Von der Antike bis zum Klassizismus.",
-                "type": "course",
-                "children": {}
-              },
-              "!NWgfjrWpxIpZjASDZH:content.udk-berlin.de": {
-                "id": "!NWgfjrWpxIpZjASDZH:content.udk-berlin.de",
-                "name": "Grundkurs II: Architektur, Raum, Gesellschaft - Kulturwissenschaftliche Grundlagen",
-                "type": "course",
-                "children": {}
-              },
-              "!NXlXmbguLhvoWOFRaG:content.udk-berlin.de": {
-                "id": "!NXlXmbguLhvoWOFRaG:content.udk-berlin.de",
-                "name": "Dekoloniale Rauminspektion",
-                "type": "course",
-                "children": {}
-              },
-              "!UGzPZTWalQJTdMJLzp:content.udk-berlin.de": {
-                "id": "!UGzPZTWalQJTdMJLzp:content.udk-berlin.de",
-                "name": "Plastische und Räumliche Darstellung Bachelor Studiengang Architektur",
-                "type": "course",
-                "children": {}
-              },
-              "!XgcyLspquhlelmJvba:content.udk-berlin.de": {
-                "id": "!XgcyLspquhlelmJvba:content.udk-berlin.de",
-                "name": "CAD II - digitale Veranstaltung",
-                "type": "course",
-                "children": {}
-              },
-              "!YyslQoeDKEfxIzBqrW:content.udk-berlin.de": {
-                "id": "!YyslQoeDKEfxIzBqrW:content.udk-berlin.de",
-                "name": "Die 80er in Deutschland: \"And the age of our innocence is somewhere in the garden.\" Eine Bestandsaufnahme",
-                "type": "course",
-                "children": {}
-              },
-              "!hsQFEdaqsAYpxaVhqg:content.udk-berlin.de": {
-                "id": "!hsQFEdaqsAYpxaVhqg:content.udk-berlin.de",
-                "name": "Über Pflanzen in Kunst und Architektur",
-                "type": "course",
-                "children": {}
-              },
-              "!iFMPhDynDlHdxZrMHP:content.udk-berlin.de": {
-                "id": "!iFMPhDynDlHdxZrMHP:content.udk-berlin.de",
-                "name": "Grundkurs Architekturgeschichte und -Theorie Modul 12/14 BA und 03/05 MA",
-                "type": "course",
-                "children": {}
-              },
-              "!mZsLVeIlMBKzhGiFOV:content.udk-berlin.de": {
-                "id": "!mZsLVeIlMBKzhGiFOV:content.udk-berlin.de",
-                "name": "„Eine Philosophie der Ernährung und der Umwelt“",
-                "type": "course",
-                "children": {}
-              },
-              "!pkkGWRWFFAYypdimyB:content.udk-berlin.de": {
-                "id": "!pkkGWRWFFAYypdimyB:content.udk-berlin.de",
-                "name": "Entwurfsprojekt Sobejano",
-                "type": "course",
-                "children": {}
-              },
-              "!rVvWcEXfnDAloDViQA:content.udk-berlin.de": {
-                "id": "!rVvWcEXfnDAloDViQA:content.udk-berlin.de",
-                "name": "CAD II ArchiCad - Architekturdarstellung",
-                "type": "course",
-                "children": {}
-              },
-              "!tKjgYLIKjmURdRKFRp:content.udk-berlin.de": {
-                "id": "!tKjgYLIKjmURdRKFRp:content.udk-berlin.de",
-                "name": "Land, Ressourcen und Immobilien: Kritische Eigentumsdiskurse in Architektur und Kunst",
-                "type": "course",
-                "children": {}
-              },
-              "!vioHewFtPwlFUykaTf:content.udk-berlin.de": {
-                "id": "!vioHewFtPwlFUykaTf:content.udk-berlin.de",
-                "name": "Do what you want",
-                "type": "course",
-                "children": {}
-              },
-              "!xCdRTUkhUfOgQudDgp:content.udk-berlin.de": {
-                "id": "!xCdRTUkhUfOgQudDgp:content.udk-berlin.de",
-                "name": "Rückzug in die Welt.",
-                "type": "course",
-                "children": {}
-              }
-            }
-          },
-          "!thbAIeoSWxvWSjfzlZ:content.udk-berlin.de": {
-            "id": "!thbAIeoSWxvWSjfzlZ:content.udk-berlin.de",
-            "name": "Kunst und Medien",
-            "type": "degree program",
-            "children": {
-              "!AGOcYOksWhetPPZYrN:content.udk-berlin.de": {
-                "id": "!AGOcYOksWhetPPZYrN:content.udk-berlin.de",
-                "name": "space, environment and context: (noise and) silence",
-                "type": "course",
-                "children": {}
-              },
-              "!BWsqsPlQcsHeEzLwmo:content.udk-berlin.de": {
-                "id": "!BWsqsPlQcsHeEzLwmo:content.udk-berlin.de",
-                "name": "Kamera für Fortgeschrittene PRAKTISCHE ÜBUNGEN ZU DIGITALEN KAMERAS",
-                "type": "course",
-                "children": {}
-              },
-              "!DPBdJnBkfJiMWQMvPY:content.udk-berlin.de": {
-                "id": "!DPBdJnBkfJiMWQMvPY:content.udk-berlin.de",
-                "name": "In Bewegung / Interaktive Systeme I",
-                "type": "course",
-                "children": {}
-              },
-              "!GPdtCWWiyFqOManxhx:content.udk-berlin.de": {
-                "id": "!GPdtCWWiyFqOManxhx:content.udk-berlin.de",
-                "name": "New Media Graduates",
-                "type": "course",
-                "children": {}
-              },
-              "!ISTkNoRHAfDogKhrsp:content.udk-berlin.de": {
-                "id": "!ISTkNoRHAfDogKhrsp:content.udk-berlin.de",
-                "name": "Grundlagen Bewegtbild I",
-                "type": "course",
-                "children": {}
-              },
-              "!IXKYDWpZbDiLzITaXq:content.udk-berlin.de": {
-                "id": "!IXKYDWpZbDiLzITaXq:content.udk-berlin.de",
-                "name": "Auf dem Land. Von neuen und alten Existenzweisen",
-                "type": "course",
-                "children": {}
-              },
-              "!JplBlTKKLeAWlHCPdX:content.udk-berlin.de": {
-                "id": "!JplBlTKKLeAWlHCPdX:content.udk-berlin.de",
-                "name": "Fachklasse Narrativer Film / Narration in und mit technischen Bildmedien",
-                "type": "course",
-                "children": {}
-              },
-              "!KOdaTNsHmstoURaJdh:content.udk-berlin.de": {
-                "id": "!KOdaTNsHmstoURaJdh:content.udk-berlin.de",
-                "name": "Montage-Seminar",
-                "type": "course",
-                "children": {}
-              },
-              "!LdfFqavPWcNTXyiGLs:content.udk-berlin.de": {
-                "id": "!LdfFqavPWcNTXyiGLs:content.udk-berlin.de",
-                "name": "Gestaltung des bewegten Bildes",
-                "type": "course",
-                "children": {}
-              },
-              "!MmVbJCYWxkWLeIYXyZ:content.udk-berlin.de": {
-                "id": "!MmVbJCYWxkWLeIYXyZ:content.udk-berlin.de",
-                "name": "Boredom and its Contents: exploring the creative, contemplative and existential aspects of switching off",
-                "type": "course",
-                "children": {}
-              },
-              "!NBSdwUlRIjWlpitMiu:content.udk-berlin.de": {
-                "id": "!NBSdwUlRIjWlpitMiu:content.udk-berlin.de",
-                "name": "Filmproduktion für Filmkünstler*innen",
-                "type": "course",
-                "children": {}
-              },
-              "!NGEwCPiTfTZzLrnzTA:content.udk-berlin.de": {
-                "id": "!NGEwCPiTfTZzLrnzTA:content.udk-berlin.de",
-                "name": "Design with Code",
-                "type": "course",
-                "children": {}
-              },
-              "!NtUveHeCFNDrlwiNrz:content.udk-berlin.de": {
-                "id": "!NtUveHeCFNDrlwiNrz:content.udk-berlin.de",
-                "name": "Kamera, Licht und Ton - Einführung",
-                "type": "course",
-                "children": {}
-              },
-              "!OiHtAguCwwKiWnklTO:content.udk-berlin.de": {
-                "id": "!OiHtAguCwwKiWnklTO:content.udk-berlin.de",
-                "name": "New forms of research: more-than-human perspectives and tentacular thinking",
-                "type": "course",
-                "children": {}
-              },
-              "!OyuNaQcrrHpGZUPzIc:content.udk-berlin.de": {
-                "id": "!OyuNaQcrrHpGZUPzIc:content.udk-berlin.de",
-                "name": "Im Hotel - Entwicklung von Szenen für einen Omnibusfilm",
-                "type": "course",
-                "children": {}
-              },
-              "!PfErzbIkcnSSwIGeEZ:content.udk-berlin.de": {
-                "id": "!PfErzbIkcnSSwIGeEZ:content.udk-berlin.de",
-                "name": "Code Experiments: Back to the Future Voices",
-                "type": "course",
-                "children": {}
-              },
-              "!QAPJfwVfGfjPMNvNCS:content.udk-berlin.de": {
-                "id": "!QAPJfwVfGfjPMNvNCS:content.udk-berlin.de",
-                "name": "Video Performance II : Dokumentation im Feld der Performancekunst",
-                "type": "course",
-                "children": {}
-              },
-              "!QbyMlsVolPKsNnipJN:content.udk-berlin.de": {
-                "id": "!QbyMlsVolPKsNnipJN:content.udk-berlin.de",
-                "name": "Technische Betreuung und Unterweisung der Nutzer/innen der AV-Geräte täglich nach Absprache",
-                "type": "course",
-                "children": {}
-              },
-              "!RCqpiyAVwzBLhIpDgU:content.udk-berlin.de": {
-                "id": "!RCqpiyAVwzBLhIpDgU:content.udk-berlin.de",
-                "name": "IoT - Island of Things",
-                "type": "course",
-                "children": {}
-              },
-              "!RECHncgkduaAKwPrMl:content.udk-berlin.de": {
-                "id": "!RECHncgkduaAKwPrMl:content.udk-berlin.de",
-                "name": "Designed Uncertainty",
-                "type": "course",
-                "children": {}
-              },
-              "!RakYASbDzUoGiqsJKr:content.udk-berlin.de": {
-                "id": "!RakYASbDzUoGiqsJKr:content.udk-berlin.de",
-                "name": "SOUNDDESIGN / POSTPRODUKTIONS-BERATUNG",
-                "type": "course",
-                "children": {}
-              },
-              "!XOtlUEGwYGMPYYXIbG:content.udk-berlin.de": {
-                "id": "!XOtlUEGwYGMPYYXIbG:content.udk-berlin.de",
-                "name": "New Media",
-                "type": "design department",
-                "children": {
-                  "!RCqpiyAVwzBLhIpDgU:content.udk-berlin.de": {
-                    "id": "!RCqpiyAVwzBLhIpDgU:content.udk-berlin.de",
-                    "name": "IoT - Island of Things",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!ZhtCtAgmyDHtgucKQv:content.udk-berlin.de": {
-                    "id": "!ZhtCtAgmyDHtgucKQv:content.udk-berlin.de",
-                    "name": "Convergence",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!nUfOjTUeYFObEMARJN:content.udk-berlin.de": {
-                    "id": "!nUfOjTUeYFObEMARJN:content.udk-berlin.de",
-                    "name": "Concretely Unimaginable",
-                    "type": "course",
-                    "children": {}
-                  },
-                  "!GPdtCWWiyFqOManxhx:content.udk-berlin.de": {
-                    "id": "!GPdtCWWiyFqOManxhx:content.udk-berlin.de",
-                    "name": "New Media Graduates",
-                    "type": "course",
-                    "children": {}
-                  }
-                }
-              },
-              "!XRukPufkZCvuaQMONH:content.udk-berlin.de": {
-                "id": "!XRukPufkZCvuaQMONH:content.udk-berlin.de",
-                "name": "Digital Audio Workstation as an Electronic Music Composition Tool",
-                "type": "course",
-                "children": {}
-              },
-              "!bMsedBNKPpABogcrJu:content.udk-berlin.de": {
-                "id": "!bMsedBNKPpABogcrJu:content.udk-berlin.de",
-                "name": "Tonaufnahme-Seminar",
-                "type": "course",
-                "children": {}
-              },
-              "!bZWwnqybRacKaOJniK:content.udk-berlin.de": {
-                "id": "!bZWwnqybRacKaOJniK:content.udk-berlin.de",
-                "name": "teacher.solar 0 :: Design & Deployment of a solar-powered artefact :: Sound & Klang",
-                "type": "course",
-                "children": {}
-              },
-              "!bqdooXkaMDMmEtrDoA:content.udk-berlin.de": {
-                "id": "!bqdooXkaMDMmEtrDoA:content.udk-berlin.de",
-                "name": "Fachklasse Experimenteller Film / Medienkunst",
-                "type": "course",
-                "children": {}
-              },
-              "!dRurlBdOOwGqzVNpPZ:content.udk-berlin.de": {
-                "id": "!dRurlBdOOwGqzVNpPZ:content.udk-berlin.de",
-                "name": "Archäologie des Selbst",
-                "type": "course",
-                "children": {}
-              },
-              "!ezJYSvulLsUILabTbb:content.udk-berlin.de": {
-                "id": "!ezJYSvulLsUILabTbb:content.udk-berlin.de",
-                "name": "Expanded Reality Worlds",
-                "type": "course",
-                "children": {}
-              },
-              "!hMzgDgyymhdhZMiYKO:content.udk-berlin.de": {
-                "id": "!hMzgDgyymhdhZMiYKO:content.udk-berlin.de",
-                "name": "New Wilderness",
-                "type": "course",
-                "children": {}
-              },
-              "!jnUDzyOFkEQoDockes:content.udk-berlin.de": {
-                "id": "!jnUDzyOFkEQoDockes:content.udk-berlin.de",
-                "name": "Fachklasse Generative Kunst / Computational Art",
-                "type": "course",
-                "children": {}
-              },
-              "!mQQpcwSrpWVbfrAiXy:content.udk-berlin.de": {
-                "id": "!mQQpcwSrpWVbfrAiXy:content.udk-berlin.de",
-                "name": "Scrapbook of the Sixties« – Film und Experiment in New York",
-                "type": "course",
-                "children": {}
-              },
-              "!nZaSkIqKenzKTroNrJ:content.udk-berlin.de": {
-                "id": "!nZaSkIqKenzKTroNrJ:content.udk-berlin.de",
-                "name": "Kameraberatung und Projektbesprechung",
-                "type": "course",
-                "children": {}
-              },
-              "!stxjaetnGXjzUjTnIB:content.udk-berlin.de": {
-                "id": "!stxjaetnGXjzUjTnIB:content.udk-berlin.de",
-                "name": "GANerative GANomaly for GANsters",
-                "type": "course",
-                "children": {}
-              },
-              "!vjjiveXiFEwLvKEeWU:content.udk-berlin.de": {
-                "id": "!vjjiveXiFEwLvKEeWU:content.udk-berlin.de",
-                "name": "The Hitchhikers to the Internet",
-                "type": "course",
-                "children": {}
-              },
-              "!vrayBZKNdRjfCCzwnJ:content.udk-berlin.de": {
-                "id": "!vrayBZKNdRjfCCzwnJ:content.udk-berlin.de",
-                "name": "“MORGEN IST DIE FRAGE” – Current Issues of Berlin’s Club Culture",
-                "type": "course",
-                "children": {}
-              },
-              "!wNVmGXQwjuNAaKNMzB:content.udk-berlin.de": {
-                "id": "!wNVmGXQwjuNAaKNMzB:content.udk-berlin.de",
-                "name": "Hybrid Systems: Silences, Soundscapes & Sonoaviatics",
-                "type": "course",
-                "children": {}
-              },
-              "!xkbMnBNsiuJJIPKJyO:content.udk-berlin.de": {
-                "id": "!xkbMnBNsiuJJIPKJyO:content.udk-berlin.de",
-                "name": "Neue Perspektiven - Tiere in der Stadt 2 / praktisches Filmseminar",
-                "type": "course",
-                "children": {}
-              }
-            }
-          },
-          "!urgxyxNjyrIMqvGQgD:content.udk-berlin.de": {
-            "id": "!urgxyxNjyrIMqvGQgD:content.udk-berlin.de",
-            "name": "Master Design",
-            "type": "degree program",
-            "children": {
-              "!EarwSosOdhVbXWZrUX:content.udk-berlin.de": {
-                "id": "!EarwSosOdhVbXWZrUX:content.udk-berlin.de",
-                "name": "Masterkolloquium",
-                "type": "course",
-                "children": {}
-              },
-              "!GMwpovekuKHDyrBqjH:content.udk-berlin.de": {
-                "id": "!GMwpovekuKHDyrBqjH:content.udk-berlin.de",
-                "name": "Zukunftsforschung",
-                "type": "course",
-                "children": {}
-              },
-              "!bxKGOQXGGBfELVmBWg:content.udk-berlin.de": {
-                "id": "!bxKGOQXGGBfELVmBWg:content.udk-berlin.de",
-                "name": "Essay als Form – in Kunst, Literatur, Ausstellung",
-                "type": "course",
-                "children": {}
-              },
-              "!cWpMVBOtmVTwXkeEeV:content.udk-berlin.de": {
-                "id": "!cWpMVBOtmVTwXkeEeV:content.udk-berlin.de",
-                "name": "Schreiben als künstlerisch-forschende Praxis",
-                "type": "course",
-                "children": {}
-              },
-              "!odqHBzkhSnZfgHLZkG:content.udk-berlin.de": {
-                "id": "!odqHBzkhSnZfgHLZkG:content.udk-berlin.de",
-                "name": "GETTING THERE. ANKOMMEN!",
-                "type": "course",
-                "children": {}
-              },
-              "!tAvxgpheKyXhGNROdA:content.udk-berlin.de": {
-                "id": "!tAvxgpheKyXhGNROdA:content.udk-berlin.de",
-                "name": "MA Colloqium Technologie",
-                "type": "course",
-                "children": {}
-              },
-              "!txPeHPUdajaqWrVCBR:content.udk-berlin.de": {
-                "id": "!txPeHPUdajaqWrVCBR:content.udk-berlin.de",
-                "name": "Signaturen",
-                "type": "course",
-                "children": {}
-              }
-            }
           }
         }
+      },
+      "!RAWNVbkCPethGjaXat:content.udk-berlin.de": {
+        "id": "!RAWNVbkCPethGjaXat:content.udk-berlin.de",
+        "name": "Fakultätsübergreifende Projekte",
+        "type": "faculty",
+        "children": {}
+      },
+      "!WfLvMMfXpFaSuqyqPE:content.udk-berlin.de": {
+        "id": "!WfLvMMfXpFaSuqyqPE:content.udk-berlin.de",
+        "name": "Frauenbeauftragte",
+        "type": "institution",
+        "children": {}
+      },
+      "!XWblQinsXLKCfZivcO:content.udk-berlin.de": {
+        "id": "!XWblQinsXLKCfZivcO:content.udk-berlin.de",
+        "name": "Jazz-Institut Berlin",
+        "type": "institute",
+        "children": {}
       },
       "!XsgtEihUWJVzKqedqI:content.udk-berlin.de": {
         "id": "!XsgtEihUWJVzKqedqI:content.udk-berlin.de",
@@ -5207,57 +3789,9 @@ const struktur = {
             "name": "Dirigieren",
             "type": "degree program",
             "children": {
-              "!rWIlHwbijdurCWVXiu:content.udk-berlin.de": {
-                "id": "!rWIlHwbijdurCWVXiu:content.udk-berlin.de",
-                "name": "Johannes Brahms und die Variation",
-                "type": "course",
-                "children": {}
-              },
-              "!FSAaCPPDjCNLAWLexg:content.udk-berlin.de": {
-                "id": "!FSAaCPPDjCNLAWLexg:content.udk-berlin.de",
-                "name": "Schneller, höher, … besser? Konkurrenz und Wettbewerb in der Musik",
-                "type": "course",
-                "children": {}
-              },
-              "!QyrgmkpNkOZGnUqPuT:content.udk-berlin.de": {
-                "id": "!QyrgmkpNkOZGnUqPuT:content.udk-berlin.de",
-                "name": "Herrschaft und Emanzipation durch Musik: Gender, Klasse, Kirche, Staat",
-                "type": "course",
-                "children": {}
-              },
-              "!oNgoNFZOxGpVTDKxqv:content.udk-berlin.de": {
-                "id": "!oNgoNFZOxGpVTDKxqv:content.udk-berlin.de",
-                "name": "Musik und Literatur im 20. Jahrhundert",
-                "type": "course",
-                "children": {}
-              },
-              "!voqBEAULHEVoqlfEjq:content.udk-berlin.de": {
-                "id": "!voqBEAULHEVoqlfEjq:content.udk-berlin.de",
-                "name": "Transitionen: Oper – Musiktheater – Musical in, aus und über Nordamerika ab dem 20. Jh.",
-                "type": "course",
-                "children": {}
-              },
-              "!IPrvYMHOyyOgLzROgn:content.udk-berlin.de": {
-                "id": "!IPrvYMHOyyOgLzROgn:content.udk-berlin.de",
-                "name": "Das Kleine Klavierstück von Bach bis Schönberg. Zur Geschichte des Charakterstücks für",
-                "type": "course",
-                "children": {}
-              },
-              "!eLBCBYqZQUZgqSNDDi:content.udk-berlin.de": {
-                "id": "!eLBCBYqZQUZgqSNDDi:content.udk-berlin.de",
-                "name": "Großer Chor der UdK",
-                "type": "course",
-                "children": {}
-              },
-              "!TrsBAlvYdhViPBJKkM:content.udk-berlin.de": {
-                "id": "!TrsBAlvYdhViPBJKkM:content.udk-berlin.de",
-                "name": "Einführung in die Musikwissenschaft",
-                "type": "course",
-                "children": {}
-              },
-              "!NHeclMzBGqFyKrowks:content.udk-berlin.de": {
-                "id": "!NHeclMzBGqFyKrowks:content.udk-berlin.de",
-                "name": "Grundlagen des Dirigierens Q2a – nur für Q-Master",
+              "!AQReXmfvpnFHybRxiQ:content.udk-berlin.de": {
+                "id": "!AQReXmfvpnFHybRxiQ:content.udk-berlin.de",
+                "name": "Das Cembalo. Von Kielklavieren, Zupfklavieren, Spinetten, Virginalen und Schweinsköpfen.",
                 "type": "course",
                 "children": {}
               },
@@ -5267,33 +3801,9 @@ const struktur = {
                 "type": "course",
                 "children": {}
               },
-              "!AQReXmfvpnFHybRxiQ:content.udk-berlin.de": {
-                "id": "!AQReXmfvpnFHybRxiQ:content.udk-berlin.de",
-                "name": "Das Cembalo. Von Kielklavieren, Zupfklavieren, Spinetten, Virginalen und Schweinsköpfen.",
-                "type": "course",
-                "children": {}
-              },
-              "!LfqpOVmTuDkxPobdhn:content.udk-berlin.de": {
-                "id": "!LfqpOVmTuDkxPobdhn:content.udk-berlin.de",
-                "name": "Super librum cantare – Mehrstimmige Vokalimprovisation im Stil der Renaissance",
-                "type": "course",
-                "children": {}
-              },
-              "!gkfvjLfhPUGwbuxEFv:content.udk-berlin.de": {
-                "id": "!gkfvjLfhPUGwbuxEFv:content.udk-berlin.de",
-                "name": "Grundlagen des Dirigierens Q2b – nur für Q-Master",
-                "type": "course",
-                "children": {}
-              },
-              "!dCNIsxXBaHVEaZxAXR:content.udk-berlin.de": {
-                "id": "!dCNIsxXBaHVEaZxAXR:content.udk-berlin.de",
-                "name": "Heimatkonstruktion, Musik und Medienkultur",
-                "type": "course",
-                "children": {}
-              },
-              "!oyfxeypVyUqBsVuDLB:content.udk-berlin.de": {
-                "id": "!oyfxeypVyUqBsVuDLB:content.udk-berlin.de",
-                "name": "Hollywood-Sound: Ästhetik und Geschichte eines filmmusikalischen Phänomens",
+              "!FSAaCPPDjCNLAWLexg:content.udk-berlin.de": {
+                "id": "!FSAaCPPDjCNLAWLexg:content.udk-berlin.de",
+                "name": "Schneller, höher, … besser? Konkurrenz und Wettbewerb in der Musik",
                 "type": "course",
                 "children": {}
               },
@@ -5303,15 +3813,45 @@ const struktur = {
                 "type": "course",
                 "children": {}
               },
+              "!HrqVwNtQydAlZJyvZM:content.udk-berlin.de": {
+                "id": "!HrqVwNtQydAlZJyvZM:content.udk-berlin.de",
+                "name": "Instrumentation",
+                "type": "course",
+                "children": {}
+              },
+              "!IPrvYMHOyyOgLzROgn:content.udk-berlin.de": {
+                "id": "!IPrvYMHOyyOgLzROgn:content.udk-berlin.de",
+                "name": "Das Kleine Klavierstück von Bach bis Schönberg. Zur Geschichte des Charakterstücks für",
+                "type": "course",
+                "children": {}
+              },
               "!JHbZvwPWMlYaynMzcJ:content.udk-berlin.de": {
                 "id": "!JHbZvwPWMlYaynMzcJ:content.udk-berlin.de",
                 "name": "Franz Schuberts Kammermusik",
                 "type": "course",
                 "children": {}
               },
-              "!cxRLrWnltNfuoqJVec:content.udk-berlin.de": {
-                "id": "!cxRLrWnltNfuoqJVec:content.udk-berlin.de",
-                "name": "Heinrich Schütz",
+              "!LfqpOVmTuDkxPobdhn:content.udk-berlin.de": {
+                "id": "!LfqpOVmTuDkxPobdhn:content.udk-berlin.de",
+                "name": "Super librum cantare – Mehrstimmige Vokalimprovisation im Stil der Renaissance",
+                "type": "course",
+                "children": {}
+              },
+              "!NHeclMzBGqFyKrowks:content.udk-berlin.de": {
+                "id": "!NHeclMzBGqFyKrowks:content.udk-berlin.de",
+                "name": "Grundlagen des Dirigierens Q2a – nur für Q-Master",
+                "type": "course",
+                "children": {}
+              },
+              "!QyrgmkpNkOZGnUqPuT:content.udk-berlin.de": {
+                "id": "!QyrgmkpNkOZGnUqPuT:content.udk-berlin.de",
+                "name": "Herrschaft und Emanzipation durch Musik: Gender, Klasse, Kirche, Staat",
+                "type": "course",
+                "children": {}
+              },
+              "!TrsBAlvYdhViPBJKkM:content.udk-berlin.de": {
+                "id": "!TrsBAlvYdhViPBJKkM:content.udk-berlin.de",
+                "name": "Einführung in die Musikwissenschaft",
                 "type": "course",
                 "children": {}
               },
@@ -5321,21 +3861,63 @@ const struktur = {
                 "type": "course",
                 "children": {}
               },
+              "!cxRLrWnltNfuoqJVec:content.udk-berlin.de": {
+                "id": "!cxRLrWnltNfuoqJVec:content.udk-berlin.de",
+                "name": "Heinrich Schütz",
+                "type": "course",
+                "children": {}
+              },
+              "!dCNIsxXBaHVEaZxAXR:content.udk-berlin.de": {
+                "id": "!dCNIsxXBaHVEaZxAXR:content.udk-berlin.de",
+                "name": "Heimatkonstruktion, Musik und Medienkultur",
+                "type": "course",
+                "children": {}
+              },
               "!eIgniKhesDJJuXVrwx:content.udk-berlin.de": {
                 "id": "!eIgniKhesDJJuXVrwx:content.udk-berlin.de",
                 "name": "Alban Berg \"Wozzeck\"",
                 "type": "course",
                 "children": {}
               },
-              "!HrqVwNtQydAlZJyvZM:content.udk-berlin.de": {
-                "id": "!HrqVwNtQydAlZJyvZM:content.udk-berlin.de",
-                "name": "Instrumentation",
+              "!eLBCBYqZQUZgqSNDDi:content.udk-berlin.de": {
+                "id": "!eLBCBYqZQUZgqSNDDi:content.udk-berlin.de",
+                "name": "Großer Chor der UdK",
+                "type": "course",
+                "children": {}
+              },
+              "!gkfvjLfhPUGwbuxEFv:content.udk-berlin.de": {
+                "id": "!gkfvjLfhPUGwbuxEFv:content.udk-berlin.de",
+                "name": "Grundlagen des Dirigierens Q2b – nur für Q-Master",
                 "type": "course",
                 "children": {}
               },
               "!iBJQxMvJfqxPRjUBgt:content.udk-berlin.de": {
                 "id": "!iBJQxMvJfqxPRjUBgt:content.udk-berlin.de",
                 "name": "Satztechniken des 20./21. Jahrhunderts mit dem Schwerpunkt experimentelle Musik",
+                "type": "course",
+                "children": {}
+              },
+              "!oNgoNFZOxGpVTDKxqv:content.udk-berlin.de": {
+                "id": "!oNgoNFZOxGpVTDKxqv:content.udk-berlin.de",
+                "name": "Musik und Literatur im 20. Jahrhundert",
+                "type": "course",
+                "children": {}
+              },
+              "!oyfxeypVyUqBsVuDLB:content.udk-berlin.de": {
+                "id": "!oyfxeypVyUqBsVuDLB:content.udk-berlin.de",
+                "name": "Hollywood-Sound: Ästhetik und Geschichte eines filmmusikalischen Phänomens",
+                "type": "course",
+                "children": {}
+              },
+              "!rWIlHwbijdurCWVXiu:content.udk-berlin.de": {
+                "id": "!rWIlHwbijdurCWVXiu:content.udk-berlin.de",
+                "name": "Johannes Brahms und die Variation",
+                "type": "course",
+                "children": {}
+              },
+              "!voqBEAULHEVoqlfEjq:content.udk-berlin.de": {
+                "id": "!voqBEAULHEVoqlfEjq:content.udk-berlin.de",
+                "name": "Transitionen: Oper – Musiktheater – Musical in, aus und über Nordamerika ab dem 20. Jh.",
                 "type": "course",
                 "children": {}
               }
@@ -10010,57 +8592,9 @@ const struktur = {
             "name": "Musikalische Nachwuchsförderung (Julius-Stern-Institut)",
             "type": "degree program",
             "children": {
-              "!FrovKPyCAMIZuPyCxZ:content.udk-berlin.de": {
-                "id": "!FrovKPyCAMIZuPyCxZ:content.udk-berlin.de",
-                "name": "Grundlagenseminar Musikphysiologie",
-                "type": "course",
-                "children": {}
-              },
-              "!KthnkihnoJAJaLVKCt:content.udk-berlin.de": {
-                "id": "!KthnkihnoJAJaLVKCt:content.udk-berlin.de",
-                "name": "Komposition (JSI)",
-                "type": "course",
-                "children": {}
-              },
-              "!HgiAWTEjSJSEtCjsSK:content.udk-berlin.de": {
-                "id": "!HgiAWTEjSJSEtCjsSK:content.udk-berlin.de",
-                "name": "Musikphysiologische Einzelberatung",
-                "type": "course",
-                "children": {}
-              },
-              "!OvFbWNWoFObBGNxbrD:content.udk-berlin.de": {
-                "id": "!OvFbWNWoFObBGNxbrD:content.udk-berlin.de",
-                "name": "Alexandertechnik",
-                "type": "course",
-                "children": {}
-              },
               "!BahvoFRakjuhRyesfB:content.udk-berlin.de": {
                 "id": "!BahvoFRakjuhRyesfB:content.udk-berlin.de",
                 "name": "Gehörbildung/Musiktheorie JSI, 3. Semester",
-                "type": "course",
-                "children": {}
-              },
-              "!YrLesGxxUhqvJvQWyR:content.udk-berlin.de": {
-                "id": "!YrLesGxxUhqvJvQWyR:content.udk-berlin.de",
-                "name": "Feldenkrais",
-                "type": "course",
-                "children": {}
-              },
-              "!vOCGaukWZlrrSyPDIV:content.udk-berlin.de": {
-                "id": "!vOCGaukWZlrrSyPDIV:content.udk-berlin.de",
-                "name": "JSI, 1. Semester, Musiktheorie/Gehörbildung",
-                "type": "course",
-                "children": {}
-              },
-              "!hoQcYfGsqazczCMgxb:content.udk-berlin.de": {
-                "id": "!hoQcYfGsqazczCMgxb:content.udk-berlin.de",
-                "name": "Musiktheorie/Gehörbildung JSI",
-                "type": "course",
-                "children": {}
-              },
-              "!aiCHXlLQluRUzEoTFl:content.udk-berlin.de": {
-                "id": "!aiCHXlLQluRUzEoTFl:content.udk-berlin.de",
-                "name": "JSI Musiktheorie/Gehörbildung, 2. Semester",
                 "type": "course",
                 "children": {}
               },
@@ -10070,9 +8604,57 @@ const struktur = {
                 "type": "course",
                 "children": {}
               },
+              "!FrovKPyCAMIZuPyCxZ:content.udk-berlin.de": {
+                "id": "!FrovKPyCAMIZuPyCxZ:content.udk-berlin.de",
+                "name": "Grundlagenseminar Musikphysiologie",
+                "type": "course",
+                "children": {}
+              },
+              "!HgiAWTEjSJSEtCjsSK:content.udk-berlin.de": {
+                "id": "!HgiAWTEjSJSEtCjsSK:content.udk-berlin.de",
+                "name": "Musikphysiologische Einzelberatung",
+                "type": "course",
+                "children": {}
+              },
+              "!KthnkihnoJAJaLVKCt:content.udk-berlin.de": {
+                "id": "!KthnkihnoJAJaLVKCt:content.udk-berlin.de",
+                "name": "Komposition (JSI)",
+                "type": "course",
+                "children": {}
+              },
+              "!OvFbWNWoFObBGNxbrD:content.udk-berlin.de": {
+                "id": "!OvFbWNWoFObBGNxbrD:content.udk-berlin.de",
+                "name": "Alexandertechnik",
+                "type": "course",
+                "children": {}
+              },
+              "!YrLesGxxUhqvJvQWyR:content.udk-berlin.de": {
+                "id": "!YrLesGxxUhqvJvQWyR:content.udk-berlin.de",
+                "name": "Feldenkrais",
+                "type": "course",
+                "children": {}
+              },
               "!ZpvKUJOCMpqkJqjsPg:content.udk-berlin.de": {
                 "id": "!ZpvKUJOCMpqkJqjsPg:content.udk-berlin.de",
                 "name": "Musikermedizinische Sprechstunde",
+                "type": "course",
+                "children": {}
+              },
+              "!aiCHXlLQluRUzEoTFl:content.udk-berlin.de": {
+                "id": "!aiCHXlLQluRUzEoTFl:content.udk-berlin.de",
+                "name": "JSI Musiktheorie/Gehörbildung, 2. Semester",
+                "type": "course",
+                "children": {}
+              },
+              "!hoQcYfGsqazczCMgxb:content.udk-berlin.de": {
+                "id": "!hoQcYfGsqazczCMgxb:content.udk-berlin.de",
+                "name": "Musiktheorie/Gehörbildung JSI",
+                "type": "course",
+                "children": {}
+              },
+              "!vOCGaukWZlrrSyPDIV:content.udk-berlin.de": {
+                "id": "!vOCGaukWZlrrSyPDIV:content.udk-berlin.de",
+                "name": "JSI, 1. Semester, Musiktheorie/Gehörbildung",
                 "type": "course",
                 "children": {}
               }
@@ -11065,12 +9647,6 @@ const struktur = {
             "type": "course",
             "children": {}
           },
-          "!oifVuGfeDeiymtbKeM:content.udk-berlin.de": {
-            "id": "!oifVuGfeDeiymtbKeM:content.udk-berlin.de",
-            "name": "Sound Studies",
-            "type": "degree program",
-            "children": {}
-          },
           "!UAhyxPPLYRgbtgSQSr:content.udk-berlin.de": {
             "id": "!UAhyxPPLYRgbtgSQSr:content.udk-berlin.de",
             "name": "Examenscolloquium",
@@ -11091,234 +9667,23 @@ const struktur = {
           }
         }
       },
-      "!gqJdrxPdlvsTTbAqMu:content.udk-berlin.de": {
-        "id": "!gqJdrxPdlvsTTbAqMu:content.udk-berlin.de",
-        "name": "Studium Generale \"Diversität im Dialog\"",
-        "type": "degree program",
-        "children": {
-          "!DQniuJtXFUEdsomgfB:content.udk-berlin.de": {
-            "id": "!DQniuJtXFUEdsomgfB:content.udk-berlin.de",
-            "name": "Taktiken der Enthaltsamkeit. Übungen in und jenseits der Krise (KW)",
-            "type": "course",
-            "children": {}
-          },
-          "!acnXfqaNsocIHwgJgL:content.udk-berlin.de": {
-            "id": "!acnXfqaNsocIHwgJgL:content.udk-berlin.de",
-            "name": "SCHRIFTKÖRPER/KÖRPERSCHRIFT (KW)",
-            "type": "course",
-            "children": {}
-          },
-          "!KevSuusjrPtmWXdzPc:content.udk-berlin.de": {
-            "id": "!KevSuusjrPtmWXdzPc:content.udk-berlin.de",
-            "name": "PAF CAMPUS – Workshop, Aufführungsbesuch und -reflexion (IK)",
-            "type": "course",
-            "children": {}
-          },
-          "!PkiKdrOfhNLzbTMPuA:content.udk-berlin.de": {
-            "id": "!PkiKdrOfhNLzbTMPuA:content.udk-berlin.de",
-            "name": "Narration des Selbst im Portrait (IK)",
-            "type": "course",
-            "children": {}
-          },
-          "!QkoSLnyNUoDBimutGT:content.udk-berlin.de": {
-            "id": "!QkoSLnyNUoDBimutGT:content.udk-berlin.de",
-            "name": "Nothing is Original. Challenging Notions of Artistic Autonomy (KW)",
-            "type": "course",
-            "children": {}
-          },
-          "!PHhjUtSLcORIZkmPVU:content.udk-berlin.de": {
-            "id": "!PHhjUtSLcORIZkmPVU:content.udk-berlin.de",
-            "name": "Die Vermögen der Körper (KW)",
-            "type": "course",
-            "children": {}
-          },
-          "!SyQzVIyLVEsIcyevOS:content.udk-berlin.de": {
-            "id": "!SyQzVIyLVEsIcyevOS:content.udk-berlin.de",
-            "name": "Contesting the Colonial Spatial Divide of the Humboldt Forum & Following Entangled Trajectories",
-            "type": "course",
-            "children": {}
-          },
-          "!dLNbyolXMdfEPJDZDl:content.udk-berlin.de": {
-            "id": "!dLNbyolXMdfEPJDZDl:content.udk-berlin.de",
-            "name": "Wahrnehmung und Konstitution (KW)",
-            "type": "course",
-            "children": {}
-          },
-          "!qHuqLRUSqSjHDcGKbz:content.udk-berlin.de": {
-            "id": "!qHuqLRUSqSjHDcGKbz:content.udk-berlin.de",
-            "name": "Fleischwerdung des Wortes. Über eine Poetik des Körpers (KW)",
-            "type": "course",
-            "children": {}
-          },
-          "!EinbtNzedjYrlkbytL:content.udk-berlin.de": {
-            "id": "!EinbtNzedjYrlkbytL:content.udk-berlin.de",
-            "name": "Über das Geistige in der Kunst (KW)",
-            "type": "course",
-            "children": {}
-          },
-          "!SngUGMVfAFRmftXKGP:content.udk-berlin.de": {
-            "id": "!SngUGMVfAFRmftXKGP:content.udk-berlin.de",
-            "name": "Bullshit-Resistenz: Einführung ins kritische Denken (KW)",
-            "type": "course",
-            "children": {}
-          },
-          "!DnxXOHbHWpKourWJHp:content.udk-berlin.de": {
-            "id": "!DnxXOHbHWpKourWJHp:content.udk-berlin.de",
-            "name": "Weibliche Kreativität und toxische Männlichkeit (KW)",
-            "type": "course",
-            "children": {}
-          },
-          "!bWgmvAQGbuCvpSTVEE:content.udk-berlin.de": {
-            "id": "!bWgmvAQGbuCvpSTVEE:content.udk-berlin.de",
-            "name": "Resonanzkörper (KW)",
-            "type": "course",
-            "children": {}
-          },
-          "!ElvAPYuRqJTCKIUvKo:content.udk-berlin.de": {
-            "id": "!ElvAPYuRqJTCKIUvKo:content.udk-berlin.de",
-            "name": "There is always Urgency: Artistic, Political and Social Speculations on the Climate Disaster (IK)",
-            "type": "course",
-            "children": {}
-          },
-          "!dyVDsamcPIjrpqKCRo:content.udk-berlin.de": {
-            "id": "!dyVDsamcPIjrpqKCRo:content.udk-berlin.de",
-            "name": "Get going. Exploring ways through the climate disaster / Wirklich handeln. Den Klimanotstand als Epochenwandel gestalten (KW)",
-            "type": "course",
-            "children": {}
-          },
-          "!vrayBZKNdRjfCCzwnJ:content.udk-berlin.de": {
-            "id": "!vrayBZKNdRjfCCzwnJ:content.udk-berlin.de",
-            "name": "“MORGEN IST DIE FRAGE” – Current Issues of Berlin’s Club Culture",
-            "type": "course",
-            "children": {}
-          },
-          "!OChnYlvSwCBxtGfxai:content.udk-berlin.de": {
-            "id": "!OChnYlvSwCBxtGfxai:content.udk-berlin.de",
-            "name": "\"It’s a family affair\" (KW)",
-            "type": "course",
-            "children": {}
-          },
-          "!MTKeudzdsgaalJURYd:content.udk-berlin.de": {
-            "id": "!MTKeudzdsgaalJURYd:content.udk-berlin.de",
-            "name": "Sensing the City (IK)",
-            "type": "course",
-            "children": {}
-          },
-          "!bPHjpANsjsJWvjyxYL:content.udk-berlin.de": {
-            "id": "!bPHjpANsjsJWvjyxYL:content.udk-berlin.de",
-            "name": "Bodybuilding (IK)",
-            "type": "course",
-            "children": {}
-          },
-          "!QbnozYRhFFOgFFHnzi:content.udk-berlin.de": {
-            "id": "!QbnozYRhFFOgFFHnzi:content.udk-berlin.de",
-            "name": "En plein air! – Wanderstaffelei, Farbentuben und festes Schuhwerk in analoger Praxis bei jeder Wetterlage (IK)",
-            "type": "course",
-            "children": {}
-          },
-          "!mJnXmEHJAUVQxcdGXz:content.udk-berlin.de": {
-            "id": "!mJnXmEHJAUVQxcdGXz:content.udk-berlin.de",
-            "name": "Medienästhetik der Faszination (KW)",
-            "type": "course",
-            "children": {}
-          },
-          "!ITThvxoaYyCfzRqNUk:content.udk-berlin.de": {
-            "id": "!ITThvxoaYyCfzRqNUk:content.udk-berlin.de",
-            "name": "\"Genau wie früher\" (IK)",
-            "type": "course",
-            "children": {}
-          },
-          "!mMnNkvFGLYaWAluFyc:content.udk-berlin.de": {
-            "id": "!mMnNkvFGLYaWAluFyc:content.udk-berlin.de",
-            "name": "Moralische Identität (KW)",
-            "type": "course",
-            "children": {}
-          },
-          "!OiIWhmjtwCIFLsBYZF:content.udk-berlin.de": {
-            "id": "!OiIWhmjtwCIFLsBYZF:content.udk-berlin.de",
-            "name": "\"… they think these bodies can't …\" - otherism in classical music composition (KW)",
-            "type": "course",
-            "children": {}
-          },
-          "!bpLrHEOwuZMIHNyKrI:content.udk-berlin.de": {
-            "id": "!bpLrHEOwuZMIHNyKrI:content.udk-berlin.de",
-            "name": "Adding Insult to Injury: Bodies and their Objects (IK)",
-            "type": "course",
-            "children": {}
-          },
-          "!jJWWIVrLjsUvUTNPEa:content.udk-berlin.de": {
-            "id": "!jJWWIVrLjsUvUTNPEa:content.udk-berlin.de",
-            "name": "Performative Methods of Continuing (IK)",
-            "type": "course",
-            "children": {}
-          },
-          "!NEyrNEjPfhkJHABEJo:content.udk-berlin.de": {
-            "id": "!NEyrNEjPfhkJHABEJo:content.udk-berlin.de",
-            "name": "LAMENTO / MEMENTO – im Kraftfeld der Erinnerungen. Individuelle Formen des Trauerns, des Erinnerns und Gedenkens (IK)",
-            "type": "course",
-            "children": {}
-          },
-          "!VLOnqckCZMHUaHxoPs:content.udk-berlin.de": {
-            "id": "!VLOnqckCZMHUaHxoPs:content.udk-berlin.de",
-            "name": "Beyond UX – Zur Kultur und Geschichte des Interfaces (KW)",
-            "type": "course",
-            "children": {}
-          },
-          "!FhQwUtMjhitIDCHfgn:content.udk-berlin.de": {
-            "id": "!FhQwUtMjhitIDCHfgn:content.udk-berlin.de",
-            "name": "Analyse der Macht der Plattformen (KW)",
-            "type": "course",
-            "children": {}
-          },
-          "!rpvOWUpDjqsOYRYROD:content.udk-berlin.de": {
-            "id": "!rpvOWUpDjqsOYRYROD:content.udk-berlin.de",
-            "name": "Is LOL Contagious?: Clowning in Digital Times (IK)",
-            "type": "course",
-            "children": {}
-          },
-          "!JhDStLCNlktIZSsqoW:content.udk-berlin.de": {
-            "id": "!JhDStLCNlktIZSsqoW:content.udk-berlin.de",
-            "name": "Free Improv – Orchestra (IK)",
-            "type": "course",
-            "children": {}
-          },
-          "!FuIsOTmrhTfniuGfWY:content.udk-berlin.de": {
-            "id": "!FuIsOTmrhTfniuGfWY:content.udk-berlin.de",
-            "name": "OPEN CALL Freie studentische Projekte unter Supervision",
-            "type": "course",
-            "children": {}
-          },
-          "!FlzuuepJHkuMGRShKc:content.udk-berlin.de": {
-            "id": "!FlzuuepJHkuMGRShKc:content.udk-berlin.de",
-            "name": "Zerrissene Verknüpfungen skizzenhafter Welterzeugung – in Literatur, Musik und Zeichnungen (KW)",
-            "type": "course",
-            "children": {}
-          },
-          "!kBksYOQqDIsHitfWRd:content.udk-berlin.de": {
-            "id": "!kBksYOQqDIsHitfWRd:content.udk-berlin.de",
-            "name": "Körperkontakt auf Entzug – performative Aktionen und Interventionen (IK)",
-            "type": "course",
-            "children": {}
-          },
-          "!MfcaECEjjCuOJvIgBk:content.udk-berlin.de": {
-            "id": "!MfcaECEjjCuOJvIgBk:content.udk-berlin.de",
-            "name": "Von der grafischen Notation hin zur \"abstrakten visuellen Referenz\" (IK)",
-            "type": "course",
-            "children": {}
-          },
-          "!vjjiveXiFEwLvKEeWU:content.udk-berlin.de": {
-            "id": "!vjjiveXiFEwLvKEeWU:content.udk-berlin.de",
-            "name": "The Hitchhikers to the Internet",
-            "type": "course",
-            "children": {}
-          },
-          "!PZzSMzhgXsaEISPLoK:content.udk-berlin.de": {
-            "id": "!PZzSMzhgXsaEISPLoK:content.udk-berlin.de",
-            "name": "Politics of Machines",
-            "type": "course",
-            "children": {}
-          }
-        }
+      "!YehuBeeJpRWuYmeVWz:content.udk-berlin.de": {
+        "id": "!YehuBeeJpRWuYmeVWz:content.udk-berlin.de",
+        "name": "Universitätsbibliothek",
+        "type": "institution",
+        "children": {}
+      },
+      "!bVgIneUIdgHrxooRvQ:content.udk-berlin.de": {
+        "id": "!bVgIneUIdgHrxooRvQ:content.udk-berlin.de",
+        "name": "Weiterbildende Studiengänge und Veranstaltungen",
+        "type": "faculty",
+        "children": {}
+      },
+      "!eBKDDBPyVbxnUYLQHQ:content.udk-berlin.de": {
+        "id": "!eBKDDBPyVbxnUYLQHQ:content.udk-berlin.de",
+        "name": "International Office",
+        "type": "institution",
+        "children": {}
       },
       "!gjRaycWJKhrKpztWJJ:content.udk-berlin.de": {
         "id": "!gjRaycWJKhrKpztWJJ:content.udk-berlin.de",
@@ -11330,27 +9695,9 @@ const struktur = {
             "name": "Bühnenbild",
             "type": "institute",
             "children": {
-              "!BSKNbCZXaRisFIOYHE:content.udk-berlin.de": {
-                "id": "!BSKNbCZXaRisFIOYHE:content.udk-berlin.de",
-                "name": "Wissenschaftliche Projektbegleitung - ab 6. Semester",
-                "type": "course",
-                "children": {}
-              },
-              "!CYYtIQBKxBVjSpQfUY:content.udk-berlin.de": {
-                "id": "!CYYtIQBKxBVjSpQfUY:content.udk-berlin.de",
-                "name": "Projektbetreuung II",
-                "type": "course",
-                "children": {}
-              },
-              "!DQaAaHictFUxEcqNJa:content.udk-berlin.de": {
-                "id": "!DQaAaHictFUxEcqNJa:content.udk-berlin.de",
-                "name": "Neue Medien des Theaters ab 2. Semester",
-                "type": "course",
-                "children": {}
-              },
-              "!DxNNFTCzJeTHOSRwlN:content.udk-berlin.de": {
-                "id": "!DxNNFTCzJeTHOSRwlN:content.udk-berlin.de",
-                "name": "Bühnenbildgeschichte II",
+              "!HPVmDfxqygxuquhoit:content.udk-berlin.de": {
+                "id": "!HPVmDfxqygxuquhoit:content.udk-berlin.de",
+                "name": "Guerilla Theater - Fliegende Bühne ab 2. Semester",
                 "type": "course",
                 "children": {}
               },
@@ -11360,75 +9707,9 @@ const struktur = {
                 "type": "course",
                 "children": {}
               },
-              "!GMdgSVmCRTfPciFDnS:content.udk-berlin.de": {
-                "id": "!GMdgSVmCRTfPciFDnS:content.udk-berlin.de",
-                "name": "Inszenierungsanalyse - 2. und 4. Sem.",
-                "type": "course",
-                "children": {}
-              },
-              "!GhCfowNoZOMImUxzsf:content.udk-berlin.de": {
-                "id": "!GhCfowNoZOMImUxzsf:content.udk-berlin.de",
-                "name": "Räume unter Queerfeministischen Vorzeichen. Eine Veranstaltung der Filmbühne",
-                "type": "course",
-                "children": {}
-              },
-              "!HPVmDfxqygxuquhoit:content.udk-berlin.de": {
-                "id": "!HPVmDfxqygxuquhoit:content.udk-berlin.de",
-                "name": "Guerilla Theater - Fliegende Bühne ab 2. Semester",
-                "type": "course",
-                "children": {}
-              },
-              "!JLNnMdqJMiCdePgPeq:content.udk-berlin.de": {
-                "id": "!JLNnMdqJMiCdePgPeq:content.udk-berlin.de",
-                "name": "Projektarbeit I",
-                "type": "course",
-                "children": {}
-              },
-              "!JMGCbBsoLatsUAvIAT:content.udk-berlin.de": {
-                "id": "!JMGCbBsoLatsUAvIAT:content.udk-berlin.de",
-                "name": "Neue Medien des Theaters ab 4. Semester",
-                "type": "course",
-                "children": {}
-              },
-              "!KKBrGXaZJaRVmPDTzm:content.udk-berlin.de": {
-                "id": "!KKBrGXaZJaRVmPDTzm:content.udk-berlin.de",
-                "name": "Workshop 3D Modelling. Blockseminar für Fortgeschrittene",
-                "type": "course",
-                "children": {}
-              },
-              "!LiKMaoKGcQrecEGfKd:content.udk-berlin.de": {
-                "id": "!LiKMaoKGcQrecEGfKd:content.udk-berlin.de",
-                "name": "Theorie und Geschichte des Theaters: Europäische Theatergeschichte, Teil 2: \"Neoavantgarden, Postdramatik und die Zukunft des Theaters\"",
-                "type": "course",
-                "children": {}
-              },
-              "!MksReTtkJbDQCPZNLb:content.udk-berlin.de": {
-                "id": "!MksReTtkJbDQCPZNLb:content.udk-berlin.de",
-                "name": "Projektbetreuung -Fliegende Bühne -ab 2. Semester",
-                "type": "course",
-                "children": {}
-              },
-              "!OpqwpRcGAmPeOVssVx:content.udk-berlin.de": {
-                "id": "!OpqwpRcGAmPeOVssVx:content.udk-berlin.de",
-                "name": "Intermediale Raumtheorien 2 - ab 4. Semester",
-                "type": "course",
-                "children": {}
-              },
-              "!RtLXuIgUoCzHzJYoOz:content.udk-berlin.de": {
-                "id": "!RtLXuIgUoCzHzJYoOz:content.udk-berlin.de",
-                "name": "Projektbetreuung -Fliegende Bühne - 2. bis 6. Semester",
-                "type": "course",
-                "children": {}
-              },
               "!UPxXHyTgwDFGfukuaO:content.udk-berlin.de": {
                 "id": "!UPxXHyTgwDFGfukuaO:content.udk-berlin.de",
                 "name": "Fliegende Bühne / Green Screen",
-                "type": "course",
-                "children": {}
-              },
-              "!UrLfBNFWLmZocjpLMT:content.udk-berlin.de": {
-                "id": "!UrLfBNFWLmZocjpLMT:content.udk-berlin.de",
-                "name": "Werkstattzeichnen",
                 "type": "course",
                 "children": {}
               },
@@ -11438,21 +9719,9 @@ const struktur = {
                 "type": "course",
                 "children": {}
               },
-              "!aJweGQuCKsZdKgBRbM:content.udk-berlin.de": {
-                "id": "!aJweGQuCKsZdKgBRbM:content.udk-berlin.de",
-                "name": "Kuhle Wampe oder wem gehört die Welt ab 2. Semester",
-                "type": "course",
-                "children": {}
-              },
-              "!bNernOxFZZvhNMEvRr:content.udk-berlin.de": {
-                "id": "!bNernOxFZZvhNMEvRr:content.udk-berlin.de",
-                "name": "Brecht ab 6. Semester",
-                "type": "course",
-                "children": {}
-              },
-              "!djvKbApzyovYVXHvoM:content.udk-berlin.de": {
-                "id": "!djvKbApzyovYVXHvoM:content.udk-berlin.de",
-                "name": "Projekt Fakultät Darstellende Kunst",
+              "!UrLfBNFWLmZocjpLMT:content.udk-berlin.de": {
+                "id": "!UrLfBNFWLmZocjpLMT:content.udk-berlin.de",
+                "name": "Werkstattzeichnen",
                 "type": "course",
                 "children": {}
               },
@@ -11462,15 +9731,15 @@ const struktur = {
                 "type": "course",
                 "children": {}
               },
-              "!fCMiYfZCFTdBbGttwf:content.udk-berlin.de": {
-                "id": "!fCMiYfZCFTdBbGttwf:content.udk-berlin.de",
-                "name": "Wanderbühne. Temporäre Architekturen als Bühnenräume - 2. Semester",
+              "!GhCfowNoZOMImUxzsf:content.udk-berlin.de": {
+                "id": "!GhCfowNoZOMImUxzsf:content.udk-berlin.de",
+                "name": "Räume unter Queerfeministischen Vorzeichen. Eine Veranstaltung der Filmbühne",
                 "type": "course",
                 "children": {}
               },
-              "!kkMvLfcBYCCeFYnTFJ:content.udk-berlin.de": {
-                "id": "!kkMvLfcBYCCeFYnTFJ:content.udk-berlin.de",
-                "name": "Grundmotive des Theaters - 4. Semester",
+              "!KKBrGXaZJaRVmPDTzm:content.udk-berlin.de": {
+                "id": "!KKBrGXaZJaRVmPDTzm:content.udk-berlin.de",
+                "name": "Workshop 3D Modelling. Blockseminar für Fortgeschrittene",
                 "type": "course",
                 "children": {}
               },
@@ -11480,15 +9749,105 @@ const struktur = {
                 "type": "course",
                 "children": {}
               },
+              "!RtLXuIgUoCzHzJYoOz:content.udk-berlin.de": {
+                "id": "!RtLXuIgUoCzHzJYoOz:content.udk-berlin.de",
+                "name": "Projektbetreuung -Fliegende Bühne - 2. bis 6. Semester",
+                "type": "course",
+                "children": {}
+              },
+              "!MksReTtkJbDQCPZNLb:content.udk-berlin.de": {
+                "id": "!MksReTtkJbDQCPZNLb:content.udk-berlin.de",
+                "name": "Projektbetreuung -Fliegende Bühne -ab 2. Semester",
+                "type": "course",
+                "children": {}
+              },
+              "!fCMiYfZCFTdBbGttwf:content.udk-berlin.de": {
+                "id": "!fCMiYfZCFTdBbGttwf:content.udk-berlin.de",
+                "name": "Wanderbühne. Temporäre Architekturen als Bühnenräume - 2. Semester",
+                "type": "course",
+                "children": {}
+              },
               "!omoKcDPftxRqlDbIzK:content.udk-berlin.de": {
                 "id": "!omoKcDPftxRqlDbIzK:content.udk-berlin.de",
                 "name": "Brecht ab 2. Semester",
                 "type": "course",
                 "children": {}
               },
-              "!pyEHPKHfEJHaMrtoZq:content.udk-berlin.de": {
-                "id": "!pyEHPKHfEJHaMrtoZq:content.udk-berlin.de",
-                "name": "Workshop 3 D Modelling. Blockseminar für Anfänger*Innen",
+              "!aJweGQuCKsZdKgBRbM:content.udk-berlin.de": {
+                "id": "!aJweGQuCKsZdKgBRbM:content.udk-berlin.de",
+                "name": "Kuhle Wampe oder wem gehört die Welt ab 2. Semester",
+                "type": "course",
+                "children": {}
+              },
+              "!DQaAaHictFUxEcqNJa:content.udk-berlin.de": {
+                "id": "!DQaAaHictFUxEcqNJa:content.udk-berlin.de",
+                "name": "Neue Medien des Theaters ab 2. Semester",
+                "type": "course",
+                "children": {}
+              },
+              "!CYYtIQBKxBVjSpQfUY:content.udk-berlin.de": {
+                "id": "!CYYtIQBKxBVjSpQfUY:content.udk-berlin.de",
+                "name": "Projektbetreuung II",
+                "type": "course",
+                "children": {}
+              },
+              "!LiKMaoKGcQrecEGfKd:content.udk-berlin.de": {
+                "id": "!LiKMaoKGcQrecEGfKd:content.udk-berlin.de",
+                "name": "Theorie und Geschichte des Theaters: Europäische Theatergeschichte, Teil 2: \"Neoavantgarden, Postdramatik und die Zukunft des Theaters\"",
+                "type": "course",
+                "children": {}
+              },
+              "!bNernOxFZZvhNMEvRr:content.udk-berlin.de": {
+                "id": "!bNernOxFZZvhNMEvRr:content.udk-berlin.de",
+                "name": "Brecht ab 6. Semester",
+                "type": "course",
+                "children": {}
+              },
+              "!GMdgSVmCRTfPciFDnS:content.udk-berlin.de": {
+                "id": "!GMdgSVmCRTfPciFDnS:content.udk-berlin.de",
+                "name": "Inszenierungsanalyse - 2. und 4. Sem.",
+                "type": "course",
+                "children": {}
+              },
+              "!JMGCbBsoLatsUAvIAT:content.udk-berlin.de": {
+                "id": "!JMGCbBsoLatsUAvIAT:content.udk-berlin.de",
+                "name": "Neue Medien des Theaters ab 4. Semester",
+                "type": "course",
+                "children": {}
+              },
+              "!djvKbApzyovYVXHvoM:content.udk-berlin.de": {
+                "id": "!djvKbApzyovYVXHvoM:content.udk-berlin.de",
+                "name": "Projekt Fakultät Darstellende Kunst",
+                "type": "course",
+                "children": {}
+              },
+              "!BSKNbCZXaRisFIOYHE:content.udk-berlin.de": {
+                "id": "!BSKNbCZXaRisFIOYHE:content.udk-berlin.de",
+                "name": "Wissenschaftliche Projektbegleitung - ab 6. Semester",
+                "type": "course",
+                "children": {}
+              },
+              "!DxNNFTCzJeTHOSRwlN:content.udk-berlin.de": {
+                "id": "!DxNNFTCzJeTHOSRwlN:content.udk-berlin.de",
+                "name": "Bühnenbildgeschichte II",
+                "type": "course",
+                "children": {}
+              },
+              "!zQWHzjBlGcppJRqXwC:content.udk-berlin.de": {
+                "id": "!zQWHzjBlGcppJRqXwC:content.udk-berlin.de",
+                "name": "Fliegende Bühne ab 4. Semester",
+                "type": "course",
+                "children": {}
+              },
+              "!kkMvLfcBYCCeFYnTFJ:content.udk-berlin.de": {
+                "id": "!kkMvLfcBYCCeFYnTFJ:content.udk-berlin.de",
+                "name": "Grundmotive des Theaters - 4. Semester",
+                "type": "course",
+                "children": {}
+              },
+              "!OpqwpRcGAmPeOVssVx:content.udk-berlin.de": {
+                "id": "!OpqwpRcGAmPeOVssVx:content.udk-berlin.de",
+                "name": "Intermediale Raumtheorien 2 - ab 4. Semester",
                 "type": "course",
                 "children": {}
               },
@@ -11498,15 +9857,21 @@ const struktur = {
                 "type": "course",
                 "children": {}
               },
+              "!JLNnMdqJMiCdePgPeq:content.udk-berlin.de": {
+                "id": "!JLNnMdqJMiCdePgPeq:content.udk-berlin.de",
+                "name": "Projektarbeit I",
+                "type": "course",
+                "children": {}
+              },
               "!xLrfqoLXsqQWfRSsSD:content.udk-berlin.de": {
                 "id": "!xLrfqoLXsqQWfRSsSD:content.udk-berlin.de",
                 "name": "Repertoire - 2. Semester",
                 "type": "course",
                 "children": {}
               },
-              "!zQWHzjBlGcppJRqXwC:content.udk-berlin.de": {
-                "id": "!zQWHzjBlGcppJRqXwC:content.udk-berlin.de",
-                "name": "Fliegende Bühne ab 4. Semester",
+              "!pyEHPKHfEJHaMrtoZq:content.udk-berlin.de": {
+                "id": "!pyEHPKHfEJHaMrtoZq:content.udk-berlin.de",
+                "name": "Workshop 3 D Modelling. Blockseminar für Anfänger*Innen",
                 "type": "course",
                 "children": {}
               }
@@ -11517,15 +9882,15 @@ const struktur = {
             "name": "Kostümbild",
             "type": "institute",
             "children": {
-              "!GsUfurzXcximSxmsrh:content.udk-berlin.de": {
-                "id": "!GsUfurzXcximSxmsrh:content.udk-berlin.de",
-                "name": "Filmprojekt A - 1. Semester",
-                "type": "course",
-                "children": {}
-              },
               "!IBjRLjnkSYLllxBgMy:content.udk-berlin.de": {
                 "id": "!IBjRLjnkSYLllxBgMy:content.udk-berlin.de",
                 "name": "Basiskenntnisse praktische Kostümumsetzung - 5. Semester",
+                "type": "course",
+                "children": {}
+              },
+              "!RYQTNkVRLNfeeiRqNi:content.udk-berlin.de": {
+                "id": "!RYQTNkVRLNfeeiRqNi:content.udk-berlin.de",
+                "name": "Basiskenntnisse in Textil Bearbeitung - 1. Semester",
                 "type": "course",
                 "children": {}
               },
@@ -11541,21 +9906,9 @@ const struktur = {
                 "type": "course",
                 "children": {}
               },
-              "!PcLcGOVnyLoCBtNrza:content.udk-berlin.de": {
-                "id": "!PcLcGOVnyLoCBtNrza:content.udk-berlin.de",
-                "name": "Masterprojekt",
-                "type": "course",
-                "children": {}
-              },
-              "!RYQTNkVRLNfeeiRqNi:content.udk-berlin.de": {
-                "id": "!RYQTNkVRLNfeeiRqNi:content.udk-berlin.de",
-                "name": "Basiskenntnisse in Textil Bearbeitung - 1. Semester",
-                "type": "course",
-                "children": {}
-              },
-              "!SPrlyxymjtFdPdnIoN:content.udk-berlin.de": {
-                "id": "!SPrlyxymjtFdPdnIoN:content.udk-berlin.de",
-                "name": "Einführung in Maskenbild",
+              "!ZxzhrpKjfSUoNShlxq:content.udk-berlin.de": {
+                "id": "!ZxzhrpKjfSUoNShlxq:content.udk-berlin.de",
+                "name": "Darstellungsmethoden - 1. Semester",
                 "type": "course",
                 "children": {}
               },
@@ -11565,9 +9918,27 @@ const struktur = {
                 "type": "course",
                 "children": {}
               },
-              "!UYyaPoWjfMAwrpvhFB:content.udk-berlin.de": {
-                "id": "!UYyaPoWjfMAwrpvhFB:content.udk-berlin.de",
-                "name": "Körper Forschung - Nachtgestalten",
+              "!xcSkdSUuCIaiJhqUPM:content.udk-berlin.de": {
+                "id": "!xcSkdSUuCIaiJhqUPM:content.udk-berlin.de",
+                "name": "Digitale Medien - 1., 3. und 5. Semester",
+                "type": "course",
+                "children": {}
+              },
+              "!SPrlyxymjtFdPdnIoN:content.udk-berlin.de": {
+                "id": "!SPrlyxymjtFdPdnIoN:content.udk-berlin.de",
+                "name": "Einführung in Maskenbild",
+                "type": "course",
+                "children": {}
+              },
+              "!oORdLeMkrwvoeiHIkG:content.udk-berlin.de": {
+                "id": "!oORdLeMkrwvoeiHIkG:content.udk-berlin.de",
+                "name": "Körper Forschung - Nachtgestalten - 3. Semester",
+                "type": "course",
+                "children": {}
+              },
+              "!PcLcGOVnyLoCBtNrza:content.udk-berlin.de": {
+                "id": "!PcLcGOVnyLoCBtNrza:content.udk-berlin.de",
+                "name": "Masterprojekt",
                 "type": "course",
                 "children": {}
               },
@@ -11577,33 +9948,9 @@ const struktur = {
                 "type": "course",
                 "children": {}
               },
-              "!ZxzhrpKjfSUoNShlxq:content.udk-berlin.de": {
-                "id": "!ZxzhrpKjfSUoNShlxq:content.udk-berlin.de",
-                "name": "Darstellungsmethoden - 1. Semester",
-                "type": "course",
-                "children": {}
-              },
-              "!aRENcFQOdnKBJrgYyi:content.udk-berlin.de": {
-                "id": "!aRENcFQOdnKBJrgYyi:content.udk-berlin.de",
-                "name": "Kulturgeschichte der Kleidung und Modetheorie - 1. Semester",
-                "type": "course",
-                "children": {}
-              },
-              "!cdTptwXbpUTyhtixgw:content.udk-berlin.de": {
-                "id": "!cdTptwXbpUTyhtixgw:content.udk-berlin.de",
-                "name": "Kulturgeschichte der Kleidung und Modetheorie für Fortgeschrittene - 1. und 3. Semester",
-                "type": "course",
-                "children": {}
-              },
-              "!dVGyVbyNFscrTRtVls:content.udk-berlin.de": {
-                "id": "!dVGyVbyNFscrTRtVls:content.udk-berlin.de",
-                "name": "Kulturgeschichte der Klleidung - 3. Semester",
-                "type": "course",
-                "children": {}
-              },
-              "!dxLrKRgsyAcDNSULwD:content.udk-berlin.de": {
-                "id": "!dxLrKRgsyAcDNSULwD:content.udk-berlin.de",
-                "name": "Körper Forschung - Nachtgestalten - 1. Semester",
+              "!urPfllmNZzqriAIssr:content.udk-berlin.de": {
+                "id": "!urPfllmNZzqriAIssr:content.udk-berlin.de",
+                "name": "Grundlagen des Filmkostüms - 1. Semester",
                 "type": "course",
                 "children": {}
               },
@@ -11619,21 +9966,21 @@ const struktur = {
                 "type": "course",
                 "children": {}
               },
-              "!nxOkAIKKuLTqQCQhqZ:content.udk-berlin.de": {
-                "id": "!nxOkAIKKuLTqQCQhqZ:content.udk-berlin.de",
-                "name": "Filmtheorie Grundlagen - 1. und 3. Semester",
+              "!UYyaPoWjfMAwrpvhFB:content.udk-berlin.de": {
+                "id": "!UYyaPoWjfMAwrpvhFB:content.udk-berlin.de",
+                "name": "Körper Forschung - Nachtgestalten",
                 "type": "course",
                 "children": {}
               },
-              "!oORdLeMkrwvoeiHIkG:content.udk-berlin.de": {
-                "id": "!oORdLeMkrwvoeiHIkG:content.udk-berlin.de",
-                "name": "Körper Forschung - Nachtgestalten - 3. Semester",
+              "!aRENcFQOdnKBJrgYyi:content.udk-berlin.de": {
+                "id": "!aRENcFQOdnKBJrgYyi:content.udk-berlin.de",
+                "name": "Kulturgeschichte der Kleidung und Modetheorie - 1. Semester",
                 "type": "course",
                 "children": {}
               },
-              "!rAVncTubDQAwBPdfBO:content.udk-berlin.de": {
-                "id": "!rAVncTubDQAwBPdfBO:content.udk-berlin.de",
-                "name": "Raumkonzeption - 1. und 3. Semester",
+              "!cdTptwXbpUTyhtixgw:content.udk-berlin.de": {
+                "id": "!cdTptwXbpUTyhtixgw:content.udk-berlin.de",
+                "name": "Kulturgeschichte der Kleidung und Modetheorie für Fortgeschrittene - 1. und 3. Semester",
                 "type": "course",
                 "children": {}
               },
@@ -11643,21 +9990,39 @@ const struktur = {
                 "type": "course",
                 "children": {}
               },
-              "!urPfllmNZzqriAIssr:content.udk-berlin.de": {
-                "id": "!urPfllmNZzqriAIssr:content.udk-berlin.de",
-                "name": "Grundlagen des Filmkostüms - 1. Semester",
+              "!rAVncTubDQAwBPdfBO:content.udk-berlin.de": {
+                "id": "!rAVncTubDQAwBPdfBO:content.udk-berlin.de",
+                "name": "Raumkonzeption - 1. und 3. Semester",
+                "type": "course",
+                "children": {}
+              },
+              "!nxOkAIKKuLTqQCQhqZ:content.udk-berlin.de": {
+                "id": "!nxOkAIKKuLTqQCQhqZ:content.udk-berlin.de",
+                "name": "Filmtheorie Grundlagen - 1. und 3. Semester",
+                "type": "course",
+                "children": {}
+              },
+              "!dVGyVbyNFscrTRtVls:content.udk-berlin.de": {
+                "id": "!dVGyVbyNFscrTRtVls:content.udk-berlin.de",
+                "name": "Kulturgeschichte der Klleidung - 3. Semester",
+                "type": "course",
+                "children": {}
+              },
+              "!dxLrKRgsyAcDNSULwD:content.udk-berlin.de": {
+                "id": "!dxLrKRgsyAcDNSULwD:content.udk-berlin.de",
+                "name": "Körper Forschung - Nachtgestalten - 1. Semester",
+                "type": "course",
+                "children": {}
+              },
+              "!GsUfurzXcximSxmsrh:content.udk-berlin.de": {
+                "id": "!GsUfurzXcximSxmsrh:content.udk-berlin.de",
+                "name": "Filmprojekt A - 1. Semester",
                 "type": "course",
                 "children": {}
               },
               "!vlHKGBifoSNluAYJNj:content.udk-berlin.de": {
                 "id": "!vlHKGBifoSNluAYJNj:content.udk-berlin.de",
                 "name": "Künstlerische Konzeption / Dramaturgie Projekt - Nachgestalten",
-                "type": "course",
-                "children": {}
-              },
-              "!xcSkdSUuCIaiJhqUPM:content.udk-berlin.de": {
-                "id": "!xcSkdSUuCIaiJhqUPM:content.udk-berlin.de",
-                "name": "Digitale Medien - 1., 3. und 5. Semester",
                 "type": "course",
                 "children": {}
               }
@@ -12155,9 +10520,238 @@ const struktur = {
           }
         }
       },
-      "!lsoUcOlTSDYmqTukyb:content.udk-berlin.de": {
-        "id": "!lsoUcOlTSDYmqTukyb:content.udk-berlin.de",
-        "name": "Studium Generale",
+      "!gqJdrxPdlvsTTbAqMu:content.udk-berlin.de": {
+        "id": "!gqJdrxPdlvsTTbAqMu:content.udk-berlin.de",
+        "name": "Studium Generale \"Diversität im Dialog\"",
+        "type": "degree program",
+        "children": {
+          "!DQniuJtXFUEdsomgfB:content.udk-berlin.de": {
+            "id": "!DQniuJtXFUEdsomgfB:content.udk-berlin.de",
+            "name": "Taktiken der Enthaltsamkeit. Übungen in und jenseits der Krise (KW)",
+            "type": "course",
+            "children": {}
+          },
+          "!acnXfqaNsocIHwgJgL:content.udk-berlin.de": {
+            "id": "!acnXfqaNsocIHwgJgL:content.udk-berlin.de",
+            "name": "SCHRIFTKÖRPER/KÖRPERSCHRIFT (KW)",
+            "type": "course",
+            "children": {}
+          },
+          "!KevSuusjrPtmWXdzPc:content.udk-berlin.de": {
+            "id": "!KevSuusjrPtmWXdzPc:content.udk-berlin.de",
+            "name": "PAF CAMPUS – Workshop, Aufführungsbesuch und -reflexion (IK)",
+            "type": "course",
+            "children": {}
+          },
+          "!PkiKdrOfhNLzbTMPuA:content.udk-berlin.de": {
+            "id": "!PkiKdrOfhNLzbTMPuA:content.udk-berlin.de",
+            "name": "Narration des Selbst im Portrait (IK)",
+            "type": "course",
+            "children": {}
+          },
+          "!QkoSLnyNUoDBimutGT:content.udk-berlin.de": {
+            "id": "!QkoSLnyNUoDBimutGT:content.udk-berlin.de",
+            "name": "Nothing is Original. Challenging Notions of Artistic Autonomy (KW)",
+            "type": "course",
+            "children": {}
+          },
+          "!PHhjUtSLcORIZkmPVU:content.udk-berlin.de": {
+            "id": "!PHhjUtSLcORIZkmPVU:content.udk-berlin.de",
+            "name": "Die Vermögen der Körper (KW)",
+            "type": "course",
+            "children": {}
+          },
+          "!SyQzVIyLVEsIcyevOS:content.udk-berlin.de": {
+            "id": "!SyQzVIyLVEsIcyevOS:content.udk-berlin.de",
+            "name": "Contesting the Colonial Spatial Divide of the Humboldt Forum & Following Entangled Trajectories",
+            "type": "course",
+            "children": {}
+          },
+          "!dLNbyolXMdfEPJDZDl:content.udk-berlin.de": {
+            "id": "!dLNbyolXMdfEPJDZDl:content.udk-berlin.de",
+            "name": "Wahrnehmung und Konstitution (KW)",
+            "type": "course",
+            "children": {}
+          },
+          "!qHuqLRUSqSjHDcGKbz:content.udk-berlin.de": {
+            "id": "!qHuqLRUSqSjHDcGKbz:content.udk-berlin.de",
+            "name": "Fleischwerdung des Wortes. Über eine Poetik des Körpers (KW)",
+            "type": "course",
+            "children": {}
+          },
+          "!EinbtNzedjYrlkbytL:content.udk-berlin.de": {
+            "id": "!EinbtNzedjYrlkbytL:content.udk-berlin.de",
+            "name": "Über das Geistige in der Kunst (KW)",
+            "type": "course",
+            "children": {}
+          },
+          "!SngUGMVfAFRmftXKGP:content.udk-berlin.de": {
+            "id": "!SngUGMVfAFRmftXKGP:content.udk-berlin.de",
+            "name": "Bullshit-Resistenz: Einführung ins kritische Denken (KW)",
+            "type": "course",
+            "children": {}
+          },
+          "!DnxXOHbHWpKourWJHp:content.udk-berlin.de": {
+            "id": "!DnxXOHbHWpKourWJHp:content.udk-berlin.de",
+            "name": "Weibliche Kreativität und toxische Männlichkeit (KW)",
+            "type": "course",
+            "children": {}
+          },
+          "!bWgmvAQGbuCvpSTVEE:content.udk-berlin.de": {
+            "id": "!bWgmvAQGbuCvpSTVEE:content.udk-berlin.de",
+            "name": "Resonanzkörper (KW)",
+            "type": "course",
+            "children": {}
+          },
+          "!ElvAPYuRqJTCKIUvKo:content.udk-berlin.de": {
+            "id": "!ElvAPYuRqJTCKIUvKo:content.udk-berlin.de",
+            "name": "There is always Urgency: Artistic, Political and Social Speculations on the Climate Disaster (IK)",
+            "type": "course",
+            "children": {}
+          },
+          "!dyVDsamcPIjrpqKCRo:content.udk-berlin.de": {
+            "id": "!dyVDsamcPIjrpqKCRo:content.udk-berlin.de",
+            "name": "Get going. Exploring ways through the climate disaster / Wirklich handeln. Den Klimanotstand als Epochenwandel gestalten (KW)",
+            "type": "course",
+            "children": {}
+          },
+          "!vrayBZKNdRjfCCzwnJ:content.udk-berlin.de": {
+            "id": "!vrayBZKNdRjfCCzwnJ:content.udk-berlin.de",
+            "name": "“MORGEN IST DIE FRAGE” – Current Issues of Berlin’s Club Culture",
+            "type": "course",
+            "children": {}
+          },
+          "!OChnYlvSwCBxtGfxai:content.udk-berlin.de": {
+            "id": "!OChnYlvSwCBxtGfxai:content.udk-berlin.de",
+            "name": "\"It’s a family affair\" (KW)",
+            "type": "course",
+            "children": {}
+          },
+          "!MTKeudzdsgaalJURYd:content.udk-berlin.de": {
+            "id": "!MTKeudzdsgaalJURYd:content.udk-berlin.de",
+            "name": "Sensing the City (IK)",
+            "type": "course",
+            "children": {}
+          },
+          "!bPHjpANsjsJWvjyxYL:content.udk-berlin.de": {
+            "id": "!bPHjpANsjsJWvjyxYL:content.udk-berlin.de",
+            "name": "Bodybuilding (IK)",
+            "type": "course",
+            "children": {}
+          },
+          "!QbnozYRhFFOgFFHnzi:content.udk-berlin.de": {
+            "id": "!QbnozYRhFFOgFFHnzi:content.udk-berlin.de",
+            "name": "En plein air! – Wanderstaffelei, Farbentuben und festes Schuhwerk in analoger Praxis bei jeder Wetterlage (IK)",
+            "type": "course",
+            "children": {}
+          },
+          "!mJnXmEHJAUVQxcdGXz:content.udk-berlin.de": {
+            "id": "!mJnXmEHJAUVQxcdGXz:content.udk-berlin.de",
+            "name": "Medienästhetik der Faszination (KW)",
+            "type": "course",
+            "children": {}
+          },
+          "!ITThvxoaYyCfzRqNUk:content.udk-berlin.de": {
+            "id": "!ITThvxoaYyCfzRqNUk:content.udk-berlin.de",
+            "name": "\"Genau wie früher\" (IK)",
+            "type": "course",
+            "children": {}
+          },
+          "!mMnNkvFGLYaWAluFyc:content.udk-berlin.de": {
+            "id": "!mMnNkvFGLYaWAluFyc:content.udk-berlin.de",
+            "name": "Moralische Identität (KW)",
+            "type": "course",
+            "children": {}
+          },
+          "!OiIWhmjtwCIFLsBYZF:content.udk-berlin.de": {
+            "id": "!OiIWhmjtwCIFLsBYZF:content.udk-berlin.de",
+            "name": "\"… they think these bodies can't …\" - otherism in classical music composition (KW)",
+            "type": "course",
+            "children": {}
+          },
+          "!bpLrHEOwuZMIHNyKrI:content.udk-berlin.de": {
+            "id": "!bpLrHEOwuZMIHNyKrI:content.udk-berlin.de",
+            "name": "Adding Insult to Injury: Bodies and their Objects (IK)",
+            "type": "course",
+            "children": {}
+          },
+          "!jJWWIVrLjsUvUTNPEa:content.udk-berlin.de": {
+            "id": "!jJWWIVrLjsUvUTNPEa:content.udk-berlin.de",
+            "name": "Performative Methods of Continuing (IK)",
+            "type": "course",
+            "children": {}
+          },
+          "!NEyrNEjPfhkJHABEJo:content.udk-berlin.de": {
+            "id": "!NEyrNEjPfhkJHABEJo:content.udk-berlin.de",
+            "name": "LAMENTO / MEMENTO – im Kraftfeld der Erinnerungen. Individuelle Formen des Trauerns, des Erinnerns und Gedenkens (IK)",
+            "type": "course",
+            "children": {}
+          },
+          "!VLOnqckCZMHUaHxoPs:content.udk-berlin.de": {
+            "id": "!VLOnqckCZMHUaHxoPs:content.udk-berlin.de",
+            "name": "Beyond UX – Zur Kultur und Geschichte des Interfaces (KW)",
+            "type": "course",
+            "children": {}
+          },
+          "!FhQwUtMjhitIDCHfgn:content.udk-berlin.de": {
+            "id": "!FhQwUtMjhitIDCHfgn:content.udk-berlin.de",
+            "name": "Analyse der Macht der Plattformen (KW)",
+            "type": "course",
+            "children": {}
+          },
+          "!rpvOWUpDjqsOYRYROD:content.udk-berlin.de": {
+            "id": "!rpvOWUpDjqsOYRYROD:content.udk-berlin.de",
+            "name": "Is LOL Contagious?: Clowning in Digital Times (IK)",
+            "type": "course",
+            "children": {}
+          },
+          "!JhDStLCNlktIZSsqoW:content.udk-berlin.de": {
+            "id": "!JhDStLCNlktIZSsqoW:content.udk-berlin.de",
+            "name": "Free Improv – Orchestra (IK)",
+            "type": "course",
+            "children": {}
+          },
+          "!FuIsOTmrhTfniuGfWY:content.udk-berlin.de": {
+            "id": "!FuIsOTmrhTfniuGfWY:content.udk-berlin.de",
+            "name": "OPEN CALL Freie studentische Projekte unter Supervision",
+            "type": "course",
+            "children": {}
+          },
+          "!FlzuuepJHkuMGRShKc:content.udk-berlin.de": {
+            "id": "!FlzuuepJHkuMGRShKc:content.udk-berlin.de",
+            "name": "Zerrissene Verknüpfungen skizzenhafter Welterzeugung – in Literatur, Musik und Zeichnungen (KW)",
+            "type": "course",
+            "children": {}
+          },
+          "!kBksYOQqDIsHitfWRd:content.udk-berlin.de": {
+            "id": "!kBksYOQqDIsHitfWRd:content.udk-berlin.de",
+            "name": "Körperkontakt auf Entzug – performative Aktionen und Interventionen (IK)",
+            "type": "course",
+            "children": {}
+          },
+          "!MfcaECEjjCuOJvIgBk:content.udk-berlin.de": {
+            "id": "!MfcaECEjjCuOJvIgBk:content.udk-berlin.de",
+            "name": "Von der grafischen Notation hin zur \"abstrakten visuellen Referenz\" (IK)",
+            "type": "course",
+            "children": {}
+          },
+          "!vjjiveXiFEwLvKEeWU:content.udk-berlin.de": {
+            "id": "!vjjiveXiFEwLvKEeWU:content.udk-berlin.de",
+            "name": "The Hitchhikers to the Internet",
+            "type": "course",
+            "children": {}
+          },
+          "!PZzSMzhgXsaEISPLoK:content.udk-berlin.de": {
+            "id": "!PZzSMzhgXsaEISPLoK:content.udk-berlin.de",
+            "name": "Politics of Machines",
+            "type": "course",
+            "children": {}
+          }
+        }
+      },
+      "!ikWOqOsHeWtDpXiaZk:content.udk-berlin.de": {
+        "id": "!ikWOqOsHeWtDpXiaZk:content.udk-berlin.de",
+        "name": "Studienberatung",
         "type": "institution",
         "children": {}
       },
@@ -12167,255 +10761,9 @@ const struktur = {
         "type": "faculty",
         "children": {}
       },
-      "!eBKDDBPyVbxnUYLQHQ:content.udk-berlin.de": {
-        "id": "!eBKDDBPyVbxnUYLQHQ:content.udk-berlin.de",
-        "name": "International Office",
-        "type": "institution",
-        "children": {}
-      },
-      "!pmQXVNCYvAjJwmRVJa:content.udk-berlin.de": {
-        "id": "!pmQXVNCYvAjJwmRVJa:content.udk-berlin.de",
-        "name": "Gender Studies und Intersektionalität",
-        "children": {
-          "!WtTrgaIuNFcMzNOLpl:content.udk-berlin.de": {
-            "id": "!WtTrgaIuNFcMzNOLpl:content.udk-berlin.de",
-            "name": "FEMINISMEN II - Schriften & Kunstwerke",
-            "type": "course",
-            "children": {}
-          },
-          "!gKKllwcjgyWvutOrzV:content.udk-berlin.de": {
-            "id": "!gKKllwcjgyWvutOrzV:content.udk-berlin.de",
-            "name": "„Sprechen über Kunst. Konzepte für Bildung und Vermittlung von Biennalen und musealen Sammlungen“",
-            "type": "course",
-            "children": {}
-          },
-          "!mEXsLcsCbKHLGhyDAg:content.udk-berlin.de": {
-            "id": "!mEXsLcsCbKHLGhyDAg:content.udk-berlin.de",
-            "name": "Forschungspositionen Kunstdidaktik",
-            "type": "course",
-            "children": {}
-          },
-          "!pnOppXfSqjyHIMNAyY:content.udk-berlin.de": {
-            "id": "!pnOppXfSqjyHIMNAyY:content.udk-berlin.de",
-            "name": "From Concept To Performance",
-            "type": "course",
-            "children": {}
-          },
-          "!iTfPzGsEoRfiiGNupK:content.udk-berlin.de": {
-            "id": "!iTfPzGsEoRfiiGNupK:content.udk-berlin.de",
-            "name": "Ort und Raum im Kontext von den Künsten und Bildung 1",
-            "type": "course",
-            "children": {}
-          },
-          "!VHasHGpZnUpqiYvnwG:content.udk-berlin.de": {
-            "id": "!VHasHGpZnUpqiYvnwG:content.udk-berlin.de",
-            "name": "Antirassistisches und vielfältiges Erzählen",
-            "type": "course",
-            "children": {}
-          },
-          "!QyrgmkpNkOZGnUqPuT:content.udk-berlin.de": {
-            "id": "!QyrgmkpNkOZGnUqPuT:content.udk-berlin.de",
-            "name": "Herrschaft und Emanzipation durch Musik: Gender, Klasse, Kirche, Staat",
-            "type": "course",
-            "children": {}
-          },
-          "!GKehszwoEurdgSXsBu:content.udk-berlin.de": {
-            "id": "!GKehszwoEurdgSXsBu:content.udk-berlin.de",
-            "name": "Quellentexte der Architekturtheorie. Von der Antike bis zum Klassizismus.",
-            "type": "course",
-            "children": {}
-          },
-          "!JJvlxenXQBOaavqlpX:content.udk-berlin.de": {
-            "id": "!JJvlxenXQBOaavqlpX:content.udk-berlin.de",
-            "name": "THEY: LIVE – student lives revealed through context-based art practices – an EACE Project",
-            "type": "course",
-            "children": {}
-          },
-          "!qxjbYYyZlDnlBqBUxK:content.udk-berlin.de": {
-            "id": "!qxjbYYyZlDnlBqBUxK:content.udk-berlin.de",
-            "name": "Vom Konzept zur Aufführung",
-            "type": "course",
-            "children": {}
-          },
-          "!RRgZnUuZiMoLWwKUEk:content.udk-berlin.de": {
-            "id": "!RRgZnUuZiMoLWwKUEk:content.udk-berlin.de",
-            "name": "Wer hat Angst vor der Klitoris? Formen des weiblichen Genießens von 1968 bis heute",
-            "type": "course",
-            "children": {}
-          },
-          "!pXxfeYOXZLzEWxHvcE:content.udk-berlin.de": {
-            "id": "!pXxfeYOXZLzEWxHvcE:content.udk-berlin.de",
-            "name": "Differenzreflexive Fotovermittlung",
-            "type": "course",
-            "children": {}
-          },
-          "!FUxEXfndPGPhtDffys:content.udk-berlin.de": {
-            "id": "!FUxEXfndPGPhtDffys:content.udk-berlin.de",
-            "name": "Fremde Wesen",
-            "type": "course",
-            "children": {}
-          },
-          "!DzjUJjsVIJHWSELzoi:content.udk-berlin.de": {
-            "id": "!DzjUJjsVIJHWSELzoi:content.udk-berlin.de",
-            "name": "Grenzen der Vermittlung erkunden",
-            "type": "course",
-            "children": {}
-          },
-          "!IMmXuVIzPhgPvOLgys:content.udk-berlin.de": {
-            "id": "!IMmXuVIzPhgPvOLgys:content.udk-berlin.de",
-            "name": "Material im Kontext von den Künsten und Bildung 2",
-            "type": "course",
-            "children": {}
-          },
-          "!bxKGOQXGGBfELVmBWg:content.udk-berlin.de": {
-            "id": "!bxKGOQXGGBfELVmBWg:content.udk-berlin.de",
-            "name": "Essay als Form – in Kunst, Literatur, Ausstellung",
-            "type": "course",
-            "children": {}
-          },
-          "!BsXSfHtqEsgorvGXqF:content.udk-berlin.de": {
-            "id": "!BsXSfHtqEsgorvGXqF:content.udk-berlin.de",
-            "name": "Freundliche Kritik - Kolloquium für wissenschaftliches Arbeiten von Künstler*innen",
-            "type": "course",
-            "children": {}
-          },
-          "!zygzkaaTTTDIPczNyg:content.udk-berlin.de": {
-            "id": "!zygzkaaTTTDIPczNyg:content.udk-berlin.de",
-            "name": "Ich und Du und Ich im Dialog. Beobachten und Dokumentieren",
-            "type": "course",
-            "children": {}
-          },
-          "!WESrWhRGozABaZoffv:content.udk-berlin.de": {
-            "id": "!WESrWhRGozABaZoffv:content.udk-berlin.de",
-            "name": "Ins Museum! Durchführung",
-            "type": "course",
-            "children": {}
-          },
-          "!HoiZLSxQAyELXMmrOy:content.udk-berlin.de": {
-            "id": "!HoiZLSxQAyELXMmrOy:content.udk-berlin.de",
-            "name": "Unphotographing stereotypes",
-            "type": "course",
-            "children": {}
-          },
-          "!MzvpxFUSmMdHLEgJNW:content.udk-berlin.de": {
-            "id": "!MzvpxFUSmMdHLEgJNW:content.udk-berlin.de",
-            "name": "Einführung in die Kunstwissenschaft und Ästhetik",
-            "type": "course",
-            "children": {}
-          },
-          "!jrBxSqhJImBnQPScsc:content.udk-berlin.de": {
-            "id": "!jrBxSqhJImBnQPScsc:content.udk-berlin.de",
-            "name": "Material im Kontext von den Künsten und Bildung 1",
-            "type": "course",
-            "children": {}
-          },
-          "!cWpMVBOtmVTwXkeEeV:content.udk-berlin.de": {
-            "id": "!cWpMVBOtmVTwXkeEeV:content.udk-berlin.de",
-            "name": "Schreiben als künstlerisch-forschende Praxis",
-            "type": "course",
-            "children": {}
-          },
-          "!HyJwwXOcuRdRlJoXNU:content.udk-berlin.de": {
-            "id": "!HyJwwXOcuRdRlJoXNU:content.udk-berlin.de",
-            "name": "Zeitlichkeit in der zeitgenössischen Kunst. Konzepte, Verfahren, Stationen der Kunst seit den 60er Jahren.",
-            "type": "course",
-            "children": {}
-          },
-          "!MqNbHsXVrkSzJVSEDP:content.udk-berlin.de": {
-            "id": "!MqNbHsXVrkSzJVSEDP:content.udk-berlin.de",
-            "name": "Aufzeichnungen im Austausch – Projektvorbereitung",
-            "type": "course",
-            "children": {}
-          },
-          "!QAPJfwVfGfjPMNvNCS:content.udk-berlin.de": {
-            "id": "!QAPJfwVfGfjPMNvNCS:content.udk-berlin.de",
-            "name": "Video Performance II : Dokumentation im Feld der Performancekunst",
-            "type": "course",
-            "children": {}
-          },
-          "!rPrhYNNDQnCxWzAvRt:content.udk-berlin.de": {
-            "id": "!rPrhYNNDQnCxWzAvRt:content.udk-berlin.de",
-            "name": "Vom Wesen der Anwesenheit. Beobachten und Dokumentieren",
-            "type": "course",
-            "children": {}
-          },
-          "!hZyOfZsfmYMNZYFcIF:content.udk-berlin.de": {
-            "id": "!hZyOfZsfmYMNZYFcIF:content.udk-berlin.de",
-            "name": "Andy Warhols queere Filmfabrik",
-            "type": "course",
-            "children": {}
-          },
-          "!xIPoFOoAKhotTKCDNd:content.udk-berlin.de": {
-            "id": "!xIPoFOoAKhotTKCDNd:content.udk-berlin.de",
-            "name": "Ort und Raum im Kontext von den Künsten und Bildung 2",
-            "type": "course",
-            "children": {}
-          },
-          "!wNVmGXQwjuNAaKNMzB:content.udk-berlin.de": {
-            "id": "!wNVmGXQwjuNAaKNMzB:content.udk-berlin.de",
-            "name": "Hybrid Systems: Silences, Soundscapes & Sonoaviatics",
-            "type": "course",
-            "children": {}
-          },
-          "!yRmdwhYsjeSvUTcBgB:content.udk-berlin.de": {
-            "id": "!yRmdwhYsjeSvUTcBgB:content.udk-berlin.de",
-            "name": "Ins Museum! Vorbereitung",
-            "type": "course",
-            "children": {}
-          },
-          "!ZBaydFZkoVDLUKdDNR:content.udk-berlin.de": {
-            "id": "!ZBaydFZkoVDLUKdDNR:content.udk-berlin.de",
-            "name": "Kunstdidaktik anders denken – Öffentlicher und privater Raum",
-            "type": "course",
-            "children": {}
-          },
-          "!RwqadGnFnHmQkTbFbj:content.udk-berlin.de": {
-            "id": "!RwqadGnFnHmQkTbFbj:content.udk-berlin.de",
-            "name": "What about our ´Invisible´ past? (kritische Fragen zur UdK Vergangenheit im Rahmen des Olympia Geländes)",
-            "type": "course",
-            "children": {}
-          },
-          "!pFIRWMUYOvqZWumkjV:content.udk-berlin.de": {
-            "id": "!pFIRWMUYOvqZWumkjV:content.udk-berlin.de",
-            "name": "Aufzeichnungen im Austausch – Projektdurchführung",
-            "type": "course",
-            "children": {}
-          },
-          "!YUdIpKrTNneoPfpLms:content.udk-berlin.de": {
-            "id": "!YUdIpKrTNneoPfpLms:content.udk-berlin.de",
-            "name": "Forschungspositionen Ästhetische Bildung",
-            "type": "course",
-            "children": {}
-          },
-          "!iBljHNVTpDKdWCAlir:content.udk-berlin.de": {
-            "id": "!iBljHNVTpDKdWCAlir:content.udk-berlin.de",
-            "name": "Kolloquium",
-            "type": "course",
-            "children": {}
-          },
-          "!skBlabtmBQYzswwwyi:content.udk-berlin.de": {
-            "id": "!skBlabtmBQYzswwwyi:content.udk-berlin.de",
-            "name": "Kunstdidaktik anders denken – Zeitgenössisches Bilderbuch",
-            "type": "course",
-            "children": {}
-          },
-          "!XevSboHlqiJqrHnodw:content.udk-berlin.de": {
-            "id": "!XevSboHlqiJqrHnodw:content.udk-berlin.de",
-            "name": "FEMINISMS-INTERVENTION II",
-            "type": "course",
-            "children": {}
-          }
-        }
-      },
-      "!bVgIneUIdgHrxooRvQ:content.udk-berlin.de": {
-        "id": "!bVgIneUIdgHrxooRvQ:content.udk-berlin.de",
-        "name": "Weiterbildende Studiengänge und Veranstaltungen",
-        "type": "faculty",
-        "children": {}
-      },
-      "!YehuBeeJpRWuYmeVWz:content.udk-berlin.de": {
-        "id": "!YehuBeeJpRWuYmeVWz:content.udk-berlin.de",
-        "name": "Universitätsbibliothek",
+      "!lsoUcOlTSDYmqTukyb:content.udk-berlin.de": {
+        "id": "!lsoUcOlTSDYmqTukyb:content.udk-berlin.de",
+        "name": "Studium Generale",
         "type": "institution",
         "children": {}
       },
@@ -12426,42 +10774,1525 @@ const struktur = {
         "children": {
           "!AjEpwkIUydsINHgYWL:content.udk-berlin.de": {
             "id": "!AjEpwkIUydsINHgYWL:content.udk-berlin.de",
+            "name": "deprecated",
+            "type": "course",
+            "children": {}
+          },
+          "!oifVuGfeDeiymtbKeM:content.udk-berlin.de": {
+            "id": "!oifVuGfeDeiymtbKeM:content.udk-berlin.de",
             "name": "Sound Studies and Sonic Arts",
-            "type": "course",
+            "type": "degree program",
             "children": {}
           }
         }
       },
-      "!WfLvMMfXpFaSuqyqPE:content.udk-berlin.de": {
-        "id": "!WfLvMMfXpFaSuqyqPE:content.udk-berlin.de",
-        "name": "Frauenbeauftragte",
-        "type": "institution",
-        "children": {}
-      },
-      "!ikWOqOsHeWtDpXiaZk:content.udk-berlin.de": {
-        "id": "!ikWOqOsHeWtDpXiaZk:content.udk-berlin.de",
-        "name": "Allgemeine Studienberatung",
-        "type": "institution",
-        "children": {}
-      },
-      "!PIZnKjMWljdFHfugiJ:content.udk-berlin.de": {
-        "id": "!PIZnKjMWljdFHfugiJ:content.udk-berlin.de",
-        "name": "Berlin Career College",
-        "type": "institution",
+      "!twLnJbaaYDIoswgCDl:content.udk-berlin.de": {
+        "id": "!twLnJbaaYDIoswgCDl:content.udk-berlin.de",
+        "name": "Fakultät Gestaltung",
+        "type": "faculty",
         "children": {
-          "!leNHytnZdIfmkxQKIe:content.udk-berlin.de": {
-            "id": "!leNHytnZdIfmkxQKIe:content.udk-berlin.de",
-            "name": "Artist Training",
+          "!oBRYpwSRIQBoJikDrr:content.udk-berlin.de": {
+            "id": "!oBRYpwSRIQBoJikDrr:content.udk-berlin.de",
+            "name": "Bachelor Architektur",
+            "type": "degree program",
+            "children": {
+              "!tKjgYLIKjmURdRKFRp:content.udk-berlin.de": {
+                "id": "!tKjgYLIKjmURdRKFRp:content.udk-berlin.de",
+                "name": "Land, Ressourcen und Immobilien: Kritische Eigentumsdiskurse in Architektur und Kunst",
+                "type": "course",
+                "children": {}
+              },
+              "!iFMPhDynDlHdxZrMHP:content.udk-berlin.de": {
+                "id": "!iFMPhDynDlHdxZrMHP:content.udk-berlin.de",
+                "name": "Grundkurs Architekturgeschichte und -Theorie Modul 12/14 BA und 03/05 MA",
+                "type": "course",
+                "children": {}
+              },
+              "!GKehszwoEurdgSXsBu:content.udk-berlin.de": {
+                "id": "!GKehszwoEurdgSXsBu:content.udk-berlin.de",
+                "name": "Quellentexte der Architekturtheorie. Von der Antike bis zum Klassizismus.",
+                "type": "course",
+                "children": {}
+              },
+              "!YyslQoeDKEfxIzBqrW:content.udk-berlin.de": {
+                "id": "!YyslQoeDKEfxIzBqrW:content.udk-berlin.de",
+                "name": "Die 80er in Deutschland: \"And the age of our innocence is somewhere in the garden.\" Eine Bestandsaufnahme",
+                "type": "course",
+                "children": {}
+              },
+              "!vioHewFtPwlFUykaTf:content.udk-berlin.de": {
+                "id": "!vioHewFtPwlFUykaTf:content.udk-berlin.de",
+                "name": "Do what you want",
+                "type": "course",
+                "children": {}
+              },
+              "!mZsLVeIlMBKzhGiFOV:content.udk-berlin.de": {
+                "id": "!mZsLVeIlMBKzhGiFOV:content.udk-berlin.de",
+                "name": "„Eine Philosophie der Ernährung und der Umwelt“",
+                "type": "course",
+                "children": {}
+              },
+              "!rVvWcEXfnDAloDViQA:content.udk-berlin.de": {
+                "id": "!rVvWcEXfnDAloDViQA:content.udk-berlin.de",
+                "name": "CAD II ArchiCad - Architekturdarstellung",
+                "type": "course",
+                "children": {}
+              },
+              "!NWgfjrWpxIpZjASDZH:content.udk-berlin.de": {
+                "id": "!NWgfjrWpxIpZjASDZH:content.udk-berlin.de",
+                "name": "Grundkurs II: Architektur, Raum, Gesellschaft - Kulturwissenschaftliche Grundlagen",
+                "type": "course",
+                "children": {}
+              },
+              "!CINFnOgmcPhwGrcPqb:content.udk-berlin.de": {
+                "id": "!CINFnOgmcPhwGrcPqb:content.udk-berlin.de",
+                "name": "Grundlagen des Entwerfens",
+                "type": "course",
+                "children": {}
+              },
+              "!CJTzHwtbjKioopYlUq:content.udk-berlin.de": {
+                "id": "!CJTzHwtbjKioopYlUq:content.udk-berlin.de",
+                "name": "Grundlagen und Praxis der Darstellung",
+                "type": "course",
+                "children": {}
+              },
+              "!xCdRTUkhUfOgQudDgp:content.udk-berlin.de": {
+                "id": "!xCdRTUkhUfOgQudDgp:content.udk-berlin.de",
+                "name": "Rückzug in die Welt.",
+                "type": "course",
+                "children": {}
+              },
+              "!EEjsfrlQZxPBTCceWW:content.udk-berlin.de": {
+                "id": "!EEjsfrlQZxPBTCceWW:content.udk-berlin.de",
+                "name": "studio raumproduktion: How Together",
+                "type": "course",
+                "children": {}
+              },
+              "!pkkGWRWFFAYypdimyB:content.udk-berlin.de": {
+                "id": "!pkkGWRWFFAYypdimyB:content.udk-berlin.de",
+                "name": "Entwurfsprojekt Sobejano",
+                "type": "course",
+                "children": {}
+              },
+              "!XgcyLspquhlelmJvba:content.udk-berlin.de": {
+                "id": "!XgcyLspquhlelmJvba:content.udk-berlin.de",
+                "name": "CAD II - digitale Veranstaltung",
+                "type": "course",
+                "children": {}
+              },
+              "!NXlXmbguLhvoWOFRaG:content.udk-berlin.de": {
+                "id": "!NXlXmbguLhvoWOFRaG:content.udk-berlin.de",
+                "name": "Dekoloniale Rauminspektion",
+                "type": "course",
+                "children": {}
+              },
+              "!hsQFEdaqsAYpxaVhqg:content.udk-berlin.de": {
+                "id": "!hsQFEdaqsAYpxaVhqg:content.udk-berlin.de",
+                "name": "Über Pflanzen in Kunst und Architektur",
+                "type": "course",
+                "children": {}
+              },
+              "!UGzPZTWalQJTdMJLzp:content.udk-berlin.de": {
+                "id": "!UGzPZTWalQJTdMJLzp:content.udk-berlin.de",
+                "name": "Plastische und Räumliche Darstellung Bachelor Studiengang Architektur",
+                "type": "course",
+                "children": {}
+              },
+              "!zvJHRmKVtzQoZdahXL:content.udk-berlin.de": {
+                "id": "!zvJHRmKVtzQoZdahXL:content.udk-berlin.de",
+                "name": "Abstract City 26",
+                "type": "course",
+                "children": {}
+              }
+            }
+          },
+          "!QAIZyZivxvvtgtmsTO:content.udk-berlin.de": {
+            "id": "!QAIZyZivxvvtgtmsTO:content.udk-berlin.de",
+            "name": "Master Architektur",
+            "type": "degree program",
+            "children": {
+              "!GKehszwoEurdgSXsBu:content.udk-berlin.de": {
+                "id": "!GKehszwoEurdgSXsBu:content.udk-berlin.de",
+                "name": "Quellentexte der Architekturtheorie. Von der Antike bis zum Klassizismus.",
+                "type": "course",
+                "children": {}
+              },
+              "!hsQFEdaqsAYpxaVhqg:content.udk-berlin.de": {
+                "id": "!hsQFEdaqsAYpxaVhqg:content.udk-berlin.de",
+                "name": "Über Pflanzen in Kunst und Architektur",
+                "type": "course",
+                "children": {}
+              },
+              "!NXlXmbguLhvoWOFRaG:content.udk-berlin.de": {
+                "id": "!NXlXmbguLhvoWOFRaG:content.udk-berlin.de",
+                "name": "Dekoloniale Rauminspektion",
+                "type": "course",
+                "children": {}
+              },
+              "!vioHewFtPwlFUykaTf:content.udk-berlin.de": {
+                "id": "!vioHewFtPwlFUykaTf:content.udk-berlin.de",
+                "name": "Do what you want",
+                "type": "course",
+                "children": {}
+              },
+              "!EEjsfrlQZxPBTCceWW:content.udk-berlin.de": {
+                "id": "!EEjsfrlQZxPBTCceWW:content.udk-berlin.de",
+                "name": "studio raumproduktion: How Together",
+                "type": "course",
+                "children": {}
+              },
+              "!mZsLVeIlMBKzhGiFOV:content.udk-berlin.de": {
+                "id": "!mZsLVeIlMBKzhGiFOV:content.udk-berlin.de",
+                "name": "„Eine Philosophie der Ernährung und der Umwelt“",
+                "type": "course",
+                "children": {}
+              },
+              "!YyslQoeDKEfxIzBqrW:content.udk-berlin.de": {
+                "id": "!YyslQoeDKEfxIzBqrW:content.udk-berlin.de",
+                "name": "Die 80er in Deutschland: \"And the age of our innocence is somewhere in the garden.\" Eine Bestandsaufnahme",
+                "type": "course",
+                "children": {}
+              },
+              "!xCdRTUkhUfOgQudDgp:content.udk-berlin.de": {
+                "id": "!xCdRTUkhUfOgQudDgp:content.udk-berlin.de",
+                "name": "Rückzug in die Welt.",
+                "type": "course",
+                "children": {}
+              },
+              "!pkkGWRWFFAYypdimyB:content.udk-berlin.de": {
+                "id": "!pkkGWRWFFAYypdimyB:content.udk-berlin.de",
+                "name": "Entwurfsprojekt Sobejano",
+                "type": "course",
+                "children": {}
+              },
+              "!tKjgYLIKjmURdRKFRp:content.udk-berlin.de": {
+                "id": "!tKjgYLIKjmURdRKFRp:content.udk-berlin.de",
+                "name": "Land, Ressourcen und Immobilien: Kritische Eigentumsdiskurse in Architektur und Kunst",
+                "type": "course",
+                "children": {}
+              }
+            }
+          },
+          "!EdPyNKPOmwJRRSWTtZ:content.udk-berlin.de": {
+            "id": "!EdPyNKPOmwJRRSWTtZ:content.udk-berlin.de",
+            "name": "Institut für Geschichte und Theorie der Gestaltung",
+            "type": "institute",
+            "children": {}
+          },
+          "!QfMBPbiqkBqVfRFkbp:content.udk-berlin.de": {
+            "id": "!QfMBPbiqkBqVfRFkbp:content.udk-berlin.de",
+            "name": "Institut für Architektur und Städtebau",
+            "type": "institute",
+            "children": {
+              "!mbBUIdNcgeznDAIEUn:content.udk-berlin.de": {
+                "id": "!mbBUIdNcgeznDAIEUn:content.udk-berlin.de",
+                "name": "Architekturgeschichte + Architekturtheorie",
+                "type": "course",
+                "children": {
+                  "!CEukofSEFLBiRYfCyS:content.udk-berlin.de": {
+                    "id": "!CEukofSEFLBiRYfCyS:content.udk-berlin.de",
+                    "name": "Streben nach dem Ideal – Vorstellungen von Stadt und Gesellschaft",
+                    "type": "course",
+                    "children": {}
+                  }
+                }
+              },
+              "!nizhmBaUcqsrdBJQvJ:content.udk-berlin.de": {
+                "id": "!nizhmBaUcqsrdBJQvJ:content.udk-berlin.de",
+                "name": "Konstruktives Entwerfen und Tragwerksplanung (KET)",
+                "type": "course",
+                "children": {}
+              },
+              "!bwKjtOSVlyxXwdWpxw:content.udk-berlin.de": {
+                "id": "!bwKjtOSVlyxXwdWpxw:content.udk-berlin.de",
+                "name": "Gastdozentur Städtebau",
+                "type": "course",
+                "children": {}
+              },
+              "!OfMuTxrqbIMabWrKpj:content.udk-berlin.de": {
+                "id": "!OfMuTxrqbIMabWrKpj:content.udk-berlin.de",
+                "name": "Lehrstuhl Entwerfen und Baukonstruktion",
+                "type": "course",
+                "children": {}
+              },
+              "!nrOGwwFvludMxzvVfh:content.udk-berlin.de": {
+                "id": "!nrOGwwFvludMxzvVfh:content.udk-berlin.de",
+                "name": "Digitales und Experimentelles Entwerfen",
+                "type": "course",
+                "children": {}
+              },
+              "!XPBNfGgumEjgYBscua:content.udk-berlin.de": {
+                "id": "!XPBNfGgumEjgYBscua:content.udk-berlin.de",
+                "name": "hello, robot!",
+                "type": "course",
+                "children": {}
+              },
+              "!zZcuNOJkeTTnJNKuKu:content.udk-berlin.de": {
+                "id": "!zZcuNOJkeTTnJNKuKu:content.udk-berlin.de",
+                "name": "Das Freibad der Zukunft",
+                "type": "course",
+                "children": {}
+              },
+              "!XLinddgRCJNJkeJlsy:content.udk-berlin.de": {
+                "id": "!XLinddgRCJNJkeJlsy:content.udk-berlin.de",
+                "name": "OPEN THE HOUSE",
+                "type": "course",
+                "children": {}
+              }
+            }
+          },
+          "!WHXBAQiZEfAhiQQIJC:content.udk-berlin.de": {
+            "id": "!WHXBAQiZEfAhiQQIJC:content.udk-berlin.de",
+            "name": "Institut für experimentelles Bekleidungs- und Textildesign",
+            "type": "institute",
+            "children": {
+              "!sBULzfrFduQpUhPsNk:content.udk-berlin.de": {
+                "id": "!sBULzfrFduQpUhPsNk:content.udk-berlin.de",
+                "name": "Crafting Textile Data",
+                "type": "course",
+                "children": {}
+              }
+            }
+          },
+          "!YBOkaZDOlptyUrZCKo:content.udk-berlin.de": {
+            "id": "!YBOkaZDOlptyUrZCKo:content.udk-berlin.de",
+            "name": "Bachelor Design",
+            "type": "degree program",
+            "children": {
+              "!hWWVnCIBxCiKTCxDCE:content.udk-berlin.de": {
+                "id": "!hWWVnCIBxCiKTCxDCE:content.udk-berlin.de",
+                "name": "Basisprojekt Produktdesign: fixperts in quarantine",
+                "type": "course",
+                "children": {}
+              },
+              "!NxGJOmQDfMUWZNvJCE:content.udk-berlin.de": {
+                "id": "!NxGJOmQDfMUWZNvJCE:content.udk-berlin.de",
+                "name": "BA Colloqium Technologie",
+                "type": "course",
+                "children": {}
+              },
+              "!OtfMlzhNjFGdOzRWFD:content.udk-berlin.de": {
+                "id": "!OtfMlzhNjFGdOzRWFD:content.udk-berlin.de",
+                "name": "Designtechniken/Mode 1: Schnittgestaltung",
+                "type": "course",
+                "children": {}
+              },
+              "!ncashziklgNyjHDvLm:content.udk-berlin.de": {
+                "id": "!ncashziklgNyjHDvLm:content.udk-berlin.de",
+                "name": "Grundpraktikum",
+                "type": "course",
+                "children": {}
+              },
+              "!TxuMAsvaxPdGjzNstu:content.udk-berlin.de": {
+                "id": "!TxuMAsvaxPdGjzNstu:content.udk-berlin.de",
+                "name": "Modetheorie 2: Die Wahrnehmungsstörung der Mode: Vom Produkt zum Prozess",
+                "type": "course",
+                "children": {}
+              },
+              "!cRDmlwArfmUesXKPUt:content.udk-berlin.de": {
+                "id": "!cRDmlwArfmUesXKPUt:content.udk-berlin.de",
+                "name": "Darstellungstechniken Zeichnen Mode",
+                "type": "course",
+                "children": {}
+              },
+              "!CPHNFveioIQKZBEMIi:content.udk-berlin.de": {
+                "id": "!CPHNFveioIQKZBEMIi:content.udk-berlin.de",
+                "name": "LUX (Live!)",
+                "type": "course",
+                "children": {}
+              },
+              "!pEvwbOpatXKhybtfhL:content.udk-berlin.de": {
+                "id": "!pEvwbOpatXKhybtfhL:content.udk-berlin.de",
+                "name": "Modul 7: Konstruktion 4, CAD-Anteil, Produktdesign",
+                "type": "course",
+                "children": {}
+              },
+              "!husxKuEQWGGeKmZmIa:content.udk-berlin.de": {
+                "id": "!husxKuEQWGGeKmZmIa:content.udk-berlin.de",
+                "name": "98% Polyester 2% Cotton",
+                "type": "course",
+                "children": {}
+              },
+              "!MAvquQJGMkppEUpOWR:content.udk-berlin.de": {
+                "id": "!MAvquQJGMkppEUpOWR:content.udk-berlin.de",
+                "name": "CAD I Mode Pflichtseminar 2. Sem.",
+                "type": "course",
+                "children": {}
+              },
+              "!cIytjNbqUAfthuKmtC:content.udk-berlin.de": {
+                "id": "!cIytjNbqUAfthuKmtC:content.udk-berlin.de",
+                "name": "Craft Utopia",
+                "type": "course",
+                "children": {}
+              },
+              "!tAvxgpheKyXhGNROdA:content.udk-berlin.de": {
+                "id": "!tAvxgpheKyXhGNROdA:content.udk-berlin.de",
+                "name": "MA Colloqium Technologie",
+                "type": "course",
+                "children": {}
+              },
+              "!KfQeIUdYTNwFvYyqfi:content.udk-berlin.de": {
+                "id": "!KfQeIUdYTNwFvYyqfi:content.udk-berlin.de",
+                "name": "Materialien, Halbzeuge, Fertigung 2",
+                "type": "course",
+                "children": {}
+              },
+              "!OMMDpwNBFAQvuDHpfP:content.udk-berlin.de": {
+                "id": "!OMMDpwNBFAQvuDHpfP:content.udk-berlin.de",
+                "name": "Basisprojekt Modedesign: HOODIE GUT, ALLES GUT",
+                "type": "course",
+                "children": {}
+              },
+              "!PlnxEASakIRLOjdsVk:content.udk-berlin.de": {
+                "id": "!PlnxEASakIRLOjdsVk:content.udk-berlin.de",
+                "name": "Radikalität",
+                "type": "course",
+                "children": {}
+              },
+              "!meRigHMonjULOLCWLM:content.udk-berlin.de": {
+                "id": "!meRigHMonjULOLCWLM:content.udk-berlin.de",
+                "name": "Artisanal Week",
+                "type": "course",
+                "children": {}
+              },
+              "!AVlclCICIrHgyXWkXg:content.udk-berlin.de": {
+                "id": "!AVlclCICIrHgyXWkXg:content.udk-berlin.de",
+                "name": "Designtechniken 2: Einführung Strick",
+                "type": "course",
+                "children": {}
+              },
+              "!NrJuWTWbhpWAsSkauT:content.udk-berlin.de": {
+                "id": "!NrJuWTWbhpWAsSkauT:content.udk-berlin.de",
+                "name": "Modegeschichte 2: MODE.KULTUR.ZEIT",
+                "type": "course",
+                "children": {}
+              },
+              "!odqHBzkhSnZfgHLZkG:content.udk-berlin.de": {
+                "id": "!odqHBzkhSnZfgHLZkG:content.udk-berlin.de",
+                "name": "GETTING THERE. ANKOMMEN!",
+                "type": "course",
+                "children": {}
+              },
+              "!aVcbbnKBSUGmSQaYGK:content.udk-berlin.de": {
+                "id": "!aVcbbnKBSUGmSQaYGK:content.udk-berlin.de",
+                "name": "The design of culinary delight.",
+                "type": "course",
+                "children": {}
+              },
+              "!AASGpkBOwEbVyHUtnG:content.udk-berlin.de": {
+                "id": "!AASGpkBOwEbVyHUtnG:content.udk-berlin.de",
+                "name": "True Colour",
+                "type": "course",
+                "children": {}
+              },
+              "!bxKGOQXGGBfELVmBWg:content.udk-berlin.de": {
+                "id": "!bxKGOQXGGBfELVmBWg:content.udk-berlin.de",
+                "name": "Essay als Form – in Kunst, Literatur, Ausstellung",
+                "type": "course",
+                "children": {}
+              },
+              "!DeooArekZlTwHeOhCC:content.udk-berlin.de": {
+                "id": "!DeooArekZlTwHeOhCC:content.udk-berlin.de",
+                "name": "Design und Technologie",
+                "type": "course",
+                "children": {}
+              },
+              "!txPeHPUdajaqWrVCBR:content.udk-berlin.de": {
+                "id": "!txPeHPUdajaqWrVCBR:content.udk-berlin.de",
+                "name": "Signaturen",
+                "type": "course",
+                "children": {}
+              },
+              "!ncKyjrjUyXNfSMABaf:content.udk-berlin.de": {
+                "id": "!ncKyjrjUyXNfSMABaf:content.udk-berlin.de",
+                "name": "Designtechniken Modedesign: Schnittkonstruktion",
+                "type": "course",
+                "children": {}
+              },
+              "!YPzRonkpbRPaTUzWfC:content.udk-berlin.de": {
+                "id": "!YPzRonkpbRPaTUzWfC:content.udk-berlin.de",
+                "name": "Grundpraktikum",
+                "type": "course",
+                "children": {}
+              },
+              "!uREreyBYMTpGuRzMdE:content.udk-berlin.de": {
+                "id": "!uREreyBYMTpGuRzMdE:content.udk-berlin.de",
+                "name": "ICH BIN AUCH DIE DIE SCHON DA WAREN",
+                "type": "course",
+                "children": {}
+              },
+              "!cWpMVBOtmVTwXkeEeV:content.udk-berlin.de": {
+                "id": "!cWpMVBOtmVTwXkeEeV:content.udk-berlin.de",
+                "name": "Schreiben als künstlerisch-forschende Praxis",
+                "type": "course",
+                "children": {}
+              },
+              "!IktKBFHVaFNVUvgrFG:content.udk-berlin.de": {
+                "id": "!IktKBFHVaFNVUvgrFG:content.udk-berlin.de",
+                "name": "Was bedeutet das alles? Transformationen des Design nach 1945",
+                "type": "course",
+                "children": {}
+              },
+              "!DPBdJnBkfJiMWQMvPY:content.udk-berlin.de": {
+                "id": "!DPBdJnBkfJiMWQMvPY:content.udk-berlin.de",
+                "name": "In Bewegung / Interaktive Systeme I",
+                "type": "course",
+                "children": {}
+              },
+              "!teyspXzijDvgOKoMrG:content.udk-berlin.de": {
+                "id": "!teyspXzijDvgOKoMrG:content.udk-berlin.de",
+                "name": "Modul 3: ALTE STOFFE & NEUE MATERIALIEN",
+                "type": "course",
+                "children": {}
+              },
+              "!dvIrmLKiFsRXiSXAdI:content.udk-berlin.de": {
+                "id": "!dvIrmLKiFsRXiSXAdI:content.udk-berlin.de",
+                "name": "Modul 3: Technologie und Konstruktion 1: Konstruktion 2 + CAD 1",
+                "type": "course",
+                "children": {}
+              },
+              "!aRcbwINgTaSfAaNndA:content.udk-berlin.de": {
+                "id": "!aRcbwINgTaSfAaNndA:content.udk-berlin.de",
+                "name": "Neobionten",
+                "type": "course",
+                "children": {}
+              },
+              "!HiVoxNdiFnMjYEsNgH:content.udk-berlin.de": {
+                "id": "!HiVoxNdiFnMjYEsNgH:content.udk-berlin.de",
+                "name": "Modul 7: Technologie und Konstruktion 2: Konstruktion 4",
+                "type": "course",
+                "children": {}
+              },
+              "!GacLYTiaoZfYoAGOqk:content.udk-berlin.de": {
+                "id": "!GacLYTiaoZfYoAGOqk:content.udk-berlin.de",
+                "name": "Virtual Design Research Colloquium: „Outside the Bubble“",
+                "type": "course",
+                "children": {}
+              },
+              "!GMwpovekuKHDyrBqjH:content.udk-berlin.de": {
+                "id": "!GMwpovekuKHDyrBqjH:content.udk-berlin.de",
+                "name": "Zukunftsforschung",
+                "type": "course",
+                "children": {}
+              },
+              "!zCbkrwFcEpsmmFVxyq:content.udk-berlin.de": {
+                "id": "!zCbkrwFcEpsmmFVxyq:content.udk-berlin.de",
+                "name": "Find a Fact and Act",
+                "type": "course",
+                "children": {}
+              }
+            }
+          },
+          "!SeCcQFyvKxNLuCnFYI:content.udk-berlin.de": {
+            "id": "!SeCcQFyvKxNLuCnFYI:content.udk-berlin.de",
+            "name": "Institut für zeitbasierte Medien",
+            "type": "institute",
+            "children": {
+              "!NAzsXmxDXbgQPPBAgg:content.udk-berlin.de": {
+                "id": "!NAzsXmxDXbgQPPBAgg:content.udk-berlin.de",
+                "name": "Video Performance",
+                "type": "course",
+                "children": {}
+              },
+              "!ezUeZQBwkUJMOiKQQR:content.udk-berlin.de": {
+                "id": "!ezUeZQBwkUJMOiKQQR:content.udk-berlin.de",
+                "name": "Video Performance I & II",
+                "type": "course",
+                "children": {}
+              }
+            }
+          },
+          "!urgxyxNjyrIMqvGQgD:content.udk-berlin.de": {
+            "id": "!urgxyxNjyrIMqvGQgD:content.udk-berlin.de",
+            "name": "Master Design",
+            "type": "degree program",
+            "children": {
+              "!EarwSosOdhVbXWZrUX:content.udk-berlin.de": {
+                "id": "!EarwSosOdhVbXWZrUX:content.udk-berlin.de",
+                "name": "Masterkolloquium",
+                "type": "course",
+                "children": {}
+              },
+              "!GMwpovekuKHDyrBqjH:content.udk-berlin.de": {
+                "id": "!GMwpovekuKHDyrBqjH:content.udk-berlin.de",
+                "name": "Zukunftsforschung",
+                "type": "course",
+                "children": {}
+              },
+              "!bxKGOQXGGBfELVmBWg:content.udk-berlin.de": {
+                "id": "!bxKGOQXGGBfELVmBWg:content.udk-berlin.de",
+                "name": "Essay als Form – in Kunst, Literatur, Ausstellung",
+                "type": "course",
+                "children": {}
+              },
+              "!cWpMVBOtmVTwXkeEeV:content.udk-berlin.de": {
+                "id": "!cWpMVBOtmVTwXkeEeV:content.udk-berlin.de",
+                "name": "Schreiben als künstlerisch-forschende Praxis",
+                "type": "course",
+                "children": {}
+              },
+              "!odqHBzkhSnZfgHLZkG:content.udk-berlin.de": {
+                "id": "!odqHBzkhSnZfgHLZkG:content.udk-berlin.de",
+                "name": "GETTING THERE. ANKOMMEN!",
+                "type": "course",
+                "children": {}
+              },
+              "!tAvxgpheKyXhGNROdA:content.udk-berlin.de": {
+                "id": "!tAvxgpheKyXhGNROdA:content.udk-berlin.de",
+                "name": "MA Colloqium Technologie",
+                "type": "course",
+                "children": {}
+              },
+              "!txPeHPUdajaqWrVCBR:content.udk-berlin.de": {
+                "id": "!txPeHPUdajaqWrVCBR:content.udk-berlin.de",
+                "name": "Signaturen",
+                "type": "course",
+                "children": {}
+              }
+            }
+          },
+          "!VRpSrZzmBnwfeIhEPy:content.udk-berlin.de": {
+            "id": "!VRpSrZzmBnwfeIhEPy:content.udk-berlin.de",
+            "name": "Institut für Produkt- und Prozeßgestaltung",
+            "type": "institute",
+            "children": {
+              "!HlFCPXOpHeEcpeJtuN:content.udk-berlin.de": {
+                "id": "!HlFCPXOpHeEcpeJtuN:content.udk-berlin.de",
+                "name": "Kunst + Design",
+                "type": "course",
+                "children": {
+                  "!FovJlDEbizZvDGARET:content.udk-berlin.de": {
+                    "id": "!FovJlDEbizZvDGARET:content.udk-berlin.de",
+                    "name": "BA + MA Abschlussarbeiten",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!GAbXLiUiBcTsbQxnAY:content.udk-berlin.de": {
+                    "id": "!GAbXLiUiBcTsbQxnAY:content.udk-berlin.de",
+                    "name": "Das Ungeheuer das aus der Tiefe kam",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!JdTYfbEjgXRafEaPoR:content.udk-berlin.de": {
+                    "id": "!JdTYfbEjgXRafEaPoR:content.udk-berlin.de",
+                    "name": "Das Portfolioprojekt",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!XzMNwdCMEYLuSQxPIS:content.udk-berlin.de": {
+                    "id": "!XzMNwdCMEYLuSQxPIS:content.udk-berlin.de",
+                    "name": "Dark Liquid",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!sGyoXXAzDSurtquECp:content.udk-berlin.de": {
+                    "id": "!sGyoXXAzDSurtquECp:content.udk-berlin.de",
+                    "name": "Wir sind auch die die schon da waren",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!wGsdjrxOuajQAQWNOK:content.udk-berlin.de": {
+                    "id": "!wGsdjrxOuajQAQWNOK:content.udk-berlin.de",
+                    "name": "Zukunftsforschung",
+                    "type": "course",
+                    "children": {}
+                  }
+                }
+              },
+              "!IpUqDvZXdiHZqVSrum:content.udk-berlin.de": {
+                "id": "!IpUqDvZXdiHZqVSrum:content.udk-berlin.de",
+                "name": "Design & Technologie",
+                "type": "course",
+                "children": {}
+              }
+            }
+          },
+          "!gGIQqEPODyuoAyCoTt:content.udk-berlin.de": {
+            "id": "!gGIQqEPODyuoAyCoTt:content.udk-berlin.de",
+            "name": "Institut für transmediale Gestaltung",
+            "type": "institute",
+            "children": {}
+          },
+          "!WjfZQCrXdnhYMHjwuK:content.udk-berlin.de": {
+            "id": "!WjfZQCrXdnhYMHjwuK:content.udk-berlin.de",
+            "name": "Bachelor Visuelle Kommunikation",
+            "type": "degree program",
+            "children": {
+              "!AMJvfJcQxDfCLVCeXW:content.udk-berlin.de": {
+                "id": "!AMJvfJcQxDfCLVCeXW:content.udk-berlin.de",
+                "name": "Werbung",
+                "type": "design department",
+                "children": {
+                  "!LECLCKxmzeprEVfMKY:content.udk-berlin.de": {
+                    "id": "!LECLCKxmzeprEVfMKY:content.udk-berlin.de",
+                    "name": "Corporate Identity und Kommunikation für das neue UdK-Hub",
+                    "type": "course",
+                    "children": {}
+                  }
+                }
+              },
+              "!IXKYDWpZbDiLzITaXq:content.udk-berlin.de": {
+                "id": "!IXKYDWpZbDiLzITaXq:content.udk-berlin.de",
+                "name": "Auf dem Land. Von neuen und alten Existenzweisen",
+                "type": "course",
+                "children": {}
+              },
+              "!JXuzLnuGJaTXJBNBdC:content.udk-berlin.de": {
+                "id": "!JXuzLnuGJaTXJBNBdC:content.udk-berlin.de",
+                "name": "Grafikdesign",
+                "type": "design department",
+                "children": {}
+              },
+              "!QDrYgRrqTHrctArECm:content.udk-berlin.de": {
+                "id": "!QDrYgRrqTHrctArECm:content.udk-berlin.de",
+                "name": "Einführung in die Siebdruckwerkstatt",
+                "type": "course",
+                "children": {}
+              },
+              "!FaOoNlaWSwdIzLgzoc:content.udk-berlin.de": {
+                "id": "!FaOoNlaWSwdIzLgzoc:content.udk-berlin.de",
+                "name": "Ausstellungsgestaltung",
+                "type": "design department",
+                "children": {
+                  "!OwqzFtitzXdRYGbAwG:content.udk-berlin.de": {
+                    "id": "!OwqzFtitzXdRYGbAwG:content.udk-berlin.de",
+                    "name": "FROM SURFACE TO SPACE",
+                    "type": "course",
+                    "children": {}
+                  }
+                }
+              },
+              "!suOGefRgcADsoZZtZl:content.udk-berlin.de": {
+                "id": "!suOGefRgcADsoZZtZl:content.udk-berlin.de",
+                "name": "Aisthesis Decolonial – Dekoloniale Theorie in Kunst und Gestaltung",
+                "type": "course",
+                "children": {}
+              },
+              "!HEkAjAMAvaKmOYALrn:content.udk-berlin.de": {
+                "id": "!HEkAjAMAvaKmOYALrn:content.udk-berlin.de",
+                "name": "Comics – Szenische Experimente",
+                "type": "course",
+                "children": {}
+              },
+              "!ExHgGsnUeguqYhDiaG:content.udk-berlin.de": {
+                "id": "!ExHgGsnUeguqYhDiaG:content.udk-berlin.de",
+                "name": "Creativ Coding I",
+                "type": "course",
+                "children": {}
+              },
+              "!XOtlUEGwYGMPYYXIbG:content.udk-berlin.de": {
+                "id": "!XOtlUEGwYGMPYYXIbG:content.udk-berlin.de",
+                "name": "New Media",
+                "type": "design department",
+                "children": {
+                  "!GPdtCWWiyFqOManxhx:content.udk-berlin.de": {
+                    "id": "!GPdtCWWiyFqOManxhx:content.udk-berlin.de",
+                    "name": "New Media Graduates",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!RCqpiyAVwzBLhIpDgU:content.udk-berlin.de": {
+                    "id": "!RCqpiyAVwzBLhIpDgU:content.udk-berlin.de",
+                    "name": "IoT - Island of Things",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!ZhtCtAgmyDHtgucKQv:content.udk-berlin.de": {
+                    "id": "!ZhtCtAgmyDHtgucKQv:content.udk-berlin.de",
+                    "name": "Convergence",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!nUfOjTUeYFObEMARJN:content.udk-berlin.de": {
+                    "id": "!nUfOjTUeYFObEMARJN:content.udk-berlin.de",
+                    "name": "Concretely Unimaginable",
+                    "type": "course",
+                    "children": {}
+                  }
+                }
+              },
+              "!NhniXFeFDoaoMIMXFX:content.udk-berlin.de": {
+                "id": "!NhniXFeFDoaoMIMXFX:content.udk-berlin.de",
+                "name": "Analytisches Zeichnen /Stadtspaziergänge",
+                "type": "course",
+                "children": {}
+              },
+              "!JSjWuTRaaAyUrNuqSn:content.udk-berlin.de": {
+                "id": "!JSjWuTRaaAyUrNuqSn:content.udk-berlin.de",
+                "name": "Connection Space",
+                "type": "course",
+                "children": {}
+              },
+              "!LECLCKxmzeprEVfMKY:content.udk-berlin.de": {
+                "id": "!LECLCKxmzeprEVfMKY:content.udk-berlin.de",
+                "name": "Corporate Identity und Kommunikation für das neue UdK-Hub",
+                "type": "course",
+                "children": {}
+              },
+              "!LarmDMoKUPPRzvNssf:content.udk-berlin.de": {
+                "id": "!LarmDMoKUPPRzvNssf:content.udk-berlin.de",
+                "name": "Corporate Wording für das neue UdK-Hub",
+                "type": "course",
+                "children": {}
+              },
+              "!QqDJxifMfSxZZJzBmj:content.udk-berlin.de": {
+                "id": "!QqDJxifMfSxZZJzBmj:content.udk-berlin.de",
+                "name": "HUMANS AND (OTHER) ANIMALS. Experimentelle 2D-Darstellungstechniken",
+                "type": "course",
+                "children": {}
+              },
+              "!aBJuWGGvwGuSblDNmg:content.udk-berlin.de": {
+                "id": "!aBJuWGGvwGuSblDNmg:content.udk-berlin.de",
+                "name": "Projektentwicklung durch experimentellen Umgang mit Material und Werkzeug",
+                "type": "course",
+                "children": {}
+              },
+              "!OLCyWgniQdgslPHLsm:content.udk-berlin.de": {
+                "id": "!OLCyWgniQdgslPHLsm:content.udk-berlin.de",
+                "name": "Archäologie der Gestaltung. Eine Einführung vor Ort (Exkursion)",
+                "type": "course",
+                "children": {}
+              },
+              "!JzYxKFMnLXGREVSmVq:content.udk-berlin.de": {
+                "id": "!JzYxKFMnLXGREVSmVq:content.udk-berlin.de",
+                "name": "Einführung in den Modellbau",
+                "type": "course",
+                "children": {}
+              },
+              "!hacaczNAXWOroXpoPY:content.udk-berlin.de": {
+                "id": "!hacaczNAXWOroXpoPY:content.udk-berlin.de",
+                "name": "Illustration",
+                "type": "design department",
+                "children": {
+                  "!MrwhqMEftglPotndmJ:content.udk-berlin.de": {
+                    "id": "!MrwhqMEftglPotndmJ:content.udk-berlin.de",
+                    "name": "Comics zeichnen – Von Humor bis zum bitteren Ernst",
+                    "type": "course",
+                    "children": {}
+                  }
+                }
+              },
+              "!hvUvQXkpuiqMVRSunu:content.udk-berlin.de": {
+                "id": "!hvUvQXkpuiqMVRSunu:content.udk-berlin.de",
+                "name": "Visuelle Systeme",
+                "type": "design department",
+                "children": {
+                  "!CQnLNUXSueOvstHEkw:content.udk-berlin.de": {
+                    "id": "!CQnLNUXSueOvstHEkw:content.udk-berlin.de",
+                    "name": "Infodesign Studio",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!AtJiGlvrHVTJweVNEU:content.udk-berlin.de": {
+                    "id": "!AtJiGlvrHVTJweVNEU:content.udk-berlin.de",
+                    "name": "Infodesign Lab",
+                    "type": "course",
+                    "children": {}
+                  }
+                }
+              },
+              "!dRurlBdOOwGqzVNpPZ:content.udk-berlin.de": {
+                "id": "!dRurlBdOOwGqzVNpPZ:content.udk-berlin.de",
+                "name": "Archäologie des Selbst",
+                "type": "course",
+                "children": {}
+              },
+              "!fsiTWbHboaHrsNTWuR:content.udk-berlin.de": {
+                "id": "!fsiTWbHboaHrsNTWuR:content.udk-berlin.de",
+                "name": "Corporate Design für das neue UdK-Hub",
+                "type": "course",
+                "children": {}
+              },
+              "!bdcTwTLDfvHkjpZPZi:content.udk-berlin.de": {
+                "id": "!bdcTwTLDfvHkjpZPZi:content.udk-berlin.de",
+                "name": "Das Comic-Panel im Raum",
+                "type": "course",
+                "children": {}
+              },
+              "!rUjWhyiYWskrJfTngn:content.udk-berlin.de": {
+                "id": "!rUjWhyiYWskrJfTngn:content.udk-berlin.de",
+                "name": "Digitale Film- und Tonmontage - Einführung",
+                "type": "course",
+                "children": {}
+              },
+              "!yYESKEVpNEmStkxQNV:content.udk-berlin.de": {
+                "id": "!yYESKEVpNEmStkxQNV:content.udk-berlin.de",
+                "name": "Fotografie 2 - open projects",
+                "type": "course",
+                "children": {}
+              },
+              "!SdlDBlZFvQdRNfBfRW:content.udk-berlin.de": {
+                "id": "!SdlDBlZFvQdRNfBfRW:content.udk-berlin.de",
+                "name": "Cube Loops - Einführung in Fusion und 3D Druck",
+                "type": "course",
+                "children": {}
+              },
+              "!ScGlFEDAKYIZItPato:content.udk-berlin.de": {
+                "id": "!ScGlFEDAKYIZItPato:content.udk-berlin.de",
+                "name": "Spatial Display as Agency",
+                "type": "course",
+                "children": {}
+              },
+              "!GixXvaYAuahAkKFTvS:content.udk-berlin.de": {
+                "id": "!GixXvaYAuahAkKFTvS:content.udk-berlin.de",
+                "name": "Experimentelles Zeichnen / Rapportieren",
+                "type": "course",
+                "children": {}
+              },
+              "!NSArehBXDKcjVkEKPL:content.udk-berlin.de": {
+                "id": "!NSArehBXDKcjVkEKPL:content.udk-berlin.de",
+                "name": "Filmprojekt / Klassenprojekt",
+                "type": "course",
+                "children": {}
+              },
+              "!zJkcNJrkxdqpqMkOFv:content.udk-berlin.de": {
+                "id": "!zJkcNJrkxdqpqMkOFv:content.udk-berlin.de",
+                "name": "Schrift und Raum",
+                "type": "course",
+                "children": {}
+              },
+              "!kgAAiYquZKanKVDlUK:content.udk-berlin.de": {
+                "id": "!kgAAiYquZKanKVDlUK:content.udk-berlin.de",
+                "name": "Das Vierte Druckverfahren",
+                "type": "course",
+                "children": {}
+              },
+              "!iMxvZYYzNDxsXyKtzh:content.udk-berlin.de": {
+                "id": "!iMxvZYYzNDxsXyKtzh:content.udk-berlin.de",
+                "name": "Pharmapolitische Fiktionen. Seltsame Substanzen und prekäre Stoffe der Science-Fiction-",
+                "type": "course",
+                "children": {}
+              },
+              "!bZWwnqybRacKaOJniK:content.udk-berlin.de": {
+                "id": "!bZWwnqybRacKaOJniK:content.udk-berlin.de",
+                "name": "teacher.solar 0 :: Design & Deployment of a solar-powered artefact :: Sound & Klang",
+                "type": "course",
+                "children": {}
+              },
+              "!jJHgbuJgxaZOcFfBaU:content.udk-berlin.de": {
+                "id": "!jJHgbuJgxaZOcFfBaU:content.udk-berlin.de",
+                "name": "Flow Flow",
+                "type": "course",
+                "children": {}
+              },
+              "!CIAkmrXysOuDciewxT:content.udk-berlin.de": {
+                "id": "!CIAkmrXysOuDciewxT:content.udk-berlin.de",
+                "name": "Motion Graphics - Einführung",
+                "type": "course",
+                "children": {}
+              },
+              "!FWjYuWSvewufzRiUBe:content.udk-berlin.de": {
+                "id": "!FWjYuWSvewufzRiUBe:content.udk-berlin.de",
+                "name": "Fotografie 1 - Perspektive",
+                "type": "course",
+                "children": {}
+              },
+              "!ISTkNoRHAfDogKhrsp:content.udk-berlin.de": {
+                "id": "!ISTkNoRHAfDogKhrsp:content.udk-berlin.de",
+                "name": "Grundlagen Bewegtbild I",
+                "type": "course",
+                "children": {}
+              },
+              "!hsQFEdaqsAYpxaVhqg:content.udk-berlin.de": {
+                "id": "!hsQFEdaqsAYpxaVhqg:content.udk-berlin.de",
+                "name": "Über Pflanzen in Kunst und Architektur",
+                "type": "course",
+                "children": {}
+              },
+              "!NtUveHeCFNDrlwiNrz:content.udk-berlin.de": {
+                "id": "!NtUveHeCFNDrlwiNrz:content.udk-berlin.de",
+                "name": "Kamera, Licht und Ton - Einführung",
+                "type": "course",
+                "children": {}
+              },
+              "!KbGjISGYUfLotmYYfJ:content.udk-berlin.de": {
+                "id": "!KbGjISGYUfLotmYYfJ:content.udk-berlin.de",
+                "name": "Quarantäne-Ästhetiken – Reflexionen über Digitalität, social distancing & Körperbilder in Zeiten der Pandemie",
+                "type": "course",
+                "children": {}
+              },
+              "!tHYQvSiVXcNDePjMjR:content.udk-berlin.de": {
+                "id": "!tHYQvSiVXcNDePjMjR:content.udk-berlin.de",
+                "name": "Basics – Grundlagen des Entwerfens",
+                "type": "course",
+                "children": {}
+              },
+              "!GPdtCWWiyFqOManxhx:content.udk-berlin.de": {
+                "id": "!GPdtCWWiyFqOManxhx:content.udk-berlin.de",
+                "name": "New Media Graduates",
+                "type": "course",
+                "children": {}
+              },
+              "!hMzgDgyymhdhZMiYKO:content.udk-berlin.de": {
+                "id": "!hMzgDgyymhdhZMiYKO:content.udk-berlin.de",
+                "name": "New Wilderness",
+                "type": "course",
+                "children": {}
+              },
+              "!LdfFqavPWcNTXyiGLs:content.udk-berlin.de": {
+                "id": "!LdfFqavPWcNTXyiGLs:content.udk-berlin.de",
+                "name": "Gestaltung des bewegten Bildes",
+                "type": "course",
+                "children": {}
+              },
+              "!vjjiveXiFEwLvKEeWU:content.udk-berlin.de": {
+                "id": "!vjjiveXiFEwLvKEeWU:content.udk-berlin.de",
+                "name": "The Hitchhikers to the Internet",
+                "type": "course",
+                "children": {}
+              },
+              "!RECHncgkduaAKwPrMl:content.udk-berlin.de": {
+                "id": "!RECHncgkduaAKwPrMl:content.udk-berlin.de",
+                "name": "Designed Uncertainty",
+                "type": "course",
+                "children": {}
+              }
+            }
+          },
+          "!NwHTjZgTjyfTOcRwuk:content.udk-berlin.de": {
+            "id": "!NwHTjZgTjyfTOcRwuk:content.udk-berlin.de",
+            "name": "Institut für Theorie und Praxis der Kommunikation",
+            "type": "institute",
+            "children": {}
+          },
+          "!iSvAGFDROLvUOSFzFI:content.udk-berlin.de": {
+            "id": "!iSvAGFDROLvUOSFzFI:content.udk-berlin.de",
+            "name": "Design Transfer",
+            "type": "institute",
+            "children": {}
+          },
+          "!JqAKEZtqItDOlxnmCr:content.udk-berlin.de": {
+            "id": "!JqAKEZtqItDOlxnmCr:content.udk-berlin.de",
+            "name": "Master Visuelle Kommunikation",
+            "type": "degree program",
+            "children": {
+              "!zmoaTHXYRRdgNbdufB:content.udk-berlin.de": {
+                "id": "!zmoaTHXYRRdgNbdufB:content.udk-berlin.de",
+                "name": "Grafikdesign",
+                "type": "design department",
+                "children": {}
+              },
+              "!UuSYrqRgYmJMjgJabN:content.udk-berlin.de": {
+                "id": "!UuSYrqRgYmJMjgJabN:content.udk-berlin.de",
+                "name": "Illustration",
+                "type": "design department",
+                "children": {
+                  "!MrwhqMEftglPotndmJ:content.udk-berlin.de": {
+                    "id": "!MrwhqMEftglPotndmJ:content.udk-berlin.de",
+                    "name": "Comics zeichnen – Von Humor bis zum bitteren Ernst",
+                    "type": "course",
+                    "children": {}
+                  }
+                }
+              },
+              "!YeYlfYsoxyJVJAjThK:content.udk-berlin.de": {
+                "id": "!YeYlfYsoxyJVJAjThK:content.udk-berlin.de",
+                "name": "Visuelle Systeme",
+                "type": "design department",
+                "children": {
+                  "!AtJiGlvrHVTJweVNEU:content.udk-berlin.de": {
+                    "id": "!AtJiGlvrHVTJweVNEU:content.udk-berlin.de",
+                    "name": "Infodesign Lab",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!CQnLNUXSueOvstHEkw:content.udk-berlin.de": {
+                    "id": "!CQnLNUXSueOvstHEkw:content.udk-berlin.de",
+                    "name": "Infodesign Studio",
+                    "type": "course",
+                    "children": {}
+                  }
+                }
+              },
+              "!vrOIUijCuglAtgdhKa:content.udk-berlin.de": {
+                "id": "!vrOIUijCuglAtgdhKa:content.udk-berlin.de",
+                "name": "Werbung",
+                "type": "design department",
+                "children": {
+                  "!LECLCKxmzeprEVfMKY:content.udk-berlin.de": {
+                    "id": "!LECLCKxmzeprEVfMKY:content.udk-berlin.de",
+                    "name": "Corporate Identity und Kommunikation für das neue UdK-Hub",
+                    "type": "course",
+                    "children": {}
+                  }
+                }
+              },
+              "!WEWBNEvpeVBXHtClqP:content.udk-berlin.de": {
+                "id": "!WEWBNEvpeVBXHtClqP:content.udk-berlin.de",
+                "name": "Ausstellungsgestaltung",
+                "type": "design department",
+                "children": {
+                  "!OwqzFtitzXdRYGbAwG:content.udk-berlin.de": {
+                    "id": "!OwqzFtitzXdRYGbAwG:content.udk-berlin.de",
+                    "name": "FROM SURFACE TO SPACE",
+                    "type": "course",
+                    "children": {}
+                  }
+                }
+              },
+              "!suOGefRgcADsoZZtZl:content.udk-berlin.de": {
+                "id": "!suOGefRgcADsoZZtZl:content.udk-berlin.de",
+                "name": "Aisthesis Decolonial – Dekoloniale Theorie in Kunst und Gestaltung",
+                "type": "course",
+                "children": {}
+              },
+              "!dRurlBdOOwGqzVNpPZ:content.udk-berlin.de": {
+                "id": "!dRurlBdOOwGqzVNpPZ:content.udk-berlin.de",
+                "name": "Archäologie des Selbst",
+                "type": "course",
+                "children": {}
+              },
+              "!IXKYDWpZbDiLzITaXq:content.udk-berlin.de": {
+                "id": "!IXKYDWpZbDiLzITaXq:content.udk-berlin.de",
+                "name": "Auf dem Land. Von neuen und alten Existenzweisen",
+                "type": "course",
+                "children": {}
+              },
+              "!JSjWuTRaaAyUrNuqSn:content.udk-berlin.de": {
+                "id": "!JSjWuTRaaAyUrNuqSn:content.udk-berlin.de",
+                "name": "Connection Space",
+                "type": "course",
+                "children": {}
+              },
+              "!kgAAiYquZKanKVDlUK:content.udk-berlin.de": {
+                "id": "!kgAAiYquZKanKVDlUK:content.udk-berlin.de",
+                "name": "Das Vierte Druckverfahren",
+                "type": "course",
+                "children": {}
+              },
+              "!JzYxKFMnLXGREVSmVq:content.udk-berlin.de": {
+                "id": "!JzYxKFMnLXGREVSmVq:content.udk-berlin.de",
+                "name": "Einführung in den Modellbau",
+                "type": "course",
+                "children": {}
+              },
+              "!QqDJxifMfSxZZJzBmj:content.udk-berlin.de": {
+                "id": "!QqDJxifMfSxZZJzBmj:content.udk-berlin.de",
+                "name": "HUMANS AND (OTHER) ANIMALS. Experimentelle 2D-Darstellungstechniken",
+                "type": "course",
+                "children": {}
+              },
+              "!iMxvZYYzNDxsXyKtzh:content.udk-berlin.de": {
+                "id": "!iMxvZYYzNDxsXyKtzh:content.udk-berlin.de",
+                "name": "Pharmapolitische Fiktionen. Seltsame Substanzen und prekäre Stoffe der Science-Fiction-",
+                "type": "course",
+                "children": {}
+              },
+              "!aBJuWGGvwGuSblDNmg:content.udk-berlin.de": {
+                "id": "!aBJuWGGvwGuSblDNmg:content.udk-berlin.de",
+                "name": "Projektentwicklung durch experimentellen Umgang mit Material und Werkzeug",
+                "type": "course",
+                "children": {}
+              },
+              "!KbGjISGYUfLotmYYfJ:content.udk-berlin.de": {
+                "id": "!KbGjISGYUfLotmYYfJ:content.udk-berlin.de",
+                "name": "Quarantäne-Ästhetiken – Reflexionen über Digitalität, social distancing & Körperbilder in Zeiten der Pandemie",
+                "type": "course",
+                "children": {}
+              },
+              "!zJkcNJrkxdqpqMkOFv:content.udk-berlin.de": {
+                "id": "!zJkcNJrkxdqpqMkOFv:content.udk-berlin.de",
+                "name": "Schrift und Raum",
+                "type": "course",
+                "children": {}
+              },
+              "!ScGlFEDAKYIZItPato:content.udk-berlin.de": {
+                "id": "!ScGlFEDAKYIZItPato:content.udk-berlin.de",
+                "name": "Spatial Display as Agency",
+                "type": "course",
+                "children": {}
+              },
+              "!hsQFEdaqsAYpxaVhqg:content.udk-berlin.de": {
+                "id": "!hsQFEdaqsAYpxaVhqg:content.udk-berlin.de",
+                "name": "Über Pflanzen in Kunst und Architektur",
+                "type": "course",
+                "children": {}
+              },
+              "!GPdtCWWiyFqOManxhx:content.udk-berlin.de": {
+                "id": "!GPdtCWWiyFqOManxhx:content.udk-berlin.de",
+                "name": "New Media Graduates",
+                "type": "course",
+                "children": {}
+              },
+              "!hMzgDgyymhdhZMiYKO:content.udk-berlin.de": {
+                "id": "!hMzgDgyymhdhZMiYKO:content.udk-berlin.de",
+                "name": "New Wilderness",
+                "type": "course",
+                "children": {}
+              },
+              "!LdfFqavPWcNTXyiGLs:content.udk-berlin.de": {
+                "id": "!LdfFqavPWcNTXyiGLs:content.udk-berlin.de",
+                "name": "Gestaltung des bewegten Bildes",
+                "type": "course",
+                "children": {}
+              },
+              "!XOtlUEGwYGMPYYXIbG:content.udk-berlin.de": {
+                "id": "!XOtlUEGwYGMPYYXIbG:content.udk-berlin.de",
+                "name": "New Media",
+                "type": "design department",
+                "children": {
+                  "!GPdtCWWiyFqOManxhx:content.udk-berlin.de": {
+                    "id": "!GPdtCWWiyFqOManxhx:content.udk-berlin.de",
+                    "name": "New Media Graduates",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!RCqpiyAVwzBLhIpDgU:content.udk-berlin.de": {
+                    "id": "!RCqpiyAVwzBLhIpDgU:content.udk-berlin.de",
+                    "name": "IoT - Island of Things",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!ZhtCtAgmyDHtgucKQv:content.udk-berlin.de": {
+                    "id": "!ZhtCtAgmyDHtgucKQv:content.udk-berlin.de",
+                    "name": "Convergence",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!nUfOjTUeYFObEMARJN:content.udk-berlin.de": {
+                    "id": "!nUfOjTUeYFObEMARJN:content.udk-berlin.de",
+                    "name": "Concretely Unimaginable",
+                    "type": "course",
+                    "children": {}
+                  }
+                }
+              },
+              "!vjjiveXiFEwLvKEeWU:content.udk-berlin.de": {
+                "id": "!vjjiveXiFEwLvKEeWU:content.udk-berlin.de",
+                "name": "The Hitchhikers to the Internet",
+                "type": "course",
+                "children": {}
+              },
+              "!RECHncgkduaAKwPrMl:content.udk-berlin.de": {
+                "id": "!RECHncgkduaAKwPrMl:content.udk-berlin.de",
+                "name": "Designed Uncertainty",
+                "type": "course",
+                "children": {}
+              }
+            }
+          },
+          "!SWThVGByWfRMqMIbuS:content.udk-berlin.de": {
+            "id": "!SWThVGByWfRMqMIbuS:content.udk-berlin.de",
+            "name": "Bachelor Gesellschafts- und Wirtschaftskommunikation",
+            "type": "degree program",
+            "children": {
+              "!GTHsGnnmTnRXLbdckw:content.udk-berlin.de": {
+                "id": "!GTHsGnnmTnRXLbdckw:content.udk-berlin.de",
+                "name": "meta.dating",
+                "type": "course",
+                "children": {}
+              },
+              "!fjdLFMIfqLlKzEuAvT:content.udk-berlin.de": {
+                "id": "!fjdLFMIfqLlKzEuAvT:content.udk-berlin.de",
+                "name": "Art and Feminisms",
+                "type": "course",
+                "children": {}
+              },
+              "!qlKimcqQITYdvYeXov:content.udk-berlin.de": {
+                "id": "!qlKimcqQITYdvYeXov:content.udk-berlin.de",
+                "name": "Flanieren, umherschweifen, spazieren - Wissen(schaft) durch Bewegung",
+                "type": "course",
+                "children": {}
+              },
+              "!zFjYibmLdNYwiYYmYy:content.udk-berlin.de": {
+                "id": "!zFjYibmLdNYwiYYmYy:content.udk-berlin.de",
+                "name": "Sommersemester 2021, Modul 06, Einführung in die angewandte Entwurfsarbeit (Creative Brief & Photoshop), Kooperationspartner Clubcommission / United We Stream / Berlin Club Memes",
+                "type": "course",
+                "children": {}
+              },
+              "!HDOQAyphXGAwIorDsV:content.udk-berlin.de": {
+                "id": "!HDOQAyphXGAwIorDsV:content.udk-berlin.de",
+                "name": "Sommersemester 2021, Modul 06, Strategische Mediengestaltung zum Thema 'World Ocean Day', Kooperationspartner Greenpeace",
+                "type": "course",
+                "children": {}
+              },
+              "!BWSWDxbeoOBKjDyOIu:content.udk-berlin.de": {
+                "id": "!BWSWDxbeoOBKjDyOIu:content.udk-berlin.de",
+                "name": "Wintersemester 2020 / 2021, Modul 06, Einführung in die angewandte Entwurfsarbeit (Creative Brief & Photoshop)",
+                "type": "course",
+                "children": {}
+              },
+              "!syMfsqnDpwiIMCYRHz:content.udk-berlin.de": {
+                "id": "!syMfsqnDpwiIMCYRHz:content.udk-berlin.de",
+                "name": "Wintersemester 2021, Modul 15, Das Interview als journalistische Darstellungsform",
+                "type": "course",
+                "children": {}
+              },
+              "!MrKhsosJuzhtNBUaci:content.udk-berlin.de": {
+                "id": "!MrKhsosJuzhtNBUaci:content.udk-berlin.de",
+                "name": "Wintersemester 2021, Modul 06, Strategische Mediengestaltung zum Thema 'World Ocean Day', Kooperationspartner Greenpeace",
+                "type": "course",
+                "children": {}
+              }
+            }
+          },
+          "!KtWoeRhyppPMSXpdpC:content.udk-berlin.de": {
+            "id": "!KtWoeRhyppPMSXpdpC:content.udk-berlin.de",
+            "name": "Master Gesellschafts- und Wirtschaftskommunikation",
+            "type": "degree program",
+            "children": {}
+          },
+          "!thbAIeoSWxvWSjfzlZ:content.udk-berlin.de": {
+            "id": "!thbAIeoSWxvWSjfzlZ:content.udk-berlin.de",
+            "name": "Kunst und Medien",
+            "type": "degree program",
+            "children": {
+              "!wNVmGXQwjuNAaKNMzB:content.udk-berlin.de": {
+                "id": "!wNVmGXQwjuNAaKNMzB:content.udk-berlin.de",
+                "name": "Hybrid Systems: Silences, Soundscapes & Sonoaviatics",
+                "type": "course",
+                "children": {}
+              },
+              "!mQQpcwSrpWVbfrAiXy:content.udk-berlin.de": {
+                "id": "!mQQpcwSrpWVbfrAiXy:content.udk-berlin.de",
+                "name": "Scrapbook of the Sixties« – Film und Experiment in New York",
+                "type": "course",
+                "children": {}
+              },
+              "!IXKYDWpZbDiLzITaXq:content.udk-berlin.de": {
+                "id": "!IXKYDWpZbDiLzITaXq:content.udk-berlin.de",
+                "name": "Auf dem Land. Von neuen und alten Existenzweisen",
+                "type": "course",
+                "children": {}
+              },
+              "!NBSdwUlRIjWlpitMiu:content.udk-berlin.de": {
+                "id": "!NBSdwUlRIjWlpitMiu:content.udk-berlin.de",
+                "name": "Filmproduktion für Filmkünstler*innen",
+                "type": "course",
+                "children": {}
+              },
+              "!KOdaTNsHmstoURaJdh:content.udk-berlin.de": {
+                "id": "!KOdaTNsHmstoURaJdh:content.udk-berlin.de",
+                "name": "Montage-Seminar",
+                "type": "course",
+                "children": {}
+              },
+              "!xkbMnBNsiuJJIPKJyO:content.udk-berlin.de": {
+                "id": "!xkbMnBNsiuJJIPKJyO:content.udk-berlin.de",
+                "name": "Neue Perspektiven - Tiere in der Stadt 2 / praktisches Filmseminar",
+                "type": "course",
+                "children": {}
+              },
+              "!bZWwnqybRacKaOJniK:content.udk-berlin.de": {
+                "id": "!bZWwnqybRacKaOJniK:content.udk-berlin.de",
+                "name": "teacher.solar 0 :: Design & Deployment of a solar-powered artefact :: Sound & Klang",
+                "type": "course",
+                "children": {}
+              },
+              "!bqdooXkaMDMmEtrDoA:content.udk-berlin.de": {
+                "id": "!bqdooXkaMDMmEtrDoA:content.udk-berlin.de",
+                "name": "Fachklasse Experimenteller Film / Medienkunst",
+                "type": "course",
+                "children": {}
+              },
+              "!LdfFqavPWcNTXyiGLs:content.udk-berlin.de": {
+                "id": "!LdfFqavPWcNTXyiGLs:content.udk-berlin.de",
+                "name": "Gestaltung des bewegten Bildes",
+                "type": "course",
+                "children": {}
+              },
+              "!QbyMlsVolPKsNnipJN:content.udk-berlin.de": {
+                "id": "!QbyMlsVolPKsNnipJN:content.udk-berlin.de",
+                "name": "Technische Betreuung und Unterweisung der Nutzer/innen der AV-Geräte täglich nach Absprache",
+                "type": "course",
+                "children": {}
+              },
+              "!dRurlBdOOwGqzVNpPZ:content.udk-berlin.de": {
+                "id": "!dRurlBdOOwGqzVNpPZ:content.udk-berlin.de",
+                "name": "Archäologie des Selbst",
+                "type": "course",
+                "children": {}
+              },
+              "!MmVbJCYWxkWLeIYXyZ:content.udk-berlin.de": {
+                "id": "!MmVbJCYWxkWLeIYXyZ:content.udk-berlin.de",
+                "name": "Boredom and its Contents: exploring the creative, contemplative and existential aspects of switching off",
+                "type": "course",
+                "children": {}
+              },
+              "!PfErzbIkcnSSwIGeEZ:content.udk-berlin.de": {
+                "id": "!PfErzbIkcnSSwIGeEZ:content.udk-berlin.de",
+                "name": "Code Experiments: Back to the Future Voices",
+                "type": "course",
+                "children": {}
+              },
+              "!RCqpiyAVwzBLhIpDgU:content.udk-berlin.de": {
+                "id": "!RCqpiyAVwzBLhIpDgU:content.udk-berlin.de",
+                "name": "IoT - Island of Things",
+                "type": "course",
+                "children": {}
+              },
+              "!vrayBZKNdRjfCCzwnJ:content.udk-berlin.de": {
+                "id": "!vrayBZKNdRjfCCzwnJ:content.udk-berlin.de",
+                "name": "“MORGEN IST DIE FRAGE” – Current Issues of Berlin’s Club Culture",
+                "type": "course",
+                "children": {}
+              },
+              "!jnUDzyOFkEQoDockes:content.udk-berlin.de": {
+                "id": "!jnUDzyOFkEQoDockes:content.udk-berlin.de",
+                "name": "Fachklasse Generative Kunst / Computational Art",
+                "type": "course",
+                "children": {}
+              },
+              "!NGEwCPiTfTZzLrnzTA:content.udk-berlin.de": {
+                "id": "!NGEwCPiTfTZzLrnzTA:content.udk-berlin.de",
+                "name": "Design with Code",
+                "type": "course",
+                "children": {}
+              },
+              "!JplBlTKKLeAWlHCPdX:content.udk-berlin.de": {
+                "id": "!JplBlTKKLeAWlHCPdX:content.udk-berlin.de",
+                "name": "Fachklasse Narrativer Film / Narration in und mit technischen Bildmedien",
+                "type": "course",
+                "children": {}
+              },
+              "!stxjaetnGXjzUjTnIB:content.udk-berlin.de": {
+                "id": "!stxjaetnGXjzUjTnIB:content.udk-berlin.de",
+                "name": "GANerative GANomaly for GANsters",
+                "type": "course",
+                "children": {}
+              },
+              "!ISTkNoRHAfDogKhrsp:content.udk-berlin.de": {
+                "id": "!ISTkNoRHAfDogKhrsp:content.udk-berlin.de",
+                "name": "Grundlagen Bewegtbild I",
+                "type": "course",
+                "children": {}
+              },
+              "!vjjiveXiFEwLvKEeWU:content.udk-berlin.de": {
+                "id": "!vjjiveXiFEwLvKEeWU:content.udk-berlin.de",
+                "name": "The Hitchhikers to the Internet",
+                "type": "course",
+                "children": {}
+              },
+              "!ezJYSvulLsUILabTbb:content.udk-berlin.de": {
+                "id": "!ezJYSvulLsUILabTbb:content.udk-berlin.de",
+                "name": "Expanded Reality Worlds",
+                "type": "course",
+                "children": {}
+              },
+              "!OyuNaQcrrHpGZUPzIc:content.udk-berlin.de": {
+                "id": "!OyuNaQcrrHpGZUPzIc:content.udk-berlin.de",
+                "name": "Im Hotel - Entwicklung von Szenen für einen Omnibusfilm",
+                "type": "course",
+                "children": {}
+              },
+              "!nZaSkIqKenzKTroNrJ:content.udk-berlin.de": {
+                "id": "!nZaSkIqKenzKTroNrJ:content.udk-berlin.de",
+                "name": "Kameraberatung und Projektbesprechung",
+                "type": "course",
+                "children": {}
+              },
+              "!BWsqsPlQcsHeEzLwmo:content.udk-berlin.de": {
+                "id": "!BWsqsPlQcsHeEzLwmo:content.udk-berlin.de",
+                "name": "Kamera für Fortgeschrittene PRAKTISCHE ÜBUNGEN ZU DIGITALEN KAMERAS",
+                "type": "course",
+                "children": {}
+              },
+              "!NtUveHeCFNDrlwiNrz:content.udk-berlin.de": {
+                "id": "!NtUveHeCFNDrlwiNrz:content.udk-berlin.de",
+                "name": "Kamera, Licht und Ton - Einführung",
+                "type": "course",
+                "children": {}
+              },
+              "!QAPJfwVfGfjPMNvNCS:content.udk-berlin.de": {
+                "id": "!QAPJfwVfGfjPMNvNCS:content.udk-berlin.de",
+                "name": "Video Performance II : Dokumentation im Feld der Performancekunst",
+                "type": "course",
+                "children": {}
+              },
+              "!DPBdJnBkfJiMWQMvPY:content.udk-berlin.de": {
+                "id": "!DPBdJnBkfJiMWQMvPY:content.udk-berlin.de",
+                "name": "In Bewegung / Interaktive Systeme I",
+                "type": "course",
+                "children": {}
+              },
+              "!OiHtAguCwwKiWnklTO:content.udk-berlin.de": {
+                "id": "!OiHtAguCwwKiWnklTO:content.udk-berlin.de",
+                "name": "New forms of research: more-than-human perspectives and tentacular thinking",
+                "type": "course",
+                "children": {}
+              },
+              "!AGOcYOksWhetPPZYrN:content.udk-berlin.de": {
+                "id": "!AGOcYOksWhetPPZYrN:content.udk-berlin.de",
+                "name": "space, environment and context: (noise and) silence",
+                "type": "course",
+                "children": {}
+              },
+              "!RakYASbDzUoGiqsJKr:content.udk-berlin.de": {
+                "id": "!RakYASbDzUoGiqsJKr:content.udk-berlin.de",
+                "name": "SOUNDDESIGN / POSTPRODUKTIONS-BERATUNG",
+                "type": "course",
+                "children": {}
+              },
+              "!bMsedBNKPpABogcrJu:content.udk-berlin.de": {
+                "id": "!bMsedBNKPpABogcrJu:content.udk-berlin.de",
+                "name": "Tonaufnahme-Seminar",
+                "type": "course",
+                "children": {}
+              },
+              "!GPdtCWWiyFqOManxhx:content.udk-berlin.de": {
+                "id": "!GPdtCWWiyFqOManxhx:content.udk-berlin.de",
+                "name": "New Media Graduates",
+                "type": "course",
+                "children": {}
+              },
+              "!hMzgDgyymhdhZMiYKO:content.udk-berlin.de": {
+                "id": "!hMzgDgyymhdhZMiYKO:content.udk-berlin.de",
+                "name": "New Wilderness",
+                "type": "course",
+                "children": {}
+              },
+              "!XOtlUEGwYGMPYYXIbG:content.udk-berlin.de": {
+                "id": "!XOtlUEGwYGMPYYXIbG:content.udk-berlin.de",
+                "name": "New Media",
+                "type": "design department",
+                "children": {
+                  "!GPdtCWWiyFqOManxhx:content.udk-berlin.de": {
+                    "id": "!GPdtCWWiyFqOManxhx:content.udk-berlin.de",
+                    "name": "New Media Graduates",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!RCqpiyAVwzBLhIpDgU:content.udk-berlin.de": {
+                    "id": "!RCqpiyAVwzBLhIpDgU:content.udk-berlin.de",
+                    "name": "IoT - Island of Things",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!ZhtCtAgmyDHtgucKQv:content.udk-berlin.de": {
+                    "id": "!ZhtCtAgmyDHtgucKQv:content.udk-berlin.de",
+                    "name": "Convergence",
+                    "type": "course",
+                    "children": {}
+                  },
+                  "!nUfOjTUeYFObEMARJN:content.udk-berlin.de": {
+                    "id": "!nUfOjTUeYFObEMARJN:content.udk-berlin.de",
+                    "name": "Concretely Unimaginable",
+                    "type": "course",
+                    "children": {}
+                  }
+                }
+              },
+              "!XRukPufkZCvuaQMONH:content.udk-berlin.de": {
+                "id": "!XRukPufkZCvuaQMONH:content.udk-berlin.de",
+                "name": "Digital Audio Workstation as an Electronic Music Composition Tool",
+                "type": "course",
+                "children": {}
+              },
+              "!RECHncgkduaAKwPrMl:content.udk-berlin.de": {
+                "id": "!RECHncgkduaAKwPrMl:content.udk-berlin.de",
+                "name": "Designed Uncertainty",
+                "type": "course",
+                "children": {}
+              }
+            }
+          },
+          "!tAVkVrmbMiVJVKiXXC:content.udk-berlin.de": {
+            "id": "!tAVkVrmbMiVJVKiXXC:content.udk-berlin.de",
+            "name": "Design & Computation",
             "type": "course",
             "children": {}
           }
         }
-      },
-      "!XWblQinsXLKCfZivcO:content.udk-berlin.de": {
-        "id": "!XWblQinsXLKCfZivcO:content.udk-berlin.de",
-        "name": "Jazz-Institut Berlin",
-        "type": "institute",
-        "children": {}
       }
     }
   }
