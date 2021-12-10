@@ -123,6 +123,7 @@ const Category = ({ title, projectSpace, parent }) => {
 
   useEffect(() => {
     createStructurObject()
+    // eslint-disable-next-line
   }, [])
 
   // const isMember = async (e) => {
