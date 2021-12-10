@@ -48,7 +48,6 @@ jobs:
           TARGET: /var/www/cms/
           VERBOSE: true
           USER: root
-          PORT: 22422
           ARGS: --recursive --update --delete --compress --exclude=/.git/
-          SSH_ARGS: '-o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no'
+          SSH_ARGS: '-o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no -p 22422'
           SOURCE: ./build/
