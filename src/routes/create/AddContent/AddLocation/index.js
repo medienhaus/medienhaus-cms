@@ -153,7 +153,6 @@ const AddLocation = ({ number, inviteCollaborators, projectSpace, handleOnBlockW
 
   return (
     <>
-      <h2>Location</h2>
       {peertube &&
         <div>
           <label htmlFor="content-select">{t('Live stream or audio/video conference?')}</label>
@@ -197,7 +196,7 @@ const AddLocation = ({ number, inviteCollaborators, projectSpace, handleOnBlockW
             <DraggableMarker />
           </MapContainer>
         </div>
-      </>
+      </>}
       <input type="text" placeholder={t('room number or specific location')} onChange={(e) => setRoom(e.target.value)} />
 
       {time &&
