@@ -95,7 +95,7 @@ function App () {
   return (
     <>
       <AuthProvider>
-        <Router basename="/rundgang">
+        <Router basename={process.env.REACT_APP_BASENAME}>
           <ScrollToTop />
           <Nav />
           <main>

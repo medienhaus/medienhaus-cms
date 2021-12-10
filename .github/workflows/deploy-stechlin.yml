@@ -1,10 +1,14 @@
-name: Deploy stechlin to ruralmindshift.org
+name: Deploy to stechlin-institut.ruralmindshift.org
 # Allows deploying a given branch to ruralmindshift.org manually from the Actions tab in GitHub
 
 on:
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
     inputs:
+      app_basename:
+        description: App basename for React Router
+        required: true
+        default: '/cms'
       matrix_base_url:
         description: Matrix Server URL
         required: true
@@ -27,12 +31,14 @@ jobs:
       - if: ${{ github.event_name == 'workflow_dispatch' }}
         run: npm run build
         env:
+          REACT_APP_BASENAME: ${{github.event.inputs.app_basename}}
           REACT_APP_MATRIX_BASE_URL: ${{github.event.inputs.matrix_base_url}}
 
       # ... this was an automatic deploy and we fill in our default environment variables.
       - if: ${{ github.event_name != 'workflow_dispatch' }}
         run: npm run build
         env:
+          REACT_APP_BASENAME: /cms
           REACT_APP_MATRIX_BASE_URL: https://stechlin-institut.ruralmindshift.org
 
       - uses: up9cloud/action-rsync@v1.1
