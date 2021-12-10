@@ -44,6 +44,10 @@ const Create = () => {
     setSaveTimestamp(date + ', ' + time)
   }, [])
 
+  // TEMPORARILY DISABLING CREATING NEW CONTENT
+  /* eslint-disable no-unreachable, react-hooks/rules-of-hooks */
+  if (!projectSpace) return null
+
   const reloadSpace = async (roomId, eventSpace) => {
     eventSpace && setEvents(eventSpace)
     // roomId is needed in order to invite collaborators to newly created rooms.
@@ -231,7 +235,7 @@ const Create = () => {
     return changeTopic
   }
 
-  if (!matrixClient.isInitialSyncComplete()) return <Loading />
+  if (projectSpace && !matrixClient.isInitialSyncComplete()) return <Loading />
 
   return (
     <>
@@ -300,14 +304,8 @@ const Create = () => {
            */}
           <section className="visibility">
             <h3>{t('Visibility')}</h3>
-            {/*
-            <p>
-              <Trans t={t} i18nKey="visibilityInstructions1">
-                Would you like to save your project as a draft or release it for publishing on the Rundgang platform? The released projects will be published for the Rundgang on October 29, 2021.
-              </Trans>
-            </p>
-            <p>{t('If you still want to make changes to your contributions after publishing, you can continue to do so. Please note, however, that content on projects with a physical location will be pulled from the system on October 8, 2021 for the printed Rundgang programme. Projects that have not been approved by you for publishing by then will not be included in the programme booklet.')}</p>
-            */}
+            {/* <p>{t('Would you like to save your project as a draft or release it for publishing on the Rundgang platform? The released projects will be published in the run-up to the Rundgang on October 25, 2021.')}</p> */}
+            {/* <p>{t('If you still want to make changes to your contributions after publishing, you can continue to do so.')}</p> */}
             {spaceObject
               ? (<>
                 <PublishProject space={spaceObject.rooms[0]} metaEvent={medienhausMeta} description={description?.en} published={visibility} time={getCurrentTime} />

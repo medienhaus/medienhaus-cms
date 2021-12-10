@@ -17,6 +17,7 @@ const AddLocation = ({ number, inviteCollaborators, projectSpace, handleOnBlockW
   const [loading, setLoading] = useState(false)
   const [bbbLink, setBbbLink] = useState('')
   const [validBbbLink, setValidBbbLink] = useState(false)
+  const [validStreamLink, setValidStreamLink] = useState(false)
   const [selectedBlockType, setSelectedBlockType] = useState('')
   const [livestream, setLivestream] = useState()
   const matrixClient = Matrix.getMatrixClient()
@@ -170,17 +171,22 @@ const AddLocation = ({ number, inviteCollaborators, projectSpace, handleOnBlockW
             }} onBlockWasAddedSuccessfully={handleOnBlockWasAddedSuccessfully}
           />
         : selectedBlockType === 'livestream' &&
-          <PeertubeEmbed type="livestream" onBlockWasAddedSuccessfully={handleOnBlockWasAddedSuccessfully} callback={(stream) => setLivestream(stream)} />}
-      {locationDropdown &&
-        <div>
-          <label htmlFor="location-select">{t('Location')}</label>
-          <select name="location-select" value={selectedLocation} id="location-select" onChange={(e) => setSelectedLocation(e.target.value)}>
-            <option value="">{t('-- select venue --')}</option>
-            <option value="custom">{t('other venue, please enter below')}</option>
-            {locations.map(location => <option value={location.coordinates} key={location.coordinates}>{location.name}</option>)}
-          </select>
-        </div>}
-      <>
+          <PeertubeEmbed
+            type="livestream" onBlockWasAddedSuccessfully={handleOnBlockWasAddedSuccessfully} callback={(stream) => {
+              setLivestream(stream)
+              setValidStreamLink(stream.startsWith('https://stream.udk-berlin.de/videos/watch/'))
+            }}
+          />}
+      <div>
+        <label htmlFor="location-select">{t('Venue')}</label>
+        <select name="location-select" value={selectedLocation} id="location-select" onChange={(e) => setSelectedLocation(e.target.value)}>
+          <option value="">{t('-- select venue --')}</option>
+          <option value="custom">{t('other venue, please enter below')}</option>
+          {locations.map(location => <option value={location.coordinates} key={location.coordinates}>{location.name}</option>)}
+        </select>
+      </div>
+
+      {selectedLocation === 'custom' && <>
         <p>{t('Drag the marker to the desired location.')}</p>
         <div className="map">
           <MapContainer className="center" center={center} zoom={12} scrollWheelZoom={false}>
@@ -202,7 +208,7 @@ const AddLocation = ({ number, inviteCollaborators, projectSpace, handleOnBlockW
       <div className="confirmation">
         <button className="cancel" onClick={() => { callback() }}>{t('CANCEL')}</button>
         <LoadingSpinnerButton
-          disabled={loading || (selectedBlockType === '' && !selectedLocation) || (selectedBlockType === 'bbb' && !validBbbLink)}
+          disabled={loading || (selectedBlockType === '' && !selectedLocation) || (selectedBlockType === 'bbb' && !validBbbLink) || (selectedBlockType === 'livestream' && !validStreamLink)}
           onClick={handleSubmit}
         >{t('SAVE')}
         </LoadingSpinnerButton>
