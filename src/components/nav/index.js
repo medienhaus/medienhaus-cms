@@ -130,7 +130,7 @@ const Nav = () => {
     <>
       <header>
         <NavLink to="/">
-          <h1>spaces/cms</h1>
+          <h1>stechlinstitut/cms</h1>
         </NavLink>
         {auth.user
           ? <button type="button" className={isNavigationOpen ? 'close' : 'open'} onClick={() => setIsNavigationOpen(!isNavigationOpen)}>{isNavigationOpen ? '×' : '|||'}</button>
