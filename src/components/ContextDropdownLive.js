@@ -97,7 +97,8 @@ function ContextDropdown ({ onItemChosen, selectedContext, showRequestButton = f
         // clear the combobox again if the user selected a context they are not a member of yet
         return
       }
-      onItemChosen(selectedItem.id)
+      console.log(selectedItem)
+      onItemChosen(selectedItem)
     }
   })
 

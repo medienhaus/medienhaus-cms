@@ -117,7 +117,7 @@ const Category = ({ title, projectSpace, parent }) => {
     }
     console.log('---- started structure ----')
     const tree = await getSpaceStructure(parent, false)
-    console.log(tree[Object.keys(tree)[0]])
+    // console.log(tree[Object.keys(tree)[0]])
     setInputItems(tree)
   }
 
@@ -148,12 +148,12 @@ const Category = ({ title, projectSpace, parent }) => {
   //   setSubject('')
   // }
 
-  async function onContextChosen (contextSpaceId) {
+  async function onContextChosen (contextSpace) {
     let projectSpaceMetaEvent = await matrixClient.getStateEvent(projectSpace, 'dev.medienhaus.meta')
 
     setLoading(true)
 
-    if (projectSpaceMetaEvent.context && projectSpaceMetaEvent.context !== contextSpaceId) {
+    if (projectSpaceMetaEvent.context && projectSpaceMetaEvent.context !== contextSpace.id) {
       // If this project was in a different context previously we should try to take it out of the old context
       const req = {
         method: 'PUT',
@@ -173,10 +173,10 @@ const Category = ({ title, projectSpace, parent }) => {
         via: [process.env.REACT_APP_MATRIX_BASE_URL.replace('https://', '')]
       })
     }
-    await fetch(process.env.REACT_APP_MATRIX_BASE_URL + `/_matrix/client/r0/rooms/${contextSpaceId}/state/m.space.child/${projectSpace}`, req)
+    await fetch(process.env.REACT_APP_MATRIX_BASE_URL + `/_matrix/client/r0/rooms/${contextSpace.id}/state/m.space.child/${projectSpace}`, req)
 
     // Set the new context in our meta event
-    projectSpaceMetaEvent.context = contextSpaceId
+    projectSpaceMetaEvent.context = contextSpace.id
     await matrixClient.sendStateEvent(projectSpace, 'dev.medienhaus.meta', projectSpaceMetaEvent)
 
     // Get the freshly updated state event and save it in our state

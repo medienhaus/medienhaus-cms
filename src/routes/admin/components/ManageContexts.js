@@ -9,6 +9,7 @@ import * as _ from 'lodash'
 import ProjectImage from '../../create/ProjectImage'
 import AddLocation from '../../create/AddContent/AddLocation'
 import { Loading } from '../../../components/loading'
+import ContextDropdown from '../../../components/ContextDropdownLive'
 
 const ManageContexts = (props) => {
   const { t } = useTranslation('admin')
@@ -20,6 +21,8 @@ const ManageContexts = (props) => {
   // eslint-disable-next-line no-unused-vars
   const [disableButton, setDisableButton] = useState(false)
   const [parent] = useState('!ZbMmIxgnJIhuROlgKJ:dev.medienhaus.udk-berlin.de')
+  const [currentContext, setCurrentContext] = useState(null)
+  const [inputItems, setInputItems] = useState()
 
   const createStructurObject = async () => {
     async function getSpaceStructure (matrixClient, motherSpaceRoomId, includeRooms) {
@@ -138,6 +141,8 @@ const ManageContexts = (props) => {
     }
     console.log('---- started structure ----')
     const tree = await getSpaceStructure(props.matrixClient, parent, false)
+    setInputItems(tree)
+    console.log(tree)
     const translatedJson = translateJson(tree[Object.keys(tree)[0]])
     setStructure(translatedJson)
   }
@@ -218,6 +223,18 @@ const ManageContexts = (props) => {
     <>
       <h2>Manage Contexts</h2>
       {!structure ? <Loading /> : <ShowContexts structure={structure} t={t} selectedContext={selectedContext} parent={parent} parentName={parentName} disableButton={disableButton} callback={contextualise} />}
+      {!inputItems
+        ? <Loading />
+        : <ContextDropdown
+            onItemChosen={(id) => {
+              setSelectedContext(id.name)
+              setSelectedContextName(id.name)
+            }}
+            selectedContext={currentContext}
+            showRequestButton
+            struktur={inputItems}
+            matrixClient={props.matrixClient}
+          />}
       <label htmlFor="name">{t('Parent')}: </label>
       <input type="text" value={selectedContextName} disabled />
       <RemoveContext t={t} selectedContext={selectedContext} parent={parent} parentName={parentName} disableButton={disableButton} callback={spaceChild} />
