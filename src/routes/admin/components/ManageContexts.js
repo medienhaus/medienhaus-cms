@@ -14,7 +14,7 @@ import AddEvent from '../../create/DateAndVenue/components/AddEvent'
 
 const ManageContexts = (props) => {
   const { t } = useTranslation('admin')
-  const [selectedContext, setSelectedContext] = useState('!EyRTeozehwfsYePWMl:dev.medienhaus.udk-berlin.de')
+  const [selectedContext, setSelectedContext] = useState('')
   const [selectedContextName, setSelectedContextName] = useState('')
   const [structure, setStructure] = useState()
   const [newContext, setNewContext] = useState('')
@@ -145,8 +145,8 @@ const ManageContexts = (props) => {
     const tree = await getSpaceStructure(props.matrixClient, parent, false)
     setInputItems(tree)
     console.log(tree)
-    const translatedJson = translateJson(tree[Object.keys(tree)[0]])
-    setStructure(translatedJson)
+    // const translatedJson = translateJson(tree[Object.keys(tree)[0]])
+    // setStructure(translatedJson)
   }
   const spaceChild = async (e, space, add) => {
     e && e.preventDefault()
@@ -224,7 +224,6 @@ const ManageContexts = (props) => {
   return (
     <>
       <h2>Manage Contexts</h2>
-      {!structure ? <Loading /> : <ShowContexts structure={structure} t={t} selectedContext={selectedContext} parent={parent} parentName={parentName} disableButton={disableButton} callback={contextualise} />}
       {!inputItems
         ? <Loading />
         : <ContextDropdown
@@ -243,18 +242,22 @@ const ManageContexts = (props) => {
       <label htmlFor="name">{t('Parent')}: </label>
       <input type="text" value={selectedContextName} disabled />
       <RemoveContext t={t} selectedContext={selectedContext} parent={contextParent} parentName={parentName} disableButton={disableButton} callback={spaceChild} />
-      <CreateContext t={t} parent={selectedContext} matrixClient={props.matrixClient} setNewContext={setNewContext} parentName={parentName} disableButton={disableButton} callback={addSpace} />
-      <div>
-        <h2>Image</h2>
-        <ProjectImage projectSpace={selectedContext} changeProjectImage={() => console.log('changed image')} />
-      </div>
-      <AddEvent
-        length={1}
-        room_id={selectedContext}
-        t={t}
-        reloadSpace={console.log}
-        inviteCollaborators={console.log}
-      />
+      <CreateContext t={t} parent={selectedContext} matrixClient={props.matrixClient} setNewContext={setNewContext} parentName={parentName} disableButton={!newContext} callback={addSpace} />
+      {selectedContextName &&
+        <>
+          <div>
+            <h2>Edit currently selected context</h2>
+            <h2>Image</h2>
+            <ProjectImage projectSpace={selectedContext} changeProjectImage={() => console.log('changed image')} />
+          </div>
+          <AddEvent
+            length={1}
+            room_id={selectedContext}
+            t={t}
+            reloadSpace={console.log}
+            inviteCollaborators={console.log}
+          />
+        </>}
     </>
   )
 }
