@@ -11,6 +11,8 @@ import AddLocation from '../../create/AddContent/AddLocation'
 import { Loading } from '../../../components/loading'
 import ContextDropdown from '../../../components/ContextDropdownLive'
 import AddEvent from '../../create/DateAndVenue/components/AddEvent'
+import DisplayEvents from '../../create/DateAndVenue/components/DisplayEvents'
+import DeleteButton from '../../create/components/DeleteButton'
 
 const ManageContexts = (props) => {
   const { t } = useTranslation('admin')
@@ -25,6 +27,7 @@ const ManageContexts = (props) => {
   const [contextParent, setContextParent] = useState('')
   const [currentContext, setCurrentContext] = useState(null)
   const [inputItems, setInputItems] = useState()
+  const [events, setEvents] = useState([])
 
   const createStructurObject = async () => {
     async function getSpaceStructure (matrixClient, motherSpaceRoomId, includeRooms) {
@@ -215,6 +218,23 @@ const ManageContexts = (props) => {
     setSelectedContextName(d3.data.name)
   }
 
+  const onContextChange = async (context) => {
+    console.log(context.children?.filter(child => child.type === 'event'))
+    const checkForEvents = context.children?.filter(child => child.type === 'event')
+    if (!_.isEmpty(checkForEvents)) {
+      const eventSummary = await Promise.all(checkForEvents.map(room => props.matrixClient.getSpaceSummary(room.id, 0).catch(err => console.log(err)))) // then we fetch the summary of all spaces within the event space
+      const onlyEvents = eventSummary
+        ?.filter(room => room !== undefined) // we filter undefined results. @TODO DOM seems to be rendering to quickly here. better solution needed
+        .map(event => event?.rooms) // finally we remove any spaces in here since we only want the content room
+      // check for empty event spaces and delete those
+      // onlyEvents.filter(space => space.length === 0).map(emptySpace => onDelete(null, emptySpace.))
+      setEvents(onlyEvents)
+    }
+    setSelectedContext(context.id)
+    setSelectedContextName(context.name)
+    setContextParent(context.pathIds[context.pathIds.length - 1])
+    // setParentName(context.path[context.path.length - 1])
+  }
   useEffect(() => {
     createStructurObject()
     // createD3Json()
@@ -228,13 +248,7 @@ const ManageContexts = (props) => {
       {!inputItems
         ? <Loading />
         : <ContextDropdown
-            onItemChosen={(context) => {
-              console.log(context)
-              setSelectedContext(context.id)
-              setSelectedContextName(context.name)
-              setContextParent(context.pathIds[context.pathIds.length - 1])
-              // setParentName(context.path[context.path.length - 1])
-            }}
+            onItemChosen={onContextChange}
             selectedContext={currentContext}
             showRequestButton
             struktur={inputItems}
@@ -251,11 +265,28 @@ const ManageContexts = (props) => {
             <h2>Image</h2>
             <ProjectImage projectSpace={selectedContext} changeProjectImage={() => console.log('changed image')} />
           </div>
+          {events && (events.map((event, i) => {
+            return (
+              <div className="editor" key={event.name}>
+                <div className="left">
+                  <span>🎭</span>
+                </div>
+                <div className="center">
+                  {event.filter(room => room.room_type !== 'm.space').filter(room => room.name.charAt(0) !== 'x') // filter rooms that were deleted
+                    .map((event, i) => {
+                      return <DisplayEvents event={event} i={i} key={i} />
+                    })}
+                </div>
+                <div className="right" />
+              </div>
+            )
+          }))}
           <AddEvent
-            length={1}
+            length={events.length}
             room_id={selectedContext}
             t={t}
             reloadSpace={console.log}
+            locationDropdown
             inviteCollaborators={console.log}
           />
         </>}

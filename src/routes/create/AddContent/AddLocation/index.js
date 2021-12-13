@@ -11,7 +11,7 @@ import BigBlueButtonEmbed from '../../components/bigBlueButtonEmbed'
 import PeertubeEmbed from '../../components/peertubeEmbed'
 
 const AddLocation = ({ number, inviteCollaborators, projectSpace, handleOnBlockWasAddedSuccessfully, peertube, time, locationDropdown, callback }) => {
-  const [selectedLocation, setSelectedLocation] = useState('')
+  const [selectedLocation, setSelectedLocation] = useState('custom')
   const [timeDate, setTimeDate] = useState([])
   const [room, setRoom] = useState('')
   const [loading, setLoading] = useState(false)
@@ -149,7 +149,7 @@ const AddLocation = ({ number, inviteCollaborators, projectSpace, handleOnBlockW
       </Marker>
     )
   }
-
+  console.log(selectedLocation)
   return (
     <>
       {peertube &&
