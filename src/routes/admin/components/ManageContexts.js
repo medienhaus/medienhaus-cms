@@ -21,7 +21,7 @@ const ManageContexts = (props) => {
   const [parentName, setParentName] = useState('Stechlin')
   // eslint-disable-next-line no-unused-vars
   const [disableButton, setDisableButton] = useState(false)
-  const [parent] = useState('!ZbMmIxgnJIhuROlgKJ:dev.medienhaus.udk-berlin.de')
+  const [parent] = useState(process.env.REACT_APP_CONTEXT_ROOT_SPACE_ID)
   const [contextParent, setContextParent] = useState('')
   const [currentContext, setCurrentContext] = useState(null)
   const [inputItems, setInputItems] = useState()

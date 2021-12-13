@@ -257,7 +257,7 @@ const Create = () => {
         <>
           <section className="context">
             <h3>{t('Project context')}</h3>
-            <Category title={title} projectSpace={projectSpace} parent="!ZbMmIxgnJIhuROlgKJ:dev.medienhaus.udk-berlin.de" />
+            <Category title={title} projectSpace={projectSpace} parent={process.env.REACT_APP_CONTEXT_ROOT_SPACE_ID} />
           </section>
           <section className="events">
             <h3>{t('Location')}</h3>
