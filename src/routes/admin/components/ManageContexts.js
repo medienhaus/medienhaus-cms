@@ -10,6 +10,7 @@ import ProjectImage from '../../create/ProjectImage'
 import AddLocation from '../../create/AddContent/AddLocation'
 import { Loading } from '../../../components/loading'
 import ContextDropdown from '../../../components/ContextDropdownLive'
+import AddEvent from '../../create/DateAndVenue/components/AddEvent'
 
 const ManageContexts = (props) => {
   const { t } = useTranslation('admin')
@@ -17,10 +18,11 @@ const ManageContexts = (props) => {
   const [selectedContextName, setSelectedContextName] = useState('')
   const [structure, setStructure] = useState()
   const [newContext, setNewContext] = useState('')
-  const [parentName] = useState('Stechlin')
+  const [parentName, setParentName] = useState('Stechlin')
   // eslint-disable-next-line no-unused-vars
   const [disableButton, setDisableButton] = useState(false)
   const [parent] = useState('!ZbMmIxgnJIhuROlgKJ:dev.medienhaus.udk-berlin.de')
+  const [contextParent, setContextParent] = useState('')
   const [currentContext, setCurrentContext] = useState(null)
   const [inputItems, setInputItems] = useState()
 
@@ -154,11 +156,12 @@ const ManageContexts = (props) => {
       suggested: false,
       auto_join: true
     }
-    await fetch(process.env.REACT_APP_MATRIX_BASE_URL + `/_matrix/client/r0/rooms/${selectedContext}/state/m.space.child/${space}`, {
+    await fetch(process.env.REACT_APP_MATRIX_BASE_URL + `/_matrix/client/r0/rooms/${add ? selectedContext : space}/state/m.space.child/${add ? space : selectedContext}`, {
       method: 'PUT',
       headers: { Authorization: 'Bearer ' + localStorage.getItem('medienhaus_access_token') },
       body: JSON.stringify(add ? body : { }) // if we add a space to an existing one we need to send the object 'body', to remove a space we send an empty object.
     }).catch(console.log)
+    add ? console.log('added as child to ' + selectedContext) : console.log('removed ' + selectedContext + ' from' + contextParent)
     createStructurObject()
   }
 
@@ -197,8 +200,8 @@ const ManageContexts = (props) => {
       // create the space for the context
       const space = await props.matrixClient.createRoom(opts('context', title, 'world_readable')).catch(console.log)
       // add this subspaces as children to the root space
-      spaceChild(e, space.room_id, true)
-      console.log('created Context ' + newContext)
+      await spaceChild(e, space.room_id, true)
+      console.log('created Context ' + newContext + ' ' + space.room_id)
 
       setDisableButton(false)
       return space
@@ -213,7 +216,6 @@ const ManageContexts = (props) => {
   }
 
   useEffect(() => {
-    console.log('yes i was fired')
     createStructurObject()
     // createD3Json()
     // eslint-disable-next-line
@@ -226,9 +228,12 @@ const ManageContexts = (props) => {
       {!inputItems
         ? <Loading />
         : <ContextDropdown
-            onItemChosen={(id) => {
-              setSelectedContext(id.name)
-              setSelectedContextName(id.name)
+            onItemChosen={(context) => {
+              console.log(context)
+              setSelectedContext(context.id)
+              setSelectedContextName(context.name)
+              setContextParent(context.pathIds[context.pathIds.length - 1])
+              // setParentName(context.path[context.path.length - 1])
             }}
             selectedContext={currentContext}
             showRequestButton
@@ -237,13 +242,19 @@ const ManageContexts = (props) => {
           />}
       <label htmlFor="name">{t('Parent')}: </label>
       <input type="text" value={selectedContextName} disabled />
-      <RemoveContext t={t} selectedContext={selectedContext} parent={parent} parentName={parentName} disableButton={disableButton} callback={spaceChild} />
-      <CreateContext t={t} parent={parent} matrixClient={props.matrixClient} setNewContext={setNewContext} parentName={parentName} disableButton={disableButton} callback={addSpace} />
+      <RemoveContext t={t} selectedContext={selectedContext} parent={contextParent} parentName={parentName} disableButton={disableButton} callback={spaceChild} />
+      <CreateContext t={t} parent={selectedContext} matrixClient={props.matrixClient} setNewContext={setNewContext} parentName={parentName} disableButton={disableButton} callback={addSpace} />
       <div>
         <h2>Image</h2>
         <ProjectImage projectSpace={selectedContext} changeProjectImage={() => console.log('changed image')} />
       </div>
-      <AddLocation callback={() => console.log('callback')} />
+      <AddEvent
+        length={1}
+        room_id={selectedContext}
+        t={t}
+        reloadSpace={console.log}
+        inviteCollaborators={console.log}
+      />
     </>
   )
 }
