@@ -224,6 +224,7 @@ const ManageContexts = (props) => {
   return (
     <>
       <h2>Manage Contexts</h2>
+      {!structure ? <Loading /> : <ShowContexts structure={structure} t={t} selectedContext={selectedContext} parent={parent} parentName={parentName} disableButton={disableButton} callback={contextualise} />}
       {!inputItems
         ? <Loading />
         : <ContextDropdown
