@@ -36,6 +36,7 @@ jobs:
         env:
           REACT_APP_BASENAME: ${{github.event.inputs.app_basename}}
           REACT_APP_MATRIX_BASE_URL: ${{github.event.inputs.matrix_base_url}}
+          REACT_APP_CONTEXT_ROOT_SPACE_ID: '!ZbMmIxgnJIhuROlgKJ:dev.medienhaus.udk-berlin.de'
 
       # ... this was an automatic deploy and we fill in our default environment variables.
       - if: ${{ github.event_name != 'workflow_dispatch' }}
@@ -43,6 +44,7 @@ jobs:
         env:
           REACT_APP_BASENAME: /stechlin-cms
           REACT_APP_MATRIX_BASE_URL: https://dev.medienhaus.udk-berlin.de
+          REACT_APP_CONTEXT_ROOT_SPACE_ID: '!ZbMmIxgnJIhuROlgKJ:dev.medienhaus.udk-berlin.de'
 
       - uses: up9cloud/action-rsync@v1.1
         env:
