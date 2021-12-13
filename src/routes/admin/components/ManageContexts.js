@@ -13,6 +13,8 @@ import ContextDropdown from '../../../components/ContextDropdownLive'
 import AddEvent from '../../create/DateAndVenue/components/AddEvent'
 import DisplayEvents from '../../create/DateAndVenue/components/DisplayEvents'
 import DeleteButton from '../../create/components/DeleteButton'
+import deleteContentBlock from '../../create/functions/deleteContentBlock'
+import { set } from 'react-hook-form'
 
 const ManageContexts = (props) => {
   const { t } = useTranslation('admin')
@@ -28,6 +30,7 @@ const ManageContexts = (props) => {
   const [currentContext, setCurrentContext] = useState(null)
   const [inputItems, setInputItems] = useState()
   const [events, setEvents] = useState([])
+  const [deleting, setDeleting] = useState(false)
 
   const createStructurObject = async () => {
     async function getSpaceStructure (matrixClient, motherSpaceRoomId, includeRooms) {
@@ -216,6 +219,7 @@ const ManageContexts = (props) => {
     console.log(d3)
     setSelectedContext(d3.data.id)
     setSelectedContextName(d3.data.name)
+    setContextParent(d3.parent.data.id)
   }
 
   const onContextChange = async (context) => {
@@ -225,7 +229,8 @@ const ManageContexts = (props) => {
       const eventSummary = await Promise.all(checkForEvents.map(room => props.matrixClient.getSpaceSummary(room.id, 0).catch(err => console.log(err)))) // then we fetch the summary of all spaces within the event space
       const onlyEvents = eventSummary
         ?.filter(room => room !== undefined) // we filter undefined results. @TODO DOM seems to be rendering to quickly here. better solution needed
-        .map(event => event?.rooms) // finally we remove any spaces in here since we only want the content room
+        .map(event => event?.rooms)
+        .filter(room => room.name.charAt(0) !== 'x') // finally we remove any spaces in here since we only want the content room
       // check for empty event spaces and delete those
       // onlyEvents.filter(space => space.length === 0).map(emptySpace => onDelete(null, emptySpace.))
       setEvents(onlyEvents)
@@ -241,6 +246,22 @@ const ManageContexts = (props) => {
     // eslint-disable-next-line
   }, [])
 
+  const onDelete = async (e, roomId, name, index) => {
+    e.preventDefault()
+    setDeleting(true)
+    try {
+      await deleteContentBlock(name, roomId, index)
+    } catch (err) {
+      console.error(err)
+      setDeleting('couldn’t delete event, please try again or try reloading the page')
+      setTimeout(() => {
+        setDeleting()
+      }, 2000)
+    } finally {
+      setDeleting()
+    }
+  }
+
   return (
     <>
       <h2>Manage Contexts</h2>
@@ -254,7 +275,7 @@ const ManageContexts = (props) => {
             struktur={inputItems}
             matrixClient={props.matrixClient}
           />}
-      <label htmlFor="name">{t('Parent')}: </label>
+      <label htmlFor="name">{t('Context')}: </label>
       <input type="text" value={selectedContextName} disabled />
       <RemoveContext t={t} selectedContext={selectedContext} parent={contextParent} parentName={parentName} disableButton={disableButton} callback={spaceChild} />
       <CreateContext t={t} parent={selectedContext} matrixClient={props.matrixClient} setNewContext={setNewContext} parentName={parentName} disableButton={!newContext} callback={addSpace} />
@@ -277,7 +298,15 @@ const ManageContexts = (props) => {
                       return <DisplayEvents event={event} i={i} key={i} />
                     })}
                 </div>
-                <div className="right" />
+                <div className="right">
+                  <DeleteButton
+                    deleting={deleting}
+                    onDelete={onDelete}
+                    block={event[0]} // the actual event space not the location itself
+                    index={events.length + i + 1}
+                    reloadSpace={() => console.log('deleted')}
+                  />
+                </div>
               </div>
             )
           }))}
