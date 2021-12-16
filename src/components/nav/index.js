@@ -61,6 +61,7 @@ const Nav = () => {
       // Types of spaces for which we want to count invites for
       const typesOfSpaces = [
         'studentproject',
+        'content',
         'context',
         'class',
         'course',
