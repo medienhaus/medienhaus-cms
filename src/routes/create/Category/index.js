@@ -149,6 +149,7 @@ const Category = ({ title, projectSpace, parent }) => {
   // }
 
   async function onContextChosen (contextSpace) {
+    console.log(contextSpace)
     let projectSpaceMetaEvent = await matrixClient.getStateEvent(projectSpace, 'dev.medienhaus.meta')
 
     setLoading(true)

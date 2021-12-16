@@ -9,12 +9,13 @@ import * as _ from 'lodash'
 import ProjectImage from '../../create/ProjectImage'
 import AddLocation from '../../create/AddContent/AddLocation'
 import { Loading } from '../../../components/loading'
-import ContextDropdown from '../../../components/ContextDropdownLive'
 import AddEvent from '../../create/DateAndVenue/components/AddEvent'
 import DisplayEvents from '../../create/DateAndVenue/components/DisplayEvents'
 import DeleteButton from '../../create/components/DeleteButton'
 import deleteContentBlock from '../../create/functions/deleteContentBlock'
+import SimpleContextSelect from '../../../components/SimpleContextSelect'
 import { set } from 'react-hook-form'
+import { MatrixEvent } from 'matrix-js-sdk'
 
 const ManageContexts = (props) => {
   const { t } = useTranslation('admin')
@@ -31,9 +32,12 @@ const ManageContexts = (props) => {
   const [inputItems, setInputItems] = useState()
   const [events, setEvents] = useState([])
   const [deleting, setDeleting] = useState(false)
+  const [loading, setLoading] = useState(false)
 
   const createStructurObject = async () => {
     async function getSpaceStructure (matrixClient, motherSpaceRoomId, includeRooms) {
+      setDisableButton(true)
+      setLoading(true)
       const result = {}
 
       function createSpaceObject (id, name, metaEvent) {
@@ -120,9 +124,11 @@ const ManageContexts = (props) => {
       }
 
       await scanForAndAddSpaceChildren(motherSpaceRoomId, [])
-
+      setLoading(false)
+      setDisableButton(false)
       return result
     }
+
     function translateJson (origin) {
       origin.childs = []
       if (origin.children && Object.keys(origin.children).length > 0) {
@@ -150,11 +156,11 @@ const ManageContexts = (props) => {
     console.log('---- started structure ----')
     const tree = await getSpaceStructure(props.matrixClient, parent, false)
     setInputItems(tree)
-    console.log(tree)
     const translatedJson = translateJson(tree[Object.keys(tree)[0]])
     setStructure(translatedJson)
   }
   const spaceChild = async (e, space, add) => {
+    setLoading(true)
     e && e.preventDefault()
     const body = {
       via:
@@ -168,7 +174,21 @@ const ManageContexts = (props) => {
       body: JSON.stringify(add ? body : { }) // if we add a space to an existing one we need to send the object 'body', to remove a space we send an empty object.
     }).catch(console.log)
     add ? console.log('added as child to ' + selectedContext) : console.log('removed ' + selectedContext + ' from' + contextParent)
-    createStructurObject()
+    await createStructurObject()
+    setLoading(false)
+  }
+
+  const setPower = async (userId, roomId, level) => {
+    console.log('changing power level for ' + userId)
+    props.matrixClient.getStateEvent(roomId, 'm.room.power_levels', '').then(async (res) => {
+      const powerEvent = new MatrixEvent({
+        type: 'm.room.power_levels',
+        content: res
+      }
+      )
+      // something here is going wrong for collab > 2
+      await props.matrixClient.setPowerLevel(roomId, userId, level, powerEvent).catch(err => console.error(err))
+    })
   }
 
   function addSpace (e) {
@@ -208,7 +228,14 @@ const ManageContexts = (props) => {
       // add this subspaces as children to the root space
       await spaceChild(e, space.room_id, true)
       console.log('created Context ' + newContext + ' ' + space.room_id)
-
+      // invite admins to newly created space
+      if (process.env.REACT_APP_USER1 === localStorage.getItem('medienhaus_user_id')) {
+        await props.matrixClient.invite(space.room_id, process.env.REACT_APP_USER2).catch(console.log)
+        await setPower(process.env.REACT_APP_USER2, space.room_id, 50)
+      } else {
+        await props.matrixClient.invite(space.room_id, process.env.REACT_APP_USER1).catch(console.log) // @TODO change to userIds
+        await setPower(process.env.REACT_APP_USER1, space.room_id, 50)
+      }
       setDisableButton(false)
       return space
     }
@@ -223,7 +250,6 @@ const ManageContexts = (props) => {
   }
 
   const onContextChange = async (context) => {
-    console.log(context.children?.filter(child => child.type === 'event'))
     const checkForEvents = context.children?.filter(child => child.type === 'event')
     if (!_.isEmpty(checkForEvents)) {
       const eventSummary = await Promise.all(checkForEvents.map(room => props.matrixClient.getSpaceSummary(room.id, 0).catch(err => console.log(err)))) // then we fetch the summary of all spaces within the event space
@@ -265,26 +291,27 @@ const ManageContexts = (props) => {
   return (
     <>
       <h2>Manage Contexts</h2>
-      {!structure ? <Loading /> : <ShowContexts structure={structure} t={t} selectedContext={selectedContext} parent={parent} parentName={parentName} disableButton={disableButton} callback={contextualise} />}
+      {// !structure ? <Loading /> : <ShowContexts structure={structure} t={t} selectedContext={selectedContext} parent={parent} parentName={parentName} disableButton={disableButton} callback={contextualise} />
+      }
       {!inputItems
         ? <Loading />
-        : <ContextDropdown
+        : <SimpleContextSelect
             onItemChosen={onContextChange}
-            selectedContext={currentContext}
-            showRequestButton
+            selectedContext={selectedContextName}
             struktur={inputItems}
-            matrixClient={props.matrixClient}
+            disabled={loading}
           />}
-      <label htmlFor="name">{t('Context')}: </label>
-      <input type="text" value={selectedContextName} disabled />
+      {loading && inputItems && <Loading />}
+      {/* <label htmlFor="name">{t('Context')}: </label>
+       <input type="text" value={selectedContextName} disabled /> */}
       <RemoveContext t={t} selectedContext={selectedContext} parent={contextParent} parentName={parentName} disableButton={disableButton} callback={spaceChild} />
-      <CreateContext t={t} parent={selectedContext} matrixClient={props.matrixClient} setNewContext={setNewContext} parentName={parentName} disableButton={!newContext} callback={addSpace} />
+      <CreateContext t={t} parent={selectedContext} matrixClient={props.matrixClient} setNewContext={setNewContext} parentName={parentName} disableButton={!newContext || loading} callback={addSpace} />
       {selectedContextName &&
         <>
           <div>
             <h2>Edit currently selected context</h2>
             <h2>Image</h2>
-            <ProjectImage projectSpace={selectedContext} changeProjectImage={() => console.log('changed image')} />
+            <ProjectImage projectSpace={selectedContext} changeProjectImage={() => console.log('changed image')} disabled={loading} />
           </div>
           {events && (events.map((event, i) => {
             return (
@@ -317,6 +344,7 @@ const ManageContexts = (props) => {
             reloadSpace={console.log}
             locationDropdown
             inviteCollaborators={console.log}
+            disabled={loading}
           />
         </>}
     </>

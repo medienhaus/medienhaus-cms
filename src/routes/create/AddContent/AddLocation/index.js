@@ -10,7 +10,7 @@ import createBlock from '../../matrix_create_room'
 import BigBlueButtonEmbed from '../../components/bigBlueButtonEmbed'
 import PeertubeEmbed from '../../components/peertubeEmbed'
 
-const AddLocation = ({ number, inviteCollaborators, projectSpace, handleOnBlockWasAddedSuccessfully, peertube, time, locationDropdown, callback }) => {
+const AddLocation = ({ number, inviteCollaborators, projectSpace, handleOnBlockWasAddedSuccessfully, peertube, time, locationDropdown, callback, disabled }) => {
   const [selectedLocation, setSelectedLocation] = useState('custom')
   const [timeDate, setTimeDate] = useState([])
   const [room, setRoom] = useState('')
@@ -201,7 +201,7 @@ const AddLocation = ({ number, inviteCollaborators, projectSpace, handleOnBlockW
       <div className="confirmation">
         <button className="cancel" onClick={() => { callback() }}>{t('CANCEL')}</button>
         <LoadingSpinnerButton
-          disabled={loading || (selectedBlockType === 'bbb' && !validBbbLink)}
+          disabled={loading || (selectedBlockType === 'bbb' && !validBbbLink) || disabled}
           onClick={handleSubmit}
         >{t('SAVE')}
         </LoadingSpinnerButton>
