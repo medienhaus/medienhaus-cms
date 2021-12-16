@@ -104,8 +104,8 @@ const Nav = () => {
     const checkAdminPriviliges = async () => {
       setIsAdmin(await matrixClient.isSynapseAdministrator().catch(console.log))
     }
-    checkAdminPriviliges()
-  }, [matrixClient])
+    matrixClient && checkAdminPriviliges()
+  }, [matrixClient, auth.user])
 
   if (auth.user === null) {
     return null
