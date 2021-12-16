@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import Matrix from '../../../Matrix'
 import { Loading } from '../../../components/loading'
-import ContextDropdown from '../../../components/ContextDropdownLive'
 import * as _ from 'lodash'
+import SimpleContextSelect from '../../../components/SimpleContextSelect'
 
 const Category = ({ title, projectSpace, parent }) => {
   console.log(parent)
@@ -196,12 +196,10 @@ const Category = ({ title, projectSpace, parent }) => {
       <div style={{ position: 'relative' }}>
         {loading || !inputItems
           ? <Loading />
-          : <ContextDropdown
+          : <SimpleContextSelect
               onItemChosen={onContextChosen}
               selectedContext={currentContext}
-              showRequestButton
               struktur={inputItems}
-              matrixClient={matrixClient}
             />}
       </div>
       {/* {subject !== '' && !member && <Knock room={room} callback={callback} />} */}
