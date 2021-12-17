@@ -78,16 +78,17 @@ const AddUser = ({ matrixClient }) => {
       <form onSubmit={handleSubmit(onSubmit)}>
         <div>
           <label htmlFor="name">{t('Username')}:</label>
-          <input type="text" value={name} onChange={(e) => setName(e.target.value)} />
+          <input type="text" value={name} onChange={(e) => setName(e.target.value)} placeholder="username" />
         </div>
         <div>
           <label htmlFor="password">{t('Password')}: </label>
-          <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+          <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="••••••••••••••••••••••••" />
         </div>
-        <label htmlFor="mail">{t('E-Mail')}: </label>
-        {/* eslint-disable-next-line no-useless-escape */}
-        <input type="text" value={mail} onChange={(e) => setMail(e.target.value)} placeholder="email" />
         <div>
+          <label htmlFor="mail">{t('E-Mail')}:</label>
+          <input type="text" value={mail} onChange={(e) => setMail(e.target.value)} placeholder="mail@example.org" />
+        </div>
+        <div className="check">
           <label htmlFor="checkbox">{t('Make user admin')}: </label>
           <input type="checkbox" id="checkbox" name="checkbox" value={admin} onChange={() => setAdmin(!admin)} checked={admin === true} />
         </div>

@@ -48,19 +48,24 @@ const Admin = () => {
 
   return (
     <>
-      <section className="request">
-        <div id="formchooser">
-          <input type="radio" id="add-user" name={t('Add Account')} checked={selection === 'add'} onChange={() => setSelection('add')} />
-          <label htmlFor="add-user">{t('Add Account')}</label>
-          <input type="radio" id="change-password" name={t('Reset Password')} value="change-password" checked={selection === 'password'} onChange={() => setSelection('password')} />
-          <label htmlFor="change-password">{t('Reset Password')}</label>
-          <input type="radio" id="delete-user" name={t('Delete user')} value="delete-user" checked={selection === 'delete'} onChange={() => setSelection('delete')} />
-          <label htmlFor="delete-user">{t('Delete user')}</label>
-          <input type="radio" id="manage-contexts" name={t('Manage contexts')} value="manage-contexts" checked={selection === 'contexts'} onChange={() => setSelection('contexts')} />
-          <label htmlFor="manage-contexts">{t('Manage contexts')}</label>
-        </div>
+      <section className="admin">
+        <h2>{t('What do you want to do?')}</h2>
+        <select className="radio" onChange={(event) => setSelection(event.target.value)}>
+          <option id="add-user" value="add">
+            {t('Add Account')}
+          </option>
+          <option id="change-password" value="password">
+            {t('Reset Password')}
+          </option>
+          <option id="delete-user" value="delete">
+            {t('Delete User')}
+          </option>
+          <option id="manage-contexts" value="contexts">
+            {t('Manage contexts')}
+          </option>
+        </select>
+        {renderSelection()}
       </section>
-      {renderSelection()}
     </>
   )
 }

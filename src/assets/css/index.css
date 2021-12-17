@@ -655,6 +655,14 @@ textarea[disabled] {
   width: calc(var(--margin) * 8);
 }
 
+.admin .check,
+.admin .radio {
+  display: grid;
+  align-items: center;
+  grid-gap: var(--margin);
+  grid-template-columns: minmax(10ch, auto) 1fr;
+}
+
 .cancel {
   background-color: var(--color-bg);
   color: var(--color-fg);
