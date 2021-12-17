@@ -7,7 +7,7 @@ function SimpleContextSelect ({ onItemChosen, selectedContext, struktur, disable
   return (
     <>
       <select disabled={disabled} onChange={(e) => { onItemChosen(JSON.parse(e.target.value)) }}>
-        <option>&nbsp;</option>
+        <option disabled selected>-- select context --</option>
         {mapDeep(filterDeep(items, (value, key, parent, context) => {
           // Exclude all hierarchy elements that are not "contexts"
           if (value?.type !== 'context') return false
