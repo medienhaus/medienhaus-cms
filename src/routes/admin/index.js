@@ -64,6 +64,7 @@ const Admin = () => {
             {t('Manage contexts')}
           </option>
         </select>
+        <hr />
         {renderSelection()}
       </section>
     </>
