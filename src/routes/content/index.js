@@ -124,7 +124,7 @@ const Overview = () => {
             ? (
               <p>{t('Welcome to the content management system. Looks like you haven\'t uploaded any content, yet.')}</p>
               )
-            : projects.map((space, index) => (
+            : projects.filter(space => space.meta.type !== 'context').map((space, index) => (
               <React.Fragment key={index}>
                 <Projects space={space} metaEvent={space.meta} visibility={space.published} index={index} removeProject={removeProject} />
                 {index < projects.length - 1 && <hr />}
