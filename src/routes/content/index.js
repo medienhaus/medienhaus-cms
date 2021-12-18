@@ -21,7 +21,6 @@ const Overview = () => {
       const typesOfSpaces = [
         'studentproject',
         'content',
-        'context',
         'class',
         'course',
         'institution',
