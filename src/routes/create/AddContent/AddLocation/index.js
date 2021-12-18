@@ -22,7 +22,7 @@ const AddLocation = ({ number, inviteCollaborators, projectSpace, handleOnBlockW
   const matrixClient = Matrix.getMatrixClient()
   const { t } = useTranslation('locations')
   const center = {
-    lat: 53.12554953986769, 
+    lat: 53.12554953986769,
     lng: 13.071531023061585
   }
   const [position, setPosition] = useState(center)
