@@ -248,9 +248,9 @@ const ManageContexts = (props) => {
     setSelectedContextName(d3.data.name)
     setContextParent(d3.parent.data.id)
   }
-
-  const onContextChange = async (context) => {
-    const checkSubSpaes = await props.matrixClient.getSpaceSummary(context.id, 0).catch(console.log)
+  const getEvents = async (space) => {
+    setEvents([])
+    const checkSubSpaes = await props.matrixClient.getSpaceSummary(space, 0).catch(console.log)
     const checkForEvents = checkSubSpaes?.rooms?.filter(child => child.name.includes('_event'))
     if (!_.isEmpty(checkForEvents)) {
       const eventSummary = await Promise.all(checkForEvents.map(room => props.matrixClient.getSpaceSummary(room.room_id, 0).catch(err => console.log(err)))) // then we fetch the summary of all spaces within the event space
@@ -262,10 +262,15 @@ const ManageContexts = (props) => {
       // onlyEvents.filter(space => space.length === 0).map(emptySpace => onDelete(null, emptySpace.))
       setEvents(onlyEvents)
     }
+  }
+  const onContextChange = async (context) => {
+    setLoading(true)
+    await getEvents(context.id)
     setSelectedContext(context.id)
     setSelectedContextName(context.name)
     setContextParent(context.pathIds[context.pathIds.length - 1])
     // setParentName(context.path[context.path.length - 1])
+    setLoading(false)
   }
   useEffect(() => {
     createStructurObject()
@@ -278,6 +283,7 @@ const ManageContexts = (props) => {
     setDeleting(true)
     try {
       await deleteContentBlock(name, roomId, index)
+      await getEvents(selectedContext)
     } catch (err) {
       console.error(err)
       setDeleting('couldn’t delete event, please try again or try reloading the page')
@@ -341,7 +347,7 @@ const ManageContexts = (props) => {
             length={events.length}
             room_id={selectedContext}
             t={t}
-            reloadSpace={console.log}
+            reloadSpace={() => getEvents(selectedContext)}
             locationDropdown
             inviteCollaborators={console.log}
             disabled={loading}
