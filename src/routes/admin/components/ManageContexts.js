@@ -250,13 +250,15 @@ const ManageContexts = (props) => {
   }
 
   const onContextChange = async (context) => {
-    const checkForEvents = context.children?.filter(child => child.type === 'event')
+    const checkSubSpaes = await props.matrixClient.getSpaceSummary(context.id, 0).catch(console.log)
+    const checkForEvents = checkSubSpaes?.rooms?.filter(child => child.name.includes('_event'))
     if (!_.isEmpty(checkForEvents)) {
-      const eventSummary = await Promise.all(checkForEvents.map(room => props.matrixClient.getSpaceSummary(room.id, 0).catch(err => console.log(err)))) // then we fetch the summary of all spaces within the event space
+      const eventSummary = await Promise.all(checkForEvents.map(room => props.matrixClient.getSpaceSummary(room.room_id, 0).catch(err => console.log(err)))) // then we fetch the summary of all spaces within the event space
+      console.log(eventSummary)
       const onlyEvents = eventSummary
         ?.filter(room => room !== undefined) // we filter undefined results. @TODO DOM seems to be rendering to quickly here. better solution needed
         .map(event => event?.rooms)
-        .filter(room => room.name.charAt(0) !== 'x') // finally we remove any spaces in here since we only want the content room
+        .filter(room => room.name?.charAt(0) !== 'x') // finally we remove any spaces in here since we only want the content room
       // check for empty event spaces and delete those
       // onlyEvents.filter(space => space.length === 0).map(emptySpace => onDelete(null, emptySpace.))
       setEvents(onlyEvents)
@@ -287,7 +289,7 @@ const ManageContexts = (props) => {
       setDeleting()
     }
   }
-
+  console.log(events)
   return (
     <>
       <h2>Manage Contexts</h2>

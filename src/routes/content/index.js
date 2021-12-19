@@ -100,7 +100,18 @@ const Overview = () => {
             </p>
       */}
             <ul>
-              {Object.values(invites).map((space, index) => {
+              {Object.values(invites).map(async (space, index) => {
+                if (space.name.includes('_event')) {
+                  const eventSpace = await matrixClient.getSpaceSummary(space).catch(console.log)
+                  eventSpace.rooms.forEach(async (space, index) => {
+                    console.log('joining ' + space.name)
+                    const subspaces = await matrixClient.getSpaceSummary(space.room_id).catch(console.log)
+                    subspaces.rooms.forEach(async (space) => {
+                      await matrixClient.joinRoom(space.room_id).catch(console.log)
+                    })
+                    await matrixClient.joinRoom(space.room_id).catch(console.log)
+                  })
+                }
                 return (
                   <React.Fragment key={space.name + index}>
                     <li key={index}>

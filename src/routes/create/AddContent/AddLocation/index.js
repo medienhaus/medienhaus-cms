@@ -9,6 +9,7 @@ import locations from '../../../../assets/data/locations.json'
 import createBlock from '../../matrix_create_room'
 import BigBlueButtonEmbed from '../../components/bigBlueButtonEmbed'
 import PeertubeEmbed from '../../components/peertubeEmbed'
+import { MatrixEvent } from 'matrix-js-sdk'
 
 const AddLocation = ({ number, inviteCollaborators, projectSpace, handleOnBlockWasAddedSuccessfully, peertube, time, locationDropdown, callback, disabled }) => {
   const [selectedLocation, setSelectedLocation] = useState('custom')
@@ -26,6 +27,20 @@ const AddLocation = ({ number, inviteCollaborators, projectSpace, handleOnBlockW
     lng: 13.071531023061585
   }
   const [position, setPosition] = useState(center)
+
+  const setPower = async (userId, roomId, level) => {
+    console.log('changing power level for ' + userId)
+    matrixClient.getStateEvent(roomId, 'm.room.power_levels', '').then(async (res) => {
+      const powerEvent = new MatrixEvent({
+        type: 'm.room.power_levels',
+        content: res
+      }
+      )
+      // something here is going wrong for collab > 2
+      await matrixClient.setPowerLevel(roomId, userId, level, powerEvent).catch(err => console.error(err))
+    })
+  }
+
   const handleSubmit = async () => {
     setLoading(true)
     const opts = (type, name) => {
@@ -68,6 +83,13 @@ const AddLocation = ({ number, inviteCollaborators, projectSpace, handleOnBlockW
           auto_join: true
         })
       })
+      if (process.env.REACT_APP_USER1 === localStorage.getItem('medienhaus_user_id')) {
+        await matrixClient.invite(event.room_id, process.env.REACT_APP_USER2).catch(console.log)
+        await setPower(process.env.REACT_APP_USER2, event.room_id, 50)
+      } else {
+        await matrixClient.invite(event.room_id, process.env.REACT_APP_USER1).catch(console.log) // @TODO change to userIds
+        await setPower(process.env.REACT_APP_USER1, event.room_id, 50)
+      }
       inviteCollaborators(event.room_id)
       // only create a location room if a selection is specefied
       if (selectedLocation) {
