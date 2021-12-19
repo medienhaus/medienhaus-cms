@@ -62,10 +62,15 @@ const Moderate = () => {
     const knockingUsers = Object.values(room?.currentState.members).filter(user => user.membership === 'knock')
     // @TODO delete users from array after accepting/rejecting
 
-    if (knockingUsers.length < 1) return <p>{t('No requests at the moment.')}</p>
+    if (knockingUsers.length < 1) return null
 
     return knockingUsers.map((user, index) => {
-      return <Requests roomId={request.room_id} roomName={request.name} userId={user.userId} userName={user.name} matrixClient={matrixClient} key={index} />
+      return (
+        <React.Fragment key={request.name + index}>
+          <h3>{request.name}</h3>
+          <Requests roomId={request.room_id} roomName={request.name} userId={user.userId} userName={user.name} matrixClient={matrixClient} key={index} />
+        </React.Fragment>
+      )
     })
   }
   /* Placeholder will be needed in the future
@@ -113,7 +118,7 @@ const Moderate = () => {
       {moderationRooms.length > 0
         ? <>
           <section className="requests">
-            {moderationRooms.map((request, index) => <React.Fragment key={request.name}><h3>{request.name}</h3><GetRequestPerRoom request={request} key={index} /></React.Fragment>)}
+            {moderationRooms.map((request, index) => <React.Fragment key={request.name}><GetRequestPerRoom request={request} key={index} /></React.Fragment>)}
           </section>
         </>
         : (
