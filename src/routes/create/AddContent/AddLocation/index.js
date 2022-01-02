@@ -57,8 +57,20 @@ const AddLocation = ({ number, inviteCollaborators, projectSpace, handleOnBlockW
           type: 'dev.medienhaus.meta',
           content: {
             version: '0.3',
-            rundgang: 21,
             type: type
+          }
+        },
+        {
+          type: 'dev.medienhaus.allocation',
+          content: {
+            version: '0.1',
+            physical: [
+              {
+                app: process.env.REACT_APP_APP_NAME,
+                lat: position.lat,
+                lng: position.lng
+              }
+            ]
           }
         },
         {
