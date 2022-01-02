@@ -68,7 +68,8 @@ const AddLocation = ({ number, inviteCollaborators, projectSpace, handleOnBlockW
               {
                 app: process.env.REACT_APP_APP_NAME,
                 lat: position.lat,
-                lng: position.lng
+                lng: position.lng,
+                info: room
               }
             ]
           }
