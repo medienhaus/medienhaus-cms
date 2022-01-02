@@ -63,7 +63,7 @@ const AddLocation = ({ number, inviteCollaborators, projectSpace, handleOnBlockW
         {
           type: 'dev.medienhaus.allocation',
           content: {
-            version: '0.1',
+            version: '1.0',
             physical: [
               {
                 app: process.env.REACT_APP_APP_NAME,
