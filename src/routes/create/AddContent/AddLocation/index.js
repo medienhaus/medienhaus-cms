@@ -43,6 +43,18 @@ const AddLocation = ({ number, inviteCollaborators, projectSpace, handleOnBlockW
 
   const handleSubmit = async () => {
     setLoading(true)
+    const allocation = {
+      version: '1.0',
+      physical: [
+        {
+          app: process.env.REACT_APP_APP_NAME,
+          lat: position.lat.toString(),
+          lng: position.lng.toString(),
+          info: room
+        }
+      ]
+    }
+    matrixClient.sendStateEvent(projectSpace, 'dev.medienhaus.allocation', allocation)
     const opts = (type, name) => {
       return {
         preset: 'private_chat',
@@ -58,20 +70,6 @@ const AddLocation = ({ number, inviteCollaborators, projectSpace, handleOnBlockW
           content: {
             version: '0.3',
             type: type
-          }
-        },
-        {
-          type: 'dev.medienhaus.allocation',
-          content: {
-            version: '1.0',
-            physical: [
-              {
-                app: process.env.REACT_APP_APP_NAME,
-                lat: position.lat.toString(),
-                lng: position.lng.toString(),
-                info: room
-              }
-            ]
           }
         },
         {
