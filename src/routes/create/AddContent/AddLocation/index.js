@@ -6,7 +6,7 @@ import { useTranslation } from 'react-i18next'
 // assets
 import locations from '../../../../assets/data/locations.json'
 
-const AddLocation = ({ number, inviteCollaborators, projectSpace, handleOnBlockWasAddedSuccessfully, peertube, time, locationDropdown, callback, disabled }) => {
+const AddLocation = ({ number, inviteCollaborators, projectSpace, handleOnBlockWasAddedSuccessfully, peertube, allocationEvent, locationDropdown, callback, disabled }) => {
   const [selectedLocation, setSelectedLocation] = useState('custom')
   const [room, setRoom] = useState('')
   const [loading, setLoading] = useState(false)
@@ -21,16 +21,31 @@ const AddLocation = ({ number, inviteCollaborators, projectSpace, handleOnBlockW
 
   const handleSubmit = async () => {
     setLoading(true)
-    const allocation = {
-      version: '1.0',
-      physical: [
-        {
-          app: process.env.REACT_APP_APP_NAME,
-          lat: position.lat.toString(),
-          lng: position.lng.toString(),
-          info: room
-        }
-      ]
+    let allocation
+    if (allocationEvent) {
+      allocation = {
+        version: '1.0',
+        physical: allocationEvent.physical.push(
+          {
+            app: process.env.REACT_APP_APP_NAME,
+            lat: position.lat.toString(),
+            lng: position.lng.toString(),
+            info: room
+          }
+        )
+      }
+    } else {
+      allocation = {
+        version: '1.0',
+        physical: [
+          {
+            app: process.env.REACT_APP_APP_NAME,
+            lat: position.lat.toString(),
+            lng: position.lng.toString(),
+            info: room
+          }
+        ]
+      }
     }
     matrixClient.sendStateEvent(projectSpace, 'dev.medienhaus.allocation', allocation)
     handleOnBlockWasAddedSuccessfully() // @TODO delay between menu collapsing and event reloading

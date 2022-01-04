@@ -288,7 +288,6 @@ const ManageContexts = (props) => {
     e.preventDefault()
     setDeleting(true)
     try {
-      await deleteContentBlock(name, roomId, index)
       await getEvents(selectedContext)
     } catch (err) {
       console.error(err)
@@ -396,6 +395,7 @@ const ManageContexts = (props) => {
             reloadSpace={() => getEvents(selectedContext)}
             locationDropdown
             inviteCollaborators={console.log}
+            allocation={allocation}
             disabled={loading}
           />
         </>}

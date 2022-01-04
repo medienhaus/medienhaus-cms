@@ -25,6 +25,7 @@ function AddEvent (props) {
           inviteCollaborators={props.inviteCollaborators}
           callback={() => setIsAddEventVisible(false)}
           disabled={props.disabled}
+          allocationEvent={props.allocation}
         />}
     </>
   )
