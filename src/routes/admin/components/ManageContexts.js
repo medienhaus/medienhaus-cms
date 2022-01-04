@@ -288,6 +288,12 @@ const ManageContexts = (props) => {
     e.preventDefault()
     setDeleting(true)
     try {
+      const deletedAllocation = {
+        version: '1.0',
+        physical: allocation.physical.filter((location, i) => i !== index)
+      }
+
+      props.matrixClient.sendStateEvent(selectedContext, 'dev.medienhaus.allocation', deletedAllocation)
       await getEvents(selectedContext)
     } catch (err) {
       console.error(err)

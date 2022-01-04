@@ -18,21 +18,22 @@ const AddLocation = ({ number, inviteCollaborators, projectSpace, handleOnBlockW
     lng: 13.071531023061585
   }
   const [position, setPosition] = useState(center)
+  console.log(allocationEvent)
 
   const handleSubmit = async () => {
     setLoading(true)
     let allocation
     if (allocationEvent) {
+      const newLocations = allocationEvent.physical
+      newLocations.push({
+        app: process.env.REACT_APP_APP_NAME,
+        lat: position.lat.toString(),
+        lng: position.lng.toString(),
+        info: room
+      })
       allocation = {
         version: '1.0',
-        physical: allocationEvent.physical.push(
-          {
-            app: process.env.REACT_APP_APP_NAME,
-            lat: position.lat.toString(),
-            lng: position.lng.toString(),
-            info: room
-          }
-        )
+        physical: newLocations
       }
     } else {
       allocation = {
