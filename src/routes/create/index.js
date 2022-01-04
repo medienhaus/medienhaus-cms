@@ -101,7 +101,7 @@ const Create = () => {
       const meta = spaceDetails.currentState.events.get('dev.medienhaus.meta').values().next().value.event.content
       setMedienhausMeta(meta)
       // check for allocation event
-      const allocationEvent = spaceDetails.currentState.events.get('dev.medienhaus.allocation').catch(console.log).values().next().value.event.content
+      const allocationEvent = spaceDetails.currentState.events.get('dev.medienhaus.allocation') ? spaceDetails.currentState.events.get('dev.medienhaus.allocation').values().next().value.event.content : null
       setAllocation(allocationEvent)
       // check if project is published or draft
       setVisibility(meta.published)
