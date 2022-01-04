@@ -1,85 +1,25 @@
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import AddEvent from './components/AddEvent'
 import { useTranslation } from 'react-i18next'
-import { Loading } from '../../../components/loading'
 import DisplayContent from '../DisplayContent'
 
 import DeleteButton from '../components/DeleteButton'
 import deleteContentBlock from '../functions/deleteContentBlock'
 import DisplayEvents from './components/DisplayEvents'
 import { isArray } from 'lodash'
+import { Loading } from '../../../components/loading'
 
-const DateAndVenue = ({ reloadSpace, inviteCollaborators, projectSpace, events, matrixClient }) => {
+const DateAndVenue = ({ reloadSpace, inviteCollaborators, projectSpace, events, allocation, matrixClient }) => {
   const [eventSpace, setEventSpace] = useState(events)
   const [eventContent, setEventContent] = useState([])
   const [oldEvents, setOldEvents] = useState([])
+  const [loading, setLoading] = useState(false)
   const [deleting, setDeleting] = useState(false)
-  const [creatingRoom, setCreatingRoom] = useState(false)
-  const [feedback, setFeedback] = useState('Migrating to new Event Space')
   const { t } = useTranslation('date')
-
-  const createEventSpace = useCallback(async () => {
-    if (!creatingRoom) {
-      setCreatingRoom(true)
-      const opts = (type, name) => {
-        return {
-          preset: 'private_chat',
-          name: name,
-          room_version: '7',
-          creation_content: { type: 'm.space' },
-          initial_state: [{
-            type: 'm.room.history_visibility',
-            content: { history_visibility: 'shared' }
-          },
-          {
-            type: 'dev.medienhaus.meta',
-            content: {
-              version: '0.3',
-              rundgang: 21,
-              type: type
-            }
-          },
-          {
-            type: 'm.room.guest_access',
-            state_key: '',
-            content: { guest_access: 'can_join' }
-          }],
-          visibility: 'private'
-        }
-      }
-
-      try {
-        await matrixClient.createRoom(opts('events', 'events'))
-          .then(async (res) => {
-            setFeedback('Event space created. Now adding to parent Space')
-            // and add those subspaces as children to the project space
-            await fetch(process.env.REACT_APP_MATRIX_BASE_URL + `/_matrix/client/r0/rooms/${projectSpace}/state/m.space.child/${res.room_id}`, {
-              method: 'PUT',
-              headers: { Authorization: 'Bearer ' + localStorage.getItem('medienhaus_access_token') },
-              body: JSON.stringify({
-                via:
-                  [process.env.REACT_APP_MATRIX_BASE_URL],
-                suggested: false,
-                auto_join: true
-              })
-            })
-            setFeedback('Reloading')
-            return res.room_id
-          }).then(async (res) => {
-            const eventSummary = await matrixClient.getSpaceSummary(res, 0).catch(err => console.log(err))
-            setEventSpace(eventSummary.rooms)
-            setFeedback('')
-          })
-      } catch (err) {
-        console.log(err)
-      } finally {
-        setCreatingRoom(false)
-      }
-    }
-  }, [creatingRoom, matrixClient, projectSpace])
 
   useEffect(() => {
     const fetchEvents = async () => {
+      setLoading(true)
       setOldEvents(eventSpace?.filter((room, i) => i > 0) // ignore the first element since its the space itself
         .filter(room => room.room_type !== 'm.space') // filter all newly created events
         .filter(room => room.name.charAt(0) !== 'x') // filter rooms that were deleted
@@ -92,10 +32,10 @@ const DateAndVenue = ({ reloadSpace, inviteCollaborators, projectSpace, events, 
       // check for empty event spaces and delete those
       // onlyEvents.filter(space => space.length === 0).map(emptySpace => onDelete(null, emptySpace.))
       setEventContent(onlyEvents)
+      setLoading(false)
     }
-    if (eventSpace === 'depricated') createEventSpace()
-    else if (isArray(eventSpace))fetchEvents(events)
-  }, [createEventSpace, eventSpace, events, matrixClient, projectSpace])
+    if (isArray(eventSpace))fetchEvents(events)
+  }, [eventSpace, events, matrixClient, projectSpace])
 
   useEffect(() => {
     setEventSpace(events)
@@ -117,9 +57,7 @@ const DateAndVenue = ({ reloadSpace, inviteCollaborators, projectSpace, events, 
       setDeleting()
     }
   }
-
-  if (!eventSpace) return <Loading />
-  if (eventSpace === 'depricated') return <><p>{feedback}</p><Loading /></>
+  if (loading) return <Loading />
   return (
     <>
       {oldEvents
@@ -154,6 +92,10 @@ const DateAndVenue = ({ reloadSpace, inviteCollaborators, projectSpace, events, 
           </div>
         )
       }))}
+      {allocation
+        ?.map((event, i) => {
+          return <DisplayContent block={event} index={i} blocks={eventSpace} projectSpace={eventSpace} reloadSpace={reloadSpace} allocationEvent={allocation} key={event + i} mapComponent />
+        })}
       {eventContent?.length < 1 &&
         <AddEvent
           length={eventSpace.filter(space => space.room_type === 'm.space').length}

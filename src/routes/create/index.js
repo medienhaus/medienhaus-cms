@@ -28,6 +28,7 @@ const Create = () => {
   const [roomMembers, setRoomMembers] = useState()
   const [saveTimestamp, setSaveTimestamp] = useState('')
   const [medienhausMeta, setMedienhausMeta] = useState([])
+  const [allocation, setAllocation] = useState([])
   const [events, setEvents] = useState()
   const [description, setDescription] = useState()
   // const [preview, setPreview] = useState(false)
@@ -99,6 +100,9 @@ const Create = () => {
       // fetch custom medienhaus event
       const meta = spaceDetails.currentState.events.get('dev.medienhaus.meta').values().next().value.event.content
       setMedienhausMeta(meta)
+      // check for allocation event
+      const allocationEvent = spaceDetails.currentState.events.get('dev.medienhaus.allocation').catch(console.log).values().next().value.event.content
+      setAllocation(allocationEvent)
       // check if project is published or draft
       setVisibility(meta.published)
       // we fetch the selected language content
@@ -261,7 +265,7 @@ const Create = () => {
           </section>
           <section className="events">
             <h3>{t('Location')}</h3>
-            <DateAndVenue inviteCollaborators={inviteCollaborators} reloadSpace={reloadSpace} projectSpace={projectSpace} events={events} matrixClient={matrixClient} />
+            <DateAndVenue inviteCollaborators={inviteCollaborators} reloadSpace={reloadSpace} projectSpace={projectSpace} events={events} allocation={allocation} matrixClient={matrixClient} />
           </section>
           <section className="contributors">
             <Collaborators projectSpace={spaceObject?.rooms} members={roomMembers} time={getCurrentTime} startListeningToCollab={() => startListeningToCollab()} />

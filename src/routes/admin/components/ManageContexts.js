@@ -14,6 +14,8 @@ import DisplayEvents from '../../create/DateAndVenue/components/DisplayEvents'
 import DeleteButton from '../../create/components/DeleteButton'
 import deleteContentBlock from '../../create/functions/deleteContentBlock'
 import SimpleContextSelect from '../../../components/SimpleContextSelect'
+import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
+import locations from '../../../assets/data/locations.json'
 import { set } from 'react-hook-form'
 import { MatrixEvent } from 'matrix-js-sdk'
 
@@ -31,6 +33,7 @@ const ManageContexts = (props) => {
   const [currentContext, setCurrentContext] = useState(null)
   const [inputItems, setInputItems] = useState()
   const [events, setEvents] = useState([])
+  const [allocation, setAllocation] = useState([])
   const [deleting, setDeleting] = useState(false)
   const [loading, setLoading] = useState(false)
 
@@ -209,7 +212,6 @@ const ManageContexts = (props) => {
             type: 'dev.medienhaus.meta',
             content: {
               version: '0.3',
-              rundgang: 21,
               type: type,
               published: 'draft'
             }
@@ -248,8 +250,12 @@ const ManageContexts = (props) => {
     setSelectedContextName(d3.data.name)
     setContextParent(d3.parent.data.id)
   }
+  const fetchAllocation = async (space) => setAllocation(await props.matrixClient.getStateEvent(space, 'dev.medienhaus.allocation').catch(console.log))
+
   const getEvents = async (space) => {
     setEvents([])
+    setAllocation([])
+    await fetchAllocation(space)
     const checkSubSpaes = await props.matrixClient.getSpaceSummary(space, 0).catch(console.log)
     const checkForEvents = checkSubSpaes?.rooms?.filter(child => child.name.includes('_event'))
     if (!_.isEmpty(checkForEvents)) {
@@ -319,6 +325,46 @@ const ManageContexts = (props) => {
             <h2>Image</h2>
             <ProjectImage projectSpace={selectedContext} changeProjectImage={() => console.log('changed image')} disabled={loading} />
           </div>
+          {allocation?.physical && allocation.physical.map((location, i) => {
+            return (
+              <div className="editor" key={location.lat}>
+                <div className="left">
+                  <span>🎭</span>
+                </div>
+                <div
+                  className={location.lat === '0.0' && location.lng === '0.0' ? 'center' : null}
+                >
+                  {
+                                location.lat !== '0.0' && location.lng !== '0.0' &&
+                                  <MapContainer className="center" center={[location.lat, location.lng]} zoom={17} scrollWheelZoom={false} placeholder>
+                                    <TileLayer
+                                      attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+                                      url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                                    />
+                                    <Marker position={[location.lat, location.lng]}>
+                                      <Popup>
+                                        {locations.find(coord => coord.coordinates === location.lat + ', ' + location.lng)?.name || // if the location is not in our location.json
+                                        location.info?.length > 0 // we check if the custom input field was filled in
+                                          ? location.info // if true, we display that text on the popup otherwise we show the lat and long coordinates
+                                          : location.lat + ', ' + location.lng}
+                                      </Popup>
+                                    </Marker>
+                                  </MapContainer>
+                              }
+                  {location.info && <input type="text" value={location.info} disabled />}
+                </div>
+                <div className="right">
+                  <DeleteButton
+                    deleting={deleting}
+                    onDelete={onDelete}
+                    block={allocation.physical[0]} // the actual event space not the location itself
+                    index={events.length + i + 1}
+                    reloadSpace={() => console.log('deleted')}
+                  />
+                </div>
+              </div>
+            )
+          })}
           {events && (events.map((event, i) => {
             return (
               <div className="editor" key={event.name}>
