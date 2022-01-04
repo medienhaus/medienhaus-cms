@@ -253,6 +253,7 @@ const ManageContexts = (props) => {
   const fetchAllocation = async (space) => setAllocation(await props.matrixClient.getStateEvent(space, 'dev.medienhaus.allocation').catch(console.log))
 
   const getEvents = async (space) => {
+    setLoading(true)
     setEvents([])
     setAllocation([])
     await fetchAllocation(space)
@@ -268,6 +269,7 @@ const ManageContexts = (props) => {
       // onlyEvents.filter(space => space.length === 0).map(emptySpace => onDelete(null, emptySpace.))
       setEvents(onlyEvents)
     }
+    setLoading(false)
   }
   const onContextChange = async (context) => {
     setLoading(true)
@@ -284,8 +286,7 @@ const ManageContexts = (props) => {
     // eslint-disable-next-line
   }, [])
 
-  const onDelete = async (e, roomId, name, index) => {
-    e.preventDefault()
+  const onDelete = async (index) => {
     setDeleting(true)
     try {
       const deletedAllocation = {
@@ -361,10 +362,10 @@ const ManageContexts = (props) => {
                 <div className="right">
                   <DeleteButton
                     deleting={deleting}
-                    onDelete={onDelete}
+                    onDelete={() => onDelete(i)}
                     block={allocation.physical[0]} // the actual event space not the location itself
                     index={events.length + i + 1}
-                    reloadSpace={() => console.log('deleted')}
+                    reloadSpace={() => getEvents(selectedContext)}
                   />
                 </div>
               </div>
