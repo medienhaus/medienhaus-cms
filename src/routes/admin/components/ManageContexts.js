@@ -322,10 +322,10 @@ const ManageContexts = (props) => {
       {loading && inputItems && <Loading />}
       {/* <label htmlFor="name">{t('Context')}: </label>
        <input type="text" value={selectedContextName} disabled /> */}
-      <RemoveContext t={t} selectedContext={selectedContext} parent={contextParent} parentName={parentName} disableButton={disableButton} callback={spaceChild} />
-      <CreateContext t={t} parent={selectedContext} matrixClient={props.matrixClient} setNewContext={setNewContext} parentName={parentName} disableButton={!newContext || loading} callback={addSpace} />
       {selectedContextName &&
         <>
+          <RemoveContext t={t} selectedContext={selectedContext} parent={contextParent} parentName={parentName} disableButton={disableButton} callback={spaceChild} />
+          <CreateContext t={t} parent={selectedContext} matrixClient={props.matrixClient} setNewContext={setNewContext} parentName={parentName} disableButton={!newContext || loading} callback={addSpace} />
           <div>
             <h2>Edit currently selected context</h2>
             <h2>Image</h2>
