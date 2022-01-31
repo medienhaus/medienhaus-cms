@@ -23,7 +23,7 @@ const Create = () => {
   const [loading, setLoading] = useState(false)
   const [blocks, setBlocks] = useState([])
   const [isCollab, setIsCollab] = useState(false)
-  const [contentLang, setContentLang] = useState('en')
+  const [contentLang] = useState('en')
   const [spaceObject, setSpaceObject] = useState()
   const [roomMembers, setRoomMembers] = useState()
   const [saveTimestamp, setSaveTimestamp] = useState('')
@@ -283,7 +283,7 @@ const Create = () => {
             <p><Trans t={t} i18nKey="contentInstructions4">You can use the <code>↑</code> and <code>↓</code> arrows to rearrange existing blocks.</Trans></p>
             <p><Trans t={t} i18nKey="contentInstructions5">You can provide content and information in multiple languages. We would recommend to provide the content in both, English and German. If you provide contents for just one language that content will appear on both Rundgang website versions, the English and the German one.</Trans></p>
             */}
-            <select
+            {/* <select
               value={contentLang} onChange={(e) => {
                 setContentLang(e.target.value)
                 setDescription()
@@ -292,6 +292,7 @@ const Create = () => {
               <option value="de">DE — Deutsch</option>
               <option value="en">EN — English</option>
             </select>
+            */}
             {spaceObject && (description || description === '') ? <ProjectDescription description={description[contentLang]} callback={onChangeDescription} /> : <Loading />}
             {blocks.length === 0
               ? <AddContent number={0} projectSpace={spaceObject?.rooms.filter(room => room.name === contentLang)[0].room_id} blocks={blocks} reloadSpace={reloadSpace} />

@@ -4,13 +4,14 @@ import filterDeep from 'deepdash/es/filterDeep'
 
 function SimpleContextSelect ({ onItemChosen, selectedContext, struktur, disabled }) {
   const items = struktur[Object.keys(struktur)[0]].children
+  console.log(items)
   return (
     <>
       <select disabled={disabled} onChange={(e) => { onItemChosen(JSON.parse(e.target.value)) }}>
         <option disabled selected>-- select context --</option>
         {mapDeep(filterDeep(items, (value, key, parent, context) => {
           // Exclude all hierarchy elements that are not "contexts"
-          if (value?.type !== 'context') return false
+          if (!value?.type.includes('structure-element')) return false
           value.path = []
           value.pathIds = []
           function addParentToPath (item) {

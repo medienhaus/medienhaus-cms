@@ -131,7 +131,7 @@ const Nav = () => {
     <>
       <header>
         <NavLink to="/">
-          <h1>ruralmindshift/cms</h1>
+          <h1>market/cms</h1>
         </NavLink>
         {auth.user
           ? <button type="button" className={isNavigationOpen ? 'close' : 'open'} onClick={() => setIsNavigationOpen(!isNavigationOpen)}>{isNavigationOpen ? '×' : '|||'}</button>

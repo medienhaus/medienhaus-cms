@@ -226,7 +226,7 @@ const ManageContexts = (props) => {
       }
 
       // create the space for the context
-      const space = await props.matrixClient.createRoom(opts('context', title, 'world_readable')).catch(console.log)
+      const space = await props.matrixClient.createRoom(opts('structure-element', title, 'world_readable')).catch(console.log)
       // add this subspaces as children to the root space
       await spaceChild(e, space.room_id, true)
       console.log('created Context ' + newContext + ' ' + space.room_id)
