@@ -157,7 +157,7 @@ const DateAndVenue = ({ reloadSpace, inviteCollaborators, projectSpace, events, 
       })}
       {eventContent?.length < 1 &&
         <AddEvent
-          length={eventSpace?.filter(space => space.room_type === 'm.space').length}
+          length={0}
           room_id={projectSpace}
           t={t}
           allocation={allocation}
