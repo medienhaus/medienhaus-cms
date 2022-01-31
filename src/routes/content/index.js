@@ -20,6 +20,7 @@ const Overview = () => {
       // Types of spaces for which we want to show invites
       const typesOfSpaces = [
         'studentproject',
+        'content',
         'context',
         'class',
         'course',
