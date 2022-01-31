@@ -23,7 +23,6 @@ const Content = ({ space, visibility, index, removeProject }) => {
           <p>{space.topic || t('Please add a short description of your project.')}</p>
         </div>
         <button disabled={showDeleteComponent} onClick={() => history.push(`/create/${space.room_id}`)}>{t('EDIT')}</button>
-        <button disabled={showDeleteComponent} onClick={() => history.push(`/preview/${space.room_id}`)}>{t('PREVIEW')}</button>
         <button disabled={showDeleteComponent} onClick={() => setShowDeleteComponent(true)}>{t('DELETE')}</button>
         <PublishProject disabled={showDeleteComponent} space={space} published={visibility} metaEvent={space.meta} />
       </div>

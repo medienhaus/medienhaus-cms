@@ -52,7 +52,7 @@ const ProjectTitle = ({ title, projectSpace, callback }) => {
     }
     try {
       // create the project space for the student project
-      await matrixClient.createRoom(opts('studentproject', title, 'world_readable'))
+      await matrixClient.createRoom(opts('content', title, 'world_readable'))
         .then(async (space) => {
           // by default we create two subpsaces for localisation and one for events
           const en = await matrixClient.createRoom(opts('lang', 'en', 'shared'))

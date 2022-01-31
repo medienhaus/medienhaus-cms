@@ -1,85 +1,27 @@
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import AddEvent from './components/AddEvent'
 import { useTranslation } from 'react-i18next'
-import { Loading } from '../../../components/loading'
 import DisplayContent from '../DisplayContent'
+import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
+import locations from '../../../assets/data/locations.json'
 
 import DeleteButton from '../components/DeleteButton'
 import deleteContentBlock from '../functions/deleteContentBlock'
 import DisplayEvents from './components/DisplayEvents'
 import { isArray } from 'lodash'
+import { Loading } from '../../../components/loading'
 
-const DateAndVenue = ({ reloadSpace, inviteCollaborators, projectSpace, events, matrixClient }) => {
+const DateAndVenue = ({ reloadSpace, inviteCollaborators, projectSpace, events, allocation, matrixClient }) => {
   const [eventSpace, setEventSpace] = useState(events)
   const [eventContent, setEventContent] = useState([])
   const [oldEvents, setOldEvents] = useState([])
+  const [loading, setLoading] = useState(false)
   const [deleting, setDeleting] = useState(false)
-  const [creatingRoom, setCreatingRoom] = useState(false)
-  const [feedback, setFeedback] = useState('Migrating to new Event Space')
   const { t } = useTranslation('date')
-
-  const createEventSpace = useCallback(async () => {
-    if (!creatingRoom) {
-      setCreatingRoom(true)
-      const opts = (type, name) => {
-        return {
-          preset: 'private_chat',
-          name: name,
-          room_version: '7',
-          creation_content: { type: 'm.space' },
-          initial_state: [{
-            type: 'm.room.history_visibility',
-            content: { history_visibility: 'shared' }
-          },
-          {
-            type: 'dev.medienhaus.meta',
-            content: {
-              version: '0.3',
-              rundgang: 21,
-              type: type
-            }
-          },
-          {
-            type: 'm.room.guest_access',
-            state_key: '',
-            content: { guest_access: 'can_join' }
-          }],
-          visibility: 'private'
-        }
-      }
-
-      try {
-        await matrixClient.createRoom(opts('events', 'events'))
-          .then(async (res) => {
-            setFeedback('Event space created. Now adding to parent Space')
-            // and add those subspaces as children to the project space
-            await fetch(process.env.REACT_APP_MATRIX_BASE_URL + `/_matrix/client/r0/rooms/${projectSpace}/state/m.space.child/${res.room_id}`, {
-              method: 'PUT',
-              headers: { Authorization: 'Bearer ' + localStorage.getItem('medienhaus_access_token') },
-              body: JSON.stringify({
-                via:
-                  [process.env.REACT_APP_MATRIX_BASE_URL],
-                suggested: false,
-                auto_join: true
-              })
-            })
-            setFeedback('Reloading')
-            return res.room_id
-          }).then(async (res) => {
-            const eventSummary = await matrixClient.getSpaceSummary(res, 0).catch(err => console.log(err))
-            setEventSpace(eventSummary.rooms)
-            setFeedback('')
-          })
-      } catch (err) {
-        console.log(err)
-      } finally {
-        setCreatingRoom(false)
-      }
-    }
-  }, [creatingRoom, matrixClient, projectSpace])
 
   useEffect(() => {
     const fetchEvents = async () => {
+      setLoading(true)
       setOldEvents(eventSpace?.filter((room, i) => i > 0) // ignore the first element since its the space itself
         .filter(room => room.room_type !== 'm.space') // filter all newly created events
         .filter(room => room.name.charAt(0) !== 'x') // filter rooms that were deleted
@@ -92,16 +34,36 @@ const DateAndVenue = ({ reloadSpace, inviteCollaborators, projectSpace, events, 
       // check for empty event spaces and delete those
       // onlyEvents.filter(space => space.length === 0).map(emptySpace => onDelete(null, emptySpace.))
       setEventContent(onlyEvents)
+      setLoading(false)
     }
-    if (eventSpace === 'depricated') createEventSpace()
-    else if (isArray(eventSpace))fetchEvents(events)
-  }, [createEventSpace, eventSpace, events, matrixClient, projectSpace])
+    if (isArray(eventSpace))fetchEvents(events)
+  }, [eventSpace, events, matrixClient, projectSpace])
 
   useEffect(() => {
     setEventSpace(events)
   }, [events])
 
-  const onDelete = async (e, roomId, name, index) => {
+  const onDelete = async (index) => {
+    setDeleting(true)
+    try {
+      const deletedAllocation = {
+        version: '1.0',
+        physical: allocation.physical.filter((location, i) => i !== index)
+      }
+
+      matrixClient.sendStateEvent(projectSpace, 'dev.medienhaus.allocation', deletedAllocation)
+      await reloadSpace()
+    } catch (err) {
+      console.error(err)
+      setDeleting('couldn’t delete event, please try again or try reloading the page')
+      setTimeout(() => {
+        setDeleting()
+      }, 2000)
+    } finally {
+      setDeleting()
+    }
+  }
+  const onLegacyDelete = async (e, roomId, name, index) => {
     e.preventDefault()
     setDeleting(true)
     try {
@@ -118,8 +80,7 @@ const DateAndVenue = ({ reloadSpace, inviteCollaborators, projectSpace, events, 
     }
   }
 
-  if (!eventSpace) return <Loading />
-  if (eventSpace === 'depricated') return <><p>{feedback}</p><Loading /></>
+  if (loading) return <Loading />
   return (
     <>
       {oldEvents
@@ -145,7 +106,7 @@ const DateAndVenue = ({ reloadSpace, inviteCollaborators, projectSpace, events, 
             <div className="right">
               <DeleteButton
                 deleting={deleting}
-                onDelete={onDelete}
+                onDelete={onLegacyDelete}
                 block={event[0]}
                 index={oldEvents.length + i + 1}
                 reloadSpace={reloadSpace}
@@ -154,11 +115,52 @@ const DateAndVenue = ({ reloadSpace, inviteCollaborators, projectSpace, events, 
           </div>
         )
       }))}
+      {allocation?.physical && allocation.physical.map((location, i) => {
+        return (
+          <div className="editor" key={location.lat}>
+            <div className="left">
+              <span>🎭</span>
+            </div>
+            <div
+              className={location.lat === '0.0' && location.lng === '0.0' ? 'center' : null}
+            >
+              {
+                                location.lat !== '0.0' && location.lng !== '0.0' &&
+                                  <MapContainer className="center" center={[location.lat, location.lng]} zoom={17} scrollWheelZoom={false} placeholder>
+                                    <TileLayer
+                                      attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+                                      url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                                    />
+                                    <Marker position={[location.lat, location.lng]}>
+                                      <Popup>
+                                        {locations.find(coord => coord.coordinates === location.lat + ', ' + location.lng)?.name || // if the location is not in our location.json
+                                        location.info?.length > 0 // we check if the custom input field was filled in
+                                          ? location.info // if true, we display that text on the popup otherwise we show the lat and long coordinates
+                                          : location.lat + ', ' + location.lng}
+                                      </Popup>
+                                    </Marker>
+                                  </MapContainer>
+                              }
+              {location.info && <input type="text" value={location.info} disabled />}
+            </div>
+            <div className="right">
+              <DeleteButton
+                deleting={deleting}
+                onDelete={() => onDelete(i)}
+                block={allocation.physical[0]} // the actual event space not the location itself
+                index={events?.length + i + 1}
+                reloadSpace={reloadSpace}
+              />
+            </div>
+          </div>
+        )
+      })}
       {eventContent?.length < 1 &&
         <AddEvent
-          length={eventSpace.filter(space => space.room_type === 'm.space').length}
-          room_id={eventSpace[0].room_id}
+          length={eventSpace?.filter(space => space.room_type === 'm.space').length}
+          room_id={projectSpace}
           t={t}
+          allocation={allocation}
           reloadSpace={reloadSpace}
           inviteCollaborators={inviteCollaborators}
         />}

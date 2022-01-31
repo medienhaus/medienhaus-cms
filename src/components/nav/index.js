@@ -61,6 +61,7 @@ const Nav = () => {
       // Types of spaces for which we want to count invites for
       const typesOfSpaces = [
         'studentproject',
+        'content',
         'context',
         'class',
         'course',
@@ -104,8 +105,8 @@ const Nav = () => {
     const checkAdminPriviliges = async () => {
       setIsAdmin(await matrixClient.isSynapseAdministrator().catch(console.log))
     }
-    checkAdminPriviliges()
-  }, [matrixClient])
+    matrixClient && checkAdminPriviliges()
+  }, [matrixClient, auth.user])
 
   if (auth.user === null) {
     return null
@@ -130,7 +131,7 @@ const Nav = () => {
     <>
       <header>
         <NavLink to="/">
-          <h1>spaces/cms</h1>
+          <h1>ruralmindshift/cms</h1>
         </NavLink>
         {auth.user
           ? <button type="button" className={isNavigationOpen ? 'close' : 'open'} onClick={() => setIsNavigationOpen(!isNavigationOpen)}>{isNavigationOpen ? '×' : '|||'}</button>

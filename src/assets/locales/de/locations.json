@@ -6,7 +6,7 @@
   "Venue": "Veranstaltungsort",
   "-- select venue --": "-- wählen Sie Ihren Veranstaltungsort --",
   "other venue, please enter below": "anderer Veranstaltungsort, bitte unten eingeben",
-  "room number or specific location": "Raumnummer oder bestimmter Veranstaltungsort",
+  "details (i.e. room number)": "details (z.B. Raumnummer)",
   "CANCEL": "ABBRECHEN",
   "SAVE": "SPEICHERN"
 }

@@ -33,7 +33,7 @@ const InviteUserToSpace = ({ matrixClient, moderationRooms, setPower, fetchUsers
 
   return (
     <section className="invite">
-      <h3>{t('Invite students')}</h3>
+      <h3>{t('Invite users')}</h3>
       <select value={selectedRoom} onChange={(e) => setSelectedRoom(e.target.value)}>
         <option value={false} disabled>-- {t('select context')} --</option>
         {moderationRooms.map((room, index) => <option key={index} value={room.room_id}>{room.name}</option>)}

@@ -28,6 +28,7 @@ const Create = () => {
   const [roomMembers, setRoomMembers] = useState()
   const [saveTimestamp, setSaveTimestamp] = useState('')
   const [medienhausMeta, setMedienhausMeta] = useState([])
+  const [allocation, setAllocation] = useState([])
   const [events, setEvents] = useState()
   const [description, setDescription] = useState()
   // const [preview, setPreview] = useState(false)
@@ -99,6 +100,9 @@ const Create = () => {
       // fetch custom medienhaus event
       const meta = spaceDetails.currentState.events.get('dev.medienhaus.meta').values().next().value.event.content
       setMedienhausMeta(meta)
+      // check for allocation event
+      const allocationEvent = spaceDetails.currentState.events.get('dev.medienhaus.allocation') ? spaceDetails.currentState.events.get('dev.medienhaus.allocation').values().next().value.event.content : null
+      setAllocation(allocationEvent)
       // check if project is published or draft
       setVisibility(meta.published)
       // we fetch the selected language content
@@ -231,7 +235,7 @@ const Create = () => {
     return changeTopic
   }
 
-  if (!matrixClient.isInitialSyncComplete()) return <Loading />
+  if (projectSpace && !matrixClient.isInitialSyncComplete()) return <Loading />
 
   return (
     <>
@@ -257,11 +261,11 @@ const Create = () => {
         <>
           <section className="context">
             <h3>{t('Project context')}</h3>
-            <Category title={title} projectSpace={projectSpace} parent="!ZbMmIxgnJIhuROlgKJ:dev.medienhaus.udk-berlin.de" />
+            <Category title={title} projectSpace={projectSpace} parent={process.env.REACT_APP_CONTEXT_ROOT_SPACE_ID} />
           </section>
           <section className="events">
             <h3>{t('Location')}</h3>
-            <DateAndVenue inviteCollaborators={inviteCollaborators} reloadSpace={reloadSpace} projectSpace={projectSpace} events={events} matrixClient={matrixClient} />
+            <DateAndVenue inviteCollaborators={inviteCollaborators} reloadSpace={reloadSpace} projectSpace={projectSpace} events={events} allocation={allocation} matrixClient={matrixClient} />
           </section>
           <section className="contributors">
             <Collaborators projectSpace={spaceObject?.rooms} members={roomMembers} time={getCurrentTime} startListeningToCollab={() => startListeningToCollab()} />
@@ -300,14 +304,8 @@ const Create = () => {
            */}
           <section className="visibility">
             <h3>{t('Visibility')}</h3>
-            {/*
-            <p>
-              <Trans t={t} i18nKey="visibilityInstructions1">
-                Would you like to save your project as a draft or release it for publishing on the Rundgang platform? The released projects will be published for the Rundgang on October 29, 2021.
-              </Trans>
-            </p>
-            <p>{t('If you still want to make changes to your contributions after publishing, you can continue to do so. Please note, however, that content on projects with a physical location will be pulled from the system on October 8, 2021 for the printed Rundgang programme. Projects that have not been approved by you for publishing by then will not be included in the programme booklet.')}</p>
-            */}
+            {/* <p>{t('Would you like to save your project as a draft or release it for publishing on the Rundgang platform? The released projects will be published in the run-up to the Rundgang on October 25, 2021.')}</p> */}
+            {/* <p>{t('If you still want to make changes to your contributions after publishing, you can continue to do so.')}</p> */}
             {spaceObject
               ? (<>
                 <PublishProject space={spaceObject.rooms[0]} metaEvent={medienhausMeta} description={description?.en} published={visibility} time={getCurrentTime} />
@@ -320,7 +318,6 @@ const Create = () => {
           <section className="save">
             <div className="confirmation">
               <button className="cancel" onClick={() => history.push('/content')}>← {t('BACK TO OVERVIEW')}</button>
-              <button className="confirm" onClick={() => history.push(`/preview/${projectSpace}`)} rel="external nofollow noopener noreferrer" target="_blank">{t('SHOW PREVIEW')} →</button>
             </div>
             {saveTimestamp && <p className="timestamp">↳ {t('Project last saved at')} {saveTimestamp}</p>}
           </section>

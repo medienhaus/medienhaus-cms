@@ -9,6 +9,7 @@ function AddEvent (props) {
   return (
     <>
       {!isAddEventVisible && <button
+        disabled={props.disabled}
         className="add-button" onClick={e => {
           e.preventDefault()
           setIsAddEventVisible(true)
@@ -23,6 +24,8 @@ function AddEvent (props) {
           handleOnBlockWasAddedSuccessfully={props.reloadSpace}
           inviteCollaborators={props.inviteCollaborators}
           callback={() => setIsAddEventVisible(false)}
+          disabled={props.disabled}
+          allocationEvent={props.allocation}
         />}
     </>
   )

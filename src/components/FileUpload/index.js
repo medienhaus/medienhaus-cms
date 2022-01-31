@@ -21,7 +21,7 @@ const FileUpload = (props) => {
 
   return (
     <>
-      <input className="browse" type="file" name="browse" onChange={changeHandler} disabled={props.fileType === '' || false} />
+      <input className="browse" type="file" name="browse" onChange={changeHandler} disabled={props.fileType === '' || false || props.disabled} />
       {selectedFile && (
         <>
           <input type="text" placeholder={t('author, credits, et cetera')} onChange={(e) => setAuthor(e.target.value)} />

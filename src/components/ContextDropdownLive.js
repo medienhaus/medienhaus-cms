@@ -15,9 +15,11 @@ function ContextDropdown ({ onItemChosen, selectedContext, showRequestButton = f
   const items = uniqBy(mapDeep(struktur[Object.keys(struktur)[0]].children, (value, key, parent, context) => {
   // Recursively loop through all parents to add them to the "path" which we later on need for displaying breadcrumbs
     value.path = []
+    value.pathIds = []
     function addParentToPath (item) {
       if (item.parentItem.value.name) {
         value.path.unshift(item.parentItem.value.name)
+        value.pathIds.unshift(item.parentItem.value.id)
         // Recursion: If this parent has yet another parent item, go check that out
         if (item.parentItem.parentItem) {
           addParentToPath(item.parentItem)
@@ -97,7 +99,8 @@ function ContextDropdown ({ onItemChosen, selectedContext, showRequestButton = f
         // clear the combobox again if the user selected a context they are not a member of yet
         return
       }
-      onItemChosen(selectedItem.id)
+      console.log(selectedItem)
+      onItemChosen(selectedItem)
     }
   })
 

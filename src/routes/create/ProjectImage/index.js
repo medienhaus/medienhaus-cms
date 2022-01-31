@@ -5,7 +5,7 @@ import TextareaAutosize from 'react-textarea-autosize'
 import { useTranslation } from 'react-i18next'
 import { Loading } from '../../../components/loading'
 
-const ProjectImage = ({ projectSpace, changeProjectImage }) => {
+const ProjectImage = ({ projectSpace, changeProjectImage, disabled }) => {
   const [edit, setEdit] = useState(false)
   const [loading, setLoading] = useState(false)
   const [projectImage, setProjectImage] = useState()
@@ -54,7 +54,7 @@ const ProjectImage = ({ projectSpace, changeProjectImage }) => {
     }
   }
 
-  const fileUpload = <FileUpload fileType="image" handleSubmission={handleSubmission} loading={loading} callback={() => setEdit(edit => !edit)} />
+  const fileUpload = <FileUpload fileType="image" handleSubmission={handleSubmission} loading={loading} disabled={disabled} callback={() => setEdit(edit => !edit)} />
 
   if (loading) return <Loading />
   if (!projectImage) {

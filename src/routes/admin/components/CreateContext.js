@@ -5,7 +5,7 @@ function CreateContext (props) {
   return (
     <form>
       <div>
-        <label htmlFor="name">{props.t('Add Context')}: </label>
+        <label htmlFor="name">{props.t('Add Sub-Context')}: </label>
         <input type="text" onChange={(e) => props.setNewContext(e.target.value)} />
       </div>
 

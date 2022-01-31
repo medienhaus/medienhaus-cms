@@ -39,6 +39,7 @@ class Matrix {
       localStorage.setItem('mx_user_id', response.user_id)
       localStorage.setItem('mx_device_id', response.device_id)
       localStorage.setItem('mx_labs_feature_feature_spaces', true)
+      this.startSync()
     }).catch((error) => {
       throw error
     })

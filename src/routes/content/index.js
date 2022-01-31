@@ -72,7 +72,7 @@ const Overview = () => {
     // we check if a collaborator has deleted a project since we last logged in
       joinedSpaces?.filter(space => space.meta?.deleted).forEach(async space => await deleteProject(space.room_id))
       // then we update our array to not display the just deleted projects and only display joined rooms
-      const updatedProjects = joinedSpaces?.filter(space => !space.meta?.deleted && space.meta.type === 'studentproject')
+      const updatedProjects = joinedSpaces?.filter(space => !space.meta?.deleted && space.meta.type === 'content')
       setProjects(sortBy(updatedProjects, 'name'))
     }
   }, [joinedSpaces])
@@ -100,7 +100,18 @@ const Overview = () => {
             </p>
       */}
             <ul>
-              {Object.values(invites).map((space, index) => {
+              {Object.values(invites).map(async (space, index) => {
+                if (space.name.includes('_event')) {
+                  const eventSpace = await matrixClient.getSpaceSummary(space).catch(console.log)
+                  eventSpace.rooms.forEach(async (space, index) => {
+                    console.log('joining ' + space.name)
+                    const subspaces = await matrixClient.getSpaceSummary(space.room_id).catch(console.log)
+                    subspaces.rooms.forEach(async (space) => {
+                      await matrixClient.joinRoom(space.room_id).catch(console.log)
+                    })
+                    await matrixClient.joinRoom(space.room_id).catch(console.log)
+                  })
+                }
                 return (
                   <React.Fragment key={space.name + index}>
                     <li key={index}>
@@ -124,7 +135,7 @@ const Overview = () => {
             ? (
               <p>{t('Welcome to the content management system. Looks like you haven\'t uploaded any content, yet.')}</p>
               )
-            : projects.map((space, index) => (
+            : projects.filter(space => space.meta.type !== 'context').map((space, index) => (
               <React.Fragment key={index}>
                 <Projects space={space} metaEvent={space.meta} visibility={space.published} index={index} removeProject={removeProject} />
                 {index < projects.length - 1 && <hr />}
