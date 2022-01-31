@@ -19,6 +19,8 @@ const Overview = () => {
     async function checkRoomForPossibleInvite (room) {
       // Types of spaces for which we want to show invites
       const typesOfSpaces = [
+        'structure-element',
+        'structure-elements',
         'studentproject',
         'content',
         'context',
@@ -83,14 +85,13 @@ const Overview = () => {
       Object.entries(invites).filter(([key]) => key !== room)))
     reload(true)
   }
-
   if (fetchSpaces || !matrixClient.isInitialSyncComplete()) return <Loading />
-
   return (
     <div>
-      {Object.keys(invites).length > 0 && (
+      {Object.keys(invites).length > 1 && (
         <>
           <section className="invites">
+            {console.log(Object.values(invites))}
             <h3>{t('Invites')}</h3>
             {/* }
             <p>
@@ -101,17 +102,6 @@ const Overview = () => {
       */}
             <ul>
               {Object.values(invites).map(async (space, index) => {
-                if (space.name.includes('_event')) {
-                  const eventSpace = await matrixClient.getSpaceSummary(space).catch(console.log)
-                  eventSpace.rooms.forEach(async (space, index) => {
-                    console.log('joining ' + space.name)
-                    const subspaces = await matrixClient.getSpaceSummary(space.room_id).catch(console.log)
-                    subspaces.rooms.forEach(async (space) => {
-                      await matrixClient.joinRoom(space.room_id).catch(console.log)
-                    })
-                    await matrixClient.joinRoom(space.room_id).catch(console.log)
-                  })
-                }
                 return (
                   <React.Fragment key={space.name + index}>
                     <li key={index}>

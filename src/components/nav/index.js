@@ -20,7 +20,8 @@ const Nav = () => {
   useEffect(() => {
     if (spacesErr) console.log(spacesErr)
     if (joinedSpaces && auth.user) {
-      const typesOfSpaces = ['context',
+      const typesOfSpaces = [
+        'context',
         'class',
         'course',
         'institution',
@@ -28,7 +29,11 @@ const Nav = () => {
         'design department',
         'faculty',
         'institute',
-        'semester']
+        'semester',
+        'structure-element',
+        'structure-elements'
+      ]
+
       // To "moderate" a space it must have one of the given types and we must be at least power level 50
       const moderatingSpaces = joinedSpaces.filter(space => typesOfSpaces.includes(space.meta.type) && space.powerLevel >= 50)
       // If we are not moderating any spaces we can cancel the rest here ...
@@ -60,6 +65,8 @@ const Nav = () => {
     async function checkRoomForPossibleInvite (room) {
       // Types of spaces for which we want to count invites for
       const typesOfSpaces = [
+        'structure-element',
+        'structure-elements',
         'studentproject',
         'content',
         'context',

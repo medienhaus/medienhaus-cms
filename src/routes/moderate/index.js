@@ -118,7 +118,9 @@ const Moderate = () => {
       {moderationRooms.length > 0
         ? <>
           <section className="requests">
-            {moderationRooms.map((request, index) => <React.Fragment key={request.name}><GetRequestPerRoom request={request} key={index} /></React.Fragment>)}
+            {moderationRooms.map((request, index) => <React.Fragment key={request.name}>
+              <GetRequestPerRoom request={request} key={index} />
+            </React.Fragment>)}
           </section>
         </>
         : (

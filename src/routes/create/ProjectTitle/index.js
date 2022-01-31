@@ -57,8 +57,8 @@ const ProjectTitle = ({ title, projectSpace, callback }) => {
           // by default we create two subpsaces for localisation and one for events
           const en = await matrixClient.createRoom(opts('lang', 'en', 'shared'))
           const de = await matrixClient.createRoom(opts('lang', 'de', 'shared'))
-          const events = await matrixClient.createRoom(opts('events', 'events', 'shared'))
-          return [space.room_id, en.room_id, de.room_id, events.room_id]
+          // const events = await matrixClient.createRoom(opts('events', 'events', 'shared'))
+          return [space.room_id, en.room_id, de.room_id]
         })
         .then(async (res) => {
           // and add those subspaces as children to the project space
@@ -84,7 +84,7 @@ const ProjectTitle = ({ title, projectSpace, callback }) => {
               auto_join: true
             })
           })
-          // events
+          /* events
           await fetch(process.env.REACT_APP_MATRIX_BASE_URL + `/_matrix/client/r0/rooms/${res[0]}/state/m.space.child/${res[3]}`, {
             method: 'PUT',
             headers: { Authorization: 'Bearer ' + localStorage.getItem('medienhaus_access_token') },
@@ -95,7 +95,7 @@ const ProjectTitle = ({ title, projectSpace, callback }) => {
               auto_join: true
             })
           })
-
+          */
           return res[0]
         })
         .then((res) => history.push(`/create/${res}`))
