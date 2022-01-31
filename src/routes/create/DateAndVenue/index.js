@@ -8,7 +8,7 @@ import locations from '../../../assets/data/locations.json'
 import DeleteButton from '../components/DeleteButton'
 import deleteContentBlock from '../functions/deleteContentBlock'
 import DisplayEvents from './components/DisplayEvents'
-import _, { isArray } from 'lodash'
+import { isArray } from 'lodash'
 import { Loading } from '../../../components/loading'
 
 const DateAndVenue = ({ reloadSpace, inviteCollaborators, projectSpace, events, allocation, matrixClient }) => {
@@ -155,9 +155,9 @@ const DateAndVenue = ({ reloadSpace, inviteCollaborators, projectSpace, events, 
           </div>
         )
       })}
-      {eventContent?.length < 1 && _.isArray(eventSpace) &&
+      {eventContent?.length < 1 &&
         <AddEvent
-          length={eventSpace?.filter(space => space.room_type === 'm.space').length}
+          length={0}
           room_id={projectSpace}
           t={t}
           allocation={allocation}

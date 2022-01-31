@@ -88,7 +88,7 @@ const Overview = () => {
   if (fetchSpaces || !matrixClient.isInitialSyncComplete()) return <Loading />
   return (
     <div>
-      {Object.keys(invites).length > 1 && (
+      {Object.keys(invites).length > 0 && (
         <>
           <section className="invites">
             {console.log(Object.values(invites))}
@@ -101,7 +101,7 @@ const Overview = () => {
             </p>
       */}
             <ul>
-              {Object.values(invites).map(async (space, index) => {
+              {Object.values(invites).map((space, index) => {
                 return (
                   <React.Fragment key={space.name + index}>
                     <li key={index}>
