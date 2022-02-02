@@ -200,13 +200,18 @@ const ManageContexts = (props) => {
       setDisableButton(true)
       const opts = (type, name, history) => {
         return {
-          preset: 'private_chat',
+          preset: 'public_chat',
+          power_level_content_override: {
+            events_default: 100,
+            invite: 0,
+            send: 0
+          },
           name: name,
-          room_version: '7',
+          room_version: '8',
           creation_content: { type: 'm.space' },
           initial_state: [{
             type: 'm.room.history_visibility',
-            content: { history_visibility: history } //  world_readable
+            content: { history_visibility: 'world_readable' } //  history
           },
           {
             type: 'dev.medienhaus.meta',
@@ -221,7 +226,7 @@ const ManageContexts = (props) => {
             state_key: '',
             content: { guest_access: 'can_join' }
           }],
-          visibility: 'public'
+          visibility: 'private'
         }
       }
 

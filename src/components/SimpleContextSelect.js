@@ -4,7 +4,6 @@ import filterDeep from 'deepdash/es/filterDeep'
 
 function SimpleContextSelect ({ onItemChosen, selectedContext, struktur, disabled }) {
   const items = struktur[Object.keys(struktur)[0]].children
-  console.log(items)
   return (
     <>
       <select disabled={disabled} onChange={(e) => { onItemChosen(JSON.parse(e.target.value)) }}>
