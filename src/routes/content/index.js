@@ -91,7 +91,6 @@ const Overview = () => {
       {Object.keys(invites).length > 0 && (
         <>
           <section className="invites">
-            {console.log(Object.values(invites))}
             <h3>{t('Invites')}</h3>
             {/* }
             <p>

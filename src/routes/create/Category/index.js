@@ -149,11 +149,9 @@ const Category = ({ title, projectSpace, parent }) => {
   // }
 
   async function onContextChosen (contextSpace) {
-    console.log(contextSpace)
     let projectSpaceMetaEvent = await matrixClient.getStateEvent(projectSpace, 'dev.medienhaus.meta')
 
     setLoading(true)
-
     if (projectSpaceMetaEvent.context && projectSpaceMetaEvent.context !== contextSpace.id) {
       // If this project was in a different context previously we should try to take it out of the old context
       const req = {
@@ -174,16 +172,24 @@ const Category = ({ title, projectSpace, parent }) => {
         via: [process.env.REACT_APP_MATRIX_BASE_URL.replace('https://', '')]
       })
     }
-    await fetch(process.env.REACT_APP_MATRIX_BASE_URL + `/_matrix/client/r0/rooms/${contextSpace.id}/state/m.space.child/${projectSpace}`, req)
+    const addToContext = await fetch(process.env.REACT_APP_MATRIX_BASE_URL + `/_matrix/client/r0/rooms/${contextSpace.id}/state/m.space.child/${projectSpace}`, req)
 
-    // Set the new context in our meta event
-    projectSpaceMetaEvent.context = contextSpace.id
-    await matrixClient.sendStateEvent(projectSpace, 'dev.medienhaus.meta', projectSpaceMetaEvent)
+    console.log(addToContext)
+    if (addToContext.ok) {
+      // Set the new context in our meta event
+      projectSpaceMetaEvent.context = contextSpace.id
+      await matrixClient.sendStateEvent(projectSpace, 'dev.medienhaus.meta', projectSpaceMetaEvent)
 
-    // Get the freshly updated state event and save it in our state
-    projectSpaceMetaEvent = await matrixClient.getStateEvent(projectSpace, 'dev.medienhaus.meta')
-    setCurrentContext(projectSpaceMetaEvent.context)
-    setLoading(false)
+      // Get the freshly updated state event and save it in our state
+      projectSpaceMetaEvent = await matrixClient.getStateEvent(projectSpace, 'dev.medienhaus.meta')
+      setCurrentContext(projectSpaceMetaEvent.context)
+      setLoading(false)
+    } else {
+      // If placing the content into a context fails, we change our states back to the previous one
+      projectSpaceMetaEvent.context && await matrixClient.sendStateEvent(projectSpace, 'dev.medienhaus.meta', projectSpaceMetaEvent)
+      setCurrentContext(projectSpaceMetaEvent.context || '')
+      setLoading(false)
+    }
   }
 
   return (
