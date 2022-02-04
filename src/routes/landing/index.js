@@ -10,7 +10,7 @@ const Landing = () => {
   return (
     <section className="landing">
       <p>{t('Hello')}{profile && <strong> {profile?.displayname}</strong>}.</p>
-      <h2>{t('Welcome to the udk/market content management system!')}</h2>
+      <h2>{t(`Welcome to the ${process.env.REACT_APP_APP_TITLE} content management system!`)}</h2>
     </section>
   )
 }

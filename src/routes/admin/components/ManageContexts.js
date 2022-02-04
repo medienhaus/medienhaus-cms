@@ -65,7 +65,10 @@ const ManageContexts = (props) => {
       async function scanForAndAddSpaceChildren (spaceId, path) {
         if (spaceId === 'undefined') return
         const stateEvents = await matrixClient.roomState(spaceId).catch(console.log)
-
+        const hierarchy = await matrixClient.getRoomHierarchy(spaceId, null, 1).catch(console.log)
+        console.log(hierarchy)
+        // eslint-disable-next-line no-debugger
+        debugger
         // check if room exists in roomHierarchy
         // const existsInCurrentTree = _.find(hierarchy, {room_id: spaceId})
         // const metaEvent = await matrixClient.getStateEvent(spaceId, 'dev.medienhaus.meta')
@@ -231,7 +234,7 @@ const ManageContexts = (props) => {
       }
 
       // create the space for the context
-      const space = await props.matrixClient.createRoom(opts('structure-element', title, 'world_readable')).catch(console.log)
+      const space = await props.matrixClient.createRoom(opts('context', title, 'world_readable')).catch(console.log)
       // add this subspaces as children to the root space
       await spaceChild(e, space.room_id, true)
       console.log('created Context ' + newContext + ' ' + space.room_id)
