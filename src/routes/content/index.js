@@ -39,13 +39,25 @@ const Overview = () => {
       // Ignore if this is not an invitation (getMyMembership() only works correctly after calling _loadMembersFromServer())
       await room.loadMembersFromServer().catch(console.error)
       if (room.getMyMembership() !== 'invite') return
+      console.log(room)
       // At this point we're sure that this is an invitation we want to display, so we add it to the state:
+      if (room.name.includes('_event')) {
+        const eventSpace = await matrixClient.getSpaceSummary(room.roomId).catch(console.log)
+        eventSpace.rooms.forEach(async (space, index) => {
+          console.log('joining ' + space.name)
+          const subspaces = await matrixClient.getSpaceSummary(space.room_id).catch(console.log)
+          subspaces.rooms.forEach(async (space) => {
+            await matrixClient.joinRoom(space.room_id).catch(console.log)
+          })
+          await matrixClient.joinRoom(space.room_id).catch(console.log)
+        })
+      }
       setInvites(invites => Object.assign({}, invites, {
         [room.roomId]:
           {
             name: room.name,
             id: room.roomId,
-            membership: room._selfMembership
+            membership: room.selfMembership
           }
       }))
     }
@@ -100,18 +112,7 @@ const Overview = () => {
             </p>
       */}
             <ul>
-              {Object.values(invites).map(async (space, index) => {
-                if (space.name.includes('_event')) {
-                  const eventSpace = await matrixClient.getSpaceSummary(space).catch(console.log)
-                  eventSpace.rooms.forEach(async (space, index) => {
-                    console.log('joining ' + space.name)
-                    const subspaces = await matrixClient.getSpaceSummary(space.room_id).catch(console.log)
-                    subspaces.rooms.forEach(async (space) => {
-                      await matrixClient.joinRoom(space.room_id).catch(console.log)
-                    })
-                    await matrixClient.joinRoom(space.room_id).catch(console.log)
-                  })
-                }
+              {Object.values(invites).map((space, index) => {
                 return (
                   <React.Fragment key={space.name + index}>
                     <li key={index}>
