@@ -11,7 +11,7 @@ on:
       app_basename:
         description: App basename for React Router
         required: true
-        default: '/stechlin-cms'
+        default: '/'
       matrix_base_url:
         description: Matrix Server URL
         required: true
@@ -42,7 +42,7 @@ jobs:
       - if: ${{ github.event_name != 'workflow_dispatch' }}
         run: npm run build
         env:
-          REACT_APP_BASENAME: /stechlin-cms
+          REACT_APP_BASENAME: /
           REACT_APP_MATRIX_BASE_URL: https://dev.medienhaus.udk-berlin.de
           REACT_APP_CONTEXT_ROOT_SPACE_ID: '!ZbMmIxgnJIhuROlgKJ:dev.medienhaus.udk-berlin.de'
 
@@ -50,7 +50,7 @@ jobs:
         env:
           HOST: dev.medienhaus.udk-berlin.de
           KEY: ${{secrets.SSH_DEV_MEDIENHAUS_UDK_BERLIN_DE}}
-          TARGET: /var/www/html/stechlin-cms/
+          TARGET: /var/www/stechlin-cms/
           VERBOSE: true
           USER: root
           PORT: 22
