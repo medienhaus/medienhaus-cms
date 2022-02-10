@@ -1,5 +1,5 @@
 name: Deploy stechlin to dev.
-# Automatically deploy "stechlin" branch to dev.medienhaus.udk-berlin.de/stechlin-cms/
+# Automatically deploy "stechlin" branch to stechlin-cms.dev.medienhaus.udk-berlin.de/
 
 on:
   push:
