@@ -53,7 +53,6 @@ const Overview = () => {
         })
       }
       // At this point we're sure that this is an invitation we want to display, so we add it to the state:
-
       setInvites(invites => Object.assign({}, invites, {
         [room.roomId]:
           {
