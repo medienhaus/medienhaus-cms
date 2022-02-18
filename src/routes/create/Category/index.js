@@ -4,7 +4,7 @@ import { Loading } from '../../../components/loading'
 import * as _ from 'lodash'
 import SimpleContextSelect from '../../../components/SimpleContextSelect'
 
-const Category = ({ title, projectSpace, parent }) => {
+const Category = ({ title, projectSpace, changeContext, parent }) => {
   console.log(parent)
   // const [subject, setSubject] = useState('')
   // const [room, setRoom] = useState('')
@@ -183,6 +183,7 @@ const Category = ({ title, projectSpace, parent }) => {
     // Get the freshly updated state event and save it in our state
     projectSpaceMetaEvent = await matrixClient.getStateEvent(projectSpace, 'dev.medienhaus.meta')
     setCurrentContext(projectSpaceMetaEvent.context)
+    changeContext()
     setLoading(false)
   }
 

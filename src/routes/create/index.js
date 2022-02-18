@@ -224,6 +224,14 @@ const Create = () => {
     setTitle(newTitle)
   }
 
+  const changeContext = async () => {
+    // @TODO redundant already happening in callback line 88
+    const spaceDetails = await matrixClient.getRoom(projectSpace)
+    const meta = spaceDetails.currentState.events.get('dev.medienhaus.meta').values().next().value.event.content
+    setMedienhausMeta(meta)
+    console.log(meta)
+  }
+
   const onChangeDescription = async (description) => {
     // if the selected content language is english we save the description in the project space topic
     contentLang === 'en' && await matrixClient.setRoomTopic(spaceObject.rooms[0].room_id, description).catch(console.log)
@@ -261,7 +269,7 @@ const Create = () => {
         <>
           <section className="context">
             <h3>{t('Project context')}</h3>
-            <Category title={title} projectSpace={projectSpace} parent={process.env.REACT_APP_CONTEXT_ROOT_SPACE_ID} />
+            <Category title={title} projectSpace={projectSpace} onChange={changeContext} parent={process.env.REACT_APP_CONTEXT_ROOT_SPACE_ID} />
           </section>
           <section className="events">
             <h3>{t('Location')}</h3>
