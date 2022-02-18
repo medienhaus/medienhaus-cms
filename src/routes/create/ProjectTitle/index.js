@@ -67,8 +67,7 @@ const ProjectTitle = ({ title, projectSpace, callback }) => {
             method: 'PUT',
             headers: { Authorization: 'Bearer ' + localStorage.getItem('medienhaus_access_token') },
             body: JSON.stringify({
-              via:
-                [process.env.REACT_APP_MATRIX_BASE_URL],
+              via: [process.env.REACT_APP_MATRIX_BASE_URL.replace('https://', '')],
               suggested: false,
               auto_join: true
             })
@@ -78,8 +77,7 @@ const ProjectTitle = ({ title, projectSpace, callback }) => {
             method: 'PUT',
             headers: { Authorization: 'Bearer ' + localStorage.getItem('medienhaus_access_token') },
             body: JSON.stringify({
-              via:
-                [process.env.REACT_APP_MATRIX_BASE_URL],
+              via: [process.env.REACT_APP_MATRIX_BASE_URL.replace('https://', '')],
               suggested: false,
               auto_join: true
             })

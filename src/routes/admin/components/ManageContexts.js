@@ -61,7 +61,7 @@ const ManageContexts = (props) => {
         'faculty',
         'institute',
         'semester']
-*/
+      */
       async function scanForAndAddSpaceChildren (spaceId, path) {
         if (spaceId === 'undefined') return
         const stateEvents = await matrixClient.roomState(spaceId).catch(console.log)
@@ -166,8 +166,7 @@ const ManageContexts = (props) => {
     setLoading(true)
     e && e.preventDefault()
     const body = {
-      via:
-        [process.env.REACT_APP_MATRIX_BASE_URL],
+      via: [process.env.REACT_APP_MATRIX_BASE_URL.replace('https://', '')],
       suggested: false,
       auto_join: true
     }
