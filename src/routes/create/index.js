@@ -229,7 +229,6 @@ const Create = () => {
     const spaceDetails = await matrixClient.getRoom(projectSpace)
     const meta = spaceDetails.currentState.events.get('dev.medienhaus.meta').values().next().value.event.content
     setMedienhausMeta(meta)
-    console.log(meta)
   }
 
   const onChangeDescription = async (description) => {
