@@ -16,6 +16,10 @@ import { Loading } from '../../components/loading'
 import { useTranslation } from 'react-i18next'
 import DateAndVenue from './DateAndVenue'
 
+import Dropdown from '../../components/medienhausUI/dropdown'
+
+import config from '../../config.json'
+
 const Create = () => {
   const { t } = useTranslation('content')
   const [title, setTitle] = useState('')
@@ -31,6 +35,7 @@ const Create = () => {
   const [allocation, setAllocation] = useState([])
   const [events, setEvents] = useState()
   const [description, setDescription] = useState()
+  const [contentType, setContentType] = useState('')
   // const [preview, setPreview] = useState(false)
   const history = useHistory()
   const matrixClient = Matrix.getMatrixClient()
@@ -255,6 +260,7 @@ const Create = () => {
       <section className="project-title">
         <h3>{t('Project title')}</h3>
         <ProjectTitle title={title} projectSpace={projectSpace} callback={changeTitle} />
+        <Dropdown name="type" label="Type" options={config.medienhaus.content} value={contentType} onChange={e => setContentType(e.target.value)} />
       </section>
 
       {projectSpace && (
