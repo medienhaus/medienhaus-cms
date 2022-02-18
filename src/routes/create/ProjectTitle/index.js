@@ -5,7 +5,7 @@ import { Loading } from '../../../components/loading'
 import LoadingSpinnerButton from '../../../components/LoadingSpinnerButton'
 import { useTranslation } from 'react-i18next'
 
-const ProjectTitle = ({ title, projectSpace, callback }) => {
+const ProjectTitle = ({ title, projectSpace, container, callback }) => {
   const { t } = useTranslation('content')
   const [projectTitle, setProjectTitle] = useState('')
   const [edit, setEdit] = useState(false)
@@ -37,7 +37,7 @@ const ProjectTitle = ({ title, projectSpace, callback }) => {
           type: 'dev.medienhaus.meta',
           content: {
             version: '0.3',
-            rundgang: 21,
+            container: container,
             type: type,
             published: 'draft'
           }
@@ -121,7 +121,7 @@ const ProjectTitle = ({ title, projectSpace, callback }) => {
           {!newProject && <button className="cancel" onClick={(e) => { e.preventDefault(); setEdit(false); setProjectTitle(oldTitle) }}>CANCEL</button>}
           {!title && newProject &&
             <LoadingSpinnerButton
-              disabled={!projectTitle || projectTitle.length > 100} onClick={(e) => {
+              disabled={!container || !projectTitle || projectTitle.length > 100} onClick={(e) => {
                 console.log(newProject)
                 if (newProject && projectTitle.length < 101) {
                   createProject(projectTitle)

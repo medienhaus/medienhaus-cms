@@ -35,7 +35,7 @@ const Create = () => {
   const [allocation, setAllocation] = useState([])
   const [events, setEvents] = useState()
   const [description, setDescription] = useState()
-  const [contentType, setContentType] = useState('')
+  const [container, setContainer] = useState('')
   // const [preview, setPreview] = useState(false)
   const history = useHistory()
   const matrixClient = Matrix.getMatrixClient()
@@ -258,9 +258,10 @@ const Create = () => {
       </section>
       */}
       <section className="project-title">
+        {!projectSpace &&
+          <Dropdown name="type" label="Type" placeholder="-- select type --" options={config.medienhaus.content} value={container} onChange={e => setContainer(e.target.value)} />}
         <h3>{t('Project title')}</h3>
-        <ProjectTitle title={title} projectSpace={projectSpace} callback={changeTitle} />
-        <Dropdown name="type" label="Type" options={config.medienhaus.content} value={contentType} onChange={e => setContentType(e.target.value)} />
+        <ProjectTitle title={title} projectSpace={projectSpace} container={container} callback={changeTitle} />
       </section>
 
       {projectSpace && (
