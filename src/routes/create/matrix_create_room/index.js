@@ -51,7 +51,7 @@ const createBlock = async (e, content, number, space) => {
     body: JSON.stringify({
       via: [localStorage.getItem('mx_home_server')],
       suggested: false,
-      auto_join: true
+      auto_join: false
     })
   }
 

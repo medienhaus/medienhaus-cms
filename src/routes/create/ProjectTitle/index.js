@@ -69,7 +69,7 @@ const ProjectTitle = ({ title, projectSpace, callback }) => {
             body: JSON.stringify({
               via: [process.env.REACT_APP_MATRIX_BASE_URL.replace('https://', '')],
               suggested: false,
-              auto_join: true
+              auto_join: false
             })
           })
           // de
@@ -79,7 +79,7 @@ const ProjectTitle = ({ title, projectSpace, callback }) => {
             body: JSON.stringify({
               via: [process.env.REACT_APP_MATRIX_BASE_URL.replace('https://', '')],
               suggested: false,
-              auto_join: true
+              auto_join: false
             })
           })
 
