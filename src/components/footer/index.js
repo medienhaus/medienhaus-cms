@@ -7,7 +7,7 @@ const Footer = () => {
 
   return (
     <footer>
-      <p className="copyleft">&#x1f12f; 2021 <a href="https://medienhaus.dev" rel="nofollow noopener noreferrer"><strong>medienhaus/</strong></a></p>
+      <p className="copyleft">&#x1f12f; {new Date().getFullYear()} <a href="https://medienhaus.dev" rel="nofollow noopener noreferrer"><strong>medienhaus/</strong></a></p>
       {!auth.user && <LanguageSelector />}
     </footer>
   )
