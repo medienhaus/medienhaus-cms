@@ -67,8 +67,6 @@ const ManageContexts = (props) => {
         const stateEvents = await matrixClient.roomState(spaceId).catch(console.log)
         const hierarchy = await matrixClient.getRoomHierarchy(spaceId, null, 1).catch(console.log)
         console.log(hierarchy)
-        // eslint-disable-next-line no-debugger
-        debugger
         // check if room exists in roomHierarchy
         // const existsInCurrentTree = _.find(hierarchy, {room_id: spaceId})
         // const metaEvent = await matrixClient.getStateEvent(spaceId, 'dev.medienhaus.meta')
