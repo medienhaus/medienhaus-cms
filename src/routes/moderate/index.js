@@ -7,6 +7,7 @@ import { MatrixEvent } from 'matrix-js-sdk'
 import { useTranslation } from 'react-i18next'
 import InviteUserToSpace from './components/InviteUserToSpace'
 import RightsManagement from './components/RightsManagement'
+import ManageContexts from '../admin/components/ManageContexts'
 
 const Moderate = () => {
   const { joinedSpaces, spacesErr, fetchSpaces } = useJoinedSpaces(false)
@@ -131,7 +132,8 @@ const Moderate = () => {
       <InviteUserToSpace matrixClient={matrixClient} moderationRooms={moderationRooms} setPower={setPower} fetchUsers={fetchUsers} fetching={fetching} userSearch={userSearch} />
       <hr />
       <RightsManagement matrixClient={matrixClient} moderationRooms={moderationRooms} setPower={setPower} fetchUsers={fetchUsers} fetching={fetching} userSearch={userSearch} />
-
+      <hr />
+      <ManageContexts matrixClient={matrixClient} />
     </>
   )
 }
