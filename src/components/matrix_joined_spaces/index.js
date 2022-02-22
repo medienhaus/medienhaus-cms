@@ -17,7 +17,7 @@ const getAnswer = async () => {
       const collab = room.getJoinedMemberCount() > 1
       const event = room.currentState.events.get('dev.medienhaus.meta').values().next().value.event.content
       const topic = room.currentState.events.has('m.room.topic') ? room.currentState.events.get('m.room.topic').values().next().value.event.content.topic : undefined
-      const powerLevel = room.currentState.members[localStorage.getItem('mx_user_id')]
+      const powerLevel = room.currentState.members[localStorage.getItem('mx_user_id')].powerLevel
       // have not found an easier way to grab the events from the room object
       return {
         name: room.name,
