@@ -138,7 +138,7 @@ const Nav = () => {
     <>
       <header>
         <NavLink to="/">
-          <h1>market/cms</h1>
+          <h1>{process.env.REACT_APP_APP_TITLE}</h1>
         </NavLink>
         {auth.user
           ? <button type="button" className={isNavigationOpen ? 'close' : 'open'} onClick={() => setIsNavigationOpen(!isNavigationOpen)}>{isNavigationOpen ? '×' : '|||'}</button>
