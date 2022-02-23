@@ -14,7 +14,6 @@ import SimpleContextSelect from '../../../components/SimpleContextSelect'
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
 import locations from '../../../assets/data/locations.json'
 import { MatrixEvent } from 'matrix-js-sdk'
-
 import config from '../../../config.json'
 
 const ManageContexts = (props) => {
@@ -236,10 +235,11 @@ const ManageContexts = (props) => {
       // invite moderators to newly created space if they are specified in our config.json
       if (config.medienhaus?.usersToInviteToNewContexts) {
         for await (const user of config.medienhaus?.usersToInviteToNewContexts) {
-            if (user === localStorage.getItem('medienhaus_user_id')) continue // if the user is us, we jump out of the loop
+          if (user === localStorage.getItem('medienhaus_user_id')) continue // if the user is us, we jump out of the loop
 
-            await props.matrixClient.invite(space.room_id, user).catch(console.log)
-            await setPower(user, space.room_id, 50)
+          await props.matrixClient.invite(space.room_id, user).catch(console.log)
+          await setPower(user, space.room_id, 50)
+        }
       }
       setDisableButton(false)
       return space

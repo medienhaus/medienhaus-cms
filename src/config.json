@@ -1,5 +1,12 @@
 {
   "medienhaus": {
-    "languages": ["en", "de"]
-  }
+    "languages": [
+      "en",
+      "de"
+    ]
+  },
+  "usersToInviteToNewContexts": [
+    "@florian9:dev.medienhaus.udk-berlin.de",
+    "@marcel328742380:dev.medienhaus.udk-berlin.de"
+  ]
 }
