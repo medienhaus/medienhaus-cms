@@ -109,6 +109,8 @@ const Nav = () => {
   }, [matrixClient])
 
   useEffect(() => {
+    if (!auth.user || auth.user === null) return
+
     const checkAdminPriviliges = async () => {
       setIsAdmin(await matrixClient.isSynapseAdministrator().catch(console.log))
     }
