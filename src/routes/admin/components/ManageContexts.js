@@ -235,10 +235,12 @@ const ManageContexts = (props) => {
       // invite moderators to newly created space if they are specified in our config.json
       if (config.medienhaus?.usersToInviteToNewContexts) {
         for await (const user of config.medienhaus?.usersToInviteToNewContexts) {
+          console.log(user)
           if (user === localStorage.getItem('medienhaus_user_id')) continue // if the user is us, we jump out of the loop
-
+          console.log('inviting ' + user)
           await props.matrixClient.invite(space.room_id, user).catch(console.log)
           await setPower(user, space.room_id, 50)
+          // @TODO only first user in loop gets actually promoted to specified power level 🤷‍♂️
         }
       }
       setDisableButton(false)
