@@ -5,6 +5,8 @@ import { Loading } from '../../../components/loading'
 import LoadingSpinnerButton from '../../../components/LoadingSpinnerButton'
 import { useTranslation } from 'react-i18next'
 
+import config from '../../../config.json'
+
 const ProjectTitle = ({ title, projectSpace, type, callback }) => {
   const { t } = useTranslation('content')
   const [projectTitle, setProjectTitle] = useState('')
@@ -54,46 +56,21 @@ const ProjectTitle = ({ title, projectSpace, type, callback }) => {
       // create the project space for the student project
       await matrixClient.createRoom(opts(type || 'content', title, 'world_readable'))
         .then(async (space) => {
-          // by default we create two subpsaces for localisation and one for events
-          const en = await matrixClient.createRoom(opts('lang', 'en', 'shared'))
-          const de = await matrixClient.createRoom(opts('lang', 'de', 'shared'))
+          // by default we create subpsaces for localisation and one for events
+          for await (const lang of config.medienhaus?.languages) {
+            const languageRoom = await matrixClient.createRoom(opts('lang', lang, 'shared'))
+            await fetch(process.env.REACT_APP_MATRIX_BASE_URL + `/_matrix/client/r0/rooms/${space.room_id}/state/m.space.child/${languageRoom.room_id}`, {
+              method: 'PUT',
+              headers: { Authorization: 'Bearer ' + localStorage.getItem('medienhaus_access_token') },
+              body: JSON.stringify({
+                via: [process.env.REACT_APP_MATRIX_BASE_URL.replace('https://', '')],
+                suggested: false,
+                auto_join: false
+              })
+            })
+          }
           // const events = await matrixClient.createRoom(opts('events', 'events', 'shared'))
-          return [space.room_id, en.room_id, de.room_id]
-        })
-        .then(async (res) => {
-          // and add those subspaces as children to the project space
-          // en
-          await fetch(process.env.REACT_APP_MATRIX_BASE_URL + `/_matrix/client/r0/rooms/${res[0]}/state/m.space.child/${res[1]}`, {
-            method: 'PUT',
-            headers: { Authorization: 'Bearer ' + localStorage.getItem('medienhaus_access_token') },
-            body: JSON.stringify({
-              via: [process.env.REACT_APP_MATRIX_BASE_URL.replace('https://', '')],
-              suggested: false,
-              auto_join: false
-            })
-          })
-          // de
-          await fetch(process.env.REACT_APP_MATRIX_BASE_URL + `/_matrix/client/r0/rooms/${res[0]}/state/m.space.child/${res[2]}`, {
-            method: 'PUT',
-            headers: { Authorization: 'Bearer ' + localStorage.getItem('medienhaus_access_token') },
-            body: JSON.stringify({
-              via: [process.env.REACT_APP_MATRIX_BASE_URL.replace('https://', '')],
-              suggested: false,
-              auto_join: false
-            })
-          })
-          /* events
-          await fetch(process.env.REACT_APP_MATRIX_BASE_URL + `/_matrix/client/r0/rooms/${res[0]}/state/m.space.child/${res[3]}`, {
-            method: 'PUT',
-            headers: { Authorization: 'Bearer ' + localStorage.getItem('medienhaus_access_token') },
-            body: JSON.stringify({
-              via: [process.env.REACT_APP_MATRIX_BASE_URL.replace('https://', '')],
-              suggested: false,
-              auto_join: false
-            })
-          })
-          */
-          return res[0]
+          return space.room_id
         })
         .then((res) => history.push(`/create/${res}`))
     } catch (e) {

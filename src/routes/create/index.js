@@ -27,7 +27,7 @@ const Create = () => {
   const [loading, setLoading] = useState(false)
   const [blocks, setBlocks] = useState([])
   const [isCollab, setIsCollab] = useState(false)
-  const [contentLang] = useState('en')
+  const [contentLang, setContentLang] = useState(config.medienhaus?.languages[0])
   const [spaceObject, setSpaceObject] = useState()
   const [roomMembers, setRoomMembers] = useState()
   const [saveTimestamp, setSaveTimestamp] = useState('')
@@ -99,7 +99,11 @@ const Create = () => {
       // setting title to project space name
       setTitle(space.rooms[0].name)
       // set the topic depending on selected language
-      setDescription({ en: space.rooms.filter(room => room.name === 'en')[0].topic || '', de: space.rooms.filter(room => room.name === 'de')[0].topic || '' })
+      const desc = {}
+      config.medienhaus?.languages.forEach(lang => {
+        desc[lang] = space.rooms.filter(room => room.name === lang)[0]?.topic || ''
+      })
+      setDescription(desc)
       // checking if the project is a collaboration
       setRoomMembers(spaceDetails.currentState.members)
       // fetch custom medienhaus event
@@ -238,7 +242,7 @@ const Create = () => {
 
   const onChangeDescription = async (description) => {
     // if the selected content language is english we save the description in the project space topic
-    contentLang === 'en' && await matrixClient.setRoomTopic(spaceObject.rooms[0].room_id, description).catch(console.log)
+    contentLang === config.medienhaus?.languages[0] && await matrixClient.setRoomTopic(spaceObject.rooms[0].room_id, description).catch(console.log)
     // here we set the description for the selected language space
     const contentRoom = spaceObject.rooms.filter(room => room.name === contentLang)
     const changeTopic = await matrixClient.setRoomTopic(contentRoom[0].room_id, description).catch(console.log)
@@ -297,16 +301,16 @@ const Create = () => {
             <p><Trans t={t} i18nKey="contentInstructions4">You can use the <code>↑</code> and <code>↓</code> arrows to rearrange existing blocks.</Trans></p>
             <p><Trans t={t} i18nKey="contentInstructions5">You can provide content and information in multiple languages. We would recommend to provide the content in both, English and German. If you provide contents for just one language that content will appear on both Rundgang website versions, the English and the German one.</Trans></p>
             */}
-            {/* <select
+            <select
               value={contentLang} onChange={(e) => {
                 setContentLang(e.target.value)
                 setDescription()
               }}
             >
-              <option value="de">DE — Deutsch</option>
-              <option value="en">EN — English</option>
+              {config.medienhaus?.languages.map((lang) => (
+                <option value={lang} key={lang}>{lang}</option>
+              ))}
             </select>
-            */}
             {spaceObject && (description || description === '') ? <ProjectDescription description={description[contentLang]} callback={onChangeDescription} /> : <Loading />}
             {blocks.length === 0
               ? <AddContent number={0} projectSpace={spaceObject?.rooms.filter(room => room.name === contentLang)[0].room_id} blocks={blocks} reloadSpace={reloadSpace} />
@@ -323,8 +327,8 @@ const Create = () => {
             {/* <p>{t('If you still want to make changes to your contributions after publishing, you can continue to do so.')}</p> */}
             {spaceObject
               ? (<>
-                <PublishProject space={spaceObject.rooms[0]} metaEvent={medienhausMeta} description={description?.en} published={visibility} time={getCurrentTime} />
-                {!description?.en && <p>❗️ {t('Please add a short description of your project.')}</p>}
+                <PublishProject space={spaceObject.rooms[0]} metaEvent={medienhausMeta} description={(description && description[config.medienhaus?.languages[0]])} published={visibility} time={getCurrentTime} />
+                {!(description && description[config.medienhaus?.languages[0]]) && <p>❗️ {t('Please add a short description of your project.')}</p>}
                 {!medienhausMeta.context && <p>❗️ {t('Please add your project to a context.')}</p>}
               </>)
               : <Loading />}
