@@ -5,7 +5,7 @@ import { Loading } from '../../../components/loading'
 import LoadingSpinnerButton from '../../../components/LoadingSpinnerButton'
 import { useTranslation } from 'react-i18next'
 
-const ProjectTitle = ({ title, projectSpace, container, callback }) => {
+const ProjectTitle = ({ title, projectSpace, type, callback }) => {
   const { t } = useTranslation('content')
   const [projectTitle, setProjectTitle] = useState('')
   const [edit, setEdit] = useState(false)
@@ -37,7 +37,7 @@ const ProjectTitle = ({ title, projectSpace, container, callback }) => {
           type: 'dev.medienhaus.meta',
           content: {
             version: '0.3',
-            container: container,
+            container: 'content',
             type: type,
             published: 'draft'
           }
@@ -52,7 +52,7 @@ const ProjectTitle = ({ title, projectSpace, container, callback }) => {
     }
     try {
       // create the project space for the student project
-      await matrixClient.createRoom(opts('content', title, 'world_readable'))
+      await matrixClient.createRoom(opts(type || 'content', title, 'world_readable'))
         .then(async (space) => {
           // by default we create two subpsaces for localisation and one for events
           const en = await matrixClient.createRoom(opts('lang', 'en', 'shared'))
@@ -121,7 +121,7 @@ const ProjectTitle = ({ title, projectSpace, container, callback }) => {
           {!newProject && <button className="cancel" onClick={(e) => { e.preventDefault(); setEdit(false); setProjectTitle(oldTitle) }}>CANCEL</button>}
           {!title && newProject &&
             <LoadingSpinnerButton
-              disabled={!container || !projectTitle || projectTitle.length > 100} onClick={(e) => {
+              disabled={!type || !projectTitle || projectTitle.length > 100} onClick={(e) => {
                 console.log(newProject)
                 if (newProject && projectTitle.length < 101) {
                   createProject(projectTitle)
