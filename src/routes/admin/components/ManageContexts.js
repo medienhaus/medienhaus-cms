@@ -233,7 +233,7 @@ const ManageContexts = (props) => {
       // add this subspaces as children to the root space
       await spaceChild(e, space.room_id, true)
       console.log('created Context ' + newContext + ' ' + space.room_id)
-      // invite admins to newly created space if they are specified in our config.json
+      // invite moderators to newly created space if they are specified in our config.json
       if (config.medienhaus?.usersToInviteToNewContexts) {
         for await (const user of config.medienhaus?.usersToInviteToNewContexts) {
             if (user === localStorage.getItem('medienhaus_user_id')) continue // if the user is us, we jump out of the loop
