@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useState } from 'react'
 import { useParams, useHistory } from 'react-router-dom'
 import Matrix from '../../Matrix'
 import { MatrixEvent } from 'matrix-js-sdk'
+import ISO6391 from 'iso-639-1'
 
 // components
 import Collaborators from './Collaborators'
@@ -15,7 +16,6 @@ import ProjectDescription from './ProjectDescription'
 import { Loading } from '../../components/loading'
 import { useTranslation } from 'react-i18next'
 import DateAndVenue from './DateAndVenue'
-
 import Dropdown from '../../components/medienhausUI/dropdown'
 
 import config from '../../config.json'
@@ -307,8 +307,8 @@ const Create = () => {
                 setDescription()
               }}
             >
-              {config.medienhaus?.languages.map((lang) => (
-                <option value={lang} key={lang}>{lang}</option>
+              {config.medienhaus?.languages.sort().map((lang) => (
+                <option value={lang} key={lang}>{lang.toUpperCase() + ' -- ' + ISO6391.getName(lang)}</option>
               ))}
             </select>
             {spaceObject && (description || description === '') ? <ProjectDescription description={description[contentLang]} callback={onChangeDescription} /> : <Loading />}
