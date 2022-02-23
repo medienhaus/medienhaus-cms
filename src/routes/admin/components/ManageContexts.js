@@ -4,20 +4,18 @@ import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import CreateContext from './CreateContext'
 import { RemoveContext } from './RemoveContext'
-import { ShowContexts } from './ShowContexts'
 import * as _ from 'lodash'
 import ProjectImage from '../../create/ProjectImage'
-import AddLocation from '../../create/AddContent/AddLocation'
 import { Loading } from '../../../components/loading'
 import AddEvent from '../../create/DateAndVenue/components/AddEvent'
 import DisplayEvents from '../../create/DateAndVenue/components/DisplayEvents'
 import DeleteButton from '../../create/components/DeleteButton'
-import deleteContentBlock from '../../create/functions/deleteContentBlock'
 import SimpleContextSelect from '../../../components/SimpleContextSelect'
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
 import locations from '../../../assets/data/locations.json'
-import { set } from 'react-hook-form'
 import { MatrixEvent } from 'matrix-js-sdk'
+
+import config from '../../../config.json'
 
 const ManageContexts = (props) => {
   const { t } = useTranslation('admin')
@@ -235,13 +233,13 @@ const ManageContexts = (props) => {
       // add this subspaces as children to the root space
       await spaceChild(e, space.room_id, true)
       console.log('created Context ' + newContext + ' ' + space.room_id)
-      // invite admins to newly created space
-      if (process.env.REACT_APP_USER1 === localStorage.getItem('medienhaus_user_id')) {
-        await props.matrixClient.invite(space.room_id, process.env.REACT_APP_USER2).catch(console.log)
-        await setPower(process.env.REACT_APP_USER2, space.room_id, 50)
-      } else {
-        await props.matrixClient.invite(space.room_id, process.env.REACT_APP_USER1).catch(console.log) // @TODO change to userIds
-        await setPower(process.env.REACT_APP_USER1, space.room_id, 50)
+      // invite admins to newly created space if they are specified in our config.json
+      if (config.medienhaus?.usersToInviteToNewContexts) {
+        for await (const user of config.medienhaus?.usersToInviteToNewContexts) {
+            if (user === localStorage.getItem('medienhaus_user_id')) continue // if the user is us, we jump out of the loop
+
+            await props.matrixClient.invite(space.room_id, user).catch(console.log)
+            await setPower(user, space.room_id, 50)
       }
       setDisableButton(false)
       return space
