@@ -71,7 +71,25 @@ const Login = () => {
               <button name="submit" type="submit" disabled={isLoading}>{isLoading ? <Loading /> : 'LOGIN'}</button>
             </form>
           </>
-          ))}
+          )
+      )}
+      <ul>
+        {process.env.REACT_APP_MEDIENHAUS_FRONTEND_LOGIN_FORGOT_PASSWORD && (<li>
+          <a href={process.env.REACT_APP_MEDIENHAUS_FRONTEND_LOGIN_FORGOT_PASSWORD} rel="external nofollow noopener noreferrer">
+            {t('Forgot your password?')}
+          </a>
+        </li>)}
+        {process.env.REACT_APP_MEDIENHAUS_FRONTEND_LOGIN_REGISTER_ACCOUNT && (<li>
+          <a href={process.env.REACT_APP_MEDIENHAUS_FRONTEND_LOGIN_REGISTER_ACCOUNT} rel="external nofollow noopener noreferrer">
+            {t('Register new account?')}
+          </a>
+        </li>)}
+        {process.env.REACT_APP_MEDIENHAUS_FRONTEND_LOGIN_SUPPORT_MAILTO && (<li>
+          <a href={process.env.REACT_APP_MEDIENHAUS_FRONTEND_LOGIN_SUPPORT_MAILTO} rel="external nofollow noopener noreferrer">
+            {t('Need support?')}
+          </a>
+        </li>)}
+      </ul>
     </section>
   )
 }
