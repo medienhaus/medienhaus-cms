@@ -165,8 +165,8 @@ const Nav = () => {
               </div>
               <div>
                 <NavLink to="/account">/account</NavLink>
-                <NavLink to="/admin" className={!isAdmin ? 'disabled' : ''}>/admin</NavLink>
                 <NavLink to="/moderate" className={!isModeratingSpaces ? 'disabled' : ''}>/moderate<sup className={`notification ${knockAmount < 1 ? 'hidden' : ''}`}>●</sup></NavLink>
+                {isAdmin && <NavLink to="/admin">/admin</NavLink>}
               </div>
               {/* <div>
                 <NavLink to="/feedback">/feedback</NavLink>
