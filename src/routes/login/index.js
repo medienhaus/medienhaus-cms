@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { Redirect, useHistory, useLocation } from 'react-router-dom'
-import { Trans, useTranslation } from 'react-i18next'
+import { useTranslation } from 'react-i18next'
 import { useAuth } from '../../Auth'
 import { Loading } from '../../components/loading'
 import Matrix from '../../Matrix'
@@ -59,13 +59,7 @@ const Login = () => {
             <form onSubmit={handleSubmit(onSubmit)}>
               <div>
                 <label htmlFor="username">{t('username')}</label>
-                <div>
-                  <input {...register('username', { required: true })} name="username" type="text" placeholder={t('u.name')} />
-                  <select defaultValue="udk">
-                    <option value="udk">@udk-berlin.de</option>
-                    <option value="intra">@intra.udk-berlin.de</option>
-                  </select>
-                </div>
+                <input {...register('username', { required: true })} name="username" type="text" placeholder={t('u.name')} />
               </div>
               {errors?.username && t('Username can\'t be empty.')}
               <div>
@@ -76,11 +70,6 @@ const Login = () => {
               {serverResponseErrorMessage && <p>❗️ {serverResponseErrorMessage}</p>}
               <button name="submit" type="submit" disabled={isLoading}>{isLoading ? <Loading /> : 'LOGIN'}</button>
             </form>
-            <p>
-              <Trans t={t} i18nKey="usernameSameAsEmail">
-                Your login username and password are the same as for your <code>@udk-berlin.de</code> or <code>@intra.udk-berlin.de</code> mail account. If you forgot your password or want to change it, please check the links below.
-              </Trans>
-            </p>
           </>
           ))}
     </section>
