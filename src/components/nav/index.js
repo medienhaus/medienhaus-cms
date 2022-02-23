@@ -112,9 +112,13 @@ const Nav = () => {
     if (!auth.user || auth.user === null) return
 
     const checkAdminPriviliges = async () => {
-      setIsAdmin(await matrixClient.isSynapseAdministrator().catch(console.log))
+      setIsAdmin(await matrixClient.isSynapseAdministrator().catch((error) => {
+        if (error.errcode === 'M_UNKNOWN_TOKEN') auth.signout(() => history.push('/login'))
+      }
+      ))
     }
     matrixClient && checkAdminPriviliges()
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [matrixClient, auth.user])
 
   if (auth.user === null) {

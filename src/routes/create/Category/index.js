@@ -4,7 +4,7 @@ import { Loading } from '../../../components/loading'
 import * as _ from 'lodash'
 import SimpleContextSelect from '../../../components/SimpleContextSelect'
 
-const Category = ({ title, projectSpace, parent }) => {
+const Category = ({ title, projectSpace, onChange, parent }) => {
   console.log(parent)
   // const [subject, setSubject] = useState('')
   // const [room, setRoom] = useState('')
@@ -173,6 +173,7 @@ const Category = ({ title, projectSpace, parent }) => {
         via: [process.env.REACT_APP_MATRIX_BASE_URL.replace('https://', '')]
       })
     }
+
     const addToContext = await fetch(process.env.REACT_APP_MATRIX_BASE_URL + `/_matrix/client/r0/rooms/${contextSpace.id}/state/m.space.child/${projectSpace}`, req)
     if (addToContext.ok) {
       // Set the new context in our meta event
@@ -181,6 +182,7 @@ const Category = ({ title, projectSpace, parent }) => {
       // Get the freshly updated state event and save it in our state
       projectSpaceMetaEvent = await matrixClient.getStateEvent(projectSpace, 'dev.medienhaus.meta')
       setCurrentContext(projectSpaceMetaEvent.context)
+      onChange()
       setLoading(false)
     } else {
       const joinRoom = await matrixClient.joinRoom(contextSpace.id).catch(console.log)
@@ -191,11 +193,13 @@ const Category = ({ title, projectSpace, parent }) => {
         // Get the freshly updated state event and save it in our state
         projectSpaceMetaEvent = await matrixClient.getStateEvent(projectSpace, 'dev.medienhaus.meta')
         setCurrentContext(projectSpaceMetaEvent.context)
+        onChange()
         setLoading(false)
       } else {
         // If placing the content into a context fails, we change our states back to the previous one
         projectSpaceMetaEvent.context && await matrixClient.sendStateEvent(projectSpace, 'dev.medienhaus.meta', projectSpaceMetaEvent)
         setCurrentContext(projectSpaceMetaEvent.context || '')
+        onChange()
         setLoading(false)
         setError('An error occured. Make sure you have the rights to publish in the selected context')
         setTimeout(() => setError(''), 2500)

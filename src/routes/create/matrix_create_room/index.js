@@ -11,7 +11,6 @@ const createBlock = async (e, content, number, space) => {
     room_version: '7',
     preset: 'private_chat',
     topic: '',
-    creation_content: { 'm.federate': false },
     initial_state: [{
       type: 'm.space.parent',
       content: {
@@ -52,7 +51,7 @@ const createBlock = async (e, content, number, space) => {
     body: JSON.stringify({
       via: [localStorage.getItem('mx_home_server')],
       suggested: false,
-      auto_join: true
+      auto_join: false
     })
   }
 

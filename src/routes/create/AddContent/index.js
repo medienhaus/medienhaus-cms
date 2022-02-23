@@ -56,10 +56,12 @@ const AddContent = ({ number, projectSpace, blocks, reloadSpace }) => {
           <optgroup label="Media">
             <option value="image">{t('Image')}</option>
             <option value="audio">{t('Audio')}</option>
+            {/*
             <option value="video">{t('Video')}</option>
             <option value="livestream">{t('Live stream')}</option>
             <option value="playlist">{t('Playlist')}</option>
-            <option value="bbb">{t('BigBlueButton-Session')}</option>
+            <option value="bbb">{t('BigBlueButton-Session')}</option> */
+            }
           </optgroup>
         </select>
         <button className="cancel" onClick={(e) => { e.preventDefault(); setShowBlockTypeSelector(false); setSelectedBlockType('') }}>×</button>
