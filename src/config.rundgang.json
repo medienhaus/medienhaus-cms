@@ -25,7 +25,15 @@
         "mail": false,
         "name": true,
         "password": false
-      }
+      },
+      "moderate": {
+        "invite-users-to-space": true,
+        "rights-management": true,
+        "manage-contexts": true
+      },
+      "support": true,
+      "request": true,
+      "feedback": true
     }
   }
 }

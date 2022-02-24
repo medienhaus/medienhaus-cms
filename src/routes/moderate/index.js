@@ -9,6 +9,8 @@ import InviteUserToSpace from './components/InviteUserToSpace'
 import RightsManagement from './components/RightsManagement'
 import ManageContexts from '../admin/components/ManageContexts'
 
+import config from '../../config.json'
+
 const Moderate = () => {
   const { joinedSpaces, spacesErr, fetchSpaces } = useJoinedSpaces(false)
   const [moderationRooms, setModerationRooms] = useState()
@@ -115,25 +117,25 @@ const Moderate = () => {
 
       </section>
       */}
-      <h2>{t('Accept user requests')}</h2>
-      {moderationRooms.length > 0
-        ? <>
-          <section className="requests">
-            {moderationRooms.map((request, index) => <React.Fragment key={request.name}>
-              <GetRequestPerRoom request={request} key={index} />
-            </React.Fragment>)}
-          </section>
-        </>
-        : (
-          <div>
-            {t('Looks like you are not moderating any spaces.')}
-          </div>)}
-      <hr />
-      <InviteUserToSpace matrixClient={matrixClient} moderationRooms={moderationRooms} setPower={setPower} fetchUsers={fetchUsers} fetching={fetching} userSearch={userSearch} />
-      <hr />
-      <RightsManagement matrixClient={matrixClient} moderationRooms={moderationRooms} setPower={setPower} fetchUsers={fetchUsers} fetching={fetching} userSearch={userSearch} />
-      <hr />
-      <ManageContexts matrixClient={matrixClient} />
+      {config.medienhaus?.sites?.moderate?.accept &&
+        <>
+          <h2>{t('Accept user requests')}</h2>
+          {moderationRooms.length > 0
+            ? <>
+              <section className="requests">
+                {moderationRooms.map((request, index) => <React.Fragment key={request.name}>
+                  <GetRequestPerRoom request={request} key={index} />
+                </React.Fragment>)}
+              </section>
+            </>
+            : (
+              <div>
+                {t('Looks like you are not moderating any spaces.')}
+              </div>)}
+        </>}
+      {config.medienhaus?.sites?.moderate?.invite && <><hr /> <InviteUserToSpace matrixClient={matrixClient} moderationRooms={moderationRooms} setPower={setPower} fetchUsers={fetchUsers} fetching={fetching} userSearch={userSearch} /></>}
+      {config.medienhaus?.sites?.moderate?.rightsManagement && <> <hr /><RightsManagement matrixClient={matrixClient} moderationRooms={moderationRooms} setPower={setPower} fetchUsers={fetchUsers} fetching={fetching} userSearch={userSearch} /></>}
+      {config.medienhaus?.sites?.moderate?.manageContexts && <> <hr /><ManageContexts matrixClient={matrixClient} /></>}
     </>
   )
 }

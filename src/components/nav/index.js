@@ -140,15 +140,15 @@ const Nav = () => {
                 <NavLink to="/content">/content <sup className={`notification ${invites.length > 0 ? '' : 'hidden'}`}>●</sup></NavLink>
               </div>
               <div>
-                <NavLink to="/account">/account</NavLink>
-                <NavLink to="/moderate" className={!isModeratingSpaces ? 'disabled' : ''}>/moderate<sup className={`notification ${knockAmount < 1 ? 'hidden' : ''}`}>●</sup></NavLink>
+                {config.medienhaus?.sites?.account && <NavLink to="/account">/account</NavLink>}
+                {config.medienhaus?.sites.moderate && <NavLink to="/moderate" className={!isModeratingSpaces ? 'disabled' : ''}>/moderate<sup className={`notification ${knockAmount < 1 ? 'hidden' : ''}`}>●</sup></NavLink>}
                 {isAdmin && <NavLink to="/admin">/admin</NavLink>}
               </div>
-              {/* <div>
-                <NavLink to="/feedback">/feedback</NavLink>
-                <NavLink to="/support">/support</NavLink>
-                <NavLink to="/request">/request</NavLink>
-              </div> */}
+              <div>
+                {config.medienhaus?.sites?.feedback && <NavLink to="/feedback">/feedback</NavLink>}
+                {config.medienhaus?.sites?.support && <NavLink to="/support">/support</NavLink>}
+                {config.medienhaus?.sites?.request && <NavLink to="/request">/request</NavLink>}
+              </div>
             </>
           )}
         </div>

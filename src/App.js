@@ -22,6 +22,8 @@ import Preview from './routes/preview'
 
 import { AuthProvider, useAuth } from './Auth'
 import PropTypes from 'prop-types'
+
+import config from './config.json'
 function PrivateRoute ({ children, ...rest }) {
   const auth = useAuth()
   const location = useLocation()
@@ -74,18 +76,18 @@ function App () {
             <Switch>
               <Route path="/" exact component={Landing} />
               <Route path="/login" component={Login} />
-              <PrivateRoute path="/account" component={Account} />
+              {config.medienhaus?.sites?.account && <PrivateRoute path="/account" component={Account} />}
               <PrivateRoute path="/admin" component={Admin} />
               <PrivateRoute path="/boilerplate" component={Boilerplate} />
               <PrivateRoute path="/content" component={Content} />
               <PrivateRoute path="/create/:spaceId" component={Create} />
               <PrivateRoute path="/preview/:spaceId" component={Preview} />
               <PrivateRoute path="/create" component={Create} />
-              <PrivateRoute path="/moderate" component={Moderate} />
-              <PrivateRoute path="/support" component={Support} />
-              <PrivateRoute path="/feedback" component={Feedback} />
-              <PrivateRoute path="/request" component={Request} />
-              <PrivateRoute path="/credits" component={Credits} />
+              {config.medienhaus?.sites?.moderate && <PrivateRoute path="/moderate" component={Moderate} />}
+              {config.medienhaus?.sites?.support && <PrivateRoute path="/support" component={Support} />}
+              {config.medienhaus?.sites?.feedback && <PrivateRoute path="/feedback" component={Feedback} />}
+              {config.medienhaus?.sites?.request && <PrivateRoute path="/request" component={Request} />}
+              {config.medienhaus?.sites?.credits && <PrivateRoute path="/credits" component={Credits} />}
             </Switch>
           </main>
           <Footer />

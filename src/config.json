@@ -9,6 +9,12 @@
         "avatar": true,
         "mail": true,
         "name": true
+      },
+      "moderate": {
+        "accept": true,
+        "invite": true,
+        "rightsManagement": true,
+        "manageContexts": true
       }
     }
   }
