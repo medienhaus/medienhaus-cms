@@ -18,6 +18,14 @@
     "languages": [
       "en",
       "de"
-    ]
+    ],
+    "sites": {
+      "account": {
+        "avatar": true,
+        "mail": false,
+        "name": true,
+        "password": false
+      }
+    }
   }
 }

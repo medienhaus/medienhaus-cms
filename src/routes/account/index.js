@@ -4,16 +4,18 @@ import { useAuth } from '../../Auth'
 import Avatar from './Avatar/avatar'
 import { Email } from './Email'
 
+import config from '../../config.json'
+
 const Account = () => {
   const auth = useAuth()
   const profile = auth.user
   const [displayName, setDisplayName] = useState('')
-  console.log(profile)
+
   return (
     <section className="account">
-      <Name name={displayName || profile.displayname} callback={(name) => setDisplayName(name)} />
-      <Avatar avatarUrl={profile.avatar_url} name={displayName || profile.displayname} />
-      <Email />
+      {config.medienhaus.sites.account.name && <Name name={displayName || profile.displayname} callback={(name) => setDisplayName(name)} />}
+      {config.medienhaus.sites.account.avatar && <Avatar avatarUrl={profile.avatar_url} name={displayName || profile.displayname} />}
+      {config.medienhaus.sites.account.mail && <Email />}
     </section>
   )
 }

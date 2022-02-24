@@ -3,6 +3,13 @@
     "languages": [
       "en",
       "de"
-    ]
+    ],
+    "sites": {
+      "account": {
+        "avatar": true,
+        "mail": true,
+        "name": true
+      }
+    }
   }
 }
