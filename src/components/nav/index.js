@@ -5,6 +5,7 @@ import { isFunction } from 'lodash/lang'
 import LanguageSelector from '../LanguageSelector'
 import useJoinedSpaces from '../matrix_joined_spaces'
 import Matrix from '../../Matrix'
+import config from '../../config.json'
 
 const Nav = () => {
   const auth = useAuth()
@@ -20,19 +21,7 @@ const Nav = () => {
   useEffect(() => {
     if (spacesErr) console.log(spacesErr)
     if (joinedSpaces && auth.user) {
-      const typesOfSpaces = [
-        'context',
-        'class',
-        'course',
-        'institution',
-        'degree program',
-        'design department',
-        'faculty',
-        'institute',
-        'semester',
-        'structure-element',
-        'structure-elements'
-      ]
+      const typesOfSpaces = config.medienhaus?.content || 'content'
 
       // To "moderate" a space it must have one of the given types and we must be at least power level 50
       const moderatingSpaces = joinedSpaces.filter(space => typesOfSpaces.includes(space.meta.type) && space.powerLevel >= 50)
@@ -64,20 +53,7 @@ const Nav = () => {
   useEffect(() => {
     async function checkRoomForPossibleInvite (room) {
       // Types of spaces for which we want to count invites for
-      const typesOfSpaces = [
-        'structure-element',
-        'structure-elements',
-        'studentproject',
-        'content',
-        'context',
-        'class',
-        'course',
-        'institution',
-        'degree program',
-        'design department',
-        'faculty',
-        'institute',
-        'semester']
+      const typesOfSpaces = config.medienhaus?.content || 'content'
 
       // Ignore if this is not a space
       if (room.getType() !== 'm.space') return

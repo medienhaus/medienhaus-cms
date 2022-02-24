@@ -9,7 +9,6 @@ const PublishProject = ({ disabled, space, published, time, metaEvent }) => {
   const [userFeedback, setUserFeedback] = useState()
   const [visibility, setVisibility] = useState(published)
   const matrixClient = Matrix.getMatrixClient()
-  console.log(metaEvent)
   useEffect(() => {
     if (published === 'invite') {
       // if 'published' = 'invite we know its legacy and we update it accordingly
