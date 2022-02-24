@@ -8,6 +8,8 @@ import { useTranslation } from 'react-i18next'
 import { sortBy } from 'lodash'
 import deleteProject from './deleteProject'
 
+import config from '../../config.json'
+
 const Overview = () => {
   const { t } = useTranslation('content')
   const matrixClient = Matrix.getMatrixClient()
@@ -18,20 +20,7 @@ const Overview = () => {
   useEffect(() => {
     async function checkRoomForPossibleInvite (room) {
       // Types of spaces for which we want to show invites
-      const typesOfSpaces = [
-        'structure-element',
-        'structure-elements',
-        'studentproject',
-        'content',
-        'context',
-        'class',
-        'course',
-        'institution',
-        'degree program',
-        'design department',
-        'faculty',
-        'institute',
-        'semester']
+      const typesOfSpaces = config.medienhaus?.content || 'content'
 
       // Ignore if this is not a space
       if (room.getType() !== 'm.space') return
@@ -84,7 +73,7 @@ const Overview = () => {
 
   useEffect(() => {
     if (joinedSpaces) {
-    // we check if a collaborator has deleted a project since we last logged in
+      // we check if a collaborator has deleted a project since we last logged in
       joinedSpaces?.filter(space => space.meta?.deleted).forEach(async space => await deleteProject(space.room_id))
       // then we update our array to not display the just deleted projects and only display joined rooms
       const updatedProjects = joinedSpaces?.filter(space => !space.meta?.deleted && space.meta.type === 'content')

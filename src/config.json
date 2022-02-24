@@ -1,5 +1,20 @@
 {
   "medienhaus": {
+    "content": [
+      "structure-element",
+      "structure-elements",
+      "studentproject",
+      "content",
+      "context",
+      "class",
+      "course",
+      "institution",
+      "degree program",
+      "design department",
+      "faculty",
+      "institute",
+      "semester"
+    ],
     "languages": [
       "en",
       "de"
