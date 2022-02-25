@@ -16,6 +16,12 @@
         "rightsManagement": true,
         "manageContexts": true
       }
-    }
+    },
+    "usersToInviteToNewContexts": [
+      "@user1:server.com",
+      "@user2:server.com",
+      "@user3:server.com",
+      "@user4:server.com"
+    ]
   }
 }

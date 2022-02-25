@@ -195,16 +195,43 @@ const ManageContexts = (props) => {
     e.preventDefault()
     const createSpace = async (title) => {
       setDisableButton(true)
+      const users = {}
+      if (config.medienhaus?.usersToInviteToNewContexts) {
+        config.medienhaus.usersToInviteToNewContexts.forEach(user => {
+          users[user] = 50
+        })
+      }
       const opts = (type, name, history) => {
         return {
           preset: 'public_chat',
           power_level_content_override: {
-            events_default: 100,
-            invite: 0,
-            send: 0
+            ban: 50,
+            events: {
+              'm.room.avatar': 50,
+              'm.room.canonical_alias': 50,
+              'm.room.encryption': 100,
+              'm.room.history_visibility': 100,
+              'm.room.name': 50,
+              'm.room.power_levels': 100,
+              'm.room.server_acl': 100,
+              'm.room.tombstone': 100,
+              'm.space.child': 50,
+              'm.room.topic': 50,
+              'm.room.pinned_events': 50,
+              'm.reaction': 0,
+              'im.vector.modular.widgets': 50
+            },
+            events_default: 50,
+            historical: 100,
+            invite: 50,
+            kick: 50,
+            redact: 50,
+            state_default: 50,
+            users_default: 50,
+            users: users
           },
           name: name,
-          room_version: '8',
+          room_version: '9',
           creation_content: { type: 'm.space' },
           initial_state: [{
             type: 'm.room.history_visibility',
