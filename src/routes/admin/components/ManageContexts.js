@@ -48,21 +48,10 @@ const ManageContexts = (props) => {
           children: {}
         }
       }
-      /*
-      const typesOfSpaces = ['context',
-        'class',
-        'course',
-        'institution',
-        'degree program',
-        'design department',
-        'faculty',
-        'institute',
-        'semester']
-      */
+
       async function scanForAndAddSpaceChildren (spaceId, path) {
         if (spaceId === 'undefined') return
         const stateEvents = await matrixClient.roomState(spaceId).catch(console.log)
-        const hierarchy = await matrixClient.getRoomHierarchy(spaceId, null, 1).catch(console.log)
         // check if room exists in roomHierarchy
         // const existsInCurrentTree = _.find(hierarchy, {room_id: spaceId})
         // const metaEvent = await matrixClient.getStateEvent(spaceId, 'dev.medienhaus.meta')
@@ -156,11 +145,11 @@ const ManageContexts = (props) => {
     console.log('---- started structure ----')
     const tree = await getSpaceStructure(props.matrixClient, parent, false)
     setInputItems(tree)
-    console.log(tree)
     const translatedJson = translateJson(tree[Object.keys(tree)[0]])
 
     setStructure(translatedJson)
   }
+
   const spaceChild = async (e, space, add) => {
     setLoading(true)
     e && e.preventDefault()
@@ -225,8 +214,7 @@ const ManageContexts = (props) => {
             kick: 50,
             redact: 50,
             state_default: 50,
-            users_default: 50,
-            users: users
+            users_default: 50
           },
           name: name,
           room_version: '9',
@@ -306,7 +294,8 @@ const ManageContexts = (props) => {
     await getEvents(context.id)
     setSelectedContext(context.id)
     setSelectedContextName(context.name)
-    context.pathIds ? setContextParent(null) : setContextParent(context.pathIds[context.pathIds.length - 1])
+    console.log(context.pathIds)
+    context.pathIds ? setContextParent(context.pathIds[context.pathIds.length - 1]) : setContextParent(null)
     // setParentName(context.path[context.path.length - 1])
     setLoading(false)
   }
@@ -315,6 +304,12 @@ const ManageContexts = (props) => {
     // createD3Json()
     // eslint-disable-next-line
   }, [])
+
+  useEffect(() => {
+    console.log(contextParent)
+    // createD3Json()
+    // eslint-disable-next-line
+  }, [contextParent])
 
   const onDelete = async (index) => {
     setDeleting(true)
