@@ -7,8 +7,9 @@
     "sites": {
       "account": {
         "avatar": true,
-        "mail": true,
-        "name": true
+        "mail": false,
+        "name": true,
+        "password": false
       },
       "moderate": {
         "accept": true,
@@ -20,10 +21,8 @@
       }
     },
     "usersToInviteToNewContexts": [
-      "@user1:server.com",
-      "@user2:server.com",
-      "@user3:server.com",
-      "@user4:server.com"
+      "@romy_content:stechlin-institut.ruralmindshift.org",
+      "stef_content:stechlin-institut.ruralmindshift.org"
     ]
   }
 }

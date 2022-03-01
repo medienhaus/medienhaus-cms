@@ -306,7 +306,7 @@ const ManageContexts = (props) => {
     await getEvents(context.id)
     setSelectedContext(context.id)
     setSelectedContextName(context.name)
-    setContextParent(context.pathIds[context.pathIds.length - 1])
+    context.pathIds ? setContextParent(null) : setContextParent(context.pathIds[context.pathIds.length - 1])
     // setParentName(context.path[context.path.length - 1])
     setLoading(false)
   }
@@ -354,7 +354,7 @@ const ManageContexts = (props) => {
        <input type="text" value={selectedContextName} disabled /> */}
       {selectedContextName &&
         <>
-          <RemoveContext t={t} selectedContext={selectedContext} parent={contextParent} parentName={parentName} disableButton={disableButton} callback={spaceChild} />
+          {contextParent && <RemoveContext t={t} selectedContext={selectedContext} parent={contextParent} parentName={parentName} disableButton={disableButton} callback={spaceChild} />}
           <CreateContext t={t} parent={selectedContext} matrixClient={props.matrixClient} setNewContext={setNewContext} parentName={parentName} disableButton={!newContext || loading} callback={addSpace} />
           <div>
             <h2>Edit currently selected context</h2>
