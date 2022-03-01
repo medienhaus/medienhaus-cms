@@ -146,7 +146,6 @@ const ManageContexts = (props) => {
     const tree = await getSpaceStructure(props.matrixClient, parent, false)
     setInputItems(tree)
     const translatedJson = translateJson(tree[Object.keys(tree)[0]])
-
     setStructure(translatedJson)
   }
 
@@ -294,7 +293,6 @@ const ManageContexts = (props) => {
     await getEvents(context.id)
     setSelectedContext(context.id)
     setSelectedContextName(context.name)
-    console.log(context.pathIds)
     context.pathIds ? setContextParent(context.pathIds[context.pathIds.length - 1]) : setContextParent(null)
     // setParentName(context.path[context.path.length - 1])
     setLoading(false)
@@ -304,12 +302,6 @@ const ManageContexts = (props) => {
     // createD3Json()
     // eslint-disable-next-line
   }, [])
-
-  useEffect(() => {
-    console.log(contextParent)
-    // createD3Json()
-    // eslint-disable-next-line
-  }, [contextParent])
 
   const onDelete = async (index) => {
     setDeleting(true)
