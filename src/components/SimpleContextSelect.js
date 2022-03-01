@@ -2,12 +2,16 @@ import React from 'react'
 import mapDeep from 'deepdash/es/mapDeep'
 import filterDeep from 'deepdash/es/filterDeep'
 
+import config from '../config.json'
+
 function SimpleContextSelect ({ onItemChosen, selectedContext, struktur, disabled }) {
   const items = struktur[Object.keys(struktur)[0]].children
   return (
     <>
       <select disabled={disabled} onChange={(e) => { onItemChosen(JSON.parse(e.target.value)) }}>
         <option disabled selected>-- select context --</option>
+        {config.medienhaus?.sites?.moderate?.manageContexts?.showRoot &&
+          <option key={struktur[Object.keys(struktur)[0]].id} value={JSON.stringify(struktur[Object.keys(struktur)[0]])} selected={selectedContext === struktur[Object.keys(struktur)[0]].id}>{struktur[Object.keys(struktur)[0]].name}</option>}
         {mapDeep(filterDeep(items, (value, key, parent, context) => {
           // Exclude all hierarchy elements that are not "contexts"
           if (!value?.type.includes('context')) return false
@@ -26,7 +30,7 @@ function SimpleContextSelect ({ onItemChosen, selectedContext, struktur, disable
           addParentToPath(context._item)
           return true
         }, { childrenPath: 'children', includeRoot: false, rootIsChildren: true }), (value, key, parent, context) => (
-          <option key={value.id} value={JSON.stringify(value)} selected={selectedContext === value.id}>{' --- '.repeat(context.depth - 1)}{value.name}</option>
+          <option key={value.id} value={JSON.stringify(value)} selected={selectedContext === value.id}>{' --- '.repeat(config.medienhaus?.sites?.moderate?.manageContexts?.showRoot ? context.depth : context.depth - 1)}{value.name}</option>
         ), { childrenPath: 'children', includeRoot: false, rootIsChildren: true })}
       </select>
     </>

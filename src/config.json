@@ -14,7 +14,9 @@
         "accept": true,
         "invite": true,
         "rightsManagement": true,
-        "manageContexts": true
+        "manageContexts": {
+          "showRoot": true
+        }
       }
     },
     "usersToInviteToNewContexts": [

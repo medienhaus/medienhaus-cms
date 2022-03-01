@@ -63,7 +63,6 @@ const ManageContexts = (props) => {
         if (spaceId === 'undefined') return
         const stateEvents = await matrixClient.roomState(spaceId).catch(console.log)
         const hierarchy = await matrixClient.getRoomHierarchy(spaceId, null, 1).catch(console.log)
-        console.log(hierarchy)
         // check if room exists in roomHierarchy
         // const existsInCurrentTree = _.find(hierarchy, {room_id: spaceId})
         // const metaEvent = await matrixClient.getStateEvent(spaceId, 'dev.medienhaus.meta')
@@ -157,7 +156,9 @@ const ManageContexts = (props) => {
     console.log('---- started structure ----')
     const tree = await getSpaceStructure(props.matrixClient, parent, false)
     setInputItems(tree)
+    console.log(tree)
     const translatedJson = translateJson(tree[Object.keys(tree)[0]])
+
     setStructure(translatedJson)
   }
   const spaceChild = async (e, space, add) => {
