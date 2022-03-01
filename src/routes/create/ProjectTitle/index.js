@@ -68,7 +68,7 @@ const ProjectTitle = ({ title, projectSpace, type, callback }) => {
             'm.space.child': 50,
             'm.room.topic': 50,
             'm.room.pinned_events': 50,
-            'm.reaction': 0,
+            'm.reaction': 50,
             'im.vector.modular.widgets': 50
           },
           events_default: 50,

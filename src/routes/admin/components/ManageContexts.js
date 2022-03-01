@@ -180,15 +180,12 @@ const ManageContexts = (props) => {
 
   const setPower = async (userId, roomId, level) => {
     console.log('changing power level for ' + userId)
-    props.matrixClient.getStateEvent(roomId, 'm.room.power_levels', '').then(async (res) => {
-      const powerEvent = new MatrixEvent({
-        type: 'm.room.power_levels',
-        content: res
-      }
-      )
-      // something here is going wrong for collab > 2
-      await props.matrixClient.setPowerLevel(roomId, userId, level, powerEvent).catch(err => console.error(err))
+    const currentStateEvent = await props.matrixClient.getStateEvent(roomId, 'm.room.power_levels', '')
+    const newStateEvent = new MatrixEvent({
+      type: 'm.room.power_levels',
+      content: currentStateEvent
     })
+    await props.matrixClient.setPowerLevel(roomId, userId, level, newStateEvent).catch(err => console.error(err))
   }
 
   function addSpace (e) {
@@ -218,7 +215,7 @@ const ManageContexts = (props) => {
               'm.space.child': 50,
               'm.room.topic': 50,
               'm.room.pinned_events': 50,
-              'm.reaction': 0,
+              'm.reaction': 50,
               'im.vector.modular.widgets': 50
             },
             events_default: 50,
@@ -242,7 +239,7 @@ const ManageContexts = (props) => {
             content: {
               version: '0.3',
               type: type,
-              published: 'draft'
+              published: 'public'
             }
           },
           {
@@ -250,7 +247,7 @@ const ManageContexts = (props) => {
             state_key: '',
             content: { guest_access: 'can_join' }
           }],
-          visibility: 'private'
+          visibility: 'private' // visibility is private even for public spaces.
         }
       }
 
