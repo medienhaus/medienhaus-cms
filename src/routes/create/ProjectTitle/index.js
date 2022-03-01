@@ -26,15 +26,20 @@ const ProjectTitle = ({ title, projectSpace, type, callback }) => {
     setLoading(true)
 
     const opts = (type, name, history) => {
+      const users = {}
+      for (const key in config.medienhaus.usersToInvite) {
+        users[key] = 50
+      }
+
       return {
         preset: 'private_chat',
         name: name,
-        room_version: '7',
+        room_version: '9',
         creation_content: { type: 'm.space' },
         initial_state: [{
           type: 'm.room.history_visibility',
-          content: { history_visibility: history } //  world_readable
-        },
+          content: { history_visibility: history }
+        }, //  world_readable
         {
           type: 'dev.medienhaus.meta',
           content: {
@@ -49,6 +54,31 @@ const ProjectTitle = ({ title, projectSpace, type, callback }) => {
           state_key: '',
           content: { guest_access: 'can_join' }
         }],
+        power_level_content_override: {
+          ban: 50,
+          events: {
+            'm.room.avatar': 50,
+            'm.room.canonical_alias': 50,
+            'm.room.encryption': 100,
+            'm.room.history_visibility': 100,
+            'm.room.name': 50,
+            'm.room.power_levels': 100,
+            'm.room.server_acl': 100,
+            'm.room.tombstone': 100,
+            'm.space.child': 50,
+            'm.room.topic': 50,
+            'm.room.pinned_events': 50,
+            'm.reaction': 50,
+            'im.vector.modular.widgets': 50
+          },
+          events_default: 50,
+          historical: 100,
+          invite: 50,
+          kick: 50,
+          redact: 50,
+          state_default: 50,
+          users_default: 50
+        },
         visibility: 'private'
       }
     }

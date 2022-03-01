@@ -48,22 +48,10 @@ const ManageContexts = (props) => {
           children: {}
         }
       }
-      /*
-      const typesOfSpaces = ['context',
-        'class',
-        'course',
-        'institution',
-        'degree program',
-        'design department',
-        'faculty',
-        'institute',
-        'semester']
-      */
+
       async function scanForAndAddSpaceChildren (spaceId, path) {
         if (spaceId === 'undefined') return
         const stateEvents = await matrixClient.roomState(spaceId).catch(console.log)
-        const hierarchy = await matrixClient.getRoomHierarchy(spaceId, null, 1).catch(console.log)
-        console.log(hierarchy)
         // check if room exists in roomHierarchy
         // const existsInCurrentTree = _.find(hierarchy, {room_id: spaceId})
         // const metaEvent = await matrixClient.getStateEvent(spaceId, 'dev.medienhaus.meta')
@@ -160,6 +148,7 @@ const ManageContexts = (props) => {
     const translatedJson = translateJson(tree[Object.keys(tree)[0]])
     setStructure(translatedJson)
   }
+
   const spaceChild = async (e, space, add) => {
     setLoading(true)
     e && e.preventDefault()
@@ -180,31 +169,54 @@ const ManageContexts = (props) => {
 
   const setPower = async (userId, roomId, level) => {
     console.log('changing power level for ' + userId)
-    props.matrixClient.getStateEvent(roomId, 'm.room.power_levels', '').then(async (res) => {
-      const powerEvent = new MatrixEvent({
-        type: 'm.room.power_levels',
-        content: res
-      }
-      )
-      // something here is going wrong for collab > 2
-      await props.matrixClient.setPowerLevel(roomId, userId, level, powerEvent).catch(err => console.error(err))
+    const currentStateEvent = await props.matrixClient.getStateEvent(roomId, 'm.room.power_levels', '')
+    const newStateEvent = new MatrixEvent({
+      type: 'm.room.power_levels',
+      content: currentStateEvent
     })
+    await props.matrixClient.setPowerLevel(roomId, userId, level, newStateEvent).catch(err => console.error(err))
   }
 
   function addSpace (e) {
     e.preventDefault()
     const createSpace = async (title) => {
       setDisableButton(true)
+      const users = {}
+      if (config.medienhaus?.usersToInviteToNewContexts) {
+        config.medienhaus.usersToInviteToNewContexts.forEach(user => {
+          users[user] = 50
+        })
+      }
       const opts = (type, name, history) => {
         return {
           preset: 'public_chat',
           power_level_content_override: {
-            events_default: 100,
-            invite: 0,
-            send: 0
+            ban: 50,
+            events: {
+              'm.room.avatar': 50,
+              'm.room.canonical_alias': 50,
+              'm.room.encryption': 100,
+              'm.room.history_visibility': 100,
+              'm.room.name': 50,
+              'm.room.power_levels': 100,
+              'm.room.server_acl': 100,
+              'm.room.tombstone': 100,
+              'm.space.child': 50,
+              'm.room.topic': 50,
+              'm.room.pinned_events': 50,
+              'm.reaction': 50,
+              'im.vector.modular.widgets': 50
+            },
+            events_default: 50,
+            historical: 100,
+            invite: 50,
+            kick: 50,
+            redact: 50,
+            state_default: 50,
+            users_default: 50
           },
           name: name,
-          room_version: '8',
+          room_version: '9',
           creation_content: { type: 'm.space' },
           initial_state: [{
             type: 'm.room.history_visibility',
@@ -215,7 +227,7 @@ const ManageContexts = (props) => {
             content: {
               version: '0.3',
               type: type,
-              published: 'draft'
+              published: 'public'
             }
           },
           {
@@ -223,7 +235,7 @@ const ManageContexts = (props) => {
             state_key: '',
             content: { guest_access: 'can_join' }
           }],
-          visibility: 'private'
+          visibility: 'private' // visibility is private even for public spaces.
         }
       }
 
@@ -281,7 +293,7 @@ const ManageContexts = (props) => {
     await getEvents(context.id)
     setSelectedContext(context.id)
     setSelectedContextName(context.name)
-    setContextParent(context.pathIds[context.pathIds.length - 1])
+    context.pathIds ? setContextParent(context.pathIds[context.pathIds.length - 1]) : setContextParent(null)
     // setParentName(context.path[context.path.length - 1])
     setLoading(false)
   }
@@ -329,7 +341,7 @@ const ManageContexts = (props) => {
        <input type="text" value={selectedContextName} disabled /> */}
       {selectedContextName &&
         <>
-          <RemoveContext t={t} selectedContext={selectedContext} parent={contextParent} parentName={parentName} disableButton={disableButton} callback={spaceChild} />
+          {contextParent && <RemoveContext t={t} selectedContext={selectedContext} parent={contextParent} parentName={parentName} disableButton={disableButton} callback={spaceChild} />}
           <CreateContext t={t} parent={selectedContext} matrixClient={props.matrixClient} setNewContext={setNewContext} parentName={parentName} disableButton={!newContext || loading} callback={addSpace} />
           <div>
             <h2>Edit currently selected context</h2>

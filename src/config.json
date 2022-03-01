@@ -7,15 +7,22 @@
     "sites": {
       "account": {
         "avatar": true,
-        "mail": true,
-        "name": true
+        "mail": false,
+        "name": true,
+        "password": false
       },
       "moderate": {
         "accept": true,
         "invite": true,
         "rightsManagement": true,
-        "manageContexts": true
+        "manageContexts": {
+          "showRoot": true
+        }
       }
-    }
+    },
+    "usersToInviteToNewContexts": [
+      "@florain9:dev.medienhaus.udk-berlin.de",
+      "@meisterhaupt:dev.medienhaus.udk-berlin.de"
+    ]
   }
 }
