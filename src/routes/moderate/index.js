@@ -22,17 +22,10 @@ const Moderate = () => {
 
   useEffect(() => {
     if (joinedSpaces) {
-      const typeOfSpaces = ['context',
-        'class',
-        'course',
-        'institution',
-        'degree program',
-        'design department',
-        'faculty',
-        'institute',
-        'semester']
+      const typesOfSpaces = config.medienhaus?.content || 'content'
+
       // check to see if a user has joined a room with the specific content type and is moderator or admin (at least power level 50)
-      const filteredRooms = joinedSpaces.filter(space => typeOfSpaces.includes(space.meta.type) && space.powerLevel > 49)
+      const filteredRooms = joinedSpaces.filter(space => typesOfSpaces.includes(space.meta.type) && space.powerLevel > 49)
       setModerationRooms(filteredRooms)
     }
   }, [joinedSpaces])

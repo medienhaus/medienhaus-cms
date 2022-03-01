@@ -1,15 +1,17 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Loading } from '../../../components/loading'
 
 function CreateContext (props) {
+  const [contextName, setContextName] = useState('')
+
   return (
     <form>
       <div>
         <label htmlFor="name">{props.t('Add Sub-Context')}: </label>
-        <input type="text" onChange={(e) => props.setNewContext(e.target.value)} />
+        <input type="text" value={contextName} onChange={(e) => setContextName(e.target.value)} />
       </div>
 
-      <button type="submit" disabled={props.disableButton} onClick={(e) => props.callback(e)}>{props.loading ? <Loading /> : props.t('Add Context')}</button>
+      <button type="submit" disabled={props.disableButton || !contextName} onClick={(e) => props.callback(e, contextName, () => { setContextName('') })}>{props.loading ? <Loading /> : props.t('Add Context')}</button>
     </form>
   )
 }

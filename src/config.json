@@ -18,10 +18,6 @@
           "showRoot": true
         }
       }
-    },
-    "usersToInviteToNewContexts": [
-      "@romy_content:stechlin-institut.ruralmindshift.org",
-      "stef_content:stechlin-institut.ruralmindshift.org"
-    ]
+    }
   }
 }

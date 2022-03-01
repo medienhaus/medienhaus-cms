@@ -5,11 +5,12 @@ import filterDeep from 'deepdash/es/filterDeep'
 import config from '../config.json'
 
 function SimpleContextSelect ({ onItemChosen, selectedContext, struktur, disabled }) {
+  console.log('selected Context = ' + selectedContext)
   const items = config.medienhaus?.sites?.moderate?.manageContexts?.showRoot ? struktur : struktur[Object.keys(struktur)[0]].children
   return (
     <>
-      <select disabled={disabled} onChange={(e) => { onItemChosen(JSON.parse(e.target.value)) }}>
-        <option disabled selected>-- select context --</option>
+      <select disabled={disabled} defaultValue={selectedContext} onChange={(e) => { onItemChosen(JSON.parse(e.target.value)) }}>
+        <option disabled selected value="">-- select context --</option>
         {mapDeep(filterDeep(items, (value, key, parent, context) => {
           // Exclude all hierarchy elements that are not "contexts"
           if (!value?.type.includes('context')) return false

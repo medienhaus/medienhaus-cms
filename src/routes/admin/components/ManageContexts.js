@@ -19,15 +19,12 @@ import config from '../../../config.json'
 const ManageContexts = (props) => {
   const { t } = useTranslation('admin')
   const [selectedContext, setSelectedContext] = useState('')
-  const [selectedContextName, setSelectedContextName] = useState('')
   const [structure, setStructure] = useState()
-  const [newContext, setNewContext] = useState('')
-  const [parentName, setParentName] = useState('Stechlin')
+  const [parentName, setParentName] = useState('')
   // eslint-disable-next-line no-unused-vars
   const [disableButton, setDisableButton] = useState(false)
   const [parent] = useState(process.env.REACT_APP_CONTEXT_ROOT_SPACE_ID)
   const [contextParent, setContextParent] = useState('')
-  const [currentContext, setCurrentContext] = useState(null)
   const [inputItems, setInputItems] = useState()
   const [events, setEvents] = useState([])
   const [allocation, setAllocation] = useState([])
@@ -162,8 +159,13 @@ const ManageContexts = (props) => {
       headers: { Authorization: 'Bearer ' + localStorage.getItem('medienhaus_access_token') },
       body: JSON.stringify(add ? body : { }) // if we add a space to an existing one we need to send the object 'body', to remove a space we send an empty object.
     }).catch(console.log)
-    add ? console.log('added as child to ' + selectedContext) : console.log('removed ' + selectedContext + ' from' + contextParent)
+    add ? console.log('added as child to ' + selectedContext) : console.log('removed ' + selectedContext + ' from ' + contextParent)
     await createStructurObject()
+    if (add) {
+      setSelectedContext(space)
+    } else {
+      setSelectedContext('')
+    }
     setLoading(false)
   }
 
@@ -177,16 +179,11 @@ const ManageContexts = (props) => {
     await props.matrixClient.setPowerLevel(roomId, userId, level, newStateEvent).catch(err => console.error(err))
   }
 
-  function addSpace (e) {
+  function addSpace (e, name, callback) {
     e.preventDefault()
     const createSpace = async (title) => {
       setDisableButton(true)
-      const users = {}
-      if (config.medienhaus?.usersToInviteToNewContexts) {
-        config.medienhaus.usersToInviteToNewContexts.forEach(user => {
-          users[user] = 50
-        })
-      }
+
       const opts = (type, name, history) => {
         return {
           preset: 'public_chat',
@@ -213,7 +210,7 @@ const ManageContexts = (props) => {
             kick: 50,
             redact: 50,
             state_default: 50,
-            users_default: 50
+            users_default: 0
           },
           name: name,
           room_version: '9',
@@ -243,7 +240,7 @@ const ManageContexts = (props) => {
       const space = await props.matrixClient.createRoom(opts('context', title, 'world_readable')).catch(console.log)
       // add this subspaces as children to the root space
       await spaceChild(e, space.room_id, true)
-      console.log('created Context ' + newContext + ' ' + space.room_id)
+      console.log('created Context ' + name + ' ' + space.room_id)
       // invite moderators to newly created space if they are specified in our config.json
       if (config.medienhaus?.usersToInviteToNewContexts) {
         for await (const user of config.medienhaus?.usersToInviteToNewContexts) {
@@ -255,16 +252,16 @@ const ManageContexts = (props) => {
           // @TODO only first user in loop gets actually promoted to specified power level 🤷‍♂️
         }
       }
+      if (callback) callback()
       setDisableButton(false)
       return space
     }
-    createSpace(newContext)
+    createSpace(name)
   }
 
   const contextualise = (d3) => {
     console.log(d3)
     setSelectedContext(d3.data.id)
-    setSelectedContextName(d3.data.name)
     setContextParent(d3.parent.data.id)
   }
   const fetchAllocation = async (space) => setAllocation(await props.matrixClient.getStateEvent(space, 'dev.medienhaus.allocation').catch(console.log))
@@ -292,7 +289,6 @@ const ManageContexts = (props) => {
     setLoading(true)
     await getEvents(context.id)
     setSelectedContext(context.id)
-    setSelectedContextName(context.name)
     context.pathIds ? setContextParent(context.pathIds[context.pathIds.length - 1]) : setContextParent(null)
     // setParentName(context.path[context.path.length - 1])
     setLoading(false)
@@ -332,17 +328,17 @@ const ManageContexts = (props) => {
         ? <Loading />
         : <SimpleContextSelect
             onItemChosen={onContextChange}
-            selectedContext={selectedContextName}
+            selectedContext={selectedContext}
             struktur={inputItems}
             disabled={loading}
           />}
       {loading && inputItems && <Loading />}
       {/* <label htmlFor="name">{t('Context')}: </label>
        <input type="text" value={selectedContextName} disabled /> */}
-      {selectedContextName &&
+      {selectedContext &&
         <>
           {contextParent && <RemoveContext t={t} selectedContext={selectedContext} parent={contextParent} parentName={parentName} disableButton={disableButton} callback={spaceChild} />}
-          <CreateContext t={t} parent={selectedContext} matrixClient={props.matrixClient} setNewContext={setNewContext} parentName={parentName} disableButton={!newContext || loading} callback={addSpace} />
+          <CreateContext t={t} parent={selectedContext} matrixClient={props.matrixClient} parentName={parentName} disableButton={loading} callback={addSpace} />
           <div>
             <h2>Edit currently selected context</h2>
             <h2>Image</h2>
