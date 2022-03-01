@@ -35,7 +35,7 @@ jobs:
           REACT_APP_APP_NAME: 'stechlin-cms'
           REACT_APP_APP_TITLE: 'ruralmindshift/cms'
           REACT_APP_MATRIX_BASE_URL: ${{github.event.inputs.matrix_base_url}}
-          REACT_APP_CONTEXT_ROOT_SPACE_ID: '!zOjltbOlSFCAdLXlIi:stechlin-institut.ruralmindshift.org
+          REACT_APP_CONTEXT_ROOT_SPACE_ID: '!zOjltbOlSFCAdLXlIi:stechlin-institut.ruralmindshift.org'
 
 
       # ... this was an automatic deploy and we fill in our default environment variables.
