@@ -21,7 +21,7 @@ const Nav = () => {
   useEffect(() => {
     if (spacesErr) console.log(spacesErr)
     if (joinedSpaces && auth.user) {
-      const typesOfSpaces = config.medienhaus?.content || 'content'
+      const typesOfSpaces = config.medienhaus?.context || 'context'
 
       // To "moderate" a space it must have one of the given types and we must be at least power level 50
       const moderatingSpaces = joinedSpaces.filter(space => typesOfSpaces.includes(space.meta.type) && space.powerLevel >= 50)
