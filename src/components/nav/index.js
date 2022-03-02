@@ -22,9 +22,10 @@ const Nav = () => {
     if (spacesErr) console.log(spacesErr)
     if (joinedSpaces && auth.user) {
       const typesOfSpaces = config.medienhaus?.context || 'context'
-
+      console.log(joinedSpaces)
       // To "moderate" a space it must have one of the given types and we must be at least power level 50
       const moderatingSpaces = joinedSpaces.filter(space => typesOfSpaces.includes(space.meta.type) && space.powerLevel >= 50)
+      console.log(moderatingSpaces)
       // If we are not moderating any spaces we can cancel the rest here ...
       if (moderatingSpaces.length < 1) return
 

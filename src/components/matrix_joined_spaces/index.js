@@ -3,7 +3,7 @@ import Matrix from '../../Matrix'
 import config from '../../config.json'
 
 const matrixClient = Matrix.getMatrixClient()
-const typesOfContent = config.medienhaus?.content || 'content'
+const typesOfContent = config.medienhaus?.content || ['context', 'content'] // @TODO merge config content and context
 // @TODO change hook to also return invites and knocks
 
 const getAnswer = async () => {
