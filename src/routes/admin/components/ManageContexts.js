@@ -141,9 +141,8 @@ const ManageContexts = (props) => {
     }
     console.log('---- started structure ----')
     const tree = await getSpaceStructure(props.matrixClient, parent, false)
+    console.log(tree)
     setInputItems(tree)
-    const translatedJson = translateJson(tree[Object.keys(tree)[0]])
-    setStructure(translatedJson)
   }
 
   const spaceChild = async (e, space, add) => {

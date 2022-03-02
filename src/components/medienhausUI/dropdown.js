@@ -1,3 +1,14 @@
+/*
+The component expects an object for props.options in the style of:
+
+const options = {
+  value1: "Label for value1",
+  value2: "Label for value2",
+  value3: "Label for value3"
+}
+
+*/
+
 import React from 'react'
 import styled from 'styled-components'
 
@@ -23,14 +34,15 @@ input {
 }
 `
 const InputField = (props) => {
+  console.log(props.options)
   return (
     <>
       <Dropdown>
         <label htmlFor={props.name}><h3>{props.label}</h3></label>
         <select id={props.name} name={props.name} value={props.value} defaultValue="" onChange={props.onChange}>
           {props.placeholder && <option value="" disabled hidden>{props.placeholder}</option>}
-          {props.options.map((option, index) => {
-            return <option value={option} key={option + index}>{option}</option>
+          {Object.keys(props.options).map((option, index) => {
+            return <option value={option} key={option + index}>{props.options[option]}</option>
           })}
         </select>
       </Dropdown>

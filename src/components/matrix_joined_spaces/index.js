@@ -3,7 +3,10 @@ import Matrix from '../../Matrix'
 import config from '../../config.json'
 
 const matrixClient = Matrix.getMatrixClient()
-const typesOfContent = config.medienhaus?.content || ['context', 'content'] // @TODO merge config content and context
+const context = config.medienhaus?.context ? config.medienhaus?.context.concat('context') : 'context'
+const content = Object.keys(config.medienhaus?.content) ? Object.keys(config.medienhaus?.content).concat('content') : 'content'
+const typesOfContent = context.concat(content)
+console.log(typesOfContent)
 // @TODO change hook to also return invites and knocks
 
 const getAnswer = async () => {
@@ -15,10 +18,11 @@ const getAnswer = async () => {
       room.name !== 'en' &&
       room.name !== 'events' &&
       room.getMyMembership() === 'join' && // we only want spaces a user is part of
-      room.currentState.events.has('dev.medienhaus.meta') && // filter any spaces which were not created with  the cms, therefore will not have the medienhaus state event
-      typesOfContent.includes(room.currentState.events.get('dev.medienhaus.meta').values().next().value.event.content.type) // Last step is to check if
+      room.currentState.events.has('dev.medienhaus.meta') && // check if the room has our meta event
+      typesOfContent.includes(room.currentState.events.get('dev.medienhaus.meta').values().next().value.event.content.type) // and see if the type is listed in our content config
     )
     .map(room => {
+      console.log(typesOfContent.includes(room.currentState.events.get('dev.medienhaus.meta').values().next().value.event.content.type))
       const collab = room.getJoinedMemberCount() > 1
       const event = room.currentState.events.get('dev.medienhaus.meta').values().next().value.event.content
       const topic = room.currentState.events.has('m.room.topic') ? room.currentState.events.get('m.room.topic').values().next().value.event.content.topic : undefined

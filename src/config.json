@@ -1,5 +1,46 @@
 {
   "medienhaus": {
+    "context": [
+      "context",
+      "testext"
+    ],
+    "content": {
+      "studentproject": {
+        "label": "Student Project",
+        "blueprint": [
+          "location",
+          "contributors",
+          "image"
+        ],
+        "blocks": [
+          "heading",
+          "text",
+          "unordered list",
+          "ordered list",
+          "quote block",
+          "code block",
+          "image",
+          "audio",
+          "peertube",
+          "bigbluebutton"
+        ]
+      },
+      "event": {
+        "label": "Events",
+        "blueprint": [
+          "location",
+          "image"
+        ],
+        "blocks": [
+          "heading",
+          "text",
+          "image",
+          "audio",
+          "peertube",
+          "bigbluebutton"
+        ]
+      }
+    },
     "languages": [
       "en"
     ],
@@ -18,10 +59,6 @@
           "showRoot": true
         }
       }
-    },
-    "usersToInviteToNewContexts": [
-      "@romy_content:stechlin-institut.ruralmindshift.org",
-      "@stef_content:stechlin-institut.ruralmindshift.org"
-    ]
+    }
   }
 }
