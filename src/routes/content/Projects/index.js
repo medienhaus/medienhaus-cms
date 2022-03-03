@@ -5,7 +5,9 @@ import PublishProject from '../../../components/PublishProject'
 import { useTranslation } from 'react-i18next'
 import DeleteProjectButton from './DeleteProjectButton'
 
-const Content = ({ space, visibility, index, removeProject }) => {
+import config from '../../../config.json'
+
+const Content = ({ space, metaEvent, visibility, index, removeProject }) => {
   const history = useHistory()
   const { t } = useTranslation('content')
   const matrixClient = Matrix.getMatrixClient()
@@ -14,7 +16,7 @@ const Content = ({ space, visibility, index, removeProject }) => {
   return (
     <>
       <div className="project">
-        <h3 className="above">{space.name}</h3>
+        <h3 className="above">{space.name} <span style={{ color: 'gray', float: 'right' }}>{config.medienhaus?.content[metaEvent.type]?.label.toUpperCase() || metaEvent.type.toUpperCase()}</span></h3>
         <figure className="left">
           {space.avatar_url && <img src={matrixClient.mxcUrlToHttp(space.avatar_url)} alt="project-visual-key" />}
         </figure>

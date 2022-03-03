@@ -63,7 +63,8 @@ const Overview = () => {
     return () => {
       matrixClient.removeListener('Room', checkRoomForPossibleInvite)
     }
-  }, [matrixClient, typesOfSpaces])
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [matrixClient])
 
   const removeProject = (index) => {
     setProjects(projects.filter((name, i) => i !== index))

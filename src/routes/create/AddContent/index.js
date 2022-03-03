@@ -8,8 +8,9 @@ import createBlock from '../matrix_create_room'
 import reorder from '../DisplayContent/matrix_reorder_rooms'
 import BigBlueButtonEmbed from '../components/bigBlueButtonEmbed'
 import { useTranslation } from 'react-i18next'
+import config from '../../../config.json'
 
-const AddContent = ({ number, projectSpace, blocks, reloadSpace }) => {
+const AddContent = ({ number, projectSpace, blocks, contentType, reloadSpace }) => {
   const [selectedBlockType, setSelectedBlockType] = useState('')
   const [showBlockTypeSelector, setShowBlockTypeSelector] = useState(false)
   const { t } = useTranslation('content')
@@ -46,22 +47,22 @@ const AddContent = ({ number, projectSpace, blocks, reloadSpace }) => {
         <select name="content-select" value={selectedBlockType} id="content-select" onChange={(e) => setSelectedBlockType(e.target.value)}>
           <option value="" disabled>{t('-- select content --')}</option>
           <optgroup label="Text">
-            <option value="heading">{t('Heading')}</option>
-            <option value="text">{t('Text')}</option>
-            <option value="ul">{t('List (unordered)')}</option>
-            <option value="ol">{t('List (ordered)')}</option>
-            <option value="quote">{t('Quote Block')}</option>
-            <option value="code">{t('Code Block')}</option>
+            {(!config.medienhaus?.content[contentType]?.blocks || config.medienhaus?.content[contentType]?.blocks.includes('heading')) && <option value="heading">{t('Heading')}</option>}
+            {(!config.medienhaus?.content[contentType]?.blocks || config.medienhaus?.content[contentType]?.blocks.includes('text')) && <option value="text">{t('Text')}</option>}
+            {(!config.medienhaus?.content[contentType]?.blocks || config.medienhaus?.content[contentType]?.blocks.includes('unordered list')) && <option value="ul">{t('List (unordered)')}</option>}
+            {(!config.medienhaus?.content[contentType]?.blocks || config.medienhaus?.content[contentType]?.blocks.includes('ordered list')) && <option value="ol">{t('List (ordered)')}</option>}
+            {(!config.medienhaus?.content[contentType]?.blocks || config.medienhaus?.content[contentType]?.blocks.includes('quote block')) && <option value="quote">{t('Quote Block')}</option>}
+            {(!config.medienhaus?.content[contentType]?.blocks || config.medienhaus?.content[contentType]?.blocks.includes('code block')) && <option value="code">{t('Code Block')}</option>}
           </optgroup>
           <optgroup label="Media">
-            <option value="image">{t('Image')}</option>
-            <option value="audio">{t('Audio')}</option>
-            {/*
-            <option value="video">{t('Video')}</option>
-            <option value="livestream">{t('Live stream')}</option>
-            <option value="playlist">{t('Playlist')}</option>
-            <option value="bbb">{t('BigBlueButton-Session')}</option> */
-            }
+            {(!config.medienhaus?.content[contentType]?.blocks || config.medienhaus?.content[contentType]?.blocks.includes('image')) && <option value="image">{t('Image')}</option>}
+            {(!config.medienhaus?.content[contentType]?.blocks || config.medienhaus?.content[contentType]?.blocks.includes('audio')) && <option value="audio">{t('Audio')}</option>}
+
+            {(!config.medienhaus?.content[contentType]?.blocks || config.medienhaus?.content[contentType]?.blocks.includes('video')) && <option value="video">{t('Video')}</option>}
+            {(!config.medienhaus?.content[contentType]?.blocks || config.medienhaus?.content[contentType]?.blocks.includes('live stream')) && <option value="livestream">{t('Live stream')}</option>}
+            {(!config.medienhaus?.content[contentType]?.blocks || config.medienhaus?.content[contentType]?.blocks.includes('playlist')) && <option value="playlist">{t('Playlist')}</option>}
+            {(!config.medienhaus?.content[contentType]?.blocks || config.medienhaus?.content[contentType]?.blocks.includes('bigbluebutton')) && <option value="bbb">{t('BigBlueButton-Session')}</option>}
+
           </optgroup>
         </select>
         <button className="cancel" onClick={(e) => { e.preventDefault(); setShowBlockTypeSelector(false); setSelectedBlockType('') }}>×</button>
