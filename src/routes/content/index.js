@@ -78,7 +78,8 @@ const Overview = () => {
       const updatedProjects = joinedSpaces?.filter(space => !space.meta?.deleted && typesOfSpaces.includes(space.meta.type))
       setProjects(sortBy(updatedProjects, 'name'))
     }
-  }, [joinedSpaces, typesOfSpaces])
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [joinedSpaces])
 
   const removeInviteByIndex = (room) => {
     // setInvites(invites => invites.filter((invite, i) => i !== index))
