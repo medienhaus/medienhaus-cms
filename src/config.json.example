@@ -5,43 +5,41 @@
       "degree"
     ],
     "content": {
-      "studentproject": {
-				"label": "Student Project",
-				"blueprint": [
-						"location",
-						"contributors",
-						"image"
-					],
-					"blocks": [
-						"heading",
-						"text",
-						"unordered list",
-						"ordered list",
-						"quote block",
-						"code block",
-						"image",
-						"audio",
-            "playlist",
-            "live stream",
-						"peertube",
-						"bigbluebutton"		
-					]
-					},
-      "event": {
-				"label": "Events",
-								"blueprint": [
-										"location",
-										"image"
-									],
-									"blocks": [
-										"heading",
-										"text",
-										"image",
-										"audio",
-										"peertube",
-										"bigbluebutton"		
-									]
-									}
+      "blog": {
+        "label": "Blog Post",
+        "blueprint": [
+          "location",
+          "contributors",
+          "image"
+        ],
+        "blocks": [
+          "heading",
+          "text",
+          "unordered list",
+          "ordered list",
+          "quote block",
+          "code block",
+          "image",
+          "audio",
+          "playlist",
+          "live stream",
+          "peertube",
+          "bigbluebutton"
+        ]
+      },
+      "article": {
+        "label": "Article",
+        "blueprint": [
+          "location",
+          "image"
+        ],
+        "blocks": [
+          "heading",
+          "text",
+          "image",
+          "audio"
+        ]
+      }
     },
     "item": []
   },
