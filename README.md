@@ -114,16 +114,16 @@ You can define which type of blocks are listed in the dropdown in the /create ro
 
 Each type of content can have one or all of the following blocks:
 
-**heading**
-**text**
-**unordered list**
-**ordered list**
-**quote block**
-**code block**
-**image**
-**audio**
-**peertube**
-**bigbluebutton**
+**heading**  
+**text**  
+**unordered list**  
+**ordered list**  
+**quote block**  
+**code block**  
+**image**  
+**audio**  
+**peertube**  
+**bigbluebutton**  
 
 ## Languages
 
