@@ -15,13 +15,11 @@ const Overview = () => {
   const matrixClient = Matrix.getMatrixClient()
   const [projects, setProjects] = useState({})
   const [invites, setInvites] = useState({})
+  const typesOfSpaces = Object.keys(config.medienhaus?.content) ? Object.keys(config.medienhaus?.content).concat('content') : ['content']
   const { joinedSpaces, spacesErr, fetchSpaces, reload } = useJoinedSpaces(false)
 
   useEffect(() => {
     async function checkRoomForPossibleInvite (room) {
-      // Types of spaces for which we want to show invites
-      const typesOfSpaces = config.medienhaus?.content || 'content'
-
       // Ignore if this is not a space
       if (room.getType() !== 'm.space') return
       // Ignore if this is not a student project or a "context"
@@ -65,6 +63,7 @@ const Overview = () => {
     return () => {
       matrixClient.removeListener('Room', checkRoomForPossibleInvite)
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [matrixClient])
 
   const removeProject = (index) => {
@@ -76,9 +75,10 @@ const Overview = () => {
       // we check if a collaborator has deleted a project since we last logged in
       joinedSpaces?.filter(space => space.meta?.deleted).forEach(async space => await deleteProject(space.room_id))
       // then we update our array to not display the just deleted projects and only display joined rooms
-      const updatedProjects = joinedSpaces?.filter(space => !space.meta?.deleted && space.meta.type === 'content')
+      const updatedProjects = joinedSpaces?.filter(space => !space.meta?.deleted && typesOfSpaces.includes(space.meta.type))
       setProjects(sortBy(updatedProjects, 'name'))
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [joinedSpaces])
 
   const removeInviteByIndex = (room) => {

@@ -19,6 +19,7 @@ import DateAndVenue from './DateAndVenue'
 import Dropdown from '../../components/medienhausUI/dropdown'
 
 import config from '../../config.json'
+import _ from 'lodash'
 
 const Create = () => {
   const { t } = useTranslation('content')
@@ -35,7 +36,7 @@ const Create = () => {
   const [allocation, setAllocation] = useState([])
   const [events, setEvents] = useState()
   const [description, setDescription] = useState()
-  const [type, setType] = useState(config.medienhaus?.content?.length === 1 ? config.medienhaus?.content[0] : '')
+  const [type, setType] = useState(Object.keys(config.medienhaus?.content).length === 1 ? Object.keys(config.medienhaus?.content)[0] : '')
   // const [preview, setPreview] = useState(false)
   const history = useHistory()
   const matrixClient = Matrix.getMatrixClient()
@@ -109,6 +110,8 @@ const Create = () => {
       // fetch custom medienhaus event
       const meta = spaceDetails.currentState.events.get('dev.medienhaus.meta').values().next().value.event.content
       setMedienhausMeta(meta)
+      // set type to the contents type
+      setType(meta.type)
       // check for allocation event
       const allocationEvent = spaceDetails.currentState.events.get('dev.medienhaus.allocation') ? spaceDetails.currentState.events.get('dev.medienhaus.allocation').values().next().value.event.content : null
       setAllocation(allocationEvent)
@@ -269,10 +272,10 @@ const Create = () => {
       </section>
       */}
       <section className="project-title">
-        {(!projectSpace && config.medienhaus?.content?.length > 1) &&
-          <Dropdown name="type" label="Type" placeholder="-- select type --" options={config.medienhaus.content} value={type} onChange={e => setType(e.target.value)} />}
+        {(!projectSpace && Object.keys(config.medienhaus?.content)?.length > 1) &&
+          <Dropdown name="type" label="Type" placeholder="-- select type --" options={_.mapValues(config.medienhaus?.content, 'label')} value={type} onChange={e => setType(e.target.value)} />}
         <h3>{t('Project title')}</h3>
-        <ProjectTitle title={title} projectSpace={projectSpace} type={config.medienhaus?.content?.length ? type : 'content'} callback={changeTitle} />
+        <ProjectTitle title={title} projectSpace={projectSpace} type={Object.keys(config.medienhaus?.content).length ? type : 'content'} callback={changeTitle} />
       </section>
 
       {projectSpace && (
@@ -281,17 +284,26 @@ const Create = () => {
             <h3>{t('Project context')}</h3>
             <Category title={title} projectSpace={projectSpace} onChange={changeContext} parent={process.env.REACT_APP_CONTEXT_ROOT_SPACE_ID} />
           </section>
-          <section className="events">
-            <h3>{t('Location')}</h3>
-            <DateAndVenue inviteCollaborators={inviteCollaborators} reloadSpace={reloadSpace} projectSpace={projectSpace} events={events} allocation={allocation} matrixClient={matrixClient} />
-          </section>
-          <section className="contributors">
-            <Collaborators projectSpace={spaceObject?.rooms} members={roomMembers} time={getCurrentTime} startListeningToCollab={() => startListeningToCollab()} />
-          </section>
-          <section className="project-image">
-            <h3>{t('Project image')}</h3>
-            {loading ? <Loading /> : <ProjectImage projectSpace={projectSpace} changeProjectImage={changeProjectImage} />}
-          </section>
+
+          {(!config.medienhaus?.content[type]?.blueprint || config.medienhaus?.content[type]?.blueprint.includes('location')) && (
+            <section className="events">
+              <h3>{t('Location')}</h3>
+              <DateAndVenue inviteCollaborators={inviteCollaborators} reloadSpace={reloadSpace} projectSpace={projectSpace} events={events} allocation={allocation} matrixClient={matrixClient} />
+            </section>
+          )}
+
+          {(!config.medienhaus?.content[type]?.blueprint || config.medienhaus?.content[type]?.blueprint.includes('contributors')) && (
+            <section className="contributors">
+              <Collaborators projectSpace={spaceObject?.rooms} members={roomMembers} time={getCurrentTime} startListeningToCollab={() => startListeningToCollab()} />
+            </section>
+          )}
+
+          {(!config.medienhaus?.content[type]?.blueprint || config.medienhaus?.content[type]?.blueprint.includes('image')) && (
+            <section className="project-image">
+              <h3>{t('Project image')}</h3>
+              {loading ? <Loading /> : <ProjectImage projectSpace={projectSpace} changeProjectImage={changeProjectImage} />}
+            </section>
+          )}
           <section className="content">
             <h3>{t('Content')}</h3>
             {/*
@@ -313,7 +325,7 @@ const Create = () => {
             </select>
             {spaceObject && (description || description === '') ? <ProjectDescription description={description[contentLang]} callback={onChangeDescription} /> : <Loading />}
             {blocks.length === 0
-              ? <AddContent number={0} projectSpace={spaceObject?.rooms.filter(room => room.name === contentLang)[0].room_id} blocks={blocks} reloadSpace={reloadSpace} />
+              ? <AddContent number={0} projectSpace={spaceObject?.rooms.filter(room => room.name === contentLang)[0].room_id} blocks={blocks} contentType={type} reloadSpace={reloadSpace} />
               : blocks.map((content, i) =>
                 <DisplayContent block={content} index={i} blocks={blocks} projectSpace={spaceObject?.rooms.filter(room => room.name === contentLang)[0].room_id} reloadSpace={reloadSpace} time={getCurrentTime} key={content + i + content?.lastUpdate} />
               )}

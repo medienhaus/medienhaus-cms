@@ -1,12 +1,12 @@
 {
   "medienhaus": {
     "context": [
-      "context",
-      "testext"
+      "faculty",
+      "degree"
     ],
     "content": {
-      "studentproject": {
-        "label": "Student Project",
+      "blog": {
+        "label": "Blog Post",
         "blueprint": [
           "location",
           "contributors",
@@ -21,12 +21,14 @@
           "code block",
           "image",
           "audio",
+          "playlist",
+          "live stream",
           "peertube",
           "bigbluebutton"
         ]
       },
-      "event": {
-        "label": "Events",
+      "article": {
+        "label": "Article",
         "blueprint": [
           "location",
           "image"
@@ -35,30 +37,33 @@
           "heading",
           "text",
           "image",
-          "audio",
-          "peertube",
-          "bigbluebutton"
+          "audio"
         ]
       }
     },
-    "languages": [
-      "en"
-    ],
-    "sites": {
-      "account": {
-        "avatar": true,
-        "mail": false,
-        "name": true,
-        "password": false
-      },
-      "moderate": {
-        "accept": true,
-        "invite": true,
-        "rightsManagement": true,
-        "manageContexts": {
-          "showRoot": true
-        }
-      }
-    }
-  }
+    "item": []
+  },
+  "sites": {
+    "account": {
+      "avatar": true,
+      "mail": true,
+      "name": true
+    },
+    "moderate": {
+      "invite": true,
+      "rightsManagement": true,
+      "manageContexts": true
+    },
+    "support": true,
+    "request": true,
+    "feedback": true
+  },
+  "languages": [
+    "en",
+    "es",
+    "de"
+  ],
+  "usersToInviteToNewContexts": [
+    "@user1:server.com"
+  ]
 }

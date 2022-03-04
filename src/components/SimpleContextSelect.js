@@ -5,7 +5,6 @@ import filterDeep from 'deepdash/es/filterDeep'
 import config from '../config.json'
 
 function SimpleContextSelect ({ onItemChosen, selectedContext, struktur, disabled }) {
-  console.log('selected Context = ' + selectedContext)
   const items = config.medienhaus?.sites?.moderate?.manageContexts?.showRoot ? struktur : struktur[Object.keys(struktur)[0]].children
   return (
     <>
