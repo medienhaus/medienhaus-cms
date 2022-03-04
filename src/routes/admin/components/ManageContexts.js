@@ -141,7 +141,6 @@ const ManageContexts = (props) => {
     }
     console.log('---- started structure ----')
     const tree = await getSpaceStructure(props.matrixClient, parent, false)
-    console.log(tree)
     setInputItems(tree)
   }
 

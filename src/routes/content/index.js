@@ -15,7 +15,7 @@ const Overview = () => {
   const matrixClient = Matrix.getMatrixClient()
   const [projects, setProjects] = useState({})
   const [invites, setInvites] = useState({})
-  const typesOfSpaces = Object.keys(config.medienhaus?.content) ? Object.keys(config.medienhaus?.content).concat('content') : 'content'
+  const typesOfSpaces = Object.keys(config.medienhaus?.content) ? Object.keys(config.medienhaus?.content).concat('content') : ['content']
   const { joinedSpaces, spacesErr, fetchSpaces, reload } = useJoinedSpaces(false)
 
   useEffect(() => {

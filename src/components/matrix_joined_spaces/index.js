@@ -3,8 +3,8 @@ import Matrix from '../../Matrix'
 import config from '../../config.json'
 
 const matrixClient = Matrix.getMatrixClient()
-const context = config.medienhaus?.context ? config.medienhaus?.context.concat('context') : 'context'
-const content = Object.keys(config.medienhaus?.content) ? Object.keys(config.medienhaus?.content).concat('content') : 'content'
+const context = config.medienhaus?.context ? config.medienhaus?.context.concat('context') : ['context']
+const content = Object.keys(config.medienhaus?.content) ? Object.keys(config.medienhaus?.content).concat('content') : ['content']
 const typesOfContent = context.concat(content)
 // @TODO change hook to also return invites and knocks
 
