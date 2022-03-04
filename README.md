@@ -2,7 +2,7 @@
 
 ### medienhaus/
 
-Berlin University of the Arts’ free and open-source environment for digital learning, teaching, and collaboration.
+customizable modular free and open-source environment for decentralized, distributed communication and collaboration with zero dependencies. info@medienhaus.dev
 
 [Concept Paper](https://medienhaus.dev/) | [Twitter](https://twitter.com/medienhaus_)
 
@@ -11,6 +11,168 @@ Berlin University of the Arts’ free and open-source environment for digital le
 # medienhaus/cms
 
 `medienhaus-cms` is a federatable, room-based content management system (CMS) using the [Matrix](https://matrix.org/) protocol. At the moment the project is still adapted to fit the needs of the Berlin University of the Arts’ digitally enhanced [Rundgang 2021](https://www.udk-berlin.de/universitaet/marketing-zentrale-veranstaltungen/zentrale-veranstaltungen/rundgang-tage-der-offenen-tuer-der-udk-berlin/rundgang-plattform/). In the future, `medienhaus-cms` will feature customisation options to fit specific needs.
+
+## Configuration
+
+If you have special requirements you can configure the cms by copying config.example.json to config.json and modifying it.
+## Content
+
+You can define different types of content the cms is supposed to support.
+
+This gives you the ability to use different blueprints for different types.
+
+@TODO needs blueprint functionality implemented
+
+## Languages
+
+Define all languages you want the CMS to support as **ISO 639-1 codes.**
+
+Cannot be empty! At least one language has to be defined.
+
+If more than one language is specified, a dropdown appears in the /create route so users are able to create content in the different languages. 
+
+`language[0]` is the default language selected and also the selected language for the topic of the content space.
+
+## usersToInviteToNewContexts
+
+All users specified in this array are invited to new context spaces if they are created through the manage context UI in /manage and promoted to power level 50.
+
+If no users are given, the context spaces are created without inviting any other users.
+
+
+
+## Sites
+
+Define which sites should be visible and which functions should be available in each route.
+
+```
+  "medienhaus": {
+    "context": [
+      "faculty",
+      "degree"
+    ],
+    "content": {
+      "blog": {
+        "label": "Blog Post",
+        "blueprint": [
+          "location",
+          "contributors",
+          "image"
+        ],
+        "blocks": [
+          "heading",
+          "text",
+          "unordered list",
+          "ordered list",
+          "quote block",
+          "code block",
+          "image",
+          "audio",
+          "playlist",
+          "live stream",
+          "peertube",
+          "bigbluebutton"
+        ]
+      },
+      "article": {
+        "label": "Article",
+        "blueprint": [
+          "location",
+          "image"
+        ],
+        "blocks": [
+          "heading",
+          "text",
+          "image",
+          "audio"
+        ]
+      }
+    },
+    "item": []
+  },
+  "sites": {
+    "account": {
+      "avatar": true,
+      "mail": true,
+      "name": true
+    },
+    "moderate": {
+      "invite": true,
+      "rightsManagement": true,
+      "manageContexts": true
+    },
+    "support": true,
+    "request": true,
+    "feedback": true
+  },
+  "languages": [
+    "en",
+    "es",
+    "de"
+  ],
+  "usersToInviteToNewContexts": [
+    "@user1:server.com"
+  ]
+} 
+```
+
+### Account
+
+**avatar**
+
+users are able to change their profile picture from within the accout route.
+
+**mail**
+
+gives users the ability to add one or more email addresses to their account.
+
+**name**
+
+gives users the ability to change their display name.
+
+## moderate
+
+**invite**
+
+Invite users to specific rooms you are moderating
+
+**rightsManagement**
+
+promote users to moderators within a specified context
+
+**manageContexts**
+
+add or remove context spaces or sub-context spaces
+
+**showRoot:** if enabled the root of all contexts is displayed in the manage context dropdown.
+
+## support
+
+shows a link to a support page in the navigation.
+
+<aside>
+💡 request, support and feedback requires  https://github.com/medienhaus/medienhaus-backend
+</aside>
+
+## request
+
+shows a link to a request form in the navigation .
+
+users are able to request context spaces if they don’t have the rights to add them themselves. 
+
+<aside>
+💡 request, support and feedback requires  https://github.com/medienhaus/medienhaus-backend
+</aside>
+
+## feedback
+
+shows a link to a feedback form in the navigation .
+
+users are able to give feedback via a form.
+
+<aside>
+💡 request, support and feedback requires  https://github.com/medienhaus/medienhaus-backend
+</aside>
 
 ## Custom stateEvent
 
