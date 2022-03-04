@@ -15,35 +15,7 @@ customizable modular free and open-source environment for decentralized, distrib
 ## Configuration
 
 If you have special requirements you can configure the cms by copying config.example.json to config.json and modifying it.
-## Content
 
-You can define different types of content the cms is supposed to support.
-
-This gives you the ability to use different blueprints for different types.
-
-@TODO needs blueprint functionality implemented
-
-## Languages
-
-Define all languages you want the CMS to support as **ISO 639-1 codes.**
-
-Cannot be empty! At least one language has to be defined.
-
-If more than one language is specified, a dropdown appears in the /create route so users are able to create content in the different languages. 
-
-`language[0]` is the default language selected and also the selected language for the topic of the content space.
-
-## usersToInviteToNewContexts
-
-All users specified in this array are invited to new context spaces if they are created through the manage context UI in /manage and promoted to power level 50.
-
-If no users are given, the context spaces are created without inviting any other users.
-
-
-
-## Sites
-
-Define which sites should be visible and which functions should be available in each route.
 
 ```
   "medienhaus": {
@@ -115,6 +87,61 @@ Define which sites should be visible and which functions should be available in 
   ]
 } 
 ```
+## Content
+
+You can define different types of content the cms is supposed to support.
+
+This gives you the ability to use different blueprints for different types.
+
+## Blueprint
+
+**Image**
+Add a main image to your content.
+
+**Contributors**
+Gives users the ability to invite contributors who can edit the content.
+
+**Location**
+Adds a UI to add a location to the content.
+
+### Blocks
+
+You can define which type of blocks are listed in the dropdown in the /create route.
+
+Each type of content can have one or all of the following blocks:
+
+**heading
+text
+unordered list
+ordered list
+quote block
+code block
+image
+audio
+peertube
+bigbluebutton**
+
+## Languages
+
+Define all languages you want the CMS to support as **ISO 639-1 codes.**
+
+Cannot be empty! At least one language has to be defined.
+
+If more than one language is specified, a dropdown appears in the /create route so users are able to create content in the different languages. 
+
+`language[0]` is the default language selected and also the selected language for the topic of the content space.
+
+## usersToInviteToNewContexts
+
+All users specified in this array are invited to new context spaces if they are created through the manage context UI in /manage and promoted to power level 50.
+
+If no users are given, the context spaces are created without inviting any other users.
+
+
+
+## Sites
+
+Define which sites should be visible and which functions should be available in each route.
 
 ### Account
 
