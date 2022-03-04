@@ -94,14 +94,18 @@ You can define different types of content the cms is supposed to support.
 This gives you the ability to use different blueprints for different types.
 
 ## Blueprint
+Define which of the following UI elements should be visible in the /create route.
 
 **Image**
+
 Add a main image to your content.
 
 **Contributors**
+
 Gives users the ability to invite contributors who can edit the content.
 
 **Location**
+
 Adds a UI to add a location to the content.
 
 ### Blocks
