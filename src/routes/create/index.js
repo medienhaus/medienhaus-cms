@@ -19,6 +19,7 @@ import DateAndVenue from './DateAndVenue'
 import Dropdown from '../../components/medienhausUI/dropdown'
 
 import config from '../../config.json'
+import _ from 'lodash'
 
 const Create = () => {
   const { t } = useTranslation('content')
@@ -35,7 +36,6 @@ const Create = () => {
   const [allocation, setAllocation] = useState([])
   const [events, setEvents] = useState()
   const [description, setDescription] = useState()
-  const [contentDropdownObject, setContentDropdownObject] = useState()
   const [type, setType] = useState(Object.keys(config.medienhaus?.content).length === 1 ? Object.keys(config.medienhaus?.content)[0] : '')
   // const [preview, setPreview] = useState(false)
   const history = useHistory()
@@ -133,16 +133,6 @@ const Create = () => {
       setTimeout(() => fetchSpace(), 250)
     }
   }, [matrixClient, projectSpace, getCurrentTime, contentLang])
-
-  useEffect(() => {
-    if (Object.keys(config.medienhaus?.content).length > 1) {
-      const obj = {}
-      Object.keys(config.medienhaus?.content).forEach((content) => {
-        obj[content] = config.medienhaus?.content[content].label
-      })
-      setContentDropdownObject(obj)
-    }
-  }, [])
 
   useEffect(() => {
     if (!projectSpace) {
@@ -282,8 +272,8 @@ const Create = () => {
       </section>
       */}
       <section className="project-title">
-        {(!projectSpace && contentDropdownObject) &&
-          <Dropdown name="type" label="Type" placeholder="-- select type --" options={contentDropdownObject} value={type} onChange={e => setType(e.target.value)} />}
+        {(!projectSpace && Object.keys(config.medienhaus?.content)?.length > 1) &&
+          <Dropdown name="type" label="Type" placeholder="-- select type --" options={_.mapValues(config.medienhaus?.content, 'label')} value={type} onChange={e => setType(e.target.value)} />}
         <h3>{t('Project title')}</h3>
         <ProjectTitle title={title} projectSpace={projectSpace} type={Object.keys(config.medienhaus?.content).length ? type : 'content'} callback={changeTitle} />
       </section>
