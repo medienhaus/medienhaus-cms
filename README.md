@@ -1,4 +1,4 @@
-<img src="public/favicon.svg" width="70" />
+<img src="public/medienhaus.png" width="70" />
 
 ### medienhaus/
 
