@@ -2,7 +2,7 @@
 
 ### medienhaus/
 
-customizable modular free and open-source environment for decentralized, distributed communication and collaboration with zero dependencies. info@medienhaus.dev
+customizable modular free and open-source environment for decentralized, distributed communication and collaboration. info@medienhaus.dev
 
 [Concept Paper](https://medienhaus.dev/) | [Twitter](https://twitter.com/medienhaus_)
 
@@ -10,12 +10,12 @@ customizable modular free and open-source environment for decentralized, distrib
 
 # medienhaus/cms
 
-`medienhaus-cms` is a federatable, room-based content management system (CMS) using the [Matrix](https://matrix.org/) protocol. At the moment the project is still adapted to fit the needs of the Berlin University of the Arts’ digitally enhanced [Rundgang 2021](https://www.udk-berlin.de/universitaet/marketing-zentrale-veranstaltungen/zentrale-veranstaltungen/rundgang-tage-der-offenen-tuer-der-udk-berlin/rundgang-plattform/). In the future, `medienhaus-cms` will feature customisation options to fit specific needs.
+`medienhaus-cms` is a federatable, room-based content management system (CMS) using the [Matrix](https://matrix.org/) protocol.
+The project was used for Berlin University of the Arts’ digitally enhanced [Rundgang 2021](https://www.udk-berlin.de/universitaet/marketing-zentrale-veranstaltungen/zentrale-veranstaltungen/rundgang-tage-der-offenen-tuer-der-udk-berlin/rundgang-plattform/).
 
 ## Configuration
 
 If you have special requirements you can configure the cms by copying config.example.json to config.json and modifying it.
-
 
 ```
   "medienhaus": {
@@ -87,6 +87,7 @@ If you have special requirements you can configure the cms by copying config.exa
   ]
 } 
 ```
+
 ## Content
 
 You can define different types of content the cms is supposed to support.
@@ -137,10 +138,9 @@ If more than one language is specified, a dropdown appears in the /create route 
 
 ## usersToInviteToNewContexts
 
-All users specified in this array are invited to new context spaces if they are created through the manage context UI in /manage and promoted to power level 50.
+All users specified in this array are automatically invited to new context spaces if they are created through the manage context UI in /manage and promoted to power level 50.
 
 If no users are given, the context spaces are created without inviting any other users.
-
 
 
 ## Sites
