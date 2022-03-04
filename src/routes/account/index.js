@@ -10,12 +10,13 @@ const Account = () => {
   const auth = useAuth()
   const profile = auth.user
   const [displayName, setDisplayName] = useState('')
+  const [verifyMail, setVerifyMail] = useState()
 
   return (
     <section className="account">
-      {config.medienhaus.sites.account.name && <Name name={displayName || profile.displayname} callback={(name) => setDisplayName(name)} />}
-      {config.medienhaus.sites.account.avatar && <Avatar avatarUrl={profile.avatar_url} name={displayName || profile.displayname} />}
-      {config.medienhaus.sites.account.mail && <Email />}
+      {config.medienhaus.sites.account.name && !verifyMail && <Name name={displayName || profile.displayname} callback={(name) => setDisplayName(name)} />}
+      {config.medienhaus.sites.account.avatar && !verifyMail && <Avatar avatarUrl={profile.avatar_url} name={displayName || profile.displayname} />}
+      {config.medienhaus.sites.account.mail && <Email callback={setVerifyMail} />}
     </section>
   )
 }

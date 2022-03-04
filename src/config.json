@@ -47,7 +47,7 @@
     "sites": {
       "account": {
         "avatar": true,
-        "mail": false,
+        "mail": true,
         "name": true,
         "password": false
       },
