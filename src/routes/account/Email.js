@@ -16,8 +16,6 @@ export const Email = (props) => {
   const matrixClient = Matrix.getMatrixClient()
 
   useEffect(() => {
-    console.log(sid)
-    console.log(secret)
     if (sid !== window.location.href) {
       props.callback(true)
 
@@ -36,7 +34,7 @@ export const Email = (props) => {
       }
       setTokenObject(obj)
     }
-  }, [props, sid])
+  }, [password, props, secret, sid])
 
   function isEmail (val) {
     const regEmail = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
