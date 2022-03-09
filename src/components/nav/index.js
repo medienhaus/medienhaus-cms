@@ -52,7 +52,9 @@ const Nav = () => {
   useEffect(() => {
     async function checkRoomForPossibleInvite (room) {
       // Types of spaces for which we want to count invites for
-      const typesOfSpaces = Object.keys(config.medienhaus?.content) || 'content'
+      const context = config.medienhaus?.context ? config.medienhaus?.context.concat('context') : ['context']
+      const content = config.medienhaus?.content ? Object.keys(config.medienhaus?.content).concat('content') : ['content']
+      const typesOfSpaces = context.concat(content)
 
       // Ignore if this is not a space
       if (room.getType() !== 'm.space') return
