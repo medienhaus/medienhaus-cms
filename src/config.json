@@ -3,18 +3,6 @@
     "context": [
       "context"
     ],
-    "content": {
-      "studentproject": {
-        "label": "Track",
-        "blueprint": [
-          "contributors",
-          "image"
-        ],
-        "blocks": [
-          "audio"
-        ]
-      }
-    },
     "languages": [
       "en"
     ],

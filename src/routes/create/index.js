@@ -272,10 +272,10 @@ const Create = () => {
       </section>
       */}
       <section className="project-title">
-        {(!projectSpace && Object.keys(config.medienhaus?.content)?.length > 1) &&
+        {(!projectSpace && (config.medienhaus?.content && Object.keys(config.medienhaus?.content).length > 1)) &&
           <Dropdown name="type" label="Type" placeholder="-- select type --" options={_.mapValues(config.medienhaus?.content, 'label')} value={type} onChange={e => setType(e.target.value)} />}
         <h3>{t('Project title')}</h3>
-        <ProjectTitle title={title} projectSpace={projectSpace} type={Object.keys(config.medienhaus?.content).length ? type : 'content'} callback={changeTitle} />
+        <ProjectTitle title={title} projectSpace={projectSpace} type={config.medienhaus?.content ? type : 'content'} callback={changeTitle} />
       </section>
 
       {projectSpace && (
