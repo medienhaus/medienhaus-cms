@@ -16,7 +16,10 @@ const Content = ({ space, metaEvent, visibility, index, removeProject }) => {
   return (
     <>
       <div className="project">
-        <h3 className="above">{space.name} <span style={{ color: 'gray', float: 'right' }}>{config.medienhaus?.content ? config.medienhaus?.content[metaEvent.type]?.label.toUpperCase() : metaEvent.type.toUpperCase()}</span></h3>
+        <h3 className="above">{space.name}
+          {config.medienhaus?.content &&
+            <span style={{ color: 'gray', float: 'right' }}>{config.medienhaus?.content ? config.medienhaus?.content[metaEvent.type]?.label.toUpperCase() : metaEvent.type.toUpperCase()}</span>}
+        </h3>
         <figure className="left">
           {space.avatar_url && <img src={matrixClient.mxcUrlToHttp(space.avatar_url)} alt="project-visual-key" />}
         </figure>
