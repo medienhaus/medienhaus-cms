@@ -36,7 +36,7 @@ const Create = () => {
   const [allocation, setAllocation] = useState([])
   const [events, setEvents] = useState()
   const [description, setDescription] = useState()
-  const [type, setType] = useState(Object.keys(config.medienhaus?.content).length === 1 ? Object.keys(config.medienhaus?.content)[0] : '')
+  const [type, setType] = useState(config.medienhaus?.content && Object.keys(config.medienhaus?.content).length === 1 ? Object.keys(config.medienhaus?.content)[0] : '')
   // const [preview, setPreview] = useState(false)
   const history = useHistory()
   const matrixClient = Matrix.getMatrixClient()
