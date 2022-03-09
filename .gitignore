@@ -30,3 +30,6 @@ yarn-error.log*
 # stuff
 .*.swp
 .DS_Store
+
+# config
+config.json

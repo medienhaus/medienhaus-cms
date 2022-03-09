@@ -11,7 +11,7 @@ customizable modular free and open-source environment for decentralized, distrib
 # medienhaus/cms
 
 `medienhaus-cms` is a federatable, room-based content management system (CMS) using the [Matrix](https://matrix.org/) protocol.
-The project was used for Berlin University of the Arts’ digitally enhanced [Rundgang 2021](https://www.udk-berlin.de/universitaet/marketing-zentrale-veranstaltungen/zentrale-veranstaltungen/rundgang-tage-der-offenen-tuer-der-udk-berlin/rundgang-plattform/).
+The project was used for Berlin University of the Arts’ digitally enhanced [Rundgang 2021](https://rundgang.udk-berlin.de/).
 
 ## Configuration
 

@@ -19,8 +19,7 @@ import config from '../../../config.json'
 const ManageContexts = (props) => {
   const { t } = useTranslation('admin')
   const [selectedContext, setSelectedContext] = useState('')
-  const [structure, setStructure] = useState()
-  const [parentName, setParentName] = useState('')
+  const [parentName] = useState('')
   // eslint-disable-next-line no-unused-vars
   const [disableButton, setDisableButton] = useState(false)
   const [parent] = useState(process.env.REACT_APP_CONTEXT_ROOT_SPACE_ID)
@@ -54,6 +53,7 @@ const ManageContexts = (props) => {
         // const metaEvent = await matrixClient.getStateEvent(spaceId, 'dev.medienhaus.meta')
         const metaEvent = _.find(stateEvents, { type: 'dev.medienhaus.meta' })
         if (!metaEvent) return
+        console.log(metaEvent)
         // if (!typesOfSpaces.includes(metaEvent.content.type)) return
 
         const nameEvent = _.find(stateEvents, { type: 'm.room.name' })
