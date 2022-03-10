@@ -11,7 +11,6 @@ import { useTranslation } from 'react-i18next'
 import config from '../../../config.json'
 
 const AddContent = ({ number, projectSpace, blocks, contentType, reloadSpace }) => {
-  console.log(contentType)
   const [selectedBlockType, setSelectedBlockType] = useState('')
   const [showBlockTypeSelector, setShowBlockTypeSelector] = useState(false)
   const { t } = useTranslation('content')

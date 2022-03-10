@@ -30,7 +30,6 @@ const Overview = () => {
       // Ignore if this is not an invitation (getMyMembership() only works correctly after calling _loadMembersFromServer())
       await room.loadMembersFromServer().catch(console.error)
       if (room.getMyMembership() !== 'invite') return
-      console.log(room)
       // if we have legacy code with unjoined rooms, take care of those first.
       if (room.name.includes('_event')) {
         const eventSpace = await matrixClient.getRoomHierarchy(room.roomId).catch(console.log)
