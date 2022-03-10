@@ -8,11 +8,11 @@ const deleteProject = async (roomId) => {
     const meta = await matrixClient.getStateEvent(roomId, 'dev.medienhaus.meta').catch(console.log)
     meta.deleted = true
     await matrixClient.sendStateEvent(roomId, 'dev.medienhaus.meta', meta)
-    const space = await matrixClient.getSpaceSummary(roomId).catch(console.log)
+    const space = await matrixClient.getRoomHierarchy(roomId).catch(console.log)
     space.rooms.filter(room => room.room_id !== roomId).forEach(async (space, index) => {
       // we reverse here to leave the actual project space last in case something goes wrong in the process.
       console.log('Leaving ' + space.name)
-      const subspaces = await matrixClient.getSpaceSummary(space.room_id).catch(console.log)
+      const subspaces = await matrixClient.getRoomHierarchy(space.room_id).catch(console.log)
       subspaces.rooms.reverse().forEach(async (space) => {
         const count = await matrixClient.getJoinedRoomMembers(space.room_id)
         Object.keys(count.joined).length > 1 && Object.keys(count.joined).forEach(name => {

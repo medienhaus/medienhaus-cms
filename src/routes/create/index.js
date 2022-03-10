@@ -61,7 +61,6 @@ const Create = () => {
   }
 
   const inviteCollaborators = async (roomId) => {
-    console.log(roomMembers)
     const allCollaborators = Object.keys(roomMembers).filter(userId => userId !== localStorage.getItem('mx_user_id'))
     // const allCollaborators = joinedSpaces?.map((space, i) => space.name === title && Object.keys(space.collab).filter(userId => userId !== localStorage.getItem('mx_user_id') && userId !== process.env.REACT_APP_PROJECT_BOT_ACCOUNT)).filter(space => space !== false)[0]
     // I would be surprised if there isn't an easier way to get joined members...
@@ -96,7 +95,6 @@ const Create = () => {
       // here we collect all necessary information about the project
       const space = await matrixClient.getRoomHierarchy(projectSpace)
       setSpaceObject(space)
-      console.log('object')
       const spaceDetails = await matrixClient.getRoom(projectSpace)
       // setting title to project space name
       setTitle(space.rooms[0].name)
@@ -180,7 +178,6 @@ const Create = () => {
         event.event.content?.name?.includes('bbb') ||
         event.event.content?.name?.includes('livestream') ||
         event.event.content?.name?.includes('date')) {
-        console.log(event)
         return
       }
       if (event.event.type === 'm.room.name' && blocks?.filter(({ roomId }) => event.sender?.roomId.includes(roomId))) {
@@ -256,7 +253,6 @@ const Create = () => {
   }
 
   if (projectSpace && !matrixClient.isInitialSyncComplete()) return <Loading />
-  console.log(type)
   return (
     <>
       {/* }
