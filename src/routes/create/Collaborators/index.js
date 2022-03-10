@@ -44,7 +44,7 @@ const Collaborators = ({ projectSpace, members, time, startListeningToCollab }) 
 
           if (index > 0) {
             try {
-              await matrixClient.getSpaceSummary(space.room_id)
+              await matrixClient.getRoomHierarchy(space.room_id)
                 .then((res) => {
                   res.rooms.forEach(async (room, index) => {
                     await matrixClient.invite(room.room_id, id).catch(console.log)
@@ -118,7 +118,7 @@ const Collaborators = ({ projectSpace, members, time, startListeningToCollab }) 
   const kickUser = async (name) => {
     projectSpace.forEach(async (space, index) => {
       console.log('revoking invitation from: ' + space.name)
-      const subspaces = await matrixClient.getSpaceSummary(space.room_id).catch(console.log)
+      const subspaces = await matrixClient.getRoomHierarchy(space.room_id).catch(console.log)
       subspaces.rooms.reverse().forEach(async (space) => {
         matrixClient.kick(space.room_id, name.user.userId).catch(console.log)
       })

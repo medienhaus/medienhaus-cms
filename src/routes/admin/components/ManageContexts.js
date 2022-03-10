@@ -269,10 +269,10 @@ const ManageContexts = (props) => {
     setEvents([])
     setAllocation([])
     await fetchAllocation(space)
-    const checkSubSpaes = await props.matrixClient.getSpaceSummary(space, 0).catch(console.log)
+    const checkSubSpaes = await props.matrixClient.getRoomHierarchy(space, 0).catch(console.log)
     const checkForEvents = checkSubSpaes?.rooms?.filter(child => child.name.includes('_event'))
     if (!_.isEmpty(checkForEvents)) {
-      const eventSummary = await Promise.all(checkForEvents.map(room => props.matrixClient.getSpaceSummary(room.room_id, 0).catch(err => console.log(err)))) // then we fetch the summary of all spaces within the event space
+      const eventSummary = await Promise.all(checkForEvents.map(room => props.matrixClient.getRoomHierarchy(room.room_id, 0).catch(err => console.log(err)))) // then we fetch the summary of all spaces within the event space
       const onlyEvents = eventSummary
         ?.filter(room => room !== undefined) // we filter undefined results. @TODO DOM seems to be rendering to quickly here. better solution needed
         .map(event => event?.rooms)

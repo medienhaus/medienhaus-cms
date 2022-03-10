@@ -17,10 +17,10 @@ const Invites = ({ space, callback }) => {
       const meta = await matrixClient.getStateEvent(room, 'dev.medienhaus.meta')
       if (meta?.type === 'content') {
         // if the project is a student project we map through each room in the projectspace and join it
-        const space = await matrixClient.getSpaceSummary(room).catch(console.log)
+        const space = await matrixClient.getRoomHierarchy(room).catch(console.log)
         space.rooms.forEach(async (space, index) => {
           console.log('joining ' + space.name)
-          const subspaces = await matrixClient.getSpaceSummary(space.room_id).catch(console.log)
+          const subspaces = await matrixClient.getRoomHierarchy(space.room_id).catch(console.log)
           subspaces.rooms.forEach(async (space) => {
             await matrixClient.joinRoom(space.room_id).catch(console.log)
           })
@@ -48,10 +48,10 @@ const Invites = ({ space, callback }) => {
       const meta = await matrixClient.getStateEvent(room, 'dev.medienhaus.meta')
       if (meta?.type === 'content') {
         // if the project is a student project we map through each room in the projectspace and join it
-        const space = await matrixClient.getSpaceSummary(room)
+        const space = await matrixClient.getRoomHierarchy(room)
         space.rooms.forEach(async (space, index) => {
           console.log('leaving ' + space.name)
-          const subspaces = await matrixClient.getSpaceSummary(space.room_id).catch(console.log)
+          const subspaces = await matrixClient.getRoomHierarchy(space.room_id).catch(console.log)
           subspaces.rooms.forEach(async (space) => {
             await matrixClient.leave(space.room_id).catch(console.log)
           })

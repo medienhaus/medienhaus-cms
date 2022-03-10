@@ -33,10 +33,10 @@ const Overview = () => {
       console.log(room)
       // if we have legacy code with unjoined rooms, take care of those first.
       if (room.name.includes('_event')) {
-        const eventSpace = await matrixClient.getSpaceSummary(room.roomId).catch(console.log)
+        const eventSpace = await matrixClient.getRoomHierarchy(room.roomId).catch(console.log)
         eventSpace.rooms.forEach(async (space, index) => {
           console.log('joining ' + space.name)
-          const subspaces = await matrixClient.getSpaceSummary(space.room_id).catch(console.log)
+          const subspaces = await matrixClient.getRoomHierarchy(space.room_id).catch(console.log)
           subspaces.rooms.forEach(async (space) => {
             await matrixClient.joinRoom(space.room_id).catch(console.log)
           })
