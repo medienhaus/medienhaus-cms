@@ -33,7 +33,7 @@ import locations from '../../../assets/data/locations.json'
 import deleteContentBlock from '../functions/deleteContentBlock'
 // import DisplayPreview from '../../preview/components/DisplayPreview'
 
-const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace, time, mapComponent }) => {
+const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace, time, mapComponent, contentType }) => {
   const [readOnly, setReadOnly] = useState(false)
   const [loading, setLoading] = useState(false)
   // eslint-disable-next-line no-unused-vars
@@ -203,7 +203,7 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace, time,
         :
         */
         <>
-          {index === 0 && !mapComponent && <AddContent number={index} projectSpace={projectSpace} blocks={blocks} reloadSpace={reloadSpace} />}
+          {index === 0 && !mapComponent && <AddContent number={index} projectSpace={projectSpace} blocks={blocks} reloadSpace={reloadSpace} contentType={contentType} />}
           <div className="editor">
             <div className="left">
               <LoadingSpinnerButton key={'up_' + block.room_id} disabled={index < 1 || mapComponent} onClick={() => changeOrder(block.room_id, block.name, -1)}>↑</LoadingSpinnerButton>
@@ -419,7 +419,7 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace, time,
               />
             </div>
           </div>
-          {!mapComponent && <AddContent number={index + 1} projectSpace={projectSpace} blocks={blocks} reloadSpace={reloadSpace} />}
+          {!mapComponent && <AddContent number={index + 1} projectSpace={projectSpace} blocks={blocks} reloadSpace={reloadSpace} contentType={contentType} />}
         </>
       }
     </>

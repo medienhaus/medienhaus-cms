@@ -94,8 +94,9 @@ const Create = () => {
   const fetchSpace = useCallback(async () => {
     if (matrixClient.isInitialSyncComplete()) {
       // here we collect all necessary information about the project
-      const space = await matrixClient.getSpaceSummary(projectSpace)
+      const space = await matrixClient.getRoomHierarchy(projectSpace)
       setSpaceObject(space)
+      console.log('object')
       const spaceDetails = await matrixClient.getRoom(projectSpace)
       // setting title to project space name
       setTitle(space.rooms[0].name)
@@ -119,13 +120,13 @@ const Create = () => {
       setVisibility(meta.published)
       // we fetch the selected language content
       const spaceRooms = space.rooms.filter(room => room.name === contentLang)
-      const getContent = await matrixClient.getSpaceSummary(spaceRooms[0].room_id)
+      const getContent = await matrixClient.getRoomHierarchy(spaceRooms[0].room_id)
       setBlocks(getContent.rooms.filter(room => room.name !== contentLang).filter(room => room.name.charAt(0) !== 'x').sort((a, b) => {
         return a.name.substring(0, a.name.indexOf('_')) - b.name.substring(0, b.name.indexOf('_'))
       }))
       // check if there is an events space
       const checkForEventSpace = space.rooms.filter(room => room.name === 'events')
-      const getEvents = checkForEventSpace.length > 0 && await matrixClient.getSpaceSummary(space.rooms.filter(room => room.name === 'events')[0].room_id, 0).catch(err => console.log(err + '. This means there is no Event space, yet'))
+      const getEvents = checkForEventSpace.length > 0 && await matrixClient.getRoomHierarchy(space.rooms.filter(room => room.name === 'events')[0].room_id, 0).catch(err => console.log(err + '. This means there is no Event space, yet'))
       setEvents(getEvents?.rooms || 'depricated')
       getCurrentTime()
     } else {
@@ -212,7 +213,7 @@ const Create = () => {
     setIsCollab(true)
     try {
       // joining contentRooms which might have been created since we last opened the project
-      await matrixClient.getSpaceSummary(projectSpace).then(res => {
+      await matrixClient.getRoomHierarchy(projectSpace).then(res => {
         res.rooms.map(async contentRooms => contentRooms.room_id !== projectSpace && await matrixClient.joinRoom(contentRooms.room_id).catch(err => console.log(err)))
       })
     } catch (err) {
@@ -255,7 +256,7 @@ const Create = () => {
   }
 
   if (projectSpace && !matrixClient.isInitialSyncComplete()) return <Loading />
-
+  console.log(type)
   return (
     <>
       {/* }
@@ -327,7 +328,16 @@ const Create = () => {
             {blocks.length === 0
               ? <AddContent number={0} projectSpace={spaceObject?.rooms.filter(room => room.name === contentLang)[0].room_id} blocks={blocks} contentType={type} reloadSpace={reloadSpace} />
               : blocks.map((content, i) =>
-                <DisplayContent block={content} index={i} blocks={blocks} projectSpace={spaceObject?.rooms.filter(room => room.name === contentLang)[0].room_id} reloadSpace={reloadSpace} time={getCurrentTime} key={content + i + content?.lastUpdate} />
+                <DisplayContent
+                  block={content}
+                  index={i}
+                  blocks={blocks}
+                  projectSpace={spaceObject?.rooms.filter(room => room.name === contentLang)[0].room_id}
+                  reloadSpace={reloadSpace}
+                  time={getCurrentTime}
+                  key={content + i + content?.lastUpdate}
+                  contentType={type}
+                />
               )}
           </section>
           {/* Placeholder to show preview next to editing

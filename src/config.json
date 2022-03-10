@@ -3,6 +3,23 @@
     "context": [
       "context"
     ],
+    "content": {
+      "content": {
+        "label": "content",
+        "blueprint": [
+          "location",
+          "contributors",
+          "image"
+        ],
+        "blocks": [
+          "heading",
+          "playlist",
+          "live stream",
+          "peertube",
+          "bigbluebutton"
+        ]
+      }
+    },
     "languages": [
       "en"
     ],

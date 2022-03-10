@@ -89,6 +89,7 @@ const Overview = () => {
       Object.entries(invites).filter(([key]) => key !== room)))
     reload(true)
   }
+
   if (fetchSpaces || !matrixClient.isInitialSyncComplete()) return <Loading />
   return (
     <div>
