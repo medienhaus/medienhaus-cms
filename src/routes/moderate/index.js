@@ -9,17 +9,20 @@ import InviteUserToSpace from './components/InviteUserToSpace'
 import RightsManagement from './components/RightsManagement'
 import ManageContexts from '../admin/components/ManageContexts'
 
+import SimpleButton from '../../components/medienhausUI/simpleButton'
+
 import config from '../../config.json'
 
 const Moderate = () => {
   const { joinedSpaces, spacesErr, fetchSpaces } = useJoinedSpaces(false)
   const [moderationRooms, setModerationRooms] = useState()
   const [userSearch, setUserSearch] = useState([])
-  // const [selection, setSelection] = useState('')
+  const [selection, setSelection] = useState('')
   const [fetching, setFetching] = useState(false)
   const matrixClient = Matrix.getMatrixClient()
-  const { t } = useTranslation()
 
+  const { t } = useTranslation()
+  console.log(selection)
   useEffect(() => {
     if (joinedSpaces) {
       const typesOfSpaces = config.medienhaus?.context || 'context'
@@ -69,66 +72,48 @@ const Moderate = () => {
       )
     })
   }
-  /* Placeholder will be needed in the future
+
   const renderSelection = () => {
     switch (selection) {
       case 'invite':
-        return <InviteUserToSpace matrixClient={matrixClient} moderationRooms={moderationRooms} setPower={setPower} fetchUsers={fetchUsers} fetching={fetching} userSearch={userSearch} />
-      case 'rights':
-        return <RightsManagement matrixClient={matrixClient} moderationRooms={moderationRooms} setPower={setPower} fetchUsers={fetchUsers} fetching={fetching} userSearch={userSearch} />
+        return config.medienhaus?.sites?.moderate?.invite && <> <InviteUserToSpace matrixClient={matrixClient} moderationRooms={moderationRooms} setPower={setPower} fetchUsers={fetchUsers} fetching={fetching} userSearch={userSearch} /></>
+      case 'rightsManagement':
+        return config.medienhaus?.sites?.moderate?.rightsManagement && <> <RightsManagement matrixClient={matrixClient} moderationRooms={moderationRooms} setPower={setPower} fetchUsers={fetchUsers} fetching={fetching} userSearch={userSearch} /></>
+      case 'manageContexts':
+        return config.medienhaus?.sites?.moderate?.manageContexts && <><ManageContexts matrixClient={matrixClient} /></>
       default:
         return (
-          moderationRooms.length > 0
-            ? <>
-              <section className="requests">
-                {moderationRooms.map((request, index) => <React.Fragment key={request.name}><h3>{request.name}</h3><GetRequestPerRoom request={request} key={index} /></React.Fragment>)}
-              </section>
+          config.medienhaus?.sites?.moderate?.accept &&
+            <>
+              <h2>{t('Accept user requests')}</h2>
+              {moderationRooms.length > 0
+                ? <>
+                  <section className="requests">
+                    {moderationRooms.map((request, index) => <React.Fragment key={request.name}>
+                      <GetRequestPerRoom request={request} key={index} />
+                    </React.Fragment>)}
+                  </section>
+                </>
+                : (
+                  <div>
+                    {t('Looks like you are not moderating any spaces.')}
+                  </div>)}
             </>
-            : (
-              <div>
-                {t('Looks like you are not moderating any spaces.')}
-              </div>
-              )
         )
     }
   }
-  */
 
   if (fetchSpaces || !matrixClient.isInitialSyncComplete()) return <Loading />
   if (spacesErr) return <p>{spacesErr}</p>
   return (
     <>
-      {/*
       <section className="request">
-        <select value={selection} onChange={(e) => setSelection(e.target.value)}>
-          <option id="requests" value="" onChange={() => setSelection('')}>{t('Requests')}</option>
-          <option id="invite-users" value="invite" onChange={() => setSelection('invite')}>
-            {t('Invite Users')}</option>
-          <option id="rights-management" value="rights" onChange={() => setSelection('rights')}>
-            {t('Promote Users')}</option>
-        </select>
-
+        {Object.keys(config?.medienhaus?.sites?.moderate).map((value, index) => {
+          return <SimpleButton width="auto" disabled={value === selection} value={value} key={value} onClick={(e) => setSelection(e.target.value)}>{value.replace(/([a-z0-9])([A-Z])/g, '$1 $2')}</SimpleButton>
+        })}
       </section>
-      */}
-      {config.medienhaus?.sites?.moderate?.accept &&
-        <>
-          <h2>{t('Accept user requests')}</h2>
-          {moderationRooms.length > 0
-            ? <>
-              <section className="requests">
-                {moderationRooms.map((request, index) => <React.Fragment key={request.name}>
-                  <GetRequestPerRoom request={request} key={index} />
-                </React.Fragment>)}
-              </section>
-            </>
-            : (
-              <div>
-                {t('Looks like you are not moderating any spaces.')}
-              </div>)}
-        </>}
-      {config.medienhaus?.sites?.moderate?.invite && <><hr /> <InviteUserToSpace matrixClient={matrixClient} moderationRooms={moderationRooms} setPower={setPower} fetchUsers={fetchUsers} fetching={fetching} userSearch={userSearch} /></>}
-      {config.medienhaus?.sites?.moderate?.rightsManagement && <> <hr /><RightsManagement matrixClient={matrixClient} moderationRooms={moderationRooms} setPower={setPower} fetchUsers={fetchUsers} fetching={fetching} userSearch={userSearch} /></>}
-      {config.medienhaus?.sites?.moderate?.manageContexts && <> <hr /><ManageContexts matrixClient={matrixClient} /></>}
+
+      {renderSelection()}
     </>
   )
 }
