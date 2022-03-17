@@ -26,7 +26,7 @@ const UlElement = (props) => {
 
   useEffect(() => {
     getElementHierarchy()
-  }, [])
+  }, [roomArray])
 
   const getRoomHierarchy = async (roomId) => {
     if (!roomId) return
@@ -51,9 +51,12 @@ const UlElement = (props) => {
   }
 
   const callback = (roomId, type) => {
-    console.log(type)
     setActive(roomId)
-    content.includes(type) ? props.setSelectedRoom(roomId) : props.setSelectedRoom('')
+    if (content.includes(type)) {
+      props.removeContentElement(roomId, props.roomId, () => setRoomArray(''))
+    } else {
+      props.removeContentElement('')
+    }
   }
 
   if (!roomArray) return <Loading />
@@ -70,7 +73,7 @@ const UlElement = (props) => {
             active={active}
             indent={props.indent}
             content={content}
-            setSelectedRoom={props.setSelectedRoom}
+            removeContentElement={props.removeContentElement}
           />
         )
       })}
