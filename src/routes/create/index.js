@@ -271,7 +271,7 @@ const Create = () => {
       <section className="project-title">
         {(!projectSpace && (config.medienhaus?.content && Object.keys(config.medienhaus?.content).length > 1)) &&
           <Dropdown name="type" label="Type" placeholder="-- select type --" options={_.mapValues(config.medienhaus?.content, 'label')} value={type} onChange={e => setType(e.target.value)} />}
-        <h3>{t('Project title')}</h3>
+        <h3>{t('Title')}</h3>
         <ProjectTitle title={title} projectSpace={projectSpace} type={config.medienhaus?.content ? type : 'content'} callback={changeTitle} />
       </section>
 
@@ -281,21 +281,20 @@ const Create = () => {
             <h3>{t('Project context')}</h3>
             <Category title={title} projectSpace={projectSpace} onChange={changeContext} parent={process.env.REACT_APP_CONTEXT_ROOT_SPACE_ID} />
           </section>
-
-          {config.medienhaus?.content && (!config.medienhaus?.content[type]?.blueprint || config.medienhaus?.content[type]?.blueprint.includes('location')) && (
+          {(!config.medienhaus?.content || !config.medienhaus?.content[type]?.blueprint || config.medienhaus?.content[type]?.blueprint.includes('location')) && (
             <section className="events">
               <h3>{t('Location')}</h3>
               <DateAndVenue inviteCollaborators={inviteCollaborators} reloadSpace={reloadSpace} projectSpace={projectSpace} events={events} allocation={allocation} matrixClient={matrixClient} />
             </section>
           )}
 
-          {config.medienhaus?.content && (!config.medienhaus?.content[type]?.blueprint || config.medienhaus?.content[type]?.blueprint.includes('contributors')) && (
+          {(!config.medienhaus?.content || !config.medienhaus?.content[type]?.blueprint || config.medienhaus?.content[type]?.blueprint.includes('contributors')) && (
             <section className="contributors">
               <Collaborators projectSpace={spaceObject?.rooms} members={roomMembers} time={getCurrentTime} startListeningToCollab={() => startListeningToCollab()} />
             </section>
           )}
 
-          {config.medienhaus?.content && (!config.medienhaus?.content[type]?.blueprint || config.medienhaus?.content[type]?.blueprint.includes('image')) && (
+          {(!config.medienhaus?.content || !config.medienhaus?.content[type]?.blueprint || config.medienhaus?.content[type]?.blueprint.includes('image')) && (
             <section className="project-image">
               <h3>{t('Project image')}</h3>
               {loading ? <Loading /> : <ProjectImage projectSpace={projectSpace} changeProjectImage={changeProjectImage} />}

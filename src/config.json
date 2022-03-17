@@ -9,7 +9,8 @@
       "moderate": {
         "invite": true,
         "rightsManagement": true,
-        "manageContexts": true
+        "manageContexts": true,
+        "removeContent": true
       },
       "support": true,
       "request": true,

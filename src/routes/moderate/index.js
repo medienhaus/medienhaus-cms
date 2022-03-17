@@ -8,6 +8,7 @@ import { useTranslation } from 'react-i18next'
 import InviteUserToSpace from './components/InviteUserToSpace'
 import RightsManagement from './components/RightsManagement'
 import ManageContexts from '../admin/components/ManageContexts'
+import RemoveContent from './components/RemoveContent'
 
 import SimpleButton from '../../components/medienhausUI/simpleButton'
 
@@ -26,7 +27,6 @@ const Moderate = () => {
   useEffect(() => {
     if (joinedSpaces) {
       const typesOfSpaces = config.medienhaus?.context || 'context'
-
       // check to see if a user has joined a room with the specific content type and is moderator or admin (at least power level 50)
       const filteredRooms = joinedSpaces.filter(space => typesOfSpaces.includes(space.meta.type) && space.powerLevel > 49)
       setModerationRooms(filteredRooms)
@@ -81,6 +81,8 @@ const Moderate = () => {
         return config.medienhaus?.sites?.moderate?.rightsManagement && <> <RightsManagement matrixClient={matrixClient} moderationRooms={moderationRooms} setPower={setPower} fetchUsers={fetchUsers} fetching={fetching} userSearch={userSearch} /></>
       case 'manageContexts':
         return config.medienhaus?.sites?.moderate?.manageContexts && <><ManageContexts matrixClient={matrixClient} /></>
+      case 'removeContent':
+        return config.medienhaus?.sites?.moderate?.removeContent && <><RemoveContent matrixClient={matrixClient} moderationRooms={moderationRooms} /></>
       default:
         return (
           config.medienhaus?.sites?.moderate?.accept &&
