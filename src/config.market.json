@@ -1,6 +1,26 @@
 {
   "medienhaus": {
-    "languages": ["en"]
+    "sites": {
+      "account": {
+        "avatar": true,
+        "mail": true,
+        "name": true
+      },
+      "moderate": {
+        "invite": true,
+        "rightsManagement": true,
+        "manageContexts": true
+      },
+      "support": true,
+      "request": true,
+      "feedback": true
+    },
+    "languages": [
+      "en"
+    ],
+    "usersToInviteToNewContexts": [
+      "@marcel328742380:dev.medienhaus.udk-berlin.de",
+      "@robert1337:dev.medienhaus.udk-berlin.de"
+    ]
   }
 }
-

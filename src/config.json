@@ -1,43 +1,26 @@
 {
   "medienhaus": {
-    "context": [
-      "context"
-    ],
-    "content": {
-      "content": {
-        "label": "content",
-        "blueprint": [
-          "location",
-          "contributors",
-          "image"
-        ],
-        "blocks": [
-          "heading",
-          "playlist",
-          "live stream",
-          "peertube",
-          "bigbluebutton"
-        ]
-      }
-    },
-    "languages": [
-      "en"
-    ],
     "sites": {
       "account": {
         "avatar": true,
         "mail": true,
-        "name": true,
-        "password": false
+        "name": true
       },
       "moderate": {
-        "accept": true,
         "invite": true,
         "rightsManagement": true,
-        "manageContexts": {
-          "showRoot": true
-        }
-      }
-    }
+        "manageContexts": true
+      },
+      "support": true,
+      "request": true,
+      "feedback": true
+    },
+    "languages": [
+      "en"
+    ],
+    "usersToInviteToNewContexts": [
+      "@marcel328742380:dev.medienhaus.udk-berlin.de",
+      "@robert1337:dev.medienhaus.udk-berlin.de"
+    ]
   }
 }

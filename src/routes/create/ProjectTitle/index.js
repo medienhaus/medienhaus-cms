@@ -26,11 +26,6 @@ const ProjectTitle = ({ title, projectSpace, type, callback }) => {
     setLoading(true)
 
     const opts = (type, name, history) => {
-      const users = {}
-      for (const key in config.medienhaus.usersToInvite) {
-        users[key] = 50
-      }
-
       return {
         preset: 'private_chat',
         name: name,
@@ -46,6 +41,7 @@ const ProjectTitle = ({ title, projectSpace, type, callback }) => {
             version: '0.3',
             container: 'content',
             type: type,
+            application: process.env.REACT_APP_APP_NAME,
             published: 'draft'
           }
         },
@@ -77,7 +73,7 @@ const ProjectTitle = ({ title, projectSpace, type, callback }) => {
           kick: 50,
           redact: 50,
           state_default: 50,
-          users_default: 50
+          users_default: 0
         },
         visibility: 'private'
       }
