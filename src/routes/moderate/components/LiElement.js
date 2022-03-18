@@ -7,8 +7,6 @@ import { ReactComponent as ArrowDown } from '../../../assets/icons/remix/arrow-d
 import Matrix from '../../../Matrix'
 import DeleteButton from '../../create/components/DeleteButton'
 
-// styled component ready
-
 const LiElement = ({ roomId, type, name, parent, indent, content, onElementRemoved }) => {
   const [isExpanded, setIsExpanded] = useState(false)
   const [feedback, setFeedback] = useState('')
@@ -22,7 +20,7 @@ const LiElement = ({ roomId, type, name, parent, indent, content, onElementRemov
   }
 
   return (
-    <section>
+    <div>
       <li
         onClick={() => setIsExpanded(isExpanded => !isExpanded)}
         className={isExpanded ? 'selected' : null}
@@ -41,7 +39,7 @@ const LiElement = ({ roomId, type, name, parent, indent, content, onElementRemov
           roomId={roomId} indent={indent + 1}
         />}
       {feedback && <p>{feedback}</p>}
-    </section>
+    </div>
   )
 }
 export default LiElement
