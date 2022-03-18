@@ -22,11 +22,11 @@ const LiElement = ({ roomId, type, name, parent, indent, content, onElementRemov
   }
 
   return (
-    <div>
+    <section>
       <li
         onClick={() => setIsExpanded(isExpanded => !isExpanded)}
         className={isExpanded ? 'selected' : null}
-        style={{ textIndent: `calc(1em * ${indent})` }}
+        style={{ textIndent: `calc(2em * ${indent})` }}
         data-name={roomId}
         value={roomId}
       >
@@ -41,7 +41,7 @@ const LiElement = ({ roomId, type, name, parent, indent, content, onElementRemov
           roomId={roomId} indent={indent + 1}
         />}
       {feedback && <p>{feedback}</p>}
-    </div>
+    </section>
   )
 }
 export default LiElement
