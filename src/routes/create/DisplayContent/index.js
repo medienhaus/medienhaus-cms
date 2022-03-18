@@ -38,7 +38,6 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace, time,
   const [loading, setLoading] = useState(false)
   // eslint-disable-next-line no-unused-vars
   const [saved, setSaved] = useState(false)
-  const [deleting, setDeleting] = useState(false)
   const [json, setJson] = useState({})
   let { cms, error, fetching } = FetchCms(block.room_id)
   cms = cms[0]
@@ -143,9 +142,7 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace, time,
     }
   }
 
-  const onDelete = async (e, roomId, name, index) => {
-    e.preventDefault()
-    setDeleting(true)
+  const onDelete = async (roomId, name, index) => {
     setReadOnly(true)
     try {
       deleteContentBlock(name, roomId, index)
@@ -157,12 +154,7 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace, time,
       reloadSpace()
     } catch (err) {
       console.error(err)
-      setDeleting(`couldn’t delete ${json.type}, please try again or try reloading the page`)
-      setTimeout(() => {
-        setDeleting()
-      }, 2000)
     } finally {
-      setDeleting()
       setReadOnly(false)
     }
   }
@@ -415,7 +407,7 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace, time,
                                         )}
             <div className="right">
               <DeleteButton
-                deleting={deleting} onDelete={onDelete} block={block} index={index} reloadSpace={reloadSpace}
+                onDelete={() => onDelete(block.room_id, block.name, index)} callback={reloadSpace}
               />
             </div>
           </div>

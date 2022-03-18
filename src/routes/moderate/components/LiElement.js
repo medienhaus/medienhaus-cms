@@ -1,21 +1,47 @@
-import React from 'react'
+import React, { useState } from 'react'
 import UlElement from './UlElement'
+
 import { ReactComponent as ArrowRight } from '../../../assets/icons/remix/arrow-right.svg'
 import { ReactComponent as ArrowDown } from '../../../assets/icons/remix/arrow-down.svg'
 
-const LiElement = (props) => {
+import Matrix from '../../../Matrix'
+import DeleteButton from '../../create/components/DeleteButton'
+
+// styled component ready
+
+const LiElement = ({ roomId, type, name, parent, indent, content, onElementRemoved }) => {
+  const [isExpanded, setIsExpanded] = useState(false)
+  const [feedback, setFeedback] = useState('')
+
+  const handleRemoveClick = async () => {
+    await Matrix.removeSpaceChild(parent, roomId).catch((e) => {
+      setFeedback(e?.message)
+      setTimeout(() => setFeedback(''), 2500)
+    })
+    onElementRemoved() // delete li element
+  }
+
   return (
-    <>
-      <li onClick={() => props.callback(props.roomId, props.type)} className={props.roomId === props.active ? 'selected' : null} style={{ 'text-indent': `calc(1em * ${props.indent})` }} data-name={props.roomId} value={props.roomId}>
-        {props.roomId === props.active && !props.content.includes(props.type) ? <ArrowDown fill="var(--color-fg)" /> : props.content.includes(props.type) ? '' : <ArrowRight fill="var(--color-fg)" />}
-        {props.name}
+    <div>
+      <li
+        onClick={() => setIsExpanded(isExpanded => !isExpanded)}
+        className={isExpanded ? 'selected' : null}
+        style={{ textIndent: `calc(1em * ${indent})` }}
+        data-name={roomId}
+        value={roomId}
+      >
+        {isExpanded && !content.includes(type) ? <ArrowDown fill="var(--color-fg)" /> : content.includes(type) ? '' : <ArrowRight fill="var(--color-fg)" />}
+        {name}
       </li>
-      {props.roomId === props.active &&
+      {content.includes(type) && <DeleteButton
+        onDelete={handleRemoveClick}
+                                 />}
+      {isExpanded &&
         <UlElement
-          roomId={props.roomId} indent={props.indent + 1}
-          removeContentElement={props.removeContentElement}
+          roomId={roomId} indent={indent + 1}
         />}
-    </>
+      {feedback && <p>{feedback}</p>}
+    </div>
   )
 }
 export default LiElement

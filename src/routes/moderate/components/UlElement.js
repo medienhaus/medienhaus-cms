@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { Loading } from '../../../components/loading'
 import Matrix from '../../../Matrix'
 import styled from 'styled-components'
@@ -16,7 +16,7 @@ const Ul = styled.ul`
 
 `
 
-const UlElement = (props) => {
+const UlElement = ({ roomId, indent, removeContentElement }) => {
   const [active, setActive] = useState('')
   const [roomArray, setRoomArray] = useState([])
   const context = config.medienhaus?.context ? config.medienhaus?.context.concat('context') : ['context']
@@ -24,12 +24,7 @@ const UlElement = (props) => {
   const typesOfContent = context.concat(content)
   const matrixClient = Matrix.getMatrixClient()
 
-  useEffect(() => {
-    getElementHierarchy()
-  }, [roomArray])
-
-  const getRoomHierarchy = async (roomId) => {
-    if (!roomId) return
+  const fetchHiararchy = useCallback(async () => {
     const hierarchy = []
 
     async function getBatchOfRooms (pagination) {
@@ -42,20 +37,20 @@ const UlElement = (props) => {
       hierarchy.pagination && await getBatchOfRooms(pagination)
     }
     await getBatchOfRooms()
-    return hierarchy
-  }
 
-  const getElementHierarchy = async () => {
-    const hierarchy = await getRoomHierarchy(props.roomId)
     setRoomArray(hierarchy)
-  }
+  }, [matrixClient, roomId])
 
-  const callback = (roomId, type) => {
-    setActive(roomId)
+  useEffect(() => {
+    fetchHiararchy()
+  }, [fetchHiararchy])
+
+  const callback = (activeRoom, type) => {
+    setActive(activeRoom)
     if (content.includes(type)) {
-      props.removeContentElement(roomId, props.roomId, () => setRoomArray(''))
+      removeContentElement(activeRoom, roomId, () => setRoomArray())
     } else {
-      props.removeContentElement('')
+      removeContentElement('')
     }
   }
 
@@ -67,13 +62,14 @@ const UlElement = (props) => {
           <LiElement
             key={room.room_id}
             roomId={room.room_id}
+            parent={roomId}
             type={room.metaEvent?.type}
             name={room.name}
             callback={callback}
             active={active}
-            indent={props.indent}
+            indent={indent}
             content={content}
-            removeContentElement={props.removeContentElement}
+            onElementRemoved={fetchHiararchy}
           />
         )
       })}
