@@ -26,7 +26,7 @@ const LiElement = ({ roomId, type, name, parent, indent, content, onElementRemov
       <li
         onClick={() => setIsExpanded(isExpanded => !isExpanded)}
         className={isExpanded ? 'selected' : null}
-        style={{ textIndent: `calc(2em * ${indent})` }}
+        style={{ paddingLeft: `calc(2em * ${indent})` }}
         data-name={roomId}
         value={roomId}
       >
