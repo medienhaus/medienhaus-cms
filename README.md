@@ -18,6 +18,7 @@ The project was used for Berlin University of the Arts’ digitally enhanced [Ru
 If you have special requirements you can configure the cms by copying config.example.json to config.json and modifying it.
 
 ```
+{
   "medienhaus": {
     "context": [
       "faculty",
