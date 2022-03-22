@@ -1,0 +1,69 @@
+{
+  "medienhaus": {
+    "context": [
+      "faculty",
+      "degree"
+    ],
+    "content": {
+      "blog": {
+        "label": "Blog Post",
+        "blueprint": [
+          "location",
+          "contributors",
+          "image"
+        ],
+        "blocks": [
+          "heading",
+          "text",
+          "unordered list",
+          "ordered list",
+          "quote block",
+          "code block",
+          "image",
+          "audio",
+          "playlist",
+          "live stream",
+          "peertube",
+          "bigbluebutton"
+        ]
+      },
+      "article": {
+        "label": "Article",
+        "blueprint": [
+          "location",
+          "image"
+        ],
+        "blocks": [
+          "heading",
+          "text",
+          "image",
+          "audio"
+        ]
+      }
+    },
+    "item": []
+  },
+  "sites": {
+    "account": {
+      "avatar": true,
+      "mail": true,
+      "name": true
+    },
+    "moderate": {
+      "invite": true,
+      "rightsManagement": true,
+      "manageContexts": true
+    },
+    "support": true,
+    "request": true,
+    "feedback": true
+  },
+  "languages": [
+    "en",
+    "es",
+    "de"
+  ],
+  "usersToInviteToNewContexts": [
+    "@user1:server.com"
+  ]
+}
