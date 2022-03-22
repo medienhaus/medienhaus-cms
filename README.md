@@ -86,7 +86,7 @@ If you have special requirements you can configure the cms by copying config.exa
   "usersToInviteToNewContexts": [
     "@user1:server.com"
   ]
-} 
+}
 ```
 
 ## Content
