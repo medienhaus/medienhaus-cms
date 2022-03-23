@@ -8,9 +8,10 @@ function SimpleContextSelect ({ onItemChosen, selectedContext, struktur, disable
   const items = config.medienhaus?.sites?.moderate?.manageContexts?.showRoot ? struktur : struktur[Object.keys(struktur)[0]].children
   return (
     <>
-      <select disabled={disabled} defaultValue={selectedContext} onChange={(e) => { onItemChosen(JSON.parse(e.target.value)) }}>
-        <option disabled selected value="">-- select context --</option>
+      <select disabled={disabled} defaultValue={selectedContext} onChange={(e) => { onItemChosen(e.target.value) }}>
+        <option disabled value="">-- select context --</option>
         {mapDeep(filterDeep(items, (value, key, parent, context) => {
+          console.log(value)
           // Exclude all hierarchy elements that are not "contexts"
           if (!value?.type.includes('context')) return false
           value.path = []
@@ -32,7 +33,7 @@ function SimpleContextSelect ({ onItemChosen, selectedContext, struktur, disable
           }
           return true
         }, { childrenPath: 'children', includeRoot: false, rootIsChildren: true }), (value, key, parent, context) => (
-          <option key={value.id} value={JSON.stringify(value)} selected={selectedContext === value.id}>{' --- '.repeat(context.depth - 1)}{value.name}</option>
+          <option key={value.id} value={value.id}>{' --- '.repeat(context.depth - 1)}{value.name}</option>
         ), { childrenPath: 'children', includeRoot: false, rootIsChildren: true })}
       </select>
     </>

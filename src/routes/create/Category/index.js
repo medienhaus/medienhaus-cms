@@ -14,18 +14,16 @@ const Category = ({ title, projectSpace, onChange, parent }) => {
   const [error, setError] = useState('')
   const [inputItems, setInputItems] = useState()
   const matrixClient = Matrix.getMatrixClient()
-
   useEffect(() => {
-    async function getCurrentContext () {
-      const projectSpaceMetaEvent = await matrixClient.getStateEvent(projectSpace, 'dev.medienhaus.meta')
-      setCurrentContext(projectSpaceMetaEvent.context)
-      setLoading(false)
-    }
-
-    getCurrentContext()
-  }, [matrixClient, projectSpace])
+    console.log('____________projectSpace:__________')
+    console.log(projectSpace)
+    console.log('______________context:__________')
+    console.log(currentContext)
+    inputItems && console.log(inputItems)
+  }, [currentContext, inputItems, projectSpace])
 
   const createStructurObject = async () => {
+    setLoading(true)
     async function getSpaceStructure (motherSpaceRoomId, includeRooms) {
       const result = {}
 
@@ -73,6 +71,11 @@ const Category = ({ title, projectSpace, onChange, parent }) => {
         for (const event of stateEvents) {
           if (event.type !== 'm.space.child' && !includeRooms) continue
           if (event.type === 'm.space.child' && _.size(event.content) === 0) continue // check to see if body of content is empty, therefore space has been removed
+          if (event.state_key === projectSpace) {
+            console.log(event)
+            console.log(spaceId)
+            setCurrentContext(event.room_id)
+          }
           if (event.room_id !== spaceId) continue
           // if (event.sender !== process.env.RUNDGANG_BOT_USERID && !includeRooms) continue
 
@@ -113,7 +116,7 @@ const Category = ({ title, projectSpace, onChange, parent }) => {
       }
 
       await scanForAndAddSpaceChildren(motherSpaceRoomId, [])
-
+      setLoading(false)
       return result
     }
     console.log('---- started structure ----')
@@ -150,61 +153,48 @@ const Category = ({ title, projectSpace, onChange, parent }) => {
   // }
 
   async function onContextChosen (contextSpace) {
-    let projectSpaceMetaEvent = await matrixClient.getStateEvent(projectSpace, 'dev.medienhaus.meta')
-
     setLoading(true)
-    if (projectSpaceMetaEvent.context && projectSpaceMetaEvent.context !== contextSpace.id) {
-      // If this project was in a different context previously we should try to take it out of the old context
-      const req = {
-        method: 'PUT',
-        headers: { Authorization: 'Bearer ' + localStorage.getItem('medienhaus_access_token') },
-        body: JSON.stringify({})
-      }
-      await fetch(process.env.REACT_APP_MATRIX_BASE_URL + `/_matrix/client/r0/rooms/${projectSpaceMetaEvent.context}/state/m.space.child/${projectSpace}`, req)
+    const projectSpaceMetaEvent = await matrixClient.getStateEvent(projectSpace, 'dev.medienhaus.meta').catch(console.log)
+    // remove legacy code:
+    // if the medienhaus meta event still has a context key, we remove it from the object.
+    if (projectSpaceMetaEvent.context) {
+      delete projectSpaceMetaEvent.context
+      await matrixClient.sendStateEvent(projectSpace, 'dev.medienhaus.meta', projectSpaceMetaEvent).catch(console.log)
     }
+
+    // If this project was in a different context previously we should try to take it out of the old context
+    // @TODO add possibilty to add a content to multiple contexts
+    if (currentContext && currentContext !== contextSpace) await Matrix.removeSpaceChild(currentContext, projectSpace).catch(console.log)
 
     // Add this current project to the given context space
-    const req = {
-      method: 'PUT',
-      headers: { Authorization: 'Bearer ' + localStorage.getItem('medienhaus_access_token') },
-      body: JSON.stringify({
-        auto_join: false,
-        suggested: false,
-        via: [process.env.REACT_APP_MATRIX_BASE_URL.replace('https://', '')]
+    const addToContext = await Matrix.addSpaceChild(contextSpace, projectSpace)
+      .catch(async () => {
+      // if we cant add the content to a context we try to join the context
+        const joinRoom = await matrixClient.joinRoom(contextSpace).catch(console.log)
+        if (joinRoom) {
+          console.log('joined room')
+          // then try to add the conent to the context again
+          const addToContext = await Matrix.addSpaceChild(contextSpace, projectSpace).catch(console.log)
+          if (addToContext.event_id) {
+            setCurrentContext(contextSpace)
+            onChange()
+            setLoading(false)
+          }
+        } else {
+          onChange()
+          setLoading(false)
+          setError('An error occured. Make sure you have the rights to publish in the selected context')
+          setTimeout(() => setError(''), 2500)
+        }
       })
-    }
-
-    const addToContext = await fetch(process.env.REACT_APP_MATRIX_BASE_URL + `/_matrix/client/r0/rooms/${contextSpace.id}/state/m.space.child/${projectSpace}`, req)
-    if (addToContext.ok) {
-      // Set the new context in our meta event
-      projectSpaceMetaEvent.context = contextSpace.id
-      await matrixClient.sendStateEvent(projectSpace, 'dev.medienhaus.meta', projectSpaceMetaEvent)
-      // Get the freshly updated state event and save it in our state
-      projectSpaceMetaEvent = await matrixClient.getStateEvent(projectSpace, 'dev.medienhaus.meta')
-      setCurrentContext(projectSpaceMetaEvent.context)
+    if (addToContext.event_id) {
+      console.log(contextSpace)
+      console.log(projectSpace)
+      setCurrentContext(contextSpace)
       onChange()
       setLoading(false)
-    } else {
-      const joinRoom = await matrixClient.joinRoom(contextSpace.id).catch(console.log)
-      if (joinRoom) {
-        console.log('joined room')
-        projectSpaceMetaEvent.context = contextSpace.id
-        await matrixClient.sendStateEvent(projectSpace, 'dev.medienhaus.meta', projectSpaceMetaEvent)
-        // Get the freshly updated state event and save it in our state
-        projectSpaceMetaEvent = await matrixClient.getStateEvent(projectSpace, 'dev.medienhaus.meta')
-        setCurrentContext(projectSpaceMetaEvent.context)
-        onChange()
-        setLoading(false)
-      } else {
-        // If placing the content into a context fails, we change our states back to the previous one
-        projectSpaceMetaEvent.context && await matrixClient.sendStateEvent(projectSpace, 'dev.medienhaus.meta', projectSpaceMetaEvent)
-        setCurrentContext(projectSpaceMetaEvent.context || '')
-        onChange()
-        setLoading(false)
-        setError('An error occured. Make sure you have the rights to publish in the selected context')
-        setTimeout(() => setError(''), 2500)
-      }
     }
+    console.log(addToContext)
   }
 
   return (
