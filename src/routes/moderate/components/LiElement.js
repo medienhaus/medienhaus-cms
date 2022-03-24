@@ -24,16 +24,21 @@ const LiElement = ({ roomId, type, name, parent, indent, content, onElementRemov
       <li
         onClick={() => setIsExpanded(isExpanded => !isExpanded)}
         className={isExpanded ? 'selected' : null}
-        style={{ paddingLeft: `calc(2em * ${indent})` }}
+        style={{
+          marginLeft: `calc(2em * ${indent})`,
+          marginBottom: 'var(--margin)'
+        }}
         data-name={roomId}
         value={roomId}
       >
         {isExpanded && !content.includes(type) ? <ArrowDown fill="var(--color-fg)" /> : content.includes(type) ? '' : <ArrowRight fill="var(--color-fg)" />}
-        {name}
+        <span>{name}</span>
+        {content.includes(type) && <DeleteButton
+          width="3vw"
+          onDelete={handleRemoveClick}
+                                   />}
       </li>
-      {content.includes(type) && <DeleteButton
-        onDelete={handleRemoveClick}
-                                 />}
+
       {isExpanded &&
         <UlElement
           roomId={roomId} indent={indent + 1}

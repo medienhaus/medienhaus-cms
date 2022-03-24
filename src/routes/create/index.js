@@ -36,6 +36,7 @@ const Create = () => {
   const [allocation, setAllocation] = useState([])
   const [events, setEvents] = useState()
   const [description, setDescription] = useState()
+  const [hasContext, setHasContext] = useState(false)
   const [type, setType] = useState(config.medienhaus?.content && Object.keys(config.medienhaus?.content).length === 1 ? Object.keys(config.medienhaus?.content)[0] : '')
   // const [preview, setPreview] = useState(false)
   const history = useHistory()
@@ -234,12 +235,7 @@ const Create = () => {
     setTitle(newTitle)
   }
 
-  const changeContext = async () => {
-    // @TODO redundant already happening in callback line 88
-    const spaceDetails = await matrixClient.getRoom(projectSpace)
-    const meta = spaceDetails.currentState.events.get('dev.medienhaus.meta').values().next().value.event.content
-    setMedienhausMeta(meta)
-  }
+  const changeContext = (contextState) => setHasContext(contextState)
 
   const onChangeDescription = async (description) => {
     // if the selected content language is english we save the description in the project space topic
@@ -344,9 +340,9 @@ const Create = () => {
             {/* <p>{t('If you still want to make changes to your contributions after publishing, you can continue to do so.')}</p> */}
             {spaceObject
               ? (<>
-                <PublishProject space={spaceObject.rooms[0]} metaEvent={medienhausMeta} description={(description && description[config.medienhaus?.languages[0]])} published={visibility} time={getCurrentTime} />
+                <PublishProject space={spaceObject.rooms[0]} metaEvent={medienhausMeta} hasContext={hasContext} description={(description && description[config.medienhaus?.languages[0]])} published={visibility} time={getCurrentTime} />
                 {!(description && description[config.medienhaus?.languages[0]]) && <p>❗️ {t('Please add a short description of your project.')}</p>}
-                {!medienhausMeta.context && <p>❗️ {t('Please add your project to a context.')}</p>}
+                {!hasContext && <p>❗️ {t('Please add your project to a context.')}</p>}
               </>)
               : <Loading />}
           </section>

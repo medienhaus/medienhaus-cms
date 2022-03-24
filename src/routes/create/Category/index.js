@@ -4,23 +4,13 @@ import { Loading } from '../../../components/loading'
 import * as _ from 'lodash'
 import SimpleContextSelect from '../../../components/SimpleContextSelect'
 
-const Category = ({ title, projectSpace, onChange, parent }) => {
-  console.log(parent)
-  // const [subject, setSubject] = useState('')
-  // const [room, setRoom] = useState('')
-  // const [member, setMember] = useState(false)
+const Category = ({ projectSpace, onChange, parent }) => {
   const [loading, setLoading] = useState(true)
-  const [currentContext, setCurrentContext] = useState(null)
+  const [currentContext] = useState('')
+  const [contexts, setContexts] = useState([])
   const [error, setError] = useState('')
   const [inputItems, setInputItems] = useState()
   const matrixClient = Matrix.getMatrixClient()
-  useEffect(() => {
-    console.log('____________projectSpace:__________')
-    console.log(projectSpace)
-    console.log('______________context:__________')
-    console.log(currentContext)
-    inputItems && console.log(inputItems)
-  }, [currentContext, inputItems, projectSpace])
 
   const createStructurObject = async () => {
     setLoading(true)
@@ -35,17 +25,7 @@ const Category = ({ title, projectSpace, onChange, parent }) => {
           children: {}
         }
       }
-      /*
-      const typesOfSpaces = ['context',
-        'class',
-        'course',
-        'institution',
-        'degree program',
-        'design department',
-        'faculty',
-        'institute',
-        'semester']
-*/
+
       async function scanForAndAddSpaceChildren (spaceId, path) {
         if (spaceId === 'undefined') return
         const stateEvents = await matrixClient.roomState(spaceId).catch(console.log)
@@ -71,11 +51,7 @@ const Category = ({ title, projectSpace, onChange, parent }) => {
         for (const event of stateEvents) {
           if (event.type !== 'm.space.child' && !includeRooms) continue
           if (event.type === 'm.space.child' && _.size(event.content) === 0) continue // check to see if body of content is empty, therefore space has been removed
-          if (event.state_key === projectSpace) {
-            console.log(event)
-            console.log(spaceId)
-            setCurrentContext(event.room_id)
-          }
+          if (event.state_key === projectSpace) setContexts(contexts => [...contexts, { name: spaceName, room_id: event.room_id }]) // add context to the contexts array if the projectspace is a child of it
           if (event.room_id !== spaceId) continue
           // if (event.sender !== process.env.RUNDGANG_BOT_USERID && !includeRooms) continue
 
@@ -116,6 +92,7 @@ const Category = ({ title, projectSpace, onChange, parent }) => {
       }
 
       await scanForAndAddSpaceChildren(motherSpaceRoomId, [])
+      onChange(!_.isEmpty(contexts))
       setLoading(false)
       return result
     }
@@ -130,29 +107,8 @@ const Category = ({ title, projectSpace, onChange, parent }) => {
     // eslint-disable-next-line
   }, [])
 
-  // const isMember = async (e) => {
-  //   e.preventDefault()
-  //   setLoading(true)
-  //   setMember(true)
-  //   setSubject(e.target.value)
-  //   setRoom(JSON.parse(e.target.value))
-  //   try {
-  //     await matrixClient.members(room.space + localStorage.getItem('mx_home_server')).catch(err => console.error(err)).then(res => {
-  //       setMember(res.chunk.map(a => a.sender).includes(localStorage.getItem('mx_user_id')))
-  //     })
-  //     console.log(member)
-  //   } catch (err) {
-  //     console.error(err)
-  //     setMember(false)
-  //   }
-  //
-  //   setLoading(false)
-  // }
-  // const callback = (requested) => {
-  //   setSubject('')
-  // }
-
   async function onContextChosen (contextSpace) {
+    console.log(contextSpace)
     setLoading(true)
     const projectSpaceMetaEvent = await matrixClient.getStateEvent(projectSpace, 'dev.medienhaus.meta').catch(console.log)
     // remove legacy code:
@@ -163,40 +119,46 @@ const Category = ({ title, projectSpace, onChange, parent }) => {
     }
 
     // If this project was in a different context previously we should try to take it out of the old context
+
     // @TODO add possibilty to add a content to multiple contexts
-    if (currentContext && currentContext !== contextSpace) await Matrix.removeSpaceChild(currentContext, projectSpace).catch(console.log)
+    // if (currentContext && currentContext !== contextSpace) await Matrix.removeSpaceChild(currentContext, projectSpace).catch(console.log)
 
     // Add this current project to the given context space
-    const addToContext = await Matrix.addSpaceChild(contextSpace, projectSpace)
+    const addToContext = await Matrix.addSpaceChild(contextSpace.id, projectSpace)
       .catch(async () => {
       // if we cant add the content to a context we try to join the context
-        const joinRoom = await matrixClient.joinRoom(contextSpace).catch(console.log)
+        const joinRoom = await matrixClient.joinRoom(contextSpace.id).catch(console.log)
         if (joinRoom) {
           console.log('joined room')
           // then try to add the conent to the context again
-          const addToContext = await Matrix.addSpaceChild(contextSpace, projectSpace).catch(console.log)
-          if (addToContext.event_id) {
-            setCurrentContext(contextSpace)
-            onChange()
+          const addToContext = await Matrix.addSpaceChild(contextSpace.id, projectSpace).catch(console.log)
+          if (addToContext?.event_id) {
+            setContexts(contexts => [...contexts, { name: contextSpace.name, room_id: contextSpace.id }])
+
+            onChange(!_.isEmpty(contexts))
             setLoading(false)
           }
         } else {
-          onChange()
+          onChange(!_.isEmpty(contexts))
           setLoading(false)
           setError('An error occured. Make sure you have the rights to publish in the selected context')
           setTimeout(() => setError(''), 2500)
         }
       })
-    if (addToContext.event_id) {
-      console.log(contextSpace)
-      console.log(projectSpace)
-      setCurrentContext(contextSpace)
-      onChange()
+    if (addToContext?.event_id) {
+      setContexts(contexts => [...contexts, { name: contextSpace.name, room_id: contextSpace.id }])
+      onChange(!_.isEmpty(contexts))
       setLoading(false)
     }
-    console.log(addToContext)
   }
 
+  const handleRemove = async (parent) => {
+    const removeSpacechild = await Matrix.removeSpaceChild(parent, projectSpace).catch((e) => {
+      setError(e?.message)
+      setTimeout(() => setError(''), 2500)
+    })
+    removeSpacechild.event_id && setContexts(contexts => contexts.filter(context => context.room_id !== parent))
+  }
   return (
     <>
       {/* }
@@ -206,12 +168,15 @@ const Category = ({ title, projectSpace, onChange, parent }) => {
       <p>{t('You can scroll through the list, or filter/search the list by typing one or more keywords.')}</p>
   */}
       <div style={{ position: 'relative' }}>
-        {loading || !inputItems
+        {!inputItems
           ? <Loading />
           : <SimpleContextSelect
               onItemChosen={onContextChosen}
+              handleRemove={handleRemove}
               selectedContext={currentContext}
+              contexts={contexts}
               struktur={inputItems}
+              loading={loading}
             />}
         {error && <p>{error}</p>}
       </div>

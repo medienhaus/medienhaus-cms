@@ -1,14 +1,22 @@
 import React, { useState } from 'react'
 import { Loading } from '../../../components/loading'
 import { ReactComponent as TrashIcon } from '../../../assets/icons/remix/trash.svg'
+import styled from 'styled-components'
 // import { isArray } from 'lodash'
+
+const Button = styled.button`
+width:  ${props => props.width || '100%'};
+float: right;
+clear: both;
+`
 
 function DeleteButton (props) {
   const [clickedDelete, setClickedDelete] = useState(false)
   const [deleting, setDeleting] = useState(false)
 
   return (
-    <button
+    <Button
+      width={props.width}
       className={clickedDelete ? 'del' : ''} disabled={deleting} onClick={async (e) => {
         if (clickedDelete) {
           setDeleting(true)
@@ -24,7 +32,7 @@ function DeleteButton (props) {
       }}
     >
       {clickedDelete ? <TrashIcon fill="var(--color-bg)" /> : deleting ? <Loading /> : '×'}
-    </button>
+    </Button>
   )
 }
 export default DeleteButton
