@@ -269,7 +269,7 @@ const ManageContexts = (props) => {
     setEvents([])
     setAllocation([])
     await fetchAllocation(space)
-    const checkSubSpaes = await props.matrixClient.getRoomHierarchy(space, 0).catch(console.log)
+    const checkSubSpaes = await props.matrixClient.getRoomHierarchy(space, 1).catch(console.log)
     const checkForEvents = checkSubSpaes?.rooms?.filter(child => child.name.includes('_event'))
     if (!_.isEmpty(checkForEvents)) {
       const eventSummary = await Promise.all(checkForEvents.map(room => props.matrixClient.getRoomHierarchy(room.room_id, 0).catch(err => console.log(err)))) // then we fetch the summary of all spaces within the event space
@@ -338,7 +338,6 @@ const ManageContexts = (props) => {
           {contextParent && <RemoveContext t={t} selectedContext={selectedContext} parent={contextParent} parentName={parentName} disableButton={disableButton} callback={spaceChild} />}
           <CreateContext t={t} parent={selectedContext} matrixClient={props.matrixClient} parentName={parentName} disableButton={loading} callback={addSpace} />
           <div>
-            <h2>Edit currently selected context</h2>
             <h2>Image</h2>
             <ProjectImage projectSpace={selectedContext} changeProjectImage={() => console.log('changed image')} disabled={loading} />
           </div>

@@ -38,6 +38,9 @@ class Matrix {
     this.matrixClient.startClient()
     this.matrixClient.setMaxListeners(500)
   }
-}
 
+  removeSpaceChild (parent, child) {
+    return this.matrixClient.http.authedRequest(undefined, 'PUT', `/rooms/${parent}/state/m.space.child/${child}`, undefined, {})
+  }
+}
 export default new Matrix()
