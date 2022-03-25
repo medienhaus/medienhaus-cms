@@ -1,4 +1,4 @@
 {
   "Hello": "Hallo",
-  "Welcome to the ruralmindshift.org content management system!": "Willkommen im Content Management System für ruralmindshift.org!"
+  "Welcome to the {{appTitle}} content management system!": "Willkommen im Content Management System für {{appTitle}}!"
 }
