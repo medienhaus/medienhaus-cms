@@ -25,7 +25,7 @@ const Content = ({ space, metaEvent, visibility, index, removeProject }) => {
         </figure>
         <div className="center">
           {/* @TODO grab description based on selected cms language */}
-          <p>{space.topic || t('Please add a short description of your project.')}</p>
+          <p>{space.topic || t('Please add a short description.')}</p>
         </div>
         <button disabled={showDeleteComponent} onClick={() => history.push(`/create/${space.room_id}`)}>{t('EDIT')}</button>
         <button disabled={showDeleteComponent} onClick={() => setShowDeleteComponent(true)}>{t('DELETE')}</button>
@@ -33,8 +33,8 @@ const Content = ({ space, metaEvent, visibility, index, removeProject }) => {
       </div>
       {showDeleteComponent &&
         <DeleteProjectButton roomId={space.room_id} name={space.name} index={index} toggleDeleteButton={() => setShowDeleteComponent(false)} removeProject={removeProject} />}
-      {!space.topic && <p>❗️ {t('Please add a short description of your project.')}</p>}
-      {!space.meta.context && <p>❗️ {t('Please add your project to a context.')}</p>}
+      {!space.topic && <p>❗️ {t('Please add a short description.')}</p>}
+      {!space.meta.context && <p>❗️ {t('Please select a context.')}</p>}
     </>
   )
 }

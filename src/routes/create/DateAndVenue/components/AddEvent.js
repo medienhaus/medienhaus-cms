@@ -4,19 +4,21 @@ import { useTranslation } from 'react-i18next'
 
 function AddEvent (props) {
   const [isAddEventVisible, setIsAddEventVisible] = useState(false)
-  const { t } = useTranslation('date')
+  const { t } = useTranslation('locations')
 
   return (
     <>
-      {!isAddEventVisible && <button
-        disabled={props.disabled}
-        className="add-button" onClick={e => {
-          e.preventDefault()
-          setIsAddEventVisible(true)
-        }}
-                             >
-        + {t('Add Location')}
-      </button>}
+      {!isAddEventVisible && (
+        <button
+          disabled={props.disabled}
+          className="add-button" onClick={e => {
+            e.preventDefault()
+            setIsAddEventVisible(true)
+          }}
+        >
+          + {t('Add Location')}
+        </button>
+      )}
       {isAddEventVisible &&
         <AddLocation
           number={props.length} // only return the number of new event spaces
