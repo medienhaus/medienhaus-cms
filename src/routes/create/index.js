@@ -278,7 +278,7 @@ const Create = () => {
       {projectSpace && (
         <>
           <section className="context">
-            <h3>{t('Project context')}</h3>
+            <h3>{t('Context')}</h3>
             <Category title={title} projectSpace={projectSpace} onChange={changeContext} parent={process.env.REACT_APP_CONTEXT_ROOT_SPACE_ID} />
           </section>
           {(!config.medienhaus?.content || !config.medienhaus?.content[type]?.blueprint || config.medienhaus?.content[type]?.blueprint.includes('location')) && (
@@ -345,8 +345,8 @@ const Create = () => {
             {spaceObject
               ? (<>
                 <PublishProject space={spaceObject.rooms[0]} metaEvent={medienhausMeta} description={(description && description[config.medienhaus?.languages[0]])} published={visibility} time={getCurrentTime} />
-                {!(description && description[config.medienhaus?.languages[0]]) && <p>❗️ {t('Please add a short description of your project.')}</p>}
-                {!medienhausMeta.context && <p>❗️ {t('Please add your project to a context.')}</p>}
+                {!(description && description[config.medienhaus?.languages[0]]) && <p>❗️ {t('Please add a short description.')}</p>}
+                {!medienhausMeta.context && <p>❗️ {t('Please select a context.')}</p>}
               </>)
               : <Loading />}
           </section>

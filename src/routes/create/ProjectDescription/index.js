@@ -35,7 +35,7 @@ const ProjectDescription = ({ description: intro, callback }) => {
             onChange={(e) => {
               setDescription(e.target.value)
             }}
-            placeholder={`${t('Please add a short description of your project.')} ${t('This field is required before publishing.')}`}
+            placeholder={`${t('Please add a short description.')} ${t('This field is required before publishing.')}`}
             onBlur={() => onSave()}
           />
         </div>
