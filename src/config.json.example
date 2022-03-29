@@ -43,6 +43,82 @@
     },
     "item": []
   },
+  {
+  "medienhaus": {
+		"context": [
+      "faculty",
+      "degree" 
+    ],
+    "content": {
+      "studentproject": {
+				"label": "Student Project",
+				"blueprint": [
+						"location",
+						"contributors",
+						"image"
+					],
+					"blocks": [
+						"heading",
+						"text",
+						"unordered list",
+						"ordered list",
+						"quote block",
+						"code block",
+						"image",
+						"audio",
+						"peertube",
+						"bigbluebutton"		
+					]
+			},
+      "event": {
+				"label": "Events",
+				"blueprint": [
+					"location",
+					"image"
+				],
+				"blocks": [
+					"heading",
+					"text",
+					"image",
+					"audio",
+					"peertube",
+					"bigbluebutton"		
+				]
+			}
+    },
+		"item":[]
+  },
+	"pages": {
+	      "code-of-conduct": {
+	        "label": "page-1",
+	        "room_id": "!Qfgxxxxxxxxxxx:yourserver.com"
+	      },
+	      "faq": {
+	        "label": "faq",
+	        "room_id": "!Dxxxxxxxxx:yourserver.com"
+	      }
+	    },
+	"sites": {
+	      "account": {
+	        "avatar": true,
+	        "mail": true,
+	        "name": true
+	      },
+				"moderate": {
+	        "invite": true,
+	        "rightsManagement": true,
+	        "manageContexts": {
+						"showRoot" : true
+						}
+	      },
+				"support" : true,
+				"request": true,
+				"feedback": true
+	    },
+	"languages": ["en", "es", "de"],
+	"usersToInviteToNewContexts": ["@user1:server.com"]
+},
+	
   "sites": {
     "account": {
       "avatar": true,
