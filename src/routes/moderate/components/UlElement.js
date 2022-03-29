@@ -25,6 +25,7 @@ const UlElement = ({ roomId, indent, removeContentElement }) => {
   const matrixClient = Matrix.getMatrixClient()
 
   const fetchHiararchy = useCallback(async () => {
+    setRoomArray(null)
     const hierarchy = []
 
     async function getBatchOfRooms (pagination) {

@@ -52,6 +52,10 @@ const Create = () => {
     setSaveTimestamp(date + ', ' + time)
   }, [])
 
+  useEffect(() => {
+    console.log(hasContext)
+  }, [hasContext])
+
   const reloadSpace = async (roomId, eventSpace) => {
     eventSpace && setEvents(eventSpace)
     // roomId is needed in order to invite collaborators to newly created rooms.

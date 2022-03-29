@@ -77,7 +77,7 @@ const PublishProject = ({ disabled, space, published, hasContext, metaEvent }) =
         }} disabled={disabled}
       >
         <option value="draft">{t('Draft')}</option>
-        <option value="public" disabled={!space.topic || !metaEvent.context}>{t('Public')}</option>
+        <option value="public" disabled={!space.topic || hasContext}>{t('Public')}</option>
       </select>
       {userFeedback && <p>{userFeedback}</p>}
     </div>

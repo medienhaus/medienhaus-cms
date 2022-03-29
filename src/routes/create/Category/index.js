@@ -92,7 +92,6 @@ const Category = ({ projectSpace, onChange, parent }) => {
       }
 
       await scanForAndAddSpaceChildren(motherSpaceRoomId, [])
-      onChange(!_.isEmpty(contexts))
       setLoading(false)
       return result
     }
@@ -107,8 +106,9 @@ const Category = ({ projectSpace, onChange, parent }) => {
     // eslint-disable-next-line
   }, [])
 
+  useEffect(() => onChange(!_.isEmpty(contexts)), [contexts, onChange])
+
   async function onContextChosen (contextSpace) {
-    console.log(contextSpace)
     setLoading(true)
     const projectSpaceMetaEvent = await matrixClient.getStateEvent(projectSpace, 'dev.medienhaus.meta').catch(console.log)
     // remove legacy code:

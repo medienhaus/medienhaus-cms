@@ -23,7 +23,6 @@ const Moderate = () => {
   const matrixClient = Matrix.getMatrixClient()
 
   const { t } = useTranslation()
-  console.log(selection)
   useEffect(() => {
     if (joinedSpaces) {
       const typesOfSpaces = config.medienhaus?.context || 'context'
@@ -82,7 +81,7 @@ const Moderate = () => {
       case 'manageContexts':
         return config.medienhaus?.sites?.moderate?.manageContexts && <><ManageContexts matrixClient={matrixClient} /></>
       case 'removeContent':
-        return config.medienhaus?.sites?.moderate?.removeContent && <><RemoveContent matrixClient={matrixClient} moderationRooms={moderationRooms} /></>
+        return config.medienhaus?.sites?.moderate?.removeContent && <><RemoveContent matrixClient={matrixClient} moderationRooms={moderationRooms} loading={fetching} /></>
       default:
         return (
           config.medienhaus?.sites?.moderate?.accept &&
