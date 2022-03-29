@@ -15,7 +15,6 @@ margin-bottom: calc(var(--margin)/2);
 
 const Category = ({ projectSpace, onChange, parent }) => {
   const [loading, setLoading] = useState(true)
-  const [currentContext] = useState('')
   const [contexts, setContexts] = useState([])
   const [error, setError] = useState('')
   const [inputItems, setInputItems] = useState()
@@ -190,7 +189,6 @@ const Category = ({ projectSpace, onChange, parent }) => {
             })}
             <SimpleContextSelect
               onItemChosen={onContextChosen}
-              selectedContext={currentContext}
               contexts={contexts}
               struktur={inputItems}
             />
