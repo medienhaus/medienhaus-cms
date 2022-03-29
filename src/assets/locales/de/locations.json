@@ -6,7 +6,9 @@
   "Venue": "Veranstaltungsort",
   "-- select venue --": "-- wählen Sie Ihren Veranstaltungsort --",
   "other venue, please enter below": "anderer Veranstaltungsort, bitte unten eingeben",
+  "Drag the marker to the desired location:": "Ziehen Sie den Pin an die gewünschte Stelle:",
   "details (i.e. room number)": "details (z.B. Raumnummer)",
+  "Add Location": "Location hinzufügen",
   "CANCEL": "ABBRECHEN",
   "SAVE": "SPEICHERN"
 }

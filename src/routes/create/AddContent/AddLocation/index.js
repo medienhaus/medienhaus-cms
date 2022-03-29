@@ -112,7 +112,7 @@ const AddLocation = ({ number, inviteCollaborators, projectSpace, handleOnBlockW
           </select>
         </div>}
       <>
-        <p>{t('Drag the marker to the desired location.')}</p>
+        <p>{t('Drag the marker to the desired location:')}</p>
         <div className="map">
           <MapContainer className="center" center={center} zoom={12} scrollWheelZoom={false}>
             <TileLayer

@@ -132,7 +132,7 @@ const ProjectTitle = ({ title, projectSpace, type, callback }) => {
                   setNewProject(true)
                 }
               }}
-            >{newProject && t('Create project')}
+            >{newProject && t('Create')}
             </LoadingSpinnerButton>}
 
           {title && edit && (projectTitle !== oldTitle) &&
