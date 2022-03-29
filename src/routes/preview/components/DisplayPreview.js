@@ -22,8 +22,6 @@ const DisplayPreview = ({ content, matrixClient, contentLoaded }) => {
     )
   }
 
-  console.log(cms)
-
   if (content.name.includes('heading')) {
     return (
       <div className="headline">
