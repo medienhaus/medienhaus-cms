@@ -3,12 +3,13 @@ import { Loading } from '../loading'
 import { useTranslation } from 'react-i18next'
 import Matrix from '../../Matrix'
 
-const PublishProject = ({ disabled, space, published, time, metaEvent }) => {
+const PublishProject = ({ disabled, space, published, hasContext, metaEvent }) => {
   const { t } = useTranslation('publish')
   // eslint-disable-next-line no-unused-vars
   const [userFeedback, setUserFeedback] = useState()
   const [visibility, setVisibility] = useState(published)
   const matrixClient = Matrix.getMatrixClient()
+
   useEffect(() => {
     if (published === 'invite') {
       // if 'published' = 'invite we know its legacy and we update it accordingly
@@ -72,11 +73,11 @@ const PublishProject = ({ disabled, space, published, time, metaEvent }) => {
     <div className="below">
       <select
         id="visibility" name="visibility" value={visibility} onChange={(e) => {
-          if (space.topic && metaEvent.context) onChangeVisibility(e.target.value)
+          if (space.topic && metaEvent.context && hasContext) onChangeVisibility(e.target.value)
         }} disabled={disabled}
       >
         <option value="draft">{t('Draft')}</option>
-        <option value="public" disabled={!space.topic || !metaEvent.context}>{t('Public')}</option>
+        <option value="public" disabled={!space.topic || hasContext}>{t('Public')}</option>
       </select>
       {userFeedback && <p>{userFeedback}</p>}
     </div>

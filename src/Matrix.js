@@ -42,5 +42,14 @@ class Matrix {
   removeSpaceChild (parent, child) {
     return this.matrixClient.http.authedRequest(undefined, 'PUT', `/rooms/${parent}/state/m.space.child/${child}`, undefined, {})
   }
+
+  addSpaceChild (parent, child, autoJoin, suggested) {
+    const payload = {
+      auto_join: autoJoin || false,
+      suggested: suggested || false,
+      via: [process.env.REACT_APP_MATRIX_BASE_URL.replace('https://', '')]
+    }
+    return this.matrixClient.http.authedRequest(undefined, 'PUT', `/rooms/${parent}/state/m.space.child/${child}`, undefined, payload)
+  }
 }
 export default new Matrix()

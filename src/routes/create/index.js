@@ -36,6 +36,7 @@ const Create = () => {
   const [allocation, setAllocation] = useState([])
   const [events, setEvents] = useState()
   const [description, setDescription] = useState()
+  const [hasContext, setHasContext] = useState(false)
   const [type, setType] = useState(config.medienhaus?.content && Object.keys(config.medienhaus?.content).length === 1 ? Object.keys(config.medienhaus?.content)[0] : '')
   // const [preview, setPreview] = useState(false)
   const history = useHistory()
@@ -234,13 +235,6 @@ const Create = () => {
     setTitle(newTitle)
   }
 
-  const changeContext = async () => {
-    // @TODO redundant already happening in callback line 88
-    const spaceDetails = await matrixClient.getRoom(projectSpace)
-    const meta = spaceDetails.currentState.events.get('dev.medienhaus.meta').values().next().value.event.content
-    setMedienhausMeta(meta)
-  }
-
   const onChangeDescription = async (description) => {
     // if the selected content language is english we save the description in the project space topic
     contentLang === config.medienhaus?.languages[0] && await matrixClient.setRoomTopic(spaceObject.rooms[0].room_id, description).catch(console.log)
@@ -279,7 +273,7 @@ const Create = () => {
         <>
           <section className="context">
             <h3>{t('Context')}</h3>
-            <Category title={title} projectSpace={projectSpace} onChange={changeContext} parent={process.env.REACT_APP_CONTEXT_ROOT_SPACE_ID} />
+            <Category title={title} projectSpace={projectSpace} onChange={setHasContext} parent={process.env.REACT_APP_CONTEXT_ROOT_SPACE_ID} />
           </section>
           {(!config.medienhaus?.content || !config.medienhaus?.content[type]?.blueprint || config.medienhaus?.content[type]?.blueprint.includes('location')) && (
             <section className="events">
@@ -344,9 +338,9 @@ const Create = () => {
             {/* <p>{t('If you still want to make changes to your contributions after publishing, you can continue to do so.')}</p> */}
             {spaceObject
               ? (<>
-                <PublishProject space={spaceObject.rooms[0]} metaEvent={medienhausMeta} description={(description && description[config.medienhaus?.languages[0]])} published={visibility} time={getCurrentTime} />
+                <PublishProject space={spaceObject.rooms[0]} metaEvent={medienhausMeta} hasContext={hasContext} description={(description && description[config.medienhaus?.languages[0]])} published={visibility} time={getCurrentTime} />
                 {!(description && description[config.medienhaus?.languages[0]]) && <p>❗️ {t('Please add a short description.')}</p>}
-                {!medienhausMeta.context && <p>❗️ {t('Please select a context.')}</p>}
+                {!hasContext && <p>❗️ {t('Please select a context.')}</p>}
               </>)
               : <Loading />}
           </section>
@@ -355,7 +349,7 @@ const Create = () => {
             <div className="confirmation">
               <button className="cancel" onClick={() => history.push('/content')}>← {t('BACK TO OVERVIEW')}</button>
             </div>
-            {saveTimestamp && <p className="timestamp">↳ {t('Project last saved at')} {saveTimestamp}</p>}
+            {saveTimestamp && <p className="timestamp">↳ {t('Last saved at')} {saveTimestamp}</p>}
           </section>
         </>
       )}

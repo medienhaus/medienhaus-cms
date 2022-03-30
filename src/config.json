@@ -3,7 +3,6 @@
     "sites": {
       "account": {
         "avatar": true,
-        "mail": true,
         "name": true
       },
       "moderate": {
