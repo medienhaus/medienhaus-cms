@@ -68,16 +68,15 @@ const PublishProject = ({ disabled, space, published, hasContext, metaEvent }) =
   }
 
   if (!visibility) return <Loading />
-
   return (
     <div className="below">
       <select
         id="visibility" name="visibility" value={visibility} onChange={(e) => {
-          if (space.topic && metaEvent.context && hasContext) onChangeVisibility(e.target.value)
+          if (space.topic && hasContext) onChangeVisibility(e.target.value)
         }} disabled={disabled}
       >
         <option value="draft">{t('Draft')}</option>
-        <option value="public" disabled={!space.topic || hasContext}>{t('Public')}</option>
+        <option value="public" disabled={!space.topic || !hasContext}>{t('Public')}</option>
       </select>
       {userFeedback && <p>{userFeedback}</p>}
     </div>
