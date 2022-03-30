@@ -95,6 +95,18 @@ You can define different types of content the cms is supposed to support.
 
 This gives you the ability to use different blueprints for different types.
 
+## Pages
+
+Any pages defined here will show up in the navigation. 
+
+You can simply add a “page” as a content type and manage them from the /content route. Simply add the content’s room id to the config. 
+
+<aside>
+💡 This also means that any user can add pages to the navigation bar!
+</aside>
+
+You can also add rooms you are not managing with the cms, as long as they follow the medienhaus scheme, or have a second medienhaus-cms instance you use to moderate pages.
+
 ## Blueprint
 Define which of the following UI elements should be visible in the /create route.
 

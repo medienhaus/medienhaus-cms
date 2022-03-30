@@ -1,5 +1,17 @@
 {
   "medienhaus": {
+    "content": {
+      "blog": {
+        "label": "pages",
+        "blocks": [
+          "heading",
+          "text"
+        ]
+      },
+      "article": {
+        "label": "article"
+      }
+    },
     "sites": {
       "account": {
         "avatar": true,
@@ -18,6 +30,16 @@
     "languages": [
       "en"
     ],
+    "pages": {
+      "code-of-conduct": {
+        "label": "code of conduct",
+        "room_id": "!sNUPSkLfCxpkNGyaoj:dev.medienhaus.udk-berlin.de"
+      },
+      "faq": {
+        "label": "faq",
+        "room_id": "!GIcvSCPPwlebHAYlez:dev.medienhaus.udk-berlin.de"
+      }
+    },
     "usersToInviteToNewContexts": [
       "@marcel328742380:dev.medienhaus.udk-berlin.de",
       "@robert1337:dev.medienhaus.udk-berlin.de"

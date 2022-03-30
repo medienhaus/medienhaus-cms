@@ -150,6 +150,9 @@ const Nav = () => {
                 {config.medienhaus?.sites?.support && <NavLink to="/support">/support</NavLink>}
                 {config.medienhaus?.sites?.request && <NavLink to="/request">/request</NavLink>}
               </div>
+              {config.medienhaus?.pages && <div>
+                {Object.keys(config.medienhaus.pages).map(key => <NavLink key={key} to={'/pages/' + encodeURI(key)}>{'/' + config.medienhaus.pages[key].label}</NavLink>)}
+              </div>}
             </>
           )}
         </div>

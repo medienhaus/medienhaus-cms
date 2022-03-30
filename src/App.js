@@ -19,6 +19,7 @@ import Credits from './routes/credits'
 import Account from './routes/account'
 import Request from './routes/request'
 import Preview from './routes/preview'
+import Pages from './routes/pages'
 
 import { AuthProvider, useAuth } from './Auth'
 import PropTypes from 'prop-types'
@@ -88,6 +89,7 @@ function App () {
               {config.medienhaus?.sites?.feedback && <PrivateRoute path="/feedback" component={Feedback} />}
               {config.medienhaus?.sites?.request && <PrivateRoute path="/request" component={Request} />}
               {config.medienhaus?.sites?.credits && <PrivateRoute path="/credits" component={Credits} />}
+              {config.medienhaus?.pages && <PrivateRoute path="/pages/:id" component={Pages} />}
             </Switch>
           </main>
           <Footer />
