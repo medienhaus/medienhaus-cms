@@ -19,9 +19,10 @@ const Pages = () => {
       const fetchHierarchy = await matrixClient.getRoomHierarchy(pageRoomId).catch(console.log)
       const selectedLanguageSpace = fetchHierarchy.rooms.filter(room => room.name === i18n.language)
       const fetchLanguageSpaceContent = await matrixClient.getRoomHierarchy(selectedLanguageSpace[0].room_id).catch(console.log)
+      const rooms = fetchLanguageSpaceContent.rooms
+      // we remove the first element since it's always the language space (e.g. "en")
+      rooms.shift()
       setContent(fetchLanguageSpaceContent.rooms
-        .filter(room => room.room_id !== pageRoomId)
-        .filter(room => !room.name.includes(i18n.language))
         .filter(room => room.name.charAt(0) !== 'x').sort((a, b) => {
           return a.name.substring(0, a.name.indexOf('_')) - b.name.substring(0, b.name.indexOf('_'))
         }))
