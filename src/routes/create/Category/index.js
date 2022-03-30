@@ -183,7 +183,7 @@ const Category = ({ projectSpace, onChange, parent }) => {
               return (
                 <RemovableLiElement key={context.room_id}>
                   <span>{context.name} </span>
-                  <DeleteButton width="5vw" onDelete={() => handleRemove(context.room_id)} />
+                  <DeleteButton width="2rem" onDelete={() => handleRemove(context.room_id)} />
                 </RemovableLiElement>
               )
             })}

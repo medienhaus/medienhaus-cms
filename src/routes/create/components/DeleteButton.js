@@ -2,13 +2,12 @@ import React, { useState } from 'react'
 import { Loading } from '../../../components/loading'
 import { ReactComponent as TrashIcon } from '../../../assets/icons/remix/trash.svg'
 import styled from 'styled-components'
-// import { isArray } from 'lodash'
 
 const Button = styled.button`
 width:  ${props => props.width || '100%'};
 float: right;
 clear: both;
-border-color: var(--color-bg);
+border: none;
 background-color: ${props => props.clickedDelete ? 'var(--color-no)' : 'var(--color-fg)'};
 `
 
@@ -20,10 +19,10 @@ function DeleteButton (props) {
     <Button
       width={props.width}
       clickedDelete={clickedDelete}
-      className={clickedDelete ? 'del' : ''} disabled={deleting} onClick={async (e) => {
+      disabled={deleting}
+      onClick={async (e) => {
         if (clickedDelete) {
           setDeleting(true)
-          // @TODO delete rooms within space when deleting event space
           await props.onDelete()
           setClickedDelete(false)
           props.callback && await props.callback()
@@ -34,7 +33,7 @@ function DeleteButton (props) {
         }
       }}
     >
-      {clickedDelete ? <TrashIcon fill="var(--color-bg)" /> : deleting ? <Loading /> : '×'}
+      {deleting ? <Loading /> : clickedDelete ? <TrashIcon fill="var(--color-bg)" /> : '×'}
     </Button>
   )
 }

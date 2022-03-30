@@ -235,8 +235,6 @@ const Create = () => {
     setTitle(newTitle)
   }
 
-  const changeContext = (contextState) => setHasContext(contextState)
-
   const onChangeDescription = async (description) => {
     // if the selected content language is english we save the description in the project space topic
     contentLang === config.medienhaus?.languages[0] && await matrixClient.setRoomTopic(spaceObject.rooms[0].room_id, description).catch(console.log)
@@ -275,7 +273,7 @@ const Create = () => {
         <>
           <section className="context">
             <h3>{t('Context')}</h3>
-            <Category title={title} projectSpace={projectSpace} onChange={changeContext} parent={process.env.REACT_APP_CONTEXT_ROOT_SPACE_ID} />
+            <Category title={title} projectSpace={projectSpace} onChange={setHasContext} parent={process.env.REACT_APP_CONTEXT_ROOT_SPACE_ID} />
           </section>
           {(!config.medienhaus?.content || !config.medienhaus?.content[type]?.blueprint || config.medienhaus?.content[type]?.blueprint.includes('location')) && (
             <section className="events">
