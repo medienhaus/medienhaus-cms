@@ -3,13 +3,15 @@ import mapDeep from 'deepdash/es/mapDeep'
 import filterDeep from 'deepdash/es/filterDeep'
 
 import config from '../config.json'
+import { useTranslation } from 'react-i18next'
 
 function SimpleContextSelect ({ onItemChosen, selectedContext, contexts, struktur, disabled }) {
+  const { t } = useTranslation('context')
   const items = config.medienhaus?.sites?.moderate?.manageContexts?.showRoot ? struktur : struktur[Object.keys(struktur)[0]].children
 
   return (
     <select disabled={disabled} defaultValue={selectedContext} onChange={(e) => { onItemChosen(JSON.parse(e.target.value)) }}>
-      <option disabled value="">-- add to context --</option>
+      <option disabled value="">-- {t('select context')} --</option>
       {mapDeep(filterDeep(items, (value, key, parent, context) => {
         // Exclude all hierarchy elements that are not "contexts"
         if (!value?.type.includes('context')) return false
