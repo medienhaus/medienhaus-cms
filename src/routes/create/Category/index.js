@@ -3,10 +3,18 @@ import Matrix from '../../../Matrix'
 import { Loading } from '../../../components/loading'
 import * as _ from 'lodash'
 import SimpleContextSelect from '../../../components/SimpleContextSelect'
+import DeleteButton from '../components/DeleteButton'
+
+import styled from 'styled-components'
+
+const RemovableLiElement = styled.li`
+list-style: none;
+height: 2em;
+margin-bottom: calc(var(--margin)/2);
+`
 
 const Category = ({ projectSpace, onChange, parent }) => {
   const [loading, setLoading] = useState(true)
-  const [currentContext] = useState('')
   const [contexts, setContexts] = useState([])
   const [error, setError] = useState('')
   const [inputItems, setInputItems] = useState()
@@ -120,7 +128,6 @@ const Category = ({ projectSpace, onChange, parent }) => {
 
     // If this project was in a different context previously we should try to take it out of the old context
 
-    // @TODO add possibilty to add a content to multiple contexts
     // if (currentContext && currentContext !== contextSpace) await Matrix.removeSpaceChild(currentContext, projectSpace).catch(console.log)
 
     // Add this current project to the given context space
@@ -159,6 +166,7 @@ const Category = ({ projectSpace, onChange, parent }) => {
     })
     removeSpacechild.event_id && setContexts(contexts => contexts.filter(context => context.room_id !== parent))
   }
+
   return (
     <>
       {/* }
@@ -168,16 +176,23 @@ const Category = ({ projectSpace, onChange, parent }) => {
       <p>{t('You can scroll through the list, or filter/search the list by typing one or more keywords.')}</p>
   */}
       <div style={{ position: 'relative' }}>
-        {!inputItems
+        {!inputItems || loading
           ? <Loading />
-          : <SimpleContextSelect
+          : <>
+            {contexts?.map((context, index) => {
+              return (
+                <RemovableLiElement key={context.room_id}>
+                  <span>{context.name} </span>
+                  <DeleteButton width="5%" onDelete={() => handleRemove(context.room_id)} />
+                </RemovableLiElement>
+              )
+            })}
+            <SimpleContextSelect
               onItemChosen={onContextChosen}
-              handleRemove={handleRemove}
-              selectedContext={currentContext}
               contexts={contexts}
               struktur={inputItems}
-              loading={loading}
-            />}
+            />
+          </>}
         {error && <p>{error}</p>}
       </div>
       {/* {subject !== '' && !member && <Knock room={room} callback={callback} />} */}
