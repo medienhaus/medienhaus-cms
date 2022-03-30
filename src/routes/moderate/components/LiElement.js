@@ -45,7 +45,7 @@ const LiElement = ({ roomId, type, name, parent, indent, content, onElementRemov
         }}
         >{name}</span>
         {content.includes(type) && <DeleteButton
-          width="3vw"
+          width="5vw"
           onDelete={handleRemoveClick}
                                    />}
       </ListElement>

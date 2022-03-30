@@ -52,10 +52,6 @@ const Create = () => {
     setSaveTimestamp(date + ', ' + time)
   }, [])
 
-  useEffect(() => {
-    console.log(hasContext)
-  }, [hasContext])
-
   const reloadSpace = async (roomId, eventSpace) => {
     eventSpace && setEvents(eventSpace)
     // roomId is needed in order to invite collaborators to newly created rooms.
@@ -345,8 +341,8 @@ const Create = () => {
             {spaceObject
               ? (<>
                 <PublishProject space={spaceObject.rooms[0]} metaEvent={medienhausMeta} hasContext={hasContext} description={(description && description[config.medienhaus?.languages[0]])} published={visibility} time={getCurrentTime} />
-                {!(description && description[config.medienhaus?.languages[0]]) && <p>❗️ {t('Please add a short description of your project.')}</p>}
-                {!hasContext && <p>❗️ {t('Please add your project to a context.')}</p>}
+                {!(description && description[config.medienhaus?.languages[0]]) && <p>❗️ {t('Please add a short description.')}</p>}
+                {!hasContext && <p>❗️ {t('Please select a context.')}</p>}
               </>)
               : <Loading />}
           </section>
@@ -355,7 +351,7 @@ const Create = () => {
             <div className="confirmation">
               <button className="cancel" onClick={() => history.push('/content')}>← {t('BACK TO OVERVIEW')}</button>
             </div>
-            {saveTimestamp && <p className="timestamp">↳ {t('Project last saved at')} {saveTimestamp}</p>}
+            {saveTimestamp && <p className="timestamp">↳ {t('Last saved at')} {saveTimestamp}</p>}
           </section>
         </>
       )}

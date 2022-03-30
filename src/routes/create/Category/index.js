@@ -175,7 +175,7 @@ const Category = ({ projectSpace, onChange, parent }) => {
       <p>{t('The context can be a class, a course, a seminar or a free project. If you are unsure, ask the professor of your class or the seminar leader.')}</p>
       <p>{t('You can scroll through the list, or filter/search the list by typing one or more keywords.')}</p>
   */}
-      <div style={{ position: 'relative' }}>
+      <ul style={{ position: 'relative' }}>
         {!inputItems || loading
           ? <Loading />
           : <>
@@ -183,7 +183,7 @@ const Category = ({ projectSpace, onChange, parent }) => {
               return (
                 <RemovableLiElement key={context.room_id}>
                   <span>{context.name} </span>
-                  <DeleteButton width="5%" onDelete={() => handleRemove(context.room_id)} />
+                  <DeleteButton width="5vw" onDelete={() => handleRemove(context.room_id)} />
                 </RemovableLiElement>
               )
             })}
@@ -194,7 +194,7 @@ const Category = ({ projectSpace, onChange, parent }) => {
             />
           </>}
         {error && <p>{error}</p>}
-      </div>
+      </ul>
       {/* {subject !== '' && !member && <Knock room={room} callback={callback} />} */}
     </>
   )
