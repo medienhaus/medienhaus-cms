@@ -8,6 +8,8 @@ const Button = styled.button`
 width:  ${props => props.width || '100%'};
 float: right;
 clear: both;
+border-color: var(--color-bg);
+background-color: ${props => props.clickedDelete ? 'var(--color-no)' : 'var(--color-fg)'};
 `
 
 function DeleteButton (props) {
@@ -17,6 +19,7 @@ function DeleteButton (props) {
   return (
     <Button
       width={props.width}
+      clickedDelete={clickedDelete}
       className={clickedDelete ? 'del' : ''} disabled={deleting} onClick={async (e) => {
         if (clickedDelete) {
           setDeleting(true)
