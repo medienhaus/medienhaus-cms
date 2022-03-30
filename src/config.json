@@ -33,11 +33,11 @@
     "pages": {
       "code-of-conduct": {
         "label": "code of conduct",
-        "room_id": "!QfgNXpmdydUMOYiiPF:dev.medienhaus.udk-berlin.de"
+        "room_id": "!sNUPSkLfCxpkNGyaoj:dev.medienhaus.udk-berlin.de"
       },
       "faq": {
         "label": "faq",
-        "room_id": "!DxRFndpHSvVDcZBvlS:dev.medienhaus.udk-berlin.de"
+        "room_id": "!GIcvSCPPwlebHAYlez:dev.medienhaus.udk-berlin.de"
       }
     },
     "usersToInviteToNewContexts": [

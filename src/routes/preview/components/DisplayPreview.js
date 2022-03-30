@@ -7,7 +7,6 @@ const DisplayPreview = ({ content, matrixClient, contentLoaded }) => {
   const { t } = useTranslation('content')
 
   let { cms, error, fetching } = contentLoaded ? { cms: contentLoaded, error: false, fetching: false } : FetchCms(content?.room_id)
-
   if (!contentLoaded) cms = cms[0]
 
   if (fetching) {
