@@ -1,5 +1,17 @@
 {
   "medienhaus": {
+    "content": {
+      "content": {
+        "label": "Content",
+        "blocks": [
+          "heading",
+          "text",
+          "unordered list",
+          "ordered list",
+          "image"
+        ]
+      }
+    },
     "sites": {
       "account": {
         "avatar": true,
@@ -8,9 +20,12 @@
       "moderate": {
         "invite": true,
         "rightsManagement": true,
-        "manageContexts": true,
+        "manageContexts": {
+          "showRoot": true
+        },
         "removeContent": true
-      }
+      },
+      "support": true
     },
     "languages": [
       "en"

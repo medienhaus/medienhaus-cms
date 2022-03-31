@@ -1,23 +1,45 @@
 {
   "medienhaus": {
+    "content": {
+      "content": {
+        "label": "Content",
+        "blocks": [
+          "heading",
+          "text",
+          "unordered list",
+          "ordered list",
+          "image"
+        ]
+      }
+    },
     "sites": {
       "account": {
         "avatar": true,
-        "mail": true,
         "name": true
       },
       "moderate": {
         "invite": true,
         "rightsManagement": true,
-        "manageContexts": true
+        "manageContexts": {
+          "showRoot": true
+        },
+        "removeContent": true
       },
-      "support": true,
-      "request": true,
-      "feedback": true
+      "support": true
     },
     "languages": [
       "en"
     ],
+    "pages": {
+      "code-of-conduct": {
+        "label": "code of conduct",
+        "room_id": "!sNUPSkLfCxpkNGyaoj:dev.medienhaus.udk-berlin.de"
+      },
+      "faq": {
+        "label": "faq",
+        "room_id": "!GIcvSCPPwlebHAYlez:dev.medienhaus.udk-berlin.de"
+      }
+    },
     "usersToInviteToNewContexts": [
       "@marcel328742380:dev.medienhaus.udk-berlin.de",
       "@robert1337:dev.medienhaus.udk-berlin.de"
