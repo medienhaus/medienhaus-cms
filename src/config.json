@@ -1,17 +1,5 @@
 {
   "medienhaus": {
-    "content": {
-      "blog": {
-        "label": "pages",
-        "blocks": [
-          "heading",
-          "text"
-        ]
-      },
-      "article": {
-        "label": "article"
-      }
-    },
     "sites": {
       "account": {
         "avatar": true,
@@ -22,10 +10,7 @@
         "rightsManagement": true,
         "manageContexts": true,
         "removeContent": true
-      },
-      "support": true,
-      "request": true,
-      "feedback": true
+      }
     },
     "languages": [
       "en"

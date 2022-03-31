@@ -145,11 +145,12 @@ const Nav = () => {
                 {config.medienhaus?.sites.moderate && <NavLink to="/moderate" className={!isModeratingSpaces ? 'disabled' : ''}>/moderate<sup className={`notification ${knockAmount < 1 ? 'hidden' : ''}`}>●</sup></NavLink>}
                 {isAdmin && <NavLink to="/admin">/admin</NavLink>}
               </div>
-              <div>
-                {config.medienhaus?.sites?.feedback && <NavLink to="/feedback">/feedback</NavLink>}
-                {config.medienhaus?.sites?.support && <NavLink to="/support">/support</NavLink>}
-                {config.medienhaus?.sites?.request && <NavLink to="/request">/request</NavLink>}
-              </div>
+              {(config.medienhaus?.sites.feedback || config.medienhaus?.sites?.support || config.medienhaus?.sites?.request) &&
+                <div>
+                  {config.medienhaus?.sites?.feedback && <NavLink to="/feedback">/feedback</NavLink>}
+                  {config.medienhaus?.sites?.support && <NavLink to="/support">/support</NavLink>}
+                  {config.medienhaus?.sites?.request && <NavLink to="/request">/request</NavLink>}
+                </div>}
               {config.medienhaus?.pages && <div>
                 {Object.keys(config.medienhaus.pages).map(key => <NavLink key={key} to={'/pages/' + encodeURI(key)}>{'/' + config.medienhaus.pages[key].label}</NavLink>)}
               </div>}
