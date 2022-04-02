@@ -196,7 +196,7 @@ const ManageContexts = (props) => {
               'm.room.power_levels': 100,
               'm.room.server_acl': 100,
               'm.room.tombstone': 100,
-              'm.space.child': 50,
+              'm.space.child': 0, // @TODO this needs to be a config flag, wether users are allowed to just add content to contexts or need to knock and be invited first.
               'm.room.topic': 50,
               'm.room.pinned_events': 50,
               'm.reaction': 50,
