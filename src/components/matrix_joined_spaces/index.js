@@ -4,8 +4,8 @@ import config from '../../config.json'
 
 const matrixClient = Matrix.getMatrixClient()
 const context = config.medienhaus?.context ? config.medienhaus?.context.concat('context') : ['context']
-const content = config.medienhaus?.content ? Object.keys(config.medienhaus?.content).concat('content') : ['content']
-const typesOfContent = context.concat(content)
+const item = config.medienhaus?.item ? Object.keys(config.medienhaus?.item).concat('item') : ['item']
+const typesOfItem = context.concat(item)
 // @TODO change hook to also return invites and knocks
 
 const getAnswer = async () => {
@@ -18,7 +18,7 @@ const getAnswer = async () => {
       room.name !== 'events' &&
       room.getMyMembership() === 'join' && // we only want spaces a user is part of
       room.currentState.events.has('dev.medienhaus.meta') && // check if the room has our meta event
-      typesOfContent.includes(room.currentState.events.get('dev.medienhaus.meta').values().next().value.event.content.type) // and see if the type is listed in our content config
+      typesOfItem.includes(room.currentState.events.get('dev.medienhaus.meta').values().next().value.event.content.type) // and see if the type is listed in our item config
     )
     .map(room => {
       const collab = room.getJoinedMemberCount() > 1

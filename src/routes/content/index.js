@@ -16,8 +16,8 @@ const Overview = () => {
   const [projects, setProjects] = useState({})
   const [invites, setInvites] = useState({})
   const context = config.medienhaus?.context ? config.medienhaus?.context.concat('context') : ['context']
-  const content = config.medienhaus?.content ? Object.keys(config.medienhaus?.content).concat('content') : ['content']
-  const typesOfSpaces = context.concat(content)
+  const item = config.medienhaus?.item ? Object.keys(config.medienhaus?.item).concat('item') : ['item']
+  const typesOfSpaces = context.concat(item)
   const { joinedSpaces, spacesErr, fetchSpaces, reload } = useJoinedSpaces(false)
 
   useEffect(() => {
@@ -26,7 +26,7 @@ const Overview = () => {
       if (room.getType() !== 'm.space') return
       // Ignore if this is not a student project or a "context"
       const metaEvent = await matrixClient.getStateEvent(room.roomId, 'dev.medienhaus.meta').catch(() => {})
-      if (!metaEvent || !metaEvent.type || !typesOfSpaces.includes(metaEvent.type)) return
+      if (!metaEvent || !metaEvent.template || !typesOfSpaces.includes(metaEvent.template)) return
       // Ignore if this is not an invitation (getMyMembership() only works correctly after calling _loadMembersFromServer())
       await room.loadMembersFromServer().catch(console.error)
       if (room.getMyMembership() !== 'invite') return

@@ -62,7 +62,7 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace, time,
   const onSave = async (roomId, text) => {
     setReadOnly(true)
     try {
-      if (json.type === 'ul' || json.type === 'ol') {
+      if (json.template === 'ul' || json.template === 'ol') {
         const list = JSON.parse(localStorage.getItem(roomId)).map(li => li.text).join('\n')
         console.log(list)
         const save = await matrixClient.sendMessage(roomId, {
@@ -77,7 +77,7 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace, time,
             setSaved()
           }, 1000)
         }
-      } else if (json.type === 'code') {
+      } else if (json.template === 'code') {
         const save = await matrixClient.sendMessage(roomId, {
           body: content,
           format: 'org.matrix.custom.html',
@@ -90,7 +90,7 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace, time,
             setSaved()
           }, 1000)
         }
-      } else if (json.type === 'quote') {
+      } else if (json.template === 'quote') {
         const save = await matrixClient.sendMessage(roomId, {
           body: localStorage.getItem(roomId),
           format: 'org.matrix.custom.html',
@@ -201,29 +201,29 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace, time,
               <LoadingSpinnerButton key={'up_' + block.room_id} disabled={index < 1 || mapComponent} onClick={() => changeOrder(block.room_id, block.name, -1)}>↑</LoadingSpinnerButton>
               <figure className="icon-bg">
                 {
-                  json.type === 'heading'
+                  json.template === 'heading'
                     ? <HeadingIcon fill="var(--color-fg)" />
-                    : json.type === 'audio'
+                    : json.template === 'audio'
                       ? <AudioIcon fill="var(--color-fg)" />
-                      : json.type === 'image'
+                      : json.template === 'image'
                         ? <ImageIcon fill="var(--color-fg)" />
-                        : json.type === 'ul'
+                        : json.template === 'ul'
                           ? <UlIcon fill="var(--color-fg)" />
-                          : json.type === 'ol'
+                          : json.template === 'ol'
                             ? <OlIcon fill="var(--color-fg)" />
-                            : json.type === 'quote'
+                            : json.template === 'quote'
                               ? <QuoteIcon fill="var(--color-fg)" />
-                              : json.type === 'code'
+                              : json.template === 'code'
                                 ? <CodeIcon fill="var(--color-fg)" />
-                                : json.type === 'video'
+                                : json.template === 'video'
                                   ? <VideoIcon fill="var(--color-fg)" />
-                                  : json.type === 'playlist'
+                                  : json.template === 'playlist'
                                     ? <PlaylistIcon fill="var(--color-fg)" />
-                                    : json.type === 'location'
+                                    : json.template === 'location'
                                       ? <LocationIcon fill="var(--color-fg)" />
-                                      : json.type === 'date'
+                                      : json.template === 'date'
                                         ? <DateIcon fill="var(--color-fg)" />
-                                        : json.type === 'bbb'
+                                        : json.template === 'bbb'
                                           ? <PictureInPictureIcon fill="var(--color-fg)" />
                                           : <TextIcon fill="var(--color-fg)" />
                 }
@@ -269,11 +269,11 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace, time,
                     <TextareaAutosize rows={cms.info.alt.split('\n').length} value={cms.info.alt} disabled />
                   </div>
                   )
-                : json.type === 'ul'
+                : json.template === 'ul'
                   ? <List onSave={() => onSave(block.room_id)} storage={(list) => localStorage.setItem(block.room_id, list)} populated={cms?.body} type="ul" />
-                  : json.type === 'ol'
+                  : json.template === 'ol'
                     ? <List onSave={() => onSave(block.room_id)} storage={(list) => localStorage.setItem(block.room_id, list)} populated={cms?.body} type="ol" />
-                    : json.type === 'code'
+                    : json.template === 'code'
                       ? <div className="center code">
                         <TextareaAutosize
                           value={content}
@@ -287,10 +287,10 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace, time,
                           }}
                         />
                       </div>
-                      : (json.type === 'video' || json.type === 'livestream' || json.type === 'playlist')
+                      : (json.template === 'video' || json.template === 'livestream' || json.template === 'playlist')
                           ? (
                             <iframe
-                              src={`https://stream.udk-berlin.de/${(json.type === 'playlist' ? 'video-playlists' : 'videos')}/embed/${cms?.body}`}
+                              src={`https://stream.udk-berlin.de/${(json.template === 'playlist' ? 'video-playlists' : 'videos')}/embed/${cms?.body}`}
                               frameBorder="0"
                               title={cms?.body}
                               sandbox="allow-same-origin allow-scripts"
@@ -298,7 +298,7 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace, time,
                               style={{ width: '100%', aspectRatio: '16 / 9', border: 'calc(var(--margin) * 0.2) solid var(--color-fg)' }}
                             />
                             )
-                          : json.type === 'location'
+                          : json.template === 'location'
                             ? (
                               <div
                                 className={cms.body.substring(0, cms.body.indexOf(',')) + ',' + cms.body.substring(cms.body.indexOf(',') + 1, cms.body.indexOf('-')) === '0.0, 0.0' ? 'center' : null}
@@ -329,7 +329,7 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace, time,
                                   </p>}
                               </div>
                               )
-                            : json.type === 'date'
+                            : json.template === 'date'
                               ? <div className={mapComponent ? 'center' : 'center warning'}>
                                 {cms.body.split(' ')[0] && <input type="date" value={cms.body.split(' ')[0]} disabled required />}
                                 {cms.body.split(' ')[1] && <input type="time" value={cms.body.split(' ')[1]} disabled required />}
@@ -340,12 +340,12 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace, time,
                                     </Trans>
                                   </p>}
                               </div>
-                              : json.type === 'bbb'
+                              : json.template === 'bbb'
                                 ? <DisplayBbb cms={cms} />
-                                : (json.type === 'video' || json.type === 'livestream' || json.type === 'playlist')
+                                : (json.template === 'video' || json.template === 'livestream' || json.template === 'playlist')
                                     ? (
                                       <iframe
-                                        src={`https://stream.udk-berlin.de/${(json.type === 'playlist' ? 'video-playlists' : 'videos')}/embed/${cms?.body}`}
+                                        src={`https://stream.udk-berlin.de/${(json.template === 'playlist' ? 'video-playlists' : 'videos')}/embed/${cms?.body}`}
                                         frameBorder="0"
                                         title={cms?.body}
                                         sandbox="allow-same-origin allow-scripts"
@@ -353,7 +353,7 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace, time,
                                         style={{ width: '100%', aspectRatio: '16 / 9', border: 'calc(var(--margin) * 0.2) solid var(--color-fg)' }}
                                       />
                                       )
-                                    : json.type === 'heading'
+                                    : json.template === 'heading'
                                       ? <div className="center">
                                         <TextareaAutosize
                                           minRows={6}
@@ -373,7 +373,7 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace, time,
                                           dark={window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches}
                                           defaultValue={cms?.body}
                                           disableExtensions={['blockmenu', 'image', 'embed', 'table', 'tr', 'th', 'td', 'bullet_list', 'ordered_list', 'checkbox_item', 'checkbox_list', 'container_notice', 'blockquote', 'heading', 'hr', 'highlight']}
-                                          placeholder={json.type}
+                                          placeholder={json.template}
                                           readOnly={readOnly}
                                           onSave={({ done }) => {
                                             if (localStorage.getItem(block.room_id) !== null && cms !== undefined && cms.body !== localStorage.getItem(block.room_id)) {

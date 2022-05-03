@@ -220,7 +220,7 @@ const ManageContexts = (props) => {
           {
             type: 'dev.medienhaus.meta',
             content: {
-              version: '0.3',
+              version: '0.4',
               type: type,
               published: 'public'
             }
@@ -247,7 +247,6 @@ const ManageContexts = (props) => {
           console.log('inviting ' + user)
           await props.matrixClient.invite(space.room_id, user).catch(console.log)
           await setPower(user, space.room_id, 50)
-          // @TODO only first user in loop gets actually promoted to specified power level 🤷‍♂️
         }
       }
       if (callback) callback()

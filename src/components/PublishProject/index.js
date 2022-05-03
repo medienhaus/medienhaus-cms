@@ -19,7 +19,7 @@ const PublishProject = ({ disabled, space, published, hasContext, metaEvent }) =
       setVisibility('draft')
     } else if (published === 'public' && !metaEvent.published) {
       // if 'published' = 'public' but the meta event is missing, we know its legacy and we update it accordingly
-      console.log('changing dev.medienhaus.meta...')
+      console.info('changing dev.medienhaus.meta...')
       metaEvent.published = published
       matrixClient.sendStateEvent(space.room_id, 'dev.medienhaus.meta', metaEvent)
       setVisibility('public')
