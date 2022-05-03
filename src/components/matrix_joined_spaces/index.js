@@ -3,9 +3,8 @@ import Matrix from '../../Matrix'
 import config from '../../config.json'
 
 const matrixClient = Matrix.getMatrixClient()
-const context = config.medienhaus?.context ? config.medienhaus?.context.concat('context') : ['context']
-const item = config.medienhaus?.item ? Object.keys(config.medienhaus?.item).concat('item') : ['item']
-const typesOfItem = context.concat(item)
+const contextTemplates = config.medienhaus?.context ? config.medienhaus?.context : ['context']
+const itemTemplates = config.medienhaus?.item ? Object.keys(config.medienhaus?.item) : ['item']
 // @TODO change hook to also return invites and knocks
 
 const getAnswer = async () => {
@@ -18,9 +17,19 @@ const getAnswer = async () => {
       room.name !== 'events' &&
       room.getMyMembership() === 'join' && // we only want spaces a user is part of
       room.currentState.events.has('dev.medienhaus.meta') && // check if the room has our meta event
-      typesOfItem.includes(room.currentState.events.get('dev.medienhaus.meta').values().next().value.event.content.type) // and see if the type is listed in our item config
+      ((
+        room.currentState.events.get('dev.medienhaus.meta').values().next().value.event.content.type === 'context' &&
+        contextTemplates.includes(room.currentState.events.get('dev.medienhaus.meta').values().next().value.event.content.template) // and see if the type is listed in our item config
+      ) ||
+      (
+        room.currentState.events.get('dev.medienhaus.meta').values().next().value.event.content.type === 'item' &&
+        itemTemplates.includes(room.currentState.events.get('dev.medienhaus.meta').values().next().value.event.content.template) // and see if the type is listed in our item config
+      ))
+
     )
     .map(room => {
+      console.log(room.currentState.events.get('dev.medienhaus.meta').values().next().value.event.content.type)
+
       const collab = room.getJoinedMemberCount() > 1
       const event = room.currentState.events.get('dev.medienhaus.meta').values().next().value.event.content
       const topic = room.currentState.events.has('m.room.topic') ? room.currentState.events.get('m.room.topic').values().next().value.event.content.topic : undefined
