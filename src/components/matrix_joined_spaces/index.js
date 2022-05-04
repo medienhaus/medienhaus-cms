@@ -42,8 +42,6 @@ const getAnswer = async () => {
   }
 
   const createObject = filteredRooms.map(room => {
-    console.log(room.currentState.events.get('dev.medienhaus.meta').values().next().value.event.content.type)
-
     const collab = room.getJoinedMemberCount() > 1
     const event = room.currentState.events.get('dev.medienhaus.meta').values().next().value.event.content
     const topic = room.currentState.events.has('m.room.topic') ? room.currentState.events.get('m.room.topic').values().next().value.event.content.topic : undefined
@@ -61,7 +59,6 @@ const getAnswer = async () => {
       powerLevel: powerLevel
     }
   })
-  console.log(createObject)
   return createObject
 }
 
