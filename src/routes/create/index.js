@@ -37,7 +37,7 @@ const Create = () => {
   const [events, setEvents] = useState()
   const [description, setDescription] = useState()
   const [hasContext, setHasContext] = useState(false)
-  const [template, setTemplate] = useState(config.medienhaus?.item && Object.keys(config.medienhaus?.item).length === 1 ? Object.keys(config.medienhaus?.item)[0] : '')
+  const [template, setTemplate] = useState(config.medienhaus?.item && Object.keys(config.medienhaus?.item).length === 1 && Object.keys(config.medienhaus?.item)[0])
   // const [preview, setPreview] = useState(false)
   const history = useHistory()
   const matrixClient = Matrix.getMatrixClient()
@@ -266,7 +266,7 @@ const Create = () => {
         {(!projectSpace && (config.medienhaus?.item && Object.keys(config.medienhaus?.item).length > 1)) &&
           <Dropdown name="type" label="Type" placeholder="-- select type --" options={_.mapValues(config.medienhaus?.item, 'label')} value={template} onChange={e => setTemplate(e.target.value)} />}
         <h3>{t('Title')}</h3>
-        <ProjectTitle title={title} projectSpace={projectSpace} template={config.medienhaus?.item ? template : 'item'} callback={changeTitle} />
+        <ProjectTitle title={title} projectSpace={projectSpace} template={template} callback={changeTitle} />
       </section>
 
       {projectSpace && (

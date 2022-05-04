@@ -80,7 +80,7 @@ const ProjectTitle = ({ title, projectSpace, template, callback }) => {
     }
     try {
       // create the project space for the student project
-      await matrixClient.createRoom(opts(template || 'item', title, 'world_readable'))
+      await matrixClient.createRoom(opts(template, title, 'world_readable'))
         .then(async (space) => {
           // by default we create subpsaces for localisation and one for events
           for await (const lang of config.medienhaus?.languages) {
@@ -105,7 +105,7 @@ const ProjectTitle = ({ title, projectSpace, template, callback }) => {
       setLoading(false)
     }
   }
-
+  console.log(template)
   return (
     <>
       <div className="maxlength">
@@ -121,7 +121,7 @@ const ProjectTitle = ({ title, projectSpace, template, callback }) => {
           {!newProject && <button className="cancel" onClick={(e) => { e.preventDefault(); setEdit(false); setProjectTitle(oldTitle) }}>CANCEL</button>}
           {!title && newProject &&
             <LoadingSpinnerButton
-              disabled={!template || !projectTitle || projectTitle.length > 100} onClick={(e) => {
+              disabled={!projectTitle || projectTitle.length > 100} onClick={(e) => {
                 console.log(newProject)
                 if (newProject && projectTitle.length < 101) {
                   createProject(projectTitle)
