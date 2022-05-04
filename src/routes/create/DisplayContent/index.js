@@ -151,6 +151,11 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace, time,
           reorder(block.name, block.room_id, true)
         }
       })
+      let order = await matrixClient.getStateEvent(projectSpace, 'dev.medienhaus.order').catch(console.log)
+      order = order.order
+      const indexOfRoom = order.indexOf(roomId)
+      order.splice(indexOfRoom, 1)
+      await matrixClient.sendStateEvent(projectSpace, 'dev.medienhaus.order', { order: order })
       reloadSpace()
     } catch (err) {
       console.error(err)
