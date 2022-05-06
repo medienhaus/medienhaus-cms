@@ -52,15 +52,17 @@ const Nav = () => {
   useEffect(() => {
     async function checkRoomForPossibleInvite (room) {
       // Types of spaces for which we want to count invites for
-      const context = config.medienhaus?.context ? config.medienhaus?.context.concat('context') : ['context']
-      const item = config.medienhaus?.item ? Object.keys(config.medienhaus?.item).concat('item') : ['item']
-      const typesOfSpaces = context.concat(item)
-
+      const contextTemplates = config.medienhaus?.context && config.medienhaus?.context
+      const itemTemplates = config.medienhaus?.item && Object.keys(config.medienhaus?.item)
+      const typesOfTemplates = contextTemplates?.concat(itemTemplates)
       // Ignore if this is not a space
       if (room.getType() !== 'm.space') return
-      // Ignore if this is not a student project or a "context"
+      // Ignore if this is not a "context" or "item"
       const metaEvent = await matrixClient.getStateEvent(room.roomId, 'dev.medienhaus.meta').catch(() => { })
-      if (!metaEvent || !metaEvent.template || !typesOfSpaces.includes(metaEvent.template)) return
+      // ignore if the room doesn't have a medienhaus meta event
+      if (!metaEvent) return
+      // ignore if there are templates specified within config.json but the room does not follow one of them
+      if (typesOfTemplates && !typesOfTemplates.includes(metaEvent.template)) return
       // Ignore if this is not an invitation (getMyMembership() only works correctly after calling _loadMembersFromServer())
       await room.loadMembersFromServer().catch(console.error)
       // At this point we're sure that the room we're checking for is either
