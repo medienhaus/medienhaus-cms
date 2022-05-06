@@ -5,6 +5,7 @@ import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet'
 import { useTranslation } from 'react-i18next'
 // assets
 import locations from '../../../../assets/data/locations.json'
+import config from '../../../../config.json'
 
 const AddLocation = ({ number, inviteCollaborators, projectSpace, handleOnBlockWasAddedSuccessfully, peertube, allocationEvent, locationDropdown, callback, disabled }) => {
   const [selectedLocation, setSelectedLocation] = useState('custom')
@@ -13,10 +14,7 @@ const AddLocation = ({ number, inviteCollaborators, projectSpace, handleOnBlockW
   const [selectedBlockType, setSelectedBlockType] = useState('')
   const matrixClient = Matrix.getMatrixClient()
   const { t } = useTranslation('locations')
-  const center = {
-    lat: 53.12554953986769,
-    lng: 13.071531023061585
-  }
+  const center = config.medienhaus.location || { lat: 0.0, lng: 0.0 }
   const [position, setPosition] = useState(center)
   console.log(allocationEvent)
 
