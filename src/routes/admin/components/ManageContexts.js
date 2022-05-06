@@ -15,6 +15,12 @@ import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
 import locations from '../../../assets/data/locations.json'
 import { MatrixEvent } from 'matrix-js-sdk'
 import config from '../../../config.json'
+import TextareaAutosize from 'react-textarea-autosize'
+import styled from 'styled-components'
+
+const Heading = styled.h2`
+margin-top: var(--margin);
+`
 
 const ManageContexts = (props) => {
   const { t } = useTranslation('admin')
@@ -29,6 +35,7 @@ const ManageContexts = (props) => {
   const [allocation, setAllocation] = useState([])
   const [deleting, setDeleting] = useState(false)
   const [loading, setLoading] = useState(false)
+  const [description, setDescription] = useState('')
 
   const createStructurObject = async () => {
     async function getSpaceStructure (matrixClient, motherSpaceRoomId, includeRooms) {
@@ -36,11 +43,12 @@ const ManageContexts = (props) => {
       setLoading(true)
       const result = {}
 
-      function createSpaceObject (id, name, metaEvent) {
+      function createSpaceObject (id, name, metaEvent, topic) {
         return {
           id: id,
           name: name,
           type: metaEvent.content.type,
+          topic: topic,
           children: {}
         }
       }
@@ -53,16 +61,16 @@ const ManageContexts = (props) => {
         // const metaEvent = await matrixClient.getStateEvent(spaceId, 'dev.medienhaus.meta')
         const metaEvent = _.find(stateEvents, { type: 'dev.medienhaus.meta' })
         if (!metaEvent) return
-        console.log(metaEvent)
         // if (!typesOfSpaces.includes(metaEvent.content.type)) return
 
         const nameEvent = _.find(stateEvents, { type: 'm.room.name' })
         if (!nameEvent) return
         const spaceName = nameEvent.content.name
-
+        let topic = _.find(stateEvents, { type: 'm.room.topic' })
+        if (topic) topic = topic.content.topic
         // if (initial) {
         // result.push(createSpaceObject(spaceId, spaceName, metaEvent))
-        _.set(result, [...path, spaceId], createSpaceObject(spaceId, spaceName, metaEvent))
+        _.set(result, [...path, spaceId], createSpaceObject(spaceId, spaceName, metaEvent, topic))
         // }
 
         // const spaceSummary = await matrixClient.getSpaceSummary(spaceId)
@@ -287,11 +295,13 @@ const ManageContexts = (props) => {
     await getEvents(context.id)
     setSelectedContext(context.id)
     context.pathIds ? setContextParent(context.pathIds[context.pathIds.length - 1]) : setContextParent(null)
+    setDescription(context.topic || '')
     // setParentName(context.path[context.path.length - 1])
     setLoading(false)
   }
   useEffect(() => {
     createStructurObject()
+
     // createD3Json()
     // eslint-disable-next-line
   }, [])
@@ -316,9 +326,13 @@ const ManageContexts = (props) => {
       setDeleting()
     }
   }
+
+  const onSave = async () => {
+    await props.matrixClient.setRoomTopic(selectedContext, description).catch(console.log)
+  }
   return (
     <>
-      <h2>Manage Contexts</h2>
+      <Heading>Manage Contexts</Heading>
       {// !structure ? <Loading /> : <ShowContexts structure={structure} t={t} selectedContext={selectedContext} parent={parent} parentName={parentName} disableButton={disableButton} callback={contextualise} />
       }
       {!inputItems
@@ -337,7 +351,7 @@ const ManageContexts = (props) => {
           {contextParent && <RemoveContext t={t} selectedContext={selectedContext} parent={contextParent} parentName={parentName} disableButton={disableButton} callback={spaceChild} />}
           <CreateContext t={t} parent={selectedContext} matrixClient={props.matrixClient} parentName={parentName} disableButton={loading} callback={addSpace} />
           <div>
-            <h2>Image</h2>
+            <Heading>Image</Heading>
             <ProjectImage projectSpace={selectedContext} changeProjectImage={() => console.log('changed image')} disabled={loading} />
           </div>
           {allocation?.physical && allocation.physical.map((location, i) => {
@@ -404,6 +418,18 @@ const ManageContexts = (props) => {
               </div>
             )
           }))}
+          <section>
+            <Heading>{t('Description')}</Heading>
+            <TextareaAutosize
+              value={description}
+              minRows={6}
+              placeholder={`${t('Please add a short description.')}`}
+              onChange={(e) => setDescription(e.target.value)}
+              onBlur={onSave}
+            />
+          </section>
+          <Heading>{t('Location')}</Heading>
+
           <AddEvent
             length={events.length}
             room_id={selectedContext}
