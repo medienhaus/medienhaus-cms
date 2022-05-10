@@ -74,6 +74,14 @@ const createBlock = async (e, content, number, space) => {
           version: '0.4'
         })
         return res[0]
+      }).then(async (res) => {
+        let currentOrder = await matrixClient.getStateEvent(space, 'dev.medienhaus.order').catch(console.log)
+        if (currentOrder) {
+          currentOrder = currentOrder.order
+          currentOrder.splice(number, 0, res)
+        }
+        await matrixClient.sendStateEvent(space, 'dev.medienhaus.order', currentOrder ? { order: currentOrder } : { order: [res] })
+        return res
       })
     return room
   } catch (e) {

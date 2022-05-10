@@ -146,11 +146,16 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace, time,
     setReadOnly(true)
     try {
       deleteContentBlock(name, roomId, index)
-      blocks.filter(room => room.name.charAt(0) !== 'x').forEach((block, i) => {
+      blocks.filter(room => room.name.charAt(0) !== 'x').forEach(async (block, i) => {
         if (i > index) {
-          reorder(block.name, block.room_id, true)
+          await reorder(block.name, block.room_id, projectSpace, true)
         }
       })
+      let order = await matrixClient.getStateEvent(projectSpace, 'dev.medienhaus.order').catch(console.log)
+      order = order.order
+      const indexOfRoom = order.indexOf(roomId)
+      order.splice(indexOfRoom, 1)
+      await matrixClient.sendStateEvent(projectSpace, 'dev.medienhaus.order', { order: order })
       reloadSpace()
     } catch (err) {
       console.error(err)
@@ -162,14 +167,23 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace, time,
   const changeOrder = async (roomId, name, direction) => {
     setLoading(true)
     setReadOnly(true)
+
     const active = name.split('_')
-    const order = parseInt(active[0])
-    const newOrder = order + direction
+    const orderOld = parseInt(active[0])
+    const newOrder = orderOld + direction
     const passive = blocks[newOrder].name.split('_')
     const passiveRoom = blocks[newOrder].room_id
+
+    let order = await matrixClient.getStateEvent(projectSpace, 'dev.medienhaus.order').catch(console.log)
+    order = order.order
+    const indexOfRoom = order.indexOf(roomId)
+    order.splice(indexOfRoom, 1) // remove from old position
+    order.splice(indexOfRoom + direction, 0, roomId) // insert at new one @TODO sth wrong here!
+    await matrixClient.sendStateEvent(projectSpace, 'dev.medienhaus.order', { order: order })
+
     try {
       await matrixClient.setRoomName(roomId, newOrder + '_' + active[1])
-        .then(await matrixClient.setRoomName(passiveRoom, order + '_' + passive[1]))
+        .then(await matrixClient.setRoomName(passiveRoom, orderOld + '_' + passive[1]))
       reloadSpace()
     } catch (err) {
       console.error(err)
@@ -412,6 +426,7 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace, time,
             </div>
           </div>
           {!mapComponent && <AddContent number={index + 1} projectSpace={projectSpace} blocks={blocks} reloadSpace={reloadSpace} contentType={contentType} />}
+
         </>
       }
     </>
