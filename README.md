@@ -30,7 +30,8 @@ If you have special requirements you can configure the cms by copying config.exa
         "blueprint": [
           "location",
           "contributors",
-          "image"
+          "image",
+          "time"
         ],
         "content": [
           "heading",
@@ -125,6 +126,10 @@ Gives users the ability to invite contributors who can edit the content.
 
 Adds a UI to add a location to the content.
 You can specify a default location with the separate 'location' key.
+
+**Time**
+
+Adds a UI to add a time window to content.
 ### Content
 
 You can define which types of content are listed in the dropdown of the /create route.
