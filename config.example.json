@@ -4,7 +4,7 @@
       "faculty",
       "degree"
     ],
-    "content": {
+    "item": {
       "blog": {
         "label": "Blog Post",
         "blueprint": [
@@ -12,7 +12,7 @@
           "contributors",
           "image"
         ],
-        "blocks": [
+        "content": [
           "heading",
           "text",
           "unordered list",
@@ -33,15 +33,14 @@
           "location",
           "image"
         ],
-        "blocks": [
+        "content": [
           "heading",
           "text",
           "image",
           "audio"
         ]
       }
-    },
-    "item": []
+    }
   },
   "sites": {
     "account": {

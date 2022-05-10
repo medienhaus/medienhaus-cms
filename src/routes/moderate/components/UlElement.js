@@ -20,8 +20,8 @@ const UlElement = ({ roomId, indent, removeContentElement }) => {
   const [active, setActive] = useState('')
   const [roomArray, setRoomArray] = useState([])
   const context = config.medienhaus?.context ? config.medienhaus?.context.concat('context') : ['context']
-  const content = config.medienhaus?.content ? Object.keys(config.medienhaus?.content).concat('content') : ['content']
-  const typesOfContent = context.concat(content)
+  const item = config.medienhaus?.item ? Object.keys(config.medienhaus?.item).concat('item') : ['item']
+  const typesOfItem = context.concat(item)
   const matrixClient = Matrix.getMatrixClient()
 
   const fetchHiararchy = useCallback(async () => {
@@ -48,7 +48,7 @@ const UlElement = ({ roomId, indent, removeContentElement }) => {
 
   const callback = (activeRoom, type) => {
     setActive(activeRoom)
-    if (content.includes(type)) {
+    if (item.includes(type)) {
       removeContentElement(activeRoom, roomId, () => setRoomArray())
     } else {
       removeContentElement('')
@@ -58,7 +58,7 @@ const UlElement = ({ roomId, indent, removeContentElement }) => {
   if (!roomArray) return <Loading />
   return (
     <Ul>
-      {roomArray.filter(room => typesOfContent.includes(room.metaEvent.type)).map((room) => {
+      {roomArray.filter(room => typesOfItem.includes(room.metaEvent.type)).map((room) => {
         return (
           <LiElement
             key={room.room_id}
@@ -69,7 +69,7 @@ const UlElement = ({ roomId, indent, removeContentElement }) => {
             callback={callback}
             active={active}
             indent={indent}
-            content={content}
+            item={item}
             onElementRemoved={fetchHiararchy}
           />
         )

@@ -13,7 +13,7 @@ margin-left: calc(2em * ${props => props.indent});
 margin-bottom: calc(var(--margin)/2);
 display: flex;
 `
-const LiElement = ({ roomId, type, name, parent, indent, content, onElementRemoved }) => {
+const LiElement = ({ roomId, type, name, parent, indent, item, onElementRemoved }) => {
   const [isExpanded, setIsExpanded] = useState(false)
   const [feedback, setFeedback] = useState('')
 
@@ -38,16 +38,16 @@ const LiElement = ({ roomId, type, name, parent, indent, content, onElementRemov
           display: 'flex',
           alignSelf: 'center'
         }}
-        >{isExpanded && !content.includes(type) ? <ArrowDown fill="var(--color-fg)" /> : content.includes(type) ? '' : <ArrowRight fill="var(--color-fg)" />}</span>
+        >{isExpanded && !item.includes(type) ? <ArrowDown fill="var(--color-fg)" /> : item.includes(type) ? '' : <ArrowRight fill="var(--color-fg)" />}</span>
         <span style={{
           display: 'flex',
           alignSelf: 'center'
         }}
         >{name}</span>
-        {content.includes(type) && <DeleteButton
+        {item.includes(type) && <DeleteButton
           width="5vw"
           onDelete={handleRemoveClick}
-                                   />}
+                                />}
       </ListElement>
 
       {isExpanded &&

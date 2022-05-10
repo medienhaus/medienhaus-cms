@@ -7,7 +7,7 @@ import { useTranslation } from 'react-i18next'
 
 import config from '../../../config.json'
 
-const ProjectTitle = ({ title, projectSpace, type, callback }) => {
+const ProjectTitle = ({ title, projectSpace, template, callback }) => {
   const { t } = useTranslation('content')
   const [projectTitle, setProjectTitle] = useState('')
   const [edit, setEdit] = useState(false)
@@ -25,7 +25,7 @@ const ProjectTitle = ({ title, projectSpace, type, callback }) => {
   const createProject = async (title) => {
     setLoading(true)
 
-    const opts = (type, name, history) => {
+    const opts = (template, name, history) => {
       return {
         preset: 'private_chat',
         name: name,
@@ -38,9 +38,9 @@ const ProjectTitle = ({ title, projectSpace, type, callback }) => {
         {
           type: 'dev.medienhaus.meta',
           content: {
-            version: '0.3',
-            container: 'content',
-            type: type,
+            version: '0.4',
+            type: 'item',
+            template: template,
             application: process.env.REACT_APP_APP_NAME,
             published: 'draft'
           }
@@ -80,7 +80,7 @@ const ProjectTitle = ({ title, projectSpace, type, callback }) => {
     }
     try {
       // create the project space for the student project
-      await matrixClient.createRoom(opts(type || 'content', title, 'world_readable'))
+      await matrixClient.createRoom(opts(template, title, 'world_readable'))
         .then(async (space) => {
           // by default we create subpsaces for localisation and one for events
           for await (const lang of config.medienhaus?.languages) {
@@ -105,7 +105,7 @@ const ProjectTitle = ({ title, projectSpace, type, callback }) => {
       setLoading(false)
     }
   }
-
+  console.log(template)
   return (
     <>
       <div className="maxlength">
@@ -121,7 +121,7 @@ const ProjectTitle = ({ title, projectSpace, type, callback }) => {
           {!newProject && <button className="cancel" onClick={(e) => { e.preventDefault(); setEdit(false); setProjectTitle(oldTitle) }}>CANCEL</button>}
           {!title && newProject &&
             <LoadingSpinnerButton
-              disabled={!type || !projectTitle || projectTitle.length > 100} onClick={(e) => {
+              disabled={!projectTitle || projectTitle.length > 100} onClick={(e) => {
                 console.log(newProject)
                 if (newProject && projectTitle.length < 101) {
                   createProject(projectTitle)

@@ -24,7 +24,7 @@ If you have special requirements you can configure the cms by copying config.exa
       "faculty",
       "degree"
     ],
-    "content": {
+    "item": {
       "blog": {
         "label": "Blog Post",
         "blueprint": [
@@ -32,7 +32,7 @@ If you have special requirements you can configure the cms by copying config.exa
           "contributors",
           "image"
         ],
-        "blocks": [
+        "content": [
           "heading",
           "text",
           "unordered list",
@@ -53,15 +53,14 @@ If you have special requirements you can configure the cms by copying config.exa
           "location",
           "image"
         ],
-        "blocks": [
+        "content": [
           "heading",
           "text",
           "image",
           "audio"
         ]
       }
-    },
-    "item": []
+    }
   },
   "sites": {
     "account": {
@@ -89,9 +88,9 @@ If you have special requirements you can configure the cms by copying config.exa
 }
 ```
 
-## Content
+## Item
 
-You can define different types of content the cms is supposed to support.
+You can define different types of items the cms is supposed to support.
 
 This gives you the ability to use different blueprints for different types.
 
@@ -122,11 +121,11 @@ Gives users the ability to invite contributors who can edit the content.
 
 Adds a UI to add a location to the content.
 
-### Blocks
+### Content
 
-You can define which type of blocks are listed in the dropdown in the /create route.
+You can define which types of content are listed in the dropdown of the /create route.
 
-Each type of content can have one or all of the following blocks:
+Each type of content can have one or all of the following:
 
 **heading**  
 **text**  

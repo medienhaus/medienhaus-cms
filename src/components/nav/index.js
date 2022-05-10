@@ -23,7 +23,7 @@ const Nav = () => {
     if (joinedSpaces && auth.user) {
       const typesOfSpaces = config.medienhaus?.context || ['context']
       // To "moderate" a space it must have one of the given types and we must be at least power level 50
-      const moderatingSpaces = joinedSpaces.filter(space => typesOfSpaces.includes(space.meta.type) && space.powerLevel >= 50)
+      const moderatingSpaces = joinedSpaces.filter(space => typesOfSpaces.includes(space.meta.template) && space.powerLevel >= 50)
       // If we are not moderating any spaces we can cancel the rest here ...
       if (moderatingSpaces.length < 1) return
 
@@ -52,15 +52,17 @@ const Nav = () => {
   useEffect(() => {
     async function checkRoomForPossibleInvite (room) {
       // Types of spaces for which we want to count invites for
-      const context = config.medienhaus?.context ? config.medienhaus?.context.concat('context') : ['context']
-      const content = config.medienhaus?.content ? Object.keys(config.medienhaus?.content).concat('content') : ['content']
-      const typesOfSpaces = context.concat(content)
-
+      const contextTemplates = config.medienhaus?.context && config.medienhaus?.context
+      const itemTemplates = config.medienhaus?.item && Object.keys(config.medienhaus?.item)
+      const typesOfTemplates = contextTemplates?.concat(itemTemplates)
       // Ignore if this is not a space
       if (room.getType() !== 'm.space') return
-      // Ignore if this is not a student project or a "context"
+      // Ignore if this is not a "context" or "item"
       const metaEvent = await matrixClient.getStateEvent(room.roomId, 'dev.medienhaus.meta').catch(() => { })
-      if (!metaEvent || !metaEvent.type || !typesOfSpaces.includes(metaEvent.type)) return
+      // ignore if the room doesn't have a medienhaus meta event
+      if (!metaEvent) return
+      // ignore if there are templates specified within config.json but the room does not follow one of them
+      if (typesOfTemplates && !typesOfTemplates.includes(metaEvent.template)) return
       // Ignore if this is not an invitation (getMyMembership() only works correctly after calling _loadMembersFromServer())
       await room.loadMembersFromServer().catch(console.error)
       // At this point we're sure that the room we're checking for is either
