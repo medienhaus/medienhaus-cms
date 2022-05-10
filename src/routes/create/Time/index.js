@@ -43,6 +43,7 @@ export default function Time ({ allocation, projectSpace, reloadSpace }) {
       }
     }
     await matrixClient.sendStateEvent(projectSpace, 'dev.medienhaus.allocation', allocation).catch(console.log)
+    setIsUIVisible(false)
     reloadSpace()
   }
 
