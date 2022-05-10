@@ -84,7 +84,11 @@ If you have special requirements you can configure the cms by copying config.exa
   ],
   "usersToInviteToNewContexts": [
     "@user1:server.com"
-  ]
+  ],
+  "location": {
+    "lat": 0.0,
+    "lng": 0.0
+  }
 }
 ```
 
@@ -120,7 +124,7 @@ Gives users the ability to invite contributors who can edit the content.
 **Location**
 
 Adds a UI to add a location to the content.
-
+You can specify a default location with the separate 'location' key.
 ### Content
 
 You can define which types of content are listed in the dropdown of the /create route.

@@ -18,7 +18,7 @@ const MediaUpload = (props) => {
           props.blocks.forEach((block, i) => {
             if (i >= props.number) {
               console.log(block.name)
-              reorder(block.name, block.room_id, false)
+              reorder(block.name, block.room_id, props.space, false)
             }
           })
           const room = await createBlock(e, props.fileType, props.number, props.space)

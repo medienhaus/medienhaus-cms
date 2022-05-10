@@ -12,7 +12,7 @@ const AddBlock = ({ contentSelect, number, projectSpace, blocks, reloadSpace, di
         blocks.forEach((block, i) => {
           if (i >= number) {
             console.log(block.name)
-            reorder(block.name, block.room_id, false)
+            reorder(block.name, block.room_id, projectSpace, false)
           }
         })
 
