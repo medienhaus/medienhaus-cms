@@ -105,7 +105,6 @@ const ProjectTitle = ({ title, projectSpace, template, callback }) => {
       setLoading(false)
     }
   }
-  console.log(template)
   return (
     <>
       <div className="maxlength">
