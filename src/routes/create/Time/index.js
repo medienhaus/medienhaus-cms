@@ -63,7 +63,7 @@ export default function Time ({ allocation, projectSpace, reloadSpace }) {
   return (
     <section className="time">
       <h3>{t('Time')}</h3>
-      {allocation.tempora && (
+      {allocation?.tempora && (
         <ul>
           {allocation.tempora.map((date, index) => <TimeSlots key={index + date.start} start={date.start} end={date.end} />
           )}
