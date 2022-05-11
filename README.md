@@ -20,10 +20,11 @@ If you have special requirements you can configure the cms by copying config.exa
 ```
 {
   "medienhaus": {
-    "context": [
-      "faculty",
-      "degree"
-    ],
+    "context": {
+      "faculty": {
+        "label": "Faculty"
+        }
+    },
     "item": {
       "blog": {
         "label": "Blog Post",
