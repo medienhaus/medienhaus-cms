@@ -189,8 +189,15 @@ const ManageContexts = ({ matrixClient, moderationRooms }) => {
     e.preventDefault()
     const createSpace = async (title) => {
       setDisableButton(true)
+      const medienhausMeta = {
+        version: '0.4',
+        type: 'context',
+        published: 'public'
+      }
+      // if there is a template defined we add it to de state event
+      if (template) medienhausMeta.template = template
 
-      const opts = (type, name, history) => {
+      const opts = (name, history) => {
         return {
           preset: 'public_chat',
           power_level_content_override: {
@@ -227,12 +234,7 @@ const ManageContexts = ({ matrixClient, moderationRooms }) => {
           },
           {
             type: 'dev.medienhaus.meta',
-            content: {
-              version: '0.4',
-              type: type,
-              template: template,
-              published: 'public'
-            }
+            content: medienhausMeta
           },
           {
             type: 'm.room.guest_access',
@@ -244,7 +246,8 @@ const ManageContexts = ({ matrixClient, moderationRooms }) => {
       }
 
       // create the space for the context
-      const space = await matrixClient.createRoom(opts('context', title, 'world_readable')).catch(console.log)
+      const space = await matrixClient.createRoom(opts(title, 'world_readable')).catch(console.log)
+
       // add this subspaces as children to the root space
       await spaceChild(e, space.room_id, true)
       console.log('created Context ' + name + ' ' + space.room_id)
