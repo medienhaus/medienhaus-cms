@@ -335,7 +335,7 @@ const ManageContexts = ({ matrixClient, moderationRooms }) => {
     if (description.length > 500) return
     await matrixClient.setRoomTopic(selectedContext, description).catch(console.log)
   }
-  console.log(moderationRooms)
+
   return (
     <>
       <Heading>Manage Contexts</Heading>
