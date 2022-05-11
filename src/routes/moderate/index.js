@@ -79,7 +79,7 @@ const Moderate = () => {
       case 'rightsManagement':
         return config.medienhaus?.sites?.moderate?.rightsManagement && <> <RightsManagement matrixClient={matrixClient} moderationRooms={moderationRooms} setPower={setPower} fetchUsers={fetchUsers} fetching={fetching} userSearch={userSearch} /></>
       case 'manageContexts':
-        return config.medienhaus?.sites?.moderate?.manageContexts && <><ManageContexts matrixClient={matrixClient} /></>
+        return config.medienhaus?.sites?.moderate?.manageContexts && <><ManageContexts matrixClient={matrixClient} moderationRooms={moderationRooms} /></>
       case 'removeContent':
         return config.medienhaus?.sites?.moderate?.removeContent && <><RemoveContent matrixClient={matrixClient} moderationRooms={moderationRooms} loading={fetching} /></>
       default:
@@ -106,6 +106,7 @@ const Moderate = () => {
 
   if (fetchSpaces || !matrixClient.isInitialSyncComplete()) return <Loading />
   if (spacesErr) return <p>{spacesErr}</p>
+  if (moderationRooms.length < 1) return null
   return (
     <>
       <section className="request">

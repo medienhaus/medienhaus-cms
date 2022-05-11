@@ -22,7 +22,7 @@ const Heading = styled.h2`
 margin-top: var(--margin);
 `
 
-const ManageContexts = (props) => {
+const ManageContexts = ({ matrixClient, moderationRooms }) => {
   const { t } = useTranslation('admin')
   const [selectedContext, setSelectedContext] = useState('')
   const [parentName] = useState('')
@@ -148,7 +148,7 @@ const ManageContexts = (props) => {
       } else { return {} }
     }
     console.log('---- started structure ----')
-    const tree = await getSpaceStructure(props.matrixClient, parent, false)
+    const tree = await getSpaceStructure(matrixClient, parent, false)
     setInputItems(tree)
   }
 
@@ -177,12 +177,12 @@ const ManageContexts = (props) => {
 
   const setPower = async (userId, roomId, level) => {
     console.log('changing power level for ' + userId)
-    const currentStateEvent = await props.matrixClient.getStateEvent(roomId, 'm.room.power_levels', '')
+    const currentStateEvent = await matrixClient.getStateEvent(roomId, 'm.room.power_levels', '')
     const newStateEvent = new MatrixEvent({
       type: 'm.room.power_levels',
       content: currentStateEvent
     })
-    await props.matrixClient.setPowerLevel(roomId, userId, level, newStateEvent).catch(err => console.error(err))
+    await matrixClient.setPowerLevel(roomId, userId, level, newStateEvent).catch(err => console.error(err))
   }
 
   function addSpace (e, name, callback) {
@@ -243,7 +243,7 @@ const ManageContexts = (props) => {
       }
 
       // create the space for the context
-      const space = await props.matrixClient.createRoom(opts('context', title, 'world_readable')).catch(console.log)
+      const space = await matrixClient.createRoom(opts('context', title, 'world_readable')).catch(console.log)
       // add this subspaces as children to the root space
       await spaceChild(e, space.room_id, true)
       console.log('created Context ' + name + ' ' + space.room_id)
@@ -253,7 +253,7 @@ const ManageContexts = (props) => {
           console.log(user)
           if (user === localStorage.getItem('medienhaus_user_id')) continue // if the user is us, we jump out of the loop
           console.log('inviting ' + user)
-          await props.matrixClient.invite(space.room_id, user).catch(console.log)
+          await matrixClient.invite(space.room_id, user).catch(console.log)
           await setPower(user, space.room_id, 50)
         }
       }
@@ -269,17 +269,17 @@ const ManageContexts = (props) => {
     setSelectedContext(d3.data.id)
     setContextParent(d3.parent.data.id)
   }
-  const fetchAllocation = async (space) => setAllocation(await props.matrixClient.getStateEvent(space, 'dev.medienhaus.allocation').catch(console.log))
+  const fetchAllocation = async (space) => setAllocation(await matrixClient.getStateEvent(space, 'dev.medienhaus.allocation').catch(console.log))
 
   const getEvents = async (space) => {
     setLoading(true)
     setEvents([])
     setAllocation([])
     await fetchAllocation(space)
-    const checkSubSpaes = await props.matrixClient.getRoomHierarchy(space, 1).catch(console.log)
+    const checkSubSpaes = await matrixClient.getRoomHierarchy(space, 1).catch(console.log)
     const checkForEvents = checkSubSpaes?.rooms?.filter(child => child.name.includes('_event'))
     if (!_.isEmpty(checkForEvents)) {
-      const eventSummary = await Promise.all(checkForEvents.map(room => props.matrixClient.getRoomHierarchy(room.room_id, 0).catch(err => console.log(err)))) // then we fetch the summary of all spaces within the event space
+      const eventSummary = await Promise.all(checkForEvents.map(room => matrixClient.getRoomHierarchy(room.room_id, 0).catch(err => console.log(err)))) // then we fetch the summary of all spaces within the event space
       const onlyEvents = eventSummary
         ?.filter(room => room !== undefined) // we filter undefined results. @TODO DOM seems to be rendering to quickly here. better solution needed
         .map(event => event?.rooms)
@@ -314,7 +314,7 @@ const ManageContexts = (props) => {
         physical: allocation.physical.filter((location, i) => i !== index)
       }
 
-      props.matrixClient.sendStateEvent(selectedContext, 'dev.medienhaus.allocation', deletedAllocation)
+      matrixClient.sendStateEvent(selectedContext, 'dev.medienhaus.allocation', deletedAllocation)
       await getEvents(selectedContext)
     } catch (err) {
       console.error(err)
@@ -328,7 +328,7 @@ const ManageContexts = (props) => {
   }
 
   const onSave = async () => {
-    await props.matrixClient.setRoomTopic(selectedContext, description).catch(console.log)
+    await matrixClient.setRoomTopic(selectedContext, description).catch(console.log)
   }
   return (
     <>
@@ -342,6 +342,7 @@ const ManageContexts = (props) => {
             selectedContext={selectedContext}
             struktur={inputItems}
             disabled={loading}
+            moderationRooms={moderationRooms}
           />}
       {loading && inputItems && <Loading />}
       {/* <label htmlFor="name">{t('Context')}: </label>
@@ -349,7 +350,7 @@ const ManageContexts = (props) => {
       {selectedContext &&
         <>
           {contextParent && <RemoveContext t={t} selectedContext={selectedContext} parent={contextParent} parentName={parentName} disableButton={disableButton} callback={spaceChild} />}
-          <CreateContext t={t} parent={selectedContext} matrixClient={props.matrixClient} parentName={parentName} disableButton={loading} callback={addSpace} />
+          <CreateContext t={t} parent={selectedContext} matrixClient={matrixClient} parentName={parentName} disableButton={loading} callback={addSpace} />
           <div>
             <Heading>Image</Heading>
             <ProjectImage projectSpace={selectedContext} changeProjectImage={() => console.log('changed image')} disabled={loading} />
