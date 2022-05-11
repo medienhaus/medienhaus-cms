@@ -185,7 +185,7 @@ const ManageContexts = ({ matrixClient, moderationRooms }) => {
     await matrixClient.setPowerLevel(roomId, userId, level, newStateEvent).catch(err => console.error(err))
   }
 
-  function addSpace (e, name, callback) {
+  function addSpace (e, name, template, callback) {
     e.preventDefault()
     const createSpace = async (title) => {
       setDisableButton(true)
@@ -230,6 +230,7 @@ const ManageContexts = ({ matrixClient, moderationRooms }) => {
             content: {
               version: '0.4',
               type: type,
+              template: template,
               published: 'public'
             }
           },
@@ -328,6 +329,7 @@ const ManageContexts = ({ matrixClient, moderationRooms }) => {
   }
 
   const onSave = async () => {
+    if (description.length > 500) return
     await matrixClient.setRoomTopic(selectedContext, description).catch(console.log)
   }
   return (
@@ -350,6 +352,8 @@ const ManageContexts = ({ matrixClient, moderationRooms }) => {
       {selectedContext &&
         <>
           {contextParent && <RemoveContext t={t} selectedContext={selectedContext} parent={contextParent} parentName={parentName} disableButton={disableButton} callback={spaceChild} />}
+          <Heading>{t('Sub-Contexts')}</Heading>
+
           <CreateContext t={t} parent={selectedContext} matrixClient={matrixClient} parentName={parentName} disableButton={loading} callback={addSpace} />
           <div>
             <Heading>Image</Heading>
@@ -428,6 +432,11 @@ const ManageContexts = ({ matrixClient, moderationRooms }) => {
               onChange={(e) => setDescription(e.target.value)}
               onBlur={onSave}
             />
+            {description.length > 500 && (<>
+              <p>{t('Characters:')} {description.length}</p>
+              <p>❗️{t('Please keep the descrpition under 500 characters.')} {description.length}</p>
+            </>
+            )}
           </section>
           <Heading>{t('Location')}</Heading>
 
