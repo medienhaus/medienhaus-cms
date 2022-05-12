@@ -22,7 +22,12 @@ import Dropdown from '../../components/medienhausUI/dropdown'
 
 import config from '../../config.json'
 import _ from 'lodash'
+import styled from 'styled-components'
 
+const AuthorCheckobox = styled.div`
+display: flex;
+justify-content: space-between;
+`
 const Create = () => {
   const { t } = useTranslation('content')
   const [title, setTitle] = useState('')
@@ -40,6 +45,7 @@ const Create = () => {
   const [description, setDescription] = useState()
   const [hasContext, setHasContext] = useState(false)
   const [template, setTemplate] = useState(config.medienhaus?.item && Object.keys(config.medienhaus?.item).length > 0 && Object.keys(config.medienhaus?.item)[0])
+  const [hideAuthors, setHideAuthors] = useState(false)
   // const [preview, setPreview] = useState(false)
   const history = useHistory()
   const matrixClient = Matrix.getMatrixClient()
@@ -248,6 +254,10 @@ const Create = () => {
     // @TODO setSpaceObject(spaceObject => ({...spaceObject, rooms: [...spaceObject.rooms, ]}))
     return changeTopic
   }
+  const handleHideAuthors = async (e) => {
+    setHideAuthors(hideAuthors => !hideAuthors)
+    await matrixClient.sendStateEvent(projectSpace, 'de.udk-berlin.rundgang', { hideAuthors: e.target.checked })
+  }
 
   if (projectSpace && !matrixClient.isInitialSyncComplete()) return <Loading />
   return (
@@ -337,6 +347,12 @@ const Create = () => {
           {/* Placeholder to show preview next to editing
           {blocks.map((content, i) => <DisplayPreview content={content} key={i} matrixClient={matrixClient} />)}
            */}
+          <section className="authors">
+            <AuthorCheckobox>
+              <label htmlFor="hide-authors">{t('Hide Authors')}</label>
+              <input id="checkbox" name="checkbox" type="checkbox" checked={hideAuthors} onChange={handleHideAuthors} />
+            </AuthorCheckobox>
+          </section>
           <section className="visibility">
             <h3>{t('Visibility')}</h3>
             {/* <p>{t('Would you like to save your project as a draft or release it for publishing on the Rundgang platform? The released projects will be published in the run-up to the Rundgang on October 25, 2021.')}</p> */}
