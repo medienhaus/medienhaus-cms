@@ -17,6 +17,7 @@ import { MatrixEvent } from 'matrix-js-sdk'
 import config from '../../../config.json'
 import TextareaAutosize from 'react-textarea-autosize'
 import styled from 'styled-components'
+import Matrix from '../../../Matrix'
 
 const Heading = styled.h2`
 margin-top: var(--margin);
@@ -36,8 +37,10 @@ const ManageContexts = ({ matrixClient, moderationRooms }) => {
   const [deleting, setDeleting] = useState(false)
   const [loading, setLoading] = useState(false)
   const [description, setDescription] = useState('')
+  const [locationStructure, setLocationStructure] = useState()
+  const [currentLocation, setCurrentLocation] = useState()
 
-  const createStructurObject = async () => {
+  const createStructurObject = async (roomId) => {
     async function getSpaceStructure (matrixClient, motherSpaceRoomId, includeRooms) {
       setDisableButton(true)
       setLoading(true)
@@ -55,6 +58,7 @@ const ManageContexts = ({ matrixClient, moderationRooms }) => {
 
       async function scanForAndAddSpaceChildren (spaceId, path) {
         if (spaceId === 'undefined') return
+        console.log(path)
         const stateEvents = await matrixClient.roomState(spaceId).catch(console.log)
         // check if room exists in roomHierarchy
         // const existsInCurrentTree = _.find(hierarchy, {room_id: spaceId})
@@ -79,38 +83,6 @@ const ManageContexts = ({ matrixClient, moderationRooms }) => {
           if (event.type !== 'm.space.child' && !includeRooms) continue
           if (event.type === 'm.space.child' && _.size(event.content) === 0) continue // check to see if body of content is empty, therefore space has been removed
           if (event.room_id !== spaceId) continue
-          // if (event.sender !== process.env.RUNDGANG_BOT_USERID && !includeRooms) continue
-
-          // find deep where 'id' === event.room_id, and assign match to 'children'
-          // const path = findPathDeep(result, (room, key) => {
-          //   return room.id === event.room_id
-          // }, {
-          //   includeRoot: true,
-          //   rootIsChildren: true,
-          //   pathFormat: 'array',
-          //   childrenPath: 'children'
-          // })
-          //
-          // if (!path) continue
-
-          // const metaEvent = await matrixClient.getStateEvent(event.state_key, 'dev.medienhaus.meta')
-
-          // const childrenSpaceToAdd = createSpaceObject(event.state_key, spaceSummary, metaEvent)
-          // if (!childrenSpaceToAdd.name) continue
-
-          // _.set(result, [...path, 'children', event.state_key], childrenSpaceToAdd)
-
-          // result[...path, 'children'].push(childrenSpaceToAdd)
-          // const currentChildren = _.get(result, [...path, 'children'])
-          // if (!currentChildren) {
-          //   _.set(result, [...path, 'children'], [])
-          //   currentChildren = _.get(result, [...path, 'children'])
-          // }
-          // console.log(currentChildren)
-          // currentChildren.push(childrenSpaceToAdd)
-
-          // Check if this is a space itself, and if so try to get its children
-          // if (_.get(_.find(spaceSummary.rooms, ['room_id', event.state_key]), 'room_type') === 'm.space') {
 
           await scanForAndAddSpaceChildren(event.state_key, [...path, spaceId, 'children'])
           // }
@@ -123,33 +95,9 @@ const ManageContexts = ({ matrixClient, moderationRooms }) => {
       return result
     }
 
-    function translateJson (origin) {
-      origin.childs = []
-      if (origin.children && Object.keys(origin.children).length > 0) {
-        const childs = parseChilds(origin.children)
-        childs.forEach((child, i) => {
-          origin.childs[i] = translateJson(child)
-        })
-      }
-      origin.children = origin.childs
-      delete origin.childs
-      return origin
-    }
-
-    function parseChilds (data) {
-      if (data) {
-        const result = []
-        for (const key in data) {
-          if (data.hasOwnProperty(key)) {
-            result.push(key)
-          }
-        }
-        return result.map(r => data[r])
-      } else { return {} }
-    }
     console.log('---- started structure ----')
-    const tree = await getSpaceStructure(matrixClient, parent, false)
-    setInputItems(tree)
+    const tree = await getSpaceStructure(matrixClient, roomId, false)
+    return tree
   }
 
   const spaceChild = async (e, space, add) => {
@@ -166,7 +114,10 @@ const ManageContexts = ({ matrixClient, moderationRooms }) => {
       body: JSON.stringify(add ? body : { }) // if we add a space to an existing one we need to send the object 'body', to remove a space we send an empty object.
     }).catch(console.log)
     add ? console.log('added as child to ' + selectedContext) : console.log('removed ' + selectedContext + ' from ' + contextParent)
-    await createStructurObject()
+    const tree = await createStructurObject(parent)
+    setInputItems(tree)
+    const locationTree = await createStructurObject('!SHcqMqiieOzSvJxppm:dev.medienhaus.udk-berlin.de')
+    setLocationStructure(locationTree)
     if (add) {
       setSelectedContext(space)
     } else {
@@ -275,11 +226,39 @@ const ManageContexts = ({ matrixClient, moderationRooms }) => {
   }
   const fetchAllocation = async (space) => setAllocation(await matrixClient.getStateEvent(space, 'dev.medienhaus.allocation').catch(console.log))
 
+  function findNested (obj, key, value) {
+    if (obj[key] === value) {
+      return obj
+    } else {
+      const keys = Object.keys(obj) // add this line to iterate over the keys
+      console.log(keys)
+      for (let i = 0, len = keys.length; i < len; i++) {
+        const k = keys[0] // use this key for iteration, instead of index "i"
+
+        // add "obj[k] &&" to ignore null values
+        if (obj[k] && typeof obj[k] === 'object') {
+          const found = findNested(obj[k], key, value)
+          if (found) {
+          // If the object was found in the recursive call, bubble it up.
+            return found
+          }
+        }
+      }
+    }
+  }
+
   const getEvents = async (space) => {
     setLoading(true)
     setEvents([])
     setAllocation([])
+    setCurrentLocation('')
     await fetchAllocation(space)
+    const idExistsInLocationStructure = findNested(locationStructure, 'id', space)
+    if (idExistsInLocationStructure) {
+      console.log(idExistsInLocationStructure)
+      setCurrentLocation(idExistsInLocationStructure.pathIds[idExistsInLocationStructure.length - 1])
+      console.log(idExistsInLocationStructure.pathIds[idExistsInLocationStructure.length - 1])
+    }
     const checkSubSpaes = await matrixClient.getRoomHierarchy(space, 1).catch(console.log)
     const checkForEvents = checkSubSpaes?.rooms?.filter(child => child.name.includes('_event'))
     if (!_.isEmpty(checkForEvents)) {
@@ -294,6 +273,7 @@ const ManageContexts = ({ matrixClient, moderationRooms }) => {
     }
     setLoading(false)
   }
+
   const onContextChange = async (context) => {
     setLoading(true)
     await getEvents(context.id)
@@ -304,8 +284,17 @@ const ManageContexts = ({ matrixClient, moderationRooms }) => {
     setLoading(false)
   }
   useEffect(() => {
-    createStructurObject()
+    const getStructures = async () => {
+      const tree = await createStructurObject(parent)
+      console.log(tree)
+      setInputItems(tree)
 
+      const locationTree = await createStructurObject('!SHcqMqiieOzSvJxppm:dev.medienhaus.udk-berlin.de')
+      console.log(locationTree)
+      setLocationStructure(locationTree)
+    }
+
+    getStructures()
     // createD3Json()
     // eslint-disable-next-line
   }, [])
@@ -336,6 +325,13 @@ const ManageContexts = ({ matrixClient, moderationRooms }) => {
     await matrixClient.setRoomTopic(selectedContext, description).catch(console.log)
   }
 
+  const addContextToLocation = async (location) => {
+    console.log('object')
+    if (currentLocation) await Matrix.removeSpaceChild(currentLocation, selectedContext)
+    await Matrix.addSpaceChild(location.id, selectedContext).catch(console.log)
+    setCurrentLocation(location.id)
+  }
+
   return (
     <>
       <Heading>Manage Contexts</Heading>
@@ -351,11 +347,13 @@ const ManageContexts = ({ matrixClient, moderationRooms }) => {
             moderationRooms={moderationRooms}
           />}
       {loading && inputItems && <Loading />}
+      <button onClick={() => console.log(findNested(locationStructure, 'id', '!VwRozGFAXnpqBYLEJi:dev.medienhaus.udk-berlin.de'))}>find nested</button>
       {/* <label htmlFor="name">{t('Context')}: </label>
        <input type="text" value={selectedContextName} disabled /> */}
       {selectedContext &&
         <>
-          {contextParent && <RemoveContext t={t} selectedContext={selectedContext} parent={contextParent} parentName={parentName} disableButton={disableButton} callback={spaceChild} />}
+          {contextParent &&
+            <RemoveContext selectedContext={selectedContext} parent={contextParent} parentName={parentName} disableButton={disableButton} callback={spaceChild} />}
           <Heading>{t('Sub-Contexts')}</Heading>
 
           <CreateContext t={t} parent={selectedContext} matrixClient={matrixClient} parentName={parentName} disableButton={loading} callback={addSpace} />
@@ -444,12 +442,19 @@ const ManageContexts = ({ matrixClient, moderationRooms }) => {
           </section>
           <Heading>{t('Location')}</Heading>
 
+          {locationStructure
+            ? <SimpleContextSelect
+                onItemChosen={addContextToLocation}
+                selectedContext={currentLocation}
+                struktur={locationStructure}
+                disabled={loading}
+              />
+            : <Loading />}
           <AddEvent
             length={events.length}
             room_id={selectedContext}
             t={t}
             reloadSpace={() => getEvents(selectedContext)}
-            locationDropdown
             inviteCollaborators={console.log}
             allocation={allocation}
             disabled={loading}
