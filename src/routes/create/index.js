@@ -246,6 +246,10 @@ const Create = () => {
     return changeTopic
   }
 
+  // get all contents for each element in `blocks` (using FetchCms probably)
+  // put them in an array that looks like this: [{"clientId":"abc","name":"core/paragraph","isValid":true,"attributes":{"content":"de"},"innerBlocks":[]}]
+  // render <GutenbergEditor content={[array]} /> in line 325-335
+
   if (projectSpace && !matrixClient.isInitialSyncComplete()) return <Loading />
   return (
     <>
@@ -316,17 +320,21 @@ const Create = () => {
             {spaceObject && (description || description === '') ? <ProjectDescription description={description[contentLang]} callback={onChangeDescription} /> : <Loading />}
             {blocks.length === 0
               ? <AddContent number={0} projectSpace={spaceObject?.rooms.filter(room => room.name === contentLang)[0].room_id} blocks={blocks} contentType={template} reloadSpace={reloadSpace} />
-              : blocks.map((content, i) =>
-                <DisplayContent
-                  block={content}
-                  index={i}
-                  blocks={blocks}
-                  projectSpace={spaceObject?.rooms.filter(room => room.name === contentLang)[0].room_id}
-                  reloadSpace={reloadSpace}
-                  time={getCurrentTime}
-                  key={content + i + content?.lastUpdate}
-                  contentType={template}
-                />
+              : blocks.map((content, i) => {
+                console.log(content)
+                return (
+                  <DisplayContent
+                    block={content}
+                    index={i}
+                    blocks={blocks}
+                    projectSpace={spaceObject?.rooms.filter(room => room.name === contentLang)[0].room_id}
+                    reloadSpace={reloadSpace}
+                    time={getCurrentTime}
+                    key={content + i + content?.lastUpdate}
+                    contentType={template}
+                  />
+                )
+              }
               )}
           </section>
           {/* Placeholder to show preview next to editing

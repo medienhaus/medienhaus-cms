@@ -12,6 +12,7 @@ import Login from './routes/login'
 import Boilerplate from './routes/boilerplate'
 import Content from './routes/content'
 import Create from './routes/create'
+import Gutenberg from './routes/gutenberg'
 import Moderate from './routes/moderate'
 import Support from './routes/support'
 import Feedback from './routes/feedback'
@@ -84,6 +85,7 @@ function App () {
               <PrivateRoute path="/create/:spaceId" component={Create} />
               <PrivateRoute path="/preview/:spaceId" component={Preview} />
               <PrivateRoute path="/create" component={Create} />
+              <PrivateRoute path="/gutenberg" component={Gutenberg} />
               {config.medienhaus?.sites?.moderate && <PrivateRoute path="/moderate" component={Moderate} />}
               {config.medienhaus?.sites?.support && <PrivateRoute path="/support" component={Support} />}
               {config.medienhaus?.sites?.feedback && <PrivateRoute path="/feedback" component={Feedback} />}
