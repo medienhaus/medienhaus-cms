@@ -16,7 +16,7 @@ const Content = ({ space, metaEvent, visibility, index, removeProject }) => {
     <>
       <div className="project">
         <h3 className="above">{space.name}
-          {<span style={{ color: 'gray' }}> {metaEvent?.published.toUpperCase()}</span>}
+          <span style={{ color: 'gray' }}> {metaEvent?.published.toUpperCase()}</span>
           {config.medienhaus?.item &&
             <span style={{ color: 'gray', float: 'right' }}>{config.medienhaus?.item ? config.medienhaus?.item[metaEvent.type]?.label.toUpperCase() : metaEvent.type.toUpperCase()}</span>}
         </h3>

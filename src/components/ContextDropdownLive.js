@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useCombobox } from 'downshift'
 import { find, map, sortBy, uniq, uniqBy } from 'lodash'
-import mapDeep from 'deepdash/es/mapDeep'
+import mapDeep from 'deepdash/mapDeep'
 // import struktur from '../struktur'
 // import strukturDev from '../struktur-dev'
 import LoadingSpinnerButton from './LoadingSpinnerButton'
