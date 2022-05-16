@@ -7,7 +7,6 @@ import ISO6391 from 'iso-639-1'
 // components
 import Collaborators from './Collaborators'
 import Category from './Category'
-import DisplayContent from './DisplayContent'
 import AddContent from './AddContent'
 import ProjectImage from './ProjectImage'
 import ProjectTitle from './ProjectTitle'
@@ -19,7 +18,8 @@ import DateAndVenue from './DateAndVenue'
 import Dropdown from '../../components/medienhausUI/dropdown'
 
 import config from '../../config.json'
-import _ from 'lodash'
+import _, { isEmpty } from 'lodash'
+import GutenbergEditor from '../gutenberg/editor'
 
 const Create = () => {
   const { t } = useTranslation('content')
@@ -35,6 +35,7 @@ const Create = () => {
   const [medienhausMeta, setMedienhausMeta] = useState([])
   const [allocation, setAllocation] = useState([])
   const [events, setEvents] = useState()
+  const [gutenbergContent, setGutenbergContent] = useState([])
   const [description, setDescription] = useState()
   const [hasContext, setHasContext] = useState(false)
   const [template, setTemplate] = useState(config.medienhaus?.item && Object.keys(config.medienhaus?.item).length > 0 && Object.keys(config.medienhaus?.item)[0])
@@ -246,9 +247,28 @@ const Create = () => {
     return changeTopic
   }
 
-  // get all contents for each element in `blocks` (using FetchCms probably)
-  // put them in an array that looks like this: [{"clientId":"abc","name":"core/paragraph","isValid":true,"attributes":{"content":"de"},"innerBlocks":[]}]
-  // render <GutenbergEditor content={[array]} /> in line 325-335
+  useEffect(() => {
+    const fetchContentsForGutenberg = async () => {
+      const contents = []
+      for (const block of blocks) {
+        const fetchMessage = await matrixClient.http.authedRequest(undefined, 'GET', `/rooms/${block.room_id}/messages`, { limit: 1, dir: 'b', filter: JSON.stringify({ types: ['m.room.message'] }) }, {})
+        const message = isEmpty(fetchMessage.chunk) ? null : fetchMessage.chunk[0].content
+
+        if (message) {
+          contents.push({
+            clientId: block.room_id,
+            isValid: true,
+            name: 'core/paragraph',
+            attributes: { content: message.body },
+            innerBlocks: []
+          })
+        }
+      }
+      setGutenbergContent(contents)
+    }
+
+    fetchContentsForGutenberg()
+  }, [blocks, contentLang])
 
   if (projectSpace && !matrixClient.isInitialSyncComplete()) return <Loading />
   return (
@@ -320,22 +340,7 @@ const Create = () => {
             {spaceObject && (description || description === '') ? <ProjectDescription description={description[contentLang]} callback={onChangeDescription} /> : <Loading />}
             {blocks.length === 0
               ? <AddContent number={0} projectSpace={spaceObject?.rooms.filter(room => room.name === contentLang)[0].room_id} blocks={blocks} contentType={template} reloadSpace={reloadSpace} />
-              : blocks.map((content, i) => {
-                console.log(content)
-                return (
-                  <DisplayContent
-                    block={content}
-                    index={i}
-                    blocks={blocks}
-                    projectSpace={spaceObject?.rooms.filter(room => room.name === contentLang)[0].room_id}
-                    reloadSpace={reloadSpace}
-                    time={getCurrentTime}
-                    key={content + i + content?.lastUpdate}
-                    contentType={template}
-                  />
-                )
-              }
-              )}
+              : <GutenbergEditor content={gutenbergContent} />}
           </section>
           {/* Placeholder to show preview next to editing
           {blocks.map((content, i) => <DisplayPreview content={content} key={i} matrixClient={matrixClient} />)}

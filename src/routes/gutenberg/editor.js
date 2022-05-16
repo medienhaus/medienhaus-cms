@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import {
   BlockEditorProvider,
   BlockList,
@@ -21,8 +21,13 @@ import { ShortcutProvider } from '@wordpress/keyboard-shortcuts'
 registerCoreBlocks([paragraph, image, heading, list, quote, code])
 
 function GutenbergEditor ({ content = [] }) {
-  // eslint-disable-next-line new-cap
   const [blocks, updateBlocks] = useState(content)
+
+  // Actually update our internal state if the content passed from external
+  // consumers of this component changes
+  useEffect(() => {
+    updateBlocks(content)
+  }, [content])
 
   return (
     <BlockEditorProvider
