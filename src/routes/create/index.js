@@ -20,6 +20,7 @@ import Dropdown from '../../components/medienhausUI/dropdown'
 import config from '../../config.json'
 import _, { isEmpty } from 'lodash'
 import GutenbergEditor from '../gutenberg/editor'
+import DisplayContent from './DisplayContent'
 
 const Create = () => {
   const { t } = useTranslation('content')
@@ -340,7 +341,22 @@ const Create = () => {
             {spaceObject && (description || description === '') ? <ProjectDescription description={description[contentLang]} callback={onChangeDescription} /> : <Loading />}
             {blocks.length === 0
               ? <AddContent number={0} projectSpace={spaceObject?.rooms.filter(room => room.name === contentLang)[0].room_id} blocks={blocks} contentType={template} reloadSpace={reloadSpace} />
-              : <GutenbergEditor content={gutenbergContent} />}
+              : blocks.map((content, i) => {
+                return (
+                  <DisplayContent
+                    block={content}
+                    index={i}
+                    blocks={blocks}
+                    projectSpace={spaceObject?.rooms.filter(room => room.name === contentLang)[0].room_id}
+                    reloadSpace={reloadSpace}
+                    time={getCurrentTime}
+                    key={content + i + content?.lastUpdate}
+                    contentType={template}
+                  />
+                )
+              }
+              )}
+            <GutenbergEditor content={gutenbergContent} />
           </section>
           {/* Placeholder to show preview next to editing
           {blocks.map((content, i) => <DisplayPreview content={content} key={i} matrixClient={matrixClient} />)}
