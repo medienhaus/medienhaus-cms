@@ -260,7 +260,7 @@ const Create = () => {
             clientId: block.room_id,
             isValid: true,
             name: 'core/paragraph',
-            attributes: { content: message.body },
+            attributes: { content: message.formatted_body },
             innerBlocks: []
           })
         }
