@@ -126,7 +126,17 @@ const Nav = () => {
           <h1>{process.env.REACT_APP_APP_TITLE}</h1>
         </NavLink>
         {auth.user
-          ? <button type="button" className={isNavigationOpen ? 'close' : 'open'} onClick={() => setIsNavigationOpen(!isNavigationOpen)}>{isNavigationOpen ? '×' : '|||'}</button>
+          ? <button type="button" className={isNavigationOpen ? 'close' : 'open'} onClick={() => setIsNavigationOpen(!isNavigationOpen)}>
+            {isNavigationOpen
+              ? '×'
+              : (
+                <svg viewBox="0 0 100 80" width="40" height="40">
+                  <rect width="100" height="20" />
+                  <rect y="30" width="100" height="20" />
+                  <rect y="60" width="100" height="20" />
+                </svg>
+                )}
+          </button>
           : <NavLink to="/login">/login</NavLink>}
       </header>
       <nav className={`${(isNavigationOpen && 'active')}`}>
