@@ -23,12 +23,12 @@ const PeertubeEmbed = ({ type, onCreateRoomForBlock, onBlockWasAddedSuccessfully
     setPastedEntry(e.target.value)
     !saveButton && callback(e.target.value)
   }
-  const validInputValue = pastedEntry.startsWith('https://stream.udk-berlin.de/videos/watch/')
+  const validInputValue = pastedEntry.startsWith('https://stream.udk-berlin.de/')
 
   return (
     <div>
       <p>{t('Paste a link to your {{type}} below', { type })}:</p>
-      <input type="text" value={pastedEntry} onChange={pasteEntry} placeholder="https://stream.udk-berlin.de/videos/watch/…" />
+      <input type="text" value={pastedEntry} onChange={pasteEntry} placeholder="https://stream.udk-berlin.de/…" />
       {type === 'video' && <p>↳ <Trans t={t} i18nKey="linkToVideo">You can upload videos via <a href="https://stream.udk-berlin.de/videos/upload" rel="external nofollow noopener noreferrer" target="_blank">udk/stream</a></Trans></p>}
       {type === 'livestream' && <p>↳ <Trans t={t} i18nKey="linkToStream">You can start a live stream via <a href="https://stream.udk-berlin.de/videos/upload" rel="external nofollow noopener noreferrer" target="_blank">udk/stream</a></Trans></p>}
       {type === 'playlist' && <p>↳ <Trans t={t} i18nKey="linkToPlaylist">You can create playlists via <a href="https://stream.udk-berlin.de/videos/upload" rel="external nofollow noopener noreferrer" target="_blank">udk/stream</a></Trans></p>}
