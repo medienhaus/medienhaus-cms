@@ -256,11 +256,62 @@ const Create = () => {
         const message = isEmpty(fetchMessage.chunk) ? null : fetchMessage.chunk[0].content
 
         if (message) {
+          console.log(block)
+          const blockType = block.name.slice(block.name.search('_'))
+          let n, a
+
+          switch (blockType) {
+            case '_heading':
+              n = 'core/heading'
+              a = { content: message.formatted_body }
+              break
+            case '_text':
+              n = 'core/paragraph'
+              a = { content: message.formatted_body }
+              break
+            case '_code':
+              n = 'core/code'
+              a = { content: message.formatted_body }
+              break
+            case '_ul':
+              n = 'core/list'
+              a = {
+                ordered: false,
+                values: message.formatted_body.slice(5, -5),
+                placeholder: 'add list element'
+              }
+              break
+            case '_ol':
+              n = 'core/list'
+              a = {
+                ordered: true,
+                values: message.formatted_body.slice(5, -5),
+                placeholder: 'add list element'
+              }
+              break
+            case '_quote':
+              n = 'core/quote'
+              a = { value: '<p>' + message.body + '</p>' }
+              break
+            case '_image':
+              n = 'core/image'
+              a = {
+                url: 'https://dev.medienhaus.udk-berlin.de/_matrix/media/r0/download/dev.medienhaus.udk-berlin.de/TFrUGgUreKGrzCeEZawIzeRg',
+                alt: message.info.alt,
+                caption: message.info.alt
+              }
+              break
+            default:
+              n = 'core/paragraph'
+              a = { content: message.formatted_body }
+          }
+          console.log('blockType')
+          console.log(message)
           contents.push({
             clientId: block.room_id,
             isValid: true,
-            name: 'core/paragraph',
-            attributes: { content: message.formatted_body },
+            name: n,
+            attributes: a,
             innerBlocks: []
           })
         }
