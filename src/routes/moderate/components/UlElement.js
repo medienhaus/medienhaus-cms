@@ -19,7 +19,7 @@ const Ul = styled.ul`
 const UlElement = ({ roomId, indent, removeContentElement }) => {
   const [active, setActive] = useState('')
   const [roomArray, setRoomArray] = useState([])
-  const context = config.medienhaus?.context ? config.medienhaus?.context.concat('context') : ['context']
+  const context = config.medienhaus?.context ? Object.keys(config.medienhaus?.context).concat('context') : ['context']
   const item = config.medienhaus?.item ? Object.keys(config.medienhaus?.item).concat('item') : ['item']
   const typesOfItem = context.concat(item)
   const matrixClient = Matrix.getMatrixClient()

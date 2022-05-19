@@ -18,6 +18,8 @@ import config from '../../../config.json'
 import TextareaAutosize from 'react-textarea-autosize'
 import styled from 'styled-components'
 
+import findValueDeep from 'deepdash/es/findValueDeep'
+
 const Heading = styled.h2`
 margin-top: var(--margin);
 `
@@ -123,30 +125,6 @@ const ManageContexts = ({ matrixClient, moderationRooms }) => {
       return result
     }
 
-    function translateJson (origin) {
-      origin.childs = []
-      if (origin.children && Object.keys(origin.children).length > 0) {
-        const childs = parseChilds(origin.children)
-        childs.forEach((child, i) => {
-          origin.childs[i] = translateJson(child)
-        })
-      }
-      origin.children = origin.childs
-      delete origin.childs
-      return origin
-    }
-
-    function parseChilds (data) {
-      if (data) {
-        const result = []
-        for (const key in data) {
-          if (data.hasOwnProperty(key)) {
-            result.push(key)
-          }
-        }
-        return result.map(r => data[r])
-      } else { return {} }
-    }
     console.log('---- started structure ----')
     const tree = await getSpaceStructure(matrixClient, parent, false)
     setInputItems(tree)
@@ -268,11 +246,6 @@ const ManageContexts = ({ matrixClient, moderationRooms }) => {
     createSpace(name)
   }
 
-  const contextualise = (d3) => {
-    console.log(d3)
-    setSelectedContext(d3.data.id)
-    setContextParent(d3.parent.data.id)
-  }
   const fetchAllocation = async (space) => setAllocation(await matrixClient.getStateEvent(space, 'dev.medienhaus.allocation').catch(console.log))
 
   const getEvents = async (space) => {
@@ -294,19 +267,28 @@ const ManageContexts = ({ matrixClient, moderationRooms }) => {
     }
     setLoading(false)
   }
+
   const onContextChange = async (context) => {
+    console.log(context)
     setLoading(true)
-    await getEvents(context.id)
-    setSelectedContext(context.id)
-    context.pathIds ? setContextParent(context.pathIds[context.pathIds.length - 1]) : setContextParent(null)
-    setDescription(context.topic || '')
+    await getEvents(context)
+    setSelectedContext(context)
+    const contextObject = findValueDeep(
+      inputItems,
+      (value, key, parent) => {
+        if (value.id === context) return true
+      }, { childrenPath: 'children', includeRoot: false, rootIsChildren: true })
+
+    console.log(contextObject)
+    contextObject.pathIds ? setContextParent(contextObject.pathIds[contextObject.pathIds.length - 1]) : setContextParent(null)
+    setDescription(contextObject
+      .topic || '')
     // setParentName(context.path[context.path.length - 1])
     setLoading(false)
   }
+
   useEffect(() => {
     createStructurObject()
-
-    // createD3Json()
     // eslint-disable-next-line
   }, [])
 
