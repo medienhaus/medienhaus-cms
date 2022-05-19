@@ -296,7 +296,8 @@ const Create = () => {
             case '_image':
               n = 'core/image'
               a = {
-                url: 'https://dev.medienhaus.udk-berlin.de/_matrix/media/r0/download/dev.medienhaus.udk-berlin.de/TFrUGgUreKGrzCeEZawIzeRg',
+                align: 'center',
+                url: matrixClient.mxcUrlToHttp(message.url),
                 alt: message.info.alt,
                 caption: message.info.alt
               }
