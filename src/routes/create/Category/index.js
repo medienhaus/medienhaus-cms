@@ -4,8 +4,9 @@ import { Loading } from '../../../components/loading'
 import * as _ from 'lodash'
 import SimpleContextSelect from '../../../components/SimpleContextSelect'
 import DeleteButton from '../components/DeleteButton'
-
+import config from '../../../config.json'
 import styled from 'styled-components'
+// import ContextDropdown from '../../../components/ContextDropdown'
 
 const RemovableLiElement = styled.li`
 list-style: none;
@@ -109,8 +110,23 @@ const Category = ({ projectSpace, onChange, parent }) => {
     setInputItems(tree)
   }
 
+  const fetchTreeFromApi = async () => {
+    const fetchTree = await fetch(config.medienhaus.api + process.env.REACT_APP_CONTEXT_ROOT_SPACE_ID + '/tree')
+    const response = await fetchTree.json()
+    setInputItems(response.children)
+    setLoading(false)
+  }
+  const fetchParentsFromApi = async () => {
+    const fetchParents = await fetch(config.medienhaus.api + projectSpace + '/path')
+    const response = await fetchParents.json()
+    console.log(response)
+  }
+
   useEffect(() => {
-    createStructurObject()
+    if (config.medienhaus.api) {
+      fetchTreeFromApi()
+      fetchParentsFromApi()
+    } else createStructurObject()
     // eslint-disable-next-line
   }, [])
 
@@ -118,6 +134,9 @@ const Category = ({ projectSpace, onChange, parent }) => {
 
   async function onContextChosen (contextSpace) {
     setLoading(true)
+    // this will be refactored with new logic once the api can return the updated /$id/path immediately after adding a space child.
+    const fetchContext = await fetch(config.medienhaus.api + contextSpace)
+    const context = await fetchContext.json()
     const projectSpaceMetaEvent = await matrixClient.getStateEvent(projectSpace, 'dev.medienhaus.meta').catch(console.log)
     // remove legacy code:
     // if the medienhaus meta event still has a context key, we remove it from the object.
@@ -131,16 +150,16 @@ const Category = ({ projectSpace, onChange, parent }) => {
     // if (currentContext && currentContext !== contextSpace) await Matrix.removeSpaceChild(currentContext, projectSpace).catch(console.log)
 
     // Add this current project to the given context space
-    const addToContext = await Matrix.addSpaceChild(contextSpace.id, projectSpace)
+    const addToContext = await Matrix.addSpaceChild(contextSpace, projectSpace)
       .catch(async () => {
       // if we cant add the content to a context we try to join the context
-        const joinRoom = await matrixClient.joinRoom(contextSpace.id).catch(console.log)
+        const joinRoom = await matrixClient.joinRoom(contextSpace).catch(console.log)
         if (joinRoom) {
           console.log('joined room')
           // then try to add the conent to the context again
-          const addToContext = await Matrix.addSpaceChild(contextSpace.id, projectSpace).catch(console.log)
+          const addToContext = await Matrix.addSpaceChild(contextSpace, projectSpace).catch(console.log)
           if (addToContext?.event_id) {
-            setContexts(contexts => [...contexts, { name: contextSpace.name, room_id: contextSpace.id }])
+            setContexts(contexts => [...contexts, { name: context.name, room_id: contextSpace }])
 
             onChange(!_.isEmpty(contexts))
             setLoading(false)
@@ -153,7 +172,7 @@ const Category = ({ projectSpace, onChange, parent }) => {
         }
       })
     if (addToContext?.event_id) {
-      setContexts(contexts => [...contexts, { name: contextSpace.name, room_id: contextSpace.id }])
+      setContexts(contexts => [...contexts, { name: context.name, room_id: contextSpace }])
       onChange(!_.isEmpty(contexts))
       setLoading(false)
     }

@@ -17,6 +17,7 @@ import { MatrixEvent } from 'matrix-js-sdk'
 import config from '../../../config.json'
 import TextareaAutosize from 'react-textarea-autosize'
 import styled from 'styled-components'
+import { MedienhausAPI } from '../../../MedienhausAPI'
 
 const Heading = styled.h2`
 margin-top: var(--margin);
@@ -36,7 +37,6 @@ const ManageContexts = ({ matrixClient, moderationRooms }) => {
   const [deleting, setDeleting] = useState(false)
   const [loading, setLoading] = useState(false)
   const [description, setDescription] = useState('')
-
   const createStructurObject = async () => {
     async function getSpaceStructure (matrixClient, motherSpaceRoomId, includeRooms) {
       setDisableButton(true)
@@ -152,6 +152,14 @@ const ManageContexts = ({ matrixClient, moderationRooms }) => {
     setInputItems(tree)
   }
 
+  const fetchTreeFromApi = async () => {
+    const fetchTree = await fetch(config.medienhaus.api + process.env.REACT_APP_CONTEXT_ROOT_SPACE_ID + '/tree')
+    console.log(fetchTree)
+    const response = await fetchTree.json()
+    console.log(response)
+    setInputItems(response.children)
+    setLoading(false)
+  }
   const spaceChild = async (e, space, add) => {
     setLoading(true)
     e && e.preventDefault()
@@ -166,7 +174,8 @@ const ManageContexts = ({ matrixClient, moderationRooms }) => {
       body: JSON.stringify(add ? body : { }) // if we add a space to an existing one we need to send the object 'body', to remove a space we send an empty object.
     }).catch(console.log)
     add ? console.log('added as child to ' + selectedContext) : console.log('removed ' + selectedContext + ' from ' + contextParent)
-    await createStructurObject()
+    if (config.medienhaus.api) fetchTreeFromApi()
+    else await createStructurObject()
     if (add) {
       setSelectedContext(space)
     } else {
@@ -268,12 +277,29 @@ const ManageContexts = ({ matrixClient, moderationRooms }) => {
     createSpace(name)
   }
 
-  const contextualise = (d3) => {
-    console.log(d3)
-    setSelectedContext(d3.data.id)
-    setContextParent(d3.parent.data.id)
-  }
   const fetchAllocation = async (space) => setAllocation(await matrixClient.getStateEvent(space, 'dev.medienhaus.allocation').catch(console.log))
+
+  async function findNested (obj, key, value) {
+    console.log(obj)
+    if (obj[key] === value) {
+      return obj
+    } else {
+      const keys = Object.keys(obj) // add this line to iterate over the keys
+      console.log(keys)
+      for (let i = 0, len = keys.length; i < len; i++) {
+        const k = keys[i] // use this key for iteration, instead of index "i"
+
+        // add "obj[k] &&" to ignore null values
+        if (obj[k] && typeof obj[k] === 'object') {
+          const found = findNested(obj[k], key, value)
+          if (found) {
+          // If the object was found in the recursive call, bubble it up.
+            return found
+          }
+        }
+      }
+    }
+  }
 
   const getEvents = async (space) => {
     setLoading(true)
@@ -294,19 +320,27 @@ const ManageContexts = ({ matrixClient, moderationRooms }) => {
     }
     setLoading(false)
   }
+
   const onContextChange = async (context) => {
-    setLoading(true)
-    await getEvents(context.id)
-    setSelectedContext(context.id)
-    context.pathIds ? setContextParent(context.pathIds[context.pathIds.length - 1]) : setContextParent(null)
-    setDescription(context.topic || '')
+    if (config.medienhaus.api) {
+      const fetchPath = await fetch(config.medienhaus.api + context + '/path')
+      const response = await fetchPath.json()
+      console.log(response)
+    } else {
+      console.log(context)
+      setLoading(true)
+      await getEvents(context)
+      setSelectedContext(context)
+      context.pathIds ? setContextParent(context.pathIds[context.pathIds.length - 1]) : setContextParent(null)
+      setDescription(context.topic || '')
+    }
     // setParentName(context.path[context.path.length - 1])
     setLoading(false)
   }
-  useEffect(() => {
-    createStructurObject()
 
-    // createD3Json()
+  useEffect(() => {
+    if (config.medienhaus.api) fetchTreeFromApi()
+    else createStructurObject()
     // eslint-disable-next-line
   }, [])
 
