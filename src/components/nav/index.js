@@ -21,7 +21,7 @@ const Nav = () => {
   useEffect(() => {
     if (spacesErr) console.log(spacesErr)
     if (joinedSpaces && auth.user) {
-      const typesOfSpaces = config.medienhaus?.context || ['context']
+      const typesOfSpaces = Object.keys(config.medienhaus?.context) || ['context']
       // To "moderate" a space it must have one of the given types and we must be at least power level 50
       const moderatingSpaces = joinedSpaces.filter(space => typesOfSpaces.includes(space.meta.template) && space.powerLevel >= 50)
       // If we are not moderating any spaces we can cancel the rest here ...
@@ -52,7 +52,7 @@ const Nav = () => {
   useEffect(() => {
     async function checkRoomForPossibleInvite (room) {
       // Types of spaces for which we want to count invites for
-      const contextTemplates = config.medienhaus?.context && config.medienhaus?.context
+      const contextTemplates = config.medienhaus?.context && Object.keys(config.medienhaus?.context)
       const itemTemplates = config.medienhaus?.item && Object.keys(config.medienhaus?.item)
       const typesOfTemplates = contextTemplates?.concat(itemTemplates)
       // Ignore if this is not a space

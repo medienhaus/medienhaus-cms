@@ -25,9 +25,14 @@ const Moderate = () => {
   const { t } = useTranslation()
   useEffect(() => {
     if (joinedSpaces) {
-      const typesOfSpaces = config.medienhaus?.context || 'context'
+      const typesOfSpaces = config.medienhaus?.context ? Object.keys(config.medienhaus?.context) : 'context'
       // check to see if a user has joined a room with the specific content type and is moderator or admin (at least power level 50)
-      const filteredRooms = joinedSpaces.filter(space => typesOfSpaces.includes(space.meta.type) && space.powerLevel > 49)
+
+      const filteredRooms = joinedSpaces.filter(space => {
+        if (config.medienhaus?.context) return typesOfSpaces.includes(space.meta.template) && space.powerLevel > 49
+        else return typesOfSpaces.includes(space.meta.type) && space.powerLevel > 49
+      }
+      )
       setModerationRooms(filteredRooms)
     }
   }, [joinedSpaces])
@@ -79,7 +84,7 @@ const Moderate = () => {
       case 'rightsManagement':
         return config.medienhaus?.sites?.moderate?.rightsManagement && <> <RightsManagement matrixClient={matrixClient} moderationRooms={moderationRooms} setPower={setPower} fetchUsers={fetchUsers} fetching={fetching} userSearch={userSearch} /></>
       case 'manageContexts':
-        return config.medienhaus?.sites?.moderate?.manageContexts && <><ManageContexts matrixClient={matrixClient} /></>
+        return config.medienhaus?.sites?.moderate?.manageContexts && <><ManageContexts matrixClient={matrixClient} moderationRooms={moderationRooms} /></>
       case 'removeContent':
         return config.medienhaus?.sites?.moderate?.removeContent && <><RemoveContent matrixClient={matrixClient} moderationRooms={moderationRooms} loading={fetching} /></>
       default:
@@ -106,6 +111,7 @@ const Moderate = () => {
 
   if (fetchSpaces || !matrixClient.isInitialSyncComplete()) return <Loading />
   if (spacesErr) return <p>{spacesErr}</p>
+  if (moderationRooms.length < 1) return <p>{t('You are not moderating any spaces.')}</p>
   return (
     <>
       <section className="request">
