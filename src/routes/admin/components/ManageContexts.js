@@ -60,7 +60,7 @@ const ManageContexts = ({ matrixClient, moderationRooms }) => {
 
       async function scanForAndAddSpaceChildren (spaceId, path) {
         if (spaceId === 'undefined') return
-        console.log(path)
+        // console.log(path)
         const stateEvents = await matrixClient.roomState(spaceId).catch(console.log)
         // check if room exists in roomHierarchy
         // const existsInCurrentTree = _.find(hierarchy, {room_id: spaceId})
@@ -354,7 +354,7 @@ const ManageContexts = ({ matrixClient, moderationRooms }) => {
             moderationRooms={moderationRooms}
           />}
       {loading && inputItems && <Loading />}
-      <button onClick={() => console.log(findNested(locationStructure, 'id', '!VwRozGFAXnpqBYLEJi:dev.medienhaus.udk-berlin.de'))}>find nested</button>
+      {/* <button onClick={() => console.log(findNested(locationStructure, 'id', '!VwRozGFAXnpqBYLEJi:dev.medienhaus.udk-berlin.de'))}>find nested</button> */}
       {/* <label htmlFor="name">{t('Context')}: </label>
        <input type="text" value={selectedContextName} disabled /> */}
       {selectedContext &&
