@@ -8,7 +8,7 @@ const Button = styled.button`
   appearance: none;
   background:none;
   border: none;
-  border-bottom: 4px solid black;
+  border-bottom: 4px solid var(--color-fg);
   cursor: pointer;
   height: calc(var(--margin) * 2);
   padding: calc(var(--margin) * 0.6);
@@ -18,7 +18,7 @@ const Button = styled.button`
   &:[disabled]{
   background:none;
   border: none;
-  border-bottom: none;
+  border-bottom: 4px solid var(--color-bg);
   cursor: not-allowed;
 }
 `
