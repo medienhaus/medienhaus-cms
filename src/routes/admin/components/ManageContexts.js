@@ -26,6 +26,7 @@ margin-top: var(--margin);
 `
 
 const ManageContexts = ({ matrixClient, moderationRooms }) => {
+  console.debug(moderationRooms)
   const { t } = useTranslation('admin')
   const [selectedContext, setSelectedContext] = useState('')
   const [parentName] = useState('')
