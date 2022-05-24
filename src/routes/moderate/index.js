@@ -17,7 +17,7 @@ const Moderate = () => {
   const { joinedSpaces, spacesErr, fetchSpaces } = useJoinedSpaces(false)
   const [moderationRooms, setModerationRooms] = useState()
   const [userSearch, setUserSearch] = useState([])
-  const [selection, setSelection] = useState('')
+  const [selection, setSelection] = useState('invite')
   const [fetching, setFetching] = useState(false)
   const matrixClient = Matrix.getMatrixClient()
 
@@ -78,6 +78,7 @@ const Moderate = () => {
   }
 
   const renderSelection = () => {
+    // eslint-disable-next-line default-case
     switch (selection) {
       case 'invite':
         return config.medienhaus?.sites?.moderate?.invite && <> <InviteUserToSpace matrixClient={matrixClient} moderationRooms={moderationRooms} setPower={setPower} fetchUsers={fetchUsers} fetching={fetching} userSearch={userSearch} /></>
@@ -87,7 +88,7 @@ const Moderate = () => {
         return config.medienhaus?.sites?.moderate?.manageContexts && <><ManageContexts matrixClient={matrixClient} moderationRooms={moderationRooms} /></>
       case 'removeContent':
         return config.medienhaus?.sites?.moderate?.removeContent && <><RemoveContent matrixClient={matrixClient} moderationRooms={moderationRooms} loading={fetching} /></>
-      default:
+      case 'accept':
         return (
           config.medienhaus?.sites?.moderate?.accept &&
             <>
