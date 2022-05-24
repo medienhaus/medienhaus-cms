@@ -13,9 +13,11 @@ import ProjectImage from './ProjectImage'
 import ProjectTitle from './ProjectTitle'
 import PublishProject from '../../components/PublishProject'
 import ProjectDescription from './ProjectDescription'
+import Time from './Time'
+
 import { Loading } from '../../components/loading'
 import { useTranslation } from 'react-i18next'
-import DateAndVenue from './DateAndVenue'
+import Location from './Location'
 import Dropdown from '../../components/medienhausUI/dropdown'
 
 import config from '../../config.json'
@@ -44,6 +46,7 @@ const Create = () => {
   const params = useParams()
 
   const projectSpace = params.spaceId
+
   const getCurrentTime = useCallback(() => {
     const today = new Date()
     const month = today.getMonth() + 1 // JS starts month with 0
@@ -173,7 +176,7 @@ const Create = () => {
       } else
       */
 
-      // since our events space contains nested spaces we need to escape them here from being updated too early and therefore causing FetchCms in DateAndVenue to return an empty array
+      // since our events space contains nested spaces we need to escape them here from being updated too early and therefore causing FetchCms in Location to return an empty array
       if (event.event.content?.name?.includes('location') ||
         event.event.content?.name?.includes('event') ||
         event.event.content?.name?.includes('bbb') ||
@@ -278,10 +281,12 @@ const Create = () => {
           {(!config.medienhaus?.item || !config.medienhaus?.item[template]?.blueprint || config.medienhaus?.item[template]?.blueprint.includes('location')) && (
             <section className="events">
               <h3>{t('Location')}</h3>
-              <DateAndVenue inviteCollaborators={inviteCollaborators} reloadSpace={reloadSpace} projectSpace={projectSpace} events={events} allocation={allocation} matrixClient={matrixClient} />
+              <Location inviteCollaborators={inviteCollaborators} reloadSpace={reloadSpace} projectSpace={projectSpace} events={events} allocation={allocation} matrixClient={matrixClient} />
             </section>
           )}
-
+          {(!config.medienhaus?.item || !config.medienhaus?.item[template]?.blueprint || config.medienhaus?.item[template]?.blueprint.includes('time')) && (
+            <Time reloadSpace={reloadSpace} projectSpace={projectSpace} allocation={allocation} matrixClient={matrixClient} />
+          )}
           {(!config.medienhaus?.item || !config.medienhaus?.item[template]?.blueprint || config.medienhaus?.item[template]?.blueprint.includes('contributors')) && (
             <section className="contributors">
               <Collaborators projectSpace={spaceObject?.rooms} members={roomMembers} time={getCurrentTime} startListeningToCollab={() => startListeningToCollab()} />
