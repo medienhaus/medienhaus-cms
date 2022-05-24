@@ -7,16 +7,18 @@ const Button = styled.button`
   color: var(--color-fg);
   appearance: none;
   background:none;
-  border:none;
+  border: none;
+  border-bottom: 4px solid black;
   cursor: pointer;
   height: calc(var(--margin) * 2);
-  padding: calc(var(--margin) * 0.2);
+  padding: calc(var(--margin) * 0.6);
   margin-top: calc(var(--margin) * 0.2);
   width: ${props => props.width || '100%'};
-  text-decoration: ${props => props.active ? 'underline' : 'none'};
 
   &:[disabled]{
-  background:none !important;
+  background:none;
+  border: none;
+  border-bottom: none;
   cursor: not-allowed;
 }
 `
