@@ -4,6 +4,7 @@ import { Loading } from '../../../components/loading'
 import * as _ from 'lodash'
 import SimpleContextSelect from '../../../components/SimpleContextSelect'
 import DeleteButton from '../components/DeleteButton'
+import { useTranslation } from 'react-i18next'
 
 import styled from 'styled-components'
 
@@ -19,6 +20,7 @@ const Category = ({ projectSpace, onChange, parent }) => {
   const [error, setError] = useState('')
   const [inputItems, setInputItems] = useState()
   const matrixClient = Matrix.getMatrixClient()
+  const { t } = useTranslation('content')
 
   const createStructurObject = async () => {
     setLoading(true)
@@ -169,12 +171,10 @@ const Category = ({ projectSpace, onChange, parent }) => {
 
   return (
     <>
-      {/* }
       <p>{t('In which context do you want to publish your project?')}</p>
-      <p>{t('This information is necessary to show your project in the right place on the Rundgang 2021 website, and must therefore be specified when you change the visibility of the project to public.')}</p>
+      <p>{t('This information is necessary to show your project in the right place on the Rundgang 2022 website, and must therefore be specified when you change the visibility of the project to public.')}</p>
       <p>{t('The context can be a class, a course, a seminar or a free project. If you are unsure, ask the professor of your class or the seminar leader.')}</p>
       <p>{t('You can scroll through the list, or filter/search the list by typing one or more keywords.')}</p>
-  */}
       <ul style={{ position: 'relative' }}>
         {!inputItems || loading
           ? <Loading />

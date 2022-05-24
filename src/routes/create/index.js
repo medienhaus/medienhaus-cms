@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react'
-import { useParams, useHistory } from 'react-router-dom'
+import { useParams, useHistory, Link } from 'react-router-dom'
 import Matrix from '../../Matrix'
 import { MatrixEvent } from 'matrix-js-sdk'
 import ISO6391 from 'iso-639-1'
@@ -16,7 +16,7 @@ import ProjectDescription from './ProjectDescription'
 import Time from './Time'
 
 import { Loading } from '../../components/loading'
-import { useTranslation } from 'react-i18next'
+import { useTranslation, Trans } from 'react-i18next'
 import Location from './Location'
 import Dropdown from '../../components/medienhausUI/dropdown'
 
@@ -100,6 +100,75 @@ const Create = () => {
     console.log('all done')
   }
 
+  // const createNewLanguageSpace = async (lang, parent) => {
+  //   const opts = (template, name, history) => {
+  //     return {
+  //       preset: 'private_chat',
+  //       name: name,
+  //       room_version: '9',
+  //       creation_content: { type: 'm.space' },
+  //       initial_state: [{
+  //         type: 'm.room.history_visibility',
+  //         content: { history_visibility: history }
+  //       }, //  world_readable
+  //       {
+  //         type: 'dev.medienhaus.meta',
+  //         content: {
+  //           version: '0.4',
+  //           type: 'item',
+  //           template: template,
+  //           application: process.env.REACT_APP_APP_NAME,
+  //           published: 'draft'
+  //         }
+  //       },
+  //       {
+  //         type: 'm.room.guest_access',
+  //         state_key: '',
+  //         content: { guest_access: 'can_join' }
+  //       }],
+  //       power_level_content_override: {
+  //         ban: 50,
+  //         events: {
+  //           'm.room.avatar': 50,
+  //           'm.room.canonical_alias': 50,
+  //           'm.room.encryption': 100,
+  //           'm.room.history_visibility': 100,
+  //           'm.room.name': 50,
+  //           'm.room.power_levels': 100,
+  //           'm.room.server_acl': 100,
+  //           'm.room.tombstone': 100,
+  //           'm.space.child': 50,
+  //           'm.room.topic': 50,
+  //           'm.room.pinned_events': 50,
+  //           'm.reaction': 50,
+  //           'im.vector.modular.widgets': 50
+  //         },
+  //         events_default: 50,
+  //         historical: 100,
+  //         invite: 50,
+  //         kick: 50,
+  //         redact: 50,
+  //         state_default: 50,
+  //         users_default: 0
+  //       },
+  //       visibility: 'private'
+  //     }
+  //   }
+  //   // create the project space for the student project
+  //   const languageRoom = await matrixClient.createRoom(opts('lang', lang, 'shared')).catch(console.log)
+  //   await fetch(process.env.REACT_APP_MATRIX_BASE_URL + `/_matrix/client/r0/rooms/${parent}/state/m.space.child/${languageRoom.room_id}`, {
+  //     method: 'PUT',
+  //     headers: { Authorization: 'Bearer ' + localStorage.getItem('medienhaus_access_token') },
+  //     body: JSON.stringify({
+  //       via: [process.env.REACT_APP_MATRIX_BASE_URL.replace('https://', '')],
+  //       suggested: false,
+  //       auto_join: false
+  //     })
+  //   }).catch(console.log)
+  //   return languageRoom.room_id
+  //   // const events = await matrixClient.createRoom(opts('events', 'events', 'shared'))
+  // }
+
   const fetchSpace = useCallback(async () => {
     if (matrixClient.isInitialSyncComplete()) {
       // here we collect all necessary information about the project
@@ -128,6 +197,15 @@ const Create = () => {
       setVisibility(meta.published)
       // we fetch the selected language content
       const spaceRooms = space.rooms.filter(room => room.name === contentLang)
+      // let getContent
+      // if (!spaceRooms[0]) {
+      //   // if a language space doesn't exist yet we create it
+      //   const languageSpace = await createNewLanguageSpace(contentLang, projectSpace)
+      //   console.log(languageSpace)
+      //   // eslint-disable-next-line no-debugger
+      //   debugger
+      //   getContent = await matrixClient.getRoomHierarchy(languageSpace)
+      // } else getContent = await matrixClient.getRoomHierarchy(spaceRooms[0].room_id)
       const getContent = await matrixClient.getRoomHierarchy(spaceRooms[0].room_id)
       setBlocks(getContent.rooms.filter(room => room.name !== contentLang).filter(room => room.name.charAt(0) !== 'x').sort((a, b) => {
         return a.name.substring(0, a.name.indexOf('_')) - b.name.substring(0, b.name.indexOf('_'))
@@ -262,7 +340,6 @@ const Create = () => {
   if (projectSpace && !matrixClient.isInitialSyncComplete()) return <Loading />
   return (
     <>
-      {/* }
       <section className="welcome">
         <p>
           {projectSpace
@@ -271,10 +348,10 @@ const Create = () => {
         </p>
 
         <p>{t('This is the project page. Please add the context in which the project was created, a project name, descriptive text and a thumbnail. You can also add more images, videos, livestreams and BigBlueButton sessions.')}</p>
-        <p><Trans t={t} i18nKey="submitInstructions2">If you want to continue at a later point in time, the project is automatically saved as a draft and you can find it in your collection under <NavLink to="/content">/content</NavLink>.</Trans></p>
+        <p><Trans t={t} i18nKey="submitInstructions2">If you want to continue at a later point in time, the project is automatically saved as a draft and you can find it in your collection under <Link to="/content">/content</Link>.</Trans></p>
         <p>{t('The Rundgang website will be available in English and German. The project name can only be entered in one language and will therefore be used for both pages. Other texts should ideally be entered in both languages, otherwise the text will appear on both pages in only one language.')}</p>
       </section>
-      */}
+
       <section className="project-title">
         {(!projectSpace && (config.medienhaus?.item && Object.keys(config.medienhaus?.item).length > 1)) &&
           <Dropdown name="type" label="Type" placeholder="-- select type --" options={_.mapValues(config.medienhaus?.item, 'label')} value={template} onChange={e => setTemplate(e.target.value)} />}
@@ -330,13 +407,13 @@ const Create = () => {
             </select>
             {spaceObject && (description || description === '') ? <ProjectDescription description={description[contentLang]} callback={onChangeDescription} /> : <Loading />}
             {blocks.length === 0
-              ? <AddContent number={0} projectSpace={spaceObject?.rooms.filter(room => room.name === contentLang)[0].room_id} blocks={blocks} contentType={template} reloadSpace={reloadSpace} />
+              ? <AddContent number={0} projectSpace={spaceObject?.rooms.filter(room => room.name === contentLang)[0]?.room_id} blocks={blocks} contentType={template} reloadSpace={reloadSpace} />
               : blocks.map((content, i) =>
                 <DisplayContent
                   block={content}
                   index={i}
                   blocks={blocks}
-                  projectSpace={spaceObject?.rooms.filter(room => room.name === contentLang)[0].room_id}
+                  projectSpace={spaceObject?.rooms.filter(room => room.name === contentLang)[0]?.room_id}
                   reloadSpace={reloadSpace}
                   time={getCurrentTime}
                   key={content + i + content?.lastUpdate}

@@ -45,7 +45,7 @@ const Feedback = () => {
     return (
       <section>
         <p>{t('Thank you for your feedback!')}</p>
-        <p><Trans t={t} i18nKey="submittedMessage">We are collecting your feedback and will evaluate it after the Rundgang 2021. If you need technical help with entering your contributions, please reach out via the <NavLink to="/support">/support</NavLink> form.</Trans></p>
+        <p><Trans t={t} i18nKey="submittedMessage">We are collecting your feedback and will evaluate it after the Rundgang 2022. If you need technical help with entering your contributions, please reach out via the <NavLink to="/support">/support</NavLink> form.</Trans></p>
       </section>
     )
   }
