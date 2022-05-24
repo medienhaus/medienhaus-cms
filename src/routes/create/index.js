@@ -290,23 +290,32 @@ const Create = () => {
               }
               break
             case '_quote':
-              n = 'core/quote'
-              a = { value: '<p>' + message.body + '</p>' }
+              n = 'medienhaus/quote'
+              a = { content: message.body }
               break
             case '_image':
-              n = 'core/image'
+              n = 'medienhaus/image'
               a = {
-                align: 'center',
                 url: matrixClient.mxcUrlToHttp(message.url),
                 alt: message.info.alt,
-                caption: message.info.alt
+                license: message.info.license,
+                author: message.info.author
+              }
+              break
+            case '_audio':
+              n = 'medienhaus/audio'
+              a = {
+                url: matrixClient.mxcUrlToHttp(message.url),
+                alt: message.info.alt,
+                license: message.info.license,
+                author: message.info.author
               }
               break
             default:
               n = 'core/paragraph'
               a = { content: message.formatted_body }
           }
-          console.log('blockType')
+          console.log(blockType)
           console.log(message)
           contents.push({
             clientId: block.room_id,
