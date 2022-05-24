@@ -15,15 +15,27 @@ const Nav = () => {
   const [isAdmin, setIsAdmin] = useState(false)
   const [knockAmount, setKnockAmount] = useState(0)
   const [invites, setInvites] = useState([])
-  const { joinedSpaces, spacesErr } = useJoinedSpaces(false)
+  const { joinedSpaces } = useJoinedSpaces(false)
   const matrixClient = Matrix.getMatrixClient()
 
   useEffect(() => {
-    if (spacesErr) console.log(spacesErr)
     if (joinedSpaces && auth.user) {
-      const typesOfSpaces = Object.keys(config.medienhaus?.context) || ['context']
-      // To "moderate" a space it must have one of the given types and we must be at least power level 50
-      const moderatingSpaces = joinedSpaces.filter(space => typesOfSpaces.includes(space.meta.template) && space.powerLevel >= 50)
+      const contextTemplates = config.medienhaus?.context && Object.keys(config.medienhaus?.context)
+      // To determine if we're "moderating" a given space...
+      const moderatingSpaces = joinedSpaces.filter(space => {
+        // 1. it must be of `type` === `context`
+        if (space.meta.type !== 'context') return false
+        // 2. the user's power level must be at least 50
+        if (space.powerLevel < 50) return false
+        // and 3. (if templates are given in config.json) must have a valid context template
+        if (contextTemplates && !contextTemplates.includes(space.meta.template)) return false
+        // @TODO: (4. What we'd still have to check for here, is if the given space is a sub-space of our root space)
+        // Because right now this `moderatingSpaces` array will include all spaces that we're moderating. No matter
+        // if they're a part of the "main context tree" of this CMS' instance, or if they are somewhere else in the
+        // Matrix.
+
+        return true
+      })
       // If we are not moderating any spaces we can cancel the rest here ...
       if (moderatingSpaces.length < 1) return
 
@@ -47,7 +59,7 @@ const Nav = () => {
 
       getAmountOfPendingKnocks()
     }
-  }, [joinedSpaces, auth.user, matrixClient, spacesErr])
+  }, [joinedSpaces, auth.user, matrixClient])
 
   useEffect(() => {
     async function checkRoomForPossibleInvite (room) {
