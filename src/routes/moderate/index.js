@@ -10,9 +10,8 @@ import RightsManagement from './components/RightsManagement'
 import ManageContexts from '../admin/components/ManageContexts'
 import RemoveContent from './components/RemoveContent'
 
-import SimpleButton from '../../components/medienhausUI/simpleButton'
-
 import config from '../../config.json'
+import TextNavigation from '../../components/medienhausUI/textNavigation'
 
 const Moderate = () => {
   const { joinedSpaces, spacesErr, fetchSpaces } = useJoinedSpaces(false)
@@ -23,6 +22,7 @@ const Moderate = () => {
   const matrixClient = Matrix.getMatrixClient()
 
   const { t } = useTranslation()
+
   useEffect(() => {
     if (joinedSpaces) {
       const typesOfSpaces = config.medienhaus?.context ? Object.keys(config.medienhaus?.context) : 'context'
@@ -116,7 +116,7 @@ const Moderate = () => {
     <>
       <section className="request">
         {Object.keys(config?.medienhaus?.sites?.moderate).map((value, index) => {
-          return <SimpleButton width="auto" disabled={value === selection} value={value} key={value} onClick={(e) => setSelection(e.target.value)}>{value.replace(/([a-z0-9])([A-Z])/g, '$1 $2')}</SimpleButton>
+          return <TextNavigation width="auto" disabled={value === selection} active={value === selection} value={value} key={value} onClick={(e) => setSelection(e.target.value)}>{value.replace(/([a-z0-9])([A-Z])/g, '$1 $2')}</TextNavigation>
         })}
       </section>
 

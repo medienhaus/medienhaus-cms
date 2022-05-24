@@ -360,13 +360,11 @@ const ManageContexts = ({ matrixClient, moderationRooms }) => {
        <input type="text" value={selectedContextName} disabled /> */}
       {selectedContext &&
         <>
-          {contextParent &&
-            <RemoveContext selectedContext={selectedContext} parent={contextParent} parentName={parentName} disableButton={disableButton} callback={spaceChild} />}
-          <Heading>{t('Sub-Contexts')}</Heading>
+          <Heading>{t('Add Sub-Context')}</Heading>
 
           <CreateContext t={t} parent={selectedContext} matrixClient={matrixClient} parentName={parentName} disableButton={loading} callback={addSpace} />
           <div>
-            <Heading>Image</Heading>
+            <Heading>{t('Add Image')}</Heading>
             <ProjectImage projectSpace={selectedContext} changeProjectImage={() => console.log('changed image')} disabled={loading} />
           </div>
           {allocation?.physical && allocation.physical.map((location, i) => {
@@ -434,7 +432,7 @@ const ManageContexts = ({ matrixClient, moderationRooms }) => {
             )
           }))}
           <section>
-            <Heading>{t('Description')}</Heading>
+            <Heading>{t('Add Description')}</Heading>
             <TextareaAutosize
               value={description}
               minRows={6}
@@ -448,7 +446,7 @@ const ManageContexts = ({ matrixClient, moderationRooms }) => {
             </>
             )}
           </section>
-          <Heading>{t('Location')}</Heading>
+          <Heading>{t('Add Location')}</Heading>
 
           {locationStructure
             ? <SimpleContextSelect
@@ -467,6 +465,9 @@ const ManageContexts = ({ matrixClient, moderationRooms }) => {
             allocation={allocation}
             disabled={loading}
           />
+          <hr />
+          {contextParent && <RemoveContext t={t} selectedContext={selectedContext} parent={contextParent} parentName={parentName} disableButton={disableButton} callback={spaceChild} />}
+
         </>}
     </>
   )
