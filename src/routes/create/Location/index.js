@@ -112,7 +112,7 @@ const Location = ({ reloadSpace, inviteCollaborators, projectSpace, events, allo
       return result
     }
     console.log('---- started structure ----')
-    const tree = await getSpaceStructure('!SHcqMqiieOzSvJxppm:dev.medienhaus.udk-berlin.de', false)
+    const tree = await getSpaceStructure('!ZfLuOQsYLtkuIvswLv:dev.medienhaus.udk-berlin.de', false)
     // console.log(tree[Object.keys(tree)[0]])
     setLocationStructure(tree)
   }

@@ -297,7 +297,7 @@ const ManageContexts = ({ matrixClient, moderationRooms }) => {
       console.log(tree)
       setInputItems(tree)
 
-      const locationTree = await createStructurObject('!SHcqMqiieOzSvJxppm:dev.medienhaus.udk-berlin.de')
+      const locationTree = await createStructurObject('!ZfLuOQsYLtkuIvswLv:dev.medienhaus.udk-berlin.de')
       console.log(locationTree)
       setLocationStructure(locationTree)
     }
