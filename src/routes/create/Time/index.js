@@ -10,12 +10,12 @@ export default function Time ({ allocation, projectSpace, reloadSpace }) {
   const [endDate, setEndDate] = useState('')
   const [startTime, setStartTime] = useState('00:00')
   const [endTime, setEndTime] = useState('00:00')
-  const [temporaObject, setTemporaObject] = useState({})
+  const [temporalObject, setTemporalObject] = useState({})
   const { t } = useTranslation('content')
   const matrixClient = Matrix.getMatrixClient()
 
   useEffect(() => {
-    setTemporaObject({
+    setTemporalObject({
       app: process.env.REACT_APP_APP_NAME,
       start: new Date(startDate + 'T' + startTime + ':00.000Z').valueOf() / 1000,
       end: new Date(endDate + 'T' + endTime + ':00.000Z').valueOf() / 1000
@@ -29,16 +29,16 @@ export default function Time ({ allocation, projectSpace, reloadSpace }) {
     if (existingEvent) {
       allocation = existingEvent
       allocation.version = '1.1'
-      // if it does and also already has a tempora key we push to the existing array.
-      if (existingEvent.tempora) allocation.tempora.push(temporaObject)
+      // if it does and also already has a temporal key we push to the existing array.
+      if (existingEvent.temporal) allocation.temporal.push(temporalObject)
       // otherwise we create a new array
-      else allocation.tempora = [temporaObject]
+      else allocation.temporal = [temporalObject]
     } else {
       // if no allocation event exists we create a new object
       allocation = {
         version: '1.1',
-        tempora: [
-          temporaObject
+        temporal: [
+          temporalObject
         ]
       }
     }
@@ -64,9 +64,9 @@ export default function Time ({ allocation, projectSpace, reloadSpace }) {
   return (
     <section className="time">
       <h3>{t('Time')}</h3>
-      {allocation?.tempora && (
+      {allocation?.temporal && (
         <ul>
-          {allocation.tempora.map((date, index) => <TimeSlots key={index + date.start} start={date.start} end={date.end} />
+          {allocation.temporal.map((date, index) => <TimeSlots key={index + date.start} start={date.start} end={date.end} />
           )}
         </ul>
       )}
