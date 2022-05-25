@@ -18,6 +18,7 @@ import config from '../../../config.json'
 import TextareaAutosize from 'react-textarea-autosize'
 import styled from 'styled-components'
 import Matrix from '../../../Matrix'
+// import { MedienhausAPI } from '../../../MedienhausAPI'
 
 import findValueDeep from 'deepdash/es/findValueDeep'
 
@@ -26,7 +27,6 @@ margin-top: var(--margin);
 `
 
 const ManageContexts = ({ matrixClient, moderationRooms }) => {
-  console.debug(moderationRooms)
   const { t } = useTranslation('admin')
   const [selectedContext, setSelectedContext] = useState('')
   const [parentName] = useState('')
@@ -104,6 +104,15 @@ const ManageContexts = ({ matrixClient, moderationRooms }) => {
     return tree
   }
 
+  const fetchTreeFromApi = async () => {
+    const fetchTree = await fetch(config.medienhaus.api + process.env.REACT_APP_CONTEXT_ROOT_SPACE_ID + '/tree')
+    const response = await fetchTree.json()
+    setInputItems(response.children)
+    const fetchLocationTree = await fetch(config.medienhaus.api + '!ZfLuOQsYLtkuIvswLv:dev.medienhaus.udk-berlin.de/tree')
+    const locationResponse = await fetchLocationTree.json()
+    setLocationStructure(locationResponse.children)
+    setLoading(false)
+  }
   const spaceChild = async (e, space, add) => {
     setLoading(true)
     e && e.preventDefault()
@@ -118,10 +127,8 @@ const ManageContexts = ({ matrixClient, moderationRooms }) => {
       body: JSON.stringify(add ? body : { }) // if we add a space to an existing one we need to send the object 'body', to remove a space we send an empty object.
     }).catch(console.log)
     add ? console.log('added as child to ' + selectedContext) : console.log('removed ' + selectedContext + ' from ' + contextParent)
-    const tree = await createStructurObject(parent)
-    setInputItems(tree)
-    const locationTree = await createStructurObject('!SHcqMqiieOzSvJxppm:dev.medienhaus.udk-berlin.de', true)
-    setLocationStructure(locationTree)
+    if (config.medienhaus.api) fetchTreeFromApi()
+    else await createStructurObject()
     if (add) {
       setSelectedContext(space)
     } else {
@@ -252,11 +259,17 @@ const ManageContexts = ({ matrixClient, moderationRooms }) => {
     setAllocation([])
     setCurrentLocation('')
     await fetchAllocation(space)
-    const idExistsInLocationStructure = findNested(locationStructure, 'id', space)
-    if (idExistsInLocationStructure) {
-      console.log(idExistsInLocationStructure)
-      setCurrentLocation(idExistsInLocationStructure.pathIds[idExistsInLocationStructure.length - 1])
-      console.log(idExistsInLocationStructure.pathIds[idExistsInLocationStructure.length - 1])
+    if (config.medienhaus.api) {
+      const fetchSpace = await fetch(config.medienhaus.api + space)
+      const response = await fetchSpace.json()
+      if (response.parents) setCurrentLocation(parent[parent.length - 1])
+    } else {
+      const idExistsInLocationStructure = findNested(locationStructure, 'id', space)
+      if (idExistsInLocationStructure) {
+        console.log(idExistsInLocationStructure)
+        setCurrentLocation(idExistsInLocationStructure.pathIds[idExistsInLocationStructure.length - 1])
+        console.log(idExistsInLocationStructure.pathIds[idExistsInLocationStructure.length - 1])
+      }
     }
     const checkSubSpaes = await matrixClient.getRoomHierarchy(space, 1).catch(console.log)
     const checkForEvents = checkSubSpaes?.rooms?.filter(child => child.name.includes('_event'))
@@ -274,6 +287,18 @@ const ManageContexts = ({ matrixClient, moderationRooms }) => {
   }
 
   const onContextChange = async (context) => {
+    if (config.medienhaus.api) {
+      const fetchPath = await fetch(config.medienhaus.api + context + '/path')
+      const response = await fetchPath.json()
+      console.log(response)
+    } else {
+      console.log(context)
+      setLoading(true)
+      await getEvents(context)
+      setSelectedContext(context)
+      context.pathIds ? setContextParent(context.pathIds[context.pathIds.length - 1]) : setContextParent(null)
+      setDescription(context.topic || '')
+    }
     console.log(context)
     setLoading(true)
     await getEvents(context)
@@ -298,13 +323,14 @@ const ManageContexts = ({ matrixClient, moderationRooms }) => {
       console.log(tree)
       setInputItems(tree)
 
-      const locationTree = await createStructurObject('!SHcqMqiieOzSvJxppm:dev.medienhaus.udk-berlin.de', true)
+      const locationTree = await createStructurObject('!ZfLuOQsYLtkuIvswLv:dev.medienhaus.udk-berlin.de', true)
       console.log(locationTree)
       setLocationStructure(locationTree)
     }
 
-    getStructures()
     // createD3Json()
+    if (config.medienhaus.api) fetchTreeFromApi()
+    else getStructures()
     // eslint-disable-next-line
   }, [])
 

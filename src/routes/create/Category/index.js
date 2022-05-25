@@ -5,9 +5,11 @@ import * as _ from 'lodash'
 import SimpleContextSelect from '../../../components/SimpleContextSelect'
 import DeleteButton from '../components/DeleteButton'
 import { useTranslation } from 'react-i18next'
+import config from '../../../config.json'
 import findValueDeep from 'deepdash/es/findValueDeep'
 
 import styled from 'styled-components'
+// import ContextDropdown from '../../../components/ContextDropdown'
 
 const RemovableLiElement = styled.li`
 list-style: none;
@@ -112,8 +114,33 @@ const Category = ({ projectSpace, onChange, parent }) => {
     setInputItems(tree)
   }
 
+  const fetchTreeFromApi = async () => {
+    const fetchTree = await fetch(config.medienhaus.api + process.env.REACT_APP_CONTEXT_ROOT_SPACE_ID + '/tree')
+    const response = await fetchTree.json()
+    setInputItems(response.children)
+    setLoading(false)
+  }
+  const fetchParentsFromApi = async () => {
+    const fetchParents = await fetch(config.medienhaus.api + projectSpace)
+    const response = await fetchParents.json()
+    const path = await fetch(config.medienhaus.api + projectSpace + '/path')
+    const res = await path.json()
+    console.log(res)
+    console.log(response)
+    if (response.parents) {
+      response.parents.forEach(async parent => {
+        const fetchParent = await fetch(config.medienhaus.api + parent)
+        const response = await fetchParent.json()
+        setContexts(contexts => [...contexts, { name: response.name, room_id: response.id }])
+      })
+    }
+  }
+
   useEffect(() => {
-    createStructurObject()
+    if (config.medienhaus.api) {
+      fetchTreeFromApi()
+      fetchParentsFromApi()
+    } else createStructurObject()
     // eslint-disable-next-line
   }, [])
 
@@ -122,12 +149,19 @@ const Category = ({ projectSpace, onChange, parent }) => {
   async function onContextChosen (contextSpace) {
     console.log(contextSpace)
     setLoading(true)
-    const contextObject = findValueDeep(
-      inputItems,
-      (value, key, parent) => {
-        if (value.id === contextSpace) return true
-      }, { childrenPath: 'children', includeRoot: false, rootIsChildren: true })
-
+    // this will be refactored with new logic once the api can return the updated /$id/path immediately after adding a space child.
+    let contextObject
+    if (config.medienhaus.api) {
+      const fetchPath = await fetch(config.medienhaus.api + contextSpace)
+      const response = await fetchPath.json()
+      contextObject = response
+    } else {
+      contextObject = findValueDeep(
+        inputItems,
+        (value, key, parent) => {
+          if (value.id === contextSpace) return true
+        }, { childrenPath: 'children', includeRoot: false, rootIsChildren: true })
+    }
     const projectSpaceMetaEvent = await matrixClient.getStateEvent(projectSpace, 'dev.medienhaus.meta').catch(console.log)
     // remove legacy code:
     // if the medienhaus meta event still has a context key, we remove it from the object.
