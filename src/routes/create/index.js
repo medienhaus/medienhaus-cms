@@ -7,7 +7,6 @@ import ISO6391 from 'iso-639-1'
 // components
 import Collaborators from './Collaborators'
 import Category from './Category'
-import AddContent from './AddContent'
 import ProjectImage from './ProjectImage'
 import ProjectTitle from './ProjectTitle'
 import PublishProject from '../../components/PublishProject'
@@ -22,7 +21,13 @@ import Dropdown from '../../components/medienhausUI/dropdown'
 import config from '../../config.json'
 import _, { isEmpty } from 'lodash'
 import GutenbergEditor from '../gutenberg/editor'
-import DisplayContent from './DisplayContent'
+
+// eslint-disable-next-line no-unused-vars
+const nl2br = function (str) {
+  return str.split('\n').join('<br>')
+  // const breakTag = '<br>' // Adjust comment to avoid issue on phpjs.org display
+  // return (str + '').replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1' + breakTag + '$2')
+}
 
 const Create = () => {
   const { t } = useTranslation('content')
@@ -405,24 +410,7 @@ const Create = () => {
               ))}
             </select>
             {spaceObject && (description || description === '') ? <ProjectDescription description={description[contentLang]} callback={onChangeDescription} /> : <Loading />}
-            {blocks.length === 0
-              ? <AddContent number={0} projectSpace={spaceObject?.rooms.filter(room => room.name === contentLang)[0].room_id} blocks={blocks} contentType={template} reloadSpace={reloadSpace} />
-              : blocks.map((content, i) => {
-                return (
-                  <DisplayContent
-                    block={content}
-                    index={i}
-                    blocks={blocks}
-                    projectSpace={spaceObject?.rooms.filter(room => room.name === contentLang)[0].room_id}
-                    reloadSpace={reloadSpace}
-                    time={getCurrentTime}
-                    key={content + i + content?.lastUpdate}
-                    contentType={template}
-                  />
-                )
-              }
-              )}
-            <GutenbergEditor content={gutenbergContent} />
+            {gutenbergContent && gutenbergContent.length > 0 && <GutenbergEditor content={gutenbergContent} />}
           </section>
           {/* Placeholder to show preview next to editing
           {blocks.map((content, i) => <DisplayPreview content={content} key={i} matrixClient={matrixClient} />)}

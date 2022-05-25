@@ -1,8 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 import Matrix from '../../../Matrix'
 import FetchCms from '../../../components/matrix_fetch_cms'
-import Editor, { renderToHtml } from 'rich-markdown-editor'
-import debounce from 'lodash/debounce'
 import { Loading } from '../../../components/loading'
 import AddContent from '../AddContent'
 import List from './List'
@@ -34,7 +32,6 @@ import deleteContentBlock from '../functions/deleteContentBlock'
 // import DisplayPreview from '../../preview/components/DisplayPreview'
 
 const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace, time, mapComponent, contentType }) => {
-  const [readOnly, setReadOnly] = useState(false)
   const [loading, setLoading] = useState(false)
   // eslint-disable-next-line no-unused-vars
   const [saved, setSaved] = useState(false)
@@ -60,7 +57,6 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace, time,
   }, [block.room_id, matrixClient])
 
   const onSave = async (roomId, text) => {
-    setReadOnly(true)
     try {
       if (json.template === 'ul' || json.template === 'ol') {
         const list = JSON.parse(localStorage.getItem(roomId)).map(li => li.text).join('\n')
@@ -69,7 +65,7 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace, time,
           body: list,
           format: 'org.matrix.custom.html',
           msgtype: 'm.text',
-          formatted_body: renderToHtml(list)
+          formatted_body: list
         })
         if ('event_id' in save) {
           setSaved('Saved!')
@@ -121,7 +117,7 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace, time,
           body: localStorage.getItem(roomId),
           format: 'org.matrix.custom.html',
           msgtype: 'm.text',
-          formatted_body: renderToHtml(localStorage.getItem(roomId))
+          formatted_body: localStorage.getItem(roomId)
         })
         if ('event_id' in save) {
           setSaved('Saved!')
@@ -137,13 +133,10 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace, time,
       setTimeout(() => {
         setSaved()
       }, 1000)
-    } finally {
-      setReadOnly(false)
     }
   }
 
   const onDelete = async (roomId, name, index) => {
-    setReadOnly(true)
     try {
       deleteContentBlock(name, roomId, index)
       blocks.filter(room => room.name.charAt(0) !== 'x').forEach(async (block, i) => {
@@ -155,18 +148,15 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace, time,
       order = order.order
       const indexOfRoom = order.indexOf(roomId)
       order.splice(indexOfRoom, 1)
-      await matrixClient.sendStateEvent(projectSpace, 'dev.medienhaus.order', { order: order })
+      await matrixClient.sendStateEvent(projectSpace, 'dev.medienhaus.order', { order })
       reloadSpace()
     } catch (err) {
       console.error(err)
-    } finally {
-      setReadOnly(false)
     }
   }
 
   const changeOrder = async (roomId, name, direction) => {
     setLoading(true)
-    setReadOnly(true)
 
     const active = name.split('_')
     const orderOld = parseInt(active[0])
@@ -179,7 +169,7 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace, time,
     const indexOfRoom = order.indexOf(roomId)
     order.splice(indexOfRoom, 1) // remove from old position
     order.splice(indexOfRoom + direction, 0, roomId) // insert at new one @TODO sth wrong here!
-    await matrixClient.sendStateEvent(projectSpace, 'dev.medienhaus.order', { order: order })
+    await matrixClient.sendStateEvent(projectSpace, 'dev.medienhaus.order', { order })
 
     try {
       await matrixClient.setRoomName(roomId, newOrder + '_' + active[1])
@@ -188,7 +178,6 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace, time,
     } catch (err) {
       console.error(err)
     } finally {
-      setReadOnly(false)
       setLoading(false)
     }
   }
@@ -384,43 +373,7 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace, time,
                                           }}
                                         />
                                       </div>
-                                      : (<div className="center">
-                                        <Editor
-                                          dark={window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches}
-                                          defaultValue={cms?.body}
-                                          disableExtensions={['blockmenu', 'image', 'embed', 'table', 'tr', 'th', 'td', 'bullet_list', 'ordered_list', 'checkbox_item', 'checkbox_list', 'container_notice', 'blockquote', 'heading', 'hr', 'highlight']}
-                                          placeholder={json.template}
-                                          readOnly={readOnly}
-                                          onSave={({ done }) => {
-                                            if (localStorage.getItem(block.room_id) !== null && cms !== undefined && cms.body !== localStorage.getItem(block.room_id)) {
-                                              onSave(block.room_id)
-                                              localStorage.removeItem(block.room_id)
-                                            } else if (localStorage.getItem(block.room_id) !== null && cms === undefined) {
-                                              onSave(block.room_id)
-                                              localStorage.removeItem(block.room_id)
-                                            }
-                                          }}
-                                          onChange={debounce((value) => {
-                                            const text = value()
-                                            localStorage.setItem(block.room_id, text)
-                                          }, 250)}
-                                          handleDOMEvents={{
-                                            focus: () => {
-                                            }, // this could set MatrixClient"User.presence" to 'online', "User.currentlyActive" or 'typing. depending on which works best.
-                                            blur: (e) => {
-                                              if (localStorage.getItem(block.room_id) !== null && cms !== undefined && cms.body !== localStorage.getItem(block.room_id)) {
-                                                onSave(block.room_id)
-                                                localStorage.removeItem(block.room_id)
-                                              } else if (localStorage.getItem(block.room_id) !== null && cms === undefined) {
-                                                onSave(block.room_id)
-                                                localStorage.removeItem(block.room_id)
-                                              }
-                                            }
-                                          }}
-                                          key={block.room_id}
-                                        />
-                                      </div>
-                                        )}
+                                      : (<></>)}
             <div className="right">
               <DeleteButton
                 onDelete={() => onDelete(block.room_id, block.name, index)} callback={reloadSpace}
