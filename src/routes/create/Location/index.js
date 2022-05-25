@@ -13,6 +13,7 @@ import { isArray } from 'lodash'
 import { Loading } from '../../../components/loading'
 import Matrix from '../../../Matrix'
 import SimpleContextSelect from '../../../components/SimpleContextSelect'
+import config from '../../../config.json'
 
 const Location = ({ reloadSpace, inviteCollaborators, projectSpace, events, allocation, matrixClient }) => {
   const [eventSpace, setEventSpace] = useState(events)
@@ -108,9 +109,17 @@ const Location = ({ reloadSpace, inviteCollaborators, projectSpace, events, allo
       return result
     }
     console.log('---- started structure ----')
-    const tree = await getSpaceStructure('!SHcqMqiieOzSvJxppm:dev.medienhaus.udk-berlin.de', false)
+    const tree = await getSpaceStructure('!ZfLuOQsYLtkuIvswLv:dev.medienhaus.udk-berlin.de', false)
     // console.log(tree[Object.keys(tree)[0]])
     setLocationStructure(tree)
+  }
+
+  const fetchTreeFromApi = async () => {
+    setLoading(true)
+    const fetchLocationTree = await fetch(config.medienhaus.api + '!ZfLuOQsYLtkuIvswLv:dev.medienhaus.udk-berlin.de/tree')
+    const locationResponse = await fetchLocationTree.json()
+    setLocationStructure(locationResponse.children)
+    setLoading(false)
   }
 
   useEffect(() => {
@@ -138,7 +147,8 @@ const Location = ({ reloadSpace, inviteCollaborators, projectSpace, events, allo
   }, [events])
 
   useEffect(() => {
-    createStructurObject()
+    if (config.medienhaus.api) fetchTreeFromApi()
+    else createStructurObject()
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
