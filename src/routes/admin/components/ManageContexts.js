@@ -17,7 +17,6 @@ import { MatrixEvent } from 'matrix-js-sdk'
 import config from '../../../config.json'
 import TextareaAutosize from 'react-textarea-autosize'
 import styled from 'styled-components'
-import { MedienhausAPI } from '../../../MedienhausAPI'
 
 import findValueDeep from 'deepdash/es/findValueDeep'
 
