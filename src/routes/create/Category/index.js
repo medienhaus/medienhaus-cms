@@ -4,6 +4,7 @@ import { Loading } from '../../../components/loading'
 import * as _ from 'lodash'
 import SimpleContextSelect from '../../../components/SimpleContextSelect'
 import DeleteButton from '../components/DeleteButton'
+import findValueDeep from 'deepdash/es/findValueDeep'
 
 import styled from 'styled-components'
 
@@ -118,6 +119,12 @@ const Category = ({ projectSpace, onChange, parent }) => {
 
   async function onContextChosen (contextSpace) {
     setLoading(true)
+    const contextObject = findValueDeep(
+      inputItems,
+      (value, key, parent) => {
+        if (value.id === contextSpace) return true
+      }, { childrenPath: 'children', includeRoot: false, rootIsChildren: true })
+
     const projectSpaceMetaEvent = await matrixClient.getStateEvent(projectSpace, 'dev.medienhaus.meta').catch(console.log)
     // remove legacy code:
     // if the medienhaus meta event still has a context key, we remove it from the object.
@@ -131,16 +138,16 @@ const Category = ({ projectSpace, onChange, parent }) => {
     // if (currentContext && currentContext !== contextSpace) await Matrix.removeSpaceChild(currentContext, projectSpace).catch(console.log)
 
     // Add this current project to the given context space
-    const addToContext = await Matrix.addSpaceChild(contextSpace.id, projectSpace)
+    const addToContext = await Matrix.addSpaceChild(contextSpace, projectSpace)
       .catch(async () => {
       // if we cant add the content to a context we try to join the context
-        const joinRoom = await matrixClient.joinRoom(contextSpace.id).catch(console.log)
+        const joinRoom = await matrixClient.joinRoom(contextSpace).catch(console.log)
         if (joinRoom) {
           console.log('joined room')
           // then try to add the conent to the context again
-          const addToContext = await Matrix.addSpaceChild(contextSpace.id, projectSpace).catch(console.log)
+          const addToContext = await Matrix.addSpaceChild(contextSpace, projectSpace).catch(console.log)
           if (addToContext?.event_id) {
-            setContexts(contexts => [...contexts, { name: contextSpace.name, room_id: contextSpace.id }])
+            setContexts(contexts => [...contexts, { name: contextObject.name, room_id: contextSpace }])
 
             onChange(!_.isEmpty(contexts))
             setLoading(false)
@@ -153,7 +160,7 @@ const Category = ({ projectSpace, onChange, parent }) => {
         }
       })
     if (addToContext?.event_id) {
-      setContexts(contexts => [...contexts, { name: contextSpace.name, room_id: contextSpace.id }])
+      setContexts(contexts => [...contexts, { name: contextObject.name, room_id: contextSpace }])
       onChange(!_.isEmpty(contexts))
       setLoading(false)
     }
