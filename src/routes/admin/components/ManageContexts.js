@@ -18,7 +18,6 @@ import config from '../../../config.json'
 import TextareaAutosize from 'react-textarea-autosize'
 import styled from 'styled-components'
 import Matrix from '../../../Matrix'
-// import { MedienhausAPI } from '../../../MedienhausAPI'
 
 import findValueDeep from 'deepdash/es/findValueDeep'
 
