@@ -18,7 +18,7 @@ import config from '../../../config.json'
 import TextareaAutosize from 'react-textarea-autosize'
 import styled from 'styled-components'
 
-import findValueDeep from 'deepdash/es/findValueDeep'
+import findValueDeep from 'deepdash/findValueDeep'
 
 const Heading = styled.h2`
 margin-top: var(--margin);
