@@ -11,7 +11,7 @@ import DisplayEvents from './components/DisplayEvents'
 import { isArray } from 'lodash'
 import { Loading } from '../../../components/loading'
 
-const DateAndVenue = ({ reloadSpace, inviteCollaborators, projectSpace, events, allocation, matrixClient }) => {
+const Location = ({ reloadSpace, inviteCollaborators, projectSpace, events, allocation, matrixClient }) => {
   const [eventSpace, setEventSpace] = useState(events)
   const [eventContent, setEventContent] = useState([])
   const [oldEvents, setOldEvents] = useState([])
@@ -167,4 +167,4 @@ const DateAndVenue = ({ reloadSpace, inviteCollaborators, projectSpace, events, 
     </>
   )
 }
-export default DateAndVenue
+export default Location

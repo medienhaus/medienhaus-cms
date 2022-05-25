@@ -3,7 +3,7 @@ import Matrix from '../../Matrix'
 import config from '../../config.json'
 
 const matrixClient = Matrix.getMatrixClient()
-const contextTemplates = config.medienhaus?.context && config.medienhaus?.context
+const contextTemplates = config.medienhaus?.context && Object.keys(config.medienhaus?.context)
 const itemTemplates = config.medienhaus?.item && Object.keys(config.medienhaus?.item)
 // @TODO change hook to also return invites and knocks
 
@@ -24,7 +24,7 @@ const getAnswer = async () => {
   // if there are context or item templates specified within config.json we filter all spaces which are not the one of the specified templates.
   if (contextTemplates) {
     filteredRooms = filteredRooms.filter(room => {
-      if (room.currentState.events.get('dev.medienhaus.meta').values().next().value.event.content.type === 'item') {
+      if (room.currentState.events.get('dev.medienhaus.meta').values().next().value.event.content.type === 'context') {
         return contextTemplates.includes(room.currentState.events.get('dev.medienhaus.meta').values().next().value.event.content.template)
       }
       return true

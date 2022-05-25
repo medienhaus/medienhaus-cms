@@ -7,8 +7,8 @@ import { RemoveContext } from './RemoveContext'
 import * as _ from 'lodash'
 import ProjectImage from '../../create/ProjectImage'
 import { Loading } from '../../../components/loading'
-import AddEvent from '../../create/DateAndVenue/components/AddEvent'
-import DisplayEvents from '../../create/DateAndVenue/components/DisplayEvents'
+import AddEvent from '../../create/Location/components/AddEvent'
+import DisplayEvents from '../../create/Location/components/DisplayEvents'
 import DeleteButton from '../../create/components/DeleteButton'
 import SimpleContextSelect from '../../../components/SimpleContextSelect'
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
@@ -18,11 +18,13 @@ import config from '../../../config.json'
 import TextareaAutosize from 'react-textarea-autosize'
 import styled from 'styled-components'
 
+import findValueDeep from 'deepdash/es/findValueDeep'
+
 const Heading = styled.h2`
 margin-top: var(--margin);
 `
 
-const ManageContexts = (props) => {
+const ManageContexts = ({ matrixClient, moderationRooms }) => {
   const { t } = useTranslation('admin')
   const [selectedContext, setSelectedContext] = useState('')
   const [parentName] = useState('')
@@ -123,32 +125,8 @@ const ManageContexts = (props) => {
       return result
     }
 
-    function translateJson (origin) {
-      origin.childs = []
-      if (origin.children && Object.keys(origin.children).length > 0) {
-        const childs = parseChilds(origin.children)
-        childs.forEach((child, i) => {
-          origin.childs[i] = translateJson(child)
-        })
-      }
-      origin.children = origin.childs
-      delete origin.childs
-      return origin
-    }
-
-    function parseChilds (data) {
-      if (data) {
-        const result = []
-        for (const key in data) {
-          if (data.hasOwnProperty(key)) {
-            result.push(key)
-          }
-        }
-        return result.map(r => data[r])
-      } else { return {} }
-    }
     console.log('---- started structure ----')
-    const tree = await getSpaceStructure(props.matrixClient, parent, false)
+    const tree = await getSpaceStructure(matrixClient, parent, false)
     setInputItems(tree)
   }
 
@@ -177,20 +155,27 @@ const ManageContexts = (props) => {
 
   const setPower = async (userId, roomId, level) => {
     console.log('changing power level for ' + userId)
-    const currentStateEvent = await props.matrixClient.getStateEvent(roomId, 'm.room.power_levels', '')
+    const currentStateEvent = await matrixClient.getStateEvent(roomId, 'm.room.power_levels', '')
     const newStateEvent = new MatrixEvent({
       type: 'm.room.power_levels',
       content: currentStateEvent
     })
-    await props.matrixClient.setPowerLevel(roomId, userId, level, newStateEvent).catch(err => console.error(err))
+    await matrixClient.setPowerLevel(roomId, userId, level, newStateEvent).catch(err => console.error(err))
   }
 
-  function addSpace (e, name, callback) {
+  function addSpace (e, name, template, callback) {
     e.preventDefault()
     const createSpace = async (title) => {
       setDisableButton(true)
+      const medienhausMeta = {
+        version: '0.4',
+        type: 'context',
+        published: 'public'
+      }
+      // if there is a template defined we add it to de state event
+      if (template) medienhausMeta.template = template
 
-      const opts = (type, name, history) => {
+      const opts = (name, history) => {
         return {
           preset: 'public_chat',
           power_level_content_override: {
@@ -227,11 +212,7 @@ const ManageContexts = (props) => {
           },
           {
             type: 'dev.medienhaus.meta',
-            content: {
-              version: '0.4',
-              type: type,
-              published: 'public'
-            }
+            content: medienhausMeta
           },
           {
             type: 'm.room.guest_access',
@@ -243,7 +224,8 @@ const ManageContexts = (props) => {
       }
 
       // create the space for the context
-      const space = await props.matrixClient.createRoom(opts('context', title, 'world_readable')).catch(console.log)
+      const space = await matrixClient.createRoom(opts(title, 'world_readable')).catch(console.log)
+
       // add this subspaces as children to the root space
       await spaceChild(e, space.room_id, true)
       console.log('created Context ' + name + ' ' + space.room_id)
@@ -253,7 +235,7 @@ const ManageContexts = (props) => {
           console.log(user)
           if (user === localStorage.getItem('medienhaus_user_id')) continue // if the user is us, we jump out of the loop
           console.log('inviting ' + user)
-          await props.matrixClient.invite(space.room_id, user).catch(console.log)
+          await matrixClient.invite(space.room_id, user).catch(console.log)
           await setPower(user, space.room_id, 50)
         }
       }
@@ -264,22 +246,17 @@ const ManageContexts = (props) => {
     createSpace(name)
   }
 
-  const contextualise = (d3) => {
-    console.log(d3)
-    setSelectedContext(d3.data.id)
-    setContextParent(d3.parent.data.id)
-  }
-  const fetchAllocation = async (space) => setAllocation(await props.matrixClient.getStateEvent(space, 'dev.medienhaus.allocation').catch(console.log))
+  const fetchAllocation = async (space) => setAllocation(await matrixClient.getStateEvent(space, 'dev.medienhaus.allocation').catch(console.log))
 
   const getEvents = async (space) => {
     setLoading(true)
     setEvents([])
     setAllocation([])
     await fetchAllocation(space)
-    const checkSubSpaes = await props.matrixClient.getRoomHierarchy(space, 1).catch(console.log)
+    const checkSubSpaes = await matrixClient.getRoomHierarchy(space, 1).catch(console.log)
     const checkForEvents = checkSubSpaes?.rooms?.filter(child => child.name.includes('_event'))
     if (!_.isEmpty(checkForEvents)) {
-      const eventSummary = await Promise.all(checkForEvents.map(room => props.matrixClient.getRoomHierarchy(room.room_id, 0).catch(err => console.log(err)))) // then we fetch the summary of all spaces within the event space
+      const eventSummary = await Promise.all(checkForEvents.map(room => matrixClient.getRoomHierarchy(room.room_id, 0).catch(err => console.log(err)))) // then we fetch the summary of all spaces within the event space
       const onlyEvents = eventSummary
         ?.filter(room => room !== undefined) // we filter undefined results. @TODO DOM seems to be rendering to quickly here. better solution needed
         .map(event => event?.rooms)
@@ -290,19 +267,28 @@ const ManageContexts = (props) => {
     }
     setLoading(false)
   }
+
   const onContextChange = async (context) => {
+    console.log(context)
     setLoading(true)
-    await getEvents(context.id)
-    setSelectedContext(context.id)
-    context.pathIds ? setContextParent(context.pathIds[context.pathIds.length - 1]) : setContextParent(null)
-    setDescription(context.topic || '')
+    await getEvents(context)
+    setSelectedContext(context)
+    const contextObject = findValueDeep(
+      inputItems,
+      (value, key, parent) => {
+        if (value.id === context) return true
+      }, { childrenPath: 'children', includeRoot: false, rootIsChildren: true })
+
+    console.log(contextObject)
+    contextObject.pathIds ? setContextParent(contextObject.pathIds[contextObject.pathIds.length - 1]) : setContextParent(null)
+    setDescription(contextObject
+      .topic || '')
     // setParentName(context.path[context.path.length - 1])
     setLoading(false)
   }
+
   useEffect(() => {
     createStructurObject()
-
-    // createD3Json()
     // eslint-disable-next-line
   }, [])
 
@@ -314,7 +300,7 @@ const ManageContexts = (props) => {
         physical: allocation.physical.filter((location, i) => i !== index)
       }
 
-      props.matrixClient.sendStateEvent(selectedContext, 'dev.medienhaus.allocation', deletedAllocation)
+      matrixClient.sendStateEvent(selectedContext, 'dev.medienhaus.allocation', deletedAllocation)
       await getEvents(selectedContext)
     } catch (err) {
       console.error(err)
@@ -328,8 +314,10 @@ const ManageContexts = (props) => {
   }
 
   const onSave = async () => {
-    await props.matrixClient.setRoomTopic(selectedContext, description).catch(console.log)
+    if (description.length > 500) return
+    await matrixClient.setRoomTopic(selectedContext, description).catch(console.log)
   }
+
   return (
     <>
       <Heading>Manage Contexts</Heading>
@@ -342,16 +330,18 @@ const ManageContexts = (props) => {
             selectedContext={selectedContext}
             struktur={inputItems}
             disabled={loading}
+            moderationRooms={moderationRooms}
           />}
       {loading && inputItems && <Loading />}
       {/* <label htmlFor="name">{t('Context')}: </label>
        <input type="text" value={selectedContextName} disabled /> */}
       {selectedContext &&
         <>
-          {contextParent && <RemoveContext t={t} selectedContext={selectedContext} parent={contextParent} parentName={parentName} disableButton={disableButton} callback={spaceChild} />}
-          <CreateContext t={t} parent={selectedContext} matrixClient={props.matrixClient} parentName={parentName} disableButton={loading} callback={addSpace} />
+          <Heading>{t('Add Sub-Context')}</Heading>
+
+          <CreateContext t={t} parent={selectedContext} matrixClient={matrixClient} parentName={parentName} disableButton={loading} callback={addSpace} />
           <div>
-            <Heading>Image</Heading>
+            <Heading>{t('Add Image')}</Heading>
             <ProjectImage projectSpace={selectedContext} changeProjectImage={() => console.log('changed image')} disabled={loading} />
           </div>
           {allocation?.physical && allocation.physical.map((location, i) => {
@@ -419,7 +409,7 @@ const ManageContexts = (props) => {
             )
           }))}
           <section>
-            <Heading>{t('Description')}</Heading>
+            <Heading>{t('Add Description')}</Heading>
             <TextareaAutosize
               value={description}
               minRows={6}
@@ -427,8 +417,13 @@ const ManageContexts = (props) => {
               onChange={(e) => setDescription(e.target.value)}
               onBlur={onSave}
             />
+            {description.length > 500 && (<>
+              <p>{t('Characters:')} {description.length}</p>
+              <p>❗️{t('Please keep the descrpition under 500 characters.')} {description.length}</p>
+            </>
+            )}
           </section>
-          <Heading>{t('Location')}</Heading>
+          <Heading>{t('Add Location')}</Heading>
 
           <AddEvent
             length={events.length}
@@ -440,6 +435,9 @@ const ManageContexts = (props) => {
             allocation={allocation}
             disabled={loading}
           />
+          <hr />
+          {contextParent && <RemoveContext t={t} selectedContext={selectedContext} parent={contextParent} parentName={parentName} disableButton={disableButton} callback={spaceChild} />}
+
         </>}
     </>
   )

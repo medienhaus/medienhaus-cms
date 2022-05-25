@@ -15,7 +15,7 @@ const Overview = () => {
   const matrixClient = Matrix.getMatrixClient()
   const [projects, setProjects] = useState({})
   const [invites, setInvites] = useState({})
-  const context = config.medienhaus?.context ? config.medienhaus?.context.concat('context') : ['context']
+  const context = config.medienhaus?.context ? Object.keys(config.medienhaus?.context).concat('context') : ['context']
   const item = config.medienhaus?.item ? Object.keys(config.medienhaus?.item).concat('item') : ['item']
   const typesOfSpaces = context.concat(item)
   const { joinedSpaces, spacesErr, fetchSpaces, reload } = useJoinedSpaces(false)

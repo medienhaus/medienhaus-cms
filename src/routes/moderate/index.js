@@ -10,24 +10,29 @@ import RightsManagement from './components/RightsManagement'
 import ManageContexts from '../admin/components/ManageContexts'
 import RemoveContent from './components/RemoveContent'
 
-import SimpleButton from '../../components/medienhausUI/simpleButton'
-
 import config from '../../config.json'
+import TextNavigation from '../../components/medienhausUI/textNavigation'
 
 const Moderate = () => {
   const { joinedSpaces, spacesErr, fetchSpaces } = useJoinedSpaces(false)
   const [moderationRooms, setModerationRooms] = useState()
   const [userSearch, setUserSearch] = useState([])
-  const [selection, setSelection] = useState('')
+  const [selection, setSelection] = useState('invite')
   const [fetching, setFetching] = useState(false)
   const matrixClient = Matrix.getMatrixClient()
 
   const { t } = useTranslation()
+
   useEffect(() => {
     if (joinedSpaces) {
-      const typesOfSpaces = config.medienhaus?.context || 'context'
+      const typesOfSpaces = config.medienhaus?.context ? Object.keys(config.medienhaus?.context) : 'context'
       // check to see if a user has joined a room with the specific content type and is moderator or admin (at least power level 50)
-      const filteredRooms = joinedSpaces.filter(space => typesOfSpaces.includes(space.meta.type) && space.powerLevel > 49)
+
+      const filteredRooms = joinedSpaces.filter(space => {
+        if (config.medienhaus?.context) return typesOfSpaces.includes(space.meta.template) && space.powerLevel > 49
+        else return typesOfSpaces.includes(space.meta.type) && space.powerLevel > 49
+      }
+      )
       setModerationRooms(filteredRooms)
     }
   }, [joinedSpaces])
@@ -73,16 +78,17 @@ const Moderate = () => {
   }
 
   const renderSelection = () => {
+    // eslint-disable-next-line default-case
     switch (selection) {
       case 'invite':
         return config.medienhaus?.sites?.moderate?.invite && <> <InviteUserToSpace matrixClient={matrixClient} moderationRooms={moderationRooms} setPower={setPower} fetchUsers={fetchUsers} fetching={fetching} userSearch={userSearch} /></>
       case 'rightsManagement':
         return config.medienhaus?.sites?.moderate?.rightsManagement && <> <RightsManagement matrixClient={matrixClient} moderationRooms={moderationRooms} setPower={setPower} fetchUsers={fetchUsers} fetching={fetching} userSearch={userSearch} /></>
       case 'manageContexts':
-        return config.medienhaus?.sites?.moderate?.manageContexts && <><ManageContexts matrixClient={matrixClient} /></>
+        return config.medienhaus?.sites?.moderate?.manageContexts && <><ManageContexts matrixClient={matrixClient} moderationRooms={moderationRooms} /></>
       case 'removeContent':
         return config.medienhaus?.sites?.moderate?.removeContent && <><RemoveContent matrixClient={matrixClient} moderationRooms={moderationRooms} loading={fetching} /></>
-      default:
+      case 'accept':
         return (
           config.medienhaus?.sites?.moderate?.accept &&
             <>
@@ -106,11 +112,12 @@ const Moderate = () => {
 
   if (fetchSpaces || !matrixClient.isInitialSyncComplete()) return <Loading />
   if (spacesErr) return <p>{spacesErr}</p>
+  if (moderationRooms.length < 1) return <p>{t('You are not moderating any spaces.')}</p>
   return (
     <>
       <section className="request">
         {Object.keys(config?.medienhaus?.sites?.moderate).map((value, index) => {
-          return <SimpleButton width="auto" disabled={value === selection} value={value} key={value} onClick={(e) => setSelection(e.target.value)}>{value.replace(/([a-z0-9])([A-Z])/g, '$1 $2')}</SimpleButton>
+          return <TextNavigation width="auto" disabled={value === selection} active={value === selection} value={value} key={value} onClick={(e) => setSelection(e.target.value)}>{value.replace(/([a-z0-9])([A-Z])/g, '$1 $2')}</TextNavigation>
         })}
       </section>
 

@@ -9,6 +9,7 @@ const ProjectDescription = ({ description: intro, callback }) => {
   const [backupDescription, setBackupDescription] = useState()
 
   const onSave = async () => {
+    if (description.length > 500) return
     if (description) {
       await callback(description)
     } else {
@@ -43,6 +44,11 @@ const ProjectDescription = ({ description: intro, callback }) => {
           <button disabled>×</button>
         </div>
       </div>
+      {description.length > 500 && (<>
+        <p>{t('Characters:')} {description.length}</p>
+        <p>❗️{t('Please keep the descrpition under 500 characters.')} {description.length}</p>
+      </>
+      )}
     </>
   )
 }
