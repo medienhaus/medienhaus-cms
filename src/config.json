@@ -70,6 +70,7 @@
     "location": {
       "lat": 52.4908014,
       "lng": 13.3565922
-    }
+    },
+    "api": "https://api.dev.medienhaus.udk-berlin.de/api/v2/"
   }
 }
