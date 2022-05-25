@@ -287,32 +287,35 @@ const ManageContexts = ({ matrixClient, moderationRooms }) => {
   }
 
   const onContextChange = async (context) => {
+    setLoading(true)
+    let contextObject
     if (config.medienhaus.api) {
-      const fetchPath = await fetch(config.medienhaus.api + context + '/path')
+      const fetchPath = await fetch(config.medienhaus.api + context)
       const response = await fetchPath.json()
-      console.log(response)
+      contextObject = response
+      console.log(contextObject)
+      contextObject.parents ? setContextParent(contextObject.parents[0]) : setContextParent(null)
+      setDescription(contextObject
+        .description.default || '')
     } else {
-      console.log(context)
-      setLoading(true)
-      await getEvents(context)
-      setSelectedContext(context)
-      context.pathIds ? setContextParent(context.pathIds[context.pathIds.length - 1]) : setContextParent(null)
-      setDescription(context.topic || '')
+      contextObject = findValueDeep(
+        inputItems,
+        (value, key, parent) => {
+          if (value.id === context) return true
+        }, { childrenPath: 'children', includeRoot: false, rootIsChildren: true })
+      contextObject.pathIds ? setContextParent(context.pathIds[context.pathIds.length - 1]) : setContextParent(null)
+      setDescription(contextObject
+        .topic || '')
     }
+    await getEvents(context)
+    setSelectedContext(context)
+    setDescription(context.topic || '')
+
     console.log(context)
     setLoading(true)
     await getEvents(context)
     setSelectedContext(context)
-    const contextObject = findValueDeep(
-      inputItems,
-      (value, key, parent) => {
-        if (value.id === context) return true
-      }, { childrenPath: 'children', includeRoot: false, rootIsChildren: true })
 
-    console.log(contextObject)
-    contextObject.pathIds ? setContextParent(contextObject.pathIds[contextObject.pathIds.length - 1]) : setContextParent(null)
-    setDescription(contextObject
-      .topic || '')
     // setParentName(context.path[context.path.length - 1])
     setLoading(false)
   }
