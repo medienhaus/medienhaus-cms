@@ -17,7 +17,7 @@ const Moderate = () => {
   const { joinedSpaces, spacesErr, fetchSpaces } = useJoinedSpaces(false)
   const [moderationRooms, setModerationRooms] = useState()
   const [userSearch, setUserSearch] = useState([])
-  const [selection, setSelection] = useState('invite')
+  const [selection, setSelection] = useState('accept')
   const [fetching, setFetching] = useState(false)
   const matrixClient = Matrix.getMatrixClient()
 
