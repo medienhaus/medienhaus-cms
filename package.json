@@ -25,6 +25,7 @@
     "leaflet": "^1.7.1",
     "lodash": "^4.17.21",
     "matrix-js-sdk": "^15.5.0",
+    "prosemirror-utils": "^1.0.0-0",
     "react": "^17.0.2",
     "react-d3-library": "^1.1.8",
     "react-dom": "^17.0.2",
