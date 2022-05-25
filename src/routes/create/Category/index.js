@@ -5,9 +5,9 @@ import * as _ from 'lodash'
 import SimpleContextSelect from '../../../components/SimpleContextSelect'
 import DeleteButton from '../components/DeleteButton'
 import { useTranslation } from 'react-i18next'
+import findValueDeep from 'deepdash/es/findValueDeep'
 
 import styled from 'styled-components'
-import findValueDeep from 'deepdash/es/findValueDeep'
 
 const RemovableLiElement = styled.li`
 list-style: none;
@@ -162,7 +162,7 @@ const Category = ({ projectSpace, onChange, parent }) => {
         }
       })
     if (addToContext?.event_id) {
-      setContexts(contexts => [...contexts, { name: contextObject, room_id: contextSpace }])
+      setContexts(contexts => [...contexts, { name: contextObject.name, room_id: contextSpace }])
       onChange(!_.isEmpty(contexts))
       setLoading(false)
     }
