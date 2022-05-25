@@ -256,11 +256,72 @@ const Create = () => {
         const message = isEmpty(fetchMessage.chunk) ? null : fetchMessage.chunk[0].content
 
         if (message) {
+          console.log(block)
+          const blockType = block.name.slice(block.name.search('_'))
+          let n, a
+
+          switch (blockType) {
+            case '_heading':
+              n = 'core/heading'
+              a = { content: message.formatted_body }
+              break
+            case '_text':
+              n = 'core/paragraph'
+              a = { content: message.formatted_body }
+              break
+            case '_code':
+              n = 'core/code'
+              a = { content: message.formatted_body }
+              break
+            case '_ul':
+              n = 'core/list'
+              a = {
+                ordered: false,
+                values: message.formatted_body.slice(5, -5),
+                placeholder: 'add list element'
+              }
+              break
+            case '_ol':
+              n = 'core/list'
+              a = {
+                ordered: true,
+                values: message.formatted_body.slice(5, -5),
+                placeholder: 'add list element'
+              }
+              break
+            case '_quote':
+              n = 'medienhaus/quote'
+              a = { content: message.body }
+              break
+            case '_image':
+              n = 'medienhaus/image'
+              a = {
+                url: matrixClient.mxcUrlToHttp(message.url),
+                alt: message.info.alt,
+                license: message.info.license,
+                author: message.info.author
+              }
+              break
+            case '_audio':
+              n = 'medienhaus/audio'
+              a = {
+                url: matrixClient.mxcUrlToHttp(message.url),
+                alt: message.info.alt,
+                license: message.info.license,
+                author: message.info.author
+              }
+              break
+            default:
+              n = 'core/paragraph'
+              a = { content: message.formatted_body }
+          }
+          console.log(blockType)
+          console.log(message)
           contents.push({
             clientId: block.room_id,
             isValid: true,
-            name: 'core/paragraph',
-            attributes: { content: message.body },
+            name: n,
+            attributes: a,
             innerBlocks: []
           })
         }

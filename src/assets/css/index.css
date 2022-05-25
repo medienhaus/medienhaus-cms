@@ -1812,3 +1812,20 @@ button>.loading {
 .contextDropdown ul li:not(.disabled):not(.selected):hover {
   background-color: var(--color-lo);
 }
+
+.wp-block {
+  /*border-color: var(--color-fg);
+  border-style: solid;
+  border-radius: unset;
+  border-width: calc(var(--margin) * 0.2);
+  padding: 0.5em;*/
+  margin: var(--margin);
+}
+
+.block-editor-writing-flow {
+  border-color: var(--color-fg);
+  border-style: solid;
+  border-radius: unset;
+  border-width: calc(var(--margin) * 0.2);
+  padding: 0.5em;
+}
