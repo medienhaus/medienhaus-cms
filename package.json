@@ -43,8 +43,8 @@
   },
   "devDependencies": {
     "eslint": "^8.15.0",
-    "eslint-config-standard": "^16.0.2",
-    "eslint-config-standard-jsx": "^10.0.0",
+    "eslint-config-standard": "^17.0.0",
+    "eslint-config-standard-jsx": "^11.0.0",
     "eslint-config-standard-react": "^11.0.1",
     "eslint-plugin-react-hooks": "^4.2.0"
   },
