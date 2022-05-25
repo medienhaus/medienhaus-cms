@@ -19,6 +19,8 @@ import TextareaAutosize from 'react-textarea-autosize'
 import styled from 'styled-components'
 import { MedienhausAPI } from '../../../MedienhausAPI'
 
+import findValueDeep from 'deepdash/es/findValueDeep'
+
 const Heading = styled.h2`
 margin-top: var(--margin);
 `
@@ -123,30 +125,6 @@ const ManageContexts = ({ matrixClient, moderationRooms }) => {
       return result
     }
 
-    function translateJson (origin) {
-      origin.childs = []
-      if (origin.children && Object.keys(origin.children).length > 0) {
-        const childs = parseChilds(origin.children)
-        childs.forEach((child, i) => {
-          origin.childs[i] = translateJson(child)
-        })
-      }
-      origin.children = origin.childs
-      delete origin.childs
-      return origin
-    }
-
-    function parseChilds (data) {
-      if (data) {
-        const result = []
-        for (const key in data) {
-          if (data.hasOwnProperty(key)) {
-            result.push(key)
-          }
-        }
-        return result.map(r => data[r])
-      } else { return {} }
-    }
     console.log('---- started structure ----')
     const tree = await getSpaceStructure(matrixClient, parent, false)
     setInputItems(tree)
@@ -334,6 +312,20 @@ const ManageContexts = ({ matrixClient, moderationRooms }) => {
       context.pathIds ? setContextParent(context.pathIds[context.pathIds.length - 1]) : setContextParent(null)
       setDescription(context.topic || '')
     }
+    console.log(context)
+    setLoading(true)
+    await getEvents(context)
+    setSelectedContext(context)
+    const contextObject = findValueDeep(
+      inputItems,
+      (value, key, parent) => {
+        if (value.id === context) return true
+      }, { childrenPath: 'children', includeRoot: false, rootIsChildren: true })
+
+    console.log(contextObject)
+    contextObject.pathIds ? setContextParent(contextObject.pathIds[contextObject.pathIds.length - 1]) : setContextParent(null)
+    setDescription(contextObject
+      .topic || '')
     // setParentName(context.path[context.path.length - 1])
     setLoading(false)
   }
@@ -389,12 +381,11 @@ const ManageContexts = ({ matrixClient, moderationRooms }) => {
        <input type="text" value={selectedContextName} disabled /> */}
       {selectedContext &&
         <>
-          {contextParent && <RemoveContext t={t} selectedContext={selectedContext} parent={contextParent} parentName={parentName} disableButton={disableButton} callback={spaceChild} />}
-          <Heading>{t('Sub-Contexts')}</Heading>
+          <Heading>{t('Add Sub-Context')}</Heading>
 
           <CreateContext t={t} parent={selectedContext} matrixClient={matrixClient} parentName={parentName} disableButton={loading} callback={addSpace} />
           <div>
-            <Heading>Image</Heading>
+            <Heading>{t('Add Image')}</Heading>
             <ProjectImage projectSpace={selectedContext} changeProjectImage={() => console.log('changed image')} disabled={loading} />
           </div>
           {allocation?.physical && allocation.physical.map((location, i) => {
@@ -462,7 +453,7 @@ const ManageContexts = ({ matrixClient, moderationRooms }) => {
             )
           }))}
           <section>
-            <Heading>{t('Description')}</Heading>
+            <Heading>{t('Add Description')}</Heading>
             <TextareaAutosize
               value={description}
               minRows={6}
@@ -476,7 +467,7 @@ const ManageContexts = ({ matrixClient, moderationRooms }) => {
             </>
             )}
           </section>
-          <Heading>{t('Location')}</Heading>
+          <Heading>{t('Add Location')}</Heading>
 
           <AddEvent
             length={events.length}
@@ -488,6 +479,9 @@ const ManageContexts = ({ matrixClient, moderationRooms }) => {
             allocation={allocation}
             disabled={loading}
           />
+          <hr />
+          {contextParent && <RemoveContext t={t} selectedContext={selectedContext} parent={contextParent} parentName={parentName} disableButton={disableButton} callback={spaceChild} />}
+
         </>}
     </>
   )

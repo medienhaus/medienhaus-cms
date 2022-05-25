@@ -8,8 +8,9 @@ import { useTranslation } from 'react-i18next'
 function SimpleContextSelect ({ onItemChosen, selectedContext, contexts, struktur, disabled, moderationRooms }) {
   const { t } = useTranslation('context')
   const items = config.medienhaus?.sites?.moderate?.manageContexts?.showRoot ? struktur : struktur[Object.keys(struktur)[0]].children
+
   return (
-    <select disabled={disabled} defaultValue={selectedContext} onChange={(e) => { onItemChosen(JSON.parse(e.target.value)) }}>
+    <select disabled={disabled} defaultValue={selectedContext} onChange={(e) => { onItemChosen(e.target.value) }}>
       <option disabled value="">-- {t('select context')} --</option>
       {mapDeep(filterDeep(items, (value, key, parent, context) => {
         // Exclude all hierarchy elements that are not "contexts"
@@ -33,7 +34,7 @@ function SimpleContextSelect ({ onItemChosen, selectedContext, contexts, struktu
         }
         return true
       }, { childrenPath: 'children', includeRoot: false, rootIsChildren: true }), (value, key, parent, context) => (
-        <option key={value.id} disabled={(contexts && contexts.some(context => context.room_id === value.id)) || (moderationRooms && !moderationRooms.some(room => room.room_id === value.id))} value={JSON.stringify(value)}>{' --- '.repeat(context.depth - 1)}{value.name}</option>
+        <option key={value.id + key} disabled={(contexts && contexts.some(context => context.room_id === value.id)) || (moderationRooms && !moderationRooms.some(room => room.room_id === value.id))} value={value.id}>{' --- '.repeat(context.depth - 1)}{value.name}</option>
       ), { childrenPath: 'children', includeRoot: false, rootIsChildren: true })}
     </select>
   )

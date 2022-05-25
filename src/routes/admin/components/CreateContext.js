@@ -9,7 +9,7 @@ function CreateContext (props) {
   return (
     <form>
       <div>
-        <label htmlFor="name">{props.t('Add Sub-Context')}: </label>
+        <label htmlFor="name">{props.t('Sub-Context Name')}: </label>
         <input type="text" value={contextName} onChange={(e) => setContextName(e.target.value)} />
       </div>
       {config.medienhaus.context &&

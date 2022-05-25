@@ -5,6 +5,8 @@ import * as _ from 'lodash'
 import SimpleContextSelect from '../../../components/SimpleContextSelect'
 import DeleteButton from '../components/DeleteButton'
 import config from '../../../config.json'
+import findValueDeep from 'deepdash/es/findValueDeep'
+
 import styled from 'styled-components'
 // import ContextDropdown from '../../../components/ContextDropdown'
 
@@ -117,9 +119,19 @@ const Category = ({ projectSpace, onChange, parent }) => {
     setLoading(false)
   }
   const fetchParentsFromApi = async () => {
-    const fetchParents = await fetch(config.medienhaus.api + projectSpace + '/path')
+    const fetchParents = await fetch(config.medienhaus.api + projectSpace)
     const response = await fetchParents.json()
+    const path = await fetch(config.medienhaus.api + projectSpace + '/path')
+    const res = await path.json()
+    console.log(res)
     console.log(response)
+    if (response.parents) {
+      response.parents.forEach(async parent => {
+        const fetchParent = await fetch(config.medienhaus.api + parent)
+        const response = await fetchParent.json()
+        setContexts(contexts => [...contexts, { name: response.name, room_id: response.id }])
+      })
+    }
   }
 
   useEffect(() => {
@@ -135,8 +147,18 @@ const Category = ({ projectSpace, onChange, parent }) => {
   async function onContextChosen (contextSpace) {
     setLoading(true)
     // this will be refactored with new logic once the api can return the updated /$id/path immediately after adding a space child.
-    const fetchContext = await fetch(config.medienhaus.api + contextSpace)
-    const context = await fetchContext.json()
+    let contextObject
+    if (config.medienhaus.api) {
+      const fetchPath = await fetch(config.medienhaus.api + contextSpace)
+      const response = await fetchPath.json()
+      contextObject = response
+    } else {
+      contextObject = findValueDeep(
+        inputItems,
+        (value, key, parent) => {
+          if (value.id === contextSpace) return true
+        }, { childrenPath: 'children', includeRoot: false, rootIsChildren: true })
+    }
     const projectSpaceMetaEvent = await matrixClient.getStateEvent(projectSpace, 'dev.medienhaus.meta').catch(console.log)
     // remove legacy code:
     // if the medienhaus meta event still has a context key, we remove it from the object.
@@ -159,7 +181,7 @@ const Category = ({ projectSpace, onChange, parent }) => {
           // then try to add the conent to the context again
           const addToContext = await Matrix.addSpaceChild(contextSpace, projectSpace).catch(console.log)
           if (addToContext?.event_id) {
-            setContexts(contexts => [...contexts, { name: context.name, room_id: contextSpace }])
+            setContexts(contexts => [...contexts, { name: contextObject.name, room_id: contextSpace }])
 
             onChange(!_.isEmpty(contexts))
             setLoading(false)
@@ -172,7 +194,7 @@ const Category = ({ projectSpace, onChange, parent }) => {
         }
       })
     if (addToContext?.event_id) {
-      setContexts(contexts => [...contexts, { name: context.name, room_id: contextSpace }])
+      setContexts(contexts => [...contexts, { name: contextObject.name, room_id: contextSpace }])
       onChange(!_.isEmpty(contexts))
       setLoading(false)
     }

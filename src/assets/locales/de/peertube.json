@@ -1,7 +1,9 @@
 {
-  "no entries": "keine Einträge vorhanden",
-  "-- please select ": "-- bitte wählen Sie Ihr/e/n ",
-  "linkToVideo": "Sie können Videos hochladen via <1>udk/stream</1>",
-  "linkToStream": "Sie können einen Livestream starten via <1>udk/stream</1>",
-  "linkToPlaylist": "Sie können Playlists erstellen via <1>udk/stream</1>"
+  "Paste a link to your {{type}} below": "Fügen Sie unten den Link zu $t({{type}}) ein",
+  "video": "Ihrem Video",
+  "livestream": "Ihrem Livestream",
+  "playlist": "Ihrer Playlist",
+  "linkToVideo": "Videos können Sie auf <1>udk/stream</1> hochladen",
+  "linkToStream": "Livestreams können Sie auf <1>udk/stream</1> starten",
+  "linkToPlaylist": "Playlists können Sie auf <1>udk/stream</1> erstellen"
 }
