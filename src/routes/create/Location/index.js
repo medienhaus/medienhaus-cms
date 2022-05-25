@@ -22,7 +22,6 @@ const Location = ({ reloadSpace, inviteCollaborators, projectSpace, events, allo
   const [loading, setLoading] = useState(false)
   const [deleting, setDeleting] = useState(false)
   const [currentLocation, setCurrentLocation] = useState()
-  const [selectedContext, setSelectedContext] = useState()
   const { t } = useTranslation('date')
 
   const createStructurObject = async () => {
@@ -49,7 +48,7 @@ const Location = ({ reloadSpace, inviteCollaborators, projectSpace, events, allo
         const metaEvent = _.find(stateEvents, { type: 'dev.medienhaus.meta' })
         if (!metaEvent) return
         // if (!typesOfSpaces.includes(metaEvent.content.type)) return
-        if (metaEvent.template !== 'location-struct') return
+        if (!metaEvent.content?.template?.includes('location')) return
         const nameEvent = _.find(stateEvents, { type: 'm.room.name' })
         if (!nameEvent) return
         const spaceName = nameEvent.content.name
@@ -64,10 +63,7 @@ const Location = ({ reloadSpace, inviteCollaborators, projectSpace, events, allo
         for (const event of stateEvents) {
           if (event.type !== 'm.space.child' && !includeRooms) continue
           if (event.type === 'm.space.child' && _.size(event.content) === 0) continue // check to see if body of content is empty, therefore space has been removed
-          if (event.state_key === projectSpace) {
-            setCurrentLocation(event.room_id) // add context to the contexts array if the projectspace is a child of it
-            setSelectedContext(event.roomId)
-          }
+          if (event.state_key === projectSpace) setCurrentLocation(event.room_id) // add context to the contexts array if the projectspace is a child of it
           if (event.room_id !== spaceId) continue
           // if (event.sender !== process.env.RUNDGANG_BOT_USERID && !includeRooms) continue
 
@@ -166,6 +162,7 @@ const Location = ({ reloadSpace, inviteCollaborators, projectSpace, events, allo
       setDeleting()
     }
   }
+
   const onLegacyDelete = async (e, roomId, name, index) => {
     e.preventDefault()
     setDeleting(true)
@@ -182,9 +179,14 @@ const Location = ({ reloadSpace, inviteCollaborators, projectSpace, events, allo
       setDeleting()
     }
   }
+
   const addContextToLocation = async (location) => {
-    if (currentLocation) await Matrix.removeSpaceChild(currentLocation, selectedContext)
-    await Matrix.addSpaceChild(location.id, selectedContext).catch(console.log)
+    if (currentLocation) await Matrix.removeSpaceChild(currentLocation, projectSpace)
+    await Matrix.addSpaceChild(location, projectSpace).catch(async () => {
+      // if adding spaceChild fails we try to join the space first
+      const joinRoom = await matrixClient.joinRoom(location).catch(console.log)
+      if (joinRoom) await addContextToLocation(location)
+    })
     setCurrentLocation(location.id)
   }
 
