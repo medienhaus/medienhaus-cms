@@ -259,6 +259,7 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace, time,
                     <option value="cc-by-nc-sa">CC BY-NC-SA 4.0</option>
                     <option value="cc-by-nd">CC BY-ND 4.0</option>
                     <option value="cc-by-nc-nd">CC BY-NC-ND 4.0</option>
+                    <option value="rs-inc">In Copyright</option>
                   </select>
                   <TextareaAutosize rows={cms.info.alt.split('\n').length} value={cms.info.alt} disabled />
                 </div>
@@ -279,6 +280,7 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace, time,
                       <option value="cc-by-nc-sa">CC BY-NC-SA 4.0</option>
                       <option value="cc-by-nd">CC BY-ND 4.0</option>
                       <option value="cc-by-nc-nd">CC BY-NC-ND 4.0</option>
+                      <option value="rs-inc">In Copyright</option>
                     </select>
                     <TextareaAutosize rows={cms.info.alt.split('\n').length} value={cms.info.alt} disabled />
                   </div>
