@@ -1158,6 +1158,15 @@ button>.loading {
   grid-column: 2;
 }
 
+.request {
+  display: grid;
+  grid-auto-flow: column;
+}
+
+.request > * + * {
+  margin-top: unset;
+}
+
 .requests>div {
   display: grid;
   grid-gap: var(--margin);
