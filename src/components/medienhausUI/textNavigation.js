@@ -12,15 +12,14 @@ const Button = styled.button`
   cursor: pointer;
   height: calc(var(--margin) * 2);
   padding: calc(var(--margin) * 0.6);
-  margin-top: calc(var(--margin) * 0.2);
   width: ${props => props.width || '100%'};
 
-  &:[disabled]{
-  background:none;
-  border: none;
-  border-bottom: none;
-  cursor: not-allowed;
-}
+  &:[disabled] {
+    background: none;
+    border: none;
+    border-bottom: none;
+    cursor: not-allowed;
+  }
 `
 
 const TextNavigation = (props) => {
@@ -36,4 +35,5 @@ const TextNavigation = (props) => {
     </Button>
   )
 }
+
 export default TextNavigation
