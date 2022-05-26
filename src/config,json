@@ -1,0 +1,76 @@
+{
+    "medienhaus": {
+        "context": {
+            "faculty": {
+                "label": "Faculty"
+            },
+            "seminar": {
+                "label": "Seminar"
+            },
+            "class": {
+                "label": "Class"
+            },
+            "degree": {
+                "label": "Degree"
+            },
+            "Fachgebiet": {
+                "label": "Fachgebiet"
+            }
+        },
+        "item": {
+            "studentproject": {
+                "label": "Project",
+                "blueprint": [
+                    "location",
+                    "contributors",
+                    "image"
+                ]
+            },
+            "event": {
+                "label": "Event",
+                "blueprint": [
+                    "image",
+                    "time",
+                    "location"
+                ],
+                "content": [
+                    "heading",
+                    "text",
+                    "unordered list",
+                    "ordered list",
+                    "image",
+                    "audio",
+                    "live stream",
+                    "peertube",
+                    "bigbluebutton"
+                ]
+            }
+        },
+        "languages": [
+            "en",
+            "de"
+        ],
+        "sites": {
+            "account": {
+                "avatar": true,
+                "name": true
+            },
+            "moderate": {
+                "accept": true,
+                "invite": true,
+                "rightsManagement": true,
+                "manageContexts": {
+                    "showRoot": true
+                }
+            },
+            "support": true,
+            "request": false,
+            "feedback": true
+        },
+        "location": {
+            "lat": 52.4908014,
+            "lng": 13.3565922
+        },
+        "api": "https://api.dev.medienhaus.udk-berlin.de/api/v2/"
+    }
+}
