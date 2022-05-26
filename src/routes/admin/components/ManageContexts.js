@@ -381,12 +381,9 @@ const ManageContexts = ({ matrixClient, moderationRooms }) => {
         {selectedContext &&
           <>
             <h3>{t('Add Sub-Context')}</h3>
-
             <CreateContext t={t} parent={selectedContext} matrixClient={matrixClient} parentName={parentName} disableButton={loading} callback={addSpace} />
-            <div>
-              <h3>{t('Add Image')}</h3>
-              <ProjectImage projectSpace={selectedContext} changeProjectImage={() => console.log('changed image')} disabled={loading} />
-            </div>
+            <h3>{t('Add Image')}</h3>
+            <ProjectImage projectSpace={selectedContext} changeProjectImage={() => console.log('changed image')} disabled={loading} />
             {allocation?.physical && allocation.physical.map((location, i) => {
               return (
                 <div className="editor" key={location.lat}>
