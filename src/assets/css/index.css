@@ -570,6 +570,7 @@ input[type="range"]::-moz-range-track {
   */
 }
 
+input[id$="-select"],
 select {
   -webkit-appearance: none;
   -moz-appearance: none;
