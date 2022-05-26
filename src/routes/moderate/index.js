@@ -39,8 +39,7 @@ const Moderate = () => {
       setModerationRooms(filteredRooms)
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [context
-  ])
+  }, [joinedSpaces])
 
   useEffect(() => {
     async function checkRoomForPossibleInvite (room) {
