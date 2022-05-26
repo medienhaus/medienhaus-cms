@@ -1204,6 +1204,17 @@ button>.loading {
 }
 */
 
+.timedate {
+  display: grid;
+  grid-gap: var(--margin);
+}
+
+.timedate > div {
+  display: grid;
+  grid-gap: var(--margin);
+  grid-template-columns: repeat(2, 1fr);
+}
+
 /*
 .timestamp {
 }
