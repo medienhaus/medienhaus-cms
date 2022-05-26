@@ -16,7 +16,7 @@ const Button = styled.button`
   padding: calc(var(--margin) * 0.2);
   width: ${props => props.width || '100%'};
 
-  &[disabled] {
+  &:[disabled] {
     background-color: var(--color-me);
     border-color: var(--color-me);
     cursor: not-allowed;
