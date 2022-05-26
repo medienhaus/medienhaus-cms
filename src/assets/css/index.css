@@ -209,9 +209,13 @@ main section>*+* {
   margin-top: var(--margin);
 }
 
+main ol,
+main ul {
+  list-style-position: inside;
+}
+
 main ul {
   list-style-type: "\2013\0020";
-  list-style-position: inside;
 }
 
 form>*+* {
