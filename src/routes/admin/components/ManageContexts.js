@@ -481,7 +481,7 @@ const ManageContexts = ({ matrixClient, moderationRooms }) => {
               disabled={loading}
             />
             <section>
-              <h3>{t('Add Description')}</h3>{t('Add Location')}
+              <h3>{t('Add Location')}</h3>
 
               {locationStructure
                 ? <SimpleContextSelect
