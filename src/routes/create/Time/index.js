@@ -58,7 +58,7 @@ export default function Time ({ allocation, projectSpace, reloadSpace }) {
     const endUnixToRealWorld = endToDate.toLocaleString('en-UK')
 
     return (
-      <li>{startUnixToRealWorld} - {endUnixToRealWorld}</li>
+      <li>{startUnixToRealWorld} – {endUnixToRealWorld}</li>
     )
   }
   return (
