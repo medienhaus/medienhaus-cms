@@ -14,7 +14,8 @@ const Nav = () => {
   const [isModeratingSpaces, setIsModeratingSpaces] = useState(false)
   const [isAdmin, setIsAdmin] = useState(false)
   const [knockAmount, setKnockAmount] = useState(0)
-  const [invites, setInvites] = useState([])
+  const [itemInvites, setItemInvites] = useState([])
+  const [contextInvites, setContextInvites] = useState([])
   const { joinedSpaces } = useJoinedSpaces(false)
   const matrixClient = Matrix.getMatrixClient()
 
@@ -80,10 +81,12 @@ const Nav = () => {
       // At this point we're sure that the room we're checking for is either
       if (room.getMyMembership() === 'invite') {
         // ... 1. an invitation we want to display, so we add it to the state, or ...
-        setInvites((invites) => [...invites, room.roomId])
+        if (metaEvent.type === 'context') setContextInvites((contextInvites) => [...contextInvites, room.roomId])
+        else setItemInvites((itemInvites) => [...itemInvites, room.roomId])
       } else {
         // ... 2. a room that the membership has changed for to something other than "invite", so we do -not- want it to be in the state in case it's there right now:
-        setInvites(invites => invites.filter(invite => invite !== room.roomId))
+        if (metaEvent.type === 'context') setContextInvites((contextInvites) => contextInvites.filter(invite => invite !== room.roomId))
+        else setItemInvites((itemInvites) => itemInvites.filter(invite => invite !== room.roomId))
       }
     }
 
@@ -162,11 +165,11 @@ const Nav = () => {
             <>
               <div>
                 <NavLink to="/create">/create</NavLink>
-                <NavLink to="/content">/content <sup className={`notification ${invites.length > 0 ? '' : 'hidden'}`}>●</sup></NavLink>
+                <NavLink to="/content">/content <sup className={`notification ${itemInvites.length > 0 ? '' : 'hidden'}`}>●</sup></NavLink>
               </div>
               <div>
                 {config.medienhaus?.sites?.account && <NavLink to="/account">/account</NavLink>}
-                {config.medienhaus?.sites.moderate && <NavLink to="/moderate" className={!isModeratingSpaces ? 'disabled' : ''}>/moderate<sup className={`notification ${knockAmount < 1 ? 'hidden' : ''}`}>●</sup></NavLink>}
+                {config.medienhaus?.sites.moderate && <NavLink to="/moderate" className={!isModeratingSpaces && !contextInvites ? 'disabled' : ''}>/moderate<sup className={`notification ${knockAmount < 1 || contextInvites.length < 1 ? 'hidden' : ''}`}>●</sup></NavLink>}
                 {isAdmin && <NavLink to="/admin">/admin</NavLink>}
               </div>
               {(config.medienhaus?.sites.feedback || config.medienhaus?.sites?.support || config.medienhaus?.sites?.request) &&
