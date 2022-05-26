@@ -58,28 +58,36 @@ export default function Time ({ allocation, projectSpace, reloadSpace }) {
     const endUnixToRealWorld = endToDate.toLocaleString('en-UK')
 
     return (
-      <li>{startUnixToRealWorld} - {endUnixToRealWorld}</li>
+      <li>{startUnixToRealWorld} – {endUnixToRealWorld}</li>
     )
   }
   return (
     <section className="time">
       <h3>{t('Time')}</h3>
       {allocation?.temporal && (
-        <ul>
+        <ol>
           {allocation.temporal.map((date, index) => <TimeSlots key={index + date.start} start={date.start} end={date.end} />
           )}
-        </ul>
+        </ol>
       )}
       {!isUIVisible && <button onClick={() => setIsUIVisible(true)}>{t('add date')}</button>}
       {isUIVisible && (
         <>
-          <label htmlFor="time">{t('Start')}:</label>
-          <input type="date" id="start-date" name="start-date" value={startDate} onChange={(e) => setStartDate(e.target.value)} />
-          <input type="time" id="start-time" name="start-time" onChange={(e) => setStartTime(e.target.value)} />
+          <div className="timedate">
+            <label htmlFor="time">{t('Start')}:</label>
+            <div>
+              <input type="date" id="start-date" min="2022-07-22" max="2022-07-24" name="start-date" value={startDate} onChange={(e) => setStartDate(e.target.value)} />
+              <input type="time" id="start-time" name="start-time" onChange={(e) => setStartTime(e.target.value)} />
+            </div>
+          </div>
 
-          <label htmlFor="time">{t('End')}:</label>
-          <input type="date" id="end-date" name="end-date" min={startDate} value={endDate} onChange={(e) => setEndDate(e.target.value)} />
-          <input type="time" id="end-time" name="end-time" onChange={(e) => setEndTime(e.target.value)} />
+          <div className="timedate">
+            <label htmlFor="time">{t('End')}:</label>
+            <div>
+              <input type="date" id="end-date" name="end-date" min={startDate || '2022-07-22'} max="2022-07-24" value={endDate} onChange={(e) => setEndDate(e.target.value)} />
+              <input type="time" id="end-time" name="end-time" onChange={(e) => setEndTime(e.target.value)} />
+            </div>
+          </div>
 
           <div className="confirmation">
             <SimpleButton cancel onClick={() => setIsUIVisible(false)}>CANCEL</SimpleButton>

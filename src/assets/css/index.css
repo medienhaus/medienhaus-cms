@@ -209,20 +209,22 @@ main section>*+* {
   margin-top: var(--margin);
 }
 
+main ol,
+main ul {
+  list-style-position: inside;
+}
+
 main ul {
   list-style-type: "\2013\0020";
-  list-style-position: inside;
 }
 
 form>*+* {
   margin-top: var(--margin);
 }
 
-/*
 form > div > * + * {
   margin-top: calc(var(--margin) * 0.5);
 }
-*/
 
 nav {
   grid-row: 1 / 3;
@@ -555,6 +557,7 @@ input[type="range"]::-moz-range-track {
   height: calc(var(--margin) * 0.3);
 }
 
+input[id$="-select"],
 select {
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -1132,6 +1135,15 @@ button>.loading {
   grid-column: 2;
 }
 
+.request {
+  display: grid;
+  grid-auto-flow: column;
+}
+
+.request > * + * {
+  margin-top: unset;
+}
+
 .requests>div {
   display: grid;
   grid-gap: var(--margin);
@@ -1181,6 +1193,17 @@ button>.loading {
   color: var(--color-fg);
 }
 */
+
+.timedate {
+  display: grid;
+  grid-gap: var(--margin);
+}
+
+.timedate > div {
+  display: grid;
+  grid-gap: var(--margin);
+  grid-template-columns: repeat(2, 1fr);
+}
 
 /*
 .timestamp {
