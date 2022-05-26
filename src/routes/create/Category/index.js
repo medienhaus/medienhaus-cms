@@ -5,7 +5,7 @@ import * as _ from 'lodash'
 import SimpleContextSelect from '../../../components/SimpleContextSelect'
 import DeleteButton from '../components/DeleteButton'
 import config from '../../../config.json'
-import findValueDeep from 'deepdash/es/findValueDeep'
+import findValueDeep from 'deepdash/findValueDeep'
 
 import styled from 'styled-components'
 // import ContextDropdown from '../../../components/ContextDropdown'
@@ -30,8 +30,8 @@ const Category = ({ projectSpace, onChange, parent }) => {
 
       function createSpaceObject (id, name, metaEvent) {
         return {
-          id: id,
-          name: name,
+          id,
+          name,
           type: metaEvent.content.type,
           children: {}
         }
