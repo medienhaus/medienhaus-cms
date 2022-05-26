@@ -33,3 +33,4 @@ yarn-error.log*
 
 # config
 config.json
+./src/config.json
