@@ -65,10 +65,10 @@ export default function Time ({ allocation, projectSpace, reloadSpace }) {
     <section className="time">
       <h3>{t('Time')}</h3>
       {allocation?.temporal && (
-        <ul>
+        <ol>
           {allocation.temporal.map((date, index) => <TimeSlots key={index + date.start} start={date.start} end={date.end} />
           )}
-        </ul>
+        </ol>
       )}
       {!isUIVisible && <button onClick={() => setIsUIVisible(true)}>{t('add date')}</button>}
       {isUIVisible && (
