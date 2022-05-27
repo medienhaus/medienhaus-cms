@@ -1,4 +1,13 @@
 {
   "Hello": "Hallo",
-  "Welcome to the {{appTitle}} content management system!": "Willkommen im Content Management System für {{appTitle}}!"
+  "Welcome to the {{appTitle}} content management system!": "Willkommen im Content Management System für {{appTitle}}!",
+  "introduction-01": "Der Rundgang – Tage der offenen Tür der Universität der Künste Berlin findet vom 23.–24. Juli 2022 sowohl im analogen als auch im digitalen Raum statt.",
+  "introduction-02": "Auf dieser Plattform haben Sie die Möglichkeit, eigene Projekte und Events zu erstellen und damit Informationen zu analogen Angeboten zu ergänzen oder digital erstellte Semesterprojekte zu präsentieren.",
+  "introduction-03": "Wir bieten Ihnen außerdem die Möglichkeit, über das Videokonferenz Tool <1>udk/meetings</1> (BigBlueButton) den Rundgang-Besucher*innen Termine anzubieten und über <2>udk/stream</2> Videos und Livestreams auf Ihrer eigenen Projektseite einzubinden.",
+  "introduction-04": "Da die Plattform ein relativ neues Tool ist, das auch in Zukunft den Rundgang bereichern kann, freuen wir uns, wenn Sie uns Ihr Feedback zur Handhaben des Systems an <1>feedback-rundgang-plattform@udk-berlin.de</1> senden.",
+  "introduction-05": "Sollten Sie technische Unterstützung bei der Eingabe von Projekten haben, wenden Sie sich bitte an: <1>rundgang-support@udk-berlin.de</1>",
+  "please-note": "Die Arbeiten am Frontend, also an der öffentlichen Website, auf der alle Projekte zu sehen sein werden, sind noch im vollen Gange. Daher ist derzeit noch keine Vorschau der angelegten Projekte möglich.",
+  "information": "Weitere Informationen zum Rundgang 2022 (Öffnungszeiten, Sicherheits- und Hygienemaßnahmen, etc.) finden Sie unter: <1>udk-berlin.de/rundgang</1>",
+  "human-readable-first": "Alle Inhalte werden nach dem Paradigma “human readable first” gespeichert und können – neben dem Content Management System udk/rundgang – mit jedem vollwertigen Matrix-Client über content.udk-berlin.de aufgerufen, gelesen, verändert und gelöscht werden.",
+  "caution": "Bitte beachten Sie, dass die manuelle Bearbeitung von Inhalten als fortgeschrittene Technik betrachtet werden sollte und die Inhaltsstruktur zerstören kann, wenn sie nicht dem dev.medienhaus.meta-Standard entspricht."
 }

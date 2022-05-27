@@ -64,6 +64,7 @@ export default function Time ({ allocation, projectSpace, reloadSpace }) {
   return (
     <section className="time">
       <h3>{t('Time')}</h3>
+      <p>{t('Mark the exact time of your event with a start and end time.')}</p>
       {allocation?.temporal && (
         <ol>
           {allocation.temporal.map((date, index) => <TimeSlots key={index + date.start} start={date.start} end={date.end} />

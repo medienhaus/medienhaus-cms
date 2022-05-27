@@ -12,8 +12,40 @@ const Landing = () => {
       <p>{t('Hello')}{profile && <strong> {profile?.displayname}</strong>}.</p>
       <h2>{t('Welcome to the {{appTitle}} content management system!', { appTitle: process.env.REACT_APP_APP_TITLE })}</h2>
       <hr />
-      <p>{t('The Rundgang – Open Days of the Berlin University of the Arts will take place in both analogue and digital space in July. On this platform, you will have the opportunity to create your own projects and thus add information on analogue offers or present digitally created semester projects.')}</p>
+      <p>
+        <Trans t={t} i18nKey="introduction-01">
+          The Rundgang – Open Days of the Berlin University of the Arts will take place in both analogue and digital space from 23–24 July 2022.
+        </Trans>
+      </p>
+      <p>
+        <Trans t={t} i18nKey="introduction-02">
+          On this platform, you will have the opportunity to create your own projects and events and thus add information on analogue offers or present digitally created semester projects.
+        </Trans>
+      </p>
+      <p>
+        <Trans t={t} i18nKey="introduction-03">
+          We also offer you the possibility to offer meetings via the video conferencing tool <a href="https://meetings.udk-berlin.de/" rel="external nofollow noopener noreferrer" target="_blank">udk/meetings</a> (BigBlueButton) and to integrate videos and livestreams via <a href="https://stream.udk-berlin.de/" rel="external nofollow noopener noreferrer" target="_blank">udk/stream</a> on your own project page.
+        </Trans>
+      </p>
       <hr />
+      <p>
+        <Trans t={t} i18nKey="introduction-04">
+          As the platform is a relatively new tool that can continue to enrich the Rundgang – Open Days in the future, we would be happy if you send us your feedback on how to handle the system to: <a href="mailto:feedback-rundgang-plattform@udk-berlin.de">feedback-rundgang-plattform@udk-berlin.de</a>
+        </Trans>
+      </p>
+      <p>
+        <Trans t={t} i18nKey="introduction-05">
+          If you need technical support for entering projects, please contact: <a href="mailto:rundgang-support@udk-berlin.de">rundgang-support@udk-berlin.de</a>
+        </Trans>
+      </p>
+      {/*
+      <hr />
+      <p>
+        <Trans t={t} i18nKey="please-note">
+          The frontend, i.e. the public website on which all projects will be visible, is still under construction. Therefore, it is not yet possible to preview the projects that have been created.
+        </Trans>
+      </p>
+      */}
       <p>
         <Trans t={t} i18nKey="information">
           For more information on the Rundgang 2022 (opening hours, safety and hygiene measures, etc.), please visit: <a href="https://udk-berlin.de/rundgang" rel="external nofollow noopener noreferrer" target="_blank">udk-berlin.de/rundgang</a>

@@ -212,10 +212,11 @@ const Category = ({ projectSpace, onChange, parent }) => {
 
   return (
     <>
-      <p>{t('In which context do you want to publish your project?')}</p>
-      <p>{t('This information is necessary to show your project in the right place on the Rundgang 2022 website, and must therefore be specified when you change the visibility of the project to public.')}</p>
+      <p>{t('In which context do you want to publish your project/event?')}</p>
+      <p>{t('This information is necessary to show your project/event in the right place on the Rundgang 2022 website, and must therefore be specified when you change the visibility of the project/event to public.')}</p>
       <p>{t('The context can be a class, a course, a seminar or a free project. If you are unsure, ask the professor of your class or the seminar leader.')}</p>
       <p>{t('You can scroll through the list, or filter/search the list by typing one or more keywords.')}</p>
+      <p>{t('You have the possibility to create multiple contexts if your event is i.e. interdisciplinary or a cooperation or similar.')}</p>
       <ul style={{ position: 'relative' }}>
         {!inputItems || loading
           ? <Loading />

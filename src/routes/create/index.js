@@ -355,12 +355,12 @@ const Create = () => {
         <p>
           {projectSpace
             ? <strong>{t('Edit project')}</strong>
-            : <strong>{t('Create and upload new project')}</strong>}
+            : <strong>{t('Create and upload new project or event')}</strong>}
         </p>
 
-        <p>{t('This is the project page. Please add the context in which the project was created, a project name, descriptive text and a thumbnail. You can also add more images, videos, livestreams and BigBlueButton sessions.')}</p>
-        <p><Trans t={t} i18nKey="submitInstructions2">If you want to continue at a later point in time, the project is automatically saved as a draft and you can find it in your collection under <Link to="/content">/content</Link>.</Trans></p>
-        <p>{t('The Rundgang website will be available in English and German. The project name can only be entered in one language and will therefore be used for both pages. Other texts should ideally be entered in both languages, otherwise the text will appear on both pages in only one language.')}</p>
+        <p>{t('This is the site for creating and editing a project or event. Please add the context in which the project or event was created, a project name, descriptive text and a thumbnail. You can also add more images, videos, livestreams and BigBlueButton sessions.')}</p>
+        <p><Trans t={t} i18nKey="submitInstructions2">If you want to continue at a later point in time, the project/event is automatically saved as a draft and you can find it in your collection under <Link to="/content">/content</Link>.</Trans></p>
+        <p>{t('The Rundgang website will be available in English and German. The project or event name can only be entered in one language and will therefore be used for both pages. Other texts should ideally be entered in both languages, otherwise the text will appear on both pages in only one language.')}</p>
       </section>
 
       <section className="project-title">
@@ -379,6 +379,7 @@ const Create = () => {
           {(!config.medienhaus?.item || !config.medienhaus?.item[template]?.blueprint || config.medienhaus?.item[template]?.blueprint.includes('location')) && (
             <section className="events">
               <h3>{t('Location')}</h3>
+              <p>{t('Specify at which location your event will take place. To be as accurate as possible you can also add a room number or a concise location marker (i.e. “behind the blue cabinet").')}</p>
               <Location inviteCollaborators={inviteCollaborators} reloadSpace={reloadSpace} projectSpace={projectSpace} events={events} allocation={allocation} matrixClient={matrixClient} />
             </section>
           )}
@@ -435,14 +436,15 @@ const Create = () => {
            */}
           <section className="authorship">
             <h3>{t('Authorship / Credits')}</h3>
+            <p>{t('If you select this option, it is hidden in the frontend that you have posted the content.')}</p>
             <AuthorCheckbox>
-              <label htmlFor="hide-authors">{t('Hide author(s) on public website')}❓</label>
+              <label htmlFor="hide-authors">{t('Hide author(s)')}</label>
               <input id="checkbox" name="checkbox" type="checkbox" checked={hideAuthors} onChange={handleHideAuthors} />
             </AuthorCheckbox>
           </section>
           <section className="visibility">
             <h3>{t('Visibility')}</h3>
-            <p>{t('Would you like to save your project as a draft or release it for publishing on the Rundgang platform? The released projects will be published in the run-up to the Rundgang on October 25, 2021.')}</p>
+            <p>{t('Would you like to save your project as a draft or release it for publishing on the Rundgang platform? The released projects will be published in the run-up to the Rundgang on July 18, 2022.')}</p>
             <p>{t('If you still want to make changes to your contributions after publishing, you can continue to do so.')}</p>
             {spaceObject
               ? (<>
