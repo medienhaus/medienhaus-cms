@@ -25,7 +25,9 @@ import _ from 'lodash'
 import styled from 'styled-components'
 
 const AuthorCheckbox = styled.div`
-  display: flex;
+  display: grid;
+  grid-auto-flow: column;
+  grid-gap: var(--margin);
   justify-content: space-between;
 `
 
