@@ -423,9 +423,10 @@ const Create = () => {
           {/* Placeholder to show preview next to editing
           {blocks.map((content, i) => <DisplayPreview content={content} key={i} matrixClient={matrixClient} />)}
            */}
-          <section className="authors">
+          <section className="authorship">
+            <h3>{t('Authorship / Credits')}</h3>
             <AuthorCheckbox>
-              <label htmlFor="hide-authors">{t('Hide Authors')}</label>
+              <label htmlFor="hide-authors">{t('Hide author(s) on public website')}</label>
               <input id="checkbox" name="checkbox" type="checkbox" checked={hideAuthors} onChange={handleHideAuthors} />
             </AuthorCheckbox>
           </section>
