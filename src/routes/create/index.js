@@ -31,6 +31,14 @@ const AuthorCheckbox = styled.div`
   justify-content: space-between;
 `
 
+/*
+const BackButton = styled.button`
+  @media (min-width: 50em) {
+    width: unset;
+  }
+`
+*/
+
 const Create = () => {
   const { t } = useTranslation('content')
   const [title, setTitle] = useState('')
@@ -446,9 +454,7 @@ const Create = () => {
           </section>
 
           <section className="save">
-            <div className="confirmation">
-              <button className="cancel" onClick={() => history.push('/content')}>← {t('BACK TO OVERVIEW')}</button>
-            </div>
+            <button className="cancel" onClick={() => history.push('/content')}>← {t('BACK TO OVERVIEW')}</button>
             {saveTimestamp && <p className="timestamp">↳ {t('Last saved at')} {saveTimestamp}</p>}
           </section>
         </>
