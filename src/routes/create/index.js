@@ -24,7 +24,7 @@ import config from '../../config.json'
 import _ from 'lodash'
 import styled from 'styled-components'
 
-const AuthorCheckobox = styled.div`
+const AuthorCheckbox = styled.div`
 display: flex;
 justify-content: space-between;
 `
@@ -423,10 +423,10 @@ const Create = () => {
           {blocks.map((content, i) => <DisplayPreview content={content} key={i} matrixClient={matrixClient} />)}
            */}
           <section className="authors">
-            <AuthorCheckobox>
+            <AuthorCheckbox>
               <label htmlFor="hide-authors">{t('Hide Authors')}</label>
               <input id="checkbox" name="checkbox" type="checkbox" checked={hideAuthors} onChange={handleHideAuthors} />
-            </AuthorCheckobox>
+            </AuthorCheckbox>
           </section>
           <section className="visibility">
             <h3>{t('Visibility')}</h3>
