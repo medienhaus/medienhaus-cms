@@ -428,7 +428,7 @@ const Create = () => {
           <section className="authorship">
             <h3>{t('Authorship / Credits')}</h3>
             <AuthorCheckbox>
-              <label htmlFor="hide-authors">{t('Hide author(s) on public website')}</label>
+              <label htmlFor="hide-authors">{t('Hide author(s) on public website')}❓</label>
               <input id="checkbox" name="checkbox" type="checkbox" checked={hideAuthors} onChange={handleHideAuthors} />
             </AuthorCheckbox>
           </section>
