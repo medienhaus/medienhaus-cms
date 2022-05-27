@@ -7,23 +7,19 @@ const Button = styled.button`
   appearance: none;
   background-color: var(--color-bg);
   border: none;
-  border-bottom-color: var(--color-fg);
-  border-bottom-radius: unset;
-  border-bottom-style: solid;
-  border-bottom-width: calc(var(--margin) * 0.2);
-  color: var(--color-fg);
+  color: var(--color-me);
   cursor: pointer;
-  height: calc(var(--margin) * 2);
+  height: 100%;
   padding: calc(var(--margin) * 0.2);
   width: ${props => props.width || '100%'};
 
   &[disabled] {
     background-color: var(--color-bg);
-    border-color: var(--color-fg);
-    border-radius: unset;
-    border-style: solid;
-    border-width: calc(var(--margin) * 0.2);
-    border-bottom: none;
+    border-bottom-color: var(--color-fg);
+    border-bottom-radius: unset;
+    border-bottom-style: solid;
+    border-bottom-width: calc(var(--margin) * 0.2);
+    color: var(--color-fg);
     cursor: not-allowed;
   }
 `

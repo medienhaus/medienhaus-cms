@@ -13,6 +13,18 @@ import RemoveContent from './components/RemoveContent'
 import config from '../../config.json'
 import TextNavigation from '../../components/medienhausUI/textNavigation'
 
+import styled from 'styled-components'
+
+const TabSection = styled.section`
+  display: grid;
+  grid-gap: var(--margin);
+  grid-template-columns: repeat(auto-fit, minmax(10ch, 1fr));
+
+  & > * + * {
+    margin-top: unset;
+  }
+`
+
 const Moderate = () => {
   const { joinedSpaces, spacesErr, fetchSpaces } = useJoinedSpaces(false)
   const [moderationRooms, setModerationRooms] = useState()
@@ -117,11 +129,11 @@ const Moderate = () => {
   if (moderationRooms.length < 1) return <p>{t('You are not moderating any spaces.')}</p>
   return (
     <>
-      <section className="request">
+      <TabSection className="request">
         {Object.keys(config?.medienhaus?.sites?.moderate).map((value, index) => {
           return <TextNavigation width="auto" disabled={value === selection} active={value === selection} value={value} key={value} onClick={(e) => setSelection(e.target.value)}>{value.replace(/([a-z0-9])([A-Z])/g, '$1 $2')}</TextNavigation>
         })}
-      </section>
+      </TabSection>
 
       {renderSelection()}
     </>

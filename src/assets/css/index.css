@@ -1135,6 +1135,7 @@ button>.loading {
   grid-column: 2;
 }
 
+/*
 .request {
   display: grid;
   grid-auto-flow: column;
@@ -1143,6 +1144,7 @@ button>.loading {
 .request > * + * {
   margin-top: unset;
 }
+*/
 
 .requests>div {
   display: grid;
