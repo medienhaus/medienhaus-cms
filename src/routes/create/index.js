@@ -25,9 +25,10 @@ import _ from 'lodash'
 import styled from 'styled-components'
 
 const AuthorCheckbox = styled.div`
-display: flex;
-justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
 `
+
 const Create = () => {
   const { t } = useTranslation('content')
   const [title, setTitle] = useState('')
