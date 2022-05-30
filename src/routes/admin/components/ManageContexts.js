@@ -368,7 +368,7 @@ const ManageContexts = ({ matrixClient, moderationRooms }) => {
   return (
     <>
       <section className="manage">
-        <h3>Manage Contexts</h3>
+        <h3>Manage contexts</h3>
         {// !structure ? <Loading /> : <ShowContexts structure={structure} t={t} selectedContext={selectedContext} parent={parent} parentName={parentName} disableButton={disableButton} callback={contextualise} />
         }
         {!inputItems
@@ -385,9 +385,9 @@ const ManageContexts = ({ matrixClient, moderationRooms }) => {
          <input type="text" value={selectedContextName} disabled /> */}
         {selectedContext &&
           <>
-            <h3>{t('Add Sub-Context')}</h3>
+            <h3>{t('Add sub-context')}</h3>
             <CreateContext t={t} parent={selectedContext} matrixClient={matrixClient} parentName={parentName} disableButton={loading} callback={addSpace} />
-            <h3>{t('Add Image')}</h3>
+            <h3>{t('Add image')}</h3>
             <ProjectImage projectSpace={selectedContext} changeProjectImage={() => console.log('changed image')} disabled={loading} />
             {allocation?.physical && allocation.physical.map((location, i) => {
               return (
@@ -454,7 +454,7 @@ const ManageContexts = ({ matrixClient, moderationRooms }) => {
               )
             }))}
             <section>
-              <h3>{t('Add Description')}</h3>
+              <h3>{t('Add description')}</h3>
               <TextareaAutosize
                 value={description}
                 minRows={6}
@@ -468,7 +468,7 @@ const ManageContexts = ({ matrixClient, moderationRooms }) => {
               </>
               )}
             </section>
-            <h3>{t('Add Location')}</h3>
+            <h3>{t('Add location')}</h3>
 
             <AddEvent
               length={events.length}
@@ -481,7 +481,7 @@ const ManageContexts = ({ matrixClient, moderationRooms }) => {
               disabled={loading}
             />
             <section>
-              <h3>{t('Add Location')}</h3>
+              <h3>{t('Add location')}</h3>
 
               {locationStructure
                 ? <SimpleContextSelect

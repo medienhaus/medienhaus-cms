@@ -38,7 +38,7 @@ const RightsManagement = ({ matrixClient, moderationRooms, setPower, fetchUsers,
 
   return (
     <section className="promote">
-      <h3>{t('Promote users to moderator')}</h3>
+      <h3>{t('Promote accounts to moderator')}</h3>
       <select value={selectedRoom} onChange={(e) => setSelectedRoom(e.target.value)}>
         <option value="" disabled>-- {t('select context')} --</option>
         {moderationRooms.map((room, index) => <option key={index} value={room.room_id}>{room.name}</option>)}
@@ -47,7 +47,7 @@ const RightsManagement = ({ matrixClient, moderationRooms, setPower, fetchUsers,
         list="userSearch"
         id="user-datalist"
         name="user-datalist"
-        placeholder={t('name')}
+        placeholder={t('account_id')}
         onChange={(e) => {
           fetchUsers(e, e.target.value)
         }}

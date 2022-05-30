@@ -33,8 +33,8 @@ const InviteUserToSpace = ({ matrixClient, moderationRooms, setPower, fetchUsers
 
   return (
     <section className="invite">
-      <h3>{t('Invite users')}</h3>
-      <p>Invite users to specific contexts and promote them to moderate said context.</p>
+      <h3>{t('Invite accounts')}</h3>
+      <p>Invite accounts to specific contexts, and optionally promote them to moderate that specific context they are invited to.</p>
       <select value={selectedRoom} onChange={(e) => setSelectedRoom(e.target.value)}>
         <option value={false} disabled>-- {t('select context')} --</option>
         {moderationRooms.map((room, index) => <option key={index} value={room.room_id}>{room.name}</option>)}
@@ -43,7 +43,7 @@ const InviteUserToSpace = ({ matrixClient, moderationRooms, setPower, fetchUsers
         list="userSearch"
         id="user-datalist"
         name="user-datalist"
-        placeholder={t('user id')}
+        placeholder={t('account_id')}
         onChange={(e) => {
           fetchUsers(e, e.target.value)
         }}
