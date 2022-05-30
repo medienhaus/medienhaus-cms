@@ -304,7 +304,6 @@ const ManageContexts = ({ matrixClient, moderationRooms }) => {
     }
     await getEvents(context)
     setSelectedContext(context)
-    setDescription(context.topic || '')
 
     console.log(context)
     setLoading(true)
@@ -469,27 +468,15 @@ const ManageContexts = ({ matrixClient, moderationRooms }) => {
               </>
               )}
             </section>
-            <h3>{t('Add location')}</h3>
-
-            <AddEvent
-              length={events.length}
-              room_id={selectedContext}
-              t={t}
-              reloadSpace={() => getEvents(selectedContext)}
-              locationDropdown
-              inviteCollaborators={console.log}
-              allocation={allocation}
-              disabled={loading}
-            />
             <section>
               <h3>{t('Add location')}</h3>
-
               {locationStructure
                 ? <SimpleContextSelect
                     onItemChosen={addContextToLocation}
                     selectedContext={currentLocation}
                     struktur={locationStructure}
                     disabled={loading}
+                    enableType="location-room"
                   />
                 : <Loading />}
 
