@@ -105,7 +105,7 @@ const Moderate = () => {
           config.medienhaus?.sites?.moderate?.accept &&
             <>
               <section className="accept">
-                <h2>{t('Accept user requests')}</h2>
+                <h2>{t('Manage requests')}</h2>
                 {moderationRooms.length > 0
                   ? <>
                     <section className="requests">

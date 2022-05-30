@@ -7,6 +7,10 @@ const Button = styled.button`
   appearance: none;
   background-color: var(--color-bg);
   border: none;
+  border-bottom-color: var(--color-lo);
+  border-bottom-radius: unset;
+  border-bottom-style: solid;
+  border-bottom-width: calc(var(--margin) * 0.2);
   color: var(--color-me);
   cursor: pointer;
   height: 100%;
@@ -15,6 +19,7 @@ const Button = styled.button`
 
   &[disabled] {
     background-color: var(--color-bg);
+    border: none;
     border-bottom-color: var(--color-fg);
     border-bottom-radius: unset;
     border-bottom-style: solid;

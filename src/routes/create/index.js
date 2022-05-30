@@ -354,7 +354,7 @@ const Create = () => {
       <section className="welcome">
         <p>
           {projectSpace
-            ? <strong>{t('Edit project')}</strong>
+            ? <strong>{t('Edit project/event')}</strong>
             : <strong>{t('Create and upload new project or event')}</strong>}
         </p>
 
@@ -379,7 +379,7 @@ const Create = () => {
           {(!config.medienhaus?.item || !config.medienhaus?.item[template]?.blueprint || config.medienhaus?.item[template]?.blueprint.includes('location')) && (
             <section className="events">
               <h3>{t('Location')}</h3>
-              <p>{t('Specify at which location your event will take place. To be as accurate as possible you can also add a room number or a concise location marker (i.e. “behind the blue cabinet").')}</p>
+              <p>{t('Specify at which location your event will take place. To be as accurate as possible you can also add a room number or a concise location marker (i.e. “behind the blue cabinet”).')}</p>
               <Location inviteCollaborators={inviteCollaborators} reloadSpace={reloadSpace} projectSpace={projectSpace} events={events} allocation={allocation} matrixClient={matrixClient} />
             </section>
           )}

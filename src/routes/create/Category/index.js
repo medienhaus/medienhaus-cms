@@ -231,6 +231,7 @@ const Category = ({ projectSpace, onChange, parent }) => {
             })}
             <SimpleContextSelect
               selectedContext=""
+              preSelectedValue="context"
               onItemChosen={onContextChosen}
               contexts={contexts}
               struktur={inputItems}

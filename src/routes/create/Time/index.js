@@ -11,7 +11,7 @@ export default function Time ({ allocation, projectSpace, reloadSpace }) {
   const [startTime, setStartTime] = useState('00:00')
   const [endTime, setEndTime] = useState('00:00')
   const [temporalObject, setTemporalObject] = useState({})
-  const { t } = useTranslation('content')
+  const { t, i18n } = useTranslation('content')
   const matrixClient = Matrix.getMatrixClient()
 
   useEffect(() => {
@@ -51,11 +51,11 @@ export default function Time ({ allocation, projectSpace, reloadSpace }) {
     const startToDate = new Date(start * 1000)
     startToDate.setHours(startToDate.getHours() - 2) // convert to Berlin Timezone
 
-    const startUnixToRealWorld = startToDate.toLocaleString('en-UK')
+    const startUnixToRealWorld = startToDate.toLocaleString(i18n.language, { year: 'numeric', month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit', hour12: false })
 
     const endToDate = new Date(end * 1000)
     endToDate.setHours(endToDate.getHours() - 2) // convert to Berlin Timezone
-    const endUnixToRealWorld = endToDate.toLocaleString('en-UK')
+    const endUnixToRealWorld = endToDate.toLocaleString(i18n.language, { year: 'numeric', month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit', hour12: false })
 
     return (
       <li>{startUnixToRealWorld} – {endUnixToRealWorld}</li>
@@ -66,10 +66,10 @@ export default function Time ({ allocation, projectSpace, reloadSpace }) {
       <h3>{t('Time')}</h3>
       <p>{t('Mark the exact time of your event with a start and end time.')}</p>
       {allocation?.temporal && (
-        <ol>
+        <ul className="times">
           {allocation.temporal.map((date, index) => <TimeSlots key={index + date.start} start={date.start} end={date.end} />
           )}
-        </ol>
+        </ul>
       )}
       {!isUIVisible && <button onClick={() => setIsUIVisible(true)}>{t('add date')}</button>}
       {isUIVisible && (

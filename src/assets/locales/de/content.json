@@ -27,7 +27,7 @@
   "Draft": "Vorlage",
   "Public": "Öffentlich",
   "Create and upload new project or event": "Neues Projekt oder Event erstellen und hochladen",
-  "Edit project": "Projekt bearbeiten",
+  "Edit project/event": "Projekt/Event bearbeiten",
   "This is the site for creating and editing a project or event. Please add the context in which the project or event was created, a project name, descriptive text and a thumbnail. You can also add more images, videos, livestreams and BigBlueButton sessions.": "Dies ist die Seite zum Anlegen und Bearbeiten eines Projekts oder Events. Ein Event ist im Rahmen des Rundgangs zeitlich begrenzt, wohingegen ein Projekt über die ganze Dauer des Rundgangs stattfindet.",
   "submitInstructions2": "Wenn Sie zu einem späteren Zeitpunkt fortfahren möchten, können Sie das Projekt/Entwurf als Entwurf speichern und finden es in Ihrer Sammlung unter <1>/content</1>.",
   "The Rundgang website will be available in English and German. The project or event name can only be entered in one language and will therefore be used for both pages. Other texts should ideally be entered in both languages, otherwise the text will appear on both pages in only one language.": "Die Website des Rundgang 2022 wird in deutscher und englischer Sprache verfügbar sein. Bitte denken Sie daran, Ihre Projekt- oder Eventbeschreibung sowohl in deutscher als auch in englischer Sprache anzulegen. Der Projekt-/Eventname kann nur in einer Sprache angegeben werden und wird daher für beide Seiten übernommen. Weitere Texte sollten idealerweise in beiden Sprachen eingegeben werden; der Text erscheint ansonsten auf beiden Seiten in nur einer Sprache.",
