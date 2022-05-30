@@ -376,6 +376,7 @@ const ManageContexts = ({ matrixClient, moderationRooms }) => {
           : <SimpleContextSelect
               onItemChosen={onContextChange}
               selectedContext={selectedContext}
+              preSelectedValue="context"
               struktur={inputItems}
               disabled={loading}
               moderationRooms={moderationRooms}
