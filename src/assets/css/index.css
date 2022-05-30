@@ -218,6 +218,14 @@ main ul {
   list-style-type: "\2013\0020";
 }
 
+main ul.times {
+  list-style-type: "\2192\0020";
+}
+
+main ul.times li::marker {
+  color: var(--color-no);
+}
+
 form>*+* {
   margin-top: var(--margin);
 }
