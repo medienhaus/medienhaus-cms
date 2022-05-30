@@ -28,6 +28,7 @@ const AuthorCheckbox = styled.div`
   display: grid;
   grid-auto-flow: column;
   grid-gap: var(--margin);
+  align-items: center;
   justify-content: space-between;
 `
 

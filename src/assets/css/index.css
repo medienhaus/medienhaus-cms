@@ -1011,6 +1011,10 @@ button>.loading {
   margin-top: calc(var(--margin) * 0.5);
 }
 
+.manage > section + section {
+  margin-top: calc(var(--margin) * 2);
+}
+
 .maxlength {
   display: grid;
 }

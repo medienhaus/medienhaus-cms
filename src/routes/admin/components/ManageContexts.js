@@ -16,10 +16,24 @@ import locations from '../../../assets/data/locations.json'
 import { MatrixEvent } from 'matrix-js-sdk'
 import config from '../../../config.json'
 import TextareaAutosize from 'react-textarea-autosize'
-import styled from 'styled-components'
 import Matrix from '../../../Matrix'
 
 import findValueDeep from 'deepdash/es/findValueDeep'
+
+import styled from 'styled-components'
+
+const DangerZone = styled.section`
+  border: none;
+  border-color: var(--color-no);
+  border-radius: unset;
+  border-style: solid;
+  border-width: calc(var(--margin) * 0.5);
+  border-right: none;
+  border-bottom: unset;
+  padding: var(--margin);
+  padding-right: unset;
+  padding-bottom: unset;
+`
 
 const ManageContexts = ({ matrixClient, moderationRooms }) => {
   const { t } = useTranslation('admin')
@@ -367,28 +381,34 @@ const ManageContexts = ({ matrixClient, moderationRooms }) => {
   return (
     <>
       <section className="manage">
-        <h3>Manage contexts</h3>
-        {// !structure ? <Loading /> : <ShowContexts structure={structure} t={t} selectedContext={selectedContext} parent={parent} parentName={parentName} disableButton={disableButton} callback={contextualise} />
-        }
-        {!inputItems
-          ? <Loading />
-          : <SimpleContextSelect
-              onItemChosen={onContextChange}
-              selectedContext={selectedContext}
-              preSelectedValue="context"
-              struktur={inputItems}
-              disabled={loading}
-              moderationRooms={moderationRooms}
-            />}
-        {loading && inputItems && <Loading />}
+        <section className="manage--add-subcontext">
+          <h3>Manage contexts</h3>
+          {// !structure ? <Loading /> : <ShowContexts structure={structure} t={t} selectedContext={selectedContext} parent={parent} parentName={parentName} disableButton={disableButton} callback={contextualise} />
+          }
+          {!inputItems
+            ? <Loading />
+            : <SimpleContextSelect
+                onItemChosen={onContextChange}
+                selectedContext={selectedContext}
+                preSelectedValue="context"
+                struktur={inputItems}
+                disabled={loading}
+                moderationRooms={moderationRooms}
+              />}
+          {loading && inputItems && <Loading />}
+        </section>
         {/* <label htmlFor="name">{t('Context')}: </label>
          <input type="text" value={selectedContextName} disabled /> */}
         {selectedContext &&
           <>
-            <h3>{t('Add sub-context')}</h3>
-            <CreateContext t={t} parent={selectedContext} matrixClient={matrixClient} parentName={parentName} disableButton={loading} callback={addSpace} />
-            <h3>{t('Add image')}</h3>
-            <ProjectImage projectSpace={selectedContext} changeProjectImage={() => console.log('changed image')} disabled={loading} />
+            <section className="manage--add-subcontext">
+              <h3>{t('Add sub-context')}</h3>
+              <CreateContext t={t} parent={selectedContext} matrixClient={matrixClient} parentName={parentName} disableButton={loading} callback={addSpace} />
+            </section>
+            <section className="manage--add-image">
+              <h3>{t('Add image')}</h3>
+              <ProjectImage projectSpace={selectedContext} changeProjectImage={() => console.log('changed image')} disabled={loading} />
+            </section>
             {allocation?.physical && allocation.physical.map((location, i) => {
               return (
                 <div className="editor" key={location.lat}>
@@ -453,7 +473,7 @@ const ManageContexts = ({ matrixClient, moderationRooms }) => {
                 </div>
               )
             }))}
-            <section>
+            <section className="manage--add-description">
               <h3>{t('Add description')}</h3>
               <TextareaAutosize
                 value={description}
@@ -468,7 +488,7 @@ const ManageContexts = ({ matrixClient, moderationRooms }) => {
               </>
               )}
             </section>
-            <section>
+            <section className="manage--add-location">
               <h3>{t('Add location')}</h3>
               {locationStructure
                 ? <SimpleContextSelect
@@ -490,9 +510,9 @@ const ManageContexts = ({ matrixClient, moderationRooms }) => {
                 disabled={loading}
               />
             </section>
-            <hr />
-            {contextParent && <RemoveContext t={t} selectedContext={selectedContext} parent={contextParent} parentName={parentName} disableButton={disableButton} callback={spaceChild} />}
-
+            <DangerZone className="manage--add-location">
+              {contextParent && <RemoveContext t={t} selectedContext={selectedContext} parent={contextParent} parentName={parentName} disableButton={disableButton} callback={spaceChild} />}
+            </DangerZone>
           </>}
       </section>
     </>
