@@ -317,7 +317,6 @@ const ManageContexts = ({ matrixClient, moderationRooms }) => {
     }
     await getEvents(context)
     setSelectedContext(context)
-    setDescription(context.topic || '')
 
     console.log(context)
     setLoading(true)
