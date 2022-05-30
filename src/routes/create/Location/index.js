@@ -278,6 +278,7 @@ const Location = ({ reloadSpace, inviteCollaborators, projectSpace, events, allo
       {locationStructure &&
         <SimpleContextSelect
           selectedContext=""
+          preSelectedValue="location"
           onItemChosen={addContextToLocation}
           struktur={locationStructure}
           disabled={loading || !locationStructure}
