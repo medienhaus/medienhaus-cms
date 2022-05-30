@@ -24,15 +24,12 @@ import styled from 'styled-components'
 
 const DangerZone = styled.section`
   border: none;
-  border-color: var(--color-no);
-  border-radius: unset;
-  border-style: solid;
-  border-width: calc(var(--margin) * 0.5);
-  border-right: none;
-  border-bottom: unset;
-  padding: var(--margin);
-  padding-right: unset;
-  padding-bottom: unset;
+  border-left-color: var(--color-no);
+  border-left-radius: unset;
+  border-left-style: solid;
+  border-left-width: calc(var(--margin) * 0.5);
+  margin-top: calc(var(--margin) * 4) !important;
+  padding-left: var(--margin);
 `
 
 const ManageContexts = ({ matrixClient, moderationRooms }) => {
@@ -499,7 +496,7 @@ const ManageContexts = ({ matrixClient, moderationRooms }) => {
                   />
                 : <Loading />}
             </section>
-            <DangerZone className="manage--add-location">
+            <DangerZone className="manage--danger-zone">
               {contextParent && <RemoveContext t={t} selectedContext={selectedContext} parent={contextParent} parentName={parentName} disableButton={disableButton} callback={spaceChild} />}
             </DangerZone>
           </>}
