@@ -354,7 +354,7 @@ const Create = () => {
       <section className="welcome">
         <p>
           {projectSpace
-            ? <strong>{t('Edit project')}</strong>
+            ? <strong>{t('Edit project/event')}</strong>
             : <strong>{t('Create and upload new project or event')}</strong>}
         </p>
 
