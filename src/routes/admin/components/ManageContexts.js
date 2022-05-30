@@ -377,7 +377,6 @@ const ManageContexts = ({ matrixClient, moderationRooms }) => {
     await Matrix.addSpaceChild(location.id, selectedContext).catch(console.log)
     setCurrentLocation(location.id)
   }
-
   return (
     <>
       <section className="manage">
@@ -499,16 +498,6 @@ const ManageContexts = ({ matrixClient, moderationRooms }) => {
                     enableType="location-room"
                   />
                 : <Loading />}
-
-              <AddEvent
-                length={events.length}
-                room_id={selectedContext}
-                t={t}
-                reloadSpace={() => getEvents(selectedContext)}
-                inviteCollaborators={console.log}
-                allocation={allocation}
-                disabled={loading}
-              />
             </section>
             <DangerZone className="manage--add-location">
               {contextParent && <RemoveContext t={t} selectedContext={selectedContext} parent={contextParent} parentName={parentName} disableButton={disableButton} callback={spaceChild} />}
