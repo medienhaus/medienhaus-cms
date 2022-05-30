@@ -219,6 +219,7 @@ main ul {
 }
 
 main ul.times {
+  font-feature-settings: "case";
   list-style-type: "\2192\0020";
 }
 
