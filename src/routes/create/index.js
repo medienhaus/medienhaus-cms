@@ -58,7 +58,7 @@ const Create = () => {
 
   const projectSpace = params.spaceId
 
-  const getCurrentTime = useCallback(() => {
+  const setSaveTimestampToCurrentTime = useCallback(() => {
     const today = new Date()
     const month = today.getMonth() + 1 // JS starts month with 0
     const time = today.getHours().toString().padStart(2, '0') + ':' + today.getMinutes().toString().padStart(2, '0') + ':' + today.getSeconds().toString().padStart(2, '0')
@@ -133,21 +133,25 @@ const Create = () => {
       setVisibility(meta.published)
       if (!contentLang) return
       // we fetch the selected language content
-      const spaceRooms = space.rooms.filter(room => room.name === contentLang)
-      const getContent = await matrixClient.getRoomHierarchy(spaceRooms[0].room_id)
-      setBlocks(getContent.rooms.filter(room => room.name !== contentLang).filter(room => room.name.charAt(0) !== 'x').sort((a, b) => {
-        return a.name.substring(0, a.name.indexOf('_')) - b.name.substring(0, b.name.indexOf('_'))
-      }))
+      fetchContentBlocks()
       // check if there is an events space
       const checkForEventSpace = space.rooms.filter(room => room.name === 'events')
       const getEvents = checkForEventSpace.length > 0 && await matrixClient.getRoomHierarchy(space.rooms.filter(room => room.name === 'events')[0].room_id, 0).catch(err => console.log(err + '. This means there is no Event space, yet'))
       setEvents(getEvents?.rooms || 'depricated')
-      getCurrentTime()
+      setSaveTimestampToCurrentTime()
     } else {
       console.log('sync not done, trying again')
       setTimeout(() => fetchSpace(), 250)
     }
-  }, [matrixClient, projectSpace, getCurrentTime, contentLang])
+  }, [matrixClient, projectSpace, setSaveTimestampToCurrentTime, contentLang])
+
+  const fetchContentBlocks = useCallback(async () => {
+    const spaceRooms = spaceObjectRef.current.rooms.filter(room => room.name === contentLangRef.current)
+    const getContent = await matrixClient.getRoomHierarchy(spaceRooms[0].room_id)
+    setBlocks(getContent.rooms.filter(room => room.name !== contentLangRef.current).filter(room => room.name.charAt(0) !== 'x').sort((a, b) => {
+      return a.name.substring(0, a.name.indexOf('_')) - b.name.substring(0, b.name.indexOf('_'))
+    }))
+  }, [matrixClient, spaceObjectRef, contentLangRef])
 
   useEffect(() => {
     if (!projectSpace) {
@@ -258,9 +262,12 @@ const Create = () => {
     }
 
     for (const block of blocksRef.current) {
+      let deletedARoom = false
       if (!find(gutenbergBlocks, { clientId: block.room_id })) {
         await deleteRoom(block.room_id, spaceObjectRef.current?.rooms.filter(room => room.name === contentLangRef.current)[0].room_id)
+        deletedARoom = true
       }
+      if (deletedARoom) fetchContentBlocks()
     }
 
     for (const [index, block] of gutenbergBlocks.entries()) {
@@ -332,6 +339,9 @@ const Create = () => {
 
     // ensure correct order
     await matrixClient.sendStateEvent(spaceObjectRef.current?.rooms.filter(room => room.name === contentLangRef.current)[0].room_id, 'dev.medienhaus.order', { order: orderOfRooms })
+
+    // update our "last saved  timestamp"
+    setSaveTimestampToCurrentTime()
   }
 
   const addToMap = (blockId, roomId) => {
@@ -343,7 +353,7 @@ const Create = () => {
 
   const changeProjectImage = () => {
     setLoading(true)
-    getCurrentTime()
+    setSaveTimestampToCurrentTime()
     setLoading(false)
   }
 
@@ -490,7 +500,7 @@ const Create = () => {
           )}
           {(!config.medienhaus?.item || !config.medienhaus?.item[template]?.blueprint || config.medienhaus?.item[template]?.blueprint.includes('contributors')) && (
             <section className="contributors">
-              <Collaborators projectSpace={spaceObject?.rooms} members={roomMembers} time={getCurrentTime} startListeningToCollab={() => startListeningToCollab()} />
+              <Collaborators projectSpace={spaceObject?.rooms} members={roomMembers} time={setSaveTimestampToCurrentTime} startListeningToCollab={() => startListeningToCollab()} />
             </section>
           )}
 
@@ -531,7 +541,7 @@ const Create = () => {
             {/* <p>{t('If you still want to make changes to your contributions after publishing, you can continue to do so.')}</p> */}
             {spaceObject
               ? (<>
-                <PublishProject space={spaceObject.rooms[0]} metaEvent={medienhausMeta} hasContext={hasContext} description={(description && description[config.medienhaus?.languages[0]])} published={visibility} time={getCurrentTime} />
+                <PublishProject space={spaceObject.rooms[0]} metaEvent={medienhausMeta} hasContext={hasContext} description={(description && description[config.medienhaus?.languages[0]])} published={visibility} time={setSaveTimestampToCurrentTime} />
                 {!(description && description[config.medienhaus?.languages[0]]) && <p>❗️ {t('Please add a short description.')}</p>}
                 {!hasContext && <p>❗️ {t('Please select a context.')}</p>}
               </>)
