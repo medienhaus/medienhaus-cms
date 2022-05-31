@@ -15,11 +15,7 @@ const Content = ({ space, metaEvent, visibility, index, removeProject }) => {
   return (
     <>
       <div className="project">
-        <h3 className="above">{space.name}
-          {<span style={{ color: 'gray' }}> {metaEvent?.published.toUpperCase()}</span>}
-          {config.medienhaus?.item &&
-            <span style={{ color: 'gray', float: 'right' }}>{config.medienhaus?.item ? config.medienhaus?.item[metaEvent.template]?.label.toUpperCase() : metaEvent.type.toUpperCase()}</span>}
-        </h3>
+        <h3 className="above">{space.name}</h3>
         <figure className="left">
           {space.avatar_url && <img src={matrixClient.mxcUrlToHttp(space.avatar_url)} alt="project-visual-key" />}
         </figure>
@@ -30,6 +26,11 @@ const Content = ({ space, metaEvent, visibility, index, removeProject }) => {
         <button disabled={showDeleteComponent} onClick={() => history.push(`/create/${space.room_id}`)}>{t('EDIT')}</button>
         <button disabled={showDeleteComponent} onClick={() => setShowDeleteComponent(true)}>{t('DELETE')}</button>
       </div>
+      <aside className="project--status">
+        {config.medienhaus?.item &&
+          <span className="project--type">{config.medienhaus?.item ? config.medienhaus?.item[metaEvent.template]?.label.toUpperCase() : metaEvent.type.toUpperCase()}</span>}
+        <span className="project--visibility">{metaEvent?.published.toUpperCase()}</span>
+      </aside>
       {showDeleteComponent &&
         <DeleteProjectButton roomId={space.room_id} name={space.name} index={index} toggleDeleteButton={() => setShowDeleteComponent(false)} removeProject={removeProject} />}
     </>
