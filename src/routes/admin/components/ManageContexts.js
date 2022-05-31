@@ -121,6 +121,7 @@ const ManageContexts = ({ matrixClient, moderationRooms: moderationRoomsInit }) 
     setLocationStructure(locationResponse.children)
     setLoading(false)
   }
+
   const spaceChild = async (e, space, add) => {
     setLoading(true)
     e && e.preventDefault()
