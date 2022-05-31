@@ -304,7 +304,15 @@ const ManageContexts = ({ matrixClient, moderationRooms: moderationRoomsInit }) 
     if (config.medienhaus.api) {
       const fetchSpace = await fetch(config.medienhaus.api + space)
       const response = await fetchSpace.json()
-      if (response.parents) setCurrentLocation(parent[parent.length - 1])
+      console.log(response)
+      if (response.parents) {
+        for (const id of response.parents) {
+          const fetchParent = await fetch(config.medienhaus.api + id)
+          const response = await fetchParent.json()
+          console.log(response)
+          if (response.template.includes('location')) setCurrentLocation(response.id)
+        }
+      }
     } else {
       const idExistsInLocationStructure = findNested(locationStructure, 'id', space)
       if (idExistsInLocationStructure) {
@@ -327,7 +335,7 @@ const ManageContexts = ({ matrixClient, moderationRooms: moderationRoomsInit }) 
     }
     setLoading(false)
   }
-
+  console.log(currentLocation)
   const onContextChange = async (context) => {
     setLoading(true)
     let contextObject
@@ -413,8 +421,12 @@ const ManageContexts = ({ matrixClient, moderationRooms: moderationRoomsInit }) 
   const addContextToLocation = async (location) => {
     console.log('object')
     if (currentLocation) await Matrix.removeSpaceChild(currentLocation, selectedContext)
-    await Matrix.addSpaceChild(location.id, selectedContext).catch(console.log)
-    setCurrentLocation(location.id)
+    await Matrix.addSpaceChild(location, selectedContext).catch(async () => {
+      const join = await matrixClient.joinRoom(location).catch(console.log)
+      if (join) addContextToLocation(location)
+    })
+
+    setCurrentLocation(location)
   }
   return (
     <>
@@ -530,6 +542,7 @@ const ManageContexts = ({ matrixClient, moderationRooms: moderationRoomsInit }) 
               <h3>{t('Add location')}</h3>
               {locationStructure
                 ? <SimpleContextSelect
+                    location
                     onItemChosen={addContextToLocation}
                     selectedContext={currentLocation}
                     struktur={locationStructure}

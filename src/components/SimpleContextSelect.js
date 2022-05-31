@@ -5,7 +5,7 @@ import filterDeep from 'deepdash/es/filterDeep'
 import config from '../config.json'
 import { useTranslation } from 'react-i18next'
 
-function SimpleContextSelect ({ onItemChosen, selectedContext: selectedContextInit, contexts, struktur, disabled, moderationRooms, preSelectedValue, enableType }) {
+function SimpleContextSelect ({ location, onItemChosen, selectedContext: selectedContextInit, contexts, struktur, disabled, moderationRooms, preSelectedValue, enableType }) {
   const [selectedContext, setSelectedContext] = useState(selectedContextInit)
   const { t } = useTranslation('context')
   const items = config.medienhaus?.sites?.moderate?.manageContexts?.showRoot ? struktur : struktur[Object.keys(struktur)[0]].children
@@ -20,11 +20,14 @@ function SimpleContextSelect ({ onItemChosen, selectedContext: selectedContextIn
       <input id="context-select" list="context-list" name="context-select" placeholder="-- type to search / double-click to select --" type="text" />
       <datalist id="context-list" disabled={disabled} defaultValue={selectedContext} onChange={(e) => { onItemChosen(e.target.value) }}>
       */}
+      <p>{selectedContext}</p>
       <select disabled={disabled} value={selectedContext} onChange={(e) => { setSelectedContext(e.target.value); onItemChosen(e.target.value) }}>
         <option disabled value="">-- {t('select ' + preSelectedValue)} --</option>
         {mapDeep(filterDeep(items, (value, key, parent, context) => {
           // Exclude all hierarchy elements that are not "contexts"
           if (!value?.type.includes('context')) return false
+          if (!value?.template.includes('location')) return false
+
           value.path = []
           value.pathIds = []
           function addParentToPath (item) {
