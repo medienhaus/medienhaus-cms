@@ -25,7 +25,7 @@ function SimpleContextSelect ({ location, onItemChosen, selectedContext: selecte
         {mapDeep(filterDeep(items, (value, key, parent, context) => {
           // Exclude all hierarchy elements that are not "contexts"
           if (!value?.type.includes('context')) return false
-          if (!value?.template.includes('location')) return false
+          if (location && !value?.template.includes('location')) return false
 
           value.path = []
           value.pathIds = []
