@@ -9,7 +9,7 @@ const Avatar = ({ avatarUrl, name }) => {
   const [selectedFile, setSelectedFile] = useState()
   const [src, setSrc] = useState('')
   const matrixClient = Matrix.getMatrixClient()
-  const { t } = useTranslation()
+  const { t } = useTranslation('content')
 
   useEffect(() => {
     if (currentAvatar) setSrc(matrixClient.mxcUrlToHttp(currentAvatar, 1000, 1000, 'crop', true))
@@ -32,8 +32,8 @@ const Avatar = ({ avatarUrl, name }) => {
   return (
 
     <div className="profile-image">
-      <h3>Profile image</h3>
-      <p>Here you can change your profile image.</p>
+      <h3>{t('Profile image')}</h3>
+      <p>{t('Here you can change your profile image.')}</p>
       {currentAvatar ? <img className="avatar" src={src} alt={`profile avatar of ${name}`} /> : <canvas className="avatar" />}
       {!changeAvatar &&
         <button onClick={() => {

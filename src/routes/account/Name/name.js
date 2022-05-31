@@ -17,8 +17,8 @@ const Name = ({ name, callback }) => {
 
   return (
     <div className="name">
-      <h3>Profile name</h3>
-      <p>Here you can change your profile name.</p>
+      <h3>{t('Profile name')}</h3>
+      <p>{t('Here you can change your profile name.')}</p>
       <input id="title" maxLength="100" name="title" type="text" value={newDisplayName} onChange={(e) => { setEditDisplayName(true); setNewDisplayName(e.target.value) }} />
       <div className="confirmation">
         {editDisplayName &&

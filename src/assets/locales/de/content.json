@@ -75,5 +75,11 @@
   "Location": "Standort",
   "Specify at which location your event will take place. To be as accurate as possible you can also add a room number or a concise location marker (i.e. “behind the blue cabinet”).": "Geben Sie an, an welchem Standort ihr Event stattfindet. Um so genau wie möglich zu sein können Sie auch eine Raumnummer oder eine prägnante Standort-Markierung hinzufügen (z.B. „hinter dem blauen Schrank“).",
   "Time": "Zeitraum",
-  "Mark the exact time of your event with a start and end time.": "Markieren Sie mit einer Start- und Endzeit, den genauen Zeitpunkt ihrs Events."
+  "Mark the exact time of your event with a start and end time.": "Markieren Sie mit einer Start- und Endzeit, den genauen Zeitpunkt ihrs Events.",
+  "cancel": "abbrechen",
+  "save": "speichern",
+  "Profile name": "Anzeigename",
+  "Here you can change your profile name.": "Hier können Sie Ihren Anzeigenamen ändern.",
+  "Profile image": "Profilbild",
+  "Here you can change your profile image.": "Hier können Sie Ihr Profilbild ändern."
 }
