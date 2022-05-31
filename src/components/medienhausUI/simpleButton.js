@@ -1,19 +1,14 @@
 import React from 'react'
 import styled from 'styled-components'
 
+/*
+  This simple button looks exactly like a standard <button>, but less heavy by using the same background color
+  as the page.
+ */
+
 const Button = styled.button`
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
   background-color: ${props => props.cancel ? 'var(--color-bg)' : 'var(--color-fg)'};
-  border-color: var(--color-fg);
-  border-radius: unset;
-  border-style: solid;
-  border-width: calc(var(--margin) * 0.2);
   color: ${props => props.cancel ? 'var(--color-fg)' : 'var(--color-bg)'};
-  cursor: pointer;
-  height: calc(var(--margin) * 2);
-  padding: calc(var(--margin) * 0.2);
   width: ${props => props.width || '100%'};
 
   &[disabled] {
