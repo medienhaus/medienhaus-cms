@@ -16,11 +16,11 @@ import locations from '../../../assets/data/locations.json'
 import { MatrixEvent } from 'matrix-js-sdk'
 import config from '../../../config.json'
 import TextareaAutosize from 'react-textarea-autosize'
-import styled from 'styled-components'
 
+import findPathDeep from 'deepdash/findPathDeep'
 import findValueDeep from 'deepdash/findValueDeep'
 
-const ManageContexts = ({ matrixClient, moderationRooms }) => {
+const ManageContexts = ({ matrixClient, moderationRooms: moderationRoomsInit }) => {
   const { t } = useTranslation('admin')
   const [selectedContext, setSelectedContext] = useState('')
   const [parentName] = useState('')
@@ -34,6 +34,7 @@ const ManageContexts = ({ matrixClient, moderationRooms }) => {
   const [deleting, setDeleting] = useState(false)
   const [loading, setLoading] = useState(false)
   const [description, setDescription] = useState('')
+  const [moderationRooms, setModerationRooms] = useState(moderationRoomsInit)
   const createStructurObject = async () => {
     async function getSpaceStructure (matrixClient, motherSpaceRoomId, includeRooms) {
       setDisableButton(true)
@@ -127,9 +128,7 @@ const ManageContexts = ({ matrixClient, moderationRooms }) => {
 
   const fetchTreeFromApi = async () => {
     const fetchTree = await fetch(config.medienhaus.api + process.env.REACT_APP_CONTEXT_ROOT_SPACE_ID + '/tree')
-    console.log(fetchTree)
     const response = await fetchTree.json()
-    console.log(response)
     setInputItems(response.children)
     setLoading(false)
   }
@@ -147,8 +146,8 @@ const ManageContexts = ({ matrixClient, moderationRooms }) => {
       body: JSON.stringify(add ? body : { }) // if we add a space to an existing one we need to send the object 'body', to remove a space we send an empty object.
     }).catch(console.log)
     add ? console.log('added as child to ' + selectedContext) : console.log('removed ' + selectedContext + ' from ' + contextParent)
-    if (config.medienhaus.api) fetchTreeFromApi()
-    else await createStructurObject()
+    // if (config.medienhaus.api) fetchTreeFromApi()
+    // else await createStructurObject()
     if (add) {
       setSelectedContext(space)
     } else {
@@ -167,7 +166,7 @@ const ManageContexts = ({ matrixClient, moderationRooms }) => {
     await matrixClient.setPowerLevel(roomId, userId, level, newStateEvent).catch(err => console.error(err))
   }
 
-  function addSpace (e, name, template, callback) {
+  async function addSpace (e, name, template, callback) {
     e.preventDefault()
     const createSpace = async (title) => {
       setDisableButton(true)
@@ -243,36 +242,47 @@ const ManageContexts = ({ matrixClient, moderationRooms }) => {
           await setPower(user, space.room_id, 50)
         }
       }
+      return space.room_id
+    }
+
+    const newContext = await createSpace(name)
+    if (config.medienhaus.api) {
+      // we add our newly created context to the context object to be able to work on it before the api is done fetching.
+      const subContextObject = {
+        id: newContext,
+        room_id: newContext,
+        name: name,
+        template: template,
+        type: 'context'
+      }
+
+      // const parentObject = findValueDeep(
+      //   inputItems,
+      //   (value, key, parent) => {
+      //     if (value.id === selectedContext) return true
+      //   }, { childrenPath: 'children', includeRoot: false, rootIsChildren: true })
+      setModerationRooms(prevState => {
+        const newState = [...prevState]
+        newState.push(subContextObject)
+        return newState
+      })
+      const pathToPushTo = findPathDeep(
+        inputItems,
+        (value, key, parent) => {
+          if (value.id === selectedContext) return true
+        }, { childrenPath: 'children', includeRoot: false, rootIsChildren: true, pathFormat: 'array' })
+
+      pathToPushTo.push('children')
+      pathToPushTo.push(newContext)
+      setInputItems(prevState => _.set({ ...prevState }, pathToPushTo, subContextObject))
+      setSelectedContext(newContext)
+
       if (callback) callback()
       setDisableButton(false)
-      return space
     }
-    createSpace(name)
   }
 
   const fetchAllocation = async (space) => setAllocation(await matrixClient.getStateEvent(space, 'dev.medienhaus.allocation').catch(console.log))
-
-  async function findNested (obj, key, value) {
-    console.log(obj)
-    if (obj[key] === value) {
-      return obj
-    } else {
-      const keys = Object.keys(obj) // add this line to iterate over the keys
-      console.log(keys)
-      for (let i = 0, len = keys.length; i < len; i++) {
-        const k = keys[i] // use this key for iteration, instead of index "i"
-
-        // add "obj[k] &&" to ignore null values
-        if (obj[k] && typeof obj[k] === 'object') {
-          const found = findNested(obj[k], key, value)
-          if (found) {
-          // If the object was found in the recursive call, bubble it up.
-            return found
-          }
-        }
-      }
-    }
-  }
 
   const getEvents = async (space) => {
     setLoading(true)
@@ -298,27 +308,33 @@ const ManageContexts = ({ matrixClient, moderationRooms }) => {
     setLoading(true)
     let contextObject
     if (config.medienhaus.api) {
-      const fetchPath = await fetch(config.medienhaus.api + context)
-      const response = await fetchPath.json()
-      contextObject = response
-      console.log(contextObject)
-      contextObject.parents ? setContextParent(contextObject.parents[0]) : setContextParent(null)
-      setDescription(contextObject
-        .description.default || '')
+      const fetchPath = await fetch(config.medienhaus.api + context).catch(console.log)
+      if (fetchPath.ok) {
+        const response = await fetchPath.json().catch(console.log)
+        contextObject = response
+        console.log(contextObject)
+        contextObject.parents ? setContextParent(contextObject.parents[0]) : setContextParent(null)
+        setDescription(contextObject
+          .description.default || '')
+      } else {
+        findValueWithDeepDash()
+      }
     } else {
+      findValueWithDeepDash()
+    }
+    function findValueWithDeepDash () {
       contextObject = findValueDeep(
         inputItems,
         (value, key, parent) => {
           if (value.id === context) return true
         }, { childrenPath: 'children', includeRoot: false, rootIsChildren: true })
-      contextObject.pathIds ? setContextParent(context.pathIds[context.pathIds.length - 1]) : setContextParent(null)
+      console.log(contextObject)
+      contextObject.pathIds ? setContextParent(contextObject.pathIds[contextObject.pathIds.length - 1]) : setContextParent(null)
       setDescription(contextObject
         .topic || '')
     }
     await getEvents(context)
     setSelectedContext(context)
-
-    console.log(context)
     setLoading(true)
     await getEvents(context)
     setSelectedContext(context)
@@ -358,7 +374,6 @@ const ManageContexts = ({ matrixClient, moderationRooms }) => {
     if (description.length > 500) return
     await matrixClient.setRoomTopic(selectedContext, description).catch(console.log)
   }
-
   return (
     <>
       <section className="manage">
@@ -379,6 +394,7 @@ const ManageContexts = ({ matrixClient, moderationRooms }) => {
          <input type="text" value={selectedContextName} disabled /> */}
         {selectedContext &&
           <>
+            {/* <button onClick={selectedContext.context.push({ name: 'yay' })}>test</button> */}
             <h3>{t('Add Sub-Context')}</h3>
             <CreateContext t={t} parent={selectedContext} matrixClient={matrixClient} parentName={parentName} disableButton={loading} callback={addSpace} />
             <h3>{t('Add Image')}</h3>
