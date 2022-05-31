@@ -22,14 +22,17 @@ import { bold } from '@wordpress/format-library/build/bold'
 import { italic } from '@wordpress/format-library/build/italic'
 import { strikethrough } from '@wordpress/format-library/build/strikethrough'
 import { debounce } from 'lodash'
+import { registerCoreBlocks } from '@wordpress/block-library'
 
 registerFormatType('bold', bold)
 registerFormatType('italic', italic)
 registerFormatType('strikethrough', strikethrough)
 
-registerBlockType(code.metadata, { ...code.settings, transforms: null })
-registerBlockType(list.metadata, { ...list.settings, transforms: null })
-registerBlockType(paragraph.metadata, { ...paragraph.settings, transforms: null })
+// registerBlockType(code.metadata, { ...code.settings, transforms: null })
+// registerBlockType(list.metadata, { ...list.settings, transforms: null })
+// registerBlockType(paragraph.metadata, { ...paragraph.settings, transforms: null })
+
+registerCoreBlocks([paragraph, code, list])
 
 registerBlockType('medienhaus/heading', {
   apiVersion: 2,
@@ -42,14 +45,18 @@ registerBlockType('medienhaus/heading', {
   icon: <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M6.2 5.2v13.4l5.8-4.8 5.8 4.8V5.2z" /></svg>,
   supports: {
     html: false
+    // __experimentalSlashInserter: true
   },
   attributes: {
-    content: { type: 'string' }
+    content: {
+      type: 'string'
+    }
   },
   edit: (props) => {
     const {
       attributes: { content },
-      setAttributes
+      setAttributes,
+      onRemove
     } = props
 
     // eslint-disable-next-line react-hooks/rules-of-hooks
@@ -62,8 +69,11 @@ registerBlockType('medienhaus/heading', {
       <RichText
         {...blockProps}
         tagName="h2"
+        placeholder="Heading"
         onChange={onChangeContent}
+        onRemove={onRemove}
         value={content}
+        disableLineBreaks
       />
     )
   }
