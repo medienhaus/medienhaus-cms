@@ -18,7 +18,7 @@ import config from '../../../config.json'
 import TextareaAutosize from 'react-textarea-autosize'
 import Matrix from '../../../Matrix'
 
-import findValueDeep from 'deepdash/es/findValueDeep'
+import findValueDeep from 'deepdash/findValueDeep'
 
 import styled from 'styled-components'
 

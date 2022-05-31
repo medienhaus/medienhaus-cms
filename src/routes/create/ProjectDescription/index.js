@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import { ReactComponent as TextIcon } from '../../../assets/icons/remix/text.svg'
 import { useTranslation } from 'react-i18next'
 import TextareaAutosize from 'react-textarea-autosize'
 
@@ -22,27 +21,17 @@ const ProjectDescription = ({ description: intro, callback }) => {
 
   return (
     <>
-      <div className="editor">
-        <div className="left">
-          <button disabled>↑</button>
-          <figure className="icon-bg"><TextIcon fill="var(--color-fg)" /></figure>
-          <button disabled>↓</button>
-        </div>
-        <div className="center">
-          <TextareaAutosize
-            minRows={6}
-            value={description}
-            onClick={() => setBackupDescription(description)}
-            onChange={(e) => {
-              setDescription(e.target.value)
-            }}
-            placeholder={`${t('Please add a short description.')} ${t('This field is required before publishing.')}`}
-            onBlur={() => onSave()}
-          />
-        </div>
-        <div className="right">
-          <button disabled>×</button>
-        </div>
+      <div className="projectdescription">
+        <TextareaAutosize
+          minRows={6}
+          value={description}
+          onClick={() => setBackupDescription(description)}
+          onChange={(e) => {
+            setDescription(e.target.value)
+          }}
+          placeholder={`${t('Please add a short description.')} ${t('This field is required before publishing.')}`}
+          onBlur={() => onSave()}
+        />
       </div>
       {description.length > 500 && (<>
         <p>{t('Characters:')} {description.length}</p>

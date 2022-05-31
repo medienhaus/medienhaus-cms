@@ -1,6 +1,6 @@
 import React from 'react'
-import mapDeep from 'deepdash/es/mapDeep'
-import filterDeep from 'deepdash/es/filterDeep'
+import mapDeep from 'deepdash/mapDeep'
+import filterDeep from 'deepdash/filterDeep'
 
 import config from '../config.json'
 import { useTranslation } from 'react-i18next'

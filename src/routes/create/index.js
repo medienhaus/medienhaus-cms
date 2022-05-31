@@ -3,12 +3,11 @@ import { useParams, useHistory, Link } from 'react-router-dom'
 import Matrix from '../../Matrix'
 import { MatrixEvent } from 'matrix-js-sdk'
 import ISO6391 from 'iso-639-1'
+import * as useStateRef from 'react-usestateref'
 
 // components
 import Collaborators from './Collaborators'
 import Category from './Category'
-import DisplayContent from './DisplayContent'
-import AddContent from './AddContent'
 import ProjectImage from './ProjectImage'
 import ProjectTitle from './ProjectTitle'
 import PublishProject from '../../components/PublishProject'
@@ -21,8 +20,17 @@ import Location from './Location'
 import Dropdown from '../../components/medienhausUI/dropdown'
 
 import config from '../../config.json'
-import _ from 'lodash'
 import styled from 'styled-components'
+import _, { find, isEmpty } from 'lodash'
+import GutenbergEditor from '../gutenberg/editor'
+import createBlock from './matrix_create_room'
+
+// eslint-disable-next-line no-unused-vars
+const nl2br = function (str) {
+  return str.split('\n').join('<br>')
+  // const breakTag = '<br>' // Adjust comment to avoid issue on phpjs.org display
+  // return (str + '').replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1' + breakTag + '$2')
+}
 
 const AuthorCheckbox = styled.div`
   display: grid;
@@ -45,15 +53,18 @@ const Create = () => {
   const [title, setTitle] = useState('')
   const [visibility, setVisibility] = useState('')
   const [loading, setLoading] = useState(false)
-  const [blocks, setBlocks] = useState([])
+  const [blocks, setBlocks, blocksRef] = useStateRef(undefined)
   const [isCollab, setIsCollab] = useState(false)
-  const [contentLang, setContentLang] = useState(config.medienhaus?.languages[0])
-  const [spaceObject, setSpaceObject] = useState()
+  const [contentLang, setContentLang, contentLangRef] = useStateRef(config.medienhaus?.languages[0])
+  const [spaceObject, setSpaceObject, spaceObjectRef] = useStateRef()
   const [roomMembers, setRoomMembers] = useState()
   const [saveTimestamp, setSaveTimestamp] = useState('')
   const [medienhausMeta, setMedienhausMeta] = useState([])
   const [allocation, setAllocation] = useState([])
   const [events, setEvents] = useState()
+  const [gutenbergContent, setGutenbergContent] = useState(undefined)
+  // eslint-disable-next-line no-unused-vars
+  const [gutenbergIdToMatrixRoomId, setGutenbergIdToMatrixRoomId, gutenbergIdToMatrixRoomIdRef] = useStateRef({})
   const [description, setDescription] = useState()
   const [hasContext, setHasContext] = useState(false)
   const [template, setTemplate] = useState(config.medienhaus?.item && Object.keys(config.medienhaus?.item).length > 0 && Object.keys(config.medienhaus?.item)[0])
@@ -65,7 +76,7 @@ const Create = () => {
 
   const projectSpace = params.spaceId
 
-  const getCurrentTime = useCallback(() => {
+  const setSaveTimestampToCurrentTime = useCallback(() => {
     const today = new Date()
     const month = today.getMonth() + 1 // JS starts month with 0
     const time = today.getHours().toString().padStart(2, '0') + ':' + today.getMinutes().toString().padStart(2, '0') + ':' + today.getSeconds().toString().padStart(2, '0')
@@ -207,31 +218,27 @@ const Create = () => {
       setAllocation(allocationEvent)
       // check if project is published or draft
       setVisibility(meta.published)
+      if (!contentLang) return
       // we fetch the selected language content
-      const spaceRooms = space.rooms.filter(room => room.name === contentLang)
-      // let getContent
-      // if (!spaceRooms[0]) {
-      //   // if a language space doesn't exist yet we create it
-      //   const languageSpace = await createNewLanguageSpace(contentLang, projectSpace)
-      //   console.log(languageSpace)
-      //   // eslint-disable-next-line no-debugger
-      //   debugger
-      //   getContent = await matrixClient.getRoomHierarchy(languageSpace)
-      // } else getContent = await matrixClient.getRoomHierarchy(spaceRooms[0].room_id)
-      const getContent = await matrixClient.getRoomHierarchy(spaceRooms[0].room_id)
-      setBlocks(getContent.rooms.filter(room => room.name !== contentLang).filter(room => room.name.charAt(0) !== 'x').sort((a, b) => {
-        return a.name.substring(0, a.name.indexOf('_')) - b.name.substring(0, b.name.indexOf('_'))
-      }))
+      fetchContentBlocks()
       // check if there is an events space
       const checkForEventSpace = space.rooms.filter(room => room.name === 'events')
       const getEvents = checkForEventSpace.length > 0 && await matrixClient.getRoomHierarchy(space.rooms.filter(room => room.name === 'events')[0].room_id, 0).catch(err => console.log(err + '. This means there is no Event space, yet'))
       setEvents(getEvents?.rooms || 'depricated')
-      getCurrentTime()
+      setSaveTimestampToCurrentTime()
     } else {
       console.log('sync not done, trying again')
       setTimeout(() => fetchSpace(), 250)
     }
-  }, [matrixClient, projectSpace, getCurrentTime, contentLang])
+  }, [matrixClient, projectSpace, setSaveTimestampToCurrentTime, contentLang])
+
+  const fetchContentBlocks = useCallback(async () => {
+    const spaceRooms = spaceObjectRef.current.rooms.filter(room => room.name === contentLangRef.current)
+    const getContent = await matrixClient.getRoomHierarchy(spaceRooms[0].room_id)
+    setBlocks(getContent.rooms.filter(room => room.name !== contentLangRef.current).filter(room => room.name.charAt(0) !== 'x').sort((a, b) => {
+      return a.name.substring(0, a.name.indexOf('_')) - b.name.substring(0, b.name.indexOf('_'))
+    }))
+  }, [matrixClient, spaceObjectRef, contentLangRef])
 
   useEffect(() => {
     if (!projectSpace) {
@@ -240,6 +247,10 @@ const Create = () => {
     }
     projectSpace && fetchSpace()
   }, [projectSpace, fetchSpace, title])
+
+  useEffect(() => {
+    setGutenbergContent(undefined)
+  }, [contentLang])
 
   useEffect(() => {
     if (!projectSpace || !spaceObject) {
@@ -318,9 +329,118 @@ const Create = () => {
     }
   }
 
+  const deleteRoom = async (roomId, parent) => {
+    await Matrix.removeSpaceChild(parent, roomId)
+    await matrixClient.setRoomName(roomId, 'x_')
+    await matrixClient.leave(roomId)
+  }
+
+  const contentHasChanged = async (gutenbergBlocks) => {
+    const orderOfRooms = []
+
+    // eslint-disable-next-line no-unused-vars
+    for (const [blockId, roomId] of Object.entries(gutenbergIdToMatrixRoomIdRef.current)) {
+      if (!find(gutenbergBlocks, { clientId: blockId })) {
+        await deleteRoom(roomId, spaceObjectRef.current?.rooms.filter(room => room.name === contentLangRef.current)[0].room_id)
+        const x = { ...gutenbergIdToMatrixRoomIdRef.current }
+        delete x[blockId]
+        setGutenbergIdToMatrixRoomId(x)
+      }
+    }
+
+    for (const block of blocksRef.current) {
+      let deletedARoom = false
+      if (!find(gutenbergBlocks, { clientId: block.room_id })) {
+        await deleteRoom(block.room_id, spaceObjectRef.current?.rooms.filter(room => room.name === contentLangRef.current)[0].room_id)
+        deletedARoom = true
+      }
+      if (deletedARoom) fetchContentBlocks()
+    }
+
+    for (const [index, block] of gutenbergBlocks.entries()) {
+      let roomId = block.clientId
+      let contentType
+      switch (block.name) {
+        case 'core/list':
+          contentType = (block.attributes.ordered ? 'ol' : 'ul')
+          break
+        case 'core/code':
+          contentType = 'code'
+          break
+        case 'medienhaus/heading':
+          contentType = 'heading'
+          break
+        default:
+          contentType = 'text'
+      }
+
+      if (!matrixClient.getRoom(roomId)) {
+        // this is a newly created block
+        if (!gutenbergIdToMatrixRoomIdRef.current[block.clientId]) {
+          const createdBlock = await createBlock(null, contentType, index, spaceObjectRef.current?.rooms.filter(room => room.name === contentLangRef.current)[0].room_id)
+          addToMap(block.clientId, createdBlock)
+        }
+
+        roomId = gutenbergIdToMatrixRoomIdRef.current[block.clientId]
+      }
+
+      // ensure room name is correct
+      await matrixClient.setRoomName(roomId, `${index}_${contentType}`)
+      orderOfRooms.push(roomId)
+
+      // write content to room
+      switch (block.name) {
+        case 'core/list':
+          await matrixClient.sendMessage(roomId, {
+            body: (block.attributes.ordered ? '<ol>' : '<ul>') + block.attributes.values + (block.attributes.ordered ? '</ol>' : '</ul>'),
+            msgtype: 'm.text',
+            format: 'org.matrix.custom.html',
+            formatted_body: (block.attributes.ordered ? '<ol>' : '<ul>') + block.attributes.values + (block.attributes.ordered ? '</ol>' : '</ul>')
+          })
+          break
+        case 'core/code':
+          await matrixClient.sendMessage(roomId, {
+            body: block.attributes.content,
+            msgtype: 'm.text',
+            format: 'org.matrix.custom.html',
+            formatted_body: `<pre><code>${block.attributes.content}</code></pre>`
+          })
+          break
+        case 'medienhaus/heading':
+          await matrixClient.sendMessage(roomId, {
+            body: '## ' + block.attributes.content,
+            msgtype: 'm.text',
+            format: 'org.matrix.custom.html',
+            formatted_body: `<h2>${block.attributes.content}</h2>`
+          })
+          break
+        default:
+          await matrixClient.sendMessage(roomId, {
+            body: block.attributes.content,
+            msgtype: 'm.text',
+            format: 'org.matrix.custom.html',
+            formatted_body: block.attributes.content
+          })
+      }
+    }
+
+    // ensure correct order
+    await matrixClient.sendStateEvent(spaceObjectRef.current?.rooms.filter(room => room.name === contentLangRef.current)[0].room_id, 'dev.medienhaus.order', { order: orderOfRooms })
+
+    // update our "last saved  timestamp"
+    setSaveTimestampToCurrentTime()
+  }
+
+  const addToMap = (blockId, roomId) => {
+    setGutenbergIdToMatrixRoomId(prevState => ({
+      ...prevState,
+      [blockId]: roomId
+    }))
+  }
+
   const changeProjectImage = () => {
     setLoading(true)
-    getCurrentTime()
+    setSaveTimestampToCurrentTime()
     setLoading(false)
   }
 
@@ -348,6 +468,88 @@ const Create = () => {
     setHideAuthors(hideAuthors => !hideAuthors)
     await matrixClient.sendStateEvent(projectSpace, 'de.udk-berlin.rundgang', { hideAuthors: e.target.checked })
   }
+
+  useEffect(() => {
+    const fetchContentsForGutenberg = async () => {
+      const contents = []
+      for (const block of blocks) {
+        const fetchMessage = await matrixClient.http.authedRequest(undefined, 'GET', `/rooms/${block.room_id}/messages`, { limit: 1, dir: 'b', filter: JSON.stringify({ types: ['m.room.message'] }) }, {})
+        const message = isEmpty(fetchMessage.chunk) ? null : fetchMessage.chunk[0].content
+
+        if (message) {
+          const blockType = block.name.slice(block.name.search('_'))
+          let n, a
+
+          switch (blockType) {
+            case '_heading':
+              n = 'medienhaus/heading'
+              a = { content: message.body.substr(3) }
+              break
+            case '_text':
+              n = 'core/paragraph'
+              a = { content: message.formatted_body ? message.formatted_body.replace(/<p>(.*)<\/p>/g, '$1<br>') : nl2br(message.body) }
+              break
+            case '_code':
+              n = 'core/code'
+              a = { content: _.escape(message.body) }
+              break
+            case '_ul':
+              n = 'core/list'
+              a = {
+                ordered: false,
+                values: message.formatted_body.slice(4, -5),
+                placeholder: 'add list element'
+              }
+              break
+            case '_ol':
+              n = 'core/list'
+              a = {
+                ordered: true,
+                values: message.formatted_body.slice(4, -5),
+                placeholder: 'add list element'
+              }
+              break
+            case '_quote':
+              n = 'medienhaus/quote'
+              a = { content: message.body }
+              break
+            case '_image':
+              n = 'medienhaus/image'
+              a = {
+                url: matrixClient.mxcUrlToHttp(message.url),
+                alt: message.info.alt,
+                license: message.info.license,
+                author: message.info.author
+              }
+              break
+            case '_audio':
+              n = 'medienhaus/audio'
+              a = {
+                url: matrixClient.mxcUrlToHttp(message.url),
+                alt: message.info.alt,
+                license: message.info.license,
+                author: message.info.author
+              }
+              break
+            default:
+              n = 'core/paragraph'
+              a = { content: message.formatted_body }
+          }
+          contents.push({
+            clientId: block.room_id,
+            isValid: true,
+            name: n,
+            attributes: a,
+            innerBlocks: []
+          })
+        }
+      }
+      setGutenbergContent(contents)
+    }
+
+    if (blocks === undefined) return
+    fetchContentsForGutenberg()
+  }, [blocks])
 
   if (projectSpace && !matrixClient.isInitialSyncComplete()) return <Loading />
   return (
@@ -389,7 +591,7 @@ const Create = () => {
           )}
           {(!config.medienhaus?.item || !config.medienhaus?.item[template]?.blueprint || config.medienhaus?.item[template]?.blueprint.includes('contributors')) && (
             <section className="contributors">
-              <Collaborators projectSpace={spaceObject?.rooms} members={roomMembers} time={getCurrentTime} startListeningToCollab={() => startListeningToCollab()} />
+              <Collaborators projectSpace={spaceObject?.rooms} members={roomMembers} time={setSaveTimestampToCurrentTime} startListeningToCollab={() => startListeningToCollab()} />
             </section>
           )}
 
@@ -417,20 +619,7 @@ const Create = () => {
               ))}
             </select>
             {spaceObject && (description || description === '') ? <ProjectDescription description={description[contentLang]} callback={onChangeDescription} /> : <Loading />}
-            {blocks.length === 0
-              ? <AddContent number={0} projectSpace={spaceObject?.rooms.filter(room => room.name === contentLang)[0]?.room_id} blocks={blocks} contentType={template} reloadSpace={reloadSpace} />
-              : blocks.map((content, i) =>
-                <DisplayContent
-                  block={content}
-                  index={i}
-                  blocks={blocks}
-                  projectSpace={spaceObject?.rooms.filter(room => room.name === contentLang)[0]?.room_id}
-                  reloadSpace={reloadSpace}
-                  time={getCurrentTime}
-                  key={content + i + content?.lastUpdate}
-                  contentType={template}
-                />
-              )}
+            {(gutenbergContent !== undefined) && <GutenbergEditor content={gutenbergContent} onChange={contentHasChanged} />}
           </section>
           {/* Placeholder to show preview next to editing
           {blocks.map((content, i) => <DisplayPreview content={content} key={i} matrixClient={matrixClient} />)}
@@ -449,7 +638,7 @@ const Create = () => {
             <p>{t('If you still want to make changes to your contributions after publishing, you can continue to do so.')}</p>
             {spaceObject
               ? (<>
-                <PublishProject space={spaceObject.rooms[0]} metaEvent={medienhausMeta} hasContext={hasContext} description={(description && description[config.medienhaus?.languages[0]])} published={visibility} time={getCurrentTime} />
+                <PublishProject space={spaceObject.rooms[0]} metaEvent={medienhausMeta} hasContext={hasContext} description={(description && description[config.medienhaus?.languages[0]])} published={visibility} time={setSaveTimestampToCurrentTime} />
                 {!(description && description[config.medienhaus?.languages[0]]) && <p>❗️ {t('Please add a short description.')}</p>}
                 {!hasContext && <p>❗️ {t('Please select a context.')}</p>}
               </>)
