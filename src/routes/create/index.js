@@ -448,7 +448,7 @@ const Create = () => {
 
     if (blocks === undefined) return
     fetchContentsForGutenberg()
-  }, [blocks, contentLang])
+  }, [blocks])
 
   if (projectSpace && !matrixClient.isInitialSyncComplete()) return <Loading />
   return (

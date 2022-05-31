@@ -296,7 +296,10 @@ function GutenbergEditor ({ content = [], onChange }) {
   return (
     <BlockEditorProvider
       value={blocks}
-      onInput={(blocks) => setBlocks(blocks)}
+      onInput={(blocks) => {
+        setBlocks(blocks)
+        debouncedBlocksHaveChanged(blocks)
+      }}
       onChange={(blocks) => {
         setBlocks(blocks)
         debouncedBlocksHaveChanged(blocks)
