@@ -28,8 +28,8 @@ const Content = ({ space, metaEvent, visibility, index, removeProject }) => {
       </div>
       <aside className="project--status">
         {config.medienhaus?.item &&
-          <span className="project--type">{config.medienhaus?.item ? config.medienhaus?.item[metaEvent.template]?.label.toUpperCase() : metaEvent.type.toUpperCase()}</span>}
-        <span className="project--visibility">{metaEvent?.published.toUpperCase()}</span>
+          <span className="project--type">{t(config.medienhaus?.item ? config.medienhaus?.item[metaEvent.template]?.label.toUpperCase() : metaEvent.type.toUpperCase())}</span>}
+        <span className="project--visibility">{t(metaEvent?.published.toUpperCase())}</span>
       </aside>
       {showDeleteComponent &&
         <DeleteProjectButton roomId={space.room_id} name={space.name} index={index} toggleDeleteButton={() => setShowDeleteComponent(false)} removeProject={removeProject} />}

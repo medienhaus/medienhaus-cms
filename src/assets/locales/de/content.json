@@ -81,5 +81,9 @@
   "Profile name": "Anzeigename",
   "Here you can change your profile name.": "Hier können Sie Ihren Anzeigenamen ändern.",
   "Profile image": "Profilbild",
-  "Here you can change your profile image.": "Hier können Sie Ihr Profilbild ändern."
+  "Here you can change your profile image.": "Hier können Sie Ihr Profilbild ändern.",
+  "EVENT": "EVENT",
+  "PROJECT": "PROJEKT",
+  "DRAFT": "ENTWURF",
+  "PUBLIC": "VERÖFFENTLICHT"
 }
