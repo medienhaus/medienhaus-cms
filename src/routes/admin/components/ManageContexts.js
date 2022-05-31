@@ -48,7 +48,7 @@ const ManageContexts = ({ matrixClient, moderationRooms: moderationRoomsInit }) 
   const [loading, setLoading] = useState(false)
   const [description, setDescription] = useState('')
   const [locationStructure, setLocationStructure] = useState()
-  const [currentLocation, setCurrentLocation] = useState()
+  const [currentLocation, setCurrentLocation] = useState('')
   const [moderationRooms, setModerationRooms] = useState(moderationRoomsInit)
 
   const createStructurObject = async (roomId, location = false) => {
