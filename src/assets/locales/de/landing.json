@@ -8,6 +8,6 @@
   "introduction-05": "Sollten Sie technische Unterstützung bei der Eingabe von Projekten haben, wenden Sie sich bitte an: <1>rundgang-support@udk-berlin.de</1>",
   "please-note": "Die Arbeiten am Frontend, also an der öffentlichen Website, auf der alle Projekte zu sehen sein werden, sind noch im vollen Gange. Daher ist derzeit noch keine Vorschau der angelegten Projekte möglich.",
   "information": "Weitere Informationen zum Rundgang 2022 (Öffnungszeiten, Sicherheits- und Hygienemaßnahmen, etc.) finden Sie unter: <1>udk-berlin.de/rundgang</1>",
-  "human-readable-first": "Alle Inhalte werden nach dem Paradigma “human readable first” gespeichert und können – neben dem Content Management System udk/rundgang – mit jedem vollwertigen Matrix-Client über content.udk-berlin.de aufgerufen, gelesen, verändert und gelöscht werden.",
-  "caution": "Bitte beachten Sie, dass die manuelle Bearbeitung von Inhalten als fortgeschrittene Technik betrachtet werden sollte und die Inhaltsstruktur zerstören kann, wenn sie nicht dem dev.medienhaus.meta-Standard entspricht."
+  "human-readable-first": "Alle Inhalte werden nach dem Paradigma “human readable first” gespeichert und können – neben dem Content Management System udk/rundgang – mit jedem vollwertigen Matrix-Client über <1>content.udk-berlin.de</1> aufgerufen, gelesen, verändert und gelöscht werden.",
+  "caution": "Bitte beachten Sie, dass die manuelle Bearbeitung von Inhalten als fortgeschrittene Technik betrachtet werden sollte und die Inhaltsstruktur zerstören kann, wenn sie nicht dem <3>dev.medienhaus.meta</3>-Standard entspricht."
 }
