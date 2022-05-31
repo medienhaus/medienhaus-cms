@@ -5,7 +5,7 @@ import filterDeep from 'deepdash/filterDeep'
 import config from '../config.json'
 import { useTranslation } from 'react-i18next'
 
-function SimpleContextSelect ({ onItemChosen, selectedContext: selectedContextInit, contexts, struktur, disabled, moderationRooms, preSelectedValue, enableType }) {
+function SimpleContextSelect ({ location, onItemChosen, selectedContext: selectedContextInit, contexts, struktur, disabled, moderationRooms, preSelectedValue, enableType }) {
   const [selectedContext, setSelectedContext] = useState(selectedContextInit)
   const { t } = useTranslation('context')
   const items = config.medienhaus?.sites?.moderate?.manageContexts?.showRoot ? struktur : struktur[Object.keys(struktur)[0]].children
@@ -25,6 +25,8 @@ function SimpleContextSelect ({ onItemChosen, selectedContext: selectedContextIn
         {mapDeep(filterDeep(items, (value, key, parent, context) => {
           // Exclude all hierarchy elements that are not "contexts"
           if (!value?.type.includes('context')) return false
+          if (!value?.template.includes('location')) return false
+
           value.path = []
           value.pathIds = []
           function addParentToPath (item) {
