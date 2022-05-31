@@ -366,7 +366,7 @@ const Create = () => {
 
       <section className="project-title">
         {(!projectSpace && (config.medienhaus?.item && Object.keys(config.medienhaus?.item).length > 1)) &&
-          <Dropdown name="type" label="Type" placeholder="-- select type --" options={_.mapValues(config.medienhaus?.item, 'label')} value={template} onChange={e => setTemplate(e.target.value)} />}
+          <Dropdown name="type" label={t('Type')} placeholder="-- select type --" options={_.mapValues(config.medienhaus?.item, 'label')} value={template} onChange={e => setTemplate(e.target.value)} />}
         <h3>{t('Title')}</h3>
         <ProjectTitle title={title} projectSpace={projectSpace} template={template} callback={changeTitle} />
       </section>

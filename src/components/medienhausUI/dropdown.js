@@ -12,6 +12,8 @@ const options = {
 import React from 'react'
 import styled from 'styled-components'
 
+import { useTranslation } from 'react-i18next'
+
 const Dropdown = styled.section`
 input {
   -webkit-appearance: none;
@@ -35,6 +37,9 @@ input {
 `
 const InputField = (props) => {
   console.log(props.options)
+
+  const { t } = useTranslation('content')
+
   return (
     <>
       <Dropdown>
@@ -42,7 +47,7 @@ const InputField = (props) => {
         <select id={props.name} name={props.name} value={props.value} defaultValue="" onChange={props.onChange}>
           {props.placeholder && <option value="" disabled hidden>{props.placeholder}</option>}
           {Object.keys(props.options).map((option, index) => {
-            return <option value={option} key={option + index}>{props.options[option]}</option>
+            return <option value={option} key={option + index}>{t(props.options[option])}</option>
           })}
         </select>
       </Dropdown>

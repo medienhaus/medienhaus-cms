@@ -85,5 +85,8 @@
   "EVENT": "EVENT",
   "PROJECT": "PROJEKT",
   "DRAFT": "ENTWURF",
-  "PUBLIC": "VERÖFFENTLICHT"
+  "PUBLIC": "VERÖFFENTLICHT",
+  "Type": "Typ",
+  "Project": "Projekt",
+  "Event": "Event"
 }
