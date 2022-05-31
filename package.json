@@ -67,7 +67,8 @@
         "error",
         "prefer-double"
       ],
-      "react/jsx-no-bind": "warn",
+      "object-shorthand": "off",
+      "react/jsx-no-bind": "off",
       "react/prop-types": "off",
       "react/jsx-closing-tag-location": "off"
     }

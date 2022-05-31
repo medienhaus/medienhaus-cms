@@ -192,6 +192,14 @@ const Create = () => {
   //   // const events = await matrixClient.createRoom(opts('events', 'events', 'shared'))
   // }
 
+  const fetchContentBlocks = useCallback(async () => {
+    const spaceRooms = spaceObjectRef.current.rooms.filter(room => room.name === contentLangRef.current)
+    const getContent = await matrixClient.getRoomHierarchy(spaceRooms[0].room_id)
+    setBlocks(getContent.rooms.filter(room => room.name !== contentLangRef.current).filter(room => room.name.charAt(0) !== 'x').sort((a, b) => {
+      return a.name.substring(0, a.name.indexOf('_')) - b.name.substring(0, b.name.indexOf('_'))
+    }))
+  }, [spaceObjectRef, matrixClient, setBlocks, contentLangRef])
+
   const fetchSpace = useCallback(async () => {
     if (matrixClient.isInitialSyncComplete()) {
       // here we collect all necessary information about the project
@@ -230,15 +238,7 @@ const Create = () => {
       console.log('sync not done, trying again')
       setTimeout(() => fetchSpace(), 250)
     }
-  }, [matrixClient, projectSpace, setSaveTimestampToCurrentTime, contentLang])
-
-  const fetchContentBlocks = useCallback(async () => {
-    const spaceRooms = spaceObjectRef.current.rooms.filter(room => room.name === contentLangRef.current)
-    const getContent = await matrixClient.getRoomHierarchy(spaceRooms[0].room_id)
-    setBlocks(getContent.rooms.filter(room => room.name !== contentLangRef.current).filter(room => room.name.charAt(0) !== 'x').sort((a, b) => {
-      return a.name.substring(0, a.name.indexOf('_')) - b.name.substring(0, b.name.indexOf('_'))
-    }))
-  }, [matrixClient, spaceObjectRef, contentLangRef])
+  }, [matrixClient, projectSpace, setSpaceObject, contentLang, fetchContentBlocks, setSaveTimestampToCurrentTime])
 
   useEffect(() => {
     if (!projectSpace) {
@@ -315,7 +315,7 @@ const Create = () => {
       matrixClient.removeListener('Room.timeline', handleRoomTimelineEvent)
       matrixClient.removeListener('RoomState.events', handleRoomStateEvent)
     }
-  }, [projectSpace, spaceObject, blocks, fetchSpace, matrixClient])
+  }, [projectSpace, spaceObject, blocks, fetchSpace, matrixClient, setBlocks])
 
   const listeningToCollaborators = async () => {
     setIsCollab(true)
@@ -549,7 +549,7 @@ const Create = () => {
 
     if (blocks === undefined) return
     fetchContentsForGutenberg()
-  }, [blocks])
+  }, [blocks, matrixClient])
 
   if (projectSpace && !matrixClient.isInitialSyncComplete()) return <Loading />
   return (

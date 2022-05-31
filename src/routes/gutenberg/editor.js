@@ -291,6 +291,7 @@ function GutenbergEditor ({ content = [], onChange }) {
     if (onChange) onChange(blocks)
   }
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const debouncedBlocksHaveChanged = useCallback(debounce((blocks) => blocksHaveChanged(blocks), 1500), [])
 
   return (
