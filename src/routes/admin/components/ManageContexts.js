@@ -335,7 +335,7 @@ const ManageContexts = ({ matrixClient, moderationRooms: moderationRoomsInit }) 
     }
     setLoading(false)
   }
-  console.log(currentLocation)
+
   const onContextChange = async (context) => {
     setLoading(true)
     let contextObject
