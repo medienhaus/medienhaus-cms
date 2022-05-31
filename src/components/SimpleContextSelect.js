@@ -1,13 +1,18 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import mapDeep from 'deepdash/mapDeep'
 import filterDeep from 'deepdash/filterDeep'
 
 import config from '../config.json'
 import { useTranslation } from 'react-i18next'
 
-function SimpleContextSelect ({ onItemChosen, selectedContext, contexts, struktur, disabled, moderationRooms, preSelectedValue, enableType }) {
+function SimpleContextSelect ({ onItemChosen, selectedContext: selectedContextInit, contexts, struktur, disabled, moderationRooms, preSelectedValue, enableType }) {
+  const [selectedContext, setSelectedContext] = useState(selectedContextInit)
   const { t } = useTranslation('context')
   const items = config.medienhaus?.sites?.moderate?.manageContexts?.showRoot ? struktur : struktur[Object.keys(struktur)[0]].children
+
+  useEffect(() => {
+    setSelectedContext(selectedContextInit)
+  }, [selectedContextInit])
 
   return (
     <>
@@ -15,7 +20,7 @@ function SimpleContextSelect ({ onItemChosen, selectedContext, contexts, struktu
       <input id="context-select" list="context-list" name="context-select" placeholder="-- type to search / double-click to select --" type="text" />
       <datalist id="context-list" disabled={disabled} defaultValue={selectedContext} onChange={(e) => { onItemChosen(e.target.value) }}>
       */}
-      <select disabled={disabled} defaultValue={selectedContext} onChange={(e) => { onItemChosen(e.target.value) }}>
+      <select disabled={disabled} value={selectedContext} onChange={(e) => { setSelectedContext(e.target.value); onItemChosen(e.target.value) }}>
         <option disabled value="">-- {t('select ' + preSelectedValue)} --</option>
         {mapDeep(filterDeep(items, (value, key, parent, context) => {
           // Exclude all hierarchy elements that are not "contexts"

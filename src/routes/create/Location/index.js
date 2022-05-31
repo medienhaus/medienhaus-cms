@@ -109,14 +109,14 @@ const Location = ({ reloadSpace, inviteCollaborators, projectSpace, events, allo
       return result
     }
     console.log('---- started structure ----')
-    const tree = await getSpaceStructure('!ZfLuOQsYLtkuIvswLv:dev.medienhaus.udk-berlin.de', false)
+    const tree = await getSpaceStructure(config.medienhaus.locationId, false)
     // console.log(tree[Object.keys(tree)[0]])
     setLocationStructure(tree)
   }
 
   const fetchTreeFromApi = async () => {
     setLoading(true)
-    const fetchLocationTree = await fetch(config.medienhaus.api + '!ZfLuOQsYLtkuIvswLv:dev.medienhaus.udk-berlin.de/tree')
+    const fetchLocationTree = await fetch(config.medienhaus.api + config.medienhaus.locationId + '/tree')
     const locationResponse = await fetchLocationTree.json()
     setLocationStructure(locationResponse.children)
     setLoading(false)

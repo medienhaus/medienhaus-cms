@@ -19,8 +19,8 @@ function CreateContext (props) {
           <label>
             <h3>{props.t('Type')}</h3>
           </label>
-          <select defaultValue="" onChange={(e) => setTemplate(e.target.value)}>
-            <option disabled value="">--- please choose a context type ---</option>
+          <select value={template} onChange={(e) => setTemplate(e.target.value)}>
+            <option disabled value="">--- Please choose a type of context ---</option>
             {Object.keys(config.medienhaus.context).map(context => {
               return <option key={config.medienhaus.context[context].label} value={context}>{config.medienhaus.context[context].label}</option>
             })}
