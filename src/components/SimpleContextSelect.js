@@ -20,7 +20,6 @@ function SimpleContextSelect ({ location, onItemChosen, selectedContext: selecte
       <input id="context-select" list="context-list" name="context-select" placeholder="-- type to search / double-click to select --" type="text" />
       <datalist id="context-list" disabled={disabled} defaultValue={selectedContext} onChange={(e) => { onItemChosen(e.target.value) }}>
       */}
-      <p>{selectedContext}</p>
       <select disabled={disabled} value={selectedContext} onChange={(e) => { setSelectedContext(e.target.value); onItemChosen(e.target.value) }}>
         <option disabled value="">-- {t('select ' + preSelectedValue)} --</option>
         {mapDeep(filterDeep(items, (value, key, parent, context) => {
