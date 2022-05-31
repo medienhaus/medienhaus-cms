@@ -18,7 +18,7 @@ import styled from 'styled-components'
 const TabSection = styled.section`
   display: grid;
   grid-gap: var(--margin);
-  grid-template-columns: repeat(auto-fit, minmax(10ch, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(14ch, 1fr));
 
   & > * + * {
     margin-top: unset;
