@@ -20,10 +20,6 @@ import styled from 'styled-components'
 
 import findValueDeep from 'deepdash/findValueDeep'
 
-const Heading = styled.h2`
-margin-top: var(--margin);
-`
-
 const ManageContexts = ({ matrixClient, moderationRooms }) => {
   const { t } = useTranslation('admin')
   const [selectedContext, setSelectedContext] = useState('')
@@ -321,7 +317,6 @@ const ManageContexts = ({ matrixClient, moderationRooms }) => {
     }
     await getEvents(context)
     setSelectedContext(context)
-    setDescription(context.topic || '')
 
     console.log(context)
     setLoading(true)
@@ -366,125 +361,124 @@ const ManageContexts = ({ matrixClient, moderationRooms }) => {
 
   return (
     <>
-      <Heading>Manage Contexts</Heading>
-      {// !structure ? <Loading /> : <ShowContexts structure={structure} t={t} selectedContext={selectedContext} parent={parent} parentName={parentName} disableButton={disableButton} callback={contextualise} />
-      }
-      {!inputItems
-        ? <Loading />
-        : <SimpleContextSelect
-            onItemChosen={onContextChange}
-            selectedContext={selectedContext}
-            struktur={inputItems}
-            disabled={loading}
-            moderationRooms={moderationRooms}
-          />}
-      {loading && inputItems && <Loading />}
-      {/* <label htmlFor="name">{t('Context')}: </label>
-       <input type="text" value={selectedContextName} disabled /> */}
-      {selectedContext &&
-        <>
-          <Heading>{t('Add Sub-Context')}</Heading>
-
-          <CreateContext t={t} parent={selectedContext} matrixClient={matrixClient} parentName={parentName} disableButton={loading} callback={addSpace} />
-          <div>
-            <Heading>{t('Add Image')}</Heading>
+      <section className="manage">
+        <h3>Manage Contexts</h3>
+        {// !structure ? <Loading /> : <ShowContexts structure={structure} t={t} selectedContext={selectedContext} parent={parent} parentName={parentName} disableButton={disableButton} callback={contextualise} />
+        }
+        {!inputItems
+          ? <Loading />
+          : <SimpleContextSelect
+              onItemChosen={onContextChange}
+              selectedContext={selectedContext}
+              struktur={inputItems}
+              disabled={loading}
+              moderationRooms={moderationRooms}
+            />}
+        {loading && inputItems && <Loading />}
+        {/* <label htmlFor="name">{t('Context')}: </label>
+         <input type="text" value={selectedContextName} disabled /> */}
+        {selectedContext &&
+          <>
+            <h3>{t('Add Sub-Context')}</h3>
+            <CreateContext t={t} parent={selectedContext} matrixClient={matrixClient} parentName={parentName} disableButton={loading} callback={addSpace} />
+            <h3>{t('Add Image')}</h3>
             <ProjectImage projectSpace={selectedContext} changeProjectImage={() => console.log('changed image')} disabled={loading} />
-          </div>
-          {allocation?.physical && allocation.physical.map((location, i) => {
-            return (
-              <div className="editor" key={location.lat}>
-                <div className="left">
-                  <span>🎭</span>
+            {allocation?.physical && allocation.physical.map((location, i) => {
+              return (
+                <div className="editor" key={location.lat}>
+                  <div className="left">
+                    <span>🎭</span>
+                  </div>
+                  <div
+                    className={location.lat === '0.0' && location.lng === '0.0' ? 'center' : null}
+                  >
+                    {
+                                  location.lat !== '0.0' && location.lng !== '0.0' &&
+                                    <MapContainer className="center" center={[location.lat, location.lng]} zoom={17} scrollWheelZoom={false} placeholder>
+                                      <TileLayer
+                                        attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+                                        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                                      />
+                                      <Marker position={[location.lat, location.lng]}>
+                                        <Popup>
+                                          {locations.find(coord => coord.coordinates === location.lat + ', ' + location.lng)?.name || // if the location is not in our location.json
+                                          location.info?.length > 0 // we check if the custom input field was filled in
+                                            ? location.info // if true, we display that text on the popup otherwise we show the lat and long coordinates
+                                            : location.lat + ', ' + location.lng}
+                                        </Popup>
+                                      </Marker>
+                                    </MapContainer>
+                                }
+                    {location.info && <input type="text" value={location.info} disabled />}
+                  </div>
+                  <div className="right">
+                    <DeleteButton
+                      deleting={deleting}
+                      onDelete={() => onDelete(i)}
+                      block={allocation.physical[0]} // the actual event space not the location itself
+                      index={events.length + i + 1}
+                      reloadSpace={() => getEvents(selectedContext)}
+                    />
+                  </div>
                 </div>
-                <div
-                  className={location.lat === '0.0' && location.lng === '0.0' ? 'center' : null}
-                >
-                  {
-                                location.lat !== '0.0' && location.lng !== '0.0' &&
-                                  <MapContainer className="center" center={[location.lat, location.lng]} zoom={17} scrollWheelZoom={false} placeholder>
-                                    <TileLayer
-                                      attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-                                      url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                                    />
-                                    <Marker position={[location.lat, location.lng]}>
-                                      <Popup>
-                                        {locations.find(coord => coord.coordinates === location.lat + ', ' + location.lng)?.name || // if the location is not in our location.json
-                                        location.info?.length > 0 // we check if the custom input field was filled in
-                                          ? location.info // if true, we display that text on the popup otherwise we show the lat and long coordinates
-                                          : location.lat + ', ' + location.lng}
-                                      </Popup>
-                                    </Marker>
-                                  </MapContainer>
-                              }
-                  {location.info && <input type="text" value={location.info} disabled />}
+              )
+            })}
+            {events && (events.map((event, i) => {
+              return (
+                <div className="editor" key={event.name}>
+                  <div className="left">
+                    <span>🎭</span>
+                  </div>
+                  <div className="center">
+                    {event.filter(room => room.room_type !== 'm.space').filter(room => room.name.charAt(0) !== 'x') // filter rooms that were deleted
+                      .map((event, i) => {
+                        return <DisplayEvents event={event} i={i} key={i} />
+                      })}
+                  </div>
+                  <div className="right">
+                    <DeleteButton
+                      deleting={deleting}
+                      onDelete={onDelete}
+                      block={event[0]} // the actual event space not the location itself
+                      index={events.length + i + 1}
+                      reloadSpace={() => console.log('deleted')}
+                    />
+                  </div>
                 </div>
-                <div className="right">
-                  <DeleteButton
-                    deleting={deleting}
-                    onDelete={() => onDelete(i)}
-                    block={allocation.physical[0]} // the actual event space not the location itself
-                    index={events.length + i + 1}
-                    reloadSpace={() => getEvents(selectedContext)}
-                  />
-                </div>
-              </div>
-            )
-          })}
-          {events && (events.map((event, i) => {
-            return (
-              <div className="editor" key={event.name}>
-                <div className="left">
-                  <span>🎭</span>
-                </div>
-                <div className="center">
-                  {event.filter(room => room.room_type !== 'm.space').filter(room => room.name.charAt(0) !== 'x') // filter rooms that were deleted
-                    .map((event, i) => {
-                      return <DisplayEvents event={event} i={i} key={i} />
-                    })}
-                </div>
-                <div className="right">
-                  <DeleteButton
-                    deleting={deleting}
-                    onDelete={onDelete}
-                    block={event[0]} // the actual event space not the location itself
-                    index={events.length + i + 1}
-                    reloadSpace={() => console.log('deleted')}
-                  />
-                </div>
-              </div>
-            )
-          }))}
-          <section>
-            <Heading>{t('Add Description')}</Heading>
-            <TextareaAutosize
-              value={description}
-              minRows={6}
-              placeholder={`${t('Please add a short description.')}`}
-              onChange={(e) => setDescription(e.target.value)}
-              onBlur={onSave}
+              )
+            }))}
+            <section>
+              <h3>{t('Add Description')}</h3>
+              <TextareaAutosize
+                value={description}
+                minRows={6}
+                placeholder={`${t('Please add a short description.')}`}
+                onChange={(e) => setDescription(e.target.value)}
+                onBlur={onSave}
+              />
+              {description.length > 500 && (<>
+                <p>{t('Characters:')} {description.length}</p>
+                <p>❗️{t('Please keep the descrpition under 500 characters.')} {description.length}</p>
+              </>
+              )}
+            </section>
+            <h3>{t('Add Location')}</h3>
+
+            <AddEvent
+              length={events.length}
+              room_id={selectedContext}
+              t={t}
+              reloadSpace={() => getEvents(selectedContext)}
+              locationDropdown
+              inviteCollaborators={console.log}
+              allocation={allocation}
+              disabled={loading}
             />
-            {description.length > 500 && (<>
-              <p>{t('Characters:')} {description.length}</p>
-              <p>❗️{t('Please keep the descrpition under 500 characters.')} {description.length}</p>
-            </>
-            )}
-          </section>
-          <Heading>{t('Add Location')}</Heading>
+            <hr />
+            {contextParent && <RemoveContext t={t} selectedContext={selectedContext} parent={contextParent} parentName={parentName} disableButton={disableButton} callback={spaceChild} />}
 
-          <AddEvent
-            length={events.length}
-            room_id={selectedContext}
-            t={t}
-            reloadSpace={() => getEvents(selectedContext)}
-            locationDropdown
-            inviteCollaborators={console.log}
-            allocation={allocation}
-            disabled={loading}
-          />
-          <hr />
-          {contextParent && <RemoveContext t={t} selectedContext={selectedContext} parent={contextParent} parentName={parentName} disableButton={disableButton} callback={spaceChild} />}
-
-        </>}
+          </>}
+      </section>
     </>
   )
 }

@@ -92,19 +92,21 @@ const Moderate = () => {
         return (
           config.medienhaus?.sites?.moderate?.accept &&
             <>
-              <h2>{t('Accept user requests')}</h2>
-              {moderationRooms.length > 0
-                ? <>
-                  <section className="requests">
-                    {moderationRooms.map((request, index) => <React.Fragment key={request.name}>
-                      <GetRequestPerRoom request={request} key={index} />
-                    </React.Fragment>)}
-                  </section>
-                </>
-                : (
-                  <div>
-                    {t('Looks like you are not moderating any spaces.')}
-                  </div>)}
+              <section className="accept">
+                <h2>{t('Accept user requests')}</h2>
+                {moderationRooms.length > 0
+                  ? <>
+                    <section className="requests">
+                      {moderationRooms.map((request, index) => <React.Fragment key={request.name}>
+                        <GetRequestPerRoom request={request} key={index} />
+                      </React.Fragment>)}
+                    </section>
+                  </>
+                  : (
+                    <div>
+                      {t('Looks like you are not moderating any spaces.')}
+                    </div>)}
+              </section>
             </>
         )
     }

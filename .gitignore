@@ -32,4 +32,4 @@ yarn-error.log*
 .DS_Store
 
 # config
-config.json
+**/[Cc]onfig.json
