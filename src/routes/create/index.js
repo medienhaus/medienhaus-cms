@@ -140,6 +140,7 @@ const Create = () => {
   useEffect(() => {
     if (!projectSpace) {
       setTitle('')
+      setDescription()
       setEvents()
     }
     projectSpace && fetchSpace()
