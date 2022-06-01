@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import AddEvent from './components/AddEvent'
-import { useTranslation } from 'react-i18next'
+// import AddEvent from './components/AddEvent'
+// import { useTranslation } from 'react-i18next'
 import DisplayContent from '../DisplayContent'
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
 import locations from '../../../assets/data/locations.json'
@@ -23,7 +23,7 @@ const Location = ({ reloadSpace, inviteCollaborators, projectSpace, events, allo
   const [loading, setLoading] = useState(false)
   const [deleting, setDeleting] = useState(false)
   const [currentLocation, setCurrentLocation] = useState()
-  const { t } = useTranslation('date')
+  // const { t } = useTranslation('date')
 
   const createStructurObject = async () => {
     setLoading(true)
@@ -283,6 +283,7 @@ const Location = ({ reloadSpace, inviteCollaborators, projectSpace, events, allo
           struktur={locationStructure}
           disabled={loading || !locationStructure}
         />}
+      {/*
       {eventContent?.length < 1 &&
         <AddEvent
           length={0}
@@ -292,6 +293,7 @@ const Location = ({ reloadSpace, inviteCollaborators, projectSpace, events, allo
           reloadSpace={reloadSpace}
           inviteCollaborators={inviteCollaborators}
         />}
+      */}
     </>
   )
 }
