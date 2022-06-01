@@ -44,11 +44,9 @@ const ProjectDescription = ({ description: intro, callback }) => {
           <button disabled>×</button>
         </div>
       </div>
-      {description.length > 500 && (<>
-        <p>{t('Characters:')} {description.length}</p>
-        <p>❗️{t('Please keep the descrpition under 500 characters.')} {description.length}</p>
-      </>
-      )}
+      <div className="maxlength">
+        <span>{description.length + '/500'}</span>
+      </div>
     </>
   )
 }
