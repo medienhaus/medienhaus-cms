@@ -18,7 +18,6 @@ import Time from './Time'
 import { Loading } from '../../components/loading'
 import { useTranslation } from 'react-i18next'
 import Location from './Location'
-import Dropdown from '../../components/medienhausUI/dropdown'
 
 import config from '../../config.json'
 import _ from 'lodash'
@@ -267,8 +266,16 @@ const Create = () => {
       </section>
       */}
       <section className="project-title">
-        {(!projectSpace && (config.medienhaus?.item && Object.keys(config.medienhaus?.item).length > 1)) &&
-          <Dropdown name="type" label="Type" placeholder="-- select type --" options={_.mapValues(config.medienhaus?.item, 'label')} value={template} onChange={e => setTemplate(e.target.value)} />}
+        {(!projectSpace && (config.medienhaus?.item && Object.keys(config.medienhaus?.item).length > 1)) && (
+          <section>
+            <h3>{t('Type')}</h3>
+            <select id="template" name="template" value={template} onChange={e => setTemplate(e.target.value)}>
+              {_.map(config.medienhaus?.item, (itemTemplateDetails, itemTemplateName) =>
+                <option value={itemTemplateName} key={itemTemplateName}>{itemTemplateDetails.label}</option>
+              )}
+            </select>
+          </section>
+        )}
         <h3>{t('Title')}</h3>
         <ProjectTitle title={title} projectSpace={projectSpace} template={template} callback={changeTitle} />
       </section>
