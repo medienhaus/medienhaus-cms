@@ -268,7 +268,7 @@ const Create = () => {
       <section className="project-title">
         {(!projectSpace && (config.medienhaus?.item && Object.keys(config.medienhaus?.item).length > 1)) && (
           <section>
-            <h3>{t('Type')}</h3>
+            <label htmlFor="template"><h3>{t('Type')}</h3></label>
             <select id="template" name="template" value={template} onChange={e => setTemplate(e.target.value)}>
               {_.map(config.medienhaus?.item, (itemTemplateDetails, itemTemplateName) =>
                 <option value={itemTemplateName} key={itemTemplateName}>{itemTemplateDetails.label}</option>
@@ -276,8 +276,9 @@ const Create = () => {
             </select>
           </section>
         )}
-        <h3>{t('Title')}</h3>
-        <ProjectTitle title={title} projectSpace={projectSpace} template={template} callback={changeTitle} />
+        <br />
+        <label htmlFor="title"><h3>{t('Title')}</h3></label>
+        <ProjectTitle id="title" name="title" title={title} projectSpace={projectSpace} template={template} callback={changeTitle} />
       </section>
 
       {projectSpace && (
