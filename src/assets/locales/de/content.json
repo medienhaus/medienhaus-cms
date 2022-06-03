@@ -32,6 +32,7 @@
   "submitInstructions2": "Wenn Sie zu einem späteren Zeitpunkt fortfahren möchten, können Sie das Projekt/Entwurf als Entwurf speichern und finden es in Ihrer Sammlung unter <1>/content</1>.",
   "The Rundgang website will be available in English and German. The project or event name can only be entered in one language and will therefore be used for both pages. Other texts should ideally be entered in both languages, otherwise the text will appear on both pages in only one language.": "Die Website des Rundgang 2022 wird in deutscher und englischer Sprache verfügbar sein. Bitte denken Sie daran, Ihre Projekt- oder Eventbeschreibung sowohl in deutscher als auch in englischer Sprache anzulegen. Der Projekt-/Eventname kann nur in einer Sprache angegeben werden und wird daher für beide Seiten übernommen. Weitere Texte sollten idealerweise in beiden Sprachen eingegeben werden; der Text erscheint ansonsten auf beiden Seiten in nur einer Sprache.",
   "Title": "Titel",
+  "Type": "Typ",
   "Create": "Anlegen",
   "Context": "Kontext",
   "In which context do you want to publish your project/event?": "In welchem Kontext möchten Sie Ihr Projekt/Event veröffentlichen?",
