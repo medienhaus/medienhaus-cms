@@ -23,7 +23,7 @@ const ProjectTitle = ({ title, projectSpace, template, callback }) => {
     title === '' ? setNewProject(true) : setNewProject(false)
   }, [title])
 
-  const createProject = async (title) => {
+  const createProject = useCallback(async (title) => {
     setLoading(true)
 
     const opts = (template, name, history) => {
@@ -105,7 +105,7 @@ const ProjectTitle = ({ title, projectSpace, template, callback }) => {
     } finally {
       setLoading(false)
     }
-  }
+  }, [history, matrixClient, template])
 
   const onClickCreateNewProject = useCallback((e) => {
     if (newProject && projectTitle.length < 101) {
