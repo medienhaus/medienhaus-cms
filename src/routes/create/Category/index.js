@@ -11,9 +11,16 @@ import styled from 'styled-components'
 // import ContextDropdown from '../../../components/ContextDropdown'
 
 const RemovableLiElement = styled.li`
+display: flex;
+justify-content: space-between;
 list-style: none;
 height: 2em;
 margin-bottom: calc(var(--margin)/2);
+
+span {
+  display: flex;
+  align-self: self-end;
+}
 `
 
 const Category = ({ projectSpace, onChange, parent }) => {
