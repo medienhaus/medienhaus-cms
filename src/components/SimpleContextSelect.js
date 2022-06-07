@@ -49,9 +49,7 @@ function SimpleContextSelect ({ location, onItemChosen, selectedContext: selecte
           <option key={value.id + key} disabled={(contexts && contexts.some(context => context.room_id === value.id)) || (moderationRooms && !moderationRooms.some(room => room.room_id === value.id)) || (enableType && value.template !== enableType)} value={value.id}>{' ─ '.repeat(context.depth - 1) + value.name}</option>
         ), { childrenPath: 'children', includeRoot: false, rootIsChildren: true })}
       </select>
-      {/*
-      </datalist>
-      */}
+      {/* </datalist> */}
     </>
   )
 }
