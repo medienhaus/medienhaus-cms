@@ -248,8 +248,14 @@ const Create = () => {
     await matrixClient.leave(roomId)
   }
 
-  const contentHasChanged = async (gutenbergBlocks) => {
+  const contentHasChanged = async (originalGutenbergBlocks) => {
     const orderOfRooms = []
+    let gutenbergBlocks = [...originalGutenbergBlocks]
+
+    // filter out all empty gutenberg blocks -- we want to ignore those
+    gutenbergBlocks = gutenbergBlocks.filter(block => {
+      return !(block.name === 'core/paragraph' && block.attributes.content === '')
+    })
 
     // eslint-disable-next-line no-unused-vars
     for (const [blockId, roomId] of Object.entries(gutenbergIdToMatrixRoomIdRef.current)) {
