@@ -394,6 +394,21 @@ const Create = () => {
     return changeTopic
   }
 
+  const warnUserAboutUnsavedChanges = useCallback((e) => {
+    if (temporaryGutenbergContents) {
+      e.returnValue = 'Please save your changes'
+      return e.returnValue
+    }
+  }, [temporaryGutenbergContents])
+
+  useEffect(() => {
+    window.addEventListener('beforeunload', warnUserAboutUnsavedChanges)
+
+    return () => {
+      window.removeEventListener('beforeunload', warnUserAboutUnsavedChanges)
+    }
+  }, [warnUserAboutUnsavedChanges])
+
   useEffect(() => {
     const fetchContentsForGutenberg = async () => {
       const contents = []
