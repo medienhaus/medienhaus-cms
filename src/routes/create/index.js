@@ -294,6 +294,9 @@ const Create = () => {
         case 'medienhaus/heading':
           contentType = 'heading'
           break
+        case 'medienhaus/video':
+          contentType = 'video'
+          break
         default:
           contentType = 'text'
       }
@@ -453,6 +456,12 @@ const Create = () => {
                 author: message.info.author
               }
               break
+            case '_video':
+              n = 'medienhaus/video'
+              a = {
+                content: message.body
+              }
+              break
             default:
               n = 'core/paragraph'
               a = { content: message.formatted_body }
@@ -543,6 +552,10 @@ const Create = () => {
             */}
             <select
               value={contentLang} onChange={(e) => {
+                if (temporaryGutenbergContents) {
+                  alert('Please save your changes first')
+                  return
+                }
                 setContentLang(e.target.value)
                 setDescription()
               }}
