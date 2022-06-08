@@ -32,6 +32,9 @@ const ProjectDescription = ({ description: intro, callback }) => {
           placeholder={`${t('Please add a short description.')} ${t('This field is required before publishing.')}`}
           onBlur={() => onSave()}
         />
+        <div className="maxlength">
+          <span>{description.length + '/500'}</span>
+        </div>
       </div>
     </>
   )
