@@ -33,9 +33,6 @@ const ProjectDescription = ({ description: intro, callback }) => {
           onBlur={() => onSave()}
         />
       </div>
-      <div className="maxlength">
-        <span>{description.length + '/500'}</span>
-      </div>
     </>
   )
 }

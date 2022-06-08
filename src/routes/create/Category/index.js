@@ -2,14 +2,14 @@ import React, { useEffect, useState } from 'react'
 import Matrix from '../../../Matrix'
 import { Loading } from '../../../components/loading'
 import * as _ from 'lodash'
-import SimpleContextSelect from '../../../components/SimpleContextSelect'
+// import SimpleContextSelect from '../../../components/SimpleContextSelect'
 import DeleteButton from '../components/DeleteButton'
 import { useTranslation } from 'react-i18next'
 import config from '../../../config.json'
 import findValueDeep from 'deepdash/findValueDeep'
 
 import styled from 'styled-components'
-// import ContextDropdown from '../../../components/ContextDropdown'
+import ContextDropdown from '../../../components/ContextDropdown'
 
 const RemovableLiElement = styled.li`
 display: flex;
@@ -236,7 +236,13 @@ const Category = ({ projectSpace, onChange, parent }) => {
                 </RemovableLiElement>
               )
             })}
-            <SimpleContextSelect
+            {/* <SimpleContextSelect
+              selectedContext=""
+              onItemChosen={onContextChosen}
+              contexts={contexts}
+              struktur={inputItems}
+            /> */}
+            <ContextDropdown
               selectedContext=""
               preSelectedValue="context"
               onItemChosen={onContextChosen}
