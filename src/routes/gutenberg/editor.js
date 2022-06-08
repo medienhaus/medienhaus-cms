@@ -16,68 +16,13 @@ import * as list from '@wordpress/block-library/build/list'
 import * as code from '@wordpress/block-library/build/code'
 import { ShortcutProvider } from '@wordpress/keyboard-shortcuts'
 
-import { registerBlockType } from '@wordpress/blocks'
-import { registerFormatType } from '@wordpress/rich-text'
+import { registerBlockType, unregisterBlockType } from '@wordpress/blocks'
+import { registerFormatType, unregisterFormatType } from '@wordpress/rich-text'
 import { bold } from '@wordpress/format-library/build/bold'
 import { italic } from '@wordpress/format-library/build/italic'
 import { strikethrough } from '@wordpress/format-library/build/strikethrough'
 import { debounce } from 'lodash'
 import { registerCoreBlocks } from '@wordpress/block-library'
-
-registerFormatType('bold', bold)
-registerFormatType('italic', italic)
-registerFormatType('strikethrough', strikethrough)
-
-// registerBlockType(code.metadata, { ...code.settings, transforms: null })
-// registerBlockType(list.metadata, { ...list.settings, transforms: null })
-// registerBlockType(paragraph.metadata, { ...paragraph.settings, transforms: null })
-
-registerCoreBlocks([paragraph, code, list])
-
-registerBlockType('medienhaus/heading', {
-  apiVersion: 2,
-  name: 'medienhaus/heading',
-  title: 'Heading',
-  category: 'text',
-  description: 'Introduce new sections and organize content to help visitors (and search engines) understand the structure of your content.',
-  keywords: ['title', 'subtitle'],
-  textdomain: 'default',
-  icon: <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M6.2 5.2v13.4l5.8-4.8 5.8 4.8V5.2z" /></svg>,
-  supports: {
-    html: false
-    // __experimentalSlashInserter: true
-  },
-  attributes: {
-    content: {
-      type: 'string'
-    }
-  },
-  edit: (props) => {
-    const {
-      attributes: { content },
-      setAttributes,
-      onRemove
-    } = props
-
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    const blockProps = useBlockProps()
-
-    const onChangeContent = (newContent) => {
-      setAttributes({ content: newContent })
-    }
-    return (
-      <RichText
-        {...blockProps}
-        tagName="h2"
-        placeholder="Heading"
-        onChange={onChangeContent}
-        onRemove={onRemove}
-        value={content}
-        disableLineBreaks
-      />
-    )
-  }
-})
 
 // registerBlockType('medienhaus/quote', {
 //   apiVersion: 2,
@@ -279,8 +224,83 @@ registerBlockType('medienhaus/heading', {
 //   }
 // })
 
-function GutenbergEditor ({ content = [], onChange }) {
+function GutenbergEditor ({ content = [], blockTypes = ['text', 'heading', 'list', 'code'], onChange }) {
   const [blocks, setBlocks] = useState(content)
+
+  useEffect(() => {
+    // register
+    registerFormatType('bold', bold)
+    registerFormatType('italic', italic)
+    registerFormatType('strikethrough', strikethrough)
+
+    // registerBlockType(code.metadata, { ...code.settings, transforms: null })
+    // registerBlockType(list.metadata, { ...list.settings, transforms: null })
+    // registerBlockType(paragraph.metadata, { ...paragraph.settings, transforms: null })
+
+    if (blockTypes.includes('text')) registerCoreBlocks([paragraph])
+    if (blockTypes.includes('list')) registerCoreBlocks([list])
+    if (blockTypes.includes('code')) registerCoreBlocks([code])
+
+    if (blockTypes.includes('heading')) {
+      registerBlockType('medienhaus/heading', {
+        apiVersion: 2,
+        name: 'medienhaus/heading',
+        title: 'Heading',
+        category: 'text',
+        description: 'Introduce new sections and organize content to help visitors (and search engines) understand the structure of your content.',
+        keywords: ['title', 'subtitle'],
+        textdomain: 'default',
+        icon: <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+          <path d="M6.2 5.2v13.4l5.8-4.8 5.8 4.8V5.2z" />
+        </svg>,
+        supports: {
+          html: false
+          // __experimentalSlashInserter: true
+        },
+        attributes: {
+          content: {
+            type: 'string'
+          }
+        },
+        edit: (props) => {
+          const {
+            attributes: { content },
+            setAttributes,
+            onRemove
+          } = props
+
+          // eslint-disable-next-line react-hooks/rules-of-hooks
+          const blockProps = useBlockProps()
+
+          const onChangeContent = (newContent) => {
+            setAttributes({ content: newContent })
+          }
+          return (
+            <RichText
+              {...blockProps}
+              tagName="h2"
+              placeholder="Heading"
+              onChange={onChangeContent}
+              onRemove={onRemove}
+              value={content}
+              disableLineBreaks
+            />
+          )
+        }
+      })
+    }
+
+    return () => {
+      // Unregister
+      unregisterBlockType('core/paragraph')
+      unregisterBlockType('core/code')
+      unregisterBlockType('core/list')
+      unregisterBlockType('medienhaus/heading')
+      unregisterFormatType('core/bold')
+      unregisterFormatType('core/italic')
+      unregisterFormatType('core/strikethrough')
+    }
+  }, [])
 
   useEffect(() => {
     setBlocks(content)
