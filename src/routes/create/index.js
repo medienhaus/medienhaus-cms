@@ -54,6 +54,7 @@ const Create = () => {
   const history = useHistory()
   const matrixClient = Matrix.getMatrixClient()
   const params = useParams()
+  const [temporaryGutenbergContents, setTemporaryGutenbergContents] = useState(undefined)
 
   const projectSpace = params.spaceId
 
@@ -248,9 +249,13 @@ const Create = () => {
     await matrixClient.leave(roomId)
   }
 
-  const contentHasChanged = async (originalGutenbergBlocks) => {
+  const contentHasChanged = (originalGutenbergBlocks) => {
+    setTemporaryGutenbergContents(originalGutenbergBlocks)
+  }
+
+  const saveGutenbergEditorToMatrix = async () => {
     const orderOfRooms = []
-    let gutenbergBlocks = [...originalGutenbergBlocks]
+    let gutenbergBlocks = [...temporaryGutenbergContents]
 
     // filter out all empty gutenberg blocks -- we want to ignore those
     gutenbergBlocks = gutenbergBlocks.filter(block => {
@@ -348,6 +353,8 @@ const Create = () => {
 
     // update our "last saved  timestamp"
     setSaveTimestampToCurrentTime()
+
+    setTemporaryGutenbergContents(undefined)
   }
 
   const addToMap = (blockId, roomId) => {
@@ -546,6 +553,9 @@ const Create = () => {
             </select>
             {spaceObject && (description || description === '') ? <ProjectDescription description={description[contentLang]} callback={onChangeDescription} /> : <Loading />}
             {(gutenbergContent !== undefined) && <GutenbergEditor content={gutenbergContent} onChange={contentHasChanged} />}
+            {temporaryGutenbergContents && (
+              <button type="button" onClick={() => saveGutenbergEditorToMatrix()}>SAVE CHANGES</button>
+            )}
           </section>
           {/* Placeholder to show preview next to editing
           {blocks.map((content, i) => <DisplayPreview content={content} key={i} matrixClient={matrixClient} />)}

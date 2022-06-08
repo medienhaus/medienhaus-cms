@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import {
   BlockEditorProvider,
   BlockList,
@@ -21,7 +21,6 @@ import { registerFormatType, unregisterFormatType } from '@wordpress/rich-text'
 import { bold } from '@wordpress/format-library/build/bold'
 import { italic } from '@wordpress/format-library/build/italic'
 import { strikethrough } from '@wordpress/format-library/build/strikethrough'
-import { debounce } from 'lodash'
 import { registerCoreBlocks } from '@wordpress/block-library'
 
 // registerBlockType('medienhaus/quote', {
@@ -300,6 +299,8 @@ function GutenbergEditor ({ content = [], blockTypes = ['text', 'heading', 'list
       unregisterFormatType('core/italic')
       unregisterFormatType('core/strikethrough')
     }
+    // We need an empty array below because otherwise we run into performance issues
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   useEffect(() => {
@@ -311,19 +312,16 @@ function GutenbergEditor ({ content = [], blockTypes = ['text', 'heading', 'list
     if (onChange) onChange(blocks)
   }
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  const debouncedBlocksHaveChanged = useCallback(debounce((blocks) => blocksHaveChanged(blocks), 1500), [])
-
   return (
     <BlockEditorProvider
       value={blocks}
       onInput={(blocks) => {
         setBlocks(blocks)
-        debouncedBlocksHaveChanged(blocks)
+        blocksHaveChanged(blocks)
       }}
       onChange={(blocks) => {
         setBlocks(blocks)
-        debouncedBlocksHaveChanged(blocks)
+        blocksHaveChanged(blocks)
       }}
     >
       <ShortcutProvider>
