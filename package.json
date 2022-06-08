@@ -46,7 +46,7 @@
     "eslint": "^8.15.0",
     "eslint-config-standard": "^17.0.0",
     "eslint-config-standard-jsx": "^11.0.0",
-    "eslint-config-standard-react": "^11.0.1",
+    "eslint-config-standard-react": "github:standard/eslint-config-standard-react#f4524992516ede26dc2d4264966acb6bd6744d66",
     "eslint-plugin-react-hooks": "^4.2.0"
   },
   "scripts": {
