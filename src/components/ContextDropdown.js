@@ -2,16 +2,14 @@ import React, { useEffect, useState } from 'react'
 import { useCombobox } from 'downshift'
 import { find, map, sortBy, uniq, uniqBy } from 'lodash'
 import mapDeep from 'deepdash/es/mapDeep'
-import struktur from '../struktur'
-import strukturDev from '../struktur-dev'
 import LoadingSpinnerButton from './LoadingSpinnerButton'
 import { useTranslation } from 'react-i18next'
 import Fuse from 'fuse.js'
 import Matrix from '../Matrix'
 import { makeRequest } from '../Backend'
 
-function ContextDropdown ({ onItemChosen, selectedContext, showRequestButton = false }) {
-  const items = uniqBy(mapDeep(process.env.NODE_ENV === 'development' ? strukturDev['!ijJyXjLNqgeJkRerIG:dev.medienhaus.udk-berlin.de'].children : struktur['!TCqCDYYsBUxmjWOZWV:content.udk-berlin.de'].children, (value, key, parent, context) => {
+function ContextDropdown ({ onItemChosen, selectedContext, showRequestButton = false, struktur }) {
+  const items = uniqBy(mapDeep(struktur, (value, key, parent, context) => {
   // Recursively loop through all parents to add them to the "path" which we later on need for displaying breadcrumbs
     value.path = []
     function addParentToPath (item) {
@@ -92,10 +90,11 @@ function ContextDropdown ({ onItemChosen, selectedContext, showRequestButton = f
     },
     onSelectedItemChange: ({ selectedItem }) => {
       if (!selectedItem) { return }
-      if (!joinedRooms.includes(selectedItem.id)) {
-        // clear the combobox again if the user selected a context they are not a member of yet
-        return
-      }
+      // if (!joinedRooms.includes(selectedItem.id)) {
+      //   // clear the combobox again if the user selected a context they are not a member of yet
+      //   return
+      // }
+      console.log(selectedItem)
       onItemChosen(selectedItem.id)
     }
   })
@@ -121,7 +120,6 @@ function ContextDropdown ({ onItemChosen, selectedContext, showRequestButton = f
             width: '50px',
             right: '0',
             bottom: '0',
-            top: '0',
             background: 'none',
             border: 'none',
             color: 'transparent'
