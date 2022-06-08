@@ -22,6 +22,7 @@ import config from '../../config.json'
 import _, { find, isEmpty } from 'lodash'
 import GutenbergEditor from '../gutenberg/editor'
 import createBlock from './matrix_create_room'
+import LoadingSpinnerButton from '../../components/LoadingSpinnerButton'
 
 // eslint-disable-next-line no-unused-vars
 const nl2br = function (str) {
@@ -54,6 +55,7 @@ const Create = () => {
   const history = useHistory()
   const matrixClient = Matrix.getMatrixClient()
   const params = useParams()
+  const [isSavingGutenbergContents, setIsSavingGutenbergContents] = useState(false)
   const [temporaryGutenbergContents, setTemporaryGutenbergContents] = useState(undefined)
 
   const projectSpace = params.spaceId
@@ -254,6 +256,10 @@ const Create = () => {
   }
 
   const saveGutenbergEditorToMatrix = async () => {
+    if (isSavingGutenbergContents) return
+
+    setIsSavingGutenbergContents(true)
+
     const orderOfRooms = []
     let gutenbergBlocks = [...temporaryGutenbergContents]
 
@@ -261,16 +267,6 @@ const Create = () => {
     gutenbergBlocks = gutenbergBlocks.filter(block => {
       return !(block.name === 'core/paragraph' && block.attributes.content === '')
     })
-
-    // eslint-disable-next-line no-unused-vars
-    for (const [blockId, roomId] of Object.entries(gutenbergIdToMatrixRoomIdRef.current)) {
-      if (!find(gutenbergBlocks, { clientId: blockId })) {
-        await deleteRoom(roomId, spaceObjectRef.current?.rooms.filter(room => room.name === contentLangRef.current)[0].room_id)
-        const x = { ...gutenbergIdToMatrixRoomIdRef.current }
-        delete x[blockId]
-        setGutenbergIdToMatrixRoomId(x)
-      }
-    }
 
     for (const block of blocksRef.current) {
       let deletedARoom = false
@@ -357,7 +353,11 @@ const Create = () => {
     // update our "last saved  timestamp"
     setSaveTimestampToCurrentTime()
 
+    await fetchContentBlocks()
+
     setTemporaryGutenbergContents(undefined)
+
+    setIsSavingGutenbergContents(false)
   }
 
   const addToMap = (blockId, roomId) => {
@@ -567,7 +567,7 @@ const Create = () => {
             {spaceObject && (description || description === '') ? <ProjectDescription description={description[contentLang]} callback={onChangeDescription} /> : <Loading />}
             {(gutenbergContent !== undefined) && <GutenbergEditor content={gutenbergContent} onChange={contentHasChanged} />}
             {temporaryGutenbergContents && (
-              <button type="button" onClick={() => saveGutenbergEditorToMatrix()}>SAVE CHANGES</button>
+              <LoadingSpinnerButton type="button" onClick={saveGutenbergEditorToMatrix}>SAVE CHANGES</LoadingSpinnerButton>
             )}
           </section>
           {/* Placeholder to show preview next to editing
