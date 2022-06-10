@@ -1612,3 +1612,7 @@ button>.loading {
 .block-editor-writing-flow ol {
   list-style-position: inside;
 }
+
+.is-root-container.block-editor-block-list__layout {
+  padding-bottom: 90px;
+}
