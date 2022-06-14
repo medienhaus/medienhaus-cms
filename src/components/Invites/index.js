@@ -1,14 +1,13 @@
 import React, { useState } from 'react'
-import Matrix from '../../../Matrix'
-import LoadingSpinnerButton from '../../../components/LoadingSpinnerButton'
+import LoadingSpinnerButton from '../LoadingSpinnerButton'
 import { useTranslation } from 'react-i18next'
+import Matrix from '../../Matrix'
 
 const Invites = ({ space, callback }) => {
   const [reactingToInvite, setReactingToInvite] = useState(false)
   const [error, setError] = useState('')
   const matrixClient = Matrix.getMatrixClient()
   const { t } = useTranslation('invites')
-
   const join = async (room) => {
     setReactingToInvite(true)
     try {
