@@ -30,12 +30,23 @@ const Moderate = () => {
   useEffect(() => {
     if (joinedSpaces) {
       // check to see if a user has joined a room with the specific content type and is moderator or admin (at least power level 50)
-      const filteredRooms = joinedSpaces.filter(space => {
-        if (config.medienhaus?.context) return context.includes(space.meta.template) && space.powerLevel > 49
-        else return context.includes(space.meta.type) && space.powerLevel > 49
+      // joinedSpaces.forEach(space => {
+      for (const space of joinedSpaces) {
+        if (space.meta.type !== 'context') continue
+        if (space.powerLevel < 50) continue
+        console.log(space)
+        setModerationRooms(moderationRooms => Object.assign({}, moderationRooms, {
+          [space.room_id]:
+          {
+            name: space.name,
+            id: space.room_id,
+            room_id: space.room_id,
+            template: space.meta.template,
+            type: space.meta.type,
+            membership: space.selfMembership
+          }
+        }))
       }
-      )
-      setModerationRooms(filteredRooms)
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [joinedSpaces])
@@ -161,7 +172,7 @@ const Moderate = () => {
   if (spacesErr) return <p>{spacesErr}</p>
   return (
     <>
-      {moderationRooms.length < 1 && <p>{t('You are not moderating any spaces.')}</p>}
+      {Object.keys(moderationRooms).length < 1 && <p>{t('You are not moderating any spaces.')}</p>}
 
       {Object.keys(invites).length > 0 && (
         <>
@@ -192,7 +203,7 @@ const Moderate = () => {
         </>
       )}
 
-      {moderationRooms.length < 1 && <>
+      {Object.keys(moderationRooms).length > 0 && <>
         <section className="request">
           {Object.keys(config?.medienhaus?.sites?.moderate).map((value, index) => {
             return <TextNavigation width="auto" disabled={value === selection} active={value === selection} value={value} key={value} onClick={(e) => setSelection(e.target.value)}>{value.replace(/([a-z0-9])([A-Z])/g, '$1 $2')}</TextNavigation>

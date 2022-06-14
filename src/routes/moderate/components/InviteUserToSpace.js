@@ -37,7 +37,7 @@ const InviteUserToSpace = ({ matrixClient, moderationRooms, setPower, fetchUsers
       <p>Invite users to specific contexts and promote them to moderate said context.</p>
       <select value={selectedRoom} onChange={(e) => setSelectedRoom(e.target.value)}>
         <option value={false} disabled>-- {t('select context')} --</option>
-        {moderationRooms.map((room, index) => <option key={index} value={room.room_id}>{room.name}</option>)}
+        {Object.keys(moderationRooms).map((roomId, index) => <option key={index} value={moderationRooms[roomId].room_id}>{moderationRooms[roomId].name}</option>)}
       </select>
       <input
         list="userSearch"

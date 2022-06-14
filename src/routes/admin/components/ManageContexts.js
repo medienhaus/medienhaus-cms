@@ -1,5 +1,3 @@
-/* eslint-disable no-prototype-builtins */
-/* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import CreateContext from './CreateContext'
@@ -10,7 +8,8 @@ import { Loading } from '../../../components/loading'
 import AddEvent from '../../create/Location/components/AddEvent'
 import DisplayEvents from '../../create/Location/components/DisplayEvents'
 import DeleteButton from '../../create/components/DeleteButton'
-import SimpleContextSelect from '../../../components/SimpleContextSelect'
+// import SimpleContextSelect from '../../../components/SimpleContextSelect'
+import ContextDropdown from '../../../components/ContextDropdown'
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
 import locations from '../../../assets/data/locations.json'
 import { MatrixEvent } from 'matrix-js-sdk'
@@ -20,10 +19,10 @@ import TextareaAutosize from 'react-textarea-autosize'
 import findPathDeep from 'deepdash/es/findPathDeep'
 import findValueDeep from 'deepdash/es/findValueDeep'
 
-const ManageContexts = ({ matrixClient, moderationRooms: moderationRoomsInit }) => {
+const ManageContexts = ({ matrixClient, moderationRooms: incomingModerationRooms }) => {
   const { t } = useTranslation('admin')
   const [selectedContext, setSelectedContext] = useState('')
-  const [parentName] = useState('')
+  const [parentName, setParentName] = useState('')
   // eslint-disable-next-line no-unused-vars
   const [disableButton, setDisableButton] = useState(false)
   const [parent] = useState(process.env.REACT_APP_CONTEXT_ROOT_SPACE_ID)
@@ -34,7 +33,7 @@ const ManageContexts = ({ matrixClient, moderationRooms: moderationRoomsInit }) 
   const [deleting, setDeleting] = useState(false)
   const [loading, setLoading] = useState(false)
   const [description, setDescription] = useState('')
-  const [moderationRooms, setModerationRooms] = useState(moderationRoomsInit)
+  const [moderationRooms, setModerationRooms] = useState()
   const createStructurObject = async () => {
     async function getSpaceStructure (matrixClient, motherSpaceRoomId, includeRooms) {
       setDisableButton(true)
@@ -130,8 +129,22 @@ const ManageContexts = ({ matrixClient, moderationRooms: moderationRoomsInit }) 
     const fetchTree = await fetch(config.medienhaus.api + process.env.REACT_APP_CONTEXT_ROOT_SPACE_ID + '/tree')
     const response = await fetchTree.json()
     setInputItems(response.children)
+
+    for (const space of Object.keys(incomingModerationRooms)) {
+      const contextObject = findValueDeep(
+        response.children,
+        (value, key, parent) => {
+          if (value.id === space) return true
+        }, { childrenPath: 'children', includeRoot: false, rootIsChildren: true })
+      if (!contextObject) {
+        const _moderationRooms = { ...incomingModerationRooms }
+        delete _moderationRooms[space]
+        setModerationRooms(_moderationRooms)
+      }
+    }
     setLoading(false)
   }
+
   const spaceChild = async (e, space, add) => {
     setLoading(true)
     e && e.preventDefault()
@@ -145,6 +158,7 @@ const ManageContexts = ({ matrixClient, moderationRooms: moderationRoomsInit }) 
       headers: { Authorization: 'Bearer ' + localStorage.getItem('medienhaus_access_token') },
       body: JSON.stringify(add ? body : { }) // if we add a space to an existing one we need to send the object 'body', to remove a space we send an empty object.
     }).catch(console.log)
+
     add ? console.log('added as child to ' + selectedContext) : console.log('removed ' + selectedContext + ' from ' + contextParent)
     // if (config.medienhaus.api) fetchTreeFromApi()
     // else await createStructurObject()
@@ -189,7 +203,7 @@ const ManageContexts = ({ matrixClient, moderationRooms: moderationRoomsInit }) 
               'm.room.encryption': 100,
               'm.room.history_visibility': 100,
               'm.room.name': 50,
-              'm.room.power_levels': 100,
+              'm.room.power_levels': 50,
               'm.room.server_acl': 100,
               'm.room.tombstone': 100,
               'm.space.child': 0, // @TODO this needs to be a config flag, wether users are allowed to just add content to contexts or need to knock and be invited first.
@@ -261,11 +275,10 @@ const ManageContexts = ({ matrixClient, moderationRooms: moderationRoomsInit }) 
       //   (value, key, parent) => {
       //     if (value.id === selectedContext) return true
       //   }, { childrenPath: 'children', includeRoot: false, rootIsChildren: true })
-      setModerationRooms(prevState => {
-        const newState = [...prevState]
-        newState.push(subContextObject)
-        return newState
-      })
+      setModerationRooms(prevState => Object.assign(prevState, {
+        [newContext]: subContextObject
+      }))
+
       const pathToPushTo = findPathDeep(
         inputItems,
         (value, key, parent) => {
@@ -289,8 +302,8 @@ const ManageContexts = ({ matrixClient, moderationRooms: moderationRoomsInit }) 
     setEvents([])
     setAllocation([])
     await fetchAllocation(space)
-    const checkSubSpaes = await matrixClient.getRoomHierarchy(space, 1).catch(console.log)
-    const checkForEvents = checkSubSpaes?.rooms?.filter(child => child.name.includes('_event'))
+    const checkSubSpaces = await matrixClient.getRoomHierarchy(space, 1).catch(console.log)
+    const checkForEvents = checkSubSpaces?.rooms?.filter(child => child.name.includes('_event'))
     if (!_.isEmpty(checkForEvents)) {
       const eventSummary = await Promise.all(checkForEvents.map(room => matrixClient.getRoomHierarchy(room.room_id, 0).catch(err => console.log(err)))) // then we fetch the summary of all spaces within the event space
       const onlyEvents = eventSummary
@@ -339,7 +352,7 @@ const ManageContexts = ({ matrixClient, moderationRooms: moderationRoomsInit }) 
     await getEvents(context)
     setSelectedContext(context)
 
-    // setParentName(context.path[context.path.length - 1])
+    setParentName(contextObject.name)
     setLoading(false)
   }
 
@@ -374,26 +387,27 @@ const ManageContexts = ({ matrixClient, moderationRooms: moderationRoomsInit }) 
     if (description.length > 500) return
     await matrixClient.setRoomTopic(selectedContext, description).catch(console.log)
   }
+
   return (
     <>
       <section className="manage">
         <h3>Manage Contexts</h3>
         {// !structure ? <Loading /> : <ShowContexts structure={structure} t={t} selectedContext={selectedContext} parent={parent} parentName={parentName} disableButton={disableButton} callback={contextualise} />
         }
-        {!inputItems
+        {!inputItems && !moderationRooms
           ? <Loading />
-          : <SimpleContextSelect
+          : <ContextDropdown
               onItemChosen={onContextChange}
               selectedContext={selectedContext}
-              struktur={inputItems}
+              struktur={moderationRooms}
               disabled={loading}
-              moderationRooms={moderationRooms}
             />}
         {loading && inputItems && <Loading />}
         {/* <label htmlFor="name">{t('Context')}: </label>
          <input type="text" value={selectedContextName} disabled /> */}
         {selectedContext &&
           <>
+            <h2>{parentName}</h2>
             {/* <button onClick={selectedContext.context.push({ name: 'yay' })}>test</button> */}
             <h3>{t('Add Sub-Context')}</h3>
             <CreateContext t={t} parent={selectedContext} matrixClient={matrixClient} parentName={parentName} disableButton={loading} callback={addSpace} />
