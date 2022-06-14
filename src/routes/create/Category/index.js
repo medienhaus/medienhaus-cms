@@ -12,16 +12,16 @@ import styled from 'styled-components'
 import ContextDropdown from '../../../components/ContextDropdown'
 
 const RemovableLiElement = styled.li`
-display: flex;
-justify-content: space-between;
-list-style: none;
-height: 2em;
-margin-bottom: calc(var(--margin)/2);
+    display: flex;
+    justify-content: space-between;
+    list-style: none;
+    height: 2em;
+    margin-bottom: calc(var(--margin)/2);
 
-span {
-  display: flex;
-  align-self: self-end;
-}
+    span {
+      display: flex;
+      align-self: self-end;
+    }
 `
 
 const Category = ({ projectSpace, onChange, parent }) => {
@@ -224,10 +224,11 @@ const Category = ({ projectSpace, onChange, parent }) => {
       <p>{t('The context can be a class, a course, a seminar or a free project. If you are unsure, ask the professor of your class or the seminar leader.')}</p>
       <p>{t('You can scroll through the list, or filter/search the list by typing one or more keywords.')}</p>
       <p>{t('You have the possibility to create multiple contexts if your event is i.e. interdisciplinary or a cooperation or similar.')}</p>
-      <ul style={{ position: 'relative' }}>
-        {!inputItems || loading
-          ? <Loading />
-          : <>
+
+      {!inputItems || loading
+        ? <Loading />
+        : <>
+          <ul style={{ position: 'relative' }}>
             {contexts?.map((context, index) => {
               return (
                 <RemovableLiElement key={context.room_id}>
@@ -236,22 +237,22 @@ const Category = ({ projectSpace, onChange, parent }) => {
                 </RemovableLiElement>
               )
             })}
-            {/* <SimpleContextSelect
+          </ul>
+
+          {/* <SimpleContextSelect
               selectedContext=""
               onItemChosen={onContextChosen}
               contexts={contexts}
               struktur={inputItems}
             /> */}
-            <ContextDropdown
-              selectedContext=""
-              preSelectedValue="context"
-              onItemChosen={onContextChosen}
-              contexts={contexts}
-              struktur={inputItems}
-            />
-          </>}
-        {error && <p>{error}</p>}
-      </ul>
+          <ContextDropdown
+            selectedContext=""
+            onItemChosen={onContextChosen}
+            contexts={contexts}
+            struktur={inputItems}
+          />
+        </>}
+      {error && <p>{error}</p>}
       {/* {subject !== '' && !member && <Knock room={room} callback={callback} />} */}
     </>
   )

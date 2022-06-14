@@ -42,12 +42,22 @@ const Moderate = () => {
   useEffect(() => {
     if (joinedSpaces) {
       // check to see if a user has joined a room with the specific content type and is moderator or admin (at least power level 50)
-      const filteredRooms = joinedSpaces.filter(space => {
-        if (config.medienhaus?.context) return context.includes(space.meta.template) && space.powerLevel > 49
-        else return context.includes(space.meta.type) && space.powerLevel > 49
+      // joinedSpaces.forEach(space => {
+      for (const space of joinedSpaces) {
+        if (space.meta.type !== 'context') continue
+        if (space.powerLevel < 50) continue
+        setModerationRooms(moderationRooms => Object.assign({}, moderationRooms, {
+          [space.room_id]:
+          {
+            name: space.name,
+            id: space.room_id,
+            room_id: space.room_id,
+            template: space.meta.template,
+            type: space.meta.type,
+            membership: space.selfMembership
+          }
+        }))
       }
-      )
-      setModerationRooms(filteredRooms)
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [joinedSpaces])
@@ -151,11 +161,11 @@ const Moderate = () => {
             <>
               <section className="accept">
                 <h2>{t('Manage requests')}</h2>
-                {moderationRooms.length > 0
+                {Object.keys(moderationRooms).length > 0
                   ? <>
                     <section className="requests">
-                      {moderationRooms.map((request, index) => <React.Fragment key={request.name}>
-                        <GetRequestPerRoom request={request} key={index} />
+                      {Object.keys(moderationRooms).map((request, index) => <React.Fragment key={request.name}>
+                        <GetRequestPerRoom request={moderationRooms[request]} key={index} />
                       </React.Fragment>)}
                     </section>
                   </>
@@ -173,6 +183,8 @@ const Moderate = () => {
   if (spacesErr) return <p>{spacesErr}</p>
   return (
     <>
+      {moderationRooms && Object.keys(moderationRooms).length < 1 && <p>{t('You are not moderating any spaces.')}</p>}
+
       {Object.keys(invites).length > 0 && (
         <>
           <section className="invites">
@@ -202,17 +214,15 @@ const Moderate = () => {
         </>
       )}
 
-      {moderationRooms.length < 1
-        ? <p>{t('You are not moderating any spaces.')}</p>
-        : <>
-          <TabSection className="request">
-            {Object.keys(config?.medienhaus?.sites?.moderate).map((value, index) => {
-              return <TextNavigation width="auto" disabled={value === selection} active={value === selection} value={value} key={value} onClick={(e) => setSelection(e.target.value)}>{value.replace(/([a-z0-9])([A-Z])/g, '$1 $2')}</TextNavigation>
-            })}
-          </TabSection>
+      {moderationRooms && Object.keys(moderationRooms).length > 0 && <>
+        <TabSection className="request">
+          {Object.keys(config?.medienhaus?.sites?.moderate).map((value, index) => {
+            return <TextNavigation width="auto" disabled={value === selection} active={value === selection} value={value} key={value} onClick={(e) => setSelection(e.target.value)}>{value.replace(/([a-z0-9])([A-Z])/g, '$1 $2')}</TextNavigation>
+          })}
+        </TabSection>
 
-          {renderSelection()}
-        </>}
+        {renderSelection()}
+      </>}
     </>
   )
 }
