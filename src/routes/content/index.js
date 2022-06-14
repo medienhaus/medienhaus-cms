@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import useJoinedSpaces from '../../components/matrix_joined_spaces'
 import Projects from './Projects'
-import Invites from './Invites'
+import Invites from '../../components/Invites'
 import Matrix from '../../Matrix'
 import { Loading } from '../../components/loading'
 import { useTranslation } from 'react-i18next'
@@ -15,18 +15,16 @@ const Overview = () => {
   const matrixClient = Matrix.getMatrixClient()
   const [projects, setProjects] = useState({})
   const [invites, setInvites] = useState({})
-  const context = config.medienhaus?.context ? Object.keys(config.medienhaus?.context).concat('context') : ['context']
   const item = config.medienhaus?.item ? Object.keys(config.medienhaus?.item).concat('item') : ['item']
-  const typesOfSpaces = context.concat(item)
   const { joinedSpaces, spacesErr, fetchSpaces, reload } = useJoinedSpaces(false)
 
   useEffect(() => {
     async function checkRoomForPossibleInvite (room) {
       // Ignore if this is not a space
       if (room.getType() !== 'm.space') return
-      // Ignore if this is not a student project or a "context"
+      // Ignore if this is not an "item"
       const metaEvent = await matrixClient.getStateEvent(room.roomId, 'dev.medienhaus.meta').catch(() => {})
-      if (!metaEvent || !metaEvent.template || !typesOfSpaces.includes(metaEvent.template)) return
+      if (!metaEvent || !metaEvent.template || !item.includes(metaEvent.template)) return
       // Ignore if this is not an invitation (getMyMembership() only works correctly after calling _loadMembersFromServer())
       await room.loadMembersFromServer().catch(console.error)
       if (room.getMyMembership() !== 'invite') return
@@ -76,7 +74,7 @@ const Overview = () => {
       // we check if a collaborator has deleted a project since we last logged in
       joinedSpaces?.filter(space => space.meta?.deleted).forEach(async space => await deleteProject(space.room_id))
       // then we update our array to not display the just deleted projects and only display joined rooms
-      const updatedProjects = joinedSpaces?.filter(space => !space.meta?.deleted && typesOfSpaces.includes(space.meta.type))
+      const updatedProjects = joinedSpaces?.filter(space => !space.meta?.deleted && item.includes(space.meta.type))
       setProjects(sortBy(updatedProjects, 'name'))
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
