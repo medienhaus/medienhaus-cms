@@ -30,7 +30,6 @@ const Moderate = () => {
   useEffect(() => {
     if (joinedSpaces) {
       // check to see if a user has joined a room with the specific content type and is moderator or admin (at least power level 50)
-
       const filteredRooms = joinedSpaces.filter(space => {
         if (config.medienhaus?.context) return context.includes(space.meta.template) && space.powerLevel > 49
         else return context.includes(space.meta.type) && space.powerLevel > 49
@@ -160,7 +159,6 @@ const Moderate = () => {
 
   if (fetchSpaces || !matrixClient.isInitialSyncComplete()) return <Loading />
   if (spacesErr) return <p>{spacesErr}</p>
-  if (moderationRooms.length < 1) return <p>{t('You are not moderating any spaces.')}</p>
   return (
     <>
       {Object.keys(invites).length > 0 && (
@@ -191,13 +189,18 @@ const Moderate = () => {
           <hr />
         </>
       )}
-      <section className="request">
-        {Object.keys(config?.medienhaus?.sites?.moderate).map((value, index) => {
-          return <TextNavigation width="auto" disabled={value === selection} active={value === selection} value={value} key={value} onClick={(e) => setSelection(e.target.value)}>{value.replace(/([a-z0-9])([A-Z])/g, '$1 $2')}</TextNavigation>
-        })}
-      </section>
 
-      {renderSelection()}
+      {moderationRooms.length < 1
+        ? <p>{t('You are not moderating any spaces.')}</p>
+        : <>
+          <section className="request">
+            {Object.keys(config?.medienhaus?.sites?.moderate).map((value, index) => {
+              return <TextNavigation width="auto" disabled={value === selection} active={value === selection} value={value} key={value} onClick={(e) => setSelection(e.target.value)}>{value.replace(/([a-z0-9])([A-Z])/g, '$1 $2')}</TextNavigation>
+            })}
+          </section>
+
+          {renderSelection()}
+        </>}
     </>
   )
 }

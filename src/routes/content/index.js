@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import useJoinedSpaces from '../../components/matrix_joined_spaces'
 import Projects from './Projects'
-import Invites from './Invites'
+import Invites from '../../components/Invites'
 import Matrix from '../../Matrix'
 import { Loading } from '../../components/loading'
 import { useTranslation } from 'react-i18next'
