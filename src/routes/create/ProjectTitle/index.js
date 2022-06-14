@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import Matrix from '../../../Matrix'
 import { Loading } from '../../../components/loading'
@@ -6,6 +6,7 @@ import LoadingSpinnerButton from '../../../components/LoadingSpinnerButton'
 import { useTranslation } from 'react-i18next'
 
 import config from '../../../config.json'
+import _ from 'lodash'
 
 const ProjectTitle = ({ title, projectSpace, template, callback }) => {
   const { t } = useTranslation('content')
@@ -22,7 +23,7 @@ const ProjectTitle = ({ title, projectSpace, template, callback }) => {
     title === '' ? setNewProject(true) : setNewProject(false)
   }, [title])
 
-  const createProject = async (title) => {
+  const createProject = useCallback(async (title) => {
     setLoading(true)
 
     const opts = (template, name, history) => {
@@ -104,11 +105,32 @@ const ProjectTitle = ({ title, projectSpace, template, callback }) => {
     } finally {
       setLoading(false)
     }
-  }
+  }, [history, matrixClient, template])
+
+  const onClickCreateNewProject = useCallback((e) => {
+    if (newProject && projectTitle.length < 101) {
+      createProject(projectTitle)
+      setOldTitle(projectTitle)
+      setNewProject(false)
+    } else {
+      if (e) e.preventDefault()
+      setNewProject(true)
+    }
+  }, [createProject, newProject, projectTitle])
+
   return (
     <>
       <div className="maxlength">
-        <input id="title" maxLength="100" name="title" type="text" value={projectTitle} onClick={() => { setEdit(true); setOldTitle(title) }} onChange={(e) => setProjectTitle(e.target.value)} />
+        <input
+          id="title"
+          maxLength="100"
+          name="title"
+          type="text"
+          value={projectTitle}
+          onClick={() => { setEdit(true); setOldTitle(title) }}
+          onChange={(e) => { setProjectTitle(e.target.value) }}
+          onKeyUp={e => { if (e.key === 'Enter' && newProject) { _.defer(onClickCreateNewProject) } }}
+        />
         <span>{projectTitle.length + '/100'}</span>
       </div>
       {/*
@@ -117,22 +139,8 @@ const ProjectTitle = ({ title, projectSpace, template, callback }) => {
       ? <Loading />
       : edit && (projectTitle !== oldTitle) &&
         <div className={!newProject ? 'confirmation' : null}>
-          {!newProject && <button className="cancel" onClick={(e) => { e.preventDefault(); setEdit(false); setProjectTitle(oldTitle) }}>CANCEL</button>}
-          {!title && newProject &&
-            <LoadingSpinnerButton
-              disabled={!projectTitle || projectTitle.length > 100} onClick={(e) => {
-                console.log(newProject)
-                if (newProject && projectTitle.length < 101) {
-                  createProject(projectTitle)
-                  setOldTitle(projectTitle)
-                  setNewProject(false)
-                } else {
-                  e.preventDefault()
-                  setNewProject(true)
-                }
-              }}
-            >{newProject && t('Create')}
-            </LoadingSpinnerButton>}
+          {!newProject && <button className="cancel" onClick={(e) => { e.preventDefault(); setEdit(false); setProjectTitle(oldTitle) }}>{t('CANCEL')}</button>}
+          {!title && newProject && <LoadingSpinnerButton disabled={!projectTitle || projectTitle.length > 100} onClick={onClickCreateNewProject}>{t('Create')}</LoadingSpinnerButton>}
 
           {title && edit && (projectTitle !== oldTitle) &&
             <LoadingSpinnerButton
