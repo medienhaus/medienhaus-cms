@@ -6,6 +6,7 @@ import { useTranslation } from 'react-i18next'
 // assets
 import locations from '../../../../assets/data/locations.json'
 import config from '../../../../config.json'
+import { Icon } from 'leaflet/dist/leaflet-src.esm'
 
 const AddLocation = ({ number, inviteCollaborators, projectSpace, handleOnBlockWasAddedSuccessfully, peertube, allocationEvent, locationDropdown, callback, disabled }) => {
   const [selectedLocation, setSelectedLocation] = useState('custom')
@@ -78,6 +79,7 @@ const AddLocation = ({ number, inviteCollaborators, projectSpace, handleOnBlockW
         eventHandlers={eventHandlers}
         position={position}
         ref={markerRef}
+        icon={(new Icon.Default({ imagePath: '/leaflet/' }))}
       >
         <Popup minWidth={90}>
           <span>
