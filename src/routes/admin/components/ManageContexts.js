@@ -18,6 +18,7 @@ import TextareaAutosize from 'react-textarea-autosize'
 
 import findPathDeep from 'deepdash/es/findPathDeep'
 import findValueDeep from 'deepdash/es/findValueDeep'
+import { Icon } from 'leaflet/dist/leaflet-src.esm'
 
 const ManageContexts = ({ matrixClient, moderationRooms: incomingModerationRooms }) => {
   const { t } = useTranslation('admin')
@@ -429,7 +430,7 @@ const ManageContexts = ({ matrixClient, moderationRooms: incomingModerationRooms
                                         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                                         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                                       />
-                                      <Marker position={[location.lat, location.lng]}>
+                                      <Marker position={[location.lat, location.lng]} icon={(new Icon.Default({ imagePath: '/leaflet/' }))}>
                                         <Popup>
                                           {locations.find(coord => coord.coordinates === location.lat + ', ' + location.lng)?.name || // if the location is not in our location.json
                                           location.info?.length > 0 // we check if the custom input field was filled in

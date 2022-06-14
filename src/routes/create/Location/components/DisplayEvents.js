@@ -5,6 +5,7 @@ import locations from '../../../../assets/data/locations.json'
 import { Loading } from '../../../../components/loading'
 import { useTranslation } from 'react-i18next'
 import DisplayBbb from '../../components/DisplayBbb'
+import { Icon } from 'leaflet/dist/leaflet-src.esm'
 
 const DisplayEvents = ({ event, i }) => {
   const { t } = useTranslation('date')
@@ -24,7 +25,10 @@ const DisplayEvents = ({ event, i }) => {
               attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             />
-            <Marker position={[cms.body.substring(0, cms.body.indexOf(',')), cms.body.substring(cms.body.indexOf(',') + 1, cms.body.indexOf('-'))]}>
+            <Marker
+              position={[cms.body.substring(0, cms.body.indexOf(',')), cms.body.substring(cms.body.indexOf(',') + 1, cms.body.indexOf('-'))]}
+              icon={(new Icon.Default({ imagePath: '/leaflet/' }))}
+            >
               <Popup>
                 {locations.find(coord => coord.coordinates === cms.body.substring(0, cms.body.indexOf(',')) + ',' + cms.body.substring(cms.body.indexOf(',') + 1, cms.body.lastIndexOf('-')))?.name || // if the location is not in our location.json
                     cms.body.substring(cms.body.lastIndexOf('-') + 1).length > 0 // we check if the custom input field was filled in

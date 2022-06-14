@@ -10,6 +10,7 @@ import deleteContentBlock from '../functions/deleteContentBlock'
 import DisplayEvents from './components/DisplayEvents'
 import { isArray } from 'lodash'
 import { Loading } from '../../../components/loading'
+import { Icon } from 'leaflet/dist/leaflet-src.esm'
 
 const Location = ({ reloadSpace, inviteCollaborators, projectSpace, events, allocation, matrixClient }) => {
   const [eventSpace, setEventSpace] = useState(events)
@@ -131,7 +132,10 @@ const Location = ({ reloadSpace, inviteCollaborators, projectSpace, events, allo
                                       attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                                       url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                                     />
-                                    <Marker position={[location.lat, location.lng]}>
+                                    <Marker
+                                      position={[location.lat, location.lng]}
+                                      icon={(new Icon.Default({ imagePath: '/leaflet/' }))}
+                                    >
                                       <Popup>
                                         {locations.find(coord => coord.coordinates === location.lat + ', ' + location.lng)?.name || // if the location is not in our location.json
                                         location.info?.length > 0 // we check if the custom input field was filled in
