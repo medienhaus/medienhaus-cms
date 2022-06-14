@@ -161,6 +161,8 @@ const Moderate = () => {
   if (spacesErr) return <p>{spacesErr}</p>
   return (
     <>
+      {moderationRooms.length < 1 && <p>{t('You are not moderating any spaces.')}</p>}
+
       {Object.keys(invites).length > 0 && (
         <>
           <section className="invites">
@@ -190,17 +192,15 @@ const Moderate = () => {
         </>
       )}
 
-      {moderationRooms.length < 1
-        ? <p>{t('You are not moderating any spaces.')}</p>
-        : <>
-          <section className="request">
-            {Object.keys(config?.medienhaus?.sites?.moderate).map((value, index) => {
-              return <TextNavigation width="auto" disabled={value === selection} active={value === selection} value={value} key={value} onClick={(e) => setSelection(e.target.value)}>{value.replace(/([a-z0-9])([A-Z])/g, '$1 $2')}</TextNavigation>
-            })}
-          </section>
+      {moderationRooms.length < 1 && <>
+        <section className="request">
+          {Object.keys(config?.medienhaus?.sites?.moderate).map((value, index) => {
+            return <TextNavigation width="auto" disabled={value === selection} active={value === selection} value={value} key={value} onClick={(e) => setSelection(e.target.value)}>{value.replace(/([a-z0-9])([A-Z])/g, '$1 $2')}</TextNavigation>
+          })}
+        </section>
 
-          {renderSelection()}
-        </>}
+        {renderSelection()}
+      </>}
     </>
   )
 }
