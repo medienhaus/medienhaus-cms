@@ -18,12 +18,13 @@ import TextareaAutosize from 'react-textarea-autosize'
 
 import findPathDeep from 'deepdash/es/findPathDeep'
 import findValueDeep from 'deepdash/es/findValueDeep'
+import LoadingSpinnerButton from '../../../components/LoadingSpinnerButton'
 
 const ManageContexts = ({ matrixClient, moderationRooms: incomingModerationRooms }) => {
   const { t } = useTranslation('admin')
   const [selectedContext, setSelectedContext] = useState('')
-  const [parentName, setParentName] = useState('')
-  // eslint-disable-next-line no-unused-vars
+  const [roomName, setRoomName] = useState('')
+  const [roomTemplate, setRoomTemplate] = useState('')
   const [disableButton, setDisableButton] = useState(false)
   const [parent] = useState(process.env.REACT_APP_CONTEXT_ROOT_SPACE_ID)
   const [contextParent, setContextParent] = useState('')
@@ -34,6 +35,9 @@ const ManageContexts = ({ matrixClient, moderationRooms: incomingModerationRooms
   const [loading, setLoading] = useState(false)
   const [description, setDescription] = useState('')
   const [moderationRooms, setModerationRooms] = useState()
+
+  const [editRoomName, setEditRoomName] = useState(false)
+  const [newRoomName, setNewRoomName] = useState()
   const createStructurObject = async () => {
     async function getSpaceStructure (matrixClient, motherSpaceRoomId, includeRooms) {
       setDisableButton(true)
@@ -325,7 +329,6 @@ const ManageContexts = ({ matrixClient, moderationRooms: incomingModerationRooms
       if (fetchPath.ok) {
         const response = await fetchPath.json().catch(console.log)
         contextObject = response
-        console.log(contextObject)
         contextObject.parents ? setContextParent(contextObject.parents[0]) : setContextParent(null)
         setDescription(contextObject
           .description.default || '')
@@ -346,13 +349,11 @@ const ManageContexts = ({ matrixClient, moderationRooms: incomingModerationRooms
       setDescription(contextObject
         .topic || '')
     }
-    await getEvents(context)
-    setSelectedContext(context)
-    setLoading(true)
-    await getEvents(context)
-    setSelectedContext(context)
 
-    setParentName(contextObject.name)
+    await getEvents(context)
+    setSelectedContext(context)
+    setNewRoomName(contextObject.name)
+    setRoomTemplate(contextObject.template)
     setLoading(false)
   }
 
@@ -388,6 +389,17 @@ const ManageContexts = ({ matrixClient, moderationRooms: incomingModerationRooms
     await matrixClient.setRoomTopic(selectedContext, description).catch(console.log)
   }
 
+  const changeRoomName = async () => {
+    const changeName = await matrixClient.setRoomName(selectedContext, newRoomName).catch(console.log)
+    if (!changeName.event_id) return
+    setRoomName(newRoomName)
+    setEditRoomName(false)
+  }
+
+  const onChangeRoomTemplate = async () => {
+    const getStateEvent = await matrixClient.getStateEvent(selectedContext, 'dev.medienhaus.meta')
+    console.log(getStateEvent)
+  }
   return (
     <>
       <section className="manage">
@@ -407,10 +419,32 @@ const ManageContexts = ({ matrixClient, moderationRooms: incomingModerationRooms
          <input type="text" value={selectedContextName} disabled /> */}
         {selectedContext &&
           <>
-            <h2>{parentName}</h2>
+            <h2>{roomName}</h2>
+            <h3>{t('Change Name')}</h3>
+            <input id="title" maxLength="100" name="title" type="text" value={newRoomName} onChange={(e) => { setEditRoomName(true); setNewRoomName(e.target.value) }} />
+            <div className="confirmation">
+              {editRoomName &&
+                <>
+                  <button
+                    className="cancel"
+                    onClick={() => {
+                      if (editRoomName) setEditRoomName(roomName)
+                      setEditRoomName(editDisplayName => !editDisplayName)
+                    }}
+                  >{editRoomName ? t('cancel') : t('edit name')}
+                  </button>
+                  <LoadingSpinnerButton className="confirm" onClick={changeRoomName}>SAVE</LoadingSpinnerButton>
+                </>}
+            </div>
+
+            <h3>{t('Change Template')}</h3>
+            <select value={roomTemplate} onChange={onChangeRoomTemplate}>
+              <option disabled value="">--- Please choose a type of context ---</option>
+              {Object.keys(config.medienhaus.context).map(context => {
+                return <option key={config.medienhaus.context[context].label} value={context}>{config.medienhaus.context[context].label}</option>
+              })}
+            </select>
             {/* <button onClick={selectedContext.context.push({ name: 'yay' })}>test</button> */}
-            <h3>{t('Add Sub-Context')}</h3>
-            <CreateContext t={t} parent={selectedContext} matrixClient={matrixClient} parentName={parentName} disableButton={loading} callback={addSpace} />
             <h3>{t('Add Image')}</h3>
             <ProjectImage projectSpace={selectedContext} changeProjectImage={() => console.log('changed image')} disabled={loading} />
             {allocation?.physical && allocation.physical.map((location, i) => {
@@ -504,10 +538,13 @@ const ManageContexts = ({ matrixClient, moderationRooms: incomingModerationRooms
               allocation={allocation}
               disabled={loading}
             />
+            <h3>{t('Add Sub-Context')}</h3>
+            <CreateContext t={t} parent={selectedContext} matrixClient={matrixClient} parentName={roomName} disableButton={loading} callback={addSpace} />
             <hr />
-            {contextParent && <RemoveContext t={t} selectedContext={selectedContext} parent={contextParent} parentName={parentName} disableButton={disableButton} callback={spaceChild} />}
+            {contextParent && <RemoveContext t={t} selectedContext={selectedContext} parent={contextParent} parentName={roomName} disableButton={disableButton} callback={spaceChild} />}
 
           </>}
+
       </section>
     </>
   )
