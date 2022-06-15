@@ -6,6 +6,7 @@ import { useTranslation } from 'react-i18next'
 const RemoveCheckbox = styled.div`
 display: flex;
 justify-content: space-between;
+align-items: center;
 `
 export function RemoveContext (props) {
   const [checkbox, setCheckbox] = useState(false)
