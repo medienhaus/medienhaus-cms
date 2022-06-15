@@ -34,13 +34,8 @@ export default function RemoveItemsInContext ({ parent, handleSpaceChild }) {
   const getAllItemsinContext = useCallback(async () => {
     // we start with an empty array to remove any items from a different context on parent change
     setItems([])
-    if (!config.medienhaus.api) {
-      const fetchFromApi = fetch(config.medienhaus.api + parent + '/list')
-      if (fetchFromApi.ok) {
-        const allItems = await fetchFromApi.json()
-        setItems(allItems)
-      }
-    } else {
+
+    const fetchItemsFromMatrix = async () => {
       const fetchFromMatrix = await matrixClient.getRoomHierarchy(parent)
       fetchFromMatrix.rooms.filter(room => room.room_id !== parent).forEach(async room => {
         const meta = await matrixClient.getStateEvent(room.room_id, 'dev.medienhaus.meta')
@@ -51,6 +46,20 @@ export default function RemoveItemsInContext ({ parent, handleSpaceChild }) {
         room.template = meta.template
         setItems(prevState => [...prevState, room])
       })
+    }
+
+    if (config.medienhaus.api) {
+      const fetchFromApi = await fetch(config.medienhaus.api + parent + '/list')
+      console.log(fetchFromApi)
+      if (fetchFromApi.ok) {
+        const allItems = await fetchFromApi.json()
+        console.log(allItems)
+        setItems(allItems.filter(room => room.type === 'item'))
+      } else {
+        await fetchItemsFromMatrix()
+      }
+    } else {
+      await fetchItemsFromMatrix()
     }
   }, [matrixClient, parent])
 

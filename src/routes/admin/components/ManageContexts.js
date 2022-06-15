@@ -339,7 +339,7 @@ const ManageContexts = ({ matrixClient, moderationRooms: incomingModerationRooms
       // onlyEvents.filter(space => space.length === 0).map(emptySpace => onDelete(null, emptySpace.))
       setEvents(onlyEvents)
     }
-    if (config.medienhaus.api) triggerApiUpdate(selectedContext)
+    // if (config.medienhaus.api) triggerApiUpdate(selectedContext)
     setLoading(false)
   }
 
@@ -373,6 +373,7 @@ const ManageContexts = ({ matrixClient, moderationRooms: incomingModerationRooms
     }
 
     await getEvents(context)
+    if (config.medienhaus.api) triggerApiUpdate(selectedContext)
     setSelectedContext(context)
     setNewRoomName(contextObject.name)
     setRoomName(contextObject.name)
@@ -396,6 +397,7 @@ const ManageContexts = ({ matrixClient, moderationRooms: incomingModerationRooms
 
       matrixClient.sendStateEvent(selectedContext, 'dev.medienhaus.allocation', deletedAllocation)
       await getEvents(selectedContext)
+      if (config.medienhaus.api) triggerApiUpdate(selectedContext)
     } catch (err) {
       console.error(err)
       setDeleting('couldn’t delete event, please try again or try reloading the page')
@@ -486,7 +488,7 @@ const ManageContexts = ({ matrixClient, moderationRooms: incomingModerationRooms
             </select>
             {/* <button onClick={selectedContext.context.push({ name: 'yay' })}>test</button> */}
             <h3>{t('Add Image')}</h3>
-            <ProjectImage projectSpace={selectedContext} changeProjectImage={() => console.log('changed image')} disabled={loading} />
+            <ProjectImage projectSpace={selectedContext} changeProjectImage={() => console.log('changed image')} disabled={loading} apiCallback={() => triggerApiUpdate(selectedContext)} />
             {allocation?.physical && allocation.physical.map((location, i) => {
               return (
                 <div className="editor" key={location.lat}>
@@ -572,7 +574,10 @@ const ManageContexts = ({ matrixClient, moderationRooms: incomingModerationRooms
               length={events.length}
               room_id={selectedContext}
               t={t}
-              reloadSpace={() => getEvents(selectedContext)}
+              reloadSpace={() => {
+                getEvents(selectedContext)
+                if (config.medienhaus.api) triggerApiUpdate(selectedContext)
+              }}
               locationDropdown
               inviteCollaborators={console.log}
               allocation={allocation}

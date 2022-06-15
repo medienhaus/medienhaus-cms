@@ -4,8 +4,9 @@ import FileUpload from '../../../components/FileUpload'
 import TextareaAutosize from 'react-textarea-autosize'
 import { useTranslation } from 'react-i18next'
 import { Loading } from '../../../components/loading'
+import config from '../../../config.json'
 
-const ProjectImage = ({ projectSpace, changeProjectImage, disabled }) => {
+const ProjectImage = ({ projectSpace, changeProjectImage, disabled, apiCallback }) => {
   const [edit, setEdit] = useState(false)
   const [loading, setLoading] = useState(false)
   const [projectImage, setProjectImage] = useState()
@@ -45,6 +46,7 @@ const ProjectImage = ({ projectSpace, changeProjectImage, disabled }) => {
           await fetchProjectImage()
           changeProjectImage()
         })
+      if (config.medienhaus.api) apiCallback()
       return 'success'
     } catch (e) {
       console.log('error while trying to save image: ' + e)
