@@ -476,23 +476,18 @@ const ManageContexts = ({ matrixClient, moderationRooms: incomingModerationRooms
   }
 
   const onRemoveContext = async (e, parent) => {
-    // const remove = await handleSpaceChild(e, parent, false)
-    // if (remove.ok) {
-    const pathToPushTo = findPathDeep(
-      inputItems,
-      (value, key, parent) => {
-        if (value.id === selectedContext) return true
-      }, { childrenPath: 'children', includeRoot: false, rootIsChildren: true, pathFormat: 'array' })
-    const _inputItems = { ...inputItems }
-    delete _inputItems[pathToPushTo]
-    setInputItems(_inputItems)
-    // pathToPushTo.push('children')
-    // pathToPushTo.push(newContext)
-    // setInputItems(prevState => _.set({ ...prevState }, pathToPushTo, subContextObject))
-    // setSelectedContext(newContext)
-
-    // if (config.medienhaus.api) triggerApiUpdate(selectedContext)
-    // }
+    e.preventDefault()
+    const remove = await handleSpaceChild(e, parent, false)
+    if (remove.ok) {
+      const _moderationRooms = { ...moderationRooms }
+      delete _moderationRooms[selectedContext]
+      setModerationRooms(_moderationRooms)
+      setSelectedContext('')
+      handleSpaceChild(e, parent, false)
+      if (config.medienhaus.api) triggerApiUpdate(selectedContext)
+    } else {
+      // @TODO error handleing
+    }
   }
 
   return (
