@@ -18,7 +18,7 @@ export function RemoveContext (props) {
     <>
       <h3>⚠️&nbsp;&nbsp;DANGER ZONE&nbsp;‼️</h3>
       <RemoveCheckbox>
-        <label htmlFor="hide-authors">{t('I am sure I want to irreversibly delete this context.')}</label>
+        <label htmlFor="checkbox">{t('I am sure I want to irreversibly delete this context.')}</label>
         <input id="checkbox" name="checkbox" type="checkbox" checked={checkbox} onChange={() => setCheckbox(checkbox => !checkbox)} />
       </RemoveCheckbox>
       <button type="submit" disabled={props.disableButton || !checkbox} onClick={e => props.callback(e, props.parent, false)}>{props.loading ? <Loading /> : props.t('Delete context')}</button>
