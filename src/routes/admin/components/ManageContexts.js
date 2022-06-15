@@ -373,7 +373,7 @@ const ManageContexts = ({ matrixClient, moderationRooms: incomingModerationRooms
     }
 
     await getEvents(context)
-    if (config.medienhaus.api) triggerApiUpdate(selectedContext)
+    if (config.medienhaus.api && selectedContext) triggerApiUpdate(selectedContext)
     setSelectedContext(context)
     setNewRoomName(contextObject.name)
     setRoomName(contextObject.name)

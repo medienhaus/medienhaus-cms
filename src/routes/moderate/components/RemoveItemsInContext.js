@@ -50,10 +50,8 @@ export default function RemoveItemsInContext ({ parent, handleSpaceChild }) {
 
     if (config.medienhaus.api) {
       const fetchFromApi = await fetch(config.medienhaus.api + parent + '/list')
-      console.log(fetchFromApi)
       if (fetchFromApi.ok) {
         const allItems = await fetchFromApi.json()
-        console.log(allItems)
         setItems(allItems.filter(room => room.type === 'item'))
       } else {
         await fetchItemsFromMatrix()
