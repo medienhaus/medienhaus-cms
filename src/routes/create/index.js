@@ -288,10 +288,11 @@ const Create = () => {
           contentType = 'code'
           break
         case 'medienhaus/heading':
-          contentType = 'heading'
-          break
+        case 'medienhaus/image':
         case 'medienhaus/video':
-          contentType = 'video'
+        case 'medienhaus/playlist':
+        case 'medienhaus/livestream':
+          contentType = block.name.replace('medienhaus/', '')
           break
         default:
           contentType = 'text'
@@ -335,6 +336,18 @@ const Create = () => {
             msgtype: 'm.text',
             format: 'org.matrix.custom.html',
             formatted_body: `<h2>${block.attributes.content}</h2>`
+          })
+          break
+        case 'medienhaus/image':
+          // eslint-disable-next-line no-case-declarations,prefer-const
+          let uploadedImage = await matrixClient.uploadContent(block.attributes.file, { name: block.attributes.file.name })
+          await matrixClient.sendImageMessage(roomId, uploadedImage, {
+            mimetype: block.attributes.file.type,
+            size: block.attributes.file.size,
+            name: block.attributes.file.name,
+            author: block.attributes.author,
+            license: block.attributes.license,
+            alt: block.attributes.alttext
           })
           break
         default:

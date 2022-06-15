@@ -25,6 +25,7 @@ import video from './blocks/video'
 import playlist from './blocks/playlist'
 import livestream from './blocks/livestream'
 import heading from './blocks/heading'
+import image from './blocks/image'
 
 // registerBlockType('medienhaus/quote', {
 //   apiVersion: 2,
@@ -62,44 +63,6 @@ import heading from './blocks/heading'
 //         {content}
 //       </div>
 //     ) */
-//   }
-// })
-//
-// registerBlockType('medienhaus/image', {
-//   apiVersion: 2,
-//   title: 'mhImage',
-//   description: '',
-//   category: 'media',
-//   attributes: {
-//     url: { type: 'string' },
-//     alt: { type: 'string' },
-//     author: { type: 'string' },
-//     license: { type: 'string' }
-//   },
-//   edit: ({ attributes, clientId, setAttributes }) => {
-//     // eslint-disable-next-line react-hooks/rules-of-hooks
-//     const blockProps = useBlockProps()
-//     const { url, alt, author, license } = attributes
-//     const onChangeAuthor = nextAuthor => setAttributes({ alt: nextAuthor })
-//     const onChangeLicense = nextLicense => setAttributes({ license: nextLicense })
-//     const onChangeAlt = nextAlt => setAttributes({ alt: nextAlt })
-//     return (
-//       <div className="center" {...blockProps}>
-//         {!url && 'Loading'}
-//         <img src={url} alt={alt} key={clientId} />
-//         <input type="text" placeholder="author, credits, et cetera" value={author} onChange={onChangeAuthor} />
-//         <select id="license" name="license" value={license} onChange={onChangeLicense}>
-//           <option value="cc0">CC0 1.0</option>
-//           <option value="cc-by">CC BY 4.0</option>
-//           <option value="cc-by-sa">CC BY-SA 4.0</option>
-//           <option value="cc-by-nc">CC BY-NC 4.0</option>
-//           <option value="cc-by-nc-sa">CC BY-NC-SA 4.0</option>
-//           <option value="cc-by-nd">CC BY-ND 4.0</option>
-//           <option value="cc-by-nc-nd">CC BY-NC-ND 4.0</option>
-//         </select>
-//         <TextareaAutosize rows={alt.split('\n').length} value={alt} onChange={onChangeAlt} />
-//       </div>
-//     )
 //   }
 // })
 //
@@ -142,69 +105,6 @@ import heading from './blocks/heading'
 //   }
 // })
 //
-// registerBlockType('medienhaus/video', {
-//   apiVersion: 2,
-//   title: 'Video',
-//   description: '',
-//   category: 'media',
-//   attributes: {
-//     content: { type: 'string' }
-//   },
-//   edit: ({ attributes }) => {
-//     // eslint-disable-next-line react-hooks/rules-of-hooks
-//     const blockProps = useBlockProps()
-//     const { content } = attributes
-//     return (
-//       <div {...blockProps}>
-//         {!content && 'Loading'}
-//         {content}
-//       </div>
-//     )
-//   }
-// })
-//
-// registerBlockType('medienhaus/livestream', {
-//   apiVersion: 2,
-//   title: 'Livestream',
-//   description: '',
-//   category: 'media',
-//   attributes: {
-//     content: { type: 'string' }
-//   },
-//   edit: ({ attributes }) => {
-//     // eslint-disable-next-line react-hooks/rules-of-hooks
-//     const blockProps = useBlockProps()
-//     const { content } = attributes
-//     return (
-//       <div {...blockProps}>
-//         {!content && 'Loading'}
-//         {content}
-//       </div>
-//     )
-//   }
-// })
-//
-// registerBlockType('medienhaus/playlist', {
-//   apiVersion: 2,
-//   title: 'Playlist',
-//   description: '',
-//   category: 'media',
-//   attributes: {
-//     content: { type: 'string' }
-//   },
-//   edit: ({ attributes }) => {
-//     // eslint-disable-next-line react-hooks/rules-of-hooks
-//     const blockProps = useBlockProps()
-//     const { content } = attributes
-//     return (
-//       <div {...blockProps}>
-//         {!content && 'Loading'}
-//         {content}
-//       </div>
-//     )
-//   }
-// })
-//
 // registerBlockType('medienhaus/bigbluebutton', {
 //   apiVersion: 2,
 //   title: 'BigBlueButton-Session',
@@ -226,7 +126,7 @@ import heading from './blocks/heading'
 //   }
 // })
 
-function GutenbergEditor ({ content = [], blockTypes = ['text', 'heading', 'list', 'code', 'video', 'playlist', 'livestream'], onChange }) {
+function GutenbergEditor ({ content = [], blockTypes = ['text', 'heading', 'list', 'code', 'image', 'video', 'playlist', 'livestream'], onChange }) {
   const [blocks, setBlocks] = useState(content)
   const { t } = useTranslation('gutenberg')
 
@@ -256,6 +156,9 @@ function GutenbergEditor ({ content = [], blockTypes = ['text', 'heading', 'list
     if (blockTypes.includes('heading')) {
       registerBlockType('medienhaus/heading', heading)
     }
+    if (blockTypes.includes('image')) {
+      registerBlockType('medienhaus/image', image)
+    }
 
     return () => {
       // Unregister
@@ -266,6 +169,7 @@ function GutenbergEditor ({ content = [], blockTypes = ['text', 'heading', 'list
       unregisterBlockType('medienhaus/livestream')
       unregisterBlockType('medienhaus/playlist')
       unregisterBlockType('medienhaus/heading')
+      unregisterBlockType('medienhaus/image')
       unregisterFormatType('core/bold')
       unregisterFormatType('core/italic')
       unregisterFormatType('core/strikethrough')
