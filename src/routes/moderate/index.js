@@ -34,7 +34,6 @@ const Moderate = () => {
       for (const space of joinedSpaces) {
         if (space.meta.type !== 'context') continue
         if (space.powerLevel < 50) continue
-        console.log(space)
         setModerationRooms(moderationRooms => Object.assign({}, moderationRooms, {
           [space.room_id]:
           {
