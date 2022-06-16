@@ -23,6 +23,7 @@ import _ from 'lodash'
 import GutenbergEditor from '../gutenberg/editor'
 import createBlock from './matrix_create_room'
 import LoadingSpinnerButton from '../../components/LoadingSpinnerButton'
+import styled from 'styled-components'
 
 // eslint-disable-next-line no-unused-vars
 const nl2br = function (str) {
@@ -30,6 +31,22 @@ const nl2br = function (str) {
   // const breakTag = '<br>' // Adjust comment to avoid issue on phpjs.org display
   // return (str + '').replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1' + breakTag + '$2')
 }
+
+const GutenbergWrapper = styled.div`
+  position: relative;
+`
+
+const GutenbergSavingOverlay = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  cursor: not-allowed;
+  pointer-events: none;
+  background: rgba(0,0,0,0.5);
+  z-index: 99999999999999;
+`
 
 const Create = () => {
   const { t } = useTranslation('content')
@@ -634,7 +651,10 @@ const Create = () => {
               ))}
             </select>
             {spaceObject && (description || description === '') ? <ProjectDescription description={description[contentLang]} callback={onChangeDescription} /> : <Loading />}
-            {(gutenbergContent !== undefined) && <GutenbergEditor content={gutenbergContent} onChange={contentHasChanged} />}
+            <GutenbergWrapper>
+              {(gutenbergContent !== undefined) && <GutenbergEditor content={gutenbergContent} onChange={contentHasChanged} />}
+              {isSavingGutenbergContents && <GutenbergSavingOverlay />}
+            </GutenbergWrapper>
             {temporaryGutenbergContents && (
               <LoadingSpinnerButton type="button" onClick={saveGutenbergEditorToMatrix}>SAVE CHANGES</LoadingSpinnerButton>
             )}
