@@ -375,10 +375,15 @@ const Create = () => {
           contentType = 'code'
           break
         case 'medienhaus/heading':
-          contentType = 'heading'
-          break
+        case 'medienhaus/image':
+        case 'medienhaus/audio':
         case 'medienhaus/video':
-          contentType = 'video'
+        case 'medienhaus/playlist':
+        case 'medienhaus/livestream':
+          contentType = block.name.replace('medienhaus/', '')
+          break
+        case 'medienhaus/bigbluebutton':
+          contentType = 'bbb'
           break
         default:
           contentType = 'text'
@@ -422,6 +427,39 @@ const Create = () => {
             msgtype: 'm.text',
             format: 'org.matrix.custom.html',
             formatted_body: `<h2>${block.attributes.content}</h2>`
+          })
+          break
+        case 'medienhaus/image':
+          // If this image was uploaded to Matrix already, we don't do anything
+          if (block.attributes.url) break
+          // eslint-disable-next-line no-case-declarations,prefer-const
+          let uploadedImage = await matrixClient.uploadContent(block.attributes.file, { name: block.attributes.file.name })
+          await matrixClient.sendImageMessage(roomId, uploadedImage, {
+            mimetype: block.attributes.file.type,
+            size: block.attributes.file.size,
+            name: block.attributes.file.name,
+            author: block.attributes.author,
+            license: block.attributes.license,
+            alt: block.attributes.alttext
+          })
+          break
+        case 'medienhaus/audio':
+          // If this audio was uploaded to Matrix already, we don't do anything
+          if (block.attributes.url) break
+          // eslint-disable-next-line no-case-declarations,prefer-const
+          let uploadedAudio = await matrixClient.uploadContent(block.attributes.file, { name: block.attributes.file.name })
+          await matrixClient.sendMessage(roomId, {
+            body: block.attributes.file.name,
+            info: {
+              size: block.attributes.file.size,
+              mimetype: block.attributes.file.type,
+              name: block.attributes.file.name,
+              author: block.attributes.author,
+              license: block.attributes.license,
+              alt: block.attributes.alttext
+            },
+            msgtype: 'm.audio',
+            url: uploadedAudio
           })
           break
         default:
@@ -564,6 +602,12 @@ const Create = () => {
               break
             case '_video':
               n = 'medienhaus/video'
+              a = {
+                content: message.body
+              }
+              break
+            case '_bbb':
+              n = 'medienhaus/bigbluebutton'
               a = {
                 content: message.body
               }
