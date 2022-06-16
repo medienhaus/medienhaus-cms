@@ -1530,7 +1530,7 @@ button>.loading {
   }
 }
 
-@import url("/node_modules/leaflet/dist/leaflet.css");
+@import url("./leaflet.css");
 /*
 @import url("./fonts.css");
 */
