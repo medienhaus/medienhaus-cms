@@ -656,7 +656,7 @@ const Create = () => {
               {isSavingGutenbergContents && <GutenbergSavingOverlay />}
             </GutenbergWrapper>
             {temporaryGutenbergContents && (
-              <LoadingSpinnerButton type="button" onClick={saveGutenbergEditorToMatrix}>SAVE CHANGES</LoadingSpinnerButton>
+              <LoadingSpinnerButton type="button" onClick={saveGutenbergEditorToMatrix}>{t('SAVE CHANGES')}</LoadingSpinnerButton>
             )}
           </section>
           {/* Placeholder to show preview next to editing

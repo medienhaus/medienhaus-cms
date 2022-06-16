@@ -1,5 +1,10 @@
 import React from 'react'
 import { useBlockProps, RichText } from '@wordpress/block-editor'
+import { createBlock } from '@wordpress/blocks'
+
+import i18n from 'i18next'
+
+const t = i18n.getFixedT(null, 'gutenberg')
 
 const heading = {
   apiVersion: 2,
@@ -35,7 +40,7 @@ const heading = {
       <RichText
         {...blockProps}
         tagName="h2"
-        placeholder="Heading"
+        placeholder={t('Heading')}
         onChange={onChangeContent}
         onRemove={onRemove}
         onReplace={onReplace}
