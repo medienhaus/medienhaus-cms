@@ -19,7 +19,10 @@ const heading = {
     const {
       attributes: { content },
       setAttributes,
-      onRemove
+      clientId,
+      onRemove,
+      onReplace,
+      mergeBlocks
     } = props
 
     // eslint-disable-next-line react-hooks/rules-of-hooks
@@ -35,6 +38,26 @@ const heading = {
         placeholder="Heading"
         onChange={onChangeContent}
         onRemove={onRemove}
+        onReplace={onReplace}
+        mergeBlocks={mergeBlocks}
+        onSplit={(value, isOriginal) => {
+          let block
+
+          if (isOriginal || value) {
+            block = createBlock('medienhaus/heading', {
+              ...props.attributes,
+              content: value
+            })
+          } else {
+            block = createBlock('core/paragraph')
+          }
+
+          if (isOriginal) {
+            block.clientId = clientId
+          }
+
+          return block
+        }}
         value={content}
         disableLineBreaks
       />
