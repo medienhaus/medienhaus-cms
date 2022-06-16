@@ -30,6 +30,7 @@ const image = {
     if (url) {
       return (
         <View {...blockProps}>
+          {/* eslint-disable-next-line jsx-a11y/alt-text */}
           <img src={url} />
         </View>
       )
@@ -38,6 +39,7 @@ const image = {
     if (file) {
       return (
         <View {...blockProps}>
+          {/* eslint-disable-next-line jsx-a11y/alt-text */}
           <img src={URL.createObjectURL(file)} />
         </View>
       )
