@@ -16,7 +16,6 @@ export function RemoveContext (props) {
   const { t } = useTranslation('moderate')
   return (
     <>
-      <h3>⚠️&nbsp;&nbsp;DANGER ZONE&nbsp;‼️</h3>
       <RemoveCheckbox>
         <label htmlFor="checkbox">{t('I am sure I want to irreversibly delete this context.')}</label>
         <input id="checkbox" name="checkbox" type="checkbox" checked={checkbox} onChange={() => setCheckbox(checkbox => !checkbox)} />
