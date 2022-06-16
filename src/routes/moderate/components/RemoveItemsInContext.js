@@ -1,7 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import config from '../../../config.json'
 import Matrix from '../../../Matrix'
-import { useTranslation } from 'react-i18next'
 import styled from 'styled-components'
 // import { ReactComponent as BinIcon } from '../../../assets/icons/remix/trash.svg'
 import DeleteButton from '../../create/components/DeleteButton'
@@ -28,19 +27,13 @@ const ListElement = styled.div`
 export default function RemoveItemsInContext ({ parent, handleSpaceChild }) {
   const [items, setItems] = useState([])
   const [highlightedElement, setHighlightedElement] = useState()
-  const { t } = useTranslation()
   const matrixClient = Matrix.getMatrixClient()
 
   const getAllItemsinContext = useCallback(async () => {
     // we start with an empty array to remove any items from a different context on parent change
     setItems([])
-    if (!config.medienhaus.api) {
-      const fetchFromApi = fetch(config.medienhaus.api + parent + '/list')
-      if (fetchFromApi.ok) {
-        const allItems = await fetchFromApi.json()
-        setItems(allItems)
-      }
-    } else {
+
+    const fetchItemsFromMatrix = async () => {
       const fetchFromMatrix = await matrixClient.getRoomHierarchy(parent)
       fetchFromMatrix.rooms.filter(room => room.room_id !== parent).forEach(async room => {
         const meta = await matrixClient.getStateEvent(room.room_id, 'dev.medienhaus.meta')
@@ -51,6 +44,18 @@ export default function RemoveItemsInContext ({ parent, handleSpaceChild }) {
         room.template = meta.template
         setItems(prevState => [...prevState, room])
       })
+    }
+
+    if (config.medienhaus.api) {
+      const fetchFromApi = await fetch(config.medienhaus.api + parent + '/list')
+      if (fetchFromApi.ok) {
+        const allItems = await fetchFromApi.json()
+        setItems(allItems.filter(room => room.type === 'item'))
+      } else {
+        await fetchItemsFromMatrix()
+      }
+    } else {
+      await fetchItemsFromMatrix()
     }
   }, [matrixClient, parent])
 
@@ -65,21 +70,20 @@ export default function RemoveItemsInContext ({ parent, handleSpaceChild }) {
 
   if (!items) return
   return (
-    <section>
-      <h2>{t('Remove Items')}</h2>
-      <Container>
-        <ul>
-          {items.map((item, index) => {
-            return (
-              <ListElement onClick={() => setHighlightedElement(prevState => prevState === item.room_id ? '' : item.room_id)} active={highlightedElement === item.room_id} key={item.room_id}>
-                <li>{item.name}</li>
-                <DeleteButton width="2rem" onDelete={(e) => onDelete(e, item.room_id)} />
-                {/* <BinIcon fill={highlightedElement === item.room_id ? 'var(--color-bg)' : 'var(--color-fg)'} /> */}
-              </ListElement>
-            )
-          })}
-        </ul>
-      </Container>
-    </section>
+
+    <Container>
+      <ul>
+        {items.map((item, index) => {
+          return (
+            <ListElement onClick={() => setHighlightedElement(prevState => prevState === item.room_id ? '' : item.room_id)} active={highlightedElement === item.room_id} key={item.room_id}>
+              <li>{item.name}</li>
+              <DeleteButton width="2rem" onDelete={(e) => onDelete(e, item.room_id)} />
+              {/* <BinIcon fill={highlightedElement === item.room_id ? 'var(--color-bg)' : 'var(--color-fg)'} /> */}
+            </ListElement>
+          )
+        })}
+      </ul>
+    </Container>
+
   )
 };
