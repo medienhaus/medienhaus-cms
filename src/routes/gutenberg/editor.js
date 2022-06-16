@@ -26,6 +26,8 @@ import playlist from './blocks/playlist'
 import livestream from './blocks/livestream'
 import heading from './blocks/heading'
 import image from './blocks/image'
+import audio from './blocks/audio'
+import bigbluebutton from './blocks/bigbluebutton'
 
 // registerBlockType('medienhaus/quote', {
 //   apiVersion: 2,
@@ -65,68 +67,8 @@ import image from './blocks/image'
 //     ) */
 //   }
 // })
-//
-// registerBlockType('medienhaus/audio', {
-//   apiVersion: 2,
-//   title: 'Audio',
-//   description: '',
-//   category: 'media',
-//   attributes: {
-//     url: { type: 'string' },
-//     name: { type: 'string' },
-//     alt: { type: 'string' },
-//     author: { type: 'string' },
-//     license: { type: 'string' }
-//   },
-//   edit: ({ attributes }) => {
-//     // eslint-disable-next-line react-hooks/rules-of-hooks
-//     const blockProps = useBlockProps()
-//     const { url, name, author, license, alt } = attributes
-//     return (
-//       <div {...blockProps}>
-//         {!url && 'Loading'}
-//         <audio className="center" controls>
-//           <source src={url} />
-//         </audio>
-//         <input type="text" value={name} disabled />
-//         <input type="text" value={author} disabled />
-//         <select id="license" name="license" value={license} disabled>
-//           <option value="cc0">CC0 1.0</option>
-//           <option value="cc-by">CC BY 4.0</option>
-//           <option value="cc-by-sa">CC BY-SA 4.0</option>
-//           <option value="cc-by-nc">CC BY-NC 4.0</option>
-//           <option value="cc-by-nc-sa">CC BY-NC-SA 4.0</option>
-//           <option value="cc-by-nd">CC BY-ND 4.0</option>
-//           <option value="cc-by-nc-nd">CC BY-NC-ND 4.0</option>
-//         </select>
-//         <textarea rows={alt.split('\n').length} value={alt} disabled />
-//       </div>
-//     )
-//   }
-// })
-//
-// registerBlockType('medienhaus/bigbluebutton', {
-//   apiVersion: 2,
-//   title: 'BigBlueButton-Session',
-//   description: '',
-//   category: 'media',
-//   attributes: {
-//     content: { type: 'string' }
-//   },
-//   edit: ({ attributes }) => {
-//     // eslint-disable-next-line react-hooks/rules-of-hooks
-//     const blockProps = useBlockProps()
-//     const { content } = attributes
-//     return (
-//       <div {...blockProps}>
-//         {!content && 'Loading'}
-//         {content}
-//       </div>
-//     )
-//   }
-// })
 
-function GutenbergEditor ({ content = [], blockTypes = ['text', 'heading', 'list', 'code', 'image', 'video', 'playlist', 'livestream'], onChange }) {
+function GutenbergEditor ({ content = [], blockTypes = ['text', 'heading', 'list', 'code', 'image', 'audio', 'video', 'playlist', 'livestream', 'bigbluebutton'], onChange }) {
   const [blocks, setBlocks] = useState(content)
   const { t } = useTranslation('gutenberg')
 
@@ -144,21 +86,13 @@ function GutenbergEditor ({ content = [], blockTypes = ['text', 'heading', 'list
     if (blockTypes.includes('list')) registerCoreBlocks([list])
     if (blockTypes.includes('code')) registerCoreBlocks([code])
 
-    if (blockTypes.includes('video')) {
-      registerBlockType('medienhaus/video', video)
-    }
-    if (blockTypes.includes('livestream')) {
-      registerBlockType('medienhaus/livestream', livestream)
-    }
-    if (blockTypes.includes('playlist')) {
-      registerBlockType('medienhaus/playlist', playlist)
-    }
-    if (blockTypes.includes('heading')) {
-      registerBlockType('medienhaus/heading', heading)
-    }
-    if (blockTypes.includes('image')) {
-      registerBlockType('medienhaus/image', image)
-    }
+    if (blockTypes.includes('video')) registerBlockType('medienhaus/video', video)
+    if (blockTypes.includes('livestream')) registerBlockType('medienhaus/livestream', livestream)
+    if (blockTypes.includes('playlist')) registerBlockType('medienhaus/playlist', playlist)
+    if (blockTypes.includes('heading')) registerBlockType('medienhaus/heading', heading)
+    if (blockTypes.includes('image')) registerBlockType('medienhaus/image', image)
+    if (blockTypes.includes('audio')) registerBlockType('medienhaus/audio', audio)
+    if (blockTypes.includes('bigbluebutton')) registerBlockType('medienhaus/bigbluebutton', bigbluebutton)
 
     return () => {
       // Unregister
@@ -170,6 +104,8 @@ function GutenbergEditor ({ content = [], blockTypes = ['text', 'heading', 'list
       unregisterBlockType('medienhaus/playlist')
       unregisterBlockType('medienhaus/heading')
       unregisterBlockType('medienhaus/image')
+      unregisterBlockType('medienhaus/audio')
+      unregisterBlockType('medienhaus/bigbluebutton')
       unregisterFormatType('core/bold')
       unregisterFormatType('core/italic')
       unregisterFormatType('core/strikethrough')
