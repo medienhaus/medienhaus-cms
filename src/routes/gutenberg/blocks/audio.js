@@ -30,7 +30,7 @@ const audio = {
     if (url) {
       return (
         <View {...blockProps}>
-          <audio controls><source src={url} /></audio>
+          <audio controls style={{ width: '100%' }}><source src={url} /></audio>
         </View>
       )
     }
@@ -38,7 +38,7 @@ const audio = {
     if (file) {
       return (
         <View {...blockProps}>
-          <audio controls><source src={URL.createObjectURL(file)} /></audio>
+          <audio controls style={{ width: '100%' }}><source src={URL.createObjectURL(file)} /></audio>
         </View>
       )
     }

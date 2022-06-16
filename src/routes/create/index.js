@@ -19,11 +19,11 @@ import { useTranslation, Trans } from 'react-i18next'
 import Location from './Location'
 
 import config from '../../config.json'
-import styled from 'styled-components'
-import _, { find, isEmpty } from 'lodash'
+import _ from 'lodash'
 import GutenbergEditor from '../gutenberg/editor'
 import createBlock from './matrix_create_room'
 import LoadingSpinnerButton from '../../components/LoadingSpinnerButton'
+import styled from 'styled-components'
 
 // eslint-disable-next-line no-unused-vars
 const nl2br = function (str) {
@@ -47,6 +47,22 @@ const BackButton = styled.button`
   }
 `
 */
+
+const GutenbergWrapper = styled.div`
+  position: relative;
+`
+
+const GutenbergSavingOverlay = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  cursor: not-allowed;
+  pointer-events: none;
+  background: rgba(0,0,0,0.5);
+  z-index: 99999999999999;
+`
 
 const Create = () => {
   const { t } = useTranslation('content')
@@ -357,7 +373,7 @@ const Create = () => {
 
     for (const block of blocksRef.current) {
       let deletedARoom = false
-      if (!find(gutenbergBlocks, { clientId: block.room_id })) {
+      if (!_.find(gutenbergBlocks, { clientId: block.room_id })) {
         await deleteRoom(block.room_id, spaceObjectRef.current?.rooms.filter(room => room.name === contentLangRef.current)[0].room_id)
         deletedARoom = true
       }
@@ -400,10 +416,20 @@ const Create = () => {
       }
 
       // ensure room name is correct
-      await matrixClient.setRoomName(roomId, `${index}_${contentType}`)
+      if (_.get(_.find(blocksRef.current, { room_id: roomId }), 'name') !== `${index}_${contentType}`) {
+        await matrixClient.setRoomName(roomId, `${index}_${contentType}`)
+      }
       orderOfRooms.push(roomId)
 
-      // write content to room
+      // lastly, if the content of this block has not changed, skip this block, otherwise ...
+      if (
+        _.isEqual(block.attributes, _.get(_.find(gutenbergContent, { clientId: roomId }), 'attributes')) &&
+          _.isEqual(block.name, _.get(_.find(gutenbergContent, { clientId: roomId }), 'name'))
+      ) {
+        continue
+      }
+
+      // ... write new contents to room
       switch (block.name) {
         case 'core/list':
           await matrixClient.sendMessage(roomId, {
@@ -543,7 +569,7 @@ const Create = () => {
       const contents = []
       for (const block of blocks) {
         const fetchMessage = await matrixClient.http.authedRequest(undefined, 'GET', `/rooms/${block.room_id}/messages`, { limit: 1, dir: 'b', filter: JSON.stringify({ types: ['m.room.message'] }) }, {})
-        const message = isEmpty(fetchMessage.chunk) ? null : fetchMessage.chunk[0].content
+        const message = _.isEmpty(fetchMessage.chunk) ? null : fetchMessage.chunk[0].content
 
         if (message) {
           const blockType = block.name.slice(block.name.search('_'))
@@ -713,9 +739,12 @@ const Create = () => {
               ))}
             </select>
             {spaceObject && (description || description === '') ? <ProjectDescription description={description[contentLang]} callback={onChangeDescription} /> : <Loading />}
-            {(gutenbergContent !== undefined) && <GutenbergEditor content={gutenbergContent} onChange={contentHasChanged} />}
+            <GutenbergWrapper>
+              {(gutenbergContent !== undefined) && <GutenbergEditor content={gutenbergContent} onChange={contentHasChanged} />}
+              {isSavingGutenbergContents && <GutenbergSavingOverlay />}
+            </GutenbergWrapper>
             {temporaryGutenbergContents && (
-              <LoadingSpinnerButton type="button" onClick={saveGutenbergEditorToMatrix}>SAVE CHANGES</LoadingSpinnerButton>
+              <LoadingSpinnerButton type="button" onClick={saveGutenbergEditorToMatrix}>{t('SAVE CHANGES')}</LoadingSpinnerButton>
             )}
           </section>
           {/* Placeholder to show preview next to editing

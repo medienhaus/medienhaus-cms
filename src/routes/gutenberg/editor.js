@@ -28,6 +28,7 @@ import heading from './blocks/heading'
 import image from './blocks/image'
 import audio from './blocks/audio'
 import bigbluebutton from './blocks/bigbluebutton'
+import _ from 'lodash'
 
 // registerBlockType('medienhaus/quote', {
 //   apiVersion: 2,
@@ -82,7 +83,7 @@ function GutenbergEditor ({ content = [], blockTypes = ['text', 'heading', 'list
     // registerBlockType(list.metadata, { ...list.settings, transforms: null })
     // registerBlockType(paragraph.metadata, { ...paragraph.settings, transforms: null })
 
-    if (blockTypes.includes('text')) registerCoreBlocks([paragraph])
+    if (blockTypes.includes('text')) registerCoreBlocks([_.set(paragraph, 'metadata.attributes.placeholder.default', t('Type / to choose a block'))])
     if (blockTypes.includes('list')) registerCoreBlocks([list])
     if (blockTypes.includes('code')) registerCoreBlocks([code])
 

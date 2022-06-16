@@ -1,5 +1,10 @@
 import React from 'react'
 import { useBlockProps, RichText } from '@wordpress/block-editor'
+import { createBlock } from '@wordpress/blocks'
+
+import i18n from 'i18next'
+
+const t = i18n.getFixedT(null, 'gutenberg')
 
 const heading = {
   apiVersion: 2,
@@ -19,7 +24,10 @@ const heading = {
     const {
       attributes: { content },
       setAttributes,
-      onRemove
+      clientId,
+      onRemove,
+      onReplace,
+      mergeBlocks
     } = props
 
     // eslint-disable-next-line react-hooks/rules-of-hooks
@@ -32,9 +40,29 @@ const heading = {
       <RichText
         {...blockProps}
         tagName="h2"
-        placeholder="Heading"
+        placeholder={t('Heading')}
         onChange={onChangeContent}
         onRemove={onRemove}
+        onReplace={onReplace}
+        mergeBlocks={mergeBlocks}
+        onSplit={(value, isOriginal) => {
+          let block
+
+          if (isOriginal || value) {
+            block = createBlock('medienhaus/heading', {
+              ...props.attributes,
+              content: value
+            })
+          } else {
+            block = createBlock('core/paragraph')
+          }
+
+          if (isOriginal) {
+            block.clientId = clientId
+          }
+
+          return block
+        }}
         value={content}
         disableLineBreaks
       />
