@@ -1506,7 +1506,7 @@ button>.loading {
   }
 }
 
-@import url("https://unpkg.com/leaflet@1.7.1/dist/leaflet.css");
+@import url("./leaflet.css");
 /*
 @import url("./fonts.css");
 */

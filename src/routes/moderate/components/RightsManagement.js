@@ -41,7 +41,7 @@ const RightsManagement = ({ matrixClient, moderationRooms, setPower, fetchUsers,
       <h3>{t('Promote users to moderator')}</h3>
       <select value={selectedRoom} onChange={(e) => setSelectedRoom(e.target.value)}>
         <option value="" disabled>-- {t('select context')} --</option>
-        {moderationRooms.map((room, index) => <option key={index} value={room.room_id}>{room.name}</option>)}
+        {Object.keys(moderationRooms).map((roomId, index) => <option key={index} value={moderationRooms[roomId].room_id}>{moderationRooms[roomId].name}</option>)}
       </select>
       <input
         list="userSearch"

@@ -2,25 +2,25 @@ import React, { useEffect, useState } from 'react'
 import Matrix from '../../../Matrix'
 import { Loading } from '../../../components/loading'
 import * as _ from 'lodash'
-import SimpleContextSelect from '../../../components/SimpleContextSelect'
+// import SimpleContextSelect from '../../../components/SimpleContextSelect'
 import DeleteButton from '../components/DeleteButton'
 import config from '../../../config.json'
 import findValueDeep from 'deepdash/findValueDeep'
 
 import styled from 'styled-components'
-// import ContextDropdown from '../../../components/ContextDropdown'
+import ContextDropdown from '../../../components/ContextDropdown'
 
 const RemovableLiElement = styled.li`
-display: flex;
-justify-content: space-between;
-list-style: none;
-height: 2em;
-margin-bottom: calc(var(--margin)/2);
+    display: flex;
+    justify-content: space-between;
+    list-style: none;
+    height: 2em;
+    margin-bottom: calc(var(--margin)/2);
 
-span {
-  display: flex;
-  align-self: self-end;
-}
+    span {
+      display: flex;
+      align-self: self-end;
+    }
 `
 
 const Category = ({ projectSpace, onChange, parent }) => {
@@ -120,18 +120,18 @@ const Category = ({ projectSpace, onChange, parent }) => {
   }
 
   const fetchTreeFromApi = async () => {
-    const fetchTree = await fetch(config.medienhaus.api + process.env.REACT_APP_CONTEXT_ROOT_SPACE_ID + '/tree')
+    const fetchTree = await fetch(config.medienhaus.api + process.env.REACT_APP_CONTEXT_ROOT_SPACE_ID + '/tree/filter/type/context')
     const response = await fetchTree.json()
     setInputItems(response.children)
     setLoading(false)
   }
+
   const fetchParentsFromApi = async () => {
     const fetchParents = await fetch(config.medienhaus.api + projectSpace)
     const response = await fetchParents.json()
-    const path = await fetch(config.medienhaus.api + projectSpace + '/path')
-    const res = await path.json()
-    console.log(res)
-    console.log(response)
+    // const path = await fetch(config.medienhaus.api + projectSpace + '/path')
+    // const res = await path.json()
+    // @TODO test if working properly
     if (response.parents) {
       response.parents.forEach(async parent => {
         const fetchParent = await fetch(config.medienhaus.api + parent)
@@ -223,10 +223,10 @@ const Category = ({ projectSpace, onChange, parent }) => {
       <p>{t('The context can be a class, a course, a seminar or a free project. If you are unsure, ask the professor of your class or the seminar leader.')}</p>
       <p>{t('You can scroll through the list, or filter/search the list by typing one or more keywords.')}</p>
   */}
-      <ul style={{ position: 'relative' }}>
-        {!inputItems || loading
-          ? <Loading />
-          : <>
+      {!inputItems || loading
+        ? <Loading />
+        : <>
+          <ul style={{ position: 'relative' }}>
             {contexts?.map((context, index) => {
               return (
                 <RemovableLiElement key={context.room_id}>
@@ -235,15 +235,22 @@ const Category = ({ projectSpace, onChange, parent }) => {
                 </RemovableLiElement>
               )
             })}
-            <SimpleContextSelect
+          </ul>
+
+          {/* <SimpleContextSelect
               selectedContext=""
               onItemChosen={onContextChosen}
               contexts={contexts}
               struktur={inputItems}
-            />
-          </>}
-        {error && <p>{error}</p>}
-      </ul>
+            /> */}
+          <ContextDropdown
+            selectedContext=""
+            onItemChosen={onContextChosen}
+            contexts={contexts}
+            struktur={inputItems}
+          />
+        </>}
+      {error && <p>{error}</p>}
       {/* {subject !== '' && !member && <Knock room={room} callback={callback} />} */}
     </>
   )

@@ -4,8 +4,9 @@ import FileUpload from '../../../components/FileUpload'
 import TextareaAutosize from 'react-textarea-autosize'
 import { useTranslation } from 'react-i18next'
 import { Loading } from '../../../components/loading'
+import config from '../../../config.json'
 
-const ProjectImage = ({ projectSpace, changeProjectImage, disabled }) => {
+const ProjectImage = ({ projectSpace, changeProjectImage, disabled, apiCallback }) => {
   const [edit, setEdit] = useState(false)
   const [loading, setLoading] = useState(false)
   const [projectImage, setProjectImage] = useState()
@@ -45,6 +46,7 @@ const ProjectImage = ({ projectSpace, changeProjectImage, disabled }) => {
           await fetchProjectImage()
           changeProjectImage()
         })
+      if (config.medienhaus.api) apiCallback()
       return 'success'
     } catch (e) {
       console.log('error while trying to save image: ' + e)
@@ -63,26 +65,24 @@ const ProjectImage = ({ projectSpace, changeProjectImage, disabled }) => {
 
   return (
     <>
-      <>
-        <img src={matrixClient.mxcUrlToHttp(projectImage.url)} alt={projectImage.alt} />
-        {!edit &&
-          <>
-            <button onClick={e => { e.preventDefault(); setEdit(edit => !edit) }}>{t('CHANGE')}</button>
+      <img src={matrixClient.mxcUrlToHttp(projectImage.url)} alt={projectImage.alt} />
+      {!edit &&
+        <>
+          <button onClick={e => { e.preventDefault(); setEdit(edit => !edit) }}>{t('CHANGE')}</button>
 
-            <input type="text" value={projectImage.author} disabled />
-            <select id="license" name="license" value={projectImage.license} disabled>
-              <option value="cc0">CC0 1.0</option>
-              <option value="cc-by">CC BY 4.0</option>
-              <option value="cc-by-sa">CC BY-SA 4.0</option>
-              <option value="cc-by-nc">CC BY-NC 4.0</option>
-              <option value="cc-by-nc-sa">CC BY-NC-SA 4.0</option>
-              <option value="cc-by-nd">CC BY-ND 4.0</option>
-              <option value="cc-by-nc-nd">CC BY-NC-ND 4.0</option>
-            </select>
-            <TextareaAutosize rows="3" value={projectImage.alt} disabled />
-          </>}
-        {edit && fileUpload}
-      </>
+          <input type="text" value={projectImage.author} disabled />
+          <select id="license" name="license" value={projectImage.license} disabled>
+            <option value="cc0">CC0 1.0</option>
+            <option value="cc-by">CC BY 4.0</option>
+            <option value="cc-by-sa">CC BY-SA 4.0</option>
+            <option value="cc-by-nc">CC BY-NC 4.0</option>
+            <option value="cc-by-nc-sa">CC BY-NC-SA 4.0</option>
+            <option value="cc-by-nd">CC BY-ND 4.0</option>
+            <option value="cc-by-nc-nd">CC BY-NC-ND 4.0</option>
+          </select>
+          <TextareaAutosize rows="3" value={projectImage.alt} disabled />
+        </>}
+      {edit && fileUpload}
     </>
   )
 }
