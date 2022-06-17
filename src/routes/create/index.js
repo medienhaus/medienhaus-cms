@@ -238,6 +238,8 @@ const Create = () => {
       setTitle('')
       setDescription()
       setEvents()
+      setLocationFromLocationTree('')
+      setAllocation([])
     }
     projectSpace && fetchSpace()
   }, [projectSpace, fetchSpace, title])
@@ -391,7 +393,7 @@ const Create = () => {
             <section className="events">
               <h3>{t('Location')}</h3>
               <p>{t('Specify at which location your event will take place. To be as accurate as possible you can also add a room number or a concise location marker (i.e. “behind the blue cabinet”).')}</p>
-              <Location inviteCollaborators={inviteCollaborators} reloadSpace={reloadSpace} projectSpace={projectSpace} events={events} allocation={allocation} matrixClient={matrixClient} locationFromLocationTree={locationFromLocationTree} />
+              <Location inviteCollaborators={inviteCollaborators} reloadSpace={reloadSpace} projectSpace={projectSpace} events={events} allocation={allocation} matrixClient={matrixClient} setLocationFromLocationTree={setLocationFromLocationTree} locationFromLocationTree={locationFromLocationTree} />
             </section>
           )}
           {(!config.medienhaus?.item || !config.medienhaus?.item[template]?.blueprint || config.medienhaus?.item[template]?.blueprint.includes('time')) && (

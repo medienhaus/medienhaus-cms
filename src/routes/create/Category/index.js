@@ -158,7 +158,6 @@ const Category = ({ projectSpace, onChange, parent, setLocationFromLocationTree 
     // eslint-disable-next-line
   }, [])
 
-  useEffect(() => console.log(contexts), [contexts])
   useEffect(() => onChange(!_.isEmpty(contexts)), [contexts, onChange])
 
   async function onContextChosen (contextSpace) {

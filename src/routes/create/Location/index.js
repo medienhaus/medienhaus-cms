@@ -202,8 +202,22 @@ const Location = ({ reloadSpace, inviteCollaborators, projectSpace, events, allo
       const joinRoom = await matrixClient.joinRoom(location).catch(console.log)
       if (joinRoom) await addContextToLocation(location)
     })
-    setLocationFromLocationTree(location.id)
+    setLocationFromLocationTree(location)
     setCurrentLocation(locationFromLocationTree)
+    // tell api to update branch of tree
+    if (config.medienhaus.api) {
+      const body = {
+        depth: 1,
+        parentId: location
+      }
+      await fetch(config.medienhaus.api + projectSpace + '/fetch', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(body)
+      })
+    }
   }
 
   if (loading) return <Loading />
