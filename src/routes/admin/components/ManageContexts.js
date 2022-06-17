@@ -22,6 +22,7 @@ import findValueDeep from 'deepdash/es/findValueDeep'
 import LoadingSpinnerButton from '../../../components/LoadingSpinnerButton'
 import { Icon } from 'leaflet/dist/leaflet-src.esm'
 import RemoveItemsInContext from '../../moderate/components/RemoveItemsInContext'
+import { fetchId, fetchTree, triggerApiUpdate } from '../../../helpers/MedienhausApiHelper'
 
 const DangerZone = styled.section`
   border: none;
@@ -124,13 +125,12 @@ const ManageContexts = ({ matrixClient, moderationRooms: incomingModerationRooms
   }
 
   const fetchTreeFromApi = async () => {
-    const fetchTree = await fetch(config.medienhaus.api + process.env.REACT_APP_CONTEXT_ROOT_SPACE_ID + '/tree')
-    const response = await fetchTree.json()
-    setInputItems(response.children)
+    const tree = await fetchTree(process.env.REACT_APP_CONTEXT_ROOT_SPACE_ID)
+    setInputItems(tree)
 
     for (const space of Object.keys(incomingModerationRooms)) {
       const contextObject = findValueDeep(
-        response.children,
+        tree,
         (value, key, parent) => {
           if (value.id === space) return true
         }, { childrenPath: 'children', includeRoot: false, rootIsChildren: true })
@@ -171,20 +171,6 @@ const ManageContexts = ({ matrixClient, moderationRooms: incomingModerationRooms
     }
     setLoading(false)
     return addOrRemoveSpaceChild
-  }
-
-  const triggerApiUpdate = async (roomId, parentId) => {
-    const body = {
-      depth: 1
-    }
-    if (parentId) body.parentId = parentId
-    await fetch(config.medienhaus.api + roomId + '/fetch', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(body)
-    })
   }
 
   const setPower = async (userId, roomId, level) => {
@@ -279,7 +265,6 @@ const ManageContexts = ({ matrixClient, moderationRooms: incomingModerationRooms
     const newContext = await createSpace(name)
     if (config.medienhaus.api) {
       triggerApiUpdate(newContext, selectedContext)
-      console.log(triggerApiUpdate)
       // we add our newly created context to the context object to be able to work on it before the api is done fetching.
       const subContextObject = {
         id: newContext,
@@ -383,10 +368,9 @@ const ManageContexts = ({ matrixClient, moderationRooms: incomingModerationRooms
     setLoading(true)
     let contextObject
     if (config.medienhaus.api) {
-      const fetchPath = await fetch(config.medienhaus.api + context).catch(console.log)
-      if (fetchPath.ok) {
-        const response = await fetchPath.json().catch(console.log)
-        contextObject = response
+      const fetchPath = await fetchId(context).catch(console.log)
+      if (fetchPath) {
+        contextObject = fetchPath
         contextObject.parents ? setContextParent(contextObject.parents[0]) : setContextParent(null)
         setDescription(contextObject
           .description.default || '')
@@ -500,7 +484,7 @@ const ManageContexts = ({ matrixClient, moderationRooms: incomingModerationRooms
       // @TODO error handleing
     }
   }
-  console.log(contextParent)
+
   return (
     <>
       <section className="manage">
