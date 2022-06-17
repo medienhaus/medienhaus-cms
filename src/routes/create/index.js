@@ -634,7 +634,7 @@ const Create = () => {
                 setDescription()
               }}
             >
-              {config.medienhaus?.languages.sort().map((lang) => (
+              {config.medienhaus?.languages.map((lang) => (
                 <option value={lang} key={lang}>{lang.toUpperCase() + ' -- ' + ISO6391.getName(lang)}</option>
               ))}
             </select>
