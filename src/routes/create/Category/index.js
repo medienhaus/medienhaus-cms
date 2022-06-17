@@ -24,7 +24,7 @@ const RemovableLiElement = styled.li`
     }
 `
 
-const Category = ({ projectSpace, onChange, parent }) => {
+const Category = ({ projectSpace, onChange, parent, setLocationFromLocationTree }) => {
   const [loading, setLoading] = useState(true)
   const [contexts, setContexts] = useState([])
   const [error, setError] = useState('')
@@ -135,11 +135,18 @@ const Category = ({ projectSpace, onChange, parent }) => {
     // const res = await path.json()
     // @TODO test if working properly
     if (response.parents) {
-      response.parents.forEach(async parent => {
+      for (const parent of response.parents) {
         const fetchParent = await fetch(config.medienhaus.api + parent)
-        const response = await fetchParent.json()
-        setContexts(contexts => [...contexts, { name: response.name, room_id: response.id }])
-      })
+        const parentResponse = await fetchParent.json()
+        console.log(parentResponse)
+
+        if (parentResponse.template.includes('location')) {
+          console.log(parentResponse)
+          setLocationFromLocationTree(parentResponse.id)
+          continue
+        }
+        setContexts(contexts => [...contexts, { name: parentResponse.name, room_id: parentResponse.id }])
+      }
     }
   }
 
@@ -151,6 +158,7 @@ const Category = ({ projectSpace, onChange, parent }) => {
     // eslint-disable-next-line
   }, [])
 
+  useEffect(() => console.log(contexts), [contexts])
   useEffect(() => onChange(!_.isEmpty(contexts)), [contexts, onChange])
 
   async function onContextChosen (contextSpace) {
