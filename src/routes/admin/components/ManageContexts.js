@@ -337,7 +337,6 @@ const ManageContexts = ({ matrixClient, moderationRooms: incomingModerationRooms
         for (const id of response.parents) {
           const fetchParent = await fetch(config.medienhaus.api + id)
           const response = await fetchParent.json()
-          console.log(response)
           if (response.template.includes('location')) setCurrentLocation(response.id)
         }
       }
