@@ -20,7 +20,8 @@ const image = {
   edit: (props) => {
     const {
       attributes: { url },
-      setAttributes
+      setAttributes,
+      onRemove
     } = props
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const blockProps = useBlockProps()
@@ -52,7 +53,11 @@ const image = {
 
     return (
       <View {...blockProps}>
-        <FileUpload fileType="image" handleSubmission={handleFormSubmission} />
+        <FileUpload
+          callback={onRemove}
+          fileType="image"
+          handleSubmission={handleFormSubmission}
+        />
       </View>
     )
   }
