@@ -37,15 +37,14 @@ If you have special requirements you can configure the cms by copying config.exa
         "content": [
           "heading",
           "text",
-          "unordered list",
-          "ordered list",
-          "quote block",
-          "code block",
+          "list",
+          "quote",
+          "code",
           "image",
           "audio",
+          "video",
           "playlist",
-          "live stream",
-          "peertube",
+          "livestream",
           "bigbluebutton"
         ]
       },
@@ -139,13 +138,14 @@ Each type of content can have one or all of the following:
 
 **heading**  
 **text**  
-**unordered list**  
-**ordered list**  
-**quote block**  
-**code block**  
+**list**   
+**quote**  
+**code**  
 **image**  
 **audio**  
-**peertube**  
+**video**  
+**livestream**  
+**playlist**  
 **bigbluebutton**  
 
 ## Languages

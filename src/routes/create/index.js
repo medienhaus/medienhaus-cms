@@ -652,7 +652,13 @@ const Create = () => {
             </select>
             {spaceObject && (description || description === '') ? <ProjectDescription description={description[contentLang]} callback={onChangeDescription} /> : <Loading />}
             <GutenbergWrapper>
-              {(gutenbergContent !== undefined) && <GutenbergEditor content={gutenbergContent} onChange={contentHasChanged} />}
+              {(gutenbergContent !== undefined) && (
+                <GutenbergEditor
+                  content={gutenbergContent}
+                  blockTypes={_.get(config, ['medienhaus', 'item', template, 'content'])}
+                  onChange={contentHasChanged}
+                />
+              )}
               {isSavingGutenbergContents && <GutenbergSavingOverlay />}
             </GutenbergWrapper>
             {temporaryGutenbergContents && (
