@@ -248,7 +248,7 @@ const Create = () => {
     // @TODO setSpaceObject(spaceObject => ({...spaceObject, rooms: [...spaceObject.rooms, ]}))
     return changeTopic
   }
-  console.log(config.medienhaus)
+
   if (projectSpace && !matrixClient.isInitialSyncComplete()) return <Loading />
   return (
     <>
