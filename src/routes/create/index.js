@@ -25,11 +25,8 @@ import createBlock from './matrix_create_room'
 import LoadingSpinnerButton from '../../components/LoadingSpinnerButton'
 import styled from 'styled-components'
 
-// eslint-disable-next-line no-unused-vars
 const nl2br = function (str) {
   return str.split('\n').join('<br>')
-  // const breakTag = '<br>' // Adjust comment to avoid issue on phpjs.org display
-  // return (str + '').replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1' + breakTag + '$2')
 }
 
 const GutenbergWrapper = styled.div`

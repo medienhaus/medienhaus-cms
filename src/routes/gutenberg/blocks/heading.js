@@ -26,8 +26,7 @@ const heading = {
       setAttributes,
       clientId,
       onRemove,
-      onReplace,
-      mergeBlocks
+      onReplace
     } = props
 
     // eslint-disable-next-line react-hooks/rules-of-hooks
@@ -44,7 +43,6 @@ const heading = {
         onChange={onChangeContent}
         onRemove={onRemove}
         onReplace={onReplace}
-        mergeBlocks={mergeBlocks}
         onSplit={(value, isOriginal) => {
           let block
 
