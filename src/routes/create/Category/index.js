@@ -122,18 +122,18 @@ const Category = ({ projectSpace, onChange, parent }) => {
   }
 
   const fetchTreeFromApi = async () => {
-    const fetchTree = await fetch(config.medienhaus.api + process.env.REACT_APP_CONTEXT_ROOT_SPACE_ID + '/tree')
+    const fetchTree = await fetch(config.medienhaus.api + process.env.REACT_APP_CONTEXT_ROOT_SPACE_ID + '/tree/filter/type/context')
     const response = await fetchTree.json()
     setInputItems(response.children)
     setLoading(false)
   }
+
   const fetchParentsFromApi = async () => {
     const fetchParents = await fetch(config.medienhaus.api + projectSpace)
     const response = await fetchParents.json()
-    const path = await fetch(config.medienhaus.api + projectSpace + '/path')
-    const res = await path.json()
-    console.log(res)
-    console.log(response)
+    // const path = await fetch(config.medienhaus.api + projectSpace + '/path')
+    // const res = await path.json()
+    // @TODO test if working properly
     if (response.parents) {
       response.parents.forEach(async parent => {
         const fetchParent = await fetch(config.medienhaus.api + parent)
