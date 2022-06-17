@@ -187,8 +187,8 @@ const Category = ({ projectSpace, onChange, parent }) => {
           const addToContext = await Matrix.addSpaceChild(contextSpace, projectSpace).catch(console.log)
           if (addToContext?.event_id) {
             setContexts(contexts => [...contexts, { name: contextObject.name, room_id: contextSpace }])
-
             onChange(!_.isEmpty(contexts))
+            await triggerApiUpdate(projectSpace, contextSpace)
             setLoading(false)
           }
         } else {

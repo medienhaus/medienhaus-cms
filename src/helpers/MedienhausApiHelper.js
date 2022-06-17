@@ -1,6 +1,6 @@
 import config from '../config.json'
 
-export async function triggerApiUpdate (roomId, parentId) {
+export const triggerApiUpdate = async (roomId, parentId) => {
   const body = {
     depth: 1
   }
@@ -12,23 +12,22 @@ export async function triggerApiUpdate (roomId, parentId) {
     },
     body: JSON.stringify(body)
   })
-
   return updateRequest
 }
 
-export async function fetchTree (root) {
+export const fetchTree = async (root) => {
   const apiCall = await fetch(config.medienhaus.api + root + '/tree')
   const response = await apiCall.json()
   return response.children
 }
 
-export async function fetchContextTree (root) {
+export const fetchContextTree = async (root) => {
   const apiCall = await fetch(config.medienhaus.api + root + '/tree/filter/type/context')
   const response = await apiCall.json()
   return response.children
 }
 
-export async function fetchId (id) {
+export const fetchId = async (id) => {
   const apiCall = await fetch(config.medienhaus.api + id)
   const response = await apiCall.json()
   return response
