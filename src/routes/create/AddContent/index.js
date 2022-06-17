@@ -55,13 +55,13 @@ const AddContent = ({ number, projectSpace, blocks, contentType, reloadSpace }) 
             {(!config.medienhaus?.item || !config.medienhaus?.item[contentType]?.content || config.medienhaus?.item[contentType]?.content.includes('code block')) && <option value="code">{t('Code Block')}</option>}
           </optgroup>
           <optgroup label="Media">
-            {(!config.medienhaus?.item || !config.medienhaus?.item[contentType]?.blocks || config.medienhaus?.item[contentType]?.blocks.includes('image')) && <option value="image">{t('Image')}</option>}
-            {(!config.medienhaus?.item || !config.medienhaus?.item[contentType]?.blocks || config.medienhaus?.item[contentType]?.blocks.includes('audio')) && <option value="audio">{t('Audio')}</option>}
+            {(!config.medienhaus?.item || !config.medienhaus?.item[contentType]?.content || config.medienhaus?.item[contentType]?.content.includes('image')) && <option value="image">{t('Image')}</option>}
+            {(!config.medienhaus?.item || !config.medienhaus?.item[contentType]?.content || config.medienhaus?.item[contentType]?.content.includes('audio')) && <option value="audio">{t('Audio')}</option>}
 
-            {(!config.medienhaus?.item || !config.medienhaus?.item[contentType]?.blocks || config.medienhaus?.item[contentType]?.blocks.includes('video')) && <option value="video">{t('Video')}</option>}
-            {(!config.medienhaus?.item || !config.medienhaus?.item[contentType]?.blocks || config.medienhaus?.item[contentType]?.blocks.includes('live stream')) && <option value="livestream">{t('Live stream')}</option>}
-            {(!config.medienhaus?.item || !config.medienhaus?.item[contentType]?.blocks || config.medienhaus?.item[contentType]?.blocks.includes('playlist')) && <option value="playlist">{t('Playlist')}</option>}
-            {(!config.medienhaus?.item || !config.medienhaus?.item[contentType]?.blocks || config.medienhaus?.item[contentType]?.blocks.includes('bigbluebutton')) && <option value="bbb">{t('BigBlueButton-Session')}</option>}
+            {(!config.medienhaus?.item || !config.medienhaus?.item[contentType]?.content || config.medienhaus?.item[contentType]?.content.includes('video')) && <option value="video">{t('Video')}</option>}
+            {(!config.medienhaus?.item || !config.medienhaus?.item[contentType]?.content || config.medienhaus?.item[contentType]?.content.includes('live stream')) && <option value="livestream">{t('Live stream')}</option>}
+            {(!config.medienhaus?.item || !config.medienhaus?.item[contentType]?.content || config.medienhaus?.item[contentType]?.content.includes('playlist')) && <option value="playlist">{t('Playlist')}</option>}
+            {(!config.medienhaus?.item || !config.medienhaus?.item[contentType]?.content || config.medienhaus?.item[contentType]?.content.includes('bigbluebutton')) && <option value="bbb">{t('BigBlueButton-Session')}</option>}
 
           </optgroup>
         </select>
