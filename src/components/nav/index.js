@@ -118,7 +118,7 @@ const Nav = () => {
   if (auth.user === null) {
     return null
   }
-  console.log(isModeratingSpaces)
+
   const NavLink = ({ to, onClick, children, className }) => {
     return (
       <Link
