@@ -117,7 +117,7 @@ const Location = ({ reloadSpace, inviteCollaborators, projectSpace, events, allo
 
   const fetchTreeFromApi = async () => {
     setLoading(true)
-    const fetchLocationTree = await fetch(config.medienhaus.api + config.medienhaus.locationId + '/tree')
+    const fetchLocationTree = await fetch(config.medienhaus.api + config.medienhaus.locationId + '/tree/filter/type/context')
     const locationResponse = await fetchLocationTree.json()
     setLocationStructure(locationResponse.children)
     setLoading(false)
