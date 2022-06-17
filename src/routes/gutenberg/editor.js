@@ -124,37 +124,56 @@ function GutenbergEditor ({ content = [], blockTypes = ['text', 'heading', 'list
     if (onChange) onChange(blocks)
   }
 
+  const addBlock = (e) => {
+    setBlocks(prevState => {
+      const newState = [...prevState]
+      newState.push({
+        clientId: _.random(100990, false),
+        name: 'core/paragraph',
+        attributes: {},
+        isValid: true,
+        innerBlocks: []
+      })
+      return newState
+    })
+  }
+
   return (
-    <BlockEditorProvider
-      settings={{
-        canLockBlocks: false,
-        codeEditingEnabled: false,
-        bodyPlaceholder: t('Start typing something...'),
-        keepCaretInsideBlock: false
-      }}
-      value={blocks}
-      onInput={(blocks) => {
-        setBlocks(blocks)
-        blocksHaveChanged(blocks)
-      }}
-      onChange={(blocks) => {
-        setBlocks(blocks)
-        blocksHaveChanged(blocks)
-      }}
-    >
-      <ShortcutProvider>
-        <SlotFillProvider>
-          <BlockTools>
-            <WritingFlow>
-              <ObserveTyping>
-                <BlockList />
-              </ObserveTyping>
-            </WritingFlow>
-          </BlockTools>
-          <Popover.Slot />
-        </SlotFillProvider>
-      </ShortcutProvider>
-    </BlockEditorProvider>
+    <>
+      <BlockEditorProvider
+        settings={{
+          canLockBlocks: false,
+          codeEditingEnabled: false,
+          bodyPlaceholder: t('Start typing something...'),
+          keepCaretInsideBlock: false
+        }}
+        value={blocks}
+        onInput={(blocks) => {
+          setBlocks(blocks)
+          blocksHaveChanged(blocks)
+        }}
+        onChange={(blocks) => {
+          setBlocks(blocks)
+          blocksHaveChanged(blocks)
+        }}
+      >
+        <ShortcutProvider>
+          <SlotFillProvider>
+            <BlockTools>
+              <WritingFlow>
+                <ObserveTyping>
+                  <BlockList renderAppender={() => null} />
+                  <div style={{ padding: '1rem', textAlign: 'right' }}>
+                    <button style={{ width: 'calc(var(--margin) * 2.5)' }} onClick={addBlock}>+</button>
+                  </div>
+                </ObserveTyping>
+              </WritingFlow>
+            </BlockTools>
+            <Popover.Slot />
+          </SlotFillProvider>
+        </ShortcutProvider>
+      </BlockEditorProvider>
+    </>
   )
 }
 
