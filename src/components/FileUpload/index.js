@@ -15,7 +15,6 @@ const FileUpload = (props) => {
 
   const changeHandler = (event) => {
     setSelectedFile(event.target.files[0])
-    console.log(selectedFile)
     setFileName(event.target.files[0].name)
   }
 
@@ -25,7 +24,7 @@ const FileUpload = (props) => {
       {selectedFile && (
         <>
           <input type="text" placeholder={t('author, credits, et cetera')} onChange={(e) => setAuthor(e.target.value)} />
-          <select id="license" name="license" defaultValue="" value={license} onChange={(e) => setLicense(e.target.value)}>
+          <select id="license" name="license" value={license} onChange={(e) => setLicense(e.target.value)}>
             <option value="" disabled>-- select license or rights statement --</option>
             <optgroup label="Creative Commons Licenses">
               <option value="cc0">CC0 1.0</option>

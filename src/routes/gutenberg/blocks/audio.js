@@ -20,7 +20,8 @@ const audio = {
   edit: (props) => {
     const {
       attributes: { url },
-      setAttributes
+      setAttributes,
+      onRemove
     } = props
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const blockProps = useBlockProps()
@@ -50,7 +51,11 @@ const audio = {
 
     return (
       <View {...blockProps}>
-        <FileUpload fileType="audio" handleSubmission={handleFormSubmission} />
+        <FileUpload
+          callback={onRemove}
+          fileType="audio"
+          handleSubmission={handleFormSubmission}
+        />
       </View>
     )
   }

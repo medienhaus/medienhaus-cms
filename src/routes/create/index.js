@@ -25,11 +25,8 @@ import createBlock from './matrix_create_room'
 import LoadingSpinnerButton from '../../components/LoadingSpinnerButton'
 import styled from 'styled-components'
 
-// eslint-disable-next-line no-unused-vars
 const nl2br = function (str) {
   return str.split('\n').join('<br>')
-  // const breakTag = '<br>' // Adjust comment to avoid issue on phpjs.org display
-  // return (str + '').replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1' + breakTag + '$2')
 }
 
 const AuthorCheckbox = styled.div`
@@ -740,7 +737,13 @@ const Create = () => {
             </select>
             {spaceObject && (description || description === '') ? <ProjectDescription description={description[contentLang]} callback={onChangeDescription} /> : <Loading />}
             <GutenbergWrapper>
-              {(gutenbergContent !== undefined) && <GutenbergEditor content={gutenbergContent} onChange={contentHasChanged} />}
+              {(gutenbergContent !== undefined) && (
+                <GutenbergEditor
+                  content={gutenbergContent}
+                  blockTypes={_.get(config, ['medienhaus', 'item', template, 'content'])}
+                  onChange={contentHasChanged}
+                />
+              )}
               {isSavingGutenbergContents && <GutenbergSavingOverlay />}
             </GutenbergWrapper>
             {temporaryGutenbergContents && (
