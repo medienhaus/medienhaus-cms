@@ -130,7 +130,7 @@ function GutenbergEditor ({ content = [], blockTypes = ['text', 'heading', 'list
       newState.push({
         clientId: _.random(100990, false),
         name: 'core/paragraph',
-        attributes: {},
+        attributes: { content: '' },
         isValid: true,
         innerBlocks: []
       })
