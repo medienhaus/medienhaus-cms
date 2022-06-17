@@ -330,14 +330,11 @@ const ManageContexts = ({ matrixClient, moderationRooms: incomingModerationRooms
     setCurrentLocation('')
     await fetchAllocation(space)
     if (config.medienhaus.api) {
-      const fetchSpace = await fetch(config.medienhaus.api + space)
-      const response = await fetchSpace.json()
-      console.log(response)
-      if (response.parents) {
-        for (const id of response.parents) {
-          const fetchParent = await fetch(config.medienhaus.api + id)
-          const response = await fetchParent.json()
-          if (response.template.includes('location')) setCurrentLocation(response.id)
+      const fetchSpace = await fetchId(space)
+      if (fetchSpace.parents) {
+        for (const id of fetchSpace.parents) {
+          const parent = await fetchId(id)
+          if (parent.template.includes('location')) setCurrentLocation(parent.id)
         }
       }
     } else {
