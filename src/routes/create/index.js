@@ -366,7 +366,7 @@ const Create = () => {
 
     // filter out all empty gutenberg blocks -- we want to ignore those
     gutenbergBlocks = gutenbergBlocks.filter(block => {
-      return !(block.name === 'core/paragraph' && block.attributes.content === '')
+      return !(block.name === 'core/paragraph' && _.get(block, 'attributes.content', '') === '')
     })
 
     for (const block of blocksRef.current) {
