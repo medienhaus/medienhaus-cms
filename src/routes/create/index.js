@@ -215,7 +215,7 @@ const Create = () => {
     }))
   }, [spaceObjectRef, matrixClient, setBlocks, contentLangRef])
 
-  const fetchSpace = useCallback(async () => {
+  const fetchSpace = useCallback(async (ignoreBlocks) => {
     if (matrixClient.isInitialSyncComplete()) {
       // here we collect all necessary information about the project
       const space = await matrixClient.getRoomHierarchy(projectSpace)
@@ -243,7 +243,7 @@ const Create = () => {
       setVisibility(meta.published)
       if (!contentLang) return
       // we fetch the selected language content
-      fetchContentBlocks()
+      if (!ignoreBlocks) fetchContentBlocks()
       // check if there is an events space
       const checkForEventSpace = space.rooms.filter(room => room.name === 'events')
       const getEvents = checkForEventSpace.length > 0 && await matrixClient.getRoomHierarchy(space.rooms.filter(room => room.name === 'events')[0].room_id, 0).catch(err => console.log(err + '. This means there is no Event space, yet'))
@@ -321,13 +321,11 @@ const Create = () => {
     }
     // first we check if the initial sync is complete otherwise we create a loop
     if (matrixClient.isInitialSyncComplete()) {
-      console.log('subscribe to all room events')
       matrixClient.addListener('Room.timeline', handleRoomTimelineEvent)
       matrixClient.addListener('RoomState.events', handleRoomStateEvent)
     }
 
     return () => {
-      console.log('unsubscribed from all room events')
       matrixClient.removeListener('Room.timeline', handleRoomTimelineEvent)
       matrixClient.removeListener('RoomState.events', handleRoomStateEvent)
     }
@@ -537,7 +535,7 @@ const Create = () => {
     // here we set the description for the selected language space
     const contentRoom = spaceObject.rooms.filter(room => room.name === contentLang)
     const changeTopic = await matrixClient.setRoomTopic(contentRoom[0].room_id, description).catch(console.log)
-    fetchSpace()
+    fetchSpace(true)
     // @TODO setSpaceObject(spaceObject => ({...spaceObject, rooms: [...spaceObject.rooms, ]}))
     return changeTopic
   }
