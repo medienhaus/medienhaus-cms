@@ -118,7 +118,7 @@ const Nav = () => {
   if (auth.user === null) {
     return null
   }
-
+  console.log(isModeratingSpaces)
   const NavLink = ({ to, onClick, children, className }) => {
     return (
       <Link
@@ -169,7 +169,7 @@ const Nav = () => {
               </div>
               <div>
                 {config.medienhaus?.sites?.account && <NavLink to="/account">/account</NavLink>}
-                {config.medienhaus?.sites.moderate && <NavLink to="/moderate" className={!isModeratingSpaces && !contextInvites ? 'disabled' : ''}>/moderate<sup className={`notification ${contextInvites.length > 0 || knockAmount > 0 ? '' : 'hidden'}`}>●</sup></NavLink>}
+                {config.medienhaus?.sites.moderate && <NavLink to="/moderate" className={!isModeratingSpaces && contextInvites.length < 1 ? 'disabled' : ''}>/moderate<sup className={`notification ${contextInvites.length > 0 || knockAmount > 0 ? '' : 'hidden'}`}>●</sup></NavLink>}
                 {isAdmin && <NavLink to="/admin">/admin</NavLink>}
               </div>
               {(config.medienhaus?.sites.feedback || config.medienhaus?.sites?.support || config.medienhaus?.sites?.request) &&
