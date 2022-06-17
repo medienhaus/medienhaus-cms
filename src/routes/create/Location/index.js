@@ -16,7 +16,7 @@ import SimpleContextSelect from '../../../components/SimpleContextSelect'
 import config from '../../../config.json'
 import { Icon } from 'leaflet/dist/leaflet-src.esm'
 
-const Location = ({ reloadSpace, inviteCollaborators, projectSpace, events, allocation, matrixClient }) => {
+const Location = ({ reloadSpace, inviteCollaborators, projectSpace, events, allocation, matrixClient, locationFromLocationTree, setLocationFromLocationTree }) => {
   const [eventSpace, setEventSpace] = useState(events)
   const [eventContent, setEventContent] = useState([])
   const [locationStructure, setLocationStructure] = useState()
@@ -25,6 +25,10 @@ const Location = ({ reloadSpace, inviteCollaborators, projectSpace, events, allo
   const [deleting, setDeleting] = useState(false)
   const [currentLocation, setCurrentLocation] = useState()
   // const { t } = useTranslation('date')
+
+  useEffect(() => {
+    setCurrentLocation(locationFromLocationTree)
+  }, [locationFromLocationTree])
 
   const createStructurObject = async () => {
     setLoading(true)
@@ -198,7 +202,22 @@ const Location = ({ reloadSpace, inviteCollaborators, projectSpace, events, allo
       const joinRoom = await matrixClient.joinRoom(location).catch(console.log)
       if (joinRoom) await addContextToLocation(location)
     })
-    setCurrentLocation(location.id)
+    setLocationFromLocationTree(location)
+    setCurrentLocation(locationFromLocationTree)
+    // tell api to update branch of tree
+    if (config.medienhaus.api) {
+      const body = {
+        depth: 1,
+        parentId: location
+      }
+      await fetch(config.medienhaus.api + projectSpace + '/fetch', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(body)
+      })
+    }
   }
 
   if (loading) return <Loading />
@@ -281,7 +300,7 @@ const Location = ({ reloadSpace, inviteCollaborators, projectSpace, events, allo
       })}
       {locationStructure &&
         <SimpleContextSelect
-          selectedContext=""
+          selectedContext={locationFromLocationTree}
           preSelectedValue="location"
           onItemChosen={addContextToLocation}
           struktur={locationStructure}

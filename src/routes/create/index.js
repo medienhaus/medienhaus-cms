@@ -74,6 +74,7 @@ const Create = () => {
   const [saveTimestamp, setSaveTimestamp] = useState('')
   const [medienhausMeta, setMedienhausMeta] = useState([])
   const [allocation, setAllocation] = useState([])
+  const [locationFromLocationTree, setLocationFromLocationTree] = useState('')
   const [events, setEvents] = useState()
   const [gutenbergContent, setGutenbergContent] = useState(undefined)
   // eslint-disable-next-line no-unused-vars
@@ -260,6 +261,8 @@ const Create = () => {
       setTitle('')
       setDescription()
       setEvents()
+      setLocationFromLocationTree('')
+      setAllocation([])
     }
     projectSpace && fetchSpace()
   }, [projectSpace, fetchSpace, title])
@@ -688,13 +691,13 @@ const Create = () => {
         <>
           <section className="context">
             <h3>{t('Context')}</h3>
-            <Category title={title} projectSpace={projectSpace} onChange={setHasContext} parent={process.env.REACT_APP_CONTEXT_ROOT_SPACE_ID} />
+            <Category title={title} projectSpace={projectSpace} onChange={setHasContext} parent={process.env.REACT_APP_CONTEXT_ROOT_SPACE_ID} setLocationFromLocationTree={setLocationFromLocationTree} />
           </section>
           {(!config.medienhaus?.item || !config.medienhaus?.item[template]?.blueprint || config.medienhaus?.item[template]?.blueprint.includes('location')) && (
             <section className="events">
               <h3>{t('Location')}</h3>
               <p>{t('Specify at which location your event will take place. To be as accurate as possible you can also add a room number or a concise location marker (i.e. “behind the blue cabinet”).')}</p>
-              <Location inviteCollaborators={inviteCollaborators} reloadSpace={reloadSpace} projectSpace={projectSpace} events={events} allocation={allocation} matrixClient={matrixClient} />
+              <Location inviteCollaborators={inviteCollaborators} reloadSpace={reloadSpace} projectSpace={projectSpace} events={events} allocation={allocation} matrixClient={matrixClient} setLocationFromLocationTree={setLocationFromLocationTree} locationFromLocationTree={locationFromLocationTree} />
             </section>
           )}
           {(!config.medienhaus?.item || !config.medienhaus?.item[template]?.blueprint || config.medienhaus?.item[template]?.blueprint.includes('time')) && (

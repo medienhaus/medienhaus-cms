@@ -11,6 +11,8 @@ import findValueDeep from 'deepdash/findValueDeep'
 import styled from 'styled-components'
 import ContextDropdown from '../../../components/ContextDropdown'
 
+import { triggerApiUpdate, fetchContextTree, fetchId } from '../../../helpers/MedienhausApiHelper'
+
 const RemovableLiElement = styled.li`
     display: flex;
     justify-content: space-between;
@@ -24,7 +26,7 @@ const RemovableLiElement = styled.li`
     }
 `
 
-const Category = ({ projectSpace, onChange, parent }) => {
+const Category = ({ projectSpace, onChange, parent, setLocationFromLocationTree }) => {
   const [loading, setLoading] = useState(true)
   const [contexts, setContexts] = useState([])
   const [error, setError] = useState('')
@@ -122,24 +124,26 @@ const Category = ({ projectSpace, onChange, parent }) => {
   }
 
   const fetchTreeFromApi = async () => {
-    const fetchTree = await fetch(config.medienhaus.api + process.env.REACT_APP_CONTEXT_ROOT_SPACE_ID + '/tree/filter/type/context')
-    const response = await fetchTree.json()
-    setInputItems(response.children)
+    const fetchTree = await fetchContextTree(process.env.REACT_APP_CONTEXT_ROOT_SPACE_ID)
+    setInputItems(fetchTree)
     setLoading(false)
   }
 
   const fetchParentsFromApi = async () => {
-    const fetchParents = await fetch(config.medienhaus.api + projectSpace)
-    const response = await fetchParents.json()
+    const fetchParents = await fetchId(projectSpace)
     // const path = await fetch(config.medienhaus.api + projectSpace + '/path')
     // const res = await path.json()
     // @TODO test if working properly
-    if (response.parents) {
-      response.parents.forEach(async parent => {
-        const fetchParent = await fetch(config.medienhaus.api + parent)
-        const response = await fetchParent.json()
-        setContexts(contexts => [...contexts, { name: response.name, room_id: response.id }])
-      })
+    if (fetchParents.parents) {
+      for (const parent of fetchParents.parents) {
+        const fetchParent = await fetchId(parent)
+        if (fetchParent.template.includes('location')) {
+          // if the parent is a location element we set it to our current location and continue with the next element
+          setLocationFromLocationTree(fetchParent.id)
+          continue
+        }
+        setContexts(contexts => [...contexts, { name: fetchParent.name, room_id: fetchParent.id }])
+      }
     }
   }
 
@@ -159,9 +163,8 @@ const Category = ({ projectSpace, onChange, parent }) => {
     // this will be refactored with new logic once the api can return the updated /$id/path immediately after adding a space child.
     let contextObject
     if (config.medienhaus.api) {
-      const fetchPath = await fetch(config.medienhaus.api + contextSpace)
-      const response = await fetchPath.json()
-      contextObject = response
+      const fetchPath = await fetchId(contextSpace)
+      contextObject = fetchPath
     } else {
       contextObject = findValueDeep(
         inputItems,
@@ -205,6 +208,7 @@ const Category = ({ projectSpace, onChange, parent }) => {
     if (addToContext?.event_id) {
       setContexts(contexts => [...contexts, { name: contextObject.name, room_id: contextSpace }])
       onChange(!_.isEmpty(contexts))
+      await triggerApiUpdate(projectSpace, contextSpace)
       setLoading(false)
     }
   }
