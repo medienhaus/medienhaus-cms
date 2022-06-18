@@ -319,7 +319,7 @@ const Create = () => {
         if (!gutenbergIdToMatrixRoomIdRef.current[block.clientId]) {
           const createdBlock = await createBlock(null, contentType, index, spaceObjectRef.current?.rooms.filter(room => room.name === contentLangRef.current)[0].room_id)
           addToMap(block.clientId, createdBlock)
-           // if the item is a collaboration we need to invite all collaborators to the newly created block
+          // if the item is a collaboration we need to invite all collaborators to the newly created block
           if (isCollab) await inviteCollaborators(createdBlock)
         }
 
