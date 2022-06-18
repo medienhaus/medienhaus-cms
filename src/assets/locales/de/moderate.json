@@ -1,0 +1,15 @@
+{
+    "Select Context": "Kontext auswählen",
+    "Change Name": "Name ändern",
+    "Change Image": "Titelbild ändern",
+    "Change Template": "Template ändern",
+    "Change Description": "Kurzbeschreibung ändern",
+    "Change Location": "Standort ändern",
+    "Add Sub-Context": "Unterkontext hunzufügen",
+    "Remove Item from context": "Item aus Kontext entfernen",
+    "Leave Context": "Kontext verlassen",
+    "Remove Context": "Kontext löschen",
+    "I am sure I want to irreversibly delete this context.": "Ich bin mir sicher, dass ich diesen Kontext unwideruflich löschen möchte",
+    "I am sure I want to irreversibly leave this context.": "Ich bin mir sicher, dass ich diesen Kontext unwideruflich verlassen möchte",
+    "You will not be able to moderate this context anymore unless you are invited by another moderator of the context. If you are the only or last member of this context, the context will be deleted after leaving.": "Du wirst keine Inhalte in diesem Kontext mehr moderieren können, ausser ein*e andere*r Moderator*ìn lädt dich wieder dazu ein. Sind keine weiteren Nutzer*innen mehr im Context wird dieser nach dem verlassen gelöscht."
+}

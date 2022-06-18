@@ -12,6 +12,7 @@ export const triggerApiUpdate = async (roomId, parentId) => {
     },
     body: JSON.stringify(body)
   })
+  if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') console.debug(updateRequest)
   return updateRequest
 }
 

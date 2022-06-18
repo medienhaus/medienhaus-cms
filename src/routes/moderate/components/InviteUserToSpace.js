@@ -23,7 +23,13 @@ const InviteUserToSpace = ({ matrixClient, moderationRooms, setPower, fetchUsers
           setUserToInvite('')
         }, 2000)
       } catch (err) {
-        setInviteFeedback(err.data.error)
+        if (promoteToModerator && err.data.error.includes('is already in the room')) {
+          // if the user is already in the room but not moderating yet, we promote them to moderator
+          setPower(selectedRoom, id, 50)
+          setInviteFeedback('Promoted ' + id + 'to moderator')
+        } else {
+          setInviteFeedback(err.data.error)
+        }
         setTimeout(() => {
           setInviteFeedback('')
         }, 2000)

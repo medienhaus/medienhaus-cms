@@ -1,29 +1,31 @@
 import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import CreateContext from './CreateContext'
-import { RemoveContext } from './RemoveContext'
+import CreateContext from '../../admin/components/CreateContext'
+import { RemoveContext } from '../../admin/components/RemoveContext'
 import * as _ from 'lodash'
 import ProjectImage from '../../create/ProjectImage'
 import { Loading } from '../../../components/loading'
 import DisplayEvents from '../../create/Location/components/DisplayEvents'
 import DeleteButton from '../../create/components/DeleteButton'
 import SimpleContextSelect from '../../../components/SimpleContextSelect'
-import Matrix from '../../../Matrix'
 // import ContextDropdown from '../../../components/ContextDropdown'
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
 import locations from '../../../assets/data/locations.json'
 import { MatrixEvent } from 'matrix-js-sdk'
 import config from '../../../config.json'
 import TextareaAutosize from 'react-textarea-autosize'
-import styled from 'styled-components'
 
 import findPathDeep from 'deepdash/findPathDeep'
 import findValueDeep from 'deepdash/findValueDeep'
 
 import LoadingSpinnerButton from '../../../components/LoadingSpinnerButton'
 import { Icon } from 'leaflet/dist/leaflet-src.esm'
-import RemoveItemsInContext from '../../moderate/components/RemoveItemsInContext'
+import RemoveItemsInContext from './RemoveItemsInContext'
+
+import styled from 'styled-components'
 import { fetchId, fetchTree, triggerApiUpdate } from '../../../helpers/MedienhausApiHelper'
+import Matrix from '../../../Matrix'
+import LeaveContext from './LeaveContext'
 
 const DangerZone = styled.section`
   border: none;
@@ -45,7 +47,7 @@ const Details = styled.details`
 `
 
 const ManageContexts = ({ matrixClient, moderationRooms: incomingModerationRooms }) => {
-  const { t } = useTranslation('admin')
+  const { t } = useTranslation('moderate')
   const [selectedContext, setSelectedContext] = useState('')
   const [roomName, setRoomName] = useState('')
   const [roomTemplate, setRoomTemplate] = useState('')
@@ -60,7 +62,7 @@ const ManageContexts = ({ matrixClient, moderationRooms: incomingModerationRooms
   const [description, setDescription] = useState('')
   const [locationStructure, setLocationStructure] = useState()
   const [currentLocation, setCurrentLocation] = useState('')
-  const [moderationRooms, setModerationRooms] = useState()
+  const [moderationRooms, setModerationRooms] = useState(incomingModerationRooms)
   const [editRoomName, setEditRoomName] = useState(false)
   const [newRoomName, setNewRoomName] = useState()
 
@@ -128,50 +130,30 @@ const ManageContexts = ({ matrixClient, moderationRooms: incomingModerationRooms
   const fetchTreeFromApi = async () => {
     const tree = await fetchTree(process.env.REACT_APP_CONTEXT_ROOT_SPACE_ID)
     setInputItems(tree)
-
+    const _moderationRooms = { ...moderationRooms }
     for (const space of Object.keys(incomingModerationRooms)) {
       const contextObject = findValueDeep(
         tree,
         (value, key, parent) => {
           if (value.id === space) return true
         }, { childrenPath: 'children', includeRoot: false, rootIsChildren: true })
+
       if (!contextObject) {
-        const _moderationRooms = { ...incomingModerationRooms }
+        if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') console.debug('not found in tree: ' + incomingModerationRooms[space].name)
         delete _moderationRooms[space]
-        setModerationRooms(_moderationRooms)
       }
     }
+    setModerationRooms(_moderationRooms)
     const fetchLocationTree = await fetch(config.medienhaus.api + config.medienhaus.locationId + '/tree')
     const locationResponse = await fetchLocationTree.json()
     setLocationStructure(locationResponse.children)
     setLoading(false)
   }
 
-  const handleSpaceChild = async (e, space, add) => {
+  const onRemoveItemFromContext = (space) => {
     setLoading(true)
-    e && e.preventDefault()
-    const body = {
-      via: [process.env.REACT_APP_MATRIX_BASE_URL.replace('https://', '')],
-      suggested: false,
-      auto_join: false
-    }
-    const addOrRemoveSpaceChild = await fetch(process.env.REACT_APP_MATRIX_BASE_URL + `/_matrix/client/r0/rooms/${add ? selectedContext : space}/state/m.space.child/${add ? space : selectedContext}`, {
-      method: 'PUT',
-      headers: { Authorization: 'Bearer ' + localStorage.getItem('medienhaus_access_token') },
-      body: JSON.stringify(add ? body : { }) // if we add a space to an existing one we need to send the object 'body', to remove a space we send an empty object.
-    }).catch(console.log)
-    if (addOrRemoveSpaceChild.ok) {
-      add ? console.log('added as child to ' + selectedContext) : console.log('removed ' + selectedContext + ' from ' + contextParent)
-      // if (config.medienhaus.api) fetchTreeFromApi()
-      // else await createStructurObject()
-      if (add) {
-        setSelectedContext(space)
-      } else {
-        setSelectedContext('')
-      }
-    }
+    Matrix.removeSpaceChild(selectedContext, space)
     setLoading(false)
-    return addOrRemoveSpaceChild
   }
 
   const setPower = async (userId, roomId, level) => {
@@ -248,7 +230,7 @@ const ManageContexts = ({ matrixClient, moderationRooms: incomingModerationRooms
       const space = await matrixClient.createRoom(opts(title, 'world_readable')).catch(console.log)
 
       // add this subspaces as children to the root space
-      await handleSpaceChild(e, space.room_id, true)
+      await Matrix.addSpaceChild(selectedContext, space.room_id)
       console.log('created Context ' + name + ' ' + space.room_id)
       // invite moderators to newly created space if they are specified in our config.json
       if (config.medienhaus?.usersToInviteToNewContexts) {
@@ -365,16 +347,20 @@ const ManageContexts = ({ matrixClient, moderationRooms: incomingModerationRooms
     setLoading(true)
     let contextObject
     if (config.medienhaus.api) {
+      // if an api is configured we fetch id of the selected context
       const fetchPath = await fetchId(context).catch(console.log)
       if (fetchPath) {
+        // and then its first parent item
         contextObject = fetchPath
         contextObject.parents ? setContextParent(contextObject.parents[0]) : setContextParent(null)
         setDescription(contextObject
           .description.default || '')
       } else {
+        // as a fallback we look for the parent with deep dash
         findValueWithDeepDash()
       }
     } else {
+      // if no api is configured we look fot the parent with deep dash
       findValueWithDeepDash()
     }
     function findValueWithDeepDash () {
@@ -390,7 +376,6 @@ const ManageContexts = ({ matrixClient, moderationRooms: incomingModerationRooms
     }
 
     await getEvents(context)
-    if (config.medienhaus.api && selectedContext) triggerApiUpdate(selectedContext)
     setSelectedContext(context)
     setNewRoomName(contextObject.name)
     setRoomName(contextObject.name)
@@ -469,34 +454,54 @@ const ManageContexts = ({ matrixClient, moderationRooms: incomingModerationRooms
 
   const onRemoveContext = async (e, parent) => {
     e.preventDefault()
-    const remove = await handleSpaceChild(e, parent, false)
-    if (remove.ok) {
+    setDisableButton(true)
+    const remove = await Matrix.removeSpaceChild(selectedContext, parent)
+    if (remove.event_id) {
       const _moderationRooms = { ...moderationRooms }
       delete _moderationRooms[selectedContext]
       setModerationRooms(_moderationRooms)
       setSelectedContext('')
-      handleSpaceChild(e, parent, false)
       if (config.medienhaus.api) triggerApiUpdate(selectedContext)
     } else {
       // @TODO error handleing
     }
+    setDisableButton(false)
+  }
+
+  const onLeaveContext = async (e, parent) => {
+    e.preventDefault()
+    setDisableButton(true)
+    await setPower(localStorage.getItem('mx_user_id'), selectedContext, 0)
+    await matrixClient.leave(selectedContext).catch(() => {
+      // @TODO error handleing
+      setDisableButton(false)
+    }
+    )
+    const _moderationRooms = { ...moderationRooms }
+    delete _moderationRooms[selectedContext]
+    setModerationRooms(_moderationRooms)
+    setSelectedContext('')
+    if (config.medienhaus.api) triggerApiUpdate(selectedContext)
+
+    setSelectedContext('')
+    setDisableButton(false)
   }
 
   return (
     <>
       <section className="manage">
-        <section className="manage--add-subcontext">
-          <h3>Manage Contexts</h3>
-          {!inputItems && !moderationRooms
-            ? <Loading />
-            : <SimpleContextSelect
-                onItemChosen={onContextChange}
-                selectedContext={selectedContext}
-                struktur={moderationRooms}
-                disabled={loading}
-              />}
-          {loading && inputItems && <Loading />}
-        </section>
+        <h3>{t('Select Context')}</h3>
+        {// !structure ? <Loading /> : <ShowContexts structure={structure} t={t} selectedContext={selectedContext} parent={parent} parentName={parentName} disableButton={disableButton} callback={contextualise} />
+        }
+        {!inputItems && !moderationRooms
+          ? <Loading />
+          : <SimpleContextSelect
+              onItemChosen={onContextChange}
+              selectedContext={selectedContext}
+              struktur={moderationRooms}
+              disabled={loading}
+            />}
+        {loading && inputItems && <Loading />}
         {/* <label htmlFor="name">{t('Context')}: </label>
          <input type="text" value={selectedContextName} disabled /> */}
         {selectedContext &&
@@ -543,7 +548,7 @@ const ManageContexts = ({ matrixClient, moderationRooms: incomingModerationRooms
                 <h3>{t('Change Image')}</h3>
               </summary>
               <section>
-                <ProjectImage projectSpace={selectedContext} changeProjectImage={() => console.log('changed image')} disabled={loading} apiCallback={() => triggerApiUpdate(selectedContext)} />
+                <ProjectImage projectSpace={selectedContext} changeProjectImage={() => console.log('changed image')} disabled={loading || disableButton} apiCallback={() => triggerApiUpdate(selectedContext)} />
                 {allocation?.physical && allocation.physical.map((location, i) => {
                   return (
                     <div className="editor" key={location.lat}>
@@ -661,7 +666,7 @@ const ManageContexts = ({ matrixClient, moderationRooms: incomingModerationRooms
                 <h3>{t('Remove Item from context')}</h3>
               </summary>
               <section>
-                <RemoveItemsInContext parent={selectedContext} handleSpaceChild={handleSpaceChild} />
+                <RemoveItemsInContext parent={selectedContext} onRemoveItemFromContext={onRemoveItemFromContext} />
               </section>
             </Details>
             <hr />
@@ -672,7 +677,16 @@ const ManageContexts = ({ matrixClient, moderationRooms: incomingModerationRooms
                     <h3>⚠️&nbsp;&nbsp;DANGER ZONE&nbsp;‼️</h3>
                   </summary>
                   <section>
-                    <RemoveContext t={t} selectedContext={selectedContext} parent={contextParent} parentName={roomName} disableButton={disableButton} callback={onRemoveContext} />
+                    <Details>
+                      <summary><h3>{t('Remove Context')}</h3></summary>
+                      <RemoveContext t={t} selectedContext={selectedContext} parent={contextParent} parentName={roomName} disableButton={disableButton} callback={onRemoveContext} />
+                    </Details>
+                  </section>
+                  <section>
+                    <Details>
+                      <summary><h3>{t('Leave Context')}</h3></summary>
+                      <LeaveContext selectedContext={selectedContext} parent={contextParent} parentName={roomName} disableButton={disableButton} callback={onLeaveContext} />
+                    </Details>
                   </section>
                 </Details>
               </DangerZone>
