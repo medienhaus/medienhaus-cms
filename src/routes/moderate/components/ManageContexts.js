@@ -27,6 +27,15 @@ import { fetchId, fetchTree, triggerApiUpdate } from '../../../helpers/Medienhau
 import Matrix from '../../../Matrix'
 import LeaveContext from './LeaveContext'
 
+const DangerZone = styled.section`
+  border: none;
+  border-left-color: var(--color-no);
+  border-left-radius: unset;
+  border-left-style: solid;
+  border-left-width: calc(var(--margin) * 0.5);
+  padding-left: var(--margin);
+`
+
 const Details = styled('details')`
     h3 {
         display: inline;
@@ -601,23 +610,25 @@ const ManageContexts = ({ matrixClient, moderationRooms: incomingModerationRooms
             </Details>
             <hr />
             {contextParent && (
-              <Details>
-                <summary>
-                  <h3>⚠️&nbsp;&nbsp;DANGER ZONE&nbsp;‼️</h3>
-                </summary>
-                <section>
-                  <Details>
-                    <summary><h3>{t('Remove Context')}</h3></summary>
-                    <RemoveContext t={t} selectedContext={selectedContext} parent={contextParent} parentName={roomName} disableButton={disableButton} callback={onRemoveContext} />
-                  </Details>
-                </section>
-                <section>
-                  <Details>
-                    <summary><h3>{t('Leave Context')}</h3></summary>
-                    <LeaveContext selectedContext={selectedContext} parent={contextParent} parentName={roomName} disableButton={disableButton} callback={onLeaveContext} />
-                  </Details>
-                </section>
-              </Details>
+              <DangerZone>
+                <Details>
+                  <summary>
+                    <h3>⚠️&nbsp;&nbsp;DANGER ZONE&nbsp;‼️</h3>
+                  </summary>
+                  <section>
+                    <Details>
+                      <summary><h3>{t('Remove Context')}</h3></summary>
+                      <RemoveContext t={t} selectedContext={selectedContext} parent={contextParent} parentName={roomName} disableButton={disableButton} callback={onRemoveContext} />
+                    </Details>
+                  </section>
+                  <section>
+                    <Details>
+                      <summary><h3>{t('Leave Context')}</h3></summary>
+                      <LeaveContext selectedContext={selectedContext} parent={contextParent} parentName={roomName} disableButton={disableButton} callback={onLeaveContext} />
+                    </Details>
+                  </section>
+                </Details>
+              </DangerZone>
             )}
           </>}
 
