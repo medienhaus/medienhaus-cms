@@ -117,7 +117,6 @@ const Category = ({ projectSpace, onChange, parent, setLocationFromLocationTree 
   useEffect(() => onChange(!_.isEmpty(contexts)), [contexts, onChange])
 
   async function onContextChosen (contextSpace) {
-    console.log(contextSpace)
     setLoading(true)
     // this will be refactored with new logic once the api can return the updated /$id/path immediately after adding a space child.
     let contextObject
