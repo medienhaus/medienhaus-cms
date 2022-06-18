@@ -36,7 +36,7 @@ const DangerZone = styled.section`
   padding-left: var(--margin);
 `
 
-const Details = styled('details')`
+const Details = styled.details`
     h3 {
         display: inline;
         }
