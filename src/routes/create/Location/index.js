@@ -305,6 +305,7 @@ const Location = ({ reloadSpace, inviteCollaborators, projectSpace, events, allo
           onItemChosen={addContextToLocation}
           struktur={locationStructure}
           disabled={loading || !locationStructure}
+          location
         />}
       {/*
       {eventContent?.length < 1 &&
