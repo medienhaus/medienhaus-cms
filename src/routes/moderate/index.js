@@ -7,7 +7,7 @@ import { MatrixEvent } from 'matrix-js-sdk'
 import { useTranslation } from 'react-i18next'
 import InviteUserToSpace from './components/InviteUserToSpace'
 import RightsManagement from './components/RightsManagement'
-import ManageContexts from '../admin/components/ManageContexts'
+import ManageContexts from './components/ManageContexts'
 import RemoveContent from './components/RemoveContent'
 
 import config from '../../config.json'
@@ -37,7 +37,7 @@ const Moderate = () => {
   const context = config.medienhaus?.context ? Object.keys(config.medienhaus?.context).concat('context') : ['context']
   const matrixClient = Matrix.getMatrixClient()
 
-  const { t } = useTranslation()
+  const { t } = useTranslation('moderate')
 
   useEffect(() => {
     if (joinedSpaces) {
@@ -113,6 +113,7 @@ const Moderate = () => {
     })
     return matrixClient.setPowerLevel(roomId, userId, level, powerEvent)
   }
+
   const fetchUsers = async (e, search) => {
     e.preventDefault()
     setFetching(true)
