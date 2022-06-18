@@ -15,13 +15,13 @@ export function RemoveContext (props) {
   const [checkbox, setCheckbox] = useState(false)
   const { t } = useTranslation('moderate')
   return (
-    <>
+    <section>
       <RemoveCheckbox>
         <label htmlFor="checkbox">{t('I am sure I want to irreversibly delete this context.')}</label>
         <input id="checkbox" name="checkbox" type="checkbox" checked={checkbox} onChange={() => setCheckbox(checkbox => !checkbox)} />
       </RemoveCheckbox>
-      <button type="submit" disabled={props.disableButton || !checkbox} onClick={e => props.callback(e, props.parent, false)}>{props.loading ? <Loading /> : props.t('Delete context')}</button>
-    </>
+      <button type="submit" disabled={props.disableButton || !checkbox} onClick={e => props.callback(e, props.parent)}>{props.loading ? <Loading /> : props.t('Delete context')}</button>
+    </section>
   )
 }
 
