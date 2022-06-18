@@ -438,6 +438,7 @@ const Create = () => {
   const startListeningToCollab = () => {
     setIsCollab(true)
     console.log('Started spying on collaborators')
+    // to avoid rate limits we debounce the next function
     debounce(() => listeningToCollaborators(), 100)
   }
 
