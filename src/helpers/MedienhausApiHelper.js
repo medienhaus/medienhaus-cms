@@ -33,3 +33,9 @@ export const fetchId = async (id) => {
   const response = await apiCall.json()
   return response
 }
+
+export const fetchList = async (id) => {
+  const fetchList = await fetch(config.medienhaus.api + id + '/list')
+  const response = fetchList.json()
+  return response
+}

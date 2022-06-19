@@ -5,6 +5,7 @@ import styled from 'styled-components'
 import { useTranslation } from 'react-i18next'
 // import { ReactComponent as BinIcon } from '../../../assets/icons/remix/trash.svg'
 import DeleteButton from '../../create/components/DeleteButton'
+import { fetchList } from '../../../helpers/MedienhausApiHelper'
 
 const Container = styled.ul`
     border:solid;
@@ -28,6 +29,7 @@ const ListElement = styled.div`
 export default function RemoveItemsInContext ({ parent, onRemoveItemFromContext }) {
   const [items, setItems] = useState([])
   const [highlightedElement, setHighlightedElement] = useState()
+  const [error, setError] = useState('')
   const matrixClient = Matrix.getMatrixClient()
   const { t } = useTranslation('moderate')
 
@@ -49,17 +51,16 @@ export default function RemoveItemsInContext ({ parent, onRemoveItemFromContext 
     }
 
     if (config.medienhaus.api) {
-      const fetchFromApi = await fetch(config.medienhaus.api + parent + '/list')
-      if (fetchFromApi.ok) {
-        const allItems = await fetchFromApi.json()
-        setItems(allItems.filter(room => room.type === 'item'))
+      const listFromApi = await fetchList(parent).catch(() => setError('❗️' + t('An error occured trying to fetch the items in the context. Please try reloading the page.')))
+      if (listFromApi) {
+        setItems(listFromApi.filter(room => room.type === 'item'))
       } else {
         await fetchItemsFromMatrix()
       }
     } else {
       await fetchItemsFromMatrix()
     }
-  }, [matrixClient, parent])
+  }, [matrixClient, parent, t])
 
   const onDelete = (e, roomId) => {
     setItems(prevState => prevState.filter(room => room.room_id !== roomId))
@@ -75,7 +76,7 @@ export default function RemoveItemsInContext ({ parent, onRemoveItemFromContext 
 
     <div>
 
-      {items.length < 1
+      {error || (items.length < 1
         ? <p>{t('There are no items in this context at the moment.')}</p>
         : <Container> {items.map((item, index) => {
           return (
@@ -88,7 +89,7 @@ export default function RemoveItemsInContext ({ parent, onRemoveItemFromContext 
         }
         )}
 
-        </Container>}
+        </Container>)}
     </div>
 
   )
