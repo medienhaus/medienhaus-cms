@@ -432,14 +432,25 @@ const ManageContexts = ({ matrixClient, moderationRooms: incomingModerationRooms
   }
 
   const addContextToLocation = async (location) => {
-    console.log('object')
-    if (currentLocation) await Matrix.removeSpaceChild(currentLocation, selectedContext)
+    if (currentLocation) {
+      let remove = await Matrix.removeSpaceChild(currentLocation, selectedContext).catch(async () => {
+        // if removing fails we try to join the current location context
+        const join = await matrixClient.joinRoom(currentLocation).catch(console.debug)
+        if (join) {
+          // then we try again
+          remove = await Matrix.removeSpaceChild(currentLocation, selectedContext)
+        }
+      })
+      // we leave the old location context
+      if (remove) await matrixClient.leave(currentLocation).catch(console.debug)
+    }
     await Matrix.addSpaceChild(location, selectedContext).catch(async () => {
-      const join = await matrixClient.joinRoom(location).catch(console.log)
+      const join = await matrixClient.joinRoom(location).catch(console.debug)
       if (join) addContextToLocation(location)
     })
 
     setCurrentLocation(location)
+    if (config.medienhaus.api) triggerApiUpdate(selectedContext)
   }
 
   const changeRoomName = async () => {
@@ -508,6 +519,7 @@ const ManageContexts = ({ matrixClient, moderationRooms: incomingModerationRooms
               selectedContext={selectedContext}
               struktur={moderationRooms}
               disabled={loading}
+              preSelectedValue="context"
             />}
         {loading && inputItems && <Loading />}
         {error && <section>{error}</section>}
@@ -658,6 +670,7 @@ const ManageContexts = ({ matrixClient, moderationRooms: incomingModerationRooms
                       struktur={locationStructure}
                       disabled={loading}
                       enableType="location-room"
+                      preSelectedValue="location"
                     />
                   : <Loading />}
               </section>
