@@ -29,6 +29,7 @@ const RemovableLiElement = styled.li`
 const Category = ({ projectSpace, onChange, parent, setLocationFromLocationTree }) => {
   const [loading, setLoading] = useState(true)
   const [contexts, setContexts] = useState([])
+  const [feedback, setFeedback] = useState('')
   const [error, setError] = useState('')
   const [inputItems, setInputItems] = useState()
   const matrixClient = Matrix.getMatrixClient()
@@ -183,7 +184,10 @@ const Category = ({ projectSpace, onChange, parent, setLocationFromLocationTree 
       setError(e?.message)
       setTimeout(() => setError(''), 2500)
     })
-    removeSpacechild?.event_id && setContexts(contexts => contexts.filter(context => context.room_id !== parent))
+    if (removeSpacechild?.event_id) {
+      setContexts(contexts => contexts.filter(context => context.room_id !== parent))
+      setFeedback(t('The context was removed succesfully. Pleas note that for up to 30 minutes the context might reappear when reloading this page. There is no need to remove it again, if you see this message the context was successfully removed. We are working on the issue. '))
+    }
   }
 
   return (
@@ -207,7 +211,6 @@ const Category = ({ projectSpace, onChange, parent, setLocationFromLocationTree 
               )
             })}
           </ul>
-
           {/* <SimpleContextSelect
               selectedContext=""
               onItemChosen={onContextChosen}
@@ -222,6 +225,8 @@ const Category = ({ projectSpace, onChange, parent, setLocationFromLocationTree 
           />
         </>}
       {error && <p>{error}</p>}
+      {feedback && <section>❗️{feedback}</section>}
+
       {/* {subject !== '' && !member && <Knock room={room} callback={callback} />} */}
     </>
   )
