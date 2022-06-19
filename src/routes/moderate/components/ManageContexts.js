@@ -63,7 +63,8 @@ const ManageContexts = ({ matrixClient, moderationRooms: incomingModerationRooms
   const [currentLocation, setCurrentLocation] = useState('')
   const [moderationRooms, setModerationRooms] = useState(incomingModerationRooms)
   const [editRoomName, setEditRoomName] = useState(false)
-  const [newRoomName, setNewRoomName] = useState()
+  const [newRoomName, setNewRoomName] = useState('')
+  const [error, setError] = useState('')
 
   const createStructurObject = async (roomId, location = false) => {
     async function getSpaceStructure (matrixClient, motherSpaceRoomId, includeRooms) {
@@ -127,7 +128,10 @@ const ManageContexts = ({ matrixClient, moderationRooms: incomingModerationRooms
   }
 
   const fetchTreeFromApi = async () => {
-    const tree = await fetchTree(process.env.REACT_APP_CONTEXT_ROOT_SPACE_ID)
+    const tree = await fetchTree(process.env.REACT_APP_CONTEXT_ROOT_SPACE_ID).catch(() => {
+      setError('❗️' + t('An error occured, please try again or try reloading the page.'))
+      setModerationRooms({})
+    })
     setInputItems(tree)
     const _moderationRooms = { ...moderationRooms }
     for (const space of Object.keys(incomingModerationRooms)) {
@@ -446,8 +450,13 @@ const ManageContexts = ({ matrixClient, moderationRooms: incomingModerationRooms
     setEditRoomName(false)
   }
 
-  const onChangeRoomTemplate = async () => {
-    await matrixClient.getStateEvent(selectedContext, 'dev.medienhaus.meta')
+  const onChangeRoomTemplate = async (e) => {
+    const oldTemplate = roomTemplate
+    setRoomTemplate(e.target.value)
+    const metaEvent = await matrixClient.getStateEvent(selectedContext, 'dev.medienhaus.meta')
+    metaEvent.template = e.target.value
+    const send = await matrixClient.sendStateEvent(selectedContext, 'dev.medienhaus.meta', metaEvent)
+    if (!send.event_id) setRoomTemplate(oldTemplate)
     if (config.medienhaus.api) triggerApiUpdate(selectedContext)
   }
 
@@ -501,6 +510,7 @@ const ManageContexts = ({ matrixClient, moderationRooms: incomingModerationRooms
               disabled={loading}
             />}
         {loading && inputItems && <Loading />}
+        {error && <section>{error}</section>}
         {/* <label htmlFor="name">{t('Context')}: </label>
          <input type="text" value={selectedContextName} disabled /> */}
         {selectedContext &&

@@ -11,5 +11,8 @@
     "Remove Context": "Kontext löschen",
     "I am sure I want to irreversibly delete this context.": "Ich bin mir sicher, dass ich diesen Kontext unwideruflich löschen möchte",
     "I am sure I want to irreversibly leave this context.": "Ich bin mir sicher, dass ich diesen Kontext unwideruflich verlassen möchte",
-    "You will not be able to moderate this context anymore unless you are invited by another moderator of the context. If you are the only or last member of this context, the context will be deleted after leaving.": "Du wirst keine Inhalte in diesem Kontext mehr moderieren können, ausser ein*e andere*r Moderator*ìn lädt dich wieder dazu ein. Sind keine weiteren Nutzer*innen mehr im Context wird dieser nach dem verlassen gelöscht."
+    "You will not be able to moderate this context anymore unless you are invited by another moderator of the context. If you are the only or last member of this context, the context will be deleted after leaving.": "Du wirst keine Inhalte in diesem Kontext mehr moderieren können, ausser ein*e andere*r Moderator*ìn lädt dich wieder dazu ein. Sind keine weiteren Nutzer*innen mehr im Context wird dieser nach dem verlassen gelöscht.",
+    "An error occured trying to fetch the items in the context. Please try reloading the page.": "Beim laden der Items des Kontextes ist ein Fehler aufgetreten. Bitte lade die Seite neu.",
+    "An error occured, please try again or try reloading the page.": "Es ist ein Fehler aufgetreten, bitte versuche es erneut oder lade die Seite neu.",
+    "There are no items in this context at the moment.": "Zur Zeit befinden sich keine Items in diesem Kontext."
 }
