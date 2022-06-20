@@ -163,8 +163,8 @@ function GutenbergEditor ({ content = [], blockTypes = ['text', 'heading', 'list
               <WritingFlow>
                 <ObserveTyping>
                   <BlockList renderAppender={() => null} />
-                  <div style={{ padding: '1rem', textAlign: 'right' }}>
-                    <button style={{ width: 'calc(var(--margin) * 2.5)' }} onClick={addBlock}>+</button>
+                  <div style={{ padding: '1rem', display: 'grid' }}>
+                    <button style={{ width: '2rem', height: '2rem', display: 'grid', placeContent: 'center', justifySelf: 'end' }} onClick={addBlock}>+</button>
                   </div>
                 </ObserveTyping>
               </WritingFlow>
