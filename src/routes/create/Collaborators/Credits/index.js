@@ -23,7 +23,7 @@ const Credits = ({ name, index, projectSpace, callback }) => {
   }
   return (
     <li>
-      <span>{name}</span><button onClick={(e) => deleteCredit(e, index)}>
+      <span>{name}</span><button style={{ width: '2rem', height: '2rem', display: 'grid', placeContent: 'center' }} onClick={(e) => deleteCredit(e, index)}>
         {loading ? <Loading /> : deleteCreditFeedback || '×'}
       </button>
     </li>
