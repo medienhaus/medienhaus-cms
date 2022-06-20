@@ -19,7 +19,7 @@ import { useTranslation, Trans } from 'react-i18next'
 import Location from './Location'
 
 import config from '../../config.json'
-import _ from 'lodash'
+import _, { debounce } from 'lodash'
 import GutenbergEditor from '../gutenberg/editor'
 import createBlock from './matrix_create_room'
 import LoadingSpinnerButton from '../../components/LoadingSpinnerButton'
@@ -114,7 +114,7 @@ const Create = () => {
     // const allCollaborators = joinedSpaces?.map((space, i) => space.name === title && Object.keys(space.collab).filter(userId => userId !== localStorage.getItem('mx_user_id') && userId !== process.env.REACT_APP_PROJECT_BOT_ACCOUNT)).filter(space => space !== false)[0]
     // I would be surprised if there isn't an easier way to get joined members...
     const setPower = async (userId) => {
-      console.log('changing power level for ' + userId)
+      console.debug('changing power level for ' + userId)
       matrixClient.getStateEvent(roomId, 'm.room.power_levels', '').then(async (res) => {
         const powerEvent = new MatrixEvent({
           type: 'm.room.power_levels',
@@ -132,11 +132,11 @@ const Create = () => {
     // invite users to newly created content room
     const invites = allCollaborators?.map(userId => matrixClient.invite(roomId, userId, () => console.log('invited ' + userId)).catch(err => console.log(err)))
     await Promise.all(invites)
-    console.log('inviting done, now changing power')
+    console.debug('inviting done, now changing power')
     // then promote them to admin
     const power = allCollaborators.map(userId => setPower(userId))
     await Promise.all(power)
-    console.log('all done')
+    console.debug('all done')
   }
 
   // const createNewLanguageSpace = async (lang, parent) => {
@@ -408,6 +408,8 @@ const Create = () => {
         if (!gutenbergIdToMatrixRoomIdRef.current[block.clientId]) {
           const createdBlock = await createBlock(null, contentType, index, spaceObjectRef.current?.rooms.filter(room => room.name === contentLangRef.current)[0].room_id)
           addToMap(block.clientId, createdBlock)
+          // if the item is a collaboration we need to invite all collaborators to the newly created block
+          if (isCollab) await inviteCollaborators(createdBlock)
         }
 
         roomId = gutenbergIdToMatrixRoomIdRef.current[block.clientId]
@@ -458,14 +460,22 @@ const Create = () => {
           if (block.attributes.url) break
           // eslint-disable-next-line no-case-declarations,prefer-const
           let uploadedImage = await matrixClient.uploadContent(block.attributes.file, { name: block.attributes.file.name })
-          await matrixClient.sendImageMessage(roomId, uploadedImage, {
-            mimetype: block.attributes.file.type,
-            size: block.attributes.file.size,
-            name: block.attributes.file.name,
-            author: block.attributes.author,
-            license: block.attributes.license,
-            alt: block.attributes.alttext
-          })
+          await matrixClient.sendImageMessage(
+            roomId,
+            uploadedImage,
+            {
+              mimetype: block.attributes.file.type,
+              size: block.attributes.file.size,
+              name: block.attributes.file.name,
+              author: block.attributes.author,
+              license: block.attributes.license,
+              alt: block.attributes.alttext
+            },
+            block.attributes.alttext,
+            // Beware: We need to provide an empty callback because otherwise matrix-js-sdk fails
+            // See https://github.com/medienhaus/medienhaus-cms/issues/173
+            () => {}
+          )
           break
         case 'medienhaus/audio':
           // If this audio was uploaded to Matrix already, we don't do anything
@@ -525,7 +535,8 @@ const Create = () => {
   const startListeningToCollab = () => {
     setIsCollab(true)
     console.log('Started spying on collaborators')
-    listeningToCollaborators()
+    // to avoid rate limits we debounce the next function
+    debounce(() => listeningToCollaborators(), 100)
   }
 
   const changeTitle = (newTitle) => {
