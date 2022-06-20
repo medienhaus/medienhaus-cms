@@ -9,5 +9,10 @@
   "hearing": "hör",
   "visually": "seh",
   " impaired website visitors.": "beeinträchtigte Website-Besucher*innen.",
-  "selectFileType": "Bitte wählen Sie eine <1>{props.fileType}</1>-Datei."
+  "selectFileType": "Bitte wählen Sie eine <1>{props.fileType}</1>-Datei.",
+  "CANCEL": "ABBRECHEN",
+  "UPLOAD": "HOCHLADEN",
+  "select license or rights statement": "Lizenz oder Rechtehinweis auswählen",
+  "Rights Statements": "Rechtehinweise",
+  "In Copyright": "Urheberrechtlich geschützt"
 }

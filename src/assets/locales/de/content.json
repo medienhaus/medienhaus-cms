@@ -91,5 +91,7 @@
   "Type": "Typ",
   "Project": "Projekt",
   "Event": "Event",
-  "SAVE CHANGES": "ÄNDERUNGEN SPEICHERN"
+  "SAVE CHANGES": "ÄNDERUNGEN SPEICHERN",
+  "add date": "ZEITRAUM ANGEBEN",
+  "End": "Ende"
 }
