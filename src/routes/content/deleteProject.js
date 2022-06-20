@@ -1,4 +1,5 @@
 import Matrix from '../../Matrix'
+import config from '../../config.json'
 
 const deleteProject = async (roomId) => {
   const matrixClient = Matrix.getMatrixClient()
@@ -26,7 +27,14 @@ const deleteProject = async (roomId) => {
       })
       await matrixClient.leave(space.room_id).catch(console.log)
     })
+    // if the room had a canonical alias we delete it and remove it from the room directory
+    if (config.medienhaus.createCanonicalAliasOnPublish) {
+      await matrixClient.setRoomDirectoryVisibility(roomId, 'private')
+        .catch(console.debug)
+      await matrixClient.deleteAlias('#' + space.rooms[0].name.replace(/\s+/g, '-').toLowerCase() + '-' + localStorage.getItem('mx_user_id').substring(1))
+    }
     await matrixClient.leave(roomId).catch(console.log)
+
     log = 'successfully deleted ' + roomId
   } catch (err) {
     log = err
