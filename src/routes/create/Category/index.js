@@ -14,16 +14,13 @@ import ContextDropdown from '../../../components/ContextDropdown'
 import { triggerApiUpdate, fetchContextTree, fetchId } from '../../../helpers/MedienhausApiHelper'
 
 const RemovableLiElement = styled.li`
-    display: flex;
-    justify-content: space-between;
-    list-style: none;
-    height: 2em;
-    margin-bottom: calc(var(--margin)/2);
-
-    span {
-      display: flex;
-      align-self: self-end;
-    }
+  display: grid;
+  grid-auto-flow: column;
+  align-items: center;
+  justify-content: space-between;
+  list-style: none;
+  height: 2rem;
+  margin-bottom: calc(var(--margin) / 2);
 `
 
 const Category = ({ projectSpace, onChange, parent, setLocationFromLocationTree }) => {
@@ -206,7 +203,7 @@ const Category = ({ projectSpace, onChange, parent, setLocationFromLocationTree 
               return (
                 <RemovableLiElement key={context.room_id}>
                   <span>{context.name} </span>
-                  <DeleteButton width="2rem" onDelete={() => handleRemove(context.room_id)} />
+                  <DeleteButton height="2rem" width="2rem" onDelete={() => handleRemove(context.room_id)} />
                 </RemovableLiElement>
               )
             })}
