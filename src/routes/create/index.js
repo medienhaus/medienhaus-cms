@@ -371,14 +371,22 @@ const Create = () => {
           if (block.attributes.url) break
           // eslint-disable-next-line no-case-declarations,prefer-const
           let uploadedImage = await matrixClient.uploadContent(block.attributes.file, { name: block.attributes.file.name })
-          await matrixClient.sendImageMessage(roomId, uploadedImage, {
-            mimetype: block.attributes.file.type,
-            size: block.attributes.file.size,
-            name: block.attributes.file.name,
-            author: block.attributes.author,
-            license: block.attributes.license,
-            alt: block.attributes.alttext
-          })
+          await matrixClient.sendImageMessage(
+            roomId,
+            uploadedImage,
+            {
+              mimetype: block.attributes.file.type,
+              size: block.attributes.file.size,
+              name: block.attributes.file.name,
+              author: block.attributes.author,
+              license: block.attributes.license,
+              alt: block.attributes.alttext
+            },
+            block.attributes.alttext,
+            // Beware: We need to provide an empty callback because otherwise matrix-js-sdk fails
+            // See https://github.com/medienhaus/medienhaus-cms/issues/173
+            () => {}
+          )
           break
         case 'medienhaus/audio':
           // If this audio was uploaded to Matrix already, we don't do anything
