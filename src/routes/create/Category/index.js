@@ -39,8 +39,8 @@ const Category = ({ projectSpace, onChange, parent, setLocationFromLocationTree 
 
       function createSpaceObject (id, name, metaEvent) {
         return {
-          id: id,
-          name: name,
+          id,
+          name,
           type: metaEvent.content.type,
           children: {}
         }
@@ -183,7 +183,7 @@ const Category = ({ projectSpace, onChange, parent, setLocationFromLocationTree 
     })
     if (removeSpacechild?.event_id) {
       setContexts(contexts => contexts.filter(context => context.room_id !== parent))
-      setFeedback(t('The context was removed succesfully. Pleas note that for up to 30 minutes the context might reappear when reloading this page. There is no need to remove it again, if you see this message the context was successfully removed. We are working on the issue. '))
+      setFeedback(t('The context was removed successfully. Please note that for up to 30 minutes the context might reappear when reloading this page. There is no need to remove it again; it will stop showing up eventually. We are working on this issue.'))
     }
   }
 
@@ -193,7 +193,7 @@ const Category = ({ projectSpace, onChange, parent, setLocationFromLocationTree 
       <p>{t('This information is necessary to show your project/event in the right place on the Rundgang 2022 website, and must therefore be specified when you change the visibility of the project/event to public.')}</p>
       <p>{t('The context can be a class, a course, a seminar or a free project. If you are unsure, ask the professor of your class or the seminar leader.')}</p>
       <p>{t('You can scroll through the list, or filter/search the list by typing one or more keywords.')}</p>
-      <p>{t('You have the possibility to create multiple contexts if your event is i.e. interdisciplinary or a cooperation or similar.')}</p>
+      <p>{t('You have the possibility to choose multiple contexts if your event is i.e. interdisciplinary or a cooperation or similar.')}</p>
 
       {!inputItems || loading
         ? <Loading />
@@ -222,7 +222,7 @@ const Category = ({ projectSpace, onChange, parent, setLocationFromLocationTree 
           />
         </>}
       {error && <p>{error}</p>}
-      {feedback && <section>❗️{feedback}</section>}
+      {feedback && <section>❗️ {feedback}</section>}
 
       {/* {subject !== '' && !member && <Knock room={room} callback={callback} />} */}
     </>
