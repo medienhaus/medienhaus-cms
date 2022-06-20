@@ -30,19 +30,25 @@ const PublishProject = ({ disabled, space, published, hasContext, metaEvent }) =
   }, [matrixClient, metaEvent, published, space.room_id])
 
   const onChangeVisibility = async (publishState) => {
+    setVisibility(publishState)
     if (config.medienhaus.createCanonicalAliasOnPublish) {
       // as of now spaces need a canonical alias and be listed in the room direcotry in order to be joinable via federation
       // we create the alias with the title of the item seperated by dashes and in lower case.
       // @TODO sanitise for special characters which might be allowed in room name but not for the alias
       const alias = '#' + space.name.replace(/\s+/g, '-').toLowerCase() + '-' + localStorage.getItem('mx_user_id').substring(1)
       if (publishState === 'public') {
-        const createAlias = await matrixClient.createAlias(alias, space.room_id)
-          .catch((e) => {
-            setUserFeedback(e.data.error)
-            setTimeout(() => setUserFeedback(''), 3000)
+        const setAlias = await matrixClient.createAlias(alias, space.room_id)
+          .catch(async (e) => {
+            const checkRoomIdToAlias = await matrixClient.resolveRoomAlias(alias)
+            if (checkRoomIdToAlias.room_id !== space.room_id) {
+              setUserFeedback(e.data.error)
+              setTimeout(() => setUserFeedback(''), 3000)
+              // eslint-disable-next-line no-useless-return
+              return
+            }
           })
+        if (!setAlias) return
         // if setting the alias fails we return out of the function
-        if (!createAlias) return
       }
       const sendEvent = await matrixClient.sendStateEvent(space.room_id, 'm.room.canonical_alias', { alias: alias })
       // if setting the alias fails we return out of the function
@@ -53,7 +59,6 @@ const PublishProject = ({ disabled, space, published, hasContext, metaEvent }) =
       // }
     }
 
-    setVisibility(publishState)
     const hierarchy = await matrixClient.getRoomHierarchy(space.room_id, 50, 1)
     const joinRules = {
       method: 'PUT',
