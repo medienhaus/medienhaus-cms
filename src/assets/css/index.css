@@ -222,7 +222,9 @@ form>*+* {
   margin-top: var(--margin);
 }
 
-form > div > * + * {
+form > div > * + *,
+.wp-block-medienhaus-image > * + *,
+.wp-block-medienhaus-audio > * + *{
   margin-top: calc(var(--margin) * 0.5);
 }
 
