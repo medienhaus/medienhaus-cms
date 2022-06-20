@@ -1540,13 +1540,17 @@ button>.loading {
     bottom: 0;
     z-index: 1;
     transition: all 100ms ease-in-out;
+    /*
     opacity: 0.5;
+    */
   }
 
   nav.active {
     visibility: visible;
     left: 0;
+    /*
     opacity: 1;
+    */
   }
 
   header {
