@@ -122,7 +122,10 @@ const Overview = () => {
           ? console.error(spacesErr)
           : projects?.length === 0
             ? (
-              <p>{t('Welcome to the content management system. Looks like you haven\'t uploaded any content, yet.')}</p>
+              <>
+                <p>{t('Welcome to the content management system.')}</p>
+                <p>{t('Looks like you haven’t uploaded any content, yet.')}</p>
+              </>
               )
             : projects.filter(space => space.meta.type !== 'context').map((space, index) => (
               <React.Fragment key={index}>
