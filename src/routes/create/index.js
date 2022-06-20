@@ -363,7 +363,7 @@ const Create = () => {
         </p>
 
         <p>{t('This is the site for creating and editing a project or event. Please add the context in which the project or event was created, a project name, descriptive text and a thumbnail. You can also add more images, videos, livestreams and BigBlueButton sessions.')}</p>
-        <p><Trans t={t} i18nKey="submitInstructions2">If you want to continue at a later point in time, the project/event is automatically saved as a draft and you can find it in your collection under <Link to="/content">/content</Link>.</Trans></p>
+        <p><Trans t={t} i18nKey="submitInstructions2">If you want to continue at a later point in time, the project/event can be saved as a draft and you can find it in your collection under <Link to="/content">/content</Link>.</Trans></p>
         <p>{t('The Rundgang website will be available in English and German. The project or event name can only be entered in one language and will therefore be used for both pages. Other texts should ideally be entered in both languages, otherwise the text will appear on both pages in only one language.')}</p>
       </section>
 
@@ -413,11 +413,10 @@ const Create = () => {
           )}
           <section className="content">
             <h3>{t('Content')}</h3>
-            <p><Trans t={t} i18nKey="contentInstructions1">You can add elements like texts, images, audio and video files, BigBlueButton sessions and livestreams by clicking the <code>+</code> button near the content block below.</Trans></p>
-            <p><Trans t={t} i18nKey="contentInstructions2">The first content block&thinsp;&mdash;&thinsp;which is the introduction to your project&thinsp;&mdash;&thinsp;is required.</Trans></p>
-            <p><Trans t={t} i18nKey="contentInstructions3">In all other text content blocks, you can format your input text by highlighting the to be formatted text with your cursor.</Trans></p>
-            <p><Trans t={t} i18nKey="contentInstructions4">You can use the <code>↑</code> and <code>↓</code> arrows to rearrange existing blocks.</Trans></p>
-            <p><Trans t={t} i18nKey="contentInstructions5">You can provide content and information in multiple languages. We would recommend to provide the content in both, English and German. If you provide contents for just one language that content will appear on both Rundgang website versions, the English and the German one.</Trans></p>
+            <p><Trans t={t} i18nKey="contentInstructions1">You can add elements like texts, images, audio and video files, BigBlueButton sessions and livestreams by typing <code>/</code> at the beginning of a new paragraph.</Trans></p>
+            <p><Trans t={t} i18nKey="contentInstructions2">The first block&thinsp;&mdash;&thinsp;which is the introduction to your project&thinsp;&mdash;&thinsp;is required.</Trans></p>
+            <p><Trans t={t} i18nKey="contentInstructions3">You can format your input by highlighting the text to be formatted with your cursor.</Trans></p>
+            <p><Trans t={t} i18nKey="contentInstructions4">Content can be provided in multiple languages. We would recommend to provide the content in both, English and German. If you provide contents for just one language that content will appear on both Rundgang website versions, the English and the German one.</Trans></p>
             <select
               value={contentLang} onChange={(e) => {
                 setContentLang(e.target.value)
