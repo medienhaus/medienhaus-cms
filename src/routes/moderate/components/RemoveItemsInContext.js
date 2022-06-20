@@ -2,10 +2,12 @@ import React, { useCallback, useEffect, useState } from 'react'
 import config from '../../../config.json'
 import Matrix from '../../../Matrix'
 import styled from 'styled-components'
+import { useTranslation } from 'react-i18next'
 // import { ReactComponent as BinIcon } from '../../../assets/icons/remix/trash.svg'
 import DeleteButton from '../../create/components/DeleteButton'
+import { fetchList } from '../../../helpers/MedienhausApiHelper'
 
-const Container = styled.div`
+const Container = styled.ul`
     border:solid;
     max-height: 30vh;
     overflow-y: scroll;
@@ -24,10 +26,12 @@ const ListElement = styled.div`
     }
 
 `
-export default function RemoveItemsInContext ({ parent, handleSpaceChild }) {
+export default function RemoveItemsInContext ({ parent, onRemoveItemFromContext }) {
   const [items, setItems] = useState([])
   const [highlightedElement, setHighlightedElement] = useState()
+  const [error, setError] = useState('')
   const matrixClient = Matrix.getMatrixClient()
+  const { t } = useTranslation('moderate')
 
   const getAllItemsinContext = useCallback(async () => {
     // we start with an empty array to remove any items from a different context on parent change
@@ -47,21 +51,20 @@ export default function RemoveItemsInContext ({ parent, handleSpaceChild }) {
     }
 
     if (config.medienhaus.api) {
-      const fetchFromApi = await fetch(config.medienhaus.api + parent + '/list')
-      if (fetchFromApi.ok) {
-        const allItems = await fetchFromApi.json()
-        setItems(allItems.filter(room => room.type === 'item'))
+      const listFromApi = await fetchList(parent).catch(() => setError('❗️' + t('An error occured trying to fetch the items in the context. Please try reloading the page.')))
+      if (listFromApi) {
+        setItems(listFromApi.filter(room => room.type === 'item'))
       } else {
         await fetchItemsFromMatrix()
       }
     } else {
       await fetchItemsFromMatrix()
     }
-  }, [matrixClient, parent])
+  }, [matrixClient, parent, t])
 
   const onDelete = (e, roomId) => {
     setItems(prevState => prevState.filter(room => room.room_id !== roomId))
-    handleSpaceChild(e, roomId, false)
+    onRemoveItemFromContext(roomId)
   }
 
   useEffect(() => {
@@ -71,9 +74,11 @@ export default function RemoveItemsInContext ({ parent, handleSpaceChild }) {
   if (!items) return
   return (
 
-    <Container>
-      <ul>
-        {items.map((item, index) => {
+    <div>
+
+      {error || (items.length < 1
+        ? <p>{t('There are no items in this context at the moment.')}</p>
+        : <Container> {items.map((item, index) => {
           return (
             <ListElement onClick={() => setHighlightedElement(prevState => prevState === item.room_id ? '' : item.room_id)} active={highlightedElement === item.room_id} key={item.room_id}>
               <li>{item.name}</li>
@@ -81,9 +86,11 @@ export default function RemoveItemsInContext ({ parent, handleSpaceChild }) {
               {/* <BinIcon fill={highlightedElement === item.room_id ? 'var(--color-bg)' : 'var(--color-fg)'} /> */}
             </ListElement>
           )
-        })}
-      </ul>
-    </Container>
+        }
+        )}
+
+        </Container>)}
+    </div>
 
   )
 };

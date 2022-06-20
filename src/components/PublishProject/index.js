@@ -34,7 +34,7 @@ const PublishProject = ({ disabled, space, published, hasContext, metaEvent }) =
     const joinRules = {
       method: 'PUT',
       headers: { Authorization: 'Bearer ' + localStorage.getItem('medienhaus_access_token') },
-      body: JSON.stringify({ join_rule: publishState === 'public' || 'invite' })
+      body: JSON.stringify({ join_rule: publishState === 'public' ? 'public' : 'invite' })
     }
     const historyVisibility = {
       method: 'PUT',

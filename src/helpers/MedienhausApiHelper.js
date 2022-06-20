@@ -12,6 +12,7 @@ export const triggerApiUpdate = async (roomId, parentId) => {
     },
     body: JSON.stringify(body)
   })
+  if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') console.debug(updateRequest)
   return updateRequest
 }
 
@@ -30,5 +31,11 @@ export const fetchContextTree = async (root) => {
 export const fetchId = async (id) => {
   const apiCall = await fetch(config.medienhaus.api + id)
   const response = await apiCall.json()
+  return response
+}
+
+export const fetchList = async (id) => {
+  const fetchList = await fetch(config.medienhaus.api + id + '/list')
+  const response = fetchList.json()
   return response
 }
