@@ -90,5 +90,8 @@
   "PUBLIC": "VERÖFFENTLICHT",
   "Type": "Typ",
   "Project": "Projekt",
-  "Event": "Event"
+  "Event": "Event",
+  "SAVE CHANGES": "ÄNDERUNGEN SPEICHERN",
+  "add date": "ZEITRAUM ANGEBEN",
+  "End": "Ende"
 }
