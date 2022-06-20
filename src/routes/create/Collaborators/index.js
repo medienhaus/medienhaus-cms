@@ -159,6 +159,7 @@ const Collaborators = ({ projectSpace, members, time, startListeningToCollab }) 
                       // revoking invitations / kicking a user is only possible if a users powerLevel is bigger than that of the user's in question
                       disabled={name.membership === 'join' || name.powerLevel >= members[localStorage.getItem('mx_user_id')].powerLevel}
                       onClick={() => kickUser(name)}
+                      style={{ width: '2rem', height: '2rem', display: 'grid', placeContent: 'center' }}
                     >×
                     </LoadingSpinnerButton>
                   </li>
