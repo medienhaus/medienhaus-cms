@@ -56,7 +56,7 @@ body>div:first-of-type>*:not(footer)>*:not(section)>*+* {
   margin-top: calc(var(--margin) * 2);
 }
 
-body>div:first-of-type>main> :first-of-type {
+body>div:first-of-type>main> :first-child {
   margin-top: calc(var(--margin) * 0.6);
 }
 
