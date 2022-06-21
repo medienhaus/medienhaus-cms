@@ -1,10 +1,12 @@
 import React, { useState } from 'react'
 import { Loading } from '../../../components/loading'
+import { useTranslation } from 'react-i18next'
 import config from '../../../config.json'
 
 function CreateContext (props) {
   const [contextName, setContextName] = useState('')
   const [template, setTemplate] = useState('')
+  const { t } = useTranslation('admin')
 
   return (
     <>
@@ -20,7 +22,7 @@ function CreateContext (props) {
             <h3>{props.t('Type')}</h3>
           </label>
           <select value={template} onChange={(e) => setTemplate(e.target.value)}>
-            <option disabled value="">-- select context type --</option>
+            <option disabled value="">-- {t('select context type')} --</option>
             {Object.keys(config.medienhaus.context).map(context => {
               return <option key={config.medienhaus.context[context].label} value={context}>{config.medienhaus.context[context].label}</option>
             })}

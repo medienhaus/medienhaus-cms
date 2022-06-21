@@ -553,9 +553,9 @@ const ManageContexts = ({ matrixClient, moderationRooms: incomingModerationRooms
                           if (editRoomName) setNewRoomName(roomName)
                           setEditRoomName(false)
                         }}
-                      >{editRoomName ? t('cancel') : t('edit name')}
+                      >{editRoomName ? t('CANCEL') : t('EDIT NAME')}
                       </button>
-                      <LoadingSpinnerButton className="confirm" onClick={changeRoomName}>SAVE</LoadingSpinnerButton>
+                      <LoadingSpinnerButton className="confirm" onClick={changeRoomName}>{t('SAVE')}</LoadingSpinnerButton>
                     </>}
                 </div>
               </section>
@@ -566,7 +566,7 @@ const ManageContexts = ({ matrixClient, moderationRooms: incomingModerationRooms
               </summary>
               <section>
                 <select value={roomTemplate} onChange={onChangeRoomTemplate}>
-                  <option disabled value="">-- select context type --</option>
+                  <option disabled value="">-- {t('select template')} --</option>
                   {Object.keys(config.medienhaus.context).map(context => {
                     return <option key={config.medienhaus.context[context].label} value={context}>{config.medienhaus.context[context].label}</option>
                   })}
@@ -692,7 +692,7 @@ const ManageContexts = ({ matrixClient, moderationRooms: incomingModerationRooms
             </Details>
             <Details>
               <summary>
-                <h3>{t('Remove Item from context')}</h3>
+                <h3>{t('Remove Item from Context')}</h3>
               </summary>
               <section>
                 <RemoveItemsInContext parent={selectedContext} onRemoveItemFromContext={onRemoveItemFromContext} />
