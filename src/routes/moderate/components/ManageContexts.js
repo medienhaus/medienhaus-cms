@@ -533,7 +533,17 @@ const ManageContexts = ({ matrixClient, moderationRooms: incomingModerationRooms
                 <h3>{t('Change Name')}</h3>
               </summary>
               <section>
-                <input id="title" maxLength="100" name="title" type="text" value={newRoomName} onChange={(e) => { setEditRoomName(true); setNewRoomName(e.target.value) }} />
+                <div className="maxlength">
+                  <input
+                    id="title"
+                    maxLength="100"
+                    name="title"
+                    type="text"
+                    value={newRoomName}
+                    onChange={(e) => { setEditRoomName(true); setNewRoomName(e.target.value) }}
+                  />
+                  <span>{newRoomName.length + '/100'}</span>
+                </div>
                 <div className="confirmation">
                   {editRoomName &&
                     <>
