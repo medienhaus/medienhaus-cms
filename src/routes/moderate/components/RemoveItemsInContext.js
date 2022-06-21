@@ -7,25 +7,22 @@ import { useTranslation } from 'react-i18next'
 import DeleteButton from '../../create/components/DeleteButton'
 import { fetchList } from '../../../helpers/MedienhausApiHelper'
 
-const Container = styled.ul`
-    border:solid;
-    max-height: 30vh;
-    overflow-y: scroll;
-    `
-
-const ListElement = styled.div`
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: ${props => props.active ? 'var(--color-fg)' : 'none'};
-    color: ${props => props.active ? 'var(--color-bg)' : 'none'};
-
-    li{
-        list-style-type: none;
-        padding: calc(var(--margin)/2);
-    }
-
+const UlElement = styled.ul`
+  background-color: ${props => props.active ? 'var(--color-fg)' : 'none'};
+  color: ${props => props.active ? 'var(--color-bg)' : 'none'};
+  display: grid;
+  grid-gap: calc(var(--margin) * 0.5);
+  align-items: center;
 `
+
+const ListElement = styled.li`
+  display: grid;
+  grid-template-columns: 1fr 2rem;
+  grid-gap: var(--margin);
+  align-items: center;
+  justify-content: space-between;
+`
+
 export default function RemoveItemsInContext ({ parent, onRemoveItemFromContext }) {
   const [items, setItems] = useState([])
   const [highlightedElement, setHighlightedElement] = useState()
@@ -73,24 +70,20 @@ export default function RemoveItemsInContext ({ parent, onRemoveItemFromContext 
 
   if (!items) return
   return (
-
-    <div>
-
+    <>
       {error || (items.length < 1
         ? <p>{t('There are no items in this context at the moment.')}</p>
-        : <Container> {items.map((item, index) => {
+        : <UlElement> {items.map((item, index) => {
           return (
             <ListElement onClick={() => setHighlightedElement(prevState => prevState === item.room_id ? '' : item.room_id)} active={highlightedElement === item.room_id} key={item.room_id}>
-              <li>{item.name}</li>
+              {item.name}
               <DeleteButton width="2rem" onDelete={(e) => onDelete(e, item.room_id)} />
               {/* <BinIcon fill={highlightedElement === item.room_id ? 'var(--color-bg)' : 'var(--color-fg)'} /> */}
             </ListElement>
           )
         }
         )}
-
-        </Container>)}
-    </div>
-
+        </UlElement>)}
+    </>
   )
 };
