@@ -40,7 +40,7 @@ const Details = styled.details`
     display: inline;
   }
 
-  section {
+  section:not(section > section):not(section + section) {
     padding-top: var(--margin);
   }
 `
