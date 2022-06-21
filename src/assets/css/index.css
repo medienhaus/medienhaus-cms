@@ -683,7 +683,7 @@ textarea[disabled] {
 .credits>ul>li {
   display: grid;
   align-items: center;
-  grid-gap: var(--margin);
+  grid-gap: calc(var(--margin) * 0.5);
 }
 
 .credits>ul>li {
