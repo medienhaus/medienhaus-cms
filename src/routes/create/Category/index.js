@@ -13,14 +13,20 @@ import ContextDropdown from '../../../components/ContextDropdown'
 
 import { triggerApiUpdate, fetchContextTree, fetchId } from '../../../helpers/MedienhausApiHelper'
 
-const RemovableLiElement = styled.li`
+const UlElement = styled.ul`
+  background-color: ${props => props.active ? 'var(--color-fg)' : 'none'};
+  color: ${props => props.active ? 'var(--color-bg)' : 'none'};
   display: grid;
-  grid-auto-flow: column;
+  grid-gap: calc(var(--margin) * 0.5);
+  align-items: center;
+`
+
+const ListElement = styled.li`
+  display: grid;
+  grid-template-columns: 1fr 2rem;
+  grid-gap: var(--margin);
   align-items: center;
   justify-content: space-between;
-  list-style: none;
-  height: 2rem;
-  margin-bottom: calc(var(--margin) / 2);
 `
 
 const Category = ({ projectSpace, onChange, parent, setLocationFromLocationTree }) => {
@@ -198,16 +204,16 @@ const Category = ({ projectSpace, onChange, parent, setLocationFromLocationTree 
       {!inputItems || loading
         ? <Loading />
         : <>
-          <ul style={{ position: 'relative' }}>
+          <UlElement>
             {contexts?.map((context, index) => {
               return (
-                <RemovableLiElement key={context.room_id}>
-                  <span>{context.name} </span>
+                <ListElement key={context.room_id}>
+                  {context.name}
                   <DeleteButton height="2rem" width="2rem" onDelete={() => handleRemove(context.room_id)} />
-                </RemovableLiElement>
+                </ListElement>
               )
             })}
-          </ul>
+          </UlElement>
           {/* <SimpleContextSelect
               selectedContext=""
               onItemChosen={onContextChosen}

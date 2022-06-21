@@ -77,7 +77,7 @@ export default function RemoveItemsInContext ({ parent, onRemoveItemFromContext 
           return (
             <ListElement onClick={() => setHighlightedElement(prevState => prevState === item.room_id ? '' : item.room_id)} active={highlightedElement === item.room_id} key={item.room_id}>
               {item.name}
-              <DeleteButton width="2rem" onDelete={(e) => onDelete(e, item.room_id)} />
+              <DeleteButton height="2rem" width="2rem" onDelete={(e) => onDelete(e, item.room_id)} />
               {/* <BinIcon fill={highlightedElement === item.room_id ? 'var(--color-bg)' : 'var(--color-fg)'} /> */}
             </ListElement>
           )
