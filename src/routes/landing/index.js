@@ -29,6 +29,17 @@ const Landing = () => {
       </p>
       <hr />
       <p>
+        <Trans t={t} i18nKey="introduction-06">
+          We will be pulling content from the published projects on analog and hybrid offerings for a shorter program version for Rundgang 2022 visitors. Therefore, it is important that contributions to analog and hybrid projects are entered and approved for publication by 08 July 2022.
+        </Trans>
+      </p>
+      <p>
+        <Trans t={t} i18nKey="introduction-07">
+          Projects that have not been approved for publication by you by then can unfortunately not be included in the program summary (print). In order to point out the purely digital and other offers, a link to the Rundgang platform will be printed there.
+        </Trans>
+      </p>
+      <hr />
+      <p>
         <Trans t={t} i18nKey="introduction-04">
           As the platform is a relatively new tool that can continue to enrich the Rundgang – Open Days in the future, we would be happy if you send us your feedback on how to handle the system to: <a href="mailto:feedback-rundgang-plattform@udk-berlin.de">feedback-rundgang-plattform@udk-berlin.de</a>
         </Trans>
