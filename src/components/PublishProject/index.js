@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Loading } from '../loading'
 import { useTranslation } from 'react-i18next'
 import Matrix from '../../Matrix'
+import config from '../../config.json'
 
 const PublishProject = ({ disabled, space, published, hasContext, metaEvent }) => {
   const { t } = useTranslation('publish')
@@ -30,6 +31,34 @@ const PublishProject = ({ disabled, space, published, hasContext, metaEvent }) =
 
   const onChangeVisibility = async (publishState) => {
     setVisibility(publishState)
+    if (config.medienhaus.createCanonicalAliasOnPublish) {
+      // as of now spaces need a canonical alias and be listed in the room direcotry in order to be joinable via federation
+      // we create the alias with the title of the item seperated by dashes and in lower case.
+      // @TODO sanitise for special characters which might be allowed in room name but not for the alias
+      const alias = '#' + space.name.replace(/\s+/g, '-').toLowerCase() + '-' + localStorage.getItem('mx_user_id').substring(1)
+      if (publishState === 'public') {
+        const setAlias = await matrixClient.createAlias(alias, space.room_id)
+          .catch(async (e) => {
+            const checkRoomIdToAlias = await matrixClient.resolveRoomAlias(alias)
+            if (checkRoomIdToAlias.room_id !== space.room_id) {
+              setUserFeedback(e.data.error)
+              setTimeout(() => setUserFeedback(''), 3000)
+              // eslint-disable-next-line no-useless-return
+              return
+            }
+          })
+        if (!setAlias) return
+        // if setting the alias fails we return out of the function
+      }
+      const sendEvent = await matrixClient.sendStateEvent(space.room_id, 'm.room.canonical_alias', { alias: alias })
+      // if setting the alias fails we return out of the function
+      if (!sendEvent.event_id) return
+      // @TODO Not sure if alias should be deleted when setting an item back to draft.
+      // else {
+      //   const deleteAlias = await matrixClient.deleteAlias('#' + space.name.replace(/\s+/g, '-').toLowerCase() + '-' + localStorage.getItem('mx_user_id').substring(1))
+      // }
+    }
+
     const hierarchy = await matrixClient.getRoomHierarchy(space.room_id, 50, 1)
     const joinRules = {
       method: 'PUT',
