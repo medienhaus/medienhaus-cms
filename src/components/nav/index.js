@@ -6,6 +6,8 @@ import LanguageSelector from '../LanguageSelector'
 import useJoinedSpaces from '../matrix_joined_spaces'
 import Matrix from '../../Matrix'
 import config from '../../config.json'
+import findValueDeep from 'deepdash/es/findValueDeep'
+import { fetchTree } from '../../helpers/MedienhausApiHelper'
 
 const Nav = () => {
   const auth = useAuth()
@@ -30,11 +32,8 @@ const Nav = () => {
         if (space.powerLevel < 50) return false
         // and 3. (if templates are given in config.json) must have a valid context template
         if (contextTemplates && !contextTemplates.includes(space.meta.template)) return false
-        // @TODO: (4. What we'd still have to check for here, is if the given space is a sub-space of our root space)
-        // Because right now this `moderatingSpaces` array will include all spaces that we're moderating. No matter
-        // if they're a part of the "main context tree" of this CMS' instance, or if they are somewhere else in the
-        // Matrix.
-
+        if (config.medienhaus.api) return checkForSpaesInRoot(space.room_id)
+        // @TODO: add check if no api is configured
         return true
       })
       // If we are not moderating any spaces we can cancel the rest here ...
@@ -61,6 +60,22 @@ const Nav = () => {
       getAmountOfPendingKnocks()
     }
   }, [joinedSpaces, auth.user, matrixClient])
+
+  const checkForSpaesInRoot = async (roomId) => {
+    const tree = await fetchTree(process.env.REACT_APP_CONTEXT_ROOT_SPACE_ID).catch(() => {
+    })
+    const contextObject = findValueDeep(
+      tree,
+      (value, key, parent) => {
+        if (value.id === roomId) return true
+      }, { childrenPath: 'children', includeRoot: false, rootIsChildren: true })
+
+    if (contextObject) return true
+    else {
+      (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') && console.debug('not found in tree: ' + roomId)
+      return false
+    }
+  }
 
   useEffect(() => {
     async function checkRoomForPossibleInvite (room) {
