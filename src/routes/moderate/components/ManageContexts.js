@@ -691,23 +691,19 @@ const ManageContexts = ({ matrixClient, moderationRooms: incomingModerationRooms
             <hr />
             {contextParent && (
               <DangerZone>
-                <Details>
-                  <summary>
-                    <h3>⚠️&nbsp;&nbsp;DANGER ZONE&nbsp;‼️</h3>
-                  </summary>
-                  <section>
-                    <Details>
-                      <summary><h3>{t('Remove Context')}</h3></summary>
-                      <RemoveContext t={t} selectedContext={selectedContext} parent={contextParent} parentName={roomName} disableButton={disableButton} callback={onRemoveContext} />
-                    </Details>
-                  </section>
-                  <section>
-                    <Details>
-                      <summary><h3>{t('Leave Context')}</h3></summary>
-                      <LeaveContext selectedContext={selectedContext} parent={contextParent} parentName={roomName} disableButton={disableButton} callback={onLeaveContext} />
-                    </Details>
-                  </section>
-                </Details>
+                <section>
+                  <h3>⚠️&nbsp;&nbsp;DANGER ZONE&nbsp;‼️</h3>
+                  <Details>
+                    <summary><h3>{t('Remove Context')}</h3></summary>
+                    <RemoveContext t={t} selectedContext={selectedContext} parent={contextParent} parentName={roomName} disableButton={disableButton} callback={onRemoveContext} />
+                  </Details>
+                </section>
+                <section>
+                  <Details>
+                    <summary><h3>{t('Leave Context')}</h3></summary>
+                    <LeaveContext selectedContext={selectedContext} parent={contextParent} parentName={roomName} disableButton={disableButton} callback={onLeaveContext} />
+                  </Details>
+                </section>
               </DangerZone>
             )}
           </>}
