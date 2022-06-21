@@ -566,7 +566,7 @@ const ManageContexts = ({ matrixClient, moderationRooms: incomingModerationRooms
               </summary>
               <section>
                 <select value={roomTemplate} onChange={onChangeRoomTemplate}>
-                  <option disabled value="">--- Please choose a type of context ---</option>
+                  <option disabled value="">-- select context type --</option>
                   {Object.keys(config.medienhaus.context).map(context => {
                     return <option key={config.medienhaus.context[context].label} value={context}>{config.medienhaus.context[context].label}</option>
                   })}
