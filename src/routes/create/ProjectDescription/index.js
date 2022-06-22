@@ -29,15 +29,14 @@ const ProjectDescription = ({ description: intro, callback }) => {
           <button disabled>↓</button>
         </div>
         <div className="center">
-
           <TextareaAutosize
             minRows={6}
+            placeholder={`${t('Please add a short description.')} ${t('This field is required before publishing.')}`}
             value={description}
             onClick={() => setBackupDescription(description)}
             onChange={(e) => {
               setDescription(e.target.value)
             }}
-            placeholder={`${t('Please add a short description.')} ${t('This field is required before publishing.')}`}
             onBlur={() => onSave()}
           />
           <div className="maxlength">
@@ -48,8 +47,8 @@ const ProjectDescription = ({ description: intro, callback }) => {
           <button disabled>×</button>
         </div>
       </div>
-
     </>
   )
 }
+
 export default ProjectDescription

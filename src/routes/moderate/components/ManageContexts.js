@@ -41,7 +41,28 @@ const Details = styled.details`
   }
 
   section:not(section > section):not(section + section) {
-    padding-top: var(--margin);
+    margin-top: var(--margin);
+  }
+
+  & > * + p {
+    margin-top: var(--margin);
+  }
+`
+
+const TextareaMaxLength = styled.section`
+  border-color: var(--color-fg);
+  border-radius: unset;
+  border-style: solid;
+  border-width: calc(var(--margin) * 0.2);
+
+  & > textarea {
+    border: unset;
+    resize: none;
+  }
+
+  & > .maxlength {
+    margin-top: unset;
+    padding: calc(var(--margin) * 0.4);
   }
 `
 
@@ -649,20 +670,22 @@ const ManageContexts = ({ matrixClient, moderationRooms: incomingModerationRooms
               <summary>
                 <h3>{t('Change Description')}</h3>
               </summary>
-              <section>
+              <TextareaMaxLength>
                 <TextareaAutosize
-                  value={description}
                   minRows={6}
                   placeholder={`${t('Please add a short description.')}`}
+                  value={description}
                   onChange={(e) => setDescription(e.target.value)}
                   onBlur={onSave}
                 />
-                {description.length > 500 && (<>
-                  <p>{t('Characters:')} {description.length}</p>
-                  <p>❗️{t('Please keep the descrpition under 500 characters.')} {description.length}</p>
-                </>
-                )}
-              </section>
+                <div className="maxlength">
+                  <span>{description.length + '/500'}</span>
+                </div>
+              </TextareaMaxLength>
+              {description.length > 500 && (<>
+                <p>❗️{t('Please keep the descrpition under 500 characters.')} {description.length}</p>
+              </>
+              )}
             </Details>
             <Details>
               <summary>
