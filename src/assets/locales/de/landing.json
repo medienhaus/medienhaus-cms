@@ -1,6 +1,6 @@
 {
   "Hello": "Hallo",
-  "Welcome to the {{appTitle}} content management system!": "Willkommen im Content Management System für {{appTitle}}!",
+  "Welcome to the {{appTitle}} content management system!": "Willkommen im {{appTitle}} Content Management System!",
   "introduction-01": "Der Rundgang – Tage der offenen Tür der Universität der Künste Berlin findet vom 23.–24. Juli 2022 sowohl im analogen als auch im digitalen Raum statt.",
   "introduction-02": "Auf dieser Plattform haben Sie die Möglichkeit, eigene Projekte und Events zu erstellen und damit Informationen zu analogen Angeboten zu ergänzen oder digital erstellte Semesterprojekte zu präsentieren.",
   "introduction-03": "Wir bieten Ihnen außerdem die Möglichkeit, über das Videokonferenz Tool <1>udk/meetings</1> (BigBlueButton) den Rundgang-Besucher*innen Termine anzubieten und über <3>udk/stream</3> Videos und Livestreams auf Ihrer eigenen Projektseite einzubinden.",
