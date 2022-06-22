@@ -17,7 +17,7 @@ const InviteUserToSpace = ({ matrixClient, moderationRooms, setPower, fetchUsers
       try {
         await matrixClient.invite(selectedRoom, id)
         promoteToModerator && setPower(selectedRoom, id, 50)
-        setInviteFeedback(name + t('was successfully invited'))
+        setInviteFeedback(name + t(' was successfully invited'))
         setTimeout(() => {
           setInviteFeedback('')
           setUserToInvite('')
