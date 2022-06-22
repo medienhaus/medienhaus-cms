@@ -725,7 +725,7 @@ const ManageContexts = ({ matrixClient, moderationRooms: incomingModerationRooms
             {contextParent && (
               <DangerZone>
                 <section>
-                  <h3>⚠️&nbsp;&nbsp;DANGER ZONE&nbsp;‼️</h3>
+                  <h3>⚠️&nbsp;&nbsp;{t('DANGER ZONE')}&nbsp;‼️</h3>
                   <Details>
                     <summary><h3>{t('Remove Context')}</h3></summary>
                     <RemoveContext t={t} selectedContext={selectedContext} parent={contextParent} parentName={roomName} disableButton={disableButton} callback={onRemoveContext} />

@@ -35,6 +35,7 @@
   "Type": "Typ",
   "select context type": "wählen Sie einen Kontext-Typ",
   "Add Context": "Kontext hinzufügen",
+  "DANGER ZONE": "GEFAHRENZONE",
   "Leave context": "Kontext verlassen",
   "Delete context": "Kontext löschen"
 }
