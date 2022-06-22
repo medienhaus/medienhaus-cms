@@ -36,8 +36,8 @@ const Category = ({ projectSpace, onChange, parent }) => {
 
       function createSpaceObject (id, name, metaEvent) {
         return {
-          id: id,
-          name: name,
+          id,
+          name,
           type: metaEvent.content.type,
           children: {}
         }
@@ -150,7 +150,7 @@ const Category = ({ projectSpace, onChange, parent }) => {
         } else {
           onChange(!_.isEmpty(contexts))
           setLoading(false)
-          setError('An error occured. Make sure you have the rights to publish in the selected context')
+          setError('An error occurred. Make sure you have the rights to publish in the selected context')
           setTimeout(() => setError(''), 2500)
         }
       })
