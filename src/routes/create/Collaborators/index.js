@@ -145,7 +145,7 @@ const Collaborators = ({ projectSpace, members, time, startListeningToCollab }) 
         {
           members && Object.keys(members).length > 1 &&
             <ul>
-              <h4><strong>{t('CAN edit and delete(!) the project')}</strong></h4>
+              <h4><strong>{t('Contributors (with editing permissions)')}</strong></h4>
               {Object.values(members).filter(name => name.membership !== 'leave').map((name, i) => {
               // we filter users with the status leave since they either rejected our invitation or left the project
                 startListeningToCollab()
@@ -169,7 +169,7 @@ const Collaborators = ({ projectSpace, members, time, startListeningToCollab }) 
         }
         {credits?.length > 0 &&
           <ul>
-            <h4><strong>{t('CANNOT edit the project')}</strong></h4>
+            <h4><strong>{t('Credits (without editing permissions)')}</strong></h4>
             {credits.map((name, index) =>
               <Credits name={name} index={index} projectSpace={projectSpace[0].room_id} callback={checkForCredits} key={index} />
             )}

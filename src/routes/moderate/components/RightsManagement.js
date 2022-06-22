@@ -6,7 +6,7 @@ const RightsManagement = ({ matrixClient, moderationRooms, setPower, fetchUsers,
   const [selectedRoom, setSelectedRoom] = useState('')
   const [userToPromote, setUserToPromote] = useState('')
   const [promoteFeedback, setPromoteFeedback] = useState('')
-  const { t } = useTranslation()
+  const { t } = useTranslation('moderate')
 
   function promote () {
     return setPower(selectedRoom, userToPromote, 50).then(() => {

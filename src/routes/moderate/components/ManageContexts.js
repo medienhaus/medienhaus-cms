@@ -41,8 +41,29 @@ const Details = styled.details`
     display: inline;
   }
 
-  section {
-    padding-top: var(--margin);
+  section:not(section > section):not(section + section) {
+    margin-top: var(--margin);
+  }
+
+  & > * + p {
+    margin-top: var(--margin);
+  }
+`
+
+const TextareaMaxLength = styled.section`
+  border-color: var(--color-fg);
+  border-radius: unset;
+  border-style: solid;
+  border-width: calc(var(--margin) * 0.2);
+
+  & > textarea {
+    border: unset;
+    resize: none;
+  }
+
+  & > .maxlength {
+    margin-top: unset;
+    padding: calc(var(--margin) * 0.4);
   }
 `
 
@@ -534,8 +555,17 @@ const ManageContexts = ({ matrixClient, moderationRooms: incomingModerationRooms
                 <h3>{t('Change Name')}</h3>
               </summary>
               <section>
-
-                <input id="title" maxLength="100" name="title" type="text" value={newRoomName} onChange={(e) => { setEditRoomName(true); setNewRoomName(e.target.value) }} />
+                <div className="maxlength">
+                  <input
+                    id="title"
+                    maxLength="100"
+                    name="title"
+                    type="text"
+                    value={newRoomName}
+                    onChange={(e) => { setEditRoomName(true); setNewRoomName(e.target.value) }}
+                  />
+                  <span>{newRoomName.length + '/100'}</span>
+                </div>
                 <div className="confirmation">
                   {editRoomName &&
                     <>
@@ -545,9 +575,9 @@ const ManageContexts = ({ matrixClient, moderationRooms: incomingModerationRooms
                           if (editRoomName) setNewRoomName(roomName)
                           setEditRoomName(false)
                         }}
-                      >{editRoomName ? t('cancel') : t('edit name')}
+                      >{editRoomName ? t('CANCEL') : t('EDIT NAME')}
                       </button>
-                      <LoadingSpinnerButton className="confirm" onClick={changeRoomName}>SAVE</LoadingSpinnerButton>
+                      <LoadingSpinnerButton className="confirm" onClick={changeRoomName}>{t('SAVE')}</LoadingSpinnerButton>
                     </>}
                 </div>
               </section>
@@ -558,7 +588,7 @@ const ManageContexts = ({ matrixClient, moderationRooms: incomingModerationRooms
               </summary>
               <section>
                 <select value={roomTemplate} onChange={onChangeRoomTemplate}>
-                  <option disabled value="">--- Please choose a type of context ---</option>
+                  <option disabled value="">-- {t('select template')} --</option>
                   {Object.keys(config.medienhaus.context).map(context => {
                     return <option key={config.medienhaus.context[context].label} value={context}>{config.medienhaus.context[context].label}</option>
                   })}
@@ -636,27 +666,27 @@ const ManageContexts = ({ matrixClient, moderationRooms: incomingModerationRooms
                   )
                 }))}
               </section>
-
             </Details>
-
             <Details>
               <summary>
                 <h3>{t('Change Description')}</h3>
               </summary>
-              <section>
+              <TextareaMaxLength>
                 <TextareaAutosize
-                  value={description}
                   minRows={6}
                   placeholder={`${t('Please add a short description.')}`}
+                  value={description}
                   onChange={(e) => setDescription(e.target.value)}
                   onBlur={onSave}
                 />
-                {description.length > 500 && (<>
-                  <p>{t('Characters:')} {description.length}</p>
-                  <p>❗️{t('Please keep the descrpition under 500 characters.')} {description.length}</p>
-                </>
-                )}
-              </section>
+                <div className="maxlength">
+                  <span>{description.length + '/500'}</span>
+                </div>
+              </TextareaMaxLength>
+              {description.length > 500 && (<>
+                <p>❗️{t('Please keep the descrpition under 500 characters.')} {description.length}</p>
+              </>
+              )}
             </Details>
             <Details>
               <summary>
@@ -686,7 +716,7 @@ const ManageContexts = ({ matrixClient, moderationRooms: incomingModerationRooms
             </Details>
             <Details>
               <summary>
-                <h3>{t('Remove Item from context')}</h3>
+                <h3>{t('Remove Item from Context')}</h3>
               </summary>
               <section>
                 <RemoveItemsInContext parent={selectedContext} onRemoveItemFromContext={onRemoveItemFromContext} />
@@ -695,29 +725,25 @@ const ManageContexts = ({ matrixClient, moderationRooms: incomingModerationRooms
             <hr />
             {contextParent && (
               <DangerZone>
-                <Details>
-                  <summary>
-                    <h3>⚠️&nbsp;&nbsp;DANGER ZONE&nbsp;‼️</h3>
-                  </summary>
-                  <section>
-                    <Details>
-                      <summary><h3>{t('Remove Context')}</h3></summary>
-                      <RemoveContext t={t} selectedContext={selectedContext} parent={contextParent} parentName={roomName} disableButton={disableButton} callback={onRemoveContext} />
-                    </Details>
-                  </section>
-                  <section>
-                    <Details>
-                      <summary><h3>{t('Leave Context')}</h3></summary>
-                      <LeaveContext selectedContext={selectedContext} parent={contextParent} parentName={roomName} disableButton={disableButton} callback={onLeaveContext} />
-                    </Details>
-                  </section>
-                </Details>
+                <section>
+                  <h3>⚠️&nbsp;&nbsp;{t('DANGER ZONE')}&nbsp;‼️</h3>
+                  <Details>
+                    <summary><h3>{t('Remove Context')}</h3></summary>
+                    <RemoveContext t={t} selectedContext={selectedContext} parent={contextParent} parentName={roomName} disableButton={disableButton} callback={onRemoveContext} />
+                  </Details>
+                </section>
+                <section>
+                  <Details>
+                    <summary><h3>{t('Leave Context')}</h3></summary>
+                    <LeaveContext selectedContext={selectedContext} parent={contextParent} parentName={roomName} disableButton={disableButton} callback={onLeaveContext} />
+                  </Details>
+                </section>
               </DangerZone>
             )}
           </>}
-
       </section>
     </>
   )
 }
+
 export default ManageContexts

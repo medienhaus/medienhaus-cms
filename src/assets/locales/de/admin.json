@@ -1,1 +1,8 @@
-{}
+{
+  "Name / Title": "Name / Titel",
+  "Type": "Typ",
+  "select context type": "wählen Sie einen Kontext-Typ",
+  "Add Context": "Kontext hinzufügen",
+  "Leave context": "Kontext verlassen",
+  "Delete context": "Kontext löschen"
+}

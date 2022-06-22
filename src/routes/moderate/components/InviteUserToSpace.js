@@ -7,7 +7,7 @@ const InviteUserToSpace = ({ matrixClient, moderationRooms, setPower, fetchUsers
   const [selectedRoom, setSelectedRoom] = useState(false)
   const [userToInvite, setUserToInvite] = useState('')
   const [inviteFeedback, setInviteFeedback] = useState('')
-  const { t } = useTranslation()
+  const { t } = useTranslation('moderate')
 
   const invite = async () => {
     // @TODO check why userToInvite is not cleared
@@ -17,7 +17,7 @@ const InviteUserToSpace = ({ matrixClient, moderationRooms, setPower, fetchUsers
       try {
         await matrixClient.invite(selectedRoom, id)
         promoteToModerator && setPower(selectedRoom, id, 50)
-        setInviteFeedback('invited ' + name + ' successfully')
+        setInviteFeedback(name + t('was successfully invited'))
         setTimeout(() => {
           setInviteFeedback('')
           setUserToInvite('')
@@ -40,7 +40,7 @@ const InviteUserToSpace = ({ matrixClient, moderationRooms, setPower, fetchUsers
   return (
     <section className="invite">
       <h3>{t('Invite accounts')}</h3>
-      <p>Invite accounts to specific contexts, and optionally promote them to moderate that specific context they are invited to.</p>
+      <p>{t('Invite accounts to specific contexts, and optionally promote them to moderate that specific context they are invited to.')}</p>
       <select value={selectedRoom} onChange={(e) => setSelectedRoom(e.target.value)}>
         <option value={false} disabled>-- {t('select context')} --</option>
         {Object.keys(moderationRooms).map((roomId, index) => <option key={index} value={moderationRooms[roomId].room_id}>{moderationRooms[roomId].name}</option>)}
