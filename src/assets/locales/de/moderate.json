@@ -1,9 +1,9 @@
 {
   "Invites": "Einladungen",
-  "Promote accounts to moderator": "Moderationsberechtigungen erteilen",
+  "Promote accounts to moderator": "Moderation erlauben",
   "select context": "wählen Sie einen Kontext",
-  "PROMOTE TO MODERATOR": "MODERATIONSBERECHTIGUNGEN ERTEILEN",
-  "Succesfully promoted user to moderator": "Erfolgreich Moderationsberechtigungen erteilt",
+  "PROMOTE TO MODERATOR": "MODERATION ERLAUBEN",
+  "Succesfully promoted user to moderator": "Erfolgreich Moderation erlaubt",
   " is not a member of this space. Please invite them first.": " ist noch nicht in diesem Space. Bitte laden Sie den/die Nutzer*in zuerst ein.",
   "CANNOT moderate the context": "kann den Kontext NICHT moderieren",
   "CAN moderate the context": "KANN den Kontext moderieren",
