@@ -23,7 +23,7 @@ import { Icon } from 'leaflet/dist/leaflet-src.esm'
 import RemoveItemsInContext from './RemoveItemsInContext'
 
 import styled from 'styled-components'
-import { fetchId, fetchTree, triggerApiUpdate } from '../../../helpers/MedienhausApiHelper'
+import { fetchId, triggerApiUpdate } from '../../../helpers/MedienhausApiHelper'
 import Matrix from '../../../Matrix'
 import LeaveContext from './LeaveContext'
 
@@ -86,7 +86,6 @@ const ManageContexts = ({ matrixClient, moderationRooms: incomingModerationRooms
   const [moderationRooms, setModerationRooms] = useState(incomingModerationRooms)
   const [editRoomName, setEditRoomName] = useState(false)
   const [newRoomName, setNewRoomName] = useState('')
-  const [error, setError] = useState('')
 
   const createStructurObject = async (roomId, location = false) => {
     async function getSpaceStructure (matrixClient, motherSpaceRoomId, includeRooms) {
@@ -149,26 +148,7 @@ const ManageContexts = ({ matrixClient, moderationRooms: incomingModerationRooms
     return tree
   }
 
-  const fetchTreeFromApi = async () => {
-    const tree = await fetchTree(process.env.REACT_APP_CONTEXT_ROOT_SPACE_ID).catch(() => {
-      setError('❗️' + t('An error occured, please try again or try reloading the page.'))
-      setModerationRooms({})
-    })
-    setInputItems(tree)
-    const _moderationRooms = { ...moderationRooms }
-    for (const space of Object.keys(incomingModerationRooms)) {
-      const contextObject = findValueDeep(
-        tree,
-        (value, key, parent) => {
-          if (value.id === space) return true
-        }, { childrenPath: 'children', includeRoot: false, rootIsChildren: true })
-
-      if (!contextObject) {
-        if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') console.debug('not found in tree: ' + incomingModerationRooms[space].name)
-        delete _moderationRooms[space]
-      }
-    }
-    setModerationRooms(_moderationRooms)
+  const fetchLocationTreeFromApi = async () => {
     const fetchLocationTree = await fetch(config.medienhaus.api + config.medienhaus.locationId + '/tree')
     const locationResponse = await fetchLocationTree.json()
     setLocationStructure(locationResponse.children)
@@ -411,16 +391,14 @@ const ManageContexts = ({ matrixClient, moderationRooms: incomingModerationRooms
   useEffect(() => {
     const getStructures = async () => {
       const tree = await createStructurObject(parent)
-      console.log(tree)
       setInputItems(tree)
 
       const locationTree = await createStructurObject(config.medienhaus.locationId, true)
-      console.log(locationTree)
       setLocationStructure(locationTree)
     }
 
     // createD3Json()
-    if (config.medienhaus.api) fetchTreeFromApi()
+    if (config.medienhaus.api) fetchLocationTreeFromApi()
     else getStructures()
     // eslint-disable-next-line
   }, [])
@@ -544,7 +522,6 @@ const ManageContexts = ({ matrixClient, moderationRooms: incomingModerationRooms
               preSelectedValue="context"
             />}
         {loading && inputItems && <Loading />}
-        {error && <section>{error}</section>}
         {/* <label htmlFor="name">{t('Context')}: </label>
          <input type="text" value={selectedContextName} disabled /> */}
         {selectedContext &&
