@@ -15,7 +15,7 @@ import TextNavigation from '../../components/medienhausUI/textNavigation'
 import Invites from '../../components/Invites'
 import Matrix from '../../Matrix'
 import findValueDeep from 'deepdash/es/findValueDeep'
-import { fetchTree } from '../../helpers/MedienhausApiHelper'
+import { fetchId, fetchTree } from '../../helpers/MedienhausApiHelper'
 
 const Moderate = () => {
   const { joinedSpaces, spacesErr, fetchSpaces, reload } = useJoinedSpaces(false)
@@ -30,6 +30,27 @@ const Moderate = () => {
   const { t } = useTranslation('moderate')
 
   useEffect(() => {
+    const checkForSpaceWithApi = async (roomId) => {
+      const room = await fetchId(roomId)
+      if (room?.type === 'context') return true
+      else return false
+    }
+
+    const checkForSpaesInRoot = async (roomId) => {
+      const tree = await fetchTree(process.env.REACT_APP_CONTEXT_ROOT_SPACE_ID).catch(() => {
+      })
+      const contextObject = findValueDeep(
+        tree,
+        (value, key, parent) => {
+          if (value.id === roomId) return true
+        }, { childrenPath: 'children', includeRoot: false, rootIsChildren: true })
+
+      if (contextObject) return true
+      else {
+        (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') && console.debug('not found in tree: ' + roomId)
+        return false
+      }
+    }
     if (joinedSpaces) {
       // check to see if a user has joined a room with the specific content type and is moderator or admin (at least power level 50)
       // joinedSpaces.forEach(space => {
@@ -37,6 +58,10 @@ const Moderate = () => {
         if (space.meta.type !== 'context') continue
         if (space.powerLevel < 50) continue
         if (config.medienhaus.api) {
+          // we check to see if the space exists in our tree by checking if the api knows about it.
+          const spaceIsInRoot = checkForSpaceWithApi(space.room_id)
+          if (!spaceIsInRoot) continue
+        } else {
           const spaceIsInRoot = checkForSpaesInRoot(space.room_id)
           if (!spaceIsInRoot) continue
         }
@@ -57,22 +82,6 @@ const Moderate = () => {
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [joinedSpaces])
-
-  const checkForSpaesInRoot = async (roomId) => {
-    const tree = await fetchTree(process.env.REACT_APP_CONTEXT_ROOT_SPACE_ID).catch(() => {
-    })
-    const contextObject = findValueDeep(
-      tree,
-      (value, key, parent) => {
-        if (value.id === roomId) return true
-      }, { childrenPath: 'children', includeRoot: false, rootIsChildren: true })
-
-    if (contextObject) return true
-    else {
-      (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') && console.debug('not found in tree: ' + roomId)
-      return false
-    }
-  }
 
   useEffect(() => {
     async function checkRoomForPossibleInvite (room) {
