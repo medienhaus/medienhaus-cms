@@ -164,7 +164,7 @@ const Category = ({ projectSpace, onChange, parent, setLocationFromLocationTree 
         } else {
           onChange(!_.isEmpty(contexts))
           setLoading(false)
-          setError('An error occured. Make sure you have the rights to publish in the selected context')
+          setError('An error occurred. Make sure you have the rights to publish in the selected context')
           setTimeout(() => setError(''), 2500)
         }
       })
