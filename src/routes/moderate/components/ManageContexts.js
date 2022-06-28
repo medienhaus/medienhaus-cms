@@ -290,7 +290,7 @@ const ManageContexts = ({ matrixClient, moderationRooms: incomingModerationRooms
         contextObject = fetchPath
         contextObject.parents ? setContextParent(contextObject.parents[0]) : setContextParent(null)
         setDescription(contextObject
-          .description.default || '')
+          .description?.default || '')
       } else {
         // as a fallback we look for the parent with deep dash
         findValueWithDeepDash()

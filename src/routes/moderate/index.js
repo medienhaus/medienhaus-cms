@@ -30,40 +30,27 @@ const Moderate = () => {
   const { t } = useTranslation('moderate')
 
   useEffect(() => {
-    const checkForSpaceWithApi = async (roomId) => {
-      const room = await fetchId(roomId)
-      if (room?.type === 'context') return true
-      else return false
-    }
-
-    const checkForSpaesInRoot = async (roomId) => {
-      const tree = await fetchTree(process.env.REACT_APP_CONTEXT_ROOT_SPACE_ID).catch(() => {
-      })
-      const contextObject = findValueDeep(
-        tree,
-        (value, key, parent) => {
-          if (value.id === roomId) return true
-        }, { childrenPath: 'children', includeRoot: false, rootIsChildren: true })
-
-      if (contextObject) return true
-      else {
-        (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') && console.debug('not found in tree: ' + roomId)
-        return false
-      }
-    }
-    if (joinedSpaces) {
-      // check to see if a user has joined a room with the specific content type and is moderator or admin (at least power level 50)
-      // joinedSpaces.forEach(space => {
+    const handleModerationRooms = async () => {
       for (const space of joinedSpaces) {
         if (space.meta.type !== 'context') continue
         if (space.powerLevel < 50) continue
         if (config.medienhaus.api) {
           // we check to see if the space exists in our tree by checking if the api knows about it.
-          const spaceIsInRoot = checkForSpaceWithApi(space.room_id)
-          if (!spaceIsInRoot) continue
+          const room = await fetchId(space.room_id)
+          if (room?.type !== 'context') continue
         } else {
-          const spaceIsInRoot = checkForSpaesInRoot(space.room_id)
-          if (!spaceIsInRoot) continue
+          const tree = await fetchTree(process.env.REACT_APP_CONTEXT_ROOT_SPACE_ID).catch(() => {
+          })
+          const contextObject = findValueDeep(
+            tree,
+            (value, key, parent) => {
+              if (value.id === space.room_id) return true
+            }, { childrenPath: 'children', includeRoot: false, rootIsChildren: true })
+
+          if (!contextObject) {
+            (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') && console.debug('not found in tree: ' + space.room_id)
+            continue
+          }
         }
 
         // @TODO: add check if no api is configured
@@ -79,6 +66,11 @@ const Moderate = () => {
           }
         }))
       }
+    }
+    if (joinedSpaces) {
+      // check to see if a user has joined a room with the specific content type and is moderator or admin (at least power level 50)
+      // joinedSpaces.forEach(space => {
+      handleModerationRooms()
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [joinedSpaces])
