@@ -45,7 +45,7 @@ const Details = styled.details`
 }
 `
 
-const ManageContexts = ({ matrixClient, moderationRooms: incomingModerationRooms, updateModerateRooms }) => {
+const ManageContexts = ({ matrixClient, moderationRooms: incomingModerationRooms, addModerationRooms, removeModerationRoom }) => {
   const { t } = useTranslation('moderate')
   const [selectedContext, setSelectedContext] = useState('')
   const [roomName, setRoomName] = useState('')
@@ -160,7 +160,7 @@ const ManageContexts = ({ matrixClient, moderationRooms: incomingModerationRooms
     const newContext = await createSpace(name)
     if (config.medienhaus.api) triggerApiUpdate(newContext, selectedContext)
     // we add our newly created context to the context object to be able to work on it immedieately.
-    updateModerateRooms(newContext, name, template)
+    addModerationRooms(newContext, name, template)
     setSelectedContext(newContext)
     onContextChange(newContext)
     if (callback) callback()
@@ -281,9 +281,7 @@ const ManageContexts = ({ matrixClient, moderationRooms: incomingModerationRooms
     setDisableButton(true)
     const remove = await Matrix.removeSpaceChild(parent, selectedContext)
     if (remove.event_id) {
-      const _moderationRooms = { ...moderationRooms }
-      delete _moderationRooms[selectedContext]
-      setModerationRooms(_moderationRooms)
+      removeModerationRoom(selectedContext)
       setSelectedContext('')
       if (config.medienhaus.api) triggerApiUpdate(selectedContext)
     } else {
