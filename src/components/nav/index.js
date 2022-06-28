@@ -6,7 +6,7 @@ import LanguageSelector from '../LanguageSelector'
 import useJoinedSpaces from '../matrix_joined_spaces'
 import Matrix from '../../Matrix'
 import config from '../../config.json'
-import findValueDeep from 'deepdash/es/findValueDeep'
+import findValueDeep from 'deepdash/findValueDeep'
 import { fetchId, fetchTree } from '../../helpers/MedienhausApiHelper'
 
 const Nav = () => {
