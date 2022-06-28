@@ -15,7 +15,6 @@ import { MatrixEvent } from 'matrix-js-sdk'
 import config from '../../../config.json'
 import TextareaAutosize from 'react-textarea-autosize'
 
-import findPathDeep from 'deepdash/es/findPathDeep'
 import findValueDeep from 'deepdash/es/findValueDeep'
 import LoadingSpinnerButton from '../../../components/LoadingSpinnerButton'
 import { Icon } from 'leaflet/dist/leaflet-src.esm'
@@ -66,14 +65,13 @@ const TextareaMaxLength = styled.section`
   }
 `
 
-const ManageContexts = ({ matrixClient, moderationRooms: incomingModerationRooms }) => {
+const ManageContexts = ({ matrixClient, moderationRooms: incomingModerationRooms, updateModerateRooms }) => {
   const { t } = useTranslation('moderate')
   const [selectedContext, setSelectedContext] = useState('')
   const [roomName, setRoomName] = useState('')
   const [roomTemplate, setRoomTemplate] = useState('')
   const [disableButton, setDisableButton] = useState(false)
   const [contextParent, setContextParent] = useState('')
-  const [inputItems, setInputItems] = useState()
   const [events, setEvents] = useState([])
   const [allocation, setAllocation] = useState([])
   const [deleting, setDeleting] = useState(false)
@@ -249,40 +247,13 @@ const ManageContexts = ({ matrixClient, moderationRooms: incomingModerationRooms
     }
 
     const newContext = await createSpace(name)
-    if (config.medienhaus.api) {
-      triggerApiUpdate(newContext, selectedContext)
-      // we add our newly created context to the context object to be able to work on it before the api is done fetching.
-      const subContextObject = {
-        id: newContext,
-        room_id: newContext,
-        name,
-        template,
-        type: 'context'
-      }
-
-      // const parentObject = findValueDeep(
-      //   inputItems,
-      //   (value, key, parent) => {
-      //     if (value.id === selectedContext) return true
-      //   }, { childrenPath: 'children', includeRoot: false, rootIsChildren: true })
-      setModerationRooms(prevState => Object.assign(prevState, {
-        [newContext]: subContextObject
-      }))
-
-      const pathToPushTo = findPathDeep(
-        inputItems,
-        (value, key, parent) => {
-          if (value.id === selectedContext) return true
-        }, { childrenPath: 'children', includeRoot: false, rootIsChildren: true, pathFormat: 'array' })
-
-      pathToPushTo.push('children')
-      pathToPushTo.push(newContext)
-      setInputItems(prevState => _.set({ ...prevState }, pathToPushTo, subContextObject))
-      setSelectedContext(newContext)
-
-      if (callback) callback()
-      setDisableButton(false)
-    }
+    if (config.medienhaus.api) triggerApiUpdate(newContext, selectedContext)
+    // we add our newly created context to the context object to be able to work on it immedieately.
+    updateModerateRooms(newContext, name, template)
+    setSelectedContext(newContext)
+    onContextChange(newContext)
+    if (callback) callback()
+    setDisableButton(false)
   }
 
   const fetchAllocation = async (space) => setAllocation(await matrixClient.getStateEvent(space, 'dev.medienhaus.allocation').catch(console.log))
@@ -351,7 +322,7 @@ const ManageContexts = ({ matrixClient, moderationRooms: incomingModerationRooms
     let contextObject
     if (config.medienhaus.api) {
       // if an api is configured we fetch id of the selected context
-      const fetchPath = await fetchId(context).catch(console.log)
+      const fetchPath = await fetchId(context)
       if (fetchPath) {
         // and then its first parent item
         contextObject = fetchPath
@@ -368,7 +339,7 @@ const ManageContexts = ({ matrixClient, moderationRooms: incomingModerationRooms
     }
     function findValueWithDeepDash () {
       contextObject = findValueDeep(
-        inputItems,
+        moderationRooms,
         (value, key, parent) => {
           if (value.id === context) return true
         }, { childrenPath: 'children', includeRoot: false, rootIsChildren: true })
@@ -387,17 +358,14 @@ const ManageContexts = ({ matrixClient, moderationRooms: incomingModerationRooms
   }
 
   useEffect(() => {
-    const getStructures = async () => {
-      const tree = await createStructurObject(process.env.REACT_APP_CONTEXT_ROOT_SPACE_ID)
-      setInputItems(tree)
-
+    const getLocationStructure = async () => {
       const locationTree = await createStructurObject(config.medienhaus.locationId, true)
       setLocationStructure(locationTree)
     }
 
     // createD3Json()
     if (config.medienhaus.api) fetchLocationTreeFromApi()
-    else getStructures()
+    else getLocationStructure()
     // eslint-disable-next-line
   }, [])
 
@@ -473,6 +441,7 @@ const ManageContexts = ({ matrixClient, moderationRooms: incomingModerationRooms
     e.preventDefault()
     setDisableButton(true)
     const remove = await Matrix.removeSpaceChild(selectedContext, parent)
+    console.log(remove)
     if (remove.event_id) {
       const _moderationRooms = { ...moderationRooms }
       delete _moderationRooms[selectedContext]
@@ -510,7 +479,7 @@ const ManageContexts = ({ matrixClient, moderationRooms: incomingModerationRooms
         <h3>{t('Select Context')}</h3>
         {// !structure ? <Loading /> : <ShowContexts structure={structure} t={t} selectedContext={selectedContext} parent={parent} parentName={parentName} disableButton={disableButton} callback={contextualise} />
         }
-        {!inputItems && !moderationRooms
+        {!moderationRooms
           ? <Loading />
           : <SimpleContextSelect
               onItemChosen={onContextChange}
@@ -519,7 +488,7 @@ const ManageContexts = ({ matrixClient, moderationRooms: incomingModerationRooms
               disabled={loading}
               preSelectedValue="context"
             />}
-        {loading && inputItems && <Loading />}
+        {loading && <Loading />}
         {/* <label htmlFor="name">{t('Context')}: </label>
          <input type="text" value={selectedContextName} disabled /> */}
         {selectedContext &&

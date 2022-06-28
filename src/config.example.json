@@ -77,6 +77,7 @@
       "lat": 0.0,
       "lng": 0.0
     },
+    "allowSelectingRootContext": true,
     "api": "https://api.dev.medienhaus.udk-berlin.de/api/v2/"
   }
 }
