@@ -205,6 +205,9 @@ const Create = () => {
       // check for allocation event
       const allocationEvent = spaceDetails.currentState.events.get('dev.medienhaus.allocation') ? spaceDetails.currentState.events.get('dev.medienhaus.allocation').values().next().value.event.content : null
       setAllocation(allocationEvent)
+      // get the udk meta event
+      const udkEventHideAuthors = spaceDetails.currentState.events.get('de.udk-berlin.rundgang') ? spaceDetails.currentState.events.get('de.udk-berlin.rundgang').values().next().value.event.content.hideAuthors : false
+      setHideAuthors(udkEventHideAuthors)
       // check if project is published or draft
       setVisibility(meta.published)
       // we fetch the selected language content
