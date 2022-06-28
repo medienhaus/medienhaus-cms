@@ -47,13 +47,11 @@ const Category = ({ projectSpace, onChange, parent }) => {
         if (spaceId === 'undefined') return
         const stateEvents = await matrixClient.roomState(spaceId).catch(console.log)
 
-        // check if room exists in roomHierarchy
-        // const existsInCurrentTree = _.find(hierarchy, {room_id: spaceId})
-        // const metaEvent = await matrixClient.getStateEvent(spaceId, 'dev.medienhaus.meta')
         const metaEvent = _.find(stateEvents, { type: 'dev.medienhaus.meta' })
         if (!metaEvent) return
-        // if (!typesOfSpaces.includes(metaEvent.content.type)) return
-
+        // make sure we only show contexts
+        if (_.get(metaEvent, 'content.type') !== 'context') return
+        // make sure we have a name for the context
         const nameEvent = _.find(stateEvents, { type: 'm.room.name' })
         if (!nameEvent) return
         const spaceName = nameEvent.content.name
@@ -67,7 +65,6 @@ const Category = ({ projectSpace, onChange, parent }) => {
           if (event.room_id !== spaceId) continue
 
           await scanForAndAddSpaceChildren(event.state_key, [...path, spaceId, 'children'])
-          // }
         }
       }
 
@@ -77,7 +74,7 @@ const Category = ({ projectSpace, onChange, parent }) => {
     }
     console.log('---- started structure ----')
     const tree = await getSpaceStructure(parent, false)
-    setInputItems(tree)
+    setInputItems(tree[parent])
   }
 
   const fetchTreeFromApi = async () => {
