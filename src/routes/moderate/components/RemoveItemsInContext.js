@@ -52,7 +52,7 @@ export default function RemoveItemsInContext ({ parent, onRemoveItemFromContext 
 
     if (config.medienhaus.api) {
       const listFromApi = await fetchList(parent).catch(() => setError('❗️' + t('An error occured trying to fetch the items in the context. Please try reloading the page.')))
-      if (listFromApi) {
+      if (!listFromApi.statusCode) {
         setItems(listFromApi?.filter(room => room.type === 'item'))
       } else {
         await fetchItemsFromMatrix()
