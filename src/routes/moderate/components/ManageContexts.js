@@ -440,8 +440,7 @@ const ManageContexts = ({ matrixClient, moderationRooms: incomingModerationRooms
   const onRemoveContext = async (e, parent) => {
     e.preventDefault()
     setDisableButton(true)
-    const remove = await Matrix.removeSpaceChild(selectedContext, parent)
-    console.log(remove)
+    const remove = await Matrix.removeSpaceChild(parent, selectedContext)
     if (remove.event_id) {
       const _moderationRooms = { ...moderationRooms }
       delete _moderationRooms[selectedContext]
