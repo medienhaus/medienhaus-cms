@@ -15,7 +15,8 @@ import TextNavigation from '../../components/medienhausUI/textNavigation'
 import Invites from '../../components/Invites'
 import Matrix from '../../Matrix'
 import findValueDeep from 'deepdash/es/findValueDeep'
-import { fetchId, fetchTree } from '../../helpers/MedienhausApiHelper'
+import * as _ from 'lodash'
+import { fetchId } from '../../helpers/MedienhausApiHelper'
 
 import styled from 'styled-components'
 
@@ -36,49 +37,96 @@ const Moderate = () => {
   const [selection, setSelection] = useState('accept')
   const [fetching, setFetching] = useState(false)
   const [invites, setInvites] = useState({})
+  const [loading, setLoading] = useState(false)
   const context = config.medienhaus?.context ? Object.keys(config.medienhaus?.context).concat('context') : ['context']
   const matrixClient = Matrix.getMatrixClient()
 
   const { t } = useTranslation('moderate')
 
-  useEffect(() => {
-    const checkForSpaceWithApi = async (roomId) => {
-      const room = await fetchId(roomId)
-      if (room?.type === 'context') return true
-      else return false
-    }
+  const createStructurObject = async () => {
+    async function getSpaceStructure (matrixClient, motherSpaceRoomId, includeRooms) {
+      const result = {}
 
-    const checkForSpaesInRoot = async (roomId) => {
-      const tree = await fetchTree(process.env.REACT_APP_CONTEXT_ROOT_SPACE_ID).catch(() => {
-      })
-      const contextObject = findValueDeep(
-        tree,
-        (value, key, parent) => {
-          if (value.id === roomId) return true
-        }, { childrenPath: 'children', includeRoot: false, rootIsChildren: true })
-
-      if (contextObject) return true
-      else {
-        (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') && console.debug('not found in tree: ' + roomId)
-        return false
+      function createSpaceObject (id, name, metaEvent, topic) {
+        return {
+          id: id,
+          name: name,
+          type: metaEvent.content.type,
+          topic: topic,
+          children: {}
+        }
       }
+
+      async function scanForAndAddSpaceChildren (spaceId, path) {
+        if (spaceId === 'undefined') return
+        const stateEvents = await matrixClient.roomState(spaceId).catch(console.log)
+        // check if room exists in roomHierarchy
+        // const existsInCurrentTree = _.find(hierarchy, {room_id: spaceId})
+        // const metaEvent = await matrixClient.getStateEvent(spaceId, 'dev.medienhaus.meta')
+        const metaEvent = _.find(stateEvents, { type: 'dev.medienhaus.meta' })
+        if (!metaEvent) return
+        // if (!typesOfSpaces.includes(metaEvent.content.type)) return
+
+        const nameEvent = _.find(stateEvents, { type: 'm.room.name' })
+        if (!nameEvent) return
+        const spaceName = nameEvent.content.name
+        let topic = _.find(stateEvents, { type: 'm.room.topic' })
+        if (topic) topic = topic.content.topic
+        // if (initial) {
+        // result.push(createSpaceObject(spaceId, spaceName, metaEvent))
+        _.set(result, [...path, spaceId], createSpaceObject(spaceId, spaceName, metaEvent, topic))
+        // }
+
+        // const spaceSummary = await matrixClient.getSpaceSummary(spaceId)
+        console.log(`getting children for ${spaceId} / ${spaceName}`)
+        for (const event of stateEvents) {
+          if (event.type !== 'm.space.child' && !includeRooms) continue
+          if (event.type === 'm.space.child' && _.size(event.content) === 0) continue // check to see if body of content is empty, therefore space has been removed
+          if (event.room_id !== spaceId) continue
+
+          await scanForAndAddSpaceChildren(event.state_key, [...path, spaceId, 'children'])
+          // }
+        }
+      }
+
+      await scanForAndAddSpaceChildren(motherSpaceRoomId, [])
+      return result
     }
-    if (joinedSpaces) {
-      // check to see if a user has joined a room with the specific content type and is moderator or admin (at least power level 50)
-      // joinedSpaces.forEach(space => {
+
+    console.log('---- started structure ----')
+    const tree = await getSpaceStructure(matrixClient, process.env.REACT_APP_CONTEXT_ROOT_SPACE_ID, false)
+    return tree
+  }
+
+  useEffect(() => {
+    const controller = new AbortController()
+
+    const handleModerationRooms = async () => {
+      setLoading(true)
       for (const space of joinedSpaces) {
         if (space.meta.type !== 'context') continue
         if (space.powerLevel < 50) continue
         if (config.medienhaus.api) {
           // we check to see if the space exists in our tree by checking if the api knows about it.
-          const spaceIsInRoot = checkForSpaceWithApi(space.room_id)
-          if (!spaceIsInRoot) continue
+          const room = await fetchId(space.room_id, controller.signal).catch((e) => {
+            console.log(e)
+            // @TODO add error handleing
+          })
+          if (room?.type !== 'context') continue
         } else {
-          const spaceIsInRoot = checkForSpaesInRoot(space.room_id)
-          if (!spaceIsInRoot) continue
-        }
+          // with no api we have to create the structure ourselves
+          const tree = await createStructurObject()
+          const contextObject = findValueDeep(
+            tree,
+            (value, key, parent) => {
+              if (value.id === space.room_id) return true
+            }, { childrenPath: 'children', includeRoot: false, rootIsChildren: true })
 
-        // @TODO: add check if no api is configured
+          if (!contextObject) {
+            (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') && console.debug('not found in tree: ' + space.room_id)
+            continue
+          }
+        }
         setModerationRooms(moderationRooms => Object.assign({}, moderationRooms, {
           [space.room_id]:
           {
@@ -91,6 +139,14 @@ const Moderate = () => {
           }
         }))
       }
+      setLoading(false)
+    }
+    if (joinedSpaces) {
+      // check to see if a user has joined a room with the specific content type and is moderator or admin (at least power level 50)
+      handleModerationRooms()
+    }
+    return () => {
+      controller && controller.abort()
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [joinedSpaces])
@@ -100,7 +156,7 @@ const Moderate = () => {
       // Ignore if this is not a space
       if (room.getType() !== 'm.space') return
       // Ignore if this is not a "context"
-      const metaEvent = await matrixClient.getStateEvent(room.roomId, 'dev.medienhaus.meta').catch(() => {})
+      const metaEvent = await matrixClient.getStateEvent(room.roomId, 'dev.medienhaus.meta').catch(() => { })
       if (!metaEvent || !metaEvent.template || !context.includes(metaEvent.template)) return
       // Ignore if this is not an invitation (getMyMembership() only works correctly after calling _loadMembersFromServer())
       await room.loadMembersFromServer().catch(console.error)
@@ -213,7 +269,7 @@ const Moderate = () => {
     }
   }
 
-  if (fetchSpaces || !matrixClient.isInitialSyncComplete()) return <Loading />
+  if (fetchSpaces || !matrixClient.isInitialSyncComplete() || loading) return <Loading />
   if (spacesErr) return <p>{spacesErr}</p>
   return (
     <>
