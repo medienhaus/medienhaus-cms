@@ -323,7 +323,7 @@ const ManageContexts = ({ matrixClient, moderationRooms: incomingModerationRooms
     if (config.medienhaus.api) {
       // if an api is configured we fetch id of the selected context
       const fetchPath = await fetchId(context)
-      if (fetchPath) {
+      if (!fetchPath.statusCode) {
         // and then its first parent item
         contextObject = fetchPath
         contextObject.parents ? setContextParent(contextObject.parents[0]) : setContextParent(null)
@@ -343,7 +343,6 @@ const ManageContexts = ({ matrixClient, moderationRooms: incomingModerationRooms
         (value, key, parent) => {
           if (value.id === context) return true
         }, { childrenPath: 'children', includeRoot: false, rootIsChildren: true })
-      console.log(contextObject)
       contextObject.pathIds ? setContextParent(contextObject.pathIds[contextObject.pathIds.length - 1]) : setContextParent(null)
       setDescription(contextObject
         .topic || '')
