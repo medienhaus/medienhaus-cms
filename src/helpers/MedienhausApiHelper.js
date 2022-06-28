@@ -28,8 +28,8 @@ export const fetchContextTree = async (root) => {
   return response.children
 }
 
-export const fetchId = async (id) => {
-  const apiCall = await fetch(config.medienhaus.api + id)
+export const fetchId = async (id, signal = null) => {
+  const apiCall = await fetch(config.medienhaus.api + id, { signal })
   const response = await apiCall.json()
   return response
 }
