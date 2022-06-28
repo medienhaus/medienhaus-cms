@@ -73,7 +73,6 @@ const ManageContexts = ({ matrixClient, moderationRooms: incomingModerationRooms
   const [roomName, setRoomName] = useState('')
   const [roomTemplate, setRoomTemplate] = useState('')
   const [disableButton, setDisableButton] = useState(false)
-  const [parent] = useState(process.env.REACT_APP_CONTEXT_ROOT_SPACE_ID)
   const [contextParent, setContextParent] = useState('')
   const [inputItems, setInputItems] = useState()
   const [events, setEvents] = useState([])
@@ -359,7 +358,7 @@ const ManageContexts = ({ matrixClient, moderationRooms: incomingModerationRooms
         contextObject = fetchPath
         contextObject.parents ? setContextParent(contextObject.parents[0]) : setContextParent(null)
         setDescription(contextObject
-          .description.default || '')
+          .description?.default || '')
       } else {
         // as a fallback we look for the parent with deep dash
         findValueWithDeepDash()
@@ -390,7 +389,7 @@ const ManageContexts = ({ matrixClient, moderationRooms: incomingModerationRooms
 
   useEffect(() => {
     const getStructures = async () => {
-      const tree = await createStructurObject(parent)
+      const tree = await createStructurObject(process.env.REACT_APP_CONTEXT_ROOT_SPACE_ID)
       setInputItems(tree)
 
       const locationTree = await createStructurObject(config.medienhaus.locationId, true)
