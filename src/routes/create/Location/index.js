@@ -306,7 +306,6 @@ const Location = ({ reloadSpace, inviteCollaborators, projectSpace, events, allo
           struktur={locationStructure}
           disabled={loading || !locationStructure}
           location
-          enableType="location-room"
         />}
       {/*
       {eventContent?.length < 1 &&
