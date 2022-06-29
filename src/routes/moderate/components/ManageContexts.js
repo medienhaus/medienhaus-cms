@@ -283,7 +283,10 @@ const ManageContexts = ({ matrixClient, moderationRooms: incomingModerationRooms
     if (remove.event_id) {
       removeModerationRoom(selectedContext)
       setSelectedContext('')
-      if (config.medienhaus.api) triggerApiUpdate(selectedContext)
+      if (config.medienhaus.api) {
+        await triggerApiUpdate(parent)
+        await triggerApiUpdate(selectedContext, parent)
+      }
     } else {
       // @TODO error handleing
     }
