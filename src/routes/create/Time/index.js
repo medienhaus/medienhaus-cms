@@ -3,7 +3,18 @@ import { useTranslation } from 'react-i18next'
 import LoadingSpinnerButton from '../../../components/LoadingSpinnerButton'
 import SimpleButton from '../../../components/medienhausUI/simpleButton'
 import Matrix from '../../../Matrix'
+import styled from 'styled-components'
+import DeleteButton from '../components/DeleteButton'
 
+const RemovableLiElement = styled.li`
+  display: grid;
+  grid-auto-flow: column;
+  align-items: center;
+  justify-content: space-between;
+  list-style: none;
+  height: 2rem;
+  margin-bottom: calc(var(--margin) / 2);
+`
 export default function Time ({ allocation, projectSpace, reloadSpace }) {
   const [isUIVisible, setIsUIVisible] = useState(false)
   const [startDate, setStartDate] = useState('')
@@ -15,11 +26,17 @@ export default function Time ({ allocation, projectSpace, reloadSpace }) {
   const matrixClient = Matrix.getMatrixClient()
 
   useEffect(() => {
-    setTemporalObject({
-      app: process.env.REACT_APP_APP_NAME,
-      start: new Date(startDate + 'T' + startTime + ':00.000Z').valueOf() / 1000,
-      end: new Date(endDate + 'T' + endTime + ':00.000Z').valueOf() / 1000
-    })
+    let cancled = false
+    if (!cancled) {
+      setTemporalObject({
+        app: process.env.REACT_APP_APP_NAME,
+        start: new Date(startDate + 'T' + startTime + ':00.000Z').valueOf() / 1000,
+        end: new Date(endDate + 'T' + endTime + ':00.000Z').valueOf() / 1000
+      })
+    }
+    return () => {
+      cancled = true
+    }
   }, [startDate, endDate, startTime, endTime, allocation])
 
   const saveTime = async () => {
@@ -47,7 +64,18 @@ export default function Time ({ allocation, projectSpace, reloadSpace }) {
     reloadSpace()
   }
 
-  const TimeSlots = ({ start, end }) => {
+  const deleteTime = async (index) => {
+    // first we grab the allocation event from the server
+    console.log(index)
+    const existingEvent = await matrixClient.getStateEvent(projectSpace, 'dev.medienhaus.allocation').catch(() => { })
+    // then we remove the selected index
+    existingEvent.temporal.splice(index, 1)
+    // and send the new event to the server
+    await matrixClient.sendStateEvent(projectSpace, 'dev.medienhaus.allocation', existingEvent).catch(console.log)
+    reloadSpace()
+  }
+
+  const TimeSlots = ({ index, start, end }) => {
     const startToDate = new Date(start * 1000)
     startToDate.setHours(startToDate.getHours() - 2) // convert to Berlin Timezone
 
@@ -58,7 +86,10 @@ export default function Time ({ allocation, projectSpace, reloadSpace }) {
     const endUnixToRealWorld = endToDate.toLocaleString(i18n.language, { year: 'numeric', month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit', hour12: false })
 
     return (
-      <li>{startUnixToRealWorld} – {endUnixToRealWorld}</li>
+      <RemovableLiElement key={index}>
+        <span>{startUnixToRealWorld} – {endUnixToRealWorld}</span>
+        <DeleteButton height="2rem" width="2rem" onDelete={() => deleteTime(index)} />
+      </RemovableLiElement>
     )
   }
   return (
@@ -67,7 +98,7 @@ export default function Time ({ allocation, projectSpace, reloadSpace }) {
       <p>{t('Mark the exact time of your event with a start and end time.')}</p>
       {allocation?.temporal && (
         <ul className="times">
-          {allocation.temporal.map((date, index) => <TimeSlots key={index + date.start} start={date.start} end={date.end} />
+          {allocation.temporal.map((date, index) => <TimeSlots key={index} index={index} start={date.start} end={date.end} />
           )}
         </ul>
       )}

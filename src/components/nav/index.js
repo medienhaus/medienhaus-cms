@@ -22,32 +22,10 @@ const Nav = () => {
   const matrixClient = Matrix.getMatrixClient()
 
   useEffect(() => {
-    const checkForSpaceWithApi = async (roomId) => {
-      const room = await fetchId(roomId)
-      if (room?.type === 'context') return true
-      else return false
-    }
-
-    const checkForSpaesInRoot = async (roomId) => {
-      const tree = await fetchTree(process.env.REACT_APP_CONTEXT_ROOT_SPACE_ID).catch(() => {
-      })
-      const contextObject = findValueDeep(
-        tree,
-        (value, key, parent) => {
-          if (value.id === roomId) return true
-        }, { childrenPath: 'children', includeRoot: false, rootIsChildren: true })
-
-      if (contextObject) return true
-      else {
-        (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') && console.debug('not found in tree: ' + roomId)
-        return false
-      }
-    }
-
     if (joinedSpaces && auth.user) {
       const contextTemplates = config.medienhaus?.context && Object.keys(config.medienhaus?.context)
       // To determine if we're "moderating" a given space...
-      const moderatingSpaces = joinedSpaces.filter(space => {
+      const moderatingSpaces = joinedSpaces.filter(async space => {
         // 1. it must be of `type` === `context`
         if (space.meta.type !== 'context') return false
         // 2. the user's power level must be at least 50
@@ -56,20 +34,30 @@ const Nav = () => {
         if (contextTemplates && !contextTemplates.includes(space.meta.template)) return false
         if (config.medienhaus.api) {
           // we check to see if the space exists in our tree by checking if the api knows about it.
-          const spaceIsInRoot = checkForSpaceWithApi(space.room_id)
-          if (!spaceIsInRoot) return false
+          const room = await fetchId(space.room_id)
+          if (room.statusCode) return false
         } else {
-          const spaceIsInRoot = checkForSpaesInRoot(space.room_id)
-          if (!spaceIsInRoot) return false
+          const tree = await fetchTree(process.env.REACT_APP_CONTEXT_ROOT_SPACE_ID).catch(() => {
+          })
+          const contextObject = findValueDeep(
+            tree,
+            (value, key, parent) => {
+              if (value.id === space.room_id) return true
+            }, { childrenPath: 'children', includeRoot: false, rootIsChildren: true })
+
+          if (contextObject) return true
+          else {
+            (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') && console.debug('not found in tree: ' + space.room_id)
+            return false
+          }
         }
-        // @TODO: add check if no api is configured
+        setIsModeratingSpaces(true)
         return true
       })
       // If we are not moderating any spaces we can cancel the rest here ...
       if (moderatingSpaces.length < 1) return
-
+      console.log('moderatingSpaces')
       // ... but if we -are- indeed moderating at least one space, we want to find out if there are any pending knocks
-      setIsModeratingSpaces(true)
 
       async function getAmountOfPendingKnocks () {
         const fullRoomObjectForModeratingSpaces = await Promise.all(moderatingSpaces.map(async (space) => await matrixClient.getRoom(space.room_id)))
