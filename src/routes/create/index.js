@@ -21,6 +21,7 @@ import Location from './Location'
 
 import config from '../../config.json'
 import _ from 'lodash'
+import UdKLocationContext from './Context/UdKLocationContext'
 
 const Create = () => {
   const { t } = useTranslation('content')
@@ -291,6 +292,12 @@ const Create = () => {
             <section className="events">
               <h3>{t('Location')}</h3>
               <Location inviteCollaborators={inviteCollaborators} reloadSpace={reloadSpace} projectSpace={projectSpace} events={events} allocation={allocation} matrixClient={matrixClient} />
+            </section>
+          )}
+          {(!config.medienhaus?.item || !config.medienhaus?.item[template]?.blueprint || config.medienhaus?.item[template]?.blueprint.includes('udklocation')) && (
+            <section>
+              <h3>{t('Location')}</h3>
+              <UdKLocationContext itemSpaceRoomId={projectSpace} />
             </section>
           )}
           {(!config.medienhaus?.item || !config.medienhaus?.item[template]?.blueprint || config.medienhaus?.item[template]?.blueprint.includes('time')) && (
