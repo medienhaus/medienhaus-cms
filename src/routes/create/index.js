@@ -21,6 +21,7 @@ import Location from './Location'
 
 import config from '../../config.json'
 import _ from 'lodash'
+import UdKLocationContext from './Context/UdKLocationContext'
 import styled from 'styled-components'
 
 const AuthorCheckbox = styled.div`
@@ -397,6 +398,12 @@ const Create = () => {
               <h3>{t('Location')}</h3>
               <p>{t('Specify at which location your project will be displayed or your event will take place.')}</p>
               <Location inviteCollaborators={inviteCollaborators} reloadSpace={reloadSpace} projectSpace={projectSpace} events={events} allocation={allocation} matrixClient={matrixClient} setLocationFromLocationTree={setLocationFromLocationTree} locationFromLocationTree={locationFromLocationTree} />
+            </section>
+          )}
+          {(!config.medienhaus?.item || !config.medienhaus?.item[template]?.blueprint || config.medienhaus?.item[template]?.blueprint.includes('udklocation')) && (
+            <section>
+              <h3>{t('Location')}</h3>
+              <UdKLocationContext itemSpaceRoomId={projectSpace} />
             </section>
           )}
           {(!config.medienhaus?.item || !config.medienhaus?.item[template]?.blueprint || config.medienhaus?.item[template]?.blueprint.includes('time')) && (

@@ -234,7 +234,7 @@ const Moderate = () => {
     })
   }
 
-  const updateModerateRooms = (newContext, name, template) => {
+  const addModerationRooms = (newContext, name, template) => {
     const subContextObject = {
       id: newContext,
       room_id: newContext,
@@ -253,6 +253,12 @@ const Moderate = () => {
     }))
   }
 
+  const removeModerationRoom = (selectedContext) => {
+    const _moderationRooms = { ...moderationRooms }
+    delete _moderationRooms[selectedContext]
+    setModerationRooms(_moderationRooms)
+  }
+
   const renderSelection = () => {
     // eslint-disable-next-line default-case
     switch (selection) {
@@ -261,7 +267,7 @@ const Moderate = () => {
       case 'rightsManagement':
         return config.medienhaus?.sites?.moderate?.rightsManagement && <> <RightsManagement matrixClient={matrixClient} moderationRooms={moderationRooms} setPower={setPower} fetchUsers={fetchUsers} fetching={fetching} userSearch={userSearch} /></>
       case 'manageContexts':
-        return config.medienhaus?.sites?.moderate?.manageContexts && <><ManageContexts matrixClient={matrixClient} moderationRooms={moderationRooms} updateModerateRooms={updateModerateRooms} /></>
+        return config.medienhaus?.sites?.moderate?.manageContexts && <><ManageContexts matrixClient={matrixClient} moderationRooms={moderationRooms} addModerationRooms={addModerationRooms} removeModerationRoom={removeModerationRoom} /></>
       case 'removeContent':
         return config.medienhaus?.sites?.moderate?.removeContent && <><RemoveContent matrixClient={matrixClient} moderationRooms={moderationRooms} loading={fetching} /></>
       case 'accept':
