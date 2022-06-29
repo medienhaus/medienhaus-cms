@@ -39,3 +39,9 @@ export const fetchList = async (id) => {
   const response = fetchList.json()
   return response
 }
+
+export const fetchPathList = async (id) => {
+  const fetchPathList = await fetch(config.medienhaus.api + id + '/pathlist')
+  const response = fetchPathList.json()
+  return response
+}
