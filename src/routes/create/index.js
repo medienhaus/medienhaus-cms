@@ -403,6 +403,7 @@ const Create = () => {
           {(!config.medienhaus?.item || !config.medienhaus?.item[template]?.blueprint || config.medienhaus?.item[template]?.blueprint.includes('udklocation')) && (
             <section>
               <h3>{t('Location')}</h3>
+              <p>{t('Specify at which location your project will be displayed or your event will take place.')}</p>
               <UdKLocationContext itemSpaceRoomId={projectSpace} />
             </section>
           )}
