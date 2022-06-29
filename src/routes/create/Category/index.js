@@ -155,6 +155,7 @@ const Category = ({ projectSpace, onChange, parent, setLocationFromLocationTree 
           if (addToContext?.event_id) {
             setContexts(contexts => [...contexts, { name: contextObject.name, room_id: contextSpace }])
             onChange(!_.isEmpty(contexts))
+            await triggerApiUpdate(contextSpace)
             await triggerApiUpdate(projectSpace, contextSpace)
             setLoading(false)
           }
@@ -168,6 +169,7 @@ const Category = ({ projectSpace, onChange, parent, setLocationFromLocationTree 
     if (addToContext?.event_id) {
       setContexts(contexts => [...contexts, { name: contextObject.name, room_id: contextSpace }])
       onChange(!_.isEmpty(contexts))
+      await triggerApiUpdate(contextSpace)
       await triggerApiUpdate(projectSpace, contextSpace)
       setLoading(false)
     }
@@ -184,6 +186,8 @@ const Category = ({ projectSpace, onChange, parent, setLocationFromLocationTree 
       setError(e?.message)
       setTimeout(() => setError(''), 2500)
     })
+    await triggerApiUpdate(parent)
+    await triggerApiUpdate(projectSpace, parent)
     if (removeSpacechild?.event_id) {
       setContexts(contexts => contexts.filter(context => context.room_id !== parent))
       setFeedback(t('The context was removed successfully. Please note that for up to 30 minutes the context might reappear when reloading this page. There is no need to remove it again; it will stop showing up eventually. We are working on this issue.'))
@@ -206,7 +210,7 @@ const Category = ({ projectSpace, onChange, parent, setLocationFromLocationTree 
               return (
                 <ListElement key={context.room_id}>
                   {context.name}
-                  <DeleteButton height="2rem" width="2rem" onDelete={() => handleRemove(context.room_id)} />
+                  <DeleteButton height="2rem" width="2rem" onDelete={async () => { await handleRemove(context.room_id) }} />
                 </ListElement>
               )
             })}

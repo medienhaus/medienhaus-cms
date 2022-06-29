@@ -23,26 +23,26 @@ const UdKLocationContext = ({ itemSpaceRoomId }) => {
     'location-level': t('-- select room --')
   }), [t])
 
-  useEffect(() => {
-    const fetchCurrentLocation = async () => {
-      const item = await fetchId(itemSpaceRoomId)
-      for (const parent of item.parents) {
-        const parentInfo = await fetchId(parent)
-        if (parentInfo.template.includes('location')) {
-          // This parent is our current location
-          const pathList = await fetchPathList(parent)
-          const indexOfLocationRoot = _.findIndex(pathList, { id: config.medienhaus?.locationId })
-          setCurrentLocationContext({
-            id: parent,
-            pathList: pathList.slice(indexOfLocationRoot + 1)
-          })
-          break
-        }
+  const fetchCurrentLocation = useCallback(async () => {
+    const item = await fetchId(itemSpaceRoomId)
+    for (const parent of item.parents) {
+      const parentInfo = await fetchId(parent)
+      if (parentInfo.template.includes('location')) {
+        // This parent is our current location
+        const pathList = await fetchPathList(parent)
+        const indexOfLocationRoot = _.findIndex(pathList, { id: config.medienhaus?.locationId })
+        setCurrentLocationContext({
+          id: parent,
+          pathList: pathList.slice(indexOfLocationRoot + 1)
+        })
+        break
       }
     }
-
-    fetchCurrentLocation()
   }, [itemSpaceRoomId])
+
+  useEffect(() => {
+    fetchCurrentLocation()
+  }, [fetchCurrentLocation, itemSpaceRoomId])
 
   const reset = () => {
     setActiveContexts([config.medienhaus?.locationId])
@@ -78,8 +78,11 @@ const UdKLocationContext = ({ itemSpaceRoomId }) => {
         }
       })
 
+    await triggerApiUpdate(selectedContextRoomId)
     await triggerApiUpdate(itemSpaceRoomId, selectedContextRoomId)
-  }, [activeContexts, currentLocationContext, isLeaf, itemSpaceRoomId])
+    await fetchCurrentLocation()
+    reset()
+  }, [activeContexts, currentLocationContext, fetchCurrentLocation, isLeaf, itemSpaceRoomId])
 
   if (currentLocationContext && !isChanging) {
     return (
