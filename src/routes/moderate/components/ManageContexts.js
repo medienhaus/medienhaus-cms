@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import CreateContext from '../../admin/components/CreateContext'
 import { RemoveContext } from '../../admin/components/RemoveContext'
@@ -62,6 +62,15 @@ const ManageContexts = ({ matrixClient, moderationRooms: incomingModerationRooms
   const [editRoomName, setEditRoomName] = useState(false)
   const [newRoomName, setNewRoomName] = useState('')
 
+  useEffect(() => {
+    let cancelled = false
+
+    !cancelled && setModerationRooms(incomingModerationRooms)
+
+    return () => {
+      cancelled = true
+    }
+  }, [incomingModerationRooms])
   const onRemoveItemFromContext = (space) => {
     setLoading(true)
     Matrix.removeSpaceChild(selectedContext, space)
@@ -161,8 +170,10 @@ const ManageContexts = ({ matrixClient, moderationRooms: incomingModerationRooms
     if (config.medienhaus.api) triggerApiUpdate(newContext, selectedContext)
     // we add our newly created context to the context object to be able to work on it immedieately.
     addModerationRooms(newContext, name, template)
+    // we set the parent to the previously selected context
+    setContextParent(selectedContext)
+    // then update our selected context to the newly created one
     setSelectedContext(newContext)
-    onContextChange(newContext)
     if (callback) callback()
     setDisableButton(false)
   }
@@ -279,18 +290,27 @@ const ManageContexts = ({ matrixClient, moderationRooms: incomingModerationRooms
   const onRemoveContext = async (e, parent) => {
     e.preventDefault()
     setDisableButton(true)
+    setLoading(true)
     const remove = await Matrix.removeSpaceChild(parent, selectedContext)
     if (remove.event_id) {
       removeModerationRoom(selectedContext)
-      setSelectedContext('')
+      await setPower(localStorage.getItem('mx_user_id'), selectedContext, 0)
+      await matrixClient.leave(selectedContext).catch(() => {
+      // @TODO error handleing
+        setDisableButton(false)
+      }
+      )
       if (config.medienhaus.api) {
+        // triggering an update on both spaces plus project and parent space simultaniously "tricks" the api into deleting the parent
         await triggerApiUpdate(parent)
         await triggerApiUpdate(selectedContext, parent)
       }
     } else {
       // @TODO error handleing
     }
+    setSelectedContext('')
     setDisableButton(false)
+    setLoading(false)
   }
 
   const onLeaveContext = async (e, parent) => {
