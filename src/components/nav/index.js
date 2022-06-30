@@ -18,11 +18,12 @@ const Nav = () => {
   const [knockAmount, setKnockAmount] = useState(0)
   const [itemInvites, setItemInvites] = useState([])
   const [contextInvites, setContextInvites] = useState([])
-  const { joinedSpaces } = useJoinedSpaces(false)
+  const { joinedSpaces, reload } = useJoinedSpaces(false)
   const matrixClient = Matrix.getMatrixClient()
 
   useEffect(() => {
-    if (joinedSpaces && auth.user) {
+    let cancelled = false
+    if (joinedSpaces && auth.user && !cancelled) {
       const contextTemplates = config.medienhaus?.context && Object.keys(config.medienhaus?.context)
       // To determine if we're "moderating" a given space...
       const moderatingSpaces = joinedSpaces.filter(async space => {
@@ -55,8 +56,10 @@ const Nav = () => {
         return true
       })
       // If we are not moderating any spaces we can cancel the rest here ...
-      if (moderatingSpaces.length < 1) return
-      console.log('moderatingSpaces')
+      if (moderatingSpaces.length < 1) {
+        setIsModeratingSpaces(false)
+        return
+      }
       // ... but if we -are- indeed moderating at least one space, we want to find out if there are any pending knocks
 
       async function getAmountOfPendingKnocks () {
@@ -75,6 +78,10 @@ const Nav = () => {
       }
 
       getAmountOfPendingKnocks()
+    }
+
+    return () => {
+      cancelled = true
     }
   }, [joinedSpaces, auth.user, matrixClient])
 
@@ -103,6 +110,8 @@ const Nav = () => {
         // ... 2. a room that the membership has changed for to something other than "invite", so we do -not- want it to be in the state in case it's there right now:
         if (metaEvent.type === 'context') setContextInvites((contextInvites) => contextInvites.filter(invite => invite !== room.roomId))
         else setItemInvites((itemInvites) => itemInvites.filter(invite => invite !== room.roomId))
+        // we reload our joinedSpaces to update out moderating spaces
+        reload()
       }
     }
 
@@ -116,6 +125,7 @@ const Nav = () => {
     return () => {
       matrixClient.removeListener('Room.myMembership', checkRoomForPossibleInvite)
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [matrixClient])
 
   useEffect(() => {
