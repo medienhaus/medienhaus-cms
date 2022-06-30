@@ -108,14 +108,27 @@ const Category = ({ projectSpace, onChange, parent, setLocationFromLocationTree 
   }
 
   useEffect(() => {
-    if (config.medienhaus.api) {
+    let cancelled = false
+    if (!cancelled && config.medienhaus.api) {
       fetchTreeFromApi()
       fetchParentsFromApi()
     } else createStructurObject()
+
+    return () => {
+      cancelled = true
+    }
     // eslint-disable-next-line
   }, [])
 
-  useEffect(() => onChange(!_.isEmpty(contexts)), [contexts, onChange])
+  useEffect(() => {
+    let cancelled = false
+
+    !cancelled && onChange(!_.isEmpty(contexts))
+
+    return () => {
+      cancelled = true
+    }
+  }, [contexts, onChange])
 
   async function onContextChosen (contextSpace) {
     setLoading(true)
@@ -186,7 +199,9 @@ const Category = ({ projectSpace, onChange, parent, setLocationFromLocationTree 
       setError(e?.message)
       setTimeout(() => setError(''), 2500)
     })
+    // triggering an update on both spaces plus project and parent space simultaniously "tricks" the api into deleting the parent
     await triggerApiUpdate(parent)
+    await triggerApiUpdate(projectSpace)
     await triggerApiUpdate(projectSpace, parent)
     if (removeSpacechild?.event_id) {
       setContexts(contexts => contexts.filter(context => context.room_id !== parent))
