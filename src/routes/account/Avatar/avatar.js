@@ -12,7 +12,8 @@ const Avatar = ({ avatarUrl, name }) => {
   const { t } = useTranslation()
 
   useEffect(() => {
-    if (currentAvatar) setSrc(matrixClient.mxcUrlToHttp(currentAvatar, 1000, 1000, 'crop', true))
+    // if (currentAvatar) setSrc(matrixClient.mxcUrlToHttp(currentAvatar, 1000, 1000, 'crop', true))
+    if (currentAvatar) setSrc(matrixClient.mxcUrlToHttp(currentAvatar))
   }, [currentAvatar, matrixClient])
 
   const changeHandler = (event) => {
