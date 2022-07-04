@@ -139,7 +139,7 @@ const Collaborators = ({ projectSpace, members, time, startListeningToCollab }) 
     <>
       <h3>{t('Contributors')}</h3>
       <p><Trans t={t} i18nKey="contributorsInstructions2">You can share access (for editing) to this project. The contributing editor needs an <a href="https://spaces.udk-berlin.de" rel="external nofollow noopener noreferrer" target="_blank">udk/spaces</a> account to edit the project.</Trans></p>
-      <p><Trans t={t} i18nKey="contributorsInstructions3">You can also give credits to a contributor without an OASE account, but they won’t be able to get access for editing. Just type in their name and click the <code>ADD</code> button.</Trans></p>
+      <p><Trans t={t} i18nKey="contributorsInstructions3">You can also give credits to a contributor without an OASE account, but they won’t be able to get access for editing.</Trans></p>
       <section className="credits">
         {/* @TODO kicking user function */}
         {
