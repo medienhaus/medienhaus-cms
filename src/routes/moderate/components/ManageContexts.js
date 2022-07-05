@@ -16,7 +16,6 @@ import config from '../../../config.json'
 import TextareaAutosize from 'react-textarea-autosize'
 
 import findValueDeep from 'deepdash/findValueDeep'
-
 import LoadingSpinnerButton from '../../../components/LoadingSpinnerButton'
 import { Icon } from 'leaflet/dist/leaflet-src.esm'
 import RemoveItemsInContext from './RemoveItemsInContext'

@@ -643,9 +643,16 @@ textarea[disabled] {
 */
 
 .account .avatar {
-  background-color: var(--color-fg);
   height: calc(var(--margin) * 8);
   width: calc(var(--margin) * 8);
+}
+
+.account canvas.avatar {
+  background-color: var(--color-fg);
+}
+
+.account img.avatar {
+  background-color: var(--color-bg);
 }
 
 .admin .check,

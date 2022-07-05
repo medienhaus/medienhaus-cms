@@ -453,15 +453,17 @@ const Create = () => {
           break
         case 'medienhaus/heading':
           await matrixClient.sendMessage(roomId, {
-            body: '## ' + block.attributes.content,
+            body: '### ' + block.attributes.content,
             msgtype: 'm.text',
             format: 'org.matrix.custom.html',
-            formatted_body: `<h2>${block.attributes.content}</h2>`
+            formatted_body: `<h3>${block.attributes.content}</h3>`
           })
           break
         case 'medienhaus/image':
           // If this image was uploaded to Matrix already, we don't do anything
           if (block.attributes.url) break
+          // If the user has not provided an image and the file input was left "empty", we don't do anything either
+          if (!block.attributes.file) break
           // eslint-disable-next-line no-case-declarations,prefer-const
           let uploadedImage = await matrixClient.uploadContent(block.attributes.file, { name: block.attributes.file.name })
           await matrixClient.sendImageMessage(
