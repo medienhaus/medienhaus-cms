@@ -6,6 +6,7 @@ import Matrix from '../../../Matrix'
 import * as _ from 'lodash'
 import LoadingSpinnerButton from '../../../components/LoadingSpinnerButton'
 import { fetchId, fetchPathList, triggerApiUpdate } from '../../../helpers/MedienhausApiHelper'
+import DeleteButton from '../components/DeleteButton'
 
 /**
  * @TODO This component does not work without the API.
@@ -84,12 +85,31 @@ const UdKLocationContext = ({ itemSpaceRoomId }) => {
     reset()
   }, [activeContexts, currentLocationContext, fetchCurrentLocation, isLeaf, itemSpaceRoomId])
 
+  const onRemoveFromLocation = async () => {
+    if (!currentLocationContext || !currentLocationContext.id) return
+
+    await Matrix.removeSpaceChild(currentLocationContext.id, itemSpaceRoomId)
+    await triggerApiUpdate(currentLocationContext.id)
+
+    // @TODO Add API call to the not-yet-existing DELETE route
+    // Otherwise the following line will have no point after refreshing the page
+    setCurrentLocationContext(null)
+  }
+
   if (currentLocationContext && !isChanging) {
     return (
       <>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
           <span>{_.map(currentLocationContext.pathList, 'name').join(', ')}</span>
-          <button style={{ width: 'auto' }} onClick={() => { setIsChanging(true) }}>{t('CHANGE')}</button>
+          <div style={{ display: 'flex', gap: '10px' }}>
+            <button style={{ width: 'auto' }} onClick={() => { setIsChanging(true) }}>{t('CHANGE')}</button>
+            {/* eslint-disable-next-line promise/param-names */}
+            <DeleteButton
+              width="calc(var(--margin) * 2.5)"
+              height="calc(var(--margin) * 2.5)"
+              onDelete={onRemoveFromLocation}
+            />
+          </div>
         </div>
       </>
     )
@@ -103,6 +123,7 @@ const UdKLocationContext = ({ itemSpaceRoomId }) => {
         sortAlphabetically
         showTopics
         templatePlaceholderMapping={templatePlaceholderMapping}
+        templatePrefixFilter="location-"
       />
       {((activeContexts.length > 1 || isChanging) && (
         <div className="confirmation">
