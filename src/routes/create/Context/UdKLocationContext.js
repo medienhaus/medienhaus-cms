@@ -103,6 +103,7 @@ const UdKLocationContext = ({ itemSpaceRoomId }) => {
         sortAlphabetically
         showTopics
         templatePlaceholderMapping={templatePlaceholderMapping}
+        templatePrefixFilter="location-"
       />
       {((activeContexts.length > 1 || isChanging) && (
         <div className="confirmation">

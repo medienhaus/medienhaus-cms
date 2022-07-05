@@ -3,7 +3,7 @@ import Matrix from '../../../Matrix'
 import _ from 'lodash'
 import { useTranslation } from 'react-i18next'
 
-const ContextMultiLevelSelectSingleLevel = ({ parentSpaceRoomId, selectedContextRoomId, onSelect, onFetchedChildren, templatePlaceholderMapping, sortAlphabetically, showTopics }) => {
+const ContextMultiLevelSelectSingleLevel = ({ parentSpaceRoomId, selectedContextRoomId, onSelect, onFetchedChildren, templatePlaceholderMapping, templatePrefixFilter, sortAlphabetically, showTopics }) => {
   const [isLoading, setIsLoading] = useState(true)
   const [parentSpaceMetaEvent, setParentSpaceMetaEvent] = useState()
   const [childContexts, setChildContexts] = useState()
@@ -27,7 +27,12 @@ const ContextMultiLevelSelectSingleLevel = ({ parentSpaceRoomId, selectedContext
       // Ensure we're looking at contexts, and not spaces/rooms of other types
       for (const room of roomHierarchy.rooms) {
         const metaEvent = await Matrix.getMatrixClient().getStateEvent(room.room_id, 'dev.medienhaus.meta').catch(() => {})
-        if (metaEvent && metaEvent.type === 'context') newChildContexts.push(room)
+        // If this is not a context, ignore this space child
+        if (metaEvent && metaEvent.type !== 'context') continue
+        // If we only want to show specific contexts, ignore this space child if its template doesn't have the given prefix
+        if (templatePrefixFilter && metaEvent && !_.startsWith(metaEvent.template, 'location-')) continue
+        // ... otherwise show this space child:
+        newChildContexts.push(room)
       }
       if (sortAlphabetically) {
         newChildContexts = _.sortBy(newChildContexts, 'name')
@@ -95,8 +100,9 @@ const ContextMultiLevelSelectSingleLevel = ({ parentSpaceRoomId, selectedContext
  * @param [Bool] showTopics - If the contents of m.room.topic should be displayed in parentheses next to the name
  * @param [Bool] sortAlphabetically - If entries should be ordered alphabetically
  * @param [Object] templatePlaceholderMapping - Optional object containing placeholders for each <select> based on the `dev.medienhaus.meta.template` of the parent context
+ * @param [String] templatePrefixFilter - Optional prefix to filter contexts by their templates
  */
-const ContextMultiLevelSelect = ({ activeContexts, onChange, showTopics, sortAlphabetically, templatePlaceholderMapping }) => {
+const ContextMultiLevelSelect = ({ activeContexts, onChange, showTopics, sortAlphabetically, templatePlaceholderMapping, templatePrefixFilter }) => {
   const onSelect = useCallback((parentContextRoomId, selectedChildContextRoomId) => {
     const newActiveContexts = [...activeContexts.splice(0, activeContexts.findIndex((contextRoomId) => contextRoomId === parentContextRoomId) + 1)]
     if (selectedChildContextRoomId) newActiveContexts.push(selectedChildContextRoomId)
@@ -121,6 +127,7 @@ const ContextMultiLevelSelect = ({ activeContexts, onChange, showTopics, sortAlp
           showTopics={showTopics}
           sortAlphabetically={sortAlphabetically}
           templatePlaceholderMapping={templatePlaceholderMapping}
+          templatePrefixFilter={templatePrefixFilter}
         />
       ))}
     </>
