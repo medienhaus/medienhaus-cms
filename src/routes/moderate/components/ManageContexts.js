@@ -25,6 +25,7 @@ import styled from 'styled-components'
 import { fetchId, triggerApiUpdate } from '../../../helpers/MedienhausApiHelper'
 import Matrix from '../../../Matrix'
 import LeaveContext from './LeaveContext'
+import ContextTree from './ContextTree'
 
 const DangerZone = styled.section`
   border: none;
@@ -52,6 +53,7 @@ const ManageContexts = ({ matrixClient, moderationRooms: incomingModerationRooms
   const [roomTemplate, setRoomTemplate] = useState('')
   const [disableButton, setDisableButton] = useState(false)
   const [contextParent, setContextParent] = useState('')
+  const [itemsInContext, setItemsInContext] = useState()
   const [events, setEvents] = useState([])
   const [allocation, setAllocation] = useState([])
   const [deleting, setDeleting] = useState(false)
@@ -210,6 +212,7 @@ const ManageContexts = ({ matrixClient, moderationRooms: incomingModerationRooms
       if (fetchPath) {
         // and then its first parent item
         contextObject = fetchPath
+        setItemsInContext(contextObject.item)
         contextObject.parents ? setContextParent(contextObject.parents[0]) : setContextParent(null)
         setDescription(contextObject
           .description?.default || '')
@@ -351,6 +354,12 @@ const ManageContexts = ({ matrixClient, moderationRooms: incomingModerationRooms
          <input type="text" value={selectedContextName} disabled /> */}
         {selectedContext &&
           <>
+            <ContextTree
+              contextId={selectedContext}
+              onContextChange={onContextChange}
+              moderationRooms={moderationRooms}
+              howItems={config.medienhaus.sites.moderate.manageContexts.showItemsInTree || false}
+            />
             <hr />
             <Details>
               <summary>
@@ -516,7 +525,7 @@ const ManageContexts = ({ matrixClient, moderationRooms: incomingModerationRooms
                 <h3>{t('Remove Item from context')}</h3>
               </summary>
               <section>
-                <RemoveItemsInContext parent={selectedContext} onRemoveItemFromContext={onRemoveItemFromContext} />
+                <RemoveItemsInContext parent={selectedContext} itemsInContext={itemsInContext} onRemoveItemFromContext={onRemoveItemFromContext} />
               </section>
             </Details>
             <hr />

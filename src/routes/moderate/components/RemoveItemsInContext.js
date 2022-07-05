@@ -1,11 +1,8 @@
 import React, { useCallback, useEffect, useState } from 'react'
-import config from '../../../config.json'
 import Matrix from '../../../Matrix'
 import styled from 'styled-components'
 import { useTranslation } from 'react-i18next'
-// import { ReactComponent as BinIcon } from '../../../assets/icons/remix/trash.svg'
 import DeleteButton from '../../create/components/DeleteButton'
-import { fetchList } from '../../../helpers/MedienhausApiHelper'
 
 const Container = styled.ul`
     border:solid;
@@ -26,10 +23,9 @@ const ListElement = styled.div`
     }
 
 `
-export default function RemoveItemsInContext ({ parent, onRemoveItemFromContext }) {
+export default function RemoveItemsInContext ({ parent, itemsInContext, onRemoveItemFromContext }) {
   const [items, setItems] = useState([])
   const [highlightedElement, setHighlightedElement] = useState()
-  const [error, setError] = useState('')
   const matrixClient = Matrix.getMatrixClient()
   const { t } = useTranslation('moderate')
 
@@ -49,18 +45,11 @@ export default function RemoveItemsInContext ({ parent, onRemoveItemFromContext 
         setItems(prevState => [...prevState, room])
       })
     }
-
-    if (config.medienhaus.api) {
-      const listFromApi = await fetchList(parent).catch(() => setError('❗️' + t('An error occured trying to fetch the items in the context. Please try reloading the page.')))
-      if (!listFromApi.statusCode) {
-        setItems(listFromApi?.filter(room => room.type === 'item'))
-      } else {
-        await fetchItemsFromMatrix()
-      }
-    } else {
+    if (itemsInContext) setItems(itemsInContext)
+    else {
       await fetchItemsFromMatrix()
     }
-  }, [matrixClient, parent, t])
+  }, [matrixClient, parent, itemsInContext])
 
   const onDelete = (e, roomId) => {
     setItems(prevState => prevState.filter(room => room.room_id !== roomId))
@@ -76,7 +65,7 @@ export default function RemoveItemsInContext ({ parent, onRemoveItemFromContext 
 
     <div>
 
-      {error || (items.length < 1
+      {items.length < 1
         ? <p>{t('There are no items in this context at the moment.')}</p>
         : <Container> {items.map((item, index) => {
           return (
@@ -89,7 +78,7 @@ export default function RemoveItemsInContext ({ parent, onRemoveItemFromContext 
         }
         )}
 
-        </Container>)}
+        </Container>}
     </div>
 
   )
