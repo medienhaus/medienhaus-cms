@@ -13,16 +13,13 @@ import ContextDropdown from '../../../components/ContextDropdown'
 import { triggerApiUpdate, fetchContextTree, fetchId } from '../../../helpers/MedienhausApiHelper'
 
 const RemovableLiElement = styled.li`
-    display: flex;
-    justify-content: space-between;
-    list-style: none;
-    height: 2em;
-    margin-bottom: calc(var(--margin)/2);
-
-    span {
-      display: flex;
-      align-self: self-end;
-    }
+  display: grid;
+  grid-auto-flow: column;
+  align-items: center;
+  justify-content: space-between;
+  list-style: none;
+  height: 2rem;
+  margin-bottom: calc(var(--margin) / 2);
 `
 
 const Category = ({ projectSpace, onChange, parent }) => {
@@ -50,13 +47,11 @@ const Category = ({ projectSpace, onChange, parent }) => {
         if (spaceId === 'undefined') return
         const stateEvents = await matrixClient.roomState(spaceId).catch(console.log)
 
-        // check if room exists in roomHierarchy
-        // const existsInCurrentTree = _.find(hierarchy, {room_id: spaceId})
-        // const metaEvent = await matrixClient.getStateEvent(spaceId, 'dev.medienhaus.meta')
         const metaEvent = _.find(stateEvents, { type: 'dev.medienhaus.meta' })
         if (!metaEvent) return
-        // if (!typesOfSpaces.includes(metaEvent.content.type)) return
-
+        // make sure we only show contexts
+        if (_.get(metaEvent, 'content.type') !== 'context') return
+        // make sure we have a name for the context
         const nameEvent = _.find(stateEvents, { type: 'm.room.name' })
         if (!nameEvent) return
         const spaceName = nameEvent.content.name
@@ -70,7 +65,6 @@ const Category = ({ projectSpace, onChange, parent }) => {
           if (event.room_id !== spaceId) continue
 
           await scanForAndAddSpaceChildren(event.state_key, [...path, spaceId, 'children'])
-          // }
         }
       }
 
@@ -80,7 +74,7 @@ const Category = ({ projectSpace, onChange, parent }) => {
     }
     console.log('---- started structure ----')
     const tree = await getSpaceStructure(parent, false)
-    setInputItems(tree)
+    setInputItems(tree[parent])
   }
 
   const fetchTreeFromApi = async () => {
@@ -100,14 +94,27 @@ const Category = ({ projectSpace, onChange, parent }) => {
   }
 
   useEffect(() => {
-    if (config.medienhaus.api) {
+    let cancelled = false
+    if (!cancelled && config.medienhaus.api) {
       fetchTreeFromApi()
       fetchParentsFromApi()
     } else createStructurObject()
+
+    return () => {
+      cancelled = true
+    }
     // eslint-disable-next-line
   }, [])
 
-  useEffect(() => onChange(!_.isEmpty(contexts)), [contexts, onChange])
+  useEffect(() => {
+    let cancelled = false
+
+    !cancelled && onChange(!_.isEmpty(contexts))
+
+    return () => {
+      cancelled = true
+    }
+  }, [contexts, onChange])
 
   async function onContextChosen (contextSpace) {
     setLoading(true)
@@ -147,19 +154,21 @@ const Category = ({ projectSpace, onChange, parent }) => {
           if (addToContext?.event_id) {
             setContexts(contexts => [...contexts, { name: contextObject.name, room_id: contextSpace }])
             onChange(!_.isEmpty(contexts))
+            await triggerApiUpdate(contextSpace)
             await triggerApiUpdate(projectSpace, contextSpace)
             setLoading(false)
           }
         } else {
           onChange(!_.isEmpty(contexts))
           setLoading(false)
-          setError('An error occured. Make sure you have the rights to publish in the selected context')
+          setError('An error occurred. Make sure you have the rights to publish in the selected context')
           setTimeout(() => setError(''), 2500)
         }
       })
     if (addToContext?.event_id) {
       setContexts(contexts => [...contexts, { name: contextObject.name, room_id: contextSpace }])
       onChange(!_.isEmpty(contexts))
+      await triggerApiUpdate(contextSpace)
       await triggerApiUpdate(projectSpace, contextSpace)
       setLoading(false)
     }
@@ -176,6 +185,10 @@ const Category = ({ projectSpace, onChange, parent }) => {
       setError(e?.message)
       setTimeout(() => setError(''), 2500)
     })
+    // triggering an update on both spaces plus project and parent space simultaniously "tricks" the api into deleting the parent
+    await triggerApiUpdate(parent)
+    await triggerApiUpdate(projectSpace)
+    await triggerApiUpdate(projectSpace, parent)
     removeSpacechild?.event_id && setContexts(contexts => contexts.filter(context => context.room_id !== parent))
   }
 
@@ -195,7 +208,7 @@ const Category = ({ projectSpace, onChange, parent }) => {
               return (
                 <RemovableLiElement key={context.room_id}>
                   <span>{context.name} </span>
-                  <DeleteButton width="2rem" onDelete={() => handleRemove(context.room_id)} />
+                  <DeleteButton height="2rem" width="2rem" onDelete={async () => { await handleRemove(context.room_id) }} />
                 </RemovableLiElement>
               )
             })}

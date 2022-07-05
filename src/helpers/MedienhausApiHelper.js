@@ -25,11 +25,11 @@ export const fetchTree = async (root) => {
 export const fetchContextTree = async (root) => {
   const apiCall = await fetch(config.medienhaus.api + root + '/tree/filter/type/context')
   const response = await apiCall.json()
-  return response.children
+  return response
 }
 
-export const fetchId = async (id) => {
-  const apiCall = await fetch(config.medienhaus.api + id)
+export const fetchId = async (id, signal = null) => {
+  const apiCall = await fetch(config.medienhaus.api + id, { signal })
   const response = await apiCall.json()
   return response
 }
@@ -37,5 +37,11 @@ export const fetchId = async (id) => {
 export const fetchList = async (id) => {
   const fetchList = await fetch(config.medienhaus.api + id + '/list')
   const response = fetchList.json()
+  return response
+}
+
+export const fetchPathList = async (id) => {
+  const fetchPathList = await fetch(config.medienhaus.api + id + '/pathlist')
+  const response = fetchPathList.json()
   return response
 }

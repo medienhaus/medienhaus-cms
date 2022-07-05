@@ -6,6 +6,8 @@ import LanguageSelector from '../LanguageSelector'
 import useJoinedSpaces from '../matrix_joined_spaces'
 import Matrix from '../../Matrix'
 import config from '../../config.json'
+import findValueDeep from 'deepdash/es/findValueDeep'
+import { fetchId, fetchTree } from '../../helpers/MedienhausApiHelper'
 
 const Nav = () => {
   const auth = useAuth()
@@ -16,32 +18,49 @@ const Nav = () => {
   const [knockAmount, setKnockAmount] = useState(0)
   const [itemInvites, setItemInvites] = useState([])
   const [contextInvites, setContextInvites] = useState([])
-  const { joinedSpaces } = useJoinedSpaces(false)
+  const { joinedSpaces, reload } = useJoinedSpaces(false)
   const matrixClient = Matrix.getMatrixClient()
 
   useEffect(() => {
-    if (joinedSpaces && auth.user) {
+    let cancelled = false
+    if (joinedSpaces && auth.user && !cancelled) {
       const contextTemplates = config.medienhaus?.context && Object.keys(config.medienhaus?.context)
       // To determine if we're "moderating" a given space...
-      const moderatingSpaces = joinedSpaces.filter(space => {
+      const moderatingSpaces = joinedSpaces.filter(async space => {
         // 1. it must be of `type` === `context`
         if (space.meta.type !== 'context') return false
         // 2. the user's power level must be at least 50
         if (space.powerLevel < 50) return false
         // and 3. (if templates are given in config.json) must have a valid context template
         if (contextTemplates && !contextTemplates.includes(space.meta.template)) return false
-        // @TODO: (4. What we'd still have to check for here, is if the given space is a sub-space of our root space)
-        // Because right now this `moderatingSpaces` array will include all spaces that we're moderating. No matter
-        // if they're a part of the "main context tree" of this CMS' instance, or if they are somewhere else in the
-        // Matrix.
+        if (config.medienhaus.api) {
+          // we check to see if the space exists in our tree by checking if the api knows about it.
+          const room = await fetchId(space.room_id)
+          if (room.statusCode) return false
+        } else {
+          const tree = await fetchTree(process.env.REACT_APP_CONTEXT_ROOT_SPACE_ID).catch(() => {
+          })
+          const contextObject = findValueDeep(
+            tree,
+            (value, key, parent) => {
+              if (value.id === space.room_id) return true
+            }, { childrenPath: 'children', includeRoot: false, rootIsChildren: true })
 
+          if (contextObject) return true
+          else {
+            (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') && console.debug('not found in tree: ' + space.room_id)
+            return false
+          }
+        }
+        setIsModeratingSpaces(true)
         return true
       })
       // If we are not moderating any spaces we can cancel the rest here ...
-      if (moderatingSpaces.length < 1) return
-
+      if (moderatingSpaces.length < 1) {
+        setIsModeratingSpaces(false)
+        return
+      }
       // ... but if we -are- indeed moderating at least one space, we want to find out if there are any pending knocks
-      setIsModeratingSpaces(true)
 
       async function getAmountOfPendingKnocks () {
         const fullRoomObjectForModeratingSpaces = await Promise.all(moderatingSpaces.map(async (space) => await matrixClient.getRoom(space.room_id)))
@@ -59,6 +78,10 @@ const Nav = () => {
       }
 
       getAmountOfPendingKnocks()
+    }
+
+    return () => {
+      cancelled = true
     }
   }, [joinedSpaces, auth.user, matrixClient])
 
@@ -87,6 +110,8 @@ const Nav = () => {
         // ... 2. a room that the membership has changed for to something other than "invite", so we do -not- want it to be in the state in case it's there right now:
         if (metaEvent.type === 'context') setContextInvites((contextInvites) => contextInvites.filter(invite => invite !== room.roomId))
         else setItemInvites((itemInvites) => itemInvites.filter(invite => invite !== room.roomId))
+        // we reload our joinedSpaces to update out moderating spaces
+        reload()
       }
     }
 
@@ -100,6 +125,7 @@ const Nav = () => {
     return () => {
       matrixClient.removeListener('Room.myMembership', checkRoomForPossibleInvite)
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [matrixClient])
 
   useEffect(() => {

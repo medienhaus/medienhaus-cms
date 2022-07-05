@@ -4,11 +4,12 @@ import { ReactComponent as TrashIcon } from '../../../assets/icons/remix/trash.s
 import styled from 'styled-components'
 
 const Button = styled.button`
-width:  ${props => props.width || '100%'};
-float: right;
-clear: both;
-border: none;
-background-color: ${props => props.clickedDelete ? 'var(--color-no)' : 'var(--color-fg)'};
+  background-color: ${props => props.clickedDelete ? 'var(--color-no)' : 'var(--color-fg)'};
+  border: none;
+  display: grid;
+  place-content: center;
+  height:  ${props => props.height || '100%'};
+  width:  ${props => props.width || '100%'};
 `
 
 function DeleteButton (props) {
@@ -17,6 +18,7 @@ function DeleteButton (props) {
 
   return (
     <Button
+      height={props.height}
       width={props.width}
       clickedDelete={clickedDelete}
       disabled={deleting}

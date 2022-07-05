@@ -7,13 +7,14 @@ import { useTranslation } from 'react-i18next'
 import Fuse from 'fuse.js'
 import Matrix from '../Matrix'
 import { makeRequest } from '../Backend'
+import config from '../config.json'
 
 function ContextDropdown ({ onItemChosen, selectedContext, showRequestButton = false, struktur }) {
   const items = uniqBy(mapDeep(struktur, (value, key, parent, context) => {
   // Recursively loop through all parents to add them to the "path" which we later on need for displaying breadcrumbs
     value.path = []
     function addParentToPath (item) {
-      if (item.parentItem.value.name) {
+      if (item.parentItem && item.parentItem.parentItem && item.parentItem.value.name) {
         value.path.unshift(item.parentItem.value.name)
         // Recursion: If this parent has yet another parent item, go check that out
         if (item.parentItem.parentItem) {
@@ -24,7 +25,7 @@ function ContextDropdown ({ onItemChosen, selectedContext, showRequestButton = f
     addParentToPath(context._item)
 
     return value
-  }, { childrenPath: 'children', includeRoot: false, rootIsChildren: true }), 'id')
+  }, { childrenPath: 'children', includeRoot: !!config.medienhaus?.allowSelectingRootContext, rootIsChildren: false }), 'id')
 
   const [joinedRooms, setJoinedRooms] = useState([])
   const [inputItems, setInputItems] = useState(items)

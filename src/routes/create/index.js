@@ -23,6 +23,7 @@ import _, { debounce } from 'lodash'
 import GutenbergEditor from '../gutenberg/editor'
 import createBlock from './matrix_create_room'
 import LoadingSpinnerButton from '../../components/LoadingSpinnerButton'
+import UdKLocationContext from './Context/UdKLocationContext'
 import styled from 'styled-components'
 
 const nl2br = function (str) {
@@ -616,6 +617,12 @@ const Create = () => {
             <section className="events">
               <h3>{t('Location')}</h3>
               <Location inviteCollaborators={inviteCollaborators} reloadSpace={reloadSpace} projectSpace={projectSpace} events={events} allocation={allocation} matrixClient={matrixClient} />
+            </section>
+          )}
+          {(!config.medienhaus?.item || !config.medienhaus?.item[template]?.blueprint || config.medienhaus?.item[template]?.blueprint.includes('udklocation')) && (
+            <section>
+              <h3>{t('Location')}</h3>
+              <UdKLocationContext itemSpaceRoomId={projectSpace} />
             </section>
           )}
           {(!config.medienhaus?.item || !config.medienhaus?.item[template]?.blueprint || config.medienhaus?.item[template]?.blueprint.includes('time')) && (
