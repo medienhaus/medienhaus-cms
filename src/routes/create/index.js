@@ -361,10 +361,10 @@ const Create = () => {
           break
         case 'medienhaus/heading':
           await matrixClient.sendMessage(roomId, {
-            body: '## ' + block.attributes.content,
+            body: '### ' + block.attributes.content,
             msgtype: 'm.text',
             format: 'org.matrix.custom.html',
-            formatted_body: `<h2>${block.attributes.content}</h2>`
+            formatted_body: `<h3>${block.attributes.content}</h3>`
           })
           break
         case 'medienhaus/image':
