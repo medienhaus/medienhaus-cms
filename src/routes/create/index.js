@@ -25,6 +25,7 @@ import createBlock from './matrix_create_room'
 import LoadingSpinnerButton from '../../components/LoadingSpinnerButton'
 import UdKLocationContext from './Context/UdKLocationContext'
 import styled from 'styled-components'
+import * as Showdown from 'showdown'
 
 const nl2br = function (str) {
   return str.split('\n').join('<br>')
@@ -61,6 +62,8 @@ const GutenbergSavingOverlay = styled.div`
   background: rgba(0,0,0,0.5);
   z-index: 99999999999999;
 `
+
+const ShowdownConverter = new Showdown.Converter()
 
 const Create = () => {
   const { t } = useTranslation('content')
@@ -504,7 +507,7 @@ const Create = () => {
           break
         default:
           await matrixClient.sendMessage(roomId, {
-            body: block.attributes.content,
+            body: ShowdownConverter.makeMarkdown(block.attributes.content),
             msgtype: 'm.text',
             format: 'org.matrix.custom.html',
             formatted_body: block.attributes.content
