@@ -370,6 +370,8 @@ const Create = () => {
         case 'medienhaus/image':
           // If this image was uploaded to Matrix already, we don't do anything
           if (block.attributes.url) break
+          // If the user has not provided an image and the file input was left "empty", we don't do anything either
+          if (!block.attributes.file) break
           // eslint-disable-next-line no-case-declarations,prefer-const
           let uploadedImage = await matrixClient.uploadContent(block.attributes.file, { name: block.attributes.file.name })
           await matrixClient.sendImageMessage(
