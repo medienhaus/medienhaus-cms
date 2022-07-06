@@ -185,11 +185,6 @@ const Category = ({ projectSpace, onChange, parent }) => {
       setError(e?.message)
       setTimeout(() => setError(''), 2500)
     })
-    await removeFromParent(projectSpace, parent).catch((e) => {
-      console.debug(e)
-      setError(e)
-      setTimeout(() => setError(''), 2500)
-    })
     if (removeSpacechild?.event_id && config.medienhaus.api) {
       await removeFromParent(projectSpace, [parent]).catch((e) => {
         console.debug(e)
