@@ -26,6 +26,9 @@ const UdKLocationContext = ({ itemSpaceRoomId }) => {
 
   const fetchCurrentLocation = useCallback(async () => {
     const item = await fetchId(itemSpaceRoomId)
+    // If the API does not know this item, or says that it does not have any parents, we don't do anything
+    if (!item || !item.parents) return
+    // ... otherwise we check all parents until we find the one that says "location"
     for (const parent of item.parents) {
       const parentInfo = await fetchId(parent)
       if (parentInfo.template.includes('location')) {
