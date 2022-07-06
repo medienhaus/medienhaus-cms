@@ -1,4 +1,6 @@
 import Matrix from '../../Matrix'
+import config from '../../config.json'
+import { removeFromParent } from '../../helpers/MedienhausApiHelper'
 
 const deleteProject = async (roomId) => {
   const matrixClient = Matrix.getMatrixClient()
@@ -27,6 +29,7 @@ const deleteProject = async (roomId) => {
       await matrixClient.leave(space.room_id).catch(console.log)
     })
     await matrixClient.leave(roomId).catch(console.log)
+    if (config.medienhaus.api) await removeFromParent(roomId, [], true)
     log = 'successfully deleted ' + roomId
   } catch (err) {
     log = err

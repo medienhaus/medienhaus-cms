@@ -45,3 +45,19 @@ export const fetchPathList = async (id) => {
   const response = fetchPathList.json()
   return response
 }
+
+export const removeFromParent = async (id, parentIds, purge) => {
+  const body = {
+    parentIds: parentIds
+  }
+  if (purge) body.purge = true
+  const deleteId = await fetch(config.medienhaus.api + id + '/fetch', {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(body)
+  })
+  if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') console.debug(deleteId)
+  return deleteId
+}
