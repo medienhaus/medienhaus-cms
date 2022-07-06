@@ -466,7 +466,6 @@ const ManageContexts = ({ matrixClient, moderationRooms: incomingModerationRooms
       )
       if (config.medienhaus.api) {
         const remove = await removeFromParent(selectedContext, [parent])
-        console.log(remove)
       }
     } else {
       // @TODO error handleing
