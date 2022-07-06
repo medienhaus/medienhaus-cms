@@ -51,5 +51,18 @@ class Matrix {
     }
     return this.matrixClient.http.authedRequest(undefined, 'PUT', `/rooms/${parent}/state/m.space.child/${child}`, undefined, payload)
   }
+
+  roomHierarchy = async (roomId, limit, maxDepth, suggestedOnly) => {
+    const rooms = []
+
+    const fetchHierarchyFromMatrix = async (fromToken) => {
+      const hierarchy = await this.matrixClient.getRoomHierarchy(roomId, limit, maxDepth, suggestedOnly, fromToken)
+      rooms.push(...hierarchy.rooms)
+      if (hierarchy.next_batch) await fetchHierarchyFromMatrix(hierarchy.next_batch)
+      return rooms
+    }
+    await fetchHierarchyFromMatrix()
+    return rooms
+  }
 }
 export default new Matrix()

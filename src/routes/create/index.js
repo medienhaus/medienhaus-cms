@@ -127,11 +127,11 @@ const Create = () => {
 
   const fetchContentBlocks = useCallback(async () => {
     const spaceRooms = spaceObjectRef.current.rooms.filter(room => room.name === contentLangRef.current)
-    const getContent = await matrixClient.getRoomHierarchy(spaceRooms[0].room_id)
-    setBlocks(getContent.rooms.filter(room => room.name !== contentLangRef.current).filter(room => room.name.charAt(0) !== 'x').sort((a, b) => {
+    const getContent = await Matrix.roomHierarchy(spaceRooms[0].room_id)
+    setBlocks(getContent.filter(room => room.name !== contentLangRef.current).filter(room => room.name.charAt(0) !== 'x').sort((a, b) => {
       return a.name.substring(0, a.name.indexOf('_')) - b.name.substring(0, b.name.indexOf('_'))
     }))
-  }, [spaceObjectRef, matrixClient, setBlocks, contentLangRef])
+  }, [spaceObjectRef, setBlocks, contentLangRef])
 
   const fetchSpace = useCallback(async (ignoreBlocks) => {
     if (matrixClient.isInitialSyncComplete()) {
@@ -663,13 +663,14 @@ const Create = () => {
             </select>
             {spaceObject && (description || description === '') ? <ProjectDescription description={description[contentLang]} callback={onChangeDescription} /> : <Loading />}
             <GutenbergWrapper>
-              {(gutenbergContent !== undefined) && (
-                <GutenbergEditor
-                  content={gutenbergContent}
-                  blockTypes={_.get(config, ['medienhaus', 'item', template, 'content'])}
-                  onChange={contentHasChanged}
-                />
-              )}
+              {(gutenbergContent === undefined)
+                ? <Loading />
+                : (<GutenbergEditor
+                    content={gutenbergContent}
+                    blockTypes={_.get(config, ['medienhaus', 'item', template, 'content'])}
+                    onChange={contentHasChanged}
+                   />
+                  )}
               {isSavingGutenbergContents && <GutenbergSavingOverlay />}
             </GutenbergWrapper>
             {temporaryGutenbergContents && (
