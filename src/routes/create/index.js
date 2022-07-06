@@ -415,7 +415,7 @@ const Create = () => {
           break
         default:
           await matrixClient.sendMessage(roomId, {
-            body: ShowdownConverter.makeMarkdown(block.attributes.content),
+            body: ShowdownConverter.makeMarkdown(block.attributes.content).replaceAll('<br>', '').replaceAll('<br />', ''),
             msgtype: 'm.text',
             format: 'org.matrix.custom.html',
             formatted_body: block.attributes.content
