@@ -11,7 +11,7 @@ import findValueDeep from 'deepdash/findValueDeep'
 import styled from 'styled-components'
 import ContextDropdown from '../../../components/ContextDropdown'
 
-import { triggerApiUpdate, fetchContextTree, fetchId } from '../../../helpers/MedienhausApiHelper'
+import { triggerApiUpdate, fetchContextTree, fetchId, removeFromParent } from '../../../helpers/MedienhausApiHelper'
 
 const UlElement = styled.ul`
   background-color: ${props => props.active ? 'var(--color-fg)' : 'none'};
@@ -32,7 +32,6 @@ const ListElement = styled.li`
 const Category = ({ projectSpace, onChange, parent, setLocationFromLocationTree }) => {
   const [loading, setLoading] = useState(true)
   const [contexts, setContexts] = useState([])
-  const [feedback, setFeedback] = useState('')
   const [error, setError] = useState('')
   const [inputItems, setInputItems] = useState()
   const matrixClient = Matrix.getMatrixClient()
@@ -199,14 +198,14 @@ const Category = ({ projectSpace, onChange, parent, setLocationFromLocationTree 
       setError(e?.message)
       setTimeout(() => setError(''), 2500)
     })
-    // triggering an update on both spaces plus project and parent space simultaniously "tricks" the api into deleting the parent
-    await triggerApiUpdate(parent)
-    await triggerApiUpdate(projectSpace)
-    await triggerApiUpdate(projectSpace, parent)
-    if (removeSpacechild?.event_id) {
-      setContexts(contexts => contexts.filter(context => context.room_id !== parent))
-      setFeedback(t('The context was removed successfully. Please note that for up to 30 minutes the context might reappear when reloading this page. There is no need to remove it again; it will stop showing up eventually. We are working on this issue.'))
+    if (removeSpacechild?.event_id && config.medienhaus.api) {
+      await removeFromParent(projectSpace, [parent]).catch((e) => {
+        console.debug(e)
+        setError(e)
+        setTimeout(() => setError(''), 2500)
+      })
     }
+    removeSpacechild?.event_id && setContexts(contexts => contexts.filter(context => context.room_id !== parent))
   }
 
   return (
@@ -244,7 +243,6 @@ const Category = ({ projectSpace, onChange, parent, setLocationFromLocationTree 
           />
         </>}
       {error && <p>{error}</p>}
-      {feedback && <section>❗️ {feedback}</section>}
 
       {/* {subject !== '' && !member && <Knock room={room} callback={callback} />} */}
     </>
