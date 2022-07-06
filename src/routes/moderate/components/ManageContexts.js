@@ -22,7 +22,7 @@ import { Icon } from 'leaflet/dist/leaflet-src.esm'
 import RemoveItemsInContext from './RemoveItemsInContext'
 
 import styled from 'styled-components'
-import { fetchId, triggerApiUpdate } from '../../../helpers/MedienhausApiHelper'
+import { fetchId, removeFromParent, triggerApiUpdate } from '../../../helpers/MedienhausApiHelper'
 import Matrix from '../../../Matrix'
 import LeaveContext from './LeaveContext'
 import ContextTree from './ContextTree'
@@ -304,9 +304,8 @@ const ManageContexts = ({ matrixClient, moderationRooms: incomingModerationRooms
       }
       )
       if (config.medienhaus.api) {
-        // triggering an update on both spaces plus project and parent space simultaniously "tricks" the api into deleting the parent
-        await triggerApiUpdate(parent)
-        await triggerApiUpdate(selectedContext, parent)
+        const remove = await removeFromParent(selectedContext, [parent])
+        console.log(remove)
       }
     } else {
       // @TODO error handleing
@@ -329,7 +328,6 @@ const ManageContexts = ({ matrixClient, moderationRooms: incomingModerationRooms
     delete _moderationRooms[selectedContext]
     setModerationRooms(_moderationRooms)
     setSelectedContext('')
-    if (config.medienhaus.api) triggerApiUpdate(selectedContext)
 
     setSelectedContext('')
     setDisableButton(false)
