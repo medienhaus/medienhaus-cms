@@ -517,7 +517,6 @@ const ManageContexts = ({ matrixClient, moderationRooms: incomingModerationRooms
               contextId={selectedContext}
               onContextChange={onContextChange}
               moderationRooms={moderationRooms}
-              howItems={config.medienhaus.sites.moderate.manageContexts.showItemsInTree || false}
             />
             <hr />
             <Details>
