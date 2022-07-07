@@ -21,11 +21,11 @@ const ContextMultiLevelSelectSingleLevel = ({ parentSpaceRoomId, selectedContext
     // Fetch all child contexts
     const fetchChildContexts = async () => {
       let newChildContexts = []
-      const roomHierarchy = await Matrix.getMatrixClient().getRoomHierarchy(parentSpaceRoomId, undefined, 1)
+      const roomHierarchy = await Matrix.roomHierarchy(parentSpaceRoomId, undefined, 1)
       // Remove the first entry, which is the context we retrieved the children for
-      roomHierarchy.rooms.shift()
+      roomHierarchy.shift()
       // Ensure we're looking at contexts, and not spaces/rooms of other types
-      for (const room of roomHierarchy.rooms) {
+      for (const room of roomHierarchy) {
         const metaEvent = await Matrix.getMatrixClient().getStateEvent(room.room_id, 'dev.medienhaus.meta').catch(() => {})
         // If this is not a context, ignore this space child
         if (metaEvent && metaEvent.type !== 'context') continue
