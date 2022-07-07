@@ -11,7 +11,7 @@ const Content = ({ space, metaEvent, visibility, index, removeProject }) => {
   const { t } = useTranslation('content')
   const matrixClient = Matrix.getMatrixClient()
   const [showDeleteComponent, setShowDeleteComponent] = useState(false)
-  console.log(space)
+
   return (
     <>
       <div className="project">
