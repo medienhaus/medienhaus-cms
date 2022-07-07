@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react'
 import { Loading } from '../loading'
 import { useTranslation } from 'react-i18next'
 import Matrix from '../../Matrix'
+import config from '../../config.json'
+import { triggerApiUpdate } from '../../helpers/MedienhausApiHelper'
 
 const PublishProject = ({ disabled, space, published, hasContext, metaEvent }) => {
   const { t } = useTranslation('publish')
@@ -59,6 +61,7 @@ const PublishProject = ({ disabled, space, published, hasContext, metaEvent }) =
       console.log('--- All changed Succesfully to ' + publishState + ' ---')
 
       setUserFeedback(t('Changed successfully!'))
+      if (config.medienhaus.api) await triggerApiUpdate(space.room_id)
       setTimeout(() => setUserFeedback(''), 3000)
     } catch (err) {
       console.error(err)
