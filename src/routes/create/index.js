@@ -23,6 +23,7 @@ import config from '../../config.json'
 import _ from 'lodash'
 import UdKLocationContext from './Context/UdKLocationContext'
 import styled from 'styled-components'
+import { triggerApiUpdate } from '../../helpers/MedienhausApiHelper'
 
 const AuthorCheckbox = styled.div`
   display: grid;
@@ -325,9 +326,10 @@ const Create = () => {
     }
   }
 
-  const changeProjectImage = () => {
+  const changeProjectImage = async () => {
     setLoading(true)
     getCurrentTime()
+    if (config.medienhaus.api) await triggerApiUpdate(projectSpace)
     setLoading(false)
   }
 
@@ -337,8 +339,9 @@ const Create = () => {
     listeningToCollaborators()
   }
 
-  const changeTitle = (newTitle) => {
+  const changeTitle = async (newTitle) => {
     setTitle(newTitle)
+    if (config.medienhaus.api) await triggerApiUpdate(projectSpace)
   }
 
   const onChangeDescription = async (description) => {
@@ -347,6 +350,7 @@ const Create = () => {
     // here we set the description for the selected language space
     const contentRoom = spaceObject.rooms.filter(room => room.name === contentLang)
     const changeTopic = await matrixClient.setRoomTopic(contentRoom[0].room_id, description).catch(console.log)
+    if (config.medienhaus.api) await triggerApiUpdate(projectSpace)
     fetchSpace()
     // @TODO setSpaceObject(spaceObject => ({...spaceObject, rooms: [...spaceObject.rooms, ]}))
     return changeTopic

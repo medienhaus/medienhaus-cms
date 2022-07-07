@@ -6,6 +6,8 @@ import { Trans, useTranslation } from 'react-i18next'
 import { useAuth } from '../../../Auth'
 import LoadingSpinnerButton from '../../../components/LoadingSpinnerButton'
 import { debounce } from 'lodash'
+import { triggerApiUpdate } from '../../../helpers/MedienhausApiHelper'
+import config from '../../../config.json'
 
 const Collaborators = ({ projectSpace, members, time, startListeningToCollab }) => {
   const [isFetchingContributorSearchResults, setIsFetchingContributorSearchResults] = useState(false)
@@ -45,9 +47,9 @@ const Collaborators = ({ projectSpace, members, time, startListeningToCollab }) 
 
           if (index > 0) {
             try {
-              await matrixClient.getRoomHierarchy(space.room_id)
+              await Matrix.roomHierarchy(space.room_id)
                 .then((res) => {
-                  res.rooms.forEach(async (room, index) => {
+                  res.forEach(async (room, index) => {
                     await matrixClient.invite(room.room_id, id).catch(console.log)
                     const stateEvent = matrixClient.getRoom(projectSpace[0].room_id)
                     await matrixClient.setPowerLevel(room.room_id, id, 100, stateEvent.currentState.getStateEvents('m.room.power_levels', ''))
@@ -56,6 +58,7 @@ const Collaborators = ({ projectSpace, members, time, startListeningToCollab }) 
                   }
                   )
                 })
+              if (config.medienhaus.api) await triggerApiUpdate(projectSpace[0].room_id)
             } catch (err) {
               console.log(err)
             }
@@ -92,7 +95,12 @@ const Collaborators = ({ projectSpace, members, time, startListeningToCollab }) 
     content.credit ? content.credit = [...content.credit, contributorInput] : content.credit = [contributorInput]
     const sendCredit = await matrixClient.sendStateEvent(projectSpace[0].room_id, 'dev.medienhaus.meta', content)
     // TODO: needs i18n
-    setAddContributionFeedback('event_id' in sendCredit ? '✓' : t('Something went wrong'))
+    if ('event_id' in sendCredit) {
+      setAddContributionFeedback('✓')
+      if (config.medienhaus.api) await triggerApiUpdate(projectSpace[0].room_id)
+    } else {
+      setAddContributionFeedback(t('Something went wrong'))
+    }
     checkForCredits()
     time()
     setTimeout(() => {
