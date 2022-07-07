@@ -21,6 +21,7 @@ import { fetchId } from '../../helpers/MedienhausApiHelper'
 const Moderate = () => {
   const { joinedSpaces, spacesErr, fetchSpaces, reload } = useJoinedSpaces(false)
   const [moderationRooms, setModerationRooms] = useState()
+  const [nestedRooms, setNestedRooms] = useState()
   const [userSearch, setUserSearch] = useState([])
   const [selection, setSelection] = useState('invite')
   const [fetching, setFetching] = useState(false)
@@ -146,6 +147,52 @@ const Moderate = () => {
   }, [joinedSpaces])
 
   useEffect(() => {
+    let cancelled = false
+
+    if (!cancelled && moderationRooms) {
+      const mod = { ...moderationRooms }
+      function findFor (parentId) {
+        // create a new object to store the result
+        const nested = {}
+
+        // for each item in a
+        for (const room of Object.keys(moderationRooms)) {
+          // find all children of parentId
+          if (moderationRooms[room].parents?.includes(parentId)) {
+            // recursively find children for each children of parentId
+            const recursive = findFor(moderationRooms[room].room_id)
+            // if it has no children, skip adding the children prop
+            const object = Object.keys(recursive).length === 0 ? {} : { children: recursive }
+            nested[moderationRooms[room].room_id] = Object.assign(object, moderationRooms[room])
+          }
+        }
+        return nested
+      }
+      for (const room of Object.keys(moderationRooms)) {
+        // we iterate over all room ids
+        const nested = findFor(room)
+        if (Object.keys(nested).length !== 0) {
+          // if we found parents fot the room we want to remove them from the first level
+          for (const child of Object.keys(nested)) {
+            console.log(child)
+            mod[child] && delete mod[child]
+          }
+        }
+        // in order not to create douplicates we continue if the parent is not in level 0 anymore
+        if (!mod[room]) continue
+        // then we add the nested object
+        const children = { children: nested }
+        mod[room] = Object.assign(children, moderationRooms[room])
+      }
+      setNestedRooms(mod)
+    }
+
+    return () => {
+      cancelled = true
+    }
+  }, [moderationRooms])
+
+  useEffect(() => {
     async function checkRoomForPossibleInvite (room) {
       // Ignore if this is not a space
       if (room.getType() !== 'm.space') return
@@ -257,11 +304,11 @@ const Moderate = () => {
     // eslint-disable-next-line default-case
     switch (selection) {
       case 'invite':
-        return config.medienhaus?.sites?.moderate?.invite && <> <InviteUserToSpace matrixClient={matrixClient} moderationRooms={moderationRooms} setPower={setPower} fetchUsers={fetchUsers} fetching={fetching} userSearch={userSearch} /></>
+        return config.medienhaus?.sites?.moderate?.invite && <> <InviteUserToSpace matrixClient={matrixClient} nestedRooms={nestedRooms} setPower={setPower} fetchUsers={fetchUsers} fetching={fetching} userSearch={userSearch} /></>
       case 'rightsManagement':
-        return config.medienhaus?.sites?.moderate?.rightsManagement && <> <RightsManagement matrixClient={matrixClient} moderationRooms={moderationRooms} setPower={setPower} fetchUsers={fetchUsers} fetching={fetching} userSearch={userSearch} /></>
+        return config.medienhaus?.sites?.moderate?.rightsManagement && <> <RightsManagement matrixClient={matrixClient} nestedRooms={nestedRooms} setPower={setPower} fetchUsers={fetchUsers} fetching={fetching} userSearch={userSearch} /></>
       case 'manageContexts':
-        return config.medienhaus?.sites?.moderate?.manageContexts && <><ManageContexts matrixClient={matrixClient} moderationRooms={moderationRooms} addModerationRooms={addModerationRooms} removeModerationRoom={removeModerationRoom} /></>
+        return config.medienhaus?.sites?.moderate?.manageContexts && <><ManageContexts matrixClient={matrixClient} moderationRooms={moderationRooms} nestedRooms={nestedRooms} addModerationRooms={addModerationRooms} removeModerationRoom={removeModerationRoom} /></>
       case 'removeContent':
         return config.medienhaus?.sites?.moderate?.removeContent && <><RemoveContent matrixClient={matrixClient} moderationRooms={moderationRooms} loading={fetching} /></>
       case 'accept':

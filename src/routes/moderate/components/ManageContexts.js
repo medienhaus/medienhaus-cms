@@ -46,7 +46,7 @@ const Details = styled.details`
 }
 `
 
-const ManageContexts = ({ matrixClient, moderationRooms: incomingModerationRooms, addModerationRooms, removeModerationRoom }) => {
+const ManageContexts = ({ matrixClient, moderationRooms: incomingModerationRooms, nestedRooms: incomingNestedRooms, addModerationRooms, removeModerationRoom }) => {
   const { t } = useTranslation('moderate')
   const [selectedContext, setSelectedContext] = useState('')
   const [roomName, setRoomName] = useState('')
@@ -60,6 +60,7 @@ const ManageContexts = ({ matrixClient, moderationRooms: incomingModerationRooms
   const [loading, setLoading] = useState(false)
   const [description, setDescription] = useState('')
   const [moderationRooms, setModerationRooms] = useState(incomingModerationRooms)
+  const [nestedRooms, setNestedRooms] = useState(incomingNestedRooms)
 
   const [editRoomName, setEditRoomName] = useState(false)
   const [newRoomName, setNewRoomName] = useState('')
@@ -67,12 +68,16 @@ const ManageContexts = ({ matrixClient, moderationRooms: incomingModerationRooms
   useEffect(() => {
     let cancelled = false
 
-    !cancelled && setModerationRooms(incomingModerationRooms)
+    if (!cancelled) {
+      setModerationRooms(incomingModerationRooms)
+      setNestedRooms(incomingNestedRooms)
+    }
 
     return () => {
       cancelled = true
     }
-  }, [incomingModerationRooms])
+  }, [incomingModerationRooms, incomingNestedRooms])
+
   const onRemoveItemFromContext = (space) => {
     setLoading(true)
     Matrix.removeSpaceChild(selectedContext, space)
@@ -343,7 +348,7 @@ const ManageContexts = ({ matrixClient, moderationRooms: incomingModerationRooms
           : <SimpleContextSelect
               onItemChosen={onContextChange}
               selectedContext={selectedContext}
-              struktur={moderationRooms}
+              struktur={nestedRooms}
               disabled={loading}
             />}
         {loading && <Loading />}
