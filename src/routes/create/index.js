@@ -222,8 +222,8 @@ const Create = () => {
       //   debugger
       //   getContent = await matrixClient.getRoomHierarchy(languageSpace)
       // } else getContent = await matrixClient.getRoomHierarchy(spaceRooms[0].room_id)
-      const getContent = await matrixClient.getRoomHierarchy(spaceRooms[0].room_id)
-      setBlocks(getContent.rooms.filter(room => room.name !== contentLang).filter(room => room.name.charAt(0) !== 'x').sort((a, b) => {
+      const getContent = await Matrix.roomHierarchy(spaceRooms[0].room_id)
+      setBlocks(getContent.filter(room => room.name !== contentLang).filter(room => room.name.charAt(0) !== 'x').sort((a, b) => {
         return a.name.substring(0, a.name.indexOf('_')) - b.name.substring(0, b.name.indexOf('_'))
       }))
       // check if there is an events space
