@@ -91,16 +91,19 @@ const Moderate = () => {
 
     const handleModerationRooms = async () => {
       setLoading(true)
+      let rooms = {}
       for (const space of joinedSpaces) {
         if (space.meta.type !== 'context') continue
         if (space.powerLevel < 50) continue
         if (config.medienhaus.api) {
           // we check to see if the space exists in our tree by checking if the api knows about it.
           const room = await fetchId(space.room_id, controller.signal).catch((e) => {
-            console.log(e)
+            console.debug(e)
             // @TODO add error handleing
           })
           if (room?.type !== 'context') continue
+          space.parents = room.parents
+          space.authors = room.origin.authors
         } else {
           // with no api we have to create the structure ourselves
           const tree = await createStructurObject()
@@ -115,7 +118,7 @@ const Moderate = () => {
             continue
           }
         }
-        setModerationRooms(moderationRooms => Object.assign({}, moderationRooms, {
+        rooms = Object.assign({}, rooms, {
           [space.room_id]:
           {
             name: space.name,
@@ -123,10 +126,13 @@ const Moderate = () => {
             room_id: space.room_id,
             template: space.meta.template,
             type: space.meta.type,
-            membership: space.selfMembership
+            membership: space.selfMembership,
+            parents: space.parents,
+            authors: space.authors
           }
-        }))
+        })
       }
+      setModerationRooms(rooms)
       setLoading(false)
     }
     if (joinedSpaces) {
