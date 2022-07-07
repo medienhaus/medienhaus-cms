@@ -47,6 +47,7 @@ const RightsManagement = ({ matrixClient, nestedRooms, setPower, fetchUsers, fet
             onItemChosen={setSelectedRoom}
             selectedContext={selectedRoom}
             struktur={nestedRooms}
+            preSelectedValue="context"
           />}
       <input
         list="userSearch"

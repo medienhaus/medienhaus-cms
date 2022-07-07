@@ -49,6 +49,7 @@ const InviteUserToSpace = ({ matrixClient, nestedRooms, setPower, fetchUsers, fe
             onItemChosen={setSelectedRoom}
             selectedContext={selectedRoom}
             struktur={nestedRooms}
+            preSelectedValue="context"
           />}
       <input
         list="userSearch"
