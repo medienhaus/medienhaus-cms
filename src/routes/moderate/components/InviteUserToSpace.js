@@ -1,10 +1,12 @@
 import React, { useState } from 'react'
 import LoadingSpinnerButton from '../../../components/LoadingSpinnerButton'
 import { useTranslation } from 'react-i18next'
+import { Loading } from '../../../components/loading'
+import SimpleContextSelect from '../../../components/SimpleContextSelect'
 
-const InviteUserToSpace = ({ matrixClient, moderationRooms, setPower, fetchUsers, fetching, userSearch }) => {
+const InviteUserToSpace = ({ matrixClient, nestedRooms, setPower, fetchUsers, fetching, userSearch }) => {
   const [promoteToModerator, setPromoteToModerator] = useState(false)
-  const [selectedRoom, setSelectedRoom] = useState(false)
+  const [selectedRoom, setSelectedRoom] = useState('')
   const [userToInvite, setUserToInvite] = useState('')
   const [inviteFeedback, setInviteFeedback] = useState('')
   const { t } = useTranslation('moderate')
@@ -41,10 +43,13 @@ const InviteUserToSpace = ({ matrixClient, moderationRooms, setPower, fetchUsers
     <section className="invite">
       <h3>{t('Invite accounts')}</h3>
       <p>{t('Invite accounts to specific contexts, and optionally promote them to moderate that specific context they are invited to.')}</p>
-      <select value={selectedRoom} onChange={(e) => setSelectedRoom(e.target.value)}>
-        <option value={false} disabled>-- {t('select context')} --</option>
-        {Object.keys(moderationRooms).map((roomId, index) => <option key={index} value={moderationRooms[roomId].room_id}>{moderationRooms[roomId].name}</option>)}
-      </select>
+      {!nestedRooms
+        ? <Loading />
+        : <SimpleContextSelect
+            onItemChosen={setSelectedRoom}
+            selectedContext={selectedRoom}
+            struktur={nestedRooms}
+          />}
       <input
         list="userSearch"
         id="user-datalist"
