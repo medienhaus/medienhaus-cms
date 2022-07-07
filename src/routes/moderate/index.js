@@ -186,7 +186,6 @@ const Moderate = () => {
         if (Object.keys(nested).length !== 0) {
           // if we found parents fot the room we want to remove them from the first level
           for (const child of Object.keys(nested)) {
-            console.log(child)
             mod[child] && delete mod[child]
           }
         }
