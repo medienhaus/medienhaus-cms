@@ -263,9 +263,9 @@ const ManageContexts = ({ matrixClient, moderationRooms: incomingModerationRooms
     }
 
     const newContext = await createSpace(name)
-    if (config.medienhaus.api) triggerApiUpdate(newContext, selectedContext)
+    if (config.medienhaus.api) await triggerApiUpdate(newContext, selectedContext)
     // we add our newly created context to the context object to be able to work on it immedieately.
-    addModerationRooms(newContext, name, template)
+    addModerationRooms(newContext, name, template, selectedContext)
     // we set the parent to the previously selected context
     setContextParent(selectedContext)
     // then update our selected context to the newly created one
