@@ -485,7 +485,7 @@ const Create = () => {
           <section className="preview">
             <div className="confirmation">
               <button className="cancel" onClick={() => history.push('/content')}>← {t('BACK TO OVERVIEW')}</button>
-              <button className="confirm" onClick={() => window.open(`https://rundgang.udk-berlin.de/${contentLang === 'en' ? 'en/' : ''}c/${params.spaceId}`, '_blank')}>{t('Preview')}*</button>
+              <button className="confirm" onClick={() => window.open(`https://2022.rundgang.udk-berlin.de/${contentLang === 'en' ? 'en/' : ''}c/${params.spaceId}`, '_blank')}>{t('Preview')}*</button>
             </div>
             {saveTimestamp && <p className="timestamp">↳ {t('Last saved at')} {saveTimestamp}</p>}
             <p>
