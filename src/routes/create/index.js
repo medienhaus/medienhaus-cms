@@ -482,11 +482,13 @@ const Create = () => {
               : <Loading />}
           </section>
 
-          <section className="save confirmation">
-            <button className="cancel" onClick={() => history.push('/content')}>← {t('BACK TO OVERVIEW')}</button>
-            <button className="save" onClick={() => window.open(`https://rundgang.udk-berlin.de/${contentLang === 'en' ? 'en/' : ''}c/${params.spaceId}`, '_blank')}>{t('PREVIEW')}</button>
+          <section className="preview">
+            <div className="confirmation">
+              <button className="cancel" onClick={() => history.push('/content')}>← {t('BACK TO OVERVIEW')}</button>
+              <button className="confirm" onClick={() => window.open(`https://rundgang.udk-berlin.de/${contentLang === 'en' ? 'en/' : ''}c/${params.spaceId}`, '_blank')}>{t('PREVIEW')}</button>
+            </div>
+            {saveTimestamp && <p className="timestamp">↳ {t('Last saved at')} {saveTimestamp}</p>}
           </section>
-          {saveTimestamp && <p className="timestamp">↳ {t('Last saved at')} {saveTimestamp}</p>}
         </>
       )}
     </>
