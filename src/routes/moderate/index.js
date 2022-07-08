@@ -286,13 +286,14 @@ const Moderate = () => {
     })
   }
 
-  const addModerationRooms = (newContext, name, template) => {
+  const addModerationRooms = (newContext, name, template, parent) => {
     const subContextObject = {
       id: newContext,
       room_id: newContext,
       name: name,
       template: template,
-      type: 'context'
+      type: 'context',
+      parents: [parent]
     }
 
     // const parentObject = findValueDeep(
@@ -300,7 +301,7 @@ const Moderate = () => {
     //   (value, key, parent) => {
     //     if (value.id === selectedContext) return true
     //   }, { childrenPath: 'children', includeRoot: false, rootIsChildren: true })
-    setModerationRooms(prevState => Object.assign(prevState, {
+    setModerationRooms(prevState => Object.assign({ ...prevState }, {
       [newContext]: subContextObject
     }))
   }
