@@ -806,11 +806,16 @@ const Create = () => {
               : <Loading />}
           </section>
 
-          <section className="save confirmation">
-            <button className="cancel" onClick={() => history.push('/content')}>← {t('BACK TO OVERVIEW')}</button>
-            <button className="save" onClick={() => window.open(`https://rundgang.udk-berlin.de/${contentLang === 'en' ? 'en/' : ''}c/${params.spaceId}`, '_blank')}>{t('PREVIEW')}</button>
+          <section className="preview">
+            <div className="confirmation">
+              <button className="cancel" onClick={() => history.push('/content')}>← {t('BACK TO OVERVIEW')}</button>
+              <button className="confirm" onClick={() => window.open(`https://rundgang.udk-berlin.de/${contentLang === 'en' ? 'en/' : ''}c/${params.spaceId}`, '_blank')}>{t('Preview')}*</button>
+            </div>
+            {saveTimestamp && <p className="timestamp">↳ {t('Last saved at')} {saveTimestamp}</p>}
+            <p>
+              * <em>{t('Please note that the Rundgang platform 2022 is currently still being edited and may still contain minor errors. The final Rundgang platform will be available on 18.07.2022 via:')} https://rundgang.udk-berlin.de/</em>
+            </p>
           </section>
-          {saveTimestamp && <p className="timestamp">↳ {t('Last saved at')} {saveTimestamp}</p>}
         </>
       )}
     </>
