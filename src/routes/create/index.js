@@ -806,10 +806,11 @@ const Create = () => {
               : <Loading />}
           </section>
 
-          <section className="save">
+          <section className="save confirmation">
             <button className="cancel" onClick={() => history.push('/content')}>← {t('BACK TO OVERVIEW')}</button>
-            {saveTimestamp && <p className="timestamp">↳ {t('Last saved at')} {saveTimestamp}</p>}
+            <button className="save" onClick={() => window.open(`https://rundgang.udk-berlin.de/${contentLang === 'en' ? 'en/' : ''}c/${params.spaceId}`, '_blank')}>{t('PREVIEW')}</button>
           </section>
+          {saveTimestamp && <p className="timestamp">↳ {t('Last saved at')} {saveTimestamp}</p>}
         </>
       )}
     </>
