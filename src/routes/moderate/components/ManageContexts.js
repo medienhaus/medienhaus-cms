@@ -14,7 +14,6 @@ import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
 import locations from '../../../assets/data/locations.json'
 import { MatrixEvent } from 'matrix-js-sdk'
 import config from '../../../config.json'
-import TextareaAutosize from 'react-textarea-autosize'
 
 import findValueDeep from 'deepdash/es/findValueDeep'
 import LoadingSpinnerButton from '../../../components/LoadingSpinnerButton'
@@ -26,6 +25,7 @@ import { fetchId, removeFromParent, triggerApiUpdate } from '../../../helpers/Me
 import Matrix from '../../../Matrix'
 import LeaveContext from './LeaveContext'
 import ContextTree from './ContextTree'
+import TextareaAutoSizeMaxLength from './TextareaAutoSizeMaxLength'
 
 const DangerZone = styled.section`
   border: none;
@@ -271,7 +271,7 @@ const ManageContexts = ({ matrixClient, moderationRooms: incomingModerationRooms
     }
   }
 
-  const onSave = async () => {
+  const onSaveDescription = async (description) => {
     if (description.length > 500) return
     await matrixClient.setRoomTopic(selectedContext, description).catch(console.log)
     if (config.medienhaus.api) triggerApiUpdate(selectedContext)
