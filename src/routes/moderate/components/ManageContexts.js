@@ -13,7 +13,6 @@ import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
 import locations from '../../../assets/data/locations.json'
 import { MatrixEvent } from 'matrix-js-sdk'
 import config from '../../../config.json'
-import TextareaAutosize from 'react-textarea-autosize'
 
 import findValueDeep from 'deepdash/findValueDeep'
 import LoadingSpinnerButton from '../../../components/LoadingSpinnerButton'
@@ -25,6 +24,7 @@ import { fetchId, removeFromParent, triggerApiUpdate } from '../../../helpers/Me
 import Matrix from '../../../Matrix'
 import LeaveContext from './LeaveContext'
 import ContextTree from './ContextTree'
+import TextareaAutoSizeMaxLength from './TextareaAutoSizeMaxLength'
 
 const DangerZone = styled.section`
   border: none;
@@ -48,24 +48,6 @@ const Details = styled.details`
     margin-top: var(--margin);
   }
 `
-
-const TextareaMaxLength = styled.section`
-  border-color: var(--color-fg);
-  border-radius: unset;
-  border-style: solid;
-  border-width: calc(var(--margin) * 0.2);
-
-  & > textarea {
-    border: unset;
-    resize: none;
-  }
-
-  & > .maxlength {
-    margin-top: unset;
-    padding: calc(var(--margin) * 0.4);
-  }
-`
-
 const ManageContexts = ({ matrixClient, moderationRooms: incomingModerationRooms, nestedRooms: incomingNestedRooms, addModerationRooms, removeModerationRoom }) => {
   const { t } = useTranslation('moderate')
   const [selectedContext, setSelectedContext] = useState('')
@@ -409,7 +391,7 @@ const ManageContexts = ({ matrixClient, moderationRooms: incomingModerationRooms
     }
   }
 
-  const onSave = async () => {
+  const onSaveDescription = async (description) => {
     if (description.length > 500) return
     await matrixClient.setRoomTopic(selectedContext, description).catch(console.log)
     if (config.medienhaus.api) triggerApiUpdate(selectedContext)
@@ -644,22 +626,7 @@ const ManageContexts = ({ matrixClient, moderationRooms: incomingModerationRooms
               <summary>
                 <h3>{t('Change Description')}</h3>
               </summary>
-              <TextareaMaxLength>
-                <TextareaAutosize
-                  minRows={6}
-                  placeholder={`${t('Please add a short description.')}`}
-                  value={description}
-                  onChange={(e) => setDescription(e.target.value)}
-                  onBlur={onSave}
-                />
-                <div className="maxlength">
-                  <span>{description.length + '/500'}</span>
-                </div>
-              </TextareaMaxLength>
-              {description.length > 500 && (<>
-                <p>❗️{t('Please keep the descrpition under 500 characters.')} {description.length}</p>
-              </>
-              )}
+              <TextareaAutoSizeMaxLength description={description} setDescription={setDescription} onSaveDescription={onSaveDescription} />
             </Details>
             <Details>
               <summary>
