@@ -1,13 +1,12 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import Matrix from '../../../Matrix'
 import _ from 'lodash'
-import { useTranslation } from 'react-i18next'
+import LoadingSpinnerSelect from '../../../components/LoadingSpinnerSelect'
 
 const ContextMultiLevelSelectSingleLevel = ({ parentSpaceRoomId, selectedContextRoomId, onSelect, onFetchedChildren, templatePlaceholderMapping, templatePrefixFilter, sortAlphabetically, showTopics }) => {
   const [isLoading, setIsLoading] = useState(true)
   const [parentSpaceMetaEvent, setParentSpaceMetaEvent] = useState()
   const [childContexts, setChildContexts] = useState()
-  const { t } = useTranslation('ui')
 
   useEffect(() => {
     let isSubscribed = true
@@ -59,7 +58,7 @@ const ContextMultiLevelSelectSingleLevel = ({ parentSpaceRoomId, selectedContext
   }, [parentSpaceRoomId, sortAlphabetically, templatePlaceholderMapping])
 
   if (isLoading) {
-    return <select key="loading" disabled><option>{t('loading...')}</option></select>
+    return <LoadingSpinnerSelect />
   }
 
   if (childContexts.length < 1) {
