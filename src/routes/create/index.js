@@ -72,6 +72,12 @@ const TabSection = styled.section`
   grid-gap: var(--margin);
   grid-template-columns: repeat(auto-fit, minmax(14ch, 1fr));
 
+  /* set height of child elements */
+  & > * {
+    height: calc(var(--margin) * 2.4);
+  }
+
+  /* unset margin-top for each direct child element directly following a previous one */
   & > * + * {
     margin-top: unset;
   }
