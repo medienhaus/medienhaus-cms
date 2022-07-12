@@ -26,27 +26,17 @@ import styled from 'styled-components'
 import { triggerApiUpdate } from '../../helpers/MedienhausApiHelper'
 import TextNavigation from '../../components/medienhausUI/textNavigation'
 
-const AuthorCheckbox = styled.div`
-  display: grid;
-  grid-auto-flow: column;
-  grid-gap: var(--margin);
-  align-items: center;
-  justify-content: space-between;
-`
-
-/*
-const BackButton = styled.button`
-  @media (min-width: 50em) {
-    width: unset;
-  }
-`
-*/
-
 const TabSection = styled.section`
   display: grid;
   grid-gap: var(--margin);
   grid-template-columns: repeat(auto-fit, minmax(14ch, 1fr));
 
+  /* set height of child elements */
+  & > * {
+    height: calc(var(--margin) * 2.4);
+  }
+
+  /* unset margin-top for each direct child element directly following a previous one */
   & > * + * {
     margin-top: unset;
   }
