@@ -26,6 +26,14 @@ import styled from 'styled-components'
 import { triggerApiUpdate } from '../../helpers/MedienhausApiHelper'
 import TextNavigation from '../../components/medienhausUI/textNavigation'
 
+const AuthorCheckbox = styled.div`
+  display: grid;
+  grid-auto-flow: column;
+  grid-gap: var(--margin);
+  align-items: center;
+  justify-content: space-between;
+`
+
 const TabSection = styled.section`
   display: grid;
   grid-gap: var(--margin);
