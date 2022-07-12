@@ -523,7 +523,7 @@ const ManageContexts = ({ matrixClient, moderationRooms: incomingModerationRooms
                   <span>{newRoomName.length + '/100'}</span>
                 </div>
                 <div className="confirmation">
-                  {editRoomName &&
+                  {editRoomName && (roomName !== newRoomName) &&
                     <>
                       <button
                         className="cancel"
