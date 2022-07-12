@@ -18,11 +18,62 @@ const ListElement = styled.li`
     color: ${props => !props.disabled && 'gray'};
 `
 
-const ContextTree = ({ showItems, moderationRooms, contextId, onContextChange }) => {
+const SwitchContainter = styled.div`
+  display: flex;
+  justify-content: space-between;
+`
+
+const Switch = styled.label`
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+    input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+span {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: gray;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+span:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: var(--color-bg);
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + span {
+  background-color: var(--color-fg);
+}
+
+input:checked + span:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+  `
+
+const ContextTree = ({ moderationRooms, contextId, onContextChange }) => {
   const [loading, setLoading] = useState(false)
   const [contexts, setContexts] = useState()
   const [rootContext, setRootContext] = useState()
   const [error, setError] = useState('')
+  const [showItems, setShowItems] = useState(false)
   const matrixClient = Matrix.getMatrixClient()
 
   useEffect(() => {
@@ -46,7 +97,6 @@ const ContextTree = ({ showItems, moderationRooms, contextId, onContextChange })
       const tree = await fetchTree(rootContext).catch(() => {
         getHierarchyFromMatrix()
       })
-      console.log(tree)
       setContexts(tree)
     }
 
@@ -81,12 +131,19 @@ const ContextTree = ({ showItems, moderationRooms, contextId, onContextChange })
   return (
     <>
       {error && <p>{error}</p>}
+      <SwitchContainter>
+        <span>Show items</span>
+        <Switch>
+          <input type="checkbox" onChange={() => setShowItems(prevState => !prevState)} />
+          <span className="slider" />
+        </Switch>
+      </SwitchContainter>
       <Container>
         {mapDeep(filterDeep(contexts, (value, key, parent, context) => {
           if (context.depth > (config.medienhaus.sites.moderate.manageContexts.treeDepth || 1)) return
           // Exclude all hierarchy elements that are not "contexts"
           if (value?.type.includes('content')) return false
-          if (!config.medienhaus.sites.moderate.manageContexts.showItemsInTree && value?.type.includes('item')) return false
+          if (!showItems && value?.type.includes('item')) return false
           if (config.medienhaus.languages.includes(value?.name)) return false
 
           value.path = []
@@ -114,7 +171,6 @@ const ContextTree = ({ showItems, moderationRooms, contextId, onContextChange })
             {value.type === 'item' && <span style={{ color: 'gray' }}> {config.medienhaus.item[value.template]?.label.toUpperCase() || 'ITEM'}</span>}
           </ListElement>
         ), { childrenPath: 'children', includeRoot: false, rootIsChildren: true })}
-
       </Container>
     </>
   )

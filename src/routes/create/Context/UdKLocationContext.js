@@ -5,8 +5,9 @@ import { useTranslation } from 'react-i18next'
 import Matrix from '../../../Matrix'
 import * as _ from 'lodash'
 import LoadingSpinnerButton from '../../../components/LoadingSpinnerButton'
-import { fetchId, fetchPathList, triggerApiUpdate } from '../../../helpers/MedienhausApiHelper'
+import { fetchId, fetchPathList, removeFromParent, triggerApiUpdate } from '../../../helpers/MedienhausApiHelper'
 import DeleteButton from '../components/DeleteButton'
+import { Loading } from '../../../components/loading'
 
 /**
  * @TODO This component does not work without the API.
@@ -16,6 +17,7 @@ const UdKLocationContext = ({ itemSpaceRoomId }) => {
   const [activeContexts, setActiveContexts] = useState([config.medienhaus?.locationId])
   const [isLeaf, setIsLeaf] = useState(false)
   const [isChanging, setIsChanging] = useState(false)
+  const [fetching, setFetching] = useState(true)
   const { t } = useTranslation('locations')
 
   const templatePlaceholderMapping = useMemo(() => ({
@@ -27,7 +29,10 @@ const UdKLocationContext = ({ itemSpaceRoomId }) => {
   const fetchCurrentLocation = useCallback(async () => {
     const item = await fetchId(itemSpaceRoomId)
     // If the API does not know this item, or says that it does not have any parents, we don't do anything
-    if (!item || !item.parents) return
+    if (!item || !item.parents) {
+      setFetching(false)
+      return
+    }
     // ... otherwise we check all parents until we find the one that says "location"
     for (const parent of item.parents) {
       const parentInfo = await fetchId(parent)
@@ -42,6 +47,7 @@ const UdKLocationContext = ({ itemSpaceRoomId }) => {
         break
       }
     }
+    setFetching(false)
   }, [itemSpaceRoomId])
 
   useEffect(() => {
@@ -92,12 +98,13 @@ const UdKLocationContext = ({ itemSpaceRoomId }) => {
     if (!currentLocationContext || !currentLocationContext.id) return
 
     await Matrix.removeSpaceChild(currentLocationContext.id, itemSpaceRoomId)
-    await triggerApiUpdate(currentLocationContext.id)
+    await removeFromParent(itemSpaceRoomId, [currentLocationContext.id])
 
-    // @TODO Add API call to the not-yet-existing DELETE route
     // Otherwise the following line will have no point after refreshing the page
     setCurrentLocationContext(null)
   }
+
+  if (fetching) return <Loading />
 
   if (currentLocationContext && !isChanging) {
     return (

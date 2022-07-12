@@ -13,7 +13,6 @@ import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
 import locations from '../../../assets/data/locations.json'
 import { MatrixEvent } from 'matrix-js-sdk'
 import config from '../../../config.json'
-import TextareaAutosize from 'react-textarea-autosize'
 
 import findValueDeep from 'deepdash/es/findValueDeep'
 import LoadingSpinnerButton from '../../../components/LoadingSpinnerButton'
@@ -21,10 +20,11 @@ import { Icon } from 'leaflet/dist/leaflet-src.esm'
 import RemoveItemsInContext from './RemoveItemsInContext'
 
 import styled from 'styled-components'
-import { fetchId, triggerApiUpdate } from '../../../helpers/MedienhausApiHelper'
+import { fetchId, removeFromParent, triggerApiUpdate } from '../../../helpers/MedienhausApiHelper'
 import Matrix from '../../../Matrix'
 import LeaveContext from './LeaveContext'
 import ContextTree from './ContextTree'
+import TextareaAutoSizeMaxLength from './TextareaAutoSizeMaxLength'
 
 const DangerZone = styled.section`
   border: none;
@@ -48,25 +48,7 @@ const Details = styled.details`
     margin-top: var(--margin);
   }
 `
-
-const TextareaMaxLength = styled.section`
-  border-color: var(--color-fg);
-  border-radius: unset;
-  border-style: solid;
-  border-width: calc(var(--margin) * 0.2);
-
-  & > textarea {
-    border: unset;
-    resize: none;
-  }
-
-  & > .maxlength {
-    margin-top: unset;
-    padding: calc(var(--margin) * 0.4);
-  }
-`
-
-const ManageContexts = ({ matrixClient, moderationRooms: incomingModerationRooms, addModerationRooms, removeModerationRoom }) => {
+const ManageContexts = ({ matrixClient, moderationRooms: incomingModerationRooms, nestedRooms: incomingNestedRooms, addModerationRooms, removeModerationRoom }) => {
   const { t } = useTranslation('moderate')
   const [selectedContext, setSelectedContext] = useState('')
   const [roomName, setRoomName] = useState('')
@@ -82,6 +64,7 @@ const ManageContexts = ({ matrixClient, moderationRooms: incomingModerationRooms
   const [locationStructure, setLocationStructure] = useState()
   const [currentLocation, setCurrentLocation] = useState('')
   const [moderationRooms, setModerationRooms] = useState(incomingModerationRooms)
+  const [nestedRooms, setNestedRooms] = useState(incomingNestedRooms)
   const [editRoomName, setEditRoomName] = useState(false)
   const [newRoomName, setNewRoomName] = useState('')
 
@@ -156,12 +139,15 @@ const ManageContexts = ({ matrixClient, moderationRooms: incomingModerationRooms
   useEffect(() => {
     let cancelled = false
 
-    !cancelled && setModerationRooms(incomingModerationRooms)
+    if (!cancelled) {
+      setModerationRooms(incomingModerationRooms)
+      setNestedRooms(incomingNestedRooms)
+    }
 
     return () => {
       cancelled = true
     }
-  }, [incomingModerationRooms])
+  }, [incomingModerationRooms, incomingNestedRooms])
 
   const onRemoveItemFromContext = (space) => {
     setLoading(true)
@@ -259,9 +245,9 @@ const ManageContexts = ({ matrixClient, moderationRooms: incomingModerationRooms
     }
 
     const newContext = await createSpace(name)
-    if (config.medienhaus.api) triggerApiUpdate(newContext, selectedContext)
+    if (config.medienhaus.api) await triggerApiUpdate(newContext, selectedContext)
     // we add our newly created context to the context object to be able to work on it immedieately.
-    addModerationRooms(newContext, name, template)
+    addModerationRooms(newContext, name, template, selectedContext)
     // we set the parent to the previously selected context
     setContextParent(selectedContext)
     // then update our selected context to the newly created one
@@ -405,7 +391,7 @@ const ManageContexts = ({ matrixClient, moderationRooms: incomingModerationRooms
     }
   }
 
-  const onSave = async () => {
+  const onSaveDescription = async (description) => {
     if (description.length > 500) return
     await matrixClient.setRoomTopic(selectedContext, description).catch(console.log)
     if (config.medienhaus.api) triggerApiUpdate(selectedContext)
@@ -465,9 +451,7 @@ const ManageContexts = ({ matrixClient, moderationRooms: incomingModerationRooms
       }
       )
       if (config.medienhaus.api) {
-        // triggering an update on both spaces plus project and parent space simultaniously "tricks" the api into deleting the parent
-        await triggerApiUpdate(parent)
-        await triggerApiUpdate(selectedContext, parent)
+        await removeFromParent(selectedContext, [parent]).catch(console.debug) // @TODO add error handleing
       }
     } else {
       // @TODO error handleing
@@ -490,7 +474,6 @@ const ManageContexts = ({ matrixClient, moderationRooms: incomingModerationRooms
     delete _moderationRooms[selectedContext]
     setModerationRooms(_moderationRooms)
     setSelectedContext('')
-    if (config.medienhaus.api) triggerApiUpdate(selectedContext)
 
     setSelectedContext('')
     setDisableButton(false)
@@ -507,7 +490,7 @@ const ManageContexts = ({ matrixClient, moderationRooms: incomingModerationRooms
           : <SimpleContextSelect
               onItemChosen={onContextChange}
               selectedContext={selectedContext}
-              struktur={moderationRooms}
+              struktur={nestedRooms}
               disabled={loading}
               preSelectedValue="context"
             />}
@@ -520,7 +503,6 @@ const ManageContexts = ({ matrixClient, moderationRooms: incomingModerationRooms
               contextId={selectedContext}
               onContextChange={onContextChange}
               moderationRooms={moderationRooms}
-              howItems={config.medienhaus.sites.moderate.manageContexts.showItemsInTree || false}
             />
             <hr />
             <Details>
@@ -644,22 +626,7 @@ const ManageContexts = ({ matrixClient, moderationRooms: incomingModerationRooms
               <summary>
                 <h3>{t('Change Description')}</h3>
               </summary>
-              <TextareaMaxLength>
-                <TextareaAutosize
-                  minRows={6}
-                  placeholder={`${t('Please add a short description.')}`}
-                  value={description}
-                  onChange={(e) => setDescription(e.target.value)}
-                  onBlur={onSave}
-                />
-                <div className="maxlength">
-                  <span>{description.length + '/500'}</span>
-                </div>
-              </TextareaMaxLength>
-              {description.length > 500 && (<>
-                <p>❗️{t('Please keep the descrpition under 500 characters.')} {description.length}</p>
-              </>
-              )}
+              <TextareaAutoSizeMaxLength description={description} setDescription={setDescription} onSaveDescription={onSaveDescription} />
             </Details>
             <Details>
               <summary>

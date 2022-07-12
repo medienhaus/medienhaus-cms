@@ -53,7 +53,7 @@
   "Contributors": "Mitwirkende",
   "Did you work with other people on this project?": "Haben Sie mit anderen Personen an diesem Projekt gearbeitet?",
   "contributor name": "Name des/der Mitwirkenden",
-  "contributorsInstructions2": "Sie können den Zugriff auf dieses Projekt zum Bearbeiten des Eintrags freigeben. Der/Die Mitwirkende benötigt einen <1>udk/spaces</1> Account, um das Projekt bearbeiten zu können.",
+  "contributorsInstructions2": "Sie können den Zugriff auf dieses Projekt/Event zum Bearbeiten des Eintrags freigeben. Der/Die Mitwirkende benötigt einen <1>udk/spaces</1> Account, um das Projekt/Event bearbeiten zu können.",
   "contributorsInstructions3": "Sie können auch Mitwirkende ohne OASE-Account nennen, diese können das Projekt dann jedoch nicht bearbeiten.",
   "CANNOT edit the project": "kann das Projekt NICHT editieren",
   "CAN edit and delete(!) the project": "KANN das Projekt editieren und löschen",
@@ -96,5 +96,7 @@
   "Event": "Event",
   "SAVE CHANGES": "ÄNDERUNGEN SPEICHERN",
   "add date": "ZEITRAUM ANGEBEN",
-  "End": "Ende"
+  "End": "Ende",
+  "Preview": "Vorschau",
+  "Preview is only possible if the project/event is public. Please note that the Rundgang platform 2022 is currently still being edited and may still contain minor errors. The final Rundgang platform will be available on 18.07.2022 via:": "Vorschau ist nur möglich, wenn das Projekt/Event öffentlich ist. Bitte beachten Sie, dass die Rundgang-Plattform 2022 derzeit noch bearbeitet wird und noch kleine Fehler enthalten kann. Die finale Rundgang-Plattform wird am 18.07.2022 veröffentlicht via:"
 }

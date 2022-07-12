@@ -2,8 +2,10 @@ import React, { useEffect, useState } from 'react'
 import { Loading } from '../loading'
 import { useTranslation } from 'react-i18next'
 import Matrix from '../../Matrix'
+import config from '../../config.json'
+import { triggerApiUpdate } from '../../helpers/MedienhausApiHelper'
 
-const PublishProject = ({ disabled, space, published, hasContext, metaEvent }) => {
+const PublishProject = ({ disabled, space, published, hasContext, metaEvent, onChange }) => {
   const { t } = useTranslation('publish')
   // eslint-disable-next-line no-unused-vars
   const [userFeedback, setUserFeedback] = useState()
@@ -57,8 +59,9 @@ const PublishProject = ({ disabled, space, published, hasContext, metaEvent }) =
       metaEvent.published = publishState
       await matrixClient.sendStateEvent(space.room_id, 'dev.medienhaus.meta', metaEvent)
       console.log('--- All changed Succesfully to ' + publishState + ' ---')
-
+      if (config.medienhaus.api) await triggerApiUpdate(space.room_id)
       setUserFeedback(t('Changed successfully!'))
+      onChange(publishState === 'public' ? 'public' : 'draft')
       setTimeout(() => setUserFeedback(''), 3000)
     } catch (err) {
       console.error(err)

@@ -23,6 +23,8 @@ import config from '../../config.json'
 import _ from 'lodash'
 import UdKLocationContext from './Context/UdKLocationContext'
 import styled from 'styled-components'
+import { triggerApiUpdate } from '../../helpers/MedienhausApiHelper'
+import TextNavigation from '../../components/medienhausUI/textNavigation'
 
 const AuthorCheckbox = styled.div`
   display: grid;
@@ -32,13 +34,21 @@ const AuthorCheckbox = styled.div`
   justify-content: space-between;
 `
 
-/*
-const BackButton = styled.button`
-  @media (min-width: 50em) {
-    width: unset;
+const TabSection = styled.section`
+  display: grid;
+  grid-gap: var(--margin);
+  grid-template-columns: repeat(auto-fit, minmax(14ch, 1fr));
+
+  /* set height of child elements */
+  & > * {
+    height: calc(var(--margin) * 2.4);
+  }
+
+  /* unset margin-top for each direct child element directly following a previous one */
+  & > * + * {
+    margin-top: unset;
   }
 `
-*/
 
 const Create = () => {
   const { t } = useTranslation('content')
@@ -222,8 +232,8 @@ const Create = () => {
       //   debugger
       //   getContent = await matrixClient.getRoomHierarchy(languageSpace)
       // } else getContent = await matrixClient.getRoomHierarchy(spaceRooms[0].room_id)
-      const getContent = await matrixClient.getRoomHierarchy(spaceRooms[0].room_id)
-      setBlocks(getContent.rooms.filter(room => room.name !== contentLang).filter(room => room.name.charAt(0) !== 'x').sort((a, b) => {
+      const getContent = await Matrix.roomHierarchy(spaceRooms[0].room_id)
+      setBlocks(getContent.filter(room => room.name !== contentLang).filter(room => room.name.charAt(0) !== 'x').sort((a, b) => {
         return a.name.substring(0, a.name.indexOf('_')) - b.name.substring(0, b.name.indexOf('_'))
       }))
       // check if there is an events space
@@ -325,9 +335,10 @@ const Create = () => {
     }
   }
 
-  const changeProjectImage = () => {
+  const changeProjectImage = async () => {
     setLoading(true)
     getCurrentTime()
+    if (config.medienhaus.api) await triggerApiUpdate(projectSpace)
     setLoading(false)
   }
 
@@ -337,8 +348,9 @@ const Create = () => {
     listeningToCollaborators()
   }
 
-  const changeTitle = (newTitle) => {
+  const changeTitle = async (newTitle) => {
     setTitle(newTitle)
+    if (config.medienhaus.api) await triggerApiUpdate(projectSpace)
   }
 
   const onChangeDescription = async (description) => {
@@ -347,6 +359,7 @@ const Create = () => {
     // here we set the description for the selected language space
     const contentRoom = spaceObject.rooms.filter(room => room.name === contentLang)
     const changeTopic = await matrixClient.setRoomTopic(contentRoom[0].room_id, description).catch(console.log)
+    if (config.medienhaus.api) await triggerApiUpdate(projectSpace)
     fetchSpace()
     // @TODO setSpaceObject(spaceObject => ({...spaceObject, rooms: [...spaceObject.rooms, ]}))
     return changeTopic
@@ -428,6 +441,7 @@ const Create = () => {
             <p><Trans t={t} i18nKey="contentInstructions2">The first block&thinsp;&mdash;&thinsp;which is the introduction to your project&thinsp;&mdash;&thinsp;is required.</Trans></p>
             <p><Trans t={t} i18nKey="contentInstructions3">You can format your input by highlighting the text to be formatted with your cursor.</Trans></p>
             <p><Trans t={t} i18nKey="contentInstructions4">Content can be provided in multiple languages. We would recommend to provide the content in both, English and German. If you provide contents for just one language that content will appear on both Rundgang website versions, the English and the German one.</Trans></p>
+            {/*
             <select
               value={contentLang} onChange={(e) => {
                 setContentLang(e.target.value)
@@ -438,6 +452,20 @@ const Create = () => {
                 <option value={lang} key={lang}>{lang.toUpperCase() + ' -- ' + ISO6391.getName(lang)}</option>
               ))}
             </select>
+            */}
+            <TabSection className="request">
+              {config.medienhaus?.languages.map((lang) => (
+                <TextNavigation
+                  value={lang}
+                  key={lang}
+                  onClick={(e) => {
+                    setContentLang(e.target.value)
+                    setDescription()
+                  }}
+                  disabled={lang === contentLang}
+                >{ISO6391.getName(lang)}</TextNavigation>
+              ))}
+            </TabSection>
             {spaceObject && (description || description === '') ? <ProjectDescription description={description[contentLang]} callback={onChangeDescription} /> : <Loading />}
             {blocks.length === 0
               ? <AddContent number={0} projectSpace={spaceObject?.rooms.filter(room => room.name === contentLang)[0]?.room_id} blocks={blocks} contentType={template} reloadSpace={reloadSpace} />
@@ -471,16 +499,22 @@ const Create = () => {
             <p>{t('If you still want to make changes to your contributions after publishing, you can continue to do so.')}</p>
             {spaceObject
               ? (<>
-                <PublishProject space={spaceObject.rooms[0]} metaEvent={medienhausMeta} hasContext={hasContext} description={(description && description[config.medienhaus?.languages[0]])} published={visibility} time={getCurrentTime} />
+                <PublishProject space={spaceObject.rooms[0]} metaEvent={medienhausMeta} hasContext={hasContext} description={(description && description[config.medienhaus?.languages[0]])} published={visibility} time={getCurrentTime} onChange={setVisibility} />
                 {!(description && description[config.medienhaus?.languages[0]]) && <p>❗️ {t('Please add a short description.')}</p>}
                 {!hasContext && <p>❗️ {t('Please select a context.')}</p>}
               </>)
               : <Loading />}
           </section>
 
-          <section className="save">
-            <button className="cancel" onClick={() => history.push('/content')}>← {t('BACK TO OVERVIEW')}</button>
+          <section className="preview">
+            <div className="confirmation">
+              <button className="cancel" onClick={() => history.push('/content')}>← {t('BACK TO OVERVIEW')}</button>
+              <button className="confirm" disabled={visibility === 'draft' && true} onClick={() => window.open(`https://2022.rundgang.udk-berlin.de/${contentLang === 'en' ? 'en/' : ''}c/${params.spaceId}`, '_blank')}>{t('Preview')}*</button>
+            </div>
             {saveTimestamp && <p className="timestamp">↳ {t('Last saved at')} {saveTimestamp}</p>}
+            <p>
+              * <em>{t('Preview is only possible if the project/event is public. Please note that the Rundgang platform 2022 is currently still being edited and may still contain minor errors. The final Rundgang platform will be available on 18.07.2022 via:')} https://rundgang.udk-berlin.de/</em>
+            </p>
           </section>
         </>
       )}

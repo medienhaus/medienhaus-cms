@@ -203,9 +203,6 @@ add or remove context spaces or sub-context spaces
 
 * **showRoot:** if enabled the root of all contexts is displayed in the manage context dropdown.
 * **treeDepth:** depth of the tree shown after selecting a context. defaults to 1.
-* **showItems:** if set to true the tree will show items within the structure. defaults to false
-
-
 
 ## support
 

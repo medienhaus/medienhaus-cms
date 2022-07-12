@@ -92,6 +92,7 @@ export default function Time ({ allocation, projectSpace, reloadSpace }) {
       </RemovableLiElement>
     )
   }
+
   return (
     <section className="time">
       <h3>{t('Time')}</h3>
@@ -108,7 +109,7 @@ export default function Time ({ allocation, projectSpace, reloadSpace }) {
           <div className="timedate">
             <label htmlFor="time">{t('Start')}:</label>
             <div>
-              <input type="date" id="start-date" min="2022-07-22" max="2022-07-24" name="start-date" value={startDate} onChange={(e) => setStartDate(e.target.value)} />
+              <input type="date" id="start-date" min="2022-07-23" max="2022-07-24" name="start-date" value={startDate} onChange={(e) => setStartDate(e.target.value)} />
               <input type="time" id="start-time" name="start-time" onChange={(e) => setStartTime(e.target.value)} />
             </div>
           </div>
@@ -116,14 +117,14 @@ export default function Time ({ allocation, projectSpace, reloadSpace }) {
           <div className="timedate">
             <label htmlFor="time">{t('End')}:</label>
             <div>
-              <input type="date" id="end-date" name="end-date" min={startDate || '2022-07-22'} max="2022-07-24" value={endDate} onChange={(e) => setEndDate(e.target.value)} />
+              <input type="date" id="end-date" name="end-date" min={startDate || '2022-07-23'} max="2022-07-24" value={endDate} onChange={(e) => setEndDate(e.target.value)} />
               <input type="time" id="end-time" name="end-time" onChange={(e) => setEndTime(e.target.value)} />
             </div>
           </div>
 
           <div className="confirmation">
             <SimpleButton cancel onClick={() => setIsUIVisible(false)}>{t('CANCEL')}</SimpleButton>
-            <LoadingSpinnerButton disabled={!startDate || !endDate || new Date(startDate + 'T' + startTime + '.000Z').valueOf() - new Date(endDate + 'T' + endTime + '.000Z').valueOf() > 0} onClick={saveTime}>{t('SAVE')}</LoadingSpinnerButton>
+            <LoadingSpinnerButton disabled={!startDate || !endDate || !startTime || !endTime || new Date(startDate + 'T' + startTime + ':00.000Z').valueOf() - new Date(endDate + 'T' + endTime + ':00.000Z').valueOf() > 0} onClick={saveTime}>{t('SAVE')}</LoadingSpinnerButton>
           </div>
 
         </>
