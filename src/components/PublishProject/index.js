@@ -4,12 +4,14 @@ import { useTranslation } from 'react-i18next'
 import Matrix from '../../Matrix'
 import config from '../../config.json'
 import { triggerApiUpdate } from '../../helpers/MedienhausApiHelper'
+import LoadingSpinnerSelect from '../LoadingSpinnerSelect'
 
 const PublishProject = ({ disabled, space, published, hasContext, metaEvent, onChange }) => {
   const { t } = useTranslation('publish')
   // eslint-disable-next-line no-unused-vars
   const [userFeedback, setUserFeedback] = useState()
   const [visibility, setVisibility] = useState(published)
+  const [isChangingVisibility, setIsChangingVisibility] = useState(false)
   const matrixClient = Matrix.getMatrixClient()
 
   useEffect(() => {
@@ -31,6 +33,7 @@ const PublishProject = ({ disabled, space, published, hasContext, metaEvent, onC
   }, [matrixClient, metaEvent, published, space.room_id])
 
   const onChangeVisibility = async (publishState) => {
+    setIsChangingVisibility(true)
     setVisibility(publishState)
     const hierarchy = await matrixClient.getRoomHierarchy(space.room_id, 50, 1)
     const joinRules = {
@@ -62,15 +65,20 @@ const PublishProject = ({ disabled, space, published, hasContext, metaEvent, onC
       if (config.medienhaus.api) await triggerApiUpdate(space.room_id)
       setUserFeedback(t('Changed successfully!'))
       onChange(publishState === 'public' ? 'public' : 'draft')
+      setIsChangingVisibility(false)
       setTimeout(() => setUserFeedback(''), 3000)
     } catch (err) {
       console.error(err)
       setUserFeedback(t('Oh no, something went wrong.'))
+      setIsChangingVisibility(false)
       setTimeout(() => setUserFeedback(''), 3000)
     }
   }
 
   if (!visibility) return <Loading />
+
+  if (isChangingVisibility) return <LoadingSpinnerSelect />
+
   return (
     <div className="below">
       <select
