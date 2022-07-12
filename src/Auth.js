@@ -5,6 +5,7 @@ import * as PropTypes from 'prop-types'
 const AuthContext = createContext(undefined)
 
 function AuthProvider ({ children }) {
+  console.log(children)
   const auth = useAuthProvider()
 
   return (
@@ -25,8 +26,8 @@ function useAuth () {
 function useAuthProvider () {
   const [user, setUser] = useState(null)
 
-  const signin = (username, password, callback) => {
-    return Matrix.login(username, password).then((response) => {
+  const signin = (username, password, server, callback) => {
+    return Matrix.login(username, password, server).then((response) => {
       hydrateLocalStorage(response)
       fetchAndSetUserData(callback)
     })

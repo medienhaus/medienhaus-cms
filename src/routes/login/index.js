@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next'
 import { useAuth } from '../../Auth'
 import { Loading } from '../../components/loading'
 import Matrix from '../../Matrix'
+import config from '../../config.json'
 
 const Login = () => {
   const { register, formState: { errors }, handleSubmit } = useForm()
@@ -35,7 +36,7 @@ const Login = () => {
     if (isLoading) { return }
     setLoading(true)
     setServerResponseErrorMessage('')
-    auth.signin(data.username, data.password, () => {
+    auth.signin(data.username, data.password, data.server, () => {
       setLoading(false)
       history.replace(from)
     }).catch((error) => {
@@ -67,6 +68,14 @@ const Login = () => {
                 <input {...register('password', { required: true })} name="password" type="password" placeholder="••••••••••••••••••••••••" />
               </div>
               {errors?.password && t('Password can\'t be empty.')}
+              {config.medienhaus.customServer &&
+                <details>
+                  <summary>Advanced</summary>
+                  <div>
+                    <label htmlFor="server">{t('server')}</label>
+                    <input name="server" type="server" placeholder="https://matrix.org" />
+                  </div>
+                </details>}
               {serverResponseErrorMessage && <p>❗️ {serverResponseErrorMessage}</p>}
               <button name="submit" type="submit" disabled={isLoading}>{isLoading ? <Loading /> : 'LOGIN'}</button>
             </form>

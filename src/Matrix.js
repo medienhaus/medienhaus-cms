@@ -1,13 +1,14 @@
 import matrixcs, { MemoryStore } from 'matrix-js-sdk'
 
 class Matrix {
-  constructor () {
+  constructor (baseUrl) {
     const myAccessToken = localStorage.getItem('medienhaus_access_token')
     const myUserId = localStorage.getItem('medienhaus_user_id')
+    this.baseUrl = baseUrl || process.env.REACT_APP_MATRIX_BASE_URL
 
     // eslint-disable-next-line new-cap
     this.matrixClient = new matrixcs.createClient({
-      baseUrl: process.env.REACT_APP_MATRIX_BASE_URL,
+      baseUrl: baseUrl,
       accessToken: myAccessToken,
       userId: myUserId,
       useAuthorizationHeader: true,
@@ -65,4 +66,4 @@ class Matrix {
     return rooms
   }
 }
-export default new Matrix()
+export default new Matrix(baseUrl)
