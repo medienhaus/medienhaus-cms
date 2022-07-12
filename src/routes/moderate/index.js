@@ -35,7 +35,7 @@ const Moderate = () => {
   const [moderationRooms, setModerationRooms] = useState()
   const [nestedRooms, setNestedRooms] = useState()
   const [userSearch, setUserSearch] = useState([])
-  const [selection, setSelection] = useState('accept')
+  const [selection, setSelection] = useState('manageContexts')
   const [fetching, setFetching] = useState(false)
   const [invites, setInvites] = useState({})
   const [loading, setLoading] = useState(false)

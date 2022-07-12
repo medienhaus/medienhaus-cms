@@ -27,6 +27,7 @@ import UdKLocationContext from './Context/UdKLocationContext'
 import styled from 'styled-components'
 import * as Showdown from 'showdown'
 import { triggerApiUpdate } from '../../helpers/MedienhausApiHelper'
+import TextNavigation from '../../components/medienhausUI/textNavigation'
 
 const nl2br = function (str) {
   return str.split('\n').join('<br>')
@@ -65,6 +66,16 @@ const GutenbergSavingOverlay = styled.div`
 `
 
 const ShowdownConverter = new Showdown.Converter()
+
+const TabSection = styled.section`
+  display: grid;
+  grid-gap: var(--margin);
+  grid-template-columns: repeat(auto-fit, minmax(14ch, 1fr));
+
+  & > * + * {
+    margin-top: unset;
+  }
+`
 
 const Create = () => {
   const { t } = useTranslation('content')
@@ -752,6 +763,7 @@ const Create = () => {
             <p><Trans t={t} i18nKey="contentInstructions2">The first block&thinsp;&mdash;&thinsp;which is the introduction to your project&thinsp;&mdash;&thinsp;is required.</Trans></p>
             <p><Trans t={t} i18nKey="contentInstructions3">You can format your input by highlighting the text to be formatted with your cursor.</Trans></p>
             <p><Trans t={t} i18nKey="contentInstructions4">Content can be provided in multiple languages. We would recommend to provide the content in both, English and German. If you provide contents for just one language that content will appear on both Rundgang website versions, the English and the German one.</Trans></p>
+            {/*
             <select
               value={contentLang} onChange={(e) => {
                 if (temporaryGutenbergContents) {
@@ -766,6 +778,20 @@ const Create = () => {
                 <option value={lang} key={lang}>{lang.toUpperCase() + ' -- ' + ISO6391.getName(lang)}</option>
               ))}
             </select>
+            */}
+            <TabSection className="request">
+              {config.medienhaus?.languages.map((lang) => (
+                <TextNavigation
+                  value={lang}
+                  key={lang}
+                  onClick={(e) => {
+                    setContentLang(e.target.value)
+                    setDescription()
+                  }}
+                  disabled={lang === contentLang}
+                >{ISO6391.getName(lang)}</TextNavigation>
+              ))}
+            </TabSection>
             {spaceObject && (description || description === '') ? <ProjectDescription description={description[contentLang]} callback={onChangeDescription} /> : <Loading />}
             <GutenbergWrapper>
               {(gutenbergContent === undefined)
