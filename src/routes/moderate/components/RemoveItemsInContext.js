@@ -19,6 +19,7 @@ const ListElement = styled.li`
   align-items: center;
   justify-content: space-between;
 `
+
 export default function RemoveItemsInContext ({ parent, itemsInContext, onRemoveItemFromContext }) {
   const [items, setItems] = useState([])
   const [highlightedElement, setHighlightedElement] = useState()
@@ -57,10 +58,9 @@ export default function RemoveItemsInContext ({ parent, itemsInContext, onRemove
   }, [getAllItemsinContext, parent])
 
   if (!items) return
+
   return (
-
     <>
-
       {items.length < 1
         ? <p>{t('There are no items in this context at the moment.')}</p>
         : <UlElement> {items.map((item, index) => {
