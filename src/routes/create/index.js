@@ -499,7 +499,7 @@ const Create = () => {
             <p>{t('If you still want to make changes to your contributions after publishing, you can continue to do so.')}</p>
             {spaceObject
               ? (<>
-                <PublishProject space={spaceObject.rooms[0]} metaEvent={medienhausMeta} hasContext={hasContext} description={(description && description[config.medienhaus?.languages[0]])} published={visibility} time={getCurrentTime} />
+                <PublishProject space={spaceObject.rooms[0]} metaEvent={medienhausMeta} hasContext={hasContext} description={(description && description[config.medienhaus?.languages[0]])} published={visibility} time={getCurrentTime} onChange={setVisibility} />
                 {!(description && description[config.medienhaus?.languages[0]]) && <p>❗️ {t('Please add a short description.')}</p>}
                 {!hasContext && <p>❗️ {t('Please select a context.')}</p>}
               </>)
