@@ -18,6 +18,18 @@ import findValueDeep from 'deepdash/es/findValueDeep'
 import * as _ from 'lodash'
 import { fetchId } from '../../helpers/MedienhausApiHelper'
 
+import styled from 'styled-components'
+
+const TabSection = styled.section`
+  display: grid;
+  grid-gap: var(--margin);
+  grid-template-columns: repeat(auto-fit, minmax(14ch, 1fr));
+
+  & > * + * {
+    margin-top: unset;
+  }
+`
+
 const Moderate = () => {
   const { joinedSpaces, spacesErr, fetchSpaces, reload } = useJoinedSpaces(false)
   const [moderationRooms, setModerationRooms] = useState()
@@ -371,11 +383,11 @@ const Moderate = () => {
       )}
 
       {moderationRooms && Object.keys(moderationRooms).length > 0 && <>
-        <section className="request">
+        <TabSection className="request">
           {Object.keys(config?.medienhaus?.sites?.moderate).map((value, index) => {
             return <TextNavigation width="auto" disabled={value === selection} active={value === selection} value={value} key={value} onClick={(e) => setSelection(e.target.value)}>{value.replace(/([a-z0-9])([A-Z])/g, '$1 $2')}</TextNavigation>
           })}
-        </section>
+        </TabSection>
 
         {renderSelection()}
       </>}
