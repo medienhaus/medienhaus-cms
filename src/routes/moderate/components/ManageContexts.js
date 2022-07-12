@@ -477,20 +477,7 @@ const ManageContexts = ({ matrixClient, moderationRooms: incomingModerationRooms
               <summary>
                 <h3>{t('Change Description')}</h3>
               </summary>
-              <section>
-                <TextareaAutosize
-                  value={description}
-                  minRows={6}
-                  placeholder={`${t('Please add a short description.')}`}
-                  onChange={(e) => setDescription(e.target.value)}
-                  onBlur={onSave}
-                />
-                {description.length > 500 && (<>
-                  <p>{t('Characters:')} {description.length}</p>
-                  <p>❗️{t('Please keep the descrpition under 500 characters.')} {description.length}</p>
-                </>
-                )}
-              </section>
+              <TextareaAutoSizeMaxLength description={description} setDescription={setDescription} onSaveDescription={onSaveDescription} />
             </Details>
             <Details>
 
