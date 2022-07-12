@@ -9,9 +9,9 @@ import UlElement from './UlElement'
 import DeleteButton from '../../create/components/DeleteButton'
 
 const ListElement = styled.li`
-margin-left: calc(2em * ${props => props.indent});
-margin-bottom: calc(var(--margin)/2);
-display: flex;
+  display: flex;
+  margin-left: calc(2em * ${props => props.indent});
+  margin-bottom: calc(var(--margin) / 2);
 `
 const LiElement = ({ roomId, type, name, parent, indent, item, onElementRemoved }) => {
   const [isExpanded, setIsExpanded] = useState(false)
@@ -58,4 +58,5 @@ const LiElement = ({ roomId, type, name, parent, indent, item, onElementRemoved 
     </div>
   )
 }
+
 export default LiElement

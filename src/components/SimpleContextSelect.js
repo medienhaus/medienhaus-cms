@@ -5,7 +5,7 @@ import filterDeep from 'deepdash/es/filterDeep'
 import config from '../config.json'
 import { useTranslation } from 'react-i18next'
 
-function SimpleContextSelect ({ onItemChosen, selectedContext: selectedContextInit, contexts, struktur, disabled, moderationRooms }) {
+function SimpleContextSelect ({ location, onItemChosen, selectedContext: selectedContextInit, contexts, struktur, disabled, moderationRooms, preSelectedValue, enableType }) {
   const [selectedContext, setSelectedContext] = useState(selectedContextInit)
   const { t } = useTranslation('context')
   const items = config.medienhaus?.sites?.moderate?.manageContexts?.showRoot ? struktur : struktur[Object.keys(struktur)[0]].children
@@ -21,10 +21,12 @@ function SimpleContextSelect ({ onItemChosen, selectedContext: selectedContextIn
       <datalist id="context-list" disabled={disabled} defaultValue={selectedContext}> */}
 
       <select disabled={disabled} value={selectedContext} onChange={(e) => { setSelectedContext(e.target.value); onItemChosen(e.target.value) }}>
-        <option disabled value="">-- {t('select context')} --</option>
+        <option disabled value="">-- {t('select ' + preSelectedValue)} --</option>
         {mapDeep(filterDeep(items, (value, key, parent, context) => {
           // Exclude all hierarchy elements that are not "contexts"
           if (!value?.type.includes('context')) return false
+          if (location && !value?.template.includes('location')) return false
+
           value.path = []
           value.pathIds = []
           function addParentToPath (item) {
@@ -44,7 +46,7 @@ function SimpleContextSelect ({ onItemChosen, selectedContext: selectedContextIn
           }
           return true
         }, { childrenPath: 'children', includeRoot: false, rootIsChildren: true }), (value, key, parent, context) => (
-          <option key={value.id + key} disabled={(contexts && contexts.some(context => context.room_id === value.id)) || (moderationRooms && !moderationRooms.some(room => room.room_id === value.id))} value={value.id}>{' --- '.repeat(context.depth - 1)}{value.name}</option>
+          <option key={value.id + key} disabled={(contexts && contexts.some(context => context.room_id === value.id)) || (moderationRooms && !moderationRooms.some(room => room.room_id === value.id)) || (enableType && value.template !== enableType)} value={value.id}>{' ─ '.repeat(context.depth - 1) + value.name}</option>
         ), { childrenPath: 'children', includeRoot: false, rootIsChildren: true })}
       </select>
       {/* </datalist> */}

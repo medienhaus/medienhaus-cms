@@ -9,7 +9,7 @@ const InviteUserToSpace = ({ matrixClient, nestedRooms, setPower, fetchUsers, fe
   const [selectedRoom, setSelectedRoom] = useState('')
   const [userToInvite, setUserToInvite] = useState('')
   const [inviteFeedback, setInviteFeedback] = useState('')
-  const { t } = useTranslation()
+  const { t } = useTranslation('moderate')
 
   const invite = async () => {
     // @TODO check why userToInvite is not cleared
@@ -19,7 +19,7 @@ const InviteUserToSpace = ({ matrixClient, nestedRooms, setPower, fetchUsers, fe
       try {
         await matrixClient.invite(selectedRoom, id)
         promoteToModerator && setPower(selectedRoom, id, 50)
-        setInviteFeedback('invited ' + name + ' successfully')
+        setInviteFeedback(name + t(' was successfully invited'))
         setTimeout(() => {
           setInviteFeedback('')
           setUserToInvite('')
@@ -41,20 +41,21 @@ const InviteUserToSpace = ({ matrixClient, nestedRooms, setPower, fetchUsers, fe
 
   return (
     <section className="invite">
-      <h3>{t('Invite users')}</h3>
-      <p>Invite users to specific contexts and promote them to moderate said context.</p>
+      <h3>{t('Invite accounts')}</h3>
+      <p>{t('Invite accounts to specific contexts, and optionally promote them to moderate that specific context they are invited to.')}</p>
       {!nestedRooms
         ? <Loading />
         : <SimpleContextSelect
             onItemChosen={setSelectedRoom}
             selectedContext={selectedRoom}
             struktur={nestedRooms}
+            preSelectedValue="context"
           />}
       <input
         list="userSearch"
         id="user-datalist"
         name="user-datalist"
-        placeholder={t('user id')}
+        placeholder={t('account_id')}
         onChange={(e) => {
           fetchUsers(e, e.target.value)
         }}

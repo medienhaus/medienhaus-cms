@@ -218,6 +218,15 @@ main ul {
   list-style-type: "\2013\0020";
 }
 
+main ul.times {
+  font-feature-settings: "case";
+  list-style-type: "\2192\0020";
+}
+
+main ul.times li::marker {
+  color: var(--color-no);
+}
+
 form>*+* {
   margin-top: var(--margin);
 }
@@ -681,7 +690,7 @@ textarea[disabled] {
 .credits>ul>li {
   display: grid;
   align-items: center;
-  grid-gap: var(--margin);
+  grid-gap: calc(var(--margin) * 0.5);
 }
 
 .credits>ul>li {
@@ -1009,6 +1018,10 @@ button>.loading {
   margin-top: calc(var(--margin) * 0.5);
 }
 
+.manage > section + section {
+  margin-top: calc(var(--margin) * 2);
+}
+
 .maxlength {
   display: grid;
 }
@@ -1047,12 +1060,10 @@ button>.loading {
   grid-gap: var(--margin);
 }
 
-/*
 .project .above  {
   grid-column: 1 / -1;
   grid-row: 1;
 }
-*/
 
 .project .left {
   background-color: var(--color-fg);
@@ -1115,6 +1126,16 @@ button>.loading {
 }
 */
 
+.project ~ .project--status {
+  color: var(--color-me);
+  display: grid;
+  font-size: 0.6rem;
+  grid-auto-flow: column;
+  grid-gap: var(--margin);
+  justify-content: space-between;
+  width: 100%;
+}
+
 .project .below,
 .visibility .below {
   display: grid;
@@ -1142,6 +1163,7 @@ button>.loading {
   grid-column: 2;
 }
 
+/*
 .request {
   display: grid;
   grid-auto-flow: column;
@@ -1150,6 +1172,7 @@ button>.loading {
 .request > * + * {
   margin-top: unset;
 }
+*/
 
 .requests>div {
   display: grid;
@@ -1694,6 +1717,7 @@ button>.loading {
     height: calc(var(--margin) * 7.8);
   }
 
+  /*
   .project :nth-child(4) {
     grid-column: 3;
     grid-row: 2;
@@ -1710,6 +1734,7 @@ button>.loading {
     grid-column: 3;
     grid-row: 4;
   }
+  */
 
   .project .below,
   .visibility .below {

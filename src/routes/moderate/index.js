@@ -35,7 +35,7 @@ const Moderate = () => {
   const [moderationRooms, setModerationRooms] = useState()
   const [nestedRooms, setNestedRooms] = useState()
   const [userSearch, setUserSearch] = useState([])
-  const [selection, setSelection] = useState('invite')
+  const [selection, setSelection] = useState('manageContexts')
   const [fetching, setFetching] = useState(false)
   const [invites, setInvites] = useState({})
   const [loading, setLoading] = useState(false)
@@ -328,7 +328,7 @@ const Moderate = () => {
           config.medienhaus?.sites?.moderate?.accept &&
             <>
               <section className="accept">
-                <h2>{t('Accept user requests')}</h2>
+                <h2>{t('Manage requests')}</h2>
                 {Object.keys(moderationRooms).length > 0
                   ? <>
                     <section className="requests">

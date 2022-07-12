@@ -22,7 +22,7 @@ export default function Time ({ allocation, projectSpace, reloadSpace }) {
   const [startTime, setStartTime] = useState('00:00')
   const [endTime, setEndTime] = useState('00:00')
   const [temporalObject, setTemporalObject] = useState({})
-  const { t } = useTranslation('content')
+  const { t, i18n } = useTranslation('content')
   const matrixClient = Matrix.getMatrixClient()
 
   useEffect(() => {
@@ -79,11 +79,11 @@ export default function Time ({ allocation, projectSpace, reloadSpace }) {
     const startToDate = new Date(start * 1000)
     startToDate.setHours(startToDate.getHours() - 2) // convert to Berlin Timezone
 
-    const startUnixToRealWorld = startToDate.toLocaleString('en-UK')
+    const startUnixToRealWorld = startToDate.toLocaleString(i18n.language, { year: 'numeric', month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit', hour12: false })
 
     const endToDate = new Date(end * 1000)
     endToDate.setHours(endToDate.getHours() - 2) // convert to Berlin Timezone
-    const endUnixToRealWorld = endToDate.toLocaleString('en-UK')
+    const endUnixToRealWorld = endToDate.toLocaleString(i18n.language, { year: 'numeric', month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit', hour12: false })
 
     return (
       <RemovableLiElement key={index}>
@@ -92,14 +92,16 @@ export default function Time ({ allocation, projectSpace, reloadSpace }) {
       </RemovableLiElement>
     )
   }
+
   return (
     <section className="time">
       <h3>{t('Time')}</h3>
+      <p>{t('Mark the exact time of your event with a start and end time.')}</p>
       {allocation?.temporal && (
-        <ol>
+        <ul className="times">
           {allocation.temporal.map((date, index) => <TimeSlots key={index} index={index} start={date.start} end={date.end} />
           )}
-        </ol>
+        </ul>
       )}
       {!isUIVisible && <button onClick={() => setIsUIVisible(true)}>{t('add date')}</button>}
       {isUIVisible && (
@@ -107,7 +109,7 @@ export default function Time ({ allocation, projectSpace, reloadSpace }) {
           <div className="timedate">
             <label htmlFor="time">{t('Start')}:</label>
             <div>
-              <input type="date" id="start-date" min="2022-07-22" max="2022-07-24" name="start-date" value={startDate} onChange={(e) => setStartDate(e.target.value)} />
+              <input type="date" id="start-date" min="2022-07-23" max="2022-07-24" name="start-date" value={startDate} onChange={(e) => setStartDate(e.target.value)} />
               <input type="time" id="start-time" name="start-time" onChange={(e) => setStartTime(e.target.value)} />
             </div>
           </div>
@@ -115,14 +117,14 @@ export default function Time ({ allocation, projectSpace, reloadSpace }) {
           <div className="timedate">
             <label htmlFor="time">{t('End')}:</label>
             <div>
-              <input type="date" id="end-date" name="end-date" min={startDate || '2022-07-22'} max="2022-07-24" value={endDate} onChange={(e) => setEndDate(e.target.value)} />
+              <input type="date" id="end-date" name="end-date" min={startDate || '2022-07-23'} max="2022-07-24" value={endDate} onChange={(e) => setEndDate(e.target.value)} />
               <input type="time" id="end-time" name="end-time" onChange={(e) => setEndTime(e.target.value)} />
             </div>
           </div>
 
           <div className="confirmation">
-            <SimpleButton cancel onClick={() => setIsUIVisible(false)}>CANCEL</SimpleButton>
-            <LoadingSpinnerButton disabled={!startDate || !endDate || new Date(startDate + 'T' + startTime + '.000Z').valueOf() - new Date(endDate + 'T' + endTime + '.000Z').valueOf() > 0} onClick={saveTime}>{t('Save')}</LoadingSpinnerButton>
+            <SimpleButton cancel onClick={() => setIsUIVisible(false)}>{t('CANCEL')}</SimpleButton>
+            <LoadingSpinnerButton disabled={!startDate || !endDate || !startTime || !endTime || new Date(startDate + 'T' + startTime + '.000Z').valueOf() - new Date(endDate + 'T' + endTime + '.000Z').valueOf() > 0} onClick={saveTime}>{t('SAVE')}</LoadingSpinnerButton>
           </div>
 
         </>

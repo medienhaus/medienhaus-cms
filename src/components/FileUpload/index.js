@@ -26,7 +26,7 @@ const FileUpload = (props) => {
         <>
           <input type="text" placeholder={t('author, credits, et cetera')} onChange={(e) => setAuthor(e.target.value)} />
           <select id="license" name="license" defaultValue="" value={license} onChange={(e) => setLicense(e.target.value)}>
-            <option value="" disabled>-- select license or rights statement --</option>
+            <option value="" disabled>-- {t('select license or rights statement')} --</option>
             <optgroup label="Creative Commons Licenses">
               <option value="cc0">CC0 1.0</option>
               <option value="cc-by">CC BY 4.0</option>
@@ -36,8 +36,8 @@ const FileUpload = (props) => {
               <option value="cc-by-nd">CC BY-ND 4.0</option>
               <option value="cc-by-nc-nd">CC BY-NC-ND 4.0</option>
             </optgroup>
-            <optgroup label="Rights Statements">
-              <option value="rs-inc">In Copyright</option>
+            <optgroup label={t('Rights Statements')}>
+              <option value="rs-inc">{t('In Copyright')}</option>
             </optgroup>
           </select>
           {/* TODO: needs i18n */}

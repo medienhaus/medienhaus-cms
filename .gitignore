@@ -28,8 +28,7 @@ yarn-debug.log*
 yarn-error.log*
 
 # stuff
-.*.swp
 .DS_Store
 
 # config
-**/[Cc]onfig.json
+config.json

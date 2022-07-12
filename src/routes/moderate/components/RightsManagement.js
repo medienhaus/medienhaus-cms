@@ -8,7 +8,7 @@ const RightsManagement = ({ matrixClient, nestedRooms, setPower, fetchUsers, fet
   const [selectedRoom, setSelectedRoom] = useState('')
   const [userToPromote, setUserToPromote] = useState('')
   const [promoteFeedback, setPromoteFeedback] = useState('')
-  const { t } = useTranslation()
+  const { t } = useTranslation('moderate')
 
   function promote () {
     return setPower(selectedRoom, userToPromote, 50).then(() => {
@@ -40,19 +40,20 @@ const RightsManagement = ({ matrixClient, nestedRooms, setPower, fetchUsers, fet
 
   return (
     <section className="promote">
-      <h3>{t('Promote users to moderator')}</h3>
+      <h3>{t('Promote accounts to moderator')}</h3>
       {!nestedRooms
         ? <Loading />
         : <SimpleContextSelect
             onItemChosen={setSelectedRoom}
             selectedContext={selectedRoom}
             struktur={nestedRooms}
+            preSelectedValue="context"
           />}
       <input
         list="userSearch"
         id="user-datalist"
         name="user-datalist"
-        placeholder={t('name')}
+        placeholder={t('account_id')}
         onChange={(e) => {
           fetchUsers(e, e.target.value)
         }}

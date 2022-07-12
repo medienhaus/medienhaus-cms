@@ -4,6 +4,7 @@ import { Loading } from '../../../components/loading'
 import * as _ from 'lodash'
 // import SimpleContextSelect from '../../../components/SimpleContextSelect'
 import DeleteButton from '../components/DeleteButton'
+import { useTranslation } from 'react-i18next'
 import config from '../../../config.json'
 import findValueDeep from 'deepdash/es/findValueDeep'
 
@@ -12,22 +13,29 @@ import ContextDropdown from '../../../components/ContextDropdown'
 
 import { triggerApiUpdate, fetchContextTree, fetchId, removeFromParent } from '../../../helpers/MedienhausApiHelper'
 
-const RemovableLiElement = styled.li`
+const UlElement = styled.ul`
+  background-color: ${props => props.active ? 'var(--color-fg)' : 'none'};
+  color: ${props => props.active ? 'var(--color-bg)' : 'none'};
   display: grid;
-  grid-auto-flow: column;
+  grid-gap: calc(var(--margin) * 0.5);
   align-items: center;
-  justify-content: space-between;
-  list-style: none;
-  height: 2rem;
-  margin-bottom: calc(var(--margin) / 2);
 `
 
-const Category = ({ projectSpace, onChange, parent }) => {
+const ListElement = styled.li`
+  display: grid;
+  grid-template-columns: 1fr 2rem;
+  grid-gap: var(--margin);
+  align-items: center;
+  justify-content: space-between;
+`
+
+const Category = ({ projectSpace, onChange, parent, setLocationFromLocationTree }) => {
   const [loading, setLoading] = useState(true)
   const [contexts, setContexts] = useState([])
   const [error, setError] = useState('')
   const [inputItems, setInputItems] = useState()
   const matrixClient = Matrix.getMatrixClient()
+  const { t } = useTranslation('content')
 
   const createStructurObject = async () => {
     setLoading(true)
@@ -86,10 +94,15 @@ const Category = ({ projectSpace, onChange, parent }) => {
   const fetchParentsFromApi = async () => {
     const fetchParents = await fetchId(projectSpace)
     if (fetchParents.parents) {
-      fetchParents.parents.forEach(async parent => {
+      for (const parent of fetchParents.parents) {
         const fetchParent = await fetchId(parent)
+        if (fetchParent.template.includes('location')) {
+          // if the parent is a location element we set it to our current location and continue with the next element
+          setLocationFromLocationTree(fetchParent.id)
+          continue
+        }
         setContexts(contexts => [...contexts, { name: fetchParent.name, room_id: fetchParent.id }])
-      })
+      }
     }
   }
 
@@ -197,26 +210,25 @@ const Category = ({ projectSpace, onChange, parent }) => {
 
   return (
     <>
-      {/* }
-      <p>{t('In which context do you want to publish your project?')}</p>
-      <p>{t('This information is necessary to show your project in the right place on the Rundgang 2021 website, and must therefore be specified when you change the visibility of the project to public.')}</p>
+      <p>{t('In which context do you want to publish your project/event?')}</p>
+      <p>{t('This information is necessary to show your project/event in the right place on the Rundgang 2022 website, and must therefore be specified when you change the visibility of the project/event to public.')}</p>
       <p>{t('The context can be a class, a course, a seminar or a free project. If you are unsure, ask the professor of your class or the seminar leader.')}</p>
       <p>{t('You can scroll through the list, or filter/search the list by typing one or more keywords.')}</p>
-  */}
+      <p>{t('You have the possibility to choose multiple contexts if your event is i.e. interdisciplinary or a cooperation or similar.')}</p>
+
       {!inputItems || loading
         ? <Loading />
         : <>
-          <ul style={{ position: 'relative' }}>
+          <UlElement>
             {contexts?.map((context, index) => {
               return (
-                <RemovableLiElement key={context.room_id}>
-                  <span>{context.name} </span>
+                <ListElement key={context.room_id}>
+                  {context.name}
                   <DeleteButton height="2rem" width="2rem" onDelete={async () => { await handleRemove(context.room_id) }} />
-                </RemovableLiElement>
+                </ListElement>
               )
             })}
-          </ul>
-
+          </UlElement>
           {/* <SimpleContextSelect
               selectedContext=""
               onItemChosen={onContextChosen}
@@ -231,6 +243,7 @@ const Category = ({ projectSpace, onChange, parent }) => {
           />
         </>}
       {error && <p>{error}</p>}
+
       {/* {subject !== '' && !member && <Knock room={room} callback={callback} />} */}
     </>
   )

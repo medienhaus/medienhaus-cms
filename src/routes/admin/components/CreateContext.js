@@ -1,29 +1,35 @@
 import React, { useState } from 'react'
 import { Loading } from '../../../components/loading'
+import { useTranslation } from 'react-i18next'
 import config from '../../../config.json'
 
 function CreateContext (props) {
   const [contextName, setContextName] = useState('')
   const [template, setTemplate] = useState('')
+  const { t } = useTranslation('admin')
 
   return (
-    <form>
-      <div>
-        <label htmlFor="name">{props.t('Sub-Context Name')}: </label>
+    <>
+      <section className="manage--add-subcontext--title">
+        <label>
+          <h3>{props.t('Name / Title')}</h3>
+        </label>
         <input type="text" value={contextName} onChange={(e) => setContextName(e.target.value)} />
-      </div>
+      </section>
       {config.medienhaus.context &&
-        <div>
-          <label htmlFor="template">{props.t('Type of Context')}: </label>
+        <section className="manage--add-subcontext--type">
+          <label>
+            <h3>{props.t('Type')}</h3>
+          </label>
           <select value={template} onChange={(e) => setTemplate(e.target.value)}>
-            <option disabled value="">--- Please choose a type of context ---</option>
+            <option disabled value="">-- {t('select context type')} --</option>
             {Object.keys(config.medienhaus.context).map(context => {
               return <option key={config.medienhaus.context[context].label} value={context}>{config.medienhaus.context[context].label}</option>
             })}
           </select>
-        </div>}
+        </section>}
       <button type="submit" disabled={props.disableButton || !contextName || !template} onClick={(e) => props.callback(e, contextName, template, () => { setContextName(''); setTemplate('') })}>{props.loading ? <Loading /> : props.t('Add Context')}</button>
-    </form>
+    </>
   )
 }
 export default CreateContext

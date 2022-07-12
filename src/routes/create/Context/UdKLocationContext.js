@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next'
 import Matrix from '../../../Matrix'
 import * as _ from 'lodash'
 import LoadingSpinnerButton from '../../../components/LoadingSpinnerButton'
-import { fetchId, fetchPathList, triggerApiUpdate } from '../../../helpers/MedienhausApiHelper'
+import { fetchId, fetchPathList, removeFromParent, triggerApiUpdate } from '../../../helpers/MedienhausApiHelper'
 import DeleteButton from '../components/DeleteButton'
 
 /**
@@ -92,9 +92,8 @@ const UdKLocationContext = ({ itemSpaceRoomId }) => {
     if (!currentLocationContext || !currentLocationContext.id) return
 
     await Matrix.removeSpaceChild(currentLocationContext.id, itemSpaceRoomId)
-    await triggerApiUpdate(currentLocationContext.id)
+    await removeFromParent(itemSpaceRoomId, [currentLocationContext.id])
 
-    // @TODO Add API call to the not-yet-existing DELETE route
     // Otherwise the following line will have no point after refreshing the page
     setCurrentLocationContext(null)
   }

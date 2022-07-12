@@ -166,7 +166,7 @@ const ContextTree = ({ moderationRooms, contextId, onContextChange }) => {
           return true
         }, { childrenPath: 'children', includeRoot: false, rootIsChildren: true }), (value, key, parent, context) => (
           <ListElement key={value.id + key} disabled={!!moderationRooms[value.id]}>
-            {' --- '.repeat(context.depth)}
+            {' ─ '.repeat(context.depth)}
             {moderationRooms[value.id] ? <UnstyledButton onClick={handleContextClick} value={value.id}>{value.name}</UnstyledButton> : value.name}
             {value.type === 'item' && <span style={{ color: 'gray' }}> {config.medienhaus.item[value.template]?.label.toUpperCase() || 'ITEM'}</span>}
           </ListElement>

@@ -146,14 +146,14 @@ const Collaborators = ({ projectSpace, members, time, startListeningToCollab }) 
   return (
     <>
       <h3>{t('Contributors')}</h3>
-      <p><Trans t={t} i18nKey="contributorsInstructions2">You can share access (for editing) to this project.</Trans></p>
-      <p><Trans t={t} i18nKey="contributorsInstructions3">You can also give credits to a contributor without an account, but they won’t be able to get access for editing. Just type in their name and click the <code>ADD</code> button.</Trans></p>
+      <p><Trans t={t} i18nKey="contributorsInstructions2">You can share access (for editing) to this project. The contributing editor needs an <a href="https://spaces.udk-berlin.de" rel="external nofollow noopener noreferrer" target="_blank">udk/spaces</a> account to edit the project.</Trans></p>
+      <p><Trans t={t} i18nKey="contributorsInstructions3">You can also give credits to a contributor without an OASE account, but they won’t be able to get access for editing.</Trans></p>
       <section className="credits">
         {/* @TODO kicking user function */}
         {
           members && Object.keys(members).length > 1 &&
             <ul>
-              <h4><strong>{t('CAN edit and delete(!) the project')}</strong></h4>
+              <h4><strong>{t('Contributors (with editing permissions)')}</strong></h4>
               {Object.values(members).filter(name => name.membership !== 'leave').map((name, i) => {
               // we filter users with the status leave since they either rejected our invitation or left the project
                 startListeningToCollab()
@@ -177,7 +177,7 @@ const Collaborators = ({ projectSpace, members, time, startListeningToCollab }) 
         }
         {credits?.length > 0 &&
           <ul>
-            <h4><strong>{t('CANNOT edit the project')}</strong></h4>
+            <h4><strong>{t('Credits (without editing permissions)')}</strong></h4>
             {credits.map((name, index) =>
               <Credits name={name} index={index} projectSpace={projectSpace[0].room_id} callback={checkForCredits} key={index} />
             )}

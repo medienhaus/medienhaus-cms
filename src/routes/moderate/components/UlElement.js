@@ -7,13 +7,13 @@ import config from '../../../config.json'
 import LiElement from './LiElement'
 
 const Ul = styled.ul`
-  list-style: none;
   cursor: pointer;
+  list-style: none;
 
-  li:hover, li.selected {
+  li:hover,
+  li.selected {
     text-decoration: underline;
   }
-
 `
 
 const UlElement = ({ roomId, indent, removeContentElement }) => {
@@ -77,4 +77,5 @@ const UlElement = ({ roomId, indent, removeContentElement }) => {
     </Ul>
   )
 }
+
 export default UlElement

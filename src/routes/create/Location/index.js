@@ -1,24 +1,131 @@
 import React, { useEffect, useState } from 'react'
-import AddEvent from './components/AddEvent'
-import { useTranslation } from 'react-i18next'
+// import AddEvent from './components/AddEvent'
+// import { useTranslation } from 'react-i18next'
 import DisplayContent from '../DisplayContent'
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
 import locations from '../../../assets/data/locations.json'
+import * as _ from 'lodash'
 
 import DeleteButton from '../components/DeleteButton'
 import deleteContentBlock from '../functions/deleteContentBlock'
 import DisplayEvents from './components/DisplayEvents'
 import { isArray } from 'lodash'
 import { Loading } from '../../../components/loading'
+import Matrix from '../../../Matrix'
+import SimpleContextSelect from '../../../components/SimpleContextSelect'
+import config from '../../../config.json'
 import { Icon } from 'leaflet/dist/leaflet-src.esm'
 
-const Location = ({ reloadSpace, inviteCollaborators, projectSpace, events, allocation, matrixClient }) => {
+const Location = ({ reloadSpace, inviteCollaborators, projectSpace, events, allocation, matrixClient, locationFromLocationTree, setLocationFromLocationTree }) => {
   const [eventSpace, setEventSpace] = useState(events)
   const [eventContent, setEventContent] = useState([])
+  const [locationStructure, setLocationStructure] = useState()
   const [oldEvents, setOldEvents] = useState([])
   const [loading, setLoading] = useState(false)
   const [deleting, setDeleting] = useState(false)
-  const { t } = useTranslation('date')
+  const [currentLocation, setCurrentLocation] = useState()
+  // const { t } = useTranslation('date')
+
+  useEffect(() => {
+    setCurrentLocation(locationFromLocationTree)
+  }, [locationFromLocationTree])
+
+  const createStructurObject = async () => {
+    setLoading(true)
+    async function getSpaceStructure (motherSpaceRoomId, includeRooms) {
+      const result = {}
+
+      function createSpaceObject (id, name, metaEvent) {
+        return {
+          id: id,
+          name: name,
+          type: metaEvent.content.type,
+          children: {}
+        }
+      }
+
+      async function scanForAndAddSpaceChildren (spaceId, path) {
+        if (spaceId === 'undefined') return
+        const stateEvents = await matrixClient.roomState(spaceId).catch(console.log)
+
+        // check if room exists in roomHierarchy
+        // const existsInCurrentTree = _.find(hierarchy, {room_id: spaceId})
+        // const metaEvent = await matrixClient.getStateEvent(spaceId, 'dev.medienhaus.meta')
+        const metaEvent = _.find(stateEvents, { type: 'dev.medienhaus.meta' })
+        if (!metaEvent) return
+        // if (!typesOfSpaces.includes(metaEvent.content.type)) return
+        if (!metaEvent.content?.template?.includes('location')) return
+        const nameEvent = _.find(stateEvents, { type: 'm.room.name' })
+        if (!nameEvent) return
+        const spaceName = nameEvent.content.name
+
+        // if (initial) {
+        // result.push(createSpaceObject(spaceId, spaceName, metaEvent))
+        _.set(result, [...path, spaceId], createSpaceObject(spaceId, spaceName, metaEvent))
+        // }
+
+        // const spaceSummary = await matrixClient.getSpaceSummary(spaceId)
+        console.log(`getting children for ${spaceId} / ${spaceName}`)
+        for (const event of stateEvents) {
+          if (event.type !== 'm.space.child' && !includeRooms) continue
+          if (event.type === 'm.space.child' && _.size(event.content) === 0) continue // check to see if body of content is empty, therefore space has been removed
+          if (event.state_key === projectSpace) setCurrentLocation(event.room_id) // add context to the contexts array if the projectspace is a child of it
+          if (event.room_id !== spaceId) continue
+          // if (event.sender !== process.env.RUNDGANG_BOT_USERID && !includeRooms) continue
+
+          // find deep where 'id' === event.room_id, and assign match to 'children'
+          // const path = findPathDeep(result, (room, key) => {
+          //   return room.id === event.room_id
+          // }, {
+          //   includeRoot: true,
+          //   rootIsChildren: true,
+          //   pathFormat: 'array',
+          //   childrenPath: 'children'
+          // })
+          //
+          // if (!path) continue
+
+          // const metaEvent = await matrixClient.getStateEvent(event.state_key, 'dev.medienhaus.meta')
+
+          // const childrenSpaceToAdd = createSpaceObject(event.state_key, spaceSummary, metaEvent)
+          // if (!childrenSpaceToAdd.name) continue
+
+          // _.set(result, [...path, 'children', event.state_key], childrenSpaceToAdd)
+
+          // result[...path, 'children'].push(childrenSpaceToAdd)
+          // const currentChildren = _.get(result, [...path, 'children'])
+          // if (!currentChildren) {
+          //   _.set(result, [...path, 'children'], [])
+          //   currentChildren = _.get(result, [...path, 'children'])
+          // }
+          // console.log(currentChildren)
+          // currentChildren.push(childrenSpaceToAdd)
+
+          // Check if this is a space itself, and if so try to get its children
+          // if (_.get(_.find(spaceSummary.rooms, ['room_id', event.state_key]), 'room_type') === 'm.space') {
+
+          await scanForAndAddSpaceChildren(event.state_key, [...path, spaceId, 'children'])
+          // }
+        }
+      }
+
+      await scanForAndAddSpaceChildren(motherSpaceRoomId, [])
+      setLoading(false)
+      return result
+    }
+    console.log('---- started structure ----')
+    const tree = await getSpaceStructure(config.medienhaus.locationId, false)
+    // console.log(tree[Object.keys(tree)[0]])
+    setLocationStructure(tree)
+  }
+
+  const fetchTreeFromApi = async () => {
+    setLoading(true)
+    const fetchLocationTree = await fetch(config.medienhaus.api + config.medienhaus.locationId + '/tree/filter/type/context')
+    const locationResponse = await fetchLocationTree.json()
+    setLocationStructure(locationResponse.children)
+    setLoading(false)
+  }
 
   useEffect(() => {
     const fetchEvents = async () => {
@@ -44,6 +151,12 @@ const Location = ({ reloadSpace, inviteCollaborators, projectSpace, events, allo
     setEventSpace(events)
   }, [events])
 
+  useEffect(() => {
+    if (config.medienhaus.api) fetchTreeFromApi()
+    else createStructurObject()
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
   const onDelete = async (index) => {
     setDeleting(true)
     try {
@@ -64,6 +177,7 @@ const Location = ({ reloadSpace, inviteCollaborators, projectSpace, events, allo
       setDeleting()
     }
   }
+
   const onLegacyDelete = async (e, roomId, name, index) => {
     e.preventDefault()
     setDeleting(true)
@@ -78,6 +192,31 @@ const Location = ({ reloadSpace, inviteCollaborators, projectSpace, events, allo
       }, 2000)
     } finally {
       setDeleting()
+    }
+  }
+
+  const addContextToLocation = async (location) => {
+    if (currentLocation) await Matrix.removeSpaceChild(currentLocation, projectSpace)
+    await Matrix.addSpaceChild(location, projectSpace).catch(async () => {
+      // if adding spaceChild fails we try to join the space first
+      const joinRoom = await matrixClient.joinRoom(location).catch(console.log)
+      if (joinRoom) await addContextToLocation(location)
+    })
+    setLocationFromLocationTree(location)
+    setCurrentLocation(locationFromLocationTree)
+    // tell api to update branch of tree
+    if (config.medienhaus.api) {
+      const body = {
+        depth: 1,
+        parentId: location
+      }
+      await fetch(config.medienhaus.api + projectSpace + '/fetch', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(body)
+      })
     }
   }
 
@@ -159,6 +298,16 @@ const Location = ({ reloadSpace, inviteCollaborators, projectSpace, events, allo
           </div>
         )
       })}
+      {locationStructure &&
+        <SimpleContextSelect
+          selectedContext={locationFromLocationTree}
+          preSelectedValue="location"
+          onItemChosen={addContextToLocation}
+          struktur={locationStructure}
+          disabled={loading || !locationStructure}
+          location
+        />}
+      {/*
       {eventContent?.length < 1 &&
         <AddEvent
           length={0}
@@ -168,6 +317,7 @@ const Location = ({ reloadSpace, inviteCollaborators, projectSpace, events, allo
           reloadSpace={reloadSpace}
           inviteCollaborators={inviteCollaborators}
         />}
+      */}
     </>
   )
 }

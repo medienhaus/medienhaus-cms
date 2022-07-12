@@ -45,7 +45,7 @@ const Feedback = () => {
     return (
       <section>
         <p>{t('Thank you for your feedback!')}</p>
-        <p><Trans t={t} i18nKey="submittedMessage">We are collecting your feedback and will evaluate it after the Rundgang 2021. If you need technical help with entering your contributions, please reach out via the <NavLink to="/support">/support</NavLink> form.</Trans></p>
+        <p><Trans t={t} i18nKey="submittedMessage">We are collecting your feedback and will evaluate it after the Rundgang 2022. If you need technical help with entering your contributions, please reach out via the <NavLink to="/support">/support</NavLink> form.</Trans></p>
       </section>
     )
   }
@@ -59,7 +59,7 @@ const Feedback = () => {
           <button type="submit" disabled={sending}>{t('SUBMIT')}</button>
         </form>
         <p>
-          * <em>
+          <em>
             <Trans t={t} i18nKey="note">
               Feedback will be evaluated, but will not be answered. If you have a question and/or need technical support for entering projects, please fill out the <NavLink to="/support">/support</NavLink> form and we will get back at you.
             </Trans>
