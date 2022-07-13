@@ -21,7 +21,7 @@ import { Icon } from 'leaflet/dist/leaflet-src.esm'
 import RemoveItemsInContext from './RemoveItemsInContext'
 
 import styled from 'styled-components'
-import { fetchId, removeFromParent, triggerApiUpdate } from '../../../helpers/MedienhausApiHelper'
+import { detailedItemList, fetchId, removeFromParent, triggerApiUpdate } from '../../../helpers/MedienhausApiHelper'
 import Matrix from '../../../Matrix'
 import LeaveContext from './LeaveContext'
 import ContextTree from './ContextTree'
@@ -217,7 +217,8 @@ const ManageContexts = ({ matrixClient, moderationRooms: incomingModerationRooms
       if (fetchPath) {
         // and then its first parent item
         contextObject = fetchPath
-        setItemsInContext(contextObject.item)
+        const detailedItems = await detailedItemList(context)
+        setItemsInContext(detailedItems)
         contextObject.parents ? setContextParent(contextObject.parents[0]) : setContextParent(null)
         setDescription(contextObject
           .description?.default || '')
@@ -235,7 +236,6 @@ const ManageContexts = ({ matrixClient, moderationRooms: incomingModerationRooms
         (value, key, parent) => {
           if (value.id === context) return true
         }, { childrenPath: 'children', includeRoot: false, rootIsChildren: true })
-      console.log(contextObject)
       contextObject.pathIds ? setContextParent(contextObject.pathIds[contextObject.pathIds.length - 1]) : setContextParent(null)
       setDescription(contextObject
         .topic || '')
