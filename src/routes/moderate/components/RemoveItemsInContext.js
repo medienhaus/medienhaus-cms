@@ -64,10 +64,9 @@ export default function RemoveItemsInContext ({ parent, itemsInContext, onRemove
   }, [getAllItemsinContext, parent])
 
   if (!items) return
+
   return (
-
     <>
-
       {items.length < 1
         ? <p>{t('There are no items in this context at the moment.')}</p>
         : <ul> {items.map((item, index) => {

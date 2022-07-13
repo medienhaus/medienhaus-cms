@@ -48,6 +48,7 @@ const Details = styled.details`
     margin-top: var(--margin);
   }
 `
+
 const ManageContexts = ({ matrixClient, moderationRooms: incomingModerationRooms, nestedRooms: incomingNestedRooms, addModerationRooms, removeModerationRoom }) => {
   const { t } = useTranslation('moderate')
   const [selectedContext, setSelectedContext] = useState('')
@@ -523,7 +524,7 @@ const ManageContexts = ({ matrixClient, moderationRooms: incomingModerationRooms
                   <span>{newRoomName.length + '/100'}</span>
                 </div>
                 <div className="confirmation">
-                  {editRoomName &&
+                  {editRoomName && (roomName !== newRoomName) &&
                     <>
                       <button
                         className="cancel"
@@ -567,22 +568,22 @@ const ManageContexts = ({ matrixClient, moderationRooms: incomingModerationRooms
                         className={location.lat === '0.0' && location.lng === '0.0' ? 'center' : null}
                       >
                         {
-                                    location.lat !== '0.0' && location.lng !== '0.0' &&
-                                      <MapContainer className="center" center={[location.lat, location.lng]} zoom={17} scrollWheelZoom={false} placeholder>
-                                        <TileLayer
-                                          attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-                                          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                                        />
-                                        <Marker position={[location.lat, location.lng]} icon={(new Icon.Default({ imagePath: '/leaflet/' }))}>
-                                          <Popup>
-                                            {locations.find(coord => coord.coordinates === location.lat + ', ' + location.lng)?.name || // if the location is not in our location.json
-                                            location.info?.length > 0 // we check if the custom input field was filled in
-                                              ? location.info // if true, we display that text on the popup otherwise we show the lat and long coordinates
-                                              : location.lat + ', ' + location.lng}
-                                          </Popup>
-                                        </Marker>
-                                      </MapContainer>
-                                  }
+                          location.lat !== '0.0' && location.lng !== '0.0' &&
+                            <MapContainer className="center" center={[location.lat, location.lng]} zoom={17} scrollWheelZoom={false} placeholder>
+                              <TileLayer
+                                attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+                                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                              />
+                              <Marker position={[location.lat, location.lng]} icon={(new Icon.Default({ imagePath: '/leaflet/' }))}>
+                                <Popup>
+                                  {locations.find(coord => coord.coordinates === location.lat + ', ' + location.lng)?.name || // if the location is not in our location.json
+                                  location.info?.length > 0 // we check if the custom input field was filled in
+                                    ? location.info // if true, we display that text on the popup otherwise we show the lat and long coordinates
+                                    : location.lat + ', ' + location.lng}
+                                </Popup>
+                              </Marker>
+                            </MapContainer>
+                        }
                         {location.info && <input type="text" value={location.info} disabled />}
                       </div>
                       <div className="right">
