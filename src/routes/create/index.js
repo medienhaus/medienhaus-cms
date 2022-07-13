@@ -417,7 +417,7 @@ const Create = () => {
             <section>
               <h3>{t('Location')}</h3>
               <p>{t('Specify at which location your project will be displayed or your event will take place.')}</p>
-              <UdKLocationContext itemSpaceRoomId={projectSpace} />
+              <UdKLocationContext spaceRoomId={projectSpace} />
             </section>
           )}
           {(!config.medienhaus?.item || !config.medienhaus?.item[template]?.blueprint || config.medienhaus?.item[template]?.blueprint.includes('time')) && (
