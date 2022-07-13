@@ -8,6 +8,7 @@ import filterDeep from 'deepdash/filterDeep'
 import config from '../../../config.json'
 import { fetchTree } from '../../../helpers/MedienhausApiHelper'
 import UnstyledButton from '../../../components/medienhausUI/unstyledButton'
+import { useTranslation } from 'react-i18next'
 
 const Container = styled.ul`
     margin-left: var(--margin);
@@ -28,47 +29,49 @@ const Switch = styled.label`
   display: inline-block;
   width: 60px;
   height: 34px;
-    input {
-  opacity: 0;
-  width: 0;
-  height: 0;
-}
-span {
-  position: absolute;
-  cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: gray;
-  -webkit-transition: .4s;
-  transition: .4s;
-}
 
-span:before {
-  position: absolute;
-  content: "";
-  height: 26px;
-  width: 26px;
-  left: 4px;
-  bottom: 4px;
-  background-color: var(--color-bg);
-  -webkit-transition: .4s;
-  transition: .4s;
-}
+  input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
 
-input:checked + span {
-  background-color: var(--color-fg);
-}
+  span {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: gray;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
 
-input:checked + span:before {
-  -webkit-transform: translateX(26px);
-  -ms-transform: translateX(26px);
-  transform: translateX(26px);
-}
-  `
+  span::before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: var(--color-bg);
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+
+  input:checked + span {
+    background-color: var(--color-fg);
+  }
+
+  input:checked + span:before {
+    -webkit-transform: translateX(26px);
+    transform: translateX(26px);
+  }
+`
 
 const ContextTree = ({ moderationRooms, contextId, onContextChange }) => {
+  const { t } = useTranslation('moderate')
   const [loading, setLoading] = useState(false)
   const [contexts, setContexts] = useState()
   const [rootContext, setRootContext] = useState()
@@ -132,7 +135,7 @@ const ContextTree = ({ moderationRooms, contextId, onContextChange }) => {
     <>
       {error && <p>{error}</p>}
       <SwitchContainter>
-        <span>Show items</span>
+        <span>{t('Show items')}</span>
         <Switch>
           <input type="checkbox" onChange={() => setShowItems(prevState => !prevState)} />
           <span className="slider" />
