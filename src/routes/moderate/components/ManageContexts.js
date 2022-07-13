@@ -25,6 +25,7 @@ import Matrix from '../../../Matrix'
 import LeaveContext from './LeaveContext'
 import ContextTree from './ContextTree'
 import TextareaAutoSizeMaxLength from './TextareaAutoSizeMaxLength'
+import UdKLocationContext from '../../create/Context/UdKLocationContext'
 
 const DangerZone = styled.section`
   border: none;
@@ -62,80 +63,10 @@ const ManageContexts = ({ matrixClient, moderationRooms: incomingModerationRooms
   const [deleting, setDeleting] = useState(false)
   const [loading, setLoading] = useState(false)
   const [description, setDescription] = useState('')
-  const [locationStructure, setLocationStructure] = useState()
-  const [currentLocation, setCurrentLocation] = useState('')
   const [moderationRooms, setModerationRooms] = useState(incomingModerationRooms)
   const [nestedRooms, setNestedRooms] = useState(incomingNestedRooms)
   const [editRoomName, setEditRoomName] = useState(false)
   const [newRoomName, setNewRoomName] = useState('')
-
-  const createStructurObject = async (roomId, location = false) => {
-    async function getSpaceStructure (matrixClient, motherSpaceRoomId, includeRooms) {
-      setDisableButton(true)
-      setLoading(true)
-      const result = {}
-
-      function createSpaceObject (id, name, metaEvent, topic) {
-        return {
-          id,
-          name,
-          type: metaEvent.content.type,
-          topic,
-          children: {}
-        }
-      }
-
-      async function scanForAndAddSpaceChildren (spaceId, path) {
-        if (spaceId === 'undefined') return
-        // console.log(path)
-        const stateEvents = await matrixClient.roomState(spaceId).catch(console.log)
-        // check if room exists in roomHierarchy
-        // const existsInCurrentTree = _.find(hierarchy, {room_id: spaceId})
-        // const metaEvent = await matrixClient.getStateEvent(spaceId, 'dev.medienhaus.meta')
-        const metaEvent = _.find(stateEvents, { type: 'dev.medienhaus.meta' })
-        if (!metaEvent) return
-        if (location && !metaEvent.content?.template?.includes('location')) return
-        // if (!typesOfSpaces.includes(metaEvent.content.type)) return
-
-        const nameEvent = _.find(stateEvents, { type: 'm.room.name' })
-        if (!nameEvent) return
-        const spaceName = nameEvent.content.name
-        let topic = _.find(stateEvents, { type: 'm.room.topic' })
-        if (topic) topic = topic.content.topic
-        // if (initial) {
-        // result.push(createSpaceObject(spaceId, spaceName, metaEvent))
-        _.set(result, [...path, spaceId], createSpaceObject(spaceId, spaceName, metaEvent, topic))
-        // }
-
-        // const spaceSummary = await matrixClient.getSpaceSummary(spaceId)
-        console.log(`getting children for ${spaceId} / ${spaceName}`)
-        for (const event of stateEvents) {
-          if (event.type !== 'm.space.child' && !includeRooms) continue
-          if (event.type === 'm.space.child' && _.size(event.content) === 0) continue // check to see if body of content is empty, therefore space has been removed
-          if (event.room_id !== spaceId) continue
-
-          await scanForAndAddSpaceChildren(event.state_key, [...path, spaceId, 'children'])
-          // }
-        }
-      }
-
-      await scanForAndAddSpaceChildren(motherSpaceRoomId, [])
-      setLoading(false)
-      setDisableButton(false)
-      return result
-    }
-
-    console.log('---- started structure ----')
-    const tree = await getSpaceStructure(matrixClient, roomId, false)
-    return tree
-  }
-
-  const fetchLocationTreeFromApi = async () => {
-    const fetchLocationTree = await fetch(config.medienhaus.api + config.medienhaus.locationId + '/tree')
-    const locationResponse = await fetchLocationTree.json()
-    setLocationStructure(locationResponse.children)
-    setLoading(false)
-  }
 
   useEffect(() => {
     let cancelled = false
@@ -259,49 +190,11 @@ const ManageContexts = ({ matrixClient, moderationRooms: incomingModerationRooms
 
   const fetchAllocation = async (space) => setAllocation(await matrixClient.getStateEvent(space, 'dev.medienhaus.allocation').catch(console.log))
 
-  function findNested (obj, key, value) {
-    if (obj[key] === value) {
-      return obj
-    } else {
-      const keys = Object.keys(obj) // add this line to iterate over the keys
-      console.log(keys)
-      for (let i = 0, len = keys.length; i < len; i++) {
-        const k = keys[0] // use this key for iteration, instead of index "i"
-
-        // add "obj[k] &&" to ignore null values
-        if (obj[k] && typeof obj[k] === 'object') {
-          const found = findNested(obj[k], key, value)
-          if (found) {
-          // If the object was found in the recursive call, bubble it up.
-            return found
-          }
-        }
-      }
-    }
-  }
-
   const getEvents = async (space) => {
     setLoading(true)
     setEvents([])
     setAllocation([])
-    setCurrentLocation('')
     await fetchAllocation(space)
-    if (config.medienhaus.api) {
-      const fetchSpace = await fetchId(space)
-      if (fetchSpace.parents) {
-        for (const id of fetchSpace.parents) {
-          const parent = await fetchId(id)
-          if (parent.template.includes('location')) setCurrentLocation(parent.id)
-        }
-      }
-    } else {
-      const idExistsInLocationStructure = findNested(locationStructure, 'id', space)
-      if (idExistsInLocationStructure) {
-        console.log(idExistsInLocationStructure)
-        setCurrentLocation(idExistsInLocationStructure.pathIds[idExistsInLocationStructure.length - 1])
-        console.log(idExistsInLocationStructure.pathIds[idExistsInLocationStructure.length - 1])
-      }
-    }
     const checkSubSpaes = await matrixClient.getRoomHierarchy(space, 1).catch(console.log)
     const checkForEvents = checkSubSpaes?.rooms?.filter(child => child.name.includes('_event'))
     if (!_.isEmpty(checkForEvents)) {
@@ -327,7 +220,7 @@ const ManageContexts = ({ matrixClient, moderationRooms: incomingModerationRooms
       if (!fetchPath.statusCode) {
         // and then its first parent item
         contextObject = fetchPath
-        const detailedItems = await detailedItemList(context)
+        const detailedItems = await detailedItemList(context, 1)
         setItemsInContext(detailedItems)
         contextObject.parents ? setContextParent(contextObject.parents[0]) : setContextParent(null)
         setDescription(contextObject
@@ -359,18 +252,6 @@ const ManageContexts = ({ matrixClient, moderationRooms: incomingModerationRooms
     setLoading(false)
   }
 
-  useEffect(() => {
-    const getLocationStructure = async () => {
-      const locationTree = await createStructurObject(config.medienhaus.locationId, true)
-      setLocationStructure(locationTree)
-    }
-
-    // createD3Json()
-    if (config.medienhaus.api) fetchLocationTreeFromApi()
-    else getLocationStructure()
-    // eslint-disable-next-line
-  }, [])
-
   const onDelete = async (index) => {
     setDeleting(true)
     try {
@@ -396,28 +277,6 @@ const ManageContexts = ({ matrixClient, moderationRooms: incomingModerationRooms
   const onSaveDescription = async (description) => {
     if (description.length > 500) return
     await matrixClient.setRoomTopic(selectedContext, description).catch(console.log)
-    if (config.medienhaus.api) triggerApiUpdate(selectedContext)
-  }
-
-  const addContextToLocation = async (location) => {
-    if (currentLocation) {
-      let remove = await Matrix.removeSpaceChild(currentLocation, selectedContext).catch(async () => {
-        // if removing fails we try to join the current location context
-        const join = await matrixClient.joinRoom(currentLocation).catch(console.debug)
-        if (join) {
-          // then we try again
-          remove = await Matrix.removeSpaceChild(currentLocation, selectedContext)
-        }
-      })
-      // we leave the old location context
-      if (remove) await matrixClient.leave(currentLocation).catch(console.debug)
-    }
-    await Matrix.addSpaceChild(location, selectedContext).catch(async () => {
-      const join = await matrixClient.joinRoom(location).catch(console.debug)
-      if (join) addContextToLocation(location)
-    })
-
-    setCurrentLocation(location)
     if (config.medienhaus.api) triggerApiUpdate(selectedContext)
   }
 
@@ -635,17 +494,7 @@ const ManageContexts = ({ matrixClient, moderationRooms: incomingModerationRooms
                 <h3>{t('Change Location')}</h3>
               </summary>
               <section className="manage--add-location">
-                {locationStructure
-                  ? <SimpleContextSelect
-                      location
-                      onItemChosen={addContextToLocation}
-                      selectedContext={currentLocation}
-                      struktur={locationStructure}
-                      disabled={loading}
-                      enableType="location-room"
-                      preSelectedValue="location"
-                    />
-                  : <Loading />}
+                <UdKLocationContext spaceRoomId={selectedContext} />
               </section>
             </Details>
             <Details>
