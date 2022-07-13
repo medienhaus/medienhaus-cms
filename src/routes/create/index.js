@@ -319,7 +319,7 @@ const Create = () => {
           {(!config.medienhaus?.item || !config.medienhaus?.item[template]?.blueprint || config.medienhaus?.item[template]?.blueprint.includes('udklocation')) && (
             <section>
               <h3>{t('Location')}</h3>
-              <UdKLocationContext itemSpaceRoomId={projectSpace} />
+              <UdKLocationContext spaceRoomId={projectSpace} />
             </section>
           )}
           {(!config.medienhaus?.item || !config.medienhaus?.item[template]?.blueprint || config.medienhaus?.item[template]?.blueprint.includes('time')) && (

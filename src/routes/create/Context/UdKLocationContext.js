@@ -12,7 +12,7 @@ import { Loading } from '../../../components/loading'
 /**
  * @TODO This component does not work without the API.
  */
-const UdKLocationContext = ({ itemSpaceRoomId }) => {
+const UdKLocationContext = ({ spaceRoomId }) => {
   const [currentLocationContext, setCurrentLocationContext] = useState()
   const [activeContexts, setActiveContexts] = useState([config.medienhaus?.locationId])
   const [isLeaf, setIsLeaf] = useState(false)
@@ -27,14 +27,14 @@ const UdKLocationContext = ({ itemSpaceRoomId }) => {
   }), [t])
 
   const fetchCurrentLocation = useCallback(async () => {
-    const item = await fetchId(itemSpaceRoomId)
-    // If the API does not know this item, or says that it does not have any parents, we don't do anything
-    if (!item || !item.parents) {
+    const space = await fetchId(spaceRoomId)
+    // If the API does not know this space, or says that it does not have any parents, we don't do anything
+    if (!space || !space.parents) {
       setFetching(false)
       return
     }
     // ... otherwise we check all parents until we find the one that says "location"
-    for (const parent of item.parents) {
+    for (const parent of space.parents) {
       const parentInfo = await fetchId(parent)
       if (parentInfo.template.includes('location')) {
         // This parent is our current location
@@ -48,11 +48,11 @@ const UdKLocationContext = ({ itemSpaceRoomId }) => {
       }
     }
     setFetching(false)
-  }, [itemSpaceRoomId])
+  }, [spaceRoomId])
 
   useEffect(() => {
     fetchCurrentLocation()
-  }, [fetchCurrentLocation, itemSpaceRoomId])
+  }, [fetchCurrentLocation, spaceRoomId])
 
   const reset = () => {
     setActiveContexts([config.medienhaus?.locationId])
@@ -70,34 +70,34 @@ const UdKLocationContext = ({ itemSpaceRoomId }) => {
 
     const selectedContextRoomId = _.last(activeContexts)
 
-    // Remove item from possibly previously selected context
+    // Remove space from possibly previously selected context
     if (currentLocationContext && currentLocationContext.id) {
-      await Matrix.removeSpaceChild(currentLocationContext.id, itemSpaceRoomId)
+      await Matrix.removeSpaceChild(currentLocationContext.id, spaceRoomId)
       await triggerApiUpdate(currentLocationContext.id)
     }
 
-    // Add this current item to the given context space
-    await Matrix.addSpaceChild(selectedContextRoomId, itemSpaceRoomId)
+    // Add this current space to the given context space
+    await Matrix.addSpaceChild(selectedContextRoomId, spaceRoomId)
       .catch(async () => {
-        // If we can't add the item to a context we try to join the context first ...
+        // If we can't add the space to a context we try to join the context first ...
         const joinRoom = await Matrix.getMatrixClient().joinRoom(selectedContextRoomId)
         if (joinRoom) {
           console.log('joined room')
-          // ... and then try to add the item to the context again
-          await Matrix.addSpaceChild(selectedContextRoomId, itemSpaceRoomId)
+          // ... and then try to add the space to the context again
+          await Matrix.addSpaceChild(selectedContextRoomId, spaceRoomId)
         }
       })
 
     await triggerApiUpdate(selectedContextRoomId)
-    await triggerApiUpdate(itemSpaceRoomId, selectedContextRoomId)
+    await triggerApiUpdate(spaceRoomId, selectedContextRoomId)
     await fetchCurrentLocation()
     reset()
-  }, [activeContexts, currentLocationContext, fetchCurrentLocation, isLeaf, itemSpaceRoomId])
+  }, [activeContexts, currentLocationContext, fetchCurrentLocation, isLeaf, spaceRoomId])
 
   const onRemoveFromLocation = async () => {
     if (!currentLocationContext || !currentLocationContext.id) return
 
-    await Matrix.removeSpaceChild(currentLocationContext.id, itemSpaceRoomId)
+    await Matrix.removeSpaceChild(currentLocationContext.id, spaceRoomId)
     await triggerApiUpdate(currentLocationContext.id)
 
     // @TODO Add API call to the not-yet-existing DELETE route
