@@ -33,6 +33,7 @@ const Login = () => {
   })
 
   const onSubmit = data => {
+    console.log(data)
     if (isLoading) { return }
     setLoading(true)
     setServerResponseErrorMessage('')
@@ -73,7 +74,7 @@ const Login = () => {
                   <summary>Advanced</summary>
                   <div>
                     <label htmlFor="server">{t('server')}</label>
-                    <input name="server" type="server" placeholder="https://matrix.org" />
+                    <input {...register('server')} name="server" type="server" placeholder="https://matrix.org" />
                   </div>
                 </details>}
               {serverResponseErrorMessage && <p>❗️ {serverResponseErrorMessage}</p>}
