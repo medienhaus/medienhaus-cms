@@ -134,7 +134,7 @@ const ManageContexts = ({ matrixClient, moderationRooms: incomingModerationRooms
             state_default: 50,
             users_default: 0
           },
-          name: name,
+          name,
           room_version: '9',
           creation_content: { type: 'm.space' },
           initial_state: [{
@@ -217,7 +217,7 @@ const ManageContexts = ({ matrixClient, moderationRooms: incomingModerationRooms
       if (fetchPath) {
         // and then its first parent item
         contextObject = fetchPath
-        const detailedItems = await detailedItemList(context)
+        const detailedItems = await detailedItemList(context, 1)
         setItemsInContext(detailedItems)
         contextObject.parents ? setContextParent(contextObject.parents[0]) : setContextParent(null)
         setDescription(contextObject
