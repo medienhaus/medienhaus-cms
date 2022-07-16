@@ -55,7 +55,7 @@
   "contributor name": "Name des/der Mitwirkenden",
   "contributorsInstructions2": "Sie können den Zugriff auf dieses Projekt/Event zum Bearbeiten des Eintrags freigeben. Der/Die Mitwirkende benötigt einen <1>udk/spaces</1> Account, um das Projekt/Event bearbeiten zu können.",
   "contributorsInstructions3": "Sie können auch Mitwirkende ohne OASE-Account nennen, diese können das Projekt dann jedoch nicht bearbeiten.",
-  "If you created the project/event your name will automatically be listed. You don't need to add yourself as a contributor": "Die Ersteller*innen eines Projektes/Events müssen sich nicht als Mitwirkende hinzufügen. Sie werden automatisch gelistet.",
+  "If you've created the project/event your name will automatically be listed. You don't need to add yourself as a contributor": "Die Ersteller*innen eines Projektes/Events müssen sich nicht als Mitwirkende hinzufügen. Sie werden automatisch gelistet.",
   "CANNOT edit the project": "kann das Projekt NICHT editieren",
   "CAN edit and delete(!) the project": "KANN das Projekt editieren und löschen",
   "Contributors (with editing permissions)": "Mitwirkende mit Editier-Berechtigungen",
