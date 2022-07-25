@@ -3,7 +3,7 @@ import matrixcs from 'matrix-js-sdk'
 import { useAuth } from '../../../../Auth'
 
 const knockClient = matrixcs.createClient({
-  baseUrl: process.env.REACT_APP_MATRIX_BASE_URL,
+  baseUrl: localStorage.getItem('medienhaus_hs_url'),
   accessToken: process.env.REACT_APP_KNOCK_BOT_TOKEN,
   userId: process.env.REACT_APP_KNOCK_BOT_ACCOUNT,
   useAuthorizationHeader: true

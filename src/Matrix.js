@@ -1,8 +1,8 @@
 import matrixcs, { MemoryStore } from 'matrix-js-sdk'
 
 class Matrix {
-  constructor (baseUrl) {
-    this.baseUrl = baseUrl
+  constructor () {
+    this.baseUrl = localStorage.getItem('medienhaus_hs_url') || process.env.REACT_APP_MATRIX_BASE_URL
     const myAccessToken = localStorage.getItem('medienhaus_access_token')
     const myUserId = localStorage.getItem('medienhaus_user_id')
 
@@ -23,7 +23,17 @@ class Matrix {
     return this.matrixClient
   }
 
-  login (user, password) {
+  login (user, password, homeserver) {
+    if (homeserver && homeserver !== this.matrixClient.getHomeserverUrl()) {
+      // eslint-disable-next-line new-cap
+      this.matrixClient = new matrixcs.createClient({
+        baseUrl: homeserver,
+        userId: user,
+        useAuthorizationHeader: true,
+        timelineSupport: true,
+        unstableClientRelationAggregation: true
+      })
+    }
     return this.matrixClient.login('m.login.password', {
       type: 'm.login.password',
       user: user,
@@ -48,7 +58,7 @@ class Matrix {
     const payload = {
       auto_join: autoJoin || false,
       suggested: suggested || false,
-      via: [process.env.REACT_APP_MATRIX_BASE_URL.replace('https://', '')]
+      via: [localStorage.getItem('medienhaus_home_server')]
     }
     return this.matrixClient.http.authedRequest(undefined, 'PUT', `/rooms/${parent}/state/m.space.child/${child}`, undefined, payload)
   }

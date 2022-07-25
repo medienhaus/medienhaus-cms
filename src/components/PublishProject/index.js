@@ -49,11 +49,11 @@ const PublishProject = ({ disabled, space, published, hasContext, metaEvent }) =
     try {
       console.log('--- Starting to change visibility ---')
       for (const room of hierarchy.rooms) {
-        const changeJoinRule = await fetch(process.env.REACT_APP_MATRIX_BASE_URL + `/_matrix/client/r0/rooms/${room.room_id}/state/m.room.join_rules/`, joinRules)
+        const changeJoinRule = await fetch(localStorage.getItem('medienhaus_hs_url') + `/_matrix/client/r0/rooms/${room.room_id}/state/m.room.join_rules/`, joinRules)
         if (changeJoinRule.ok) console.log('Changed joinRule of ' + room.name + ' successfully to ' + publishState + '!')
         else console.log('Oh no, changing join_rule went wrong with room ' + room.name)
 
-        const changeHistoryVisibility = await fetch(process.env.REACT_APP_MATRIX_BASE_URL + `/_matrix/client/r0/rooms/${room.room_id}/state/m.room.history_visibility/`, historyVisibility)
+        const changeHistoryVisibility = await fetch(localStorage.getItem('medienhaus_hs_url') + `/_matrix/client/r0/rooms/${room.room_id}/state/m.room.history_visibility/`, historyVisibility)
         if (changeHistoryVisibility.ok) console.log('Changed history_visibility of ' + room.name + ' successfully!')
         else console.log('Oh no, something went wrong with room ' + room.name)
       }

@@ -15,7 +15,7 @@ const DeleteUser = () => {
     const body = {
       erase: true
     }
-    fetch(`${process.env.REACT_APP_MATRIX_BASE_URL}/_synapse/admin/v1/deactivate/@${name}:${localStorage.getItem('mx_home_server')}`, {
+    fetch(`${localStorage.getItem('medienhaus_hs_url')}/_synapse/admin/v1/deactivate/@${name}:${localStorage.getItem('mx_home_server')}`, {
       method: 'POST',
       headers: { Authorization: 'Bearer ' + localStorage.getItem('mx_access_token') },
       body: JSON.stringify(body)

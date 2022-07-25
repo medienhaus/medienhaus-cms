@@ -80,6 +80,7 @@ const Login = () => {
               {serverResponseErrorMessage && <p>❗️ {serverResponseErrorMessage}</p>}
               <button name="submit" type="submit" disabled={isLoading}>{isLoading ? <Loading /> : 'LOGIN'}</button>
             </form>
+            {config.medienhaus.customServer && <p>{t('No account yet?')} <a href="https://app.element.io/#/register" rel="external nofollow noopener noreferrer" target="_blank">{t('Create Account')}</a></p>}
           </>
           )
       )}

@@ -45,21 +45,11 @@ const createBlock = async (e, content, number, space) => {
     }
   }
 
-  const req = {
-    method: 'PUT',
-    headers: { Authorization: 'Bearer ' + localStorage.getItem('medienhaus_access_token') },
-    body: JSON.stringify({
-      via: [localStorage.getItem('mx_home_server')],
-      suggested: false,
-      auto_join: false
-    })
-  }
-
   try {
     const room = await matrixClient.createRoom(opts)
       .then(async (res) => {
         const roomId = res.room_id
-        const response = await fetch(process.env.REACT_APP_MATRIX_BASE_URL + `/_matrix/client/r0/rooms/${space}/state/m.space.child/${roomId}`, req)
+        const response = await Matrix.addSpaceChild(space, res.roomId)
         return [roomId, response]
       })
       .then(async (res) => {
