@@ -14,7 +14,6 @@ import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
 import locations from '../../../assets/data/locations.json'
 import { MatrixEvent } from 'matrix-js-sdk'
 import config from '../../../config.json'
-import TextareaAutosize from 'react-textarea-autosize'
 
 import findValueDeep from 'deepdash/es/findValueDeep'
 import LoadingSpinnerButton from '../../../components/LoadingSpinnerButton'
@@ -22,10 +21,11 @@ import { Icon } from 'leaflet/dist/leaflet-src.esm'
 import RemoveItemsInContext from './RemoveItemsInContext'
 
 import styled from 'styled-components'
-import { fetchId, removeFromParent, triggerApiUpdate } from '../../../helpers/MedienhausApiHelper'
+import { detailedItemList, fetchId, removeFromParent, triggerApiUpdate } from '../../../helpers/MedienhausApiHelper'
 import Matrix from '../../../Matrix'
 import LeaveContext from './LeaveContext'
 import ContextTree from './ContextTree'
+import TextareaAutoSizeMaxLength from './TextareaAutoSizeMaxLength'
 
 const DangerZone = styled.section`
   border: none;
@@ -134,7 +134,7 @@ const ManageContexts = ({ matrixClient, moderationRooms: incomingModerationRooms
             state_default: 50,
             users_default: 0
           },
-          name: name,
+          name,
           room_version: '9',
           creation_content: { type: 'm.space' },
           initial_state: [{
@@ -174,9 +174,9 @@ const ManageContexts = ({ matrixClient, moderationRooms: incomingModerationRooms
     }
 
     const newContext = await createSpace(name)
-    if (config.medienhaus.api) triggerApiUpdate(newContext, selectedContext)
+    if (config.medienhaus.api) await triggerApiUpdate(newContext, selectedContext)
     // we add our newly created context to the context object to be able to work on it immedieately.
-    addModerationRooms(newContext, name, template)
+    addModerationRooms(newContext, name, template, selectedContext)
     // we set the parent to the previously selected context
     setContextParent(selectedContext)
     // then update our selected context to the newly created one
@@ -217,7 +217,8 @@ const ManageContexts = ({ matrixClient, moderationRooms: incomingModerationRooms
       if (fetchPath) {
         // and then its first parent item
         contextObject = fetchPath
-        setItemsInContext(contextObject.item)
+        const detailedItems = await detailedItemList(context, 1)
+        setItemsInContext(detailedItems)
         contextObject.parents ? setContextParent(contextObject.parents[0]) : setContextParent(null)
         setDescription(contextObject
           .description?.default || '')
@@ -235,7 +236,6 @@ const ManageContexts = ({ matrixClient, moderationRooms: incomingModerationRooms
         (value, key, parent) => {
           if (value.id === context) return true
         }, { childrenPath: 'children', includeRoot: false, rootIsChildren: true })
-      console.log(contextObject)
       contextObject.pathIds ? setContextParent(contextObject.pathIds[contextObject.pathIds.length - 1]) : setContextParent(null)
       setDescription(contextObject
         .topic || '')
@@ -271,7 +271,7 @@ const ManageContexts = ({ matrixClient, moderationRooms: incomingModerationRooms
     }
   }
 
-  const onSave = async () => {
+  const onSaveDescription = async (description) => {
     if (description.length > 500) return
     await matrixClient.setRoomTopic(selectedContext, description).catch(console.log)
     if (config.medienhaus.api) triggerApiUpdate(selectedContext)
@@ -477,20 +477,7 @@ const ManageContexts = ({ matrixClient, moderationRooms: incomingModerationRooms
               <summary>
                 <h3>{t('Change Description')}</h3>
               </summary>
-              <section>
-                <TextareaAutosize
-                  value={description}
-                  minRows={6}
-                  placeholder={`${t('Please add a short description.')}`}
-                  onChange={(e) => setDescription(e.target.value)}
-                  onBlur={onSave}
-                />
-                {description.length > 500 && (<>
-                  <p>{t('Characters:')} {description.length}</p>
-                  <p>❗️{t('Please keep the descrpition under 500 characters.')} {description.length}</p>
-                </>
-                )}
-              </section>
+              <TextareaAutoSizeMaxLength description={description} setDescription={setDescription} onSaveDescription={onSaveDescription} />
             </Details>
             <Details>
 

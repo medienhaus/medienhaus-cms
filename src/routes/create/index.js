@@ -22,6 +22,25 @@ import Location from './Location'
 import config from '../../config.json'
 import _ from 'lodash'
 import UdKLocationContext from './Context/UdKLocationContext'
+import styled from 'styled-components'
+import { triggerApiUpdate } from '../../helpers/MedienhausApiHelper'
+import TextNavigation from '../../components/medienhausUI/textNavigation'
+
+const TabSection = styled.section`
+  display: grid;
+  grid-gap: var(--margin);
+  grid-template-columns: repeat(auto-fit, minmax(14ch, 1fr));
+
+  /* set height of child elements */
+  & > * {
+    height: calc(var(--margin) * 2.4);
+  }
+
+  /* unset margin-top for each direct child element directly following a previous one */
+  & > * + * {
+    margin-top: unset;
+  }
+`
 
 const Create = () => {
   const { t } = useTranslation('content')
@@ -223,9 +242,10 @@ const Create = () => {
     }
   }
 
-  const changeProjectImage = () => {
+  const changeProjectImage = async () => {
     setLoading(true)
     getCurrentTime()
+    if (config.medienhaus.api) await triggerApiUpdate(projectSpace)
     setLoading(false)
   }
 
@@ -235,8 +255,9 @@ const Create = () => {
     listeningToCollaborators()
   }
 
-  const changeTitle = (newTitle) => {
+  const changeTitle = async (newTitle) => {
     setTitle(newTitle)
+    if (config.medienhaus.api) await triggerApiUpdate(projectSpace)
   }
 
   const onChangeDescription = async (description) => {
@@ -245,6 +266,7 @@ const Create = () => {
     // here we set the description for the selected language space
     const contentRoom = spaceObject.rooms.filter(room => room.name === contentLang)
     const changeTopic = await matrixClient.setRoomTopic(contentRoom[0].room_id, description).catch(console.log)
+    if (config.medienhaus.api) await triggerApiUpdate(projectSpace)
     fetchSpace()
     // @TODO setSpaceObject(spaceObject => ({...spaceObject, rooms: [...spaceObject.rooms, ]}))
     return changeTopic
@@ -297,7 +319,7 @@ const Create = () => {
           {(!config.medienhaus?.item || !config.medienhaus?.item[template]?.blueprint || config.medienhaus?.item[template]?.blueprint.includes('udklocation')) && (
             <section>
               <h3>{t('Location')}</h3>
-              <UdKLocationContext itemSpaceRoomId={projectSpace} />
+              <UdKLocationContext spaceRoomId={projectSpace} />
             </section>
           )}
           {(!config.medienhaus?.item || !config.medienhaus?.item[template]?.blueprint || config.medienhaus?.item[template]?.blueprint.includes('time')) && (
@@ -317,6 +339,7 @@ const Create = () => {
           )}
           <section className="content">
             <h3>{t('Content')}</h3>
+            {/*
             <select
               value={contentLang} onChange={(e) => {
                 setContentLang(e.target.value)
@@ -327,6 +350,20 @@ const Create = () => {
                 <option value={lang} key={lang}>{lang.toUpperCase() + ' -- ' + ISO6391.getName(lang)}</option>
               ))}
             </select>
+            */}
+            <TabSection className="request">
+              {config.medienhaus?.languages.map((lang) => (
+                <TextNavigation
+                  value={lang}
+                  key={lang}
+                  onClick={(e) => {
+                    setContentLang(e.target.value)
+                    setDescription()
+                  }}
+                  disabled={lang === contentLang}
+                >{ISO6391.getName(lang)}</TextNavigation>
+              ))}
+            </TabSection>
             {spaceObject && (description || description === '') ? <ProjectDescription description={description[contentLang]} callback={onChangeDescription} /> : <Loading />}
             {blocks.length === 0
               ? <AddContent number={0} projectSpace={spaceObject?.rooms.filter(room => room.name === contentLang)[0].room_id} blocks={blocks} contentType={template} reloadSpace={reloadSpace} />

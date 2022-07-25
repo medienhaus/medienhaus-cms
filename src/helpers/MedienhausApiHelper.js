@@ -46,9 +46,22 @@ export const fetchPathList = async (id) => {
   return response
 }
 
+export const detailedItemList = async (id, depth = null) => {
+  const body = { depth }
+  const request = await fetch(config.medienhaus.api + id + '/detailedList/filter/type/item', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(body)
+  })
+  const response = request.json()
+  return response
+}
+
 export const removeFromParent = async (id, parentIds, purge) => {
   const body = {
-    parentIds: parentIds
+    parentIds
   }
   if (purge) body.purge = true
   const deleteId = await fetch(config.medienhaus.api + id + '/fetch', {
