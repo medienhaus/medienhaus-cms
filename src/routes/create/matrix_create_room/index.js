@@ -48,22 +48,19 @@ const createBlock = async (e, content, number, space) => {
   try {
     const room = await matrixClient.createRoom(opts)
       .then(async (res) => {
-        const roomId = res.room_id
-        const response = await Matrix.addSpaceChild(space, res.roomId)
-        return [roomId, response]
+        const response = await Matrix.addSpaceChild(space, res.room_id)
+        if (!response.event_id) {
+          return Promise.reject(new Error('Something went wrong while trying to add space child'))
+        }
+        return res.room_id
       })
       .then(async (res) => {
-        const data = await res[1].json()
-        if (!res[1].ok) {
-          const error = (data?.message) || res[1].status
-          return Promise.reject(error)
-        }
-        await matrixClient.sendStateEvent(res[0], 'dev.medienhaus.meta', {
+        await matrixClient.sendStateEvent(res, 'dev.medienhaus.meta', {
           type: 'content',
           template: content,
           version: '0.4'
         })
-        return res[0]
+        return res
       }).then(async (res) => {
         let currentOrder = await matrixClient.getStateEvent(space, 'dev.medienhaus.order').catch(console.log)
         if (currentOrder) {

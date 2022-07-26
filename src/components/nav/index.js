@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from 'react'
 import { Link, useHistory } from 'react-router-dom'
 import { useAuth } from '../../Auth'
@@ -18,12 +19,75 @@ const Nav = () => {
   const [knockAmount, setKnockAmount] = useState(0)
   const [itemInvites, setItemInvites] = useState([])
   const [contextInvites, setContextInvites] = useState([])
+  const [applicationSpace, setApplicationSpace] = useState(localStorage.getItem(process.env.REACT_APP_APP_NAME + '_space'))
+  const [folderDialogueOpen, setFolderDialogueOpen] = useState(false)
   const { joinedSpaces, reload } = useJoinedSpaces(false)
   const matrixClient = Matrix.getMatrixClient()
 
   useEffect(() => {
     let cancelled = false
+
+    const lookForServiceFolder = async (applicationsSpaceId) => {
+      const findServiceSpace = joinedSpaces.find(space => space.name === process.env.REACT_APP_APP_NAME)
+      if (findServiceSpace) {
+        localStorage.setItem(process.env.REACT_APP_APP_NAME + '_space', findServiceSpace.room_id)
+        setApplicationSpace(findServiceSpace.room_id)
+      } else {
+        if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') console.info('creating service space')
+        const createRoom = await Matrix.createRoom(
+          process.env.REACT_APP_APP_NAME,
+          true,
+                `This is your private space for the application ${process.env.REACT_APP_APP_NAME}. You can find all your ${process.env.REACT_APP_APP_NAME} data in here.`,
+                'invite',
+                'context',
+                'application')
+        await Matrix.addSpaceChild(applicationsSpaceId, createRoom.room_id)
+        setApplicationSpace(createRoom.room_id)
+        localStorage.setItem(process.env.REACT_APP_APP_NAME + '_space', createRoom.room_id)
+      }
+      setFolderDialogueOpen(false)
+      reload()
+    }
+
+    const lookForApplicationsFolder = async () => {
+      setFolderDialogueOpen(true)
+      const findApplicationsFolder = joinedSpaces.find(space => space.meta?.template === 'applications')
+      if (findApplicationsFolder) {
+        if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') console.debug('found applications folder')
+        await lookForServiceFolder(findApplicationsFolder.room_id)
+      } else {
+        const createApplicationSpace = window.prompt(`We couldn't find a space for ${process.env.REACT_APP_APP_NAME}. \n\n You can either enter an existing space in the field below in the form of \n\n  !OWpL.....FTOWuq:matrix.org \n\n or just leave it empty to automatically create one. \n`)
+        if (createApplicationSpace === null) {
+          auth.signout(() => history.push('/'))
+          return
+        }
+        if (createApplicationSpace === '') {
+          console.log('creating root applications folder')
+          const newApplicationsFolder = await Matrix.createRoom(
+            'Applications',
+            true,
+            'This is your private applications space. You can find all your application data in here.',
+            'invite',
+            'context',
+            'applications')
+          await lookForServiceFolder(newApplicationsFolder.room_id)
+        }
+        if (createApplicationSpace) {
+          console.log(createApplicationSpace)
+          if (!createApplicationSpace.includes(localStorage.getItem('medienhaus_home_server'))) {
+            alert('roomId must contain ' + localStorage.getItem('medienhaus_home_server'))
+            return lookForApplicationsFolder()
+          }
+          setApplicationSpace(createApplicationSpace)
+          localStorage.setItem(process.env.REACT_APP_APP_NAME + '_space', createApplicationSpace)
+          setFolderDialogueOpen(false)
+        }
+      }
+    }
+
     if (joinedSpaces && auth.user && !cancelled) {
+      !applicationSpace && !folderDialogueOpen && lookForApplicationsFolder()
+
       const contextTemplates = config.medienhaus?.context && Object.keys(config.medienhaus?.context)
       // To determine if we're "moderating" a given space...
       const moderatingSpaces = joinedSpaces.filter(async space => {

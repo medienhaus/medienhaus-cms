@@ -7,7 +7,7 @@ const fetchMatrix = async (room) => {
   }
 
   try {
-    const allMessages = localStorage.getItem('medienhaus_hs_url') + `/_matrix/client/r0/rooms/${room}/messages?limit=999999&dir=b`
+    const allMessages = localStorage.getItem('medienhaus_hs_url') + `_matrix/client/r0/rooms/${room}/messages?limit=999999&dir=b`
     const result = await fetch(allMessages, req)
     const data = await result.json()
     const htmlString = data.chunk.map(type => {

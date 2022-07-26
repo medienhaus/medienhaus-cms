@@ -33,7 +33,6 @@ const Login = () => {
   })
 
   const onSubmit = data => {
-    console.log(data)
     if (isLoading) { return }
     setLoading(true)
     setServerResponseErrorMessage('')
@@ -71,7 +70,7 @@ const Login = () => {
               {errors?.password && t('Password can\'t be empty.')}
               {config.medienhaus.customServer &&
                 <details>
-                  <summary>Advanced</summary>
+                  <summary>{t('Advanced')}</summary>
                   <div>
                     <label htmlFor="server">{t('server')}</label>
                     <input {...register('server')} name="server" type="server" placeholder="https://matrix.org" />
