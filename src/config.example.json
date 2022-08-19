@@ -66,9 +66,9 @@
         },
         "removeContent": true
       },
-      "support": true,
+      "support": false,
       "request": false,
-      "feedback": true
+      "feedback": false
     },
     "usersToInviteToNewContexts": [
       "@user1:server.com"
