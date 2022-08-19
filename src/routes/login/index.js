@@ -8,7 +8,11 @@ import Matrix from '../../Matrix'
 import config from '../../config.json'
 
 const Login = () => {
-  const { register, formState: { errors }, handleSubmit } = useForm()
+  const { register, formState: { errors }, handleSubmit } = useForm({
+    defaultValues: {
+      server: process.env.REACT_APP_MATRIX_BASE_URL
+    }
+  })
   const [isLoading, setLoading] = useState(false)
   const [serverResponseErrorMessage, setServerResponseErrorMessage] = useState('')
   const history = useHistory()
@@ -69,17 +73,13 @@ const Login = () => {
               </div>
               {errors?.password && t('Password can\'t be empty.')}
               {config.medienhaus.customServer &&
-                <details>
-                  <summary>{t('Advanced')}</summary>
-                  <div>
-                    <label htmlFor="server">{t('server')}</label>
-                    <input {...register('server')} name="server" type="server" placeholder="https://matrix.org" />
-                  </div>
-                </details>}
+                <div>
+                  <label htmlFor="server">{t('matrix server')}</label>
+                  <input {...register('server')} name="server" type="text" placeholder={process.env.REACT_APP_MATRIX_BASE_URL} />
+                </div>}
               {serverResponseErrorMessage && <p>❗️ {serverResponseErrorMessage}</p>}
               <button name="submit" type="submit" disabled={isLoading}>{isLoading ? <Loading /> : 'LOGIN'}</button>
             </form>
-            {config.medienhaus.customServer && <p>{t('No account yet?')} <a href="https://app.element.io/#/register" rel="external nofollow noopener noreferrer" target="_blank">{t('Create Account')}</a></p>}
           </>
           )
       )}
