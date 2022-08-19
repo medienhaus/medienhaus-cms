@@ -36,11 +36,27 @@ const Login = () => {
     })
   })
 
-  const onSubmit = data => {
+  const getBaseUrl = async (servername) => {
+    let protocol = 'https://'
+    if (servername.match(/^https?:\/\//) !== null) protocol = ''
+    const serverDiscoveryUrl = `${protocol}${servername}/.well-known/matrix/client`
+    try {
+      const result = await (await fetch(serverDiscoveryUrl, { method: 'GET' })).json()
+
+      const baseUrl = result?.['m.homeserver']?.base_url
+      if (baseUrl === undefined) throw new Error()
+      return baseUrl
+    } catch (e) {
+      return `${protocol}${servername}`
+    }
+  }
+
+  const onSubmit = async (data) => {
     if (isLoading) { return }
     setLoading(true)
     setServerResponseErrorMessage('')
-    auth.signin(data.username, data.password, data.server, () => {
+    const homeserverBaseUrl = await getBaseUrl(data.server)
+    auth.signin(data.username, data.password, homeserverBaseUrl, () => {
       setLoading(false)
       history.replace(from)
     }).catch((error) => {
