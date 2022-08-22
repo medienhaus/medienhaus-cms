@@ -1,0 +1,33 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the README at:
+// https://github.com/microsoft/vscode-dev-containers/tree/v0.238.1/containers/javascript-node
+{
+	"name": "Node.js",
+	"image": "mcr.microsoft.com/vscode/devcontainers/javascript-node:16",
+
+	// Configure tool-specific properties.
+	"customizations": {
+		// Configure properties specific to VS Code.
+		"vscode": {
+			// Add the IDs of extensions you want installed when the container is created.
+			"extensions": [
+				"dbaeumer.vscode-eslint"
+			]
+		}
+	},
+
+	// Use 'forwardPorts' to make a list of ports inside the container available locally.
+	"forwardPorts": [3000],
+	"portsAttributes": {
+		"3000": {
+			"label": "npm run start"
+		}
+	},
+
+	"containerEnv": { "REACT_APP_APP_TITLE": "medienhaus/ cms ⨯ GitHub Codespaces" },
+
+	// Use 'postCreateCommand' to run commands after the container is created.
+	"postCreateCommand": "cp .env.example .env && cp src/config.example.json src/config.json && npm install",
+
+	// Comment out to connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
+	"remoteUser": "node"
+}
