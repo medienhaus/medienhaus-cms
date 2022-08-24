@@ -7,8 +7,7 @@ import LanguageSelector from '../LanguageSelector'
 import useJoinedSpaces from '../matrix_joined_spaces'
 import Matrix from '../../Matrix'
 import config from '../../config.json'
-import findValueDeep from 'deepdash/es/findValueDeep'
-import { fetchId, fetchTree } from '../../helpers/MedienhausApiHelper'
+import { fetchId } from '../../helpers/MedienhausApiHelper'
 
 const Nav = () => {
   const auth = useAuth()
@@ -97,26 +96,13 @@ const Nav = () => {
         if (space.powerLevel < 50) return false
         // and 3. (if templates are given in config.json) must have a valid context template
         if (contextTemplates && !contextTemplates.includes(space.meta.template)) return false
+        // and 4. check to see if the space is part of the context tree
         if (config.medienhaus.api) {
-          // we check to see if the space exists in our tree by checking if the api knows about it.
           const room = await fetchId(space.room_id)
           if (room.statusCode) return false
         } else {
-          const tree = await fetchTree(process.env.REACT_APP_CONTEXT_ROOT_SPACE_ID).catch(() => {
-          })
-          const contextObject = findValueDeep(
-            tree,
-            (value, key, parent) => {
-              if (value.id === space.room_id) return true
-            }, { childrenPath: 'children', includeRoot: false, rootIsChildren: true })
-
-          if (contextObject) return true
-          else {
-            (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') && console.debug('not found in tree: ' + space.room_id)
-            return false
-          }
+          // @TODO Add this check for environments without API
         }
-        setIsModeratingSpaces(true)
         return true
       })
       // If we are not moderating any spaces we can cancel the rest here ...
@@ -125,7 +111,7 @@ const Nav = () => {
         return
       }
       // ... but if we -are- indeed moderating at least one space, we want to find out if there are any pending knocks
-
+      setIsModeratingSpaces(true)
       async function getAmountOfPendingKnocks () {
         const fullRoomObjectForModeratingSpaces = await Promise.all(moderatingSpaces.map(async (space) => await matrixClient.getRoom(space.room_id)))
 
@@ -140,7 +126,6 @@ const Nav = () => {
         })
         setKnockAmount(pendingKnocks.length)
       }
-
       getAmountOfPendingKnocks()
     }
 

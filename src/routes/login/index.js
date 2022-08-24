@@ -71,7 +71,7 @@ const Login = () => {
 
   return (
     <section className="login">
-      {(process.env.REACT_APP_MATRIX_SSO_LOGIN
+      {((process.env.REACT_APP_MATRIX_SSO_LOGIN === 'true')
         ? (
           <button onClick={() => { window.location.replace(matrixClient.getSsoLoginUrl(document.baseURI)) }}>LOGIN WITH SAML</button>
           )
