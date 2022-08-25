@@ -86,23 +86,17 @@ const ProjectTitle = ({ title, projectSpace, template, callback }) => {
           // by default we create subpsaces for localisation and one for events
           for await (const lang of config.medienhaus?.languages) {
             const languageRoom = await matrixClient.createRoom(opts('lang', lang, 'shared'))
-            await fetch(process.env.REACT_APP_MATRIX_BASE_URL + `/_matrix/client/r0/rooms/${space.room_id}/state/m.space.child/${languageRoom.room_id}`, {
-              method: 'PUT',
-              headers: { Authorization: 'Bearer ' + localStorage.getItem('medienhaus_access_token') },
-              body: JSON.stringify({
-                via: [process.env.REACT_APP_MATRIX_BASE_URL.replace('https://', '')],
-                suggested: false,
-                auto_join: false
-              })
-            })
+            await Matrix.addSpaceChild(space.room_id, languageRoom.room_id)
           }
           // const events = await matrixClient.createRoom(opts('events', 'events', 'shared'))
           return space.room_id
         })
-        .then((res) => {
-          history.push(`/create/${res}`)
-          window.location.reload()
+        .then(async (itemSpaceRoomId) => {
+          // add this project to our application -> cms space
+          await Matrix.addSpaceChild(localStorage.getItem(process.env.REACT_APP_APP_NAME + '_space'), itemSpaceRoomId)
+          return itemSpaceRoomId
         })
+        .then((itemSpaceRoomId) => history.push(`/create/${itemSpaceRoomId}`))
     } catch (e) {
       console.log(e)
     } finally {

@@ -637,7 +637,7 @@ const Create = () => {
         <>
           <section className="context">
             <h3>{t('Context')}</h3>
-            <Category title={title} projectSpace={projectSpace} onChange={setHasContext} parent={process.env.REACT_APP_CONTEXT_ROOT_SPACE_ID} />
+            <Category title={title} projectSpace={projectSpace} onChange={setHasContext} parent={localStorage.getItem(process.env.REACT_APP_APP_NAME + '_root_context_space')} />
           </section>
           {(!config.medienhaus?.item || !config.medienhaus?.item[template]?.blueprint || config.medienhaus?.item[template]?.blueprint.includes('location')) && (
             <section className="events">

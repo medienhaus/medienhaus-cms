@@ -5,9 +5,14 @@ import { useTranslation } from 'react-i18next'
 import { useAuth } from '../../Auth'
 import { Loading } from '../../components/loading'
 import Matrix from '../../Matrix'
+import config from '../../config.json'
 
 const Login = () => {
-  const { register, formState: { errors }, handleSubmit } = useForm()
+  const { register, formState: { errors }, handleSubmit } = useForm({
+    defaultValues: {
+      server: process.env.REACT_APP_MATRIX_BASE_URL
+    }
+  })
   const [isLoading, setLoading] = useState(false)
   const [serverResponseErrorMessage, setServerResponseErrorMessage] = useState('')
   const history = useHistory()
@@ -31,11 +36,27 @@ const Login = () => {
     })
   })
 
-  const onSubmit = data => {
+  const getBaseUrl = async (servername) => {
+    let protocol = 'https://'
+    if (servername.match(/^https?:\/\//) !== null) protocol = ''
+    const serverDiscoveryUrl = `${protocol}${servername}/.well-known/matrix/client`
+    try {
+      const result = await (await fetch(serverDiscoveryUrl, { method: 'GET' })).json()
+
+      const baseUrl = result?.['m.homeserver']?.base_url
+      if (baseUrl === undefined) throw new Error()
+      return baseUrl
+    } catch (e) {
+      return `${protocol}${servername}`
+    }
+  }
+
+  const onSubmit = async (data) => {
     if (isLoading) { return }
     setLoading(true)
     setServerResponseErrorMessage('')
-    auth.signin(data.username, data.password, () => {
+    const homeserverBaseUrl = await getBaseUrl(data.server)
+    auth.signin(data.username, data.password, homeserverBaseUrl, () => {
       setLoading(false)
       history.replace(from)
     }).catch((error) => {
@@ -67,6 +88,11 @@ const Login = () => {
                 <input {...register('password', { required: true })} name="password" type="password" placeholder="••••••••••••••••••••••••" />
               </div>
               {errors?.password && t('Password can\'t be empty.')}
+              {config.medienhaus.customServer &&
+                <div>
+                  <label htmlFor="server">{t('matrix server')}</label>
+                  <input {...register('server')} name="server" type="text" placeholder={process.env.REACT_APP_MATRIX_BASE_URL} />
+                </div>}
               {serverResponseErrorMessage && <p>❗️ {serverResponseErrorMessage}</p>}
               <button name="submit" type="submit" disabled={isLoading}>{isLoading ? <Loading /> : 'LOGIN'}</button>
             </form>

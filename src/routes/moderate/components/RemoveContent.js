@@ -12,7 +12,7 @@ const RemoveContent = ({ loading }) => {
       {loading
         ? <Loading />
         : <UlElement
-            roomId={process.env.REACT_APP_CONTEXT_ROOT_SPACE_ID}
+            roomId={localStorage.getItem(process.env.REACT_APP_APP_NAME + '_root_context_space')}
             indent={0}
           />}
     </section>

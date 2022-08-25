@@ -27,7 +27,7 @@ const AddUser = ({ matrixClient }) => {
     }
     */
 
-    fetch(`${process.env.REACT_APP_MATRIX_BASE_URL}/_synapse/admin/v1/register/`, { method: 'GET' })
+    fetch(`${localStorage.getItem('medienhaus_hs_url')}/_synapse/admin/v1/register/`, { method: 'GET' })
       .then(res => res.json())
       .then(res => {
         const shaObj = new JsSHA('SHA-1', 'TEXT', {
@@ -51,7 +51,7 @@ const AddUser = ({ matrixClient }) => {
           mac: hmac
         }
 
-        fetch(`${process.env.REACT_APP_MATRIX_BASE_URL}/_synapse/admin/v1/register/`, {
+        fetch(`${localStorage.getItem('medienhaus_hs_url')}/_synapse/admin/v1/register/`, {
           method: 'POST',
           body: JSON.stringify(body)
         })

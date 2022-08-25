@@ -95,7 +95,7 @@ const Moderate = () => {
     }
 
     console.log('---- started structure ----')
-    const tree = await getSpaceStructure(matrixClient, process.env.REACT_APP_CONTEXT_ROOT_SPACE_ID, false)
+    const tree = await getSpaceStructure(matrixClient, localStorage.getItem(process.env.REACT_APP_APP_NAME + '_root_context_space'), false)
     return tree
   }
 
