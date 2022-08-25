@@ -67,41 +67,30 @@ This gives you the ability to use different blueprints for different types.
 
 Define which of the following UI elements should be visible in the /create route.
 
-**Image**
+- `image`: Add a main image to your content.
+- `contributors`: Gives users the ability to invite contributors who can edit the content.
+- `location`: Adds a UI to add a location to the content. You can specify a default location with the separate 'location' key.
+- `time`: Adds a UI to add a time window to content.
 
-Add a main image to your content.
-
-**Contributors**
-
-Gives users the ability to invite contributors who can edit the content.
-
-**Location**
-
-Adds a UI to add a location to the content.
-You can specify a default location with the separate 'location' key.
-
-**Time**
-
-Adds a UI to add a time window to content.
-
-#### `content`
+#### Allowed content types
 
 You can define which types of content are listed in the dropdown of the /create route.
 
 Each type of content can have one or all of the following:
 
-**heading**  
-**text**  
-**list**   
-**quote**  
-**code**  
-**image**  
-**audio**  
-**video**  
-**livestream**  
-**playlist**  
-**bigbluebutton**
-
+```
+heading
+text
+list
+quote
+code
+image
+audio
+video
+livestream
+playlist
+bigbluebutton
+```
 
 ### `pages`
 
@@ -133,34 +122,17 @@ Define which sites should be visible and which functions should be available in 
 
 #### `account`
 
-**avatar**
-
-users are able to change their profile picture from within the accout route.
-
-**mail**
-
-gives users the ability to add one or more email addresses to their account.
-
-**name**
-
-gives users the ability to change their display name.
+- `avatar`: if users are able to change their profile picture from within the /account route
+- `mail`: gives users the ability to add one or more email addresses to their account
+- `name`: gives users the ability to change their display name
 
 #### `moderate`
 
-**invite**
-
-Invite users to specific rooms you are moderating
-
-**rightsManagement**
-
-promote users to moderators within a specified context
-
-**manageContexts**
-
-add or remove context spaces or sub-context spaces
-
-* **showRoot:** if enabled the root of all contexts is displayed in the manage context dropdown.
-* **treeDepth:** depth of the tree shown after selecting a context. defaults to 1.
+- `invite`: Invite users to specific rooms you are moderating
+- `rightsManagement`: promote users to moderators within a specified context
+- `manageContexts`: add or remove context spaces or sub-context spaces
+  - `showRoot`: if enabled the root of all contexts is displayed in the manage context dropdown.
+  - `treeDepth`: depth of the tree shown after selecting a context. defaults to 1.
 
 ### `usersToInviteToNewContexts`
 
