@@ -5,7 +5,6 @@ import * as PropTypes from 'prop-types'
 const AuthContext = createContext(undefined)
 
 function AuthProvider ({ children }) {
-  console.log(children)
   const auth = useAuthProvider()
 
   return (
