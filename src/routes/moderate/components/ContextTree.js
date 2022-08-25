@@ -137,13 +137,13 @@ const ContextTree = ({ moderationRooms, contextId, onContextChange }) => {
       <SwitchContainter>
         <span>{t('Show items')}</span>
         <Switch>
-          <input type="checkbox" onChange={() => setShowItems(prevState => !prevState)} />
+          <input type="checkbox" checked={showItems} onChange={() => setShowItems(prevState => !prevState)} />
           <span className="slider" />
         </Switch>
       </SwitchContainter>
       <Container>
         {mapDeep(filterDeep(contexts, (value, key, parent, context) => {
-          if (context.depth > (config.medienhaus.sites.moderate.manageContexts.treeDepth || 1)) return
+          if (context.depth > (config.medienhaus.sites.moderate.manageContexts.treeDepth || 2)) return
           // Exclude all hierarchy elements that are not "contexts"
           if (value?.type.includes('content')) return false
           if (!showItems && value?.type.includes('item')) return false
