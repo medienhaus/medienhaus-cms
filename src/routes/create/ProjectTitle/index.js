@@ -91,6 +91,10 @@ const ProjectTitle = ({ title, projectSpace, template, callback }) => {
           // const events = await matrixClient.createRoom(opts('events', 'events', 'shared'))
           return space.room_id
         })
+        .then(async (itemSpaceRoomId) => {
+          // add this project to our application -> cms space
+          await Matrix.addSpaceChild(localStorage.getItem(process.env.REACT_APP_APP_NAME + '_space'), itemSpaceRoomId)
+        })
         .then((res) => history.push(`/create/${res}`))
     } catch (e) {
       console.log(e)
