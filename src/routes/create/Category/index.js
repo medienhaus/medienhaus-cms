@@ -78,7 +78,7 @@ const Category = ({ projectSpace, onChange, parent }) => {
   }
 
   const fetchTreeFromApi = async () => {
-    const fetchTree = await fetchContextTree(process.env.REACT_APP_CONTEXT_ROOT_SPACE_ID)
+    const fetchTree = await fetchContextTree(localStorage.getItem(process.env.REACT_APP_APP_NAME + '_root_context_space'))
     setInputItems(fetchTree)
     setLoading(false)
   }

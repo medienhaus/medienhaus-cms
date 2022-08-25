@@ -30,18 +30,105 @@ const Nav = () => {
       if (findServiceSpace) {
         localStorage.setItem(process.env.REACT_APP_APP_NAME + '_space', findServiceSpace.room_id)
         setApplicationSpace(findServiceSpace.room_id)
+        // private / drafts
+        localStorage.setItem(process.env.REACT_APP_APP_NAME + '_space', joinedSpaces.find(space => space.name === 'drafts').room_id)
+        setApplicationSpace(joinedSpaces.find(space => space.name === 'drafts').room_id)
+        // public
+        if (process.env.REACT_APP_CONTEXT_ROOT_SPACE_ID) {
+          // If there's a context root space ID provided by the .env file, we use that one ...
+          localStorage.setItem(process.env.REACT_APP_APP_NAME + '_root_context_space', process.env.REACT_APP_CONTEXT_ROOT_SPACE_ID)
+        } else {
+          // ... otherwise we look for the space called "public"
+          localStorage.setItem(process.env.REACT_APP_APP_NAME + '_root_context_space', joinedSpaces.find(space => space.name === 'public').room_id)
+        }
       } else {
         if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') console.info('creating service space')
         const createRoom = await Matrix.createRoom(
           process.env.REACT_APP_APP_NAME,
           true,
-                `This is your private space for the application ${process.env.REACT_APP_APP_NAME}. You can find all your ${process.env.REACT_APP_APP_NAME} data in here.`,
-                'invite',
-                'context',
-                'application')
+          '',
+          'invite',
+          'context',
+          'application')
         await Matrix.addSpaceChild(applicationsSpaceId, createRoom.room_id)
-        setApplicationSpace(createRoom.room_id)
-        localStorage.setItem(process.env.REACT_APP_APP_NAME + '_space', createRoom.room_id)
+
+        // private / drafts
+        const createPrivateSpace = await Matrix.createRoom(
+          'drafts',
+          true,
+            `This is your private space for the application ${process.env.REACT_APP_APP_NAME}. You can find all your unpublished ${process.env.REACT_APP_APP_NAME} drafts in here.`,
+            'invite',
+            'context',
+            'application')
+        await Matrix.addSpaceChild(createRoom.room_id, createPrivateSpace.room_id)
+        setApplicationSpace(createPrivateSpace.room_id)
+        localStorage.setItem(process.env.REACT_APP_APP_NAME + '_space', createPrivateSpace.room_id)
+
+        // public
+        if (process.env.REACT_APP_CONTEXT_ROOT_SPACE_ID) {
+          // If there's a context root space ID provided by the .env file, we use that one ...
+          localStorage.setItem(process.env.REACT_APP_APP_NAME + '_root_context_space', process.env.REACT_APP_CONTEXT_ROOT_SPACE_ID)
+        } else {
+          // ... otherwise we create a space called "public" which the user can manage and moderate themselves
+          const medienhausMeta = {
+            version: '0.4',
+            type: 'context',
+            published: 'public',
+            template: 'application'
+          }
+
+          const opts = {
+            preset: 'public_chat',
+            power_level_content_override: {
+              ban: 50,
+              events: {
+                'm.room.avatar': 50,
+                'm.room.canonical_alias': 50,
+                'm.room.encryption': 100,
+                'm.room.history_visibility': 100,
+                'm.room.name': 50,
+                'm.room.power_levels': 50,
+                'm.room.server_acl': 100,
+                'm.room.tombstone': 100,
+                'm.space.child': 0, // @TODO this needs to be a config flag, wether users are allowed to just add content to contexts or need to knock and be invited first.
+                'm.room.topic': 50,
+                'm.room.pinned_events': 50,
+                'm.reaction': 50,
+                'im.vector.modular.widgets': 50
+              },
+              events_default: 50,
+              historical: 100,
+              invite: 50,
+              kick: 50,
+              redact: 50,
+              state_default: 50,
+              users_default: 0
+            },
+            name: 'public',
+            topic: `This is your public space for the application ${process.env.REACT_APP_APP_NAME}. You can find all your published ${process.env.REACT_APP_APP_NAME} data in here.`,
+            room_version: '9',
+            creation_content: { type: 'm.space' },
+            initial_state: [{
+              type: 'm.room.history_visibility',
+              content: { history_visibility: 'world_readable' } //  history
+            },
+            {
+              type: 'dev.medienhaus.meta',
+              content: medienhausMeta
+            },
+            {
+              type: 'm.room.guest_access',
+              state_key: '',
+              content: { guest_access: 'can_join' }
+            }],
+            visibility: 'private' // visibility is private even for public spaces.
+          }
+
+          // create the space for the context
+          const createPublicSpace = await matrixClient.createRoom(opts).catch(console.log)
+          await Matrix.addSpaceChild(createRoom.room_id, createPublicSpace.room_id)
+          localStorage.setItem(process.env.REACT_APP_APP_NAME + '_root_context_space', createPublicSpace.room_id)
+        }
       }
       setFolderDialogueOpen(false)
       reload()
