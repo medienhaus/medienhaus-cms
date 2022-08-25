@@ -1,5 +1,10 @@
 {
   "medienhaus": {
+    "context": {
+      "category": {
+        "label": "Category"
+      }
+    },
     "item": {
       "article": {
         "label": "Blog Post",
@@ -25,12 +30,8 @@
         "rightsManagement": true,
         "manageContexts": {
           "showRoot": true
-        },
-        "removeContent": true
-      },
-      "support": false,
-      "request": false,
-      "feedback": false
+        }
+      }
     },
     "allowSelectingRootContext": true,
     "customServer": true
