@@ -521,7 +521,7 @@ const Create = () => {
           switch (blockType) {
             case '_heading':
               n = 'medienhaus/heading'
-              a = { content: message.body.substr(3) }
+              a = { content: message.body.substr(4) }
               break
             case '_text':
               n = 'core/paragraph'
