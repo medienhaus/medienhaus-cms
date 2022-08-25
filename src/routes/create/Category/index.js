@@ -10,7 +10,7 @@ import findValueDeep from 'deepdash/findValueDeep'
 import styled from 'styled-components'
 import ContextDropdown from '../../../components/ContextDropdown'
 
-import { triggerApiUpdate, fetchContextTree, fetchId } from '../../../helpers/MedienhausApiHelper'
+import { triggerApiUpdate, fetchContextTree, fetchId, removeFromParent } from '../../../helpers/MedienhausApiHelper'
 
 const RemovableLiElement = styled.li`
   display: grid;
@@ -185,10 +185,13 @@ const Category = ({ projectSpace, onChange, parent }) => {
       setError(e?.message)
       setTimeout(() => setError(''), 2500)
     })
-    // triggering an update on both spaces plus project and parent space simultaniously "tricks" the api into deleting the parent
-    await triggerApiUpdate(parent)
-    await triggerApiUpdate(projectSpace)
-    await triggerApiUpdate(projectSpace, parent)
+    if (removeSpacechild?.event_id && config.medienhaus.api) {
+      await removeFromParent(projectSpace, [parent]).catch((e) => {
+        console.debug(e)
+        setError(e)
+        setTimeout(() => setError(''), 2500)
+      })
+    }
     removeSpacechild?.event_id && setContexts(contexts => contexts.filter(context => context.room_id !== parent))
   }
 

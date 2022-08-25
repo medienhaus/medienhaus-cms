@@ -2,12 +2,16 @@ import React, { useEffect, useState } from 'react'
 import { Loading } from '../loading'
 import { useTranslation } from 'react-i18next'
 import Matrix from '../../Matrix'
+import config from '../../config.json'
+import { triggerApiUpdate } from '../../helpers/MedienhausApiHelper'
+import LoadingSpinnerSelect from '../LoadingSpinnerSelect'
 
 const PublishProject = ({ disabled, space, published, hasContext, metaEvent }) => {
   const { t } = useTranslation('publish')
   // eslint-disable-next-line no-unused-vars
   const [userFeedback, setUserFeedback] = useState()
   const [visibility, setVisibility] = useState(published)
+  const [isChangingVisibility, setIsChangingVisibility] = useState(false)
   const matrixClient = Matrix.getMatrixClient()
 
   useEffect(() => {
@@ -29,26 +33,19 @@ const PublishProject = ({ disabled, space, published, hasContext, metaEvent }) =
   }, [matrixClient, metaEvent, published, space.room_id])
 
   const onChangeVisibility = async (publishState) => {
+    setIsChangingVisibility(true)
     setVisibility(publishState)
     const hierarchy = await matrixClient.getRoomHierarchy(space.room_id, 50, 1)
-    const joinRules = {
-      method: 'PUT',
-      headers: { Authorization: 'Bearer ' + localStorage.getItem('medienhaus_access_token') },
-      body: JSON.stringify({ join_rule: publishState === 'public' ? 'public' : 'invite' })
-    }
-    const historyVisibility = {
-      method: 'PUT',
-      headers: { Authorization: 'Bearer ' + localStorage.getItem('medienhaus_access_token') },
-      body: JSON.stringify({ history_visibility: publishState === 'invite' ? 'shared' : 'world_readable' })
-    }
+    const joinRules = { join_rule: publishState === 'public' ? 'public' : 'invite' }
+    const historyVisibility = { history_visibility: publishState === 'invite' ? 'shared' : 'world_readable' }
     try {
       console.log('--- Starting to change visibility ---')
       for (const room of hierarchy.rooms) {
-        const changeJoinRule = await fetch(process.env.REACT_APP_MATRIX_BASE_URL + `/_matrix/client/r0/rooms/${room.room_id}/state/m.room.join_rules/`, joinRules)
+        const changeJoinRule = await matrixClient.http.authedRequest(undefined, 'PUT', `/rooms/${room.room_id}/state/m.room.join_rules/`, undefined, joinRules)
         if (changeJoinRule.ok) console.log('Changed joinRule of ' + room.name + ' successfully to ' + publishState + '!')
         else console.log('Oh no, changing join_rule went wrong with room ' + room.name)
 
-        const changeHistoryVisibility = await fetch(process.env.REACT_APP_MATRIX_BASE_URL + `/_matrix/client/r0/rooms/${room.room_id}/state/m.room.history_visibility/`, historyVisibility)
+        const changeHistoryVisibility = await matrixClient.http.authedRequest(undefined, 'PUT', `/rooms/${room.room_id}/state/m.room.history_visibility/`, undefined, historyVisibility)
         if (changeHistoryVisibility.ok) console.log('Changed history_visibility of ' + room.name + ' successfully!')
         else console.log('Oh no, something went wrong with room ' + room.name)
       }
@@ -59,15 +56,21 @@ const PublishProject = ({ disabled, space, published, hasContext, metaEvent }) =
       console.log('--- All changed Succesfully to ' + publishState + ' ---')
 
       setUserFeedback(t('Changed successfully!'))
+      if (config.medienhaus.api) await triggerApiUpdate(space.room_id)
+      setIsChangingVisibility(false)
       setTimeout(() => setUserFeedback(''), 3000)
     } catch (err) {
       console.error(err)
       setUserFeedback(t('Oh no, something went wrong.'))
+      setIsChangingVisibility(false)
       setTimeout(() => setUserFeedback(''), 3000)
     }
   }
 
   if (!visibility) return <Loading />
+
+  if (isChangingVisibility) return <LoadingSpinnerSelect />
+
   return (
     <div className="below">
       <select

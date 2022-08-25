@@ -14,7 +14,6 @@ import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
 import locations from '../../../assets/data/locations.json'
 import { MatrixEvent } from 'matrix-js-sdk'
 import config from '../../../config.json'
-import TextareaAutosize from 'react-textarea-autosize'
 
 import findValueDeep from 'deepdash/findValueDeep'
 import LoadingSpinnerButton from '../../../components/LoadingSpinnerButton'
@@ -22,9 +21,11 @@ import { Icon } from 'leaflet/dist/leaflet-src.esm'
 import RemoveItemsInContext from './RemoveItemsInContext'
 
 import styled from 'styled-components'
-import { fetchId, triggerApiUpdate } from '../../../helpers/MedienhausApiHelper'
+import { detailedItemList, fetchId, removeFromParent, triggerApiUpdate } from '../../../helpers/MedienhausApiHelper'
 import Matrix from '../../../Matrix'
 import LeaveContext from './LeaveContext'
+import ContextTree from './ContextTree'
+import TextareaAutoSizeMaxLength from './TextareaAutoSizeMaxLength'
 
 const DangerZone = styled.section`
   border: none;
@@ -45,19 +46,21 @@ const Details = styled.details`
 }
 `
 
-const ManageContexts = ({ matrixClient, moderationRooms: incomingModerationRooms, addModerationRooms, removeModerationRoom }) => {
+const ManageContexts = ({ matrixClient, moderationRooms: incomingModerationRooms, nestedRooms: incomingNestedRooms, addModerationRooms, removeModerationRoom }) => {
   const { t } = useTranslation('moderate')
   const [selectedContext, setSelectedContext] = useState('')
   const [roomName, setRoomName] = useState('')
   const [roomTemplate, setRoomTemplate] = useState('')
   const [disableButton, setDisableButton] = useState(false)
   const [contextParent, setContextParent] = useState('')
+  const [itemsInContext, setItemsInContext] = useState()
   const [events, setEvents] = useState([])
   const [allocation, setAllocation] = useState([])
   const [deleting, setDeleting] = useState(false)
   const [loading, setLoading] = useState(false)
   const [description, setDescription] = useState('')
   const [moderationRooms, setModerationRooms] = useState(incomingModerationRooms)
+  const [nestedRooms, setNestedRooms] = useState(incomingNestedRooms)
 
   const [editRoomName, setEditRoomName] = useState(false)
   const [newRoomName, setNewRoomName] = useState('')
@@ -65,12 +68,16 @@ const ManageContexts = ({ matrixClient, moderationRooms: incomingModerationRooms
   useEffect(() => {
     let cancelled = false
 
-    !cancelled && setModerationRooms(incomingModerationRooms)
+    if (!cancelled) {
+      setModerationRooms(incomingModerationRooms)
+      setNestedRooms(incomingNestedRooms)
+    }
 
     return () => {
       cancelled = true
     }
-  }, [incomingModerationRooms])
+  }, [incomingModerationRooms, incomingNestedRooms])
+
   const onRemoveItemFromContext = (space) => {
     setLoading(true)
     Matrix.removeSpaceChild(selectedContext, space)
@@ -127,7 +134,7 @@ const ManageContexts = ({ matrixClient, moderationRooms: incomingModerationRooms
             state_default: 50,
             users_default: 0
           },
-          name: name,
+          name,
           room_version: '9',
           creation_content: { type: 'm.space' },
           initial_state: [{
@@ -167,9 +174,9 @@ const ManageContexts = ({ matrixClient, moderationRooms: incomingModerationRooms
     }
 
     const newContext = await createSpace(name)
-    if (config.medienhaus.api) triggerApiUpdate(newContext, selectedContext)
+    if (config.medienhaus.api) await triggerApiUpdate(newContext, selectedContext)
     // we add our newly created context to the context object to be able to work on it immedieately.
-    addModerationRooms(newContext, name, template)
+    addModerationRooms(newContext, name, template, selectedContext)
     // we set the parent to the previously selected context
     setContextParent(selectedContext)
     // then update our selected context to the newly created one
@@ -210,6 +217,8 @@ const ManageContexts = ({ matrixClient, moderationRooms: incomingModerationRooms
       if (fetchPath) {
         // and then its first parent item
         contextObject = fetchPath
+        const detailedItems = await detailedItemList(context, 1)
+        setItemsInContext(detailedItems)
         contextObject.parents ? setContextParent(contextObject.parents[0]) : setContextParent(null)
         setDescription(contextObject
           .description?.default || '')
@@ -227,7 +236,6 @@ const ManageContexts = ({ matrixClient, moderationRooms: incomingModerationRooms
         (value, key, parent) => {
           if (value.id === context) return true
         }, { childrenPath: 'children', includeRoot: false, rootIsChildren: true })
-      console.log(contextObject)
       contextObject.pathIds ? setContextParent(contextObject.pathIds[contextObject.pathIds.length - 1]) : setContextParent(null)
       setDescription(contextObject
         .topic || '')
@@ -263,7 +271,7 @@ const ManageContexts = ({ matrixClient, moderationRooms: incomingModerationRooms
     }
   }
 
-  const onSave = async () => {
+  const onSaveDescription = async (description) => {
     if (description.length > 500) return
     await matrixClient.setRoomTopic(selectedContext, description).catch(console.log)
     if (config.medienhaus.api) triggerApiUpdate(selectedContext)
@@ -301,9 +309,7 @@ const ManageContexts = ({ matrixClient, moderationRooms: incomingModerationRooms
       }
       )
       if (config.medienhaus.api) {
-        // triggering an update on both spaces plus project and parent space simultaniously "tricks" the api into deleting the parent
-        await triggerApiUpdate(parent)
-        await triggerApiUpdate(selectedContext, parent)
+        await removeFromParent(selectedContext, [parent]).catch(console.debug) // @TODO add error handleing
       }
     } else {
       // @TODO error handleing
@@ -326,7 +332,6 @@ const ManageContexts = ({ matrixClient, moderationRooms: incomingModerationRooms
     delete _moderationRooms[selectedContext]
     setModerationRooms(_moderationRooms)
     setSelectedContext('')
-    if (config.medienhaus.api) triggerApiUpdate(selectedContext)
 
     setSelectedContext('')
     setDisableButton(false)
@@ -343,7 +348,7 @@ const ManageContexts = ({ matrixClient, moderationRooms: incomingModerationRooms
           : <SimpleContextSelect
               onItemChosen={onContextChange}
               selectedContext={selectedContext}
-              struktur={moderationRooms}
+              struktur={nestedRooms}
               disabled={loading}
             />}
         {loading && <Loading />}
@@ -351,6 +356,11 @@ const ManageContexts = ({ matrixClient, moderationRooms: incomingModerationRooms
          <input type="text" value={selectedContextName} disabled /> */}
         {selectedContext &&
           <>
+            <ContextTree
+              contextId={selectedContext}
+              onContextChange={onContextChange}
+              moderationRooms={moderationRooms}
+            />
             <hr />
             <Details>
               <summary>
@@ -467,20 +477,7 @@ const ManageContexts = ({ matrixClient, moderationRooms: incomingModerationRooms
               <summary>
                 <h3>{t('Change Description')}</h3>
               </summary>
-              <section>
-                <TextareaAutosize
-                  value={description}
-                  minRows={6}
-                  placeholder={`${t('Please add a short description.')}`}
-                  onChange={(e) => setDescription(e.target.value)}
-                  onBlur={onSave}
-                />
-                {description.length > 500 && (<>
-                  <p>{t('Characters:')} {description.length}</p>
-                  <p>❗️{t('Please keep the descrpition under 500 characters.')} {description.length}</p>
-                </>
-                )}
-              </section>
+              <TextareaAutoSizeMaxLength description={description} setDescription={setDescription} onSaveDescription={onSaveDescription} />
             </Details>
             <Details>
 
@@ -516,7 +513,7 @@ const ManageContexts = ({ matrixClient, moderationRooms: incomingModerationRooms
                 <h3>{t('Remove Item from context')}</h3>
               </summary>
               <section>
-                <RemoveItemsInContext parent={selectedContext} onRemoveItemFromContext={onRemoveItemFromContext} />
+                <RemoveItemsInContext parent={selectedContext} itemsInContext={itemsInContext} onRemoveItemFromContext={onRemoveItemFromContext} />
               </section>
             </Details>
             <hr />

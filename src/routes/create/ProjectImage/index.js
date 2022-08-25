@@ -79,6 +79,7 @@ const ProjectImage = ({ projectSpace, changeProjectImage, disabled, apiCallback 
             <option value="cc-by-nc-sa">CC BY-NC-SA 4.0</option>
             <option value="cc-by-nd">CC BY-ND 4.0</option>
             <option value="cc-by-nc-nd">CC BY-NC-ND 4.0</option>
+            <option value="rs-inc">In Copyright</option>
           </select>
           <TextareaAutosize rows="3" value={projectImage.alt} disabled />
         </>}

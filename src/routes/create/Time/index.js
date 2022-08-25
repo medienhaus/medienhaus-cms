@@ -122,7 +122,7 @@ export default function Time ({ allocation, projectSpace, reloadSpace }) {
 
           <div className="confirmation">
             <SimpleButton cancel onClick={() => setIsUIVisible(false)}>CANCEL</SimpleButton>
-            <LoadingSpinnerButton disabled={!startDate || !endDate || new Date(startDate + 'T' + startTime + '.000Z').valueOf() - new Date(endDate + 'T' + endTime + '.000Z').valueOf() > 0} onClick={saveTime}>{t('Save')}</LoadingSpinnerButton>
+            <LoadingSpinnerButton disabled={!startDate || !endDate || new Date(startDate + 'T' + startTime + ':00.000Z').valueOf() - new Date(endDate + 'T' + endTime + ':00.000Z').valueOf() > 0} onClick={saveTime}>{t('Save')}</LoadingSpinnerButton>
           </div>
 
         </>

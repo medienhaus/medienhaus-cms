@@ -18,9 +18,22 @@ import findValueDeep from 'deepdash/findValueDeep'
 import * as _ from 'lodash'
 import { fetchId } from '../../helpers/MedienhausApiHelper'
 
+import styled from 'styled-components'
+
+const TabSection = styled.section`
+  display: grid;
+  grid-gap: var(--margin);
+  grid-template-columns: repeat(auto-fit, minmax(14ch, 1fr));
+
+  & > * + * {
+    margin-top: unset;
+  }
+`
+
 const Moderate = () => {
   const { joinedSpaces, spacesErr, fetchSpaces, reload } = useJoinedSpaces(false)
   const [moderationRooms, setModerationRooms] = useState()
+  const [nestedRooms, setNestedRooms] = useState()
   const [userSearch, setUserSearch] = useState([])
   const [selection, setSelection] = useState('invite')
   const [fetching, setFetching] = useState(false)
@@ -91,16 +104,19 @@ const Moderate = () => {
 
     const handleModerationRooms = async () => {
       setLoading(true)
+      let rooms = {}
       for (const space of joinedSpaces) {
         if (space.meta.type !== 'context') continue
         if (space.powerLevel < 50) continue
         if (config.medienhaus.api) {
           // we check to see if the space exists in our tree by checking if the api knows about it.
           const room = await fetchId(space.room_id, controller.signal).catch((e) => {
-            console.log(e)
+            console.debug(e)
             // @TODO add error handleing
           })
           if (room?.type !== 'context') continue
+          space.parents = room.parents
+          space.authors = room.origin.authors
         } else {
           // with no api we have to create the structure ourselves
           const tree = await createStructurObject()
@@ -115,7 +131,7 @@ const Moderate = () => {
             continue
           }
         }
-        setModerationRooms(moderationRooms => Object.assign({}, moderationRooms, {
+        rooms = Object.assign({}, rooms, {
           [space.room_id]:
           {
             name: space.name,
@@ -123,10 +139,13 @@ const Moderate = () => {
             room_id: space.room_id,
             template: space.meta.template,
             type: space.meta.type,
-            membership: space.selfMembership
+            membership: space.selfMembership,
+            parents: space.parents,
+            authors: space.authors
           }
-        }))
+        })
       }
+      setModerationRooms(rooms)
       setLoading(false)
     }
     if (joinedSpaces) {
@@ -138,6 +157,51 @@ const Moderate = () => {
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [joinedSpaces])
+
+  useEffect(() => {
+    let cancelled = false
+
+    if (!cancelled && moderationRooms) {
+      const mod = { ...moderationRooms }
+      function findFor (parentId) {
+        // create a new object to store the result
+        const nested = {}
+
+        // for each item in a
+        for (const room of Object.keys(moderationRooms)) {
+          // find all children of parentId
+          if (moderationRooms[room].parents?.includes(parentId)) {
+            // recursively find children for each children of parentId
+            const recursive = findFor(moderationRooms[room].room_id)
+            // if it has no children, skip adding the children prop
+            const object = Object.keys(recursive).length === 0 ? {} : { children: recursive }
+            nested[moderationRooms[room].room_id] = Object.assign(object, moderationRooms[room])
+          }
+        }
+        return nested
+      }
+      for (const room of Object.keys(moderationRooms)) {
+        // we iterate over all room ids
+        const nested = findFor(room)
+        if (Object.keys(nested).length !== 0) {
+          // if we found parents fot the room we want to remove them from the first level
+          for (const child of Object.keys(nested)) {
+            mod[child] && delete mod[child]
+          }
+        }
+        // in order not to create douplicates we continue if the parent is not in level 0 anymore
+        if (!mod[room]) continue
+        // then we add the nested object
+        const children = { children: nested }
+        mod[room] = Object.assign(children, moderationRooms[room])
+      }
+      setNestedRooms(mod)
+    }
+
+    return () => {
+      cancelled = true
+    }
+  }, [moderationRooms])
 
   useEffect(() => {
     async function checkRoomForPossibleInvite (room) {
@@ -222,13 +286,14 @@ const Moderate = () => {
     })
   }
 
-  const addModerationRooms = (newContext, name, template) => {
+  const addModerationRooms = (newContext, name, template, parent) => {
     const subContextObject = {
       id: newContext,
       room_id: newContext,
       name: name,
       template: template,
-      type: 'context'
+      type: 'context',
+      parents: [parent]
     }
 
     // const parentObject = findValueDeep(
@@ -236,7 +301,7 @@ const Moderate = () => {
     //   (value, key, parent) => {
     //     if (value.id === selectedContext) return true
     //   }, { childrenPath: 'children', includeRoot: false, rootIsChildren: true })
-    setModerationRooms(prevState => Object.assign(prevState, {
+    setModerationRooms(prevState => Object.assign({ ...prevState }, {
       [newContext]: subContextObject
     }))
   }
@@ -251,11 +316,11 @@ const Moderate = () => {
     // eslint-disable-next-line default-case
     switch (selection) {
       case 'invite':
-        return config.medienhaus?.sites?.moderate?.invite && <> <InviteUserToSpace matrixClient={matrixClient} moderationRooms={moderationRooms} setPower={setPower} fetchUsers={fetchUsers} fetching={fetching} userSearch={userSearch} /></>
+        return config.medienhaus?.sites?.moderate?.invite && <> <InviteUserToSpace matrixClient={matrixClient} nestedRooms={nestedRooms} setPower={setPower} fetchUsers={fetchUsers} fetching={fetching} userSearch={userSearch} /></>
       case 'rightsManagement':
-        return config.medienhaus?.sites?.moderate?.rightsManagement && <> <RightsManagement matrixClient={matrixClient} moderationRooms={moderationRooms} setPower={setPower} fetchUsers={fetchUsers} fetching={fetching} userSearch={userSearch} /></>
+        return config.medienhaus?.sites?.moderate?.rightsManagement && <> <RightsManagement matrixClient={matrixClient} nestedRooms={nestedRooms} setPower={setPower} fetchUsers={fetchUsers} fetching={fetching} userSearch={userSearch} /></>
       case 'manageContexts':
-        return config.medienhaus?.sites?.moderate?.manageContexts && <><ManageContexts matrixClient={matrixClient} moderationRooms={moderationRooms} addModerationRooms={addModerationRooms} removeModerationRoom={removeModerationRoom} /></>
+        return config.medienhaus?.sites?.moderate?.manageContexts && <><ManageContexts matrixClient={matrixClient} moderationRooms={moderationRooms} nestedRooms={nestedRooms} addModerationRooms={addModerationRooms} removeModerationRoom={removeModerationRoom} /></>
       case 'removeContent':
         return config.medienhaus?.sites?.moderate?.removeContent && <><RemoveContent matrixClient={matrixClient} moderationRooms={moderationRooms} loading={fetching} /></>
       case 'accept':
@@ -318,11 +383,11 @@ const Moderate = () => {
       )}
 
       {moderationRooms && Object.keys(moderationRooms).length > 0 && <>
-        <section className="request">
+        <TabSection className="request">
           {Object.keys(config?.medienhaus?.sites?.moderate).map((value, index) => {
             return <TextNavigation width="auto" disabled={value === selection} active={value === selection} value={value} key={value} onClick={(e) => setSelection(e.target.value)}>{value.replace(/([a-z0-9])([A-Z])/g, '$1 $2')}</TextNavigation>
           })}
-        </section>
+        </TabSection>
 
         {renderSelection()}
       </>}

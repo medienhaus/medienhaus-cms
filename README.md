@@ -72,7 +72,11 @@ If you have special requirements you can configure the cms by copying config.exa
     "moderate": {
       "invite": true,
       "rightsManagement": true,
-      "manageContexts": true
+       "manageContexts": {
+          "showRoot": true,
+          "treeDepth": 3,
+          "showItems": true
+        }
     },
     "support": true,
     "request": true,
@@ -197,7 +201,8 @@ promote users to moderators within a specified context
 
 add or remove context spaces or sub-context spaces
 
-**showRoot:** if enabled the root of all contexts is displayed in the manage context dropdown.
+* **showRoot:** if enabled the root of all contexts is displayed in the manage context dropdown.
+* **treeDepth:** depth of the tree shown after selecting a context. defaults to 1.
 
 ## support
 

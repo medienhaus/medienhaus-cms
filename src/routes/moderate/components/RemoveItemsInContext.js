@@ -1,35 +1,35 @@
 import React, { useCallback, useEffect, useState } from 'react'
-import config from '../../../config.json'
 import Matrix from '../../../Matrix'
 import styled from 'styled-components'
 import { useTranslation } from 'react-i18next'
-// import { ReactComponent as BinIcon } from '../../../assets/icons/remix/trash.svg'
 import DeleteButton from '../../create/components/DeleteButton'
-import { fetchList } from '../../../helpers/MedienhausApiHelper'
 
-const Container = styled.ul`
-    border:solid;
-    max-height: 30vh;
-    overflow-y: scroll;
-    `
-
-const ListElement = styled.div`
-    display: flex;
-    justify-content: space-between;
+const ListElement = styled.li`
+    display: grid;
+    grid-template-columns: calc(var(--margin)*2) 1fr 1fr calc(var(--margin)*2);
+    grid-gap: var(--margin);
     align-items: center;
+    
     background-color: ${props => props.active ? 'var(--color-fg)' : 'none'};
     color: ${props => props.active ? 'var(--color-bg)' : 'none'};
 
-    li{
-        list-style-type: none;
-        padding: calc(var(--margin)/2);
+    list-style-type: none;
+    
+    img, canvas{
+      background-color: var(--color-fg);
+      width: calc(var(--margin)*2);
+      height: calc(var(--margin)*2);
+    }
+
+    span{
+      color: var(--color-me);  
     }
 
 `
-export default function RemoveItemsInContext ({ parent, onRemoveItemFromContext }) {
+
+export default function RemoveItemsInContext ({ parent, itemsInContext, onRemoveItemFromContext }) {
   const [items, setItems] = useState([])
   const [highlightedElement, setHighlightedElement] = useState()
-  const [error, setError] = useState('')
   const matrixClient = Matrix.getMatrixClient()
   const { t } = useTranslation('moderate')
 
@@ -38,8 +38,8 @@ export default function RemoveItemsInContext ({ parent, onRemoveItemFromContext 
     setItems([])
 
     const fetchItemsFromMatrix = async () => {
-      const fetchFromMatrix = await matrixClient.getRoomHierarchy(parent)
-      fetchFromMatrix.rooms.filter(room => room.room_id !== parent).forEach(async room => {
+      const fetchFromMatrix = await Matrix.roomHierarchy(parent)
+      fetchFromMatrix.filter(room => room.room_id !== parent).forEach(async room => {
         const meta = await matrixClient.getStateEvent(room.room_id, 'dev.medienhaus.meta')
         // we only want to list items and no language items
         if (meta.type !== 'item') return
@@ -49,18 +49,11 @@ export default function RemoveItemsInContext ({ parent, onRemoveItemFromContext 
         setItems(prevState => [...prevState, room])
       })
     }
-
-    if (config.medienhaus.api) {
-      const listFromApi = await fetchList(parent).catch(() => setError('❗️' + t('An error occured trying to fetch the items in the context. Please try reloading the page.')))
-      if (!listFromApi.statusCode) {
-        setItems(listFromApi?.filter(room => room.type === 'item'))
-      } else {
-        await fetchItemsFromMatrix()
-      }
-    } else {
+    if (itemsInContext) setItems(itemsInContext)
+    else {
       await fetchItemsFromMatrix()
     }
-  }, [matrixClient, parent, t])
+  }, [matrixClient, parent, itemsInContext])
 
   const onDelete = (e, roomId) => {
     setItems(prevState => prevState.filter(room => room.room_id !== roomId))
@@ -76,20 +69,25 @@ export default function RemoveItemsInContext ({ parent, onRemoveItemFromContext 
 
     <div>
 
-      {error || (items.length < 1
+      {items.length < 1
         ? <p>{t('There are no items in this context at the moment.')}</p>
-        : <Container> {items.map((item, index) => {
+        : <ul> {items.map((item, index) => {
           return (
             <ListElement onClick={() => setHighlightedElement(prevState => prevState === item.room_id ? '' : item.room_id)} active={highlightedElement === item.room_id} key={item.room_id}>
-              <li>{item.name}</li>
-              <DeleteButton width="2rem" onDelete={(e) => onDelete(e, item.room_id)} />
+              {item.thumbnail ? <img alt="" src={item.thumbnail} /> : <canvas />}{item.name} <span title={item.origin?.authors?.map((author, index) => author.name)}>
+                {item.origin?.authors?.map((author, index) => {
+                  return <React.Fragment key={author.name + index}>{author.name}{item.origin.authors.length - 1 > index && ', '}</React.Fragment>
+                })}
+              </span>
+              <DeleteButton width="calc(var(--margin)*2)" height="calc(var(--margin)*2)" onDelete={(e) => onDelete(e, item.room_id)} />
+
               {/* <BinIcon fill={highlightedElement === item.room_id ? 'var(--color-bg)' : 'var(--color-fg)'} /> */}
             </ListElement>
           )
         }
         )}
 
-        </Container>)}
+        </ul>}
     </div>
 
   )
