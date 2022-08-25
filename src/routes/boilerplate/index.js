@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
 import ContextDropdown from '../../components/ContextDropdown'
-import mapDeep from 'deepdash/es/mapDeep'
+import mapDeep from 'deepdash/mapDeep'
 import struktur from '../../struktur'
 import strukturDev from '../../struktur-dev'
-import filterDeep from 'deepdash/es/filterDeep'
+import filterDeep from 'deepdash/filterDeep'
 
 const Boilerplate = () => {
   const contextMenuWithoutCourses = process.env.NODE_ENV === 'development' ? strukturDev['!ijJyXjLNqgeJkRerIG:dev.medienhaus.udk-berlin.de'].children : struktur['!TCqCDYYsBUxmjWOZWV:content.udk-berlin.de'].children

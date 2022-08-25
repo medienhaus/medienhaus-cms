@@ -15,7 +15,7 @@ import locations from '../../../assets/data/locations.json'
 import { MatrixEvent } from 'matrix-js-sdk'
 import config from '../../../config.json'
 
-import findValueDeep from 'deepdash/es/findValueDeep'
+import findValueDeep from 'deepdash/findValueDeep'
 import LoadingSpinnerButton from '../../../components/LoadingSpinnerButton'
 import { Icon } from 'leaflet/dist/leaflet-src.esm'
 import RemoveItemsInContext from './RemoveItemsInContext'
