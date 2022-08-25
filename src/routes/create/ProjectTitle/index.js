@@ -99,7 +99,10 @@ const ProjectTitle = ({ title, projectSpace, template, callback }) => {
           // const events = await matrixClient.createRoom(opts('events', 'events', 'shared'))
           return space.room_id
         })
-        .then((res) => history.push(`/create/${res}`))
+        .then((res) => {
+          history.push(`/create/${res}`)
+          window.location.reload()
+        })
     } catch (e) {
       console.log(e)
     } finally {

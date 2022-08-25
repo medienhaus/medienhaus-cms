@@ -14,7 +14,7 @@ import config from '../../config.json'
 import TextNavigation from '../../components/medienhausUI/textNavigation'
 import Invites from '../../components/Invites'
 import Matrix from '../../Matrix'
-import findValueDeep from 'deepdash/es/findValueDeep'
+import findValueDeep from 'deepdash/findValueDeep'
 import * as _ from 'lodash'
 import { fetchId } from '../../helpers/MedienhausApiHelper'
 

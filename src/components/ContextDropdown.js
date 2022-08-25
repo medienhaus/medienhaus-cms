@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useCombobox } from 'downshift'
 import { find, map, sortBy, uniq, uniqBy } from 'lodash'
-import mapDeep from 'deepdash/es/mapDeep'
+import mapDeep from 'deepdash/mapDeep'
 import LoadingSpinnerButton from './LoadingSpinnerButton'
 import { useTranslation } from 'react-i18next'
 import Fuse from 'fuse.js'
