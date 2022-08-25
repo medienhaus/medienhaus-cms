@@ -48,7 +48,7 @@ const Nav = () => {
           true,
           '',
           'invite',
-          'context',
+          '',
           'application')
         await Matrix.addSpaceChild(applicationsSpaceId, createRoom.room_id)
 
@@ -58,7 +58,7 @@ const Nav = () => {
           true,
             `This is your private space for the application ${process.env.REACT_APP_APP_NAME}. You can find all your unpublished ${process.env.REACT_APP_APP_NAME} drafts in here.`,
             'invite',
-            'context',
+            '',
             'application')
         await Matrix.addSpaceChild(createRoom.room_id, createPrivateSpace.room_id)
         setApplicationSpace(createPrivateSpace.room_id)
@@ -160,7 +160,7 @@ const Nav = () => {
             true,
             'This is your private applications space. You can find all your application data in here.',
             'invite',
-            'context',
+            '',
             'applications')
           await lookForServiceFolder(newApplicationsFolder.room_id)
         }
