@@ -94,8 +94,9 @@ const ProjectTitle = ({ title, projectSpace, template, callback }) => {
         .then(async (itemSpaceRoomId) => {
           // add this project to our application -> cms space
           await Matrix.addSpaceChild(localStorage.getItem(process.env.REACT_APP_APP_NAME + '_space'), itemSpaceRoomId)
+          return itemSpaceRoomId
         })
-        .then((res) => history.push(`/create/${res}`))
+        .then((itemSpaceRoomId) => history.push(`/create/${itemSpaceRoomId}`))
     } catch (e) {
       console.log(e)
     } finally {
