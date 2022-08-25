@@ -128,7 +128,7 @@ const Category = ({ projectSpace, onChange, parent }) => {
         inputItems,
         (value, key, parent) => {
           if (value.id === contextSpace) return true
-        }, { childrenPath: 'children', includeRoot: false, rootIsChildren: true })
+        }, { childrenPath: 'children', includeRoot: true, rootIsChildren: false })
     }
     const projectSpaceMetaEvent = await matrixClient.getStateEvent(projectSpace, 'dev.medienhaus.meta').catch(console.log)
     // remove legacy code:
