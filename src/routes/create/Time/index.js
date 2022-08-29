@@ -107,7 +107,7 @@ export default function Time ({ allocation, projectSpace, reloadSpace }) {
           <div className="timedate">
             <label htmlFor="time">{t('Start')}:</label>
             <div>
-              <input type="date" id="start-date" min="2022-07-22" max="2022-07-24" name="start-date" value={startDate} onChange={(e) => setStartDate(e.target.value)} />
+              <input type="date" id="start-date" name="start-date" value={startDate} onChange={(e) => setStartDate(e.target.value)} />
               <input type="time" id="start-time" name="start-time" onChange={(e) => setStartTime(e.target.value)} />
             </div>
           </div>
@@ -115,7 +115,7 @@ export default function Time ({ allocation, projectSpace, reloadSpace }) {
           <div className="timedate">
             <label htmlFor="time">{t('End')}:</label>
             <div>
-              <input type="date" id="end-date" name="end-date" min={startDate || '2022-07-22'} max="2022-07-24" value={endDate} onChange={(e) => setEndDate(e.target.value)} />
+              <input type="date" id="end-date" name="end-date" value={endDate} onChange={(e) => setEndDate(e.target.value)} />
               <input type="time" id="end-time" name="end-time" onChange={(e) => setEndTime(e.target.value)} />
             </div>
           </div>
