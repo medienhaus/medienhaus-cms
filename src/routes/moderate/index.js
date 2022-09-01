@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import Requests from './components/Requests'
 import { Loading } from '../../components/loading'
 import useJoinedSpaces from '../../components/matrix_joined_spaces'
@@ -44,7 +44,7 @@ const Moderate = () => {
 
   const { t } = useTranslation('moderate')
 
-  const createStructurObject = async () => {
+  const createStructurObject = useCallback(async () => {
     async function getSpaceStructure (matrixClient, motherSpaceRoomId, includeRooms) {
       const result = {}
 
@@ -79,7 +79,7 @@ const Moderate = () => {
         // }
 
         // const spaceSummary = await matrixClient.getSpaceSummary(spaceId)
-        console.log(`getting children for ${spaceId} / ${spaceName}`)
+        if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') console.log(`getting children for ${spaceId} / ${spaceName}`)
         for (const event of stateEvents) {
           if (event.type !== 'm.space.child' && !includeRooms) continue
           if (event.type === 'm.space.child' && _.size(event.content) === 0) continue // check to see if body of content is empty, therefore space has been removed
@@ -94,10 +94,10 @@ const Moderate = () => {
       return result
     }
 
-    console.log('---- started structure ----')
+    if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') console.log('---- started structure ----')
     const tree = await getSpaceStructure(matrixClient, localStorage.getItem(process.env.REACT_APP_APP_NAME + '_root_context_space'), false)
     return tree
-  }
+  }, [matrixClient])
 
   useEffect(() => {
     const controller = new AbortController()
@@ -105,6 +105,10 @@ const Moderate = () => {
     const handleModerationRooms = async () => {
       setLoading(true)
       let rooms = {}
+      let tree = {}
+
+      // with no api we have to create the structure ourselves
+      if (!config.medienhaus.api) tree = await createStructurObject()
       for (const space of joinedSpaces) {
         if (space.meta.type !== 'context') continue
         if (space.powerLevel < 50) continue
@@ -118,8 +122,6 @@ const Moderate = () => {
           space.parents = room.parents
           space.authors = room.origin.authors
         } else {
-          // with no api we have to create the structure ourselves
-          const tree = await createStructurObject()
           const contextObject = findValueDeep(
             tree,
             (value, key, parent) => {
@@ -155,8 +157,7 @@ const Moderate = () => {
     return () => {
       controller && controller.abort()
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [joinedSpaces])
+  }, [createStructurObject, joinedSpaces])
 
   useEffect(() => {
     let cancelled = false
