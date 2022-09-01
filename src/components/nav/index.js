@@ -225,6 +225,7 @@ const Nav = () => {
     return () => {
       cancelled = true
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [joinedSpaces, auth.user, matrixClient])
 
   useEffect(() => {
