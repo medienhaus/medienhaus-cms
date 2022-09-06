@@ -318,7 +318,7 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace, time,
                                     />
                                     <Marker
                                       position={[cms.body.substring(0, cms.body.indexOf(',')), cms.body.substring(cms.body.indexOf(',') + 1, cms.body.indexOf('-'))]}
-                                      icon={(new Icon.Default({ imagePath: '/leaflet/' }))}
+                                      icon={(new Icon.Default({ imagePath: `${process.env.PUBLIC_URL}/leaflet/` }))}
                                     >
                                       <Popup>
                                         {locations.find(coord => coord.coordinates === cms.body.substring(0, cms.body.indexOf(',')) + ',' + cms.body.substring(cms.body.indexOf(',') + 1, cms.body.lastIndexOf('-')))?.name || // if the location is not in our location.json
