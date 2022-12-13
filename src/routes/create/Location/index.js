@@ -134,7 +134,7 @@ const Location = ({ reloadSpace, inviteCollaborators, projectSpace, events, allo
                                     />
                                     <Marker
                                       position={[location.lat, location.lng]}
-                                      icon={(new Icon.Default({ imagePath: '/leaflet/' }))}
+                                      icon={(new Icon.Default({ imagePath: `${process.env.PUBLIC_URL}/leaflet/` }))}
                                     >
                                       <Popup>
                                         {locations.find(coord => coord.coordinates === location.lat + ', ' + location.lng)?.name || // if the location is not in our location.json

@@ -79,7 +79,7 @@ const AddLocation = ({ number, inviteCollaborators, projectSpace, handleOnBlockW
         eventHandlers={eventHandlers}
         position={position}
         ref={markerRef}
-        icon={(new Icon.Default({ imagePath: '/leaflet/' }))}
+        icon={(new Icon.Default({ imagePath: `${process.env.PUBLIC_URL}/leaflet/` }))}
       >
         <Popup minWidth={90}>
           <span>
