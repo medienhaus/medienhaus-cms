@@ -29,7 +29,7 @@ const ContextMultiLevelSelectSingleLevel = ({ parentSpaceRoomId, selectedContext
         // If this is not a context, ignore this space child
         if (metaEvent && metaEvent.type !== 'context') continue
         // If we only want to show specific contexts, ignore this space child if its template doesn't have the given prefix
-        if (templatePrefixFilter && metaEvent && !_.startsWith(metaEvent.template, 'location-')) continue
+        if (templatePrefixFilter && metaEvent && !_.startsWith(metaEvent.template, templatePrefixFilter)) continue
         // ... otherwise show this space child:
         newChildContexts.push(room)
       }
