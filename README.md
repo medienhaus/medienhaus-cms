@@ -86,6 +86,7 @@ quote
 code
 image
 audio
+file
 video
 livestream
 playlist
