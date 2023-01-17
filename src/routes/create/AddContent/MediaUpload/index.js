@@ -53,9 +53,6 @@ const MediaUpload = (props) => {
       props.displayPlusButton(true)
       props.reloadSpace(room)
       setLoading(false)
-
-      // setCounter(0)
-      // })
     } catch (e) {
       console.log('error while trying to save image: ' + e)
     } finally {
