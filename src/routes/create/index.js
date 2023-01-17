@@ -324,6 +324,7 @@ const Create = () => {
         case 'medienhaus/heading':
         case 'medienhaus/image':
         case 'medienhaus/audio':
+        case 'medienhaus/file':
         case 'medienhaus/video':
         case 'medienhaus/playlist':
         case 'medienhaus/livestream':
@@ -429,6 +430,25 @@ const Create = () => {
             },
             msgtype: 'm.audio',
             url: uploadedAudio
+          })
+          break
+        case 'medienhaus/file':
+          // If this file was uploaded to Matrix already, we don't do anything
+          if (block.attributes.url) break
+          // eslint-disable-next-line no-case-declarations,prefer-const
+          let uploadedFile = await matrixClient.uploadContent(block.attributes.file, { name: block.attributes.file.name })
+          await matrixClient.sendMessage(roomId, {
+            body: block.attributes.file.name,
+            info: {
+              size: block.attributes.file.size,
+              mimetype: block.attributes.file.type,
+              name: block.attributes.file.name,
+              author: block.attributes.author,
+              license: block.attributes.license,
+              alt: block.attributes.alttext
+            },
+            msgtype: 'm.file',
+            url: uploadedFile
           })
           break
         default:
@@ -567,6 +587,17 @@ const Create = () => {
                 alt: message.info.alt,
                 license: message.info.license,
                 author: message.info.author
+              }
+              break
+            case '_file':
+              n = 'medienhaus/file'
+              a = {
+                url: matrixClient.mxcUrlToHttp(message.url),
+                alt: message.info.alt,
+                license: message.info.license,
+                author: message.info.author,
+                name: message.info.name
+
               }
               break
             case '_video':
