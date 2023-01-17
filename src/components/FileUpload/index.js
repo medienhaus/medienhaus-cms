@@ -11,7 +11,7 @@ const FileUpload = (props) => {
   const [alttext, setAlttext] = useState('')
   const size = props.fileType === 'image' ? 5000000 : 25000000
   const { t } = useTranslation('fileupload')
-  const impairment = props.fileType === 'audio' ? [t('audio'), t('hearing')] : [t('image'), t('visually')]
+  const impairment = props.fileType === 'audio' ? [t('audio'), t('hearing')] : props.fileType === 'image ' ? [t('image'), t('visually')] : [t('file'), t('hearing/visually')]
 
   const changeHandler = (event) => {
     setSelectedFile(event.target.files[0])
