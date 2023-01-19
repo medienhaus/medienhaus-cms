@@ -11,6 +11,7 @@ const createBlock = async (e, content, number, space) => {
     room_version: '7',
     preset: 'private_chat',
     topic: '',
+    creation_content: { type: 'm.space' },
     initial_state: [{
       type: 'm.space.parent',
       content: {
