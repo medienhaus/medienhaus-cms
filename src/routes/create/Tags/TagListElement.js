@@ -30,14 +30,15 @@ const TagListLi = styled.li`
     }
 `
 
-const TagListElement = ({ tagName, projectSpace, callback }) => {
+const TagListElement = ({ tagName, projectSpace, tagArray, callback }) => {
   const [loading, setLoading] = useState(false)
   const matrixClient = Matrix.getMatrixClient()
 
   const onDelete = async (e, tagName) => {
     e.preventDefault()
     setLoading(true)
-    await matrixClient.deleteRoomTag(projectSpace, tagName).catch((error) => console.log(error))
+    const filteredArray = tagArray.filter(tag => tag !== tagName)
+    await matrixClient.sendStateEvent(projectSpace, 'dev.medienhaus.tags', { tags: filteredArray })
     await callback()
     setLoading(false)
   }

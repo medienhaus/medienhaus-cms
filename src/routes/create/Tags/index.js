@@ -21,8 +21,9 @@ const Tags = ({ projectSpace, name, type, placeholder }) => {
 
   const fetchRoomTags = useCallback(async () => {
     // fetching current room tags and creating an array from them
-    const roomTags = await matrixClient.getRoomTags(projectSpace)
-    setTags(Object.keys(roomTags.tags))
+    const roomTags = await matrixClient.getStateEvent(projectSpace, 'dev.medienhaus.tags')
+    console.log(roomTags.tags)
+    setTags(roomTags.tags)
   }, [matrixClient, projectSpace])
 
   useEffect(() => {
@@ -41,12 +42,13 @@ const Tags = ({ projectSpace, name, type, placeholder }) => {
   }
 
   const onSubmit = async () => {
-    // we create an array with the tags from the input field
-    const tagArray = value.split(' ')
-    for (const i in tagArray) {
-      // then we add all tags to the room (duplicate tags are ignored by matrix)
-      await matrixClient.setRoomTag(projectSpace, tagArray[i], {}).catch((error) => console.log(error))
-    }
+    // we create an array with the tags from the input field, and add the old tags to it
+    const tagArray = value.split(' ').concat(tags)
+    console.log(tagArray)
+    // then we remove any duplicates buy converting the erray to a Set and back to an array
+    const unique = [...new Set(tagArray)]
+    // then we add all tags to the room
+    await matrixClient.sendStateEvent(projectSpace, 'dev.medienhaus.tags', { tags: unique })
     setValue('')
     await fetchRoomTags()
     setEdit(false)
@@ -56,7 +58,7 @@ const Tags = ({ projectSpace, name, type, placeholder }) => {
     <>
       <p>{t('You can add multiple tags by separating them with a space.')}</p>
       {tags.length > 0 && <TagList>
-        {tags.map((name) => <TagListElement key={name} tagName={name} projectSpace={projectSpace} callback={fetchRoomTags} />
+        {tags.map((name) => <TagListElement key={name} tagName={name} projectSpace={projectSpace} tagArray={tags} callback={fetchRoomTags} />
         )}
       </TagList>}
       <InputField name={name} type={type} placeholder={placeholder} value={value} onChange={onChange} />
