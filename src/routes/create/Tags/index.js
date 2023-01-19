@@ -7,14 +7,12 @@ import styled from 'styled-components'
 import TagListElement from './TagListElement'
 
 const TagList = styled.ul`
-    display: grid;
-    grid-auto-flow: column;
-    // grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    grid-gap: calc(var(--margin) * 0.5);
-    widht: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: calc(var(--margin) * 0.5);
 `
 
-const Tags = ({ projectSpace, name, label, type, placeholder }) => {
+const Tags = ({ projectSpace, name, type, placeholder }) => {
   const matrixClient = Matrix.getMatrixClient()
   const [value, setValue] = useState('')
   const [tags, setTags] = useState([])
@@ -56,9 +54,8 @@ const Tags = ({ projectSpace, name, label, type, placeholder }) => {
 
   return (
     <>
-      <h3>{label}</h3>
-      {t('You can add multiple tags by separating them with a space.')}
-      {tags && <TagList>
+      <p>{t('You can add multiple tags by separating them with a space.')}</p>
+      {tags.length > 0 && <TagList>
         {tags.map((name) => <TagListElement key={name} tagName={name} projectSpace={projectSpace} callback={fetchRoomTags} />
         )}
       </TagList>}
