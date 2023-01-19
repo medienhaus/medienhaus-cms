@@ -778,15 +778,23 @@ textarea[disabled] {
 }
 */
 
+.editor .left> :only-child,
 .editor .right> :only-child {
   grid-row: 2;
   align-self: center;
+}
+
+.editor .left> span:only-child {
+  display: grid;
+  place-content: center;
+  background-color: var(--color-bg);
 }
 
 .editor .left>button,
 .editor .right>button {
   display: grid;
   place-content: center;
+  height: 2rem;
 }
 
 .editor .left,
