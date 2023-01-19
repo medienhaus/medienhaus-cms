@@ -14,22 +14,20 @@ input {
   border-width: calc(var(--margin) * 0.2);
   box-shadow: none;
   color: var(--color-fg);
-  height: calc(var(--margin) * 2);
+  height: calc(var(--margin) * 2.5);
   /*
   outline: none;
   */
-  padding: calc(var(--margin) * 0.2);
+ padding: calc(var(--margin) * 0.4) calc(var(--margin) * 0.55);
   width: 100%;
 }
 `
 const InputField = ({ name, label, type, placeholder, value, onChange }) => {
   return (
-    <>
-      <Input>
-        <label htmlFor={name}>{label}:</label>
-        <input name={name} type={type} placeholder={placeholder} value={value} onChange={onChange} />
-      </Input>
-    </>
+    <Input>
+      {label && <label htmlFor={name}>{label}:</label>}
+      <input name={name} type={type} placeholder={placeholder} value={value} onChange={onChange} />
+    </Input>
 
   )
 }
