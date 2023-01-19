@@ -28,6 +28,7 @@ import styled from 'styled-components'
 import * as Showdown from 'showdown'
 import { triggerApiUpdate } from '../../helpers/MedienhausApiHelper'
 import TextNavigation from '../../components/medienhausUI/textNavigation'
+import Tags from './Tags'
 
 const nl2br = function (str) {
   return str.split('\n').join('<br>')
@@ -697,6 +698,14 @@ const Create = () => {
               {loading ? <Loading /> : <ProjectImage projectSpace={projectSpace} changeProjectImage={changeProjectImage} />}
             </section>
           )}
+
+          {(!config.medienhaus?.item || !config.medienhaus?.item[template]?.blueprint || config.medienhaus?.item[template]?.blueprint.includes('tags')) && (
+            <section className="tags">
+              <h3>{t('Tags')}</h3>
+              <Tags projectSpace={projectSpace} placeholder="event, outside" />
+            </section>
+          )}
+
           <section className="content">
             <h3>{t('Content')}</h3>
             {/*
