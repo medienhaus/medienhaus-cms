@@ -702,7 +702,7 @@ const Create = () => {
           {(!config.medienhaus?.item || !config.medienhaus?.item[template]?.blueprint || config.medienhaus?.item[template]?.blueprint.includes('tags')) && (
             <section className="tags">
               <h3>{t('Tags')}</h3>
-              <Tags projectSpace={projectSpace} placeholder="event, outside" />
+              <Tags projectSpace={projectSpace} placeholder="tags separated by space character" />
             </section>
           )}
 
