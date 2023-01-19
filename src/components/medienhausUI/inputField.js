@@ -22,7 +22,7 @@ input {
   width: 100%;
 }
 `
-const InputField = (name, label, type, placeholder, value, onChange) => {
+const InputField = ({ name, label, type, placeholder, value, onChange }) => {
   return (
     <>
       <Input>
