@@ -71,6 +71,7 @@ Define which of the following UI elements should be visible in the /create route
 - `contributors`: Gives users the ability to invite contributors who can edit the content.
 - `location`: Adds a UI to add a location to the content. You can specify a default location with the separate 'location' key.
 - `time`: Adds a UI to add a time window to content.
+- `tags`: Adds a UI to add tags to content.
 
 #### Allowed content types
 
