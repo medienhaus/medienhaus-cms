@@ -368,7 +368,8 @@ const Create = () => {
       switch (block.name) {
         case 'core/list':
           await matrixClient.sendMessage(roomId, {
-            body: (block.attributes.ordered ? '<ol>' : '<ul>') + block.attributes.values + (block.attributes.ordered ? '</ol>' : '</ul>'),
+            // body: (block.attributes.ordered ? '<ol>' : '<ul>') + block.attributes.values + (block.attributes.ordered ? '</ol>' : '</ul>'), // body should have unformated list (markdowm)
+            body: block.attributes.values.replaceAll('<li>', '- ').replaceAll('</li>', '\n'), // @TODO add case for ol
             msgtype: 'm.text',
             format: 'org.matrix.custom.html',
             formatted_body: (block.attributes.ordered ? '<ol>' : '<ul>') + block.attributes.values + (block.attributes.ordered ? '</ol>' : '</ul>')
