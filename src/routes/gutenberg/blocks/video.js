@@ -39,8 +39,9 @@ const video = {
 
     const isValidUrl = (url) => {
       // @TODO validation needs to be more  (check https etc.)
-      if (config.medienhaus.video.youtube && url?.includes('youtu')) return true
-      if (config.medienhaus.video.vimeo && url?.includes('vimeo.com')) return true
+      if (!config.medienhaus.video) return true
+      if (config.medienhaus.video?.youtube && url?.includes('youtu')) return true
+      if (config.medienhaus.video?.vimeo && url?.includes('vimeo.com')) return true
       return url && url.startsWith && url.startsWith(config.medienhaus.video?.custom?.baseUrl)
     }
 
@@ -49,7 +50,7 @@ const video = {
         return (
           <View {...blockProps}>
             <iframe
-              src={`${config.medienhaus.video.custom.iframeUrl}${content.replace(config.medienhaus.video.custom.baseUrl, '')}`}
+              src={`${config.medienhaus.video?.custom?.iframeUrl}${content.replace(config.medienhaus.video.custom.baseUrl, '')}`}
               frameBorder="0"
               title={content}
               sandbox="allow-same-origin allow-scripts"
@@ -62,7 +63,7 @@ const video = {
         )
       }
 
-      if (config.medienhaus.video.youtube && content?.includes('youtu')) {
+      if (config.medienhaus.video?.youtube && content?.includes('youtu')) {
         return (
           <View {...blockProps}>
             <iframe
@@ -78,7 +79,7 @@ const video = {
           </View>
         )
       }
-      if (config.medienhaus.video.vimeo && content?.includes('vimeo.com/')) {
+      if (config.medienhaus.video?.vimeo && content?.includes('vimeo.com/')) {
         return (
           <View {...blockProps}>
             <iframe
