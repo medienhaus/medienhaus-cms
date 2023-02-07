@@ -5,6 +5,7 @@ import { Trans } from 'react-i18next'
 import { useState } from '@wordpress/element'
 import { View } from '@wordpress/primitives'
 import i18n from 'i18next'
+import config from '../../../config.json'
 
 const t = i18n.getFixedT(null, 'gutenberg')
 
@@ -37,37 +38,90 @@ const video = {
     }
 
     const isValidUrl = (url) => {
-      return url && url.startsWith && url.startsWith('https://stream.udk-berlin.de/')
+      // @TODO validation needs to be more  (check https etc.)
+      if (!config.medienhaus.video) return true
+      if (config.medienhaus.video?.youtube && url?.includes('youtu')) return true
+      if (config.medienhaus.video?.vimeo && url?.includes('vimeo.com')) return true
+      return url && url.startsWith && url.startsWith(config.medienhaus.video?.custom?.baseUrl)
     }
 
     if (isValidUrl(content)) {
+      if (config.medienhaus.video) {
+        return (
+          <View {...blockProps}>
+            <iframe
+              src={`${config.medienhaus.video?.custom?.iframeUrl}${content.replace(config.medienhaus.video.custom.baseUrl, '')}`}
+              frameBorder="0"
+              title={content}
+              sandbox="allow-same-origin allow-scripts"
+              allowFullScreen="allowfullscreen"
+              width="560"
+              height="315"
+              style={{ width: '100%', aspectRatio: '16 / 9', border: 'calc(var(--margin) * 0.2) solid var(--color-fg)' }}
+            />
+          </View>
+        )
+      }
+
+      if (config.medienhaus.video?.youtube && content?.includes('youtu')) {
+        return (
+          <View {...blockProps}>
+            <iframe
+              src={`https://www.youtube.com/embed/${content.replace(content.includes('/watch?v=') ? 'https://www.youtube.com/watch?v=' : 'https://youtu.be/', '')}`}
+              frameBorder="0"
+              title={content}
+              sandbox="allow-same-origin allow-scripts"
+              allowFullScreen="allowfullscreen"
+              width="560"
+              height="315"
+              style={{ width: '100%', aspectRatio: '16 / 9', border: 'calc(var(--margin) * 0.2) solid var(--color-fg)' }}
+            />
+          </View>
+        )
+      }
+      if (config.medienhaus.video?.vimeo && content?.includes('vimeo.com/')) {
+        return (
+          <View {...blockProps}>
+            <iframe
+              src={`https://player.vimeo.com/video/${content.replace('https://vimeo.com/', '')}`}
+              frameBorder="0"
+              title={content}
+              sandbox="allow-same-origin allow-scripts"
+              allowFullScreen="allowfullscreen"
+              width="560"
+              height="315"
+              style={{ width: '100%', aspectRatio: '16 / 9', border: 'calc(var(--margin) * 0.2) solid var(--color-fg)' }}
+            />
+          </View>
+        )
+      }
+    }
+
+    // in case content is parsed but the platform not supported:
+    if (content) {
       return (
         <View {...blockProps}>
-          <iframe
-            src={`https://stream.udk-berlin.de/videos/embed/${content.replace('https://stream.udk-berlin.de/w/', '')}`}
-            frameBorder="0"
-            title={content}
-            sandbox="allow-same-origin allow-scripts"
-            allowFullScreen="allowfullscreen"
-            width="560"
-            height="315"
-            style={{ width: '100%', aspectRatio: '16 / 9', border: 'calc(var(--margin) * 0.2) solid var(--color-fg)' }}
-          />
+          <p><em>{t('No preview available for')}:</em></p>
+          <a href={content} target="_blank" rel="external nofollow noopener noreferrer">{content}</a>
         </View>
       )
     }
-
     return (
       <View {...blockProps}>
         <form onSubmit={onSubmit}>
           <input
             type="url"
             value={urlInput}
-            placeholder="https://stream.udk-berlin.de/…"
+            placeholder={(config.medienhaus.video?.custom?.baseUrl || 'https://') + '…'}
             onChange={(e) => setUrlInput(e.target.value)}
           />
           <button type="submit" disabled={!isValidUrl(urlInput)}>{t('Embed Video')}</button>
-          <p>↳ <Trans t={t} i18nKey="linkToVideo">You can upload videos via <a href="https://stream.udk-berlin.de/videos/upload" rel="external nofollow noopener noreferrer" target="_blank">udk/stream</a></Trans></p>
+          <p>↳
+            {config.medienhaus.video?.custom && <Trans t={t} i18nKey="linkToVideo">You can upload videos via <a href={config.medienhaus.video.custom.uploadUrl || config.medienhaus.video.custom.baseUrl} rel="external nofollow noopener noreferrer" target="_blank">{
+              config.medienhaus.video.custom.label
+            }</a>
+            </Trans>}
+          </p>
         </form>
       </View>
     )
