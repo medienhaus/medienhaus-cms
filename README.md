@@ -136,6 +136,27 @@ Define which sites should be visible and which functions should be available in 
   - `showRoot`: if enabled the root of all contexts is displayed in the manage context dropdown.
   - `treeDepth`: depth of the tree shown after selecting a context. defaults to 1.
 
+### `video`
+
+the video object defines which video platforms are supported by the cms:
+There is built in support for Vimeo and YouTube, which needs to be activated.
+
+```
+ "video": {
+            "youtube": true,
+            "vimeo": true,
+            "custom": {
+              "label": "Peerube",
+              "baseUrl": "https://peertube.server.com/w/",
+              "iframeUrl": "https://peertube.server.com/embed/",
+              "uploadUrl": ""https://stream.udk-berlin.de/videos/upload"
+            }
+        }
+```
+<aside>
+‼️ The `baseUrl` of your custom platform needs to be the exact url which is going to be replaced by `iframeUrl` for the iframe preview.
+</aside>
+
 ### `usersToInviteToNewContexts`
 
 All users specified in this array are automatically invited to new context spaces if they are created through the manage context UI in /manage and promoted to power level 50.
