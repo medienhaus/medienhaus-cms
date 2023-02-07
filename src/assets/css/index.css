@@ -816,7 +816,7 @@ textarea[disabled] {
   border-width: calc(var(--margin) * 0.2);
   display: grid;
   grid-gap: var(--margin);
-  height: calc(var(--margin) * 12);
+  height: calc(100vh - calc(var(--margin) * 16));
   margin-top: var(--margin);
 }
 
