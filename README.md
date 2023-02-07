@@ -153,9 +153,9 @@ There is built in support for Vimeo and YouTube, which needs to be activated.
             }
         }
 ```
-<aside>
+
 ‼️ The `baseUrl` of your custom platform needs to be the exact url which is going to be replaced by `iframeUrl` for the iframe preview.
-</aside>
+
 
 ### `usersToInviteToNewContexts`
 
