@@ -146,7 +146,7 @@ There is built in support for Vimeo and YouTube, which needs to be activated.
             "youtube": true,
             "vimeo": true,
             "custom": {
-              "label": "Peerube",
+              "label": "Peertube",
               "baseUrl": "https://peertube.server.com/w/",
               "iframeUrl": "https://peertube.server.com/embed/",
               "uploadUrl": ""https://stream.udk-berlin.de/videos/upload"
