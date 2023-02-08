@@ -26,6 +26,7 @@ import Matrix from '../../../Matrix'
 import LeaveContext from './LeaveContext'
 import ContextTree from './ContextTree'
 import TextareaAutoSizeMaxLength from './TextareaAutoSizeMaxLength'
+import AddSubContext from './AddSubContext'
 
 const DangerZone = styled.section`
   border: none;
@@ -502,10 +503,18 @@ const ManageContexts = ({ matrixClient, moderationRooms: incomingModerationRooms
             </Details>
             <Details>
               <summary>
-                <h3>{t('Add Sub-Context')}</h3>
+                <h3>{t('Create new Sub-Context')}</h3>
               </summary>
               <section>
                 <CreateContext t={t} parent={selectedContext} matrixClient={matrixClient} parentName={roomName} disableButton={loading} callback={addSpace} />
+              </section>
+            </Details>
+            <Details>
+              <summary>
+                <h3>{t('Add existing Sub-Context')}</h3>
+              </summary>
+              <section>
+                <AddSubContext t={t} parent={selectedContext} matrixClient={matrixClient} nestedRooms={nestedRooms} parentName={roomName} disableButton={loading} callback={setSelectedContext} />
               </section>
             </Details>
             <Details>
