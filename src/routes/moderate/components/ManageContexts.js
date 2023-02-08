@@ -79,10 +79,11 @@ const ManageContexts = ({ matrixClient, moderationRooms: incomingModerationRooms
     }
   }, [incomingModerationRooms, incomingNestedRooms])
 
-  const onRemoveItemFromContext = (space) => {
+  const onRemoveChildFromContext = async (space) => {
     setLoading(true)
-    Matrix.removeSpaceChild(selectedContext, space)
+    const remove = await Matrix.removeSpaceChild(selectedContext, space).catch(error => console.debug(error))
     setLoading(false)
+    return remove
   }
 
   const setPower = async (userId, roomId, level) => {
@@ -237,6 +238,7 @@ const ManageContexts = ({ matrixClient, moderationRooms: incomingModerationRooms
         (value, key, parent) => {
           if (value.id === context) return true
         }, { childrenPath: 'children', includeRoot: false, rootIsChildren: true })
+
       contextObject.pathIds ? setContextParent(contextObject.pathIds[contextObject.pathIds.length - 1]) : setContextParent(null)
       setDescription(contextObject
         .topic || '')
@@ -361,6 +363,7 @@ const ManageContexts = ({ matrixClient, moderationRooms: incomingModerationRooms
               contextId={selectedContext}
               onContextChange={onContextChange}
               moderationRooms={moderationRooms}
+              onDelete={onRemoveChildFromContext}
             />
             <hr />
             <Details>
@@ -522,7 +525,7 @@ const ManageContexts = ({ matrixClient, moderationRooms: incomingModerationRooms
                 <h3>{t('Remove Item from context')}</h3>
               </summary>
               <section>
-                <RemoveItemsInContext parent={selectedContext} itemsInContext={itemsInContext} onRemoveItemFromContext={onRemoveItemFromContext} />
+                <RemoveItemsInContext parent={selectedContext} itemsInContext={itemsInContext} onRemoveItemFromContext={onRemoveChildFromContext} />
               </section>
             </Details>
             <hr />

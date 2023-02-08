@@ -21,7 +21,7 @@ function DeleteButton (props) {
       height={props.height}
       width={props.width}
       clickedDelete={clickedDelete}
-      disabled={deleting}
+      disabled={deleting || props.disabled}
       onClick={async (e) => {
         if (clickedDelete) {
           setDeleting(true)

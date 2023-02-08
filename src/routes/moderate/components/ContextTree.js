@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import { Loading } from '../../../components/loading'
 import Matrix from '../../../Matrix'
 import styled from 'styled-components'
@@ -9,13 +9,19 @@ import config from '../../../config.json'
 import { fetchTree } from '../../../helpers/MedienhausApiHelper'
 import UnstyledButton from '../../../components/medienhausUI/unstyledButton'
 import { useTranslation } from 'react-i18next'
+import DeleteButton from '../../create/components/DeleteButton'
 
 const Container = styled.ul`
     margin-left: var(--margin);
     list-style-type: none;
+    display: grid;
+    grid-auto-flow: row;
+    grid-gap: calc(var(--margin) * 0.3);
 `
 
 const ListElement = styled.li`
+    display: flex;
+    justify-content: space-between;
     color: ${props => !props.disabled && 'gray'};
 `
 
@@ -70,38 +76,39 @@ const Switch = styled.label`
   }
 `
 
-const ContextTree = ({ moderationRooms, contextId, onContextChange }) => {
+const ContextTree = ({ moderationRooms, contextId, onContextChange, onDelete }) => {
   const { t } = useTranslation('moderate')
   const [loading, setLoading] = useState(false)
   const [contexts, setContexts] = useState()
   const [rootContext, setRootContext] = useState()
   const [error, setError] = useState('')
   const [showItems, setShowItems] = useState(false)
+  const [highlightedElement, setHighlightedElement] = useState('')
   const matrixClient = Matrix.getMatrixClient()
+
+  const getHierarchyFromMatrix = useCallback(async () => {
+    setLoading(true)
+    //   const tree = await matrixClient.getRoomHierarchy(rootContext, null, config.medienhaus.sites.moderate.manageContexts.treeDepth).catch(err => {
+    //     console.debug(err)
+    //     setError('Couldn"t create tree')
+    //   })
+    const filteredTree = await createStructurObject(rootContext).catch(err => {
+      console.debug(err)
+      setError('Couldn"t create tree')
+    })
+    setContexts(filteredTree)
+    setLoading(false)
+  }, [rootContext])
+
+  const getHierarchyFromApi = useCallback(async () => {
+    const tree = await fetchTree(rootContext).catch(() => {
+      getHierarchyFromMatrix()
+    })
+    setContexts(tree)
+  }, [getHierarchyFromMatrix, rootContext])
 
   useEffect(() => {
     let cancelled = false
-
-    const getHierarchyFromMatrix = async () => {
-      setLoading(true)
-      //   const tree = await matrixClient.getRoomHierarchy(rootContext, null, config.medienhaus.sites.moderate.manageContexts.treeDepth).catch(err => {
-      //     console.debug(err)
-      //     setError('Couldn"t create tree')
-      //   })
-      const filteredTree = await createStructurObject(rootContext).catch(err => {
-        console.debug(err)
-        setError('Couldn"t create tree')
-      })
-      setContexts(filteredTree)
-      setLoading(false)
-    }
-
-    const getHierarchyFromApi = async () => {
-      const tree = await fetchTree(rootContext).catch(() => {
-        getHierarchyFromMatrix()
-      })
-      setContexts(tree)
-    }
 
     if (!cancelled && rootContext) {
       if (config.medienhaus.api) {
@@ -113,7 +120,7 @@ const ContextTree = ({ moderationRooms, contextId, onContextChange }) => {
     return () => {
       cancelled = true
     }
-  }, [rootContext, matrixClient, showItems])
+  }, [rootContext, matrixClient, showItems, getHierarchyFromApi, getHierarchyFromMatrix])
 
   useEffect(() => {
     let cancelled = false
@@ -128,6 +135,17 @@ const ContextTree = ({ moderationRooms, contextId, onContextChange }) => {
 
   const handleContextClick = (e) => {
     onContextChange(e.target.value)
+  }
+
+  const handleDelete = async (roomId) => {
+    const removeSpaceChild = await onDelete(roomId)
+    if (removeSpaceChild.event_id) {
+      setContexts(prevState => {
+        const _contexts = { ...prevState }
+        delete _contexts[contextId].children[roomId]
+        return _contexts
+      })
+    }
   }
 
   if (!contexts || !rootContext || loading) return <Loading />
@@ -168,11 +186,23 @@ const ContextTree = ({ moderationRooms, contextId, onContextChange }) => {
           //   }
           return true
         }, { childrenPath: 'children', includeRoot: false, rootIsChildren: true }), (value, key, parent, context) => (
-          <ListElement key={value.id + key + parent.id} disabled={!!moderationRooms[value.id]}>
-            {' --- '.repeat(context.depth)}
-            {moderationRooms[value.id] ? <UnstyledButton onClick={handleContextClick} value={value.id}>{value.name}</UnstyledButton> : value.name}
-            {value.type === 'item' && <span style={{ color: 'gray' }}> {config.medienhaus.item[value.template]?.label.toUpperCase() || 'ITEM'}</span>}
-          </ListElement>
+          <>
+            <ListElement
+              onClick={() => setHighlightedElement(prevState => prevState === value.room_id ? '' : value.room_id)}
+              active={highlightedElement === value.room_id}
+              key={value.id + key + parent.id}
+              disabled={!!moderationRooms[value.id]}
+            >
+              <span>
+                {' --- '.repeat(context.depth)}
+                {moderationRooms[value.id] ? <UnstyledButton onClick={handleContextClick} value={value.id}>{value.name}</UnstyledButton> : value.name}
+                {value.type === 'item' && <span style={{ color: 'gray' }}> {config.medienhaus.item[value.template]?.label.toUpperCase() || 'ITEM'}</span>}
+              </span>
+              <DeleteButton width="calc(var(--margin)*2)" height="calc(var(--margin)*2)" disabled={context.depth !== 2} onDelete={() => handleDelete(value.id)} />
+            </ListElement>
+
+          </>
+
         ), { childrenPath: 'children', includeRoot: false, rootIsChildren: true })}
       </Container>
     </>
