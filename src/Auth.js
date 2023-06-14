@@ -49,8 +49,8 @@ function useAuthProvider () {
   const signout = cb => {
     // @TODO Implement
     return Matrix.getMatrixClient().logout(() => {
-      localStorage.clear()
       setUser(false)
+      localStorage.clear()
       cb()
     })
   }
@@ -250,9 +250,9 @@ function useAuthProvider () {
   }, [user])
 
   useEffect(() => {
-    joinedSpaces && !localStorage.getItem(process.env.REACT_APP_APP_NAME + '_space') && !folderDialogueOpen && lookForApplicationsFolder()
+    user && joinedSpaces && !localStorage.getItem(process.env.REACT_APP_APP_NAME + '_space') && !folderDialogueOpen && lookForApplicationsFolder()
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [joinedSpaces])
+  }, [joinedSpaces, user])
 
   return {
     user,
