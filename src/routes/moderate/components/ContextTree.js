@@ -188,9 +188,9 @@ const ContextTree = ({ moderationRooms, contextId, onContextChange, onDelete }) 
         }, { childrenPath: 'children', includeRoot: false, rootIsChildren: true }), (value, key, parent, context) => (
           <>
             <ListElement
+              key={value.id + key + parent.id}
               onClick={() => setHighlightedElement(prevState => prevState === value.room_id ? '' : value.room_id)}
               active={highlightedElement === value.room_id}
-              key={value.id + key + parent.id}
               disabled={!!moderationRooms[value.id]}
             >
               <span>
