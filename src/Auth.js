@@ -112,7 +112,7 @@ function useAuthProvider () {
           true,
           'This is your private applications space. You can find all your application data in here.',
           'invite',
-          '',
+          'context',
           'applications')
         await lookForServiceFolder(newApplicationsFolder.room_id)
       }
