@@ -48,11 +48,12 @@ function useAuthProvider () {
 
   const signout = cb => {
     // @TODO Implement
-    return Matrix.getMatrixClient().logout(() => {
-      setUser(false)
-      localStorage.clear()
-      cb()
-    })
+    return Matrix.getMatrixClient().logout(true)
+      .then(() => {
+        setUser(false)
+        localStorage.clear()
+        cb()
+      })
   }
 
   const hydrateLocalStorage = (response) => {

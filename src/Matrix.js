@@ -51,7 +51,7 @@ class Matrix {
   }
 
   removeSpaceChild (parent, child) {
-    return this.matrixClient.http.authedRequest(undefined, 'PUT', `/rooms/${parent}/state/m.space.child/${child}`, undefined, {})
+    return this.matrixClient.http.authedRequest('PUT', `/rooms/${parent}/state/m.space.child/${child}`, undefined, {})
   }
 
   addSpaceChild (parent, child, autoJoin, suggested) {
@@ -60,7 +60,8 @@ class Matrix {
       suggested: suggested || false,
       via: [localStorage.getItem('medienhaus_home_server')]
     }
-    return this.matrixClient.http.authedRequest(undefined, 'PUT', `/rooms/${parent}/state/m.space.child/${child}`, undefined, payload)
+
+    return this.matrixClient.http.authedRequest('PUT', `/rooms/${parent}/state/m.space.child/${child}`, undefined, payload)
   }
 
   roomHierarchy = async (roomId, limit, maxDepth, suggestedOnly) => {

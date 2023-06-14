@@ -41,11 +41,11 @@ const PublishProject = ({ disabled, space, published, hasContext, metaEvent }) =
     try {
       console.log('--- Starting to change visibility ---')
       for (const room of hierarchy.rooms) {
-        const changeJoinRule = await matrixClient.http.authedRequest(undefined, 'PUT', `/rooms/${room.room_id}/state/m.room.join_rules/`, undefined, joinRules)
+        const changeJoinRule = await matrixClient.http.authedRequest('PUT', `/rooms/${room.room_id}/state/m.room.join_rules/`, undefined, joinRules)
         if (changeJoinRule.ok) console.log('Changed joinRule of ' + room.name + ' successfully to ' + publishState + '!')
         else console.log('Oh no, changing join_rule went wrong with room ' + room.name)
 
-        const changeHistoryVisibility = await matrixClient.http.authedRequest(undefined, 'PUT', `/rooms/${room.room_id}/state/m.room.history_visibility/`, undefined, historyVisibility)
+        const changeHistoryVisibility = await matrixClient.http.authedRequest('PUT', `/rooms/${room.room_id}/state/m.room.history_visibility/`, undefined, historyVisibility)
         if (changeHistoryVisibility.ok) console.log('Changed history_visibility of ' + room.name + ' successfully!')
         else console.log('Oh no, something went wrong with room ' + room.name)
       }
