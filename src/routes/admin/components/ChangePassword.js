@@ -17,7 +17,7 @@ const ChangePassword = () => {
       new_password: password,
       logout_devices: true
     }
-    fetch(`${process.env.REACT_APP_MATRIX_BASE_URL}/_synapse/admin/v1/reset_password/@${name}:${localStorage.getItem('mx_home_server')}`, {
+    fetch(`${localStorage.getItem('medienhaus_hs_url')}/_synapse/admin/v1/reset_password/@${name}:${localStorage.getItem('mx_home_server')}`, {
       method: 'POST',
       headers: { Authorization: 'Bearer ' + localStorage.getItem('mx_access_token') },
       body: JSON.stringify(body)

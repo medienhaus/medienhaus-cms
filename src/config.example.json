@@ -1,50 +1,17 @@
 {
   "medienhaus": {
     "context": {
-      "faculty": {
-        "label": "Faculty"
-      },
-      "seminar": {
-        "label": "Seminar"
+      "category": {
+        "label": "Category"
       }
     },
     "item": {
-      "studentproject": {
-        "label": "Project",
+      "article": {
+        "label": "Blog Post",
         "blueprint": [
-          "location",
           "contributors",
           "image"
         ]
-      },
-      "event": {
-        "label": "Event",
-        "blueprint": [
-          "image",
-          "time",
-          "location"
-        ],
-        "content": [
-          "heading",
-          "text",
-          "list",
-          "image",
-          "audio",
-          "livestream",
-          "video",
-          "playlist",
-          "bigbluebutton"
-        ]
-      }
-    },
-    "pages": {
-      "code-of-conduct": {
-        "label": "page-1",
-        "room_id": "!Qfgxxxxxxxxxxx:yourserver.com"
-      },
-      "faq": {
-        "label": "faq",
-        "room_id": "!Dxxxxxxxxx:yourserver.com"
       }
     },
     "languages": [
@@ -63,21 +30,10 @@
         "rightsManagement": true,
         "manageContexts": {
           "showRoot": true
-        },
-        "removeContent": true
-      },
-      "support": true,
-      "request": false,
-      "feedback": true
-    },
-    "usersToInviteToNewContexts": [
-      "@user1:server.com"
-    ],
-    "location": {
-      "lat": 0.0,
-      "lng": 0.0
+        }
+      }
     },
     "allowSelectingRootContext": true,
-    "api": "https://api.dev.medienhaus.udk-berlin.de/api/v2/"
+    "customServer": true
   }
 }

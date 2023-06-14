@@ -86,7 +86,7 @@ const Category = ({ projectSpace, onChange, parent, setLocationFromLocationTree 
   }
 
   const fetchTreeFromApi = async () => {
-    const fetchTree = await fetchContextTree(process.env.REACT_APP_CONTEXT_ROOT_SPACE_ID)
+    const fetchTree = await fetchContextTree(localStorage.getItem(process.env.REACT_APP_APP_NAME + '_root_context_space'))
     setInputItems(fetchTree)
     setLoading(false)
   }
@@ -141,7 +141,7 @@ const Category = ({ projectSpace, onChange, parent, setLocationFromLocationTree 
         inputItems,
         (value, key, parent) => {
           if (value.id === contextSpace) return true
-        }, { childrenPath: 'children', includeRoot: false, rootIsChildren: true })
+        }, { childrenPath: 'children', includeRoot: true, rootIsChildren: false })
     }
     const projectSpaceMetaEvent = await matrixClient.getStateEvent(projectSpace, 'dev.medienhaus.meta').catch(console.log)
     // remove legacy code:

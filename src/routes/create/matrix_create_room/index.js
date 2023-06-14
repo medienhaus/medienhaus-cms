@@ -1,4 +1,3 @@
-
 import Matrix from '../../../Matrix'
 
 const createBlock = async (e, content, number, space) => {
@@ -11,6 +10,7 @@ const createBlock = async (e, content, number, space) => {
     room_version: '7',
     preset: 'private_chat',
     topic: '',
+    creation_content: { type: 'm.space' },
     initial_state: [{
       type: 'm.space.parent',
       content: {
@@ -45,35 +45,22 @@ const createBlock = async (e, content, number, space) => {
     }
   }
 
-  const req = {
-    method: 'PUT',
-    headers: { Authorization: 'Bearer ' + localStorage.getItem('medienhaus_access_token') },
-    body: JSON.stringify({
-      via: [localStorage.getItem('mx_home_server')],
-      suggested: false,
-      auto_join: false
-    })
-  }
-
   try {
     const room = await matrixClient.createRoom(opts)
       .then(async (res) => {
-        const roomId = res.room_id
-        const response = await fetch(process.env.REACT_APP_MATRIX_BASE_URL + `/_matrix/client/r0/rooms/${space}/state/m.space.child/${roomId}`, req)
-        return [roomId, response]
+        const response = await Matrix.addSpaceChild(space, res.room_id)
+        if (!response.event_id) {
+          return Promise.reject(new Error('Something went wrong while trying to add space child'))
+        }
+        return res.room_id
       })
       .then(async (res) => {
-        const data = await res[1].json()
-        if (!res[1].ok) {
-          const error = (data?.message) || res[1].status
-          return Promise.reject(error)
-        }
-        await matrixClient.sendStateEvent(res[0], 'dev.medienhaus.meta', {
+        await matrixClient.sendStateEvent(res, 'dev.medienhaus.meta', {
           type: 'content',
           template: content,
           version: '0.4'
         })
-        return res[0]
+        return res
       }).then(async (res) => {
         let currentOrder = await matrixClient.getStateEvent(space, 'dev.medienhaus.order').catch(console.log)
         if (currentOrder) {

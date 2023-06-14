@@ -1,6 +1,7 @@
 import config from '../config.json'
 
 export const triggerApiUpdate = async (roomId, parentId) => {
+  if (!config.medienhaus.api) return
   const body = {
     depth: 1
   }

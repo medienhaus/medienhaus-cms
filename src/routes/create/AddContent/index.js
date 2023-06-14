@@ -57,6 +57,7 @@ const AddContent = ({ number, projectSpace, blocks, contentType, reloadSpace }) 
           <optgroup label="Media">
             {(!config.medienhaus?.item || !config.medienhaus?.item[contentType]?.content || config.medienhaus?.item[contentType]?.content.includes('image')) && <option value="image">{t('Image')}</option>}
             {(!config.medienhaus?.item || !config.medienhaus?.item[contentType]?.content || config.medienhaus?.item[contentType]?.content.includes('audio')) && <option value="audio">{t('Audio')}</option>}
+            {(!config.medienhaus?.item || !config.medienhaus?.item[contentType]?.content || config.medienhaus?.item[contentType]?.content.includes('file')) && <option value="file">{t('File')}</option>}
 
             {(!config.medienhaus?.item || !config.medienhaus?.item[contentType]?.content || config.medienhaus?.item[contentType]?.content.includes('video')) && <option value="video">{t('Video')}</option>}
             {(!config.medienhaus?.item || !config.medienhaus?.item[contentType]?.content || config.medienhaus?.item[contentType]?.content.includes('live stream')) && <option value="livestream">{t('Live stream')}</option>}
@@ -68,7 +69,7 @@ const AddContent = ({ number, projectSpace, blocks, contentType, reloadSpace }) 
         <button className="cancel" onClick={(e) => { e.preventDefault(); setShowBlockTypeSelector(false); setSelectedBlockType('') }}>×</button>
       </div>
       {
-        selectedBlockType === 'image' || selectedBlockType === 'audio'
+        selectedBlockType === 'image' || selectedBlockType === 'audio' || selectedBlockType === 'file'
           ? <MediaUpload fileType={selectedBlockType} number={number} space={projectSpace} blocks={blocks} reloadSpace={reloadSpace} displayPlusButton={displayPlusButton} />
           : selectedBlockType === 'video' || selectedBlockType === 'livestream' || selectedBlockType === 'playlist'
             ? <PeertubeEmbed type={selectedBlockType} onCreateRoomForBlock={onCreateBlockRoom} onBlockWasAddedSuccessfully={onBlockWasAddedSuccessfully} />

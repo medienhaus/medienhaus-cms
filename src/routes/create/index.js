@@ -28,6 +28,7 @@ import styled from 'styled-components'
 import * as Showdown from 'showdown'
 import { triggerApiUpdate } from '../../helpers/MedienhausApiHelper'
 import TextNavigation from '../../components/medienhausUI/textNavigation'
+import Tags from './Tags'
 
 const nl2br = function (str) {
   return str.split('\n').join('<br>')
@@ -48,6 +49,21 @@ const BackButton = styled.button`
   }
 `
 */
+const TabSection = styled.section`
+  display: grid;
+  grid-gap: var(--margin);
+  grid-template-columns: repeat(auto-fit, minmax(14ch, 1fr));
+
+  /* set height of child elements */
+  & > * {
+    height: calc(var(--margin) * 2.4);
+  }
+
+  /* unset margin-top for each direct child element directly following a previous one */
+  & > * + * {
+    margin-top: unset;
+  }
+`
 
 const GutenbergWrapper = styled.div`
   position: relative;
@@ -66,22 +82,6 @@ const GutenbergSavingOverlay = styled.div`
 `
 
 const ShowdownConverter = new Showdown.Converter()
-
-const TabSection = styled.section`
-  display: grid;
-  grid-gap: var(--margin);
-  grid-template-columns: repeat(auto-fit, minmax(14ch, 1fr));
-
-  /* set height of child elements */
-  & > * {
-    height: calc(var(--margin) * 2.4);
-  }
-
-  /* unset margin-top for each direct child element directly following a previous one */
-  & > * + * {
-    margin-top: unset;
-  }
-`
 
 const Create = () => {
   const { t } = useTranslation('content')
@@ -416,6 +416,7 @@ const Create = () => {
         case 'medienhaus/heading':
         case 'medienhaus/image':
         case 'medienhaus/audio':
+        case 'medienhaus/file':
         case 'medienhaus/video':
         case 'medienhaus/playlist':
         case 'medienhaus/livestream':
@@ -458,7 +459,8 @@ const Create = () => {
       switch (block.name) {
         case 'core/list':
           await matrixClient.sendMessage(roomId, {
-            body: (block.attributes.ordered ? '<ol>' : '<ul>') + block.attributes.values + (block.attributes.ordered ? '</ol>' : '</ul>'),
+            // body: (block.attributes.ordered ? '<ol>' : '<ul>') + block.attributes.values + (block.attributes.ordered ? '</ol>' : '</ul>'), // body should have unformated list (markdowm)
+            body: block.attributes.values.replaceAll('<li>', '- ').replaceAll('</li>', '\n'), // @TODO add case for ol
             msgtype: 'm.text',
             format: 'org.matrix.custom.html',
             formatted_body: (block.attributes.ordered ? '<ol>' : '<ul>') + block.attributes.values + (block.attributes.ordered ? '</ol>' : '</ul>')
@@ -523,6 +525,25 @@ const Create = () => {
             url: uploadedAudio
           })
           break
+        case 'medienhaus/file':
+          // If this file was uploaded to Matrix already, we don't do anything
+          if (block.attributes.url) break
+          // eslint-disable-next-line no-case-declarations,prefer-const
+          let uploadedFile = await matrixClient.uploadContent(block.attributes.file, { name: block.attributes.file.name })
+          await matrixClient.sendMessage(roomId, {
+            body: block.attributes.file.name,
+            info: {
+              size: block.attributes.file.size,
+              mimetype: block.attributes.file.type,
+              name: block.attributes.file.name,
+              author: block.attributes.author,
+              license: block.attributes.license,
+              alt: block.attributes.alttext
+            },
+            msgtype: 'm.file',
+            url: uploadedFile
+          })
+          break
         default:
           await matrixClient.sendMessage(roomId, {
             body: ShowdownConverter.makeMarkdown(block.attributes.content).replaceAll('<br>', '').replaceAll('<br />', ''),
@@ -578,8 +599,8 @@ const Create = () => {
     // here we set the description for the selected language space
     const contentRoom = spaceObject.rooms.filter(room => room.name === contentLang)
     const changeTopic = await matrixClient.setRoomTopic(contentRoom[0].room_id, description).catch(console.log)
-    if (config.medienhaus.api) await triggerApiUpdate(projectSpace)
     fetchSpace(true)
+    if (config.medienhaus.api) await triggerApiUpdate(projectSpace)
     // @TODO setSpaceObject(spaceObject => ({...spaceObject, rooms: [...spaceObject.rooms, ]}))
     return changeTopic
   }
@@ -617,7 +638,7 @@ const Create = () => {
           switch (blockType) {
             case '_heading':
               n = 'medienhaus/heading'
-              a = { content: message.body.substr(3) }
+              a = { content: message.body.substr(4) }
               break
             case '_text':
               n = 'core/paragraph'
@@ -663,6 +684,17 @@ const Create = () => {
                 alt: message.info.alt,
                 license: message.info.license,
                 author: message.info.author
+              }
+              break
+            case '_file':
+              n = 'medienhaus/file'
+              a = {
+                url: matrixClient.mxcUrlToHttp(message.url),
+                alt: message.info.alt,
+                license: message.info.license,
+                author: message.info.author,
+                name: message.info.name
+
               }
               break
             case '_video':
@@ -732,6 +764,7 @@ const Create = () => {
         <>
           <section className="context">
             <h3>{t('Context')}</h3>
+            {/* main branch parses app name as parent, unsure which one is needed for udk but I left root space id here */}
             <Category title={title} projectSpace={projectSpace} onChange={setHasContext} parent={process.env.REACT_APP_CONTEXT_ROOT_SPACE_ID} setLocationFromLocationTree={setLocationFromLocationTree} />
           </section>
           {(!config.medienhaus?.item || !config.medienhaus?.item[template]?.blueprint || config.medienhaus?.item[template]?.blueprint.includes('location')) && (
@@ -763,6 +796,14 @@ const Create = () => {
               {loading ? <Loading /> : <ProjectImage projectSpace={projectSpace} changeProjectImage={changeProjectImage} />}
             </section>
           )}
+
+          {(!config.medienhaus?.item || !config.medienhaus?.item[template]?.blueprint || config.medienhaus?.item[template]?.blueprint.includes('tags')) && (
+            <section className="tags">
+              <h3>{t('Tags')}</h3>
+              <Tags projectSpace={projectSpace} placeholder="tags separated by space character" />
+            </section>
+          )}
+
           <section className="content">
             <h3>{t('Content')}</h3>
             <p><Trans t={t} i18nKey="contentInstructions1">You can add elements like texts, images, audio and video files, BigBlueButton sessions and livestreams by typing <code>/</code> at the beginning of a new paragraph.</Trans></p>

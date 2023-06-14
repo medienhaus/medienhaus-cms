@@ -26,6 +26,7 @@ import LeaveContext from './LeaveContext'
 import ContextTree from './ContextTree'
 import TextareaAutoSizeMaxLength from './TextareaAutoSizeMaxLength'
 import UdKLocationContext from '../../create/Context/UdKLocationContext'
+import AddSubContext from './AddSubContext'
 
 const DangerZone = styled.section`
   border: none;
@@ -81,10 +82,11 @@ const ManageContexts = ({ matrixClient, moderationRooms: incomingModerationRooms
     }
   }, [incomingModerationRooms, incomingNestedRooms])
 
-  const onRemoveItemFromContext = (space) => {
+  const onRemoveChildFromContext = async (space) => {
     setLoading(true)
-    Matrix.removeSpaceChild(selectedContext, space)
+    const remove = await Matrix.removeSpaceChild(selectedContext, space).catch(error => console.debug(error))
     setLoading(false)
+    return remove
   }
 
   const setPower = async (userId, roomId, level) => {
@@ -239,6 +241,7 @@ const ManageContexts = ({ matrixClient, moderationRooms: incomingModerationRooms
         (value, key, parent) => {
           if (value.id === context) return true
         }, { childrenPath: 'children', includeRoot: false, rootIsChildren: true })
+
       contextObject.pathIds ? setContextParent(contextObject.pathIds[contextObject.pathIds.length - 1]) : setContextParent(null)
       setDescription(contextObject
         .topic || '')
@@ -364,6 +367,7 @@ const ManageContexts = ({ matrixClient, moderationRooms: incomingModerationRooms
               contextId={selectedContext}
               onContextChange={onContextChange}
               moderationRooms={moderationRooms}
+              onDelete={onRemoveChildFromContext}
             />
             <hr />
             <Details>
@@ -427,22 +431,22 @@ const ManageContexts = ({ matrixClient, moderationRooms: incomingModerationRooms
                         className={location.lat === '0.0' && location.lng === '0.0' ? 'center' : null}
                       >
                         {
-                          location.lat !== '0.0' && location.lng !== '0.0' &&
-                            <MapContainer className="center" center={[location.lat, location.lng]} zoom={17} scrollWheelZoom={false} placeholder>
-                              <TileLayer
-                                attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-                                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                              />
-                              <Marker position={[location.lat, location.lng]} icon={(new Icon.Default({ imagePath: '/leaflet/' }))}>
-                                <Popup>
-                                  {locations.find(coord => coord.coordinates === location.lat + ', ' + location.lng)?.name || // if the location is not in our location.json
-                                  location.info?.length > 0 // we check if the custom input field was filled in
-                                    ? location.info // if true, we display that text on the popup otherwise we show the lat and long coordinates
-                                    : location.lat + ', ' + location.lng}
-                                </Popup>
-                              </Marker>
-                            </MapContainer>
-                        }
+                                    location.lat !== '0.0' && location.lng !== '0.0' &&
+                                      <MapContainer className="center" center={[location.lat, location.lng]} zoom={17} scrollWheelZoom={false} placeholder>
+                                        <TileLayer
+                                          attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+                                          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                                        />
+                                        <Marker position={[location.lat, location.lng]} icon={(new Icon.Default({ imagePath: `${process.env.PUBLIC_URL}/leaflet/` }))}>
+                                          <Popup>
+                                            {locations.find(coord => coord.coordinates === location.lat + ', ' + location.lng)?.name || // if the location is not in our location.json
+                                            location.info?.length > 0 // we check if the custom input field was filled in
+                                              ? location.info // if true, we display that text on the popup otherwise we show the lat and long coordinates
+                                              : location.lat + ', ' + location.lng}
+                                          </Popup>
+                                        </Marker>
+                                      </MapContainer>
+                                  }
                         {location.info && <input type="text" value={location.info} disabled />}
                       </div>
                       <div className="right">
@@ -499,7 +503,7 @@ const ManageContexts = ({ matrixClient, moderationRooms: incomingModerationRooms
             </Details>
             <Details>
               <summary>
-                <h3>{t('Add Sub-Context')}</h3>
+                <h3>{t('Create new Sub-Context')}</h3>
               </summary>
               <section>
                 <CreateContext t={t} parent={selectedContext} matrixClient={matrixClient} parentName={roomName} disableButton={loading} callback={addSpace} />
@@ -507,10 +511,18 @@ const ManageContexts = ({ matrixClient, moderationRooms: incomingModerationRooms
             </Details>
             <Details>
               <summary>
-                <h3>{t('Remove Item from Context')}</h3>
+                <h3>{t('Add existing Sub-Context')}</h3>
               </summary>
               <section>
-                <RemoveItemsInContext parent={selectedContext} itemsInContext={itemsInContext} onRemoveItemFromContext={onRemoveItemFromContext} />
+                <AddSubContext t={t} parent={selectedContext} matrixClient={matrixClient} nestedRooms={nestedRooms} parentName={roomName} disableButton={loading} callback={setSelectedContext} />
+              </section>
+            </Details>
+            <Details>
+              <summary>
+                <h3>{t('Remove Item from context')}</h3>
+              </summary>
+              <section>
+                <RemoveItemsInContext parent={selectedContext} itemsInContext={itemsInContext} onRemoveItemFromContext={onRemoveChildFromContext} />
               </section>
             </Details>
             <hr />

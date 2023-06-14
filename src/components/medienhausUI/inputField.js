@@ -14,22 +14,20 @@ input {
   border-width: calc(var(--margin) * 0.2);
   box-shadow: none;
   color: var(--color-fg);
-  height: calc(var(--margin) * 2);
+  height: calc(var(--margin) * 2.5);
   /*
   outline: none;
   */
-  padding: calc(var(--margin) * 0.2);
+ padding: calc(var(--margin) * 0.4) calc(var(--margin) * 0.55);
   width: 100%;
 }
 `
-const InputField = (props) => {
+const InputField = ({ name, label, type, placeholder, value, onChange }) => {
   return (
-    <>
-      <Input>
-        <label htmlFor={props.name}>{props.label}:</label>
-        <input name={props.name} type={props.type} placeholder={props.placeholder} value={props.value} onChange={props.onChange} />
-      </Input>
-    </>
+    <Input>
+      {label && <label htmlFor={name}>{label}:</label>}
+      <input name={name} type={type} placeholder={placeholder} value={value} onChange={onChange} />
+    </Input>
 
   )
 }

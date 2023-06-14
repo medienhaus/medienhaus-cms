@@ -22,6 +22,7 @@ const Nav = () => {
 
   useEffect(() => {
     let cancelled = false
+
     if (joinedSpaces && auth.user && !cancelled) {
       const contextTemplates = config.medienhaus?.context && Object.keys(config.medienhaus?.context)
       // To determine if we're "moderating" a given space...
@@ -68,6 +69,7 @@ const Nav = () => {
     return () => {
       cancelled = true
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [joinedSpaces, auth.user, matrixClient])
 
   useEffect(() => {

@@ -41,7 +41,7 @@ const ProjectImage = ({ projectSpace, changeProjectImage, disabled, apiCallback 
               alt: alt
             })
           }
-          await fetch(process.env.REACT_APP_MATRIX_BASE_URL + `/_matrix/client/r0/rooms/${projectSpace}/state/m.room.avatar/`, req)
+          await fetch(localStorage.getItem('medienhaus_hs_url') + `_matrix/client/r0/rooms/${projectSpace}/state/m.room.avatar/`, req)
         }).then(async () => {
           await fetchProjectImage()
           changeProjectImage()

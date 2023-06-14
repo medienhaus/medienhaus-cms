@@ -717,17 +717,101 @@ textarea[disabled] {
   display: inline;
 }
 */
+.editor {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  grid-gap: var(--margin);
+}
 
-.events .left> :only-child {
+.editor .left,
+.editor .right {
+  background-image: linear-gradient(var(--color-me), var(--color-me));
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: calc(var(--margin) * 0.1) 100%;
+  display: grid;
+  grid-template-rows: repeat(3, auto);
+  grid-gap: var(--margin);
+}
+
+.editor .left>*,
+.editor .right>* {
+  border-color: var(--color-bg);
+  border-style: solid;
+  border-radius: unset;
+  border-width: calc(var(--margin) * 0.2);
+}
+
+.editor .left> :nth-child(1) {
+  grid-row: 1;
+  align-self: start;
+  margin-top: calc(var(--margin) * -0.2);
+}
+
+.editor .left> :nth-child(2) {
   background-color: var(--color-bg);
   display: grid;
   grid-row: 2;
   align-self: center;
-  place-content: center;
 }
 
-.events label+* {
-  margin-top: calc(var(--margin) * 0.5);
+.editor .left> :nth-child(2)>* {
+  max-width: 80%;
+  place-self: center;
+}
+
+.editor .left> :nth-child(3) {
+  grid-row: 3;
+  align-self: end;
+  margin-bottom: calc(var(--margin) * -0.2);
+}
+
+.editor .center {
+  border-color: var(--color-fg);
+  border-style: solid;
+  border-radius: unset;
+  border-width: calc(var(--margin) * 0.2);
+}
+
+.editor .center.leaflet-container {
+  height: calc(var(--margin) * 12);
+}
+
+.editor .center.leaflet-container+* {
+  margin-top: var(--margin);
+}
+
+/*
+.editor .center div {
+  height: 100%;
+}
+*/
+
+.editor .left> :only-child,
+.editor .right> :only-child {
+  grid-row: 2;
+  align-self: center;
+}
+
+.editor .left> span:only-child {
+  display: grid;
+  place-content: center;
+  background-color: var(--color-bg);
+}
+
+.editor .left>button,
+.editor .right>button {
+  display: grid;
+  place-content: center;
+  height: 2rem;
+}
+
+.editor .left,
+.editor .left>*,
+.editor .right,
+.editor .right>* {
+  min-height: 2rem;
+  width: 2rem;
 }
 
 .events select+p {
@@ -741,7 +825,7 @@ textarea[disabled] {
   border-width: calc(var(--margin) * 0.2);
   display: grid;
   grid-gap: var(--margin);
-  height: calc(var(--margin) * 12);
+  height: calc(100vh - calc(var(--margin) * 16));
   margin-top: var(--margin);
 }
 

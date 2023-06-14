@@ -25,6 +25,8 @@ const getAnswer = async () => {
   if (contextTemplates) {
     filteredRooms = filteredRooms.filter(room => {
       if (room.currentState.events.get('dev.medienhaus.meta').values().next().value.event.content.type === 'context') {
+        if (room.currentState.events.get('dev.medienhaus.meta').values().next().value.event.content.template === 'application') return true
+        if (room.currentState.events.get('dev.medienhaus.meta').values().next().value.event.content.template === 'applications') return true
         return contextTemplates.includes(room.currentState.events.get('dev.medienhaus.meta').values().next().value.event.content.template)
       }
       return true

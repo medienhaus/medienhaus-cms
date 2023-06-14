@@ -17,7 +17,6 @@ const AddLocation = ({ number, inviteCollaborators, projectSpace, handleOnBlockW
   const { t } = useTranslation('locations')
   const center = config.medienhaus.location || { lat: 0.0, lng: 0.0 }
   const [position, setPosition] = useState(center)
-  console.log(allocationEvent)
 
   const handleSubmit = async () => {
     setLoading(true)
@@ -47,7 +46,7 @@ const AddLocation = ({ number, inviteCollaborators, projectSpace, handleOnBlockW
         ]
       }
     }
-    matrixClient.sendStateEvent(projectSpace, 'dev.medienhaus.allocation', allocation)
+    await matrixClient.sendStateEvent(projectSpace, 'dev.medienhaus.allocation', allocation)
     handleOnBlockWasAddedSuccessfully() // @TODO delay between menu collapsing and event reloading
     callback()
 
@@ -79,7 +78,7 @@ const AddLocation = ({ number, inviteCollaborators, projectSpace, handleOnBlockW
         eventHandlers={eventHandlers}
         position={position}
         ref={markerRef}
-        icon={(new Icon.Default({ imagePath: '/leaflet/' }))}
+        icon={(new Icon.Default({ imagePath: `${process.env.PUBLIC_URL}/leaflet/` }))}
       >
         <Popup minWidth={90}>
           <span>
