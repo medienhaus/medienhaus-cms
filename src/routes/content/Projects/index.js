@@ -17,7 +17,7 @@ const Content = ({ space, metaEvent, visibility, index, removeProject }) => {
       <div className="project">
         <h3 className="above">{space.name}</h3>
         <figure className="left">
-          {space.avatar_url && <img src={matrixClient.mxcUrlToHttp(space.avatar_url)} alt="project-visual-key" />}
+          {space.avatar_url && <img src={matrixClient.mxcUrlToHttp(space.avatar_url.content_uri)} alt="project-visual-key" />}
         </figure>
         <div className="center">
           {/* @TODO grab description based on selected cms language */}
