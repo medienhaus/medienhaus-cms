@@ -62,10 +62,9 @@ const ProjectImage = ({ projectSpace, changeProjectImage, disabled, apiCallback 
   if (!projectImage) {
     return fileUpload
   }
-
   return (
     <>
-      <img src={matrixClient.mxcUrlToHttp(projectImage.url)} alt={projectImage.alt} />
+      <img src={matrixClient.mxcUrlToHttp(projectImage.url.content_uri)} alt={projectImage.alt} />
       {!edit &&
         <>
           <button onClick={e => { e.preventDefault(); setEdit(edit => !edit) }}>{t('CHANGE')}</button>
