@@ -21,7 +21,7 @@ const Content = ({ space, metaEvent, visibility, index, removeProject }) => {
             <span style={{ color: 'gray', float: 'right' }}>{config.medienhaus?.item ? config.medienhaus?.item[metaEvent.template]?.label.toUpperCase() : metaEvent.type.toUpperCase()}</span>}
         </h3>
         <figure className="left">
-          {space.avatar_url && <img src={matrixClient.mxcUrlToHttp(space.avatar_url.content_uri)} alt="project-visual-key" />}
+          {space.avatar_url && <img src={matrixClient.mxcUrlToHttp(space.avatar_url)} alt="project-visual-key" />}
         </figure>
         <div className="center">
           {/* @TODO grab description based on selected cms language */}
