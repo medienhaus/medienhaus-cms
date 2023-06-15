@@ -26,7 +26,6 @@ function TextareaAutoSizeMaxLength ({ description: incomingDescription, onSaveDe
 
   useEffect(() => {
     let cancelled = false
-
     if (!cancelled) setDescription(incomingDescription)
     return () => {
       cancelled = true
