@@ -1,14 +1,14 @@
 import { useEffect, useState } from 'react'
 import Matrix from '../../Matrix'
 import config from '../../config.json'
+import { useAuth } from '../../Auth'
 
-const matrixClient = Matrix.getMatrixClient()
 const contextTemplates = config.medienhaus?.context && Object.keys(config.medienhaus?.context)
 const itemTemplates = config.medienhaus?.item && Object.keys(config.medienhaus?.item)
 // @TODO change hook to also return invites and knocks
 
 const getAnswer = async () => {
-  const visibleRooms = matrixClient.getVisibleRooms()
+  const visibleRooms = Matrix.getMatrixClient().getVisibleRooms()
   let filteredRooms = visibleRooms
   // we filter all joined rooms for spaces
     .filter(room => room.isSpaceRoom() &&
@@ -64,17 +64,18 @@ const getAnswer = async () => {
   return createObject
 }
 
-const useJoinedSpaces = ({ reload }) => {
-  const [joinedSpaces, setJoinedSpaces] = useState(reload)
+const useJoinedSpaces = (reload) => {
+  const [joinedSpaces, setJoinedSpaces] = useState(false)
   const [fetchSpaces, setFetchSpaces] = useState(true)
   const [spacesErr, setSpacesErr] = useState(false)
   const [load, setLoad] = useState(reload)
+  const auth = useAuth()
 
   useEffect(() => {
     let canceled
     setFetchSpaces(true)
     const fetchSpaces = async () => {
-      if (matrixClient.isInitialSyncComplete()) {
+      if (Matrix.getMatrixClient().isInitialSyncComplete()) {
         try {
           const res = await getAnswer()
           canceled || setJoinedSpaces(res)
@@ -89,17 +90,16 @@ const useJoinedSpaces = ({ reload }) => {
         }, 200)
       }
     }
-    fetchSpaces()
+    auth?.user && fetchSpaces()
     return () => { canceled = true }
-  }, [load])
+  }, [auth?.user, load])
 
   return {
     joinedSpaces,
     spacesErr,
     fetchSpaces,
     reload: () => {
-      setLoad({ ...load }
-      )
+      setLoad(prevState => !prevState)
     }
   }
 }
