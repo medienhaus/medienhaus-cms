@@ -143,7 +143,8 @@ const Moderate = () => {
             type: space.meta.type,
             membership: space.selfMembership,
             parents: space.parents,
-            authors: space.authors
+            authors: space.authors,
+            topic: space.topic
           }
         })
       }

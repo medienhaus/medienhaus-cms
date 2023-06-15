@@ -222,23 +222,17 @@ const ManageContexts = ({ matrixClient, moderationRooms: incomingModerationRooms
         const detailedItems = await detailedItemList(context, 1)
         setItemsInContext(detailedItems)
         contextObject.parents ? setContextParent(contextObject.parents[0]) : setContextParent(null)
-        setDescription(contextObject
-          .description?.default || '')
+        setDescription(contextObject.description?.default || '')
       } else {
         // as a fallback we look for the parent with deep dash
-        findValueWithDeepDash()
+        contextObject = findValueWithDeepDash(context)
+        contextObject.pathIds ? setContextParent(contextObject.pathIds[contextObject.pathIds.length - 1]) : setContextParent(null)
+        setDescription(contextObject
+          .topic || '')
       }
     } else {
       // if no api is configured we look fot the parent with deep dash
-      findValueWithDeepDash()
-    }
-    function findValueWithDeepDash () {
-      contextObject = findValueDeep(
-        moderationRooms,
-        (value, key, parent) => {
-          if (value.id === context) return true
-        }, { childrenPath: 'children', includeRoot: false, rootIsChildren: true })
-
+      contextObject = findValueWithDeepDash(context)
       contextObject.pathIds ? setContextParent(contextObject.pathIds[contextObject.pathIds.length - 1]) : setContextParent(null)
       setDescription(contextObject
         .topic || '')
@@ -250,6 +244,14 @@ const ManageContexts = ({ matrixClient, moderationRooms: incomingModerationRooms
     setRoomName(contextObject.name)
     setRoomTemplate(contextObject.template)
     setLoading(false)
+  }
+
+  function findValueWithDeepDash (context) {
+    return findValueDeep(
+      moderationRooms,
+      (value, key, parent) => {
+        if (value.id === context) return true
+      }, { childrenPath: 'children', includeRoot: false, rootIsChildren: true })
   }
 
   const onDelete = async (index) => {
@@ -278,6 +280,8 @@ const ManageContexts = ({ matrixClient, moderationRooms: incomingModerationRooms
     if (description.length > 500) return
     await matrixClient.setRoomTopic(selectedContext, description).catch(console.log)
     if (config.medienhaus.api) triggerApiUpdate(selectedContext)
+    const context = findValueWithDeepDash(selectedContext)
+    context.topic = description
   }
 
   const changeRoomName = async () => {
