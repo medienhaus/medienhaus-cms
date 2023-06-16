@@ -5,7 +5,7 @@ import Invites from '../../components/Invites'
 import Matrix from '../../Matrix'
 import { Loading } from '../../components/loading'
 import { useTranslation } from 'react-i18next'
-import { sortBy } from 'lodash'
+import _, { sortBy } from 'lodash'
 import deleteProject from './deleteProject'
 
 import config from '../../config.json'
@@ -17,6 +17,8 @@ const Overview = () => {
   const [invites, setInvites] = useState({})
   const item = config.medienhaus?.item ? Object.keys(config.medienhaus?.item).concat('item') : ['item']
   const { joinedSpaces, spacesErr, fetchSpaces, reload } = useJoinedSpaces(false)
+
+  const [displayStyle, setDisplayStyle] = useState('grid')
 
   useEffect(() => {
     async function checkRoomForPossibleInvite (room) {
@@ -71,6 +73,9 @@ const Overview = () => {
 
   useEffect(() => {
     let cancelled = false
+    if (cancelled) {
+      console.log('cancelled')
+    }
     if (joinedSpaces) {
       // we check if a collaborator has deleted a project since we last logged in
       joinedSpaces?.filter(space => space.meta?.deleted).forEach(async space => await deleteProject(space.room_id))
@@ -90,6 +95,17 @@ const Overview = () => {
     setInvites(Object.fromEntries(
       Object.entries(invites).filter(([key]) => key !== room)))
     reload(true)
+  }
+
+  function splitSpacesInTemplateArrays (spaces) {
+    const seperatedSpaces = {}
+    spaces.forEach(space => {
+      if (!(space.meta.template in seperatedSpaces)) { // check if template already exist otherwise initialize empty array
+        seperatedSpaces[space.meta.template] = []
+      }
+      seperatedSpaces[space.meta.template].push(space)
+    })
+    return seperatedSpaces
   }
 
   if (fetchSpaces || !matrixClient.isInitialSyncComplete()) return <Loading />
@@ -124,7 +140,10 @@ const Overview = () => {
         </>
       )}
       <section className="projects">
-        <h3>{t('Content')}</h3>
+        <div className="contentHeader">
+          <h3>{t('Content')} </h3>
+          <button onClick={() => displayStyle === 'grid' ? setDisplayStyle('list') : setDisplayStyle('grid')}>{displayStyle === 'grid' ? t('grid') : t('list')}</button>
+        </div>
         {spacesErr
           ? console.error(spacesErr)
           : projects?.length === 0
@@ -134,12 +153,30 @@ const Overview = () => {
                 <p>{t('Looks like you haven’t uploaded any content, yet.')}</p>
               </>
               )
-            : projects.filter(space => space.meta.type !== 'context').map((space, index) => (
-              <React.Fragment key={index}>
-                <Projects space={space} metaEvent={space.meta} visibility={space.published} index={index} removeProject={removeProject} />
-                {index < projects.length - 1 && <hr />}
-              </React.Fragment>
-            ))}
+            : <>
+              {displayStyle === 'grid' &&
+              projects.filter(space => space.meta.type !== 'context').map((space, index) => (
+                <React.Fragment key={index}>
+                  <Projects space={space} metaEvent={space.meta} visibility={space.published} index={index} removeProject={removeProject} displayStyle={displayStyle} />
+                  {index < projects.length - 1 && <hr />}
+                </React.Fragment>
+              ))}
+              {displayStyle === 'list' &&
+              _.map(splitSpacesInTemplateArrays(projects.filter(space => space.meta.type !== 'context')), (template, index) => (
+                <React.Fragment key={index}>
+                  <h3>{config.medienhaus?.item ? config.medienhaus?.item[index]?.label.toUpperCase() : index.toUpperCase()}</h3>
+                  {_.map(template, (space, spaceIndex) => {
+                    return (
+                      <React.Fragment key={spaceIndex}>
+                        <Projects space={space} metaEvent={space.meta} visibility={space.published} index={index} removeProject={removeProject} displayStyle={displayStyle} />
+                      </React.Fragment>
+                    )
+                  })}
+                  <hr />
+                </React.Fragment>
+
+              ))}
+            </>}
       </section>
     </div>
   )
