@@ -736,12 +736,8 @@ const Create = () => {
         <p>
           {projectSpace
             ? <strong>{t('Edit project/event')}</strong>
-            : <strong>{t('Create and upload new project or event')}</strong>}
+            : <strong>{t('Create new project')}</strong>}
         </p>
-
-        <p>{t('This is the site for creating and editing a project or event. Please add the context in which the project or event was created, a project name, descriptive text and a thumbnail. You can also add more images, videos, livestreams and BigBlueButton sessions.')}</p>
-        <p><Trans t={t} i18nKey="submitInstructions2">If you want to continue at a later point in time, the project/event can be saved as a draft and you can find it in your collection under <Link to="/content">/content</Link>.</Trans></p>
-        <p>{t('The Rundgang website will be available in English and German. The project or event name can only be entered in one language and will therefore be used for both pages. Other texts should ideally be entered in both languages, otherwise the text will appear on both pages in only one language.')}</p>
       </section>
 
       <section className="project-title">
@@ -758,6 +754,11 @@ const Create = () => {
         <br />
         <label htmlFor="title"><h3>{t('Title')}</h3></label>
         <ProjectTitle id="title" name="title" title={title} projectSpace={projectSpace} template={template} callback={changeTitle} />
+        <p>
+          <Trans t={t} i18nKey="submitInstructions2">
+            The entry can initially also be saved as a draft and completed at a later time. The saved draft can be found under <Link to="/content">/content</Link>.
+          </Trans>
+        </p>
       </section>
 
       {projectSpace && (
