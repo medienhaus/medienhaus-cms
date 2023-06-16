@@ -84,7 +84,7 @@
   "cancel": "abbrechen",
   "save": "speichern",
   "Profile name": "Anzeigename",
-  "Here you can change your profile name.": "Hier können Sie Ihren Anzeigenamen ändern.",
+  "Here you can change your profile name. The user name is the name that appears under the project on the website.": "Hier können Sie Ihren Anzeigenamen ändern. Der Nutzer*innenname ist der Name, der auf der Website unter dem Projekt erscheint.",
   "Profile image": "Profilbild",
   "Here you can change your profile image.": "Hier können Sie Ihr Profilbild ändern.",
   "EVENT": "EVENT",
