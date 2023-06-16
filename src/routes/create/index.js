@@ -807,10 +807,16 @@ const Create = () => {
 
           <section className="content">
             <h3>{t('Content')}</h3>
-            <p><Trans t={t} i18nKey="contentInstructions1">You can add elements like texts, images, audio and video files, BigBlueButton sessions and livestreams by typing <code>/</code> at the beginning of a new paragraph.</Trans></p>
-            <p><Trans t={t} i18nKey="contentInstructions2">The first block&thinsp;&mdash;&thinsp;which is the introduction to your project&thinsp;&mdash;&thinsp;is required.</Trans></p>
-            <p><Trans t={t} i18nKey="contentInstructions3">You can format your input by highlighting the text to be formatted with your cursor.</Trans></p>
-            <p><Trans t={t} i18nKey="contentInstructions4">Content can be provided in multiple languages. We would recommend to provide the content in both, English and German. If you provide contents for just one language that content will appear on both Rundgang website versions, the English and the German one.</Trans></p>
+            <p>
+              <Trans t={t} i18nKey="contentInstructions1">
+                The project descriptions are displayed on the platform in English and in German, if they are entered here in both languages.
+              </Trans>
+            </p>
+            <p>
+              <Trans t={t} i18nKey="contentInstructions2">
+                The short description—as an introduction to your project—is mandatory.
+              </Trans>
+            </p>
             {/*
             <select
               value={contentLang} onChange={(e) => {
@@ -855,6 +861,11 @@ const Create = () => {
             {temporaryGutenbergContents && (
               <LoadingSpinnerButton type="button" onClick={saveGutenbergEditorToMatrix}>{t('SAVE CHANGES')}</LoadingSpinnerButton>
             )}
+            <p><Trans t={t} i18nKey="contentNotes1">Enter <code>/</code> to set a paragraph.</Trans></p>
+            <p><Trans t={t} i18nKey="contentNotes2">The project can be published only with a short description.</Trans></p>
+            <p><Trans t={t} i18nKey="contentNotes3">Formatting of the text is possible. To do this, please mark the text with the cursor.</Trans></p>
+            <p><Trans t={t} i18nKey="contentNotes4">Via <code>+</code> a new section can be set in each case. Here, in addition to text, various elements such as images, audio and video files, BigBlueButton sessions and livestreams can be inserted.</Trans></p>
+            <p><Trans t={t} i18nKey="contentNotes5">If the text is only entered in one language, it will also only be published in this one language.</Trans></p>
           </section>
           {/* Placeholder to show preview next to editing
           {blocks.map((content, i) => <DisplayPreview content={content} key={i} matrixClient={matrixClient} />)}
