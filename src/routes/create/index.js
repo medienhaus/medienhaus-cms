@@ -771,7 +771,7 @@ const Create = () => {
           {(!config.medienhaus?.item || !config.medienhaus?.item[template]?.blueprint || config.medienhaus?.item[template]?.blueprint.includes('location')) && (
             <section className="events">
               <h3>{t('Location')}</h3>
-              <p>{t('Specify at which location your project will be displayed or your event will take place.')}</p>
+              <p>{t('At which location does the project take place?')}</p>
               <Location inviteCollaborators={inviteCollaborators} reloadSpace={reloadSpace} projectSpace={projectSpace} events={events} allocation={allocation} matrixClient={matrixClient} setLocationFromLocationTree={setLocationFromLocationTree} locationFromLocationTree={locationFromLocationTree} />
             </section>
           )}
