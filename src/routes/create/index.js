@@ -400,7 +400,8 @@ const Create = () => {
           let uploadedImage = await matrixClient.uploadContent(block.attributes.file, { name: block.attributes.file.name })
           await matrixClient.sendImageMessage(
             roomId,
-            uploadedImage,
+            null,
+            uploadedImage?.content_uri,
             {
               mimetype: block.attributes.file.type,
               size: block.attributes.file.size,
@@ -431,7 +432,7 @@ const Create = () => {
               alt: block.attributes.alttext
             },
             msgtype: 'm.audio',
-            url: uploadedAudio
+            url: uploadedAudio?.content_uri
           })
           break
         case 'medienhaus/file':
@@ -450,7 +451,7 @@ const Create = () => {
               alt: block.attributes.alttext
             },
             msgtype: 'm.file',
-            url: uploadedFile
+            url: uploadedFile?.content_uri
           })
           break
         default:
