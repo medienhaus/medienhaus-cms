@@ -872,9 +872,9 @@ const Create = () => {
            */}
           <section className="authorship">
             <h3>{t('Authorship / Credits')}</h3>
-            <p>{t('If you select this option, it is hidden in the frontend that you have posted the content.')}</p>
+            <p>{t('The author(s)/contributor(s) will be named on the tour platform. Please indicate here if this is not desired.')}</p>
             <AuthorCheckbox>
-              <label htmlFor="hide-authors">{t('Hide author(s)')}</label>
+              <label htmlFor="hide-authors">{t('Do not show authors/contributors')}</label>
               <input id="checkbox" name="checkbox" type="checkbox" checked={hideAuthors} onChange={handleHideAuthors} />
             </AuthorCheckbox>
           </section>
