@@ -880,13 +880,12 @@ const Create = () => {
           </section>
           <section className="visibility">
             <h3>{t('Visibility')}</h3>
-            <p>{t('Would you like to save your project as a draft or release it for publishing on the Rundgang platform? The released projects will be published in the run-up to the Rundgang on July 18, 2022.')}</p>
-            <p>{t('If you still want to make changes to your contributions after publishing, you can continue to do so.')}</p>
+            <p>{t('Entries that are saved as drafts are not publicly visible. Entries that are released for publication on the Rundgang 2023 website are publicly visible from 5 July. In both cases, the entries can be further edited at any time.')}</p>
             {spaceObject
               ? (<>
                 <PublishProject space={spaceObject.rooms[0]} metaEvent={medienhausMeta} hasContext={hasContext} description={(description && description[config.medienhaus?.languages[0]])} published={visibility} time={setSaveTimestampToCurrentTime} onChange={setVisibility} />
-                {!(description && description[config.medienhaus?.languages[0]]) && <p>❗️ {t('Please add a short description.')}</p>}
-                {!hasContext && <p>❗️ {t('Please select a context.')}</p>}
+                {!(description && description[config.medienhaus?.languages[0]]) && <p>❗️ {t('Short description missing')}</p>}
+                {!hasContext && <p>❗️ {t('Context missing')}</p>}
               </>)
               : <Loading />}
           </section>
@@ -898,7 +897,11 @@ const Create = () => {
             </div>
             {saveTimestamp && <p className="timestamp">↳ {t('Last saved at')} {saveTimestamp}</p>}
             <p>
-              * <em>{t('Preview is only possible if the project/event is public. Please note that the Rundgang platform 2022 is currently still being edited and may still contain minor errors. The final Rundgang platform will be available on 18.07.2022 via:')} https://rundgang.udk-berlin.de/</em>
+              * <em>
+                <Trans t={t} i18nKey="previewNote">
+                  It is not possible to preview the entry. What the public version of the project looks like can be seen from 5 July, once the project is released and the platform is published at: <a href="https://rundgang.udk-berlin.de" rel="external nofollow noopener noreferrer" target="_blank">rundgang.udk-berlin.de</a>
+                </Trans>
+              </em>
             </p>
           </section>
         </>
