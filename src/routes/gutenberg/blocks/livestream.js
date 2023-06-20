@@ -44,7 +44,7 @@ const livestream = {
       return (
         <View {...blockProps}>
           <iframe
-            src={`https://stream.udk-berlin.de/livestreams/embed/${content.replace('https://stream.udk-berlin.de/w/', '')}`}
+            src={`https://stream.udk-berlin.de/video/embed/${content.replace('https://stream.udk-berlin.de/w/', '')}`}
             frameBorder="0"
             title={content}
             sandbox="allow-same-origin allow-scripts"
