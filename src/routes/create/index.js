@@ -491,7 +491,8 @@ const Create = () => {
           let uploadedImage = await matrixClient.uploadContent(block.attributes.file, { name: block.attributes.file.name })
           await matrixClient.sendImageMessage(
             roomId,
-            uploadedImage,
+            null,
+            uploadedImage?.content_uri,
             {
               mimetype: block.attributes.file.type,
               size: block.attributes.file.size,
@@ -522,7 +523,7 @@ const Create = () => {
               alt: block.attributes.alttext
             },
             msgtype: 'm.audio',
-            url: uploadedAudio
+            url: uploadedAudio?.content_uri
           })
           break
         case 'medienhaus/file':
@@ -541,7 +542,7 @@ const Create = () => {
               alt: block.attributes.alttext
             },
             msgtype: 'm.file',
-            url: uploadedFile
+            url: uploadedFile?.content_uri
           })
           break
         default:
@@ -628,7 +629,7 @@ const Create = () => {
     const fetchContentsForGutenberg = async () => {
       const contents = []
       for (const block of blocks) {
-        const fetchMessage = await matrixClient.http.authedRequest('GET', `/rooms/${block.room_id}/messages`, { limit: 1, dir: 'b', filter: JSON.stringify({ types: ['m.room.message'] }) }, {})
+        const fetchMessage = await matrixClient.http.authedRequest('GET', `/rooms/${block.room_id}/messages`, { limit: 1, dir: 'b', filter: JSON.stringify({ types: ['m.room.message'] }) })
         const message = _.isEmpty(fetchMessage.chunk) ? null : fetchMessage.chunk[0].content
 
         if (message) {

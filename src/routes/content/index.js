@@ -71,7 +71,7 @@ const Overview = () => {
 
   useEffect(() => {
     let cancelled = false
-    if (!cancelled && joinedSpaces) {
+    if (joinedSpaces && !cancelled) {
       // we check if a collaborator has deleted a project since we last logged in
       joinedSpaces?.filter(space => space.meta?.deleted).forEach(async space => await deleteProject(space.room_id))
       // then we update our array to not display the just deleted projects and only display joined rooms
@@ -80,7 +80,7 @@ const Overview = () => {
     }
 
     return () => {
-      cancelled = false
+      cancelled = true
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [joinedSpaces])
