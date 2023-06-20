@@ -615,6 +615,12 @@ const Create = () => {
                 content: message.body
               }
               break
+            case '_playlist':
+              n = 'medienhaus/playlist'
+              a = {
+                content: message.body
+              }
+              break
             default:
               n = 'core/paragraph'
               a = { content: message.formatted_body }
