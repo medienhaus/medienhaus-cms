@@ -24,7 +24,7 @@ const ProjectDescription = ({ description: intro, callback }) => {
       <div className="projectdescription">
         <TextareaAutosize
           minRows={6}
-          placeholder={`${t('Please add a short description.')} ${t('This field is required before publishing.')}`}
+          placeholder={`${t('short description')}`}
           value={description}
           onClick={() => setBackupDescription(description)}
           onChange={(e) => {

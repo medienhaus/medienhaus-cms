@@ -492,7 +492,8 @@ const Create = () => {
           let uploadedImage = await matrixClient.uploadContent(block.attributes.file, { name: block.attributes.file.name })
           await matrixClient.sendImageMessage(
             roomId,
-            uploadedImage,
+            null,
+            uploadedImage?.content_uri,
             {
               mimetype: block.attributes.file.type,
               size: block.attributes.file.size,
@@ -523,7 +524,7 @@ const Create = () => {
               alt: block.attributes.alttext
             },
             msgtype: 'm.audio',
-            url: uploadedAudio
+            url: uploadedAudio?.content_uri
           })
           break
         case 'medienhaus/file':
@@ -542,7 +543,7 @@ const Create = () => {
               alt: block.attributes.alttext
             },
             msgtype: 'm.file',
-            url: uploadedFile
+            url: uploadedFile?.content_uri
           })
           break
         default:
@@ -629,7 +630,7 @@ const Create = () => {
     const fetchContentsForGutenberg = async () => {
       const contents = []
       for (const block of blocks) {
-        const fetchMessage = await matrixClient.http.authedRequest('GET', `/rooms/${block.room_id}/messages`, { limit: 1, dir: 'b', filter: JSON.stringify({ types: ['m.room.message'] }) }, {})
+        const fetchMessage = await matrixClient.http.authedRequest('GET', `/rooms/${block.room_id}/messages`, { limit: 1, dir: 'b', filter: JSON.stringify({ types: ['m.room.message'] }) })
         const message = _.isEmpty(fetchMessage.chunk) ? null : fetchMessage.chunk[0].content
 
         if (message) {
@@ -710,6 +711,12 @@ const Create = () => {
                 content: message.body
               }
               break
+            case '_playlist':
+              n = 'medienhaus/playlist'
+              a = {
+                content: message.body
+              }
+              break
             default:
               n = 'core/paragraph'
               a = { content: message.formatted_body }
@@ -737,12 +744,8 @@ const Create = () => {
         <p>
           {projectSpace
             ? <strong>{t('Edit project/event')}</strong>
-            : <strong>{t('Create and upload new project or event')}</strong>}
+            : <strong>{t('Create new project')}</strong>}
         </p>
-
-        <p>{t('This is the site for creating and editing a project or event. Please add the context in which the project or event was created, a project name, descriptive text and a thumbnail. You can also add more images, videos, livestreams and BigBlueButton sessions.')}</p>
-        <p><Trans t={t} i18nKey="submitInstructions2">If you want to continue at a later point in time, the project/event can be saved as a draft and you can find it in your collection under <Link to="/content">/content</Link>.</Trans></p>
-        <p>{t('The Rundgang website will be available in English and German. The project or event name can only be entered in one language and will therefore be used for both pages. Other texts should ideally be entered in both languages, otherwise the text will appear on both pages in only one language.')}</p>
       </section>
 
       <section className="project-title">
@@ -759,6 +762,11 @@ const Create = () => {
         <br />
         <label htmlFor="title"><h3>{t('Title')}</h3></label>
         <ProjectTitle id="title" name="title" title={title} projectSpace={projectSpace} template={template} callback={changeTitle} />
+        <p>
+          <Trans t={t} i18nKey="submitInstructions2">
+            The entry can initially also be saved as a draft and completed at a later time. The saved draft can be found under <Link to="/content">/content</Link>.
+          </Trans>
+        </p>
       </section>
 
       {projectSpace && (
@@ -771,7 +779,7 @@ const Create = () => {
           {(!config.medienhaus?.item || !config.medienhaus?.item[template]?.blueprint || config.medienhaus?.item[template]?.blueprint.includes('location')) && (
             <section className="events">
               <h3>{t('Location')}</h3>
-              <p>{t('Specify at which location your project will be displayed or your event will take place.')}</p>
+              <p>{t('At which location does the project take place?')}</p>
               <Location inviteCollaborators={inviteCollaborators} reloadSpace={reloadSpace} projectSpace={projectSpace} events={events} allocation={allocation} matrixClient={matrixClient} setLocationFromLocationTree={setLocationFromLocationTree} locationFromLocationTree={locationFromLocationTree} />
             </section>
           )}
@@ -814,10 +822,16 @@ const Create = () => {
 
           <section className="content">
             <h3>{t('Content')}</h3>
-            <p><Trans t={t} i18nKey="contentInstructions1">You can add elements like texts, images, audio and video files, BigBlueButton sessions and livestreams by typing <code>/</code> at the beginning of a new paragraph.</Trans></p>
-            <p><Trans t={t} i18nKey="contentInstructions2">The first block&thinsp;&mdash;&thinsp;which is the introduction to your project&thinsp;&mdash;&thinsp;is required.</Trans></p>
-            <p><Trans t={t} i18nKey="contentInstructions3">You can format your input by highlighting the text to be formatted with your cursor.</Trans></p>
-            <p><Trans t={t} i18nKey="contentInstructions4">Content can be provided in multiple languages. We would recommend to provide the content in both, English and German. If you provide contents for just one language that content will appear on both Rundgang website versions, the English and the German one.</Trans></p>
+            <p>
+              <Trans t={t} i18nKey="contentInstructions1">
+                The project descriptions are displayed on the platform in English and in German, if they are entered here in both languages.
+              </Trans>
+            </p>
+            <p>
+              <Trans t={t} i18nKey="contentInstructions2">
+                The short description—as an introduction to your project—is mandatory.
+              </Trans>
+            </p>
             {/*
             <select
               value={contentLang} onChange={(e) => {
@@ -862,27 +876,31 @@ const Create = () => {
             {temporaryGutenbergContents && (
               <LoadingSpinnerButton type="button" onClick={saveGutenbergEditorToMatrix}>{t('SAVE CHANGES')}</LoadingSpinnerButton>
             )}
+            <p><Trans t={t} i18nKey="contentNotes1">Enter <code>/</code> to set a paragraph.</Trans></p>
+            <p><Trans t={t} i18nKey="contentNotes2">The project can be published only with a short description.</Trans></p>
+            <p><Trans t={t} i18nKey="contentNotes3">Formatting of the text is possible. To do this, please mark the text with the cursor.</Trans></p>
+            <p><Trans t={t} i18nKey="contentNotes4">Via <code>+</code> a new section can be set in each case. Here, in addition to text, various elements such as images, audio and video files, BigBlueButton sessions and livestreams can be inserted.</Trans></p>
+            <p><Trans t={t} i18nKey="contentNotes5">If the text is only entered in one language, it will also only be published in this one language.</Trans></p>
           </section>
           {/* Placeholder to show preview next to editing
           {blocks.map((content, i) => <DisplayPreview content={content} key={i} matrixClient={matrixClient} />)}
            */}
           <section className="authorship">
             <h3>{t('Authorship / Credits')}</h3>
-            <p>{t('If you select this option, it is hidden in the frontend that you have posted the content.')}</p>
+            <p>{t('The author(s)/contributor(s) will be named on the tour platform. Please indicate here if this is not desired.')}</p>
             <AuthorCheckbox>
-              <label htmlFor="hide-authors">{t('Hide author(s)')}</label>
+              <label htmlFor="hide-authors">{t('Do not show authors/contributors')}</label>
               <input id="checkbox" name="checkbox" type="checkbox" checked={hideAuthors} onChange={handleHideAuthors} />
             </AuthorCheckbox>
           </section>
           <section className="visibility">
             <h3>{t('Visibility')}</h3>
-            <p>{t('Would you like to save your project as a draft or release it for publishing on the Rundgang platform? The released projects will be published in the run-up to the Rundgang on July 18, 2022.')}</p>
-            <p>{t('If you still want to make changes to your contributions after publishing, you can continue to do so.')}</p>
+            <p>{t('Entries that are saved as drafts are not publicly visible. Entries that are released for publication on the Rundgang 2023 website are publicly visible from 5 July. In both cases, the entries can be further edited at any time.')}</p>
             {spaceObject
               ? (<>
                 <PublishProject space={spaceObject.rooms[0]} metaEvent={medienhausMeta} hasContext={hasContext} description={(description && description[config.medienhaus?.languages[0]])} published={visibility} time={setSaveTimestampToCurrentTime} onChange={setVisibility} />
-                {!(description && description[config.medienhaus?.languages[0]]) && <p>❗️ {t('Please add a short description.')}</p>}
-                {!hasContext && <p>❗️ {t('Please select a context.')}</p>}
+                {!(description && description[config.medienhaus?.languages[0]]) && <p>❗️ {t('Short description missing')}</p>}
+                {!hasContext && <p>❗️ {t('Context missing')}</p>}
               </>)
               : <Loading />}
           </section>
@@ -894,7 +912,11 @@ const Create = () => {
             </div>
             {saveTimestamp && <p className="timestamp">↳ {t('Last saved at')} {saveTimestamp}</p>}
             <p>
-              * <em>{t('Preview is only possible if the project/event is public. Please note that the Rundgang platform 2022 is currently still being edited and may still contain minor errors. The final Rundgang platform will be available on 18.07.2022 via:')} https://rundgang.udk-berlin.de/</em>
+              * <em>
+                <Trans t={t} i18nKey="previewNote">
+                  It is not possible to preview the entry. What the public version of the project looks like can be seen from 5 July, once the project is released and the platform is published at: <a href="https://rundgang.udk-berlin.de" rel="external nofollow noopener noreferrer" target="_blank">rundgang.udk-berlin.de</a>
+                </Trans>
+              </em>
             </p>
           </section>
         </>

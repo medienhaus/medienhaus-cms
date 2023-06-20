@@ -1,15 +1,10 @@
 {
-  "Hello": "Hallo",
-  "Welcome to the {{appTitle}} content management system!": "Willkommen im {{appTitle}} Content Management System!",
-  "introduction-01": "Der Rundgang – Tage der offenen Tür der Universität der Künste Berlin findet vom 23.–24. Juli 2022 sowohl im analogen als auch im digitalen Raum statt.",
-  "introduction-02": "Auf dieser Plattform haben Sie die Möglichkeit, eigene Projekte und Events zu erstellen und damit Informationen zu analogen Angeboten zu ergänzen oder digital erstellte Semesterprojekte zu präsentieren.",
-  "introduction-03": "Wir bieten Ihnen außerdem die Möglichkeit, über das Videokonferenz Tool <1>udk/meetings</1> (BigBlueButton) den Rundgang-Besucher*innen Termine anzubieten und über <3>udk/stream</3> Videos und Livestreams auf Ihrer eigenen Projektseite einzubinden.",
-  "introduction-04": "Da die Plattform ein relativ neues Tool ist, das auch in Zukunft den Rundgang bereichern kann, freuen wir uns, wenn Sie uns Ihr Feedback zur Handhaben des Systems an <1>feedback-rundgang-plattform@udk-berlin.de</1> senden.",
-  "introduction-05": "Sollten Sie technische Unterstützung bei der Eingabe von Projekten haben, wenden Sie sich bitte an: <1>rundgang-support@udk-berlin.de</1>",
-  "introduction-06": "Wir werden aus den veröffentlichten Projekten Inhalte zu analogen und hybriden Angeboten für eine kürzere Programmfassung für Besucher*innen des Rundgangs 2022 ziehen. Daher ist es wichtig, dass die Beiträge zu analogen und hybriden Projekten bis zum 08.07.2022 eingetragen und zur Veröffentlichung freigegeben werden.",
-  "introduction-07": "Projekte, die bis dahin nicht zur Veröffentlichung freigegeben worden sind, können leider nicht in die Programm-Kurzfassung (Print) aufgenommen werden. Um auf die rein digitalen und anderen Angebote hinzuweisen, wird dort ein Link zur Rundgang-Plattform abgedruckt werden.",
-  "please-note": "Die Arbeiten am Frontend, also an der öffentlichen Website, auf der alle Projekte zu sehen sein werden, sind noch im vollen Gange. Daher ist derzeit noch keine Vorschau der angelegten Projekte möglich.",
-  "information": "Weitere Informationen zum Rundgang 2022 (Öffnungszeiten, Sicherheits- und Hygienemaßnahmen, etc.) finden Sie unter: <1>udk-berlin.de/rundgang</1>",
-  "human-readable-first": "Alle Inhalte werden nach dem Paradigma “human readable first” gespeichert und können – neben dem Content Management System udk/rundgang – mit jedem vollwertigen Matrix-Client über <1>content.udk-berlin.de</1> aufgerufen, gelesen, verändert und gelöscht werden.",
-  "caution": "Bitte beachten Sie, dass die manuelle Bearbeitung von Inhalten als fortgeschrittene Technik betrachtet werden sollte und die Inhaltsstruktur zerstören kann, wenn diese nicht dem <3>dev.medienhaus.meta</3>-Standard entspricht."
+  "hello": "Hallo",
+  "welcome": "Willkommen auf der Rundgang-Plattform!",
+  "introduction-01": "Der Rundgang der Universität der Künste Berlin findet vom 21.–23. Juli 2023 statt. Auf der Rundgang-Plattform können alle digitalen und analogen Rundgang-Veranstaltungen und -Projekte zur Veröffentlichung eingepflegt werden.",
+  "introduction-02": "Die Rundgang-Plattform geht zum 5. Juli 2023 online. Aus diesem Grund sollten nach Möglichkeit alle Eckdaten der Rundgang-Projekte bis spätestens 4. Juli 2023, 23:59 Uhr eingetragen werden. Format, Datum, Uhrzeit, Ort, Kurzbeschreibung und (vorläufiger) Titel reichen vorerst aus. Alle weiteren Angaben (Beschreibungstexte, Bilder, Videos etc.) können sukzessive und bis zum Rundgang aktualisiert werden.",
+  "introduction-03": "Projekte, die zum 4. Juli auf der Plattform eingetragen sind, werden daraufhin in das gedruckte Programm aufgenommen. Das gedruckte Programm wird an den Rundgang-Tagen für die Besucher*innen an den Standorten ausliegen.",
+  "introduction-04": "Projekte, die bis zum 4. Juli 2023 nicht auf der Plattform eingetragen sind, können leider nicht in die gedruckten Programmzettel aufgenommen werden.",
+  "questions": "Fragen und Workflow bei der Eingabe zu Projekten: <1>_LINK_FEHLT_NOCH_</1>",
+  "informations": "Informationen zum Rundgang 2023 (Öffnungszeiten, Sicherheit und Awareness, Ansprechpartner*innen, Rundgang-FAQ etc.): <1>udk-berlin.de/rundgang</1>"
 }

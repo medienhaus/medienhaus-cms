@@ -52,7 +52,7 @@ const Feedback = () => {
   return (
     <>
       <section className="support">
-        <p>{t('As the platform is a new tool that can continue to enrich the Rundgang – Open Days in the future, we would be happy if you send us your feedback.')}</p>
+        <p>{t('We look forward to your feedback.')}</p>
         <form onSubmit={handleSubmit(onSubmit)}>
           <textarea {...register('messageInput', { required: true })} name="messageInput" placeholder={t('Your feedback …')} rows="7" spellCheck="true" value={msg} onChange={changeMsg} />
           {errors?.messageInput && t('This field can’t be empty.')}

@@ -44,7 +44,7 @@ const playlist = {
       return (
         <View {...blockProps}>
           <iframe
-            src={`https://stream.udk-berlin.de/playlists/embed/${content.replace('https://stream.udk-berlin.de/w/', '')}`}
+            src={`https://stream.udk-berlin.de/video-playlists/embed/${content.replace('https://stream.udk-berlin.de/w/', '')}`}
             frameBorder="0"
             title={content}
             sandbox="allow-same-origin allow-scripts"

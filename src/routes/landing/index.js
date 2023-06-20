@@ -9,68 +9,47 @@ const Landing = () => {
 
   return (
     <section className="landing">
-      <p>{t('Hello')}{profile && <strong> {profile?.displayname}</strong>}.</p>
-      <h2>{t('Welcome to the {{appTitle}} content management system!', { appTitle: process.env.REACT_APP_APP_TITLE })}</h2>
+      <p>
+        <Trans t={t} i18nKey="hello">
+          Hello
+        </Trans>
+        {profile && <strong> {profile?.displayname}</strong>}.
+      </p>
+      <h2>
+        <Trans t={t} i18nKey="welcome">
+          Welcome to the Rundgang platform!
+        </Trans>
+      </h2>
       <hr />
       <p>
         <Trans t={t} i18nKey="introduction-01">
-          The Rundgang – Open Days of the Berlin University of the Arts will take place in both analogue and digital space from 23–24 July 2022.
+          The Rundgang of the Berlin University of the Arts will take place from July 21–23, 2023. All digital and analog Rundgang events and projects can be entered on the Rundgang platform for publication.
         </Trans>
       </p>
       <p>
         <Trans t={t} i18nKey="introduction-02">
-          On this platform, you will have the opportunity to create your own projects and events and thus add information on analogue offers or present digitally created semester projects.
+          The Rundgang platform will go online on July 5, 2023. For this reason, if possible, all key data of the Rundgang projects should be entered no later than July 4, 2023, 23:59. Format, date, time, location, short description and (preliminary) title are sufficient for now. All other details (descriptive texts, images, videos, etc.) can be updated successively and until the Rundgang.
         </Trans>
       </p>
       <p>
         <Trans t={t} i18nKey="introduction-03">
-          We also offer you the possibility to offer meetings via the video conferencing tool <a href="https://meetings.udk-berlin.de/" rel="external nofollow noopener noreferrer" target="_blank">udk/meetings</a> (BigBlueButton) and to integrate videos and livestreams via <a href="https://stream.udk-berlin.de/" rel="external nofollow noopener noreferrer" target="_blank">udk/stream</a> on your own project page.
+          Projects that are entered on the platform by July 4 will then be included in the printed program. The printed program will be available for visitors at the locations on the days of the tour.
         </Trans>
       </p>
-      <hr />
-      <p>
-        <Trans t={t} i18nKey="introduction-06">
-          We will be pulling content from the published projects on analog and hybrid offerings for a shorter program version for Rundgang 2022 visitors. Therefore, it is important that contributions to analog and hybrid projects are entered and approved for publication by 08 July 2022.
-        </Trans>
-      </p>
-      <p>
-        <Trans t={t} i18nKey="introduction-07">
-          Projects that have not been approved for publication by you by then can unfortunately not be included in the program summary (print). In order to point out the purely digital and other offers, a link to the Rundgang platform will be printed there.
-        </Trans>
-      </p>
-      <hr />
       <p>
         <Trans t={t} i18nKey="introduction-04">
-          As the platform is a relatively new tool that can continue to enrich the Rundgang – Open Days in the future, we would be happy if you send us your feedback on how to handle the system to: <a href="mailto:feedback-rundgang-plattform@udk-berlin.de">feedback-rundgang-plattform@udk-berlin.de</a>
-        </Trans>
-      </p>
-      <p>
-        <Trans t={t} i18nKey="introduction-05">
-          If you need technical support for entering projects, please contact: <a href="mailto:rundgang-support@udk-berlin.de">rundgang-support@udk-berlin.de</a>
-        </Trans>
-      </p>
-      {/*
-      <hr />
-      <p>
-        <Trans t={t} i18nKey="please-note">
-          The frontend, i.e. the public website on which all projects will be visible, is still under construction. Therefore, it is not yet possible to preview the projects that have been created.
-        </Trans>
-      </p>
-      */}
-      <p>
-        <Trans t={t} i18nKey="information">
-          For more information on the Rundgang 2022 (opening hours, safety and hygiene measures, etc.), please visit: <a href="https://udk-berlin.de/rundgang" rel="external nofollow noopener noreferrer" target="_blank">udk-berlin.de/rundgang</a>
+          Projects that are not entered on the platform by July 4, 2023, unfortunately cannot be included in the printed program sheet.
         </Trans>
       </p>
       <hr />
       <p>
-        <Trans t={t} i18nKey="human-readable-first">
-          All content is stored in compliance with the “human readable first” paradigm and can&thinsp;&mdash;&thinsp;besides the udk/rundgang content management system&thinsp;&mdash;&thinsp;be accessed, read, modified, and deleted with any fully-featured Matrix client via: <code>content.udk-berlin.de</code>
+        <Trans t={t} i18nKey="questions">
+          Questions and workflow when entering projects: <a href="https://udk-berlin.de/rundgang" rel="external nofollow noopener noreferrer" target="_blank">_LINK_STILL_MISSING_</a>
         </Trans>
       </p>
       <p>
-        ❗️ <Trans t={t} i18nKey="caution">
-          Please note that manual content editing should be considered <em>advanced technique</em> and might break the content structure if not complying the <code>dev.medienhaus.meta</code> standard.
+        <Trans t={t} i18nKey="informations">
+          Information about the Rundgang 2023 (opening hours, security and awareness, contact persons, Rundgang FAQ etc.): <a href="https://udk-berlin.de/rundgang" rel="external nofollow noopener noreferrer" target="_blank">udk-berlin.de/rundgang</a>
         </Trans>
       </p>
     </section>

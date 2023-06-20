@@ -146,9 +146,11 @@ const Collaborators = ({ projectSpace, members, time, startListeningToCollab }) 
   return (
     <>
       <h3>{t('Contributors')}</h3>
-      <p><Trans t={t} i18nKey="contributorsInstructions2">You can share access (for editing) to this project/event. The contributing editor needs an <a href="https://spaces.udk-berlin.de" rel="external nofollow noopener noreferrer" target="_blank">udk/spaces</a> account to edit the project/event.</Trans></p>
-      <p><Trans t={t} i18nKey="contributorsInstructions3">You can also give credits to a contributor without an OASE account, but they won’t be able to get access for editing.</Trans></p>
-      <p><i>{t('If you\'ve created the project/event your name will automatically be listed. You don\'t need to add yourself as a contributor.')}</i></p>
+      <p>
+        <Trans t={t} i18nKey="contributorsIntro">
+          Contributors can be named here that can also work on the project.
+        </Trans>
+      </p>
 
       <section className="credits">
         {/* @TODO kicking user function */}
@@ -191,7 +193,7 @@ const Collaborators = ({ projectSpace, members, time, startListeningToCollab }) 
           <input
             type="text"
             list="userSearch"
-            placeholder={t('contributor name')}
+            placeholder={t('name of the contributor')}
             value={contributorInput}
             onChange={onContributorInputValueChanged}
             autoComplete="off"
@@ -206,12 +208,8 @@ const Collaborators = ({ projectSpace, members, time, startListeningToCollab }) 
       {contributorInput &&
         <div className="permissions">
           <select value={giveWritePermission} onChange={(e) => setGiveWritePermission(e.target.value)}>
-            {/*
-            <option value="">🚫 {contributorInput.substring(contributorInput.lastIndexOf(' ') + 1) || 'user'} {t('CANNOT edit the project')}</option>
-            <option value disabled={!contributorSearchResults.some(user => user.user_id === contributorInput.substring(contributorInput.lastIndexOf(' ') + 1))}>⚠️ {contributorInput.substring(0, contributorInput.lastIndexOf(' ') + 1) || 'user'} {t('CAN edit the project')}</option>
-            */}
-            <option value="">🚫 {t('CANNOT edit the project')}</option>
-            <option value disabled={!contributorSearchResults.some(user => user.user_id === contributorInput.substring(contributorInput.lastIndexOf(' ') + 1))}>⚠️ {t('CAN edit and delete(!) the project')}</option>
+            <option value="">🚫 {t('Can not edit and delete')}</option>
+            <option value disabled={!contributorSearchResults.some(user => user.user_id === contributorInput.substring(contributorInput.lastIndexOf(' ') + 1))}>⚠️ {t('Can edit and delete')}</option>
           </select>
           <div className="confirmation">
             <button className="cancel" disabled={!contributorInput || inviting || isFetchingContributorSearchResults || addContributionFeedback} onClick={() => setContributorInput('')}>{t('CANCEL')}</button>
@@ -230,7 +228,21 @@ const Collaborators = ({ projectSpace, members, time, startListeningToCollab }) 
           >{inviting || isFetchingContributorSearchResults ? <Loading /> : addContributionFeedback || (giveWritePermission ? 'ADD 🖋 ' : 'ADD 🔒')}
           */}
         </div>}
-      {contributorInput && !contributorSearchResults.some(user => user.user_id === contributorInput.substring(contributorInput.lastIndexOf(' ') + 1)) && <p>❗️ {t('If you’re looking to give a user write permissions but can’t, please make sure they have already logged in to spaces.udk-berlin.de at least once.')}</p>}
+      {/*
+        contributorInput && !contributorSearchResults.some(user => user.user_id === contributorInput.substring(contributorInput.lastIndexOf(' ') + 1)) && <p>❗️ {t('If you’re looking to give a user write permissions but can’t, please make sure they have already logged in to spaces.udk-berlin.de at least once.')}</p>
+      */}
+
+      <p>
+        <Trans t={t} i18nKey="contributorsNote1">
+          Persons with an udk/spaces account can be activated for editing as soon as they have logged in at least once on: <a href="https://spaces.udk-berlin.de" rel="external nofollow noopener noreferrer" target="_blank">udk/spaces</a>
+        </Trans>
+      </p>
+      <p>
+        <Trans t={t} i18nKey="contributorsNote2">
+          Persons without an OASE account can only be named as contributors. They cannot edit the project.
+        </Trans>
+      </p>
+
     </>
   )
 }
