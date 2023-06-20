@@ -13,7 +13,7 @@ import { Loading } from '../../../components/loading'
  * @TODO This component does not work without the API.
  */
 const UdkFormatContext = ({ spaceRoomId }) => {
-  const [currentLocationContext, setCurrentLocationContext] = useState()
+  const [currentFormatContext, setCurrentFormatContext] = useState()
   const [activeContexts, setActiveContexts] = useState([config.medienhaus?.formatId])
   const [isLeaf, setIsLeaf] = useState(false)
   const [isChanging, setIsChanging] = useState(false)
@@ -24,23 +24,24 @@ const UdkFormatContext = ({ spaceRoomId }) => {
     'structure-element': t('-- select format --')
   }), [t])
 
-  const fetchCurrentLocation = useCallback(async () => {
+  const fetchCurrentFormat = useCallback(async () => {
     const space = await fetchId(spaceRoomId).catch(e => console.log(e))
     // If the API does not know this space, or says that it does not have any parents, we don't do anything
     if (!space || !space.parents) {
       setFetching(false)
       return
     }
-    // ... otherwise we check all parents until we find the one that says "location"
+
+    // ... otherwise we check all parents until we find the one that says "structure-element"
     for (const parent of space.parents) {
       const parentInfo = await fetchId(parent)
-      if (parentInfo.template.includes('location')) {
+      if (parentInfo.template.includes('structure-element')) {
         // This parent is our current location
         const pathList = await fetchPathList(parent)
-        const indexOfLocationRoot = _.findIndex(pathList, { id: config.medienhaus?.formatId })
-        setCurrentLocationContext({
+        const indexOfFormatRoot = _.findIndex(pathList, { id: config.medienhaus?.formatId })
+        setCurrentFormatContext({
           id: parent,
-          pathList: pathList.slice(indexOfLocationRoot + 1)
+          pathList: pathList.slice(indexOfFormatRoot + 1)
         })
         break
       }
@@ -49,8 +50,8 @@ const UdkFormatContext = ({ spaceRoomId }) => {
   }, [spaceRoomId])
 
   useEffect(() => {
-    fetchCurrentLocation()
-  }, [fetchCurrentLocation, spaceRoomId])
+    fetchCurrentFormat()
+  }, [fetchCurrentFormat, spaceRoomId])
 
   const reset = () => {
     setActiveContexts([config.medienhaus?.formatId])
@@ -69,9 +70,9 @@ const UdkFormatContext = ({ spaceRoomId }) => {
     const selectedContextRoomId = _.last(activeContexts)
 
     // Remove space from possibly previously selected context
-    if (currentLocationContext && currentLocationContext.id) {
-      await Matrix.removeSpaceChild(currentLocationContext.id, spaceRoomId)
-      await triggerApiUpdate(currentLocationContext.id)
+    if (currentFormatContext && currentFormatContext.id) {
+      await Matrix.removeSpaceChild(currentFormatContext.id, spaceRoomId)
+      await triggerApiUpdate(currentFormatContext.id)
     }
 
     // Add this current space to the given context space
@@ -80,7 +81,6 @@ const UdkFormatContext = ({ spaceRoomId }) => {
         // If we can't add the space to a context we try to join the context first ...
         const joinRoom = await Matrix.getMatrixClient().joinRoom(selectedContextRoomId)
         if (joinRoom) {
-          console.log('joined room')
           // ... and then try to add the space to the context again
           await Matrix.addSpaceChild(selectedContextRoomId, spaceRoomId)
         }
@@ -88,27 +88,26 @@ const UdkFormatContext = ({ spaceRoomId }) => {
 
     await triggerApiUpdate(selectedContextRoomId)
     await triggerApiUpdate(spaceRoomId, selectedContextRoomId)
-    await fetchCurrentLocation()
+    await fetchCurrentFormat()
     reset()
-  }, [activeContexts, currentLocationContext, fetchCurrentLocation, isLeaf, spaceRoomId])
+  }, [activeContexts, currentFormatContext, fetchCurrentFormat, isLeaf, spaceRoomId])
 
   const onRemoveFromLocation = async () => {
-    if (!currentLocationContext || !currentLocationContext.id) return
+    if (!currentFormatContext || !currentFormatContext.id) return
 
-    await Matrix.removeSpaceChild(currentLocationContext.id, spaceRoomId)
-    await removeFromParent(spaceRoomId, [currentLocationContext.id])
+    await Matrix.removeSpaceChild(currentFormatContext.id, spaceRoomId)
+    await removeFromParent(spaceRoomId, [currentFormatContext.id])
 
     // Otherwise the following line will have no point after refreshing the page
-    setCurrentLocationContext(null)
+    setCurrentFormatContext(null)
   }
-  console.log(activeContexts)
 
   if (fetching) return <Loading />
-  if (currentLocationContext && !isChanging) {
+  if (currentFormatContext && !isChanging) {
     return (
       <>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-          <span>{_.map(currentLocationContext.pathList, 'name').join(', ')}</span>
+          <span>{_.map(currentFormatContext.pathList, 'name').join(', ')}</span>
           <div style={{ display: 'flex', gap: '10px' }}>
             <button style={{ width: 'auto' }} onClick={() => { setIsChanging(true) }}>{t('CHANGE')}</button>
             {/* eslint-disable-next-line promise/param-names */}
