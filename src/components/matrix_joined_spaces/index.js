@@ -65,7 +65,7 @@ const getAnswer = async () => {
 }
 
 const useJoinedSpaces = (reload) => {
-  const [joinedSpaces, setJoinedSpaces] = useState(false)
+  const [joinedSpaces, setJoinedSpaces] = useState()
   const [fetchSpaces, setFetchSpaces] = useState(true)
   const [spacesErr, setSpacesErr] = useState(false)
   const [load, setLoad] = useState(reload)
@@ -98,8 +98,10 @@ const useJoinedSpaces = (reload) => {
     joinedSpaces,
     spacesErr,
     fetchSpaces,
-    reload: () => {
+    reload: async () => {
       setLoad(prevState => !prevState)
+      const res = await getAnswer()
+      return res
     }
   }
 }
