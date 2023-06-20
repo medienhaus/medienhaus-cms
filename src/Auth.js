@@ -242,6 +242,7 @@ function useAuthProvider () {
   useEffect(() => {
     if (localStorage.getItem('medienhaus_user_id') && localStorage.getItem('medienhaus_access_token')) {
       fetchAndSetUserData()
+    } else {
       setUser(false)
     }
   }, [])
