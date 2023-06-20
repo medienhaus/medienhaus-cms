@@ -29,6 +29,7 @@ import * as Showdown from 'showdown'
 import { triggerApiUpdate } from '../../helpers/MedienhausApiHelper'
 import TextNavigation from '../../components/medienhausUI/textNavigation'
 import Tags from './Tags'
+import UdkFormatContext from './Context/UdKFormatContext'
 
 const nl2br = function (str) {
   return str.split('\n').join('<br>')
@@ -779,6 +780,13 @@ const Create = () => {
               <h3>{t('Location')}</h3>
               <p>{t('Specify at which location your project will be displayed or your event will take place.')}</p>
               <UdKLocationContext spaceRoomId={projectSpace} />
+            </section>
+          )}
+          {(!config.medienhaus?.item || !config.medienhaus?.item[template]?.blueprint || config.medienhaus?.item[template]?.blueprint.includes('udkFormat')) && (
+            <section>
+              <h3>{t('Formats')}</h3>
+              {/* <p>{t('Specify at which location your project will be displayed or your event will take place.')}</p> */}
+              <UdkFormatContext spaceRoomId={projectSpace} />
             </section>
           )}
           {(!config.medienhaus?.item || !config.medienhaus?.item[template]?.blueprint || config.medienhaus?.item[template]?.blueprint.includes('time')) && (
