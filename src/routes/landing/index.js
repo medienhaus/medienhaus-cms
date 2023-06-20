@@ -28,17 +28,17 @@ const Landing = () => {
       </p>
       <p>
         <Trans t={t} i18nKey="introduction-02">
-          The Rundgang platform will go online on July 5, 2023. For this reason, if possible, all key data of the Rundgang projects should be entered no later than July 3, 2023, 23:59. Format, date, time, location, short description and (preliminary) title are sufficient for now. All other details (descriptive texts, images, videos, etc.) can be updated successively and until the Rundgang.
+          The Rundgang platform will go online on July 5, 2023. For this reason, if possible, all key data of the Rundgang projects should be entered no later than July 4, 2023, 23:59. Format, date, time, location, short description and (preliminary) title are sufficient for now. All other details (descriptive texts, images, videos, etc.) can be updated successively and until the Rundgang.
         </Trans>
       </p>
       <p>
         <Trans t={t} i18nKey="introduction-03">
-          Projects that are entered on the platform by July 3 will then be included in the printed program. The printed program will be available for visitors at the locations on the days of the tour.
+          Projects that are entered on the platform by July 4 will then be included in the printed program. The printed program will be available for visitors at the locations on the days of the tour.
         </Trans>
       </p>
       <p>
         <Trans t={t} i18nKey="introduction-04">
-          Projects that are not entered on the platform by July 3, 2023, unfortunately cannot be included in the printed program sheet.
+          Projects that are not entered on the platform by July 4, 2023, unfortunately cannot be included in the printed program sheet.
         </Trans>
       </p>
       <hr />
