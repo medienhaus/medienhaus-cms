@@ -21,7 +21,7 @@ const UdkFormatContext = ({ spaceRoomId }) => {
   const { t } = useTranslation('locations')
 
   const templatePlaceholderMapping = useMemo(() => ({
-    'structure-element': t('-- select format --')
+    'format-element': t('-- select format --')
   }), [t])
 
   const fetchCurrentFormat = useCallback(async () => {
@@ -35,7 +35,7 @@ const UdkFormatContext = ({ spaceRoomId }) => {
     // ... otherwise we check all parents until we find the one that says "structure-element"
     for (const parent of space.parents) {
       const parentInfo = await fetchId(parent)
-      if (parentInfo.template.includes('structure-element')) {
+      if (parentInfo.template.includes('format-element')) {
         // This parent is our current location
         const pathList = await fetchPathList(parent)
         const indexOfFormatRoot = _.findIndex(pathList, { id: config.medienhaus?.formatId })
