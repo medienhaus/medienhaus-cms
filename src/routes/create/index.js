@@ -534,7 +534,7 @@ const Create = () => {
     const fetchContentsForGutenberg = async () => {
       const contents = []
       for (const block of blocks) {
-        const fetchMessage = await matrixClient.http.authedRequest('GET', `/rooms/${block.room_id}/messages`, { limit: 1, dir: 'b', filter: JSON.stringify({ types: ['m.room.message'] }) }, {})
+        const fetchMessage = await matrixClient.http.authedRequest('GET', `/rooms/${block.room_id}/messages`, { limit: 1, dir: 'b', filter: JSON.stringify({ types: ['m.room.message'] }) })
         const message = _.isEmpty(fetchMessage.chunk) ? null : fetchMessage.chunk[0].content
 
         if (message) {
