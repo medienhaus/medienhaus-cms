@@ -897,6 +897,44 @@ button>.loading {
   visibility: hidden;
 }
 
+.contentHeader {
+  display: grid;
+  grid-gap: var(--margin);
+  grid-template-columns: 4fr 1fr;
+  margin-bottom: calc(var(--margin) * 2);
+}
+
+.contentHeader > button {
+  background: none;
+  border: none;
+  color: white;
+  padding: 0;
+  margin: 0;
+  text-align: right;
+  height: 1rem;
+  line-height: 1rem;
+}
+
+.projectSmall {
+  display: grid;
+  grid-gap: var(--margin);
+  grid-template-columns: 4fr 1fr;
+}
+
+.projectSmall > div {
+  grid-template-columns: 1fr 1fr;
+  display: grid;
+}
+
+.projectSmall > div > button {
+  font-size: .75rem;
+  padding: 0;
+  height: 1rem;
+  background: none;
+  border: none;
+  text-align: right;
+}
+
 .project {
   display: grid;
   grid-gap: var(--margin);

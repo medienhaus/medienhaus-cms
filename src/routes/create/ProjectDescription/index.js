@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import TextareaAutosize from 'react-textarea-autosize'
+import config from '../../../config.json'
 
 const ProjectDescription = ({ description: intro, callback }) => {
   const { t } = useTranslation('content')
@@ -8,7 +9,7 @@ const ProjectDescription = ({ description: intro, callback }) => {
   const [backupDescription, setBackupDescription] = useState()
 
   const onSave = async () => {
-    if (description.length > 500) return
+    if (description.length > (config?.medienhaus?.limits?.descriptionMaxCharacters ? config?.medienhaus?.limits?.descriptionMaxCharacters : 500)) return
     if (description) {
       await callback(description)
     } else {
@@ -33,7 +34,7 @@ const ProjectDescription = ({ description: intro, callback }) => {
           onBlur={() => onSave()}
         />
         <div className="maxlength">
-          <span>{description.length + '/500'}</span>
+          <span>{description.length + '/' + (config?.medienhaus?.limits?.descriptionMaxCharacters ? config?.medienhaus?.limits?.descriptionMaxCharacters : 500)}</span>
         </div>
       </div>
     </>

@@ -19,6 +19,8 @@ const Overview = () => {
   const item = config.medienhaus?.item ? Object.keys(config.medienhaus?.item).concat('item') : ['item']
   const { joinedSpaces, spacesErr, fetchSpaces, reload } = useJoinedSpaces(false)
 
+  const [displayStyle, setDisplayStyle] = useState('grid')
+
   useEffect(() => {
     async function checkRoomForPossibleInvite (room) {
       // Ignore if this is not a space
@@ -93,6 +95,17 @@ const Overview = () => {
     reload(true)
   }
 
+  function splitSpacesInTemplateArrays (spaces) {
+    const seperatedSpaces = {}
+    spaces.forEach(space => {
+      if (!(space.meta.template in seperatedSpaces)) { // check if template already exist otherwise initialize empty array
+        seperatedSpaces[space.meta.template] = []
+      }
+      seperatedSpaces[space.meta.template].push(space)
+    })
+    return seperatedSpaces
+  }
+
   if (fetchSpaces || !matrixClient.isInitialSyncComplete()) return <Loading />
   return (
     <div>
@@ -125,7 +138,10 @@ const Overview = () => {
         </>
       )}
       <section className="projects">
-        <h3>{t('Content')}</h3>
+        <div className="contentHeader">
+          <h3>{t('Content')} </h3>
+          <button onClick={() => displayStyle === 'grid' ? setDisplayStyle('list') : setDisplayStyle('grid')}>{displayStyle === 'grid' ? t('grid') : t('list')}</button>
+        </div>
         {spacesErr
           ? console.error(spacesErr)
           : projects?.length === 0
@@ -139,12 +155,30 @@ const Overview = () => {
                 </p>
               </>
               )
-            : projects.filter(space => space.meta.type !== 'context').map((space, index) => (
-              <React.Fragment key={index}>
-                <Projects space={space} metaEvent={space.meta} visibility={space.published} index={index} removeProject={removeProject} />
-                {index < projects.length - 1 && <hr />}
-              </React.Fragment>
-            ))}
+            : <>
+              {displayStyle === 'grid' &&
+              projects.filter(space => space.meta.type !== 'context').map((space, index) => (
+                <React.Fragment key={index}>
+                  <Projects space={space} metaEvent={space.meta} visibility={space.published} index={index} removeProject={removeProject} displayStyle={displayStyle} />
+                  {index < projects.length - 1 && <hr />}
+                </React.Fragment>
+              ))}
+              {displayStyle === 'list' &&
+              _.map(splitSpacesInTemplateArrays(projects.filter(space => space.meta.type !== 'context')), (template, index) => (
+                <React.Fragment key={index}>
+                  <h3>{config.medienhaus?.item ? config.medienhaus?.item[index]?.label.toUpperCase() : index.toUpperCase()}</h3>
+                  {_.map(template, (space, spaceIndex) => {
+                    return (
+                      <React.Fragment key={spaceIndex}>
+                        <Projects space={space} metaEvent={space.meta} visibility={space.published} index={index} removeProject={removeProject} displayStyle={displayStyle} />
+                      </React.Fragment>
+                    )
+                  })}
+                  <hr />
+                </React.Fragment>
+
+              ))}
+            </>}
       </section>
     </div>
   )
