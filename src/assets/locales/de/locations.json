@@ -12,7 +12,8 @@
   "CANCEL": "ABBRECHEN",
   "SAVE": "SPEICHERN",
   "CHANGE": "ÄNDERN",
-  "-- select location --": "-- Veranstaltungsort wählen --",
+  "-- select format --": "-- Format wählen --",
   "-- select level --": "-- Etage wählen --",
+  "-- select location --": "-- Veranstaltungsort wählen --",
   "-- select room --": "-- Raum wählen --"
 }
