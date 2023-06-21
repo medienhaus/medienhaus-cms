@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react'
+import { NavLink } from 'react-router-dom'
 import useJoinedSpaces from '../../components/matrix_joined_spaces'
 import Projects from './Projects'
 import Invites from '../../components/Invites'
 import Matrix from '../../Matrix'
 import { Loading } from '../../components/loading'
-import { useTranslation, Trans } from 'react-i18next'
+import { Trans, useTranslation } from 'react-i18next'
 import { sortBy } from 'lodash'
 import deleteProject from './deleteProject'
 
@@ -128,8 +129,12 @@ const Overview = () => {
           : projects?.length === 0
             ? (
               <>
-                <p>{t('Welcome to the content management system.')}</p>
                 <p>{t('Looks like you haven’t uploaded any content, yet.')}</p>
+                <p>
+                  <Trans t={t} i18nKey="hyperlinkToSlashCreate">
+                    You can do so via the <NavLink to="/create">/create</NavLink> page.
+                  </Trans>
+                </p>
               </>
               )
             : projects.filter(space => space.meta.type !== 'context').map((space, index) => (
