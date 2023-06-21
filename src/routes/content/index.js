@@ -6,7 +6,7 @@ import Invites from '../../components/Invites'
 import Matrix from '../../Matrix'
 import { Loading } from '../../components/loading'
 import { Trans, useTranslation } from 'react-i18next'
-import { sortBy } from 'lodash'
+import _, { sortBy } from 'lodash'
 import deleteProject from './deleteProject'
 
 import config from '../../config.json'
