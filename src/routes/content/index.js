@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react'
+import { NavLink } from 'react-router-dom'
 import useJoinedSpaces from '../../components/matrix_joined_spaces'
 import Projects from './Projects'
 import Invites from '../../components/Invites'
 import Matrix from '../../Matrix'
 import { Loading } from '../../components/loading'
-import { useTranslation } from 'react-i18next'
+import { Trans, useTranslation } from 'react-i18next'
 import { sortBy } from 'lodash'
 import deleteProject from './deleteProject'
 
@@ -105,7 +106,7 @@ const Overview = () => {
                 You have been invited to join the following project{Object.keys(invites).length > 1 ? 's' : ''}/context{Object.keys(invites).length > 1 ? 's' : ''}. When you accept an invitation for a project, it will be listed below with your others. You can edit collaborative projects, delete them, or change their visibility.
               </Trans>
             </p>
-      */}
+            */}
             <ul>
               {Object.values(invites).map((space, index) => {
                 return (
@@ -130,8 +131,12 @@ const Overview = () => {
           : projects?.length === 0
             ? (
               <>
-                <p>{t('Welcome to the content management system.')}</p>
                 <p>{t('Looks like you haven’t uploaded any content, yet.')}</p>
+                <p>
+                  <Trans t={t} i18nKey="hyperlinkToSlashCreate">
+                    You can do so via the <NavLink to="/create">/create</NavLink> page.
+                  </Trans>
+                </p>
               </>
               )
             : projects.filter(space => space.meta.type !== 'context').map((space, index) => (
