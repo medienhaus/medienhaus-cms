@@ -80,7 +80,7 @@
   "Location": "Standort",
   "At which location does the project take place?": "An welchem Standort findet das Projekt statt?",
   "Time": "Zeitraum",
-  "Mark the exact time of your event with a start and end time.": "Markieren Sie mit einer Start- und Endzeit den genauen Zeitpunkt ihres Events.",
+  "When does the project start? Here you can specify the exact time of the project.": "Wann beginnt das Projekt? Hier kann der genaue Zeitpunkt des Projekts festgelegt werden.",
   "cancel": "abbrechen",
   "save": "speichern",
   "Profile name": "Anzeigename",
@@ -95,7 +95,7 @@
   "Project": "Projekt",
   "Event": "Event",
   "SAVE CHANGES": "ÄNDERUNGEN SPEICHERN",
-  "add date": "ZEITRAUM ANGEBEN",
+  "SPECIFY TIME PERIOD": "ZEITRAUM ANGEBEN",
   "End": "Ende",
   "Preview": "Vorschau",
   "previewNote": "Eine Vorschau des Eintrags ist nicht möglich. Wie die öffentliche Version des Projekts aussieht, ist ab dem 5. Juli einsehbar, sobald das Projekt freigeben und die Plattform unter <1>rundgang.udk-berlin.de</1> veröffentlicht ist."

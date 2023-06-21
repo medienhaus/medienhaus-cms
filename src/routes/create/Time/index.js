@@ -96,14 +96,14 @@ export default function Time ({ allocation, projectSpace, reloadSpace }) {
   return (
     <section className="time">
       <h3>{t('Time')}</h3>
-      <p>{t('Mark the exact time of your event with a start and end time.')}</p>
+      <p>{t('When does the project start? Here you can specify the exact time of the project.')}</p>
       {allocation?.temporal && (
         <ul className="times">
           {allocation.temporal.map((date, index) => <TimeSlots key={index} index={index} start={date.start} end={date.end} />
           )}
         </ul>
       )}
-      {!isUIVisible && <button onClick={() => setIsUIVisible(true)}>{t('add date')}</button>}
+      {!isUIVisible && <button onClick={() => setIsUIVisible(true)}>{t('SPECIFY TIME PERIOD')}</button>}
       {isUIVisible && (
         <>
           <div className="timedate">
