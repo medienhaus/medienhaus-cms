@@ -219,7 +219,7 @@ const Category = ({ projectSpace, onChange, parent, setLocationFromLocationTree 
       {!inputItems || loading
         ? <Loading />
         : <>
-          <UlElement>
+          {contexts?.length > 0 && <UlElement style={{ position: 'relative' }}>
             {contexts?.map((context, index) => {
               return (
                 <ListElement key={context.room_id}>
@@ -228,7 +228,8 @@ const Category = ({ projectSpace, onChange, parent, setLocationFromLocationTree 
                 </ListElement>
               )
             })}
-          </UlElement>
+          </UlElement>}
+
           {/* <SimpleContextSelect
               selectedContext=""
               onItemChosen={onContextChosen}
