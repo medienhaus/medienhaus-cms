@@ -101,6 +101,10 @@ const Category = ({ projectSpace, onChange, parent, setLocationFromLocationTree 
           setLocationFromLocationTree(fetchParent.id)
           continue
         }
+        if (fetchParent.template.includes('format')) {
+          // if the parent is a format element we continue with the next element
+          continue
+        }
         setContexts(contexts => [...contexts, { name: fetchParent.name, room_id: fetchParent.id }])
       }
     }
