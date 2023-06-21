@@ -25,7 +25,11 @@ const ContextMultiLevelSelectSingleLevel = ({ parentSpaceRoomId, selectedContext
       roomHierarchy.shift()
       // Ensure we're looking at contexts, and not spaces/rooms of other types
       for (const room of roomHierarchy) {
-        const metaEvent = await Matrix.getMatrixClient().getStateEvent(room.room_id, 'dev.medienhaus.meta').catch(() => {})
+        if (templatePrefixFilter.includes('location')) {
+          const joinRule = await Matrix.getMatrixClient().getStateEvent(room.room_id, 'm.room.join_rules').catch(() => { })
+          if (joinRule?.join_rule === 'invite') continue
+        }
+        const metaEvent = await Matrix.getMatrixClient().getStateEvent(room.room_id, 'dev.medienhaus.meta').catch(() => { })
         // If this is not a context, ignore this space child
         if (metaEvent && metaEvent.type !== 'context') continue
         // If we only want to show specific contexts, ignore this space child if its template doesn't have the given prefix
