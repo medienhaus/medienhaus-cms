@@ -21,7 +21,7 @@ const UdkFormatContext = ({ spaceRoomId }) => {
   const { t } = useTranslation('locations')
 
   const templatePlaceholderMapping = useMemo(() => ({
-    'format-element': t('-- select format --')
+    'format-root': t('-- select format --')
   }), [t])
 
   const fetchCurrentFormat = useCallback(async () => {

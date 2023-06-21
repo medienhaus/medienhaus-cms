@@ -13,7 +13,7 @@ const ContextMultiLevelSelectSingleLevel = ({ parentSpaceRoomId, selectedContext
 
     // Fetch meta event of the parent space
     const fetchMetaEvent = async () => {
-      const metaEvent = await Matrix.getMatrixClient().getStateEvent(parentSpaceRoomId, 'dev.medienhaus.meta').catch(() => {})
+      const metaEvent = await Matrix.getMatrixClient().getStateEvent(parentSpaceRoomId, 'dev.medienhaus.meta').catch(() => { })
       isSubscribed && setParentSpaceMetaEvent(metaEvent)
     }
 
