@@ -73,10 +73,12 @@ const Overview = () => {
   useEffect(() => {
     let cancelled = false
     if (joinedSpaces && !cancelled) {
+      console.log(joinedSpaces.forEach(space => console.log(space.meta.application)))
       // we check if a collaborator has deleted a project since we last logged in
-      joinedSpaces?.filter(space => space.meta?.deleted).forEach(async space => await deleteProject(space.room_id))
+      joinedSpaces?.filter(space => space.meta?.deleted)
+        .forEach(async space => await deleteProject(space.room_id))
       // then we update our array to not display the just deleted projects and only display joined rooms
-      const updatedProjects = joinedSpaces?.filter(space => !space.meta?.deleted && item.includes(space.meta.type))
+      const updatedProjects = joinedSpaces?.filter(space => !space.meta?.deleted && item.includes(space.meta.type)).filter(space => space.meta.application === process.env.REACT_APP_APP_NAME)
       setProjects(sortBy(updatedProjects, 'name'))
     }
 
@@ -137,6 +139,7 @@ const Overview = () => {
                 </p>
               </>
               )
+
             : projects.filter(space => space.meta.type !== 'context').map((space, index) => (
               <React.Fragment key={index}>
                 <Projects space={space} metaEvent={space.meta} visibility={space.published} index={index} removeProject={removeProject} />
