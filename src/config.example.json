@@ -34,6 +34,7 @@
       }
     },
     "allowSelectingRootContext": true,
-    "customServer": true
+    "customServer": true,
+    "allowManualApplicationSpaceId": true
   }
 }
