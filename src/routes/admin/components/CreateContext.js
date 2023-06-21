@@ -5,7 +5,13 @@ import config from '../../../config.json'
 function CreateContext (props) {
   const [contextName, setContextName] = useState('')
   const [template, setTemplate] = useState('')
+  const [loading, setLoading] = useState(false)
 
+  const handleClick = async (e) => {
+    setLoading(true)
+    await props.callback(e, contextName, template, () => { setContextName(''); setTemplate('') })
+    setLoading(false)
+  }
   return (
     <form>
       <div>
@@ -22,7 +28,7 @@ function CreateContext (props) {
             })}
           </select>
         </div>}
-      <button type="submit" disabled={props.disableButton || !contextName || !template} onClick={(e) => props.callback(e, contextName, template, () => { setContextName(''); setTemplate('') })}>{props.loading ? <Loading /> : props.t('Add Context')}</button>
+      <button type="submit" disabled={props.disableButton || !contextName || !template || loading} onClick={handleClick}>{props.loading || loading ? <Loading /> : props.t('Add Context')}</button>
     </form>
   )
 }
