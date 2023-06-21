@@ -90,7 +90,6 @@ function useAuthProvider () {
 
   const lookForApplicationsFolder = async (reloadedSpaces) => {
     setFolderDialogueOpen(true)
-    console.log('object')
     const spaces = reloadedSpaces
     const findApplicationsFolder = spaces.find(space => space.meta?.template === 'applications')
     if (findApplicationsFolder) {
