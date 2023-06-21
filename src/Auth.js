@@ -103,7 +103,7 @@ function useAuthProvider () {
       if (config.medienhaus.allowManualApplicationSpaceId) {
         // ... but if there's none defined we want to ask the user if it's okay to create one, or if they want to
         // provide one they manually created
-        createApplicationSpace = window.prompt(`We couldn't find a space for ${process.env.REACT_APP_APP_NAME}. \n\n You can either enter an existing space in the field below in the form of \n\n  !OWpL.....FTOWuq:matrix.org \n\n or just leave it empty to automatically create one. \n`)
+        createApplicationSpace = window.prompt(`We couldn’t find an application-specific space for the currently running matrix application:\n\n${process.env.REACT_APP_APP_NAME}\n\nWe can either create a new application-specific space for you, or you can provide the matrix space identifier one of your existing application/content spaces in the input field below, i.e. an identifier in the form of:\n\n!411c010r54r3b34u7ifu1:matrix.org\n\n`)
       }
       if (createApplicationSpace === null) {
         signout(() => history.push('/'))
