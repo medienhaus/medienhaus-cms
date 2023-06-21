@@ -206,7 +206,7 @@ const Category = ({ projectSpace, onChange, parent }) => {
       {!inputItems || loading
         ? <Loading />
         : <>
-          <ul style={{ position: 'relative' }}>
+          {contexts?.length > 0 && <ul style={{ position: 'relative' }}>
             {contexts?.map((context, index) => {
               return (
                 <RemovableLiElement key={context.room_id}>
@@ -215,7 +215,7 @@ const Category = ({ projectSpace, onChange, parent }) => {
                 </RemovableLiElement>
               )
             })}
-          </ul>
+          </ul>}
 
           {/* <SimpleContextSelect
               selectedContext=""
