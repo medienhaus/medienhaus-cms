@@ -759,7 +759,6 @@ const Create = () => {
             </select>
           </section>
         )}
-        <br />
         <label htmlFor="title"><h3>{t('Title')}</h3></label>
         <ProjectTitle id="title" name="title" title={title} projectSpace={projectSpace} template={template} callback={changeTitle} />
         <p>
