@@ -82,7 +82,12 @@ const ManageContexts = ({ matrixClient, moderationRooms: incomingModerationRooms
   const onRemoveChildFromContext = async (space) => {
     setLoading(true)
     const remove = await Matrix.removeSpaceChild(selectedContext, space).catch(error => console.debug(error))
-    await removeFromParent(space, [selectedContext]).catch(console.debug) // @TODO add error handleing
+    if (config.medienhaus.api) {
+      const checkForParents = await fetchId(space)
+      // if the space only has one parent and this parent is the selected context we purge it from the api.
+      const purge = checkForParents.parents.length === 1 && checkForParents.parents[0] === selectedContext
+      await removeFromParent(space, [selectedContext], purge).catch(console.debug) // @TODO add error handleing
+    }
     setLoading(false)
     return remove
   }
