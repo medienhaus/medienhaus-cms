@@ -3,6 +3,7 @@ import Matrix from './Matrix'
 import * as PropTypes from 'prop-types'
 import useJoinedSpaces from './components/matrix_joined_spaces'
 import { useHistory } from 'react-router-dom'
+import config from './config.json'
 
 const AuthContext = createContext(undefined)
 
@@ -27,7 +28,7 @@ function useAuth () {
 function useAuthProvider () {
   const [user, setUser] = useState(null)
   const [folderDialogueOpen, setFolderDialogueOpen] = useState(false)
-  const { joinedSpaces, reload } = useJoinedSpaces(false)
+  const { reload } = useJoinedSpaces(false)
   const history = useHistory()
 
   const signin = (username, password, server, callback) => {
@@ -87,20 +88,21 @@ function useAuthProvider () {
     })
   }
 
-  const lookForApplicationsFolder = async () => {
+  const lookForApplicationsFolder = async (reloadedSpaces) => {
     setFolderDialogueOpen(true)
-    const findApplicationsFolder = joinedSpaces.find(space => space.meta?.template === 'applications')
+    const spaces = reloadedSpaces
+    const findApplicationsFolder = spaces.find(space => space.meta?.template === 'applications')
     if (findApplicationsFolder) {
       if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') console.debug('found applications folder')
-      await lookForServiceFolder(findApplicationsFolder.room_id)
+      await lookForServiceFolder(findApplicationsFolder.room_id, spaces)
     } else {
       // For environments with a pre-defined context root space ID we want to automatically create the
       // "Applications > medienhaus-cms" space to store all of our items in ...
       let createApplicationSpace = ''
-      if (!process.env.REACT_APP_CONTEXT_ROOT_SPACE_ID) {
+      if (config.medienhaus.allowManualApplicationSpaceId) {
         // ... but if there's none defined we want to ask the user if it's okay to create one, or if they want to
         // provide one they manually created
-        createApplicationSpace = window.prompt(`We couldn't find a space for ${process.env.REACT_APP_APP_NAME}. \n\n You can either enter an existing space in the field below in the form of \n\n  !OWpL.....FTOWuq:matrix.org \n\n or just leave it empty to automatically create one. \n`)
+        createApplicationSpace = window.prompt(`We couldn’t find an application-specific space for the currently running matrix application:\n\n${process.env.REACT_APP_APP_NAME}\n\nWe can either create a new application-specific space for you, or you can provide the matrix space identifier one of your existing application/content spaces in the input field below, i.e. an identifier in the form of:\n\n!411c010r54r3b34u7ifu1:matrix.org\n\n`)
       }
       if (createApplicationSpace === null) {
         signout(() => history.push('/'))
@@ -115,13 +117,13 @@ function useAuthProvider () {
           'invite',
           'context',
           'applications')
-        await lookForServiceFolder(newApplicationsFolder.room_id)
+        await lookForServiceFolder(newApplicationsFolder.room_id, spaces)
       }
       if (createApplicationSpace) {
         console.log(createApplicationSpace)
         if (!createApplicationSpace.includes(localStorage.getItem('medienhaus_home_server'))) {
           alert('roomId must contain ' + localStorage.getItem('medienhaus_home_server'))
-          return lookForApplicationsFolder()
+          return lookForApplicationsFolder(spaces)
         }
         // setApplicationSpace(createApplicationSpace)
         localStorage.setItem(process.env.REACT_APP_APP_NAME + '_space', createApplicationSpace)
@@ -130,19 +132,21 @@ function useAuthProvider () {
     }
   }
 
-  const lookForServiceFolder = async (applicationsSpaceId) => {
-    const findServiceSpace = joinedSpaces.find(space => space.name === process.env.REACT_APP_APP_NAME)
+  const lookForServiceFolder = async (applicationsSpaceId, spaces) => {
+    const findServiceSpace = spaces.find(space => space.name === process.env.REACT_APP_APP_NAME)
     if (findServiceSpace) {
+      if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') console.debug('found service folder')
+
       localStorage.setItem(process.env.REACT_APP_APP_NAME + '_space', findServiceSpace.room_id)
       // private / drafts
-      localStorage.setItem(process.env.REACT_APP_APP_NAME + '_space', joinedSpaces.find(space => space.name === 'drafts').room_id)
+      localStorage.setItem(process.env.REACT_APP_APP_NAME + '_space', spaces.find(space => space.name === 'drafts').room_id)
       // public
       if (process.env.REACT_APP_CONTEXT_ROOT_SPACE_ID) {
         // If there's a context root space ID provided by the .env file, we use that one ...
         localStorage.setItem(process.env.REACT_APP_APP_NAME + '_root_context_space', process.env.REACT_APP_CONTEXT_ROOT_SPACE_ID)
       } else {
         // ... otherwise we look for the space called "public"
-        localStorage.setItem(process.env.REACT_APP_APP_NAME + '_root_context_space', joinedSpaces.find(space => space.name === 'public').room_id)
+        localStorage.setItem(process.env.REACT_APP_APP_NAME + '_root_context_space', spaces.find(space => space.name === 'public').room_id)
       }
     } else {
       if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') console.info('creating service space')
@@ -250,10 +254,25 @@ function useAuthProvider () {
     }
   }, [user])
 
+  const reloadJoinedSpaces = async () => {
+    const reloadedSpaces = await reload()
+    if (reloadedSpaces) lookForApplicationsFolder(reloadedSpaces)
+  }
+
   useEffect(() => {
-    user && joinedSpaces && !localStorage.getItem(process.env.REACT_APP_APP_NAME + '_space') && !folderDialogueOpen && lookForApplicationsFolder()
+    // we check to see if the initial sync is done which will
+    const checkForCompletedSync = async () => {
+      if (Matrix.getMatrixClient().isInitialSyncComplete() && !localStorage.getItem(process.env.REACT_APP_APP_NAME + '_space') && !folderDialogueOpen) {
+        reloadJoinedSpaces()
+      } else {
+        setTimeout(() => {
+          checkForCompletedSync()
+        }, 300)
+      }
+    }
+    checkForCompletedSync()
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [joinedSpaces, user])
+  }, [])
 
   return {
     user,
