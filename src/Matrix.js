@@ -58,7 +58,7 @@ class Matrix {
     const payload = {
       auto_join: autoJoin || false,
       suggested: suggested || false,
-      via: [localStorage.getItem('medienhaus_home_server')]
+      via: [this.matrixClient.getDomain()]
     }
 
     return this.matrixClient.http.authedRequest('PUT', `/rooms/${parent}/state/m.space.child/${child}`, undefined, payload)
