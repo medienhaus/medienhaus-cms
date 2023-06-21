@@ -85,6 +85,7 @@ const ManageContexts = ({ matrixClient, moderationRooms: incomingModerationRooms
   const onRemoveChildFromContext = async (space) => {
     setLoading(true)
     const remove = await Matrix.removeSpaceChild(selectedContext, space).catch(error => console.debug(error))
+    await removeFromParent(space, [selectedContext]).catch(console.debug) // @TODO add error handleing
     setLoading(false)
     return remove
   }
