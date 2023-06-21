@@ -3,6 +3,7 @@ import Matrix from './Matrix'
 import * as PropTypes from 'prop-types'
 import useJoinedSpaces from './components/matrix_joined_spaces'
 import { useHistory } from 'react-router-dom'
+import config from './config.json'
 
 const AuthContext = createContext(undefined)
 
@@ -89,6 +90,7 @@ function useAuthProvider () {
 
   const lookForApplicationsFolder = async (reloadedSpaces) => {
     setFolderDialogueOpen(true)
+    console.log('object')
     const spaces = reloadedSpaces
     const findApplicationsFolder = spaces.find(space => space.meta?.template === 'applications')
     if (findApplicationsFolder) {
@@ -98,7 +100,7 @@ function useAuthProvider () {
       // For environments with a pre-defined context root space ID we want to automatically create the
       // "Applications > medienhaus-cms" space to store all of our items in ...
       let createApplicationSpace = ''
-      if (!process.env.REACT_APP_CONTEXT_ROOT_SPACE_ID) {
+      if (config.medienhaus.allowManualApplicationSpaceId) {
         // ... but if there's none defined we want to ask the user if it's okay to create one, or if they want to
         // provide one they manually created
         createApplicationSpace = window.prompt(`We couldn't find a space for ${process.env.REACT_APP_APP_NAME}. \n\n You can either enter an existing space in the field below in the form of \n\n  !OWpL.....FTOWuq:matrix.org \n\n or just leave it empty to automatically create one. \n`)
