@@ -82,6 +82,20 @@ const GutenbergWrapper = styled.div`
     top: 4rem;
   }
 
+  /* set color via variable for toolbar separators */
+  .block-editor-block-contextual-toolbar.is-fixed .block-editor-block-toolbar .components-toolbar,
+  .block-editor-block-contextual-toolbar.is-fixed .block-editor-block-toolbar .components-toolbar-group {
+    border-right-color: var(--color-fg);
+  }
+
+  /* set color(s) via variable and not-allowed cursor */
+  button[disabled], input[type="submit"][disabled] {
+    background-color: var(--color-lo);
+    border-color: var(--color-lo);
+    cursor: not-allowed;
+    pointer-events: unset !important;
+  }
+
   /* set color via variable, and unset border-radius */
   .block-editor-block-list__insertion-point-indicator {
     background: var(--color-fg);
