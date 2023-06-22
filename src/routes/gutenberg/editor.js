@@ -188,9 +188,9 @@ function GutenbergEditor ({ content = [], blockTypes = ['text', 'heading', 'list
                 <ObserveTyping>
                   <BlockList renderAppender={() => null} />
                   <div style={{ padding: '0 1rem 1rem 1rem', display: 'grid', gridGap: '1rem', gridTemplateColumns: '1fr auto 1fr' }}>
-                    <hr />
+                    <hr style={{ borderWidth: '2px', transform: 'translateY(-1px)' }} />
                     <button style={{ width: '2rem', height: '2rem', display: 'grid', placeContent: 'center', justifySelf: 'center' }} onClick={addBlock}>+</button>
-                    <hr />
+                    <hr style={{ borderWidth: '2px', transform: 'translateY(-1px)' }} />
                   </div>
                 </ObserveTyping>
               </WritingFlow>
