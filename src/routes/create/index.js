@@ -68,6 +68,38 @@ const TabSection = styled.section`
 
 const GutenbergWrapper = styled.div`
   position: relative;
+
+  /* add some vertical spacing between block elements */
+  [id^="block-"] {
+    margin: calc(var(--margin) * 2.5) calc(var(--margin) * 0.75);
+  }
+
+  /* set color via variable, and unset border-radius */
+  .block-editor-block-list__insertion-point-indicator {
+    background: var(--color-fg);
+    border-radius: unset !important;
+  }
+
+  /* make that element flex for viewport resize action™ &
+   * add outline to button to make it visually pleasing */
+  .block-editor-block-list__insertion-point-inserter {
+    display: flex;
+    outline: 0.5rem solid var(--color-bg);
+  }
+
+  /* set color(s) via variable, and unset border-radius */
+  .block-editor-inserter__toggle.components-button.has-icon {
+    background: var(--color-fg);
+    border-radius: unset !important;
+    color: var(--color-bg);
+    min-width: 24px;
+    height: 24px;
+
+    &:hover {
+      background: var(--color-fg);
+      color: var(--color-bg);
+    }
+  }
 `
 
 const GutenbergSavingOverlay = styled.div`
