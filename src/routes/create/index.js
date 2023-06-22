@@ -55,7 +55,7 @@ const GutenbergWrapper = styled.div`
 
   /* add some vertical spacing between block elements */
   [id^="block-"] {
-    margin: calc(var(--margin) * 2.5) calc(var(--margin) * 0.75);
+    margin: calc(var(--margin) * 3.5) calc(var(--margin) * 0.75);
   }
 
   /* make toolbar fixed and bordered on narrow widths */
