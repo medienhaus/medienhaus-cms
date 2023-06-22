@@ -58,6 +58,14 @@ const GutenbergWrapper = styled.div`
     margin: calc(var(--margin) * 2.5) calc(var(--margin) * 0.75);
   }
 
+  /* make toolbar fixed and bordered on narrow widths */
+  .block-editor-block-contextual-toolbar.is-fixed {
+    border: 4px solid var(--color-fg);
+    margin-bottom: -4px;
+    position: sticky;
+    top: 4rem;
+  }
+
   /* set color via variable, and unset border-radius */
   .block-editor-block-list__insertion-point-indicator {
     background: var(--color-fg);
