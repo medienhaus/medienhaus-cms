@@ -38,7 +38,7 @@ const heading = {
     return (
       <RichText
         {...blockProps}
-        tagName="h2"
+        tagName="h3"
         placeholder={t('Heading')}
         onChange={onChangeContent}
         onRemove={onRemove}
