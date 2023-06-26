@@ -18,7 +18,7 @@ const Name = ({ name, callback }) => {
   return (
     <div className="name">
       <h3>{t('Profile name')}</h3>
-      <p>{t('Here you can change your profile name. The user name is the name that appears under the project on the website.')}</p>
+      <p>{t('The profile name is the name that appears under your projects on the public-facing Rundgang website.')}</p>
       <input id="title" maxLength="100" name="title" type="text" value={newDisplayName} onChange={(e) => { setEditDisplayName(true); setNewDisplayName(e.target.value) }} />
       <div className="confirmation">
         {editDisplayName && (name !== newDisplayName) &&
@@ -31,7 +31,7 @@ const Name = ({ name, callback }) => {
               }}
             >{editDisplayName ? t('cancel') : t('edit name')}
             </button>
-            <LoadingSpinnerButton className="confirm" onClick={changeDisplayName}>SAVE</LoadingSpinnerButton>
+            <LoadingSpinnerButton className="confirm" onClick={changeDisplayName}>{t('SAVE')}</LoadingSpinnerButton>
           </>}
       </div>
     </div>
