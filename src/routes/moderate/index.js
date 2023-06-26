@@ -341,7 +341,7 @@ const Moderate = () => {
                   </>
                   : (
                     <div>
-                      {t('Looks like you are not moderating any spaces.')}
+                      {t('Looks like you are not moderating any contexts.')}
                     </div>)}
               </section>
             </>
@@ -353,7 +353,7 @@ const Moderate = () => {
   if (spacesErr) return <p>{spacesErr}</p>
   return (
     <>
-      {moderationRooms && Object.keys(moderationRooms).length < 1 && <p>{t('You are not moderating any spaces.')}</p>}
+      {moderationRooms && Object.keys(moderationRooms).length < 1 && <p>{t('You are not moderating any contexts.')}</p>}
 
       {Object.keys(invites).length > 0 && (
         <>
