@@ -19,7 +19,7 @@ const Name = ({ name, callback }) => {
     <div className="name">
       <h3>{t('Profile name')}</h3>
       <p>{t('The profile name is the name that appears under your projects on the public-facing Rundgang website.')}</p>
-      <input id="title" maxLength="100" name="title" type="text" value={newDisplayName} onChange={(e) => { setEditDisplayName(true); setNewDisplayName(e.target.value) }} />
+      <input id="title" maxLength="100" name="title" type="text" placeholder={t('Your Name')} value={newDisplayName} onChange={(e) => { setEditDisplayName(true); setNewDisplayName(e.target.value) }} />
       <div className="confirmation">
         {editDisplayName && (name !== newDisplayName) &&
           <>
