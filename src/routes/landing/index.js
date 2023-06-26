@@ -1,4 +1,5 @@
 import React from 'react'
+import { NavLink } from 'react-router-dom'
 import { useTranslation, Trans } from 'react-i18next'
 import { useAuth } from '../../Auth'
 
@@ -43,13 +44,18 @@ const Landing = () => {
       </p>
       <hr />
       <p>
-        <Trans t={t} i18nKey="questions">
-          Questions and workflow when entering projects: <a href="https://udk-berlin.de/rundgang" rel="external nofollow noopener noreferrer" target="_blank">_LINK_STILL_MISSING_</a>
+        <Trans t={t} i18nKey="questions-01">
+          Material/Technical requests: If special technical equipment or furnishings are needed for Rundgang events (which are not already available within the degree programs and studios), please always inform the responsible janitor. Requests must be received at least 14 days prior to the Rundgang weekend so that needs and feasibility can be assessed.
+        </Trans>
+      </p>
+      <p>
+        <Trans t={t} i18nKey="questions-02">
+          Preview function of the projects: The tour platform will be opened to the public on July 5. A preview of the created projects is unfortunately not possible before that for technical reasons. The design of the pages is already fixed and is currently being implemented for the Rundgang website.
         </Trans>
       </p>
       <p>
         <Trans t={t} i18nKey="informations">
-          Information about the Rundgang 2023 (opening hours, security and awareness, contact persons, Rundgang FAQ etc.): <a href="https://udk-berlin.de/rundgang" rel="external nofollow noopener noreferrer" target="_blank">udk-berlin.de/rundgang</a>
+          For support and feedback regarding the content management system, please visit <NavLink to="/feedback">/feedback</NavLink> and <NavLink to="/support">/support</NavLink>. Information about the Rundgang 2023 (opening hours, security and awareness, contact persons, Rundgang FAQ etc.) via: <a href="https://udk-berlin.de/rundgang" rel="external nofollow noopener noreferrer" target="_blank">udk-berlin.de/rundgang</a>
         </Trans>
       </p>
     </section>
