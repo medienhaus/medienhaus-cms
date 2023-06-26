@@ -78,7 +78,7 @@
   "Do not show authors/contributors": "Autor*innen/Mitwirkende nicht anzeigen",
   "The author(s)/contributor(s) will be named on the tour platform. Please indicate here if this is not desired.": "Der*die Autor*innen/Mitwirkenden werden auf der Rundgang-Plattform genannt. Bitte hier angeben, wenn dies nicht erwünscht ist.",
   "Location": "Standort",
-  "At which location does the project take place?": "An welchem Standort findet das Projekt statt?",
+  "Specify at which location your project will be displayed or your event will take place.": "An welchem Standort findet das Projekt statt?",
   "Time": "Zeitraum",
   "When does the project start? Here you can specify the exact time of the project.": "Wann beginnt das Projekt? Hier kann der genaue Zeitpunkt des Projekts festgelegt werden.",
   "cancel": "abbrechen",
