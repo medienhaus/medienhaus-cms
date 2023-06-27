@@ -73,7 +73,6 @@ const Overview = () => {
   useEffect(() => {
     let cancelled = false
     if (joinedSpaces && !cancelled) {
-      console.log(joinedSpaces.forEach(space => console.log(space.meta.application)))
       // we check if a collaborator has deleted a project since we last logged in
       joinedSpaces?.filter(space => space.meta?.deleted)
         .forEach(async space => await deleteProject(space.room_id))
