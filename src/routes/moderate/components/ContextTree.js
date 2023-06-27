@@ -198,7 +198,14 @@ const ContextTree = ({ moderationRooms, contextId, onContextChange, onDelete }) 
                 {moderationRooms[value.id] ? <UnstyledButton onClick={handleContextClick} value={value.id}>{value.name}</UnstyledButton> : value.name}
                 {value.type === 'item' && <span style={{ color: 'gray' }}> {config.medienhaus.item[value.template]?.label.toUpperCase() || 'ITEM'}</span>}
               </span>
-              <DeleteButton width="calc(var(--margin)*2)" height="calc(var(--margin)*2)" disabled={context.depth !== 1} onDelete={() => handleDelete(value.id)} />
+              <DeleteButton
+                width="calc(var(--margin)*2)" height="calc(var(--margin)*2)" disabled={
+                // @TODO check why these values are different for api and non api case
+                config.medienhaus.api
+                  ? context.depth !== 1
+                  : context.depth !== 2
+              } onDelete={() => handleDelete(value.id)}
+              />
             </ListElement>
 
           </>
