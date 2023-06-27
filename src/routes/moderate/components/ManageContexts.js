@@ -286,7 +286,7 @@ const ManageContexts = ({ matrixClient, moderationRooms: incomingModerationRooms
   }
 
   const onSaveDescription = async (description) => {
-    if (description.length > 500) return
+    if (description.length > (config?.medienhaus?.limits?.descriptionMaxCharacters ? config?.medienhaus?.limits?.descriptionMaxCharacters : 500)) return
     await matrixClient.setRoomTopic(selectedContext, description).catch(console.log)
     if (config.medienhaus.api) triggerApiUpdate(selectedContext)
     const context = findValueWithDeepDash(selectedContext)
@@ -501,7 +501,7 @@ const ManageContexts = ({ matrixClient, moderationRooms: incomingModerationRooms
               <summary>
                 <h3>{t('Change Description')}</h3>
               </summary>
-              <TextareaAutoSizeMaxLength description={description} setDescription={setDescription} onSaveDescription={onSaveDescription} />
+              <TextareaAutoSizeMaxLength description={description} setDescription={setDescription} onSaveDescription={onSaveDescription} maxLength={(config?.medienhaus?.limits?.descriptionMaxCharacters ? config?.medienhaus?.limits?.descriptionMaxCharacters : 500)} />
             </Details>
             <Details>
               <summary>

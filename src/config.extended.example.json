@@ -58,6 +58,9 @@
         "name": true,
         "mail": true
       },
+      "limits": {
+        "descriptionMaxCharacters": 500
+      },
       "moderate": {
         "invite": true,
         "rightsManagement": true,
