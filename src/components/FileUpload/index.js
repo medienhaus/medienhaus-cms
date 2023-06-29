@@ -147,9 +147,9 @@ const FileUpload = (props) => {
               disabled={!selectedFile.type.includes(props.fileType) || selectedFile.size > size || props.loading || alttext.length < 1 || license.length < 1 || author.length < 1}
             >{props.loading ? <Loading /> : 'Upload'}
             </button>
-            {selectedFile.type.includes(props.fileType) || <p>❗️ <Trans t={t} i18nKey="selectFileType">{t('Please select an')} {impairment[0]} file.</Trans></p>}
-            {selectedFile.size > size && <p>❗️ {t('File size needs to be less than')} {size / 1000000}MB</p>}
           </div>
+          {selectedFile.type.includes(props.fileType) || <p>❗️ <Trans t={t} i18nKey="selectFileType">{t('Please select an')} {props.fileType} file.</Trans></p>}
+          {selectedFile.size > size && <p>❗️ {t('File size needs to be less than')} {size / 1000000}MB</p>}
         </>
       )}
     </>
