@@ -57,8 +57,8 @@ const Support = () => {
   return (
     <>
       <section className="support">
-        <p>{t('Please have a look at these video tutorials:')} <a href="https://stream.udk-berlin.de/w/p/43Hj9AaeewRLiUdRLmvzLH" rel="external nofollow noopener noreferrer" target="_blank">udk/rundgang — HOW TO </a></p>
-        <p>{t('In case you\'re having trouble with /moderate, have a look here: ')} <a href="https://stream.udk-berlin.de/w/p/fPiujcDcZPYss1bb5d7eFk" rel="external nofollow noopener noreferrer" target="_blank">udk/rundgang — /moderate</a></p>
+        <p>{t('Please have a look at these video tutorials:')} <a href="https://stream.udk-berlin.de/w/p/43Hj9AaeewRLiUdRLmvzLH" rel="external nofollow noopener noreferrer" target="_blank">udk/rundgang — HOW TO</a></p>
+        <p>{t('In case you’re having trouble with /moderate, have a look here:')} <a href="https://stream.udk-berlin.de/w/p/fPiujcDcZPYss1bb5d7eFk" rel="external nofollow noopener noreferrer" target="_blank">udk/rundgang — /moderate</a></p>
         <p>{t('Please provide some details and tell us about the problem you encounter.')}</p>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div>
