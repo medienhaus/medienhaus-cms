@@ -23,8 +23,8 @@ const Avatar = ({ avatarUrl, name }) => {
   const handleSubmission = async () => {
     await matrixClient.uploadContent(selectedFile, { name: selectedFile.name })
       .then(async (url) => {
-        await matrixClient.setAvatarUrl(url)
-        return url
+        await matrixClient.setAvatarUrl(url?.content_uri)
+        return url?.content_uri
       })
       .then((url) => setCurrentAvatar(url))
       .then(() => setChangeAvatar(false))
