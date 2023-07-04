@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { Loading } from '../loading'
 import { useTranslation } from 'react-i18next'
 import Matrix from '../../Matrix'
@@ -32,7 +32,7 @@ const PublishProject = ({ disabled, space, published, hasContext, metaEvent }) =
     }
   }, [matrixClient, metaEvent, published, space.room_id])
 
-  const onChangeVisibility = async (publishState) => {
+  const onChangeVisibility = useCallback(async (publishState) => {
     setIsChangingVisibility(true)
     setVisibility(publishState)
     const hierarchy = await matrixClient.getRoomHierarchy(space.room_id, 50, 1)
@@ -42,11 +42,11 @@ const PublishProject = ({ disabled, space, published, hasContext, metaEvent }) =
       console.log('--- Starting to change visibility ---')
       for (const room of hierarchy.rooms) {
         const changeJoinRule = await matrixClient.http.authedRequest('PUT', `/rooms/${room.room_id}/state/m.room.join_rules/`, undefined, joinRules)
-        if (changeJoinRule.ok) console.log('Changed joinRule of ' + room.name + ' successfully to ' + publishState + '!')
+        if (changeJoinRule.event_id) console.log('Changed joinRule of ' + room.name + ' successfully to ' + publishState + '!')
         else console.log('Oh no, changing join_rule went wrong with room ' + room.name)
 
         const changeHistoryVisibility = await matrixClient.http.authedRequest('PUT', `/rooms/${room.room_id}/state/m.room.history_visibility/`, undefined, historyVisibility)
-        if (changeHistoryVisibility.ok) console.log('Changed history_visibility of ' + room.name + ' successfully!')
+        if (changeHistoryVisibility.event_id) console.log('Changed history_visibility of ' + room.name + ' successfully!')
         else console.log('Oh no, something went wrong with room ' + room.name)
       }
 
@@ -65,7 +65,19 @@ const PublishProject = ({ disabled, space, published, hasContext, metaEvent }) =
       setIsChangingVisibility(false)
       setTimeout(() => setUserFeedback(''), 3000)
     }
-  }
+  }, [matrixClient, metaEvent, space.room_id, t])
+
+  useEffect(() => {
+    // set content to draft when context was removed.
+    let cancelled = false
+    if (!cancelled && !hasContext && visibility === 'public') {
+      onChangeVisibility('draft')
+    }
+
+    return () => {
+      cancelled = true
+    }
+  }, [hasContext, onChangeVisibility, visibility])
 
   if (!visibility) return <Loading />
 
