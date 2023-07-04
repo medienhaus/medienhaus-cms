@@ -20,7 +20,7 @@ const FileUpload = (props) => {
 
   return (
     <>
-      <input className="browse" type="file" name="browse" onChange={changeHandler} disabled={props.fileType === '' || false || props.disabled} />
+      <input className="browse" type="file" name="browse" onChange={changeHandler} accept=".jpg,.jpeg,.png,.webp,.mp3,.wav,.flac,.aiff,aac,.opus" disabled={props.fileType === '' || false || props.disabled} />
       {selectedFile && (
         <>
           <input type="text" placeholder={t('author, credits, et cetera')} onChange={(e) => setAuthor(e.target.value)} />
