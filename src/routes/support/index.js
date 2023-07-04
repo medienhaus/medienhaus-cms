@@ -65,7 +65,7 @@ const Support = () => {
           </Trans>
         </p>
         <hr />
-        <p>{t('If you still have questions or want to ask for support, then please provide some details and tell us about the problem you encounter.')}</p>
+        <p>{t('If you still have questions or need further support, please provide a few details and tell us about the problem you encounter.')}</p>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div>
             <select {...register('operatingSystem', { required: true })} name="operatingSystem" id="operatingSystem" defaultValue="" onBlur={changeSystem}>
