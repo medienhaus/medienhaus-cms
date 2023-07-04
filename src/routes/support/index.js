@@ -1,9 +1,10 @@
 import React, { useState } from 'react'
 import { useForm } from 'react-hook-form' // https://github.com/react-hook-form/react-hook-form
-import { useTranslation } from 'react-i18next'
+import { Trans, useTranslation } from 'react-i18next'
 import { useAuth } from '../../Auth'
 import { makeRequest } from '../../Backend'
 import Matrix from '../../Matrix'
+import { NavLink } from 'react-router-dom'
 
 const Support = () => {
   const { register, formState: { errors }, handleSubmit } = useForm()
@@ -58,8 +59,13 @@ const Support = () => {
     <>
       <section className="support">
         <p>{t('Please have a look at these video tutorials:')} <a href="https://stream.udk-berlin.de/w/p/43Hj9AaeewRLiUdRLmvzLH" rel="external nofollow noopener noreferrer" target="_blank">udk/rundgang — HOW TO</a></p>
-        <p>{t('In case you’re having trouble with /moderate, have a look here:')} <a href="https://stream.udk-berlin.de/w/p/fPiujcDcZPYss1bb5d7eFk" rel="external nofollow noopener noreferrer" target="_blank">udk/rundgang — /moderate</a></p>
-        <p>{t('Please provide some details and tell us about the problem you encounter.')}</p>
+        <p>
+          <Trans t={t} i18nKey="hyperlinkToSlashModerate">
+            In case you’re having questions regarding moderation, please have a look at the following <NavLink to="/moderate">/moderate</NavLink> video guide: <a href="https://stream.udk-berlin.de/w/p/fPiujcDcZPYss1bb5d7eFk" rel="external nofollow noopener noreferrer" target="_blank">udk/rundgang — /moderate</a>
+          </Trans>
+        </p>
+        <hr />
+        <p>{t('If you still have questions or want to ask for support, then please provide some details and tell us about the problem you encounter.')}</p>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div>
             <select {...register('operatingSystem', { required: true })} name="operatingSystem" id="operatingSystem" defaultValue="" onBlur={changeSystem}>
