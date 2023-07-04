@@ -53,7 +53,7 @@
   "contributorsNote1": "Personen mit einem udk/spaces Account können für die Bearbeitung freigeschaltet werden, sobald sie sich mindestens einmal auf <1>udk/spaces</1> eingeloggt haben.",
   "contributorsNote2": "Personen ohne einen OASE-Account können nur als Mitwirkende benannt werden. Sie können das Projekt nicht bearbeiten.",
   "Can edit and delete": "Darf bearbeiten und löschen",
-  "Can not edit and delete": "Darf nicht bearbeiten und löschen",
+  "Cannot edit and delete": "Darf nicht bearbeiten und löschen",
   "Contributors (with editing permissions)": "Mitwirkende mit Editier-Berechtigungen",
   "Credits (without editing permissions)": "Mitwirkende ohne Editier-Berechtigungen",
   "If you’re looking to give a user write permissions but can’t, please make sure they have already logged in to spaces.udk-berlin.de at least once.": "Wenn Sie bestimmte Mitwirkenden nicht finden können, stellen Sie bitte sicher, dass die entsprechenden Personen sich mindestens ein Mal auf spaces.udk-berlin.de eingeloggt haben.",

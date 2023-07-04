@@ -208,7 +208,7 @@ const Collaborators = ({ projectSpace, members, time, startListeningToCollab }) 
       {contributorInput &&
         <div className="permissions">
           <select value={giveWritePermission} onChange={(e) => setGiveWritePermission(e.target.value)}>
-            <option value="">🚫 {t('Can not edit and delete')}</option>
+            <option value="">🚫 {t('Cannot edit and delete')}</option>
             <option value disabled={!contributorSearchResults.some(user => user.user_id === contributorInput.substring(contributorInput.lastIndexOf(' ') + 1))}>⚠️ {t('Can edit and delete')}</option>
           </select>
           <div className="confirmation">
