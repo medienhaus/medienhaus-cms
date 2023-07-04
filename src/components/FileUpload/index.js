@@ -12,7 +12,20 @@ const FileUpload = (props) => {
   const size = props.fileType === 'image' ? 5000000 : 25000000
   const { t } = useTranslation('fileupload')
   const impairment = props.fileType === 'audio' ? [t('audio'), t('hearing')] : props.fileType === 'image ' ? [t('image'), t('visually')] : [t('file'), t('hearing/visually')]
-
+  const fileTypes = [
+    'image/apng',
+    'image/gif',
+    'image/jpeg',
+    'image/pjpeg',
+    'image/png',
+    'image/svg+xml',
+    'image/webp',
+    'audio/mp3',
+    'audio/flac',
+    'audio/wav',
+    'audio/aac',
+    'audio/opus'
+  ]
   const changeHandler = (event) => {
     setSelectedFile(event.target.files[0])
     setFileName(event.target.files[0].name)
@@ -20,7 +33,7 @@ const FileUpload = (props) => {
 
   return (
     <>
-      <input className="browse" type="file" name="browse" onChange={changeHandler} accept=".jpg,.jpeg,.png,.webp,.mp3,.wav,.flac,.aiff,aac,.opus" disabled={props.fileType === '' || false || props.disabled} />
+      <input className="browse" type="file" name="browse" onChange={changeHandler} accept={fileTypes} disabled={props.fileType === '' || false || props.disabled} />
       {selectedFile && (
         <>
           <input type="text" placeholder={t('author, credits, et cetera')} onChange={(e) => setAuthor(e.target.value)} />
