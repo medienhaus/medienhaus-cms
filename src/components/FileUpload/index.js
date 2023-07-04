@@ -26,7 +26,6 @@ const FileUpload = (props) => {
     'audio/aac',
     'audio/opus'
   ]
-
   const changeHandler = (event) => {
     setSelectedFile(event.target.files[0])
     setFileName(event.target.files[0].name)
