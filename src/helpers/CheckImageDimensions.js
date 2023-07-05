@@ -2,7 +2,7 @@ import config from '../config.json'
 
 export const checkImageDimensions = (file) => {
   const promise = new Promise((resolve, reject) => {
-    if (!file) return
+    if (!file) reject(new Error('file type error'))
     const reader = new FileReader()
     if (!file.type.includes('image')) reject(new Error('file type does not match type image'))
     // Read the contents of Image File.
