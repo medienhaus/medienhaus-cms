@@ -2,22 +2,37 @@ import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import LoadingSpinnerButton from '../../../components/LoadingSpinnerButton'
 import Matrix from '../../../Matrix'
+import { checkImageDimensions } from '../../../helpers/CheckImageDimensions'
 
 const Avatar = ({ avatarUrl, name }) => {
   const [currentAvatar, setCurrentAvatar] = useState(avatarUrl)
   const [changeAvatar, setChangeAvatar] = useState(false)
   const [selectedFile, setSelectedFile] = useState()
+  const [errorMessage, setErrorMessage] = useState('')
   const [src, setSrc] = useState('')
   const matrixClient = Matrix.getMatrixClient()
   const { t } = useTranslation('content')
+  const fileTypes = [
+    'image/gif',
+    'image/jpeg',
+    'image/jpg',
+    'image/png',
+    'image/webp'
+  ]
 
   useEffect(() => {
     // if (currentAvatar) setSrc(matrixClient.mxcUrlToHttp(currentAvatar, 1000, 1000, 'crop', true))
     if (currentAvatar) setSrc(matrixClient.mxcUrlToHttp(currentAvatar))
   }, [currentAvatar, matrixClient])
 
-  const changeHandler = (event) => {
-    setSelectedFile(event.target.files[0])
+  const changeHandler = async (event) => {
+    const imageDimensions = await checkImageDimensions(event.target.files[0])
+      .catch(async error => {
+        setErrorMessage(error.message)
+        await new Promise(resolve => setTimeout(resolve, 3000))
+        setErrorMessage('')
+      })
+    if (imageDimensions !== undefined) setSelectedFile(event.target.files[0])
   }
 
   const handleSubmission = async () => {
@@ -44,7 +59,7 @@ const Avatar = ({ avatarUrl, name }) => {
         </button>}
       {changeAvatar && (
         <>
-          <input className="browse" type="file" name="browse" onChange={changeHandler} />
+          <input className="browse" type="file" name="browse" accept={fileTypes} onChange={changeHandler} />
           <div className="confirmation">
             <button
               className="cancel"
@@ -56,6 +71,7 @@ const Avatar = ({ avatarUrl, name }) => {
             <LoadingSpinnerButton className="confirm" disabled={!selectedFile || !selectedFile.type.includes('image')} onClick={handleSubmission}>{t('UPLOAD')}</LoadingSpinnerButton>
           </div>
           {selectedFile && !selectedFile.type.includes('image') && <p>❗️ {t('Please select an image file')}</p>}
+          {errorMessage && <p>❗️ {errorMessage}</p>}
         </>
       )}
     </div>

@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Loading } from '../../components/loading'
 import TextareaAutosize from 'react-textarea-autosize'
 import { Trans, useTranslation } from 'react-i18next'
+import { checkImageDimensions } from '../../helpers/CheckImageDimensions'
 
 const FileUpload = (props) => {
   const [selectedFile, setSelectedFile] = useState()
@@ -9,31 +10,47 @@ const FileUpload = (props) => {
   const [author, setAuthor] = useState('')
   const [license, setLicense] = useState('')
   const [alttext, setAlttext] = useState('')
+  const [errorMessage, setErrorMessage] = useState('')
   const size = props.fileType === 'image' ? 5000000 : 25000000
   const { t } = useTranslation('fileupload')
   const impairment = props.fileType === 'audio' ? [t('audio'), t('hearing')] : props.fileType === 'image ' ? [t('image'), t('visually')] : [t('file'), t('hearing/visually')]
-  const fileTypes = [
+  const imageFileTypes = [
     'image/apng',
     'image/gif',
     'image/jpeg',
     'image/pjpeg',
     'image/png',
     'image/svg+xml',
-    'image/webp',
+    'image/webp'
+  ]
+  const audioFileTypes = [
     'audio/mp3',
     'audio/flac',
     'audio/wav',
     'audio/aac',
     'audio/opus'
   ]
-  const changeHandler = (event) => {
-    setSelectedFile(event.target.files[0])
-    setFileName(event.target.files[0].name)
+  const changeHandler = async (event) => {
+    const imageDimensions = await checkImageDimensions(event.target.files[0])
+      .catch(async error => {
+        if (error.message === 'file type does not match type image') {
+          setErrorMessage(<Trans t={t} i18nKey="selectFileType">Please select an {props.fileType} file.</Trans>)
+        }
+        await new Promise(resolve => setTimeout(resolve, 4000))
+        setErrorMessage('')
+      })
+    console.log(imageDimensions)
+    if (props.fileType !== 'image' || imageDimensions !== undefined) {
+      setSelectedFile(event.target.files[0])
+      setFileName(event.target.files[0].name)
+    }
   }
 
   return (
     <>
-      <input className="browse" type="file" name="browse" onChange={changeHandler} accept={fileTypes} disabled={props.fileType === '' || false || props.disabled} />
+      <input className="browse" type="file" name="browse" onChange={changeHandler} accept={props.fileType === 'image' ? imageFileTypes : audioFileTypes} disabled={props.fileType === '' || false || props.disabled} />
+      {errorMessage && <p>❗️ {errorMessage}</p>}
+
       {selectedFile && (
         <>
           <input type="text" placeholder={t('author, credits, et cetera')} onChange={(e) => setAuthor(e.target.value)} />
