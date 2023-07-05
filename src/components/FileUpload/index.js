@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Loading } from '../../components/loading'
 import TextareaAutosize from 'react-textarea-autosize'
 import { Trans, useTranslation } from 'react-i18next'
-import { checkImageDimensions } from '../../helpers/CheckImageDimensions'
+import { fileHandler } from '../../helpers/fileHandler'
 
 const FileUpload = (props) => {
   const [selectedFile, setSelectedFile] = useState()
@@ -31,14 +31,15 @@ const FileUpload = (props) => {
     'audio/opus'
   ]
   const changeHandler = async (event) => {
-    const imageDimensions = await checkImageDimensions(event.target.files[0])
+    setErrorMessage('')
+
+    const checkFile = await fileHandler(event.target.files[0], props.fileType)
       .catch(error => {
-        if (error.message === 'file type does not match type image') {
+        if (error.message === 'file type does not match expected type') {
           setErrorMessage(<Trans t={t} i18nKey="selectFileType">Please select an {props.fileType} file.</Trans>)
-        }
-        setErrorMessage(error.message)
+        } else setErrorMessage(error.message)
       })
-    if (props.fileType !== 'image' || imageDimensions !== undefined) {
+    if (checkFile !== undefined) {
       setSelectedFile(event.target.files[0])
       setFileName(event.target.files[0].name)
     }
@@ -174,8 +175,6 @@ const FileUpload = (props) => {
             >{props.loading ? <Loading /> : 'Upload'}
             </button>
           </div>
-          {selectedFile.type.includes(props.fileType) || <p>❗️ <Trans t={t} i18nKey="selectFileType">Please select an {props.fileType} file.</Trans></p>}
-          {selectedFile.size > size && <p>❗️ {t('File size needs to be less than')} {size / 1000000}MB</p>}
         </>
       )}
       {errorMessage && <p>❗️ {errorMessage}</p>}
