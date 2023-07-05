@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import LoadingSpinnerButton from '../../../components/LoadingSpinnerButton'
 import Matrix from '../../../Matrix'
-import { checkImageDimensions } from '../../../helpers/CheckImageDimensions'
+import { fileHandler } from '../../../helpers/fileHandler'
 
 const Avatar = ({ avatarUrl, name }) => {
   const [currentAvatar, setCurrentAvatar] = useState(avatarUrl)
@@ -26,13 +26,14 @@ const Avatar = ({ avatarUrl, name }) => {
   }, [currentAvatar, matrixClient])
 
   const changeHandler = async (event) => {
-    const imageDimensions = await checkImageDimensions(event.target.files[0])
+    setErrorMessage('')
+    const checkFile = await fileHandler(event.target.files[0], 'image')
       .catch(async error => {
         setErrorMessage(error.message)
         await new Promise(resolve => setTimeout(resolve, 3000))
         setErrorMessage('')
       })
-    if (imageDimensions !== undefined) setSelectedFile(event.target.files[0])
+    if (checkFile !== undefined) setSelectedFile(event.target.files[0])
   }
 
   const handleSubmission = async () => {
