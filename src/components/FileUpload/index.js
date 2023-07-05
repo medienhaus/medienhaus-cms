@@ -36,10 +36,10 @@ const FileUpload = (props) => {
         if (error.message === 'file type does not match type image') {
           setErrorMessage(<Trans t={t} i18nKey="selectFileType">Please select an {props.fileType} file.</Trans>)
         }
+        setErrorMessage(error.message)
         await new Promise(resolve => setTimeout(resolve, 4000))
         setErrorMessage('')
       })
-    console.log(imageDimensions)
     if (props.fileType !== 'image' || imageDimensions !== undefined) {
       setSelectedFile(event.target.files[0])
       setFileName(event.target.files[0].name)
