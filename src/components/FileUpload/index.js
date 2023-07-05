@@ -32,13 +32,11 @@ const FileUpload = (props) => {
   ]
   const changeHandler = async (event) => {
     const imageDimensions = await checkImageDimensions(event.target.files[0])
-      .catch(async error => {
+      .catch(error => {
         if (error.message === 'file type does not match type image') {
           setErrorMessage(<Trans t={t} i18nKey="selectFileType">Please select an {props.fileType} file.</Trans>)
         }
         setErrorMessage(error.message)
-        await new Promise(resolve => setTimeout(resolve, 4000))
-        setErrorMessage('')
       })
     if (props.fileType !== 'image' || imageDimensions !== undefined) {
       setSelectedFile(event.target.files[0])
@@ -49,8 +47,6 @@ const FileUpload = (props) => {
   return (
     <>
       <input className="browse" type="file" name="browse" onChange={changeHandler} accept={props.fileType === 'image' ? imageFileTypes : audioFileTypes} disabled={props.fileType === '' || false || props.disabled} />
-      {errorMessage && <p>❗️ {errorMessage}</p>}
-
       {selectedFile && (
         <>
           <input type="text" placeholder={t('author, credits, et cetera')} onChange={(e) => setAuthor(e.target.value)} />
@@ -182,6 +178,7 @@ const FileUpload = (props) => {
           {selectedFile.size > size && <p>❗️ {t('File size needs to be less than')} {size / 1000000}MB</p>}
         </>
       )}
+      {errorMessage && <p>❗️ {errorMessage}</p>}
     </>
   )
 }
