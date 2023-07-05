@@ -10,6 +10,13 @@ const Avatar = ({ avatarUrl, name }) => {
   const [src, setSrc] = useState('')
   const matrixClient = Matrix.getMatrixClient()
   const { t } = useTranslation()
+  const fileTypes = [
+    'image/gif',
+    'image/jpeg',
+    'image/jpg',
+    'image/png',
+    'image/webp'
+  ]
 
   useEffect(() => {
     // if (currentAvatar) setSrc(matrixClient.mxcUrlToHttp(currentAvatar, 1000, 1000, 'crop', true))
@@ -44,7 +51,7 @@ const Avatar = ({ avatarUrl, name }) => {
         </button>}
       {changeAvatar && (
         <>
-          <input className="browse" type="file" name="browse" onChange={changeHandler} />
+          <input className="browse" type="file" name="browse" accept={fileTypes} onChange={changeHandler} />
           <div className="confirmation">
             <button
               className="cancel"
