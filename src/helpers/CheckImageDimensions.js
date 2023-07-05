@@ -17,7 +17,7 @@ export const checkImageDimensions = (file) => {
         const height = this.height
         const width = this.width
         const maxDimensions = config.medienhaus.limits?.maxAvatarDimensions || 3000
-        if (height > maxDimensions || width > maxDimensions) reject(new Error('Height and width must not exceed ' + (config.medienhaus.limits?.maxAvatarDimensions || '3000') + 'px'))
+        if (height > maxDimensions || width > maxDimensions) reject(new Error('Height and width must not exceed ' + (config.medienhaus.limits?.maxAvatarDimensions || '3000') + ' pixels'))
         else resolve(true)
       }
       image.onerror = reject
