@@ -878,7 +878,7 @@ const Create = () => {
             <h3>{t('Content')}</h3>
             <p>
               <Trans t={t} i18nKey="contentInstructions1">
-                The project descriptions are displayed on the platform in English and in German, if they are entered here in both languages.
+                The project descriptions are displayed on the Rundgang website in English and in German, if they are entered here in both languages.
               </Trans>
             </p>
             <p>
@@ -968,7 +968,7 @@ const Create = () => {
             <p>
               * <em>
                 <Trans t={t} i18nKey="previewNote">
-                  It is not possible to preview the entry. What the public version of the project looks like can be seen from 5 July, once the project is released and the platform is published at: <a href="https://rundgang.udk-berlin.de" rel="external nofollow noopener noreferrer" target="_blank">rundgang.udk-berlin.de</a>
+                  It is not possible to preview the entry. What the public version of the project looks like can be seen from 5 July, once the project is released and the Rundgang website is published at: <a href="https://rundgang.udk-berlin.de" rel="external nofollow noopener noreferrer" target="_blank">rundgang.udk-berlin.de</a>
                 </Trans>
               </em>
             </p>

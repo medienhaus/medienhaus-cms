@@ -58,7 +58,7 @@
   "Credits (without editing permissions)": "Mitwirkende ohne Editier-Berechtigungen",
   "If you’re looking to give a user write permissions but can’t, please make sure they have already logged in to spaces.udk-berlin.de at least once.": "Wenn Sie bestimmte Mitwirkenden nicht finden können, stellen Sie bitte sicher, dass die entsprechenden Personen sich mindestens ein Mal auf spaces.udk-berlin.de eingeloggt haben.",
   "Project image": "Titelbild",
-  "contentInstructions1": "Die Projektbeschreibungen werden auf der Plattform auf Englisch und auf Deutsch angezeigt, sofern sie hier in beiden Sprachen eingepflegt werden.",
+  "contentInstructions1": "Die Projektbeschreibungen werden auf der Website auf Englisch und auf Deutsch angezeigt, sofern sie hier in beiden Sprachen eingepflegt werden.",
   "contentInstructions2": "Die Kurzbeschreibung – als Einleitung zu Ihrem Projekt – ist zwingend erforderlich.",
   "contentNotes1": "Gebe <1>/</1> ein, um einen Absatz festzulegen.",
   "contentNotes2": "Ohne Kurzbeschreibung kann das Projekt nicht veröffentlicht werden.",
@@ -100,5 +100,5 @@
   "SPECIFY TIME PERIOD": "ZEITRAUM ANGEBEN",
   "End": "Ende",
   "Preview": "Vorschau",
-  "previewNote": "Eine Vorschau des Eintrags ist nicht möglich. Wie die öffentliche Version des Projekts aussieht, ist ab dem 5. Juli einsehbar, sobald das Projekt freigeben und die Plattform unter <1>rundgang.udk-berlin.de</1> veröffentlicht ist."
+  "previewNote": "Eine Vorschau des Eintrags ist nicht möglich. Wie die öffentliche Version des Projekts aussieht, ist ab dem 5. Juli einsehbar, sobald das Projekt freigeben und die Website unter <1>rundgang.udk-berlin.de</1> veröffentlicht ist."
 }

@@ -18,28 +18,28 @@ const Landing = () => {
       </p>
       <h2>
         <Trans t={t} i18nKey="welcome">
-          Welcome to the Rundgang platform!
+          Welcome to the Rundgang content management system!
         </Trans>
       </h2>
       <hr />
       <p>
         <Trans t={t} i18nKey="introduction-01">
-          The Rundgang of the Berlin University of the Arts will take place from July 21–23, 2023. All digital and analog Rundgang events and projects can be entered on the Rundgang platform for publication.
+          The Rundgang of the Berlin University of the Arts will take place from July 21–23, 2023. All digital and analog Rundgang events and projects can be entered on the Rundgang content management system for publication.
         </Trans>
       </p>
       <p>
         <Trans t={t} i18nKey="introduction-02">
-          The Rundgang platform will go online on July 5, 2023. For this reason, if possible, all key data of the Rundgang projects should be entered no later than July 4, 2023, 23:59. Format, date, time, location, short description and (preliminary) title are sufficient for now. All other details (descriptive texts, images, videos, etc.) can be updated successively and until the Rundgang.
+          The public-facing Rundgang website will go online on July 5, 2023. For this reason, if possible, all key data of the Rundgang projects should be entered no later than July 4, 2023, 23:59. Format, date, time, location, short description and (preliminary) title are sufficient for now. All other details (descriptive texts, images, videos, etc.) can be updated successively and until the Rundgang.
         </Trans>
       </p>
       <p>
         <Trans t={t} i18nKey="introduction-03">
-          Projects that are entered on the platform by July 4 will then be included in the printed program. The printed program will be available for visitors at the locations during the Rundgang days.
+          Projects that are entered and published in the content management system by July 4 will then be included in the printed program. The printed program will be available for visitors at the locations during the Rundgang days.
         </Trans>
       </p>
       <p>
         <Trans t={t} i18nKey="introduction-04">
-          Projects that are not entered on the platform by July 4, 2023, unfortunately cannot be included in the printed program sheet.
+          Projects that are not entered in the content management system by July 4, 2023, as well as any drafts, unfortunately cannot be included in the printed program sheet.
         </Trans>
       </p>
       <hr />
@@ -50,7 +50,7 @@ const Landing = () => {
       </p>
       <p>
         <Trans t={t} i18nKey="questions-02">
-          Preview function of the projects: The Rundgang platform will be opened to the public on July 5. A preview of the created projects is unfortunately not possible before that for technical reasons. The design of the pages is already fixed and is currently being implemented for the Rundgang website.
+          Preview function of the projects: The Rundgang website will be opened to the public on July 5. A preview of the created projects is unfortunately not possible before that for technical reasons. The design of the pages is already fixed and is currently being implemented for the Rundgang website.
         </Trans>
       </p>
       <p>
