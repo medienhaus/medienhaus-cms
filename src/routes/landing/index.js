@@ -34,7 +34,7 @@ const Landing = () => {
       </p>
       <p>
         <Trans t={t} i18nKey="introduction-03">
-          Projects that are entered on the platform by July 4 will then be included in the printed program. The printed program will be available for visitors at the locations on the days of the tour.
+          Projects that are entered on the platform by July 4 will then be included in the printed program. The printed program will be available for visitors at the locations during the Rundgang days.
         </Trans>
       </p>
       <p>
@@ -50,7 +50,7 @@ const Landing = () => {
       </p>
       <p>
         <Trans t={t} i18nKey="questions-02">
-          Preview function of the projects: The tour platform will be opened to the public on July 5. A preview of the created projects is unfortunately not possible before that for technical reasons. The design of the pages is already fixed and is currently being implemented for the Rundgang website.
+          Preview function of the projects: The Rundgang platform will be opened to the public on July 5. A preview of the created projects is unfortunately not possible before that for technical reasons. The design of the pages is already fixed and is currently being implemented for the Rundgang website.
         </Trans>
       </p>
       <p>
