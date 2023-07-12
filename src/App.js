@@ -21,6 +21,7 @@ import Account from './routes/account'
 import Request from './routes/request'
 import Preview from './routes/preview'
 import Pages from './routes/pages'
+import Logout from './routes/logout'
 
 import { AuthProvider, useAuth } from './Auth'
 import PropTypes from 'prop-types'
@@ -86,6 +87,8 @@ function App () {
               <PrivateRoute path="/preview/:spaceId" component={Preview} />
               <PrivateRoute path="/create" component={Create} />
               <PrivateRoute path="/gutenberg" component={Gutenberg} />
+              <PrivateRoute path="/logout" component={Logout} />
+
               {config.medienhaus?.sites?.moderate && <PrivateRoute path="/moderate" component={Moderate} />}
               {config.medienhaus?.sites?.support && <PrivateRoute path="/support" component={Support} />}
               {config.medienhaus?.sites?.feedback && <PrivateRoute path="/feedback" component={Feedback} />}
