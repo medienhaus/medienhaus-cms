@@ -91,7 +91,6 @@ const Category = ({ projectSpace, onChange, parent, setLocationFromLocationTree 
     }
     console.log('---- started structure ----')
     const tree = await getSpaceStructure(parent, false)
-    console.log(tree)
     if (!tree[1]) setContexts([]) // if the content is in not in any context, yet, we set contexts to an empty array in order to display the publishProject component
     setInputItems(tree[0][parent])
   }
@@ -105,7 +104,7 @@ const Category = ({ projectSpace, onChange, parent, setLocationFromLocationTree 
     const fetchParents = await fetchId(projectSpace)
     if (fetchParents.parents) {
       if (_.isEmpty(fetchParents.parents)) {
-        setContexts([])
+        setContexts([]) // if parents is empty we set contexts to an empty array for the PublishProjects component.
       } else {
         for (const parent of fetchParents.parents) {
           const fetchParent = await fetchId(parent)
@@ -124,6 +123,8 @@ const Category = ({ projectSpace, onChange, parent, setLocationFromLocationTree 
           })
         }
       }
+    } else if (fetchParents.statusCode === 404) {
+      setContexts([]) // if the api doesn't know about the project we can safely assume it does not have a parent yet. Therefor we set contexts to an empty array for the PublishProjects component.
     }
   }
 
