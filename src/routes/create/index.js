@@ -305,10 +305,9 @@ const Create = () => {
         // new content room being added
         fetchSpace()
         matrixClient.joinRoom(event.event.state_key)
-      }/* else if (event.event.state_key === projectSpace) {
+      } else if (event.event.type === 'dev.medienhaus.meta') {
         fetchSpace()
       }
-      */
     }
     // first we check if the initial sync is complete otherwise we create a loop
     if (matrixClient.isInitialSyncComplete()) {
