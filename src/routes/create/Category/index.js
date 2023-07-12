@@ -31,7 +31,7 @@ const ListElement = styled.li`
 
 const Category = ({ projectSpace, onChange, parent, setLocationFromLocationTree }) => {
   const [loading, setLoading] = useState(true)
-  const [contexts, setContexts] = useState([])
+  const [contexts, setContexts] = useState(undefined)
   const [error, setError] = useState('')
   const [inputItems, setInputItems] = useState()
   const matrixClient = Matrix.getMatrixClient()
@@ -40,7 +40,8 @@ const Category = ({ projectSpace, onChange, parent, setLocationFromLocationTree 
   const createStructurObject = async () => {
     setLoading(true)
     async function getSpaceStructure (motherSpaceRoomId, includeRooms) {
-      const result = {}
+      const result = {} // the resulting tree structure
+      let hasContext = false // we use a boolean to know if a content is in a context which we need for the publishProject component in /create
 
       function createSpaceObject (id, name, metaEvent) {
         return {
@@ -69,7 +70,13 @@ const Category = ({ projectSpace, onChange, parent, setLocationFromLocationTree 
         for (const event of stateEvents) {
           if (event.type !== 'm.space.child' && !includeRooms) continue
           if (event.type === 'm.space.child' && _.size(event.content) === 0) continue // check to see if body of content is empty, therefore space has been removed
-          if (event.state_key === projectSpace) setContexts(contexts => [...contexts, { name: spaceName, room_id: event.room_id }]) // add context to the contexts array if the projectspace is a child of it
+          if (event.state_key === projectSpace) {
+            setContexts(contexts => {
+              if (contexts) return [...contexts, { name: spaceName, room_id: event.room_id }]
+              else return [{ name: spaceName, room_id: event.room_id }]
+            }) // add context to the contexts array if the projectspace is a child of it
+            hasContext = true
+          }
           if (event.room_id !== spaceId) continue
 
           await scanForAndAddSpaceChildren(event.state_key, [...path, spaceId, 'children'])
@@ -77,35 +84,45 @@ const Category = ({ projectSpace, onChange, parent, setLocationFromLocationTree 
       }
 
       await scanForAndAddSpaceChildren(motherSpaceRoomId, [])
+
+      if (_.isEmpty(result)) setContexts([]) // if the content is in not in any context, yet, we set contexts to an empty array in order to display the publishProject component
       setLoading(false)
-      return result
+      return [result, hasContext]
     }
     console.log('---- started structure ----')
     const tree = await getSpaceStructure(parent, false)
-    setInputItems(tree[parent])
+    console.log(tree)
+    if (!tree[1]) setContexts([]) // if the content is in not in any context, yet, we set contexts to an empty array in order to display the publishProject component
+    setInputItems(tree[0][parent])
   }
 
   const fetchTreeFromApi = async () => {
     const fetchTree = await fetchContextTree(localStorage.getItem(process.env.REACT_APP_APP_NAME + '_root_context_space'))
     setInputItems(fetchTree)
-    setLoading(false)
   }
 
   const fetchParentsFromApi = async () => {
     const fetchParents = await fetchId(projectSpace)
     if (fetchParents.parents) {
-      for (const parent of fetchParents.parents) {
-        const fetchParent = await fetchId(parent)
-        if (fetchParent.template.includes('location')) {
+      if (_.isEmpty(fetchParents.parents)) {
+        setContexts([])
+      } else {
+        for (const parent of fetchParents.parents) {
+          const fetchParent = await fetchId(parent)
+          if (fetchParent.template.includes('location')) {
           // if the parent is a location element we set it to our current location and continue with the next element
-          setLocationFromLocationTree(fetchParent.id)
-          continue
-        }
-        if (fetchParent.template.includes('format')) {
+            setLocationFromLocationTree(fetchParent.id)
+            continue
+          }
+          if (fetchParent.template.includes('format')) {
           // if the parent is a format element we continue with the next element
-          continue
+            continue
+          }
+          setContexts(contexts => {
+            if (contexts) return [...contexts, { name: fetchParent.name, room_id: fetchParent.id }]
+            else return [{ name: fetchParent.name, room_id: fetchParent.id }]
+          })
         }
-        setContexts(contexts => [...contexts, { name: fetchParent.name, room_id: fetchParent.id }])
       }
     }
   }
@@ -113,8 +130,10 @@ const Category = ({ projectSpace, onChange, parent, setLocationFromLocationTree 
   useEffect(() => {
     let cancelled = false
     if (!cancelled && config.medienhaus.api) {
+      setLoading(true)
       fetchTreeFromApi()
       fetchParentsFromApi()
+      setLoading(false)
     } else createStructurObject()
 
     return () => {
@@ -126,7 +145,7 @@ const Category = ({ projectSpace, onChange, parent, setLocationFromLocationTree 
   useEffect(() => {
     let cancelled = false
 
-    !cancelled && onChange(!_.isEmpty(contexts))
+    !cancelled && contexts !== undefined && onChange(!_.isEmpty(contexts))
 
     return () => {
       cancelled = true
@@ -169,7 +188,11 @@ const Category = ({ projectSpace, onChange, parent, setLocationFromLocationTree 
           // then try to add the conent to the context again
           const addToContext = await Matrix.addSpaceChild(contextSpace, projectSpace).catch(console.log)
           if (addToContext?.event_id) {
-            setContexts(contexts => [...contexts, { name: contextObject.name, room_id: contextSpace }])
+            setContexts(contexts => {
+              if (contexts) return [...contexts, { name: contextObject.name, room_id: contextSpace }]
+              else return [{ name: contextObject.name, room_id: contextSpace }]
+            })
+
             onChange(!_.isEmpty(contexts))
             await triggerApiUpdate(contextSpace)
             await triggerApiUpdate(projectSpace, contextSpace)
@@ -183,7 +206,10 @@ const Category = ({ projectSpace, onChange, parent, setLocationFromLocationTree 
         }
       })
     if (addToContext?.event_id) {
-      setContexts(contexts => [...contexts, { name: contextObject.name, room_id: contextSpace }])
+      setContexts(contexts => {
+        if (contexts) return [...contexts, { name: contextObject.name, room_id: contextSpace }]
+        else return [{ name: contextObject.name, room_id: contextSpace }]
+      })
       onChange(!_.isEmpty(contexts))
       await triggerApiUpdate(contextSpace)
       await triggerApiUpdate(projectSpace, contextSpace)

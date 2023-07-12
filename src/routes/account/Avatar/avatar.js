@@ -37,6 +37,7 @@ const Avatar = ({ avatarUrl, name }) => {
   }
 
   const handleSubmission = async () => {
+    // @TODO use fileUpload component
     await matrixClient.uploadContent(selectedFile, { name: selectedFile.name })
       .then(async (url) => {
         await matrixClient.setAvatarUrl(url?.content_uri)

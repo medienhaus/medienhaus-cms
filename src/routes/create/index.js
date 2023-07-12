@@ -157,7 +157,7 @@ const Create = () => {
   // eslint-disable-next-line no-unused-vars
   const [gutenbergIdToMatrixRoomId, setGutenbergIdToMatrixRoomId, gutenbergIdToMatrixRoomIdRef] = useStateRef({})
   const [description, setDescription] = useState()
-  const [hasContext, setHasContext] = useState(false)
+  const [hasContext, setHasContext] = useState(undefined)
   const [template, setTemplate] = useState(config.medienhaus?.item && Object.keys(config.medienhaus?.item).length > 0 && Object.keys(config.medienhaus?.item)[0])
   const [hideAuthors, setHideAuthors] = useState(false)
   // const [preview, setPreview] = useState(false)
@@ -397,10 +397,9 @@ const Create = () => {
         // new content room being added
         fetchSpace()
         matrixClient.joinRoom(event.event.state_key)
-      }/* else if (event.event.state_key === projectSpace) {
+      } else if (event.event.type === 'dev.medienhaus.meta') {
         fetchSpace()
       }
-      */
     }
     // first we check if the initial sync is complete otherwise we create a loop
     if (matrixClient.isInitialSyncComplete()) {
@@ -950,7 +949,7 @@ const Create = () => {
           <section className="visibility">
             <h3>{t('Visibility')}</h3>
             <p>{t('Entries that are saved as drafts are not publicly visible. Entries that are released for publication on the Rundgang 2023 website are publicly visible from 5 July. In both cases, the entries can be further edited at any time.')}</p>
-            {spaceObject
+            {spaceObject && hasContext !== undefined
               ? (<>
                 <PublishProject space={spaceObject.rooms[0]} metaEvent={medienhausMeta} hasContext={hasContext} description={(description && description[config.medienhaus?.languages[0]])} published={visibility} time={setSaveTimestampToCurrentTime} onChange={setVisibility} />
                 {!(description && description[config.medienhaus?.languages[0]]) && <p>❗️ {t('Short description missing')}</p>}
