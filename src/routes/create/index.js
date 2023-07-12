@@ -140,7 +140,7 @@ const Create = () => {
   // eslint-disable-next-line no-unused-vars
   const [gutenbergIdToMatrixRoomId, setGutenbergIdToMatrixRoomId, gutenbergIdToMatrixRoomIdRef] = useStateRef({})
   const [description, setDescription] = useState()
-  const [hasContext, setHasContext] = useState(false)
+  const [hasContext, setHasContext] = useState(undefined)
   const [template, setTemplate] = useState(config.medienhaus?.item && Object.keys(config.medienhaus?.item).length > 0 && Object.keys(config.medienhaus?.item)[0])
   // const [preview, setPreview] = useState(false)
   const history = useHistory()
@@ -821,7 +821,7 @@ const Create = () => {
             <h3>{t('Visibility')}</h3>
             {/* <p>{t('Would you like to save your project as a draft or release it for publishing on the Rundgang platform? The released projects will be published in the run-up to the Rundgang on October 25, 2021.')}</p> */}
             {/* <p>{t('If you still want to make changes to your contributions after publishing, you can continue to do so.')}</p> */}
-            {spaceObject
+            {spaceObject && hasContext !== undefined
               ? (<>
                 <PublishProject space={spaceObject.rooms[0]} metaEvent={medienhausMeta} hasContext={hasContext} description={(description && description[config.medienhaus?.languages[0]])} published={visibility} time={setSaveTimestampToCurrentTime} />
                 {!(description && description[config.medienhaus?.languages[0]]) && <p>❗️ {t('Please add a short description.')}</p>}
