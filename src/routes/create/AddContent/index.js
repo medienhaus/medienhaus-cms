@@ -48,6 +48,7 @@ const AddContent = ({ number, projectSpace, blocks, contentType, reloadSpace }) 
           <option value="" disabled>{t('-- select content --')}</option>
           <optgroup label="Text">
             {(!config.medienhaus?.item || !config.medienhaus?.item[contentType]?.content || config.medienhaus?.item[contentType]?.content.includes('heading')) && <option value="heading">{t('Heading')}</option>}
+            {(!config.medienhaus?.item || !config.medienhaus?.item[contentType]?.content || config.medienhaus?.item[contentType]?.content.includes('link')) && <option value="link">{t('Link')}</option>}
             {(!config.medienhaus?.item || !config.medienhaus?.item[contentType]?.content || config.medienhaus?.item[contentType]?.content.includes('text')) && <option value="text">{t('Text')}</option>}
             {(!config.medienhaus?.item || !config.medienhaus?.item[contentType]?.content || config.medienhaus?.item[contentType]?.content.includes('unordered list')) && <option value="ul">{t('List (unordered)')}</option>}
             {(!config.medienhaus?.item || !config.medienhaus?.item[contentType]?.content || config.medienhaus?.item[contentType]?.content.includes('ordered list')) && <option value="ol">{t('List (ordered)')}</option>}

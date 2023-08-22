@@ -113,6 +113,19 @@ const DisplayContent = ({ block, index, blocks, projectSpace, reloadSpace, time,
             setSaved()
           }, 1000)
         }
+      } else if (json.template === 'link') {
+        const save = await matrixClient.sendMessage(roomId, {
+          body: '[' + text + '](' + text + ')',
+          format: 'org.matrix.custom.html',
+          msgtype: 'm.text',
+          formatted_body: '<a href="' + text + '">' + text + '</a>'
+        })
+        if ('event_id' in save) {
+          setSaved('Saved!')
+          setTimeout(() => {
+            setSaved()
+          }, 1000)
+        }
       } else {
         const save = await matrixClient.sendMessage(roomId, {
           body: localStorage.getItem(roomId),
