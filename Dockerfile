@@ -1,24 +1,29 @@
-# Taken from https://dev.to/deepakfilth/how-i-dockerized-my-next-js-website-4f3a
+# syntax=docker/dockerfile:1
+#
+# https://docs.docker.com/engine/reference/builder/
 
-# Creates a layer from node:alpine image.
-FROM node:alpine
+ARG NODE_VERSION=lts
 
-# Sets an environment variable
-ENV PORT 3000
+FROM node:${NODE_VERSION}-alpine
 
-# Sets the working directory for any RUN, CMD, ENTRYPOINT, COPY, and ADD commands
+# Use production node environment by default.
+#ENV NODE_ENV=production
+ENV NODE_ENV=development
+
+# Define working directory for the application.
 WORKDIR /usr/src/app
 
-# Copy new files or directories into the filesystem of the container
-COPY package.json /usr/src/app
-COPY package-lock.json /usr/src/app
+# Download dependencies and make use of caching.
+RUN --mount=type=bind,source=package.json,target=package.json \
+    --mount=type=bind,source=package-lock.json,target=package-lock.json \
+    --mount=type=cache,target=/root/.npm \
+    npm clean-install
 
-# Execute commands in a new layer on top of the current image and commit the results
-RUN npm install
+# Copy the rest of the source files into the image.
+COPY . .
 
+# Expose the port that the application listens on.
 EXPOSE 3000
 
-ENTRYPOINT ["npm", "run"]
-
-# Use this command as a default (can be overridden via "command" option in docker-compose.yml)
-CMD ["start"]
+# Run the application.
+CMD npm start
