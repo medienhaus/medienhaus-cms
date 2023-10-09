@@ -6,8 +6,7 @@ ARG NODE_VERSION=lts
 
 FROM node:${NODE_VERSION}-alpine
 
-# Use production node environment by default.
-#ENV NODE_ENV=production
+# Use development node environment by default.
 ENV NODE_ENV=development
 
 # Define working directory for the application.
