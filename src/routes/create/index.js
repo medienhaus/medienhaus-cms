@@ -375,6 +375,9 @@ const Create = () => {
         case 'core/code':
           contentType = 'code'
           break
+        case 'medienhaus/link':
+          contentType = 'link'
+          break
         case 'medienhaus/heading':
         case 'medienhaus/image':
         case 'medienhaus/audio':
@@ -442,6 +445,14 @@ const Create = () => {
             msgtype: 'm.text',
             format: 'org.matrix.custom.html',
             formatted_body: `<h3>${block.attributes.content}</h3>`
+          })
+          break
+        case 'medienhaus/link':
+          await matrixClient.sendMessage(roomId, {
+            body: '[' + block.attributes.text + '](' + block.attributes.content + ')',
+            msgtype: 'm.text',
+            format: 'org.matrix.custom.html',
+            formatted_body: `<a href="${block.attributes.content}">${block.attributes.text}</a>`
           })
           break
         case 'medienhaus/image':
