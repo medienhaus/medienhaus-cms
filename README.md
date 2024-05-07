@@ -4,7 +4,7 @@
 
 Customizable, modular, free and open-source environment for decentralized, distributed communication and collaboration without third-party dependencies.
 
-[Website](https://medienhaus.dev/) — [Mastodon](https://chaos.social/@medienhaus)
+[Website](https://medienhaus.dev/) — [Fediverse](https://chaos.social/@medienhaus)
 
 <br>
 
