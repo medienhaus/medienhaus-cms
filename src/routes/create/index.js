@@ -35,23 +35,6 @@ const nl2br = function (str) {
   return str.split('\n').join('<br>')
 }
 
-const TabSection = styled.section`
-  display: grid;
-  grid-gap: var(--margin);
-  grid-template-columns: repeat(auto-fit, minmax(14ch, 1fr));
-  overflow-y: scroll;
-
-  /* set height of child elements */
-  & > * {
-    height: calc(var(--margin) * 2.4);
-  }
-
-  /* unset margin-top for each direct child element directly following a previous one */
-  & > * + * {
-    margin-top: unset;
-  }
-`
-
 const LanguageSection = styled.section`
   display: grid;
   grid-gap: var(--margin);

@@ -170,7 +170,6 @@ function GutenbergEditor ({ content = [], blockTypes = ['text', 'heading', 'list
           codeEditingEnabled: false,
           bodyPlaceholder: t('Start typing something...'),
           keepCaretInsideBlock: false
-
         }}
         value={blocks}
         onInput={(blocks) => {
@@ -181,7 +180,6 @@ function GutenbergEditor ({ content = [], blockTypes = ['text', 'heading', 'list
           setBlocks(blocks)
           blocksHaveChanged(blocks)
         }}
-
       >
         <ShortcutProvider>
           <SlotFillProvider>
