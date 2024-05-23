@@ -174,6 +174,15 @@ const Create = () => {
 
   const projectSpace = params.spaceId
 
+  useEffect(() => {
+    // we reset the content language to the default language if the project space changes back to the /create route
+    if (!projectSpace) {
+      console.log('no project space')
+      setAddingAdditionalLanguage(false)
+      setLanguages([])
+    }
+  }, [projectSpace])
+
   const addLang = async () => {
     const createLanguageSpace = async (lang) => {
       const opts = (template, name, history) => {
