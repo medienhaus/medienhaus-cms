@@ -52,6 +52,7 @@
       "es",
       "de"
     ],
+    "customLanguages": true,
     "sites": {
       "account": {
         "avatar": true,
