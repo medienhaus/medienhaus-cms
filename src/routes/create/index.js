@@ -1170,6 +1170,7 @@ const Create = () => {
                     </select>
                   )}
                   <button
+                    style={{ whiteSpace: 'nowrap' }}
                     value="addLang"
                     key="lang"
                     onClick={(e) => {
