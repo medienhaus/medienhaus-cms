@@ -38,6 +38,7 @@ const TabSection = styled.section`
   display: grid;
   grid-gap: var(--margin);
   grid-template-columns: repeat(auto-fit, minmax(14ch, 1fr));
+  overflow-y: scroll;
 
   /* set height of child elements */
   & > * {
@@ -166,16 +167,108 @@ const Create = () => {
   const [temporaryGutenbergContents, setTemporaryGutenbergContents] =
     useState(undefined)
 
-  const [languages, setLanguages] = useState(config.medienhaus?.languages)
+  const [languages, setLanguages] = useState([])
   const [newLang, setNewLang] = useState('')
-  const [addingAdditionalLanguage, setAddingAdditionalLanguage] = useState(false)
+  const [addingAdditionalLanguage, setAddingAdditionalLanguage] =
+    useState(false)
 
   const projectSpace = params.spaceId
 
-  const addLang = (lang) => {
+  const addLang = async () => {
+    const createLanguageSpace = async (lang) => {
+      const opts = (template, name, history) => {
+        return {
+          preset: 'private_chat',
+          name: name,
+          room_version: '9',
+          creation_content: { type: 'm.space' },
+          initial_state: [
+            {
+              type: 'm.room.history_visibility',
+              content: { history_visibility: history }
+            }, //  world_readable
+            {
+              type: 'dev.medienhaus.meta',
+              content: {
+                version: '0.4',
+                type: 'item',
+                template: template,
+                application: process.env.REACT_APP_APP_NAME,
+                published: 'draft'
+              }
+            },
+            {
+              type: 'm.room.guest_access',
+              state_key: '',
+              content: { guest_access: 'can_join' }
+            }
+          ],
+          power_level_content_override: {
+            ban: 50,
+            events: {
+              'm.room.avatar': 50,
+              'm.room.canonical_alias': 50,
+              'm.room.encryption': 100,
+              'm.room.history_visibility': 100,
+              'm.room.name': 50,
+              'm.room.power_levels': 100,
+              'm.room.server_acl': 100,
+              'm.room.tombstone': 100,
+              'm.space.child': 50,
+              'm.room.topic': 50,
+              'm.room.pinned_events': 50,
+              'm.reaction': 50,
+              'im.vector.modular.widgets': 50
+            },
+            events_default: 50,
+            historical: 100,
+            invite: 50,
+            kick: 50,
+            redact: 50,
+            state_default: 50,
+            users_default: 0
+          },
+          visibility: 'private'
+        }
+      }
+      const languageRoom = await matrixClient.createRoom(
+        opts('lang', lang, 'shared')
+      )
+      await inviteCollaborators(languageRoom.room_id)
+      await Matrix.addSpaceChild(projectSpace, languageRoom.room_id)
+    }
+
+    if (languages.includes(newLang)) {
+      console.log('error')
+      setNewLang('')
+      return
+    }
     setLanguages([...languages, newLang])
     setAddingAdditionalLanguage(false)
+    console.log(projectSpace)
+    await createLanguageSpace(newLang)
   }
+
+  // we populate the languages in this effect hook and check if we allow custom languages, then it will fetch the languages from the project space otherwise it will use the default languages from the config
+  useEffect(() => {
+    const fetchLanguagesAndUpdateState = async (id) => {
+      const spaces = await matrixClient.getRoomHierarchy(id, 1000, 1)
+      // we filter out all of the spaces which are not the parent space itstelf as well as assuming that if it is an two letter space it is a language space based on the ISO639-1 standard
+      // @TODO this is a very hacky way to determine if a space is a language space, it should be discussed if we should check that with additional calls to check the dev.medienhaus.meta event
+      const languageSpaces = spaces?.rooms
+        ?.filter((room) => room.room_id !== id && room.name.length === 2)
+        .map((room) => room.name)
+
+      if (languageSpaces) setLanguages(languageSpaces)
+    }
+    if (languages.length === 0) {
+      if (projectSpace && config.medienhaus?.customLanguages) {
+        fetchLanguagesAndUpdateState(projectSpace)
+      } else {
+        setLanguages(config.medienhaus?.languages)
+      }
+    }
+  }, [setLanguages, projectSpace, matrixClient, languages.length])
 
   const setSaveTimestampToCurrentTime = useCallback(() => {
     const today = new Date()
@@ -1051,8 +1144,13 @@ const Create = () => {
               {config.medienhaus?.customLanguages && (
                 <>
                   {addingAdditionalLanguage && (
-                    <select onChange={(e) => setNewLang(e.target.value)} value={newLang || ''}>
-                      <option disabled value="">{t('select language')}</option>
+                    <select
+                      onChange={(e) => setNewLang(e.target.value)}
+                      value={newLang || ''}
+                    >
+                      <option disabled value="">
+                        {t('select language')}
+                      </option>
                       {ISO6391.getAllNames().map((lang, i) => (
                         <option key={i} value={ISO6391.getCode(lang)}>
                           {lang}
@@ -1064,14 +1162,15 @@ const Create = () => {
                     value="addLang"
                     key="lang"
                     onClick={(e) => {
-                      if (!addingAdditionalLanguage) { setAddingAdditionalLanguage(true) }
+                      if (!addingAdditionalLanguage) {
+                        setAddingAdditionalLanguage(true)
+                      }
                       if (addingAdditionalLanguage && newLang?.length > 0) {
-                        console.log('add lang click')
-                        addLang(e.target.value)
+                        addLang()
                       }
                     }}
                   >
-                    +
+                    {addingAdditionalLanguage ? '+' : t('Add language')}
                   </button>
                 </>
               )}
