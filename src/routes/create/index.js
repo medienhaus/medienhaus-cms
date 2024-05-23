@@ -29,6 +29,7 @@ import * as Showdown from 'showdown'
 import { triggerApiUpdate } from '../../helpers/MedienhausApiHelper'
 import TextNavigation from '../../components/medienhausUI/textNavigation'
 import Tags from './Tags'
+import SimpleButton from '../../components/medienhausUI/simpleButton'
 
 const nl2br = function (str) {
   return str.split('\n').join('<br>')
@@ -49,6 +50,33 @@ const TabSection = styled.section`
   & > * + * {
     margin-top: unset;
   }
+`
+
+const LanguageSection = styled.section`
+  display: grid;
+  grid-gap: var(--margin);
+  grid-auto-flow: row;
+
+  /* unset margin-top for each direct child element directly following a previous one */
+  & > * + * {
+    margin-top: unset;
+  }
+`
+
+const LanguageCancelConfirm = styled.div`
+  display: flex;
+  gap: var(--margin);
+`
+
+const LanguageSectionAdd = styled.div`
+  display: grid;
+  grid-gap: var(--margin);
+  grid-auto-flow: row;
+`
+const LanguageSectionSelect = styled.div`
+  display: grid;
+  grid-template-columns: 1fr calc(var(--margin) * 2.5);
+  grid-gap: var(--margin);
 `
 
 const GutenbergWrapper = styled.div`
@@ -1138,65 +1166,96 @@ const Create = () => {
               ))}
             </select>
             */}
-            <TabSection className="request">
-              {languages.map((lang) => (
-                <TextNavigation
-                  value={lang}
-                  key={lang}
-                  onClick={(e) => {
+            <LanguageSection className="request">
+              <LanguageSectionSelect>
+                <select
+                  disabled={addingAdditionalLanguage}
+                  onChange={(e) => {
                     setContentLang(e.target.value)
                     setDescription()
                   }}
-                  disabled={lang === contentLang}
                 >
-                  {ISO6391.getName(lang)}
-                </TextNavigation>
-              ))}
-              {config.medienhaus?.customLanguages && (
-                <>
-                  {addingAdditionalLanguage && (
-                    <select
-                      onChange={(e) => setNewLang(e.target.value)}
-                      value={newLang || ''}
-                    >
-                      <option disabled value="">
-                        {t('select language')}
-                      </option>
-                      {ISO6391.getAllNames().map((lang, i) => (
-                        <option key={i} value={ISO6391.getCode(lang)}>
-                          {lang}
+                  {languages.map((lang) => (
+                    <option value={lang} key={lang}>
+                      {ISO6391.getName(lang)}
+                    </option>
+                  ))}
+                </select>
+                <SimpleButton
+                  value="addLang"
+                  key="lang"
+                  disabled={addingAdditionalLanguage}
+                  onClick={(e) => {
+                    if (!addingAdditionalLanguage) {
+                      setAddingAdditionalLanguage(true)
+                    }
+                  }}
+                >
+                  +
+                </SimpleButton>
+              </LanguageSectionSelect>
+              <LanguageSectionAdd>
+                {config.medienhaus?.customLanguages && (
+                  <>
+                    {addingAdditionalLanguage && (
+                      <select
+                        onChange={(e) => setNewLang(e.target.value)}
+                        value={newLang || ''}
+                      >
+                        <option disabled value="">
+                          {t('select language')}
                         </option>
-                      ))}
-                    </select>
-                  )}
-                  <button
-                    style={{ whiteSpace: 'nowrap' }}
-                    value="addLang"
-                    key="lang"
-                    onClick={(e) => {
-                      if (!addingAdditionalLanguage) {
-                        setAddingAdditionalLanguage(true)
-                      }
-                      if (addingAdditionalLanguage && newLang?.length > 0) {
-                        addLang()
-                      }
-                    }}
-                  >
-                    {addingAdditionalLanguage ? '+' : t('Add language')}
-                  </button>
-                </>
-              )}
-            </TabSection>
+                        {ISO6391.getAllNames().map((lang, i) => (
+                          <option key={i} value={ISO6391.getCode(lang)}>
+                            {lang}
+                          </option>
+                        ))}
+                      </select>
+                    )}
+                    {addingAdditionalLanguage && (
+                      <LanguageCancelConfirm>
+                        <SimpleButton
+                          cancel
+                          onClick={() => {
+                            setAddingAdditionalLanguage(false)
+                            setNewLang('')
+                          }}
+                        >
+                          {t('CANCEL')}
+                        </SimpleButton>
+                        <SimpleButton
+                          value="addLang"
+                          key="lang"
+                          onClick={(e) => {
+                            if (
+                              addingAdditionalLanguage &&
+                              newLang?.length > 0
+                            ) {
+                              addLang()
+                            }
+                          }}
+                        >
+                          {t('Add')}
+                        </SimpleButton>
+                      </LanguageCancelConfirm>
+                    )}
+                  </>
+                )}
+              </LanguageSectionAdd>
+            </LanguageSection>
             {spaceObject && (description || description === '')
               ? (
                 <ProjectDescription
+                  disabled={addingAdditionalLanguage}
                   description={description[contentLang]}
                   callback={onChangeDescription}
+                  language={ISO6391.getName(contentLang)}
                 />
                 )
               : (
                 <Loading />
                 )}
+
             <GutenbergWrapper>
               {gutenbergContent === undefined
                 ? (
@@ -1204,6 +1263,7 @@ const Create = () => {
                   )
                 : (
                   <GutenbergEditor
+                    disabled={addingAdditionalLanguage}
                     content={gutenbergContent}
                     blockTypes={_.get(config, [
                       'medienhaus',
@@ -1219,6 +1279,7 @@ const Create = () => {
             {temporaryGutenbergContents && (
               <LoadingSpinnerButton
                 type="button"
+                disabled={addingAdditionalLanguage}
                 onClick={saveGutenbergEditorToMatrix}
               >
                 {t('SAVE CHANGES')}
@@ -1247,7 +1308,15 @@ const Create = () => {
                   />
                   {!(
                     description && description[config.medienhaus?.languages[0]]
-                  ) && <p>❗️ {t('Please add a short description. At least in') + ' "' + ISO6391.getName(languages[0]) + '"'}</p>}
+                  ) && (
+                    <p>
+                      ❗️{' '}
+                      {t('Please add a short description. At least in') +
+                      ' "' +
+                      ISO6391.getName(languages[0]) +
+                      '"'}
+                    </p>
+                  )}
                   {!hasContext && <p>❗️ {t('Please select a context.')}</p>}
                 </>
                 )

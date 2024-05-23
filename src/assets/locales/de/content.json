@@ -22,6 +22,7 @@
   "SAVE": "SPEICHERN",
   "CHANGE": "ÄNDERN",
   "Please add a short description.": "Bitte fügen Sie eine Kurzbeschreibung hinzu.",
+  "Please add a short description": "Bitte fügen Sie eine Kurzbeschreibung hinzu",
   "Please add a short description. At least in": "Bitte fügen Sie eine Kurzbeschreibung hinzu. Zumindest in",
   "Please select a context.": "Bitte wählen Sie einen Kontext aus.",
   "This field is required before publishing.": "Dieses Feld muss vor der Veröffentlichung ausgefüllt werden.",
@@ -73,5 +74,5 @@
   "Date and Venue": "Datum und Veranstaltungsort",
   "SAVE CHANGES": "ÄNDERUNGEN SPEICHERN",
   "select language": "Sprache auswählen",
-  "Add language": "Sprache hinzufügen"
+  "Add": "Hinzufügen"
 }
