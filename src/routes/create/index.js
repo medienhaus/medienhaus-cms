@@ -145,12 +145,13 @@ const Create = () => {
   const [allocation, setAllocation] = useState([])
   const [events, setEvents] = useState()
   const [gutenbergContent, setGutenbergContent] = useState(undefined)
-  // eslint-disable-next-line no-unused-vars
+  /* eslint-disable no-unused-vars */
   const [
     gutenbergIdToMatrixRoomId,
     setGutenbergIdToMatrixRoomId,
     gutenbergIdToMatrixRoomIdRef
   ] = useStateRef({})
+  /* eslint-disable no-unused-vars */
   const [description, setDescription] = useState()
   const [hasContext, setHasContext] = useState(undefined)
   const [template, setTemplate] = useState(
@@ -441,7 +442,7 @@ const Create = () => {
       setEvents()
     }
     projectSpace && languages?.length > 0 && fetchSpace()
-  }, [projectSpace, fetchSpace, title])
+  }, [projectSpace, fetchSpace, title, languages?.length])
 
   useEffect(() => {
     setGutenbergContent(undefined)
