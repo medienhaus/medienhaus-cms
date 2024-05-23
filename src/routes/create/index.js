@@ -363,7 +363,7 @@ const Create = () => {
         setTitle(space.rooms[0].name)
         // set the topic depending on selected language
         const desc = {}
-        config.medienhaus?.languages.forEach((lang) => {
+        languages.forEach((lang) => {
           desc[lang] =
             space.rooms.filter((room) => room.name === lang)[0]?.topic || ''
         })
@@ -416,6 +416,7 @@ const Create = () => {
     },
     [
       matrixClient,
+      languages,
       projectSpace,
       setSpaceObject,
       contentLang,
@@ -430,7 +431,7 @@ const Create = () => {
       setDescription()
       setEvents()
     }
-    projectSpace && fetchSpace()
+    projectSpace && languages?.length > 0 && fetchSpace()
   }, [projectSpace, fetchSpace, title])
 
   useEffect(() => {
