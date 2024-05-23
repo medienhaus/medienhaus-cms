@@ -1236,7 +1236,7 @@ const Create = () => {
                   />
                   {!(
                     description && description[config.medienhaus?.languages[0]]
-                  ) && <p>❗️ {t('Please add a short description.')}</p>}
+                  ) && <p>❗️ {t('Please add a short description. At least in') + ' "' + ISO6391.getName(languages[0]) + '"'}</p>}
                   {!hasContext && <p>❗️ {t('Please select a context.')}</p>}
                 </>
                 )
