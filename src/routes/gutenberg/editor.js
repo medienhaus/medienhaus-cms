@@ -189,7 +189,7 @@ function GutenbergEditor ({ content = [], blockTypes = ['text', 'heading', 'list
                   <BlockList renderAppender={() => null} />
                   <div style={{ padding: '0 1rem 1rem 1rem', display: 'grid', gridGap: '1rem', gridTemplateColumns: '1fr auto 1fr' }}>
                     <hr style={{ borderWidth: '2px', transform: 'translateY(-1px)' }} />
-                    <button style={{ width: 'auto', height: '2rem', display: 'grid', placeContent: 'center', justifySelf: 'center' }} disabled={disabled} onClick={addBlock}>{t('Add text/images/videos …')}</button>
+                    <button style={{ width: 'auto', height: '2rem', display: 'grid', placeContent: 'center', justifySelf: 'center' }} disabled={disabled} onClick={addBlock}>{t('Add (text, images, videos, etc.)')}</button>
                     <hr style={{ borderWidth: '2px', transform: 'translateY(-1px)' }} />
                   </div>
                 </ObserveTyping>
