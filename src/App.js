@@ -22,6 +22,7 @@ import Request from './routes/request'
 import Preview from './routes/preview'
 import Pages from './routes/pages'
 import Logout from './routes/logout'
+import Terms from './routes/terms'
 
 import { AuthProvider, useAuth } from './Auth'
 import PropTypes from 'prop-types'
@@ -80,6 +81,7 @@ function App () {
               <Route path="/" exact component={Landing} />
               <Route path="/login" component={Login} />
               {config.medienhaus?.sites?.account && <PrivateRoute path="/account" component={Account} />}
+              {config.medienhaus?.sites.terms && <Route path="/terms" component={Terms} />}
               <PrivateRoute path="/admin" component={Admin} />
               <PrivateRoute path="/boilerplate" component={Boilerplate} />
               <PrivateRoute path="/content" component={Content} />

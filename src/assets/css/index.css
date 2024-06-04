@@ -1040,6 +1040,13 @@ button>.loading {
   font-family: "Courier New", "Courier", monospace;
 }
 
+.terms ul  {
+  display: grid;
+  grid-gap: var(--margin);
+  grid-template-rows:  1fr;
+
+}
+
 /*
 .toggle {
   display: grid;
