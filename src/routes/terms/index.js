@@ -47,7 +47,7 @@ const Terms = () => {
   async function createTermsRoom () {
     return await Matrix.getMatrixClient().createRoom({
       preset: 'private_chat',
-      name: 'termsAndConditions',
+      name: process.env.REACT_APP_APP_NAME + 'termsAndConditions',
       room_version: '9',
       initial_state: [{
         type: 'dev.medienhaus.meta',
@@ -87,7 +87,7 @@ const Terms = () => {
             }
 
             // Tell the backend that we accept the terms
-            await makeRequest('/cms/terms', { termsRoomId })
+            await makeRequest('cms/terms', { termsRoomId })
 
             history.push(from)
           }
