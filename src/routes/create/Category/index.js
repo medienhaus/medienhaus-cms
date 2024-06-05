@@ -173,23 +173,25 @@ const Category = ({ projectSpace, onChange, parent }) => {
     // Add this current project to the given context space
 
     // if the join rule of the context is knock, we need to ask to join first.
-    if (contextObject.joinRule === 'knock' && contextObject.membership !== 'join') {
-      if (contextObject.membership === 'knock') {
-        alert('You have already requested to join this context. You will be notified once you are accepted.')
+    if (!contextObject.membership !== 'join') {
+      if (contextObject.joinRule === 'knock' || contextObject.joinRule === 'knock_restricted') {
+        if (contextObject.membership === 'knock') {
+          alert('You have already requested to join this context. You will be notified once you are accepted.')
+          setLoading(false)
+          return
+        }
+        const knockOnRoom = window.confirm('You need to ask to join this context first. Do you want to ask to join the context?')
+        if (knockOnRoom) {
+          const knock = await Matrix.knockOnMatrixRoom(contextObject.id).catch((error) => alert('The following error occurred: ' + error.data?.error))
+          if (knock.room_id) {
+            alert('You have asked to join the context. You will be notified once you are accepted.')
+          }
+        }
+
         setLoading(false)
+
         return
       }
-      const knockOnRoom = window.confirm('You need to ask to join this context first. Do you want to ask to join the context?')
-      if (knockOnRoom) {
-        const knock = await Matrix.knockOnMatrixRoom(contextObject.id).catch((error) => alert('The following error occurred: ' + error.data?.error))
-        if (knock.room_id) {
-          alert('You have asked to join the context. You will be notified once you are accepted.')
-        }
-      }
-
-      setLoading(false)
-
-      return
     }
     const addToContext = await Matrix.addSpaceChild(contextSpace, projectSpace)
       .catch(async () => {
