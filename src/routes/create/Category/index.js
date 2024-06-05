@@ -185,6 +185,7 @@ const Category = ({ projectSpace, onChange, parent }) => {
           const knock = await Matrix.knockOnMatrixRoom(contextObject.id).catch((error) => alert('The following error occurred: ' + error.data?.error))
           if (knock.room_id) {
             alert('You have asked to join the context. You will be notified once you are accepted.')
+            contextObject.membership = 'knock'
           }
         }
 
