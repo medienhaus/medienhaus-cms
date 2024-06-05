@@ -47,13 +47,14 @@ const Terms = () => {
   async function createTermsRoom () {
     return await Matrix.getMatrixClient().createRoom({
       preset: 'private_chat',
-      name: process.env.REACT_APP_APP_NAME + 'termsAndConditions',
+      name: process.env.REACT_APP_APP_NAME + '-termsAndConditions',
       room_version: '9',
       initial_state: [{
         type: 'dev.medienhaus.meta',
         content: {
           version: '0.3',
-          template: 'termsAndConditions'
+          template: 'termsAndConditions',
+          type: 'item'
         }
       }],
       visibility: 'private'
