@@ -1,5 +1,11 @@
 import React, { useEffect, useState } from 'react'
-import { BrowserRouter as Router, Route, Switch, Redirect, useLocation } from 'react-router-dom'
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  Redirect,
+  useLocation
+} from 'react-router-dom'
 
 import './assets/css/index.css'
 import Footer from './components/footer'
@@ -40,14 +46,15 @@ function PrivateRoute ({ children, ...rest }) {
     //   setHasAcceptedTerms(true)
     //   return
     // }
-
-    makeRequest('cms/terms', null, 'GET').then(({ hasAcceptedTerms }) => {
-      setHasAcceptedTerms(hasAcceptedTerms)
-    })
+    if (config.medienhaus?.sites.terms) {
+      makeRequest('cms/terms', null, 'GET').then(({ hasAcceptedTerms }) => {
+        setHasAcceptedTerms(hasAcceptedTerms)
+      })
+    }
   }, [])
 
   // Still loading information...
-  if (auth.user === null || hasAcceptedTerms === null) {
+  if (auth.user === null || (hasAcceptedTerms === null && config.medienhaus?.sites.terms)) {
     return <Loading />
   }
 
@@ -63,7 +70,11 @@ function PrivateRoute ({ children, ...rest }) {
     )
   }
 
-  if (!hasAcceptedTerms && location.pathname !== '/support') {
+  if (
+    config.medienhaus?.sites.terms &&
+    !hasAcceptedTerms &&
+    location.pathname !== '/support'
+  ) {
     return (
       <Redirect
         to={{
@@ -75,9 +86,7 @@ function PrivateRoute ({ children, ...rest }) {
   }
 
   // Logged in - render our actual route components
-  return (
-    <Route {...rest}>{children}</Route>
-  )
+  return <Route {...rest}>{children}</Route>
 }
 
 function ScrollToTop () {
@@ -105,8 +114,12 @@ function App () {
             <Switch>
               <Route path="/" exact component={Landing} />
               <Route path="/login" component={Login} />
-              {config.medienhaus?.sites?.account && <PrivateRoute path="/account" component={Account} />}
-              {config.medienhaus?.sites.terms && <Route path="/terms" component={Terms} />}
+              {config.medienhaus?.sites?.account && (
+                <PrivateRoute path="/account" component={Account} />
+              )}
+              {config.medienhaus?.sites.terms && (
+                <Route path="/terms" component={Terms} />
+              )}
               <PrivateRoute path="/admin" component={Admin} />
               <PrivateRoute path="/boilerplate" component={Boilerplate} />
               <PrivateRoute path="/content" component={Content} />
@@ -116,12 +129,24 @@ function App () {
               <PrivateRoute path="/gutenberg" component={Gutenberg} />
               <PrivateRoute path="/logout" component={Logout} />
 
-              {config.medienhaus?.sites?.moderate && <PrivateRoute path="/moderate" component={Moderate} />}
-              {config.medienhaus?.sites?.support && <PrivateRoute path="/support" component={Support} />}
-              {config.medienhaus?.sites?.feedback && <PrivateRoute path="/feedback" component={Feedback} />}
-              {config.medienhaus?.sites?.request && <PrivateRoute path="/request" component={Request} />}
-              {config.medienhaus?.sites?.credits && <PrivateRoute path="/credits" component={Credits} />}
-              {config.medienhaus?.pages && <PrivateRoute path="/pages/:id" component={Pages} />}
+              {config.medienhaus?.sites?.moderate && (
+                <PrivateRoute path="/moderate" component={Moderate} />
+              )}
+              {config.medienhaus?.sites?.support && (
+                <PrivateRoute path="/support" component={Support} />
+              )}
+              {config.medienhaus?.sites?.feedback && (
+                <PrivateRoute path="/feedback" component={Feedback} />
+              )}
+              {config.medienhaus?.sites?.request && (
+                <PrivateRoute path="/request" component={Request} />
+              )}
+              {config.medienhaus?.sites?.credits && (
+                <PrivateRoute path="/credits" component={Credits} />
+              )}
+              {config.medienhaus?.pages && (
+                <PrivateRoute path="/pages/:id" component={Pages} />
+              )}
             </Switch>
           </main>
           <Footer />
