@@ -11,6 +11,7 @@ import styled from 'styled-components'
 import ContextDropdown from '../../../components/ContextDropdown'
 
 import { triggerApiUpdate, fetchContextTree, fetchId, removeFromParent } from '../../../helpers/MedienhausApiHelper'
+import { useTranslation } from 'react-i18next'
 
 const RemovableLiElement = styled.li`
   display: grid;
@@ -28,6 +29,7 @@ const Category = ({ projectSpace, onChange, parent }) => {
   const [error, setError] = useState('')
   const [inputItems, setInputItems] = useState()
   const matrixClient = Matrix.getMatrixClient()
+  const { t } = useTranslation('content')
 
   const createStructurObject = async () => {
     setLoading(true)
@@ -62,7 +64,18 @@ const Category = ({ projectSpace, onChange, parent }) => {
         // check the join rule of the context
         const joinRule = _.find(stateEvents, { type: 'm.room.join_rules' })?.content?.join_rule
         // find the membership of the user in the context by checking the m.room.members event and its state_key which is the user_id
-        const membership = _.find(stateEvents, { type: 'm.room.member', state_key: matrixClient.getUserId() })?.content?.membership
+        const memberEvent = _.find(stateEvents, { type: 'm.room.member', state_key: matrixClient.getUserId() })
+        const membership = memberEvent?.content?.membership
+        const prevMembership = memberEvent?.prev_content?.membership
+
+        if (membership === 'invite' && prevMembership === 'knock') {
+          await matrixClient.joinRoom(spaceId).catch(error => {
+            console.error(error)
+            alert(t('The following error occurred: {{error}}', { error: error.data?.error }))
+          })
+          alert(t('You have been added to the following context: {{roomName}}', { roomName: spaceName }))
+        }
+
         _.set(result, [...path, spaceId], createSpaceObject(spaceId, spaceName, metaEvent, joinRule, membership))
 
         console.log(`getting children for ${spaceId} / ${spaceName}`)

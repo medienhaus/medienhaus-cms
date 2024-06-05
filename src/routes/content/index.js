@@ -34,8 +34,11 @@ const Overview = () => {
       // get current membership
       const membership = event.content.membership
       if (membership === 'invite' && event.unsigned?.prev_content?.membership === 'knock') {
-        console.log('joining room')
-        await matrixClient.joinRoom(room.roomId).catch(console.log)
+        await matrixClient.joinRoom(room.roomId).catch(error => {
+          console.error(error)
+          alert(t('The following error occurred: {{error}}', { error: error.data?.error }))
+        })
+        alert(t('You have been added to the following context: {{roomName}}', { roomName: room.name }))
       }
 
       if (!metaEvent.template || !item.includes(metaEvent.template)) return
