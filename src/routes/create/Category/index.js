@@ -11,8 +11,6 @@ import styled from 'styled-components'
 import ContextDropdown from '../../../components/ContextDropdown'
 
 import { triggerApiUpdate, fetchContextTree, fetchId, removeFromParent } from '../../../helpers/MedienhausApiHelper'
-import { useTranslation } from 'react-i18next'
-import { joinRoomIfKnock } from '../../../helpers/joinRoomIfKnocked'
 
 const RemovableLiElement = styled.li`
   display: grid;
@@ -30,7 +28,6 @@ const Category = ({ projectSpace, onChange, parent }) => {
   const [error, setError] = useState('')
   const [inputItems, setInputItems] = useState()
   const matrixClient = Matrix.getMatrixClient()
-  const { t } = useTranslation('content')
 
   const createStructurObject = async () => {
     setLoading(true)
@@ -66,14 +63,6 @@ const Category = ({ projectSpace, onChange, parent }) => {
         const joinRule = _.find(stateEvents, { type: 'm.room.join_rules' })?.content?.join_rule
         // find the membership of the user in the context by checking the m.room.members event and its state_key which is the user_id
         const memberEvent = _.find(stateEvents, { type: 'm.room.member', state_key: matrixClient.getUserId() })
-        // Check if there are any rooms where a user has previously requested access (knocked) and has now been granted permission to join.
-        const autoJoinRoom = await joinRoomIfKnock(spaceId, memberEvent)
-          .catch(error => {
-            alert(t('The following error occurred: {{error}}', { error: error.data?.error }))
-          })
-
-        // if a room was joined, and the user therefore has access to the room, we alert the user
-        if (autoJoinRoom) alert(t(autoJoinRoom.message))
 
         _.set(result, [...path, spaceId], createSpaceObject(spaceId, spaceName, metaEvent, joinRule, memberEvent?.content?.membership))
 

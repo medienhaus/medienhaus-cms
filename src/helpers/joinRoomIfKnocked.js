@@ -11,8 +11,9 @@ import Matrix from '../Matrix'
 export const joinRoomIfKnock = async (roomOrSpaceId, event) => {
   if (!event) return null
 
-  // Check if roomOrSpaceId is a string, if so, it's a spaceId and we need to get the room
-  const room = typeof roomOrSpaceId === 'string' ? await Matrix.matrixClient.getRoom(roomOrSpaceId) : roomOrSpaceId
+  // get the room name
+  const roomName = await Matrix.getMatrixClient().getStateEvent(roomOrSpaceId, 'm.room.name')
+  console.log(roomName)
   // Get the current and previous membership status
   const membership = event?.content?.membership
   const prevMembership = event?.prev_content?.membership || event.unsigned?.prev_content?.membership
@@ -20,12 +21,10 @@ export const joinRoomIfKnock = async (roomOrSpaceId, event) => {
   if (membership === 'invite' && prevMembership === 'knock') {
     try {
       await Matrix.matrixClient.joinRoom(roomOrSpaceId)
-      return { room_id: roomOrSpaceId, message: `You have been added to the following context: ${room.name}` }
+      return { room_id: roomOrSpaceId, message: `You have been added to the following context: ${roomName.name}` }
     } catch (error) {
-      console.error(`Failed to join room: ${error}`)
+      console.error(error)
       throw error
     }
   }
-  // otherwise, return null
-  return null
 }
