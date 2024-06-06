@@ -11,6 +11,7 @@ import deleteProject from './deleteProject'
 
 import config from '../../config.json'
 import * as _ from 'lodash'
+import { joinRoomIfKnock } from '../../helpers/joinRoomIfKnocked'
 
 const Overview = () => {
   const { t } = useTranslation('content')
@@ -31,17 +32,19 @@ const Overview = () => {
 
       // see if the previous membership state of the room was 'knock' and if so, we want to join the room
       const event = _.find(room.currentState.getMembers(), { userId: matrixClient.getUserId() }).events.member.event
-      // get current membership
-      const membership = event.content.membership
-      if (membership === 'invite' && event.unsigned?.prev_content?.membership === 'knock') {
-        await matrixClient.joinRoom(room.roomId).catch(error => {
-          console.error(error)
+
+      // Check if there are any rooms where a user has previously requested access (knocked) and has now been granted permission to join.
+      const autoJoinRoom = await joinRoomIfKnock(room.roomId, event)
+        .catch(error => {
+          console.log(error)
           alert(t('The following error occurred: {{error}}', { error: error.data?.error }))
         })
-        alert(t('You have been added to the following context: {{roomName}}', { roomName: room.name }))
-      }
 
+      // if a room was joined, and the user therefore has access to the room, we alert the user
+      if (autoJoinRoom) alert(t(autoJoinRoom.message))
       if (!metaEvent.template || !item.includes(metaEvent.template)) return
+
+      const membership = event.content.membership
       // Ignore if this is not an invitation
       if (membership !== 'invite') return
       // see if the previous membership state of the room was 'knock' and if so, we want to join the room

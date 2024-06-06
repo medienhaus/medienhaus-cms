@@ -12,6 +12,7 @@ import ContextDropdown from '../../../components/ContextDropdown'
 
 import { triggerApiUpdate, fetchContextTree, fetchId, removeFromParent } from '../../../helpers/MedienhausApiHelper'
 import { useTranslation } from 'react-i18next'
+import { joinRoomIfKnock } from '../../../helpers/joinRoomIfKnocked'
 
 const RemovableLiElement = styled.li`
   display: grid;
@@ -65,18 +66,16 @@ const Category = ({ projectSpace, onChange, parent }) => {
         const joinRule = _.find(stateEvents, { type: 'm.room.join_rules' })?.content?.join_rule
         // find the membership of the user in the context by checking the m.room.members event and its state_key which is the user_id
         const memberEvent = _.find(stateEvents, { type: 'm.room.member', state_key: matrixClient.getUserId() })
-        const membership = memberEvent?.content?.membership
-        const prevMembership = memberEvent?.prev_content?.membership
-
-        if (membership === 'invite' && prevMembership === 'knock') {
-          await matrixClient.joinRoom(spaceId).catch(error => {
-            console.error(error)
+        // Check if there are any rooms where a user has previously requested access (knocked) and has now been granted permission to join.
+        const autoJoinRoom = await joinRoomIfKnock(spaceId, memberEvent)
+          .catch(error => {
             alert(t('The following error occurred: {{error}}', { error: error.data?.error }))
           })
-          alert(t('You have been added to the following context: {{roomName}}', { roomName: spaceName }))
-        }
 
-        _.set(result, [...path, spaceId], createSpaceObject(spaceId, spaceName, metaEvent, joinRule, membership))
+        // if a room was joined, and the user therefore has access to the room, we alert the user
+        if (autoJoinRoom) alert(t(autoJoinRoom.message))
+
+        _.set(result, [...path, spaceId], createSpaceObject(spaceId, spaceName, metaEvent, joinRule, memberEvent?.content?.membership))
 
         console.log(`getting children for ${spaceId} / ${spaceName}`)
         for (const event of stateEvents) {
