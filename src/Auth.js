@@ -265,8 +265,6 @@ function useAuthProvider () {
     const checkForCompletedSync = async () => {
       if (Matrix.getMatrixClient().isInitialSyncComplete() && !localStorage.getItem(process.env.REACT_APP_APP_NAME + '_space') && !folderDialogueOpen) {
         reloadJoinedSpaces()
-        // Attach event handlers to Matrix client
-        Matrix.getMatrixClient().on('RoomMember.membership', handleMembershipEvent)
         // start listening for room member events
       } else {
         setTimeout(() => {
@@ -277,6 +275,19 @@ function useAuthProvider () {
     checkForCompletedSync()
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
+
+  useEffect(() => {
+    if (user) {
+      // Attach event handlers to Matrix client
+      const matrixClient = Matrix.getMatrixClient()
+      matrixClient.on('RoomMember.membership', handleMembershipEvent)
+    }
+
+    return () => {
+      const matrixClient = Matrix.getMatrixClient()
+      matrixClient.removeListener('RoomMember.membership', handleMembershipEvent)
+    }
+  }, [user])
 
   return {
     user,
