@@ -1,0 +1,17 @@
+# https://docs.docker.com/compose/compose-file/
+
+services:
+  medienhaus-cms:
+    build:
+      context: .
+    environment:
+      NODE_ENV: development
+    ports:
+      - 3000:3000
+    volumes:
+      - .:/usr/src/app:rw
+      - node_modules:/usr/src/app/node_modules:rw
+
+volumes:
+  node_modules:
+    driver: local

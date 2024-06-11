@@ -1063,6 +1063,13 @@ button>.loading {
   font-family: "Courier New", "Courier", monospace;
 }
 
+.terms ul  {
+  display: grid;
+  grid-gap: var(--margin);
+  grid-template-rows:  1fr;
+
+}
+
 /*
 .toggle {
   display: grid;
@@ -1670,7 +1677,7 @@ button>.loading {
 }
 
 .contextDropdown ul li div small {
-  color: gray;
+  color: var(--color-me);
 }
 
 .contextDropdown ul li.disabled {

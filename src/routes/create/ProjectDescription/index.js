@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next'
 import TextareaAutosize from 'react-textarea-autosize'
 import config from '../../../config.json'
 
-const ProjectDescription = ({ description: intro, callback }) => {
+const ProjectDescription = ({ description: intro, callback, disabled = false, language = '' }) => {
   const { t } = useTranslation('content')
   const [description, setDescription] = useState(intro)
   const [backupDescription, setBackupDescription] = useState()
@@ -25,12 +25,13 @@ const ProjectDescription = ({ description: intro, callback }) => {
       <div className="projectdescription">
         <TextareaAutosize
           minRows={6}
-          placeholder={`${t('short description')}`}
           value={description}
           onClick={() => setBackupDescription(description)}
           onChange={(e) => {
             setDescription(e.target.value)
           }}
+          disabled={disabled}
+          placeholder={`${t('Please add a short description')} in ${language}. ${t('This field is required before publishing.')}`}
           onBlur={() => onSave()}
         />
         <div className="maxlength">

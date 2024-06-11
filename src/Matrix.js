@@ -123,6 +123,8 @@ class Matrix {
     await this.matrixClient.sendStateEvent(room.room_id, 'dev.medienhaus.meta', medienhausMetaEvent)
     return room
   }
+
+  knockOnMatrixRoom = (roomId) => this.matrixClient.http.authedRequest('POST', `/knock/${roomId}`, undefined, {})
 }
 
 export default new Matrix()

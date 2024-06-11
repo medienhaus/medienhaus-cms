@@ -11,7 +11,7 @@ import findValueDeep from 'deepdash/findValueDeep'
 import styled from 'styled-components'
 import ContextDropdown from '../../../components/ContextDropdown'
 
-import { triggerApiUpdate, fetchContextTree, fetchId, removeFromParent } from '../../../helpers/MedienhausApiHelper'
+import { fetchContextTree, fetchId, removeFromParent, triggerApiUpdate } from '../../../helpers/MedienhausApiHelper'
 
 const UlElement = styled.ul`
   background-color: ${props => props.active ? 'var(--color-fg)' : 'none'};
@@ -43,11 +43,13 @@ const Category = ({ projectSpace, onChange, parent, setLocationFromLocationTree 
       const result = {} // the resulting tree structure
       let hasContext = false // we use a boolean to know if a content is in a context which we need for the publishProject component in /create
 
-      function createSpaceObject (id, name, metaEvent) {
+      function createSpaceObject (id, name, metaEvent, joinRule, membership) {
         return {
           id,
           name,
           type: metaEvent.content.type,
+          joinRule: joinRule,
+          membership: membership,
           children: {}
         }
       }
@@ -64,7 +66,13 @@ const Category = ({ projectSpace, onChange, parent, setLocationFromLocationTree 
         const nameEvent = _.find(stateEvents, { type: 'm.room.name' })
         if (!nameEvent) return
         const spaceName = nameEvent.content.name
-        _.set(result, [...path, spaceId], createSpaceObject(spaceId, spaceName, metaEvent))
+
+        // check the join rule of the context
+        const joinRule = _.find(stateEvents, { type: 'm.room.join_rules' })?.content?.join_rule
+        // find the membership of the user in the context by checking the m.room.members event and its state_key which is the user_id
+        const memberEvent = _.find(stateEvents, { type: 'm.room.member', state_key: matrixClient.getUserId() })
+
+        _.set(result, [...path, spaceId], createSpaceObject(spaceId, spaceName, metaEvent, joinRule, memberEvent?.content?.membership))
 
         console.log(`getting children for ${spaceId} / ${spaceName}`)
         for (const event of stateEvents) {
@@ -174,19 +182,53 @@ const Category = ({ projectSpace, onChange, parent, setLocationFromLocationTree 
       delete projectSpaceMetaEvent.context
       await matrixClient.sendStateEvent(projectSpace, 'dev.medienhaus.meta', projectSpaceMetaEvent).catch(console.log)
     }
+    if (!contextObject.membership) {
+      // if there is no membership (most likely because the contextObject came from the api) we need to check if the user is already a member of the context
 
+      // first we check if the user is already a member of the context
+      contextObject.membership = matrixClient.getRoom(contextSpace)?.getMyMembership()
+      // we check to see if the join rule of the context is 'knock' or 'knock_restricted'
+      const joinRuleEvent = await Matrix.getMatrixClient().getStateEvent(contextSpace, 'm.room.join_rules')
+      if (joinRuleEvent?.join_rule !== 'knock' && joinRuleEvent.join_rule !== 'knock_restricted') return
+      contextObject.joinRule = joinRuleEvent.join_rule
+    }
     // If this project was in a different context previously we should try to take it out of the old context
 
     // if (currentContext && currentContext !== contextSpace) await Matrix.removeSpaceChild(currentContext, projectSpace).catch(console.log)
 
     // Add this current project to the given context space
+
+    // if the join rule of the context is knock, we need to ask to join first.
+    if (contextObject.membership !== 'join') {
+      if (contextObject.joinRule === 'knock' || contextObject.joinRule === 'knock_restricted') {
+        if (contextObject.membership === 'knock') {
+          alert('You have already requested to join this context. You will be notified once you are accepted.')
+          setLoading(false)
+          return
+        }
+        const knockOnRoom = window.confirm('You need to ask to join this context first. Do you want to ask to join the context?')
+        if (knockOnRoom) {
+          const knock = await Matrix.knockOnMatrixRoom(contextObject.id).catch((error) => alert('The following error occurred: ' + error.data?.error))
+          if (knock.room_id) {
+            alert('You have asked to join the context. You will be notified once you are accepted.')
+            contextObject.membership = 'knock'
+          }
+        }
+
+        setLoading(false)
+
+        return
+      }
+    }
     const addToContext = await Matrix.addSpaceChild(contextSpace, projectSpace)
       .catch(async () => {
-      // if we cant add the content to a context we try to join the context
+        // if we can't add the content to a context we check the join_rules of the context
+
+        // if we cant add the content to a context we try to join the context
         const joinRoom = await matrixClient.joinRoom(contextSpace).catch(console.log)
         if (joinRoom) {
           console.log('joined room')
-          // then try to add the conent to the context again
+          // then try to add the content to the context again
           const addToContext = await Matrix.addSpaceChild(contextSpace, projectSpace).catch(console.log)
           if (addToContext?.event_id) {
             setContexts(contexts => {

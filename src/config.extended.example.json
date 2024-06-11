@@ -52,6 +52,7 @@
       "es",
       "de"
     ],
+    "customLanguages": true,
     "sites": {
       "account": {
         "avatar": true,
@@ -71,7 +72,13 @@
       },
       "support": true,
       "request": false,
-      "feedback": true
+      "feedback": true,
+      "terms": [
+        {
+          "en":"hereby I confirm that I will enjoy using this software.",
+          "de":"Hiermit bestätige ich Spaß bei der Nutzung dieser Software zu haben."
+        }
+      ]
     },
     "usersToInviteToNewContexts": [
       "@user1:server.com"

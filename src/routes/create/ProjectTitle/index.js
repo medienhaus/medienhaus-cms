@@ -83,8 +83,9 @@ const ProjectTitle = ({ title, projectSpace, template, callback }) => {
       // create the project space for the student project
       await matrixClient.createRoom(opts(template, title, 'world_readable'))
         .then(async (space) => {
-          // by default we create subpsaces for localisation and one for events
+          // by default, we create subspaces for localisation and one for events
           for await (const lang of config.medienhaus?.languages) {
+            // @TODO language rooms should only be created if content was added in that language. Currently we create all of them when the project is created.
             const languageRoom = await matrixClient.createRoom(opts('lang', lang, 'shared'))
             await Matrix.addSpaceChild(space.room_id, languageRoom.room_id)
           }
