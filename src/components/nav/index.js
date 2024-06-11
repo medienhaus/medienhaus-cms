@@ -63,7 +63,7 @@ const Nav = () => {
         })
         setKnockAmount(pendingKnocks.length)
       }
-      getAmountOfPendingKnocks()
+      config.medienhaus?.sites?.moderate?.accept && getAmountOfPendingKnocks()
     }
 
     return () => {
