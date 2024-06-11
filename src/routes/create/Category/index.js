@@ -166,7 +166,22 @@ const Category = ({ projectSpace, onChange, parent }) => {
       delete projectSpaceMetaEvent.context
       await matrixClient.sendStateEvent(projectSpace, 'dev.medienhaus.meta', projectSpaceMetaEvent).catch(console.log)
     }
+    console.log('contextObject', contextObject)
+    if (!contextObject.membership) {
+      // if there is no membership (most likely because the contextObject came from the api) we need to check if the user is already a member of the context
 
+      // first we check if the user is already a member of the context
+      const membership = matrixClient.getRoom(contextSpace)?.getMyMembership()
+      console.log('membership', membership)
+      contextObject.membership = membership
+      // we check to see if the join rule of the context is 'knock' or 'knock_restricted'
+      const joinRuleEvent = await Matrix.getMatrixClient().getStateEvent(contextSpace, 'm.room.join_rules')
+      console.log('joinRuleEvent', joinRuleEvent)
+      if (joinRuleEvent?.join_rule !== 'knock' || joinRuleEvent.join_rule !== 'knock_restricted') return
+      contextObject.joinRule = joinRuleEvent.join_rule
+      const memberEvent = matrixClient.getRoom(contextSpace)
+      console.log('memberEvent', memberEvent)
+    }
     // If this project was in a different context previously we should try to take it out of the old context
 
     // if (currentContext && currentContext !== contextSpace) await Matrix.removeSpaceChild(currentContext, projectSpace).catch(console.log)
