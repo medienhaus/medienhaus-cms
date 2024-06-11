@@ -188,7 +188,7 @@ const Category = ({ projectSpace, onChange, parent }) => {
     // Add this current project to the given context space
 
     // if the join rule of the context is knock, we need to ask to join first.
-    if (!contextObject.membership !== 'join') {
+    if (contextObject.membership !== 'join') {
       if (contextObject.joinRule === 'knock' || contextObject.joinRule === 'knock_restricted') {
         if (contextObject.membership === 'knock') {
           alert('You have already requested to join this context. You will be notified once you are accepted.')
