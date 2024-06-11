@@ -4,10 +4,7 @@ import { joinRoomIfKnock } from './joinRoomIfKnocked'
 // Function to handle 'RoomMember.membership' events
 export const handleMembershipEvent = async (event, member) => {
   // only listen to events for the current user
-  console.log(event)
   if (member.userId !== Matrix.getMatrixClient().getUserId()) return
-  console.log(member.membership)
-  console.log(event)
   const autoJoinRoom = await joinRoomIfKnock(event.event.room_id, event.event)
     .catch(error => {
       console.log(error)
