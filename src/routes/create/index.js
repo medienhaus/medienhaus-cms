@@ -27,7 +27,7 @@ import UdKLocationContext from './Context/UdKLocationContext'
 import styled from 'styled-components'
 import * as Showdown from 'showdown'
 import { triggerApiUpdate } from '../../helpers/MedienhausApiHelper'
-import TextNavigation from '../../components/medienhausUI/textNavigation'
+// import TextNavigation from '../../components/medienhausUI/textNavigation'
 import Tags from './Tags'
 import SimpleButton from '../../components/medienhausUI/simpleButton'
 

@@ -10,6 +10,7 @@ import { sortBy } from 'lodash'
 import deleteProject from './deleteProject'
 
 import config from '../../config.json'
+import * as _ from 'lodash'
 
 const Overview = () => {
   const { t } = useTranslation('content')
@@ -25,10 +26,14 @@ const Overview = () => {
       if (room.getType() !== 'm.space') return
       // Ignore if this is not an "item"
       const metaEvent = await matrixClient.getStateEvent(room.roomId, 'dev.medienhaus.meta').catch(() => {})
+      // if no meta event is found, we don't want to display the room
       if (!metaEvent || !metaEvent.template || !item.includes(metaEvent.template)) return
-      // Ignore if this is not an invitation (getMyMembership() only works correctly after calling _loadMembersFromServer())
-      await room.loadMembersFromServer().catch(console.error)
-      if (room.getMyMembership() !== 'invite') return
+
+      const event = _.find(room.currentState.getMembers(), { userId: matrixClient.getUserId() }).events.member.event
+      const membership = event.content.membership
+      // Ignore if this is not an invitation
+      if (membership !== 'invite') return
+      // see if the previous membership state of the room was 'knock' and if so, we want to join the room
       // if we have legacy code with unjoined rooms, take care of those first.
       if (room.name.includes('_event')) {
         const eventSpace = await matrixClient.getRoomHierarchy(room.roomId).catch(console.log)
