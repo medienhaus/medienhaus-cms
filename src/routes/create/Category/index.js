@@ -10,7 +10,7 @@ import findValueDeep from 'deepdash/findValueDeep'
 import styled from 'styled-components'
 import ContextDropdown from '../../../components/ContextDropdown'
 
-import { triggerApiUpdate, fetchContextTree, fetchId, removeFromParent } from '../../../helpers/MedienhausApiHelper'
+import { fetchContextTree, fetchId, removeFromParent, triggerApiUpdate } from '../../../helpers/MedienhausApiHelper'
 
 const RemovableLiElement = styled.li`
   display: grid;
@@ -170,16 +170,11 @@ const Category = ({ projectSpace, onChange, parent }) => {
       // if there is no membership (most likely because the contextObject came from the api) we need to check if the user is already a member of the context
 
       // first we check if the user is already a member of the context
-      const membership = matrixClient.getRoom(contextSpace)?.getMyMembership()
-      console.log('membership', membership)
-      contextObject.membership = membership
+      contextObject.membership = matrixClient.getRoom(contextSpace)?.getMyMembership()
       // we check to see if the join rule of the context is 'knock' or 'knock_restricted'
       const joinRuleEvent = await Matrix.getMatrixClient().getStateEvent(contextSpace, 'm.room.join_rules')
-      console.log('joinRuleEvent', joinRuleEvent)
       if (joinRuleEvent?.join_rule !== 'knock' && joinRuleEvent.join_rule !== 'knock_restricted') return
       contextObject.joinRule = joinRuleEvent.join_rule
-      const memberEvent = matrixClient.getRoom(contextSpace)
-      console.log('memberEvent', memberEvent)
     }
     // If this project was in a different context previously we should try to take it out of the old context
 
