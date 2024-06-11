@@ -27,8 +27,7 @@ const Overview = () => {
       // Ignore if this is not an "item"
       const metaEvent = await matrixClient.getStateEvent(room.roomId, 'dev.medienhaus.meta').catch(() => {})
       // if no meta event is found, we don't want to display the room
-      if (!metaEvent) return
-      if (!metaEvent.template || !item.includes(metaEvent.template)) return
+      if (!metaEvent || !metaEvent.template || !item.includes(metaEvent.template)) return
 
       const event = _.find(room.currentState.getMembers(), { userId: matrixClient.getUserId() }).events.member.event
       const membership = event.content.membership
