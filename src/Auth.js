@@ -4,6 +4,7 @@ import * as PropTypes from 'prop-types'
 import useJoinedSpaces from './components/matrix_joined_spaces'
 import { useHistory } from 'react-router-dom'
 import config from './config.json'
+import { handleMembershipEvent } from './helpers/matrixClientEventHandlers'
 
 const AuthContext = createContext(undefined)
 
@@ -264,6 +265,7 @@ function useAuthProvider () {
     const checkForCompletedSync = async () => {
       if (Matrix.getMatrixClient().isInitialSyncComplete() && !localStorage.getItem(process.env.REACT_APP_APP_NAME + '_space') && !folderDialogueOpen) {
         reloadJoinedSpaces()
+        // start listening for room member events
       } else {
         setTimeout(() => {
           checkForCompletedSync()
@@ -273,6 +275,19 @@ function useAuthProvider () {
     checkForCompletedSync()
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
+
+  useEffect(() => {
+    if (user) {
+      // Attach event handlers to Matrix client
+      const matrixClient = Matrix.getMatrixClient()
+      matrixClient.on('RoomMember.membership', handleMembershipEvent)
+    }
+
+    return () => {
+      const matrixClient = Matrix.getMatrixClient()
+      matrixClient.removeListener('RoomMember.membership', handleMembershipEvent)
+    }
+  }, [user])
 
   return {
     user,
