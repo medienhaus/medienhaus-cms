@@ -1163,18 +1163,20 @@ const Create = () => {
                     </option>
                   ))}
                 </select>
-                <SimpleButton
-                  value="addLang"
-                  key="lang"
-                  disabled={addingAdditionalLanguage}
-                  onClick={(e) => {
-                    if (!addingAdditionalLanguage) {
-                      setAddingAdditionalLanguage(true)
-                    }
-                  }}
-                >
-                  +
-                </SimpleButton>
+                {config.medienhaus?.customLanguages && (
+                  <SimpleButton
+                    value="addLang"
+                    key="lang"
+                    disabled={addingAdditionalLanguage}
+                    onClick={(e) => {
+                      if (!addingAdditionalLanguage) {
+                        setAddingAdditionalLanguage(true)
+                      }
+                    }}
+                  >
+                    +
+                  </SimpleButton>
+                )}
               </LanguageSectionSelect>
               <LanguageSectionAdd>
                 {config.medienhaus?.customLanguages && (
