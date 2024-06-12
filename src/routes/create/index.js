@@ -73,9 +73,14 @@ const LanguageSectionAdd = styled.div`
   grid-auto-flow: row;
 `
 const LanguageSectionSelect = styled.div`
-  display: grid;
-  grid-template-columns: 1fr calc(var(--margin) * 2.5);
-  grid-gap: var(--margin);
+  display: flex;
+  gap: var(--margin);
+  
+  > button {
+  width: calc(var(--margin) * 2.5);
+}
+
+
 `
 
 const GutenbergWrapper = styled.div`
