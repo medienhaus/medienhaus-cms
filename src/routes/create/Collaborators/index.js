@@ -148,7 +148,7 @@ const Collaborators = ({ projectSpace, members, time, startListeningToCollab }) 
       <h3>{t('Contributors')}</h3>
       <p>
         <Trans t={t} i18nKey="contributorsIntro">
-          Contributors can be named here that can also work on the project.
+          Contributors can be named here. These people can also edit the project.
         </Trans>
       </p>
 
@@ -234,12 +234,12 @@ const Collaborators = ({ projectSpace, members, time, startListeningToCollab }) 
 
       <p>
         <Trans t={t} i18nKey="contributorsNote1">
-          Persons with an udk/spaces account can be activated for editing as soon as they have logged in at least once on: <a href="https://spaces.udk-berlin.de" rel="external nofollow noopener noreferrer" target="_blank">udk/spaces</a>
+          Persons with an O.A.Se account can be activated for editing as soon as they have logged in at least once on via <a href="https://content.udk-berlin.de" rel="external nofollow noopener noreferrer" target="_blank">udk/content</a> and have been activated for the contexts by the respective context managers.
         </Trans>
       </p>
       <p>
         <Trans t={t} i18nKey="contributorsNote2">
-          Persons without an OASE account can only be named as contributors. They cannot edit the project.
+          Persons without an O.A.Se account can only be named as contributors. They cannot log in and edit the project.
         </Trans>
       </p>
 

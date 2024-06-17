@@ -283,6 +283,7 @@ const Category = ({ projectSpace, onChange, parent, setLocationFromLocationTree 
 
   return (
     <>
+      <p>{t('Each context is managed by responsible teachers or employees of UdK Berlin. They must approve their context once so that the project can be assigned and published on the platform. Those responsible for the context will be notified as soon as you enter and submit a project (this does not apply to drafts).')}</p>
       <p>{t('In which context do you want to publish your project?')}</p>
 
       {!inputItems || loading
@@ -314,8 +315,9 @@ const Category = ({ projectSpace, onChange, parent, setLocationFromLocationTree 
         </>}
       {error && <p>{error}</p>}
 
-      <p>{t('Context means: a class, a course, a seminar, a free project …')}</p>
+      <p>{t('Context = an institute, a class, a course, a seminar, a free project in which the work was created.')}</p>
       <p>{t('In case of collaborations or interdisciplinary projects, several contexts can be selected.')}</p>
+      <p>{t('Those responsible for the context can also create further sub-contexts.')}</p>
 
       {/* {subject !== '' && !member && <Knock room={room} callback={callback} />} */}
     </>

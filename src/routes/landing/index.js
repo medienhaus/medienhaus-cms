@@ -1,5 +1,4 @@
 import React from 'react'
-import { NavLink } from 'react-router-dom'
 import { useTranslation, Trans } from 'react-i18next'
 import { useAuth } from '../../Auth'
 
@@ -16,47 +15,24 @@ const Landing = () => {
         </Trans>
         {profile && <strong> {profile?.displayname}</strong>}.
       </p>
-      <h2>
+      <p>
         <Trans t={t} i18nKey="welcome">
-          Welcome to the Rundgang content management system!
+          Welcome to the <strong>Rundgang content management system</strong>, which gathers all Rundgang formats from exhibitions and concerts, discussions and lectures to performances and project presentations. All digital and analog Rundgang events and projects can be entered here for publication.
         </Trans>
-      </h2>
+      </p>
       <hr />
       <p>
         <Trans t={t} i18nKey="introduction-01">
-          The Rundgang of the Berlin University of the Arts will take place from July 21–23, 2023. All digital and analog Rundgang events and projects can be entered on the Rundgang content management system for publication.
-        </Trans>
-      </p>
-      <p>
-        <Trans t={t} i18nKey="introduction-02">
-          The public-facing Rundgang website will go online on July 5, 2023. For this reason, if possible, all key data of the Rundgang projects should be entered no later than July 4, 2023, 23:59. Format, date, time, location, short description and (preliminary) title are sufficient for now. All other details (descriptive texts, images, videos, etc.) can be updated successively and until the Rundgang.
-        </Trans>
-      </p>
-      <p>
-        <Trans t={t} i18nKey="introduction-03">
-          Projects that are entered and published in the content management system by July 4 will then be included in the printed program. The printed program will be available for visitors at the locations during the Rundgang days.
-        </Trans>
-      </p>
-      <p>
-        <Trans t={t} i18nKey="introduction-04">
-          Projects that are not entered in the content management system by July 4, 2023, as well as any drafts, unfortunately cannot be included in the printed program sheet.
+          The Rundgang content management system will go online on <strong>July 3, 2024</strong>. It would be great if the first key data such as date, time, location, short description of the planned formats, e.g. exhibition, performance, installation, etc., had already been entered by then. All further information, such as detailed description texts, images or videos, can be added and updated successively until the first day of the Rundgang, Friday, July 19 at 12 noon.
         </Trans>
       </p>
       <hr />
       <p>
-        <Trans t={t} i18nKey="questions-01">
-          Material/Technical requests: If special technical equipment or furnishings are needed for Rundgang events (which are not already available within the degree programs and studios), please always inform the responsible janitor. Requests must be received at least 14 days prior to the Rundgang weekend so that needs and feasibility can be assessed.
+        <Trans t={t} i18nKey="introduction-02">
+          Information about the Rundgang 2024 (opening hours, security and awareness, contact persons, etc.):
         </Trans>
-      </p>
-      <p>
-        <Trans t={t} i18nKey="questions-02">
-          Preview function of the projects: The Rundgang website will be opened to the public on July 5. A preview of the created projects is unfortunately not possible before that for technical reasons. The design of the pages is already fixed and is currently being implemented for the Rundgang website.
-        </Trans>
-      </p>
-      <p>
-        <Trans t={t} i18nKey="informations">
-          For support and feedback regarding the content management system, please visit <NavLink to="/feedback">/feedback</NavLink> and <NavLink to="/support">/support</NavLink>. Information about the Rundgang 2023 (opening hours, security and awareness, contact persons, Rundgang FAQ etc.) via: <a href="https://udk-berlin.de/rundgang" rel="external nofollow noopener noreferrer" target="_blank">udk-berlin.de/rundgang</a>
-        </Trans>
+        {' '}
+        <a href="https://udk-berlin.de/rundgang" rel="external nofollow noopener noreferrer" target="_blank">udk-berlin.de/rundgang</a>
       </p>
     </section>
   )

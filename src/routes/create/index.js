@@ -1237,7 +1237,7 @@ const Create = () => {
             <h3>{t('Content')}</h3>
             <p>
               <Trans t={t} i18nKey="contentInstructions1">
-                The project descriptions are displayed on the Rundgang website in English and in German, if they are entered here in both languages.
+                Texts can be entered in English and all other languages of your choice. Later on, all projects will be selectable by language on the public-facing Rundgang website. You are also welcome to use your personal first language.
               </Trans>
             </p>
             <p>
@@ -1393,7 +1393,7 @@ const Create = () => {
            */}
           <section className="authorship">
             <h3>{t('Authorship / Credits')}</h3>
-            <p>{t('Names of authors and contributors are, by default, shown on the public-facing Rundgang website. Opt-out below if credits should not be listed.')}</p>
+            <p>{t('The author(s)/contributor(s) will be named on the Rundgang website. Please indicate here if this is not desired, because the entry is not made by the contributors themselves, but only on their behalf.')}</p>
             <AuthorCheckbox>
               <label htmlFor="hide-authors">{t('Hide credits: do not show authors/contributors')}</label>
               <input id="checkbox" name="checkbox" type="checkbox" checked={hideAuthors} onChange={handleHideAuthors} />
@@ -1401,7 +1401,7 @@ const Create = () => {
           </section>
           <section className="visibility">
             <h3>{t('Visibility')}</h3>
-            <p>{t('Entries that are saved as drafts are not publicly visible. Entries that are released for publication on the Rundgang 2023 website are publicly visible from 5 July. In both cases, the entries can be further edited at any time.')}</p>
+            <p>{t('Entries that are saved as drafts are not publicly visible. Entries that are released for publication on the Rundgang 2024 website are publicly visible from July 3. In both cases, the entries can be further edited until Friday, July 19 at 12 noon. Entries can be deleted by their authors at any time.')}</p>
             {spaceObject && hasContext !== undefined
               ? (
                 <>
@@ -1452,7 +1452,7 @@ const Create = () => {
             <p>
               * <em>
                 <Trans t={t} i18nKey="previewNote">
-                  It is not possible to preview the entry. What the public version of the project looks like can be seen from 5 July, once the project is released and the Rundgang website is published at: <a href="https://rundgang.udk-berlin.de" rel="external nofollow noopener noreferrer" target="_blank">rundgang.udk-berlin.de</a>
+                  It is not possible to preview the entry. What the public version of the project looks like can be seen from July 3, once the project is released and the Rundgang website is published at: <a href="https://rundgang.udk-berlin.de" rel="external nofollow noopener noreferrer" target="_blank">rundgang.udk-berlin.de</a>, if the project has been approved by the person(s) responsible for the context.
                 </Trans>
               </em>
             </p>
