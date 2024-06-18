@@ -3,6 +3,9 @@ import createBlock from './matrix_create_room'
 import * as Showdown from 'showdown'
 
 const ShowdownConverter = new Showdown.Converter()
+const nl2br = function (str) {
+  return str.split('\n').join('<br>')
+}
 export const saveGutenbergEditorToMatrix = async (isSavingGutenbergContents, setIsSavingGutenbergContents, temporaryGutenbergContents, blocksRef, deleteRoom, spaceObjectRef, contentLangRef, fetchContentBlocks, matrixClient, gutenbergIdToMatrixRoomIdRef, addToMap, isCollab, inviteCollaborators, gutenbergContent, setSaveTimestampToCurrentTime, setTemporaryGutenbergContents) => {
   if (isSavingGutenbergContents) return
 
@@ -235,4 +238,123 @@ export const saveGutenbergEditorToMatrix = async (isSavingGutenbergContents, set
   setTemporaryGutenbergContents(undefined)
 
   setIsSavingGutenbergContents(false)
+}
+
+export const fetchContentsForGutenberg = async (blocks, matrixClient, setGutenbergContent) => {
+  const contents = []
+  for (const block of blocks) {
+    const fetchMessage = await matrixClient.http.authedRequest(
+      'GET',
+        `/rooms/${block.room_id}/messages`,
+        {
+          limit: 1,
+          dir: 'b',
+          filter: JSON.stringify({ types: ['m.room.message'] })
+        }
+    )
+    const message = _.isEmpty(fetchMessage.chunk)
+      ? null
+      : fetchMessage.chunk[0].content
+
+    if (message) {
+      const blockType = block.name.slice(block.name.search('_'))
+      let n, a
+
+      switch (blockType) {
+        case '_heading':
+          n = 'medienhaus/heading'
+          a = { content: message.body.substr(4) }
+          break
+        case '_text':
+          n = 'core/paragraph'
+          a = {
+            content: message.formatted_body
+              ? message.formatted_body.replace(/<p>(.*)<\/p>/g, '$1<br>')
+              : nl2br(message.body)
+          }
+          break
+        case '_code':
+          n = 'core/code'
+          a = { content: _.escape(message.body) }
+          break
+        case '_ul':
+          n = 'core/list'
+          a = {
+            ordered: false,
+            values: message.formatted_body.slice(4, -5),
+            placeholder: 'add list element'
+          }
+          break
+        case '_ol':
+          n = 'core/list'
+          a = {
+            ordered: true,
+            values: message.formatted_body.slice(4, -5),
+            placeholder: 'add list element'
+          }
+          break
+        case '_quote':
+          n = 'medienhaus/quote'
+          a = { content: message.body }
+          break
+        case '_image':
+          n = 'medienhaus/image'
+          a = {
+            url: matrixClient.mxcUrlToHttp(message.url),
+            alt: message.info.alt,
+            license: message.info.license,
+            author: message.info.author
+          }
+          break
+        case '_audio':
+          n = 'medienhaus/audio'
+          a = {
+            url: matrixClient.mxcUrlToHttp(message.url),
+            alt: message.info.alt,
+            license: message.info.license,
+            author: message.info.author
+          }
+          break
+        case '_file':
+          n = 'medienhaus/file'
+          a = {
+            url: matrixClient.mxcUrlToHttp(message.url),
+            alt: message.info.alt,
+            license: message.info.license,
+            author: message.info.author,
+            name: message.info.name
+          }
+          break
+        case '_video':
+          n = 'medienhaus/video'
+          a = {
+            content: message.body
+          }
+          break
+        case '_bbb':
+          n = 'medienhaus/bigbluebutton'
+          a = {
+            content: message.body
+          }
+          break
+        case '_playlist':
+          n = 'medienhaus/playlist'
+          a = {
+            content: message.body
+          }
+          break
+        default:
+          n = 'core/paragraph'
+          a = { content: message.formatted_body }
+      }
+      contents.push({
+        clientId: block.room_id,
+        isValid: true,
+        name: n,
+        attributes: a,
+        innerBlocks: []
+      })
+    }
+  }
+  setGutenbergContent(contents)
 }
