@@ -1,12 +1,28 @@
 import _ from 'lodash'
 import createBlock from './matrix_create_room'
 import * as Showdown from 'showdown'
+import Matrix from '../../Matrix'
 
+const matrixClient = Matrix.getMatrixClient()
 const ShowdownConverter = new Showdown.Converter()
 const nl2br = function (str) {
   return str.split('\n').join('<br>')
 }
-export const saveGutenbergEditorToMatrix = async (isSavingGutenbergContents, setIsSavingGutenbergContents, temporaryGutenbergContents, blocksRef, deleteRoom, spaceObjectRef, contentLangRef, fetchContentBlocks, matrixClient, gutenbergIdToMatrixRoomIdRef, addToMap, isCollab, inviteCollaborators, gutenbergContent, setSaveTimestampToCurrentTime, setTemporaryGutenbergContents) => {
+export const saveGutenbergEditorToMatrix = async (isSavingGutenbergContents,
+  setIsSavingGutenbergContents,
+  temporaryGutenbergContents,
+  blocksRef,
+  deleteRoom,
+  spaceObjectRef,
+  contentLangRef,
+  fetchContentBlocks,
+  gutenbergIdToMatrixRoomIdRef,
+  isCollab,
+  inviteCollaborators,
+  gutenbergContent,
+  setSaveTimestampToCurrentTime,
+  setTemporaryGutenbergContents,
+  setGutenbergIdToMatrixRoomId) => {
   if (isSavingGutenbergContents) return
 
   setIsSavingGutenbergContents(true)
@@ -73,7 +89,7 @@ export const saveGutenbergEditorToMatrix = async (isSavingGutenbergContents, set
             (room) => room.name === contentLangRef.current
           )[0].room_id
         )
-        addToMap(block.clientId, createdBlock)
+        addToMap(block.clientId, createdBlock, setGutenbergIdToMatrixRoomId)
         // if the item is a collaboration we need to invite all collaborators to the newly created block
         if (isCollab) await inviteCollaborators(createdBlock)
       }
@@ -357,4 +373,18 @@ export const fetchContentsForGutenberg = async (blocks, matrixClient, setGutenbe
     }
   }
   setGutenbergContent(contents)
+}
+
+export const warnUserAboutUnsavedChanges = (e, temporaryGutenbergContents) => {
+  // @TODO this only works on reloads, changing the route via the navigation doesn't trigger this
+  if (temporaryGutenbergContents) {
+    e.returnValue = 'Please save your changes'
+    return e.returnValue
+  }
+}
+export const addToMap = (blockId, roomId, setGutenbergIdToMatrixRoomId) => {
+  setGutenbergIdToMatrixRoomId((prevState) => ({
+    ...prevState,
+    [blockId]: roomId
+  }))
 }

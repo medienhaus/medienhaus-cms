@@ -27,8 +27,8 @@ import styled from 'styled-components'
 import { triggerApiUpdate } from '../../helpers/MedienhausApiHelper'
 import Tags from './Tags'
 import SimpleButton from '../../components/medienhausUI/simpleButton'
-import { fetchLanguages, languageUtils } from './languageUtils'
-import { fetchContentsForGutenberg, saveGutenbergEditorToMatrix } from './gutenbergUtils'
+import { fetchLanguages, languageUtils, onChangeDescription } from './languageUtils'
+import { fetchContentsForGutenberg, saveGutenbergEditorToMatrix, warnUserAboutUnsavedChanges } from './gutenbergUtils'
 
 const LanguageSection = styled.section`
   display: grid;
@@ -505,42 +505,13 @@ const Create = () => {
     if (config.medienhaus.api) await triggerApiUpdate(projectSpace)
   }
 
-  const onChangeDescription = async (description) => {
-    // if the selected content language is english we save the description in the project space topic
-    contentLang === config.medienhaus?.languages[0] &&
-      (await matrixClient
-        .setRoomTopic(spaceObject.rooms[0].room_id, description)
-        .catch(console.log))
-    // here we set the description for the selected language space
-    const contentRoom = spaceObject.rooms.filter(
-      (room) => room.name === contentLang
-    )
-    const changeTopic = await matrixClient
-      .setRoomTopic(contentRoom[0].room_id, description)
-      .catch(console.log)
-    fetchSpace(true)
-    if (config.medienhaus.api) await triggerApiUpdate(projectSpace)
-    // @TODO setSpaceObject(spaceObject => ({...spaceObject, rooms: [...spaceObject.rooms, ]}))
-    return changeTopic
-  }
-
-  const warnUserAboutUnsavedChanges = useCallback(
-    (e) => {
-      if (temporaryGutenbergContents) {
-        e.returnValue = 'Please save your changes'
-        return e.returnValue
-      }
-    },
-    [temporaryGutenbergContents]
-  )
-
   useEffect(() => {
-    window.addEventListener('beforeunload', warnUserAboutUnsavedChanges)
+    window.addEventListener('beforeunload', (e) => warnUserAboutUnsavedChanges(e, temporaryGutenbergContents))
 
     return () => {
-      window.removeEventListener('beforeunload', warnUserAboutUnsavedChanges)
+      window.removeEventListener('beforeunload', (e) => warnUserAboutUnsavedChanges(e, temporaryGutenbergContents))
     }
-  }, [warnUserAboutUnsavedChanges])
+  }, [temporaryGutenbergContents])
 
   useEffect(() => {
     if (blocks === undefined) return
@@ -798,7 +769,7 @@ const Create = () => {
                 <ProjectDescription
                   disabled={addingAdditionalLanguage}
                   description={description[contentLang]}
-                  callback={onChangeDescription}
+                  callback={() => onChangeDescription(description, contentLang, matrixClient, spaceObject, fetchSpace, projectSpace)}
                   language={ISO6391.getName(contentLang)}
                 />
                 )
@@ -831,7 +802,21 @@ const Create = () => {
                 type="button"
                 disabled={addingAdditionalLanguage}
                 onClick={() =>
-                  saveGutenbergEditorToMatrix(isSavingGutenbergContents, setIsSavingGutenbergContents, temporaryGutenbergContents, blocksRef, deleteRoom, spaceObjectRef, contentLangRef, fetchContentBlocks, matrixClient, gutenbergIdToMatrixRoomIdRef, addToMap, isCollab, inviteCollaborators, gutenbergContent, setSaveTimestampToCurrentTime, setTemporaryGutenbergContents)}
+                  saveGutenbergEditorToMatrix(isSavingGutenbergContents,
+                    setIsSavingGutenbergContents,
+                    temporaryGutenbergContents,
+                    blocksRef,
+                    deleteRoom,
+                    spaceObjectRef,
+                    contentLangRef,
+                    fetchContentBlocks,
+                    gutenbergIdToMatrixRoomIdRef,
+                    isCollab,
+                    inviteCollaborators,
+                    gutenbergContent,
+                    setSaveTimestampToCurrentTime,
+                    setTemporaryGutenbergContents,
+                    setGutenbergIdToMatrixRoomId)}
               >
                 {t('SAVE CHANGES')}
               </LoadingSpinnerButton>

@@ -1,4 +1,6 @@
 import Matrix from '../../Matrix'
+import config from '../../config.json'
+import { triggerApiUpdate } from '../../helpers/MedienhausApiHelper'
 
 export const languageUtils = async (matrixClient, inviteCollaborators, projectSpace, languages, newLang, setNewLang, setLanguages, setAddingAdditionalLanguage) => {
   const createLanguageSpace = async (lang) => {
@@ -84,4 +86,23 @@ export const fetchLanguages = async (id) => {
     ?.filter((room) => room.room_id !== id && room.name.length === 2)
     .map((room) => room.name)
   return languageSpaces
+}
+
+export const onChangeDescription = async (description, contentLang, matrixClient, spaceObject, fetchSpace, projectSpace) => {
+  // if the selected content language is english we save the description in the project space topic
+  contentLang === config.medienhaus?.languages[0] &&
+  (await matrixClient
+    .setRoomTopic(spaceObject.rooms[0].room_id, description)
+    .catch(console.log))
+  // here we set the description for the selected language space
+  const contentRoom = spaceObject.rooms.filter(
+    (room) => room.name === contentLang
+  )
+  const changeTopic = await matrixClient
+    .setRoomTopic(contentRoom[0].room_id, description)
+    .catch(console.log)
+  fetchSpace(true)
+  if (config.medienhaus.api) await triggerApiUpdate(projectSpace)
+  // @TODO setSpaceObject(spaceObject => ({...spaceObject, rooms: [...spaceObject.rooms, ]}))
+  return changeTopic
 }
