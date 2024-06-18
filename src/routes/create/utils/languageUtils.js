@@ -1,6 +1,6 @@
-import Matrix from '../../Matrix'
-import config from '../../config.json'
-import { triggerApiUpdate } from '../../helpers/MedienhausApiHelper'
+import Matrix from '../../../Matrix'
+import config from '../../../config.json'
+import { triggerApiUpdate } from '../../../helpers/MedienhausApiHelper'
 
 export const languageUtils = async (matrixClient, inviteCollaborators, projectSpace, languages, newLang, setNewLang, setLanguages, setAddingAdditionalLanguage) => {
   const createLanguageSpace = async (lang) => {

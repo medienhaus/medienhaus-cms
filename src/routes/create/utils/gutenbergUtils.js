@@ -1,7 +1,7 @@
 import _ from 'lodash'
-import createBlock from './matrix_create_room'
+import createBlock from '../matrix_create_room'
 import * as Showdown from 'showdown'
-import Matrix from '../../Matrix'
+import Matrix from '../../../Matrix'
 
 const matrixClient = Matrix.getMatrixClient()
 const ShowdownConverter = new Showdown.Converter()

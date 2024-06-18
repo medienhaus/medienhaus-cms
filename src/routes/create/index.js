@@ -26,8 +26,8 @@ import UdKLocationContext from './Context/UdKLocationContext'
 import styled from 'styled-components'
 import { triggerApiUpdate } from '../../helpers/MedienhausApiHelper'
 import Tags from './Tags'
-import { fetchLanguages, onChangeDescription } from './languageUtils'
-import { fetchContentsForGutenberg, saveGutenbergEditorToMatrix, warnUserAboutUnsavedChanges } from './gutenbergUtils'
+import { fetchLanguages, onChangeDescription } from './utils/languageUtils'
+import { fetchContentsForGutenberg, saveGutenbergEditorToMatrix, warnUserAboutUnsavedChanges } from './utils/gutenbergUtils'
 import LanguageSelection from './LanguageSelection'
 
 const GutenbergWrapper = styled.div`

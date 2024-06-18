@@ -1,7 +1,7 @@
 import ISO6391 from 'iso-639-1'
 import config from '../../../config.json'
 import SimpleButton from '../../../components/medienhausUI/simpleButton'
-import { languageUtils } from '../languageUtils'
+import { languageUtils } from '../utils/languageUtils'
 import React, { useState } from 'react'
 import styled from 'styled-components'
 import { useTranslation } from 'react-i18next'
