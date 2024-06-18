@@ -27,12 +27,8 @@ import styled from 'styled-components'
 import { triggerApiUpdate } from '../../helpers/MedienhausApiHelper'
 import Tags from './Tags'
 import SimpleButton from '../../components/medienhausUI/simpleButton'
-import { addLanguage } from './addLanguage'
-import { saveGutenbergEditorToMatrix } from './gutenbergUtils'
-
-const nl2br = function (str) {
-  return str.split('\n').join('<br>')
-}
+import { fetchLanguages, languageUtils } from './languageUtils'
+import { fetchContentsForGutenberg, saveGutenbergEditorToMatrix } from './gutenbergUtils'
 
 const LanguageSection = styled.section`
   display: grid;
@@ -199,15 +195,9 @@ const Create = () => {
 
   // we populate the languages in this effect hook and check if we allow custom languages, then it will fetch the languages from the project space otherwise it will use the default languages from the config
   useEffect(() => {
-    const fetchLanguagesAndUpdateState = async (id) => {
-      const spaces = await matrixClient.getRoomHierarchy(id, 1000, 1)
-      // we filter out all of the spaces which are not the parent space itstelf as well as assuming that if it is an two letter space it is a language space based on the ISO639-1 standard
-      // @TODO this is a very hacky way to determine if a space is a language space, it should be discussed if we should check that with additional calls to check the dev.medienhaus.meta event
-      const languageSpaces = spaces?.rooms
-        ?.filter((room) => room.room_id !== id && room.name.length === 2)
-        .map((room) => room.name)
-
-      if (languageSpaces) setLanguages(languageSpaces)
+    const fetchLanguagesAndUpdateState = async () => {
+      const languageSpaces = await fetchLanguages(projectSpace)
+      setLanguages(languageSpaces)
     }
     if (languages.length === 0) {
       if (projectSpace && config.medienhaus?.customLanguages) {
@@ -553,127 +543,8 @@ const Create = () => {
   }, [warnUserAboutUnsavedChanges])
 
   useEffect(() => {
-    const fetchContentsForGutenberg = async () => {
-      const contents = []
-      for (const block of blocks) {
-        const fetchMessage = await matrixClient.http.authedRequest(
-          'GET',
-          `/rooms/${block.room_id}/messages`,
-          {
-            limit: 1,
-            dir: 'b',
-            filter: JSON.stringify({ types: ['m.room.message'] })
-          }
-        )
-        const message = _.isEmpty(fetchMessage.chunk)
-          ? null
-          : fetchMessage.chunk[0].content
-
-        if (message) {
-          const blockType = block.name.slice(block.name.search('_'))
-          let n, a
-
-          switch (blockType) {
-            case '_heading':
-              n = 'medienhaus/heading'
-              a = { content: message.body.substr(4) }
-              break
-            case '_text':
-              n = 'core/paragraph'
-              a = {
-                content: message.formatted_body
-                  ? message.formatted_body.replace(/<p>(.*)<\/p>/g, '$1<br>')
-                  : nl2br(message.body)
-              }
-              break
-            case '_code':
-              n = 'core/code'
-              a = { content: _.escape(message.body) }
-              break
-            case '_ul':
-              n = 'core/list'
-              a = {
-                ordered: false,
-                values: message.formatted_body.slice(4, -5),
-                placeholder: 'add list element'
-              }
-              break
-            case '_ol':
-              n = 'core/list'
-              a = {
-                ordered: true,
-                values: message.formatted_body.slice(4, -5),
-                placeholder: 'add list element'
-              }
-              break
-            case '_quote':
-              n = 'medienhaus/quote'
-              a = { content: message.body }
-              break
-            case '_image':
-              n = 'medienhaus/image'
-              a = {
-                url: matrixClient.mxcUrlToHttp(message.url),
-                alt: message.info.alt,
-                license: message.info.license,
-                author: message.info.author
-              }
-              break
-            case '_audio':
-              n = 'medienhaus/audio'
-              a = {
-                url: matrixClient.mxcUrlToHttp(message.url),
-                alt: message.info.alt,
-                license: message.info.license,
-                author: message.info.author
-              }
-              break
-            case '_file':
-              n = 'medienhaus/file'
-              a = {
-                url: matrixClient.mxcUrlToHttp(message.url),
-                alt: message.info.alt,
-                license: message.info.license,
-                author: message.info.author,
-                name: message.info.name
-              }
-              break
-            case '_video':
-              n = 'medienhaus/video'
-              a = {
-                content: message.body
-              }
-              break
-            case '_bbb':
-              n = 'medienhaus/bigbluebutton'
-              a = {
-                content: message.body
-              }
-              break
-            case '_playlist':
-              n = 'medienhaus/playlist'
-              a = {
-                content: message.body
-              }
-              break
-            default:
-              n = 'core/paragraph'
-              a = { content: message.formatted_body }
-          }
-          contents.push({
-            clientId: block.room_id,
-            isValid: true,
-            name: n,
-            attributes: a,
-            innerBlocks: []
-          })
-        }
-      }
-      setGutenbergContent(contents)
-    }
-
     if (blocks === undefined) return
-    fetchContentsForGutenberg()
+    fetchContentsForGutenberg(blocks, matrixClient, setGutenbergContent)
   }, [blocks, matrixClient])
 
   if (projectSpace && !matrixClient.isInitialSyncComplete()) return <Loading />
@@ -860,7 +731,7 @@ const Create = () => {
                 </select>
                 {config.medienhaus?.customLanguages && (
                   <SimpleButton
-                    value="addLanguage"
+                    value="languageUtils"
                     key="lang"
                     disabled={addingAdditionalLanguage}
                     onClick={(e) => {
@@ -903,14 +774,14 @@ const Create = () => {
                           {t('CANCEL')}
                         </SimpleButton>
                         <SimpleButton
-                          value="addLanguage"
+                          value="languageUtils"
                           key="lang"
                           onClick={(e) => {
                             if (
                               addingAdditionalLanguage &&
                               newLang?.length > 0
                             ) {
-                              addLanguage(matrixClient, inviteCollaborators, projectSpace, languages, newLang, setNewLang, setLanguages, setAddingAdditionalLanguage)
+                              languageUtils(matrixClient, inviteCollaborators, projectSpace, languages, newLang, setNewLang, setLanguages, setAddingAdditionalLanguage)
                             }
                           }}
                         >
