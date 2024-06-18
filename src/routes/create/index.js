@@ -21,14 +21,14 @@ import Location from './Location'
 import config from '../../config.json'
 import _, { debounce } from 'lodash'
 import GutenbergEditor from '../gutenberg/editor'
-import createBlock from './matrix_create_room'
 import LoadingSpinnerButton from '../../components/LoadingSpinnerButton'
 import UdKLocationContext from './Context/UdKLocationContext'
 import styled from 'styled-components'
-import * as Showdown from 'showdown'
 import { triggerApiUpdate } from '../../helpers/MedienhausApiHelper'
 import Tags from './Tags'
 import SimpleButton from '../../components/medienhausUI/simpleButton'
+import { addLanguage } from './addLanguage'
+import { saveGutenbergEditorToMatrix } from './gutenbergUtils'
 
 const nl2br = function (str) {
   return str.split('\n').join('<br>')
@@ -136,8 +136,6 @@ const GutenbergSavingOverlay = styled.div`
   z-index: 99999999999999;
 `
 
-const ShowdownConverter = new Showdown.Converter()
-
 const Create = () => {
   const { t } = useTranslation('content')
   const [title, setTitle] = useState('')
@@ -193,81 +191,6 @@ const Create = () => {
       setLanguages([])
     }
   }, [projectSpace])
-
-  const addLang = async () => {
-    const createLanguageSpace = async (lang) => {
-      const opts = (template, name, history) => {
-        return {
-          preset: 'private_chat',
-          name: name,
-          room_version: '9',
-          creation_content: { type: 'm.space' },
-          initial_state: [
-            {
-              type: 'm.room.history_visibility',
-              content: { history_visibility: history }
-            }, //  world_readable
-            {
-              type: 'dev.medienhaus.meta',
-              content: {
-                version: '0.4',
-                type: 'item',
-                template: template,
-                application: process.env.REACT_APP_APP_NAME,
-                published: 'draft'
-              }
-            },
-            {
-              type: 'm.room.guest_access',
-              state_key: '',
-              content: { guest_access: 'can_join' }
-            }
-          ],
-          power_level_content_override: {
-            ban: 50,
-            events: {
-              'm.room.avatar': 50,
-              'm.room.canonical_alias': 50,
-              'm.room.encryption': 100,
-              'm.room.history_visibility': 100,
-              'm.room.name': 50,
-              'm.room.power_levels': 100,
-              'm.room.server_acl': 100,
-              'm.room.tombstone': 100,
-              'm.space.child': 50,
-              'm.room.topic': 50,
-              'm.room.pinned_events': 50,
-              'm.reaction': 50,
-              'im.vector.modular.widgets': 50
-            },
-            events_default: 50,
-            historical: 100,
-            invite: 50,
-            kick: 50,
-            redact: 50,
-            state_default: 50,
-            users_default: 0
-          },
-          visibility: 'private'
-        }
-      }
-      const languageRoom = await matrixClient.createRoom(
-        opts('lang', lang, 'shared')
-      )
-      await inviteCollaborators(languageRoom.room_id)
-      await Matrix.addSpaceChild(projectSpace, languageRoom.room_id)
-    }
-
-    if (languages.includes(newLang)) {
-      console.log('error')
-      setNewLang('')
-      return
-    }
-    setLanguages([...languages, newLang])
-    setAddingAdditionalLanguage(false)
-    console.log(projectSpace)
-    await createLanguageSpace(newLang)
-  }
 
   // we populate the languages in this effect hook and check if we allow custom languages, then it will fetch the languages from the project space otherwise it will use the default languages from the config
   useEffect(() => {
@@ -559,239 +482,6 @@ const Create = () => {
 
   const contentHasChanged = (originalGutenbergBlocks) => {
     setTemporaryGutenbergContents(originalGutenbergBlocks)
-  }
-
-  const saveGutenbergEditorToMatrix = async () => {
-    if (isSavingGutenbergContents) return
-
-    setIsSavingGutenbergContents(true)
-
-    const orderOfRooms = []
-    let gutenbergBlocks = [...temporaryGutenbergContents]
-
-    // filter out all empty gutenberg blocks -- we want to ignore those
-    gutenbergBlocks = gutenbergBlocks.filter((block) => {
-      return !(
-        block.name === 'core/paragraph' &&
-        _.get(block, 'attributes.content', '') === ''
-      )
-    })
-
-    for (const block of blocksRef.current) {
-      let deletedARoom = false
-      if (!_.find(gutenbergBlocks, { clientId: block.room_id })) {
-        await deleteRoom(
-          block.room_id,
-          spaceObjectRef.current?.rooms.filter(
-            (room) => room.name === contentLangRef.current
-          )[0].room_id
-        )
-        deletedARoom = true
-      }
-      if (deletedARoom) fetchContentBlocks()
-    }
-
-    for (const [index, block] of gutenbergBlocks.entries()) {
-      let roomId = block.clientId
-      let contentType
-      switch (block.name) {
-        case 'core/list':
-          contentType = block.attributes.ordered ? 'ol' : 'ul'
-          break
-        case 'core/code':
-          contentType = 'code'
-          break
-        case 'medienhaus/heading':
-        case 'medienhaus/image':
-        case 'medienhaus/audio':
-        case 'medienhaus/file':
-        case 'medienhaus/video':
-        case 'medienhaus/playlist':
-        case 'medienhaus/livestream':
-          contentType = block.name.replace('medienhaus/', '')
-          break
-        case 'medienhaus/bigbluebutton':
-          contentType = 'bbb'
-          break
-        default:
-          contentType = 'text'
-      }
-
-      if (!matrixClient.getRoom(roomId)) {
-        // this is a newly created block
-        if (!gutenbergIdToMatrixRoomIdRef.current[block.clientId]) {
-          const createdBlock = await createBlock(
-            null,
-            contentType,
-            index,
-            spaceObjectRef.current?.rooms.filter(
-              (room) => room.name === contentLangRef.current
-            )[0].room_id
-          )
-          addToMap(block.clientId, createdBlock)
-          // if the item is a collaboration we need to invite all collaborators to the newly created block
-          if (isCollab) await inviteCollaborators(createdBlock)
-        }
-
-        roomId = gutenbergIdToMatrixRoomIdRef.current[block.clientId]
-      }
-
-      // ensure room name is correct
-      if (
-        _.get(_.find(blocksRef.current, { room_id: roomId }), 'name') !==
-        `${index}_${contentType}`
-      ) {
-        await matrixClient.setRoomName(roomId, `${index}_${contentType}`)
-      }
-      orderOfRooms.push(roomId)
-
-      // lastly, if the content of this block has not changed, skip this block, otherwise ...
-      if (
-        _.isEqual(
-          block.attributes,
-          _.get(_.find(gutenbergContent, { clientId: roomId }), 'attributes')
-        ) &&
-        _.isEqual(
-          block.name,
-          _.get(_.find(gutenbergContent, { clientId: roomId }), 'name')
-        )
-      ) {
-        continue
-      }
-
-      // ... write new contents to room
-      switch (block.name) {
-        case 'core/list':
-          await matrixClient.sendMessage(roomId, {
-            // body: (block.attributes.ordered ? '<ol>' : '<ul>') + block.attributes.values + (block.attributes.ordered ? '</ol>' : '</ul>'), // body should have unformated list (markdowm)
-            body: block.attributes.values
-              .replaceAll('<li>', '- ')
-              .replaceAll('</li>', '\n'), // @TODO add case for ol
-            msgtype: 'm.text',
-            format: 'org.matrix.custom.html',
-            formatted_body:
-              (block.attributes.ordered ? '<ol>' : '<ul>') +
-              block.attributes.values +
-              (block.attributes.ordered ? '</ol>' : '</ul>')
-          })
-          break
-        case 'core/code':
-          await matrixClient.sendMessage(roomId, {
-            body: block.attributes.content,
-            msgtype: 'm.text',
-            format: 'org.matrix.custom.html',
-            formatted_body: `<pre><code>${block.attributes.content}</code></pre>`
-          })
-          break
-        case 'medienhaus/heading':
-          await matrixClient.sendMessage(roomId, {
-            body: '### ' + block.attributes.content,
-            msgtype: 'm.text',
-            format: 'org.matrix.custom.html',
-            formatted_body: `<h3>${block.attributes.content}</h3>`
-          })
-          break
-        case 'medienhaus/image':
-          // If this image was uploaded to Matrix already, we don't do anything
-          if (block.attributes.url) break
-          // If the user has not provided an image and the file input was left "empty", we don't do anything either
-          if (!block.attributes.file) break
-          // eslint-disable-next-line no-case-declarations,prefer-const
-          let uploadedImage = await matrixClient.uploadContent(
-            block.attributes.file,
-            { name: block.attributes.file.name }
-          )
-          await matrixClient.sendImageMessage(
-            roomId,
-            null,
-            uploadedImage?.content_uri,
-            {
-              mimetype: block.attributes.file.type,
-              size: block.attributes.file.size,
-              name: block.attributes.file.name,
-              author: block.attributes.author,
-              license: block.attributes.license,
-              alt: block.attributes.alttext
-            },
-            block.attributes.alttext,
-            // Beware: We need to provide an empty callback because otherwise matrix-js-sdk fails
-            // See https://github.com/medienhaus/medienhaus-cms/issues/173
-            () => {}
-          )
-          break
-        case 'medienhaus/audio':
-          // If this audio was uploaded to Matrix already, we don't do anything
-          if (block.attributes.url) break
-          // eslint-disable-next-line no-case-declarations,prefer-const
-          let uploadedAudio = await matrixClient.uploadContent(
-            block.attributes.file,
-            { name: block.attributes.file.name }
-          )
-          await matrixClient.sendMessage(roomId, {
-            body: block.attributes.file.name,
-            info: {
-              size: block.attributes.file.size,
-              mimetype: block.attributes.file.type,
-              name: block.attributes.file.name,
-              author: block.attributes.author,
-              license: block.attributes.license,
-              alt: block.attributes.alttext
-            },
-            msgtype: 'm.audio',
-            url: uploadedAudio?.content_uri
-          })
-          break
-        case 'medienhaus/file':
-          // If this file was uploaded to Matrix already, we don't do anything
-          if (block.attributes.url) break
-          // eslint-disable-next-line no-case-declarations,prefer-const
-          let uploadedFile = await matrixClient.uploadContent(
-            block.attributes.file,
-            { name: block.attributes.file.name }
-          )
-          await matrixClient.sendMessage(roomId, {
-            body: block.attributes.file.name,
-            info: {
-              size: block.attributes.file.size,
-              mimetype: block.attributes.file.type,
-              name: block.attributes.file.name,
-              author: block.attributes.author,
-              license: block.attributes.license,
-              alt: block.attributes.alttext
-            },
-            msgtype: 'm.file',
-            url: uploadedFile?.content_uri
-          })
-          break
-        default:
-          await matrixClient.sendMessage(roomId, {
-            body: ShowdownConverter.makeMarkdown(block.attributes.content)
-              .replaceAll('<br>', '')
-              .replaceAll('<br />', ''),
-            msgtype: 'm.text',
-            format: 'org.matrix.custom.html',
-            formatted_body: block.attributes.content
-          })
-      }
-    }
-
-    // ensure correct order
-    await matrixClient.sendStateEvent(
-      spaceObjectRef.current?.rooms.filter(
-        (room) => room.name === contentLangRef.current
-      )[0].room_id,
-      'dev.medienhaus.order',
-      { order: orderOfRooms }
-    )
-
-    // update our "last saved  timestamp"
-    setSaveTimestampToCurrentTime()
-
-    await fetchContentBlocks()
-
-    setTemporaryGutenbergContents(undefined)
-
-    setIsSavingGutenbergContents(false)
   }
 
   const addToMap = (blockId, roomId) => {
@@ -1164,7 +854,7 @@ const Create = () => {
                   ))}
                 </select>
                 <SimpleButton
-                  value="addLang"
+                  value="addLanguage"
                   key="lang"
                   disabled={addingAdditionalLanguage}
                   onClick={(e) => {
@@ -1206,14 +896,14 @@ const Create = () => {
                           {t('CANCEL')}
                         </SimpleButton>
                         <SimpleButton
-                          value="addLang"
+                          value="addLanguage"
                           key="lang"
                           onClick={(e) => {
                             if (
                               addingAdditionalLanguage &&
                               newLang?.length > 0
                             ) {
-                              addLang()
+                              addLanguage(matrixClient, inviteCollaborators, projectSpace, languages, newLang, setNewLang, setLanguages, setAddingAdditionalLanguage)
                             }
                           }}
                         >
@@ -1262,7 +952,8 @@ const Create = () => {
               <LoadingSpinnerButton
                 type="button"
                 disabled={addingAdditionalLanguage}
-                onClick={saveGutenbergEditorToMatrix}
+                onClick={() =>
+                  saveGutenbergEditorToMatrix(isSavingGutenbergContents, setIsSavingGutenbergContents, temporaryGutenbergContents, blocksRef, deleteRoom, spaceObjectRef, contentLangRef, fetchContentBlocks, matrixClient, gutenbergIdToMatrixRoomIdRef, addToMap, isCollab, inviteCollaborators, gutenbergContent, setSaveTimestampToCurrentTime, setTemporaryGutenbergContents)}
               >
                 {t('SAVE CHANGES')}
               </LoadingSpinnerButton>
