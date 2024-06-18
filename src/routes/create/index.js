@@ -26,41 +26,9 @@ import UdKLocationContext from './Context/UdKLocationContext'
 import styled from 'styled-components'
 import { triggerApiUpdate } from '../../helpers/MedienhausApiHelper'
 import Tags from './Tags'
-import SimpleButton from '../../components/medienhausUI/simpleButton'
-import { fetchLanguages, languageUtils, onChangeDescription } from './languageUtils'
+import { fetchLanguages, onChangeDescription } from './languageUtils'
 import { fetchContentsForGutenberg, saveGutenbergEditorToMatrix, warnUserAboutUnsavedChanges } from './gutenbergUtils'
-
-const LanguageSection = styled.section`
-  display: grid;
-  grid-gap: var(--margin);
-  grid-auto-flow: row;
-
-  /* unset margin-top for each direct child element directly following a previous one */
-  & > * + * {
-    margin-top: unset;
-  }
-`
-
-const LanguageCancelConfirm = styled.div`
-  display: flex;
-  gap: var(--margin);
-`
-
-const LanguageSectionAdd = styled.div`
-  display: grid;
-  grid-gap: var(--margin);
-  grid-auto-flow: row;
-`
-const LanguageSectionSelect = styled.div`
-  display: flex;
-  gap: var(--margin);
-  
-  > button {
-  width: calc(var(--margin) * 2.5);
-}
-
-
-`
+import LanguageSelection from './LanguageSelection'
 
 const GutenbergWrapper = styled.div`
   position: relative;
@@ -178,7 +146,6 @@ const Create = () => {
     useState(undefined)
 
   const [languages, setLanguages] = useState([])
-  const [newLang, setNewLang] = useState('')
   const [addingAdditionalLanguage, setAddingAdditionalLanguage] =
     useState(false)
 
@@ -669,107 +636,22 @@ const Create = () => {
 
           <section className="content">
             <h3>{t('Content')}</h3>
-            {/*
-            <select
-              value={contentLang} onChange={(e) => {
-                if (temporaryGutenbergContents) {
-                  alert('Please save your changes first')
-                  return
-                }
-                setContentLang(e.target.value)
-                setDescription()
-              }}
-            >
-              {config.medienhaus?.languages.map((lang) => (
-                <option value={lang} key={lang}>{lang.toUpperCase() + ' -- ' + ISO6391.getName(lang)}</option>
-              ))}
-            </select>
-            */}
-            <LanguageSection className="request">
-              <LanguageSectionSelect>
-                <select
-                  disabled={addingAdditionalLanguage}
-                  onChange={(e) => {
-                    setContentLang(e.target.value)
-                    setDescription()
-                  }}
-                >
-                  {languages.map((lang) => (
-                    <option value={lang} key={lang}>
-                      {ISO6391.getName(lang)}
-                    </option>
-                  ))}
-                </select>
-                {config.medienhaus?.customLanguages && (
-                  <SimpleButton
-                    value="languageUtils"
-                    key="lang"
-                    disabled={addingAdditionalLanguage}
-                    onClick={(e) => {
-                      if (!addingAdditionalLanguage) {
-                        setAddingAdditionalLanguage(true)
-                      }
-                    }}
-                  >
-                    +
-                  </SimpleButton>
-                )}
-              </LanguageSectionSelect>
-              <LanguageSectionAdd>
-                {config.medienhaus?.customLanguages && (
-                  <>
-                    {addingAdditionalLanguage && (
-                      <select
-                        onChange={(e) => setNewLang(e.target.value)}
-                        value={newLang || ''}
-                      >
-                        <option disabled value="">
-                          {t('select language')}
-                        </option>
-                        {ISO6391.getAllNames().map((lang, i) => (
-                          <option key={i} value={ISO6391.getCode(lang)}>
-                            {lang}
-                          </option>
-                        ))}
-                      </select>
-                    )}
-                    {addingAdditionalLanguage && (
-                      <LanguageCancelConfirm>
-                        <SimpleButton
-                          cancel
-                          onClick={() => {
-                            setAddingAdditionalLanguage(false)
-                            setNewLang('')
-                          }}
-                        >
-                          {t('CANCEL')}
-                        </SimpleButton>
-                        <SimpleButton
-                          value="languageUtils"
-                          key="lang"
-                          onClick={(e) => {
-                            if (
-                              addingAdditionalLanguage &&
-                              newLang?.length > 0
-                            ) {
-                              languageUtils(matrixClient, inviteCollaborators, projectSpace, languages, newLang, setNewLang, setLanguages, setAddingAdditionalLanguage)
-                            }
-                          }}
-                        >
-                          {t('Add')}
-                        </SimpleButton>
-                      </LanguageCancelConfirm>
-                    )}
-                  </>
-                )}
-              </LanguageSectionAdd>
-            </LanguageSection>
+            <LanguageSelection
+              setLanguages={setLanguages}
+              languages={languages}
+              projectSpace={projectSpace}
+              setAddingAdditionalLanguage={setAddingAdditionalLanguage}
+              addingAdditionalLanguage={addingAdditionalLanguage}
+              setContentLang={setContentLang}
+              setDescription={setDescription}
+              inviteCollaborators={inviteCollaborators}
+            />
             {spaceObject && (description || description === '')
               ? (
                 <ProjectDescription
                   disabled={addingAdditionalLanguage}
                   description={description[contentLang]}
-                  callback={() => onChangeDescription(description, contentLang, matrixClient, spaceObject, fetchSpace, projectSpace)}
+                  callback={(updatedDescription) => onChangeDescription(updatedDescription, contentLang, matrixClient, spaceObject, fetchSpace, projectSpace)}
                   language={ISO6391.getName(contentLang)}
                 />
                 )
