@@ -182,12 +182,13 @@ const Category = ({ projectSpace, onChange, parent, setLocationFromLocationTree 
       delete projectSpaceMetaEvent.context
       await matrixClient.sendStateEvent(projectSpace, 'dev.medienhaus.meta', projectSpaceMetaEvent).catch(console.log)
     }
+    console.log('contextObject', contextObject)
     if (!contextObject.membership) {
       // if there is no membership (most likely because the contextObject came from the api) we need to check if the user is already a member of the context
 
       // first we check if the user is already a member of the context
       contextObject.membership = matrixClient.getRoom(contextSpace)?.getMyMembership() || await matrixClient.getStateEvent(contextSpace, 'm.room.member', matrixClient.getUserId())?.membership
-
+      console.log('contextObject.membership', contextObject.membership)
       // we check to see if the join rule of the context is 'knock' or 'knock_restricted'
       const joinRuleEvent = await Matrix.getMatrixClient().getStateEvent(contextSpace, 'm.room.join_rules')
       if (joinRuleEvent?.join_rule !== 'knock' && joinRuleEvent.join_rule !== 'knock_restricted') return
