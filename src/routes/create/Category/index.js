@@ -182,7 +182,6 @@ const Category = ({ projectSpace, onChange, parent, setLocationFromLocationTree 
       delete projectSpaceMetaEvent.context
       await matrixClient.sendStateEvent(projectSpace, 'dev.medienhaus.meta', projectSpaceMetaEvent).catch(console.log)
     }
-    console.log('contextObject', contextObject)
     if (!contextObject.membership) {
       // if there is no membership (most likely because the contextObject came from the api) we need to check if the user is already a member of the context
       // first we check if the user is already a member of the context
