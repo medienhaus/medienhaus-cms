@@ -18,11 +18,11 @@ export const joinRoomIfKnock = async (roomOrSpaceId, event) => {
       return null
     })
   // Get the current and previous membership status
-  const membership = event?.content?.membership
   const prevMembership = event?.prev_content?.membership || event.unsigned?.prev_content?.membership
   const myMembership = Matrix.getMatrixClient().getRoom(roomOrSpaceId)?.getMyMembership()
+
   // If the current membership is 'invite' and the previous membership was 'knock', join the room, if the user is not already a member
-  if (membership === 'invite' && prevMembership === 'knock' && myMembership !== 'join') {
+  if (myMembership === 'invite' && prevMembership === 'knock') {
     try {
       await Matrix.matrixClient.joinRoom(roomOrSpaceId)
       return { room_id: roomOrSpaceId, message: `You have been added to the following context: ${roomName.name}` }
