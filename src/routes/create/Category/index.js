@@ -168,10 +168,14 @@ const Category = ({ projectSpace, onChange, parent }) => {
     }
     if (!contextObject.membership) {
       // if there is no membership (most likely because the contextObject came from the api) we need to check if the user is already a member of the context
-
       // first we check if the user is already a member of the context
-      contextObject.membership = matrixClient.getRoom(contextSpace)?.getMyMembership() || await matrixClient.getStateEvent(contextSpace, 'm.room.member', matrixClient.getUserId())?.membership
-
+      contextObject.membership = matrixClient.getRoom(contextSpace)?.getMyMembership()
+      if (!contextObject.membership) {
+        // if the above check fails we check the m.room.member event of the user in the context
+        const memberEvent = await matrixClient.getStateEvent(contextSpace, 'm.room.member', matrixClient.getUserId())
+          .catch(console.log)
+        if (memberEvent?.membership) contextObject.membership = memberEvent.membership
+      }
       // we check to see if the join rule of the context is 'knock' or 'knock_restricted'
       const joinRuleEvent = await Matrix.getMatrixClient().getStateEvent(contextSpace, 'm.room.join_rules')
       if (joinRuleEvent?.join_rule !== 'knock' && joinRuleEvent.join_rule !== 'knock_restricted') return
