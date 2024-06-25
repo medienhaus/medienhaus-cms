@@ -1,6 +1,17 @@
 import * as _ from 'lodash'
 import Matrix from '../Matrix'
 
+/**
+ * This function creates a structure object for a Matrix space.
+ * It recursively scans through the children of a given space and builds a tree structure.
+ *
+ * @async
+ * @param {string} parentId - The ID of the parent space.
+ * @param {string} projectSpace - The ID of the project space.
+ * @param {function} setContexts - A function to set the contexts.
+ * @returns {Promise<Array>} - A promise that resolves to an array containing the resulting tree structure and a boolean indicating if a content is in a context.
+ */
+
 export const createMatrixStructureObject = async (parentId, projectSpace, setContexts) => {
   const matrixClient = Matrix.getMatrixClient()
   async function getSpaceStructure (motherSpaceRoomId, includeRooms) {
