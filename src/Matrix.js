@@ -124,7 +124,16 @@ class Matrix {
     }
   }
 
-  async removeChildFromParent (roomId) {
+  /**
+   * Removes a child room from its parent space(s) in Matrix.
+   * if no parent is provided, the room will be removed from all its parent spaces.
+   *
+   * @param {string} roomId - The ID of the room to be removed from its parent space(s).
+   * @param {string} [parent] - Optional. The ID of a specific parent space from which the room should be removed. If not provided, the room will be removed from all its parent spaces.
+   * @throws Will throw an error if the room with the provided ID is not found.
+   * @returns {Promise<void>} A Promise that resolves when the operation is complete.
+   */
+  async removeParentFromChild (roomId, parent) {
     const room = this.matrixClient.getRoom(roomId)
     console.log(room)
 
@@ -137,15 +146,14 @@ class Matrix {
     console.log('parentEvents', parentEvents)
     // Remove the room from each parent space
     for await (const event of parentEvents) {
+      // if a parent is specified, only remove the room from that parent
+      if (parent && event.getStateKey() !== parent) {
+        continue
+      }
       const parentId = event.getStateKey()
       try {
         // Remove m.space.child event from the parent space
-        await this.matrixClient.sendStateEvent(
-          parentId,
-          'm.space.child',
-          {}, // empty content to remove the event
-          roomId
-        )
+        await this.matrixClient.http.authedRequest('PUT', `/rooms/${roomId}/state/m.space.child/${parentId}`, undefined, {})
 
         console.log(`Removed room ${roomId} from space ${parentId}`)
       } catch (error) {

@@ -52,7 +52,7 @@ const processRoom = async (matrixClient, roomId, parentRoomId) => {
     }
 
     // Remove child from parent
-    await Matrix.removeChildFromParent(roomId, parentRoomId).catch(console.error)
+    await Matrix.removeSpaceChild(parentRoomId, roomId)
 
     // Leave the room if we haven't already
     await matrixClient.leave(roomId).catch(console.error)
