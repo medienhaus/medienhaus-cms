@@ -124,6 +124,37 @@ class Matrix {
     }
   }
 
+  async removeChildFromParent (roomId) {
+    const room = this.matrixClient.getRoom(roomId)
+    console.log(room)
+
+    if (!room) {
+      throw new Error(`Room ${roomId} not found`)
+    }
+
+    // Get all m.space.parent events
+    const parentEvents = room.currentState.getStateEvents('m.space.parent')
+    console.log('parentEvents', parentEvents)
+    // Remove the room from each parent space
+    for await (const event of parentEvents) {
+      const parentId = event.getStateKey()
+      try {
+        // Remove m.space.child event from the parent space
+        await this.matrixClient.sendStateEvent(
+          parentId,
+          'm.space.child',
+          {}, // empty content to remove the event
+          roomId
+        )
+
+        console.log(`Removed room ${roomId} from space ${parentId}`)
+      } catch (error) {
+        console.error(`Failed to remove room ${roomId} from space ${parentId}:`, error)
+        // Continue with other parent spaces even if one fails
+      }
+    }
+  }
+
   roomHierarchy = async (roomId, limit, maxDepth, suggestedOnly) => {
     const rooms = []
 
