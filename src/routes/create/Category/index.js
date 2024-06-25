@@ -29,7 +29,7 @@ const Category = ({ projectSpace, onChange, parent }) => {
   const [inputItems, setInputItems] = useState()
   const matrixClient = Matrix.getMatrixClient()
 
-  const createStructurObject = async () => {
+  const createStructureObject = async () => {
     setLoading(true)
     async function getSpaceStructure (motherSpaceRoomId, includeRooms) {
       const result = {} // the resulting tree structure
@@ -127,7 +127,7 @@ const Category = ({ projectSpace, onChange, parent }) => {
       fetchTreeFromApi()
       fetchParentsFromApi()
       setLoading(false)
-    } else createStructurObject()
+    } else createStructureObject()
 
     return () => {
       cancelled = true
