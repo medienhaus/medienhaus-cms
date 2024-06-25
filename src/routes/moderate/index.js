@@ -44,7 +44,7 @@ const Moderate = () => {
 
   const { t } = useTranslation('moderate')
 
-  const createStructurObject = useCallback(async () => {
+  const createStructureObject = useCallback(async () => {
     async function getSpaceStructure (matrixClient, motherSpaceRoomId, includeRooms) {
       const result = {}
 
@@ -108,7 +108,7 @@ const Moderate = () => {
       let tree = {}
 
       // with no api we have to create the structure ourselves
-      if (!config.medienhaus.api) tree = await createStructurObject()
+      if (!config.medienhaus.api) tree = await createStructureObject()
       for (const space of joinedSpaces) {
         if (space.meta.type !== 'context') continue
         if (space.powerLevel < 50) continue
@@ -159,7 +159,7 @@ const Moderate = () => {
     return () => {
       controller && controller.abort()
     }
-  }, [createStructurObject, joinedSpaces])
+  }, [createStructureObject, joinedSpaces])
 
   useEffect(() => {
     let cancelled = false
