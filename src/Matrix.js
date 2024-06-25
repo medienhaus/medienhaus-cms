@@ -54,14 +54,45 @@ class Matrix {
     return this.matrixClient.http.authedRequest('PUT', `/rooms/${parent}/state/m.space.child/${child}`, undefined, {})
   }
 
-  addSpaceChild (parent, child, autoJoin, suggested) {
+  async addSpaceChild (parent, child, autoJoin, suggested) {
     const payload = {
       auto_join: autoJoin || false,
       suggested: suggested || false,
       via: [this.matrixClient.getDomain()]
     }
+    // add m.space.parent event
+    await this.addSpaceToParent(parent, child)
 
     return this.matrixClient.http.authedRequest('PUT', `/rooms/${parent}/state/m.space.child/${child}`, undefined, payload)
+  }
+
+  addSpaceToParent = async (parent, child) => {
+    const existingParents = await this.matrixClient.getStateEvent(child, 'm.space.parent')
+      .catch(() => {
+        console.log('No existing parents found')
+      })
+
+    console.log(existingParents)
+    const hasCanonicalParent = existingParents?.some(event => event.content.canonical === true)
+
+    // Determine if this new parent should be canonical
+    const canonical = !hasCanonicalParent
+
+    // Send m.space.parent event
+    await this.matrixClient.sendStateEvent(
+      child,
+      'm.space.parent',
+      {
+        via: [this.matrixClient.getDomain()],
+        canonical: canonical
+      },
+      parent
+    )
+
+    return {
+      success: true,
+      message: canonical ? 'Added as canonical parent' : 'Added as non-canonical parent'
+    }
   }
 
   roomHierarchy = async (roomId, limit, maxDepth, suggestedOnly) => {
