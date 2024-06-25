@@ -5,35 +5,59 @@ import { removeFromParent } from '../../helpers/MedienhausApiHelper'
 const deleteProject = async (roomId) => {
   const matrixClient = Matrix.getMatrixClient()
   let log
+
   try {
-    // we change the meta json to reflect the deleted space
-    const meta = await matrixClient.getStateEvent(roomId, 'dev.medienhaus.meta').catch(console.log)
+    // Update meta json to reflect the deleted space, this ensures that the space will be deleted for collaborators
+    const meta = await matrixClient.getStateEvent(roomId, 'dev.medienhaus.meta')
     meta.deleted = true
     await matrixClient.sendStateEvent(roomId, 'dev.medienhaus.meta', meta)
-    const space = await matrixClient.getRoomHierarchy(roomId).catch(console.log)
-    space.rooms.filter(room => room.room_id !== roomId).forEach(async (space, index) => {
-      // we reverse here to leave the actual project space last in case something goes wrong in the process.
-      console.log('Leaving ' + space.name)
-      const subspaces = await matrixClient.getRoomHierarchy(space.room_id).catch(console.log)
-      subspaces.rooms.reverse().forEach(async (space) => {
-        const count = await matrixClient.getJoinedRoomMembers(space.room_id)
-        Object.keys(count.joined).length > 1 && Object.keys(count.joined).forEach(name => {
-          localStorage.getItem('medienhaus_user_id') !== name && matrixClient.kick(space.room_id, name).catch(console.log)
-        })
-        await matrixClient.leave(space.room_id).catch(console.log)
-      })
-      const count = await matrixClient.getJoinedRoomMembers(space.room_id)
-      Object.keys(count.joined).length > 1 && Object.keys(count.joined).forEach(async name => {
-        localStorage.getItem('medienhaus_user_id') !== name && matrixClient.kick(space.room_id, name).catch(console.log)
-      })
-      await matrixClient.leave(space.room_id).catch(console.log)
-    })
-    await matrixClient.leave(roomId).catch(console.log)
-    if (config.medienhaus.api) await removeFromParent(roomId, [], true)
-    log = 'successfully deleted ' + roomId
+
+    // Get room hierarchy
+    const space = await Matrix.roomHierarchy(roomId)
+
+    // Process each room in the hierarchy from bottom to top
+    const allRooms = space.filter(room => room.room_id !== roomId)
+    for (const room of allRooms.reverse()) {
+      console.log('Processing ' + room.name)
+      await processRoom(matrixClient, room.room_id, roomId)
+    }
+
+    // Leave the main project room
+    await matrixClient.leave(roomId)
+
+    // Remove from parent if API is configured
+    if (config.medienhaus.api) {
+      await removeFromParent(roomId, [], true)
+    }
+
+    log = 'Successfully deleted ' + roomId
   } catch (err) {
-    log = err
+    log = 'Error deleting project: ' + err.message
   }
+
   return log
+}
+
+// Helper function to process a room
+const processRoom = async (matrixClient, roomId, parentRoomId) => {
+  try {
+    const currentUserId = matrixClient.getUserId()
+    const members = await matrixClient.getJoinedRoomMembers(roomId)
+
+    // Kick other members
+    for (const memberId of Object.keys(members.joined)) {
+      if (memberId !== currentUserId) {
+        await matrixClient.kick(roomId, memberId).catch(console.error)
+      }
+    }
+
+    // Remove child from parent
+    await Matrix.removeChildFromParent(roomId, parentRoomId).catch(console.error)
+
+    // Leave the room if we haven't already
+    await matrixClient.leave(roomId).catch(console.error)
+  } catch (error) {
+    console.error(`Error processing room ${roomId}:`, error)
+  }
 }
 export default deleteProject
