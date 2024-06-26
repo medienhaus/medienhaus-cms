@@ -27,7 +27,6 @@ const ProjectTitle = ({ title, projectSpace, template, callback }) => {
   useEffect(() => {
     let cancelled = false
     if (joinedSpaces && !cancelled) {
-      console.log('joinedSpaces', joinedSpaces)
       const item = config.medienhaus?.item ? Object.keys(config.medienhaus?.item).concat('item') : ['item']
       const updatedProjects = joinedSpaces?.filter(space => !space.meta?.deleted && item.includes(space.meta.type) && space.meta.application === process.env.REACT_APP_APP_NAME)
       setProjects(_.sortBy(updatedProjects, 'name'))
