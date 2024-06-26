@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next'
 import LoadingSpinnerButton from '../../../components/LoadingSpinnerButton'
 import SimpleButton from '../../../components/medienhausUI/simpleButton'
 import Matrix from '../../../Matrix'
+import config from '../../../config.json'
 import styled from 'styled-components'
 import DeleteButton from '../components/DeleteButton'
 
@@ -109,7 +110,7 @@ export default function Time ({ allocation, projectSpace, reloadSpace }) {
           <div className="timedate">
             <label htmlFor="time">{t('Start')}:</label>
             <div>
-              <input type="date" id="start-date" min="2024-07-19" max="2024-07-21" name="start-date" value={startDate} onChange={(e) => setStartDate(e.target.value)} />
+              <input type="date" id="start-date" name="start-date" min={config.medienhaus?.item?.event?.dates?.min ? config.medienhaus.item.event.dates.min : ''} max={config.medienhaus?.item?.event?.dates?.max ? config.medienhaus.item.event.dates.max : ''} value={startDate} onChange={(e) => setStartDate(e.target.value)} />
               <input type="time" id="start-time" name="start-time" onChange={(e) => setStartTime(e.target.value)} />
             </div>
           </div>
@@ -117,7 +118,7 @@ export default function Time ({ allocation, projectSpace, reloadSpace }) {
           <div className="timedate">
             <label htmlFor="time">{t('End')}:</label>
             <div>
-              <input type="date" id="end-date" name="end-date" min={startDate || '2024-07-19'} max="2024-07-21" value={endDate} onChange={(e) => setEndDate(e.target.value)} />
+              <input type="date" id="end-date" name="end-date" min={startDate || (config.medienhaus?.item?.event?.dates?.min ? config.medienhaus.item.event.dates.min : '')} max={config.medienhaus?.item?.event?.dates?.max ? config.medienhaus.item.event.dates.max : ''} value={endDate} onChange={(e) => setEndDate(e.target.value)} />
               <input type="time" id="end-time" name="end-time" onChange={(e) => setEndTime(e.target.value)} />
             </div>
           </div>

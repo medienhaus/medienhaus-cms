@@ -104,5 +104,6 @@
   "previewNote": "Eine Vorschau des Eintrags ist nicht möglich. Wie die öffentliche Version des Projekts aussieht, ist ab dem 3. Juli unter <1>rundgang.udk-berlin.de</1> einsehbar, sofern das Projekt durch die Kontextverantwortlichen freigeben wurde.",
   "SAVE CHANGES": "ÄNDERUNGEN SPEICHERN",
   "select language": "Sprache auswählen",
-  "Add": "Hinzufügen"
+  "Add": "Hinzufügen",
+  "You’ve reached the maximum amount of entries.": "Sie haben bereits die maximale Anzahl an Einträgen erreicht."
 }
