@@ -26,7 +26,7 @@ const Nav = () => {
     let cancelled = false
     if (joinedSpaces && !cancelled) {
       const item = config.medienhaus?.item ? Object.keys(config.medienhaus?.item).concat('item') : ['item']
-      const updatedProjects = joinedSpaces?.filter(space => !space.meta?.deleted && item.includes(space.meta.type))
+      const updatedProjects = joinedSpaces?.filter(space => !space.meta?.deleted && item.includes(space.meta.type) && space.meta.application === process.env.REACT_APP_APP_NAME)
       setProjects(sortBy(updatedProjects, 'name'))
     }
 
