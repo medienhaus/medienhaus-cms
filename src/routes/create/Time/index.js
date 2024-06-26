@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next'
 import LoadingSpinnerButton from '../../../components/LoadingSpinnerButton'
 import SimpleButton from '../../../components/medienhausUI/simpleButton'
 import Matrix from '../../../Matrix'
+import config from '../../../config.json'
 import styled from 'styled-components'
 import DeleteButton from '../components/DeleteButton'
 
@@ -107,7 +108,7 @@ export default function Time ({ allocation, projectSpace, reloadSpace }) {
           <div className="timedate">
             <label htmlFor="time">{t('Start')}:</label>
             <div>
-              <input type="date" id="start-date" name="start-date" value={startDate} onChange={(e) => setStartDate(e.target.value)} />
+              <input type="date" id="start-date" name="start-date" min={config.medienhaus?.item.event.dates.min || null} max={config.medienhaus?.item.event.dates.max || null} value={startDate} onChange={(e) => setStartDate(e.target.value)} />
               <input type="time" id="start-time" name="start-time" onChange={(e) => setStartTime(e.target.value)} />
             </div>
           </div>
@@ -115,7 +116,7 @@ export default function Time ({ allocation, projectSpace, reloadSpace }) {
           <div className="timedate">
             <label htmlFor="time">{t('End')}:</label>
             <div>
-              <input type="date" id="end-date" name="end-date" value={endDate} onChange={(e) => setEndDate(e.target.value)} />
+              <input type="date" id="end-date" name="end-date" min={startDate || (config.medienhaus?.item.event.dates.min || null)} max={config.medienhaus?.item.event.dates.max || null} value={endDate} onChange={(e) => setEndDate(e.target.value)} />
               <input type="time" id="end-time" name="end-time" onChange={(e) => setEndTime(e.target.value)} />
             </div>
           </div>
