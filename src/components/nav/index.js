@@ -7,6 +7,7 @@ import useJoinedSpaces from '../matrix_joined_spaces'
 import Matrix from '../../Matrix'
 import config from '../../config.json'
 import { fetchId } from '../../helpers/MedienhausApiHelper'
+import { sortBy } from 'lodash'
 
 const Nav = () => {
   const auth = useAuth()
@@ -19,6 +20,21 @@ const Nav = () => {
   const [contextInvites, setContextInvites] = useState([])
   const { joinedSpaces, reload } = useJoinedSpaces(false)
   const matrixClient = Matrix.getMatrixClient()
+  const [projects, setProjects] = useState({})
+
+  useEffect(() => {
+    let cancelled = false
+    if (joinedSpaces && !cancelled) {
+      const item = config.medienhaus?.item ? Object.keys(config.medienhaus?.item).concat('item') : ['item']
+      const updatedProjects = joinedSpaces?.filter(space => !space.meta?.deleted && item.includes(space.meta.type))
+      setProjects(sortBy(updatedProjects, 'name'))
+    }
+
+    return () => {
+      cancelled = true
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [joinedSpaces])
 
   useEffect(() => {
     let cancelled = false
@@ -177,7 +193,7 @@ const Nav = () => {
           {auth.user && (
             <>
               <div>
-                <NavLink to="/create">/create</NavLink>
+                <NavLink className={(typeof config.medienhaus?.maxEntriesPerUser === 'number' && projects.length >= config.medienhaus?.maxEntriesPerUser) ? 'disabled' : ''} to="/create">/create</NavLink>
                 <NavLink to="/content">/content <sup className={`notification ${itemInvites.length > 0 ? '' : 'hidden'}`}>●</sup></NavLink>
               </div>
               <div>

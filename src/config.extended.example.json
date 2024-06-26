@@ -87,6 +87,7 @@
       "lat": 0.0,
       "lng": 0.0
     },
+    "maxEntriesPerUser": 10,
     "allowSelectingRootContext": true,
     "api": "https://api.dev.medienhaus.udk-berlin.de/api/v2/",
     "customServer": true

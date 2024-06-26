@@ -74,5 +74,6 @@
   "Date and Venue": "Datum und Veranstaltungsort",
   "SAVE CHANGES": "ÄNDERUNGEN SPEICHERN",
   "select language": "Sprache auswählen",
-  "Add": "Hinzufügen"
+  "Add": "Hinzufügen",
+  "You’ve reached the maximum amount of entries.": "Sie haben bereits die maximale Anzahl an Einträgen erreicht."
 }
