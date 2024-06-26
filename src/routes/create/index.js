@@ -542,8 +542,8 @@ const Create = () => {
     setIsCollab(true)
     try {
       // joining contentRooms which might have been created since we last opened the project
-      await matrixClient.getRoomHierarchy(projectSpace).then((res) => {
-        res.rooms.map(
+      await Matrix.roomHierarchy(projectSpace).then((res) => {
+        res.map(
           async (contentRooms) =>
             contentRooms.room_id !== projectSpace &&
             (await matrixClient
@@ -817,6 +817,7 @@ const Create = () => {
     setIsCollab(true)
     console.log('Started spying on collaborators')
     // to avoid rate limits we debounce the next function
+    listeningToCollaborators()
     debounce(() => listeningToCollaborators(), 100)
   }
 
