@@ -30,12 +30,6 @@ const ProjectTitle = ({ title, projectSpace, template, callback }) => {
       const item = config.medienhaus?.item ? Object.keys(config.medienhaus?.item).concat('item') : ['item']
       const updatedProjects = joinedSpaces?.filter(space => !space.meta?.deleted && item.includes(space.meta.type))
       setProjects(_.sortBy(updatedProjects, 'name'))
-
-      if ((typeof config.medienhaus?.maxEntriesPerUser === 'number') && (projects.length >= config.medienhaus?.maxEntriesPerUser)) {
-        setMaxProjectsReached(true)
-      } else {
-        setMaxProjectsReached(false)
-      }
     }
 
     return () => {
@@ -44,6 +38,14 @@ const ProjectTitle = ({ title, projectSpace, template, callback }) => {
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [joinedSpaces])
+
+  useEffect(() => {
+    if ((typeof config.medienhaus?.maxEntriesPerUser === 'number') && (projects.length >= config.medienhaus?.maxEntriesPerUser)) {
+      setMaxProjectsReached(true)
+    } else {
+      setMaxProjectsReached(false)
+    }
+  }, [projects])
 
   useEffect(() => {
     setProjectTitle(title)
