@@ -75,5 +75,5 @@
   "SAVE CHANGES": "ÄNDERUNGEN SPEICHERN",
   "select language": "Sprache auswählen",
   "Add": "Hinzufügen",
-  "You already reached the maximum amount of created entries. Remove some to create additional ones.": "Sie haben bereits die maximale Anzahl an erstellten Einträgen erreicht. Löschen Sie einige, um zusätzliche erstellen zu können."
+  "You’ve reached the maximum amount of entries.": "Sie haben bereits die maximale Anzahl an Einträgen erreicht."
 }

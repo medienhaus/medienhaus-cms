@@ -168,7 +168,7 @@ const ProjectTitle = ({ title, projectSpace, template, callback }) => {
         <div className={!newProject ? 'confirmation' : null}>
           {!newProject && <button className="cancel" onClick={(e) => { e.preventDefault(); setEdit(false); setProjectTitle(oldTitle) }}>{t('CANCEL')}</button>}
           {!title && newProject && <LoadingSpinnerButton disabled={!projectTitle || projectTitle.length > 100 || maxProjectsReached} onClick={onClickCreateNewProject}>{t('Create')}</LoadingSpinnerButton>}
-          {maxProjectsReached && <p>{t('You already reached the maximum amount of created entries. Remove some to create additional ones.')}</p>}
+          {maxProjectsReached && <p style={{ marginTop: 'var(--margin)' }}>❗️ {t('You’ve reached the maximum amount of entries.')}</p>}
           {title && edit && (projectTitle !== oldTitle) &&
             <LoadingSpinnerButton
               className="confirm" disabled={projectTitle.length > 100} onClick={async () => {
