@@ -34,7 +34,11 @@
           "video",
           "playlist",
           "bigbluebutton"
-        ]
+        ],
+        "dates": {
+          "min": "2024-01-01",
+          "max": "2024-07-03"
+        }
       }
     },
     "pages": {
