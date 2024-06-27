@@ -472,7 +472,7 @@ const Create = () => {
         setSpaceObject(space)
         const spaceDetails = await matrixClient.getRoom(projectSpace)
         // check if new rooms have been created by collaborators and join them if we are not yet part of them
-        if (spaceDetails.currentState.getJoinedMemberCount() > 0) {
+        if (spaceDetails.currentState.getJoinedMemberCount() > 1) {
           space.rooms.map(async (contentRooms) => {
             if (contentRooms.room_id !== projectSpace) {
               const room = matrixClient.getRoom(contentRooms.room_id)
