@@ -6,7 +6,7 @@ import config from '../../config.json'
 import { triggerApiUpdate } from '../../helpers/MedienhausApiHelper'
 import LoadingSpinnerSelect from '../LoadingSpinnerSelect'
 
-const PublishProject = ({ disabled, space, published, hasContext, metaEvent}) => {
+const PublishProject = ({ disabled, space, published, hasContext, metaEvent }) => {
   const { t } = useTranslation('publish')
   // eslint-disable-next-line no-unused-vars
   const [userFeedback, setUserFeedback] = useState()
