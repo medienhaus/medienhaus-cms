@@ -99,11 +99,11 @@ const GutenbergWrapper = styled.div`
   }
 
   /* set color via variable for toolbar separators */
-  .block-editor-block-contextual-toolbar.is-fixed
-    .block-editor-block-toolbar
+  .block-editor-block-contextual-toolbar.is-fixed,
+    .block-editor-block-toolbar,
     .components-toolbar,
-  .block-editor-block-contextual-toolbar.is-fixed
-    .block-editor-block-toolbar
+  .block-editor-block-contextual-toolbar.is-fixed,
+    .block-editor-block-toolbar,
     .components-toolbar-group {
     border-right-color: var(--color-fg);
   }
@@ -1280,7 +1280,7 @@ const Create = () => {
                     value="addLang"
                     key="lang"
                     disabled={addingAdditionalLanguage}
-                    onClick={(e) => {
+                    onClick={() => {
                       if (!addingAdditionalLanguage) {
                         setAddingAdditionalLanguage(true)
                       }
@@ -1322,7 +1322,7 @@ const Create = () => {
                         <SimpleButton
                           value="addLang"
                           key="lang"
-                          onClick={(e) => {
+                          onClick={() => {
                             if (
                               addingAdditionalLanguage &&
                               newLang?.length > 0
