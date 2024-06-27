@@ -6,7 +6,7 @@ import config from '../../config.json'
 import { triggerApiUpdate } from '../../helpers/MedienhausApiHelper'
 import LoadingSpinnerSelect from '../LoadingSpinnerSelect'
 
-const PublishProject = ({ disabled, space, published, hasContext, metaEvent, onChange }) => {
+const PublishProject = ({ disabled, space, published, hasContext, metaEvent}) => {
   const { t } = useTranslation('publish')
   // eslint-disable-next-line no-unused-vars
   const [userFeedback, setUserFeedback] = useState()
@@ -54,8 +54,12 @@ const PublishProject = ({ disabled, space, published, hasContext, metaEvent, onC
       metaEvent.published = publishState
       await matrixClient.sendStateEvent(space.room_id, 'dev.medienhaus.meta', metaEvent)
       console.log('--- All changed Succesfully to ' + publishState + ' ---')
-      if (config.medienhaus.api) await triggerApiUpdate(space.room_id)
       setUserFeedback(t('Changed successfully!'))
+      if (config.medienhaus.api) {
+        await triggerApiUpdate(space.room_id).catch((error) => {
+          console.log('Error while triggering API update:', error)
+        })
+      }
       setIsChangingVisibility(false)
       setTimeout(() => setUserFeedback(''), 3000)
     } catch (err) {

@@ -148,7 +148,10 @@ const Category = ({ projectSpace, onChange, parent, setLocationFromLocationTree 
     // Add this current project to the given context space
 
     // if the join rule of the context is knock, we need to ask to join first.
-    if (contextObject.membership !== 'join') {
+    // @TODO if the membership is invite, we should first join the room and then add the content to the context.
+    // atm we try to add the content to the context and if that fails we try to join the context. therefore creating an extra api call.
+
+    if (contextObject.membership !== 'join' && contextObject.membership !== 'invite') {
       if (contextObject.joinRule === 'knock' || contextObject.joinRule === 'knock_restricted') {
         if (contextObject.membership === 'knock') {
           alert('You have already requested to join this context. You will be notified once you are accepted.')
