@@ -8,6 +8,8 @@ import { useTranslation } from 'react-i18next'
 import config from '../../../config.json'
 import _ from 'lodash'
 
+import useJoinedSpaces from '../../../components/matrix_joined_spaces'
+
 const ProjectTitle = ({ title, projectSpace, template, callback }) => {
   const { t } = useTranslation('content')
   const [projectTitle, setProjectTitle] = useState('')
@@ -17,6 +19,33 @@ const ProjectTitle = ({ title, projectSpace, template, callback }) => {
   const [loading, setLoading] = useState(false)
   const matrixClient = Matrix.getMatrixClient()
   const history = useHistory()
+
+  const { joinedSpaces } = useJoinedSpaces(false)
+  const [projects, setProjects] = useState({})
+  const [maxProjectsReached, setMaxProjectsReached] = useState(false)
+
+  useEffect(() => {
+    let cancelled = false
+    if (joinedSpaces && !cancelled) {
+      const item = config.medienhaus?.item ? Object.keys(config.medienhaus?.item).concat('item') : ['item']
+      const updatedProjects = joinedSpaces?.filter(space => !space.meta?.deleted && item.includes(space.meta.type) && space.meta.application === process.env.REACT_APP_APP_NAME)
+      setProjects(_.sortBy(updatedProjects, 'name'))
+    }
+
+    return () => {
+      cancelled = true
+    }
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [joinedSpaces])
+
+  useEffect(() => {
+    if ((typeof config.medienhaus?.maxEntriesPerUser === 'number') && (projects.length >= config.medienhaus?.maxEntriesPerUser)) {
+      setMaxProjectsReached(true)
+    } else {
+      setMaxProjectsReached(false)
+    }
+  }, [projects])
 
   useEffect(() => {
     setProjectTitle(title)
@@ -138,8 +167,8 @@ const ProjectTitle = ({ title, projectSpace, template, callback }) => {
       : edit && (projectTitle !== oldTitle) &&
         <div className={!newProject ? 'confirmation' : null}>
           {!newProject && <button className="cancel" onClick={(e) => { e.preventDefault(); setEdit(false); setProjectTitle(oldTitle) }}>{t('CANCEL')}</button>}
-          {!title && newProject && <LoadingSpinnerButton disabled={!projectTitle || projectTitle.length > 100} onClick={onClickCreateNewProject}>{t('Create')}</LoadingSpinnerButton>}
-
+          {!title && newProject && <LoadingSpinnerButton disabled={!projectTitle || projectTitle.length > 100 || maxProjectsReached} onClick={onClickCreateNewProject}>{t('Create')}</LoadingSpinnerButton>}
+          {maxProjectsReached && <p style={{ marginTop: 'var(--margin)' }}>❗️ {t('You’ve reached the maximum amount of entries.')}</p>}
           {title && edit && (projectTitle !== oldTitle) &&
             <LoadingSpinnerButton
               className="confirm" disabled={projectTitle.length > 100} onClick={async () => {

@@ -18,6 +18,15 @@ const createBlock = async (e, content, number, space) => {
         canonical: true
       },
       state_key: space
+    },
+    {
+      type: 'dev.medienhaus.meta',
+      content: {
+        type: 'content',
+        template: content,
+        version: '0.4',
+        application: process.env.REACT_APP_APP_NAME
+      }
     }, {
       type: 'm.room.history_visibility',
       content: { history_visibility: 'world_readable' }
@@ -46,7 +55,7 @@ const createBlock = async (e, content, number, space) => {
   }
 
   try {
-    const room = await matrixClient.createRoom(opts)
+    return await matrixClient.createRoom(opts)
       .then(async (res) => {
         const response = await Matrix.addSpaceChild(space, res.room_id)
         if (!response.event_id) {
@@ -55,13 +64,6 @@ const createBlock = async (e, content, number, space) => {
         return res.room_id
       })
       .then(async (res) => {
-        await matrixClient.sendStateEvent(res, 'dev.medienhaus.meta', {
-          type: 'content',
-          template: content,
-          version: '0.4'
-        })
-        return res
-      }).then(async (res) => {
         let currentOrder = await matrixClient.getStateEvent(space, 'dev.medienhaus.order').catch(console.log)
         if (currentOrder) {
           currentOrder = currentOrder.order
@@ -70,7 +72,6 @@ const createBlock = async (e, content, number, space) => {
         await matrixClient.sendStateEvent(space, 'dev.medienhaus.order', currentOrder ? { order: currentOrder } : { order: [res] })
         return res
       })
-    return room
   } catch (e) {
     console.log(e)
   }

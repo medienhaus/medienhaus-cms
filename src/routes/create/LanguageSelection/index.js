@@ -85,7 +85,7 @@ const LanguageSelection = ({
             value="languageUtils"
             key="lang"
             disabled={addingAdditionalLanguage}
-            onClick={(e) => {
+            onClick={() => {
               if (!addingAdditionalLanguage) {
                 setAddingAdditionalLanguage(true)
               }
@@ -127,7 +127,7 @@ const LanguageSelection = ({
                 <SimpleButton
                   value="languageUtils"
                   key="lang"
-                  onClick={(e) => {
+                  onClick={() => {
                     if (
                       addingAdditionalLanguage &&
                                             newLang?.length > 0
