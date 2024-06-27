@@ -56,7 +56,6 @@ const PublishProject = ({ disabled, space, published, hasContext, metaEvent, onC
       console.log('--- All changed Succesfully to ' + publishState + ' ---')
       if (config.medienhaus.api) await triggerApiUpdate(space.room_id)
       setUserFeedback(t('Changed successfully!'))
-      onChange(publishState === 'public' ? 'public' : 'draft')
       setIsChangingVisibility(false)
       setTimeout(() => setUserFeedback(''), 3000)
     } catch (err) {
