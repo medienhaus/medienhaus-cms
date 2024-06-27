@@ -471,6 +471,22 @@ const Create = () => {
         const space = await matrixClient.getRoomHierarchy(projectSpace)
         setSpaceObject(space)
         const spaceDetails = await matrixClient.getRoom(projectSpace)
+        // check if new rooms have been created by collaborators and join them if we are not yet part of them
+        if (spaceDetails.currentState.getJoinedMemberCount() > 0) {
+          space.rooms.map(async (contentRooms) => {
+            if (contentRooms.room_id !== projectSpace) {
+              const room = matrixClient.getRoom(contentRooms.room_id)
+              if (!room || room.getMyMembership() !== 'join') {
+                // if we aren't already part of the room we try to join it
+                await matrixClient
+                  .joinRoom(contentRooms.room_id)
+                  .catch((err) => console.log(err))
+              }
+            }
+          }
+          )
+        }
+
         // setting title to project space name
         setTitle(space.rooms[0].name)
         // set the topic depending on selected language
