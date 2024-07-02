@@ -47,6 +47,7 @@ const LanguageSectionSelect = styled.div`
  * @param {Function} inviteCollaborators - Function to invite collaborators.
  * @param {string} projectSpace - The project space.
  * @param {Function} setLanguages - Function to set the languages.
+ * @param {string} contentLang - The selected content language.
  * @returns {JSX.Element} The rendered component.
  */
 
@@ -58,11 +59,28 @@ const LanguageSelection = ({
   setAddingAdditionalLanguage,
   inviteCollaborators,
   projectSpace,
-  setLanguages
+  setLanguages,
+  contentLang
 }) => {
   const [newLang, setNewLang] = useState('')
+  const [errorMessage, setErrorMessage] = useState('')
   const { t } = useTranslation('create')
   const matrixClient = Matrix.getMatrixClient()
+
+  const handleAddLanguage = async () => {
+    if (addingAdditionalLanguage && newLang?.length > 0) {
+      setErrorMessage('')
+      const createLanguageSpace = await languageUtils(matrixClient, inviteCollaborators, projectSpace, languages, newLang, setLanguages, setAddingAdditionalLanguage)
+        .catch((err) => {
+          console.error(err)
+          setErrorMessage(err.message)
+          setNewLang('')
+        })
+      if (createLanguageSpace) {
+        setContentLang(newLang)
+      }
+    }
+  }
 
   return (
     <Wrapper className="request">
@@ -73,6 +91,7 @@ const LanguageSelection = ({
             setContentLang(e.target.value)
             setDescription()
           }}
+          value={contentLang}
         >
           {languages.map((lang) => (
             <option value={lang} key={lang}>
@@ -106,11 +125,14 @@ const LanguageSelection = ({
                 <option disabled value="">
                   {t('select language')}
                 </option>
-                {ISO6391.getAllNames().map((lang, i) => (
-                  <option key={i} value={ISO6391.getCode(lang)}>
-                    {lang}
-                  </option>
-                ))}
+                {ISO6391.getAllNames().map((lang, i) => {
+                  const isoLang = ISO6391.getCode(lang)
+                  return (
+                    <option key={i} value={isoLang} disabled={languages.includes(isoLang)}>
+                      {lang}
+                    </option>
+                  )
+                })}
               </select>
             )}
             {addingAdditionalLanguage && (
@@ -127,14 +149,7 @@ const LanguageSelection = ({
                 <SimpleButton
                   value="languageUtils"
                   key="lang"
-                  onClick={() => {
-                    if (
-                      addingAdditionalLanguage &&
-                                            newLang?.length > 0
-                    ) {
-                      languageUtils(matrixClient, inviteCollaborators, projectSpace, languages, newLang, setNewLang, setLanguages, setAddingAdditionalLanguage)
-                    }
-                  }}
+                  onClick={handleAddLanguage}
                 >
                   {t('Add')}
                 </SimpleButton>
@@ -142,6 +157,7 @@ const LanguageSelection = ({
             )}
           </>
         )}
+        {errorMessage && <p>‼️ {errorMessage}</p>}
       </LanguageSectionAdd>
     </Wrapper>
   )
