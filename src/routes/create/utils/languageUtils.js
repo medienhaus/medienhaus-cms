@@ -82,10 +82,9 @@ export const fetchLanguages = async (id) => {
   const spaces = await Matrix.roomHierarchy(id, 1000, 1)
   // we filter out all of the spaces which are not the parent space itstelf as well as assuming that if it is an two letter space it is a language space based on the ISO639-1 standard
   // @TODO this is a very hacky way to determine if a space is a language space, it should be discussed if we should check that with additional calls to check the dev.medienhaus.meta event
-  const languageSpaces = spaces
+  return spaces
     ?.filter((room) => room.room_id !== id && room.name.length === 2)
     .map((room) => room.name)
-  return languageSpaces
 }
 
 export const onChangeDescription = async (description, contentLang, matrixClient, spaceObject, fetchSpace, projectSpace) => {
