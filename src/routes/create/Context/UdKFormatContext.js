@@ -81,6 +81,7 @@ const UdkFormatContext = ({ spaceRoomId }) => {
         // If we can't add the space to a context we try to join the context first ...
         const joinRoom = await Matrix.getMatrixClient().joinRoom(selectedContextRoomId)
         if (joinRoom) {
+          console.log('joined room {id} and retrying to add space to context', { id: selectedContextRoomId })
           // ... and then try to add the space to the context again
           await Matrix.addSpaceChild(selectedContextRoomId, spaceRoomId)
         }
