@@ -125,7 +125,7 @@ const LanguageSelection = ({
                 <option disabled value="">
                   {t('select language')}
                 </option>
-                {ISO6391.getAllNames().map((lang, i) => {
+                {ISO6391.getAllNames()?.sort().map((lang, i) => {
                   const isoLang = ISO6391.getCode(lang)
                   return (
                     <option key={i} value={isoLang} disabled={languages.includes(isoLang)}>
