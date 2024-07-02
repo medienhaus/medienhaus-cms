@@ -51,6 +51,9 @@ class Matrix {
   }
 
   removeSpaceChild (parent, child) {
+    // remove m.space.parent event for the child
+    this.matrixClient.http.authedRequest('PUT', `/rooms/${child}/state/m.space.parent/${parent}`, undefined, {})
+
     return this.matrixClient.http.authedRequest('PUT', `/rooms/${parent}/state/m.space.child/${child}`, undefined, {})
   }
 
@@ -121,45 +124,6 @@ class Matrix {
     return {
       success: true,
       message: canonical ? 'Added as canonical parent' : 'Added as non-canonical parent'
-    }
-  }
-
-  /**
-   * Removes a child room from its parent space(s) in Matrix.
-   * if no parent is provided, the room will be removed from all its parent spaces.
-   *
-   * @param {string} roomId - The ID of the room to be removed from its parent space(s).
-   * @param {string} [parent] - Optional. The ID of a specific parent space from which the room should be removed. If not provided, the room will be removed from all its parent spaces.
-   * @throws Will throw an error if the room with the provided ID is not found.
-   * @returns {Promise<void>} A Promise that resolves when the operation is complete.
-   */
-  async removeParentFromChild (roomId, parent) {
-    const room = this.matrixClient.getRoom(roomId)
-    console.log(room)
-
-    if (!room) {
-      throw new Error(`Room ${roomId} not found`)
-    }
-
-    // Get all m.space.parent events
-    const parentEvents = room.currentState.getStateEvents('m.space.parent')
-    console.log('parentEvents', parentEvents)
-    // Remove the room from each parent space
-    for await (const event of parentEvents) {
-      // if a parent is specified, only remove the room from that parent
-      if (parent && event.getStateKey() !== parent) {
-        continue
-      }
-      const parentId = event.getStateKey()
-      try {
-        // Remove m.space.child event from the parent space
-        await this.matrixClient.http.authedRequest('PUT', `/rooms/${roomId}/state/m.space.child/${parentId}`, undefined, {})
-
-        console.log(`Removed room ${roomId} from space ${parentId}`)
-      } catch (error) {
-        console.error(`Failed to remove room ${roomId} from space ${parentId}:`, error)
-        // Continue with other parent spaces even if one fails
-      }
     }
   }
 
