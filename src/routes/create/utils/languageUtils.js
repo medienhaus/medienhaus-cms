@@ -2,7 +2,7 @@ import Matrix from '../../../Matrix'
 import config from '../../../config.json'
 import { triggerApiUpdate } from '../../../helpers/MedienhausApiHelper'
 
-export const languageUtils = async (matrixClient, inviteCollaborators, projectSpace, languages, newLang, setNewLang, setLanguages, setAddingAdditionalLanguage) => {
+export const languageUtils = async (matrixClient, inviteCollaborators, projectSpace, languages, newLang, setLanguages, setAddingAdditionalLanguage) => {
   const createLanguageSpace = async (lang) => {
     const opts = (template, name, history) => {
       return {
@@ -63,19 +63,16 @@ export const languageUtils = async (matrixClient, inviteCollaborators, projectSp
       opts('lang', lang, 'shared')
     )
     await inviteCollaborators(languageRoom.room_id)
-    await Matrix.addSpaceChild(projectSpace, languageRoom.room_id)
+    return Matrix.addSpaceChild(projectSpace, languageRoom.room_id)
   }
 
   if (languages.includes(newLang)) {
-    console.log('error')
-    setNewLang('')
-    return
+    throw new Error(`language space ${newLang} already exists`)
   }
 
   setLanguages([...languages, newLang])
   setAddingAdditionalLanguage(false)
-  console.log(projectSpace)
-  await createLanguageSpace(newLang)
+  return createLanguageSpace(newLang)
 }
 
 export const fetchLanguages = async (id) => {

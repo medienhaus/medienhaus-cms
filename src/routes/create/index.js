@@ -654,6 +654,7 @@ const Create = () => {
               setContentLang={setContentLang}
               setDescription={setDescription}
               inviteCollaborators={inviteCollaborators}
+              contentLang={contentLang}
             />
             {spaceObject && (description || description === '')
               ? (
