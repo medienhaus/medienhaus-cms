@@ -270,7 +270,7 @@ const Category = ({ projectSpace, onChange, parent }) => {
       })
     }
     if (removeSpacechild?.event_id) {
-      await Matrix.removeSpaceChild(parent, projectSpace)
+      // await Matrix.removeSpaceChild(parent, projectSpace)
 
       setContexts(contexts => contexts.filter(context => context.room_id !== parent))
     }
