@@ -110,8 +110,7 @@ const Category = ({ projectSpace, onChange, parent, setLocationFromLocationTree 
     // this will be refactored with new logic once the api can return the updated /$id/path immediately after adding a space child.
     let contextObject
     if (config.medienhaus.api) {
-      const fetchPath = await fetchId(contextSpace)
-      contextObject = fetchPath
+      contextObject = await fetchId(contextSpace)
     } else {
       contextObject = findValueDeep(
         inputItems,

@@ -55,7 +55,7 @@ const createBlock = async (e, content, number, space) => {
   }
 
   try {
-    const room = await matrixClient.createRoom(opts)
+    return await matrixClient.createRoom(opts)
       .then(async (res) => {
         const response = await Matrix.addSpaceChild(space, res.room_id)
         if (!response.event_id) {
@@ -72,7 +72,6 @@ const createBlock = async (e, content, number, space) => {
         await matrixClient.sendStateEvent(space, 'dev.medienhaus.order', currentOrder ? { order: currentOrder } : { order: [res] })
         return res
       })
-    return room
   } catch (e) {
     console.log(e)
   }

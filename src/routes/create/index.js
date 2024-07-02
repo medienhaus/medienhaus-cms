@@ -21,19 +21,15 @@ import Location from './Location'
 import config from '../../config.json'
 import _, { debounce } from 'lodash'
 import GutenbergEditor from '../gutenberg/editor'
-import createBlock from './matrix_create_room'
 import LoadingSpinnerButton from '../../components/LoadingSpinnerButton'
 import UdKLocationContext from './Context/UdKLocationContext'
 import styled from 'styled-components'
-import * as Showdown from 'showdown'
 import { triggerApiUpdate } from '../../helpers/MedienhausApiHelper'
 import Tags from './Tags'
 import UdkFormatContext from './Context/UdKFormatContext'
-import SimpleButton from '../../components/medienhausUI/simpleButton'
-
-const nl2br = function (str) {
-  return str.split('\n').join('<br>')
-}
+import { fetchLanguages, onChangeDescription } from './utils/languageUtils'
+import { fetchContentsForGutenberg, saveGutenbergEditorToMatrix, warnUserAboutUnsavedChanges } from './utils/gutenbergUtils'
+import LanguageSelection from './LanguageSelection'
 
 const AuthorCheckbox = styled.div`
   display: grid;
@@ -41,45 +37,6 @@ const AuthorCheckbox = styled.div`
   grid-gap: var(--margin);
   align-items: center;
   justify-content: space-between;
-`
-
-/*
-const BackButton = styled.button`
-  @media (min-width: 50em) {
-    width: unset;
-  }
-`
-*/
-const LanguageSection = styled.section`
-  display: grid;
-  grid-gap: var(--margin);
-  grid-auto-flow: row;
-
-  /* unset margin-top for each direct child element directly following a previous one */
-  & > * + * {
-    margin-top: unset;
-  }
-`
-
-const LanguageCancelConfirm = styled.div`
-  display: flex;
-  gap: var(--margin);
-`
-
-const LanguageSectionAdd = styled.div`
-  display: grid;
-  grid-gap: var(--margin);
-  grid-auto-flow: row;
-`
-const LanguageSectionSelect = styled.div`
-  display: flex;
-  gap: var(--margin);
-  
-  > button {
-  width: calc(var(--margin) * 2.5);
-}
-
-
 `
 
 const GutenbergWrapper = styled.div`
@@ -157,8 +114,6 @@ const GutenbergSavingOverlay = styled.div`
   z-index: 99999999999999;
 `
 
-const ShowdownConverter = new Showdown.Converter()
-
 const Create = () => {
   const { t } = useTranslation('content')
   const [title, setTitle] = useState('')
@@ -202,7 +157,6 @@ const Create = () => {
     useState(undefined)
 
   const [languages, setLanguages] = useState([])
-  const [newLang, setNewLang] = useState('')
   const [addingAdditionalLanguage, setAddingAdditionalLanguage] =
     useState(false)
 
@@ -217,92 +171,11 @@ const Create = () => {
     }
   }, [projectSpace])
 
-  const addLang = async () => {
-    const createLanguageSpace = async (lang) => {
-      const opts = (template, name, history) => {
-        return {
-          preset: 'private_chat',
-          name: name,
-          room_version: '9',
-          creation_content: { type: 'm.space' },
-          initial_state: [
-            {
-              type: 'm.room.history_visibility',
-              content: { history_visibility: history }
-            }, //  world_readable
-            {
-              type: 'dev.medienhaus.meta',
-              content: {
-                version: '0.4',
-                type: 'item',
-                template: template,
-                application: process.env.REACT_APP_APP_NAME,
-                published: 'draft'
-              }
-            },
-            {
-              type: 'm.room.guest_access',
-              state_key: '',
-              content: { guest_access: 'can_join' }
-            }
-          ],
-          power_level_content_override: {
-            ban: 50,
-            events: {
-              'm.room.avatar': 50,
-              'm.room.canonical_alias': 50,
-              'm.room.encryption': 100,
-              'm.room.history_visibility': 100,
-              'm.room.name': 50,
-              'm.room.power_levels': 100,
-              'm.room.server_acl': 100,
-              'm.room.tombstone': 100,
-              'm.space.child': 50,
-              'm.room.topic': 50,
-              'm.room.pinned_events': 50,
-              'm.reaction': 50,
-              'im.vector.modular.widgets': 50
-            },
-            events_default: 50,
-            historical: 100,
-            invite: 50,
-            kick: 50,
-            redact: 50,
-            state_default: 50,
-            users_default: 0
-          },
-          visibility: 'private'
-        }
-      }
-      const languageRoom = await matrixClient.createRoom(
-        opts('lang', lang, 'shared')
-      )
-      await inviteCollaborators(languageRoom.room_id)
-      await Matrix.addSpaceChild(projectSpace, languageRoom.room_id)
-    }
-
-    if (languages.includes(newLang)) {
-      console.log('error')
-      setNewLang('')
-      return
-    }
-    setLanguages([...languages, newLang])
-    setAddingAdditionalLanguage(false)
-    console.log(projectSpace)
-    await createLanguageSpace(newLang)
-  }
-
   // we populate the languages in this effect hook and check if we allow custom languages, then it will fetch the languages from the project space otherwise it will use the default languages from the config
   useEffect(() => {
-    const fetchLanguagesAndUpdateState = async (id) => {
-      const spaces = await matrixClient.getRoomHierarchy(id, 1000, 1)
-      // we filter out all of the spaces which are not the parent space itstelf as well as assuming that if it is an two letter space it is a language space based on the ISO639-1 standard
-      // @TODO this is a very hacky way to determine if a space is a language space, it should be discussed if we should check that with additional calls to check the dev.medienhaus.meta event
-      const languageSpaces = spaces?.rooms
-        ?.filter((room) => room.room_id !== id && room.name.length === 2)
-        .map((room) => room.name)
-
-      if (languageSpaces) setLanguages(languageSpaces)
+    const fetchLanguagesAndUpdateState = async () => {
+      const languageSpaces = await fetchLanguages(projectSpace)
+      setLanguages(languageSpaces)
     }
     if (languages.length === 0) {
       if (projectSpace && config.medienhaus?.customLanguages) {
@@ -376,75 +249,6 @@ const Create = () => {
     await Promise.all(power)
     console.debug('all done')
   }
-
-  // const createNewLanguageSpace = async (lang, parent) => {
-  //   const opts = (template, name, history) => {
-  //     return {
-  //       preset: 'private_chat',
-  //       name: name,
-  //       room_version: '9',
-  //       creation_content: { type: 'm.space' },
-  //       initial_state: [{
-  //         type: 'm.room.history_visibility',
-  //         content: { history_visibility: history }
-  //       }, //  world_readable
-  //       {
-  //         type: 'dev.medienhaus.meta',
-  //         content: {
-  //           version: '0.4',
-  //           type: 'item',
-  //           template: template,
-  //           application: process.env.REACT_APP_APP_NAME,
-  //           published: 'draft'
-  //         }
-  //       },
-  //       {
-  //         type: 'm.room.guest_access',
-  //         state_key: '',
-  //         content: { guest_access: 'can_join' }
-  //       }],
-  //       power_level_content_override: {
-  //         ban: 50,
-  //         events: {
-  //           'm.room.avatar': 50,
-  //           'm.room.canonical_alias': 50,
-  //           'm.room.encryption': 100,
-  //           'm.room.history_visibility': 100,
-  //           'm.room.name': 50,
-  //           'm.room.power_levels': 100,
-  //           'm.room.server_acl': 100,
-  //           'm.room.tombstone': 100,
-  //           'm.space.child': 50,
-  //           'm.room.topic': 50,
-  //           'm.room.pinned_events': 50,
-  //           'm.reaction': 50,
-  //           'im.vector.modular.widgets': 50
-  //         },
-  //         events_default: 50,
-  //         historical: 100,
-  //         invite: 50,
-  //         kick: 50,
-  //         redact: 50,
-  //         state_default: 50,
-  //         users_default: 0
-  //       },
-  //       visibility: 'private'
-  //     }
-  //   }
-  //   // create the project space for the student project
-  //   const languageRoom = await matrixClient.createRoom(opts('lang', lang, 'shared')).catch(console.log)
-  //   await fetch(process.env.REACT_APP_MATRIX_BASE_URL + `/_matrix/client/r0/rooms/${parent}/state/m.space.child/${languageRoom.room_id}`, {
-  //     method: 'PUT',
-  //     headers: { Authorization: 'Bearer ' + localStorage.getItem('medienhaus_access_token') },
-  //     body: JSON.stringify({
-  //       via: [process.env.REACT_APP_MATRIX_BASE_URL.replace('https://', '')],
-  //       suggested: false,
-  //       auto_join: false
-  //     })
-  //   }).catch(console.log)
-  //   return languageRoom.room_id
-  //   // const events = await matrixClient.createRoom(opts('events', 'events', 'shared'))
-  // }
 
   const fetchContentBlocks = useCallback(async () => {
     const spaceRooms = spaceObjectRef.current.rooms.filter(
@@ -674,246 +478,6 @@ const Create = () => {
     setTemporaryGutenbergContents(originalGutenbergBlocks)
   }
 
-  const saveGutenbergEditorToMatrix = async () => {
-    if (isSavingGutenbergContents) return
-
-    setIsSavingGutenbergContents(true)
-
-    const orderOfRooms = []
-    let gutenbergBlocks = [...temporaryGutenbergContents]
-
-    // filter out all empty gutenberg blocks -- we want to ignore those
-    gutenbergBlocks = gutenbergBlocks.filter((block) => {
-      return !(
-        block.name === 'core/paragraph' &&
-        _.get(block, 'attributes.content', '') === ''
-      )
-    })
-
-    for (const block of blocksRef.current) {
-      let deletedARoom = false
-      if (!_.find(gutenbergBlocks, { clientId: block.room_id })) {
-        await deleteRoom(
-          block.room_id,
-          spaceObjectRef.current?.rooms.filter(
-            (room) => room.name === contentLangRef.current
-          )[0].room_id
-        )
-        deletedARoom = true
-      }
-      if (deletedARoom) fetchContentBlocks()
-    }
-
-    for (const [index, block] of gutenbergBlocks.entries()) {
-      let roomId = block.clientId
-      let contentType
-      switch (block.name) {
-        case 'core/list':
-          contentType = block.attributes.ordered ? 'ol' : 'ul'
-          break
-        case 'core/code':
-          contentType = 'code'
-          break
-        case 'medienhaus/heading':
-        case 'medienhaus/image':
-        case 'medienhaus/audio':
-        case 'medienhaus/file':
-        case 'medienhaus/video':
-        case 'medienhaus/playlist':
-        case 'medienhaus/livestream':
-          contentType = block.name.replace('medienhaus/', '')
-          break
-        case 'medienhaus/bigbluebutton':
-          contentType = 'bbb'
-          break
-        default:
-          contentType = 'text'
-      }
-
-      if (!matrixClient.getRoom(roomId)) {
-        // this is a newly created block
-        if (!gutenbergIdToMatrixRoomIdRef.current[block.clientId]) {
-          const createdBlock = await createBlock(
-            null,
-            contentType,
-            index,
-            spaceObjectRef.current?.rooms.filter(
-              (room) => room.name === contentLangRef.current
-            )[0].room_id
-          )
-          addToMap(block.clientId, createdBlock)
-          // if the item is a collaboration we need to invite all collaborators to the newly created block
-          if (isCollab) await inviteCollaborators(createdBlock)
-        }
-
-        roomId = gutenbergIdToMatrixRoomIdRef.current[block.clientId]
-      }
-
-      // ensure room name is correct
-      if (
-        _.get(_.find(blocksRef.current, { room_id: roomId }), 'name') !==
-        `${index}_${contentType}`
-      ) {
-        await matrixClient.setRoomName(roomId, `${index}_${contentType}`)
-      }
-      orderOfRooms.push(roomId)
-
-      // lastly, if the content of this block has not changed, skip this block, otherwise ...
-      if (
-        _.isEqual(
-          block.attributes,
-          _.get(_.find(gutenbergContent, { clientId: roomId }), 'attributes')
-        ) &&
-        _.isEqual(
-          block.name,
-          _.get(_.find(gutenbergContent, { clientId: roomId }), 'name')
-        )
-      ) {
-        continue
-      }
-
-      // ... write new contents to room
-      switch (block.name) {
-        case 'core/list':
-          await matrixClient.sendMessage(roomId, {
-            // body: (block.attributes.ordered ? '<ol>' : '<ul>') + block.attributes.values + (block.attributes.ordered ? '</ol>' : '</ul>'), // body should have unformated list (markdowm)
-            body: block.attributes.values
-              .replaceAll('<li>', '- ')
-              .replaceAll('</li>', '\n'), // @TODO add case for ol
-            msgtype: 'm.text',
-            format: 'org.matrix.custom.html',
-            formatted_body:
-              (block.attributes.ordered ? '<ol>' : '<ul>') +
-              block.attributes.values +
-              (block.attributes.ordered ? '</ol>' : '</ul>')
-          })
-          break
-        case 'core/code':
-          await matrixClient.sendMessage(roomId, {
-            body: block.attributes.content,
-            msgtype: 'm.text',
-            format: 'org.matrix.custom.html',
-            formatted_body: `<pre><code>${block.attributes.content}</code></pre>`
-          })
-          break
-        case 'medienhaus/heading':
-          await matrixClient.sendMessage(roomId, {
-            body: '### ' + block.attributes.content,
-            msgtype: 'm.text',
-            format: 'org.matrix.custom.html',
-            formatted_body: `<h3>${block.attributes.content}</h3>`
-          })
-          break
-        case 'medienhaus/image':
-          // If this image was uploaded to Matrix already, we don't do anything
-          if (block.attributes.url) break
-          // If the user has not provided an image and the file input was left "empty", we don't do anything either
-          if (!block.attributes.file) break
-          // eslint-disable-next-line no-case-declarations,prefer-const
-          let uploadedImage = await matrixClient.uploadContent(
-            block.attributes.file,
-            { name: block.attributes.file.name }
-          )
-          await matrixClient.sendImageMessage(
-            roomId,
-            null,
-            uploadedImage?.content_uri,
-            {
-              mimetype: block.attributes.file.type,
-              size: block.attributes.file.size,
-              name: block.attributes.file.name,
-              author: block.attributes.author,
-              license: block.attributes.license,
-              alt: block.attributes.alttext
-            },
-            block.attributes.alttext,
-            // Beware: We need to provide an empty callback because otherwise matrix-js-sdk fails
-            // See https://github.com/medienhaus/medienhaus-cms/issues/173
-            () => {}
-          )
-          break
-        case 'medienhaus/audio':
-          // If this audio was uploaded to Matrix already, we don't do anything
-          if (block.attributes.url) break
-          // eslint-disable-next-line no-case-declarations,prefer-const
-          let uploadedAudio = await matrixClient.uploadContent(
-            block.attributes.file,
-            { name: block.attributes.file.name }
-          )
-          await matrixClient.sendMessage(roomId, {
-            body: block.attributes.file.name,
-            info: {
-              size: block.attributes.file.size,
-              mimetype: block.attributes.file.type,
-              name: block.attributes.file.name,
-              author: block.attributes.author,
-              license: block.attributes.license,
-              alt: block.attributes.alttext
-            },
-            msgtype: 'm.audio',
-            url: uploadedAudio?.content_uri
-          })
-          break
-        case 'medienhaus/file':
-          // If this file was uploaded to Matrix already, we don't do anything
-          if (block.attributes.url) break
-          // eslint-disable-next-line no-case-declarations,prefer-const
-          let uploadedFile = await matrixClient.uploadContent(
-            block.attributes.file,
-            { name: block.attributes.file.name }
-          )
-          await matrixClient.sendMessage(roomId, {
-            body: block.attributes.file.name,
-            info: {
-              size: block.attributes.file.size,
-              mimetype: block.attributes.file.type,
-              name: block.attributes.file.name,
-              author: block.attributes.author,
-              license: block.attributes.license,
-              alt: block.attributes.alttext
-            },
-            msgtype: 'm.file',
-            url: uploadedFile?.content_uri
-          })
-          break
-        default:
-          await matrixClient.sendMessage(roomId, {
-            body: ShowdownConverter.makeMarkdown(block.attributes.content)
-              .replaceAll('<br>', '')
-              .replaceAll('<br />', ''),
-            msgtype: 'm.text',
-            format: 'org.matrix.custom.html',
-            formatted_body: block.attributes.content
-          })
-      }
-    }
-
-    // ensure correct order
-    await matrixClient.sendStateEvent(
-      spaceObjectRef.current?.rooms.filter(
-        (room) => room.name === contentLangRef.current
-      )[0].room_id,
-      'dev.medienhaus.order',
-      { order: orderOfRooms }
-    )
-
-    // update our "last saved  timestamp"
-    setSaveTimestampToCurrentTime()
-
-    await fetchContentBlocks()
-
-    setTemporaryGutenbergContents(undefined)
-
-    setIsSavingGutenbergContents(false)
-  }
-
-  const addToMap = (blockId, roomId) => {
-    setGutenbergIdToMatrixRoomId((prevState) => ({
-      ...prevState,
-      [blockId]: roomId
-    }))
-  }
-
   const changeProjectImage = async () => {
     setLoading(true)
     setSaveTimestampToCurrentTime()
@@ -933,169 +497,22 @@ const Create = () => {
     if (config.medienhaus.api) await triggerApiUpdate(projectSpace)
   }
 
-  const onChangeDescription = async (description) => {
-    // if the selected content language is english we save the description in the project space topic
-    contentLang === config.medienhaus?.languages[0] &&
-      (await matrixClient
-        .setRoomTopic(spaceObject.rooms[0].room_id, description)
-        .catch(console.log))
-    // here we set the description for the selected language space
-    const contentRoom = spaceObject.rooms.filter(
-      (room) => room.name === contentLang
-    )
-    const changeTopic = await matrixClient
-      .setRoomTopic(contentRoom[0].room_id, description)
-      .catch(console.log)
-    fetchSpace(true)
-    if (config.medienhaus.api) await triggerApiUpdate(projectSpace)
-    // @TODO setSpaceObject(spaceObject => ({...spaceObject, rooms: [...spaceObject.rooms, ]}))
-    return changeTopic
-  }
   const handleHideAuthors = async (e) => {
     setHideAuthors(hideAuthors => !hideAuthors)
     await matrixClient.sendStateEvent(projectSpace, 'de.udk-berlin.rundgang', { hideAuthors: e.target.checked })
   }
 
-  const warnUserAboutUnsavedChanges = useCallback(
-    (e) => {
-      if (temporaryGutenbergContents) {
-        e.returnValue = 'Please save your changes'
-        return e.returnValue
-      }
-    },
-    [temporaryGutenbergContents]
-  )
-
   useEffect(() => {
-    window.addEventListener('beforeunload', warnUserAboutUnsavedChanges)
+    window.addEventListener('beforeunload', (e) => warnUserAboutUnsavedChanges(e, temporaryGutenbergContents))
 
     return () => {
-      window.removeEventListener('beforeunload', warnUserAboutUnsavedChanges)
+      window.removeEventListener('beforeunload', (e) => warnUserAboutUnsavedChanges(e, temporaryGutenbergContents))
     }
-  }, [warnUserAboutUnsavedChanges])
+  }, [temporaryGutenbergContents])
 
   useEffect(() => {
-    const fetchContentsForGutenberg = async () => {
-      const contents = []
-      for (const block of blocks) {
-        const fetchMessage = await matrixClient.http.authedRequest(
-          'GET',
-          `/rooms/${block.room_id}/messages`,
-          {
-            limit: 1,
-            dir: 'b',
-            filter: JSON.stringify({ types: ['m.room.message'] })
-          }
-        )
-        const message = _.isEmpty(fetchMessage.chunk)
-          ? null
-          : fetchMessage.chunk[0].content
-
-        if (message) {
-          const blockType = block.name.slice(block.name.search('_'))
-          let n, a
-
-          switch (blockType) {
-            case '_heading':
-              n = 'medienhaus/heading'
-              a = { content: message.body.substr(4) }
-              break
-            case '_text':
-              n = 'core/paragraph'
-              a = {
-                content: message.formatted_body
-                  ? message.formatted_body.replace(/<p>(.*)<\/p>/g, '$1<br>')
-                  : nl2br(message.body)
-              }
-              break
-            case '_code':
-              n = 'core/code'
-              a = { content: _.escape(message.body) }
-              break
-            case '_ul':
-              n = 'core/list'
-              a = {
-                ordered: false,
-                values: message.formatted_body.slice(4, -5),
-                placeholder: 'add list element'
-              }
-              break
-            case '_ol':
-              n = 'core/list'
-              a = {
-                ordered: true,
-                values: message.formatted_body.slice(4, -5),
-                placeholder: 'add list element'
-              }
-              break
-            case '_quote':
-              n = 'medienhaus/quote'
-              a = { content: message.body }
-              break
-            case '_image':
-              n = 'medienhaus/image'
-              a = {
-                url: matrixClient.mxcUrlToHttp(message.url),
-                alt: message.info.alt,
-                license: message.info.license,
-                author: message.info.author
-              }
-              break
-            case '_audio':
-              n = 'medienhaus/audio'
-              a = {
-                url: matrixClient.mxcUrlToHttp(message.url),
-                alt: message.info.alt,
-                license: message.info.license,
-                author: message.info.author
-              }
-              break
-            case '_file':
-              n = 'medienhaus/file'
-              a = {
-                url: matrixClient.mxcUrlToHttp(message.url),
-                alt: message.info.alt,
-                license: message.info.license,
-                author: message.info.author,
-                name: message.info.name
-              }
-              break
-            case '_video':
-              n = 'medienhaus/video'
-              a = {
-                content: message.body
-              }
-              break
-            case '_bbb':
-              n = 'medienhaus/bigbluebutton'
-              a = {
-                content: message.body
-              }
-              break
-            case '_playlist':
-              n = 'medienhaus/playlist'
-              a = {
-                content: message.body
-              }
-              break
-            default:
-              n = 'core/paragraph'
-              a = { content: message.formatted_body }
-          }
-          contents.push({
-            clientId: block.room_id,
-            isValid: true,
-            name: n,
-            attributes: a,
-            innerBlocks: []
-          })
-        }
-      }
-      setGutenbergContent(contents)
-    }
-
     if (blocks === undefined) return
-    fetchContentsForGutenberg()
+    fetchContentsForGutenberg(blocks, matrixClient, setGutenbergContent)
   }, [blocks, matrixClient])
 
   if (projectSpace && !matrixClient.isInitialSyncComplete()) return <Loading />
@@ -1260,107 +677,22 @@ const Create = () => {
                 The short description—as an introduction to your project—is mandatory.
               </Trans>
             </p>
-            {/*
-            <select
-              value={contentLang} onChange={(e) => {
-                if (temporaryGutenbergContents) {
-                  alert('Please save your changes first')
-                  return
-                }
-                setContentLang(e.target.value)
-                setDescription()
-              }}
-            >
-              {config.medienhaus?.languages.map((lang) => (
-                <option value={lang} key={lang}>{lang.toUpperCase() + ' -- ' + ISO6391.getName(lang)}</option>
-              ))}
-            </select>
-            */}
-            <LanguageSection className="request">
-              <LanguageSectionSelect>
-                <select
-                  disabled={addingAdditionalLanguage}
-                  onChange={(e) => {
-                    setContentLang(e.target.value)
-                    setDescription()
-                  }}
-                >
-                  {languages.map((lang) => (
-                    <option value={lang} key={lang}>
-                      {ISO6391.getName(lang)}
-                    </option>
-                  ))}
-                </select>
-                {config.medienhaus?.customLanguages && (
-                  <SimpleButton
-                    value="addLang"
-                    key="lang"
-                    disabled={addingAdditionalLanguage}
-                    onClick={() => {
-                      if (!addingAdditionalLanguage) {
-                        setAddingAdditionalLanguage(true)
-                      }
-                    }}
-                  >
-                    +
-                  </SimpleButton>
-                )}
-              </LanguageSectionSelect>
-              <LanguageSectionAdd>
-                {config.medienhaus?.customLanguages && (
-                  <>
-                    {addingAdditionalLanguage && (
-                      <select
-                        onChange={(e) => setNewLang(e.target.value)}
-                        value={newLang || ''}
-                      >
-                        <option disabled value="">
-                          {t('select language')}
-                        </option>
-                        {ISO6391.getAllNames().map((lang, i) => (
-                          <option key={i} value={ISO6391.getCode(lang)}>
-                            {lang}
-                          </option>
-                        ))}
-                      </select>
-                    )}
-                    {addingAdditionalLanguage && (
-                      <LanguageCancelConfirm>
-                        <SimpleButton
-                          cancel
-                          onClick={() => {
-                            setAddingAdditionalLanguage(false)
-                            setNewLang('')
-                          }}
-                        >
-                          {t('CANCEL')}
-                        </SimpleButton>
-                        <SimpleButton
-                          value="addLang"
-                          key="lang"
-                          onClick={() => {
-                            if (
-                              addingAdditionalLanguage &&
-                              newLang?.length > 0
-                            ) {
-                              addLang()
-                            }
-                          }}
-                        >
-                          {t('Add')}
-                        </SimpleButton>
-                      </LanguageCancelConfirm>
-                    )}
-                  </>
-                )}
-              </LanguageSectionAdd>
-            </LanguageSection>
+            <LanguageSelection
+              setLanguages={setLanguages}
+              languages={languages}
+              projectSpace={projectSpace}
+              setAddingAdditionalLanguage={setAddingAdditionalLanguage}
+              addingAdditionalLanguage={addingAdditionalLanguage}
+              setContentLang={setContentLang}
+              setDescription={setDescription}
+              inviteCollaborators={inviteCollaborators}
+            />
             {spaceObject && (description || description === '')
               ? (
                 <ProjectDescription
                   disabled={addingAdditionalLanguage}
                   description={description[contentLang]}
-                  callback={onChangeDescription}
+                  callback={(updatedDescription) => onChangeDescription(updatedDescription, contentLang, matrixClient, spaceObject, fetchSpace, projectSpace)}
                   language={ISO6391.getName(contentLang)}
                 />
                 )
@@ -1392,7 +724,22 @@ const Create = () => {
               <LoadingSpinnerButton
                 type="button"
                 disabled={addingAdditionalLanguage}
-                onClick={saveGutenbergEditorToMatrix}
+                onClick={() =>
+                  saveGutenbergEditorToMatrix(isSavingGutenbergContents,
+                    setIsSavingGutenbergContents,
+                    temporaryGutenbergContents,
+                    blocksRef,
+                    deleteRoom,
+                    spaceObjectRef,
+                    contentLangRef,
+                    fetchContentBlocks,
+                    gutenbergIdToMatrixRoomIdRef,
+                    isCollab,
+                    inviteCollaborators,
+                    gutenbergContent,
+                    setSaveTimestampToCurrentTime,
+                    setTemporaryGutenbergContents,
+                    setGutenbergIdToMatrixRoomId)}
               >
                 {t('SAVE CHANGES')}
               </LoadingSpinnerButton>
