@@ -34,7 +34,11 @@
           "video",
           "playlist",
           "bigbluebutton"
-        ]
+        ],
+        "dates": {
+          "min": "2024-01-01",
+          "max": "2024-07-03"
+        }
       }
     },
     "pages": {
@@ -87,6 +91,7 @@
       "lat": 0.0,
       "lng": 0.0
     },
+    "maxEntriesPerUser": 10,
     "allowSelectingRootContext": true,
     "api": "https://api.dev.medienhaus.udk-berlin.de/api/v2/",
     "customServer": true

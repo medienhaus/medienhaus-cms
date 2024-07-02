@@ -83,11 +83,11 @@ const GutenbergWrapper = styled.div`
   }
 
   /* set color via variable for toolbar separators */
-  .block-editor-block-contextual-toolbar.is-fixed
-    .block-editor-block-toolbar
+  .block-editor-block-contextual-toolbar.is-fixed,
+    .block-editor-block-toolbar,
     .components-toolbar,
-  .block-editor-block-contextual-toolbar.is-fixed
-    .block-editor-block-toolbar
+  .block-editor-block-contextual-toolbar.is-fixed,
+    .block-editor-block-toolbar,
     .components-toolbar-group {
     border-right-color: var(--color-fg);
   }
@@ -384,6 +384,22 @@ const Create = () => {
         const space = await matrixClient.getRoomHierarchy(projectSpace)
         setSpaceObject(space)
         const spaceDetails = await matrixClient.getRoom(projectSpace)
+        // check if new rooms have been created by collaborators and join them if we are not yet part of them
+        if (spaceDetails.currentState.getJoinedMemberCount() > 1) {
+          space.rooms.map(async (contentRooms) => {
+            if (contentRooms.room_id !== projectSpace) {
+              const room = matrixClient.getRoom(contentRooms.room_id)
+              if (!room || room.getMyMembership() !== 'join') {
+                // if we aren't already part of the room we try to join it
+                await matrixClient
+                  .joinRoom(contentRooms.room_id)
+                  .catch((err) => console.log(err))
+              }
+            }
+          }
+          )
+        }
+
         // setting title to project space name
         setTitle(space.rooms[0].name)
         // set the topic depending on selected language
@@ -542,8 +558,8 @@ const Create = () => {
     setIsCollab(true)
     try {
       // joining contentRooms which might have been created since we last opened the project
-      await matrixClient.getRoomHierarchy(projectSpace).then((res) => {
-        res.rooms.map(
+      await Matrix.roomHierarchy(projectSpace).then((res) => {
+        res.map(
           async (contentRooms) =>
             contentRooms.room_id !== projectSpace &&
             (await matrixClient
@@ -1173,7 +1189,7 @@ const Create = () => {
                     value="addLang"
                     key="lang"
                     disabled={addingAdditionalLanguage}
-                    onClick={(e) => {
+                    onClick={() => {
                       if (!addingAdditionalLanguage) {
                         setAddingAdditionalLanguage(true)
                       }
@@ -1215,7 +1231,7 @@ const Create = () => {
                         <SimpleButton
                           value="addLang"
                           key="lang"
-                          onClick={(e) => {
+                          onClick={() => {
                             if (
                               addingAdditionalLanguage &&
                               newLang?.length > 0

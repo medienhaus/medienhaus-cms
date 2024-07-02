@@ -11,6 +11,7 @@ import styled from 'styled-components'
 import ContextDropdown from '../../../components/ContextDropdown'
 
 import { fetchContextTree, fetchId, removeFromParent, triggerApiUpdate } from '../../../helpers/MedienhausApiHelper'
+import { createMatrixStructureObject } from '../../../helpers/createMatrixStructureObject'
 
 const RemovableLiElement = styled.li`
   display: grid;
@@ -29,70 +30,11 @@ const Category = ({ projectSpace, onChange, parent }) => {
   const [inputItems, setInputItems] = useState()
   const matrixClient = Matrix.getMatrixClient()
 
-  const createStructureObject = async () => {
+  const createObject = async () => {
     setLoading(true)
-    async function getSpaceStructure (motherSpaceRoomId, includeRooms) {
-      const result = {} // the resulting tree structure
-      let hasContext = false // we use a boolean to know if a content is in a context which we need for the publishProject component in /create
-
-      function createSpaceObject (id, name, metaEvent, joinRule, membership) {
-        return {
-          id,
-          name,
-          type: metaEvent.content.type,
-          joinRule: joinRule,
-          membership: membership,
-          children: {}
-        }
-      }
-
-      async function scanForAndAddSpaceChildren (spaceId, path) {
-        if (spaceId === 'undefined') return
-        const stateEvents = await matrixClient.roomState(spaceId).catch(console.log)
-
-        const metaEvent = _.find(stateEvents, { type: 'dev.medienhaus.meta' })
-        if (!metaEvent) return
-        // make sure we only show contexts
-        if (_.get(metaEvent, 'content.type') !== 'context') return
-        // make sure we have a name for the context
-        const nameEvent = _.find(stateEvents, { type: 'm.room.name' })
-        if (!nameEvent) return
-        const spaceName = nameEvent.content.name
-
-        // check the join rule of the context
-        const joinRule = _.find(stateEvents, { type: 'm.room.join_rules' })?.content?.join_rule
-        // find the membership of the user in the context by checking the m.room.members event and its state_key which is the user_id
-        const memberEvent = _.find(stateEvents, { type: 'm.room.member', state_key: matrixClient.getUserId() })
-
-        _.set(result, [...path, spaceId], createSpaceObject(spaceId, spaceName, metaEvent, joinRule, memberEvent?.content?.membership))
-
-        console.log(`getting children for ${spaceId} / ${spaceName}`)
-        for (const event of stateEvents) {
-          if (event.type !== 'm.space.child' && !includeRooms) continue
-          if (event.type === 'm.space.child' && _.size(event.content) === 0) continue // check to see if body of content is empty, therefore space has been removed
-          if (event.state_key === projectSpace) {
-            setContexts(contexts => {
-              if (contexts) return [...contexts, { name: spaceName, room_id: event.room_id }]
-              else return [{ name: spaceName, room_id: event.room_id }]
-            }) // add context to the contexts array if the projectspace is a child of it
-            hasContext = true
-          }
-          if (event.room_id !== spaceId) continue
-
-          await scanForAndAddSpaceChildren(event.state_key, [...path, spaceId, 'children'])
-        }
-      }
-
-      await scanForAndAddSpaceChildren(motherSpaceRoomId, [])
-
-      if (_.isEmpty(result)) setContexts([]) // if the content is in not in any context, yet, we set contexts to an empty array in order to display the publishProject component
-      setLoading(false)
-      return [result, hasContext]
-    }
-    console.log('---- started structure ----')
-    const tree = await getSpaceStructure(parent, false)
-    if (!tree[1]) setContexts([]) // if the content is in not in any context, yet, we set contexts to an empty array in order to display the publishProject component
-    setInputItems(tree[0][parent])
+    const matrixObject = await createMatrixStructureObject(parent, projectSpace, setContexts)
+    setInputItems(matrixObject[0][parent])
+    setLoading(false)
   }
 
   const fetchTreeFromApi = async () => {
@@ -127,7 +69,9 @@ const Category = ({ projectSpace, onChange, parent }) => {
       fetchTreeFromApi()
       fetchParentsFromApi()
       setLoading(false)
-    } else createStructureObject()
+    } else {
+      createObject()
+    }
 
     return () => {
       cancelled = true
@@ -188,7 +132,10 @@ const Category = ({ projectSpace, onChange, parent }) => {
     // Add this current project to the given context space
 
     // if the join rule of the context is knock, we need to ask to join first.
-    if (contextObject.membership !== 'join') {
+    // @TODO if the membership is invite, we should first join the room and then add the content to the context.
+    // atm we try to add the content to the context and if that fails we try to join the context. therefore creating an extra api call.
+
+    if (contextObject.membership !== 'join' && contextObject.membership !== 'invite') {
       if (contextObject.joinRule === 'knock' || contextObject.joinRule === 'knock_restricted') {
         if (contextObject.membership === 'knock') {
           alert('You have already requested to join this context. You will be notified once you are accepted.')
@@ -288,7 +235,7 @@ const Category = ({ projectSpace, onChange, parent }) => {
         ? <Loading />
         : <>
           {contexts?.length > 0 && <ul style={{ position: 'relative' }}>
-            {contexts?.map((context, index) => {
+            {contexts?.map((context) => {
               return (
                 <RemovableLiElement key={context.room_id}>
                   <span>{context.name} </span>

@@ -56,7 +56,11 @@ const PublishProject = ({ disabled, space, published, hasContext, metaEvent }) =
       console.log('--- All changed Succesfully to ' + publishState + ' ---')
 
       setUserFeedback(t('Changed successfully!'))
-      if (config.medienhaus.api) await triggerApiUpdate(space.room_id)
+      if (config.medienhaus.api) {
+        await triggerApiUpdate(space.room_id).catch((error) => {
+          console.log('Error while triggering API update:', error)
+        })
+      }
       setIsChangingVisibility(false)
       setTimeout(() => setUserFeedback(''), 3000)
     } catch (err) {
