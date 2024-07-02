@@ -3,6 +3,18 @@ import Matrix from '../../../Matrix'
 import _ from 'lodash'
 import LoadingSpinnerSelect from '../../../components/LoadingSpinnerSelect'
 
+/**
+ * This component renders a single level of a multi-level <select> UI for an arbitrary set of contexts in the sense of Matrix spaces.
+ *
+ * @param {string} parentSpaceRoomId - The room ID of the parent space.
+ * @param {string} selectedContextRoomId - The room ID of the selected context.
+ * @param {function} onSelect - Function to be called when a selection is made.
+ * @param {function} onFetchedChildren - Function to be called when child contexts are fetched.
+ * @param {Object} templatePlaceholderMapping - Optional object containing placeholders for each <select> based on the `dev.medienhaus.meta.template` of the parent context.
+ * @param {string} templatePrefixFilter - Optional prefix to filter contexts by their templates.
+ * @param {boolean} sortAlphabetically - If entries should be ordered alphabetically.
+ * @param {boolean} showTopics - If the contents of m.room.topic should be displayed in parentheses next to the name.
+ */
 const ContextMultiLevelSelectSingleLevel = ({ parentSpaceRoomId, selectedContextRoomId, onSelect, onFetchedChildren, templatePlaceholderMapping, templatePrefixFilter, sortAlphabetically, showTopics }) => {
   const [isLoading, setIsLoading] = useState(true)
   const [parentSpaceMetaEvent, setParentSpaceMetaEvent] = useState()
@@ -92,14 +104,13 @@ const ContextMultiLevelSelectSingleLevel = ({ parentSpaceRoomId, selectedContext
 
 /**
  * This component renders a multi-level <select> UI for an arbitrary set of contexts in the sense of Matrix spaces.
- * `activeContexts` is the array of room IDs for the currently set context spaces.
  *
- * @param [Array] activeContexts
- * @param [Func] onChange (newActiveContexts, isLeaf)
- * @param [Bool] showTopics - If the contents of m.room.topic should be displayed in parentheses next to the name
- * @param [Bool] sortAlphabetically - If entries should be ordered alphabetically
- * @param [Object] templatePlaceholderMapping - Optional object containing placeholders for each <select> based on the `dev.medienhaus.meta.template` of the parent context
- * @param [String] templatePrefixFilter - Optional prefix to filter contexts by their templates
+ * @param {Array} activeContexts - The array of room IDs for the currently set context spaces.
+ * @param {function} onChange - Function to be called when the active contexts change.
+ * @param {boolean} showTopics - If the contents of m.room.topic should be displayed in parentheses next to the name.
+ * @param {boolean} sortAlphabetically - If entries should be ordered alphabetically.
+ * @param {Object} templatePlaceholderMapping - Optional object containing placeholders for each <select> based on the `dev.medienhaus.meta.template` of the parent context.
+ * @param {string} templatePrefixFilter - Optional prefix to filter contexts by their templates.
  */
 const ContextMultiLevelSelect = ({ activeContexts, onChange, showTopics, sortAlphabetically, templatePlaceholderMapping, templatePrefixFilter }) => {
   const onSelect = useCallback((parentContextRoomId, selectedChildContextRoomId) => {
