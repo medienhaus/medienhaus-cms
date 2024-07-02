@@ -738,10 +738,9 @@ const Create = () => {
                   ) && (
                     <p>
                       ❗️{' '}
-                      {t('Please add a short description. At least in') +
-                      ' "' +
-                      ISO6391.getName(languages[0]) +
-                      '"'}
+                      {t('Please add a short description in') +
+                      ' ' +
+                      ISO6391.getName(languages[0])}
                     </p>
                   )}
                   {!hasContext && <p>❗️ {t('Please select a context.')}</p>}
