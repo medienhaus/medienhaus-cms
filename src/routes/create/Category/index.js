@@ -43,7 +43,6 @@ const Category = ({ projectSpace, onChange, parent }) => {
   }
 
   const fetchParentsFromApi = async () => {
-    // @TODO make sure api returns join rules
     const fetchParents = await fetchId(projectSpace)
     if (fetchParents.parents) {
       if (_.isEmpty(fetchParents.parents)) {

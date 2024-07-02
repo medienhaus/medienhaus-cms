@@ -187,6 +187,7 @@ const Create = () => {
   const [newLang, setNewLang] = useState('')
   const [addingAdditionalLanguage, setAddingAdditionalLanguage] =
     useState(false)
+  const [spaceParents, setSpaceParents] = useState([])
 
   const projectSpace = params.spaceId
 
@@ -419,6 +420,11 @@ const Create = () => {
         setMedienhausMeta(meta)
         // set type to the contents type
         setTemplate(meta.template)
+        // check m.space.parent event for parents
+        const parents = spaceDetails.currentState.getStateEvents('m.space.parent')
+          ?.filter(parent => !_.isEmpty(parent.getContent()))
+          .map(parent => parent.event)
+        setSpaceParents(parents)
         // check for allocation event
         const allocationEvent = spaceDetails.currentState.events.get(
           'dev.medienhaus.allocation'
@@ -1067,6 +1073,7 @@ const Create = () => {
               parent={localStorage.getItem(
                 process.env.REACT_APP_APP_NAME + '_root_context_space'
               )}
+              spaceParents={spaceParents}
             />
           </section>
           {(!config.medienhaus?.item ||
