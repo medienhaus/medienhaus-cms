@@ -27,7 +27,10 @@ const ContextMultiLevelSelectSingleLevel = ({ parentSpaceRoomId, selectedContext
       for (const room of roomHierarchy) {
         if (templatePrefixFilter.includes('location')) {
           const joinRule = await Matrix.getMatrixClient().getStateEvent(room.room_id, 'm.room.join_rules').catch(() => { })
-          if (joinRule?.join_rule === 'invite') continue
+          room.joinRule = joinRule?.join_rule
+          // for the udk we want to display all rooms, even if they are invite only, these will be greyed out in the select.
+          // This makes it easier for the dev team to see if a room is missing or just has the wrong join rule.
+          // if (joinRule?.join_rule === 'invite') continue
         }
         const metaEvent = await Matrix.getMatrixClient().getStateEvent(room.room_id, 'dev.medienhaus.meta').catch(() => { })
         // If this is not a context, ignore this space child
@@ -84,12 +87,15 @@ const ContextMultiLevelSelectSingleLevel = ({ parentSpaceRoomId, selectedContext
           : <option disabled value="" />
         )
       }
-      {Object.entries(childContexts).map(([key, room]) => (
-        <option key={key} value={room.room_id}>
-          {room.name}
-          {showTopics && room.topic && (` (${room.topic})`)}
-        </option>
-      ))}
+      {Object.entries(childContexts).map(([key, room]) => {
+        const disabled = room.joinRule === 'invite'
+        return (
+          <option key={key} value={room.room_id} title={disabled && 'This room is currently disabled. If you believe this is an error, please contact support'} disabled={disabled}>
+            {room.name}
+            {showTopics && room.topic && (` (${room.topic})`)}
+          </option>
+        )
+      })}
     </select>
   )
 }
