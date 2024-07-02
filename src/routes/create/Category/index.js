@@ -43,7 +43,6 @@ const Category = ({ projectSpace, onChange, parent }) => {
   }
 
   const fetchParentsFromApi = async () => {
-    // @TODO make sure api returns join rules
     const fetchParents = await fetchId(projectSpace)
     if (fetchParents.parents) {
       if (_.isEmpty(fetchParents.parents)) {
@@ -206,6 +205,8 @@ const Category = ({ projectSpace, onChange, parent }) => {
       setError(e?.message)
       setTimeout(() => setError(''), 2500)
     })
+
+    // api functions
     if (removeSpacechild?.event_id && config.medienhaus.api) {
       await removeFromParent(projectSpace, [parent]).catch((e) => {
         console.debug(e)
@@ -213,7 +214,10 @@ const Category = ({ projectSpace, onChange, parent }) => {
         setTimeout(() => setError(''), 2500)
       })
     }
-    removeSpacechild?.event_id && setContexts(contexts => contexts.filter(context => context.room_id !== parent))
+    if (removeSpacechild?.event_id) {
+      // await Matrix.removeSpaceChild(parent, projectSpace)
+      setContexts(contexts => contexts.filter(context => context.room_id !== parent))
+    }
   }
 
   return (

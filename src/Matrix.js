@@ -51,17 +51,80 @@ class Matrix {
   }
 
   removeSpaceChild (parent, child) {
+    // remove m.space.parent event for the child
+    this.matrixClient.http.authedRequest('PUT', `/rooms/${child}/state/m.space.parent/${parent}`, undefined, {})
+
     return this.matrixClient.http.authedRequest('PUT', `/rooms/${parent}/state/m.space.child/${child}`, undefined, {})
   }
 
-  addSpaceChild (parent, child, autoJoin, suggested) {
+  async waitForRoom (roomId, maxAttempts = 10, delay = 100) {
+    // Wait for the room to be available, sometimes the room is not available immediately after creation
+    for (let attempt = 0; attempt < maxAttempts; attempt++) {
+      const room = this.matrixClient.getRoom(roomId)
+      if (room) return room
+      await new Promise(resolve => setTimeout(resolve, delay))
+    }
+    throw new Error(`Room ${roomId} not available after ${maxAttempts} attempts`)
+  }
+
+  async addSpaceChild (parent, child, autoJoin, suggested) {
+    // check if the user has the necessary permissions to add a child to the parent
+    // Get the room object
+    const room = await this.waitForRoom(parent)
+
+    if (!room) {
+      throw new Error(`Room ${parent} not found`)
+    }
+
+    const myPowerLevel = room.getMember(this.matrixClient.getUserId()).powerLevel
+
+    const canSendStateEvent = room.currentState.hasSufficientPowerLevelFor(
+      'm.space.child',
+      myPowerLevel
+    )
+
+    if (!canSendStateEvent) throw new Error('Insufficient permissions to add a child to the parent')
+
     const payload = {
       auto_join: autoJoin || false,
       suggested: suggested || false,
       via: [this.matrixClient.getDomain()]
     }
+    // add m.space.parent event
+    await this.addSpaceToParent(parent, child)
 
     return this.matrixClient.http.authedRequest('PUT', `/rooms/${parent}/state/m.space.child/${child}`, undefined, payload)
+  }
+
+  addSpaceToParent = async (parent, child) => {
+    const room = await this.waitForRoom(child)
+
+    if (!room) {
+      throw new Error(`Room ${child} not found`)
+    }
+
+    // Get all m.space.parent state events
+    const existingParents = room.currentState.getStateEvents('m.space.parent')
+    // Check if any existing parent is canonical
+    const hasCanonicalParent = existingParents?.some(event => event.getContent().canonical === true)
+    // Determine if this new parent should be canonical
+    const canonical = !hasCanonicalParent
+
+    // Send m.space.parent event
+    await this.matrixClient.sendStateEvent(
+      child,
+      'm.space.parent',
+      {
+        via: [this.matrixClient.getDomain()],
+        canonical: canonical
+      },
+      parent
+    )
+
+    return {
+      success: true,
+      message: canonical ? 'Added as canonical parent' : 'Added as non-canonical parent'
+    }
   }
 
   roomHierarchy = async (roomId, limit, maxDepth, suggestedOnly) => {
@@ -80,7 +143,6 @@ class Matrix {
   createRoom = async (name, isSpace, topic, joinRule, type, template) => {
     const opts = {
       name: name,
-      room_version: '9',
       preset: 'private_chat',
       topic: topic,
       visibility: 'private', // by default we want rooms and spaces to be private, this can later be changed either in /content or /moderate
