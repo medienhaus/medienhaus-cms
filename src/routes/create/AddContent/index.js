@@ -53,6 +53,8 @@ const AddContent = ({ number, projectSpace, blocks, contentType, reloadSpace }) 
             {(!config.medienhaus?.item || !config.medienhaus?.item[contentType]?.content || config.medienhaus?.item[contentType]?.content.includes('ordered list')) && <option value="ol">{t('List (ordered)')}</option>}
             {(!config.medienhaus?.item || !config.medienhaus?.item[contentType]?.content || config.medienhaus?.item[contentType]?.content.includes('quote block')) && <option value="quote">{t('Quote Block')}</option>}
             {(!config.medienhaus?.item || !config.medienhaus?.item[contentType]?.content || config.medienhaus?.item[contentType]?.content.includes('code block')) && <option value="code">{t('Code Block')}</option>}
+            {(!config.medienhaus?.item || !config.medienhaus?.item[contentType]?.content || config.medienhaus?.item[contentType]?.content.includes('citation')) && <option value="code">{t('Citation')}</option>}
+
           </optgroup>
           <optgroup label="Media">
             {(!config.medienhaus?.item || !config.medienhaus?.item[contentType]?.content || config.medienhaus?.item[contentType]?.content.includes('image')) && <option value="image">{t('Image')}</option>}

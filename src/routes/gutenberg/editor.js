@@ -30,6 +30,7 @@ import file from './blocks/file'
 
 import bigbluebutton from './blocks/bigbluebutton'
 import _ from 'lodash'
+import citation from './blocks/citation'
 
 // registerBlockType('medienhaus/quote', {
 //   apiVersion: 2,
@@ -70,7 +71,7 @@ import _ from 'lodash'
 //   }
 // })
 
-function GutenbergEditor ({ content = [], blockTypes = ['text', 'heading', 'list', 'code', 'image', 'audio', 'video', 'file', 'playlist', 'livestream', 'bigbluebutton'], onChange, disabled }) {
+function GutenbergEditor ({ content = [], blockTypes = ['text', 'heading', 'list', 'code', 'image', 'audio', 'video', 'file', 'playlist', 'livestream', 'bigbluebutton', 'citation'], onChange, disabled }) {
   const [blocks, setBlocks] = useState(content)
   const { t } = useTranslation('gutenberg')
 
@@ -115,6 +116,7 @@ function GutenbergEditor ({ content = [], blockTypes = ['text', 'heading', 'list
     if (blockTypes.includes('image')) registerBlockType('medienhaus/image', image)
     if (blockTypes.includes('audio')) registerBlockType('medienhaus/audio', audio)
     if (blockTypes.includes('file')) registerBlockType('medienhaus/file', file)
+    if (blockTypes.includes('citation')) registerBlockType('medienhaus/citation', citation)
 
     if (blockTypes.includes('bigbluebutton')) registerBlockType('medienhaus/bigbluebutton', bigbluebutton)
 
@@ -131,6 +133,7 @@ function GutenbergEditor ({ content = [], blockTypes = ['text', 'heading', 'list
       unregisterBlockType('medienhaus/audio')
       unregisterBlockType('medienhaus/file')
       unregisterBlockType('medienhaus/bigbluebutton')
+      unregisterBlockType('medienhaus/citation')
       unregisterFormatType('core/bold')
       unregisterFormatType('core/italic')
       unregisterFormatType('core/strikethrough')

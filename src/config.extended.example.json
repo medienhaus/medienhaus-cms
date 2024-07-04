@@ -33,7 +33,8 @@
           "livestream",
           "video",
           "playlist",
-          "bigbluebutton"
+          "bigbluebutton",
+          "citation"
         ],
         "dates": {
           "min": "2024-01-01",
