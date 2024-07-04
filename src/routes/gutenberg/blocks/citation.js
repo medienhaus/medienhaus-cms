@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react'
-import { useBlockProps } from '@wordpress/block-editor'
+import { useBlockProps, BlockPreview } from '@wordpress/block-editor'
 import { View } from '@wordpress/primitives'
 
 import i18n from 'i18next'
 import { fetchContentsForGutenberg } from '../../create/utils/gutenbergUtils'
 import Matrix from '../../../Matrix'
-import DisplayContent from '../../create/DisplayContent'
+// import { BlockPreview } from '@wordpress/block-editor/build/components/block-preview'
 
 const t = i18n.getFixedT(null, 'gutenberg')
 
@@ -64,7 +64,7 @@ const citation = {
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const blockProps = useBlockProps()
     // eslint-disable-next-line react-hooks/rules-of-hooks
-    if (content) return <View {...blockProps}> <DisplayContent block={content} />  </View>
+    if (content) return <View {...blockProps}> <BlockPreview blocks={content} /> </View>
 
     const onSubmit = (content) => {
       console.log(content)
