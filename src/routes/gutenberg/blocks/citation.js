@@ -1,21 +1,38 @@
 import React, { useEffect, useState } from 'react'
-import { useBlockProps, BlockPreview } from '@wordpress/block-editor'
+import { useBlockProps } from '@wordpress/block-editor'
 import { View } from '@wordpress/primitives'
 
 import i18n from 'i18next'
 import { fetchContentsForGutenberg } from '../../create/utils/gutenbergUtils'
 import Matrix from '../../../Matrix'
-// import { BlockPreview } from '@wordpress/block-editor/build/components/block-preview'
+import heading from './heading'
 
 const t = i18n.getFixedT(null, 'gutenberg')
-
+const renderPreviewBlock = (block) => {
+  console.log(block)
+  try {
+    switch (block.name) {
+      case 'medienhaus/paragraph':
+        return <p key={block.clientId}>{block.attributes.content}</p>
+      case 'medienhaus/heading':
+        return heading.preview({ content: block.attributes.content })
+      case 'medienhaus/image':
+        return <img key={block.clientId} src={block.attributes.url} alt={block.attributes.alt || ''} />
+        // Add more cases for other block types as needed
+      default:
+        return <div key={block.clientId}>Unsupported block type: {block.name}</div>
+    }
+  } catch (error) {
+    console.error('Error rendering block:', error)
+    return <div key={block.clientId}>Error rendering block: {block.name}</div>
+  }
+}
 function AddCitation ({ callback }) {
   const [roomId, setRoomId] = useState('')
   const [newRoomId, setNewRoomId] = useState('')
   const matrixClient = Matrix.getMatrixClient()
 
   useEffect(() => {
-    console.log(roomId)
     const getContent = async () => {
       const blocks = await matrixClient.getRoomHierarchy(roomId)
       fetchContentsForGutenberg(blocks.rooms, matrixClient, callback)
@@ -30,7 +47,6 @@ function AddCitation ({ callback }) {
   const handleFormSubmission = async (e) => {
     e.preventDefault()
     setRoomId(newRoomId)
-    console.log(e.target.value)
   }
 
   return (
@@ -63,21 +79,31 @@ const citation = {
 
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const blockProps = useBlockProps()
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    if (content) return <View {...blockProps}> <BlockPreview blocks={content} /> </View>
+
+    if (content) {
+      try {
+        return (
+          <View {...blockProps}>
+            {Array.isArray(content)
+              ? content.map((block) => renderPreviewBlock(block))
+              : <div>Invalid content format</div>}
+          </View>
+        )
+      } catch (error) {
+        console.error('Error rendering citation content:', error)
+        return <View {...blockProps}>Error rendering citation content</View>
+      }
+    }
 
     const onSubmit = (content) => {
-      console.log(content)
       setAttributes({ content })
     }
 
     return (
       <View {...blockProps}>
         <AddCitation callback={onSubmit} />
-
       </View>
     )
   }
 }
-
 export default citation

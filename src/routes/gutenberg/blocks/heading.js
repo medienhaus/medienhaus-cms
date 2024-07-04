@@ -65,6 +65,17 @@ const heading = {
         disableLineBreaks
       />
     )
+  },
+  preview: ({ content }) => {
+    const blockProps = useBlockProps // Use .save() for the preview
+
+    return (
+      <RichText.Content
+        {...blockProps}
+        tagName="h3"
+        value={content || t('Heading')}
+      />
+    )
   }
 }
 

@@ -172,7 +172,10 @@ function GutenbergEditor ({ content = [], blockTypes = ['text', 'heading', 'list
           canLockBlocks: false,
           codeEditingEnabled: false,
           bodyPlaceholder: t('Start typing something...'),
-          keepCaretInsideBlock: false
+          keepCaretInsideBlock: false,
+          __experimentalFeatures: {
+            preview: true // Enable preview mode
+          }
         }}
         value={blocks}
         onInput={(blocks) => {
