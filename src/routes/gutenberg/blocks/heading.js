@@ -66,15 +66,15 @@ const heading = {
       />
     )
   },
-  // @TODO for the preview inside the cms this should probably be the save attribute not preview
-  preview: ({ content }) => {
-    const blockProps = useBlockProps // Use .save() for the preview
+  save: ({ content }) => {
+    const blockProps = useBlockProps
 
     return (
       <RichText.Content
         {...blockProps}
         tagName="h3"
         value={content || t('Heading')}
+
       />
     )
   }

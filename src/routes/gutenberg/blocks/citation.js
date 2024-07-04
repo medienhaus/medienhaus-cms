@@ -9,13 +9,12 @@ import heading from './heading'
 
 const t = i18n.getFixedT(null, 'gutenberg')
 const renderPreviewBlock = (block) => {
-  console.log(block)
   try {
     switch (block.name) {
       case 'medienhaus/paragraph':
         return <p key={block.clientId}>{block.attributes.content}</p>
       case 'medienhaus/heading':
-        return heading.preview({ content: block.attributes.content })
+        return heading.save({ content: block.attributes.content })
       case 'medienhaus/image':
         return <img key={block.clientId} src={block.attributes.url} alt={block.attributes.alt || ''} />
         // Add more cases for other block types as needed
@@ -42,7 +41,7 @@ function AddCitation ({ callback }) {
     if (roomId) {
       getContent()
     }
-  }, [roomId])
+  }, [callback, matrixClient, roomId])
 
   const handleFormSubmission = async (e) => {
     e.preventDefault()
