@@ -66,6 +66,7 @@ const heading = {
       />
     )
   },
+  // @TODO for the preview inside the cms this should probably be the save attribute not preview
   preview: ({ content }) => {
     const blockProps = useBlockProps // Use .save() for the preview
 
