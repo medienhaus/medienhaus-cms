@@ -146,7 +146,6 @@ const ManageContexts = ({ matrixClient, moderationRooms: incomingModerationRooms
             users_default: 0
           },
           name,
-          room_version: '9',
           creation_content: { type: 'm.space' },
           initial_state: [{
             type: 'm.room.history_visibility',
@@ -163,7 +162,7 @@ const ManageContexts = ({ matrixClient, moderationRooms: incomingModerationRooms
           },
           {
             type: 'm.room.join_rules',
-            content: { join_rule: 'knock_restriced' } // can be set to either public, invite or knock
+            content: { join_rule: 'knock_restricted' } // can be set to either public, invite or knock
           }],
           visibility: 'private' // visibility is private even for public spaces.
         }
