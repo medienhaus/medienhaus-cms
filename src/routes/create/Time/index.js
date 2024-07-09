@@ -78,10 +78,10 @@ export default function Time ({ allocation, projectSpace, reloadSpace }) {
 
   const TimeSlots = ({ index, start, end }) => {
     const startToDate = new Date(start * 1000)
-    const startUnixToRealWorld = startToDate.toLocaleString(undefined, { timeZone: 'UTC', hour: '2-digit', minute: '2-digit', second: '2-digit' })
+    const startUnixToRealWorld = startToDate.toLocaleString(undefined, { timeZone: 'UTC', year: 'numeric', month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit', hour12: false })
 
     const endToDate = new Date(end * 1000)
-    const endUnixToRealWorld = endToDate.toLocaleString(undefined, { timeZone: 'UTC', hour: '2-digit', minute: '2-digit', second: '2-digit' })
+    const endUnixToRealWorld = endToDate.toLocaleString(undefined, { timeZone: 'UTC', year: 'numeric', month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit', hour12: false })
 
     return (
       <RemovableLiElement key={index}>
