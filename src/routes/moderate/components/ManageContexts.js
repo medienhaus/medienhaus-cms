@@ -159,7 +159,8 @@ const ManageContexts = ({ matrixClient, moderationRooms: incomingModerationRooms
             content: { guest_access: 'can_join' }
           },
           {
-            join_rule: 'knock_restricted'
+            type: 'm.room.join_rules',
+            content: 'knock_restricted'
           }],
           visibility: 'private' // visibility is private even for public spaces.
         }
