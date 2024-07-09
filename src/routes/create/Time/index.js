@@ -78,13 +78,10 @@ export default function Time ({ allocation, projectSpace, reloadSpace }) {
 
   const TimeSlots = ({ index, start, end }) => {
     const startToDate = new Date(start * 1000)
-    startToDate.setHours(startToDate.getHours() - 2) // convert to Berlin Timezone
-
-    const startUnixToRealWorld = startToDate.toLocaleString('en-UK')
+    const startUnixToRealWorld = startToDate.toLocaleString(undefined, { timeZone: 'UTC' })
 
     const endToDate = new Date(end * 1000)
-    endToDate.setHours(endToDate.getHours() - 2) // convert to Berlin Timezone
-    const endUnixToRealWorld = endToDate.toLocaleString('en-UK')
+    const endUnixToRealWorld = endToDate.toLocaleString(undefined, { timeZone: 'UTC' })
 
     return (
       <RemovableLiElement key={index}>
