@@ -143,7 +143,6 @@ const ManageContexts = ({ matrixClient, moderationRooms: incomingModerationRooms
             users_default: 0
           },
           name,
-          room_version: '9',
           creation_content: { type: 'm.space' },
           initial_state: [{
             type: 'm.room.history_visibility',
