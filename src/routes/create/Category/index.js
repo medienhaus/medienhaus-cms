@@ -121,8 +121,7 @@ const Category = ({ projectSpace, onChange, parent }) => {
       }
       // we check to see if the join rule of the context is 'knock' or 'knock_restricted'
       const joinRuleEvent = await Matrix.getMatrixClient().getStateEvent(contextSpace, 'm.room.join_rules')
-      if (joinRuleEvent?.join_rule !== 'knock' && joinRuleEvent.join_rule !== 'knock_restricted') return
-      contextObject.joinRule = joinRuleEvent.join_rule
+      contextObject.joinRule = joinRuleEvent?.join_rule
     }
     // If this project was in a different context previously we should try to take it out of the old context
 
