@@ -23,7 +23,7 @@ export default function Time ({ allocation, projectSpace, reloadSpace }) {
   const [startTime, setStartTime] = useState('00:00')
   const [endTime, setEndTime] = useState('00:00')
   const [temporalObject, setTemporalObject] = useState({})
-  const { t, i18n } = useTranslation('content')
+  const { t } = useTranslation('content')
   const matrixClient = Matrix.getMatrixClient()
 
   useEffect(() => {
@@ -78,13 +78,10 @@ export default function Time ({ allocation, projectSpace, reloadSpace }) {
 
   const TimeSlots = ({ index, start, end }) => {
     const startToDate = new Date(start * 1000)
-    startToDate.setHours(startToDate.getHours() - 2) // convert to Berlin Timezone
-
-    const startUnixToRealWorld = startToDate.toLocaleString(i18n.language, { year: 'numeric', month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit', hour12: false })
+    const startUnixToRealWorld = startToDate.toLocaleString(undefined, { timeZone: 'UTC' })
 
     const endToDate = new Date(end * 1000)
-    endToDate.setHours(endToDate.getHours() - 2) // convert to Berlin Timezone
-    const endUnixToRealWorld = endToDate.toLocaleString(i18n.language, { year: 'numeric', month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit', hour12: false })
+    const endUnixToRealWorld = endToDate.toLocaleString(undefined, { timeZone: 'UTC' })
 
     return (
       <RemovableLiElement key={index}>
