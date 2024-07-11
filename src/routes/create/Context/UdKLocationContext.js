@@ -18,6 +18,7 @@ const UdKLocationContext = ({ spaceRoomId }) => {
   const [isLeaf, setIsLeaf] = useState(false)
   const [isChanging, setIsChanging] = useState(false)
   const [fetching, setFetching] = useState(true)
+  const [errorMessage, setErrorMessage] = useState('')
   const { t } = useTranslation('locations')
 
   const templatePlaceholderMapping = useMemo(() => ({
@@ -67,7 +68,7 @@ const UdKLocationContext = ({ spaceRoomId }) => {
 
   const onSave = useCallback(async () => {
     if (!isLeaf) return
-
+    setErrorMessage('')
     const selectedContextRoomId = _.last(activeContexts)
 
     // Remove space from possibly previously selected context
@@ -81,10 +82,20 @@ const UdKLocationContext = ({ spaceRoomId }) => {
       .catch(async () => {
         // If we can't add the space to a context we try to join the context first ...
         const joinRoom = await Matrix.getMatrixClient().joinRoom(selectedContextRoomId)
+          .catch((error) => {
+            console.log(error)
+            setErrorMessage(error.data.error)
+            return false
+          })
         if (joinRoom) {
-          console.log('joined room')
+          console.log('joined room {id} and retrying to add space to context', { id: selectedContextRoomId })
           // ... and then try to add the space to the context again
           await Matrix.addSpaceChild(selectedContextRoomId, spaceRoomId)
+            .catch((error) => {
+              console.log(error)
+              setErrorMessage(error.data.error)
+              return false
+            })
         }
       })
 
@@ -96,11 +107,15 @@ const UdKLocationContext = ({ spaceRoomId }) => {
 
   const onRemoveFromLocation = async () => {
     if (!currentLocationContext || !currentLocationContext.id) return
-
+    setErrorMessage('')
     await Matrix.removeSpaceChild(currentLocationContext.id, spaceRoomId)
+      .catch((error) => {
+        console.log(error)
+        setErrorMessage(error.data.error)
+        return false
+      })
     await removeFromParent(spaceRoomId, [currentLocationContext.id])
 
-    // @TODO Add API call to the not-yet-existing DELETE route
     // Otherwise the following line will have no point after refreshing the page
     setCurrentLocationContext(null)
   }
@@ -142,6 +157,8 @@ const UdKLocationContext = ({ spaceRoomId }) => {
           <LoadingSpinnerButton disabled={!isLeaf} onClick={onSave}>{t('SAVE')}</LoadingSpinnerButton>
         </div>
       ))}
+      {errorMessage && <p> ‼️{errorMessage}</p>}
+
     </>
   )
 }
