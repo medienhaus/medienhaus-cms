@@ -9,6 +9,25 @@ import { fetchId, fetchPathList, removeFromParent, triggerApiUpdate } from '../.
 import DeleteButton from '../components/DeleteButton'
 import { Loading } from '../../../components/loading'
 
+async function handleJoinAndRetry (originalFunction, args, errorHandler) {
+  try {
+    await originalFunction(...args)
+  } catch (error) {
+    console.log(error)
+    errorHandler(error.data.error)
+    try {
+      const joinRoom = await Matrix.getMatrixClient().joinRoom(args[0])
+      if (joinRoom) {
+        console.log('joined room {id} and retrying to add space to context', { id: args[0] })
+        await originalFunction(...args)
+      }
+    } catch (error) {
+      console.log(error)
+      errorHandler(error.data.error)
+    }
+  }
+}
+
 /**
  * @TODO This component does not work without the API.
  */
@@ -78,26 +97,7 @@ const UdKLocationContext = ({ spaceRoomId }) => {
     }
 
     // Add this current space to the given context space
-    await Matrix.addSpaceChild(selectedContextRoomId, spaceRoomId)
-      .catch(async () => {
-        // If we can't add the space to a context we try to join the context first ...
-        const joinRoom = await Matrix.getMatrixClient().joinRoom(selectedContextRoomId)
-          .catch((error) => {
-            console.log(error)
-            setErrorMessage(error.data.error)
-            return false
-          })
-        if (joinRoom) {
-          console.log('joined room {id} and retrying to add space to context', { id: selectedContextRoomId })
-          // ... and then try to add the space to the context again
-          await Matrix.addSpaceChild(selectedContextRoomId, spaceRoomId)
-            .catch((error) => {
-              console.log(error)
-              setErrorMessage(error.data.error)
-              return false
-            })
-        }
-      })
+    await handleJoinAndRetry(Matrix.addSpaceChild, [selectedContextRoomId, spaceRoomId], setErrorMessage)
 
     await triggerApiUpdate(selectedContextRoomId)
     await triggerApiUpdate(spaceRoomId, selectedContextRoomId)
@@ -108,12 +108,7 @@ const UdKLocationContext = ({ spaceRoomId }) => {
   const onRemoveFromLocation = async () => {
     if (!currentLocationContext || !currentLocationContext.id) return
     setErrorMessage('')
-    await Matrix.removeSpaceChild(currentLocationContext.id, spaceRoomId)
-      .catch((error) => {
-        console.log(error)
-        setErrorMessage(error.data.error)
-        return false
-      })
+    await handleJoinAndRetry(Matrix.removeSpaceChild, [currentLocationContext.id, spaceRoomId], setErrorMessage)
     await removeFromParent(spaceRoomId, [currentLocationContext.id])
 
     // Otherwise the following line will have no point after refreshing the page
