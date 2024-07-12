@@ -111,21 +111,29 @@ const Moderate = () => {
     if (!cancelled && moderationRooms) {
       const mod = { ...moderationRooms }
       function findFor (parentId) {
-        // create a new object to store the result
-        const nested = {}
+        try {
+          // create a new object to store the result
+          const nested = {}
 
-        // for each item in a
-        for (const room of Object.keys(moderationRooms)) {
-          // find all children of parentId
-          if (moderationRooms[room].parents?.includes(parentId)) {
-            // recursively find children for each children of parentId
-            const recursive = findFor(moderationRooms[room].room_id)
-            // if it has no children, skip adding the children prop
-            const object = Object.keys(recursive).length === 0 ? {} : { children: recursive }
-            nested[moderationRooms[room].room_id] = Object.assign(object, moderationRooms[room])
+          // for each item in a
+          for (const room of Object.keys(moderationRooms)) {
+            // find all children of parentId
+            if (moderationRooms[room].parents?.includes(parentId)) {
+              // recursively find children for each child of parentId
+              const recursive = findFor(moderationRooms[room].room_id)
+              // if it has no children, skip adding the children prop
+              const object = Object.keys(recursive).length === 0 ? {} : { children: recursive }
+              nested[moderationRooms[room].room_id] = Object.assign(object, moderationRooms[room])
+            }
           }
+          return nested
+        } catch (error) {
+          console.log('Error in findFor function:', error)
+          if (error instanceof RangeError && error.message.includes('Maximum call stack size exceeded')) {
+            console.log('Too much recursion:', error.stack)
+            console.log('Params at error:', parentId)
+          } else console.error('Error in findFor function:', error)
         }
-        return nested
       }
       for (const room of Object.keys(moderationRooms)) {
         // we iterate over all room ids
